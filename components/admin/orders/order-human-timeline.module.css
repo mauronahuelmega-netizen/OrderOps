@@ -1,0 +1,323 @@
+/* Bloque M: timeline humano (extraído de orders-admin.css) */
+
+.admin-order-human-timeline {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-order-human-timeline--compact {
+  gap: 0;
+}
+
+.admin-order-human-timeline--bare {
+  gap: 0;
+}
+
+.admin-order-human-timeline-panel--bare {
+  gap: 0.5rem;
+  margin-top: 0;
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.admin-order-human-timeline-section-header {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.admin-order-human-timeline-section-header h2 {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.15;
+  text-transform: none;
+}
+
+.admin-order-human-timeline--bare .admin-order-human-timeline__item {
+  position: relative;
+  padding: 0.45rem 0;
+  gap: 10px;
+  contain-intrinsic-size: auto 40px;
+}
+
+.admin-order-human-timeline__marker {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  width: 12px;
+  min-height: 100%;
+}
+
+.admin-order-human-timeline__item:not(:last-child) .admin-order-human-timeline__marker::after {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: -0.45rem;
+  width: 1px;
+  background: var(--border-subtle);
+}
+
+.admin-order-human-timeline--bare .admin-order-human-timeline__dot {
+  width: 7px;
+  height: 7px;
+  margin-top: 4px;
+  border-width: 1px;
+}
+
+.admin-order-human-timeline--bare .admin-order-human-timeline__copy {
+  gap: 1px;
+}
+
+.admin-order-human-timeline--bare .admin-order-human-timeline__copy strong {
+  font-size: 0.8rem;
+  font-weight: 550;
+  line-height: 1.2;
+}
+
+.admin-order-human-timeline--bare .admin-order-human-timeline__copy span {
+  font-size: 0.72rem;
+  line-height: 1.25;
+}
+
+.admin-order-human-timeline--bare .admin-order-human-timeline__meta-line {
+  margin-top: 1px;
+  color: var(--text-tertiary);
+  font-size: 0.68rem;
+  line-height: 1.2;
+}
+
+.admin-order-human-timeline__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  line-height: 1.2;
+}
+
+.admin-order-human-timeline__item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 52px;
+}
+
+.admin-order-human-timeline__dot {
+  width: 8px;
+  height: 8px;
+  margin-top: 5px;
+  border-radius: 999px;
+  border: 2px solid color-mix(in srgb, var(--text-tertiary) 32%, var(--border-subtle));
+  background: var(--text-tertiary);
+  box-sizing: border-box;
+}
+
+.admin-order-human-timeline__meta-line {
+  color: var(--text-secondary);
+}
+
+.admin-order-human-timeline__copy {
+  display: grid;
+  gap: 2px;
+}
+
+.admin-order-human-timeline__copy strong,
+.admin-order-human-timeline__copy span {
+  margin: 0;
+}
+
+.admin-order-human-timeline__copy strong {
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.admin-order-human-timeline__copy span {
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  line-height: 1.3;
+}
+
+.admin-order-human-timeline--compact .admin-order-human-timeline__copy strong {
+  font-size: 0.86rem;
+}
+
+.admin-order-human-timeline--compact .admin-order-human-timeline__copy span {
+  font-size: 0.73rem;
+}
+
+@media (min-width: 720px) {
+  .admin-order-human-timeline {
+    gap: 13px;
+  }
+
+  .admin-order-human-timeline__item {
+    gap: 12px;
+  }
+
+  .admin-order-human-timeline__copy strong {
+    font-size: 0.92rem;
+  }
+
+  .admin-order-human-timeline--compact .admin-order-human-timeline__copy strong {
+    font-size: 0.88rem;
+  }
+}
+
+.admin-order-history-summary {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-order-history-summary--compact {
+  gap: 8px;
+}
+
+.admin-order-history-summary__metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0;
+}
+
+.admin-order-history-summary__metric {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--bg-surface-soft);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 44px;
+}
+
+.admin-order-history-summary__metric dt,
+.admin-order-history-summary__metric dd {
+  margin: 0;
+}
+
+.admin-order-history-summary__metric dt {
+  color: var(--text-tertiary);
+  font-size: 0.68rem;
+  font-weight: 650;
+  line-height: 1.1;
+}
+
+.admin-order-history-summary__metric dd {
+  color: var(--text-primary);
+  font-size: 0.82rem;
+  font-weight: 650;
+  line-height: 1.15;
+}
+
+.admin-order-history-summary__signals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.admin-order-history-signal {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 9px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 0.7rem;
+  font-weight: 650;
+  line-height: 1;
+}
+
+.admin-order-history-signal--cancelled {
+  border-color: color-mix(in srgb, var(--color-cancelled) 28%, var(--border-subtle));
+  color: var(--text-cancelled-strong);
+  background: var(--bg-cancelled-subtle);
+}
+
+.admin-order-history-signal--completed {
+  border-color: color-mix(in srgb, var(--color-ready) 28%, var(--border-subtle));
+  color: var(--text-ready-strong);
+  background: var(--bg-ready-subtle);
+}
+
+.admin-order-history-stages {
+  display: grid;
+  gap: 7px;
+}
+
+.admin-order-history-stages__item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.admin-order-history-stages__item:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.admin-order-history-stages__item strong,
+.admin-order-history-stages__item span {
+  margin: 0;
+}
+
+.admin-order-history-stages__item strong {
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.2;
+}
+
+.admin-order-history-stages__item span {
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  line-height: 1.2;
+  text-align: right;
+}
+
+@media (min-width: 720px) {
+  .admin-order-history-summary {
+    gap: 12px;
+  }
+
+  .admin-order-history-summary__metrics {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+
+  .admin-order-history-summary__metric {
+    gap: 4px;
+    padding: 9px 11px;
+  }
+
+  .admin-order-history-summary__metric dt {
+    font-size: 0.7rem;
+  }
+
+  .admin-order-history-summary__metric dd {
+    font-size: 0.86rem;
+  }
+
+  .admin-order-history-stages {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px 14px;
+  }
+
+  .admin-order-history-stages__item {
+    padding-bottom: 8px;
+  }
+}

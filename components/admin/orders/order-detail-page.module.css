@@ -1,0 +1,38 @@
+/* Bloque O: envoltura de la vista de detalle de página completa (extraído de orders-admin.css) */
+
+.admin-order-page-header-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.admin-order-page-header-total {
+  display: grid;
+  justify-items: end;
+  gap: 1px;
+}
+
+.admin-order-page-header-total span {
+  color: #6e655b;
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.admin-order-page-header-total strong {
+  font-size: 1.05rem;
+  line-height: 1;
+  transition: color 180ms ease, opacity 180ms ease;
+}
+
+@media (min-width: 720px) {
+  .admin-order-page-header-total strong {
+    font-size: 1.12rem;
+  }
+
+  .admin-order-page-header-actions {
+    justify-content: flex-end;
+  }
+}

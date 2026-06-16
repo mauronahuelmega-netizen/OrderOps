@@ -1,0 +1,212 @@
+.page {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.sections {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.section {
+  display: grid;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.sectionHeader {
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.sectionTitle {
+  margin: 0;
+  font-family: var(--type-heading-family);
+  font-size: var(--type-heading-size);
+  font-weight: var(--type-heading-weight);
+  line-height: var(--type-heading-line-height);
+  color: var(--text-primary);
+}
+
+.sectionDescription {
+  margin: 0;
+  font-family: var(--type-body-family);
+  font-size: var(--type-body-size);
+  line-height: var(--type-body-line-height);
+  color: var(--text-secondary);
+}
+
+.modeGrid {
+  display: grid;
+  gap: var(--space-sm);
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+.modeCard {
+  display: grid;
+  gap: var(--space-xs);
+  padding: var(--space-md);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface-hover);
+}
+
+.modeLabel {
+  margin: 0;
+  font-family: var(--type-label-family);
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  color: var(--text-primary);
+}
+
+.modeHint {
+  margin: 0;
+  font-family: var(--type-body-family);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line-height);
+  color: var(--text-tertiary);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-full);
+  font-family: var(--type-caption-family);
+  font-size: var(--type-caption-size);
+  font-weight: var(--type-caption-weight);
+  line-height: var(--type-caption-line-height);
+}
+
+.badgeActive {
+  background: var(--bg-ready-subtle);
+  color: var(--text-ready-strong);
+}
+
+.badgeInactive {
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+}
+
+.storeStatus {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.storeStatusText {
+  margin: 0;
+  font-family: var(--type-body-family);
+  font-size: var(--type-body-size);
+  color: var(--text-secondary);
+}
+
+.storeStatusText strong {
+  color: var(--text-primary);
+}
+
+.actionsRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.feedback {
+  margin: 0;
+  font-family: var(--type-body-family);
+  font-size: var(--type-label-size);
+  line-height: var(--type-label-line-height);
+}
+
+.feedbackError {
+  color: var(--danger);
+}
+
+.feedbackSuccess {
+  color: var(--success);
+}
+
+.feedbackInfo {
+  color: var(--text-secondary);
+}
+
+.form {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.formGrid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+@media (min-width: 720px) {
+  .formGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .formGridFull {
+    grid-column: 1 / -1;
+  }
+}
+
+.weekdayFieldset {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.weekdayLegend {
+  margin-bottom: var(--space-sm);
+  font-family: var(--type-label-family);
+  font-size: var(--type-label-size);
+  font-weight: var(--type-label-weight);
+  color: var(--text-primary);
+}
+
+.weekdayGrid {
+  display: grid;
+  gap: var(--space-sm);
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.weekdayOption {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--bg-surface-hover);
+  cursor: pointer;
+  transition: var(--transition-hover);
+}
+
+.weekdayOption:hover {
+  border-color: var(--border-strong);
+  background: var(--bg-surface);
+}
+
+.weekdayOption input {
+  accent-color: var(--accent-primary);
+}
+
+.weekdayOption span {
+  font-family: var(--type-body-family);
+  font-size: var(--type-label-size);
+  color: var(--text-primary);
+}
+
+.formActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-md);
+}

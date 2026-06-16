@@ -1,0 +1,330 @@
+/* Bloque F: métricas por carril (extraído de orders-admin.css) */
+
+.admin-orders-lane-metrics {
+  display: grid;
+  gap: 6px;
+  margin-top: 0;
+}
+
+.admin-orders-lane-metrics--compact {
+  gap: 4px;
+}
+
+.admin-orders-lane-metrics--minimal {
+  gap: 3px;
+}
+
+.admin-orders-lane-metrics__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 12px;
+  padding: 0 2px;
+}
+
+:global(.admin-orders-group--production) .admin-orders-lane-metrics__header,
+:global(.admin-orders-group--resolved) .admin-orders-lane-metrics__header {
+  padding: 0;
+}
+
+.admin-orders-lane-metrics__copy {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.admin-orders-lane-metrics__copy strong,
+.admin-orders-lane-metrics__copy span,
+.admin-orders-lane-metrics__alert {
+  margin: 0;
+}
+
+.admin-orders-lane-metrics__copy strong {
+  color: var(--text-primary);
+  font-size: 0.79rem;
+  font-weight: 700;
+  line-height: 1.14;
+}
+
+.admin-orders-lane-metrics__copy span {
+  color: var(--text-secondary);
+  font-size: 0.64rem;
+  line-height: 1.14;
+}
+
+.admin-orders-lane-metrics__alert {
+  color: var(--text-secondary);
+  font-size: 0.65rem;
+  line-height: 1.12;
+  text-align: left;
+  max-width: none;
+}
+
+.admin-orders-lane-metrics--compact .admin-orders-lane-metrics__header {
+  gap: 4px 8px;
+}
+
+.admin-orders-lane-metrics--minimal .admin-orders-lane-metrics__header {
+  display: none;
+}
+
+.admin-orders-lane-metrics__inline-summary {
+  margin: 0;
+  padding: 0 1px;
+  color: var(--text-secondary);
+  font-size: 0.62rem;
+  font-weight: 600;
+  line-height: 1.08;
+}
+
+.admin-orders-lane-metrics--compact .admin-orders-lane-metrics__copy {
+  gap: 1px;
+}
+
+.admin-orders-lane-metrics--compact .admin-orders-lane-metrics__copy strong {
+  font-size: 0.72rem;
+  line-height: 1.06;
+}
+
+.admin-orders-lane-metrics--compact .admin-orders-lane-metrics__copy span,
+.admin-orders-lane-metrics--compact .admin-orders-lane-metrics__alert {
+  font-size: 0.6rem;
+  line-height: 1.04;
+}
+
+.admin-orders-lane-metrics__strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 108px), 1fr));
+  gap: 7px;
+  padding: 0;
+}
+
+.admin-orders-lane-metrics--minimal .admin-orders-lane-metrics__strip {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 88px), 1fr));
+  gap: 4px;
+}
+
+:global(.admin-orders-group--resolved) .admin-orders-lane-metrics__strip {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 88px), 1fr));
+  gap: 4px;
+}
+
+.admin-orders-lane-metrics--compact .admin-orders-lane-metrics__strip {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 92px), 1fr));
+  gap: 5px;
+}
+
+.admin-orders-lane-metrics__item {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  padding: 7px 9px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 11px;
+  background-color: var(--bg-surface-soft);
+  box-shadow: var(--shadow-sm);
+  scroll-snap-align: start;
+  transition:
+    border-color 160ms ease,
+    background-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+:global(.admin-orders-group--resolved) .admin-orders-lane-metrics__item {
+  gap: 2px;
+  padding: 4px 6px;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.admin-orders-lane-metrics--compact .admin-orders-lane-metrics__item {
+  gap: 2px;
+  padding: 5px 7px;
+  border-radius: 9px;
+  box-shadow: none;
+}
+
+.admin-orders-lane-metrics--minimal .admin-orders-lane-metrics__item {
+  gap: 1px;
+  padding: 4px 6px;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.admin-orders-lane-metrics__item span,
+.admin-orders-lane-metrics__item strong {
+  margin: 0;
+}
+
+.admin-orders-lane-metrics__item span {
+  color: var(--text-secondary);
+  font-size: 0.6rem;
+  font-weight: 560;
+  line-height: 1.08;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+
+.admin-orders-lane-metrics__item strong {
+  color: var(--text-primary);
+  font-size: 0.84rem;
+  font-weight: 690;
+  line-height: 1.1;
+}
+
+:global(.admin-orders-group--resolved) .admin-orders-lane-metrics__item span {
+  font-size: 0.55rem;
+}
+
+:global(.admin-orders-group--resolved) .admin-orders-lane-metrics__item strong {
+  font-size: 0.72rem;
+  line-height: 1.02;
+}
+
+.admin-orders-lane-metrics--compact .admin-orders-lane-metrics__item span {
+  font-size: 0.56rem;
+}
+
+.admin-orders-lane-metrics--minimal .admin-orders-lane-metrics__item span {
+  font-size: 0.54rem;
+  line-height: 1.02;
+}
+
+.admin-orders-lane-metrics--compact .admin-orders-lane-metrics__item strong {
+  font-size: 0.76rem;
+  line-height: 1.04;
+}
+
+.admin-orders-lane-metrics--minimal .admin-orders-lane-metrics__item strong {
+  font-size: 0.72rem;
+  line-height: 1.02;
+}
+
+.admin-orders-lane-metrics--compact .admin-orders-lane-metrics__item--emphasize strong {
+  font-size: 0.81rem;
+}
+
+.admin-orders-lane-metrics__item--emphasize strong {
+  font-size: 0.9rem;
+}
+
+.admin-orders-lane-metrics--positive .admin-orders-lane-metrics__item {
+  border-color: color-mix(in srgb, var(--color-ready) 20%, var(--border-subtle));
+  background-color: var(--bg-ready-subtle);
+}
+
+.admin-orders-lane-metrics--positive .admin-orders-lane-metrics__alert {
+  color: var(--text-ready-strong);
+}
+
+.admin-orders-lane-metrics--attention .admin-orders-lane-metrics__item {
+  border-color: color-mix(in srgb, var(--color-pending) 22%, var(--border-subtle));
+  background-color: var(--bg-pending-subtle);
+}
+
+.admin-orders-lane-metrics--attention .admin-orders-lane-metrics__alert {
+  color: var(--text-pending-strong);
+}
+
+.admin-orders-lane-metrics--warning .admin-orders-lane-metrics__item {
+  border-color: color-mix(in srgb, var(--color-cancelled) 24%, var(--border-subtle));
+  background-color: var(--bg-cancelled-subtle);
+}
+
+.admin-orders-lane-metrics--warning .admin-orders-lane-metrics__alert {
+  color: var(--text-cancelled-strong);
+}
+
+@media (min-width: 720px) {
+  .admin-orders-lane-metrics {
+    gap: 8px;
+  }
+
+  .admin-orders-lane-metrics__header {
+    padding: 0;
+  }
+
+  .admin-orders-lane-metrics__strip {
+    padding: 0;
+  }
+
+  .admin-orders-lane-metrics__item {
+    gap: 4px;
+    padding: 9px 11px;
+    border-radius: 12px;
+  }
+
+  .admin-orders-lane-metrics--compact .admin-orders-lane-metrics__item {
+    gap: 2px;
+    padding: 6px 8px;
+    border-radius: 10px;
+  }
+
+  .admin-orders-lane-metrics__copy strong {
+    font-size: 0.79rem;
+  }
+
+  .admin-orders-lane-metrics__copy span,
+  .admin-orders-lane-metrics__alert {
+    font-size: 0.69rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .admin-orders-lane-metrics {
+    gap: 4px;
+  }
+
+  .admin-orders-lane-metrics--compact,
+  .admin-orders-lane-metrics--minimal {
+    gap: 3px;
+  }
+
+  .admin-orders-lane-metrics__header {
+    gap: 3px 8px;
+    padding: 0 0 1px;
+  }
+
+  .admin-orders-lane-metrics__copy {
+    gap: 1px;
+  }
+
+  .admin-orders-lane-metrics__copy strong {
+    line-height: 1.08;
+  }
+
+  .admin-orders-lane-metrics__copy span,
+  .admin-orders-lane-metrics__alert,
+  .admin-orders-lane-metrics__inline-summary {
+    line-height: 1.02;
+  }
+
+  .admin-orders-lane-metrics__inline-summary {
+    padding: 0;
+  }
+
+  .admin-orders-lane-metrics__strip {
+    gap: 5px;
+  }
+
+  .admin-orders-lane-metrics--compact .admin-orders-lane-metrics__strip,
+  .admin-orders-lane-metrics--minimal .admin-orders-lane-metrics__strip,
+  :global(.admin-orders-group--resolved) .admin-orders-lane-metrics__strip {
+    gap: 3px;
+  }
+}
+
+@media (min-width: 720px) and (max-width: 1023px) {
+  .admin-orders-lane-metrics {
+    gap: 6px;
+  }
+
+  .admin-orders-lane-metrics__header {
+    gap: 4px 10px;
+  }
+
+  .admin-orders-lane-metrics__strip {
+    gap: 6px;
+  }
+}

@@ -1,0 +1,307 @@
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-sm);
+  width: 100%;
+  min-width: 0;
+  padding: 0 0 var(--space-md);
+  border-bottom: 1px solid color-mix(in srgb, var(--border-subtle) 88%, transparent);
+  background-color: var(--bg-canvas);
+  box-sizing: border-box;
+}
+
+.summary {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+}
+
+.controlsRow {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-sm);
+  min-width: 0;
+  width: 100%;
+}
+
+.filtersCluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xs);
+  min-width: 0;
+  width: 100%;
+  padding: var(--space-xs);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background-color: color-mix(in srgb, var(--bg-surface) 72%, var(--bg-canvas));
+  box-sizing: border-box;
+}
+
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  width: 1rem;
+  height: 1rem;
+  color: var(--text-tertiary);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.search,
+.filterSelect {
+  min-width: 0;
+  min-height: 2.25rem;
+  box-sizing: border-box;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.8125rem;
+  line-height: 1.25;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease;
+}
+
+.search {
+  width: 100%;
+  padding: 0.5rem 0.75rem 0.5rem 2.375rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.searchWrapper:focus-within .search {
+  border-color: color-mix(in srgb, var(--accent-primary) 45%, var(--border-subtle));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 14%, transparent);
+}
+
+.search::placeholder {
+  color: var(--text-tertiary);
+}
+
+.filterSelect {
+  appearance: none;
+  flex: 1 1 auto;
+  min-width: 8.5rem;
+  padding: 0.5rem 2rem 0.5rem 0.75rem;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  background-position: right 0.625rem center;
+  background-size: 0.875rem 0.875rem;
+  background-image: var(--icon-chevron-down);
+}
+
+.filterSelect:hover {
+  border-color: color-mix(in srgb, var(--text-secondary) 24%, var(--border-subtle));
+  background-color: var(--bg-surface-hover);
+}
+
+.filterSelectActive {
+  border-color: color-mix(in srgb, var(--accent-primary) 42%, var(--border-subtle));
+  color: var(--text-primary);
+  background-color: color-mix(in srgb, var(--bg-surface-hover) 88%, var(--accent-soft, transparent));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent-primary) 18%, transparent);
+}
+
+.search:focus-visible,
+.filterSelect:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  outline-offset: 1px;
+}
+
+.clearFilters {
+  flex: 0 0 auto;
+  min-height: 2rem;
+  padding: 0 0.75rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.clearFilters:hover {
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+  background-color: color-mix(in srgb, var(--bg-surface-hover) 80%, transparent);
+}
+
+.clearFilters:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  outline-offset: 1px;
+}
+
+.toolbarSkeletonSummary {
+  width: 11rem;
+  height: 0.875rem;
+  border-radius: var(--radius-sm);
+}
+
+.toolbarSkeletonSearch {
+  width: 100%;
+  height: 2.25rem;
+  border-radius: var(--radius-md);
+}
+
+.toolbarSkeletonFilter {
+  flex: 1 1 calc(33.333% - var(--space-xs));
+  min-width: 7.5rem;
+  height: 2.25rem;
+  border-radius: var(--radius-md);
+}
+
+@media (min-width: 768px) {
+  .controlsRow {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .searchWrapper {
+    flex: 1 1 16rem;
+    max-width: 22rem;
+  }
+
+  .filtersCluster {
+    flex: 1 1 20rem;
+  }
+
+  .filterSelect {
+    flex: 0 1 auto;
+    min-width: 9rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .filtersCluster {
+    flex-wrap: nowrap;
+  }
+
+  .filterSelect {
+    min-width: 8.75rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .toolbar {
+    gap: 6px;
+    padding-bottom: var(--space-sm);
+  }
+
+  .summary {
+    font-size: 0.8125rem;
+  }
+
+  .controlsRow {
+    gap: 6px;
+  }
+
+  .filtersCluster {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 6px;
+    padding: 6px;
+    border-color: color-mix(in srgb, var(--border-subtle) 75%, transparent);
+    background-color: color-mix(in srgb, var(--bg-surface) 55%, var(--bg-canvas));
+  }
+
+  .filterSelect,
+  .clearFilters {
+    width: 100%;
+  }
+
+  .search {
+    min-height: 2.375rem;
+    box-shadow: none;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .filtersCluster {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .filtersCluster .filterSelect:first-of-type {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 899px) {
+  .toolbar {
+    gap: var(--space-xs);
+    padding-bottom: var(--space-sm);
+  }
+
+  .controlsRow {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .searchWrapper {
+    flex: none;
+    width: 100%;
+    max-width: none;
+  }
+
+  .search {
+    box-shadow: none;
+  }
+
+  .filtersCluster {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    flex: none;
+    width: 100%;
+    padding: 6px 8px;
+    gap: 8px;
+    border-color: color-mix(in srgb, var(--border-subtle) 80%, transparent);
+    background-color: color-mix(in srgb, var(--bg-surface) 65%, var(--bg-canvas));
+  }
+
+  .filterSelect {
+    width: 100%;
+    min-width: 0;
+    flex: none;
+    padding: 0.5rem 1.75rem 0.5rem 0.625rem;
+    font-size: 0.8125rem;
+    background-position: right 0.5rem center;
+    background-size: 0.8125rem 0.8125rem;
+  }
+
+  .clearFilters {
+    grid-column: 1 / -1;
+    width: 100%;
+    justify-self: stretch;
+    text-align: center;
+  }
+}
+
+@media (max-width: 479px) {
+  .toolbarSkeletonFilter {
+    flex-basis: 100%;
+  }
+}

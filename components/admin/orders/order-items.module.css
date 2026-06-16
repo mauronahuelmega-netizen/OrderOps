@@ -1,0 +1,173 @@
+/* Bloque K (parte 2): lista de productos (extraído de orders-admin.css) */
+
+.admin-items-list {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-items-list--compact {
+  gap: 8px;
+}
+
+.admin-items-list--compact .admin-item-row {
+  padding-bottom: 8px;
+}
+
+.admin-item-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-subtle);
+  content-visibility: auto;
+  contain-intrinsic-size: auto 40px;
+}
+
+.admin-item-row h3 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.admin-item-row p {
+  margin: 0;
+  color: var(--text-secondary);
+}
+
+.admin-item-title--compact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.admin-item-quantity {
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.admin-item-row--button {
+  width: 100%;
+  padding: 0 0 12px;
+  text-align: left;
+  border-top: none;
+  border-right: none;
+  border-left: none;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    color 160ms ease;
+}
+
+.admin-item-row--button:hover {
+  transform: translateY(-1px);
+}
+
+.admin-item-row--button:focus-visible {
+  outline: 2px solid var(--focus, var(--color-preparing));
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.admin-items-list--dense {
+  gap: 0;
+}
+
+.admin-items-list--dense .admin-item-row,
+.admin-items-list--dense .admin-item-row--button {
+  padding: 0.625rem 0.75rem;
+  margin-inline: -0.125rem;
+  border-bottom: none;
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--bg-surface-soft) 58%, transparent);
+}
+
+.admin-items-list--dense .admin-item-row + .admin-item-row,
+.admin-items-list--dense .admin-item-row--button + .admin-item-row,
+.admin-items-list--dense .admin-item-row + .admin-item-row--button,
+.admin-items-list--dense .admin-item-row--button + .admin-item-row--button {
+  margin-top: 0.25rem;
+}
+
+.admin-items-list--dense .admin-item-row h3,
+.admin-items-list--dense .admin-item-title--compact {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.admin-items-list--dense .admin-item-row strong {
+  font-size: 0.88rem;
+  line-height: 1.15;
+}
+
+.admin-item-modifiers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.15rem;
+}
+
+.admin-item-modifier {
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
+.admin-total-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 4px;
+}
+
+.admin-items-list--dense .admin-total-row {
+  margin-top: 0.375rem;
+  padding: 0.625rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--border-subtle) 72%, transparent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--bg-surface-soft) 58%, transparent);
+}
+
+.admin-items-list--dense .admin-total-row span {
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.admin-items-list--dense .admin-total-row strong {
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+@media (min-width: 720px) {
+  .admin-items-list--compact {
+    gap: 6px;
+  }
+
+  .admin-items-list--compact .admin-item-row {
+    align-items: start;
+    gap: 14px;
+    padding-bottom: 7px;
+  }
+
+  .admin-items-list--compact .admin-item-title--compact {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: baseline;
+    gap: 6px 10px;
+  }
+
+  .admin-items-list--compact .admin-item-row strong {
+    flex-shrink: 0;
+  }
+
+  .admin-items-list--compact .admin-item-row h3 {
+    line-height: 1.14;
+  }
+}

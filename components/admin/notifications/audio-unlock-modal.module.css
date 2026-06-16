@@ -1,0 +1,93 @@
+/* Operational audio unlock modal — theme-aware interaction gate */
+
+.admin-audio-unlock-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: grid;
+  place-items: center;
+  padding: var(--space-lg, 16px);
+}
+
+.admin-audio-unlock-modal__overlay {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  background: color-mix(in srgb, var(--text-primary) 16%, transparent);
+}
+
+:global(html[data-dashboard-theme="dark"]) .admin-audio-unlock-modal__overlay {
+  background: color-mix(in srgb, var(--bg-canvas) 58%, transparent);
+}
+
+.admin-audio-unlock-modal__overlay:disabled {
+  cursor: wait;
+  opacity: 0.92;
+}
+
+.admin-audio-unlock-modal__panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 460px);
+  display: grid;
+  gap: var(--space-lg, 16px);
+  padding: 22px;
+  border: 1px solid var(--surface-elevated-border, var(--border-subtle));
+  border-radius: var(--radius-lg, 14px);
+  background: var(--surface-elevated-bg, var(--bg-surface));
+  color: var(--text-primary);
+  box-shadow: var(--shadow-card);
+}
+
+.admin-audio-unlock-modal__hint {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+.admin-audio-unlock-modal__actions {
+  display: grid;
+}
+
+.primaryAction {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid color-mix(in srgb, var(--text-primary) 16%, transparent);
+  border-radius: var(--radius-md);
+  background: var(--text-primary);
+  color: var(--bg-canvas);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease,
+    opacity 120ms ease;
+}
+
+.primaryAction:hover:not(:disabled) {
+  opacity: 0.92;
+}
+
+.primaryAction:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--text-primary) 35%, transparent);
+  outline-offset: 2px;
+}
+
+.primaryAction:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .admin-audio-unlock-modal {
+    padding: var(--space-md, 12px);
+  }
+
+  :global(html[data-dashboard-theme="dark"]) .admin-audio-unlock-modal__overlay {
+    background: color-mix(in srgb, var(--bg-canvas) 64%, transparent);
+  }
+}

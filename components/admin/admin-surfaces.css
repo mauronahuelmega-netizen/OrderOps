@@ -1,0 +1,538 @@
+/* Shared admin surfaces are used by protected admin, admin login, and super-admin. */
+.oo-canvas {
+  background: var(--surface-canvas-bg);
+  color: var(--surface-canvas-text);
+}
+
+.oo-surface,
+.admin-form-card {
+  border: 1px solid var(--surface-base-border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-base-bg);
+  box-shadow: var(--surface-base-shadow);
+}
+
+.oo-surface-soft {
+  border: 1px solid var(--surface-soft-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-soft-bg);
+  box-shadow: var(--surface-soft-shadow);
+}
+
+.oo-surface-elevated,
+.admin-empty-state {
+  border: 1px solid var(--surface-elevated-border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-elevated-bg);
+  box-shadow: var(--surface-elevated-shadow);
+}
+
+.oo-surface-interactive,
+.admin-secondary-link {
+  border: 1px solid var(--surface-interactive-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-interactive-bg);
+  box-shadow: var(--surface-interactive-shadow);
+  transition: var(--transition-hover);
+}
+
+.oo-surface-interactive:hover,
+.admin-secondary-link:hover {
+  background: var(--surface-interactive-hover-bg);
+  border-color: var(--surface-interactive-hover-border);
+  box-shadow: var(--surface-interactive-hover-shadow);
+}
+
+.oo-surface-interactive:active,
+.admin-secondary-link:active {
+  background: var(--surface-interactive-press-bg);
+}
+
+.oo-surface-critical {
+  border: 1px solid var(--surface-critical-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-critical-bg);
+  color: var(--surface-critical-text);
+  box-shadow: var(--surface-critical-shadow);
+}
+
+.oo-surface-muted,
+.admin-secondary-link--muted {
+  border: 1px solid var(--surface-muted-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-muted-bg);
+  color: var(--surface-muted-text);
+  box-shadow: none;
+}
+
+.oo-panel,
+.admin-form-card {
+  padding: var(--surface-panel-padding);
+}
+
+.oo-card,
+.admin-empty-state {
+  padding: var(--surface-card-padding);
+}
+
+.oo-strip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: 32px;
+  padding: var(--surface-strip-padding-y) var(--surface-strip-padding-x);
+  border: 1px solid var(--surface-strip-border);
+  border-radius: var(--radius-full);
+  background: var(--surface-strip-bg);
+  color: var(--text-secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+.oo-focus-ring:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.oo-visually-muted {
+  color: var(--text-muted);
+}
+
+.oo-critical-text {
+  color: var(--risk);
+}
+
+.oo-meta-text {
+  color: var(--text-secondary);
+  font-size: var(--type-caption-size);
+  line-height: var(--type-caption-line-height);
+}
+
+.oo-interactive-reset {
+  transition: var(--transition-hover);
+}
+
+.admin-empty-actions,
+.admin-collapsed-helper,
+.admin-embedded-form {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-empty-state {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-empty-state h2,
+.admin-empty-state p {
+  margin: 0;
+}
+
+.admin-empty-state p {
+  color: var(--text-secondary);
+  line-height: var(--type-body-line-height);
+}
+
+.admin-empty-actions {
+  margin-top: 6px;
+}
+
+.admin-form-card {
+  display: grid;
+  gap: 16px;
+}
+
+.admin-form-header {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-form-header h2,
+.admin-form-header p {
+  margin: 0;
+}
+
+.admin-form-header h2 {
+  color: var(--text-primary);
+  line-height: var(--type-heading-line-height);
+}
+
+.admin-form-header p {
+  color: var(--text-secondary);
+  line-height: var(--type-body-line-height);
+}
+
+.admin-field,
+.admin-field-label {
+  display: grid;
+  gap: 8px;
+}
+
+.admin-field span,
+.admin-field-label,
+.admin-field > span {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.96rem;
+  font-weight: var(--type-label-weight);
+}
+
+.admin-field-hint,
+.admin-collapsed-helper {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.admin-field input,
+.admin-field select,
+.admin-field textarea,
+.admin-field--inline input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  background: var(--surface-elevated-bg);
+  color: var(--text-primary);
+  transition: var(--transition-focus);
+}
+
+.admin-field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.admin-field input:focus-visible,
+.admin-field select:focus-visible,
+.admin-field textarea:focus-visible,
+.admin-field--inline input:focus-visible {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: var(--focus-ring-soft);
+}
+
+.admin-feedback {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.admin-status-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: var(--radius-full, 999px);
+  font-size: var(--type-caption-size, 0.78rem);
+  font-weight: var(--type-caption-weight, 600);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.admin-status-badge--completed {
+  background-color: var(--bg-ready-subtle);
+  color: var(--text-ready-strong);
+}
+
+.admin-status-badge--cancelled {
+  background-color: var(--bg-cancelled-subtle);
+  color: var(--text-cancelled-strong);
+}
+
+.admin-feedback--error,
+.admin-feedback--success {
+  padding: 10px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+}
+
+.admin-feedback--error {
+  color: var(--danger);
+  background: rgba(138, 63, 54, 0.08);
+  border-color: rgba(138, 63, 54, 0.14);
+}
+
+.admin-feedback--success {
+  color: var(--success);
+  background: rgba(46, 125, 91, 0.08);
+  border-color: rgba(46, 125, 91, 0.14);
+}
+
+.admin-inline-feedback {
+  display: grid;
+  gap: 8px;
+  min-height: 20px;
+}
+
+.admin-primary-button,
+.admin-danger-button,
+.admin-whatsapp-link,
+.admin-secondary-link,
+.admin-ghost-link {
+  display: inline-grid;
+  place-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition-hover);
+}
+
+.admin-primary-button {
+  border: none;
+  background: var(--text-primary);
+  color: #fff;
+}
+
+.admin-primary-button:hover:not(:disabled),
+.admin-danger-button:hover:not(:disabled),
+.admin-secondary-link:hover,
+.admin-whatsapp-link:hover,
+.admin-ghost-link:hover {
+  transform: translateY(-1px);
+}
+
+.admin-primary-button:focus-visible,
+.admin-danger-button:focus-visible,
+.admin-whatsapp-link:focus-visible,
+.admin-secondary-link:focus-visible,
+.admin-ghost-link:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(191, 169, 143, 0.22);
+}
+
+.admin-primary-button:disabled,
+.admin-danger-button:disabled {
+  opacity: 0.45;
+}
+
+.admin-danger-button {
+  border: none;
+  background: var(--danger);
+  color: #fff;
+}
+
+.admin-whatsapp-link {
+  width: 100%;
+}
+
+.admin-secondary-link {
+  color: var(--text-primary);
+}
+
+.admin-secondary-link--muted {
+  color: var(--surface-muted-text);
+}
+
+.admin-secondary-link--compact {
+  min-height: 38px;
+  padding: 0 12px;
+}
+
+.admin-ghost-link {
+  padding: 0 10px;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 720px) {
+  .admin-form-card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .oo-surface,
+  .admin-form-card,
+  .oo-surface-soft,
+  .oo-surface-elevated,
+  .admin-empty-state,
+  .oo-surface-interactive,
+  .admin-secondary-link,
+  .oo-surface-muted,
+  .admin-secondary-link--muted,
+  .oo-strip {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .oo-surface,
+  .admin-form-card,
+  .oo-surface-soft,
+  .oo-surface-elevated,
+  .admin-empty-state,
+  .oo-surface-interactive,
+  .admin-secondary-link,
+  .oo-surface-muted,
+  .admin-secondary-link--muted {
+    box-shadow: none;
+  }
+}
+
+.admin-team-layout,
+.admin-team-list {
+  display: grid;
+  gap: 16px;
+}
+
+.admin-team-row {
+  display: grid;
+  gap: 14px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.admin-team-row:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.admin-team-row__copy,
+.admin-team-row__controls,
+.admin-team-row__form {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-team-row__headline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-team-row__headline h3,
+.admin-team-row__meta,
+.admin-team-row__note {
+  margin: 0;
+}
+
+.admin-team-row__headline h3 {
+  color: var(--text-primary);
+  font-size: 1rem;
+  line-height: 1.3;
+}
+
+.admin-team-row__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+}
+
+.admin-team-row__note {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.admin-team-role-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-surface-soft);
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.admin-team-row__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-notification-settings-card__status,
+.admin-notification-settings-card__meta {
+  display: grid;
+  gap: 6px;
+}
+
+.admin-notification-settings-card__status strong,
+.admin-notification-settings-card__status p,
+.admin-notification-settings-card__meta span {
+  margin: 0;
+}
+
+.admin-notification-settings-card__status strong {
+  color: var(--text-primary);
+}
+
+.admin-notification-settings-card__status p,
+.admin-notification-settings-card__meta span {
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.admin-notification-settings-card__meta {
+  padding-top: 2px;
+  font-size: 0.92rem;
+}
+
+.admin-notification-settings-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.admin-notification-settings-card__section,
+.admin-notification-settings-card__section-header,
+.admin-notification-settings-card__list,
+.admin-notification-settings-card__copy {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-notification-settings-card__section {
+  padding-top: 4px;
+}
+
+.admin-notification-settings-card__section-header strong,
+.admin-notification-settings-card__section-header p,
+.admin-notification-settings-card__copy span,
+.admin-notification-settings-card__copy small {
+  margin: 0;
+}
+
+.admin-notification-settings-card__section-header strong,
+.admin-notification-settings-card__copy span {
+  color: var(--text-primary);
+}
+
+.admin-notification-settings-card__section-header p,
+.admin-notification-settings-card__copy small {
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.admin-notification-settings-card__item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid var(--border-soft);
+}
+
+.admin-notification-settings-card__item:first-child {
+  border-top: 1px solid var(--border-soft);
+}
+
+.admin-notification-settings-card__item input {
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+}
+
+@media (min-width: 900px) {
+  .admin-team-row {
+    grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.8fr);
+    align-items: start;
+  }
+}

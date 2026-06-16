@@ -1,0 +1,46 @@
+export async function copyTextToClipboard(text: string) {
+  if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return true;
+  }
+
+  if (typeof document === "undefined") {
+    return false;
+  }
+
+  const textarea = document.createElement("textarea");
+  textarea.value = text;
+  textarea.setAttribute("readonly", "true");
+  textarea.style.position = "fixed";
+  textarea.style.opacity = "0";
+  textarea.style.pointerEvents = "none";
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  try {
+    return document.execCommand("copy");
+  } finally {
+    document.body.removeChild(textarea);
+  }
+}
+
+export function canUseWebShare() {
+  return typeof navigator !== "undefined" && typeof navigator.share === "function";
+}
+
+export async function shareText(input: { title?: string; text: string }) {
+  if (!canUseWebShare()) {
+    return "unsupported" as const;
+  }
+
+  try {
+    await navigator.share(input);
+    return "shared" as const;
+  } catch (error) {
+    if (error instanceof DOMException && error.name === "AbortError") {
+      return "cancelled" as const;
+    }
+
+    return "error" as const;
+  }
+}

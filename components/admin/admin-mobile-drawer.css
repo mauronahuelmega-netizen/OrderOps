@@ -1,0 +1,403 @@
+/* Mobile admin drawer — local tokens (MH3/MH4). */
+.admin-mobile-drawer {
+  --drawer-bg: var(--bg-surface);
+  --drawer-bg-header: color-mix(in srgb, var(--drawer-bg) 96%, var(--bg-canvas));
+  --drawer-bg-footer: color-mix(in srgb, var(--bg-surface) 92%, var(--bg-canvas));
+  --drawer-border: var(--border-subtle);
+  --drawer-text: var(--text-primary);
+  --drawer-text-secondary: var(--text-secondary);
+  --drawer-text-muted: var(--text-muted);
+  --drawer-hover-bg: var(--bg-surface-hover);
+  --drawer-active-bg: color-mix(in srgb, var(--text-primary) 6%, transparent);
+  --drawer-active-bg-hover: color-mix(in srgb, var(--text-primary) 8%, transparent);
+  --drawer-active-border: color-mix(in srgb, var(--border-subtle) 70%, transparent);
+  --drawer-active-accent: color-mix(in srgb, var(--text-primary) 55%, var(--border-subtle));
+  --drawer-overlay-scrim: color-mix(in srgb, var(--text-primary) 50%, transparent);
+  --drawer-overlay: color-mix(in srgb, var(--bg-canvas) 45%, var(--drawer-overlay-scrim));
+  --drawer-shadow-color: color-mix(in srgb, var(--text-primary) 18%, transparent);
+  --drawer-shadow: -12px 0 32px var(--drawer-shadow-color);
+  --drawer-radius: var(--radius-md, 8px);
+  --drawer-focus-ring: color-mix(in srgb, var(--text-primary) 24%, transparent);
+  --drawer-row-min-height: 44px;
+  --drawer-row-padding: 0.5625rem 14px;
+  --drawer-row-gap: 0.6875rem;
+  --drawer-width: min(88vw, 360px);
+
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: var(--drawer-width);
+  height: 100dvh;
+  max-height: 100dvh;
+  padding: 0;
+  border-left: 1px solid var(--drawer-border);
+  background: var(--drawer-bg);
+  box-shadow: var(--drawer-shadow);
+  color: var(--drawer-text);
+}
+
+.admin-mobile-menu-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--drawer-border, var(--border-subtle));
+  border-radius: var(--drawer-radius, var(--radius-md, 8px));
+  background: var(--drawer-hover-bg, var(--bg-surface-hover));
+  color: var(--drawer-text, var(--text-primary));
+  box-shadow: none;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.admin-mobile-menu-button:hover {
+  background: color-mix(in srgb, var(--text-primary) 5%, var(--drawer-hover-bg, var(--bg-surface-hover)));
+  border-color: color-mix(
+    in srgb,
+    var(--drawer-border, var(--border-subtle)) 80%,
+    var(--text-primary)
+  );
+}
+
+.admin-mobile-menu-button:active {
+  background: color-mix(in srgb, var(--text-primary) 8%, var(--drawer-hover-bg, var(--bg-surface-hover)));
+}
+
+.admin-mobile-menu-button[aria-expanded="true"] {
+  background: color-mix(in srgb, var(--text-primary) 7%, var(--drawer-hover-bg, var(--bg-surface-hover)));
+  border-color: color-mix(in srgb, var(--drawer-border, var(--border-subtle)) 65%, var(--text-primary));
+  color: var(--drawer-text, var(--text-primary));
+}
+
+.admin-mobile-menu-button:focus-visible,
+.admin-mobile-drawer__close:focus-visible,
+.admin-mobile-drawer__link:focus-visible,
+.admin-mobile-drawer__logout-button:focus-visible {
+  outline: 2px solid var(--drawer-focus-ring, color-mix(in srgb, var(--text-primary) 24%, transparent));
+  outline-offset: 2px;
+}
+
+.admin-mobile-menu-button__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  color: currentColor;
+}
+
+.admin-mobile-menu-button__icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+}
+
+.admin-mobile-drawer-portal {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100dvh;
+  z-index: 60;
+  overflow: hidden;
+}
+
+.admin-mobile-drawer-overlay {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: var(--drawer-overlay);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+}
+
+.admin-mobile-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  flex: 0 0 auto;
+  padding: 14px 12px 12px 16px;
+  border-bottom: 1px solid var(--drawer-border);
+  background: var(--drawer-bg-header);
+}
+
+.admin-mobile-drawer__header h2,
+.admin-mobile-drawer__footer p,
+.admin-mobile-drawer__user-label {
+  margin: 0;
+}
+
+.admin-mobile-drawer__close {
+  position: relative;
+  flex: 0 0 auto;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: var(--drawer-radius);
+  background: transparent;
+  color: var(--drawer-text-secondary);
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.admin-mobile-drawer__close:hover {
+  background: var(--drawer-hover-bg);
+  color: var(--drawer-text);
+}
+
+.admin-mobile-drawer__close-line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 2px;
+  border-radius: var(--radius-full, 999px);
+  background: currentColor;
+}
+
+.admin-mobile-drawer__close-line:first-child {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.admin-mobile-drawer__close-line:last-child {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.admin-mobile-drawer__nav {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  gap: 2px;
+  padding: 8px 10px;
+}
+
+.admin-mobile-drawer__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: var(--drawer-row-min-height);
+  padding: var(--drawer-row-padding);
+  gap: var(--drawer-row-gap);
+  border: none;
+  border-radius: var(--drawer-radius);
+  background: transparent;
+  color: var(--drawer-text-secondary);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.2;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.admin-mobile-drawer__link-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--drawer-text-muted);
+}
+
+.admin-mobile-drawer__link-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
+
+.admin-mobile-drawer__link-text {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-mobile-drawer__link:hover,
+.admin-mobile-drawer__link:focus-visible {
+  background: var(--drawer-hover-bg);
+  color: var(--drawer-text);
+}
+
+.admin-mobile-drawer__link:hover:not(.admin-mobile-drawer__link--active) .admin-mobile-drawer__link-icon,
+.admin-mobile-drawer__link:focus-visible:not(.admin-mobile-drawer__link--active)
+  .admin-mobile-drawer__link-icon {
+  color: var(--drawer-text-secondary);
+}
+
+.admin-mobile-drawer__link--active {
+  background: var(--drawer-active-bg);
+  color: var(--drawer-text);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px var(--drawer-active-border);
+}
+
+.admin-mobile-drawer__link--active::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 2px;
+  height: 56%;
+  border-radius: 0 4px 4px 0;
+  background: var(--drawer-active-accent);
+  transform: translateY(-50%);
+}
+
+.admin-mobile-drawer__link--active .admin-mobile-drawer__link-icon {
+  color: var(--drawer-text);
+}
+
+.admin-mobile-drawer__link--active:hover,
+.admin-mobile-drawer__link--active:focus-visible {
+  background: var(--drawer-active-bg-hover);
+  color: var(--drawer-text);
+}
+
+.admin-mobile-drawer__footer {
+  display: grid;
+  flex: 0 0 auto;
+  gap: 4px;
+  margin-top: auto;
+  padding: 10px 10px 16px;
+  border-top: 1px solid var(--drawer-border);
+  background: var(--drawer-bg-footer);
+  color: var(--drawer-text-secondary);
+}
+
+.admin-mobile-drawer__account {
+  display: flex;
+  align-items: center;
+  gap: var(--drawer-row-gap);
+  min-height: var(--drawer-row-min-height);
+  padding: 0.375rem 14px;
+}
+
+.admin-mobile-drawer__avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full, 999px);
+  background: color-mix(in srgb, var(--text-primary) 8%, var(--drawer-hover-bg));
+  color: var(--drawer-text);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.admin-mobile-drawer__user-label {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--drawer-text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.admin-mobile-drawer__theme-toggle,
+.admin-mobile-drawer__logout {
+  width: 100%;
+  padding: 0 4px;
+}
+
+.admin-mobile-drawer__logout-form {
+  margin: 0;
+}
+
+.admin-mobile-drawer__logout-button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: var(--drawer-row-min-height);
+  margin: 0;
+  padding: var(--drawer-row-padding);
+  gap: var(--drawer-row-gap);
+  border: none;
+  border-radius: var(--drawer-radius);
+  background: transparent;
+  box-shadow: none;
+  color: var(--drawer-text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.admin-mobile-drawer__logout-button:hover,
+.admin-mobile-drawer__logout-button:focus-visible {
+  background: color-mix(in srgb, var(--text-primary) 5%, transparent);
+  color: var(--drawer-text);
+}
+
+.admin-mobile-drawer__logout-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--drawer-text-muted);
+}
+
+.admin-mobile-drawer__logout-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+
+.admin-mobile-drawer__logout-button:hover .admin-mobile-drawer__logout-icon,
+.admin-mobile-drawer__logout-button:focus-visible .admin-mobile-drawer__logout-icon {
+  color: var(--drawer-text-secondary);
+}
+
+.admin-mobile-drawer__logout-label {
+  min-width: 0;
+}
+
+@media (min-width: 768px) and (max-width: 899px) {
+  .admin-mobile-drawer {
+    --drawer-width: min(88vw, 420px);
+  }
+}
+
+@media (min-width: 900px) {
+  .admin-mobile-menu-button,
+  .admin-mobile-drawer-portal {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-mobile-drawer-overlay {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

@@ -1,0 +1,499 @@
+@keyframes overviewPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.root {
+  --dashboard-top-surface: var(--surface-elevated-bg, var(--bg-surface));
+  --dashboard-top-surface-muted: var(--surface-muted-bg, var(--bg-surface-soft));
+  --dashboard-top-border: var(--surface-elevated-border, var(--border-subtle));
+  --dashboard-top-shadow: var(--shadow-sm);
+  --dashboard-top-card-radius: var(--radius-lg);
+  --dashboard-top-section-gap: var(--space-md);
+  --dashboard-top-grid-gap: var(--space-lg);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.headerSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid color-mix(in srgb, var(--border-subtle) 82%, transparent);
+}
+
+.headerCopy {
+  flex: 1;
+  min-width: 0;
+}
+
+.headerCopy h1 {
+  margin: 0;
+  font-size: 1.8125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.headerMetaLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-md);
+  margin-top: var(--space-sm);
+}
+
+.liveIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
+
+.liveDot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: color-mix(in srgb, var(--color-ready) 88%, transparent);
+  animation: overviewPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  flex-shrink: 0;
+}
+
+.liveIndicator[data-scope-indicator="review"] .liveDot {
+  background-color: color-mix(in srgb, var(--text-tertiary) 72%, transparent);
+  animation: none;
+}
+
+.kpiSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dashboard-top-section-gap);
+}
+
+.kpiSectionTitle,
+.insightsRowTitle {
+  margin: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.2;
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--dashboard-top-grid-gap);
+}
+
+.kpiGrid--business {
+  align-items: stretch;
+}
+
+.kpiCard {
+  background: var(--dashboard-top-surface);
+  border: 1px solid var(--dashboard-top-border);
+  border-radius: var(--dashboard-top-card-radius);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  box-shadow: var(--dashboard-top-shadow);
+  min-width: 0;
+}
+
+.iconWrapper {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md);
+  background: var(--surface-muted-bg, var(--bg-surface-soft));
+  border: 1px solid var(--surface-muted-border, var(--border-subtle));
+  color: var(--text-secondary);
+}
+
+.kpiIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.kpiValue {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.kpiCard[data-priority="primary"] .kpiValue {
+  font-size: 2rem;
+}
+
+.kpiLabel {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-tertiary);
+  font-weight: 600;
+}
+
+.kpiDetail {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+/* Business KPI editorial polish */
+.kpiSection[data-section="business"] .kpiCard {
+  gap: var(--space-sm);
+}
+
+.kpiSection[data-section="business"] .kpiLabel {
+  order: 1;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.kpiSection[data-section="business"] .kpiValue {
+  order: 2;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.kpiSection[data-section="business"] .kpiDetail {
+  order: 3;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  margin-top: auto;
+}
+
+.kpiSection[data-section="business"] .kpiCard[data-tone] .kpiValue {
+  color: var(--text-primary);
+}
+
+.kpiSection[data-section="business"] .iconWrapper {
+  color: var(--text-secondary);
+  background: var(--surface-muted-bg, var(--bg-surface-soft));
+  border-color: var(--surface-muted-border, var(--border-subtle));
+}
+
+.kpiCard[data-kpi-id="revenue"] {
+  padding: calc(var(--space-lg) + 2px) var(--space-lg);
+  border-color: color-mix(in srgb, var(--accent-primary) 14%, var(--dashboard-top-border));
+}
+
+.kpiCard[data-kpi-id="revenue"] .kpiValue {
+  font-size: clamp(1.9rem, 2.6vw, 2.35rem);
+  letter-spacing: -0.045em;
+}
+
+.kpiCard[data-kpi-id="revenue"] .kpiDetail {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.kpiCard[data-kpi-id="revenue"] .iconWrapper {
+  color: var(--accent-primary);
+  background: color-mix(in srgb, var(--accent-primary) 8%, var(--surface-muted-bg, var(--bg-surface-soft)));
+  border-color: color-mix(in srgb, var(--accent-primary) 16%, var(--dashboard-top-border));
+}
+
+.kpiCard[data-kpi-id="topProduct"] .kpiValue {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  line-height: 1.15;
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+.kpiCard[data-kpi-id="topProduct"] .kpiDetail {
+  font-size: 0.875rem;
+}
+
+/* Operational KPI polish (D6) */
+.kpiGrid--operational {
+  align-items: stretch;
+}
+
+.kpiSection[data-section="operational"] .kpiCard {
+  position: relative;
+  overflow: hidden;
+  gap: var(--space-sm);
+}
+
+.kpiSection[data-section="operational"] .kpiCard::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: transparent;
+}
+
+.kpiSection[data-section="operational"] .kpiCard[data-tone="success"]::before {
+  background: color-mix(in srgb, var(--color-ready) 45%, transparent);
+}
+
+.kpiSection[data-section="operational"] .kpiCard[data-tone="warning"]::before {
+  background: color-mix(in srgb, var(--color-pending) 50%, transparent);
+}
+
+.kpiSection[data-section="operational"] .kpiCard[data-tone="danger"]::before {
+  background: color-mix(in srgb, var(--color-cancelled) 52%, transparent);
+}
+
+.kpiSection[data-section="operational"] .kpiCard[data-tone="info"]::before {
+  background: color-mix(in srgb, var(--color-delivery) 45%, transparent);
+}
+
+.kpiSection[data-section="operational"] .kpiCard[data-tone="neutral"]::before {
+  background: color-mix(in srgb, var(--border-subtle) 60%, transparent);
+}
+
+.kpiSection[data-section="operational"] .kpiLabel {
+  order: 1;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.kpiSection[data-section="operational"] .kpiValue {
+  order: 2;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+}
+
+.kpiSection[data-section="operational"] .kpiDetail {
+  order: 3;
+  font-size: 0.875rem;
+  line-height: 1.35;
+  margin-top: auto;
+}
+
+.kpiSection[data-section="operational"] .kpiCard[data-tone="success"] .kpiValue {
+  color: var(--text-ready-strong, var(--color-ready));
+}
+
+.kpiSection[data-section="operational"] .kpiCard[data-tone="warning"] .kpiValue {
+  color: var(--text-pending-strong, var(--color-pending));
+}
+
+.kpiSection[data-section="operational"] .kpiCard[data-tone="danger"] .kpiValue {
+  color: var(--text-cancelled-strong, var(--color-cancelled));
+}
+
+.kpiSection[data-section="operational"] .kpiCard[data-tone="info"] .kpiValue {
+  color: var(--text-delivery-strong, var(--color-delivery));
+}
+
+.kpiSection[data-section="operational"] .kpiCard[data-tone="success"] .iconWrapper {
+  color: var(--text-ready-strong, var(--color-ready));
+  background: color-mix(in srgb, var(--color-ready) 8%, var(--surface-muted-bg, var(--bg-surface-soft)));
+  border-color: color-mix(in srgb, var(--color-ready) 14%, var(--dashboard-top-border));
+}
+
+.kpiSection[data-section="operational"] .kpiCard[data-tone="warning"] .iconWrapper {
+  color: var(--text-pending-strong, var(--color-pending));
+  background: color-mix(in srgb, var(--color-pending) 8%, var(--surface-muted-bg, var(--bg-surface-soft)));
+  border-color: color-mix(in srgb, var(--color-pending) 14%, var(--dashboard-top-border));
+}
+
+.kpiSection[data-section="operational"] .kpiCard[data-tone="danger"] .iconWrapper {
+  color: var(--text-cancelled-strong, var(--color-cancelled));
+  background: color-mix(in srgb, var(--color-cancelled) 8%, var(--surface-muted-bg, var(--bg-surface-soft)));
+  border-color: color-mix(in srgb, var(--color-cancelled) 14%, var(--dashboard-top-border));
+}
+
+.kpiSection[data-section="operational"] .kpiCard[data-tone="info"] .iconWrapper {
+  color: var(--text-delivery-strong, var(--color-delivery));
+  background: color-mix(in srgb, var(--color-delivery) 8%, var(--surface-muted-bg, var(--bg-surface-soft)));
+  border-color: color-mix(in srgb, var(--color-delivery) 14%, var(--dashboard-top-border));
+}
+
+.kpiCard[data-kpi-id="kitchenStatus"] .kpiValue {
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+.kpiCard[data-kpi-id="kitchenStatus"] .kpiDetail {
+  color: var(--text-secondary);
+}
+
+.kpiCard[data-kpi-id="delayedOrders"][data-tone="warning"] .kpiValue,
+.kpiCard[data-kpi-id="delayedOrders"][data-tone="danger"] .kpiValue {
+  font-size: 1.875rem;
+}
+
+.kpiCard[data-kpi-id="delayedOrders"][data-tone="success"] .kpiValue {
+  color: var(--text-ready-strong, var(--color-ready));
+}
+
+.kpiCard[data-kpi-id="averageTime"] .kpiDetail {
+  color: var(--text-secondary);
+}
+
+.kpiCard[data-kpi-id="readyWaiting"][data-tone="info"] .kpiValue,
+.kpiCard[data-kpi-id="readyWaiting"][data-tone="warning"] .kpiValue {
+  font-size: 1.625rem;
+}
+
+.kpiCard[data-kpi-id="readyWaiting"][data-tone="success"] .kpiValue {
+  color: var(--text-ready-strong, var(--color-ready));
+}
+
+.insightsRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--dashboard-top-section-gap);
+  margin-bottom: 0;
+}
+
+.insightsRowTitle {
+  color: var(--text-tertiary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.insightsStrip {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.insightsStrip[data-insight-count="1"] {
+  grid-template-columns: minmax(0, 22rem);
+}
+
+.insightsStrip[data-insight-count="2"] {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.insightsStrip[data-insight-count="3"] {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.insightCard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+  padding: var(--space-md) var(--space-lg) var(--space-md)
+    calc(var(--space-lg) + var(--space-md));
+  border: 1px solid color-mix(in srgb, var(--dashboard-top-border) 82%, transparent);
+  border-radius: var(--radius-lg);
+  background: var(--dashboard-top-surface-muted);
+  box-shadow: none;
+  cursor: default;
+  min-width: 0;
+}
+
+.insightCard::before {
+  content: "";
+  position: absolute;
+  left: var(--space-md);
+  top: calc(var(--space-md) + 0.35rem);
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: var(--radius-full);
+  background: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.insightTitle {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.insightDetail {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.35;
+}
+
+.insightCard[data-tone="success"]::before {
+  background: color-mix(in srgb, var(--color-ready) 70%, transparent);
+}
+
+.insightCard[data-tone="warning"]::before {
+  background: color-mix(in srgb, var(--color-pending) 70%, transparent);
+}
+
+.insightCard[data-tone="danger"]::before {
+  background: color-mix(in srgb, var(--color-cancelled) 70%, transparent);
+}
+
+.insightCard[data-tone="info"]::before {
+  background: color-mix(in srgb, var(--color-delivery) 65%, transparent);
+}
+
+.insightCard[data-insight-id="stalled-orders"],
+.insightCard[data-insight-id="ready-waiting"] {
+  border-color: color-mix(in srgb, var(--dashboard-top-border) 72%, var(--color-pending) 10%);
+}
+
+.insightCard[data-insight-id="delivery-dominance"],
+.insightCard[data-insight-id="pickup-dominance"],
+.insightCard[data-insight-id="recent-peak"] {
+  border-color: color-mix(in srgb, var(--dashboard-top-border) 88%, transparent);
+}
+
+.insightCard[data-insight-id="positive-operations"] {
+  border-color: color-mix(in srgb, var(--dashboard-top-border) 84%, var(--color-ready) 8%);
+}
+
+.insightCard[data-insight-id="stalled-orders"] .insightTitle,
+.insightCard[data-insight-id="ready-waiting"] .insightTitle {
+  color: var(--text-primary);
+}
+
+.insightCard[data-insight-id="delivery-dominance"] .insightDetail,
+.insightCard[data-insight-id="pickup-dominance"] .insightDetail {
+  color: var(--text-secondary);
+}
+
+@media (max-width: 1200px) {
+  .kpiGrid,
+  .insightsStrip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .root {
+    display: none;
+  }
+}

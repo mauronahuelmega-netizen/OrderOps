@@ -1,0 +1,10 @@
+.listWrapper {
+  padding: 1.5rem;
+  background-color: var(--bg-canvas);
+  min-height: calc(100vh - 140px);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1rem;
+  align-content: start;
+  width: 100%;
+}

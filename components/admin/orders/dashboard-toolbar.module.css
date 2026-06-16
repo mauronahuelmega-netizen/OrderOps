@@ -1,0 +1,513 @@
+.toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding-block: 0 var(--space-md);
+  padding-inline: 0;
+  background-color: var(--bg-canvas);
+  min-width: 0;
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+  overflow-x: clip;
+}
+
+.operationalRow,
+.viewControlsRow {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-sm);
+  min-width: 0;
+  width: 100%;
+}
+
+.titleCluster {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+}
+
+.sessionCluster {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  min-width: 0;
+  max-width: 100%;
+}
+
+.sessionStatus {
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 650;
+  line-height: 1.25;
+  min-width: 0;
+}
+
+.sessionStatusGroup {
+  display: grid;
+  gap: 0.125rem;
+  min-width: 0;
+}
+
+.reviewModeHint {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 550;
+  line-height: 1.25;
+}
+
+.sessionButton {
+  min-height: 2.25rem;
+  padding: 0 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.sessionButtonDanger {
+  color: var(--text-cancelled-strong, var(--text-primary));
+}
+
+.manualOrderButton {
+  min-height: 2.25rem;
+  padding: 0 0.75rem;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.manualOrderButtonLabelDesktop {
+  display: none;
+}
+
+.manualOrderButtonLabelMobile {
+  display: inline;
+}
+
+@media (min-width: 769px) {
+  .manualOrderButtonLabelDesktop {
+    display: inline;
+  }
+
+  .manualOrderButtonLabelMobile {
+    display: none;
+  }
+}
+
+.syncButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  min-width: 2rem;
+  height: 2rem;
+  min-height: 2rem;
+  padding: 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  background: color-mix(in srgb, var(--surface-elevated-bg) 86%, transparent);
+  color: var(--text-secondary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.syncButton:hover:not(:disabled) {
+  color: var(--text-primary);
+  border-color: color-mix(in srgb, var(--text-secondary) 32%, var(--border-subtle));
+  background: color-mix(in srgb, var(--surface-elevated-bg) 92%, var(--accent-soft));
+}
+
+.syncButton:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary) 45%, transparent);
+  outline-offset: 2px;
+}
+
+.syncButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.88;
+}
+
+.syncStatusDot {
+  position: absolute;
+  top: 0.375rem;
+  right: 0.375rem;
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: var(--radius-full);
+  background: var(--color-success);
+  pointer-events: none;
+}
+
+.syncButton[data-sync-state="syncing"] .syncStatusDot {
+  background: color-mix(in srgb, var(--accent-primary) 72%, var(--color-success));
+}
+
+.syncButton[data-sync-state="error"] {
+  color: var(--text-tertiary);
+  opacity: 0.82;
+}
+
+.syncButton[data-sync-state="offline"],
+.syncButton[data-sync-state="stale"] {
+  color: var(--text-tertiary);
+  opacity: 0.82;
+}
+
+.syncButton[data-sync-state="error"] .syncStatusDot {
+  background: color-mix(in srgb, var(--color-cancelled) 52%, var(--text-tertiary));
+}
+
+.syncButton[data-sync-state="offline"] .syncStatusDot,
+.syncButton[data-sync-state="stale"] .syncStatusDot {
+  background: color-mix(in srgb, var(--text-tertiary) 68%, var(--text-secondary));
+}
+
+.syncButton[data-sync-state="synced"] .syncStatusDot,
+.syncButton[data-sync-state="syncing"] .syncStatusDot {
+  animation: toolbar-sync-pulse 1.8s ease-in-out infinite;
+}
+
+.syncIcon {
+  width: 0.9375rem;
+  height: 0.9375rem;
+  flex-shrink: 0;
+}
+
+@keyframes toolbar-sync-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(0.92);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes toolbar-sync-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.syncIconSpinning {
+  animation: toolbar-sync-spin 850ms linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .syncStatusDot,
+  .syncIconSpinning {
+    animation: none;
+  }
+}
+
+.filterCluster {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  overflow-x: auto;
+  width: 100%;
+  min-width: 0;
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-surface-soft);
+  scrollbar-width: none;
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+
+.filterCluster::-webkit-scrollbar {
+  display: none;
+}
+
+.filterButton {
+  flex-shrink: 0;
+  min-height: 2rem;
+  padding: 0 0.875rem;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+  border-radius: var(--radius-sm);
+}
+
+.filterButton:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  outline-offset: 2px;
+}
+
+.filterButtonActive {
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent-primary) 24%, transparent);
+}
+
+.searchCluster {
+  min-width: 0;
+  width: 100%;
+}
+
+.searchCluster :global(.ui-field) {
+  gap: 0;
+  margin: 0;
+}
+
+.sessionError {
+  margin: var(--space-xs) 0 0;
+  color: var(--text-cancelled-strong, var(--text-primary));
+  font-size: 0.8125rem;
+  line-height: 1.25;
+}
+
+.activeFilterBanner {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  min-width: 0;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-surface-soft);
+  box-sizing: border-box;
+}
+
+.activeFilterBannerLabel {
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.3;
+  min-width: 0;
+}
+
+.activeFilterBannerAction {
+  flex-shrink: 0;
+  min-height: 2rem;
+  padding: 0 0.75rem;
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+.activeFilterBannerAction:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  outline-offset: 2px;
+}
+
+/* Mobile (T8) */
+@media (max-width: 768px) {
+  .operationalRow {
+    gap: var(--space-md);
+  }
+
+  .viewControlsRow {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .title {
+    font-size: 1.25rem;
+    width: 100%;
+  }
+
+  .sessionCluster {
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    gap: var(--space-sm);
+    row-gap: var(--space-xs);
+  }
+
+  .sessionStatus {
+    flex: 1 1 auto;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sessionButton {
+    min-height: 2.75rem;
+    padding-inline: 0.875rem;
+  }
+
+  .manualOrderButton {
+    min-height: 2.75rem;
+    padding-inline: 0.875rem;
+  }
+
+  .syncButton {
+    width: 2.75rem;
+    min-width: 2.75rem;
+    height: 2.75rem;
+    min-height: 2.75rem;
+  }
+
+  .searchCluster {
+    order: 1;
+    width: 100%;
+    max-width: none;
+  }
+
+  .filterCluster {
+    order: 2;
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: nowrap;
+    padding-inline: var(--space-sm);
+  }
+
+  .filterButton {
+    min-height: 2.5rem;
+    padding-inline: 1rem;
+  }
+}
+
+/* Tablet + desktop base (T4.8 two-row layout) */
+@media (min-width: 769px) {
+  .operationalRow {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+  }
+
+  .sessionCluster {
+    justify-content: flex-end;
+    flex-shrink: 0;
+    max-width: min(100%, 42rem);
+  }
+
+  .viewControlsRow {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 22rem);
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .filterCluster {
+    width: 100%;
+    max-width: none;
+    order: unset;
+  }
+
+  .searchCluster {
+    min-width: 16rem;
+    max-width: 22rem;
+    width: 100%;
+    justify-self: end;
+    order: unset;
+  }
+
+  .toolbar[data-kanban-board="true"] .filterCluster {
+    display: none;
+  }
+
+  .toolbar[data-kanban-board="true"] .activeFilterBanner {
+    display: none;
+  }
+
+  .toolbar[data-kanban-board="true"] .viewControlsRow {
+    grid-template-columns: 1fr;
+  }
+
+  .toolbar[data-kanban-board="true"] .searchCluster {
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+    justify-self: stretch;
+  }
+}
+
+/* Tablet narrow: stack view controls with search first */
+@media (min-width: 769px) and (max-width: 920px) {
+  .operationalRow {
+    align-items: flex-start;
+  }
+
+  .sessionCluster {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    max-width: 100%;
+  }
+
+  .viewControlsRow {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .searchCluster {
+    order: 1;
+    min-width: 0;
+    max-width: none;
+    width: 100%;
+    justify-self: stretch;
+  }
+
+  .filterCluster {
+    order: 2;
+  }
+}
+
+/* Tablet touch comfort */
+@media (min-width: 769px) and (max-width: 1199px) {
+  .sessionButton {
+    min-height: 2.5rem;
+  }
+
+  .manualOrderButton {
+    min-height: 2.5rem;
+  }
+
+  .syncButton {
+    width: 2.25rem;
+    min-width: 2.25rem;
+    height: 2.25rem;
+    min-height: 2.25rem;
+  }
+
+  .filterButton {
+    min-height: 2.375rem;
+  }
+}
+
+/* Desktop (T4.8 preserved + B8.2 simplification) */
+@media (min-width: 1200px) {
+  .operationalRow {
+    align-items: center;
+  }
+
+  .viewControlsRow {
+    grid-template-columns: minmax(0, min(32rem, 100%));
+    justify-content: start;
+    gap: var(--space-sm);
+  }
+
+  .filterCluster {
+    display: none;
+  }
+
+  .searchCluster {
+    min-width: 0;
+    max-width: min(32rem, 100%);
+    width: 100%;
+    justify-self: start;
+  }
+
+  .activeFilterBanner {
+    display: flex;
+  }
+}

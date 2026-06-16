@@ -1,0 +1,164 @@
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.logoFrame {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+  padding: 7px;
+  overflow: hidden;
+  border: 1px solid var(--surface-elevated-border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-elevated-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.logoFallback {
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-md);
+  background: var(--text-primary);
+  color: var(--bg-surface);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.brandName {
+  margin: 0;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 0.98rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.1;
+}
+
+.kicker {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.77rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.brandDrawer {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding-right: 4px;
+}
+
+.brandDrawer .logoFrame {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface-hover);
+  box-shadow: none;
+}
+
+.brandDrawer .logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.brandDrawer .logoFallback {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  background: var(--text-primary);
+  color: var(--bg-surface);
+  font-size: 0.875rem;
+}
+
+.brandDrawer .text {
+  gap: 3px;
+}
+
+.brandDrawer .brandName {
+  font-size: 1rem;
+  font-weight: 650;
+}
+
+.brandDrawer .kicker {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.brandTopbar {
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.brandTopbar .logoFrame {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background: var(--bg-surface-hover);
+  box-shadow: none;
+}
+
+.brandTopbar .logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.brandTopbar .logoFallback {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  font-size: 0.875rem;
+}
+
+.brandTopbar .brandName {
+  font-size: 0.9375rem;
+  font-weight: 650;
+}
+
+.brandTopbar .kicker {
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+@media (min-width: 720px) {
+  .brandDrawer .logoFrame {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brandDrawer .brandName {
+    font-size: 1rem;
+  }
+}

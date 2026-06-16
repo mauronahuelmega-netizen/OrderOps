@@ -1,0 +1,323 @@
+"use server";
+
+import { getActionErrorMessage, logActionFailure } from "@/lib/admin/action-errors";
+import { requireAdminPermission } from "@/lib/admin/context";
+import { createOrderEvent } from "@/lib/orders/events.server";
+import {
+  presentOrderTimelineEvent,
+  type AdminOrderTimelineEvent
+} from "@/lib/orders/events.shared";
+import type { OrderMutationErrorCode } from "@/lib/store-sessions/types";
+import { assertActiveStoreSessionForOrderMutation } from "@/lib/store-sessions/admin";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
+
+type OrderStatus = "pending" | "preparing" | "ready" | "completed" | "cancelled";
+type AssignmentAction = "claim" | "release";
+
+type ActionState = {
+  error?: string;
+  code?: OrderMutationErrorCode;
+  success?: boolean;
+  changed?: boolean;
+  message?: string;
+  event?: AdminOrderTimelineEvent | null;
+  order?: {
+    id: string;
+    status?: OrderStatus;
+    assigned_to?: string | null;
+    assigned_at?: string | null;
+  };
+};
+
+const ORDER_STATUSES: OrderStatus[] = [
+  "pending",
+  "preparing",
+  "ready",
+  "completed",
+  "cancelled"
+];
+const ASSIGNMENT_ACTIONS: AssignmentAction[] = ["claim", "release"];
+
+export async function updateOrderStatusAction(
+  _prevState: ActionState,
+  formData: FormData
+) {
+  const orderId = getTrimmedString(formData.get("order_id"));
+  const status = getTrimmedString(formData.get("status"));
+
+  if (!orderId) {
+    return { error: "Falta identificar el pedido." };
+  }
+
+  if (!ORDER_STATUSES.includes(status as OrderStatus)) {
+    return { error: "Estado invalido." };
+  }
+
+  try {
+    const adminContext = await requireAdminPermission("updateOrders");
+    const supabase = await createSupabaseServerClient();
+
+    const { data: currentOrder, error: currentOrderError } = await supabase
+      .from("orders")
+      .select("id, created_at, status, assigned_to, assigned_at")
+      .eq("id", orderId)
+      .eq("business_id", adminContext.businessId)
+      .maybeSingle();
+
+    if (currentOrderError) {
+      throw new Error("No pudimos cargar el pedido.");
+    }
+
+    if (!currentOrder) {
+      return { error: "Este pedido ya no existe o pertenece a otro negocio.", code: "ORDER_NOT_FOUND" };
+    }
+
+    const mutationGuard = await assertActiveStoreSessionForOrderMutation({
+      businessId: adminContext.businessId,
+      order: {
+        id: currentOrder.id,
+        created_at: currentOrder.created_at,
+        business_id: adminContext.businessId
+      }
+    });
+
+    if (!mutationGuard.ok) {
+      return { error: mutationGuard.message, code: mutationGuard.reason };
+    }
+
+    if (currentOrder.status === status) {
+      return {
+        success: true,
+        changed: false,
+        message: "No hubo cambios para guardar.",
+        order: {
+          id: currentOrder.id,
+          status: currentOrder.status as OrderStatus,
+          assigned_to: currentOrder.assigned_to ?? null,
+          assigned_at: currentOrder.assigned_at ?? null
+        }
+      };
+    }
+
+    const { data: updatedOrder, error: updateError } = await supabase
+      .from("orders")
+      .update({ status: status as OrderStatus })
+      .eq("id", orderId)
+      .eq("business_id", adminContext.businessId)
+      .select("id, status, assigned_to, assigned_at")
+      .maybeSingle();
+
+    if (updateError) {
+      throw new Error("No pudimos actualizar el pedido.");
+    }
+
+    if (!updatedOrder) {
+      return { error: "Este pedido ya no existe o pertenece a otro negocio." };
+    }
+
+    let event: AdminOrderTimelineEvent | null = null;
+
+    try {
+      const eventRow = await createOrderEvent({
+        businessId: adminContext.businessId,
+        orderId,
+        actorProfileId: adminContext.user.id,
+        eventType: "status_changed",
+        payload: {
+          from_status: currentOrder.status,
+          to_status: status
+        }
+      });
+
+      event = eventRow
+        ? presentOrderTimelineEvent(eventRow, adminContext.user.email ?? null)
+        : null;
+    } catch (eventError) {
+      logActionFailure("orders.updateStatus.event", eventError, {
+        businessId: adminContext.businessId,
+        orderId,
+        fromStatus: currentOrder.status,
+        toStatus: status
+      });
+    }
+
+    return {
+      success: true,
+      changed: true,
+      event,
+      order: {
+        id: updatedOrder.id,
+        status: updatedOrder.status as OrderStatus,
+        assigned_to: updatedOrder.assigned_to ?? null,
+        assigned_at: updatedOrder.assigned_at ?? null
+      }
+    };
+  } catch (error) {
+    logActionFailure("orders.updateStatus", error, { orderId, status });
+    return { error: getActionErrorMessage(error, "No pudimos actualizar el pedido.") };
+  }
+}
+
+export async function updateOrderAssignmentAction(
+  _prevState: ActionState,
+  formData: FormData
+) {
+  const orderId = getTrimmedString(formData.get("order_id"));
+  const assignmentAction = getTrimmedString(formData.get("assignment_action"));
+
+  if (!orderId) {
+    return { error: "Falta identificar el pedido." };
+  }
+
+  if (!ASSIGNMENT_ACTIONS.includes(assignmentAction as AssignmentAction)) {
+    return { error: "Accion invalida." };
+  }
+
+  try {
+    const adminContext = await requireAdminPermission("updateOrders");
+    const supabase = await createSupabaseServerClient();
+
+    const { data: currentOrder, error: currentOrderError } = await supabase
+      .from("orders")
+      .select("id, created_at, status, assigned_to, assigned_at")
+      .eq("id", orderId)
+      .eq("business_id", adminContext.businessId)
+      .maybeSingle();
+
+    if (currentOrderError) {
+      throw new Error("No pudimos cargar el pedido.");
+    }
+
+    if (!currentOrder) {
+      return { error: "Este pedido ya no existe o pertenece a otro negocio.", code: "ORDER_NOT_FOUND" };
+    }
+
+    const mutationGuard = await assertActiveStoreSessionForOrderMutation({
+      businessId: adminContext.businessId,
+      order: {
+        id: currentOrder.id,
+        created_at: currentOrder.created_at,
+        business_id: adminContext.businessId
+      }
+    });
+
+    if (!mutationGuard.ok) {
+      return { error: mutationGuard.message, code: mutationGuard.reason };
+    }
+
+    if (assignmentAction === "claim" && currentOrder.assigned_to === adminContext.user.id) {
+      return {
+        success: true,
+        changed: false,
+        message: "El pedido ya estaba a tu cargo.",
+        order: {
+          id: currentOrder.id,
+          status: currentOrder.status as OrderStatus,
+          assigned_to: currentOrder.assigned_to ?? null,
+          assigned_at: currentOrder.assigned_at ?? null
+        }
+      };
+    }
+
+    if (assignmentAction === "release" && !currentOrder.assigned_to) {
+      return {
+        success: true,
+        changed: false,
+        message: "El pedido ya estaba sin responsable.",
+        order: {
+          id: currentOrder.id,
+          status: currentOrder.status as OrderStatus,
+          assigned_to: null,
+          assigned_at: null
+        }
+      };
+    }
+
+    if (
+      assignmentAction === "release" &&
+      currentOrder.assigned_to &&
+      currentOrder.assigned_to !== adminContext.user.id
+    ) {
+      return { error: "Solo podes liberar un pedido que esta a tu cargo." };
+    }
+
+    const nextAssignment =
+      assignmentAction === "claim"
+        ? {
+            assigned_to: adminContext.user.id,
+            assigned_at: new Date().toISOString()
+          }
+        : {
+            assigned_to: null,
+            assigned_at: null
+          };
+
+    const { data: updatedOrder, error: updateError } = await supabase
+      .from("orders")
+      .update(nextAssignment)
+      .eq("id", orderId)
+      .eq("business_id", adminContext.businessId)
+      .select("id, status, assigned_to, assigned_at")
+      .maybeSingle();
+
+    if (updateError) {
+      throw new Error("No pudimos actualizar el responsable.");
+    }
+
+    if (!updatedOrder) {
+      return { error: "Este pedido ya no existe o pertenece a otro negocio." };
+    }
+
+    let event: AdminOrderTimelineEvent | null = null;
+
+    try {
+      const eventRow = await createOrderEvent({
+        businessId: adminContext.businessId,
+        orderId,
+        actorProfileId: adminContext.user.id,
+        eventType: assignmentAction === "claim" ? "assignment_taken" : "assignment_released",
+        payload:
+          assignmentAction === "claim"
+            ? {
+                assigned_to: adminContext.user.id,
+                previous_assigned_to: currentOrder.assigned_to ?? null
+              }
+            : {
+                released_from: currentOrder.assigned_to ?? null
+              }
+      });
+
+      event = eventRow
+        ? presentOrderTimelineEvent(eventRow, adminContext.user.email ?? null)
+        : null;
+    } catch (eventError) {
+      logActionFailure("orders.updateAssignment.event", eventError, {
+        businessId: adminContext.businessId,
+        orderId,
+        assignmentAction
+      });
+    }
+
+    return {
+      success: true,
+      changed: true,
+      event,
+      order: {
+        id: updatedOrder.id,
+        status: updatedOrder.status as OrderStatus,
+        assigned_to: updatedOrder.assigned_to ?? null,
+        assigned_at: updatedOrder.assigned_at ?? null
+      }
+    };
+  } catch (error) {
+    logActionFailure("orders.updateAssignment", error, {
+      orderId,
+      assignmentAction
+    });
+    return { error: getActionErrorMessage(error, "No pudimos actualizar el responsable.") };
+  }
+}
+
+function getTrimmedString(value: FormDataEntryValue | null) {
+  return typeof value === "string" ? value.trim() : "";
+}

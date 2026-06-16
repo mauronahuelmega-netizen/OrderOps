@@ -1,0 +1,134 @@
+/* Operational search — toolbar execution block (T5/T8 touch targets) */
+
+.admin-orders-search {
+  display: block;
+  width: 100%;
+  margin: 0;
+  min-width: 0;
+}
+
+.admin-orders-search__field {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--space-sm);
+  min-height: 2.25rem;
+  padding: var(--space-xs) var(--space-sm);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-surface);
+  box-shadow: var(--shadow-sm);
+  min-width: 0;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.admin-orders-search__field:focus-within {
+  border-color: color-mix(in srgb, var(--accent-primary) 45%, var(--border-subtle));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 16%, transparent);
+}
+
+.admin-orders-search__input-shell {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.admin-orders-search__icon {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.admin-orders-search__input-shell :global(.ui-field) {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  gap: 0;
+  margin: 0;
+}
+
+.admin-orders-search__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+  min-height: 1.75rem;
+  padding: 0 var(--space-sm) 0 calc(var(--space-xl) + var(--space-xs));
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.8125rem;
+  line-height: 1.25;
+}
+
+.admin-orders-search__input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.admin-orders-search__input:focus-visible {
+  outline: none;
+}
+
+.admin-orders-search__clear {
+  flex: 0 0 auto;
+  min-height: 1.75rem;
+  padding: 0 var(--space-sm);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  background-color: var(--bg-surface-soft);
+  color: var(--text-secondary);
+  font-size: 0.6875rem;
+  font-weight: 650;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  margin-inline-start: auto;
+}
+
+.admin-orders-search__clear:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .admin-orders-search__field {
+    min-height: 2.75rem;
+    padding: var(--space-xs) var(--space-sm);
+    background-color: var(--bg-surface);
+    box-shadow: none;
+  }
+
+  .admin-orders-search__input {
+    min-height: 2.25rem;
+  }
+
+  .admin-orders-search__clear {
+    min-height: 2.25rem;
+  }
+}
+
+@media (max-width: 479px) {
+  .admin-orders-search__field {
+    gap: var(--space-xs);
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .admin-orders-search__clear {
+    min-height: 1.75rem;
+    margin-inline-start: 0;
+  }
+}
+
+@media (max-width: 389px) {
+  .admin-orders-search__input {
+    padding-right: var(--space-xs);
+  }
+}

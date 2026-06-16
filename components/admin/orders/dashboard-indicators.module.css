@@ -1,0 +1,156 @@
+/* Bloque B: indicadores en vivo del dashboard (extraído de orders-admin.css) */
+
+.admin-orders-realtime-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-start;
+  margin-bottom: 0;
+  padding: 0;
+}
+
+:global(.admin-orders-section) .admin-orders-realtime-bar {
+  width: 100%;
+  margin: 0;
+}
+
+.admin-orders-realtime-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 22px;
+  padding: 0 8px;
+  border: 1px solid rgba(219, 208, 193, 0.82);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  color: #655b50;
+  font-size: 0.71rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.admin-orders-realtime-indicator__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #b1a79d;
+  box-shadow: 0 0 0 1px rgba(177, 167, 157, 0.18);
+  flex-shrink: 0;
+}
+
+.admin-orders-realtime-indicator--live .admin-orders-realtime-indicator__dot {
+  background: #6f9b83;
+  box-shadow: 0 0 0 1px rgba(111, 155, 131, 0.16);
+}
+
+.admin-orders-realtime-indicator--connecting .admin-orders-realtime-indicator__dot,
+.admin-orders-realtime-indicator--reconnecting .admin-orders-realtime-indicator__dot {
+  background: #c39a5a;
+  box-shadow: 0 0 0 1px rgba(195, 154, 90, 0.16);
+}
+
+.admin-orders-realtime-indicator--disconnected .admin-orders-realtime-indicator__dot,
+.admin-orders-realtime-indicator--error .admin-orders-realtime-indicator__dot {
+  background: #bc7b6a;
+  box-shadow: 0 0 0 1px rgba(188, 123, 106, 0.16);
+}
+
+.admin-orders-pressure-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 22px;
+  padding: 0 8px;
+  border: 1px solid rgba(219, 208, 193, 0.78);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.58);
+  color: #655b50;
+  max-width: 100%;
+  min-width: 0;
+}
+
+.admin-orders-pressure-indicator__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #9aab9a;
+  box-shadow: 0 0 0 1px rgba(154, 171, 154, 0.16);
+  flex-shrink: 0;
+}
+
+.admin-orders-pressure-indicator__copy {
+  display: grid;
+  gap: 1px;
+}
+
+.admin-orders-pressure-indicator__copy strong,
+.admin-orders-pressure-indicator__copy small {
+  margin: 0;
+  line-height: 1;
+}
+
+.admin-orders-pressure-indicator__copy strong {
+  font-size: 0.72rem;
+  font-weight: 650;
+}
+
+.admin-orders-pressure-indicator__copy small {
+  color: rgba(101, 91, 80, 0.86);
+  font-size: 0.63rem;
+  font-weight: 600;
+}
+
+.admin-orders-pressure-indicator--calm .admin-orders-pressure-indicator__dot {
+  background: #79a083;
+  box-shadow: 0 0 0 1px rgba(121, 160, 131, 0.14);
+}
+
+.admin-orders-pressure-indicator--active .admin-orders-pressure-indicator__dot {
+  background: #7294b8;
+  box-shadow: 0 0 0 1px rgba(114, 148, 184, 0.14);
+}
+
+.admin-orders-pressure-indicator--busy .admin-orders-pressure-indicator__dot {
+  background: #c09558;
+  box-shadow: 0 0 0 1px rgba(192, 149, 88, 0.16);
+}
+
+.admin-orders-pressure-indicator--critical .admin-orders-pressure-indicator__dot {
+  background: #bb786a;
+  box-shadow: 0 0 0 1px rgba(187, 120, 106, 0.16);
+}
+
+@media (min-width: 720px) {
+  .admin-orders-realtime-bar {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    justify-content: flex-start;
+  }
+
+  .admin-orders-realtime-indicator {
+    min-height: 21px;
+    padding: 0 7px;
+    font-size: 0.67rem;
+  }
+
+  .admin-orders-pressure-indicator {
+    min-height: 21px;
+    padding: 0 8px;
+  }
+
+  .admin-orders-pressure-indicator__copy strong {
+    font-size: 0.68rem;
+  }
+
+  .admin-orders-pressure-indicator__copy small {
+    font-size: 0.58rem;
+  }
+}
+
+@media (max-width: 479px) {
+  .admin-orders-realtime-bar {
+    gap: 5px;
+  }
+}

@@ -1,0 +1,526 @@
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 72px;
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-right: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface) !important;
+  transition: width 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.sidebar:hover {
+  width: 240px;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.05);
+}
+
+.sidebarTop {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  overflow-x: hidden;
+}
+
+.sidebarBrand {
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sidebarNavHost {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  padding: var(--space-xs) 0;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebarFooter {
+  flex-shrink: 0;
+  overflow-x: hidden;
+  border-top: 1px solid var(--border-subtle);
+  background-color: color-mix(in srgb, var(--bg-surface) 92%, var(--bg-canvas));
+}
+
+.accountBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-xs) 0 var(--space-sm);
+}
+
+.brandContainer {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 240px;
+  min-height: 72px;
+  padding: var(--space-md) var(--space-lg);
+  gap: var(--space-sm);
+  border: 0;
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.navLink,
+.userFooter,
+.logoutButton,
+.appearanceControl {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 224px;
+  margin: 0 8px;
+  padding: 0.5625rem 14px;
+  gap: 0.6875rem;
+  border: none;
+  border-radius: var(--radius-md, 8px);
+  background: transparent;
+  color: var(--text-secondary);
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.brandIcon,
+.navIcon,
+.userAvatar,
+.logoutIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.brandIcon {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-surface-hover);
+}
+
+.brandLogo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.brandLogoFallback {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--text-primary);
+  color: var(--bg-surface);
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.brandText,
+.navText,
+.userInfo,
+.appearanceLabel {
+  min-width: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.brandText {
+  display: grid;
+  gap: 2px;
+}
+
+.brandName {
+  margin: 0;
+  overflow: hidden;
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+  font-weight: 650;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-overflow: ellipsis;
+}
+
+.brandKicker {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.navLink {
+  position: relative;
+  min-height: 40px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.navLink:not(.navLinkActive) .navIcon {
+  color: var(--text-muted);
+}
+
+.navLink:hover,
+.navLink:focus-visible {
+  background-color: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.navLink:hover:not(.navLinkActive) .navIcon,
+.navLink:focus-visible:not(.navLinkActive) .navIcon {
+  color: var(--text-secondary);
+}
+
+.navLink:focus-visible,
+.appearanceControl:focus-visible,
+.logoutButton:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--text-primary) 24%, transparent);
+  outline-offset: 1px;
+}
+
+.navLinkActive {
+  background-color: color-mix(in srgb, var(--text-primary) 6%, transparent);
+  color: var(--text-primary);
+  font-weight: 600;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--border-subtle) 70%, transparent);
+}
+
+.navLinkActive:hover,
+.navLinkActive:focus-visible {
+  background-color: color-mix(in srgb, var(--text-primary) 8%, transparent);
+  color: var(--text-primary);
+}
+
+.navLinkActive::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 2px;
+  height: 56%;
+  border-radius: 0 4px 4px 0;
+  background-color: color-mix(in srgb, var(--text-primary) 55%, var(--border-subtle));
+  transform: translateY(-50%);
+}
+
+.navLinkActive .navIcon {
+  color: var(--text-primary);
+}
+
+.navIcon {
+  width: 24px;
+  height: 24px;
+  color: currentColor;
+}
+
+.navIcon svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
+
+.userFooter,
+.logoutButton,
+.appearanceControl {
+  width: 224px;
+}
+
+.userFooter {
+  min-height: 40px;
+  cursor: default;
+}
+
+.userFooter:hover {
+  background-color: transparent;
+  color: var(--text-secondary);
+}
+
+.userAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-full);
+  background-color: color-mix(in srgb, var(--text-primary) 8%, var(--bg-surface-hover));
+  color: var(--text-primary);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.userInfo {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--text-secondary);
+}
+
+.appearanceControl {
+  justify-content: flex-start;
+  gap: 0.75rem;
+  min-height: 40px;
+  color: var(--text-secondary);
+}
+
+.appearanceControlDrawer {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: var(--drawer-row-min-height, 44px);
+  margin: 0;
+  padding: var(--drawer-row-padding, 0.5625rem 14px);
+  gap: var(--drawer-row-gap, 0.6875rem);
+  border: none;
+  border-radius: var(--drawer-radius, var(--radius-md, 8px));
+  background: transparent;
+  color: var(--drawer-text-secondary, var(--text-secondary));
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.appearanceControlDrawer:hover,
+.appearanceControlDrawer:focus-visible {
+  background-color: var(--drawer-hover-bg, var(--bg-surface-hover));
+  color: var(--drawer-text, var(--text-primary));
+  outline: 2px solid var(--drawer-focus-ring, color-mix(in srgb, var(--text-primary) 24%, transparent));
+  outline-offset: 1px;
+}
+
+.appearanceControlDrawer .appearanceLabel {
+  position: relative;
+  flex: 0 0 auto;
+  min-width: 2.25rem;
+  opacity: 1;
+  overflow: visible;
+  font-size: 0;
+  line-height: 0;
+  color: inherit;
+  text-indent: -9999px;
+  white-space: nowrap;
+}
+
+.appearanceControlDrawer .themeSwitch {
+  margin-left: auto;
+  opacity: 1;
+}
+
+.appearanceControl:hover,
+.appearanceControl:focus-visible {
+  background-color: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.appearanceLabel {
+  position: relative;
+  flex: 0 0 auto;
+  min-width: 2.25rem;
+  overflow: hidden;
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+  text-indent: -9999px;
+  white-space: nowrap;
+}
+
+.appearanceLabel::after {
+  content: "Tema";
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.2;
+  color: inherit;
+  text-indent: 0;
+  transform: translateY(-50%);
+}
+
+.themeSwitch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+
+.themeSwitchIcon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--text-muted);
+  opacity: 0.62;
+}
+
+.themeSwitchIcon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.themeSwitchIconActive {
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+.themeSwitchTrack {
+  position: relative;
+  width: 18px;
+  height: 10px;
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--text-muted) 22%, var(--bg-surface-hover));
+}
+
+.themeSwitchTrackLight {
+  background-color: color-mix(in srgb, var(--text-primary) 14%, var(--bg-surface-hover));
+}
+
+.themeSwitchTrackDark {
+  background-color: color-mix(in srgb, var(--text-primary) 28%, var(--bg-surface-hover));
+}
+
+.themeSwitchThumb {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background-color: var(--bg-surface);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+  transition: transform 0.18s ease;
+}
+
+.themeSwitchTrackDark .themeSwitchThumb {
+  transform: translateX(8px);
+  background-color: color-mix(in srgb, var(--text-primary) 85%, var(--bg-surface));
+}
+
+.logoutForm {
+  margin: 0;
+}
+
+.logoutButton {
+  min-height: 40px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-secondary);
+}
+
+.logoutButton:hover,
+.logoutButton:focus-visible {
+  background-color: color-mix(in srgb, var(--text-primary) 5%, transparent);
+  color: var(--text-primary);
+}
+
+.logoutIcon {
+  width: 24px;
+  height: 24px;
+  color: var(--text-muted);
+}
+
+.logoutIcon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.logoutButton:hover .logoutIcon,
+.logoutButton:focus-visible .logoutIcon {
+  color: var(--text-secondary);
+}
+
+.sidebar:hover .brandText,
+.sidebar:hover .navText,
+.sidebar:hover .userInfo,
+.sidebar:hover .appearanceLabel,
+.sidebar:hover .themeSwitch {
+  opacity: 1;
+}
+
+.sidebar:not(:hover) .themeSwitch {
+  opacity: 1;
+}
+
+@media (min-width: 900px) {
+  .sidebar {
+    display: flex;
+  }
+
+  .sidebar:not(:hover) .brandContainer {
+    width: 72px;
+    padding-inline: 0;
+    justify-content: center;
+  }
+
+  .sidebar:not(:hover) .brandText {
+    display: none;
+  }
+
+  .sidebar:not(:hover) .navLink,
+  .sidebar:not(:hover) .userFooter,
+  .sidebar:not(:hover) .logoutButton,
+  .sidebar:not(:hover) .appearanceControl {
+    width: 56px;
+    margin-inline: auto;
+    padding-inline: 0;
+    gap: 0;
+    justify-content: center;
+  }
+
+  .sidebar:not(:hover) .navText,
+  .sidebar:not(:hover) .userFooter .userInfo,
+  .sidebar:not(:hover) .logoutButton .userInfo {
+    display: none;
+  }
+
+  .sidebar:not(:hover) .navIcon,
+  .sidebar:not(:hover) .userAvatar,
+  .sidebar:not(:hover) .logoutIcon {
+    display: grid;
+    place-items: center;
+    margin: 0;
+  }
+
+  .sidebar:not(:hover) .navLinkActive::before {
+    inset-inline-start: 0;
+  }
+
+  .sidebar:not(:hover) .appearanceLabel {
+    display: none;
+  }
+
+  .sidebar:not(:hover) .themeSwitch {
+    gap: 6px;
+    justify-content: center;
+  }
+
+  .sidebar:not(:hover) .themeSwitchTrack {
+    display: none;
+  }
+}

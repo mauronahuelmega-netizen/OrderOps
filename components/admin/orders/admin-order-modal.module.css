@@ -1,0 +1,650 @@
+/* Bloque I: modal de pedido (extraído de orders-admin.css) */
+
+.admin-order-modal-shell {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  align-items: stretch;
+  justify-items: stretch;
+  padding:
+    max(10px, env(safe-area-inset-top))
+    max(10px, env(safe-area-inset-right))
+    max(10px, env(safe-area-inset-bottom))
+    max(10px, env(safe-area-inset-left));
+}
+
+.admin-order-modal-shell--workstation {
+  align-items: stretch;
+  justify-items: stretch;
+}
+
+@media (min-width: 720px) {
+  .admin-order-modal-shell--workstation {
+    place-items: center;
+  }
+}
+
+.admin-order-modal-shell__overlay {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background-color: color-mix(in srgb, black 74%, transparent);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.admin-order-modal-shell__panel {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 0;
+  width: 100%;
+  min-height: 0;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-premium);
+  color: var(--text-primary);
+  isolation: isolate;
+  overscroll-behavior: contain;
+}
+
+.admin-order-modal-shell__panel--workstation {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+.admin-order-modal-shell__header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+}
+
+.admin-order-modal-shell__header--workstation {
+  gap: 10px;
+  padding: 10px 16px;
+}
+
+.admin-order-modal-shell__header-main {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.admin-order-modal-shell__header-main h2 {
+  margin: 0;
+  font-size: 0.96rem;
+  line-height: 1.2;
+  color: var(--text-primary);
+  min-width: 0;
+}
+
+.admin-order-modal-shell__workstation-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  flex-wrap: nowrap;
+}
+
+.admin-order-modal-shell__workstation-order-label {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.92rem;
+  font-weight: 650;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.admin-order-modal-shell__workstation-order-label span {
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.admin-order-modal-shell__header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.admin-order-modal-shell__header-meta {
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.admin-order-modal-shell__header-meta--elapsed {
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-order-modal-shell__close {
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+.admin-order-modal-shell__close:hover {
+  background: var(--bg-surface-hover);
+}
+
+.admin-order-modal-shell__close:focus {
+  outline: none;
+}
+
+.admin-order-modal-shell__close:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 30%, transparent);
+}
+
+.admin-order-modal-shell__body {
+  min-height: 0;
+  padding: 14px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  will-change: transform, scroll-position;
+  transform: translateZ(0);
+}
+
+.admin-order-modal-shell__body--workstation {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  padding: 14px;
+  overflow: hidden;
+  will-change: auto;
+  transform: none;
+}
+
+.admin-order-modal-workstation-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+  flex-shrink: 0;
+  padding-bottom: 10px;
+}
+
+.admin-order-modal-workstation-toolbar--presence {
+  justify-content: flex-end;
+}
+
+.workspaceGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.executionColumn,
+.commandColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  min-width: 0;
+  min-height: 0;
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--text-muted) 35%, transparent) transparent;
+}
+
+.executionColumn::-webkit-scrollbar,
+.commandColumn::-webkit-scrollbar {
+  width: 8px;
+}
+
+.executionColumn::-webkit-scrollbar-track,
+.commandColumn::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.executionColumn::-webkit-scrollbar-thumb,
+.commandColumn::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--text-muted) 30%, transparent);
+  background-clip: padding-box;
+}
+
+.executionColumn {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding-right: 0;
+}
+
+.commandColumn {
+  padding: 1.125rem 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--border-subtle) 68%, transparent);
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--bg-surface-soft) 72%, var(--bg-surface));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  contain: paint;
+}
+
+.admin-order-modal-shell__body--workstation :global(.ui-card) {
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  border-bottom: none;
+}
+
+.admin-order-modal-shell__body--workstation .commandColumn > * {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.admin-order-modal-shell__body--workstation .commandColumn > :global(.order-recommended-action-panel) {
+  display: grid;
+  gap: 5px;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--border-subtle) 78%, transparent);
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--bg-surface) 94%, var(--bg-surface-soft));
+  color: var(--text-primary);
+}
+
+.admin-order-modal-shell__body--workstation .commandColumn > :global(.order-recommended-action-panel--primary) {
+  border-color: color-mix(in srgb, var(--color-preparing) 18%, var(--border-subtle));
+  background: color-mix(in srgb, var(--bg-preparing-subtle) 58%, var(--bg-surface));
+}
+
+.admin-order-modal-shell__body--workstation .commandColumn > :global(.order-recommended-action-panel--warning) {
+  border-color: color-mix(in srgb, var(--color-pending) 18%, var(--border-subtle));
+  background: color-mix(in srgb, var(--bg-pending-subtle) 58%, var(--bg-surface));
+}
+
+.admin-order-modal-shell__body--workstation .commandColumn > :global(.order-recommended-action-panel--success) {
+  border-color: color-mix(in srgb, var(--color-ready) 18%, var(--border-subtle));
+  background: color-mix(in srgb, var(--bg-ready-subtle) 58%, var(--bg-surface));
+}
+
+.admin-order-modal-shell__body--workstation .commandColumn > :global(.order-recommended-action-panel--neutral) {
+  border-color: var(--border-subtle);
+  background: color-mix(in srgb, var(--bg-surface-soft) 72%, var(--bg-surface));
+}
+
+.admin-order-modal-shell__body--workstation .commandColumn > :global(.order-risk-panel) {
+  margin-top: 0;
+  padding: 10px 12px;
+  border: 1px solid color-mix(in srgb, var(--border-subtle) 78%, transparent);
+  border-radius: 11px;
+  background: color-mix(in srgb, var(--bg-surface) 94%, var(--bg-surface-soft));
+}
+
+.admin-order-modal-shell__body--workstation .commandColumn > :global(.order-risk-panel--attention) {
+  border-color: color-mix(in srgb, var(--color-pending) 16%, var(--border-subtle));
+  background: color-mix(in srgb, var(--bg-pending-subtle) 48%, var(--bg-surface));
+}
+
+.admin-order-modal-shell__body--workstation .commandColumn > :global(.order-risk-panel--warning) {
+  border-color: color-mix(in srgb, var(--color-cancelled) 16%, var(--border-subtle));
+  background: color-mix(in srgb, var(--bg-cancelled-subtle) 48%, var(--bg-surface));
+}
+
+.admin-order-modal-content {
+  display: grid;
+  gap: 16px;
+}
+
+.admin-order-modal-content :global(.ui-card) {
+  padding: 0 0 14px;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.admin-order-modal-content :global(.ui-card):last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.admin-order-modal-state {
+  display: grid;
+  gap: 8px;
+  padding: 8px 2px;
+  color: var(--text-primary);
+}
+
+.admin-order-modal-state h3,
+.admin-order-modal-state p {
+  margin: 0;
+}
+
+.admin-order-modal-state--error p {
+  color: var(--text-cancelled-strong);
+}
+
+.admin-order-modal-state--inline {
+  padding: 0;
+}
+
+.admin-order-modal-state--inline p {
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.admin-order-modal-refreshing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+  padding: 0 2px;
+}
+
+.admin-order-modal-refreshing span {
+  color: var(--text-secondary);
+  font-size: 0.76rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.admin-order-modal-refreshing--presence {
+  justify-content: flex-end;
+}
+
+.admin-order-modal-content :global(.admin-detail-layout) {
+  gap: 14px;
+}
+
+.admin-order-modal-content :global(.admin-detail-panel) {
+  gap: 10px;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.admin-order-modal-content :global(.admin-detail-header) {
+  gap: 8px;
+}
+
+.admin-order-modal-content :global(.admin-detail-header) h2 {
+  font-size: 0.98rem;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.admin-order-modal-content :global(.admin-detail-grid) {
+  gap: 12px 10px;
+}
+
+.admin-order-modal-content :global(.admin-detail-grid) dt {
+  margin-bottom: 3px;
+  font-size: 0.88rem;
+}
+
+.admin-order-modal-content :global(.admin-detail-grid) dd {
+  font-size: 0.95rem;
+}
+
+.admin-order-modal-shell__body--workstation :global(.admin-detail-panel--products) {
+  gap: 6px;
+}
+
+.admin-order-modal-shell__body--workstation :global(.admin-detail-header) h2 {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-tertiary);
+}
+
+.admin-order-modal-shell__body--workstation :global(.admin-items-list) {
+  gap: 0;
+}
+
+.admin-order-modal-shell__body--workstation :global(.admin-item-row),
+.admin-order-modal-shell__body--workstation :global(.admin-item-row--button) {
+  padding: 0.5rem 0;
+}
+
+.admin-order-modal-shell__body--workstation :global(.admin-item-row h3) {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.admin-order-modal-shell__body--workstation :global(.admin-item-row strong) {
+  font-size: 0.88rem;
+  line-height: 1.15;
+}
+
+.admin-order-modal-shell__body--workstation :global(.admin-total-row) {
+  padding-top: 0.5rem;
+}
+
+.admin-order-modal-content :global(.admin-detail-panel--products) {
+  gap: 8px;
+}
+
+.admin-order-modal-content--workstation :global(.admin-detail-panel--products) {
+  gap: 6px;
+}
+
+.admin-order-modal-content--workstation :global(.admin-detail-header) h2 {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-tertiary);
+}
+
+.admin-order-modal-content :global(.admin-items-list) {
+  gap: 8px;
+}
+
+.admin-order-modal-content--workstation :global(.admin-items-list) {
+  gap: 0;
+}
+
+.admin-order-modal-content :global(.admin-item-row) {
+  padding-bottom: 8px;
+}
+
+.admin-order-modal-content--workstation :global(.admin-item-row),
+.admin-order-modal-content--workstation :global(.admin-item-row--button) {
+  padding: 0.5rem 0;
+}
+
+.admin-order-modal-content--workstation :global(.admin-item-row h3) {
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.admin-order-modal-content--workstation :global(.admin-item-row strong) {
+  font-size: 0.88rem;
+  line-height: 1.15;
+}
+
+.admin-order-modal-content--workstation :global(.admin-total-row) {
+  padding-top: 0.5rem;
+}
+
+.admin-order-modal-content :global(.admin-status-form) {
+  gap: 8px;
+}
+
+.admin-order-modal-content :global(.admin-status-form) :global(.admin-field) > span {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+@media (min-width: 720px) {
+  .admin-order-modal-shell {
+    place-items: center;
+    padding: 18px;
+  }
+
+  .admin-order-modal-shell__panel {
+    width: min(100%, 1080px);
+    height: auto;
+    max-height: min(90dvh, 860px);
+  }
+
+  .admin-order-modal-shell__header {
+    padding: 13px 18px;
+  }
+
+  .admin-order-modal-shell__body {
+    padding: 16px 18px 18px;
+  }
+
+  .admin-order-modal-shell__body--workstation {
+    padding: 16px 18px 18px;
+  }
+
+  .admin-order-modal-content {
+    gap: 18px;
+  }
+
+  .admin-order-modal-content :global(.admin-detail-layout) {
+    gap: 16px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .admin-order-modal-shell__panel {
+    width: min(100%, 1180px);
+    max-height: min(90dvh, 900px);
+  }
+
+  .admin-order-modal-shell__panel--workstation {
+    width: 95vw;
+    max-width: 1200px;
+    height: 90vh;
+    max-height: 90vh;
+  }
+
+  .workspaceGrid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+    align-items: stretch;
+    gap: 0;
+  }
+
+  .executionColumn {
+    padding-right: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .admin-order-modal-shell__body--workstation .executionColumn :global(.admin-order-human-timeline-panel--bare) {
+    margin-top: 0.25rem;
+    padding: 0.75rem 0.875rem;
+    border: 1px solid color-mix(in srgb, var(--border-subtle) 78%, transparent);
+    border-radius: 11px;
+    background: color-mix(in srgb, var(--bg-surface-soft) 52%, var(--bg-surface));
+  }
+
+  .commandColumn {
+    gap: 0.75rem;
+  }
+
+  .admin-order-modal-shell__body--workstation .commandColumn :global(.admin-status-form--modal) {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .admin-order-modal-shell__body--workstation .commandColumn :global(.admin-status-form--modal) :global(.admin-primary-button) {
+    width: 100%;
+    min-height: 2.625rem;
+    font-size: 0.9rem;
+    font-weight: 650;
+    white-space: nowrap;
+  }
+
+  .admin-order-modal-shell__body--workstation .commandColumn :global(.ui-button--accent) {
+    min-height: 2.125rem;
+    font-size: 0.76rem;
+    font-weight: 550;
+  }
+}
+
+@media (max-width: 1023px) {
+  .commandColumn {
+    order: -1;
+  }
+}
+
+/* Phase 2J: interaction performance — scoped to modal panel */
+
+.admin-order-modal-shell__panel :global(.ui-button),
+.admin-order-modal-shell__panel :global(.admin-primary-button),
+.admin-order-modal-shell__panel :global(.admin-danger-button),
+.admin-order-modal-shell__panel :global(.admin-whatsapp-link),
+.admin-order-modal-shell__panel :global(.admin-secondary-link),
+.admin-order-modal-shell__panel :global(.admin-ghost-link) {
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+.admin-order-modal-shell__panel :global(.ui-button:hover:not(:disabled)),
+.admin-order-modal-shell__panel :global(.ui-button:active:not(:disabled)),
+.admin-order-modal-shell__panel :global(.admin-primary-button:hover:not(:disabled)),
+.admin-order-modal-shell__panel :global(.admin-primary-button:active:not(:disabled)),
+.admin-order-modal-shell__panel :global(.admin-danger-button:hover:not(:disabled)),
+.admin-order-modal-shell__panel :global(.admin-danger-button:active:not(:disabled)),
+.admin-order-modal-shell__panel :global(.admin-whatsapp-link:hover),
+.admin-order-modal-shell__panel :global(.admin-secondary-link:hover),
+.admin-order-modal-shell__panel :global(.admin-ghost-link:hover) {
+  transform: none;
+}
+
+.admin-order-modal-shell__panel :global(.ui-button--accent:hover:not(:disabled)) {
+  box-shadow: none;
+}
+
+.admin-order-modal-shell__panel :global(.admin-item-row--button:hover),
+.admin-order-modal-shell__panel :global(.admin-item-row--button:active) {
+  transform: none;
+}
+
+.admin-order-modal-shell__panel :global(.admin-field) select {
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    color 120ms ease;
+}

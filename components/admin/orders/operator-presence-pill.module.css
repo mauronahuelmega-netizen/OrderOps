@@ -1,0 +1,80 @@
+/* Bloque B: presencia de operadores (extraído de orders-admin.css) */
+
+.admin-orders-presence-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 22px;
+  padding: 0 8px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  background-color: var(--bg-surface-soft);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+.admin-orders-presence-indicator__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background-color: var(--color-delivery);
+  flex-shrink: 0;
+}
+
+.admin-orders-presence-indicator__label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.71rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.admin-orders-presence-indicator__avatars {
+  display: inline-flex;
+  align-items: center;
+  margin-left: 1px;
+}
+
+.admin-orders-presence-indicator__avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  margin-left: -5px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  background-color: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.admin-orders-presence-indicator__avatar:first-child {
+  margin-left: 0;
+}
+
+.admin-orders-presence-indicator--contextual {
+  min-height: 23px;
+  padding: 0 9px;
+  background-color: var(--bg-surface-soft);
+  max-width: min(100%, 260px);
+}
+
+@media (min-width: 720px) {
+  .admin-orders-presence-indicator {
+    min-height: 21px;
+    padding: 0 8px;
+  }
+
+  .admin-orders-presence-indicator__label {
+    font-size: 0.7rem;
+  }
+
+  .admin-orders-presence-indicator--contextual {
+    max-width: 320px;
+  }
+}

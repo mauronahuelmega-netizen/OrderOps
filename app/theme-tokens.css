@@ -1,0 +1,276 @@
+:root,
+html[data-dashboard-theme="light"] {
+  color-scheme: light;
+  /* =========================================
+     1. NEUTROS PREMIUM (ZINC)
+     ========================================= */
+  --bg-canvas: #F8FAFC;
+  --bg-surface: #FFFFFF;
+  --bg-surface-hover: #E2E8F0;
+  --bg-surface-soft: #F1F5F9;
+
+  --text-primary: #09090B;
+  --text-secondary: #52525B;
+  --text-tertiary: #A1A1AA;
+
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-strong: rgba(15, 23, 42, 0.15);
+
+  --nav-active-bg: #F3F6FF;
+  --nav-active-text: #2563EB;
+  --nav-active-border: #2563EB;
+
+  /* =========================================
+     2. COLORES SEMÁNTICOS (PROFUNDOS)
+     ========================================= */
+  --color-pending: #D97706;
+  --color-preparing: #4F46E5;
+  --color-ready: #059669;
+  --color-delivery: #2563EB;
+  --color-cancelled: #DC2626;
+
+  --bg-pending-subtle: #FEF3C7;
+  --text-pending-strong: #B45309;
+
+  --bg-preparing-subtle: #E0E7FF;
+  --text-preparing-strong: #4338CA;
+
+  --bg-ready-subtle: #D1FAE5;
+  --text-ready-strong: #047857;
+
+  --bg-delivery-subtle: #DBEAFE;
+  --text-delivery-strong: #1D4ED8;
+
+  --bg-cancelled-subtle: #FEE2E2;
+  --text-cancelled-strong: #B91C1C;
+
+  /* =========================================
+     3. SOMBRAS FLOTANTES (Tinte frío)
+     ========================================= */
+  --shadow-sm: 0 1px 2px 0 rgb(9 9 11 / 0.04);
+  --shadow-premium: 0 8px 24px rgba(15, 23, 42, 0.04);
+  --shadow-card: var(--shadow-premium);
+  --shadow-floating: 0 12px 24px -4px rgb(9 9 11 / 0.06), 0 4px 8px -4px rgb(9 9 11 / 0.04);
+
+  /* Compatibility aliases */
+  --text-muted: var(--text-tertiary);
+  --border-soft: var(--border-subtle);
+  --shadow-md: var(--shadow-card);
+  --shadow-lg: var(--shadow-floating);
+  --shadow-surface: var(--shadow-card);
+
+  /* Brand */
+  --accent-primary: #2563eb;
+  --accent-primary-strong: #1e40af;
+  --accent-soft: rgba(37, 99, 235, 0.12);
+
+  /* Semantic */
+  --success: var(--color-ready);
+  --warning: var(--color-pending);
+  --danger: var(--color-cancelled);
+  --info: var(--color-delivery);
+  --neutral: var(--text-tertiary);
+
+  /* Operational */
+  --risk: var(--color-cancelled);
+  --ownership: #6366f1;
+  --congestion: var(--color-pending);
+  --focus: #6366f1;
+
+  /* Spacing */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
+
+  /* Typography */
+  --type-display-family: var(--font-display), Arial, Helvetica, sans-serif;
+  --type-display-size: clamp(2rem, 6vw, 3.2rem);
+  --type-display-line-height: 0.95;
+  --type-display-weight: 700;
+
+  --type-heading-family: var(--font-display), Arial, Helvetica, sans-serif;
+  --type-heading-size: 1.05rem;
+  --type-heading-line-height: 1.15;
+  --type-heading-weight: 700;
+
+  --type-body-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  --type-body-size: 1rem;
+  --type-body-line-height: 1.5;
+  --type-body-weight: 400;
+
+  --type-label-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  --type-label-size: 0.92rem;
+  --type-label-line-height: 1.35;
+  --type-label-weight: 600;
+
+  --type-caption-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  --type-caption-size: 0.78rem;
+  --type-caption-line-height: 1.2;
+  --type-caption-weight: 600;
+
+  --type-metric-family: var(--font-display), Arial, Helvetica, sans-serif;
+  --type-metric-size: 1.1rem;
+  --type-metric-line-height: 1;
+  --type-metric-weight: 700;
+
+  /* Motion */
+  --motion-fast: 160ms;
+  --motion-normal: 220ms;
+  --motion-slow: 320ms;
+  --transition-hover:
+    background-color var(--motion-fast) ease,
+    border-color var(--motion-fast) ease,
+    color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease,
+    transform var(--motion-fast) ease;
+  --transition-focus:
+    border-color var(--motion-fast) ease,
+    box-shadow var(--motion-fast) ease,
+    outline-color var(--motion-fast) ease;
+  --transition-press: transform var(--motion-fast) ease, opacity var(--motion-fast) ease;
+
+  /* Responsive */
+  --breakpoint-mobile: 0px;
+  --breakpoint-tablet: 720px;
+  --breakpoint-desktop: 1024px;
+
+  /* Layout aliases */
+  --layout-max-width: 1280px;
+  --layout-padding-x-sm: 16px;
+  --layout-padding-x-lg: 24px;
+  --layout-spacing-y-sm: 24px;
+  --layout-spacing-y-lg: 40px;
+
+  /* Base helpers */
+  --focus-ring: 0 0 0 3px rgba(37, 99, 235, 0.22);
+  --focus-ring-soft: 0 0 0 3px rgba(37, 99, 235, 0.16);
+
+  /* Surface system */
+  --surface-canvas-bg: var(--bg-canvas);
+  --surface-canvas-text: var(--text-primary);
+  --surface-base-bg: var(--bg-surface);
+  --surface-base-border: var(--border-subtle);
+  --surface-base-shadow: var(--shadow-surface);
+  --surface-soft-bg: var(--bg-surface-soft);
+  --surface-soft-border: color-mix(in srgb, var(--border-subtle) 88%, transparent);
+  --surface-soft-shadow: none;
+  --surface-elevated-bg: var(--bg-surface);
+  --surface-elevated-border: color-mix(in srgb, var(--border-subtle) 82%, white 18%);
+  --surface-elevated-shadow: var(--shadow-card);
+  --surface-interactive-bg: var(--surface-elevated-bg);
+  --surface-interactive-border: var(--surface-elevated-border);
+  --surface-interactive-shadow: var(--shadow-sm);
+  --surface-interactive-hover-bg: var(--bg-surface-hover);
+  --surface-interactive-hover-border: color-mix(in srgb, var(--border-strong) 82%, var(--focus) 18%);
+  --surface-interactive-hover-shadow: var(--shadow-card);
+  --surface-interactive-press-bg: color-mix(in srgb, var(--surface-elevated-bg) 90%, var(--accent-soft));
+  --surface-critical-bg: var(--bg-cancelled-subtle);
+  --surface-critical-border: color-mix(in srgb, var(--color-cancelled) 28%, var(--border-subtle));
+  --surface-critical-shadow: var(--shadow-sm);
+  --surface-critical-text: var(--text-primary);
+  --surface-muted-bg: color-mix(in srgb, var(--bg-surface-hover) 78%, transparent);
+  --surface-muted-border: color-mix(in srgb, var(--border-subtle) 74%, transparent);
+  --surface-muted-text: var(--text-secondary);
+  --surface-strip-bg: color-mix(in srgb, var(--bg-surface-hover) 72%, white 28%);
+  --surface-strip-border: color-mix(in srgb, var(--border-subtle) 80%, transparent);
+  --surface-panel-padding: 18px;
+  --surface-card-padding: 20px;
+  --surface-strip-padding-y: 8px;
+  --surface-strip-padding-x: 12px;
+
+  /* Legacy compatibility */
+  --color-primary: var(--accent-primary);
+  --color-primary-hover: var(--accent-primary-strong);
+  --color-accent-orange: #f97316;
+  --color-success: var(--color-ready);
+  --color-bg: var(--bg-canvas);
+  --color-card: var(--bg-surface);
+  --color-border: var(--border-subtle);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+
+  /* Icons */
+  --icon-chevron-down: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+}
+
+.dark,
+html[data-dashboard-theme="dark"] {
+  color-scheme: dark;
+  /* =========================================
+     PREPARACIÓN PARA DARK MODE (NAVY/ZINC)
+     ========================================= */
+  --bg-canvas: #090A0D;
+  --bg-surface: #17181D;
+  --bg-surface-hover: #282930;
+  --bg-surface-soft: #202126;
+
+  --text-primary: #F8FAFC;
+  --text-secondary: #CBD5E1;
+  --text-tertiary: #94A3B8;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
+
+  --nav-active-bg: rgba(37, 99, 235, 0.15);
+  --nav-active-text: #60A5FA;
+  --nav-active-border: #3B82F6;
+
+  --color-pending: #fbbf24;
+  --color-preparing: #a5b4fc;
+  --color-ready: #34d399;
+  --color-delivery: #60a5fa;
+  --color-cancelled: #f87171;
+
+  --bg-pending-subtle: color-mix(in srgb, var(--bg-surface) 78%, rgba(251, 191, 36, 0.24));
+  --text-pending-strong: #fcd34d;
+
+  --bg-preparing-subtle: color-mix(in srgb, var(--bg-surface) 78%, rgba(129, 140, 248, 0.24));
+  --text-preparing-strong: #c7d2fe;
+
+  --bg-ready-subtle: color-mix(in srgb, var(--bg-surface) 78%, rgba(52, 211, 153, 0.22));
+  --text-ready-strong: #6ee7b7;
+
+  --bg-delivery-subtle: color-mix(in srgb, var(--bg-surface) 78%, rgba(96, 165, 250, 0.22));
+  --text-delivery-strong: #93c5fd;
+
+  --bg-cancelled-subtle: color-mix(in srgb, var(--bg-surface) 78%, rgba(248, 113, 113, 0.22));
+  --text-cancelled-strong: #fca5a5;
+
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.24);
+  --shadow-premium: 0 8px 24px rgba(0, 0, 0, 0.28);
+  --shadow-card: var(--shadow-premium);
+  --shadow-floating: 0 12px 24px -4px rgb(0 0 0 / 0.36), 0 4px 8px -4px rgb(0 0 0 / 0.24);
+
+  --accent-soft: rgba(96, 165, 250, 0.16);
+
+  --focus-ring: 0 0 0 3px rgba(96, 165, 250, 0.26);
+  --focus-ring-soft: 0 0 0 3px rgba(96, 165, 250, 0.2);
+
+  --surface-elevated-bg: color-mix(in srgb, var(--bg-surface) 92%, white 8%);
+  --surface-elevated-border: color-mix(in srgb, var(--border-subtle) 92%, rgba(255, 255, 255, 0.06));
+  --surface-interactive-hover-bg: var(--bg-surface-hover);
+  --surface-interactive-hover-border: color-mix(in srgb, var(--focus) 18%, var(--border-strong));
+  --surface-critical-bg: color-mix(in srgb, var(--bg-surface) 86%, rgba(239, 68, 68, 0.14));
+  --surface-critical-border: color-mix(in srgb, var(--color-cancelled) 34%, var(--border-subtle));
+  --surface-critical-shadow: var(--shadow-sm);
+  --surface-muted-bg: color-mix(in srgb, var(--bg-surface-hover) 76%, transparent);
+  --surface-muted-border: color-mix(in srgb, var(--border-subtle) 82%, transparent);
+  --surface-strip-bg: color-mix(in srgb, var(--bg-surface-hover) 82%, rgba(255, 255, 255, 0.04));
+  --surface-strip-border: color-mix(in srgb, var(--border-subtle) 88%, transparent);
+}
+
+html {
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}

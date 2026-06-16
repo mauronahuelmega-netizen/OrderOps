@@ -1,0 +1,40 @@
+.emptyContext {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background-color: var(--bg-surface);
+}
+
+.emptyContextCopy {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.emptyContextCopy strong {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+.emptyContextCopy p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  line-height: 1.28;
+}
+
+@media (max-width: 767px) {
+  .emptyContext {
+    padding: 0.625rem;
+    gap: 0.4375rem;
+  }
+
+  .emptyContextCopy p {
+    font-size: 0.75rem;
+    line-height: 1.35;
+  }
+}

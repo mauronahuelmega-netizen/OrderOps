@@ -1,0 +1,21 @@
+/* Mobile admin topbar — brand/menu alignment (MH3/MH4.1). */
+@media (max-width: 899px) {
+  .admin-topbar__inner {
+    min-height: 56px;
+    padding-block: 8px;
+    gap: 12px;
+  }
+
+  .admin-topbar__brand {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .admin-topbar__menu-action {
+    display: inline-flex;
+    align-items: center;
+    flex: 0 0 auto;
+  }
+}

@@ -1,0 +1,481 @@
+.formSection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid var(--border-subtle);
+  margin: 1.5rem 0;
+}
+
+.toggleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 40px;
+  margin-top: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.toggleLabel {
+  color: var(--text-primary);
+  font-size: var(--type-body-size);
+  font-weight: 500;
+}
+
+.toggleControl {
+  margin: 0;
+}
+
+.field {
+  width: 100%;
+  min-width: 0;
+}
+
+.select {
+  flex: 1;
+  min-width: 0;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 2.5rem !important;
+  background-image: var(--icon-chevron-down);
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  color: var(--text-primary);
+}
+
+.formSection :global(.ui-field),
+.formSection :global(.admin-field) {
+  width: 100%;
+  min-width: 0;
+}
+
+.formSection :global(.ui-input),
+.formSection :global(.admin-field select),
+.field select,
+.textarea {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formSection :global(.admin-field select),
+.field select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 2.5rem !important;
+  background-image: var(--icon-chevron-down);
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 1rem;
+  color: var(--text-primary);
+}
+
+.shell :global(input[type="text"]),
+.shell :global(input[type="number"]),
+.shell :global(select),
+.iconButton {
+  height: 42px !important;
+  box-sizing: border-box;
+}
+
+.shell :global(input[type="number"]) {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.shell :global(input[type="number"])::-webkit-inner-spin-button,
+.shell :global(input[type="number"])::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.textarea {
+  min-height: auto;
+  resize: vertical;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.tooltipWrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0.5rem;
+  cursor: help;
+}
+
+.infoIcon {
+  width: 14px;
+  height: 14px;
+  color: var(--text-tertiary);
+}
+
+.tooltipText {
+  position: absolute;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--text-primary);
+  color: var(--bg-surface);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 10;
+}
+
+.tooltipWrapper:hover .tooltipText,
+.tooltipWrapper:focus-within .tooltipText {
+  opacity: 1;
+}
+
+.imageUploadSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.editImageBadge {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+  pointer-events: auto;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.editImageBadge:hover:not(:disabled) {
+  color: var(--brand-primary, var(--accent-primary));
+  transform: scale(1.05);
+}
+
+.editImageBadge:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.imageDropzone:hover .editImageBadge:not(:disabled) {
+  color: var(--brand-primary, var(--accent-primary));
+}
+
+.imageDropzone {
+  position: relative;
+  width: 240px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  flex-shrink: 0;
+  border-radius: 12px;
+  border: 2px dashed var(--border-strong);
+  background-color: var(--bg-canvas, var(--bg-surface-hover));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  overflow: hidden;
+  color: var(--text-tertiary);
+  transition: border-color 0.2s, background-color 0.2s;
+  gap: 0.5rem;
+}
+
+.imageDropzone:hover {
+  border-color: var(--brand-primary, var(--accent-primary));
+  background-color: var(--bg-surface-hover);
+}
+
+.imageDropzoneBusy {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.imageDropzone img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.imageDropzoneText {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: center;
+  padding: 0 0.75rem;
+}
+
+.imageDropzoneHasImage::after {
+  content: "Cambiar foto";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.imageDropzoneHasImage:hover::after {
+  opacity: 1;
+}
+
+.imageHint {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.categoryWrapper {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  flex-shrink: 0;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.iconButton:hover:not(:disabled) {
+  background-color: var(--bg-surface-hover);
+  color: var(--brand-primary, var(--accent-primary));
+  border-color: var(--brand-primary, var(--accent-primary));
+}
+
+.iconButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.currencyInputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.currencySymbol {
+  position: absolute;
+  left: 12px;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+.currencyInputWrapper :global(.ui-input),
+.currencyInputWrapper input {
+  padding-left: 2rem;
+  width: 100%;
+}
+
+.categoryDialog {
+  width: min(100%, 360px);
+  padding: 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-floating);
+}
+
+.categoryDialog::backdrop {
+  background: color-mix(in srgb, var(--text-primary) 24%, transparent);
+}
+
+.categoryDialogForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.categoryDialogTitle {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.categoryDialogActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.categoryDialogCancel,
+.categoryDialogSave {
+  padding: 0.5rem 0.875rem;
+  border-radius: 6px;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.categoryDialogCancel {
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.categoryDialogSave {
+  border: 1px solid var(--border-strong);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+.actions {
+  margin-top: 1rem;
+  background: transparent;
+}
+
+.actionsSticky {
+  position: sticky;
+  bottom: 0;
+  padding-top: 8px;
+  padding-bottom: 4px;
+  background: linear-gradient(to top, var(--bg-surface) 72%, transparent);
+}
+
+.formRoot {
+  display: grid;
+  gap: 16px;
+  padding: 0 16px 16px;
+}
+
+.formShell {
+  display: grid;
+  gap: 16px;
+}
+
+.formHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.formHeader h2 {
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.standaloneCard {
+  display: grid;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.feedback {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.shell {
+  padding: 1rem;
+  overflow: visible;
+}
+
+.skeletonImage {
+  width: 240px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
+  border-radius: 12px;
+}
+
+.skeletonField {
+  width: 100%;
+  min-width: 0;
+}
+
+.skeletonLabel {
+  height: 16px;
+  width: 30%;
+  margin-bottom: 0.5rem;
+  border-radius: 4px;
+}
+
+.skeletonToggleLabel {
+  width: 24%;
+  margin-bottom: 0;
+}
+
+.skeletonInput {
+  height: 42px;
+  width: 100%;
+}
+
+.skeletonTextarea {
+  height: 80px;
+  width: 100%;
+}
+
+.skeletonToggle {
+  height: 24px;
+  width: 44px;
+  flex-shrink: 0;
+}
+
+.skeletonButton {
+  height: 40px;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .grid2,
+  .grid3 {
+    grid-template-columns: 1fr;
+  }
+}

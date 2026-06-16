@@ -1,0 +1,259 @@
+/* Bloque A: estructura principal del dashboard (extraído de orders-admin.css) */
+
+.admin-orders-structure {
+  --admin-orders-content-width: 100%;
+  display: grid;
+  gap: var(--space-md);
+}
+
+:global(.admin-page-layout--operational) .admin-orders-structure {
+  --admin-orders-content-width: 100%;
+}
+
+.admin-orders-section {
+  display: grid;
+  gap: 10px;
+  width: min(100%, var(--admin-orders-content-width));
+  margin: 0 auto;
+  min-width: 0;
+}
+
+.admin-orders-section--overview {
+  gap: 0;
+}
+
+.admin-orders-section--empty-overview {
+  gap: 4px;
+}
+
+.dashboardTopSection {
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.dashboardMobileTopSection {
+  min-width: 0;
+  width: 100%;
+}
+
+.dashboardExecutionSection {
+  min-width: 0;
+  width: 100%;
+  max-width: none;
+}
+
+.dashboardExecutionChrome {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  min-width: 0;
+  width: 100%;
+  max-width: none;
+}
+
+.dashboardExecutionSection .admin-orders-controls {
+  gap: var(--space-xs);
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+}
+
+.admin-orders-section--empty-execution .admin-orders-controls--compact {
+  gap: 1px;
+}
+
+.admin-orders-section-cluster,
+.admin-orders-controls,
+.admin-orders-execution-flow {
+  display: grid;
+  gap: 7px;
+  min-width: 0;
+  width: 100%;
+  max-width: none;
+}
+
+.admin-orders-controls--compact {
+  gap: 2px;
+}
+
+.executionSection {
+  background-color: var(--bg-canvas);
+  border: none;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  box-shadow: none;
+}
+
+.admin-orders-section :global(.admin-orders-realtime-bar),
+.admin-orders-section :global(.admin-orders-micro-insights),
+.admin-orders-section :global(.admin-orders-search),
+.admin-orders-section :global(.admin-orders-filters),
+.admin-orders-section :global(.admin-orders-filter-empty) {
+  width: 100%;
+  margin: 0;
+}
+
+.admin-orders-section :global(.admin-orders-filters),
+.admin-orders-section :global(.admin-orders-search) {
+  margin-bottom: 0;
+}
+
+.admin-orders-section :global(.admin-orders-micro-insights__strip),
+.admin-orders-section :global(.admin-orders-lane-metrics__strip) {
+  margin-bottom: 0;
+}
+
+@media (min-width: 720px) {
+  .admin-orders-structure {
+    gap: var(--space-md);
+  }
+
+  :global(.admin-page-layout--operational) .admin-orders-structure {
+    --admin-orders-content-width: 100%;
+  }
+
+  .admin-orders-section {
+    gap: var(--space-md);
+  }
+
+  .admin-orders-section-cluster,
+  .admin-orders-controls,
+  .admin-orders-execution-flow {
+    gap: var(--space-sm);
+  }
+}
+
+@media (min-width: 769px) {
+  .dashboardExecutionSection {
+    margin-top: 0;
+    padding-top: var(--space-lg);
+    border-top: 1px solid color-mix(in srgb, var(--border-subtle) 78%, transparent);
+    background-color: transparent;
+    border-radius: 0;
+  }
+
+  .dashboardExecutionSection .admin-orders-execution-flow {
+    gap: var(--space-sm);
+  }
+}
+
+@media (min-width: 1200px) {
+  :global(.admin-page-layout:not(.admin-page-layout--operational)) .admin-orders-structure {
+    --admin-orders-content-width: 1160px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :global(.admin-page-layout:not(.admin-page-layout--operational)) .admin-orders-structure {
+    --admin-orders-content-width: 1180px;
+  }
+
+  .admin-orders-section {
+    width: min(100%, var(--admin-orders-content-width));
+  }
+
+  .admin-orders-section-cluster--secondary {
+    gap: 10px;
+  }
+}
+
+@media (min-width: 1440px) {
+  :global(.admin-page-layout:not(.admin-page-layout--operational)) .admin-orders-structure {
+    --admin-orders-content-width: 1280px;
+  }
+}
+
+@media (max-width: 479px) {
+  .admin-orders-structure {
+    gap: var(--space-sm);
+  }
+
+  .admin-orders-section {
+    gap: 8px;
+  }
+
+  .admin-orders-section-cluster,
+  .admin-orders-controls,
+  .admin-orders-execution-flow {
+    gap: 2px;
+  }
+}
+
+@media (max-width: 768px) {
+  .admin-orders-section--overview {
+    display: none;
+  }
+
+  .admin-orders-structure {
+    gap: var(--space-sm);
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  .dashboardMobileTopSection {
+    margin-bottom: var(--space-sm);
+  }
+
+  .dashboardExecutionChrome {
+    min-width: 0;
+    width: 100%;
+    gap: var(--space-xs);
+  }
+
+  .dashboardExecutionSection {
+    padding-top: var(--space-sm);
+    gap: var(--space-sm);
+    border-top: 1px solid color-mix(in srgb, var(--border-subtle) 78%, transparent);
+  }
+
+  .dashboardExecutionSection .admin-orders-controls {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .admin-orders-execution-flow {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .dashboardExecutionSection :global(.admin-orders-search) {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .admin-orders-section--execution,
+  .executionSection {
+    background-color: var(--bg-canvas);
+  }
+
+  .admin-orders-section--overview {
+    background: transparent;
+    background-color: transparent;
+    box-shadow: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .admin-orders-execution-flow {
+    gap: 1px;
+  }
+
+  .admin-orders-section--empty-execution {
+    padding-inline: 0.875rem;
+  }
+}
+
+@media (max-width: 389px) {
+  .admin-orders-execution-flow {
+    gap: 0;
+  }
+}
+
+@media (min-width: 720px) and (max-width: 1023px) {
+  .admin-orders-execution-flow {
+    gap: 3px;
+  }
+}

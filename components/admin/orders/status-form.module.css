@@ -1,0 +1,63 @@
+/* Bloque K: formulario de cambio de estado (extraído de orders-admin.css) */
+
+.admin-status-form {
+  display: grid;
+  gap: 12px;
+}
+
+.admin-status-form--modal {
+  gap: 8px;
+}
+
+.admin-status-form--modal :global(.admin-field) > span {
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.admin-status-form--modal :global(.admin-field) select {
+  min-height: 40px;
+  padding: 8px 11px;
+  border: 1px solid color-mix(in srgb, var(--border-subtle) 82%, var(--border-strong));
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--bg-surface) 92%, var(--bg-surface-soft));
+  font-size: 0.88rem;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.admin-status-form--modal :global(.admin-field) select:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--focus) 50%, var(--border-subtle));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 18%, transparent);
+}
+
+.admin-status-form select[data-syncing="true"] {
+  opacity: 0.82;
+}
+
+.admin-status-form :global(.admin-primary-button) {
+  width: 100%;
+}
+
+.admin-status-form__read-only-note {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+@media (min-width: 720px) {
+  .admin-status-form--modal {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 10px 12px;
+  }
+
+  .admin-status-form--modal :global(.admin-primary-button) {
+    white-space: nowrap;
+    min-width: max-content;
+  }
+}
