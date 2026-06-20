@@ -25,9 +25,8 @@ import DashboardKanbanBoard from "@/components/admin/orders/DashboardKanbanBoard
 import DashboardMobileOverview from "@/components/admin/orders/DashboardMobileOverview";
 import DashboardOverview from "@/components/admin/orders/DashboardOverview";
 import DashboardToolbar from "@/components/admin/orders/DashboardToolbar";
-import ManualOrderModal, {
-  type ManualOrderProductOption
-} from "@/components/admin/orders/manual-order-modal";
+import ManualOrderModal from "@/components/admin/orders/manual-order-modal";
+import type { ManualOrderProductOption } from "@/lib/orders/manual-order-types";
 import LaneMetricsLayer from "@/components/admin/orders/lane-metrics-layer";
 import OrderCard from "@/components/admin/orders/order-card";
 

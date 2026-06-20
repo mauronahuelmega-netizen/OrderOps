@@ -1,6 +1,9 @@
 import "server-only";
 
+import type { ManualOrderProductOption } from "@/lib/orders/manual-order-types";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+
+export type { ManualOrderProductOption };
 
 export const ADMIN_PRODUCTS_PAGE_SIZE = 24;
 
@@ -38,14 +41,6 @@ export type AdminProductsOptions = {
   categoryId?: string;
   stock?: string;
   status?: string;
-};
-
-export type ManualOrderProductOption = {
-  id: string;
-  name: string;
-  price: number;
-  categoryName?: string | null;
-  isAvailable: boolean;
 };
 
 function normalizeCategoryRelation(

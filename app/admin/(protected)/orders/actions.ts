@@ -6,15 +6,11 @@ import {
   getAdminDashboardOrderById,
   type AdminOrderDashboardItem
 } from "@/lib/orders/admin";
-import {
-  getManualOrderProductOptions,
-  type ManualOrderProductOption
-} from "@/lib/products/admin";
+import type { ManualOrderProductOption } from "@/lib/orders/manual-order-types";
+import { getManualOrderProductOptions } from "@/lib/products/admin";
 import { assertActiveStoreSessionForOrderCreation } from "@/lib/store-sessions/admin";
 import type { OrderCreationErrorCode } from "@/lib/store-sessions/types";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-
-export type { ManualOrderProductOption };
 
 export type CreateManualOrderInput = {
   customerName: string;

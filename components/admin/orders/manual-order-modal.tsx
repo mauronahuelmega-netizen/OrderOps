@@ -1,16 +1,14 @@
 "use client";
 
 import { useCallback, useMemo, useRef, useState, useTransition } from "react";
-import {
-  createManualOrderAction,
-  type ManualOrderProductOption
-} from "@/app/admin/(protected)/orders/actions";
+import { createManualOrderAction } from "@/app/admin/(protected)/orders/actions";
 import AdminOrderModalShell from "@/components/admin/orders/admin-order-modal-shell";
 import Button from "@/components/ui/Button";
 import type { AdminOrderDashboardItem } from "@/lib/orders/admin";
+import type { ManualOrderProductOption } from "@/lib/orders/manual-order-types";
 import styles from "./manual-order-modal.module.css";
 
-export type { ManualOrderProductOption };
+export type { ManualOrderProductOption } from "@/lib/orders/manual-order-types";
 
 type DeliveryMethod = "delivery" | "pickup";
 

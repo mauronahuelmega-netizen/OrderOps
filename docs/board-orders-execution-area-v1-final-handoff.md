@@ -308,7 +308,17 @@ Exclusions: `/admin/login`, `/super-admin` — ✓ static (no AdminShell).
 | I-8 | **P2** | QA manual staging completo no ejecutado | Gate pre-producción recomendado |
 | I-9 | **P1** | Producción: mutaciones status/assignment fallan (POST `/admin/dashboard` 500); create manual OK | Forense PROD-1 — ver `docs/order-mutation-production-forensic-audit-prod-1.md`; logs diagnósticos pendientes deploy |
 
-**P0/P1 abiertos:** I-9 en investigación (PROD-1 diagnóstico, sin fix funcional aún).
+**P0/P1 abiertos:** I-9 en investigación (PROD-1 + PROD-2 diagnóstico, sin fix funcional aún).
+
+---
+
+## Production incident — order mutations
+
+- **PROD-1** forensic audit completed — ver `docs/order-mutation-production-forensic-audit-prod-1.md`.
+- **PROD-2** runtime reproduction completed (parcial) — ver `docs/order-mutation-production-runtime-reproduction-prod-2.md`.
+- **PROD-3** runtime fix applied — `ManualOrderProductOption` movido a `lib/orders/manual-order-types.ts`; ver `docs/order-mutation-production-runtime-fix-prod-3.md`.
+- **Current status:** fix type boundary desplegado pendiente QA prod; causa raíz CONFIRMED `ReferenceError` pre-guard.
+- **Next step:** deploy + QA mutaciones en producción; cerrar I-9 si PASS.
 
 ---
 
