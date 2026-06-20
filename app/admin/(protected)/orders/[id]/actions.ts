@@ -38,6 +38,46 @@ const ORDER_STATUSES: OrderStatus[] = [
 ];
 const ASSIGNMENT_ACTIONS: AssignmentAction[] = ["claim", "release"];
 
+function logSupabaseActionError(
+  scope: "status" | "assignment",
+  action: string,
+  context: Record<string, unknown>,
+  error: unknown
+) {
+  const supabaseError =
+    error && typeof error === "object"
+      ? {
+          message:
+            "message" in error && typeof error.message === "string"
+              ? error.message
+              : undefined,
+          name: "name" in error && typeof error.name === "string" ? error.name : undefined,
+          code: "code" in error ? error.code : undefined,
+          details: "details" in error ? error.details : undefined,
+          hint: "hint" in error ? error.hint : undefined,
+          status: "status" in error ? error.status : undefined
+        }
+      : undefined;
+
+  console.error(`[order-mutation:${scope}:error]`, {
+    action,
+    ...context,
+    message: error instanceof Error ? error.message : String(error),
+    name: error instanceof Error ? error.name : undefined,
+    code:
+      typeof error === "object" && error !== null && "code" in error ? error.code : undefined,
+    ...(supabaseError
+      ? {
+          supabase: {
+            details: supabaseError.details,
+            hint: supabaseError.hint,
+            status: supabaseError.status
+          }
+        }
+      : {})
+  });
+}
+
 export async function updateOrderStatusAction(
   _prevState: ActionState,
   formData: FormData
@@ -65,6 +105,7 @@ export async function updateOrderStatusAction(
       .maybeSingle();
 
     if (currentOrderError) {
+      logSupabaseActionError("status", "updateOrderStatusAction.loadOrder", { orderId }, currentOrderError);
       throw new Error("No pudimos cargar el pedido.");
     }
 
@@ -82,6 +123,13 @@ export async function updateOrderStatusAction(
     });
 
     if (!mutationGuard.ok) {
+      console.error("[order-mutation:status:guard]", {
+        action: "updateOrderStatusAction",
+        orderId,
+        nextStatus: status,
+        code: mutationGuard.reason,
+        message: mutationGuard.message
+      });
       return { error: mutationGuard.message, code: mutationGuard.reason };
     }
 
@@ -108,10 +156,20 @@ export async function updateOrderStatusAction(
       .maybeSingle();
 
     if (updateError) {
+      logSupabaseActionError("status", "updateOrderStatusAction.update", {
+        orderId,
+        nextStatus: status
+      }, updateError);
       throw new Error("No pudimos actualizar el pedido.");
     }
 
     if (!updatedOrder) {
+      console.error("[order-mutation:status:empty-update]", {
+        action: "updateOrderStatusAction",
+        orderId,
+        nextStatus: status,
+        message: "Update returned no row"
+      });
       return { error: "Este pedido ya no existe o pertenece a otro negocio." };
     }
 
@@ -153,6 +211,7 @@ export async function updateOrderStatusAction(
       }
     };
   } catch (error) {
+    logSupabaseActionError("status", "updateOrderStatusAction", { orderId, nextStatus: status }, error);
     logActionFailure("orders.updateStatus", error, { orderId, status });
     return { error: getActionErrorMessage(error, "No pudimos actualizar el pedido.") };
   }
@@ -185,6 +244,10 @@ export async function updateOrderAssignmentAction(
       .maybeSingle();
 
     if (currentOrderError) {
+      logSupabaseActionError("assignment", "updateOrderAssignmentAction.loadOrder", {
+        orderId,
+        assigneeId: assignmentAction === "claim" ? adminContext.user.id : null
+      }, currentOrderError);
       throw new Error("No pudimos cargar el pedido.");
     }
 
@@ -202,6 +265,13 @@ export async function updateOrderAssignmentAction(
     });
 
     if (!mutationGuard.ok) {
+      console.error("[order-mutation:assignment:guard]", {
+        action: "updateOrderAssignmentAction",
+        orderId,
+        assignmentAction,
+        code: mutationGuard.reason,
+        message: mutationGuard.message
+      });
       return { error: mutationGuard.message, code: mutationGuard.reason };
     }
 
@@ -261,10 +331,20 @@ export async function updateOrderAssignmentAction(
       .maybeSingle();
 
     if (updateError) {
+      logSupabaseActionError("assignment", "updateOrderAssignmentAction.update", {
+        orderId,
+        assigneeId: nextAssignment.assigned_to ?? null
+      }, updateError);
       throw new Error("No pudimos actualizar el responsable.");
     }
 
     if (!updatedOrder) {
+      console.error("[order-mutation:assignment:empty-update]", {
+        action: "updateOrderAssignmentAction",
+        orderId,
+        assignmentAction,
+        message: "Update returned no row"
+      });
       return { error: "Este pedido ya no existe o pertenece a otro negocio." };
     }
 
@@ -310,6 +390,10 @@ export async function updateOrderAssignmentAction(
       }
     };
   } catch (error) {
+    logSupabaseActionError("assignment", "updateOrderAssignmentAction", {
+      orderId,
+      assignmentAction
+    }, error);
     logActionFailure("orders.updateAssignment", error, {
       orderId,
       assignmentAction

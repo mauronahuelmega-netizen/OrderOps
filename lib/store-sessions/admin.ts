@@ -93,6 +93,12 @@ export async function assertActiveStoreSessionForOrderMutation(input: {
   const activeSession = await resolveOpenActiveStoreSession(input.businessId);
 
   if (!activeSession) {
+    console.error("[store-session-guard:error]", {
+      action: "assertActiveStoreSessionForOrderMutation",
+      orderId: input.order.id,
+      code: "NO_ACTIVE_SESSION",
+      message: ORDER_MUTATION_GUARD_MESSAGES.NO_ACTIVE_SESSION
+    });
     return {
       ok: false,
       reason: "NO_ACTIVE_SESSION",
@@ -101,6 +107,12 @@ export async function assertActiveStoreSessionForOrderMutation(input: {
   }
 
   if (!isOrderWithinActiveSession(input.order, activeSession)) {
+    console.error("[store-session-guard:error]", {
+      action: "assertActiveStoreSessionForOrderMutation",
+      orderId: input.order.id,
+      code: "ORDER_OUTSIDE_ACTIVE_SESSION",
+      message: ORDER_MUTATION_GUARD_MESSAGES.ORDER_OUTSIDE_ACTIVE_SESSION
+    });
     return {
       ok: false,
       reason: "ORDER_OUTSIDE_ACTIVE_SESSION",
@@ -165,6 +177,14 @@ export async function getActiveStoreSession(businessId: string): Promise<StoreSe
       return null;
     }
 
+    console.error("[store-session-guard:error]", {
+      action: "getActiveStoreSession",
+      code: error.code,
+      message: error.message,
+      details: "details" in error ? error.details : undefined,
+      hint: "hint" in error ? error.hint : undefined,
+      status: "status" in error ? error.status : undefined
+    });
     throw new Error(`Failed to load active store session: ${error.message}`);
   }
 

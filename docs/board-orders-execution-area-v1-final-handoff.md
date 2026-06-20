@@ -306,8 +306,9 @@ Exclusions: `/admin/login`, `/super-admin` — ✓ static (no AdminShell).
 | I-6 | **P3** | 16× `no-img-element` warnings | Deuda aceptada (devx baseline) |
 | I-7 | **P2** | Footer al final del page container vs dentro execution section (spacing dashboard) | Validar en staging manual |
 | I-8 | **P2** | QA manual staging completo no ejecutado | Gate pre-producción recomendado |
+| I-9 | **P1** | Producción: mutaciones status/assignment fallan (POST `/admin/dashboard` 500); create manual OK | Forense PROD-1 — ver `docs/order-mutation-production-forensic-audit-prod-1.md`; logs diagnósticos pendientes deploy |
 
-**P0/P1 abiertos:** ninguno identificado en B9.7.
+**P0/P1 abiertos:** I-9 en investigación (PROD-1 diagnóstico, sin fix funcional aún).
 
 ---
 
