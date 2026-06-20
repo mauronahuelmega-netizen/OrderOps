@@ -6,7 +6,9 @@ import {
   DEFAULT_SCHEDULED_DELIVERY_RULES,
   normalizeScheduledDeliveryRules
 } from "@/lib/business/scheduled-delivery-rules";
+import { isBusinessAcceptingPublicOrders } from "@/lib/store-sessions/public.server";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createSupabaseServiceClient } from "@/lib/supabase/service";
 
 export type PublicBusiness = {
   catalog_hero_badge: string | null;
@@ -53,7 +55,8 @@ export async function getPublicBusinessBySlug(slug: string): Promise<PublicBusin
     return null;
   }
 
-  const { data: settings, error: settingsError } = await supabase
+  const serviceSupabase = createSupabaseServiceClient();
+  const { data: settings, error: settingsError } = await serviceSupabase
     .from("business_settings")
     .select(
       "on_demand_mode_active, scheduled_mode_active, scheduled_min_lead_time_hours, scheduled_max_days_in_advance, scheduled_cutoff_time, inactive_working_days"
@@ -62,29 +65,32 @@ export async function getPublicBusinessBySlug(slug: string): Promise<PublicBusin
     .maybeSingle();
 
   if (settingsError) {
-    return {
-      ...data,
-      on_demand_mode_active: false,
-      scheduled_mode_active: false,
-      scheduled_min_lead_time_hours:
-        DEFAULT_SCHEDULED_DELIVERY_RULES.scheduled_min_lead_time_hours,
-      scheduled_max_days_in_advance:
-        DEFAULT_SCHEDULED_DELIVERY_RULES.scheduled_max_days_in_advance,
-      scheduled_cutoff_time: DEFAULT_SCHEDULED_DELIVERY_RULES.scheduled_cutoff_time,
-      inactive_working_days: DEFAULT_SCHEDULED_DELIVERY_RULES.inactive_working_days
-    };
+    console.error("[public-business] settings lookup failed", {
+      businessId: data.id,
+      code: settingsError.code,
+      message: settingsError.message
+    });
   }
 
+  const acceptingOrders = await isBusinessAcceptingPublicOrders(data.id);
   const normalizedRules = normalizeScheduledDeliveryRules(settings);
 
   return {
     ...data,
-    on_demand_mode_active: settings?.on_demand_mode_active ?? false,
+    on_demand_mode_active: acceptingOrders,
     scheduled_mode_active: settings?.scheduled_mode_active ?? false,
-    scheduled_min_lead_time_hours: normalizedRules.scheduled_min_lead_time_hours,
-    scheduled_max_days_in_advance: normalizedRules.scheduled_max_days_in_advance,
-    scheduled_cutoff_time: normalizedRules.scheduled_cutoff_time,
-    inactive_working_days: normalizedRules.inactive_working_days
+    scheduled_min_lead_time_hours:
+      normalizedRules.scheduled_min_lead_time_hours ??
+      DEFAULT_SCHEDULED_DELIVERY_RULES.scheduled_min_lead_time_hours,
+    scheduled_max_days_in_advance:
+      normalizedRules.scheduled_max_days_in_advance ??
+      DEFAULT_SCHEDULED_DELIVERY_RULES.scheduled_max_days_in_advance,
+    scheduled_cutoff_time:
+      normalizedRules.scheduled_cutoff_time ??
+      DEFAULT_SCHEDULED_DELIVERY_RULES.scheduled_cutoff_time,
+    inactive_working_days:
+      normalizedRules.inactive_working_days ??
+      DEFAULT_SCHEDULED_DELIVERY_RULES.inactive_working_days
   };
 }
 

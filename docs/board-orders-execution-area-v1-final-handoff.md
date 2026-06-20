@@ -316,9 +316,9 @@ Exclusions: `/admin/login`, `/super-admin` — ✓ static (no AdminShell).
 
 - **PROD-1** forensic audit completed — ver `docs/order-mutation-production-forensic-audit-prod-1.md`.
 - **PROD-2** runtime reproduction completed (parcial) — ver `docs/order-mutation-production-runtime-reproduction-prod-2.md`.
-- **PROD-3** runtime fix applied — `ManualOrderProductOption` movido a `lib/orders/manual-order-types.ts`; ver `docs/order-mutation-production-runtime-fix-prod-3.md`.
-- **Current status:** fix type boundary desplegado pendiente QA prod; causa raíz CONFIRMED `ReferenceError` pre-guard.
-- **Next step:** deploy + QA mutaciones en producción; cerrar I-9 si PASS.
+- **PROD-4** public checkout fix — checkout anónimo vía server action + service role; ver `docs/public-checkout-anonymous-order-fix-prod-4.md`.
+- **Current status:** checkout público desacoplado de auth admin; QA prod pendiente.
+- **Next step:** deploy + QA incógnito en `/b/[slug]/checkout`.
 
 ---
 

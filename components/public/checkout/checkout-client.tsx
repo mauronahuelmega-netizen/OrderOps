@@ -18,7 +18,7 @@ import {
   parseLocalCartItems,
   type LocalCartItem
 } from "@/lib/cart/local";
-import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import { createPublicCheckoutOrderAction } from "@/app/b/[slug]/checkout/actions";
 
 type CheckoutClientProps = {
   business: PublicBusiness;
@@ -32,20 +32,6 @@ type CheckoutFormState = {
   deliveryMethod: "delivery" | "pickup";
   address: string;
   notes: string;
-};
-
-type CreateOrderPayload = {
-  p_business_id: string;
-  p_customer_name: string;
-  p_phone: string;
-  p_delivery_date: string;
-  p_delivery_method: "delivery" | "pickup";
-  p_address: string | null;
-  p_notes: string | null;
-  p_items: Array<{
-    product_id: string;
-    quantity: number;
-  }>;
 };
 
 const initialFormState: CheckoutFormState = {
@@ -193,35 +179,30 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
         return;
       }
 
-      const payload: CreateOrderPayload = {
-        p_business_id: business.id,
-        p_customer_name: formState.customerName.trim(),
-        p_phone: formState.phone.trim(),
-        p_delivery_date: deliveryDate,
-        p_delivery_method: formState.deliveryMethod,
-        p_address:
+      const result = await createPublicCheckoutOrderAction(slug, {
+        customerName: formState.customerName.trim(),
+        phone: formState.phone.trim(),
+        deliveryDate,
+        deliveryMethod: formState.deliveryMethod,
+        address:
           formState.deliveryMethod === "delivery"
             ? formState.address.trim()
             : null,
-        p_notes: formState.notes.trim() ? formState.notes.trim() : null,
-        p_items: cartItems.map((item) => ({
-          product_id: item.productId,
+        notes: formState.notes.trim() ? formState.notes.trim() : null,
+        items: cartItems.map((item) => ({
+          productId: item.productId,
           quantity: item.quantity
         }))
-      };
+      });
 
-      const supabase = createSupabaseBrowserClient();
-      const { data, error } = await supabase.rpc("create_order", payload);
-
-      if (error) {
-        throw error;
+      if (!result.ok) {
+        setErrorMessage(result.error);
+        return;
       }
 
-      if (typeof data !== "string" || !data) {
-        throw new Error("No pudimos obtener el identificador del pedido.");
-      }
+      const orderId = result.orderId;
 
-      void fetch(`/api/internal/orders/${encodeURIComponent(data)}/push`, {
+      void fetch(`/api/internal/orders/${encodeURIComponent(orderId)}/push`, {
         method: "POST",
         credentials: "same-origin",
         keepalive: true
@@ -230,9 +211,9 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
       });
 
       window.localStorage.removeItem(storageKey);
-      router.push(`/b/${slug}/success?order_id=${encodeURIComponent(data)}`);
-    } catch (error) {
-      setErrorMessage(getErrorMessage(error));
+      router.push(`/b/${slug}/success?order_id=${encodeURIComponent(orderId)}`);
+    } catch {
+      setErrorMessage("No pudimos crear el pedido. Intentá nuevamente.");
     } finally {
       setIsSubmitting(false);
     }
@@ -460,38 +441,4 @@ function formatCurrency(value: number) {
     currency: "ARS",
     maximumFractionDigits: 2
   }).format(value);
-}
-
-function getErrorMessage(error: unknown): string {
-  const message = error instanceof Error ? error.message : String(error);
-
-  if (message.includes("on_demand_mode is not active")) {
-    return "Lo sentimos, el negocio no está aceptando pedidos en este momento.";
-  }
-
-  if (message.includes("scheduled_mode is not active")) {
-    return "Este negocio no acepta pedidos programados para fechas futuras.";
-  }
-
-  if (message.includes("delivery_date cannot be in the past")) {
-    return "La fecha de entrega no puede ser anterior a hoy.";
-  }
-
-  if (message.includes("delivery_date falls on a non-operating day")) {
-    return "Ese día el negocio no opera. Elegí otra fecha.";
-  }
-
-  if (message.includes("delivery_date does not meet minimum lead time")) {
-    return "La fecha elegida no cumple el tiempo mínimo de anticipación.";
-  }
-
-  if (message.includes("delivery_date is past cutoff for next-day orders")) {
-    return "Ya pasó la hora límite para pedidos del día siguiente.";
-  }
-
-  if (message.includes("delivery_date exceeds maximum advance window")) {
-    return "La fecha elegida supera la ventana máxima de anticipación.";
-  }
-
-  return "Ocurrió un error inesperado. Por favor, intenta de nuevo.";
 }
