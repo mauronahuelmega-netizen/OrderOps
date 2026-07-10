@@ -51,6 +51,7 @@ export async function createTeamMemberAction(
     return { error: getActionErrorMessage(error, "No pudimos crear el usuario interno.") };
   }
 
+  revalidatePath("/admin/settings/team");
   revalidatePath("/admin/team");
   return { success: true };
 }
@@ -87,6 +88,7 @@ export async function updateTeamMemberRoleAction(
     return { error: getActionErrorMessage(error, "No pudimos actualizar el rol.") };
   }
 
+  revalidatePath("/admin/settings/team");
   revalidatePath("/admin/team");
   return { success: true };
 }

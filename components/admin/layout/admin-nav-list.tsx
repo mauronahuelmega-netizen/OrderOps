@@ -7,7 +7,6 @@ import {
   CookingPot,
   Package,
   Settings,
-  Users,
   type LucideIcon
 } from "lucide-react";
 import { isAdminNavItemActive, type AdminNavItem } from "@/components/admin/admin-nav-config";
@@ -23,8 +22,7 @@ const ADMIN_NAV_ICONS: Record<string, LucideIcon> = {
   "/admin/dashboard": ClipboardList,
   "/admin/kitchen": CookingPot,
   "/admin/products": Package,
-  "/admin/team": Users,
-  "/admin/settings/public": Settings
+  "/admin/settings": Settings
 };
 
 function getDrawerLinkClassName(isActive: boolean): string {

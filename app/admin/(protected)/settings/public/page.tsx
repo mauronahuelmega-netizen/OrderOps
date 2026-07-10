@@ -1,90 +1,70 @@
-import Link from "next/link";
-import AdminPageHeader from "@/components/admin/admin-page-header";
-import AdminPageLayout from "@/components/admin/admin-page-layout";
-import NotificationSettingsCard from "@/components/admin/notifications/notification-settings-card";
-import PublicSettingsNav from "@/components/admin/settings/public-settings-nav";
-import Card from "@/components/ui/Card";
+import PublicPresenceSummary from "@/components/admin/settings/public-presence-summary";
+import SettingsShell from "@/components/admin/settings/settings-shell";
 import { requireAdminPermission } from "@/lib/admin/context";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export default async function AdminPublicSettingsOverviewPage() {
   const adminContext = await requireAdminPermission("manageNotifications");
   const canManagePublicSettings = adminContext.permissions.canManagePublicSettings;
-  let businessName: string | null = null;
 
-  if (canManagePublicSettings) {
-    const supabase = await createSupabaseServerClient();
-    const { data: business } = await supabase
-      .from("businesses")
-      .select("name")
-      .eq("id", adminContext.businessId)
-      .maybeSingle();
-
-    if (!business) {
-      throw new Error("No pudimos cargar la configuracion del negocio.");
-    }
-
-    businessName = business.name;
+  if (!canManagePublicSettings) {
+    return (
+      <SettingsShell
+        title="Presencia pública"
+        description="Revisá cómo está configurada la presencia online que ven tus clientes."
+        canManagePublicSettings={canManagePublicSettings}
+        canManageTeam={adminContext.permissions.canManageTeam}
+      >
+        <p>No tenés permiso para editar la presencia pública de este negocio.</p>
+      </SettingsShell>
+    );
   }
 
+  const supabase = await createSupabaseServerClient();
+  const { data: business } = await supabase
+    .from("businesses")
+    .select(
+      "slug, logo_url, description, primary_color, cover_image_url, instagram_url, catalog_hero_headline, catalog_hero_badge, catalog_hero_microcopy"
+    )
+    .eq("id", adminContext.businessId)
+    .maybeSingle();
+
+  if (!business) {
+    throw new Error("No pudimos cargar la configuración de presencia pública.");
+  }
+
+  const publicLandingHref = business.slug ? `/b/${business.slug}` : null;
+  const publicCatalogHref = business.slug ? `/b/${business.slug}/catalogo` : null;
+
   return (
-    <AdminPageLayout size="default">
-      <AdminPageHeader
-        eyebrow="Configuracion"
-        title="Resumen"
-        description="Ajusta la presencia publica del negocio y prepara los avisos operativos del navegador."
+    <SettingsShell
+      title="Presencia pública"
+      description="Revisá cómo está configurada la presencia online que ven tus clientes."
+      canManagePublicSettings={canManagePublicSettings}
+      canManageTeam={adminContext.permissions.canManageTeam}
+    >
+      <PublicPresenceSummary
+        publicLandingHref={publicLandingHref}
+        publicCatalogHref={publicCatalogHref}
+        identity={{
+          logoUrl: business.logo_url,
+          coverImageUrl: business.cover_image_url,
+          primaryColor: business.primary_color
+        }}
+        landing={{
+          description: business.description,
+          instagramUrl: business.instagram_url
+        }}
+        catalog={{
+          headline: business.catalog_hero_headline,
+          badge: business.catalog_hero_badge,
+          microcopy: business.catalog_hero_microcopy
+        }}
+        publication={{
+          slug: business.slug,
+          publicUrl: publicLandingHref
+        }}
       />
-
-      {canManagePublicSettings ? (
-        <div className="admin-settings-public-page__nav">
-          <PublicSettingsNav current="overview" />
-        </div>
-      ) : null}
-
-      <div className="admin-settings-public-overview">
-        <NotificationSettingsCard
-          initialPreferences={adminContext.profile.notificationPreferences}
-          canManage={adminContext.permissions.canManageNotifications}
-        />
-
-        {canManagePublicSettings && businessName ? (
-          <>
-            <Card className="admin-form-card admin-settings-public-overview-card">
-              <div className="admin-form-header">
-                <h2>Landing publica</h2>
-                <p>
-                  Logo, portada, descripcion general, color principal e Instagram de{" "}
-                  {businessName}.
-                </p>
-              </div>
-
-              <Link
-                href="/admin/settings/public/landing"
-                className="admin-secondary-link admin-settings-public-overview-link"
-              >
-                Editar landing
-              </Link>
-            </Card>
-
-            <Card className="admin-form-card admin-settings-public-overview-card">
-              <div className="admin-form-header">
-                <h2>Catalogo publico</h2>
-                <p>
-                  Headline, badge y microcopy especificos del hero del catalogo, sin mezclarlo con
-                  la descripcion general.
-                </p>
-              </div>
-
-              <Link
-                href="/admin/settings/public/catalogo"
-                className="admin-secondary-link admin-settings-public-overview-link"
-              >
-                Editar catalogo
-              </Link>
-            </Card>
-          </>
-        ) : null}
-      </div>
-    </AdminPageLayout>
+    </SettingsShell>
   );
 }

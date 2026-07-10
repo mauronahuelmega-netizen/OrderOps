@@ -1,10 +1,17 @@
 "use client";
 
-import type { CSSProperties } from "react";
-import { useActionState, useEffect, useRef, useState } from "react";
+import type { FormEvent } from "react";
+import { startTransition, useActionState, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
+import PublicAssetUpload, {
+  type PublicAssetUploadState
+} from "@/components/admin/settings/public-asset-upload";
+import BrandPaletteControl from "@/components/admin/settings/brand-palette-control";
+import { normalizeHexColor } from "@/components/admin/settings/brand-palette";
+import PublicPresenceReadiness from "@/components/admin/settings/public-presence-readiness";
+import PublicPresencePreview from "@/components/admin/settings/public-presence-preview";
 import { updatePublicBusinessSettingsAction } from "@/app/admin/(protected)/settings/public/actions";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
@@ -15,6 +22,9 @@ type ActionState = {
 
 type PublicSettingsFormProps = {
   businessId: string;
+  businessName: string;
+  publicLandingHref?: string | null;
+  publicCatalogHref?: string | null;
   initialValues: {
     logoUrl: string | null;
     description: string | null;
@@ -22,15 +32,35 @@ type PublicSettingsFormProps = {
     coverImageUrl: string | null;
     instagramUrl: string | null;
   };
+  publishedCatalog?: {
+    headline: string | null;
+    badge: string | null;
+    microcopy: string | null;
+  };
+  publication?: {
+    slug: string | null;
+    publicUrl: string | null;
+  };
 };
 
 const initialState: ActionState = {};
 const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png", "image/webp"];
 
+const LOGO_HINT =
+  "Usá una imagen cuadrada y fácil de reconocer. Se verá en el header, la landing y el catálogo. JPG, PNG o WebP. Máximo 5 MB.";
+
+const COVER_HINT =
+  "Elegí una imagen horizontal que represente lo primero que tus clientes van a ver. Ideal: 16:9, buena luz y producto centrado. JPG, PNG o WebP. Máximo 5 MB.";
+
 export default function PublicSettingsForm({
   businessId,
-  initialValues
+  businessName,
+  publicLandingHref = null,
+  publicCatalogHref = null,
+  initialValues,
+  publishedCatalog,
+  publication
 }: PublicSettingsFormProps) {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
@@ -48,7 +78,12 @@ export default function PublicSettingsForm({
   const [formError, setFormError] = useState<string | null>(null);
   const [isUploadingLogo, setIsUploadingLogo] = useState(false);
   const [isUploadingCover, setIsUploadingCover] = useState(false);
-  const [previewBusinessName, setPreviewBusinessName] = useState("Tu negocio");
+  const [pendingLogoFile, setPendingLogoFile] = useState<File | null>(null);
+  const [pendingLogoPreviewUrl, setPendingLogoPreviewUrl] = useState<string | null>(null);
+  const [pendingLogoMetadata, setPendingLogoMetadata] = useState<string | null>(null);
+  const [pendingCoverFile, setPendingCoverFile] = useState<File | null>(null);
+  const [pendingCoverPreviewUrl, setPendingCoverPreviewUrl] = useState<string | null>(null);
+  const [pendingCoverMetadata, setPendingCoverMetadata] = useState<string | null>(null);
   const [state, formAction, isPending] = useActionState(
     updatePublicBusinessSettingsAction,
     initialState
@@ -60,6 +95,22 @@ export default function PublicSettingsForm({
     setPrimaryColor(initialValues.primaryColor ?? "");
     setCoverImageUrl(initialValues.coverImageUrl ?? "");
     setInstagramUrl(initialValues.instagramUrl ?? "");
+    setPendingLogoPreviewUrl((current) => {
+      revokeObjectUrl(current);
+      return null;
+    });
+    setPendingCoverPreviewUrl((current) => {
+      revokeObjectUrl(current);
+      return null;
+    });
+    setPendingLogoFile(null);
+    setPendingCoverFile(null);
+    setPendingLogoMetadata(null);
+    setPendingCoverMetadata(null);
+    setLogoStatus(null);
+    setCoverStatus(null);
+    setLogoError(null);
+    setCoverError(null);
   }, [
     initialValues.coverImageUrl,
     initialValues.description,
@@ -81,19 +132,17 @@ export default function PublicSettingsForm({
   }, [coverImageUrl]);
 
   useEffect(() => {
-    const businessTitle = formRef.current
-      ?.closest(".admin-form-card")
-      ?.querySelector(".admin-form-header h2")
-      ?.textContent?.trim();
-
-    if (businessTitle) {
-      setPreviewBusinessName(businessTitle);
-    }
-  }, []);
+    return () => {
+      revokeObjectUrl(pendingLogoPreviewUrl);
+      revokeObjectUrl(pendingCoverPreviewUrl);
+    };
+  }, [pendingCoverPreviewUrl, pendingLogoPreviewUrl]);
 
   useEffect(() => {
     if (state.success) {
       setFormError(null);
+      clearPendingLogo();
+      clearPendingCover();
       setLogoStatus((current) => current ?? (logoUrl ? "Logo guardado." : null));
       setCoverStatus((current) => current ?? (coverImageUrl ? "Portada guardada." : null));
       router.refresh();
@@ -101,48 +150,183 @@ export default function PublicSettingsForm({
   }, [coverImageUrl, logoUrl, router, state.success]);
 
   const isUploadingAsset = isUploadingLogo || isUploadingCover;
-  const previewDescription = description.trim() || "Conta brevemente que ofrece tu negocio.";
-  const previewBrandColor = primaryColor.trim() || "#2563EB";
-  const previewInitial = previewBusinessName.charAt(0).toUpperCase();
+  const publishedPrimaryColor = initialValues.primaryColor ?? "";
+  const displayLogoSrc = pendingLogoPreviewUrl ?? (logoUrl || null);
+  const displayCoverSrc = pendingCoverPreviewUrl ?? (coverImageUrl || null);
+
+  const logoUploadState = getAssetUploadState({
+    hasPublishedAsset: Boolean(logoUrl),
+    hasPendingFile: Boolean(pendingLogoFile),
+    isUploading: isUploadingLogo
+  });
+
+  const coverUploadState = getAssetUploadState({
+    hasPublishedAsset: Boolean(coverImageUrl),
+    hasPendingFile: Boolean(pendingCoverFile),
+    isUploading: isUploadingCover
+  });
+
+  const publishedDescription = initialValues.description ?? "";
+  const publishedInstagram = initialValues.instagramUrl ?? "";
+  const publishedColorNormalized = normalizeHexColor(initialValues.primaryColor ?? "");
+  const currentColorNormalized = normalizeHexColor(primaryColor);
+
+  const hasPendingLogo = Boolean(pendingLogoFile);
+  const hasPendingCover = Boolean(pendingCoverFile);
+  const hasUnsavedColorChange = currentColorNormalized !== publishedColorNormalized;
+  const hasUnsavedDescriptionChange = description !== publishedDescription;
+  const hasUnsavedInstagramChange = instagramUrl !== publishedInstagram;
+
+  const hasPendingChanges =
+    hasPendingLogo ||
+    hasPendingCover ||
+    hasUnsavedColorChange ||
+    hasUnsavedDescriptionChange ||
+    hasUnsavedInstagramChange;
+
+  const pendingChangeLabels = [
+    hasPendingLogo ? "Logo" : null,
+    hasPendingCover ? "Portada" : null,
+    hasUnsavedColorChange ? "Color" : null,
+    hasUnsavedDescriptionChange ? "Descripción" : null,
+    hasUnsavedInstagramChange ? "Instagram" : null
+  ].filter((label): label is string => Boolean(label));
+
+  const showSavedState = state.success && !hasPendingChanges && !isPending && !isUploadingAsset;
+
+  const submitButtonLabel = isUploadingAsset
+    ? "Subiendo imágenes..."
+    : isPending
+      ? "Guardando..."
+      : showSavedState
+        ? "Guardado"
+        : hasPendingChanges
+          ? "Guardar cambios"
+          : "Sin cambios";
+
+  const isSubmitDisabled = isPending || isUploadingAsset || !hasPendingChanges;
+
+  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (isPending || isUploadingAsset) {
+      return;
+    }
+
+    setFormError(null);
+
+    try {
+      let nextLogoUrl = logoUrl;
+      let nextCoverUrl = coverImageUrl;
+
+      if (pendingLogoFile) {
+        setIsUploadingLogo(true);
+        setLogoStatus("Subiendo logo...");
+        nextLogoUrl = await uploadBusinessAsset(pendingLogoFile, businessId, "logo");
+        clearPendingLogo();
+        setLogoUrl(nextLogoUrl);
+        setIsUploadingLogo(false);
+      }
+
+      if (pendingCoverFile) {
+        setIsUploadingCover(true);
+        setCoverStatus("Subiendo portada...");
+        nextCoverUrl = await uploadBusinessAsset(pendingCoverFile, businessId, "cover");
+        clearPendingCover();
+        setCoverImageUrl(nextCoverUrl);
+        setIsUploadingCover(false);
+      }
+
+      const currentForm = formRef.current;
+
+      if (!currentForm) {
+        return;
+      }
+
+      const formData = new FormData(currentForm);
+      formData.set("logo_url", nextLogoUrl);
+      formData.set("cover_image_url", nextCoverUrl);
+      const normalizedPrimaryColor = normalizeHexColor(primaryColor);
+      formData.set("primary_color", normalizedPrimaryColor ?? "");
+      startTransition(() => {
+        formAction(formData);
+      });
+    } catch (error) {
+      setIsUploadingLogo(false);
+      setIsUploadingCover(false);
+      setFormError(
+        error instanceof Error ? error.message : "No pudimos preparar las imágenes para guardar."
+      );
+    }
+  }
+
+  async function handleLogoFileSelected(file: File) {
+    const validationError = validateImageFile(file);
+
+    if (validationError) {
+      setLogoError(validationError);
+      setLogoStatus(null);
+      return false;
+    }
+
+    clearPendingLogo();
+    const previewUrl = URL.createObjectURL(file);
+    setPendingLogoFile(file);
+    setPendingLogoPreviewUrl(previewUrl);
+    setPendingLogoMetadata(await buildFileMetadata(file));
+    setLogoError(null);
+    setLogoStatus("Imagen seleccionada. Guardá cambios para publicarla.");
+  }
+
+  async function handleCoverFileSelected(file: File) {
+    const validationError = validateImageFile(file);
+
+    if (validationError) {
+      setCoverError(validationError);
+      setCoverStatus(null);
+      return false;
+    }
+
+    clearPendingCover();
+    const previewUrl = URL.createObjectURL(file);
+    setPendingCoverFile(file);
+    setPendingCoverPreviewUrl(previewUrl);
+    setPendingCoverMetadata(await buildFileMetadata(file, true));
+    setCoverError(null);
+    setCoverStatus("Imagen seleccionada. Guardá cambios para publicarla.");
+  }
+
+  function clearPendingLogo() {
+    revokeObjectUrl(pendingLogoPreviewUrl);
+    setPendingLogoFile(null);
+    setPendingLogoPreviewUrl(null);
+    setPendingLogoMetadata(null);
+  }
+
+  function clearPendingCover() {
+    revokeObjectUrl(pendingCoverPreviewUrl);
+    setPendingCoverFile(null);
+    setPendingCoverPreviewUrl(null);
+    setPendingCoverMetadata(null);
+  }
+
+  function cancelLogoSelection() {
+    clearPendingLogo();
+    setLogoError(null);
+    setLogoStatus(null);
+  }
+
+  function cancelCoverSelection() {
+    clearPendingCover();
+    setCoverError(null);
+    setCoverStatus(null);
+  }
 
   return (
     <form
       ref={formRef}
-      action={formAction}
-      className="admin-settings-public-form"
-      onSubmit={(event) => {
-        if (isUploadingAsset) {
-          event.preventDefault();
-          setFormError("Espera a que termine la subida.");
-          return;
-        }
-
-        const currentForm = formRef.current;
-
-        if (!currentForm) {
-          return;
-        }
-
-        const payload = new FormData(currentForm);
-        const submittedLogoUrl = getHiddenInputValue(payload.get("logo_url"));
-        const submittedCoverImageUrl = getHiddenInputValue(payload.get("cover_image_url"));
-
-        if (logoUrl && submittedLogoUrl !== logoUrl) {
-          event.preventDefault();
-          setFormError("El logo todavia no quedo listo para guardarse. Proba de nuevo en un segundo.");
-          return;
-        }
-
-        if (coverImageUrl && submittedCoverImageUrl !== coverImageUrl) {
-          event.preventDefault();
-          setFormError(
-            "La imagen de portada todavia no quedo lista para guardarse. Proba de nuevo en un segundo."
-          );
-          return;
-        }
-
-        setFormError(null);
-      }}
+      onSubmit={handleSubmit}
+      className="admin-settings-public-form admin-settings-landing-editor"
     >
       <input ref={logoUrlInputRef} type="hidden" name="logo_url" value={logoUrl} readOnly />
       <input
@@ -153,338 +337,329 @@ export default function PublicSettingsForm({
         readOnly
       />
 
-      <section className="admin-settings-section">
-        <div className="admin-settings-section__header">
-          <h3 className="admin-settings-section__title">Identidad</h3>
-          <p className="admin-settings-section__description">
-            Defini como se reconoce visualmente tu negocio.
-          </p>
-        </div>
-
-        <div className="admin-settings-public-assets">
-          <label className="admin-field">
-            <span>Logo del negocio</span>
-            <div className="admin-settings-public-preview admin-settings-public-preview--logo">
-              {logoUrl ? (
-                <img src={logoUrl} alt="Logo actual del negocio" />
-              ) : (
-                <div className="admin-settings-public-empty">Sin logo</div>
-              )}
+      <div className="admin-settings-landing-editor__layout">
+        <div className="admin-settings-landing-editor__form">
+          <section className="admin-settings-section admin-settings-landing-section">
+            <div className="admin-settings-section__header">
+              <h3 className="admin-settings-section__title">Identidad</h3>
+              <p className="admin-settings-section__description">
+                Definí cómo se reconoce visualmente tu negocio.
+              </p>
             </div>
-            <div className="admin-settings-upload">
-              <input
-                id="logo-file"
-                className="admin-settings-upload__input"
-                type="file"
-                accept="image/jpeg,image/png,image/webp"
+
+            <div className="admin-settings-public-assets">
+              <PublicAssetUpload
+                inputId="logo-file"
+                label="Logo del negocio"
+                variant="logo"
+                previewSrc={displayLogoSrc}
+                state={logoUploadState}
+                metadata={pendingLogoMetadata}
+                hint={LOGO_HINT}
+                error={logoError}
+                status={logoStatus}
                 disabled={isPending || isUploadingAsset}
-                onChange={(event) =>
-                  handleAssetUpload({
-                    event,
-                    businessId,
-                    folder: "logo",
-                    onUploadStart: () => {
-                      setLogoError(null);
-                      setFormError(null);
-                      setLogoStatus("Subiendo logo...");
-                      setIsUploadingLogo(true);
-                    },
-                    onUploadEnd: () => setIsUploadingLogo(false),
-                    onUploaded: (url) => {
-                      if (logoUrlInputRef.current) {
-                        logoUrlInputRef.current.value = url;
-                      }
-
-                      setLogoUrl(url);
-                      setLogoStatus("Logo listo para guardar.");
-                    },
-                    onError: (message) => {
-                      setLogoError(message);
-                      setLogoStatus(null);
-                    }
-                  })
-                }
+                changeLabel={displayLogoSrc ? "Cambiar logo" : "Subir logo"}
+                onFileSelected={handleLogoFileSelected}
+                onCancelSelection={cancelLogoSelection}
               />
-              <div className="admin-settings-upload__control">
-                <label className="admin-settings-upload__button" htmlFor="logo-file">
-                  {logoUrl ? "Cambiar logo" : "Subir logo"}
-                </label>
-                <div className="admin-settings-upload__meta">
-                  <p className="admin-settings-upload__hint">
-                    Usá una imagen cuadrada, simple y legible. Se verá en el header, la landing y
-                    el catálogo.
-                  </p>
-                  <p className="admin-settings-upload__hint">
-                    Formatos: JPG, PNG o WebP. Máximo 5MB.
-                  </p>
-                  {!logoError && logoStatus ? (
-                    <p className="admin-settings-upload__status admin-feedback admin-feedback--success">
-                      {logoStatus}
-                    </p>
-                  ) : null}
-                  {logoError ? (
-                    <p className="admin-settings-upload__status admin-feedback admin-feedback--error">
-                      {logoError}
-                    </p>
-                  ) : null}
-                </div>
-              </div>
+
+              <BrandPaletteControl
+                name="primary_color"
+                value={primaryColor}
+                publishedValue={publishedPrimaryColor}
+                disabled={isPending || isUploadingAsset}
+                onChange={setPrimaryColor}
+              />
             </div>
-          </label>
+          </section>
 
-          <Input
-            label="Color de marca"
-            name="primary_color"
-            type="text"
-            value={primaryColor}
-            onChange={(event) => setPrimaryColor(event.target.value)}
-            disabled={isPending}
-            placeholder="#2563EB"
-            helperText="Usa un color hexadecimal en formato #RRGGBB."
-          />
-        </div>
-      </section>
+          <section className="admin-settings-section admin-settings-landing-section">
+            <div className="admin-settings-section__header">
+              <h3 className="admin-settings-section__title">Imagen de portada</h3>
+              <p className="admin-settings-section__description">
+                Elegí una imagen horizontal que represente tu negocio.
+              </p>
+            </div>
 
-      <section className="admin-settings-section">
-        <div className="admin-settings-section__header">
-          <h3 className="admin-settings-section__title">Imagen de portada</h3>
-          <p className="admin-settings-section__description">
-            Elegi una imagen horizontal que represente tu negocio.
-          </p>
-        </div>
-
-        <label className="admin-field">
-          <span>Imagen de portada</span>
-          <div className="admin-settings-public-preview admin-settings-public-preview--cover">
-            {coverImageUrl ? (
-              <img src={coverImageUrl} alt="Portada actual del negocio" />
-            ) : (
-              <div className="admin-settings-public-empty">Sin portada</div>
-            )}
-          </div>
-          <div className="admin-settings-upload">
-            <input
-              id="cover-file"
-              className="admin-settings-upload__input"
-              type="file"
-              accept="image/jpeg,image/png,image/webp"
+            <PublicAssetUpload
+              inputId="cover-file"
+              label="Imagen de portada"
+              variant="cover"
+              previewSrc={displayCoverSrc}
+              state={coverUploadState}
+              metadata={pendingCoverMetadata}
+              hint={COVER_HINT}
+              error={coverError}
+              status={coverStatus}
               disabled={isPending || isUploadingAsset}
-              onChange={(event) =>
-                handleAssetUpload({
-                  event,
-                  businessId,
-                  folder: "cover",
-                  onUploadStart: () => {
-                    setCoverError(null);
-                    setFormError(null);
-                    setCoverStatus("Subiendo portada...");
-                    setIsUploadingCover(true);
-                  },
-                  onUploadEnd: () => setIsUploadingCover(false),
-                  onUploaded: (url) => {
-                    if (coverImageUrlInputRef.current) {
-                      coverImageUrlInputRef.current.value = url;
-                    }
+              changeLabel={displayCoverSrc ? "Cambiar portada" : "Subir portada"}
+              onFileSelected={handleCoverFileSelected}
+              onCancelSelection={cancelCoverSelection}
+            />
+          </section>
 
-                    setCoverImageUrl(url);
-                    setCoverStatus("Portada lista para guardar.");
-                  },
-                  onError: (message) => {
-                    setCoverError(message);
-                    setCoverStatus(null);
-                  }
-                })
+          <section className="admin-settings-section admin-settings-landing-section">
+            <div className="admin-settings-section__header">
+              <h3 className="admin-settings-section__title">Presentación</h3>
+              <p className="admin-settings-section__description">
+                Contá brevemente qué ofrece tu negocio y dónde encontrarlo.
+              </p>
+            </div>
+
+            <div className="admin-settings-public-grid">
+              <label className="ui-field" htmlFor="description">
+                <span className="ui-label">Descripción</span>
+                <textarea
+                  id="description"
+                  name="description"
+                  className="ui-input admin-settings-public-textarea"
+                  rows={4}
+                  value={description}
+                  onChange={(event) => setDescription(event.target.value)}
+                  disabled={isPending}
+                  placeholder="Contá brevemente qué ofrece tu negocio."
+                />
+                <p className="ui-helper">Este texto aparece en la landing pública de tu negocio.</p>
+              </label>
+
+              <Input
+                label="Instagram del negocio"
+                name="instagram_url"
+                type="url"
+                value={instagramUrl}
+                onChange={(event) => setInstagramUrl(event.target.value)}
+                disabled={isPending}
+                placeholder="https://instagram.com/tu-negocio"
+                helperText="Podés dejarlo vacío si no querés mostrarlo todavía."
+              />
+            </div>
+          </section>
+
+          {state.error ? (
+            <p className="admin-feedback admin-feedback--error">{state.error}</p>
+          ) : null}
+          {formError ? <p className="admin-feedback admin-feedback--error">{formError}</p> : null}
+          {showSavedState ? (
+            <p className="admin-feedback admin-feedback--success" role="status">
+              Cambios publicados correctamente.
+            </p>
+          ) : null}
+
+          <div className="admin-settings-form-actions admin-settings-landing-editor__actions">
+            <Button
+              type="submit"
+              className="admin-primary-button"
+              variant="primary"
+              disabled={isSubmitDisabled}
+              aria-disabled={isSubmitDisabled}
+            >
+              {submitButtonLabel}
+            </Button>
+          </div>
+        </div>
+
+        <aside
+          className="admin-settings-landing-editor__preview"
+          aria-label="Estado y vista previa de presencia pública"
+        >
+          <div className="admin-settings-landing-preview-panel">
+            <PublicPresenceReadiness
+              identity={{
+                hasLogo: Boolean(displayLogoSrc),
+                hasCover: Boolean(displayCoverSrc),
+                primaryColor,
+                pendingLogo: hasPendingLogo,
+                pendingCover: hasPendingCover,
+                pendingColor: hasUnsavedColorChange
+              }}
+              landing={{
+                description,
+                instagramUrl,
+                pendingDescription: hasUnsavedDescriptionChange,
+                pendingInstagram: hasUnsavedInstagramChange
+              }}
+              catalog={{
+                headline: publishedCatalog?.headline ?? null,
+                badge: publishedCatalog?.badge ?? null,
+                microcopy: publishedCatalog?.microcopy ?? null
+              }}
+              publication={{
+                slug: publication?.slug ?? null,
+                publicUrl: publication?.publicUrl ?? publicLandingHref
+              }}
+            />
+
+            {hasPendingChanges ? (
+              <div
+                className="admin-settings-landing-preview-panel__pending"
+                role="status"
+                aria-live="polite"
+              >
+                <strong>Tenés cambios pendientes de publicar.</strong>
+                <ul className="admin-settings-landing-preview-panel__pending-list">
+                  {pendingChangeLabels.map((label) => (
+                    <li key={label}>{label}</li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
+
+            <PublicPresencePreview
+              defaultMode="landing"
+              businessName={businessName}
+              logoUrl={displayLogoSrc}
+              coverImageUrl={displayCoverSrc}
+              primaryColor={primaryColor}
+              landing={{
+                description,
+                instagramUrl,
+                publicUrl: publicLandingHref
+              }}
+              catalog={{
+                headline: publishedCatalog?.headline ?? null,
+                badge: publishedCatalog?.badge ?? null,
+                microcopy: publishedCatalog?.microcopy ?? null,
+                publicUrl: publicCatalogHref
+              }}
+              catalogNeutralMessage={
+                !publishedCatalog?.headline?.trim() &&
+                !publishedCatalog?.badge?.trim() &&
+                !publishedCatalog?.microcopy?.trim()
+                  ? "Configurá el encabezado del catálogo desde la sección Catálogo."
+                  : null
               }
             />
-            <div className="admin-settings-upload__control">
-              <label className="admin-settings-upload__button" htmlFor="cover-file">
-                {coverImageUrl ? "Cambiar portada" : "Subir portada"}
-              </label>
-              <div className="admin-settings-upload__meta">
-                <p className="admin-settings-upload__hint">
-                  Elegí una foto horizontal que muestre tu producto principal o el estilo de tu
-                  negocio.
-                </p>
-                <p className="admin-settings-upload__hint">
-                  Ideal: formato 16:9, buena luz y el producto centrado. JPG, PNG o WebP. Máximo
-                  5MB.
-                </p>
-                {!coverError && coverStatus ? (
-                  <p className="admin-settings-upload__status admin-feedback admin-feedback--success">
-                    {coverStatus}
-                  </p>
-                ) : null}
-                {coverError ? (
-                  <p className="admin-settings-upload__status admin-feedback admin-feedback--error">
-                    {coverError}
-                  </p>
-                ) : null}
-              </div>
-            </div>
           </div>
-        </label>
-      </section>
-
-      <section className="admin-settings-section">
-        <div className="admin-settings-section__header">
-          <h3 className="admin-settings-section__title">Presentacion</h3>
-          <p className="admin-settings-section__description">
-            Conta brevemente que ofrece tu negocio y donde encontrarlo.
-          </p>
-        </div>
-
-        <div className="admin-settings-public-grid">
-          <label className="ui-field" htmlFor="description">
-            <span className="ui-label">Presentacion del negocio</span>
-            <textarea
-              id="description"
-              name="description"
-              className="ui-input admin-settings-public-textarea"
-              rows={4}
-              value={description}
-              onChange={(event) => setDescription(event.target.value)}
-              disabled={isPending}
-              placeholder="Conta brevemente que ofrece tu negocio."
-            />
-            <p className="ui-helper">Este texto aparece en la landing publica de tu negocio.</p>
-          </label>
-
-          <Input
-            label="Instagram del negocio"
-            name="instagram_url"
-            type="url"
-            value={instagramUrl}
-            onChange={(event) => setInstagramUrl(event.target.value)}
-            disabled={isPending}
-            placeholder="https://instagram.com/tu-negocio"
-            helperText="Podes dejarlo vacio si no queres mostrarlo todavia."
-          />
-        </div>
-      </section>
-
-      <section className="admin-settings-section">
-        <div className="admin-settings-section__header">
-          <h3 className="admin-settings-section__title">Vista previa</h3>
-          <p className="admin-settings-section__description">
-            Asi se vera la presentacion principal de tu negocio.
-          </p>
-        </div>
-
-        <div className="admin-settings-preview" style={{ "--preview-brand": previewBrandColor } as CSSProperties}>
-          <div className="admin-settings-preview__header">
-            {logoUrl ? (
-              <img
-                className="admin-settings-preview__logo"
-                src={logoUrl}
-                alt="Vista previa del logo"
-              />
-            ) : (
-              <div className="admin-settings-preview__logo admin-settings-preview__logo--placeholder">
-                {previewInitial}
-              </div>
-            )}
-
-            <div className="admin-settings-preview__content">
-              <p className="admin-settings-preview__kicker">Pedido online</p>
-              <strong className="admin-settings-preview__title">{previewBusinessName}</strong>
-              <p className="admin-settings-preview__description">{previewDescription}</p>
-            </div>
-          </div>
-
-          {coverImageUrl ? (
-            <img
-              className="admin-settings-preview__cover"
-              src={coverImageUrl}
-              alt="Vista previa de la portada"
-            />
-          ) : (
-            <div className="admin-settings-preview__cover admin-settings-preview__cover--placeholder">
-              Imagen de portada
-            </div>
-          )}
-
-          <span className="admin-settings-preview__pill">Tu marca en foco</span>
-        </div>
-      </section>
-
-      {state.error ? <p className="admin-feedback admin-feedback--error">{state.error}</p> : null}
-      {formError ? <p className="admin-feedback admin-feedback--error">{formError}</p> : null}
-      {state.success ? (
-        <p className="admin-feedback admin-feedback--success">Configuracion guardada.</p>
-      ) : null}
-
-      <Button
-        type="submit"
-        className="admin-primary-button"
-        variant="primary"
-        disabled={isPending || isUploadingAsset}
-      >
-        {isPending ? "Guardando..." : "Guardar cambios"}
-      </Button>
+        </aside>
+      </div>
     </form>
   );
 }
 
-async function handleAssetUpload(input: {
-  event: React.ChangeEvent<HTMLInputElement>;
-  businessId: string;
-  folder: "logo" | "cover";
-  onUploadStart: () => void;
-  onUploadEnd: () => void;
-  onUploaded: (url: string) => void;
-  onError: (message: string) => void;
-}) {
-  const file = input.event.target.files?.[0];
-
-  if (!file) {
-    input.onError("");
-    return;
+function getAssetUploadState(input: {
+  hasPublishedAsset: boolean;
+  hasPendingFile: boolean;
+  isUploading: boolean;
+}): PublicAssetUploadState {
+  if (input.isUploading) {
+    return "uploading";
   }
 
+  if (input.hasPendingFile) {
+    return "selected";
+  }
+
+  if (input.hasPublishedAsset) {
+    return "published";
+  }
+
+  return "empty";
+}
+
+function validateImageFile(file: File) {
   if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
-    input.onError("Subi una imagen JPG, PNG o WebP.");
-    input.event.target.value = "";
-    return;
+    return "Formato no compatible. Usá JPG, PNG o WebP.";
   }
 
   if (file.size > MAX_FILE_SIZE_BYTES) {
-    input.onError("La imagen no puede pesar mas de 5MB.");
-    input.event.target.value = "";
-    return;
+    return "La imagen supera 5 MB. Elegí una imagen más liviana.";
   }
 
-  input.onUploadStart();
+  return null;
+}
 
-  try {
-    const supabase = createSupabaseBrowserClient();
-    const fileExt = getFileExtension(file.name);
-    const filePath = `${input.businessId}/${input.folder}/${Date.now()}-${crypto.randomUUID()}.${fileExt}`;
+async function buildFileMetadata(file: File, includeDimensions = false) {
+  const parts = [file.name, formatFileSize(file.size), formatMimeLabel(file.type)];
 
-    const { error: uploadError } = await supabase.storage
-      .from("business-assets")
-      .upload(filePath, file, {
-        contentType: file.type || undefined,
-        upsert: true
-      });
+  if (includeDimensions) {
+    const dimensions = await loadImageDimensions(file);
 
-    if (uploadError) {
-      input.onError(uploadError.message || "No pudimos subir la imagen.");
-      return;
+    if (dimensions) {
+      parts.push(`${dimensions.width}×${dimensions.height}`);
     }
+  }
 
-    const {
-      data: { publicUrl }
-    } = supabase.storage.from("business-assets").getPublicUrl(filePath);
+  return parts.join(" · ");
+}
 
-    input.onUploaded(publicUrl);
-    input.event.target.value = "";
-  } finally {
-    input.onUploadEnd();
+async function uploadBusinessAsset(
+  file: File,
+  businessId: string,
+  folder: "logo" | "cover"
+) {
+  const validationError = validateImageFile(file);
+
+  if (validationError) {
+    throw new Error(validationError);
+  }
+
+  const supabase = createSupabaseBrowserClient();
+  const fileExt = getFileExtension(file.name);
+  const filePath = `${businessId}/${folder}/${Date.now()}-${crypto.randomUUID()}.${fileExt}`;
+
+  const { error: uploadError } = await supabase.storage
+    .from("business-assets")
+    .upload(filePath, file, {
+      contentType: file.type || undefined,
+      upsert: true
+    });
+
+  if (uploadError) {
+    throw new Error(uploadError.message || "No pudimos subir la imagen.");
+  }
+
+  const {
+    data: { publicUrl }
+  } = supabase.storage.from("business-assets").getPublicUrl(filePath);
+
+  return publicUrl;
+}
+
+function loadImageDimensions(file: File) {
+  return new Promise<{ width: number; height: number } | null>((resolve) => {
+    const objectUrl = URL.createObjectURL(file);
+    const image = new Image();
+
+    image.onload = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve({ width: image.naturalWidth, height: image.naturalHeight });
+    };
+
+    image.onerror = () => {
+      URL.revokeObjectURL(objectUrl);
+      resolve(null);
+    };
+
+    image.src = objectUrl;
+  });
+}
+
+function formatFileSize(bytes: number) {
+  if (bytes < 1024 * 1024) {
+    return `${(bytes / 1024).toFixed(1)} KB`;
+  }
+
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
+function formatMimeLabel(mimeType: string) {
+  switch (mimeType) {
+    case "image/jpeg":
+      return "JPG";
+    case "image/png":
+      return "PNG";
+    case "image/webp":
+      return "WebP";
+    default:
+      return mimeType.replace("image/", "").toUpperCase();
   }
 }
 
-function getHiddenInputValue(value: FormDataEntryValue | null) {
-  return typeof value === "string" ? value : "";
+function revokeObjectUrl(url: string | null) {
+  if (url) {
+    URL.revokeObjectURL(url);
+  }
 }
 
 function getFileExtension(filename: string) {

@@ -38,15 +38,9 @@ export const adminNavItems: AdminNavItem[] = [
     requiredPermission: "manageProducts"
   },
   {
-    href: "/admin/team",
-    label: "Equipo",
-    matchPrefixes: ["/admin/team"],
-    requiredPermission: "manageTeam"
-  },
-  {
-    href: "/admin/settings/public",
-    label: "Configuracion",
-    matchPrefixes: ["/admin/settings/public", "/admin/settings/operations"],
+    href: "/admin/settings",
+    label: "Configuración",
+    matchPrefixes: ["/admin/settings", "/admin/team"],
     requiredPermission: "manageNotifications"
   }
 ];

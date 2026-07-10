@@ -1,0 +1,16 @@
+.hub {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+}
+
+@media (min-width: 900px) {
+  .grid {
+    gap: var(--space-lg);
+  }
+}

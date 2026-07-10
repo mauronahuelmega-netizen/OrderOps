@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, useTransition } from "react";
-import { updateNotificationPreferencesAction } from "@/app/admin/(protected)/settings/public/actions";
+import { updateNotificationPreferencesAction } from "@/app/admin/(protected)/settings/notifications/actions";
 import {
   canUseNewOrderBrowserNotification,
   normalizeNotificationPreferences,
@@ -9,6 +9,7 @@ import {
 } from "@/lib/notifications/preferences";
 import PushDeviceSettings from "@/components/admin/notifications/push-device-settings";
 import { useBrowserNotificationPermission } from "@/components/admin/notifications/use-browser-notification-permission";
+import styles from "./notification-settings.module.css";
 
 type NotificationSettingsCardProps = {
   initialPreferences: NotificationPreferences;
@@ -22,6 +23,10 @@ type FeedbackState = {
 
 type PreferenceKey = keyof NotificationPreferences;
 
+type BrowserPermission = ReturnType<typeof useBrowserNotificationPermission>["permission"];
+
+type StatusTone = "ready" | "pending" | "blocked" | "neutral";
+
 const PREFERENCE_ITEMS: Array<{
   key: PreferenceKey;
   label: string;
@@ -30,38 +35,54 @@ const PREFERENCE_ITEMS: Array<{
   {
     key: "new_order_browser_notifications_enabled",
     label: "Avisos del navegador",
-    description: "Mostra una notificacion cuando llegue un pedido y estes usando otra pestana."
+    description: "Mostrar una notificación cuando llegue un pedido y estés usando otra pestaña."
   },
   {
     key: "new_order_sound_enabled",
     label: "Sonido",
-    description: "Reproduci el aviso sonoro de OrderOps cuando llegue un pedido."
+    description: "Reproducir el aviso sonoro de OrderOps cuando llegue un pedido."
   },
   {
     key: "new_order_toast_enabled",
     label: "Toast en pantalla",
-    description: "Mostra un aviso visual cuando estes mirando el dashboard."
+    description: "Mostrar un aviso visual cuando estés mirando el dashboard."
   },
   {
     key: "new_order_highlight_enabled",
     label: "Highlight del pedido",
-    description: "Marca visualmente los pedidos recien llegados."
+    description: "Marcar visualmente los pedidos recién llegados."
   }
 ];
 
-function getPermissionLabel(permission: ReturnType<typeof useBrowserNotificationPermission>["permission"]) {
+function getPermissionLabel(permission: BrowserPermission) {
   switch (permission) {
     case "granted":
-      return "permitido";
+      return "Permitido";
     case "denied":
-      return "bloqueado";
+      return "Bloqueado";
     case "default":
-      return "no configurado";
+      return "Sin configurar";
     case "unsupported":
-      return "no soportado";
+      return "No soportado";
     case "unknown":
     default:
-      return "verificando";
+      return "Verificando";
+  }
+}
+
+function getPermissionDescription(permission: BrowserPermission) {
+  switch (permission) {
+    case "granted":
+      return "Este navegador puede mostrar avisos de nuevos pedidos.";
+    case "denied":
+      return "Está bloqueado. Habilitalo desde la configuración del navegador.";
+    case "default":
+      return "Todavía no diste permiso a este navegador.";
+    case "unsupported":
+      return "Este navegador no soporta notificaciones.";
+    case "unknown":
+    default:
+      return "Estamos verificando el estado del navegador.";
   }
 }
 
@@ -82,18 +103,26 @@ export default function NotificationSettingsCard({
 
   const isBusy = isPending || isRequesting;
   const browserCanNotify = canUseNewOrderBrowserNotification(preferences, permission);
-  const statusCopy = useMemo(() => {
+
+  const activeCount = useMemo(
+    () => PREFERENCE_ITEMS.reduce((total, item) => total + (preferences[item.key] ? 1 : 0), 0),
+    [preferences]
+  );
+
+  const status = useMemo<{ title: string; description: string; tone: StatusTone }>(() => {
     if (!canManage) {
       return {
         title: "Solo lectura",
-        description: "Tu rol no puede cambiar estos avisos operativos."
+        description: "Tu rol no puede cambiar estos avisos operativos.",
+        tone: "neutral"
       };
     }
 
     if (permission === "unsupported") {
       return {
         title: "No disponible",
-        description: "Este navegador no soporta notificaciones."
+        description: "Este navegador no soporta notificaciones.",
+        tone: "neutral"
       };
     }
 
@@ -101,14 +130,16 @@ export default function NotificationSettingsCard({
       return {
         title: "Bloqueadas",
         description:
-          "Las notificaciones estan bloqueadas en este navegador. Podes habilitarlas desde la configuracion del navegador."
+          "Las notificaciones están bloqueadas en este navegador. Podés habilitarlas desde la configuración del navegador.",
+        tone: "blocked"
       };
     }
 
     if (permission === "granted" && preferences.new_order_browser_notifications_enabled) {
       return {
         title: "Notificaciones activadas",
-        description: "Recibiras avisos de nuevos pedidos aunque estes usando otra pestana."
+        description: "Recibirás avisos de nuevos pedidos aunque estés usando otra pestaña.",
+        tone: "ready"
       };
     }
 
@@ -116,15 +147,24 @@ export default function NotificationSettingsCard({
       return {
         title: "Notificaciones pausadas",
         description:
-          "El navegador ya tiene permiso, pero los avisos de nuevos pedidos estan desactivados."
+          "El navegador ya tiene permiso, pero los avisos de nuevos pedidos están desactivados.",
+        tone: "pending"
       };
     }
 
     return {
       title: "No configuradas",
-      description: "Todavia no activaste notificaciones en este navegador."
+      description: "Todavía no activaste notificaciones en este navegador.",
+      tone: "pending"
     };
   }, [canManage, permission, preferences.new_order_browser_notifications_enabled]);
+
+  const statusPillClass = getStatusPillClass(status.tone);
+  const saveState: "saving" | "saved" | "idle" = isPending
+    ? "saving"
+    : feedback.success
+      ? "saved"
+      : "idle";
 
   const persistPreferences = (patch: {
     newOrderBrowserNotificationsEnabled?: boolean;
@@ -187,41 +227,62 @@ export default function NotificationSettingsCard({
   };
 
   return (
-    <section className="admin-form-card admin-notification-settings-card">
-      <div className="admin-form-header">
-        <h2>Notificaciones operativas</h2>
-        <p>Recibi avisos de nuevos pedidos aunque estes usando otra pestana.</p>
-      </div>
-
-      <div className="admin-notification-settings-card__status">
-        <strong>{statusCopy.title}</strong>
-        <p>{statusCopy.description}</p>
-      </div>
-
-      <div className="admin-notification-settings-card__meta">
-        <span>Permiso del navegador: {getPermissionLabel(permission)}</span>
-        <span>Preferencia actual: {browserCanNotify ? "activa" : "pausada"}</span>
-      </div>
-
-      {canManage && permission === "default" ? (
-        <div className="admin-notification-settings-card__actions">
-          <button
-            type="button"
-            className="admin-primary-button"
-            onClick={handleEnableBrowserNotifications}
-            disabled={isBusy}
-          >
-            Activar notificaciones
-          </button>
-        </div>
-      ) : null}
-
-      <div className="admin-notification-settings-card__section">
-        <div className="admin-notification-settings-card__section-header">
-          <strong>Nuevos pedidos</strong>
+    <div className={styles.layout}>
+      <section className={styles.summary} aria-labelledby="notif-summary-title">
+        <div className={styles.summaryHeader}>
+          <h2 id="notif-summary-title" className={styles.summaryTitle}>
+            Resumen de notificaciones
+          </h2>
+          <p className={styles.summaryDescription}>
+            Definí qué avisos recibe tu equipo durante la operación diaria.
+          </p>
         </div>
 
-        <div className="admin-notification-settings-card__list">
+        <div className={styles.statGrid}>
+          <div className={styles.stat}>
+            <span className={styles.statValue}>
+              {activeCount} de {PREFERENCE_ITEMS.length}
+            </span>
+            <span className={styles.statLabel}>Avisos activos</span>
+          </div>
+          <div className={styles.stat}>
+            <span className={styles.statValue}>{getPermissionLabel(permission)}</span>
+            <span className={styles.statLabel}>Permiso del navegador</span>
+          </div>
+          <div className={styles.stat}>
+            <span className={styles.statValue}>{browserCanNotify ? "Activa" : "Pausada"}</span>
+            <span className={styles.statLabel}>Notificación de pedidos</span>
+          </div>
+        </div>
+
+        <p className={styles.summaryStatus}>
+          <span className={statusPillClass}>{status.title}</span>
+          <span>{status.description}</span>
+        </p>
+
+        <p className={styles.autosaveHint}>Los cambios se guardan automáticamente.</p>
+      </section>
+
+      <section className={styles.card} aria-labelledby="notif-prefs-title">
+        <div className={styles.cardHeader}>
+          <div className={styles.cardHeaderText}>
+            <h2 id="notif-prefs-title" className={styles.cardTitle}>
+              Avisos de nuevos pedidos
+            </h2>
+            <p className={styles.cardDescription}>
+              Elegí cómo querés enterarte cuando entra un pedido nuevo.
+            </p>
+          </div>
+
+          {saveState === "saving" ? (
+            <span className={`${styles.savePill} ${styles.savePillActive}`}>Guardando…</span>
+          ) : null}
+          {saveState === "saved" ? (
+            <span className={`${styles.savePill} ${styles.savePillSaved}`}>Guardado</span>
+          ) : null}
+        </div>
+
+        <div className={styles.switchList}>
           {PREFERENCE_ITEMS.map((item) => {
             const checked = preferences[item.key];
             const disabled =
@@ -231,36 +292,129 @@ export default function NotificationSettingsCard({
                 permission === "unsupported");
 
             return (
-              <label key={item.key} className="admin-notification-settings-card__item">
-                <div className="admin-notification-settings-card__copy">
-                  <span>{item.label}</span>
-                  <small>{item.description}</small>
+              <label
+                key={item.key}
+                className={`${styles.switchRow} ${disabled ? styles.switchRowDisabled : ""}`}
+              >
+                <div className={styles.switchCopy}>
+                  <span className={styles.switchLabel}>{item.label}</span>
+                  <span className={styles.switchDescription}>{item.description}</span>
                 </div>
-                <input
-                  type="checkbox"
-                  checked={checked}
-                  disabled={disabled}
-                  onChange={(event) => {
-                    void handleToggle(item.key, event.currentTarget.checked);
-                  }}
-                />
+                <span className={styles.switch}>
+                  <input
+                    type="checkbox"
+                    className={styles.switchInput}
+                    checked={checked}
+                    disabled={disabled}
+                    onChange={(event) => {
+                      void handleToggle(item.key, event.currentTarget.checked);
+                    }}
+                  />
+                  <span className={styles.switchTrack} aria-hidden="true">
+                    <span className={styles.switchThumb} />
+                  </span>
+                </span>
               </label>
             );
           })}
         </div>
-      </div>
 
-      <PushDeviceSettings
-        canManage={canManage}
-        isRequestingPermission={isRequesting}
-        permission={permission}
-        requestPermission={requestPermission}
-      />
+        <div className={styles.inlineFeedback} aria-live="polite">
+          {feedback.error ? (
+            <p className={`${styles.feedback} ${styles.feedbackError}`}>{feedback.error}</p>
+          ) : null}
+          {feedback.success ? (
+            <p className={`${styles.feedback} ${styles.feedbackSuccess}`}>{feedback.success}</p>
+          ) : null}
+        </div>
+      </section>
 
-      {feedback.error ? <p className="admin-feedback admin-feedback--error">{feedback.error}</p> : null}
-      {feedback.success ? (
-        <p className="admin-feedback admin-feedback--success">{feedback.success}</p>
-      ) : null}
-    </section>
+      <section className={styles.card} aria-labelledby="notif-device-title">
+        <div className={styles.cardHeader}>
+          <div className={styles.cardHeaderText}>
+            <h2 id="notif-device-title" className={styles.cardTitle}>
+              Dispositivo y permisos
+            </h2>
+            <p className={styles.cardDescription}>
+              Controlá qué puede hacer este navegador y preparalo para recibir avisos.
+            </p>
+          </div>
+        </div>
+
+        <div className={styles.deviceBlock}>
+          <div className={styles.deviceStatus}>
+            <span className={getStatusPillClass(getPermissionTone(permission))}>
+              {getPermissionLabel(permission)}
+            </span>
+            <div className={styles.deviceStatusText}>
+              <span className={styles.deviceStatusTitle}>Permiso del navegador</span>
+              <p className={styles.deviceStatusDescription}>
+                {getPermissionDescription(permission)}
+              </p>
+            </div>
+          </div>
+
+          {canManage && permission === "default" ? (
+            <div className={styles.actionsRow}>
+              <button
+                type="button"
+                className={styles.primaryButton}
+                onClick={handleEnableBrowserNotifications}
+                disabled={isBusy}
+              >
+                Activar notificaciones
+              </button>
+            </div>
+          ) : null}
+        </div>
+
+        <PushDeviceSettings
+          canManage={canManage}
+          isRequestingPermission={isRequesting}
+          permission={permission}
+          requestPermission={requestPermission}
+        />
+      </section>
+
+      <section className={styles.helpCard} aria-labelledby="notif-help-title">
+        <h2 id="notif-help-title" className={styles.helpTitle}>
+          Qué recibe tu equipo
+        </h2>
+        <ul className={styles.helpList}>
+          <li>Los avisos operativos se configuran por persona con acceso al panel.</li>
+          <li>Los avisos del navegador dependen del permiso de este dispositivo.</li>
+          <li>Sonido, toast y highlight funcionan mientras el panel está abierto.</li>
+        </ul>
+      </section>
+    </div>
   );
+}
+
+function getStatusPillClass(tone: StatusTone) {
+  switch (tone) {
+    case "ready":
+      return `${styles.statusPill} ${styles.statusPillReady}`;
+    case "pending":
+      return `${styles.statusPill} ${styles.statusPillPending}`;
+    case "blocked":
+      return `${styles.statusPill} ${styles.statusPillBlocked}`;
+    case "neutral":
+    default:
+      return `${styles.statusPill} ${styles.statusPillNeutral}`;
+  }
+}
+
+function getPermissionTone(permission: BrowserPermission): StatusTone {
+  switch (permission) {
+    case "granted":
+      return "ready";
+    case "denied":
+      return "blocked";
+    case "default":
+      return "pending";
+    case "unsupported":
+    case "unknown":
+    default:
+      return "neutral";
+  }
 }

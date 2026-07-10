@@ -333,7 +333,42 @@ Exclusions: `/admin/login`, `/super-admin` — ✓ static (no AdminShell).
 - admin-dashboard-orders.tsx container grande.
 - next build flake ocasional en page data collection (/admin/categories, /admin/kitchen).
 - Footer spacing dashboard vs otras páginas admin (P2 visual).
+- Settings/Team IA fragmentada — ver `docs/admin-settings-team-forensic-audit-settings-1.md` (SETTINGS-1).
 ```
+
+---
+
+## Settings & Team audit
+
+- SETTINGS-1 forensic audit completed — `docs/admin-settings-team-forensic-audit-settings-1.md`.
+- SETTINGS-2 IA & Team consolidation completed — `docs/admin-settings-phase-settings-2-ia-team-consolidation.md`.
+- Team canonical route: `/admin/settings/team` (`/admin/team` redirects).
+
+## Settings V1
+
+- Admin Settings V1 completed.
+- Browser QA completed in STAGING-QA-1.
+- QA report: `docs/admin-settings-staging-qa-1-browser-qa.md`
+- Final handoff: `docs/admin-settings-v1-final-handoff.md`
+- Responsive QA: `docs/admin-settings-phase-settings-7-responsive-qa-final-handoff.md`
+- STAGING-QA-1 result: PASS WITH P2 DEBT — ready for production deploy QA.
+- Remaining debt: ESLint circular config, Next 16 middleware→proxy, Team performance, AdminShell fetch optimization, business status/session alignment, checkout E2E, multi-rol permissions QA.
+
+## Settings roadmap
+
+- SETTINGS-1 forensic audit completed.
+- SETTINGS-2 IA & Team consolidation completed.
+- SETTINGS-3 shell premium alignment completed.
+- SETTINGS-4 public presence polish completed.
+- SETTINGS-5 operations & notifications polish completed.
+- SETTINGS-6 team migration completed.
+- SETTINGS-6.5 hub enterprise IA polish completed.
+- SETTINGS-6.6 hub layout & density polish completed.
+- SETTINGS-6.7 hub light mode & density final polish completed.
+- SETTINGS-6.8 viewport & footer anchoring polish completed.
+- SETTINGS-7 responsive QA & final handoff completed.
+
+---
 
 ---
 

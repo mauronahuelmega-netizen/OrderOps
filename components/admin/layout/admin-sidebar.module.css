@@ -516,11 +516,33 @@
   }
 
   .sidebar:not(:hover) .themeSwitch {
-    gap: 6px;
+    gap: 0;
     justify-content: center;
+    width: 24px;
   }
 
   .sidebar:not(:hover) .themeSwitchTrack {
     display: none;
+  }
+
+  .sidebar:not(:hover) .themeSwitchIcon:not(.themeSwitchIconActive) {
+    display: none;
+  }
+
+  .sidebar:not(:hover) .themeSwitchIconActive {
+    width: 20px;
+    height: 20px;
+    color: var(--text-primary);
+    opacity: 1;
+  }
+
+  .sidebar:not(:hover) .themeSwitchIconActive svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .sidebar:not(:hover) .appearanceControl {
+    min-width: 40px;
+    min-height: 40px;
   }
 }

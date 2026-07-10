@@ -1,6 +1,7 @@
 "use client";
 
 import { usePushSubscription } from "@/components/admin/notifications/use-push-subscription";
+import styles from "@/components/admin/notifications/notification-settings.module.css";
 import type { BrowserNotificationPermissionState } from "@/lib/notifications/preferences";
 
 type PushDeviceSettingsProps = {
@@ -10,7 +11,9 @@ type PushDeviceSettingsProps = {
   requestPermission: () => Promise<BrowserNotificationPermissionState>;
 };
 
-function getPushStatusCopy(state: ReturnType<typeof usePushSubscription>["state"]) {
+type PushState = ReturnType<typeof usePushSubscription>["state"];
+
+function getPushStatusCopy(state: PushState) {
   switch (state) {
     case "unsupported":
       return {
@@ -20,22 +23,22 @@ function getPushStatusCopy(state: ReturnType<typeof usePushSubscription>["state"
     case "env_missing":
       return {
         title: "No configurado en este entorno",
-        description: "Push no esta configurado en este entorno."
+        description: "Push no está configurado en este entorno."
       };
     case "blocked":
       return {
         title: "Bloqueado",
-        description: "Las notificaciones estan bloqueadas en este navegador."
+        description: "Las notificaciones están bloqueadas en este navegador."
       };
     case "configured":
       return {
         title: "Dispositivo preparado",
-        description: "Este dispositivo esta preparado para push."
+        description: "Este dispositivo está preparado para push."
       };
     case "not_configured":
       return {
         title: "Sin preparar",
-        description: "Este dispositivo todavia no esta preparado para push."
+        description: "Este dispositivo todavía no está preparado para push."
       };
     case "unknown":
     default:
@@ -43,6 +46,22 @@ function getPushStatusCopy(state: ReturnType<typeof usePushSubscription>["state"
         title: "Verificando",
         description: "Estamos revisando si este navegador puede preparar push."
       };
+  }
+}
+
+function getPushStatusPillClass(state: PushState) {
+  switch (state) {
+    case "configured":
+      return `${styles.statusPill} ${styles.statusPillReady}`;
+    case "not_configured":
+      return `${styles.statusPill} ${styles.statusPillPending}`;
+    case "blocked":
+      return `${styles.statusPill} ${styles.statusPillBlocked}`;
+    case "unsupported":
+    case "env_missing":
+    case "unknown":
+    default:
+      return `${styles.statusPill} ${styles.statusPillNeutral}`;
   }
 }
 
@@ -64,53 +83,59 @@ export default function PushDeviceSettings({
   }
 
   return (
-    <div className="admin-notification-settings-card__section">
-      <div className="admin-notification-settings-card__section-header">
-        <strong>Push del navegador</strong>
-        <p>
-          Prepara este dispositivo para recibir avisos futuros incluso cuando OrderOps no este
+    <div className={styles.deviceBlock}>
+      <div className={styles.deviceStatusText}>
+        <span className={styles.deviceStatusTitle}>Push del navegador</span>
+        <p className={styles.deviceStatusDescription}>
+          Prepará este dispositivo para recibir avisos futuros incluso cuando OrderOps no esté
           abierto.
         </p>
       </div>
 
-      <div className="admin-notification-settings-card__status">
-        <strong>{statusCopy.title}</strong>
-        <p>{statusCopy.description}</p>
+      <div className={styles.deviceStatus}>
+        <span className={getPushStatusPillClass(state)}>{statusCopy.title}</span>
+        <div className={styles.deviceStatusText}>
+          <p className={styles.deviceStatusDescription}>{statusCopy.description}</p>
+        </div>
       </div>
 
-      <p className="admin-field-hint">
-        Todavia no enviamos pedidos por push. Esta opcion prepara la base para una proxima fase.
+      <p className={styles.deviceHint}>
+        Todavía no enviamos pedidos por push. Esta opción prepara la base para una próxima fase.
       </p>
 
-      {error ? <p className="admin-feedback admin-feedback--error">{error}</p> : null}
-
-      <div className="admin-notification-settings-card__actions">
-        {state === "not_configured" ? (
-          <button
-            type="button"
-            className="admin-primary-button"
-            onClick={() => {
-              void prepareDevice();
-            }}
-            disabled={isBusy}
-          >
-            Preparar este dispositivo
-          </button>
-        ) : null}
-
-        {state === "configured" ? (
-          <button
-            type="button"
-            className="admin-secondary-link admin-secondary-link--muted"
-            onClick={() => {
-              void unsubscribeDevice();
-            }}
-            disabled={isBusy}
-          >
-            Desactivar en este dispositivo
-          </button>
-        ) : null}
+      <div className={styles.inlineFeedback} aria-live="polite">
+        {error ? <p className={`${styles.feedback} ${styles.feedbackError}`}>{error}</p> : null}
       </div>
+
+      {state === "not_configured" || state === "configured" ? (
+        <div className={styles.actionsRow}>
+          {state === "not_configured" ? (
+            <button
+              type="button"
+              className={styles.primaryButton}
+              onClick={() => {
+                void prepareDevice();
+              }}
+              disabled={isBusy}
+            >
+              Preparar este dispositivo
+            </button>
+          ) : null}
+
+          {state === "configured" ? (
+            <button
+              type="button"
+              className={styles.secondaryButton}
+              onClick={() => {
+                void unsubscribeDevice();
+              }}
+              disabled={isBusy}
+            >
+              Desactivar en este dispositivo
+            </button>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   );
 }

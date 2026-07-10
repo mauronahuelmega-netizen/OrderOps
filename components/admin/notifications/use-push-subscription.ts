@@ -4,7 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import {
   revokePushSubscriptionAction,
   savePushSubscriptionAction
-} from "@/app/admin/(protected)/settings/public/actions";
+} from "@/app/admin/(protected)/settings/notifications/actions";
 import {
   canUsePushInBrowser,
   getWebPushPublicKey,

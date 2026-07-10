@@ -4,16 +4,17 @@ import { useActionState, useCallback, useEffect, useState, useTransition } from 
 import { useRouter } from "next/navigation";
 import { toggleBusinessStatus } from "@/app/admin/(protected)/dashboard/actions";
 import { updateScheduledSettings } from "@/app/admin/(protected)/settings/operations/actions";
-import AdminPageHeader from "@/components/admin/admin-page-header";
-import AdminPageLayout from "@/components/admin/admin-page-layout";
-import PublicSettingsNav from "@/components/admin/settings/public-settings-nav";
+import SettingsShell from "@/components/admin/settings/settings-shell";
 import { useAdminBusinessSettings } from "@/components/admin/admin-shell";
+import type { BusinessSettingsRow } from "@/components/admin/admin-shell";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import styles from "./operations-settings.module.css";
 
 type OperationsSettingsClientProps = {
+  initialSettings: BusinessSettingsRow | null;
   canManagePublicSettings: boolean;
+  canManageTeam: boolean;
 };
 
 type FormActionState = {
@@ -26,17 +27,17 @@ const initialFormState: FormActionState = {};
 const SUBSCRIPTION_MODES = [
   {
     key: "on_demand_mode_active" as const,
-    label: "On-Demand",
+    label: "Bajo demanda",
     hint: "Pedidos para hoy con tienda abierta."
   },
   {
     key: "scheduled_mode_active" as const,
-    label: "Scheduled",
+    label: "Programado",
     hint: "Pedidos con fecha futura programada."
   },
   {
     key: "kitchen_mode_active" as const,
-    label: "Kitchen",
+    label: "Cocina",
     hint: "Vista operativa de cocina en el admin."
   }
 ];
@@ -60,10 +61,13 @@ function toTimeInputValue(dbTime: string | undefined): string {
 }
 
 export default function OperationsSettingsClient({
-  canManagePublicSettings
+  initialSettings,
+  canManagePublicSettings,
+  canManageTeam
 }: OperationsSettingsClientProps) {
   const router = useRouter();
-  const { settings, loading } = useAdminBusinessSettings();
+  const { settings: contextSettings } = useAdminBusinessSettings();
+  const settings = contextSettings ?? initialSettings;
   const [onDemandModeActive, setOnDemandModeActive] = useState(false);
   const [storeActionError, setStoreActionError] = useState<string | null>(null);
   const [isStorePending, startStoreTransition] = useTransition();
@@ -127,32 +131,24 @@ export default function OperationsSettingsClient({
     });
   }, []);
 
-  if (loading || !settings) {
+  if (!settings) {
     return (
-      <AdminPageLayout size="default">
-        <AdminPageHeader
-          eyebrow="Configuración"
-          title="Operaciones"
-          description="Cargando reglas operativas del negocio…"
-        />
-      </AdminPageLayout>
+      <SettingsShell
+        title="Operaciones"
+        description="Cargando reglas operativas del negocio…"
+        canManagePublicSettings={canManagePublicSettings}
+        canManageTeam={canManageTeam}
+      />
     );
   }
 
   return (
-    <AdminPageLayout size="default">
-      <AdminPageHeader
-        eyebrow="Configuración"
-        title="Operaciones"
-        description="Consulta los modos contratados, controla la tienda On-Demand y ajusta las reglas del modo programado."
-      />
-
-      {canManagePublicSettings ? (
-        <div className="admin-settings-public-page__nav">
-          <PublicSettingsNav current="operaciones" />
-        </div>
-      ) : null}
-
+    <SettingsShell
+      title="Operaciones"
+      description="Definí reglas operativas, modalidad y comportamiento del negocio durante la toma de pedidos."
+      canManagePublicSettings={canManagePublicSettings}
+      canManageTeam={canManageTeam}
+    >
       <div className={styles.page}>
         <div className={styles.sections}>
           <section className={styles.section} aria-labelledby="operations-subscription-heading">
@@ -187,10 +183,10 @@ export default function OperationsSettingsClient({
           <section className={styles.section} aria-labelledby="operations-on-demand-heading">
             <div className={styles.sectionHeader}>
               <h2 id="operations-on-demand-heading" className={styles.sectionTitle}>
-                On-Demand
+                Bajo demanda
               </h2>
               <p className={styles.sectionDescription}>
-                Abre o cierra la tienda para recibir pedidos del día sin fecha futura.
+                Abrí o cerrá la tienda para recibir pedidos del día sin fecha futura.
               </p>
             </div>
 
@@ -222,7 +218,7 @@ export default function OperationsSettingsClient({
               </div>
             ) : (
               <p className={`${styles.feedback} ${styles.feedbackInfo}`}>
-                No tienes permisos para cambiar el estado de la tienda.
+                No tenés permisos para cambiar el estado del negocio.
               </p>
             )}
 
@@ -236,7 +232,7 @@ export default function OperationsSettingsClient({
           <section className={styles.section} aria-labelledby="operations-scheduled-heading">
             <div className={styles.sectionHeader}>
               <h2 id="operations-scheduled-heading" className={styles.sectionTitle}>
-                Scheduled Mode
+                Modo programado
               </h2>
               <p className={styles.sectionDescription}>
                 Reglas operativas para pedidos con entrega programada.
@@ -330,12 +326,12 @@ export default function OperationsSettingsClient({
               </form>
             ) : (
               <p className={`${styles.feedback} ${styles.feedbackInfo}`}>
-                No tienes permisos para editar las reglas programadas.
+                No tenés permisos para editar las reglas programadas.
               </p>
             )}
           </section>
         </div>
       </div>
-    </AdminPageLayout>
+    </SettingsShell>
   );
 }
