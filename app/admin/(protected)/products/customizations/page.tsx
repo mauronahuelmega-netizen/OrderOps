@@ -35,8 +35,9 @@ export default async function AdminProductCustomizationsPage({ searchParams }: P
   const nextUpsellSort = suggestNextUpsellSortOrder(upsellGroups);
 
   return (
-    <AdminPageLayout size="wide">
+    <AdminPageLayout size="operational">
       <AdminPageHeader
+        variant="operational"
         eyebrow="Catálogo"
         title="Opcionales, extras y plus"
         description="Configurá qué puede elegir el cliente antes de agregar un producto al carrito. También podés sugerir productos extra para aumentar el ticket promedio."

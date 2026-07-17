@@ -1,17 +1,18 @@
 .layout {
   display: grid;
   gap: var(--space-4, 16px);
-  max-width: 1100px;
-  margin: 0 auto;
+  width: 100%;
+  min-width: 0;
 }
 
 .notice {
   display: grid;
   gap: 6px;
-  padding: 14px 16px;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md, 12px);
-  background: var(--bg-surface);
+  padding: var(--surface-card-padding, 14px 16px);
+  border: 1px solid var(--surface-elevated-border, var(--border-subtle));
+  border-radius: var(--radius-lg, 14px);
+  background: var(--surface-elevated-bg, var(--bg-surface));
+  box-shadow: var(--surface-elevated-shadow, var(--shadow-sm, none));
   color: var(--text-secondary);
 }
 
@@ -33,9 +34,9 @@
   align-items: center;
   width: fit-content;
   padding: 2px 8px;
-  border-radius: 999px;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-surface-hover);
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid var(--surface-muted-border, var(--border-subtle));
+  background: var(--surface-muted-bg, var(--bg-surface-hover));
   color: var(--text-tertiary);
   font-size: 0.75rem;
   font-weight: 600;
@@ -50,11 +51,11 @@
 .groupCard {
   display: grid;
   gap: 14px;
-  padding: 16px;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md, 12px);
-  background: var(--bg-surface);
-  box-shadow: var(--shadow-sm, none);
+  padding: var(--surface-card-padding, 16px);
+  border: 1px solid var(--surface-base-border, var(--border-subtle));
+  border-radius: var(--radius-lg, 14px);
+  background: var(--surface-base-bg, var(--bg-surface));
+  box-shadow: var(--surface-base-shadow, var(--shadow-sm, none));
 }
 
 .groupHeader {
@@ -96,8 +97,8 @@
   align-items: center;
   padding: 2px 8px;
   border-radius: 999px;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-canvas);
+  border: 1px solid var(--surface-muted-border, var(--border-subtle));
+  background: var(--surface-muted-bg, var(--bg-canvas));
   color: var(--text-tertiary);
   font-size: 0.75rem;
 }
@@ -147,9 +148,9 @@
   display: grid;
   gap: 10px;
   padding: 12px;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--surface-soft-border, var(--border-subtle));
   border-radius: var(--radius-md, 12px);
-  background: var(--bg-canvas);
+  background: var(--surface-soft-bg, var(--bg-canvas));
 }
 
 .optionHeader {
@@ -332,10 +333,11 @@
 .productPanel {
   display: grid;
   gap: 12px;
-  padding: 14px 16px;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md, 12px);
-  background: var(--bg-surface);
+  padding: var(--surface-card-padding, 14px 16px);
+  border: 1px solid var(--surface-base-border, var(--border-subtle));
+  border-radius: var(--radius-lg, 14px);
+  background: var(--surface-base-bg, var(--bg-surface));
+  box-shadow: var(--surface-base-shadow, none);
 }
 
 .productPanelHeader {
@@ -353,9 +355,9 @@
   justify-content: space-between;
   gap: 8px;
   padding: 8px 10px;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--surface-soft-border, var(--border-subtle));
   border-radius: var(--radius-md, 12px);
-  background: var(--bg-canvas);
+  background: var(--surface-soft-bg, var(--bg-canvas));
 }
 
 @media (min-width: 720px) {
@@ -394,44 +396,49 @@
 .builderShell {
   display: grid;
   gap: var(--space-4, 16px);
-  max-width: 1280px;
-  margin: 0 auto;
+  width: 100%;
   min-width: 0;
 }
 
 .builderTabs {
   display: flex;
   flex-wrap: nowrap;
-  gap: 6px;
+  gap: 4px;
   overflow-x: auto;
-  padding-bottom: 2px;
+  padding: 4px;
+  border: 1px solid var(--surface-soft-border, var(--border-subtle));
+  border-radius: var(--radius-lg, 14px);
+  background: var(--surface-soft-bg, var(--bg-surface-soft));
+  box-shadow: var(--surface-soft-shadow, none);
   -webkit-overflow-scrolling: touch;
 }
 
 .builderTab,
 .builderTabActive {
   flex: 0 0 auto;
-  padding: 8px 14px;
+  padding: 10px 14px;
   border-radius: var(--radius-md, 12px);
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-surface);
+  border: 1px solid transparent;
+  background: transparent;
   color: var(--text-secondary);
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease,
+    box-shadow 120ms ease;
 }
 
 .builderTab:hover {
-  background: var(--bg-surface-hover);
+  background: var(--surface-interactive-hover-bg, var(--bg-surface-hover));
   color: var(--text-primary);
 }
 
 .builderTabActive {
-  background: var(--bg-surface-hover);
+  background: var(--surface-elevated-bg, var(--bg-surface));
   color: var(--text-primary);
-  border-color: var(--text-tertiary);
-  box-shadow: var(--shadow-sm, none);
+  border-color: var(--surface-elevated-border, var(--border-subtle));
+  box-shadow: var(--surface-elevated-shadow, var(--shadow-sm, none));
 }
 
 .builderTab:focus-visible,
@@ -439,7 +446,7 @@
 .productSelectItem:focus-visible,
 .productSelectItemActive:focus-visible,
 .secondaryCta:focus-visible {
-  outline: 2px solid var(--text-secondary);
+  outline: 2px solid var(--accent-primary, var(--text-secondary));
   outline-offset: 2px;
 }
 
@@ -503,12 +510,19 @@
 .previewPanel {
   display: grid;
   gap: 12px;
-  padding: 14px 16px;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md, 12px);
-  background: var(--bg-surface);
+  padding: var(--surface-card-padding, 16px);
+  border: 1px solid var(--surface-base-border, var(--border-subtle));
+  border-radius: var(--radius-lg, 14px);
+  background: var(--surface-base-bg, var(--bg-surface));
+  box-shadow: var(--surface-base-shadow, none);
   min-width: 0;
   align-content: start;
+}
+
+.previewPanel {
+  border-color: var(--surface-elevated-border, var(--border-subtle));
+  background: var(--surface-elevated-bg, var(--bg-surface));
+  box-shadow: var(--surface-elevated-shadow, var(--shadow-sm, none));
 }
 
 .productSelectList {
@@ -517,7 +531,7 @@
   padding: 0;
   display: grid;
   gap: 6px;
-  max-height: min(70vh, 640px);
+  max-height: min(70vh, 720px);
   overflow: auto;
 }
 
@@ -530,18 +544,19 @@
   padding: 10px 12px;
   border-radius: var(--radius-md, 12px);
   border: 1px solid transparent;
-  background: var(--bg-canvas);
+  background: var(--surface-soft-bg, var(--bg-canvas));
   color: var(--text-primary);
   cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease;
 }
 
 .productSelectItem:hover {
-  background: var(--bg-surface-hover);
+  background: var(--surface-interactive-hover-bg, var(--bg-surface-hover));
 }
 
 .productSelectItemActive {
-  border-color: var(--border-subtle);
-  background: var(--bg-surface-hover);
+  border-color: color-mix(in srgb, var(--accent-primary) 35%, var(--border-subtle));
+  background: color-mix(in srgb, var(--accent-soft) 55%, var(--bg-surface));
   box-shadow: var(--shadow-sm, none);
 }
 
@@ -594,10 +609,10 @@
 .builderEmpty {
   display: grid;
   gap: 8px;
-  padding: 16px;
-  border: 1px dashed var(--border-subtle);
-  border-radius: var(--radius-md, 12px);
-  background: var(--bg-canvas);
+  padding: var(--surface-card-padding, 16px);
+  border: 1px dashed var(--surface-muted-border, var(--border-subtle));
+  border-radius: var(--radius-lg, 14px);
+  background: var(--surface-soft-bg, var(--bg-canvas));
   color: var(--text-secondary);
 }
 
@@ -628,26 +643,28 @@
   gap: 6px;
   padding: 8px 12px;
   border-radius: var(--radius-md, 12px);
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-canvas);
+  border: 1px solid var(--surface-interactive-border, var(--border-subtle));
+  background: var(--surface-interactive-bg, var(--bg-canvas));
   color: var(--text-secondary);
   font-size: 0.875rem;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
 }
 
 .secondaryCta:hover {
-  background: var(--bg-surface-hover);
+  background: var(--surface-interactive-hover-bg, var(--bg-surface-hover));
+  border-color: var(--surface-interactive-hover-border, var(--border-subtle));
   color: var(--text-primary);
 }
 
 .advancedBlock,
 .advancedInline {
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--surface-soft-border, var(--border-subtle));
   border-radius: var(--radius-md, 12px);
   padding: 10px 12px;
-  background: var(--bg-canvas);
+  background: var(--surface-soft-bg, var(--bg-canvas));
 }
 
 .advancedBlock summary,
@@ -719,9 +736,9 @@
   display: grid;
   gap: 8px;
   padding: 12px;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--surface-soft-border, var(--border-subtle));
   border-radius: var(--radius-md, 12px);
-  background: var(--bg-canvas);
+  background: var(--surface-soft-bg, var(--bg-canvas));
 }
 
 .previewProductName {
@@ -810,15 +827,49 @@
   line-height: 1.4;
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 900px) and (max-width: 1199px) {
   .productWorkspace {
-    grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1.35fr) minmax(240px, 0.95fr);
+    grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
     align-items: start;
   }
 
   .categoryWorkspace {
-    grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1.6fr);
+    grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
     align-items: start;
+  }
+
+  .sectionsLayout {
+    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .previewDesktop {
+    display: none;
+  }
+
+  .previewMobile {
+    display: grid;
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1200px) {
+  .productWorkspace {
+    grid-template-columns: minmax(280px, 360px) minmax(420px, 1fr) minmax(300px, 380px);
+    align-items: start;
+    gap: 16px;
+  }
+
+  .categoryWorkspace {
+    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+    align-items: start;
+    gap: 16px;
+  }
+
+  .sectionsLayout {
+    grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+    align-items: start;
+    gap: 16px;
   }
 
   .previewDesktop {
@@ -829,6 +880,22 @@
 
   .previewMobile {
     display: none;
+  }
+}
+
+@media (max-width: 899px) {
+  .productWorkspace,
+  .categoryWorkspace,
+  .sectionsLayout {
+    grid-template-columns: 1fr;
+  }
+
+  .previewDesktop {
+    display: none;
+  }
+
+  .previewMobile {
+    display: grid;
   }
 }
 

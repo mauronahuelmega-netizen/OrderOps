@@ -756,6 +756,23 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-17 — PRODUCT-CUSTOMIZATION-ADMIN-VISUAL-POLISH-1 — Admin Customizations Layout & Theme Polish
+
+- **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-VISUAL-POLISH-1 ejecutada. Se pulió visualmente la pantalla `/admin/products/customizations` para alinearla con el shell admin actual. La fase ajustó layout, ancho disponible, tabs, cards y tokens de theme sin modificar lógica de Product Customization, checkout, stock, RLS, DB ni pedidos. Resultado: **PASS**.
+- Archivos: `app/admin/(protected)/products/customizations/page.tsx`, `components/admin/product-customization/product-customization-admin.module.css`, `docs/product-customization-admin-visual-polish-1-layout-theme-polish.md`, `docs/CURRENT_PHASE.md`
+
+### 2026-07-17 — PRODUCT-CUSTOMIZATION-FLAG-OFF-RLS-FIXTURE-QA-1 — Flag OFF Corpus Fixture Negative QA
+
+- **QA / RLS fixture** PRODUCT-CUSTOMIZATION-FLAG-OFF-RLS-FIXTURE-QA-1 ejecutada. Se creó/validó un fixture no piloto (`qa-rls-flag-off-customization`) con product_customization_enabled=false y corpus real de Product Customization/Plus. La prueba confirmó que las filas existen para lectura privilegiada, pero anon no puede leer el corpus cuando el flag está OFF, mientras el piloto flag ON sigue exponiendo su corpus público esperado. No se modificó código, RLS, schema, pedidos, stock, flags del piloto ni se hizo deploy. Fixture KEEP. Resultado: **PASS**.
+
+### 2026-07-17 — PRODUCT-CUSTOMIZATION-FLAG-OFF-RLS-QA-1 — Flag OFF Public RLS Negative QA
+
+- **QA / RLS** PRODUCT-CUSTOMIZATION-FLAG-OFF-RLS-QA-1 ejecutada. Se validó el comportamiento negativo del hardening RLS público: con product_customization_enabled=false el corpus público de Product Customization/Plus no debe exponerse para anon, mientras el piloto flag ON continúa funcionando. La prueba no modificó código, schema, flags, stock, pedidos ni realizó deploys. Sin tenant flag OFF con corpus real → **PASS WITH FIXTURE DEBT**.
+
+### 2026-07-17 — PRODUCT-CUSTOMIZATION-PILOT-MONITOR-2 — Plus UI + Stock + Public RLS Live Monitoring
+
+- **Ops / Pilot** PRODUCT-CUSTOMIZATION-PILOT-MONITOR-2 ejecutada. Se monitoreó el piloto live después de Plus UI, copy polish, stock/restock y public RLS hardening. El monitoreo validó catálogo, modal, Plus Bebidas, carrito/checkout, dashboard, stock Coca, stock_movements y lectura anon del corpus público sin realizar writes ni deploys. Resultado: **PASS**.
+
 ### 2026-07-17 — PRODUCT-CUSTOMIZATION-PUBLIC-RLS-HARDENING-1 — Public Customization Corpus RLS Hardening
 
 - **RLS / Public read model** PRODUCT-CUSTOMIZATION-PUBLIC-RLS-HARDENING-1 ejecutada. Se endureció el acceso público al corpus de Product Customization / Plus UI. Las policies públicas ya no dependen de que anon lea business_settings directamente, sino de un helper SECURITY DEFINER que expone únicamente si Product Customization está habilitado para el tenant. El catálogo público mantiene Plus Bebidas funcionando sin abrir settings internos ni tocar checkout, inventario, stock_movements o RPCs. Migration `20260717170000_product_customization_public_rls_hardening_1.sql`. Resultado: **PASS**.

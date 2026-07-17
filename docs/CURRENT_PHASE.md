@@ -1,5 +1,58 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-ADMIN-VISUAL-POLISH-1 (2026-07-17)
+
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-VISUAL-POLISH-1 — Admin Customizations Layout & Theme Polish  
+**Estado:** PASS  
+**Resultado:** La pantalla `/admin/products/customizations` quedó alineada visualmente con el resto del admin. Usa mejor el ancho disponible, elimina estilos legacy/hardcoded relevantes y mantiene compatibilidad dark/light sin tocar lógica operativa.
+
+- Shell: `AdminPageLayout size="operational"` + header operational (mismo ancho efectivo que Products / 1600px)
+- CSS module: grid 3-col ≥1200px · tabs strip · surfaces tokenizadas · selected con accent
+- Sin DB/RLS/actions/checkout/stock · tsc/build PASS
+- Doc: `docs/product-customization-admin-visual-polish-1-layout-theme-polish.md`
+- **Próxima:** monitor piloto · opcional preview más fiel al modal público
+
+---
+
+## Registro — PRODUCT-CUSTOMIZATION-FLAG-OFF-RLS-FIXTURE-QA-1 (2026-07-17)
+
+**Fase:** PRODUCT-CUSTOMIZATION-FLAG-OFF-RLS-FIXTURE-QA-1 — Flag OFF Corpus Fixture Negative QA  
+**Estado:** PASS  
+**Resultado:** Se creó un fixture no piloto con Product Customization flag OFF y corpus real. La lectura privilegiada confirma que existen filas, pero anon no puede leerlas por RLS. El piloto flag ON sigue funcionando y business_settings permanece cerrado para anon.
+
+- Fixture: `qa-rls-flag-off-customization` / `59db34de-…` · flag OFF · corpus 1/1/1/1/1 + override
+- Anon fixture corpus **0** · piloto groups=3 options=11 upsell=1 · Plus UI OK · KEEP fixture
+- Doc: `docs/product-customization-flag-off-rls-fixture-qa-1-flag-off-corpus-fixture-negative-qa.md`
+- **Próxima:** reusar fixture en regresiones · monitor piloto
+
+---
+
+## Registro — PRODUCT-CUSTOMIZATION-FLAG-OFF-RLS-QA-1 (2026-07-17)
+
+**Fase:** PRODUCT-CUSTOMIZATION-FLAG-OFF-RLS-QA-1 — Flag OFF Public RLS Negative QA  
+**Estado:** PASS WITH FIXTURE DEBT  
+**Resultado:** El helper y business_settings cerrado fueron validados, y el control positivo del piloto ON pasó. No se encontró tenant flag OFF con corpus real para probar negación completa; queda deuda de fixture.
+
+- Helper false: `roticeriajuan` / `majopasteleria` (sin settings) · piloto helper true · anon settings=0
+- Piloto Plus UI OK · browser flag-OFF N/A (404) · sin writes
+- Doc: `docs/product-customization-flag-off-rls-qa-1-flag-off-public-rls-negative-qa.md`
+- **Próxima:** fixture flag-OFF con corpus (auth) · o monitor piloto
+
+---
+
+## Registro — PRODUCT-CUSTOMIZATION-PILOT-MONITOR-2 (2026-07-17)
+
+**Fase:** PRODUCT-CUSTOMIZATION-PILOT-MONITOR-2 — Plus UI + Stock + Public RLS Live Monitoring  
+**Estado:** PASS  
+**Resultado:** El piloto live se mantiene estable luego de Plus UI, copy polish, inventario tracked y public RLS hardening. Catálogo, modal, carrito, checkout, dashboard, stock Coca, ledger y corpus anon fueron validados sin writes.
+
+- Flags ON · sesión abierta · Coca stock **4** · anon corpus OK · `business_settings` count=0
+- Modal “Sumá una bebida” + Coca · carrito/checkout “Adicional” · Pendientes QA=0
+- Doc: `docs/product-customization-pilot-monitor-2-plus-ui-stock-public-rls-live-monitoring.md`
+- **Próxima:** monitor operación real · opcional reconciliación `#9632` (auth) · opcional flag-OFF test
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-PUBLIC-RLS-HARDENING-1 (2026-07-17)
 
 **Fase:** PRODUCT-CUSTOMIZATION-PUBLIC-RLS-HARDENING-1 — Public Customization Corpus RLS Hardening  
