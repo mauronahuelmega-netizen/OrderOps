@@ -756,6 +756,13 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-17 — PRODUCT-CUSTOMIZATION-PLUS-UI-DEPLOY-1 — Deploy Plus Suggestions UI
+
+- **Frontend/Deploy** PRODUCT-CUSTOMIZATION-PLUS-UI-DEPLOY-1 ejecutada. Se desplegó el WIP de Plus UI para Product Customization, habilitando Plus Bebidas en el modal público del producto. Se validó que Coca Cola 500ml se agrega como upsell asociado al producto padre, que checkout crea parent + child item, que stock tracked se descuenta y que cancelar desde admin devuelve stock vía stock_movements. Fix crítico: public read model usa service role porque las policies public de customization/upsell dependen de `business_settings` no legible por anon. Resultado: **PASS**.
+- Archivos: `lib/product-customization/public.ts`, commits `a284a23` + `d1b8e7f`, `docs/product-customization-plus-ui-deploy-1-deploy-plus-suggestions-ui.md`, `docs/CURRENT_PHASE.md`
+- QA: `#76D4` `8508feb5-…` Doble Smash + Coca upsell · Coca 4→3→4 · decrement+restock idempotente
+- Próxima: opcional hardening RLS public · copy Plus · monitor piloto
+
 ### 2026-07-17 — PRODUCT-STOCK-QA-ORDER-CLEANUP-1 — Controlled QA Orders Cleanup
 
 - **Ops** PRODUCT-STOCK-QA-ORDER-CLEANUP-1 ejecutada. Se limpiaron pedidos QA pendientes mediante cancelación controlada, sin eliminar pedidos ni order_items. El cleanup respetó el contrato de stock: solo pedidos con order_decrement pueden restockear automáticamente; pedidos pre-ledger como #9632 no reciben restock retroactivo. No se modificaron código, schema, productos, flags ni sesión. Resultado: **PASS WITH DEBT** (1 Coca histórica pre-ledger documentada).

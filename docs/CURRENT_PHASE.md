@@ -1,5 +1,19 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-PLUS-UI-DEPLOY-1 (2026-07-17)
+
+**Fase:** PRODUCT-CUSTOMIZATION-PLUS-UI-DEPLOY-1 — Deploy Plus Suggestions UI  
+**Estado:** PASS  
+**Resultado:** Plus Bebidas quedó desplegado y validado en la UI pública productiva. El cliente puede agregar Coca Cola 500ml como plus dentro del modal de Doble Smash; checkout, dashboard, decremento de stock, ledger y restock al cancelar funcionan end-to-end.
+
+- Deploy: `a284a23` Plus UI + `d1b8e7f` service-role public corpus (fix RLS/anon gap) → `https://orderops.vercel.app`
+- Smoke: Doble Smash modal · Papas/Salsas/Agregados · plus Coca · carrito parent+plus
+- QA: `#76D4` `8508feb5-…` Coca **4→3** `order_decrement` upsell · cancel UI **3→4** `order_restock` · idempotencia OK
+- Doc: `docs/product-customization-plus-ui-deploy-1-deploy-plus-suggestions-ui.md`
+- **Próxima:** opcional hardening RLS public/`business_settings` · copy Plus · monitor piloto
+
+---
+
 ## Registro — PRODUCT-STOCK-QA-ORDER-CLEANUP-1 (2026-07-17)
 
 **PRODUCT-STOCK-QA-ORDER-CLEANUP-1 — Controlled QA Orders Cleanup** → **PASS WITH DEBT**.
