@@ -143,33 +143,38 @@ Ver sección Root cause anon (REST + RPC). Conteos documentados; keys no loguead
 
 ## Deploy
 
-- Commit: (ver git log post-push)
-- Branch: `main`
+- Commit: `c76daaa` — *Harden public Product Customization RLS*
+- Branch: `main` → `origin/main` (`188d484..c76daaa`)
 - URL: `https://orderops.vercel.app`
 - Autorización deploy: sí
+- Hora aprox.: 2026-07-17 ~16:40 UTC
 
 ## Smoke producción
 
 Checklist (post-deploy):
 
-- [ ] Catálogo carga
-- [ ] Doble Smash modal
-- [ ] Papas/Salsas/Agregados
-- [ ] “Sumá una bebida”
-- [ ] Coca Cola 500ml
-- [ ] Carrito parent + adicional
-- [ ] Checkout summary visual
-- [ ] Sin JSON raw / sin 500
+- [x] Catálogo carga
+- [x] Doble Smash modal
+- [x] Papas/Salsas/Agregados
+- [x] “Sumá una bebida”
+- [x] Coca Cola 500ml
+- [x] Carrito parent + adicional (`Adicional` + Coca)
+- [x] Checkout summary visual (Resumen con Papas + Adicional Coca)
+- [x] Sin JSON raw / sin 500
+
+Sin pedido QA real.
 
 ## Seguridad post-smoke
 
-- `business_settings` sigue cerrado a anon.
+- `business_settings` sigue cerrado a anon (REST count=0).
 - Corpus solo con flag ON (piloto ON validado).
-- Tenant flag OFF: no validado en prod (deuda de test si no hay tenant seguro).
+- Tenant flag OFF: no validado en prod (deuda de test).
 
 ## Browser sanity final
 
-- `/admin/dashboard`, `/admin/products`, catálogo + modal Doble Smash.
+- `/admin/dashboard` — carga (sesión activa)
+- `/admin/products` — sanity post-smoke
+- Catálogo + modal Doble Smash — Plus OK
 
 ## Compatibilidad legacy
 
