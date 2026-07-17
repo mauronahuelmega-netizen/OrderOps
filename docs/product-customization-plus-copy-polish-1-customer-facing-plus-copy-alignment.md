@@ -92,11 +92,24 @@ DB intacta: grupo `Bebidas`, description `Sumá una bebida a tu burguer`.
 
 ## Deploy
 
-Documentado tras push (commit hash / URL / status).
+| Campo | Valor |
+|-------|-------|
+| Commit | `68baace` `Polish Product Customization plus copy` |
+| También empujado | `9840c4c` docs Plus UI Deploy |
+| URL | `https://orderops.vercel.app` |
+| Vercel | Production Ready (~5 min post-push, `order-l0uh2cr1i-…`) |
+| Hora aprox. | 2026-07-17 ~13:10 ART |
 
 ## Smoke producción
 
-Validar `/b/demohamburgueseria/catalogo` → Doble Smash modal → carrito → checkout visual.
+| Check | Resultado |
+|-------|-----------|
+| Catálogo | PASS |
+| Modal Doble Smash | **Sumá una bebida** · **Agregá una bebida a tu pedido.** |
+| Coca + precio | `Coca Cola 500ml +$ 3.000,00` |
+| Carrito | Label **Adicional** · línea asociada |
+| Checkout summary | **Adicional** · sin `upsell` / `Plus Bebidas` |
+| Copy técnico | Ausente en UI pública |
 
 ## Pedido QA opcional
 
@@ -104,13 +117,17 @@ No ejecutado (sin auth / no necesario).
 
 ## Browser sanity final
 
-Dashboard / products / catálogo / modal — post-deploy.
+| Ruta | Resultado |
+|------|-----------|
+| `/admin/dashboard` | PASS (carga) |
+| `/admin/products` | PASS (smoke previo / catálogo admin intacto) |
+| Catálogo + modal | PASS |
 
 ## Compatibilidad legacy
 
 - Productos sin upsell sin cambio
-- Admin “Plus” badge intacto
-- Lógica cart parent+child intacta
+- Admin badge “Plus” intacto
+- Cart parent+child structure intacta
 
 ## Qué NO se tocó
 
@@ -127,13 +144,15 @@ Schema, RPC, RLS, service corpus, stock, flags, sesión, pedidos, `upsell_groups
 
 ## Rollback plan
 
-- Revertir commit de copy polish
+- Revertir `68baace`
 - No tocar DB/RPC/stock
 - Verificar modal/catálogo
 
 ## Resultado final
 
-Pendiente de deploy/smoke — se completa en cierre de fase.
+**PASS**
+
+El copy público de Plus Bebidas quedó alineado para clientes. La sección del modal comunica la venta sugerida como una bebida adicional al pedido, manteniendo intacta la lógica de parent+upsell, checkout, stock y restock.
 
 ## Próxima fase recomendada
 
