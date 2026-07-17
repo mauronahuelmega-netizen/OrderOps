@@ -1,14 +1,12 @@
 "use client";
 
-import Link from "next/link";
-
 type CartBarProps = {
-  slug: string;
   count: number;
   total: number;
+  onOpenCart: () => void;
 };
 
-export default function CartBar({ slug, count, total }: CartBarProps) {
+export default function CartBar({ count, total, onOpenCart }: CartBarProps) {
   const isEmpty = count === 0;
 
   return (
@@ -20,16 +18,22 @@ export default function CartBar({ slug, count, total }: CartBarProps) {
         <span>{formatCurrency(total)}</span>
       </div>
 
-      <Link
-        href={isEmpty ? "#" : `/b/${slug}/checkout`}
+      <button
+        type="button"
+        onClick={() => {
+          if (!isEmpty) {
+            onOpenCart();
+          }
+        }}
+        disabled={isEmpty}
         aria-disabled={isEmpty}
-        tabIndex={isEmpty ? -1 : undefined}
         className={`catalog-cart-bar__button${
           isEmpty ? " catalog-cart-bar__button--disabled" : ""
         }`}
+        style={{ border: "none", font: "inherit", cursor: isEmpty ? "default" : "pointer" }}
       >
         Ver pedido
-      </Link>
+      </button>
     </div>
   );
 }

@@ -59,6 +59,7 @@ export async function createProductAction(
   const sku = formData.get("sku")?.toString().trim() || null;
   const stockStr = formData.get("stock")?.toString();
   const stock = stockStr ? parseInt(stockStr, 10) : 0;
+  const trackStock = formData.get("track_stock") === "on";
 
   if (!name) {
     return { error: "Ingresa un nombre para el producto." };
@@ -110,7 +111,8 @@ export async function createProductAction(
       image_url: imageUrl,
       is_available: true,
       sku: resolvedSku.sku,
-      stock
+      stock,
+      track_stock: trackStock
     });
 
     if (error) {
@@ -183,6 +185,7 @@ export async function updateProductAction(
   const categoryId = getTrimmedString(formData.get("category_id"));
   const imageUrl = getOptionalTrimmedString(formData.get("image_url"));
   const isAvailable = formData.get("is_available") === "on";
+  const trackStock = formData.get("track_stock") === "on";
   const sku = formData.get("sku")?.toString().trim() || null;
   const stockStr = formData.get("stock")?.toString();
   const stock = stockStr ? parseInt(stockStr, 10) : 0;
@@ -244,6 +247,7 @@ export async function updateProductAction(
       is_available: boolean;
       sku: string | null;
       stock: number;
+      track_stock: boolean;
       image_url?: string;
     } = {
       name,
@@ -252,7 +256,8 @@ export async function updateProductAction(
       category_id: categoryId,
       is_available: isAvailable,
       sku,
-      stock
+      stock,
+      track_stock: trackStock
     };
 
     if (typeof imageUrl === "string") {

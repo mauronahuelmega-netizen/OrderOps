@@ -5,8 +5,14 @@ import {
   normalizeScheduledDeliveryRules
 } from "@/lib/business/scheduled-delivery-rules";
 import { getPublicBusinessBySlug } from "@/lib/business/public";
+import type { CheckoutCartPayload } from "@/lib/product-customization/order-types";
+import {
+  toCreateOrderRpcJson,
+  validateCheckoutCartForCreateOrder
+} from "@/lib/product-customization/order-validation";
 import { isBusinessAcceptingPublicOrders } from "@/lib/store-sessions/public.server";
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
+import type { Json } from "@/types/database";
 
 const ORDERS_CLOSED_MESSAGE = "El negocio no está aceptando pedidos en este momento.";
 
@@ -17,21 +23,40 @@ export type CreatePublicCheckoutOrderInput = {
   deliveryMethod: "delivery" | "pickup";
   address?: string | null;
   notes?: string | null;
-  items: Array<{
+  /** @deprecated Prefer `cart`. Kept for transitional callers. */
+  items?: Array<{
     productId: string;
     quantity: number;
   }>;
+  cart?: CheckoutCartPayload;
 };
 
 export type CreatePublicCheckoutOrderResult =
   | { ok: true; orderId: string }
   | { ok: false; error: string };
 
+function normalizeCartPayload(input: CreatePublicCheckoutOrderInput): CheckoutCartPayload {
+  if (input.cart) {
+    return {
+      legacyItems: Array.isArray(input.cart.legacyItems) ? input.cart.legacyItems : [],
+      customizedItems: Array.isArray(input.cart.customizedItems)
+        ? input.cart.customizedItems
+        : []
+    };
+  }
+
+  return {
+    legacyItems: Array.isArray(input.items) ? input.items : [],
+    customizedItems: []
+  };
+}
+
 export async function createPublicCheckoutOrderAction(
   slug: string,
   input: CreatePublicCheckoutOrderInput
 ): Promise<CreatePublicCheckoutOrderResult> {
   const normalizedSlug = slug.trim().toLowerCase();
+  const cart = normalizeCartPayload(input);
 
   try {
     const business = await getPublicBusinessBySlug(normalizedSlug);
@@ -44,10 +69,6 @@ export async function createPublicCheckoutOrderAction(
 
     if (!acceptingOrders) {
       return { ok: false, error: ORDERS_CLOSED_MESSAGE };
-    }
-
-    if (!Array.isArray(input.items) || input.items.length === 0) {
-      return { ok: false, error: "Tu carrito está vacío." };
     }
 
     const customerName = input.customerName.trim();
@@ -90,24 +111,17 @@ export async function createPublicCheckoutOrderAction(
       }
     }
 
-    const validatedItems: Array<{ product_id: string; quantity: number }> = [];
+    const validated = await validateCheckoutCartForCreateOrder({
+      businessId: business.id,
+      cart
+    });
 
-    for (const item of input.items) {
-      const productId = item.productId.trim();
-
-      if (!productId) {
-        return { ok: false, error: "Tu carrito está vacío." };
-      }
-
-      if (!Number.isInteger(item.quantity) || item.quantity < 1) {
-        return { ok: false, error: "La cantidad debe ser mayor a cero." };
-      }
-
-      validatedItems.push({
-        product_id: productId,
-        quantity: item.quantity
-      });
+    if (!validated.ok) {
+      return { ok: false, error: validated.error };
     }
+
+    const rpcPayload = toCreateOrderRpcJson(validated.rpcItems);
+    const rpcItemCount = rpcPayload.length;
 
     const supabase = createSupabaseServiceClient();
     const { data: orderId, error: rpcError } = await supabase.rpc("create_order", {
@@ -118,13 +132,13 @@ export async function createPublicCheckoutOrderAction(
       p_delivery_method: input.deliveryMethod,
       p_address: input.deliveryMethod === "delivery" ? (input.address ?? "").trim() : null,
       p_notes: input.notes?.trim() ? input.notes.trim() : null,
-      p_items: validatedItems
+      p_items: rpcPayload as Json
     });
 
     if (rpcError) {
       console.error("[public-checkout:create-order:error]", {
         slug: normalizedSlug,
-        itemCount: validatedItems.length,
+        itemCount: rpcItemCount,
         message: rpcError.message,
         code: rpcError.code,
         details: "details" in rpcError ? rpcError.details : undefined,
@@ -143,7 +157,10 @@ export async function createPublicCheckoutOrderAction(
   } catch (error) {
     console.error("[public-checkout:create-order:error]", {
       slug: normalizedSlug,
-      itemCount: Array.isArray(input.items) ? input.items.length : 0,
+      itemCount:
+        cart.legacyItems.length +
+        cart.customizedItems.length +
+        cart.customizedItems.reduce((sum, item) => sum + item.upsellItems.length, 0),
       message: error instanceof Error ? error.message : String(error),
       name: error instanceof Error ? error.name : undefined,
       code: typeof error === "object" && error !== null && "code" in error ? error.code : undefined
@@ -180,6 +197,21 @@ function mapCreateOrderRpcError(message: string): string {
 
   if (message.includes("delivery_date exceeds maximum advance window")) {
     return "La fecha elegida supera la ventana máxima de anticipación.";
+  }
+
+  if (message.includes("invalid, unavailable, or foreign-business products")) {
+    return "El producto ya no está disponible.";
+  }
+
+  if (
+    message.includes("INSUFFICIENT_STOCK") ||
+    message.toLowerCase().includes("insufficient_stock")
+  ) {
+    return "Algunos productos ya no tienen stock suficiente. Revisá tu pedido antes de continuar.";
+  }
+
+  if (message.includes("upsell items require a valid parent")) {
+    return "La configuración del producto cambió. Revisá el carrito.";
   }
 
   return "No pudimos crear el pedido. Intentá nuevamente.";

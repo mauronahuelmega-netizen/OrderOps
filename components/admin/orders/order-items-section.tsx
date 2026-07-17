@@ -71,7 +71,10 @@ function areOrderItemsSectionPropsEqual(
       previousItem.id !== nextItem.id ||
       previousItem.quantity !== nextItem.quantity ||
       previousItem.unit_price !== nextItem.unit_price ||
-      previousItem.product_name !== nextItem.product_name
+      previousItem.product_name !== nextItem.product_name ||
+      previousItem.item_kind !== nextItem.item_kind ||
+      previousItem.parent_order_item_id !== nextItem.parent_order_item_id ||
+      previousItem.customization_snapshot !== nextItem.customization_snapshot
     ) {
       return false;
     }

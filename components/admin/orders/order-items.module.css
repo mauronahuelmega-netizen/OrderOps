@@ -83,6 +83,10 @@
   background: color-mix(in srgb, var(--bg-surface-soft) 58%, transparent);
 }
 
+.admin-items-list--dense .orderItemNode + .orderItemNode {
+  margin-top: 0.25rem;
+}
+
 .admin-items-list--dense .admin-item-row + .admin-item-row,
 .admin-items-list--dense .admin-item-row--button + .admin-item-row,
 .admin-items-list--dense .admin-item-row + .admin-item-row--button,
@@ -113,6 +117,95 @@
   color: var(--text-tertiary);
   font-size: 0.75rem;
   line-height: 1.2;
+}
+
+.orderItemNode {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.orderItemCustomizationSummary {
+  display: grid;
+  gap: 0.1rem;
+  margin: 0.2rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.orderItemCustomizationLine {
+  margin: 0;
+  padding-left: 0.15rem;
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
+  line-height: 1.25;
+}
+
+.orderItemUpsellChildren {
+  display: grid;
+  gap: 0.2rem;
+  margin: 0;
+  padding: 0 0 0 0.75rem;
+  list-style: none;
+  border-left: 2px solid color-mix(in srgb, var(--border-subtle) 85%, transparent);
+}
+
+.orderItemUpsell {
+  margin: 0;
+}
+
+.orderItemUpsellButton {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0.2rem 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.orderItemUpsellButton:focus-visible {
+  outline: 2px solid var(--focus, var(--color-preparing));
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.orderItemUpsellLabel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.25;
+}
+
+.orderItemUpsellButton strong {
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.orderItemUpsellBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.05rem 0.35rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg-delivery-subtle) 88%, transparent);
+  color: var(--text-secondary);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.orderItemSnapshotFallback {
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
 }
 
 .admin-total-row {

@@ -8,7 +8,9 @@ import ImageCropModal from "@/components/admin/products/image-crop-modal";
 import { createCategoryAction } from "@/app/admin/(protected)/categories/actions";
 import { createProductAction } from "@/app/admin/(protected)/products/actions";
 import type { AdminCategory } from "@/lib/categories/admin";
+import { createClientSafeId } from "@/lib/client/safe-random-id";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+import toggleStyles from "./product-availability-toggle.module.css";
 import styles from "./product-form.module.css";
 
 type CreateProductFormProps = {
@@ -66,6 +68,8 @@ export default function CreateProductForm({
   const [categoryError, setCategoryError] = useState<string | null>(null);
   const [isSavingCategory, setIsSavingCategory] = useState(false);
   const [pendingImageSrc, setPendingImageSrc] = useState<string | null>(null);
+  const [trackStock, setTrackStock] = useState(false);
+  const [stockValue, setStockValue] = useState(0);
 
   useEffect(() => {
     return () => {
@@ -89,6 +93,8 @@ export default function CreateProductForm({
       setNewCategoryName("");
       setIsValid(false);
       setPendingImageSrc(null);
+      setTrackStock(false);
+      setStockValue(0);
       router.refresh();
     }
   }, [router, state.success]);
@@ -150,9 +156,9 @@ export default function CreateProductForm({
 
     try {
       const supabase = createSupabaseBrowserClient();
-      const productId = crypto.randomUUID();
+      const productId = createClientSafeId("tmp-product");
       const fileExt = getFileExtension(file.name);
-      const filePath = `${businessId}/${productId}/${crypto.randomUUID()}.${fileExt}`;
+      const filePath = `${businessId}/${productId}/${createClientSafeId("product-image")}.${fileExt}`;
 
       const { error: uploadError } = await supabase.storage
         .from("product-images")
@@ -452,11 +458,47 @@ export default function CreateProductForm({
               type="number"
               min="0"
               step="1"
-              label="Stock"
-              defaultValue="0"
+              label="Stock actual"
+              value={String(stockValue)}
+              onChange={(event) => {
+                const next = Number.parseInt(event.target.value, 10);
+                setStockValue(Number.isFinite(next) ? next : 0);
+              }}
               disabled={isPending}
               required
             />
+          </div>
+
+          <div className={styles.toggleStack}>
+            <div className={styles.toggleStackHeader}>
+              <span className={styles.toggleLabel}>Controlar stock automáticamente</span>
+              <div className={toggleStyles.toggleHost}>
+                <label className={toggleStyles.switch}>
+                  <input
+                    name="track_stock"
+                    type="checkbox"
+                    checked={trackStock}
+                    onChange={(event) => setTrackStock(event.target.checked)}
+                    disabled={isPending}
+                    aria-label="Controlar stock automáticamente"
+                  />
+                  <span className={toggleStyles.slider} />
+                </label>
+                <span className={toggleStyles.statusLabel} aria-hidden="true">
+                  {trackStock ? "Activo" : "Inactivo"}
+                </span>
+              </div>
+            </div>
+            <p className={styles.toggleHelper}>
+              Si está activo, este producto quedará preparado para descontar stock automáticamente en
+              pedidos. El descuento automático se implementará en una fase posterior.
+            </p>
+            {trackStock && stockValue <= 0 ? (
+              <p className={styles.toggleWarning} role="status">
+                Este producto tiene stock 0. Cuando el control automático esté activo, no debería
+                venderse sin unidades disponibles.
+              </p>
+            ) : null}
           </div>
         </div>
 

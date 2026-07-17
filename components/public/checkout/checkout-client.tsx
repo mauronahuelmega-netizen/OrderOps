@@ -14,10 +14,17 @@ import {
   normalizeScheduledDeliveryRules
 } from "@/lib/business/scheduled-delivery-rules";
 import {
+  buildCheckoutCartPayload,
+  buildHierarchicalCartRows,
+  getCartItemCount,
+  getCartItemsTotal,
   getCartStorageKey,
-  parseLocalCartItems,
+  getCartV2StorageKey,
+  isLocalCartItemV2,
+  loadUnifiedCartItems,
   type LocalCartItem
 } from "@/lib/cart/local";
+import { formatPublicCatalogCurrency } from "@/lib/product-customization/public-shared";
 import { createPublicCheckoutOrderAction } from "@/app/b/[slug]/checkout/actions";
 
 type CheckoutClientProps = {
@@ -45,27 +52,27 @@ const initialFormState: CheckoutFormState = {
 
 export default function CheckoutClient({ business, slug }: CheckoutClientProps) {
   const router = useRouter();
-  const [cartItems, setCartItems] = useState<LocalCartItem[]>([]);
+  const [unifiedCartItems, setUnifiedCartItems] = useState<LocalCartItem[]>([]);
   const [formState, setFormState] = useState<CheckoutFormState>(initialFormState);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const storageKey = getCartStorageKey(business.id);
+  const storageV2Key = getCartV2StorageKey(business.id);
 
   useEffect(() => {
-    const storedValue = window.localStorage.getItem(storageKey);
-    const parsedItems = parseLocalCartItems(storedValue);
-    setCartItems(parsedItems);
-  }, [storageKey]);
+    setUnifiedCartItems(loadUnifiedCartItems(business.id));
+  }, [business.id, storageKey, storageV2Key]);
 
-  const cartCount = useMemo(
-    () => cartItems.reduce((total, item) => total + item.quantity, 0),
-    [cartItems]
+  const cartRows = useMemo(
+    () => buildHierarchicalCartRows(unifiedCartItems),
+    [unifiedCartItems]
   );
-
-  const cartTotal = useMemo(
-    () => cartItems.reduce((total, item) => total + item.price * item.quantity, 0),
-    [cartItems]
+  const cartCount = useMemo(() => getCartItemCount(unifiedCartItems), [unifiedCartItems]);
+  const cartTotal = useMemo(() => getCartItemsTotal(unifiedCartItems), [unifiedCartItems]);
+  const hasCustomizedItems = useMemo(
+    () => unifiedCartItems.some(isLocalCartItemV2),
+    [unifiedCartItems]
   );
 
   const today = useMemo(() => new Date().toISOString().slice(0, 10), []);
@@ -138,7 +145,8 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
         return;
       }
 
-      if (cartItems.length === 0) {
+      const latestUnified = loadUnifiedCartItems(business.id);
+      if (latestUnified.length === 0) {
         setErrorMessage("Tu carrito está vacío.");
         return;
       }
@@ -179,6 +187,8 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
         return;
       }
 
+      const cart = buildCheckoutCartPayload(latestUnified);
+
       const result = await createPublicCheckoutOrderAction(slug, {
         customerName: formState.customerName.trim(),
         phone: formState.phone.trim(),
@@ -189,10 +199,7 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
             ? formState.address.trim()
             : null,
         notes: formState.notes.trim() ? formState.notes.trim() : null,
-        items: cartItems.map((item) => ({
-          productId: item.productId,
-          quantity: item.quantity
-        }))
+        cart
       });
 
       if (!result.ok) {
@@ -211,6 +218,7 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
       });
 
       window.localStorage.removeItem(storageKey);
+      window.localStorage.removeItem(storageV2Key);
       router.push(`/b/${slug}/success?order_id=${encodeURIComponent(orderId)}`);
     } catch {
       setErrorMessage("No pudimos crear el pedido. Intentá nuevamente.");
@@ -219,7 +227,7 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
     }
   }
 
-  if (cartItems.length === 0) {
+  if (unifiedCartItems.length === 0) {
     return (
       <main className="checkout-page">
         <header className="checkout-header">
@@ -268,6 +276,13 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
             {!onDemandModeActive ? (
               <p className="checkout-message checkout-message--error" role="status">
                 {ordersClosedMessage}
+              </p>
+            ) : null}
+
+            {hasCustomizedItems ? (
+              <p className="checkout-message" role="status">
+                Tu pedido incluye productos personalizados. Los precios se confirman al
+                enviar.
               </p>
             ) : null}
 
@@ -412,33 +427,63 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
           </div>
 
           <div className="checkout-summary-list">
-            {cartItems.map((item) => (
-              <article key={item.productId} className="checkout-summary-item">
-                <div>
-                  <h3>{item.name}</h3>
-                  <p>
-                    {item.quantity} x {formatCurrency(item.price)}
-                  </p>
-                </div>
-                <strong>{formatCurrency(item.price * item.quantity)}</strong>
-              </article>
-            ))}
+            {cartRows.map((row) => {
+              if (row.kind === "legacy") {
+                const item = row.item;
+                return (
+                  <article key={`legacy-${item.productId}`} className="checkout-summary-item">
+                    <div>
+                      <h3>{item.name}</h3>
+                      <p>
+                        {item.quantity} x {formatPublicCatalogCurrency(item.price)}
+                      </p>
+                    </div>
+                    <strong>
+                      {formatPublicCatalogCurrency(item.price * item.quantity)}
+                    </strong>
+                  </article>
+                );
+              }
+
+              const { parent, children } = row;
+              const childrenTotal = children.reduce((sum, child) => sum + child.lineTotal, 0);
+
+              return (
+                <article key={parent.cartLineId} className="checkout-summary-item">
+                  <div>
+                    <h3>{parent.productName}</h3>
+                    <p>
+                      {parent.quantity} x{" "}
+                      {formatPublicCatalogCurrency(parent.finalUnitPrice)}
+                    </p>
+                    {parent.displaySummary.length > 0 ? (
+                      <ul style={{ margin: "0.35rem 0 0", paddingLeft: "1rem" }}>
+                        {parent.displaySummary.map((line) => (
+                          <li key={line}>{line}</li>
+                        ))}
+                      </ul>
+                    ) : null}
+                    {children.map((child) => (
+                      <p key={child.cartLineId}>
+                        + {child.productName}{" "}
+                        {formatPublicCatalogCurrency(child.finalUnitPrice)}
+                      </p>
+                    ))}
+                  </div>
+                  <strong>
+                    {formatPublicCatalogCurrency(parent.lineTotal + childrenTotal)}
+                  </strong>
+                </article>
+              );
+            })}
 
             <div className="checkout-summary-total">
               <span>Total</span>
-              <strong>{formatCurrency(cartTotal)}</strong>
+              <strong>{formatPublicCatalogCurrency(cartTotal)}</strong>
             </div>
           </div>
         </Card>
       </div>
     </main>
   );
-}
-
-function formatCurrency(value: number) {
-  return new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    maximumFractionDigits: 2
-  }).format(value);
 }

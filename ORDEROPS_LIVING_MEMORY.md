@@ -208,14 +208,19 @@ Paleta: Zinc (`#FAFAFB`, `#09090B`) + Índigo (`#4F46E5`, `#6366F1`). SVGs: `con
 
 ## 2. Esquema de Base de Datos (Resumen)
 
-> Fuente de verdad: `supabase/migrations/` (25 migraciones). Tipos: `types/database.ts`.
+> Fuente de verdad: `supabase/migrations/`. Tipos: `types/database.ts`.
 
 ### Diagrama relacional simplificado
 
 ```
 businesses (1) ──┬── (N) profiles
+                 ├── (1) business_settings  (+ product_customization_enabled)
                  ├── (N) categories ── (N) products
-                 ├── (N) orders ──┬── (N) order_items
+                 ├── (N) customization_groups ── (N) customization_options
+                 │         └── (N) customization_group_assignments → category|product
+                 ├── (N) product_customization_overrides → products
+                 ├── (N) upsell_groups ── (N) upsell_group_items → products
+                 ├── (N) orders ──┬── (N) order_items (+ snapshot, parent, item_kind)
                  │                └── (N) order_events
                  ├── (N) store_sessions
                  └── (N) push_subscriptions
@@ -275,6 +280,22 @@ businesses (1) ──┬── (N) profiles
 | `order_id` | uuid FK | CASCADE delete |
 | `product_id` | uuid? FK | Snapshot si producto eliminado |
 | `product_name`, `unit_price`, `quantity` | | Snapshot inmutable |
+| `customization_snapshot` | jsonb? | V1 Product Customization; null = legacy |
+| `parent_order_item_id` | uuid? self FK | Plus hijo; ON DELETE CASCADE |
+| `item_kind` | text | `product` \| `upsell`; default `product` |
+
+#### Product Customization V1 (migración `20260712090000`)
+
+| Tabla | Rol |
+|-------|-----|
+| `customization_groups` | Grupos reutilizables (single/multiple, min/max) |
+| `customization_options` | Opciones con `price_delta numeric(12,2) >= 0` |
+| `customization_group_assignments` | Asignación polimórfica a category\|product |
+| `product_customization_overrides` | Disable grupo/opción por producto |
+| `upsell_groups` | Plus sugerido (1 por target) |
+| `upsell_group_items` | Productos reales sugeridos |
+
+Flag: `business_settings.product_customization_enabled` default **false**.
 
 #### `order_events`
 | Columna | Tipo | Notas |
@@ -303,7 +324,7 @@ businesses (1) ──┬── (N) profiles
 
 ### RPC crítica
 
-- **`create_order`** (`t8_create_order_rpc.sql`) — Security definer; valida productos, calcula total, inserta order + items en transacción.
+- **`create_order`** (`t8_create_order_rpc.sql`) — Security definer; valida productos, calcula total, inserta order + items en transacción. Customization payload: fase ORDER-1 (aún no).
 
 ### RLS (patrón universal)
 
@@ -312,9 +333,9 @@ business_id = (select p.business_id from profiles p where p.id = auth.uid())
 -- o super_admin bypass
 ```
 
-Tablas con RLS: `businesses`, `profiles`, `categories`, `products`, `orders`, `order_items`, `order_events`, `store_sessions`, `push_subscriptions`.
+Tablas con RLS: `businesses`, `profiles`, `categories`, `products`, `orders`, `order_items`, `order_events`, `store_sessions`, `push_subscriptions`, `business_settings`, `customization_groups`, `customization_options`, `customization_group_assignments`, `product_customization_overrides`, `upsell_groups`, `upsell_group_items`.
 
-Lectura pública (sin auth): `categories`, `products`, `businesses` activos — migración `t6_public_catalog_read`.
+Lectura pública (sin auth): `categories`, `products`, `businesses` activos — migración `t6_public_catalog_read`. Customization anon solo si `product_customization_enabled` + available.
 
 ### Realtime publication
 
@@ -677,6 +698,249 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - **UI** **Operational Strip prescriptivo:** Evolución de `DashboardOverview` / `admin-dashboard-orders.tsx` — reemplazo de métricas pasivas (Estancados, Tiempo de preparación) por **Estado de cocina**, **Cumplimiento SLA** y **Riesgo operativo**; tonos semánticos (`success` / `attention` / `danger`) vía `data-tone` en `DashboardOverview.module.css`; paridad en vista móvil.
 - Archivos: `lib/orders/constants.ts`, `lib/orders/prescriptive-actions.ts`, `lib/orders/sla-metrics.ts`, `lib/orders/saturation-metrics.ts`, `lib/orders/admin.ts`, `components/admin/orders/admin-dashboard-orders.tsx`, `components/admin/orders/DashboardOverview.tsx`, `components/admin/orders/DashboardOverview.module.css`, `components/admin/orders/DashboardMobileOverview.tsx`
 - Breaking: no — métricas legacy (`averagePreparation`, `stalled`) permanecen en `overviewOperationalInsights` para otros consumidores; strip operativo usa claves `kitchenSaturation`, `slaCompliance`, `operationalRisk`
+
+### 2026-07-12 — Product Customization V1 schema (DB-1)
+
+- **DB** Migración `20260712090000_product_customization_v1_schema.sql`: tablas `customization_groups`, `customization_options`, `customization_group_assignments`, `product_customization_overrides`, `upsell_groups`, `upsell_group_items`; columnas `order_items.customization_snapshot`, `parent_order_item_id`, `item_kind`; flag `business_settings.product_customization_enabled` default false; RLS admin + anon gated por flag.
+- Archivos: `supabase/migrations/20260712090000_product_customization_v1_schema.sql`, `types/database.ts`, `docs/product-customization-db-1-schema-rls-types.md`
+- Breaking: no — backward-compatible; RPC `create_order` sin cambios; flag off.
+
+### 2026-07-12 — Product Customization FLAG-1 — Tenant Rollout Guard
+
+- **API** Helper server-only `isProductCustomizationEnabled(businessId)` fail-closed sobre `business_settings.product_customization_enabled` vía `createSupabaseServiceClient`.
+- Archivos: `lib/product-customization/flags.ts`, `docs/product-customization-flag-1-tenant-rollout-guard.md`
+- Breaking: no — sin integración UI/catálogo; flag sigue off; no se activa ningún tenant.
+
+### 2026-07-12 — Product Customization DB-APPLY-1 (producción autorizada)
+
+- **DB/Ops** Sin staging: usuario autorizó validar `pkrsedmwxekbhlohhqds` (OrderOps). Schema customization ya aplicado en remoto; smoke PASS; `enabled_count=0`; app flag-off PASS. `db push` omitido por ausencia de `supabase_migrations.schema_migrations` (evitar reaplicar historial).
+- Archivos: `docs/product-customization-db-apply-1-staging-migration-schema-smoke.md`, `docs/CURRENT_PHASE.md`
+- Breaking: no — flag off; sin UI; sin deploy.
+
+### 2026-07-12 — Product Customization ADMIN-1 — Groups & Options Admin
+
+- **UI/Admin** Ruta `/admin/products/customizations`: CRUD grupos/opciones (sin assignments/upsell), soft disable, sort_order numérico, aviso flag off. Link desde header de Productos.
+- Archivos: `app/admin/(protected)/products/customizations/*`, `lib/product-customization/admin.ts`, `lib/product-customization/shared.ts`, `components/admin/product-customization/*`, `docs/product-customization-admin-1-groups-options-admin.md`
+- Breaking: no — no afecta catálogo/checkout; flag off; sin deploy.
+
+### 2026-07-12 — Product Customization ADMIN-2 — Assignments, Overrides & Upsell
+
+- **UI/Admin** Assignments categoría/producto, herencia + overrides en edit product, upsell groups/items (máx. 1 por target). Flag off; sin público.
+- Archivos: `customizations/actions.ts`, `lib/product-customization/*`, `customization-assignments-section.tsx`, `upsell-groups-section.tsx`, `product-customization-overrides-panel.tsx`, `edit-product-form.tsx`, `docs/product-customization-admin-2-assignments-overrides-upsell.md`
+- Breaking: no — preparación interna; flag off; sin deploy.
+
+### 2026-07-14 — LIVE-OPS-GATE-1 — Store Session / On-Demand Acceptance Reconciliation
+
+- **Ops** LIVE-OPS-GATE-1 ejecutada. Se corrigió la reconciliación entre `store_sessions` y `business_settings.on_demand_mode_active` para que el gate público y `create_order` no queden desincronizados. Smoke remoto PASS: close→open SQL sync + pedido legacy `1ef8a30a-…` (QA Live Ops Gate). Product Customization no fue modificado. Tenant listo: session open + `on_demand=true` + customization flag false. Próximo paso: PRODUCT-CUSTOMIZATION-ROLLOUT-PILOT-1 Modo C Live Activation Retry 2.
+- Archivos: `lib/store-sessions/acceptance.ts`, `public.server.ts`, `admin.ts`, `dashboard/actions.ts`, operations settings client, `docs/live-ops-gate-1-store-session-on-demand-reconciliation.md`
+- Resultado: **PASS**.
+
+### 2026-07-17 — PRODUCT-STOCK-DECREMENT-LEDGER-1 — Record Order Decrement Movements in create_order
+
+- **RPC** PRODUCT-STOCK-DECREMENT-LEDGER-1 ejecutada. Se actualizó create_order para registrar movimientos order_decrement en stock_movements cuando descuenta stock de productos con track_stock=true. Cada movement queda asociado a order_id, order_item_id y product_id, con stock_before/stock_after y quantity_delta negativo. No se implementó restock ni se modificaron pedidos históricos. Resultado: **PASS**.
+- Archivos: `supabase/migrations/20260717130000_product_stock_decrement_ledger_1.sql`, `docs/product-stock-decrement-ledger-1-record-order-decrement-movements-create-order.md`
+- QA: Coca 4→3 + ledger (`4ef1169a-…`); legacy sin movements (`c9721e63-…`); #9632 sin backfill
+- Próxima: PRODUCT-STOCK-RESTOCK-CANCEL-1
+
+### 2026-07-17 — PRODUCT-STOCK-RESTOCK-CANCEL-1 — Idempotent Cancel Restock via stock_movements
+
+- **RPC** PRODUCT-STOCK-RESTOCK-CANCEL-1 ejecutada. Se implementó restock idempotente al cancelar pedidos mediante una transición transaccional de estado. El sistema devuelve stock solo para order_items con stock_movements.order_decrement previo, registra order_restock, evita doble devolución y no aplica restock a pedidos históricos sin ledger. No se modificó create_order ni se hizo backfill. Resultado: **PASS WITH DEBT** (deploy action Vercel pendiente).
+- Archivos: `supabase/migrations/20260717140000_product_stock_restock_cancel_1.sql`, `app/admin/(protected)/orders/[id]/actions.ts`, `types/database.ts`, `docs/product-stock-restock-cancel-1-idempotent-cancel-restock-stock-movements.md`
+- QA: `#8B9A` Coca 3→4 + order_restock; idempotencia OK; `#503E` cancel sin movements; `#9632`/`#8C2F` sin restock
+- Próxima: deploy wiring `updateOrderStatusAction` → smoke UI cancel
+
+### 2026-07-17 — PRODUCT-STOCK-RESTOCK-ACTION-DEPLOY-SMOKE-1 — Deploy Status Action Wiring & UI Cancel Smoke
+
+- **Ops** PRODUCT-STOCK-RESTOCK-ACTION-DEPLOY-SMOKE-1 ejecutada. Se desplegó el wiring de updateOrderStatusAction para usar transition_order_status en producción y se validó desde la UI admin real que cancelar un pedido tracked devuelve stock de forma idempotente mediante stock_movements. El smoke confirmó order_decrement + order_restock para Coca Cola 500ml sin afectar pedidos históricos sin ledger. Resultado: **PASS**.
+- Archivos: commit `b0bfddb` (action + types RPC + migration SQL), `docs/product-stock-restock-action-deploy-smoke-1-deploy-status-action-wiring-ui-cancel-smoke.md`
+- QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
+- Próxima: deploy WIP customization / cleanup QA `#9632` opcional
+
+### 2026-07-17 — PRODUCT-STOCK-QA-ORDER-CLEANUP-1 — Controlled QA Orders Cleanup
+
+- **Ops** PRODUCT-STOCK-QA-ORDER-CLEANUP-1 ejecutada. Se limpiaron pedidos QA pendientes mediante cancelación controlada, sin eliminar pedidos ni order_items. El cleanup respetó el contrato de stock: solo pedidos con order_decrement pueden restockear automáticamente; pedidos pre-ledger como #9632 no reciben restock retroactivo. No se modificaron código, schema, productos, flags ni sesión. Resultado: **PASS WITH DEBT** (1 Coca histórica pre-ledger documentada).
+- Archivos: `docs/product-stock-qa-order-cleanup-1-controlled-qa-orders-cleanup.md`, `docs/CURRENT_PHASE.md`
+- QA: `#9632` + `#9B25` cancelled vía UI · Coca stock=4 · pending QA=0 · dashboard limpio
+- Próxima: opcional reconciliación manual pre-ledger (auth) · deploy WIP customization
+
+### 2026-07-16 — PRODUCT-STOCK-MOVEMENTS-SCHEMA-1 — Stock Movements Ledger & Idempotency Schema
+
+- **Schema** PRODUCT-STOCK-MOVEMENTS-SCHEMA-1 ejecutada. Se creó la base de ledger public.stock_movements para movimientos de inventario, con constraints de integridad, índices de consulta e índices únicos parciales para evitar doble order_decrement/order_restock por order_item. La tabla queda preparada para fases futuras de decrement ledger y restock idempotente. No se modificaron create_order, updateOrderStatusAction, stock, productos, pedidos, flags ni sesión. Resultado: **PASS**.
+- Archivos: `supabase/migrations/20260717120000_product_stock_movements_schema_1.sql`, `types/database.ts`, `docs/product-stock-movements-schema-1-stock-movements-ledger-idempotency-schema.md`
+- Próxima: PRODUCT-STOCK-DECREMENT-LEDGER-1 → RESTOCK-CANCEL-1
+
+### 2026-07-16 — PRODUCT-STOCK-RESTOCK-DESIGN-1 — Cancel Restock Contract & Idempotency
+
+- **Ops/Design** PRODUCT-STOCK-RESTOCK-DESIGN-1 ejecutada. Se diseñó el contrato de devolución de stock al cancelar pedidos. La recomendación es no modificar updateOrderStatusAction directamente todavía, sino introducir un ledger stock_movements con constraints de idempotencia y luego implementar restock transaccional solo para items con decremento registrado. Los pedidos históricos y QA actuales no deben recibir restock automático retroactivo. Resultado: **PASS**.
+- Archivos: `docs/product-stock-restock-design-1-cancel-restock-contract-idempotency.md`, `docs/CURRENT_PHASE.md`
+- Próxima: PRODUCT-STOCK-MOVEMENTS-SCHEMA-1 → DECREMENT-LEDGER-1 → RESTOCK-CANCEL-1 → RESTOCK-QA / QA-CLEANUP
+
+### 2026-07-16 — PRODUCT-STOCK-DECREMENT-ORDER-1 — Transactional Stock Consumption in create_order
+
+- **RPC** PRODUCT-STOCK-DECREMENT-ORDER-1 ejecutada. Se actualizó create_order para validar y descontar stock transaccionalmente solo en productos con track_stock=true. La lógica agrupa cantidades por product_id, incluye productos normales y upsell child items, usa bloqueo transaccional y evita stock negativo. Productos legacy con track_stock=false conservan comportamiento anterior. Restock en cancelación queda fuera de scope. Resultado: **PASS**.
+- Archivos: `supabase/migrations/20260717010500_product_stock_decrement_order_1.sql`, checkout/admin `mapCreateOrderRpcError`, `docs/product-stock-decrement-order-1-transactional-stock-consumption-create-order.md`
+- QA: Coca Cola 5→4 (`f34118c6-…`); legacy Clásica sin descuento (`d2489663-…`); insufficient qty 99 sin order
+- Próxima: PRODUCT-STOCK-RESTOCK-CANCEL-1 / STOCK-MOVEMENTS
+
+### 2026-07-16 — PRODUCT-STOCK-ADMIN-UX-1 — Stock Tracking Controls in Product Admin
+
+- **Admin UX** PRODUCT-STOCK-ADMIN-UX-1 ejecutada. Se agregó al admin de productos el control “Controlar stock automáticamente”, conectado a products.track_stock. El comportamiento legacy se mantiene: create_order todavía no descuenta stock y los productos existentes siguen sin tracking salvo cambios explícitos. No se tocaron schema, triggers, pedidos, flags ni sesión. Resultado: **PASS**.
+- Archivos: `create-product-form.tsx`, `edit-product-form.tsx`, `product-form.module.css`, `products/actions.ts`, `lib/products/admin.ts`, `docs/product-stock-admin-ux-1-stock-tracking-controls-product-admin.md`, `docs/CURRENT_PHASE.md`
+- QA write: Coca Cola 500ml `track_stock=true` (autorizado)
+- Próxima: PRODUCT-STOCK-DECREMENT-ORDER-1
+
+### 2026-07-16 — PRODUCT-STOCK-TRACKING-SCHEMA-1 — Add Product Stock Tracking Flag
+
+- **Schema** PRODUCT-STOCK-TRACKING-SCHEMA-1 ejecutada. Se agregó la base de schema para inventario híbrido mediante products.track_stock boolean NOT NULL DEFAULT false. Los productos existentes conservan comportamiento legacy con tracking apagado. No se modificó create_order, stock, availability, pedidos, flags, sesión ni lógica runtime. Resultado: **PASS**.
+- Archivos: `supabase/migrations/20260716224005_product_stock_tracking_schema_1.sql`, `types/database.ts`, `docs/product-stock-tracking-schema-1-add-product-track-stock-flag.md`, `docs/CURRENT_PHASE.md`
+- Próxima: PRODUCT-STOCK-ADMIN-UX-1
+
+### 2026-07-16 — PRODUCT-STOCK-DECREMENT-DESIGN-1 — Inventory Consumption Contract
+
+- **Ops/Design** PRODUCT-STOCK-DECREMENT-DESIGN-1 ejecutada. Se diseñó el contrato de consumo de inventario para OrderOps. La recomendación es un modelo híbrido con track_stock por producto: productos sin tracking siguen usando disponibilidad manual; productos con tracking validan y descuentan stock transaccionalmente en create_order, incluyendo products y upsell child items. Restock en cancelaciones queda para una fase posterior con diseño de idempotencia/ledger. No se tocaron código, schema, stock, pedidos, flags ni sesión. Resultado: **PASS**.
+- Archivos: `docs/product-stock-decrement-design-1-inventory-consumption-contract.md`, `docs/CURRENT_PHASE.md`
+- Próxima: PRODUCT-STOCK-TRACKING-SCHEMA-1 → ADMIN-UX → DECREMENT-ORDER → QA
+
+### 2026-07-16 — PRODUCT-STOCK-DECREMENT-AUDIT-1 — Order Stock Consumption For Product/Upsell Items
+
+- **Ops/QA** PRODUCT-STOCK-DECREMENT-AUDIT-1 ejecutada. Se auditó el modelo de stock/inventario para pedidos normales y upsell child items usando como evidencia el pedido QA #8C2F. La fase fue read-only: no se tocaron código, schema, stock, productos, pedidos, flags ni sesión. Se documentó si create_order consume stock o no, cómo interactúa products.stock con availability y cuál debería ser la fase posterior de diseño/fix. Hipótesis: **H1** (stock manual + trigger availability; sin consumo en create_order/cancel). Resultado: **PASS WITH DEBT**.
+- Archivos: `docs/product-stock-decrement-audit-1-order-stock-consumption-product-upsell-items.md`, `docs/CURRENT_PHASE.md`
+
+### 2026-07-16 — PRODUCT-CUSTOMIZATION-QA-ORDER-CLEANUP-1 — Cancel QA Orders Safely
+
+- **Ops/QA** PRODUCT-CUSTOMIZATION-QA-ORDER-CLEANUP-1 ejecutada. Se canceló de forma segura el pedido QA `#8C2F` (`30c1b498-…`) vía UI admin (`updateOrderStatusAction` → `cancelled`), sin borrar order/items/snapshot/upsell. Dashboard Pendientes limpio; evidencia histórica intacta. Product Customization live; flags/sesión intactos; stock sin ajuste manual. Resultado: **PASS WITH DEBT**.
+- Archivos: `docs/product-customization-qa-order-cleanup-1-cancel-qa-orders-safely.md`, `docs/CURRENT_PHASE.md`
+
+### 2026-07-16 — PRODUCT-CUSTOMIZATION-PLUS-BEBIDAS-QA-1 Retry — Real Order Snapshot & Dashboard Validation
+
+- **Ops/QA** PRODUCT-CUSTOMIZATION-PLUS-BEBIDAS-QA-1 Retry ejecutada. Se creó un pedido QA real desde UI en demohamburgueseria con Doble Smash personalizado y Coca Cola 500ml como Plus/Bebidas. Se validó order parent, upsell child item, total, snapshot, stock post-pedido y dashboard, manteniendo Product Customization live y sin tocar código, schema, flags, sesión ni configuración. Resultado: **PASS WITH DEBT** (stock no decrementa; pedido QA queda pending).
+- Archivos: `docs/product-customization-plus-bebidas-qa-1-retry-real-order-snapshot-dashboard-validation.md`, `docs/CURRENT_PHASE.md`
+- Pedido: `30c1b498-…` `#8C2F` · total `15750` · parent `c559f4bf-…` · upsell child `9138e5f2-…`
+
+### 2026-07-16 — PRODUCT-CUSTOMIZATION-PLUS-BEBIDAS-AVAILABILITY-1 — Reactivate Beverage Product for Upsell QA
+
+- **Ops/QA** PRODUCT-CUSTOMIZATION-PLUS-BEBIDAS-AVAILABILITY-1 ejecutada. Se auditó el modelo real de disponibilidad/stock de products y se reactivó Coca Cola 500ml para que Plus/Bebidas vuelva a aparecer en el modal público. Se validó catálogo, modal, cart V2 y checkout pre-submit sin crear pedido, manteniendo Product Customization live y sin tocar código, schema, flags, sesión ni configuración de customization. Nota: al auditar, Coca Cola ya estaba `is_available=true`/`stock=5` (sin write SQL adicional). Resultado: **PASS WITH DEBT**.
+- Archivos: `docs/product-customization-plus-bebidas-availability-1-reactivate-beverage-product-for-upsell-qa.md`, `docs/CURRENT_PHASE.md`
+- IDs: product `c5d56371-…` · upsell item `df1e56f4-…` · trigger `tr_auto_suspend_out_of_stock`
+
+### 2026-07-16 — PRODUCT-CUSTOMIZATION-PLUS-BEBIDAS-QA-1 — Real Order Snapshot & Dashboard Validation
+
+- **Ops/QA** PRODUCT-CUSTOMIZATION-PLUS-BEBIDAS-QA-1 quedó **BLOCKED**. Había autorización para crear pedido QA, pero Coca Cola 500ml (`c5d56371-…`) está `is_available=false`, por lo que el Plus no aparece en el modal público y no se puede validar parent+upsell child. No se reactivó el producto (fuera de scope). Live intacto. Próximo: reactivar Coca Cola con auth explícita y reintentar QA.
+- Archivos: `docs/product-customization-plus-bebidas-qa-1-real-order-snapshot-dashboard-validation.md`, `docs/CURRENT_PHASE.md`
+
+### 2026-07-16 — PRODUCT-IMAGE-RANDOMUUID-HOTFIX-1 — Client-Safe Image Upload ID Fallback
+
+- **Fix** PRODUCT-IMAGE-RANDOMUUID-HOTFIX-1 ejecutada. Se eliminó el crash `crypto.randomUUID is not a function` en crop/upload de imágenes de producto (y assets públicos) en orígenes no seguros (LAN HTTP). Helper client-safe `createClientSafeId` con fallbacks `getRandomValues` / timestamp. Sin tocar schema, storage policies ni buckets. Resultado: **PASS WITH DEBT** (QA LAN física pendiente).
+- Archivos: `lib/client/safe-random-id.ts`, `components/admin/products/edit-product-form.tsx`, `create-product-form.tsx`, `components/admin/settings/public-settings-form.tsx`, `docs/product-image-randomuuid-hotfix-1-client-safe-image-upload-id-fallback.md`, `docs/CURRENT_PHASE.md`
+
+### 2026-07-16 — PRODUCT-CUSTOMIZATION-PLUS-BEBIDAS-2 — Create Beverage Products & Enable Upsell
+
+- **Ops/QA** PRODUCT-CUSTOMIZATION-PLUS-BEBIDAS-2 ejecutada. Se creó al menos un producto bebida real en `demohamburgueseria` (Coca Cola 500ml) y se conectó al grupo Plus/Bebidas, habilitando la experiencia modal → cart V2 → checkout pre-submit con bebida sugerida, manteniendo Product Customization live y sin tocar código, schema, precios existentes, assignments, flags ni sesión. No se creó pedido QA por falta de autorización; la validación quedó en checkout pre-submit. Resultado: **PASS WITH DEBT**.
+- Archivos: `docs/product-customization-plus-bebidas-2-create-beverage-products-enable-upsell.md`, `docs/CURRENT_PHASE.md`
+- IDs: category `91580431-…` · product `c5d56371-…` · upsell item `df1e56f4-…`
+
+### 2026-07-16 — PRODUCT-CUSTOMIZATION-PLUS-BEBIDAS-1 — Real Beverage Upsell Setup
+
+- **Ops/QA** PRODUCT-CUSTOMIZATION-PLUS-BEBIDAS-1 ejecutada. Se auditó Plus/Bebidas en `demohamburgueseria`: el grupo upsell existe y apunta a Doble Smash, pero `upsell_group_items` está vacío y **no hay productos bebida vivos** en catálogo (Coca Cola 500ml histórica eliminada). Sin `AUTORIZO_CREATE_BEVERAGE_PRODUCTS` no se aplicaron writes. Live intacto. Resultado: **BLOCKED**.
+- Archivos: `docs/product-customization-plus-bebidas-1-real-beverage-upsell-setup.md`, `docs/CURRENT_PHASE.md`
+
+### 2026-07-16 — PRODUCT-CUSTOMIZATION-GROUP-DESCRIPTIONS-1 — Customer-Facing Group Description Polish
+
+- **Ops/QA** PRODUCT-CUSTOMIZATION-GROUP-DESCRIPTIONS-1 ejecutada. Se pulieron descriptions de grupos visibles para clientes en `demohamburgueseria`, alineando Papas, Salsas y Agregados extra con el copy comercial actual. Product Customization siguió live, con precios, assignments, checkout y dashboard intactos. Resultado: **PASS WITH DEBT** (Plus Bebidas vacío; assignments limitados; sin pedido QA nuevo).
+- Archivos: `docs/product-customization-group-descriptions-1-customer-facing-descriptions.md`, `docs/CURRENT_PHASE.md`
+
+### 2026-07-16 — PRODUCT-CUSTOMIZATION-GROUP-NAMING-1 — Customer-Facing Group Naming Polish
+
+- **Ops/QA** PRODUCT-CUSTOMIZATION-GROUP-NAMING-1 ejecutada. Se pulieron nombres de grupos visibles para clientes en `demohamburgueseria`. Aderezos pasó a **Salsas** y Extras pasó a **Agregados extra**, manteniendo Product Customization live, precios, assignments, checkout y dashboard intactos. Papas sin cambios. Resultado: **PASS WITH DEBT** (descriptions de grupo aún con copy viejo; Plus Bebidas vacío).
+- Archivos: `docs/product-customization-group-naming-1-customer-facing-group-names.md`, `docs/CURRENT_PHASE.md`
+
+### 2026-07-16 — PRODUCT-CUSTOMIZATION-REAL-CONFIG-POLISH-1 — Owner Config Copy & Commercial Cleanup
+
+- **Ops/QA** PRODUCT-CUSTOMIZATION-REAL-CONFIG-POLISH-1 ejecutada. Se auditó y pulió la configuración comercial inicial del piloto live en `demohamburgueseria`. Product Customization siguió live. Se corrigieron nombres visibles seguros (`Chedar`→Cheddar, `Big Mac`→Salsa Big Mac) y se limpió copy público con restos QA. Se documentaron recomendaciones para plus sugeridos (grupo Bebidas sin items), renombres de grupo opcionales, imágenes y UX admin futura. Resultado: **PASS WITH DEBT**. Sin cambios de código funcional.
+- Archivos: `docs/product-customization-real-config-polish-1-owner-config-copy-commercial-cleanup.md`, `docs/CURRENT_PHASE.md`
+
+### 2026-07-15 — PRODUCT-CUSTOMIZATION-PILOT-MONITOR-1 — Live Pilot Monitoring & Real Config Readiness
+
+- **Ops/QA** PRODUCT-CUSTOMIZATION-PILOT-MONITOR-1 ejecutada. Se monitoreó el piloto live de Product Customization V1 en `demohamburgueseria`. Se validaron flags, gate operativo, pedidos recientes, pedido live `#213F`, pedido comercial `#7D0A`, catálogo, modal, cart, checkout pre-submit y dashboard. La configuración activa (Papas/Aderezos/Extras) fue clasificada como **demo/comercial inicial** con recomendaciones de polish (`Chedar`→Cheddar, `Big Mac`→Salsa Big Mac, Plus ausente) antes de rollout comercial. Resultado: **PASS WITH DEBT**. Sin writes.
+- Archivos: `docs/product-customization-pilot-monitor-1-live-pilot-monitoring-real-config-readiness.md`, `docs/CURRENT_PHASE.md`
+
+### 2026-07-15 — PRODUCT-CUSTOMIZATION-ROLLOUT-PILOT-1 Modo C Live Activation Retry 2
+
+- **Ops/QA** PRODUCT-CUSTOMIZATION-ROLLOUT-PILOT-1 Modo C Live Activation Retry 2 ejecutado. Tenant: `demohamburgueseria`. Motivo: retry posterior a LIVE-OPS-GATE-1 PASS. Resultado: **PASS WITH DEBT — PILOT LIVE**. Flag final: **true** (`2026-07-14 23:00:16 UTC`). Gate operativo final: store session open + `on_demand_mode_active=true`. Config final: **active** (leave-on autorizado). Pedido QA live retry 2: `#213F` / `d5573074-8c14-4fa1-af5f-6e3a2209213f`. SQL/dashboard: **PASS**. Rollback: **disponible, no ejecutado**. Deuda: sticky cart automation; dedup no smokeado.
+- Archivos: `docs/product-customization-rollout-pilot-1-controlled-tenant-rollout.md`, `docs/CURRENT_PHASE.md`
+- Sin cambios de código funcional.
+
+### 2026-07-14 — Product Customization ROLLOUT-PILOT-1 — Controlled Tenant Rollout
+
+- **Ops/QA** PRODUCT-CUSTOMIZATION-ROLLOUT-PILOT-1 Modo C Live Activation Retry ejecutado. Tenant: `demohamburgueseria`. Motivo: retry después de abrir store session. Resultado: **ROLLBACK EXECUTED**. Flag final: **false** (`16:08:29 UTC`). Config final: soft-disabled. Pedido QA live retry: N/A. SQL/dashboard: N/A. Rollback: **ejecutado**. Causa: desync `store_sessions=open` vs `on_demand_mode_active=false` → RPC `create_order` rechaza con mismo mensaje UX. Catálogo/modal/cart V2 PASSaron bajo flag ON. Modo B `#8C9E` sigue válido.
+- Archivos: `docs/product-customization-rollout-pilot-1-controlled-tenant-rollout.md`, `docs/CURRENT_PHASE.md`
+- Sin cambios de código. Superado por Modo C Live Activation Retry 2 (PASS WITH DEBT — PILOT LIVE).
+
+### 2026-07-14 — Product Customization CHECKOUT-UI-SMOKE-1 — Browser Checkout Validation
+
+- **QA/Runtime** Primer pedido V2 desde checkout UI real (`3b9f87a2-…` / `#5C7C`): catálogo → modal → cart V2 → checkout → server action → snapshot parent + upsell child; dashboard summary/Plus OK.
+- Archivos: `docs/product-customization-checkout-ui-smoke-1-browser-checkout-validation.md`, `docs/CURRENT_PHASE.md`
+- Flag/datos QA cleanup cerrado (`product_customization_enabled=false`). Deuda menor: dedup cart no probado; browser automation frágil. Sin cambios de código.
+
+### 2026-07-14 — Product Customization ADMIN-UX-1 — Owner-Friendly Builder Shell
+- Qué: shell de presentación para `/admin/products/customizations` (tabs product-first, preview placeholder, copy de negocio) sobre UI ADMIN-1/2/DnD existente; helpers puros `builder-presentation.ts`
+- Archivos: `owner-customization-builder.tsx`, `customer-preview-panel.tsx`, `builder-presentation.ts`, `customizations/page.tsx`, `product-customization-admin.module.css`, copy en assignments/groups/upsell, `docs/product-customization-admin-ux-1-owner-friendly-builder-shell.md`
+- Impacto: UX admin más owner-friendly sin cambiar DB/actions/validaciones/flag; deuda preview/overrides + densificación forms
+- Dec: `docs/product-customization-admin-ux-1-owner-friendly-builder-shell.md`
+
+### 2026-07-14 — Product Customization ADMIN-UX-SPEC-1 — Owner-Friendly Builder Specification
+
+- **Docs/UX** Spec para rediseñar `/admin/products/customizations` como builder owner-friendly product-first: lenguaje de negocio, preview del cliente, plus como venta sugerida, excepciones (overrides), roadmap UX-1…UX-5 + OPTION-IMAGES-1.
+- Archivos: `docs/product-customization-admin-ux-spec-1-owner-friendly-builder.md`, `docs/CURRENT_PHASE.md`
+- Sin código/DB/flag. Próxima implementación: ADMIN-UX-1 Builder Shell.
+
+### 2026-07-14 — Product Customization V1-HANDOFF-1 — Final Handoff & V1 Closure
+
+- **Docs** Product Customization V1 cerrado como PASS WITH DEBT. Consolidación de arquitectura, QA, rollout/rollback, deudas y roadmap V1.1.
+- Archivos: `docs/product-customization-v1-final-handoff.md`, `docs/CURRENT_PHASE.md`
+- Flag final `demohamburgueseria=false`. Pedido V2 runtime `#8E6F` validado en SQL/dashboard. Sin cambios de código/DB.
+
+### 2026-07-14 — Product Customization E2E-QA-1 — Flag-on Full Runtime Smoke
+
+- **QA/Runtime** Pedido V2 real en prod demo (`d3e5c903-…`): snapshot parent + upsell child; dashboard summary/Plus render; flag/datos cleanup cerrado.
+- Archivos: `docs/product-customization-e2e-qa-1-flag-on-full-runtime-smoke.md`, `docs/CURRENT_PHASE.md`
+- Deuda: E2E browser checkout UI no automatizado (RPC autorizado usado). Sin cambios de código.
+
+### 2026-07-13 — Product Customization DASHBOARD-1 — Render Snapshot & Upsell Children
+
+- **UI/Admin** Display read-only de `customization_snapshot` + upsell hijos en panel Productos del workspace; parser tolerante + árbol jerárquico; selects dashboard/detail extendidos.
+- Archivos: `lib/product-customization/order-dashboard.ts`, `lib/orders/admin.ts`, `order-products-list.tsx`, `order-product-modal.tsx`, `order-items*.css`, `docs/product-customization-dashboard-1-render-snapshot-upsell-children.md`
+- Breaking: no — legacy sin snapshot se ve igual; sin RPC/checkout/flag/DB.
+
+### 2026-07-13 — Product Customization ORDER-1-DB-APPLY-QA — Apply RPC & Flag-on Smoke
+
+- **DB/Runtime** `create_order` ORDER-1 aplicado en prod `pkrsedmwxekbhlohhqds` vía MCP `apply_migration`; markers snapshot/parent/item_kind verificados; legacy order QA OK; flag-on temporal + public modal/cart V2 smoke parcial.
+- Archivos: `docs/product-customization-order-1-db-apply-qa-runtime-smoke.md`, `docs/CURRENT_PHASE.md`
+- **Deuda crítica:** `product_customization_enabled` demo puede seguir true si cleanup no se ejecutó; V2 persist SQL assert pendiente. Sin dashboard UI.
+
+### 2026-07-13 — Product Customization ORDER-1 — RPC, Server Validation & Snapshot
+
+- **Orders** Validación TS + `create_order` evolucionado (snapshot + upsell children); checkout V2 unlock; dual cart clear on success.
+- Archivos: `order-validation.ts`, `order-snapshot.ts`, `order-types.ts`, `20260713030000_product_customization_order_1_create_order_snapshot.sql`, checkout action/client, cart-sheet, `docs/product-customization-order-1-rpc-server-validation-snapshot.md`
+- Flag off; migración local no pushed; sin dashboard UI.
+
+### 2026-07-13 — Product Customization CART-1 — Cart Signature, Pricing & Display
+
+- **Cart** LocalCartItemV2 + configurationSignature; storage `orderops-cart-v2`; cart sheet; edit from cart; checkout client guard (no RPC).
+- Archivos: `lib/cart/{types,signature,local}.ts`, `cart-sheet.*`, `customization-modal.tsx`, `catalog-client.tsx`, `cart-bar.tsx`, `checkout-client.tsx`, `docs/product-customization-cart-1-cart-signature-pricing-display.md`
+- Flag sigue off; sin create_order/migrations.
+
+### 2026-07-13 — Product Customization CATALOG-1 — Public Customization Modal
+
+- **Public** Catálogo: summaries SSR detrás de flag; “Desde $X”; intercept add-to-cart; modal lazy con herencia/overrides/upsell; CTA no persiste (seam CART-1).
+- Archivos: `lib/product-customization/public.ts`, `public-shared.ts`, `app/b/[slug]/catalogo/actions.ts`, `components/public/catalog/customization-modal.*`, `catalog-client.tsx`, `product-card.tsx`, `product-detail-modal.tsx`, `public-catalog-page.tsx`, `docs/product-customization-catalog-1-public-customization-modal.md`
+- Flag sigue off; sin cart/checkout/`create_order`/migraciones.
+
+### 2026-07-12 — Product Customization ADMIN-DND-1 — Sortable Groups & Options
+
+- **UI/Admin** Reorder visual (HTML5 DnD + ↑/↓) de grupos, opciones intra-grupo y assignments intra-target; persist `sort_order` 10/20/30. Sin librería DnD nueva.
+- Archivos: `sortable-reorder-list.tsx`, `sortable-groups-list.tsx`, `customizations/actions.ts` (reorder*), `shared.ts`, `docs/product-customization-admin-dnd-1-sortable-groups-options.md`
+- Breaking: no — solo admin UX; flag off; sin migraciones/deploy.
 
 ---
 

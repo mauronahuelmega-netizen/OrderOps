@@ -270,6 +270,21 @@
   line-height: 1.5;
 }
 
+.itemModalCustomizationList {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text-tertiary);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.itemModalCustomizationList li {
+  margin: 0;
+}
+
 .itemModalGrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

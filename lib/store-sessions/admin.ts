@@ -219,20 +219,52 @@ export async function getLastClosedStoreSession(businessId: string): Promise<Sto
   return data ? mapStoreSessionRow(data) : null;
 }
 
-async function syncOnDemandModeActive(
+export type OnDemandModeSyncResult = {
+  active: boolean;
+  hasOpenStoreSession: boolean;
+};
+
+async function countOpenStoreSessions(
+  supabase: Awaited<ReturnType<typeof createSupabaseServerClient>>,
+  businessId: string
+): Promise<number> {
+  const { count, error } = await supabase
+    .from("store_sessions")
+    .select("id", { count: "exact", head: true })
+    .eq("business_id", businessId)
+    .eq("status", "open")
+    .is("closed_at", null);
+
+  if (error) {
+    if (isMissingStoreSessionsTableError(error)) {
+      throw new Error("La migracion de sesiones todavia no esta aplicada.");
+    }
+
+    console.error("[store-sessions] countOpenStoreSessions failed", {
+      businessId,
+      code: error.code,
+      message: error.message
+    });
+    throw new Error("No pudimos validar las sesiones abiertas del negocio.");
+  }
+
+  return count ?? 0;
+}
+
+async function writeOnDemandModeActive(
   supabase: Awaited<ReturnType<typeof createSupabaseServerClient>>,
   businessId: string,
   active: boolean
 ) {
   const { data, error } = await supabase
     .from("business_settings")
-    .update({ on_demand_mode_active: active })
+    .update({ on_demand_mode_active: active, updated_at: new Date().toISOString() })
     .eq("business_id", businessId)
-    .select("business_id")
+    .select("business_id, on_demand_mode_active")
     .maybeSingle();
 
   if (error || !data) {
-    console.error("[store-sessions] syncOnDemandModeActive failed", {
+    console.error("[store-sessions] writeOnDemandModeActive failed", {
       businessId,
       active,
       error
@@ -243,6 +275,33 @@ async function syncOnDemandModeActive(
         : "No pudimos desactivar el modo On-Demand del negocio."
     );
   }
+
+  if (data.on_demand_mode_active !== active) {
+    throw new Error(
+      active
+        ? "No pudimos activar el modo On-Demand del negocio."
+        : "No pudimos desactivar el modo On-Demand del negocio."
+    );
+  }
+}
+
+/**
+ * Derives business_settings.on_demand_mode_active from whether any
+ * store_sessions row is currently open. Idempotent; safe after open/close.
+ */
+export async function reconcileOnDemandModeActiveFromSessions(
+  businessId: string
+): Promise<OnDemandModeSyncResult> {
+  const supabase = await createSupabaseServerClient();
+  const openCount = await countOpenStoreSessions(supabase, businessId);
+  const active = openCount > 0;
+
+  await writeOnDemandModeActive(supabase, businessId, active);
+
+  return {
+    active,
+    hasOpenStoreSession: active
+  };
 }
 
 export async function openStoreSession(input: {
@@ -253,7 +312,12 @@ export async function openStoreSession(input: {
   const existingSession = await getActiveStoreSession(input.businessId);
 
   if (existingSession) {
-    await syncOnDemandModeActive(supabase, input.businessId, true);
+    const sync = await reconcileOnDemandModeActiveFromSessions(input.businessId);
+
+    if (!sync.active) {
+      throw new Error("No pudimos activar el modo On-Demand del negocio.");
+    }
+
     return existingSession;
   }
 
@@ -278,7 +342,44 @@ export async function openStoreSession(input: {
     throw new Error("No pudimos abrir la sesion del negocio.");
   }
 
-  await syncOnDemandModeActive(supabase, input.businessId, true);
+  try {
+    const sync = await reconcileOnDemandModeActiveFromSessions(input.businessId);
+
+    if (!sync.active) {
+      throw new Error("No pudimos activar el modo On-Demand del negocio.");
+    }
+  } catch (syncError) {
+    console.error("[store-sessions] openStoreSession sync failed after insert", {
+      businessId: input.businessId,
+      sessionId: data.id,
+      syncError
+    });
+
+    const rollbackNow = new Date().toISOString();
+    const { error: rollbackError } = await supabase
+      .from("store_sessions")
+      .update({
+        closed_at: rollbackNow,
+        closed_by: input.actorUserId,
+        status: "closed",
+        updated_at: rollbackNow
+      })
+      .eq("id", data.id)
+      .eq("business_id", input.businessId)
+      .eq("status", "open");
+
+    if (rollbackError) {
+      console.error("[store-sessions] openStoreSession rollback failed", {
+        businessId: input.businessId,
+        sessionId: data.id,
+        rollbackError
+      });
+    }
+
+    throw syncError instanceof Error
+      ? syncError
+      : new Error("No pudimos activar el modo On-Demand del negocio.");
+  }
 
   return mapStoreSessionRow(data);
 }
@@ -309,7 +410,7 @@ export async function closeStoreSession(input: {
   }
 
   if (currentSession.status !== "open" || currentSession.closed_at) {
-    await syncOnDemandModeActive(supabase, input.businessId, false);
+    await reconcileOnDemandModeActiveFromSessions(input.businessId);
     return mapStoreSessionRow(currentSession);
   }
 
@@ -337,7 +438,14 @@ export async function closeStoreSession(input: {
     throw new Error("No pudimos cerrar la sesion del negocio.");
   }
 
-  await syncOnDemandModeActive(supabase, input.businessId, false);
+  const sync = await reconcileOnDemandModeActiveFromSessions(input.businessId);
+
+  if (sync.hasOpenStoreSession) {
+    console.warn("[store-sessions] closeStoreSession left other open sessions active", {
+      businessId: input.businessId,
+      closedSessionId: input.sessionId
+    });
+  }
 
   return data ? mapStoreSessionRow(data) : null;
 }

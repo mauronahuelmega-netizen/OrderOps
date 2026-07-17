@@ -129,6 +129,14 @@ function mapCreateOrderRpcError(error: unknown): {
     };
   }
 
+  if (normalizedMessage.includes("insufficient_stock")) {
+    return {
+      code: "PRODUCT_UNAVAILABLE",
+      error:
+        "Algunos productos ya no tienen stock suficiente. Revis\u00e1 tu pedido antes de continuar."
+    };
+  }
+
   if (normalizedMessage.includes("each item must include product_id and quantity > 0")) {
     return {
       code: "VALIDATION_ERROR",

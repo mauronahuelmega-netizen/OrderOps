@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import detailStyles from "./order-detail-surfaces.module.css";
 import type { AdminOrderItem } from "@/lib/orders/admin";
+import { getCustomizationSummaryLines, parseCustomizationSnapshot } from "@/lib/product-customization/order-dashboard";
 
 type OrderProductModalProps = {
   item: AdminOrderItem;
@@ -10,6 +11,11 @@ type OrderProductModalProps = {
 };
 
 export default function OrderProductModal({ item, onClose }: OrderProductModalProps) {
+  const customizationLines = useMemo(
+    () => getCustomizationSummaryLines(parseCustomizationSnapshot(item.customization_snapshot)),
+    [item.customization_snapshot]
+  );
+
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -69,6 +75,18 @@ export default function OrderProductModal({ item, onClose }: OrderProductModalPr
           <div className={detailStyles.itemModalDetails}>
             {item.description ? (
               <p className={detailStyles.itemModalDescription}>{item.description}</p>
+            ) : null}
+
+            {item.item_kind === "upsell" ? (
+              <p className={detailStyles.itemModalDescription}>Plus asociado al producto principal.</p>
+            ) : null}
+
+            {customizationLines.length > 0 ? (
+              <ul className={detailStyles.itemModalCustomizationList}>
+                {customizationLines.map((line, index) => (
+                  <li key={`${item.id}-modal-summary-${index}`}>{line}</li>
+                ))}
+              </ul>
             ) : null}
 
             <dl className={detailStyles.itemModalGrid}>

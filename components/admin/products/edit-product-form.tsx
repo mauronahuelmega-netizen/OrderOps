@@ -5,10 +5,12 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import ImageCropModal from "@/components/admin/products/image-crop-modal";
+import ProductCustomizationOverridesPanel from "@/components/admin/product-customization/product-customization-overrides-panel";
 import { createCategoryAction } from "@/app/admin/(protected)/categories/actions";
 import { updateProductAction } from "@/app/admin/(protected)/products/actions";
 import type { AdminCategory } from "@/lib/categories/admin";
 import type { AdminProduct } from "@/lib/products/admin";
+import { createClientSafeId } from "@/lib/client/safe-random-id";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import toggleStyles from "./product-availability-toggle.module.css";
 import styles from "./product-form.module.css";
@@ -71,6 +73,14 @@ export default function EditProductForm({
   const [isSavingCategory, setIsSavingCategory] = useState(false);
   const [pendingImageSrc, setPendingImageSrc] = useState<string | null>(null);
   const [isAvailable, setIsAvailable] = useState(product.is_available);
+  const [trackStock, setTrackStock] = useState(product.track_stock);
+  const [stockValue, setStockValue] = useState(product.stock ?? 0);
+
+  useEffect(() => {
+    setIsAvailable(product.is_available);
+    setTrackStock(product.track_stock);
+    setStockValue(product.stock ?? 0);
+  }, [product.id, product.is_available, product.track_stock, product.stock]);
 
   useEffect(() => {
     return () => {
@@ -139,7 +149,7 @@ export default function EditProductForm({
     try {
       const supabase = createSupabaseBrowserClient();
       const fileExt = getFileExtension(file.name);
-      const filePath = `${businessId}/${product.id}/${crypto.randomUUID()}.${fileExt}`;
+      const filePath = `${businessId}/${product.id}/${createClientSafeId("product-image")}.${fileExt}`;
 
       const { error: uploadError } = await supabase.storage
         .from("product-images")
@@ -439,8 +449,12 @@ export default function EditProductForm({
               type="number"
               min="0"
               step="1"
-              label="Stock"
-              defaultValue={product.stock ?? 0}
+              label="Stock actual"
+              value={String(stockValue)}
+              onChange={(event) => {
+                const next = Number.parseInt(event.target.value, 10);
+                setStockValue(Number.isFinite(next) ? next : 0);
+              }}
               disabled={isPending}
               required
             />
@@ -465,6 +479,39 @@ export default function EditProductForm({
               </span>
             </div>
           </div>
+
+          <div className={styles.toggleStack}>
+            <div className={styles.toggleStackHeader}>
+              <span className={styles.toggleLabel}>Controlar stock automáticamente</span>
+              <div className={toggleStyles.toggleHost}>
+                <label className={toggleStyles.switch}>
+                  <input
+                    name="track_stock"
+                    type="checkbox"
+                    checked={trackStock}
+                    onChange={(event) => setTrackStock(event.target.checked)}
+                    disabled={isPending}
+                    aria-label="Controlar stock automáticamente"
+                  />
+                  <span className={toggleStyles.slider} />
+                </label>
+                <span className={toggleStyles.statusLabel} aria-hidden="true">
+                  {trackStock ? "Activo" : "Inactivo"}
+                </span>
+              </div>
+            </div>
+            <p className={styles.toggleHelper}>
+              Usá esta opción para productos con unidades contables, como bebidas o postres. Cuando
+              esté activo, OrderOps podrá descontar unidades de este producto al recibir pedidos. Por
+              ahora, esta opción solo prepara el producto para el control automático de stock.
+            </p>
+            {trackStock && stockValue <= 0 ? (
+              <p className={styles.toggleWarning} role="status">
+                Con stock automático activo y stock 0, este producto quedará fuera de venta cuando se
+                apliquen las reglas de inventario.
+              </p>
+            ) : null}
+          </div>
         </div>
 
         <div className={styles.feedback}>
@@ -486,6 +533,8 @@ export default function EditProductForm({
           </Button>
         </div>
       </form>
+
+      <ProductCustomizationOverridesPanel productId={product.id} />
 
       <dialog ref={categoryDialogRef} className={styles.categoryDialog}>
         <form

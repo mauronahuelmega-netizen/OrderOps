@@ -21,6 +21,7 @@ export type AdminProductListItem = {
 export type AdminProduct = AdminProductListItem & {
   description: string | null;
   created_at: string;
+  track_stock: boolean;
   categories: {
     name: string;
   } | null;
@@ -189,6 +190,7 @@ export async function getAdminProductById(
         is_available,
         sku,
         stock,
+        track_stock,
         created_at,
         categories (
           name
@@ -217,6 +219,7 @@ export async function getAdminProductById(
     is_available: data.is_available,
     sku: data.sku,
     stock: data.stock,
+    track_stock: data.track_stock,
     created_at: data.created_at,
     categories: normalizeCategoryRelation(data.categories)
   };

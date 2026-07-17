@@ -13,6 +13,7 @@ import { normalizeHexColor } from "@/components/admin/settings/brand-palette";
 import PublicPresenceReadiness from "@/components/admin/settings/public-presence-readiness";
 import PublicPresencePreview from "@/components/admin/settings/public-presence-preview";
 import { updatePublicBusinessSettingsAction } from "@/app/admin/(protected)/settings/public/actions";
+import { createClientSafeId } from "@/lib/client/safe-random-id";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 
 type ActionState = {
@@ -596,7 +597,7 @@ async function uploadBusinessAsset(
 
   const supabase = createSupabaseBrowserClient();
   const fileExt = getFileExtension(file.name);
-  const filePath = `${businessId}/${folder}/${Date.now()}-${crypto.randomUUID()}.${fileExt}`;
+  const filePath = `${businessId}/${folder}/${Date.now()}-${createClientSafeId("business-asset")}.${fileExt}`;
 
   const { error: uploadError } = await supabase.storage
     .from("business-assets")

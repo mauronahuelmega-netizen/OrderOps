@@ -34,7 +34,11 @@ export const adminNavItems: AdminNavItem[] = [
   {
     href: "/admin/products",
     label: "Productos",
-    matchPrefixes: ["/admin/products", "/admin/categories"],
+    matchPrefixes: [
+      "/admin/products",
+      "/admin/categories",
+      "/admin/products/customizations"
+    ],
     requiredPermission: "manageProducts"
   },
   {

@@ -26,6 +26,14 @@ export default function ProductsHeaderActions({ businessSlug }: ProductsHeaderAc
         {isProductOpen ? "Cerrar producto" : "+ Nuevo producto"}
       </Button>
 
+      <Button
+        href="/admin/products/customizations"
+        className="admin-ghost-link"
+        variant="ghost"
+      >
+        Opcionales y extras
+      </Button>
+
       {catalogHref ? (
         <Button href={catalogHref} className="admin-ghost-link" variant="ghost">
           Ver catálogo

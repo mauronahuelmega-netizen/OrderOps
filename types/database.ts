@@ -35,6 +35,7 @@ export type Database = {
           inactive_working_days: number[];
           kitchen_mode_active: boolean;
           on_demand_mode_active: boolean;
+          product_customization_enabled: boolean;
           scheduled_cutoff_time: string;
           scheduled_max_days_in_advance: number;
           scheduled_min_lead_time_hours: number;
@@ -48,6 +49,7 @@ export type Database = {
           inactive_working_days?: number[];
           kitchen_mode_active?: boolean;
           on_demand_mode_active?: boolean;
+          product_customization_enabled?: boolean;
           scheduled_cutoff_time?: string;
           scheduled_max_days_in_advance?: number;
           scheduled_min_lead_time_hours?: number;
@@ -61,6 +63,7 @@ export type Database = {
           inactive_working_days?: number[];
           kitchen_mode_active?: boolean;
           on_demand_mode_active?: boolean;
+          product_customization_enabled?: boolean;
           scheduled_cutoff_time?: string;
           scheduled_max_days_in_advance?: number;
           scheduled_min_lead_time_hours?: number;
@@ -160,26 +163,193 @@ export type Database = {
           }
         ];
       };
+      customization_group_assignments: {
+        Row: {
+          business_id: string;
+          created_at: string;
+          group_id: string;
+          id: string;
+          is_enabled: boolean;
+          sort_order: number;
+          target_id: string;
+          target_type: "category" | "product";
+          updated_at: string;
+        };
+        Insert: {
+          business_id: string;
+          created_at?: string;
+          group_id: string;
+          id?: string;
+          is_enabled?: boolean;
+          sort_order?: number;
+          target_id: string;
+          target_type: "category" | "product";
+          updated_at?: string;
+        };
+        Update: {
+          business_id?: string;
+          created_at?: string;
+          group_id?: string;
+          id?: string;
+          is_enabled?: boolean;
+          sort_order?: number;
+          target_id?: string;
+          target_type?: "category" | "product";
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "customization_group_assignments_business_id_fkey";
+            columns: ["business_id"];
+            isOneToOne: false;
+            referencedRelation: "businesses";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "customization_group_assignments_group_same_business_fk";
+            columns: ["group_id", "business_id"];
+            isOneToOne: false;
+            referencedRelation: "customization_groups";
+            referencedColumns: ["id", "business_id"];
+          }
+        ];
+      };
+      customization_groups: {
+        Row: {
+          business_id: string;
+          created_at: string;
+          description: string | null;
+          id: string;
+          is_available: boolean;
+          is_required: boolean;
+          max_selections: number | null;
+          min_selections: number;
+          name: string;
+          selection_type: "single" | "multiple";
+          sort_order: number;
+          updated_at: string;
+        };
+        Insert: {
+          business_id: string;
+          created_at?: string;
+          description?: string | null;
+          id?: string;
+          is_available?: boolean;
+          is_required?: boolean;
+          max_selections?: number | null;
+          min_selections?: number;
+          name: string;
+          selection_type: "single" | "multiple";
+          sort_order?: number;
+          updated_at?: string;
+        };
+        Update: {
+          business_id?: string;
+          created_at?: string;
+          description?: string | null;
+          id?: string;
+          is_available?: boolean;
+          is_required?: boolean;
+          max_selections?: number | null;
+          min_selections?: number;
+          name?: string;
+          selection_type?: "single" | "multiple";
+          sort_order?: number;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "customization_groups_business_id_fkey";
+            columns: ["business_id"];
+            isOneToOne: false;
+            referencedRelation: "businesses";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
+      customization_options: {
+        Row: {
+          business_id: string;
+          created_at: string;
+          description: string | null;
+          group_id: string;
+          id: string;
+          is_available: boolean;
+          name: string;
+          price_delta: number;
+          sort_order: number;
+          updated_at: string;
+        };
+        Insert: {
+          business_id: string;
+          created_at?: string;
+          description?: string | null;
+          group_id: string;
+          id?: string;
+          is_available?: boolean;
+          name: string;
+          price_delta?: number;
+          sort_order?: number;
+          updated_at?: string;
+        };
+        Update: {
+          business_id?: string;
+          created_at?: string;
+          description?: string | null;
+          group_id?: string;
+          id?: string;
+          is_available?: boolean;
+          name?: string;
+          price_delta?: number;
+          sort_order?: number;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "customization_options_business_id_fkey";
+            columns: ["business_id"];
+            isOneToOne: false;
+            referencedRelation: "businesses";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "customization_options_group_same_business_fk";
+            columns: ["group_id", "business_id"];
+            isOneToOne: false;
+            referencedRelation: "customization_groups";
+            referencedColumns: ["id", "business_id"];
+          }
+        ];
+      };
       order_items: {
         Row: {
+          customization_snapshot: Json | null;
           id: string;
+          item_kind: "product" | "upsell";
           order_id: string;
+          parent_order_item_id: string | null;
           product_id: string | null;
           product_name: string;
           quantity: number;
           unit_price: number;
         };
         Insert: {
+          customization_snapshot?: Json | null;
           id?: string;
+          item_kind?: "product" | "upsell";
           order_id: string;
+          parent_order_item_id?: string | null;
           product_id?: string | null;
           product_name: string;
           quantity: number;
           unit_price: number;
         };
         Update: {
+          customization_snapshot?: Json | null;
           id?: string;
+          item_kind?: "product" | "upsell";
           order_id?: string;
+          parent_order_item_id?: string | null;
           product_id?: string | null;
           product_name?: string;
           quantity?: number;
@@ -191,6 +361,13 @@ export type Database = {
             columns: ["order_id"];
             isOneToOne: false;
             referencedRelation: "orders";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "order_items_parent_order_item_id_fkey";
+            columns: ["parent_order_item_id"];
+            isOneToOne: false;
+            referencedRelation: "order_items";
             referencedColumns: ["id"];
           },
           {
@@ -320,6 +497,83 @@ export type Database = {
           }
         ];
       };
+      stock_movements: {
+        Row: {
+          id: string;
+          business_id: string;
+          product_id: string;
+          order_id: string | null;
+          order_item_id: string | null;
+          movement_type: "order_decrement" | "order_restock" | "manual_adjustment";
+          quantity_delta: number;
+          stock_before: number;
+          stock_after: number;
+          reason: string | null;
+          metadata: Json;
+          created_by: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          business_id: string;
+          product_id: string;
+          order_id?: string | null;
+          order_item_id?: string | null;
+          movement_type: "order_decrement" | "order_restock" | "manual_adjustment";
+          quantity_delta: number;
+          stock_before: number;
+          stock_after: number;
+          reason?: string | null;
+          metadata?: Json;
+          created_by?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          business_id?: string;
+          product_id?: string;
+          order_id?: string | null;
+          order_item_id?: string | null;
+          movement_type?: "order_decrement" | "order_restock" | "manual_adjustment";
+          quantity_delta?: number;
+          stock_before?: number;
+          stock_after?: number;
+          reason?: string | null;
+          metadata?: Json;
+          created_by?: string | null;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "stock_movements_business_id_fkey";
+            columns: ["business_id"];
+            isOneToOne: false;
+            referencedRelation: "businesses";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "stock_movements_product_id_fkey";
+            columns: ["product_id"];
+            isOneToOne: false;
+            referencedRelation: "products";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "stock_movements_order_id_fkey";
+            columns: ["order_id"];
+            isOneToOne: false;
+            referencedRelation: "orders";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "stock_movements_order_item_id_fkey";
+            columns: ["order_item_id"];
+            isOneToOne: false;
+            referencedRelation: "order_items";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
       products: {
         Row: {
           business_id: string;
@@ -333,6 +587,7 @@ export type Database = {
           price: number;
           sku: string | null;
           stock: number;
+          track_stock: boolean;
         };
         Insert: {
           business_id: string;
@@ -346,6 +601,7 @@ export type Database = {
           price: number;
           sku?: string | null;
           stock?: number;
+          track_stock?: boolean;
         };
         Update: {
           business_id?: string;
@@ -359,6 +615,7 @@ export type Database = {
           price?: number;
           sku?: string | null;
           stock?: number;
+          track_stock?: boolean;
         };
         Relationships: [
           {
@@ -374,6 +631,71 @@ export type Database = {
             isOneToOne: false;
             referencedRelation: "categories";
             referencedColumns: ["id", "business_id"];
+          }
+        ];
+      };
+      product_customization_overrides: {
+        Row: {
+          business_id: string;
+          created_at: string;
+          group_id: string | null;
+          id: string;
+          is_enabled: boolean;
+          option_id: string | null;
+          override_type: "group" | "option";
+          product_id: string;
+          updated_at: string;
+        };
+        Insert: {
+          business_id: string;
+          created_at?: string;
+          group_id?: string | null;
+          id?: string;
+          is_enabled?: boolean;
+          option_id?: string | null;
+          override_type: "group" | "option";
+          product_id: string;
+          updated_at?: string;
+        };
+        Update: {
+          business_id?: string;
+          created_at?: string;
+          group_id?: string | null;
+          id?: string;
+          is_enabled?: boolean;
+          option_id?: string | null;
+          override_type?: "group" | "option";
+          product_id?: string;
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "product_customization_overrides_business_id_fkey";
+            columns: ["business_id"];
+            isOneToOne: false;
+            referencedRelation: "businesses";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "product_customization_overrides_group_same_business_fk";
+            columns: ["group_id", "business_id"];
+            isOneToOne: false;
+            referencedRelation: "customization_groups";
+            referencedColumns: ["id", "business_id"];
+          },
+          {
+            foreignKeyName: "product_customization_overrides_option_same_business_fk";
+            columns: ["option_id", "business_id"];
+            isOneToOne: false;
+            referencedRelation: "customization_options";
+            referencedColumns: ["id", "business_id"];
+          },
+          {
+            foreignKeyName: "product_customization_overrides_product_id_fkey";
+            columns: ["product_id"];
+            isOneToOne: false;
+            referencedRelation: "products";
+            referencedColumns: ["id"];
           }
         ];
       };
@@ -470,6 +792,108 @@ export type Database = {
             columns: ["opened_by"];
             isOneToOne: false;
             referencedRelation: "profiles";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
+      upsell_group_items: {
+        Row: {
+          business_id: string;
+          created_at: string;
+          id: string;
+          is_available: boolean;
+          product_id: string;
+          sort_order: number;
+          updated_at: string;
+          upsell_group_id: string;
+        };
+        Insert: {
+          business_id: string;
+          created_at?: string;
+          id?: string;
+          is_available?: boolean;
+          product_id: string;
+          sort_order?: number;
+          updated_at?: string;
+          upsell_group_id: string;
+        };
+        Update: {
+          business_id?: string;
+          created_at?: string;
+          id?: string;
+          is_available?: boolean;
+          product_id?: string;
+          sort_order?: number;
+          updated_at?: string;
+          upsell_group_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "upsell_group_items_business_id_fkey";
+            columns: ["business_id"];
+            isOneToOne: false;
+            referencedRelation: "businesses";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "upsell_group_items_group_same_business_fk";
+            columns: ["upsell_group_id", "business_id"];
+            isOneToOne: false;
+            referencedRelation: "upsell_groups";
+            referencedColumns: ["id", "business_id"];
+          },
+          {
+            foreignKeyName: "upsell_group_items_product_id_fkey";
+            columns: ["product_id"];
+            isOneToOne: false;
+            referencedRelation: "products";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
+      upsell_groups: {
+        Row: {
+          business_id: string;
+          created_at: string;
+          description: string | null;
+          id: string;
+          is_available: boolean;
+          name: string;
+          sort_order: number;
+          target_id: string;
+          target_type: "category" | "product";
+          updated_at: string;
+        };
+        Insert: {
+          business_id: string;
+          created_at?: string;
+          description?: string | null;
+          id?: string;
+          is_available?: boolean;
+          name: string;
+          sort_order?: number;
+          target_id: string;
+          target_type: "category" | "product";
+          updated_at?: string;
+        };
+        Update: {
+          business_id?: string;
+          created_at?: string;
+          description?: string | null;
+          id?: string;
+          is_available?: boolean;
+          name?: string;
+          sort_order?: number;
+          target_id?: string;
+          target_type?: "category" | "product";
+          updated_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "upsell_groups_business_id_fkey";
+            columns: ["business_id"];
+            isOneToOne: false;
+            referencedRelation: "businesses";
             referencedColumns: ["id"];
           }
         ];

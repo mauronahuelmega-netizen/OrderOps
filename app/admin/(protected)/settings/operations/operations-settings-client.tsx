@@ -114,7 +114,7 @@ export default function OperationsSettingsClient({
           return;
         }
 
-        setOnDemandModeActive(nextActive);
+        setOnDemandModeActive(result.onDemandModeActive ?? nextActive);
         router.refresh();
       });
     },

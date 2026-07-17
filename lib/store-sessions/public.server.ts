@@ -1,6 +1,7 @@
 import "server-only";
 
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
+import { computeOrderAcceptanceActive } from "@/lib/store-sessions/acceptance";
 
 function isMissingStoreSessionsTableError(error: { code?: string; message?: string } | null) {
   if (!error) {
@@ -17,8 +18,36 @@ function isMissingStoreSessionsTableError(error: { code?: string; message?: stri
   );
 }
 
+/**
+ * Public order acceptance aligned with create_order:
+ * requires on_demand_mode_active=true, and an open store session when the
+ * sessions table is available. Prevents UI false-positives when sessions are
+ * open but the column RPC checks is still false.
+ */
 export async function isBusinessAcceptingPublicOrders(businessId: string): Promise<boolean> {
   const supabase = createSupabaseServiceClient();
+
+  const { data: settings, error: settingsError } = await supabase
+    .from("business_settings")
+    .select("on_demand_mode_active")
+    .eq("business_id", businessId)
+    .maybeSingle();
+
+  if (settingsError) {
+    console.error("[store-sessions:public] settings lookup failed", {
+      businessId,
+      code: settingsError.code,
+      message: settingsError.message
+    });
+    return false;
+  }
+
+  const onDemandModeActive = settings?.on_demand_mode_active ?? false;
+
+  if (!onDemandModeActive) {
+    return false;
+  }
+
   const { data: activeSession, error: sessionError } = await supabase
     .from("store_sessions")
     .select("id")
@@ -29,13 +58,10 @@ export async function isBusinessAcceptingPublicOrders(businessId: string): Promi
 
   if (sessionError) {
     if (isMissingStoreSessionsTableError(sessionError)) {
-      const { data: settings } = await supabase
-        .from("business_settings")
-        .select("on_demand_mode_active")
-        .eq("business_id", businessId)
-        .maybeSingle();
-
-      return settings?.on_demand_mode_active ?? false;
+      return computeOrderAcceptanceActive({
+        onDemandModeActive,
+        hasOpenStoreSession: null
+      });
     }
 
     console.error("[store-sessions:public] active session lookup failed", {
@@ -47,5 +73,8 @@ export async function isBusinessAcceptingPublicOrders(businessId: string): Promi
     return false;
   }
 
-  return Boolean(activeSession);
+  return computeOrderAcceptanceActive({
+    onDemandModeActive,
+    hasOpenStoreSession: Boolean(activeSession)
+  });
 }

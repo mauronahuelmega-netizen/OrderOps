@@ -16,6 +16,13 @@ export type PublicProduct = {
   description: string | null;
   price: number;
   image_url: string | null;
+  /** Present only when product_customization_enabled is on for the business. */
+  customizationSummary?: {
+    hasCustomizations: boolean;
+    hasPaidCustomizations: boolean;
+    hasUpsell: boolean;
+    priceFrom: number | null;
+  } | null;
 };
 
 export async function getPublicCatalogByBusinessId(businessId: string): Promise<{

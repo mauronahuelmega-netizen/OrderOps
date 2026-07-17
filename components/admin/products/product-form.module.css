@@ -31,10 +31,40 @@
   padding: 0 0.5rem;
 }
 
+.toggleStack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0 0.5rem;
+}
+
+.toggleStackHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 40px;
+  gap: 1rem;
+}
+
 .toggleLabel {
   color: var(--text-primary);
   font-size: var(--type-body-size);
   font-weight: 500;
+}
+
+.toggleHelper {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--type-caption-size);
+  line-height: 1.4;
+}
+
+.toggleWarning {
+  margin: 0;
+  color: var(--color-pending);
+  font-size: var(--type-caption-size);
+  line-height: 1.4;
 }
 
 .toggleControl {

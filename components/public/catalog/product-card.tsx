@@ -1,10 +1,16 @@
 "use client";
 
 import type { PublicProduct } from "@/lib/catalog/public";
+import {
+  formatPublicCatalogCurrency,
+  shouldShowPriceFrom
+} from "@/lib/product-customization/public-shared";
 
 type ProductCardProps = {
   product: PublicProduct;
   quantity: number;
+  /** When true, hide legacy quantity controls and always route add through onAdd. */
+  requiresCustomization?: boolean;
   onOpen: () => void;
   onAdd: () => void;
   onIncrement: () => void;
@@ -14,6 +20,7 @@ type ProductCardProps = {
 export default function ProductCard({
   product,
   quantity,
+  requiresCustomization = false,
   onOpen,
   onAdd,
   onIncrement,
@@ -25,6 +32,22 @@ export default function ProductCard({
       onOpen();
     }
   }
+
+  const summary = product.customizationSummary
+    ? {
+        productId: product.id,
+        hasCustomizations: product.customizationSummary.hasCustomizations,
+        hasPaidCustomizations: product.customizationSummary.hasPaidCustomizations,
+        hasUpsell: product.customizationSummary.hasUpsell,
+        priceFrom: product.customizationSummary.priceFrom
+      }
+    : null;
+
+  const showFrom = shouldShowPriceFrom(summary);
+  const displayPrice =
+    showFrom && summary?.priceFrom !== null && summary?.priceFrom !== undefined
+      ? summary.priceFrom
+      : Number(product.price);
 
   return (
     <article className="catalog-product-card">
@@ -54,13 +77,14 @@ export default function ProductCard({
             {product.description ? <p>{product.description}</p> : null}
           </div>
           <strong className="catalog-product-card__price">
-            {formatCurrency(Number(product.price))}
+            {showFrom ? "Desde " : null}
+            {formatPublicCatalogCurrency(displayPrice)}
           </strong>
         </div>
       </div>
 
       <div className="catalog-product-card__actions">
-        {quantity > 0 ? (
+        {!requiresCustomization && quantity > 0 ? (
           <div
             className="catalog-quantity-control"
             aria-label={`Cantidad de ${product.name}`}
@@ -102,10 +126,3 @@ export default function ProductCard({
   );
 }
 
-function formatCurrency(value: number) {
-  return new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    maximumFractionDigits: 2
-  }).format(value);
-}

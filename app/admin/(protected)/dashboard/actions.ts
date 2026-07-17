@@ -3,12 +3,12 @@
 import { revalidatePath } from "next/cache";
 import { getActionErrorMessage, logActionFailure } from "@/lib/admin/action-errors";
 import { getAdminContext, requireAdminPermission } from "@/lib/admin/context";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
 import {
   closeStoreSession,
   getActiveStoreSession,
   getLastClosedStoreSession,
-  openStoreSession
+  openStoreSession,
+  reconcileOnDemandModeActiveFromSessions
 } from "@/lib/store-sessions/admin";
 import type { StoreSession } from "@/lib/orders/analytics";
 
@@ -48,21 +48,35 @@ export async function toggleBusinessStatus(
 ): Promise<ToggleBusinessStatusResult> {
   try {
     const adminContext = await requireAdminPermission("managePublicSettings");
-    const supabase = await createSupabaseServerClient();
-    const { error } = await supabase.rpc("set_business_on_demand_status", {
-      p_business_id: adminContext.businessId,
-      p_active: active
-    });
 
-    if (error) {
-      throw error;
+    let onDemandModeActive = false;
+
+    if (active) {
+      await openStoreSession({
+        businessId: adminContext.businessId,
+        actorUserId: adminContext.user.id
+      });
+      onDemandModeActive = true;
+    } else {
+      const activeSession = await getActiveStoreSession(adminContext.businessId);
+
+      if (activeSession) {
+        await closeStoreSession({
+          businessId: adminContext.businessId,
+          sessionId: activeSession.id,
+          actorUserId: adminContext.user.id
+        });
+      }
+
+      const sync = await reconcileOnDemandModeActiveFromSessions(adminContext.businessId);
+      onDemandModeActive = sync.active;
     }
 
     revalidateStoreSessionPaths(adminContext.businessSlug);
 
     return {
       success: true,
-      onDemandModeActive: active
+      onDemandModeActive
     };
   } catch (error) {
     logActionFailure("dashboard.toggleBusinessStatus", error, { active });

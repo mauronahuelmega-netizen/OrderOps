@@ -1,27 +1,56 @@
 "use client";
 
 import type { CSSProperties } from "react";
+import dynamic from "next/dynamic";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import type { PublicBusiness } from "@/lib/business/public";
 import type { PublicCategory, PublicProduct } from "@/lib/catalog/public";
 import {
-  getCartStorageKey,
-  parseLocalCartItems,
-  type LocalCartItem
+  getCartItemCount,
+  getCartItemsTotal,
+  getLegacyQuantityForProduct,
+  loadUnifiedCartItems,
+  mergeCustomizedSelectionIntoCart,
+  persistUnifiedCartItems,
+  removeSingleCartLine,
+  selectionStateFromCartParent,
+  setLegacyProductQuantity,
+  setV2ParentQuantity,
+  type LocalCartItem,
+  type LocalCartItemV2
 } from "@/lib/cart/local";
 import CartBar from "@/components/public/catalog/cart-bar";
+import CartSheet from "@/components/public/catalog/cart-sheet";
 import CategoryNav from "@/components/public/catalog/category-nav";
 import ProductCard from "@/components/public/catalog/product-card";
 import ProductDetailModal from "@/components/public/catalog/product-detail-modal";
+import type { CustomizationConfirmResult } from "@/components/public/catalog/customization-modal";
+import { productNeedsCustomizationModal } from "@/lib/product-customization/public-shared";
+
+const CustomizationModal = dynamic(
+  () => import("@/components/public/catalog/customization-modal"),
+  { ssr: false }
+);
 
 type CatalogClientProps = {
   business: PublicBusiness;
   categories: PublicCategory[];
   products: PublicProduct[];
   slug: string;
+  customizationEnabled?: boolean;
 };
 
 type ResolvedTheme = "light" | "dark";
+
+type CustomizationSession = {
+  productId: string;
+  editingCartLineId: string | null;
+  initialSelection: {
+    selectedOptionsByGroupId: Record<string, string[]>;
+    selectedUpsellProductIds: string[];
+  } | null;
+};
 
 const THEME_STORAGE_KEY = "orderops-public-theme";
 const THEME_CHANGE_EVENT = "orderops-public-theme-change";
@@ -30,17 +59,22 @@ export default function CatalogClient({
   business,
   categories,
   products,
-  slug
+  slug,
+  customizationEnabled = false
 }: CatalogClientProps) {
+  const router = useRouter();
   const [cartItems, setCartItems] = useState<LocalCartItem[]>([]);
+  const [cartHydrated, setCartHydrated] = useState(false);
+  const [isCartSheetOpen, setIsCartSheetOpen] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
+  const [customizationSession, setCustomizationSession] =
+    useState<CustomizationSession | null>(null);
   const [resolvedTheme, setResolvedTheme] = useState<ResolvedTheme>("light");
   const [coverState, setCoverState] = useState<"idle" | "loaded" | "error">(
     business.cover_image_url ? "idle" : "error"
   );
   const coverImageRef = useRef<HTMLImageElement | null>(null);
-  const storageKey = getCartStorageKey(business.id);
 
   const productMap = useMemo(
     () => new Map(products.map((product) => [product.id, product])),
@@ -75,43 +109,89 @@ export default function CatalogClient({
     return counts;
   }, [categoriesWithProducts, productsByCategoryId]);
 
-  const cartCount = useMemo(
-    () => cartItems.reduce((total, item) => total + item.quantity, 0),
-    [cartItems]
-  );
-
-  const cartTotal = useMemo(
-    () => cartItems.reduce((total, item) => total + item.price * item.quantity, 0),
-    [cartItems]
-  );
+  const cartCount = useMemo(() => getCartItemCount(cartItems), [cartItems]);
+  const cartTotal = useMemo(() => getCartItemsTotal(cartItems), [cartItems]);
 
   const selectedProduct = selectedProductId ? productMap.get(selectedProductId) ?? null : null;
+  const customizingProduct = customizationSession
+    ? productMap.get(customizationSession.productId) ?? null
+    : null;
+
+  function productRequiresCustomization(product: PublicProduct) {
+    if (!customizationEnabled) {
+      return false;
+    }
+
+    const summary = product.customizationSummary;
+    if (!summary) {
+      return false;
+    }
+
+    return productNeedsCustomizationModal({
+      productId: product.id,
+      hasCustomizations: summary.hasCustomizations,
+      hasPaidCustomizations: summary.hasPaidCustomizations,
+      hasUpsell: summary.hasUpsell,
+      priceFrom: summary.priceFrom
+    });
+  }
+
+  function openCustomizationModal(
+    product: PublicProduct,
+    options?: {
+      editingCartLineId?: string | null;
+      initialSelection?: CustomizationSession["initialSelection"];
+    }
+  ) {
+    setSelectedProductId(null);
+    setIsCartSheetOpen(false);
+    setCustomizationSession({
+      productId: product.id,
+      editingCartLineId: options?.editingCartLineId ?? null,
+      initialSelection: options?.initialSelection ?? null
+    });
+  }
+
+  function handleAddProduct(product: PublicProduct) {
+    if (productRequiresCustomization(product)) {
+      openCustomizationModal(product);
+      return;
+    }
+
+    setCartItems((current) => setLegacyProductQuantity(current, product, 1));
+  }
+
+  function handleConfirmCustomizationSelection(result: CustomizationConfirmResult) {
+    setCartItems((current) =>
+      mergeCustomizedSelectionIntoCart(current, result.parent, result.children, {
+        replaceCartLineId: result.replaceCartLineId
+      })
+    );
+    setIsCartSheetOpen(true);
+  }
 
   useEffect(() => {
-    const storedValue = window.localStorage.getItem(storageKey);
+    const loaded = loadUnifiedCartItems(business.id).filter((item) => {
+      if ("schemaVersion" in item && item.schemaVersion === 2) {
+        return productMap.has(item.productId);
+      }
+      return productMap.has(item.productId);
+    });
+    setCartItems(loaded);
+    setCartHydrated(true);
+  }, [business.id, productMap]);
 
-    if (!storedValue) {
+  useEffect(() => {
+    if (!cartHydrated) {
       return;
     }
 
     try {
-      setCartItems(
-        parseLocalCartItems(storedValue).filter((item) => productMap.has(item.productId))
-      );
+      persistUnifiedCartItems(business.id, cartItems);
     } catch {
-      window.localStorage.removeItem(storageKey);
+      // localStorage may be unavailable; keep in-memory cart.
     }
-  }, [productMap, storageKey]);
-
-  useEffect(() => {
-    setCartItems((currentItems) =>
-      currentItems.filter((item) => productMap.has(item.productId))
-    );
-  }, [productMap]);
-
-  useEffect(() => {
-    window.localStorage.setItem(storageKey, JSON.stringify(cartItems));
-  }, [cartItems, storageKey]);
+  }, [business.id, cartHydrated, cartItems]);
 
   useEffect(() => {
     if (selectedCategoryId || categoriesWithProducts.length === 0) {
@@ -212,45 +292,29 @@ export default function CatalogClient({
     }
   }, [business.cover_image_url]);
 
-  function getCartItem(productId: string) {
-    return cartItems.find((item) => item.productId === productId) ?? null;
-  }
-
-  function setProductQuantity(product: PublicProduct, quantity: number) {
-    setCartItems((currentItems) => {
-      if (quantity <= 0) {
-        return currentItems.filter((item) => item.productId !== product.id);
-      }
-
-      const existingItem = currentItems.find((item) => item.productId === product.id);
-
-      if (existingItem) {
-        return currentItems.map((item) =>
-          item.productId === product.id ? { ...item, quantity } : item
-        );
-      }
-
-      return [
-        ...currentItems,
-        {
-          productId: product.id,
-          categoryId: product.category_id,
-          name: product.name,
-          description: product.description,
-          imageUrl: product.image_url,
-          price: Number(product.price),
-          quantity
-        }
-      ];
-    });
-  }
-
   function handleCategorySelect(categoryId: string) {
     setSelectedCategoryId(categoryId);
     document.getElementById(`category-${categoryId}`)?.scrollIntoView({
       behavior: "smooth",
       block: "start"
     });
+  }
+
+  function handleEditParent(parent: LocalCartItemV2, children: LocalCartItemV2[]) {
+    const product = productMap.get(parent.productId);
+    if (!product) {
+      return;
+    }
+
+    openCustomizationModal(product, {
+      editingCartLineId: parent.cartLineId,
+      initialSelection: selectionStateFromCartParent(parent, children)
+    });
+  }
+
+  function handleCheckoutFromSheet() {
+    setIsCartSheetOpen(false);
+    router.push(`/b/${slug}/checkout`);
   }
 
   const businessStyles = {
@@ -356,17 +420,31 @@ export default function CatalogClient({
 
                   <div className="catalog-product-list">
                     {categoryProducts.map((product) => {
-                      const quantity = getCartItem(product.id)?.quantity ?? 0;
+                      const quantity = getLegacyQuantityForProduct(cartItems, product.id);
+                      const requiresCustomization = productRequiresCustomization(product);
 
                       return (
                         <ProductCard
                           key={product.id}
                           product={product}
                           quantity={quantity}
+                          requiresCustomization={requiresCustomization}
                           onOpen={() => setSelectedProductId(product.id)}
-                          onAdd={() => setProductQuantity(product, 1)}
-                          onIncrement={() => setProductQuantity(product, quantity + 1)}
-                          onDecrement={() => setProductQuantity(product, quantity - 1)}
+                          onAdd={() => handleAddProduct(product)}
+                          onIncrement={() => {
+                            if (requiresCustomization) {
+                              openCustomizationModal(product);
+                              return;
+                            }
+                            setCartItems((current) =>
+                              setLegacyProductQuantity(current, product, quantity + 1)
+                            );
+                          }}
+                          onDecrement={() =>
+                            setCartItems((current) =>
+                              setLegacyProductQuantity(current, product, quantity - 1)
+                            )
+                          }
                         />
                       );
                     })}
@@ -378,14 +456,64 @@ export default function CatalogClient({
         )}
       </div>
 
-      <CartBar slug={slug} count={cartCount} total={cartTotal} />
+      <CartBar
+        count={cartCount}
+        total={cartTotal}
+        onOpenCart={() => setIsCartSheetOpen(true)}
+      />
+
+      {isCartSheetOpen ? (
+        <CartSheet
+          slug={slug}
+          items={cartItems}
+          onClose={() => setIsCartSheetOpen(false)}
+          onCheckout={handleCheckoutFromSheet}
+          onEditParent={handleEditParent}
+          onRemoveLine={(cartLineId) =>
+            setCartItems((current) => removeSingleCartLine(current, cartLineId))
+          }
+          onChangeParentQuantity={(parentCartLineId, quantity) =>
+            setCartItems((current) =>
+              setV2ParentQuantity(current, parentCartLineId, quantity)
+            )
+          }
+          onChangeLegacyQuantity={(productId, quantity) => {
+            const product = productMap.get(productId);
+            if (!product) {
+              return;
+            }
+            setCartItems((current) =>
+              setLegacyProductQuantity(current, product, quantity)
+            );
+          }}
+        />
+      ) : null}
 
       {selectedProduct ? (
         <ProductDetailModal
           product={selectedProduct}
-          currentQuantity={getCartItem(selectedProduct.id)?.quantity ?? 0}
+          currentQuantity={getLegacyQuantityForProduct(cartItems, selectedProduct.id)}
+          requiresCustomization={productRequiresCustomization(selectedProduct)}
           onClose={() => setSelectedProductId(null)}
-          onSaveQuantity={(quantity) => setProductQuantity(selectedProduct, quantity)}
+          onSaveQuantity={(quantity) =>
+            setCartItems((current) =>
+              setLegacyProductQuantity(current, selectedProduct, quantity)
+            )
+          }
+          onCustomize={() => openCustomizationModal(selectedProduct)}
+        />
+      ) : null}
+
+      {customizingProduct && customizationSession ? (
+        <CustomizationModal
+          slug={slug}
+          productId={customizingProduct.id}
+          productName={customizingProduct.name}
+          categoryId={customizingProduct.category_id}
+          editingCartLineId={customizationSession.editingCartLineId}
+          initialSelection={customizationSession.initialSelection}
+          onClose={() => setCustomizationSession(null)}
+          onConfirmSelection={handleConfirmCustomizationSelection}
         />
       ) : null}
     </main>

@@ -65,6 +65,11 @@ export type AdminOrderItem = {
   unit_price: number;
   description: string | null;
   image_url: string | null;
+  /** Null/undefined treated as legacy product line. */
+  item_kind: "product" | "upsell" | null;
+  parent_order_item_id: string | null;
+  /** Raw jsonb; dashboard parsers tolerate corrupt payloads. */
+  customization_snapshot: unknown;
 };
 
 export type AdminOrderDetail = AdminOrderListItem & {
@@ -112,7 +117,10 @@ export async function getAdminOrders(businessId: string): Promise<AdminOrderDash
           product_id,
           product_name,
           quantity,
-          unit_price
+          unit_price,
+          item_kind,
+          parent_order_item_id,
+          customization_snapshot
         )
       `
     )
@@ -181,7 +189,10 @@ export async function getAdminDashboardOrderById(
           product_id,
           product_name,
           quantity,
-          unit_price
+          unit_price,
+          item_kind,
+          parent_order_item_id,
+          customization_snapshot
         )
       `
     )
@@ -238,6 +249,9 @@ export async function getAdminOrderById(
           product_name,
           quantity,
           unit_price,
+          item_kind,
+          parent_order_item_id,
+          customization_snapshot,
           products (
             image_url,
             description
@@ -310,6 +324,9 @@ type RawOrderItem = {
   product_name: string;
   quantity: number;
   unit_price: number;
+  item_kind?: "product" | "upsell" | null;
+  parent_order_item_id?: string | null;
+  customization_snapshot?: unknown;
   products?:
     | {
         image_url?: string | null;
@@ -321,6 +338,30 @@ type RawOrderItem = {
       }>
     | null;
 };
+
+function normalizeOrderItemKind(
+  value: RawOrderItem["item_kind"]
+): "product" | "upsell" | null {
+  if (value === "product" || value === "upsell") {
+    return value;
+  }
+
+  return null;
+}
+
+function normalizeAdminOrderItemFields(item: RawOrderItem): Pick<
+  AdminOrderItem,
+  "item_kind" | "parent_order_item_id" | "customization_snapshot"
+> {
+  return {
+    item_kind: normalizeOrderItemKind(item.item_kind),
+    parent_order_item_id:
+      typeof item.parent_order_item_id === "string" && item.parent_order_item_id
+        ? item.parent_order_item_id
+        : null,
+    customization_snapshot: item.customization_snapshot ?? null
+  };
+}
 
 type RawOrderEvent = {
   id: string;
@@ -354,7 +395,8 @@ function normalizeOrderItems(items: RawOrderItem[] | null | undefined): AdminOrd
       quantity: item.quantity,
       unit_price: item.unit_price,
       image_url: relatedProduct?.image_url ?? null,
-      description: relatedProduct?.description ?? null
+      description: relatedProduct?.description ?? null,
+      ...normalizeAdminOrderItemFields(item)
     };
   });
 }
@@ -382,7 +424,8 @@ function normalizeDashboardOrderItems(items: RawOrderItem[] | null | undefined):
     quantity: item.quantity,
     unit_price: item.unit_price,
     image_url: null,
-    description: null
+    description: null,
+    ...normalizeAdminOrderItemFields(item)
   }));
 }
 
