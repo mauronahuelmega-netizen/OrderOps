@@ -553,6 +553,13 @@ export type Database = {
         };
         Returns: undefined;
       };
+      transition_order_status: {
+        Args: {
+          p_order_id: string;
+          p_target_status: string;
+        };
+        Returns: Json;
+      };
     };
     Enums: {
       delivery_method: DeliveryMethod;

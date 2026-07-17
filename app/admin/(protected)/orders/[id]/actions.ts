@@ -38,6 +38,43 @@ const ORDER_STATUSES: OrderStatus[] = [
 ];
 const ASSIGNMENT_ACTIONS: AssignmentAction[] = ["claim", "release"];
 
+type TransitionOrderStatusResult = {
+  changed: boolean;
+  previous_status: OrderStatus;
+  status: OrderStatus;
+  restocked_items: number;
+};
+
+function parseTransitionOrderStatusResult(value: unknown): TransitionOrderStatusResult | null {
+  if (!value || typeof value !== "object") {
+    return null;
+  }
+
+  const record = value as Record<string, unknown>;
+  const previousStatus = record.previous_status;
+  const nextStatus = record.status;
+
+  if (
+    typeof record.changed !== "boolean" ||
+    typeof previousStatus !== "string" ||
+    typeof nextStatus !== "string" ||
+    !ORDER_STATUSES.includes(previousStatus as OrderStatus) ||
+    !ORDER_STATUSES.includes(nextStatus as OrderStatus)
+  ) {
+    return null;
+  }
+
+  return {
+    changed: record.changed,
+    previous_status: previousStatus as OrderStatus,
+    status: nextStatus as OrderStatus,
+    restocked_items:
+      typeof record.restocked_items === "number" && Number.isFinite(record.restocked_items)
+        ? record.restocked_items
+        : 0
+  };
+}
+
 function logSupabaseActionError(
   scope: "status" | "assignment",
   action: string,
@@ -147,30 +184,83 @@ export async function updateOrderStatusAction(
       };
     }
 
-    const { data: updatedOrder, error: updateError } = await supabase
-      .from("orders")
-      .update({ status: status as OrderStatus })
-      .eq("id", orderId)
-      .eq("business_id", adminContext.businessId)
-      .select("id, status, assigned_to, assigned_at")
-      .maybeSingle();
+    const { data: transitionData, error: transitionError } = await supabase.rpc(
+      "transition_order_status",
+      {
+        p_order_id: orderId,
+        p_target_status: status
+      }
+    );
 
-    if (updateError) {
-      logSupabaseActionError("status", "updateOrderStatusAction.update", {
+    if (transitionError) {
+      logSupabaseActionError("status", "updateOrderStatusAction.transition", {
         orderId,
         nextStatus: status
-      }, updateError);
+      }, transitionError);
+
+      const rpcMessage =
+        typeof transitionError.message === "string" ? transitionError.message : "";
+
+      if (rpcMessage.includes("RESTOCK_CONFLICT")) {
+        return {
+          error:
+            "No se pudo actualizar el estado porque el stock ya fue ajustado. Volvé a cargar e intentá nuevamente."
+        };
+      }
+
+      if (rpcMessage.includes("ORDER_NOT_FOUND") || rpcMessage.includes("ORDER_BUSINESS_MISMATCH")) {
+        return {
+          error: "Este pedido ya no existe o pertenece a otro negocio.",
+          code: "ORDER_NOT_FOUND"
+        };
+      }
+
+      if (rpcMessage.includes("INVALID_ORDER_STATUS")) {
+        return { error: "Estado invalido." };
+      }
+
       throw new Error("No pudimos actualizar el pedido.");
     }
 
-    if (!updatedOrder) {
-      console.error("[order-mutation:status:empty-update]", {
+    const transitionResult = parseTransitionOrderStatusResult(transitionData);
+
+    if (!transitionResult) {
+      console.error("[order-mutation:status:empty-transition]", {
         action: "updateOrderStatusAction",
         orderId,
         nextStatus: status,
-        message: "Update returned no row"
+        message: "RPC returned unexpected payload",
+        payload: transitionData
       });
-      return { error: "Este pedido ya no existe o pertenece a otro negocio." };
+      return { error: "No pudimos actualizar el pedido." };
+    }
+
+    if (!transitionResult.changed) {
+      return {
+        success: true,
+        changed: false,
+        message: "No hubo cambios para guardar.",
+        order: {
+          id: currentOrder.id,
+          status: transitionResult.status,
+          assigned_to: currentOrder.assigned_to ?? null,
+          assigned_at: currentOrder.assigned_at ?? null
+        }
+      };
+    }
+
+    const { data: updatedOrder, error: reloadError } = await supabase
+      .from("orders")
+      .select("id, status, assigned_to, assigned_at")
+      .eq("id", orderId)
+      .eq("business_id", adminContext.businessId)
+      .maybeSingle();
+
+    if (reloadError) {
+      logSupabaseActionError("status", "updateOrderStatusAction.reload", {
+        orderId,
+        nextStatus: status
+      }, reloadError);
     }
 
     let event: AdminOrderTimelineEvent | null = null;
@@ -182,8 +272,8 @@ export async function updateOrderStatusAction(
         actorProfileId: adminContext.user.id,
         eventType: "status_changed",
         payload: {
-          from_status: currentOrder.status,
-          to_status: status
+          from_status: transitionResult.previous_status,
+          to_status: transitionResult.status
         }
       });
 
@@ -194,8 +284,8 @@ export async function updateOrderStatusAction(
       logActionFailure("orders.updateStatus.event", eventError, {
         businessId: adminContext.businessId,
         orderId,
-        fromStatus: currentOrder.status,
-        toStatus: status
+        fromStatus: transitionResult.previous_status,
+        toStatus: transitionResult.status
       });
     }
 
@@ -204,10 +294,10 @@ export async function updateOrderStatusAction(
       changed: true,
       event,
       order: {
-        id: updatedOrder.id,
-        status: updatedOrder.status as OrderStatus,
-        assigned_to: updatedOrder.assigned_to ?? null,
-        assigned_at: updatedOrder.assigned_at ?? null
+        id: updatedOrder?.id ?? currentOrder.id,
+        status: (updatedOrder?.status as OrderStatus | undefined) ?? transitionResult.status,
+        assigned_to: updatedOrder?.assigned_to ?? currentOrder.assigned_to ?? null,
+        assigned_at: updatedOrder?.assigned_at ?? currentOrder.assigned_at ?? null
       }
     };
   } catch (error) {
