@@ -131,7 +131,22 @@ Sin cambios de lógica; confirmar:
 
 ## Deploy
 
-Autorizado. Commit + push a `main` tras validación visual/funcional mínima.
+Autorizado y ejecutado.
+
+```txt
+Commit: 40366d6 Polish Product Customization admin layout
+Push: origin main
+```
+
+Archivos desplegados:
+
+- `app/admin/(protected)/products/customizations/page.tsx`
+- `components/admin/product-customization/product-customization-admin.module.css`
+- `docs/product-customization-admin-visual-polish-1-layout-theme-polish.md`
+- `docs/CURRENT_PHASE.md`
+- `ORDEROPS_LIVING_MEMORY.md`
+
+Sin migrations · sin server actions · sin DB/RLS.
 
 ## Browser QA
 
