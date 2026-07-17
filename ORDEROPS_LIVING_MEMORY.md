@@ -756,6 +756,12 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-17 — PRODUCT-CUSTOMIZATION-PLUS-COPY-POLISH-1 — Customer-facing Plus Copy Alignment
+
+- **Frontend** PRODUCT-CUSTOMIZATION-PLUS-COPY-POLISH-1 ejecutada. Se alineó el copy público de la sección Plus/Bebidas para que el cliente entienda la venta sugerida como una bebida adicional al pedido. No se modificó la lógica de checkout, inventario, stock_movements, RPC, schema ni configuración de productos. Resultado: **PASS**.
+- Archivos: `lib/product-customization/upsell-copy.ts`, `customization-modal.tsx`, `cart-sheet.tsx`, `checkout-client.tsx`, `docs/product-customization-plus-copy-polish-1-customer-facing-plus-copy-alignment.md`, `docs/CURRENT_PHASE.md`
+- Próxima: opcional hardening RLS public · monitor piloto
+
 ### 2026-07-17 — PRODUCT-CUSTOMIZATION-PLUS-UI-DEPLOY-1 — Deploy Plus Suggestions UI
 
 - **Frontend/Deploy** PRODUCT-CUSTOMIZATION-PLUS-UI-DEPLOY-1 ejecutada. Se desplegó el WIP de Plus UI para Product Customization, habilitando Plus Bebidas en el modal público del producto. Se validó que Coca Cola 500ml se agrega como upsell asociado al producto padre, que checkout crea parent + child item, que stock tracked se descuenta y que cancelar desde admin devuelve stock vía stock_movements. Fix crítico: public read model usa service role porque las policies public de customization/upsell dependen de `business_settings` no legible por anon. Resultado: **PASS**.

@@ -139,6 +139,21 @@
   gap: 0.25rem;
 }
 
+.childrenBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.childrenLabel {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
 .summary li,
 .child {
   font-size: 0.82rem;

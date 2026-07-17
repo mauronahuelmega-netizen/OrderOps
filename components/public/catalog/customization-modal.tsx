@@ -12,6 +12,10 @@ import {
   validateCustomizationSelection,
   type PublicProductCustomizationConfig
 } from "@/lib/product-customization/public-shared";
+import {
+  formatUpsellOptionPrice,
+  getUpsellGroupCopy
+} from "@/lib/product-customization/upsell-copy";
 import styles from "./customization-modal.module.css";
 
 export type CustomizationModalInitialSelection = {
@@ -272,6 +276,11 @@ export default function CustomizationModal({
 
   const ctaLabel = editingCartLineId ? "Actualizar carrito" : "Agregar al carrito";
 
+  const upsellCopy =
+    loadState.status === "ready" && loadState.config.upsellGroup
+      ? getUpsellGroupCopy(loadState.config.upsellGroup.name)
+      : null;
+
   return (
     <div className={styles.backdrop} role="presentation" onClick={onClose}>
       <div
@@ -431,21 +440,13 @@ export default function CustomizationModal({
                 );
               })}
 
-              {loadState.config.upsellGroup ? (
+              {loadState.config.upsellGroup && upsellCopy ? (
                 <section className={styles.upsell}>
                   <div className={styles.groupHeader}>
-                    <h3>También podés sumar</h3>
+                    <h3>{upsellCopy.title}</h3>
                     <span className={styles.groupMeta}>Opcional</span>
                   </div>
-                  {loadState.config.upsellGroup.description ? (
-                    <p className={styles.groupDescription}>
-                      {loadState.config.upsellGroup.description}
-                    </p>
-                  ) : (
-                    <p className={styles.groupDescription}>
-                      {loadState.config.upsellGroup.name}
-                    </p>
-                  )}
+                  <p className={styles.groupDescription}>{upsellCopy.description}</p>
                   <ul className={styles.optionList}>
                     {loadState.config.upsellGroup.products.map((product) => {
                       const checked = selectedUpsellProductIds.includes(product.id);
@@ -469,7 +470,10 @@ export default function CustomizationModal({
                               <strong>{product.name}</strong>
                             </span>
                             <span className={styles.optionDelta}>
-                              {formatPublicCatalogCurrency(product.price)}
+                              {formatUpsellOptionPrice(
+                                product.price,
+                                formatPublicCatalogCurrency
+                              )}
                             </span>
                           </label>
                         </li>

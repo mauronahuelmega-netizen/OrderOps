@@ -1,5 +1,18 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-PLUS-COPY-POLISH-1 (2026-07-17)
+
+**Fase:** PRODUCT-CUSTOMIZATION-PLUS-COPY-POLISH-1 — Customer-facing Plus Copy Alignment  
+**Estado:** PASS  
+**Resultado:** El copy público de Plus Bebidas quedó alineado para clientes. La sección del modal comunica la venta sugerida como una bebida adicional al pedido, manteniendo intacta la lógica de parent+upsell, checkout, stock y restock.
+
+- Helper: `lib/product-customization/upsell-copy.ts` · modal “Sumá una bebida” · carrito/checkout “Adicional”
+- Sin pedido QA · sin DB/RPC/stock
+- Doc: `docs/product-customization-plus-copy-polish-1-customer-facing-plus-copy-alignment.md`
+- **Próxima:** opcional RLS public hardening · monitor piloto
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-PLUS-UI-DEPLOY-1 (2026-07-17)
 
 **Fase:** PRODUCT-CUSTOMIZATION-PLUS-UI-DEPLOY-1 — Deploy Plus Suggestions UI  

@@ -25,6 +25,10 @@ import {
   type LocalCartItem
 } from "@/lib/cart/local";
 import { formatPublicCatalogCurrency } from "@/lib/product-customization/public-shared";
+import {
+  UPSELL_ASSOCIATED_LABEL,
+  formatUpsellAssociatedLine
+} from "@/lib/product-customization/upsell-copy";
 import { createPublicCheckoutOrderAction } from "@/app/b/[slug]/checkout/actions";
 
 type CheckoutClientProps = {
@@ -463,13 +467,28 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
                         ))}
                       </ul>
                     ) : null}
-                    {children.map((child) => (
-                      <p key={child.cartLineId}>
-                        + {child.productName}{" "}
-                        {formatPublicCatalogCurrency(child.finalUnitPrice)}
-                      </p>
-                    ))}
-                  </div>
+                    {children.length > 0 ? (
+                      <div style={{ marginTop: "0.35rem" }}>
+                        <p
+                          style={{
+                            margin: "0 0 0.15rem",
+                            fontSize: "0.85rem",
+                            color: "var(--text-secondary)"
+                          }}
+                        >
+                          {UPSELL_ASSOCIATED_LABEL}
+                        </p>
+                        {children.map((child) => (
+                          <p key={child.cartLineId} style={{ margin: "0.1rem 0" }}>
+                            {formatUpsellAssociatedLine(
+                              child.productName,
+                              child.finalUnitPrice,
+                              formatPublicCatalogCurrency
+                            )}
+                          </p>
+                        ))}
+                      </div>
+                    ) : null}                  </div>
                   <strong>
                     {formatPublicCatalogCurrency(parent.lineTotal + childrenTotal)}
                   </strong>

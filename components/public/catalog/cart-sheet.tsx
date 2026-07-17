@@ -7,6 +7,10 @@ import {
   type LocalCartItemV2
 } from "@/lib/cart/local";
 import { formatPublicCatalogCurrency } from "@/lib/product-customization/public-shared";
+import {
+  UPSELL_ASSOCIATED_LABEL,
+  formatUpsellAssociatedLine
+} from "@/lib/product-customization/upsell-copy";
 import styles from "./cart-sheet.module.css";
 
 type CartSheetProps = {
@@ -129,25 +133,29 @@ export default function CartSheet({
                     ) : null}
 
                     {children.length > 0 ? (
-                      <ul className={styles.children}>
-                        {children.map((child) => (
-                          <li key={child.cartLineId} className={styles.child}>
-                            <span>
-                              + {child.productName}{" "}
-                              <small>
-                                {formatPublicCatalogCurrency(child.finalUnitPrice)}
-                              </small>
-                            </span>
-                            <button
-                              type="button"
-                              className={styles.linkButton}
-                              onClick={() => onRemoveLine(child.cartLineId)}
-                            >
-                              Quitar
-                            </button>
-                          </li>
-                        ))}
-                      </ul>
+                      <div className={styles.childrenBlock}>
+                        <p className={styles.childrenLabel}>{UPSELL_ASSOCIATED_LABEL}</p>
+                        <ul className={styles.children}>
+                          {children.map((child) => (
+                            <li key={child.cartLineId} className={styles.child}>
+                              <span>
+                                {formatUpsellAssociatedLine(
+                                  child.productName,
+                                  child.finalUnitPrice,
+                                  formatPublicCatalogCurrency
+                                )}
+                              </span>
+                              <button
+                                type="button"
+                                className={styles.linkButton}
+                                onClick={() => onRemoveLine(child.cartLineId)}
+                              >
+                                Quitar
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     ) : null}
 
                     <div className={styles.rowActions}>
