@@ -756,6 +756,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-17 — PRODUCT-CUSTOMIZATION-ADMIN-BUTTON-THEME-POLISH-1 — Admin Customizations Button Theme Polish
+
+- **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-BUTTON-THEME-POLISH-1 ejecutada. Se pulieron los botones y controles interactivos de `/admin/products/customizations` para alinearlos con los tokens de theme del admin. La fase mejoró primary, secondary, disabled, hover y focus states en dark/light sin tocar lógica de Product Customization, DB, RLS, checkout, stock ni pedidos. Resultado: **PASS**.
+- Archivos: `product-customization-admin.module.css`, `owner-customization-builder.tsx` (className), `docs/product-customization-admin-button-theme-polish-1-button-theme-polish.md`, `docs/CURRENT_PHASE.md`
+
 ### 2026-07-17 — PRODUCT-CUSTOMIZATION-ADMIN-VISUAL-POLISH-1 — Admin Customizations Layout & Theme Polish
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-VISUAL-POLISH-1 ejecutada. Se pulió visualmente la pantalla `/admin/products/customizations` para alinearla con el shell admin actual. La fase ajustó layout, ancho disponible, tabs, cards y tokens de theme sin modificar lógica de Product Customization, checkout, stock, RLS, DB ni pedidos. Resultado: **PASS**.

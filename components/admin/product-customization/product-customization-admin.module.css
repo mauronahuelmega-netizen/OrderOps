@@ -268,18 +268,28 @@
   min-width: 2rem;
   min-height: 2rem;
   padding: 0 6px;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--surface-interactive-border, var(--border-subtle));
   border-radius: var(--radius-md, 12px);
-  background: var(--bg-surface-hover);
+  background: var(--surface-soft-bg, var(--bg-surface-hover));
   color: var(--text-tertiary);
   cursor: grab;
   contain: paint layout;
   touch-action: none;
+  transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.dragHandle:hover:not(:disabled) {
+  background: var(--surface-interactive-hover-bg, var(--bg-surface-hover));
+  border-color: var(--surface-interactive-hover-border, var(--border-subtle));
+  color: var(--text-secondary);
 }
 
 .dragHandle:disabled {
   cursor: not-allowed;
-  opacity: 0.55;
+  background: var(--surface-muted-bg, var(--bg-surface-hover));
+  border-color: var(--surface-muted-border, var(--border-subtle));
+  color: var(--text-tertiary);
+  opacity: 0.7;
 }
 
 .dragHandle:active:not(:disabled) {
@@ -288,8 +298,8 @@
 
 .dragHandle:focus-visible,
 .moveButton:focus-visible {
-  outline: 2px solid var(--text-secondary);
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: var(--focus-ring, 0 0 0 3px color-mix(in srgb, var(--accent-primary) 28%, transparent));
 }
 
 .moveControls {
@@ -304,18 +314,28 @@
   min-width: 1.75rem;
   min-height: 1.75rem;
   padding: 0;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--surface-interactive-border, var(--border-subtle));
   border-radius: var(--radius-md, 12px);
-  background: var(--bg-canvas);
+  background: var(--surface-soft-bg, var(--bg-canvas));
   color: var(--text-secondary);
   font-size: 0.8125rem;
   line-height: 1;
   cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, color 120ms ease;
+}
+
+.moveButton:hover:not(:disabled) {
+  background: var(--surface-interactive-hover-bg, var(--bg-surface-hover));
+  border-color: var(--surface-interactive-hover-border, var(--border-subtle));
+  color: var(--text-primary);
 }
 
 .moveButton:disabled {
   cursor: not-allowed;
-  opacity: 0.45;
+  background: var(--surface-muted-bg, var(--bg-canvas));
+  border-color: var(--surface-muted-border, var(--border-subtle));
+  color: var(--text-tertiary);
+  opacity: 0.7;
 }
 
 .visuallyHidden {
@@ -636,15 +656,113 @@
   line-height: 1.4;
 }
 
-.secondaryCta {
+/* ——— Button variants (theme polish) ——— */
+
+.primaryCta,
+.builderShell :global(.admin-primary-button) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 72%, transparent);
+  background: var(--accent-primary);
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background 120ms ease, border-color 120ms ease, box-shadow 120ms ease,
+    transform 120ms ease;
+}
+
+.primaryCta:hover:not(:disabled),
+.builderShell :global(.admin-primary-button:hover:not(:disabled)) {
+  background: var(--accent-primary-strong, var(--color-primary-hover));
+  border-color: var(--accent-primary-strong, var(--color-primary-hover));
+  transform: translateY(-1px);
+}
+
+.primaryCta:active:not(:disabled),
+.builderShell :global(.admin-primary-button:active:not(:disabled)) {
+  transform: translateY(0);
+}
+
+.primaryCta:focus-visible,
+.builderShell :global(.admin-primary-button:focus-visible) {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.primaryCta:disabled,
+.builderShell :global(.admin-primary-button:disabled) {
+  background: var(--surface-muted-bg, var(--bg-surface-hover));
+  border-color: var(--surface-muted-border, var(--border-subtle));
+  color: var(--text-tertiary);
+  opacity: 1;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.secondaryCta,
+.builderShell :global(.admin-secondary-link) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 40px;
   padding: 8px 12px;
   border-radius: var(--radius-md, 12px);
   border: 1px solid var(--surface-interactive-border, var(--border-subtle));
-  background: var(--surface-interactive-bg, var(--bg-canvas));
+  background: var(--surface-soft-bg, var(--bg-surface-soft));
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.secondaryCta:hover,
+.builderShell :global(.admin-secondary-link:hover) {
+  background: var(--surface-interactive-hover-bg, var(--bg-surface-hover));
+  border-color: var(--surface-interactive-hover-border, var(--border-subtle));
+  color: var(--text-primary);
+  transform: none;
+}
+
+.secondaryCta:focus-visible,
+.builderShell :global(.admin-secondary-link:focus-visible) {
+  outline: none;
+  box-shadow: var(--focus-ring-soft, var(--focus-ring));
+}
+
+.secondaryCta:disabled,
+.builderShell :global(.admin-secondary-link:disabled),
+.builderShell :global(.admin-secondary-link[aria-disabled="true"]) {
+  background: var(--surface-muted-bg, var(--bg-surface-hover));
+  border-color: var(--surface-muted-border, var(--border-subtle));
+  color: var(--text-tertiary);
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.ghostCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 10px;
+  border-radius: var(--radius-md, 12px);
+  border: 1px solid transparent;
+  background: transparent;
   color: var(--text-secondary);
   font-size: 0.875rem;
   font-weight: 600;
@@ -653,10 +771,20 @@
   transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
 }
 
-.secondaryCta:hover {
+.ghostCta:hover:not(:disabled) {
   background: var(--surface-interactive-hover-bg, var(--bg-surface-hover));
-  border-color: var(--surface-interactive-hover-border, var(--border-subtle));
   color: var(--text-primary);
+}
+
+.ghostCta:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring-soft, var(--focus-ring));
+}
+
+.ghostCta:disabled {
+  color: var(--text-tertiary);
+  cursor: not-allowed;
+  opacity: 0.72;
 }
 
 .advancedBlock,

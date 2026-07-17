@@ -226,7 +226,7 @@ export default function OwnerCustomizationBuilder({
                     <div className={styles.actionsRow}>
                       <button
                         type="button"
-                        className="admin-primary-button"
+                        className={styles.primaryCta}
                         onClick={() => setTab("sections")}
                       >
                         Agregar una sección
@@ -279,7 +279,7 @@ export default function OwnerCustomizationBuilder({
                 <div className={styles.actionsRow}>
                   <button
                     type="button"
-                    className="admin-primary-button"
+                    className={styles.primaryCta}
                     onClick={() => setTab("sections")}
                   >
                     Agregar sección de opciones

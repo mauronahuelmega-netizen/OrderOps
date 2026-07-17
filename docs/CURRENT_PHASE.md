@@ -1,5 +1,19 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-ADMIN-BUTTON-THEME-POLISH-1 (2026-07-17)
+
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-BUTTON-THEME-POLISH-1 — Admin Customizations Button Theme Polish  
+**Estado:** PASS  
+**Resultado:** Los botones y controles interactivos de `/admin/products/customizations` quedaron alineados con los tokens de theme del admin. Dark/light se ven consistentes, los disabled states son claros y la pantalla conserva la lógica operativa intacta.
+
+- Primary: accent (`--accent-primary`) en lugar de ink `text-primary` (evita blanco crudo en dark)
+- Secondary / DnD tokenizados · overrides scoped bajo `.builderShell` para `admin-primary-button`
+- Sin layout/DB/RLS/actions · tsc/build PASS
+- Doc: `docs/product-customization-admin-button-theme-polish-1-button-theme-polish.md`
+- **Próxima:** opcional primary global admin-wide · monitor piloto
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-ADMIN-VISUAL-POLISH-1 (2026-07-17)
 
 **Fase:** PRODUCT-CUSTOMIZATION-ADMIN-VISUAL-POLISH-1 — Admin Customizations Layout & Theme Polish  
