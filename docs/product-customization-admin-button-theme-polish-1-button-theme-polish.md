@@ -106,7 +106,12 @@ Sin cambios de layout; `actionsRow` ya wrappea. Sin overflow observado.
 
 ## Deploy
 
-Autorizado. Commit + push `main` tras CLI PASS.
+```txt
+Commit: 5ea6264 Polish Product Customization admin buttons theme
+Push: origin main → Vercel
+URL: https://orderops.vercel.app
+Hora aprox.: 2026-07-17 ~17:20 UTC-3
+```
 
 ## Browser QA
 
