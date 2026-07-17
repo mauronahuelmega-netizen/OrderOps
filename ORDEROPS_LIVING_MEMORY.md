@@ -756,6 +756,10 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-17 — PRODUCT-CUSTOMIZATION-PUBLIC-RLS-HARDENING-1 — Public Customization Corpus RLS Hardening
+
+- **RLS / Public read model** PRODUCT-CUSTOMIZATION-PUBLIC-RLS-HARDENING-1 ejecutada. Se endureció el acceso público al corpus de Product Customization / Plus UI. Las policies públicas ya no dependen de que anon lea business_settings directamente, sino de un helper SECURITY DEFINER que expone únicamente si Product Customization está habilitado para el tenant. El catálogo público mantiene Plus Bebidas funcionando sin abrir settings internos ni tocar checkout, inventario, stock_movements o RPCs. Migration `20260717170000_product_customization_public_rls_hardening_1.sql`. Resultado: **PASS**.
+
 ### 2026-07-17 — PRODUCT-CUSTOMIZATION-PLUS-COPY-POLISH-1 — Customer-facing Plus Copy Alignment
 
 - **Frontend** PRODUCT-CUSTOMIZATION-PLUS-COPY-POLISH-1 ejecutada. Se alineó el copy público de la sección Plus/Bebidas para que el cliente entienda la venta sugerida como una bebida adicional al pedido. No se modificó la lógica de checkout, inventario, stock_movements, RPC, schema ni configuración de productos. Resultado: **PASS**.

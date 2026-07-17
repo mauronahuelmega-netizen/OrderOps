@@ -1,5 +1,19 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-PUBLIC-RLS-HARDENING-1 (2026-07-17)
+
+**Fase:** PRODUCT-CUSTOMIZATION-PUBLIC-RLS-HARDENING-1 — Public Customization Corpus RLS Hardening  
+**Estado:** PASS  
+**Resultado:** El corpus público de Product Customization / Plus UI dejó de depender del service role directo. RLS pública ahora usa un helper SECURITY DEFINER que expone solo el booleano del flag y permite leer customizations/upsells disponibles cuando Product Customization está activo.
+
+- Helper: `public.is_public_product_customization_enabled(uuid)` · policies public SELECT actualizadas
+- Código: `loadPublicCustomizationCorpus` → `createSupabaseServerClient()` (sin service role en corpus)
+- Apply prod OK · anon REST: groups=3 options=11 upsell Bebidas/Coca · `business_settings` count=0
+- Doc: `docs/product-customization-public-rls-hardening-1-public-corpus-rls-hardening.md`
+- **Próxima:** monitor piloto · opcional test flag-OFF · opcional flag gate vía RPC
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-PLUS-COPY-POLISH-1 (2026-07-17)
 
 **Fase:** PRODUCT-CUSTOMIZATION-PLUS-COPY-POLISH-1 — Customer-facing Plus Copy Alignment  

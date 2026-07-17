@@ -9,7 +9,7 @@ import {
   type PublicProductCustomizationSummary,
   type PublicUpsellGroupView
 } from "@/lib/product-customization/public-shared";
-import { createSupabaseServiceClient } from "@/lib/supabase/service";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type ProductRow = {
   id: string;
@@ -215,12 +215,11 @@ function resolveGroupsForProduct(params: {
 }
 
 async function loadPublicCustomizationCorpus(businessId: string, productIds: string[]) {
-  // Service role: public RLS policies on customization_*/upsell_* gate on
-  // business_settings.product_customization_enabled, but anon cannot SELECT
-  // business_settings (member-only). Callers already fail-closed via
-  // isProductCustomizationEnabled (also service-role). Queries still filter
-  // by business_id + availability.
-  const supabase = createSupabaseServiceClient();
+  // Anon/authenticated SSR client. Public SELECT policies gate on
+  // is_public_product_customization_enabled(business_id) (SECURITY DEFINER
+  // boolean helper) so anon does not need SELECT on business_settings.
+  // Callers already fail-closed via isProductCustomizationEnabled.
+  const supabase = await createSupabaseServerClient();
 
   const { data: products, error: productsError } = await supabase
     .from("products")
