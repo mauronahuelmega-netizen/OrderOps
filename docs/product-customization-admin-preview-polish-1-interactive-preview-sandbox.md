@@ -99,7 +99,12 @@ Admin preview no escribe cart keys. Side effects de cart solo en flujo público 
 
 ## Deploy
 
-Commit + push `main` (documentar hash).
+```txt
+Commit: 2226256 Add interactive Product Customization admin preview
+Push: origin main → Vercel
+URL: https://orderops.vercel.app
+Hora aprox.: 2026-07-17 ~23:00 UTC-3
+```
 
 ## Browser QA
 
