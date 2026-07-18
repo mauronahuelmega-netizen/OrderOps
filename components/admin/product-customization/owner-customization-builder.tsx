@@ -5,8 +5,8 @@ import { useMemo, useState } from "react";
 import CustomizationAssignmentsSection from "@/components/admin/product-customization/customization-assignments-section";
 import AdminCustomizationLivePreview from "@/components/admin/product-customization/admin-customization-live-preview";
 import ProductCustomizationOverridesPanel from "@/components/admin/product-customization/product-customization-overrides-panel";
+import PlusSuggestionsTab from "@/components/admin/product-customization/plus-suggestions/plus-suggestions-tab";
 import ReusableSectionsTab from "@/components/admin/product-customization/reusable-sections/reusable-sections-tab";
-import UpsellGroupsSection from "@/components/admin/product-customization/upsell-groups-section";
 import type { AdminCategory } from "@/lib/categories/admin";
 import {
   buildCategoryRows,
@@ -459,14 +459,12 @@ export default function OwnerCustomizationBuilder({
       ) : null}
 
       {tab === "plus" ? (
-        <div className={styles.plusWorkspace}>
-          <UpsellGroupsSection
-            categories={categories}
-            products={products}
-            upsellGroups={upsellGroups}
-            defaultSortOrder={nextUpsellSort}
-          />
-        </div>
+        <PlusSuggestionsTab
+          categories={categories}
+          products={products}
+          upsellGroups={upsellGroups}
+          defaultSortOrder={nextUpsellSort}
+        />
       ) : null}
     </div>
   );

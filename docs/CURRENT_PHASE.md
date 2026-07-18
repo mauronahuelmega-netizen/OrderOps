@@ -1,5 +1,32 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-COMPACT-1 (2026-07-18)
+
+**Fase:** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-COMPACT-1 — Compact Plus Suggestions UI  
+**Estado:** PASS  
+**Resultado:** La pestaña Plus sugeridos fue compactada: las ventas sugeridas ahora se muestran como cards resumidas, la edición ocurre en modales y los productos sugeridos se gestionan en un modal dedicado sin tocar la lógica operativa.
+
+- Components: `plus-suggestions/*` · wired en `owner-customization-builder`
+- Actions reutilizadas (create/update/toggle group + add/update/toggle item; ↑↓ vía update item)
+- Doc: `docs/product-customization-plus-suggestions-compact-1-compact-plus-suggestions-ui.md`
+- **Próxima:** cleanup legacy `upsell-groups-section` · monitor piloto
+
+---
+
+## Registro — PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-UX-SPEC-1 (2026-07-18)
+
+**Fase:** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-UX-SPEC-1 — Plus Suggestions Compact UX Specification  
+**Estado:** PASS  
+**Resultado:** Se definió la UX compacta para Plus sugeridos, reemplazando formularios inline extensos por cards resumidas, menús de acciones y modales de edición para ventas sugeridas y productos sugeridos, sin cambiar lógica operativa.
+
+- Doc: `docs/product-customization-plus-suggestions-ux-spec-1-compact-plus-suggestions.md`
+- Principio: lista = lectura; modal = edición / gestionar productos
+- Actions existentes reutilizables; sin delete/remove; sin reorder RPC (↑↓ vía update item)
+- Patrón alineado a Secciones reutilizables compact
+- **Próxima:** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-COMPACT-1
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-CLEANUP-1 (2026-07-18)
 
 **Fase:** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-CLEANUP-1 — Reusable Sections Legacy Cleanup  
@@ -10,7 +37,7 @@
 - CSS huérfano sections-only removido del module admin (compartido Plus/assignments conservado)
 - Doc: `docs/product-customization-reusable-sections-cleanup-1-legacy-cleanup.md`
 - Deploy: commit `5819460` → `origin/main` → https://orderops.vercel.app
-- **Próxima:** opcional compact Plus sugeridos · monitor piloto
+- **Próxima:** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-COMPACT-1 (tras UX-SPEC)
 
 ---
 
