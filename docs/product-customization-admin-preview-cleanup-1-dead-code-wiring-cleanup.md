@@ -152,7 +152,14 @@ placeholder listadas arriba. Sin cleanup masivo ni cambios a tokens globales.
 
 ## Deploy
 
-Pendiente en el momento de redactar este archivo; se completa tras commit push a `main`.
+| Campo | Valor |
+|-------|-------|
+| Commit | `34b0b55` |
+| Mensaje | Clean up Product Customization admin preview legacy code |
+| Remote | `origin/main` pushed |
+| URL | https://orderops.vercel.app |
+| Hora aprox. | 2026-07-17 (noche AR) |
+| Nota | Vercel deploy vía push a `main` (autorizado) |
 
 ## Browser QA
 

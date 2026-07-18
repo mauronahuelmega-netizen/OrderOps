@@ -10,6 +10,7 @@
 - CSS huérfano del placeholder removido del module admin
 - Sandbox `AdminCustomizationLivePreview` + modal público smoke OK
 - Doc: `docs/product-customization-admin-preview-cleanup-1-dead-code-wiring-cleanup.md`
+- Deploy: commit `34b0b55` → `origin/main` → https://orderops.vercel.app
 - **Próxima:** opcional overrides en mapper admin · monitor piloto
 
 ---
