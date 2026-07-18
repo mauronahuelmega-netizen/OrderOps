@@ -1,5 +1,19 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-CLEANUP-1 (2026-07-17)
+
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-CLEANUP-1 — Admin Preview Dead Code & Wiring Cleanup  
+**Estado:** PASS  
+**Resultado:** Se eliminó la preview placeholder anterior y se limpió wiring/imports/CSS obsoleto relacionado. La preview sandbox interactiva sigue funcionando y el modal público conserva su comportamiento.
+
+- Eliminado: `customer-preview-panel.tsx` (0 imports)
+- CSS huérfano del placeholder removido del module admin
+- Sandbox `AdminCustomizationLivePreview` + modal público smoke OK
+- Doc: `docs/product-customization-admin-preview-cleanup-1-dead-code-wiring-cleanup.md`
+- **Próxima:** opcional overrides en mapper admin · monitor piloto
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-POLISH-1 (2026-07-17)
 
 **Fase:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-POLISH-1 — Interactive Admin Preview Sandbox  

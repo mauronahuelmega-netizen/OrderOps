@@ -903,16 +903,6 @@
   line-height: 1.45;
 }
 
-.previewProductCard,
-.previewModalCard {
-  display: grid;
-  gap: 8px;
-  padding: 12px;
-  border: 1px solid var(--surface-soft-border, var(--border-subtle));
-  border-radius: var(--radius-md, 12px);
-  background: var(--surface-soft-bg, var(--bg-canvas));
-}
-
 .previewProductName {
   margin: 0;
   color: var(--text-primary);
@@ -924,79 +914,6 @@
   margin: 0;
   color: var(--text-secondary);
   font-size: 0.875rem;
-}
-
-.previewModalTitle {
-  margin: 0;
-  color: var(--text-primary);
-  font-size: 0.875rem;
-  font-weight: 650;
-}
-
-.previewSection {
-  display: grid;
-  gap: 6px;
-}
-
-.previewSectionTitle {
-  margin: 0;
-  color: var(--text-primary);
-  font-size: 0.8125rem;
-  font-weight: 600;
-}
-
-.previewOptionList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 6px;
-}
-
-.previewOptionRow {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 8px;
-  color: var(--text-secondary);
-  font-size: 0.8125rem;
-}
-
-.previewRadio,
-.previewCheck {
-  width: 14px;
-  height: 14px;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-surface);
-  flex: 0 0 auto;
-  contain: paint layout;
-}
-
-.previewRadio {
-  border-radius: 999px;
-}
-
-.previewCheck {
-  border-radius: 3px;
-}
-
-.previewDelta {
-  margin-left: auto;
-  color: var(--text-tertiary);
-  font-size: 0.75rem;
-}
-
-.previewMuted {
-  margin: 0;
-  color: var(--text-tertiary);
-  font-size: 0.8125rem;
-}
-
-.previewFoot {
-  margin: 0;
-  color: var(--text-tertiary);
-  font-size: 0.75rem;
-  line-height: 1.4;
 }
 
 @media (min-width: 900px) and (max-width: 1199px) {
