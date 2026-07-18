@@ -9,6 +9,7 @@
 - Eliminados: `create-group-form.tsx`, `customization-group-card.tsx`, `sortable-groups-list.tsx`
 - CSS huérfano sections-only removido del module admin (compartido Plus/assignments conservado)
 - Doc: `docs/product-customization-reusable-sections-cleanup-1-legacy-cleanup.md`
+- Deploy: commit `5819460` → `origin/main` → https://orderops.vercel.app
 - **Próxima:** opcional compact Plus sugeridos · monitor piloto
 
 ---

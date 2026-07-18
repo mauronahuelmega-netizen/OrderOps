@@ -759,7 +759,7 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ### 2026-07-18 — PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-CLEANUP-1 — Reusable Sections Legacy Cleanup
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-CLEANUP-1 ejecutada. Se limpió deuda técnica posterior a la compactación de Secciones reutilizables, eliminando componentes legacy/imports/CSS obsoletos del flujo inline anterior donde fue seguro hacerlo. La UI compacta, preview admin, tabs restantes y catálogo público se mantienen operativos sin tocar DB, RLS, checkout, cart, stock ni pedidos. Resultado: **PASS**.
-- Archivos eliminados: `create-group-form.tsx`, `customization-group-card.tsx`, `sortable-groups-list.tsx`; CSS huérfano en `product-customization-admin.module.css`; docs de fase
+- Archivos eliminados: `create-group-form.tsx`, `customization-group-card.tsx`, `sortable-groups-list.tsx`; CSS huérfano en `product-customization-admin.module.css`; docs de fase; commit `5819460`
 
 ### 2026-07-18 — PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-COMPACT-1 — Compact Reusable Sections UI
 

@@ -122,7 +122,11 @@ Por producto · Por categoría · Plus sugeridos: cargan; preview admin operativ
 
 ## Deploy
 
-Autorizado. Commit + push `main` documentados en CURRENT_PHASE tras deploy.
+Autorizado y ejecutado.
+
+- Commit: `5819460` — `Clean up legacy reusable customization sections`
+- Push: `origin/main`
+- App: https://orderops.vercel.app
 
 ## Browser QA
 
