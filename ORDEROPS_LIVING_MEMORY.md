@@ -759,7 +759,7 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ### 2026-07-18 — PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-COMPACT-1 — Compact Reusable Sections UI
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-COMPACT-1 ejecutada. Se compactó la pestaña Secciones reutilizables del admin de Product Customization. La pantalla principal ahora usa cards resumidas, menú de acciones y modales para editar secciones/opciones, reduciendo scroll y mejorando comprensión para el dueño del negocio. La fase reutilizó actions existentes y no modificó DB, RLS, checkout, cart, stock ni pedidos. Resultado: **PASS**.
-- Archivos: `components/admin/product-customization/reusable-sections/*`, `owner-customization-builder.tsx`, docs de fase
+- Archivos: `components/admin/product-customization/reusable-sections/*`, `owner-customization-builder.tsx`, docs de fase; commit `a124459`
 
 ### 2026-07-18 — PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-UX-SPEC-1 — Reusable Sections Compact UX Specification
 

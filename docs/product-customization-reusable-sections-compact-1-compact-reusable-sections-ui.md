@@ -141,7 +141,12 @@ Sin migrations/schema/RLS · sin cart/checkout/stock · sin flags · solo action
 
 ## Deploy
 
-Pendiente completar en CURRENT_PHASE tras push.
+| Campo | Valor |
+|-------|-------|
+| Commit | `a124459` |
+| Mensaje | Compact reusable Product Customization sections |
+| Remote | `origin/main` |
+| URL | https://orderops.vercel.app |
 
 ## Browser QA
 

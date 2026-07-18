@@ -9,6 +9,7 @@
 - Components: `reusable-sections/*` · wired en `owner-customization-builder`
 - Actions reutilizadas (create/update/toggle/reorder)
 - Doc: `docs/product-customization-reusable-sections-compact-1-compact-reusable-sections-ui.md`
+- Deploy: commit `a124459` → `origin/main` → https://orderops.vercel.app
 - **Próxima:** cleanup legacy forms · opcional compact Plus tab
 
 ---
