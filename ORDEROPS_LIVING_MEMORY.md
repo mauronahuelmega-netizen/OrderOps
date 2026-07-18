@@ -759,7 +759,7 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ### 2026-07-17 — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-CLEANUP-1 — Admin Preview Dead Code & Wiring Cleanup
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-CLEANUP-1 ejecutada. Se limpió deuda técnica de la preview admin anterior de Product Customization, eliminando código muerto/imports/CSS obsoleto donde correspondía. La preview sandbox interactiva y el modal público se mantienen operativos sin tocar DB, RLS, checkout, cart, stock ni pedidos. Resultado: **PASS**.
-- Archivos: eliminado `customer-preview-panel.tsx`; CSS placeholder huérfano en `product-customization-admin.module.css`; docs de fase
+- Archivos: eliminado `customer-preview-panel.tsx`; CSS placeholder huérfano en `product-customization-admin.module.css`; docs de fase; commits `34b0b55` / `c93d9fc`
 
 ### 2026-07-17 — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-POLISH-1 — Interactive Admin Preview Sandbox
 
