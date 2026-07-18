@@ -1,5 +1,31 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-COMPACT-1 (2026-07-18)
+
+**Fase:** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-COMPACT-1 — Compact Reusable Sections UI  
+**Estado:** PASS  
+**Resultado:** La pestaña Secciones reutilizables fue compactada: las secciones ahora se muestran como cards resumidas, la edición ocurre en modales, las opciones se gestionan en un modal dedicado y se eliminaron los formularios inline extensos sin tocar la lógica operativa.
+
+- Components: `reusable-sections/*` · wired en `owner-customization-builder`
+- Actions reutilizadas (create/update/toggle/reorder)
+- Doc: `docs/product-customization-reusable-sections-compact-1-compact-reusable-sections-ui.md`
+- **Próxima:** cleanup legacy forms · opcional compact Plus tab
+
+---
+
+## Registro — PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-UX-SPEC-1 (2026-07-18)
+
+**Fase:** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-UX-SPEC-1 — Reusable Sections Compact UX Specification  
+**Estado:** PASS  
+**Resultado:** Se definió la UX compacta para Secciones reutilizables, reemplazando formularios inline extensos por cards resumidas, menús de acciones y modales de edición para secciones y opciones, sin cambiar lógica operativa.
+
+- Doc: `docs/product-customization-reusable-sections-ux-spec-1-compact-reusable-sections.md`
+- Principio: lista = lectura/orden; modal = edición
+- Actions existentes reutilizables; sin delete/duplicate en V1
+- **Próxima:** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-COMPACT-1
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-OVERRIDES-1 (2026-07-18)
 
 **Fase:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-OVERRIDES-1 — Admin Preview Product Overrides Fidelity  

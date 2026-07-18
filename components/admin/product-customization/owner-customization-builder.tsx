@@ -2,11 +2,10 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import CreateCustomizationGroupForm from "@/components/admin/product-customization/create-group-form";
 import CustomizationAssignmentsSection from "@/components/admin/product-customization/customization-assignments-section";
 import AdminCustomizationLivePreview from "@/components/admin/product-customization/admin-customization-live-preview";
 import ProductCustomizationOverridesPanel from "@/components/admin/product-customization/product-customization-overrides-panel";
-import SortableGroupsList from "@/components/admin/product-customization/sortable-groups-list";
+import ReusableSectionsTab from "@/components/admin/product-customization/reusable-sections/reusable-sections-tab";
 import UpsellGroupsSection from "@/components/admin/product-customization/upsell-groups-section";
 import type { AdminCategory } from "@/lib/categories/admin";
 import {
@@ -456,40 +455,7 @@ export default function OwnerCustomizationBuilder({
       ) : null}
 
       {tab === "sections" ? (
-        <div className={styles.sectionsWorkspace}>
-          <div className={styles.paneHeader}>
-            <h2 className={styles.panelTitle}>Secciones reutilizables</h2>
-            <p className={styles.panelSubtitle}>
-              Creá secciones de opciones que después podés usar en varios productos o
-              categorías. Ejemplos: Tamaño de papas, Extras, Aderezos, Tipo de pan.
-            </p>
-          </div>
-
-          <div className={styles.sectionsLayout}>
-            <CreateCustomizationGroupForm defaultSortOrder={nextGroupSort} />
-
-            <div className={styles.groupsColumn}>
-              <section className="admin-form-card">
-                <div className="admin-form-header">
-                  <h2>Tus secciones</h2>
-                  <p>Editá reglas de selección y las opciones de cada sección.</p>
-                </div>
-
-                {groups.length > 0 ? (
-                  <SortableGroupsList groups={groups} />
-                ) : (
-                  <div className="admin-empty-state">
-                    <h2>Todavía no hay secciones</h2>
-                    <p>
-                      Creá la primera (por ejemplo “Tamaño de papas” o “Aderezos”) para
-                      empezar a armar opcionales y extras.
-                    </p>
-                  </div>
-                )}
-              </section>
-            </div>
-          </div>
-        </div>
+        <ReusableSectionsTab groups={groups} nextGroupSort={nextGroupSort} />
       ) : null}
 
       {tab === "plus" ? (

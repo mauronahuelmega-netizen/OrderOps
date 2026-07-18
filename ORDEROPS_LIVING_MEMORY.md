@@ -756,6 +756,16 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-18 — PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-COMPACT-1 — Compact Reusable Sections UI
+
+- **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-COMPACT-1 ejecutada. Se compactó la pestaña Secciones reutilizables del admin de Product Customization. La pantalla principal ahora usa cards resumidas, menú de acciones y modales para editar secciones/opciones, reduciendo scroll y mejorando comprensión para el dueño del negocio. La fase reutilizó actions existentes y no modificó DB, RLS, checkout, cart, stock ni pedidos. Resultado: **PASS**.
+- Archivos: `components/admin/product-customization/reusable-sections/*`, `owner-customization-builder.tsx`, docs de fase
+
+### 2026-07-18 — PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-UX-SPEC-1 — Reusable Sections Compact UX Specification
+
+- **Spec / Admin UX** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-UX-SPEC-1 ejecutada. Se diseñó la compactación de la pestaña Secciones reutilizables dentro del admin de Product Customization. La propuesta reemplaza formularios inline largos por cards compactas, menús de tres puntos y modales de edición para secciones/opciones, manteniendo la lógica existente y priorizando comprensión para el dueño del negocio. Resultado: **PASS**.
+- Archivos: `docs/product-customization-reusable-sections-ux-spec-1-compact-reusable-sections.md`, `docs/CURRENT_PHASE.md` (sin cambios runtime)
+
 ### 2026-07-18 — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-OVERRIDES-1 — Admin Preview Product Overrides Fidelity
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-OVERRIDES-1 ejecutada. La preview interactiva del admin ahora respeta las excepciones del producto seleccionado, ocultando grupos u opciones desactivadas por override y manteniendo grupos propios/product-specific. La fase ajustó el mapper/admin read model sin tocar checkout, carrito, pedidos, stock, RLS ni schema. Resultado: **PASS WITH DATA QA DEBT**.
