@@ -1,5 +1,33 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-POLISH-1 (2026-07-17)
+
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-POLISH-1 — Interactive Admin Preview Sandbox  
+**Estado:** PASS  
+**Resultado:** La preview admin de Product Customization ahora es interactiva y sandbox. Permite probar selección single/multi, plus/adicionales y total estimado reutilizando componentes presentacionales del modal público, sin agregar al carrito, sin localStorage, sin checkout y sin writes.
+
+- Shared: option-group/row · upsell · price-summary · \`preview-selection.ts\`
+- Admin: \`admin-customization-live-preview.tsx\` + \`admin-preview-mapper.ts\`
+- Público: modal refactorizado sin cambio de comportamiento (smoke Papas/Salsas/Plus OK)
+- Doc: \`docs/product-customization-admin-preview-polish-1-interactive-preview-sandbox.md\`
+- **Próxima:** opcional overrides en mapper · cleanup CustomerPreviewPanel
+
+---
+
+## Registro — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-SPEC-1 (2026-07-17)
+
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-SPEC-1 — Interactive Admin Preview Architecture Spec  
+**Estado:** PASS  
+**Resultado:** Se auditó el modal público y la preview admin actual. Se definió una arquitectura segura para una preview interactiva en modo sandbox, reutilizando componentes presentacionales sin arrastrar carrito, checkout, localStorage ni side effects.
+
+- Veredicto: **no** importar `CustomizationModal` completo
+- Recomendación: extraer presentacionales shared + estado local sandbox + mapper admin→`PublicProductCustomizationConfig`
+- Reutilizar: `validateCustomizationSelection`, `computeVisualCustomizationTotal`, `upsell-copy`
+- Doc: `docs/product-customization-admin-preview-spec-1-interactive-admin-preview-architecture.md`
+- **Próxima:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-POLISH-1 (implementación)
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-ADMIN-BUTTON-THEME-POLISH-1 (2026-07-17)
 
 **Fase:** PRODUCT-CUSTOMIZATION-ADMIN-BUTTON-THEME-POLISH-1 — Admin Customizations Button Theme Polish  

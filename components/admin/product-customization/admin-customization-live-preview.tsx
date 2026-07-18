@@ -1,0 +1,210 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+import CustomizationOptionGroup from "@/components/product-customization/shared/customization-option-group";
+import CustomizationPriceSummary from "@/components/product-customization/shared/customization-price-summary";
+import UpsellSuggestionGroup from "@/components/product-customization/shared/upsell-suggestion-group";
+import sharedStyles from "@/components/product-customization/shared/customization-shared.module.css";
+import { mapAdminCorpusToPreviewConfig } from "@/lib/product-customization/admin-preview-mapper";
+import {
+  selectSingleOption,
+  toggleMultipleOption,
+  toggleUpsellProduct
+} from "@/lib/product-customization/preview-selection";
+import {
+  computeVisualCustomizationTotal,
+  formatPublicCatalogCurrency,
+  validateCustomizationSelection
+} from "@/lib/product-customization/public-shared";
+import type {
+  AdminCatalogProductOption,
+  AdminCustomizationAssignment,
+  AdminCustomizationGroup,
+  AdminUpsellGroup
+} from "@/lib/product-customization/shared";
+import styles from "./product-customization-admin.module.css";
+
+type Props = {
+  product: AdminCatalogProductOption | null;
+  groups: AdminCustomizationGroup[];
+  assignments: AdminCustomizationAssignment[];
+  upsellGroups: AdminUpsellGroup[];
+  collapsible?: boolean;
+  defaultOpen?: boolean;
+};
+
+export default function AdminCustomizationLivePreview({
+  product,
+  groups,
+  assignments,
+  upsellGroups,
+  collapsible = false,
+  defaultOpen = true
+}: Props) {
+  const config = useMemo(
+    () =>
+      mapAdminCorpusToPreviewConfig({
+        product,
+        groups,
+        assignments,
+        upsellGroups
+      }),
+    [product, groups, assignments, upsellGroups]
+  );
+
+  const [selectedOptionsByGroupId, setSelectedOptionsByGroupId] = useState<
+    Record<string, string[]>
+  >({});
+  const [selectedUpsellProductIds, setSelectedUpsellProductIds] = useState<string[]>(
+    []
+  );
+
+  useEffect(() => {
+    setSelectedOptionsByGroupId({});
+    setSelectedUpsellProductIds([]);
+  }, [product?.id]);
+
+  const validation = useMemo(() => {
+    if (!config) {
+      return { valid: true, issues: [] as { groupId: string; message: string }[] };
+    }
+    return validateCustomizationSelection(config.groups, selectedOptionsByGroupId);
+  }, [config, selectedOptionsByGroupId]);
+
+  const visualTotal = useMemo(() => {
+    if (!config) {
+      return 0;
+    }
+    return computeVisualCustomizationTotal({
+      basePrice: config.productPrice,
+      groups: config.groups,
+      selectedOptionsByGroupId,
+      upsellProducts: config.upsellGroup?.products ?? [],
+      selectedUpsellProductIds
+    });
+  }, [config, selectedOptionsByGroupId, selectedUpsellProductIds]);
+
+  const issueByGroupId = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const issue of validation.issues) {
+      map.set(issue.groupId, issue.message);
+    }
+    return map;
+  }, [validation.issues]);
+
+  const body = (
+    <div className={styles.previewBody}>
+      <p className={styles.previewNote}>Vista previa interactiva · no agrega al carrito</p>
+
+      {!product || !config ? (
+        <p className={styles.previewEmpty}>
+          Elegí un producto a la izquierda para probar cómo verá el cliente las opciones.
+        </p>
+      ) : (
+        <div className={styles.previewLiveShell}>
+          <div className={styles.previewLiveHeader}>
+            <p className={styles.previewLiveEyebrow}>Personalizar</p>
+            <p className={styles.previewProductName}>{config.productName}</p>
+            <p className={styles.previewProductPrice}>
+              Precio base {formatPublicCatalogCurrency(config.productPrice)}
+            </p>
+          </div>
+
+          <div className={styles.previewLiveBody}>
+            {config.groups.length === 0 && !config.upsellGroup ? (
+              <p className={styles.previewEmpty}>
+                Este producto no tiene opciones ni plus configurados todavía.
+              </p>
+            ) : null}
+
+            {config.groups.map((group) => (
+              <CustomizationOptionGroup
+                key={group.id}
+                group={group}
+                selectedOptionIds={selectedOptionsByGroupId[group.id] ?? []}
+                issue={issueByGroupId.get(group.id) ?? null}
+                onSelectOption={(optionId) => {
+                  if (group.selectionType === "single") {
+                    setSelectedOptionsByGroupId((current) =>
+                      selectSingleOption(current, group.id, optionId)
+                    );
+                    return;
+                  }
+                  setSelectedOptionsByGroupId((current) =>
+                    toggleMultipleOption(
+                      current,
+                      group.id,
+                      optionId,
+                      group.maxSelections
+                    )
+                  );
+                }}
+              />
+            ))}
+
+            {config.upsellGroup ? (
+              <UpsellSuggestionGroup
+                upsellGroup={config.upsellGroup}
+                selectedProductIds={selectedUpsellProductIds}
+                onToggleProduct={(upsellProductId) => {
+                  setSelectedUpsellProductIds((current) =>
+                    toggleUpsellProduct(current, upsellProductId)
+                  );
+                }}
+              />
+            ) : null}
+          </div>
+
+          <div className={styles.previewLiveFooter}>
+            <CustomizationPriceSummary
+              total={visualTotal}
+              label="Total estimado"
+              note="Vista previa. El pedido real se valida al finalizar la compra."
+              incompleteHint={
+                !validation.valid && validation.issues.length > 0
+                  ? "Faltan opciones requeridas (solo aviso — la preview sigue usable)."
+                  : null
+              }
+            >
+              <button
+                type="button"
+                className={sharedStyles.previewCta}
+                disabled
+                aria-disabled="true"
+              >
+                Agregar al pedido
+              </button>
+              <p className={sharedStyles.previewCtaHint}>
+                Solo vista previa · no agrega al carrito
+              </p>
+            </CustomizationPriceSummary>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+
+  if (!collapsible) {
+    return (
+      <aside className={styles.previewPanel}>
+        <div className={styles.previewHeader}>
+          <h2 className={styles.panelTitle}>Así lo verá el cliente</h2>
+          <p className={styles.panelSubtitle}>
+            Preview interactiva del modal público. No escribe carrito ni pedidos.
+          </p>
+        </div>
+        {body}
+      </aside>
+    );
+  }
+
+  return (
+    <details className={styles.previewPanel} open={defaultOpen}>
+      <summary className={styles.previewSummary}>
+        <span className={styles.panelTitle}>Así lo verá el cliente</span>
+        <span className={styles.panelSubtitleInline}>Vista previa interactiva</span>
+      </summary>
+      {body}
+    </details>
+  );
+}

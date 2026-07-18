@@ -756,6 +756,16 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-17 — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-POLISH-1 — Interactive Admin Preview Sandbox
+
+- **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-POLISH-1 ejecutada. Se implementó una preview interactiva sandbox en `/admin/products/customizations`. La preview reutiliza componentes presentacionales del modal público, permite probar selección single/multi y plus/adicionales, recalcula total estimado localmente y no toca carrito, checkout, localStorage, DB, RLS, pedidos ni stock. Resultado: **PASS**.
+- Archivos: `components/product-customization/shared/*`, `admin-customization-live-preview.tsx`, `admin-preview-mapper.ts`, `preview-selection.ts`, `customization-modal.tsx`, docs de fase
+
+### 2026-07-17 — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-SPEC-1 — Interactive Admin Preview Architecture Spec
+
+- **Spec / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-SPEC-1 ejecutada. Se definió la arquitectura para convertir la preview admin de Product Customization en una vista interactiva y realista del modal público. La recomendación es extraer componentes presentacionales compartidos y usar estado local sandbox en admin, sin importar el modal completo ni arrastrar carrito, checkout, localStorage o side effects. Resultado: **PASS**.
+- Archivos: `docs/product-customization-admin-preview-spec-1-interactive-admin-preview-architecture.md`, `docs/CURRENT_PHASE.md` (sin cambios runtime)
+
 ### 2026-07-17 — PRODUCT-CUSTOMIZATION-ADMIN-BUTTON-THEME-POLISH-1 — Admin Customizations Button Theme Polish
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-BUTTON-THEME-POLISH-1 ejecutada. Se pulieron los botones y controles interactivos de `/admin/products/customizations` para alinearlos con los tokens de theme del admin. La fase mejoró primary, secondary, disabled, hover y focus states en dark/light sin tocar lógica de Product Customization, DB, RLS, checkout, stock ni pedidos. Resultado: **PASS**.

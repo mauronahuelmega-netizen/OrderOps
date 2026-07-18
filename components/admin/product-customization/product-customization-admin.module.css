@@ -841,6 +841,7 @@
 .previewBody {
   display: grid;
   gap: 12px;
+  min-width: 0;
 }
 
 .previewNote {
@@ -850,6 +851,49 @@
   font-weight: 600;
   letter-spacing: 0.01em;
   text-transform: uppercase;
+}
+
+.previewLiveShell {
+  display: grid;
+  gap: 0;
+  min-width: 0;
+  border: 1px solid var(--surface-elevated-border, var(--border-subtle));
+  border-radius: var(--radius-lg, 14px);
+  background: var(--surface-elevated-bg, var(--bg-surface));
+  box-shadow: var(--surface-elevated-shadow, var(--shadow-sm, none));
+  overflow: hidden;
+}
+
+.previewLiveHeader {
+  display: grid;
+  gap: 4px;
+  padding: 14px 14px 12px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.previewLiveEyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.previewLiveBody {
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+  max-height: min(52vh, 520px);
+  overflow: auto;
+  min-width: 0;
+}
+
+.previewLiveFooter {
+  display: grid;
+  gap: 8px;
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--surface-soft-bg, var(--bg-surface-soft));
 }
 
 .previewEmpty {

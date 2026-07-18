@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import CreateCustomizationGroupForm from "@/components/admin/product-customization/create-group-form";
 import CustomizationAssignmentsSection from "@/components/admin/product-customization/customization-assignments-section";
-import CustomerPreviewPanel from "@/components/admin/product-customization/customer-preview-panel";
+import AdminCustomizationLivePreview from "@/components/admin/product-customization/admin-customization-live-preview";
 import ProductCustomizationOverridesPanel from "@/components/admin/product-customization/product-customization-overrides-panel";
 import SortableGroupsList from "@/components/admin/product-customization/sortable-groups-list";
 import UpsellGroupsSection from "@/components/admin/product-customization/upsell-groups-section";
@@ -101,6 +101,9 @@ export default function OwnerCustomizationBuilder({
 
   const selectedProduct =
     productRows.find((row) => row.id === selectedProductId) ?? null;
+
+  const selectedCatalogProduct =
+    products.find((item) => item.id === selectedProductId) ?? null;
 
   const selectedCategory =
     categoryRows.find((row) => row.id === selectedCategoryId) ??
@@ -332,10 +335,22 @@ export default function OwnerCustomizationBuilder({
           </section>
 
           <div className={styles.previewDesktop}>
-            <CustomerPreviewPanel product={selectedProduct} />
+            <AdminCustomizationLivePreview
+              product={selectedCatalogProduct}
+              groups={groups}
+              assignments={assignments}
+              upsellGroups={upsellGroups}
+            />
           </div>
           <div className={styles.previewMobile}>
-            <CustomerPreviewPanel product={selectedProduct} collapsible defaultOpen={false} />
+            <AdminCustomizationLivePreview
+              product={selectedCatalogProduct}
+              groups={groups}
+              assignments={assignments}
+              upsellGroups={upsellGroups}
+              collapsible
+              defaultOpen={false}
+            />
           </div>
         </div>
       ) : null}

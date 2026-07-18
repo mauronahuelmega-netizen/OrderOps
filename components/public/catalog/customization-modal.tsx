@@ -2,20 +2,24 @@
 
 import { useEffect, useMemo, useState, useTransition } from "react";
 import { getPublicProductCustomizationConfigAction } from "@/app/b/[slug]/catalogo/actions";
+import CustomizationOptionGroup from "@/components/product-customization/shared/customization-option-group";
+import CustomizationPriceSummary from "@/components/product-customization/shared/customization-price-summary";
+import UpsellSuggestionGroup from "@/components/product-customization/shared/upsell-suggestion-group";
 import {
   buildCartLinesFromCustomizationSelection,
   type LocalCartItemV2
 } from "@/lib/cart/local";
+import {
+  selectSingleOption,
+  toggleMultipleOption,
+  toggleUpsellProduct
+} from "@/lib/product-customization/preview-selection";
 import {
   computeVisualCustomizationTotal,
   formatPublicCatalogCurrency,
   validateCustomizationSelection,
   type PublicProductCustomizationConfig
 } from "@/lib/product-customization/public-shared";
-import {
-  formatUpsellOptionPrice,
-  getUpsellGroupCopy
-} from "@/lib/product-customization/upsell-copy";
 import styles from "./customization-modal.module.css";
 
 export type CustomizationModalInitialSelection = {
@@ -196,51 +200,6 @@ export default function CustomizationModal({
     });
   }, [loadState, selectedOptionsByGroupId, selectedUpsellProductIds]);
 
-  function toggleSingle(groupId: string, optionId: string) {
-    setSelectedOptionsByGroupId((current) => ({
-      ...current,
-      [groupId]: [optionId]
-    }));
-    setConfirmError(null);
-  }
-
-  function toggleMultiple(
-    groupId: string,
-    optionId: string,
-    maxSelections: number | null
-  ) {
-    setSelectedOptionsByGroupId((current) => {
-      const existing = current[groupId] ?? [];
-      const isSelected = existing.includes(optionId);
-
-      if (isSelected) {
-        return {
-          ...current,
-          [groupId]: existing.filter((id) => id !== optionId)
-        };
-      }
-
-      if (maxSelections !== null && existing.length >= maxSelections) {
-        return current;
-      }
-
-      return {
-        ...current,
-        [groupId]: [...existing, optionId]
-      };
-    });
-    setConfirmError(null);
-  }
-
-  function toggleUpsell(productIdToToggle: string) {
-    setSelectedUpsellProductIds((current) =>
-      current.includes(productIdToToggle)
-        ? current.filter((id) => id !== productIdToToggle)
-        : [...current, productIdToToggle]
-    );
-    setConfirmError(null);
-  }
-
   function handleConfirm() {
     if (loadState.status !== "ready" || !validation.valid) {
       return;
@@ -275,11 +234,6 @@ export default function CustomizationModal({
   }, [validation.issues]);
 
   const ctaLabel = editingCartLineId ? "Actualizar carrito" : "Agregar al carrito";
-
-  const upsellCopy =
-    loadState.status === "ready" && loadState.config.upsellGroup
-      ? getUpsellGroupCopy(loadState.config.upsellGroup.name)
-      : null;
 
   return (
     <div className={styles.backdrop} role="presentation" onClick={onClose}>
@@ -346,141 +300,43 @@ export default function CustomizationModal({
                 </p>
               ) : null}
 
-              {loadState.config.groups.map((group) => {
-                const selected = selectedOptionsByGroupId[group.id] ?? [];
-                const groupIssue = issueByGroupId.get(group.id);
-
-                return (
-                  <section key={group.id} className={styles.group}>
-                    <div className={styles.groupHeader}>
-                      <h3>{group.name}</h3>
-                      <span className={styles.groupMeta}>
-                        {group.isRequired ? "Requerido" : "Opcional"}
-                        {group.selectionType === "multiple" && group.minSelections > 0
-                          ? ` · mín. ${group.minSelections}`
-                          : null}
-                        {group.selectionType === "multiple" && group.maxSelections !== null
-                          ? ` · máx. ${group.maxSelections}`
-                          : null}
-                      </span>
-                    </div>
-                    {group.description ? (
-                      <p className={styles.groupDescription}>{group.description}</p>
-                    ) : null}
-
-                    {group.isBlocked ? (
-                      <p className={styles.groupError} role="alert">
-                        No hay opciones disponibles para este grupo requerido.
-                      </p>
-                    ) : (
-                      <ul className={styles.optionList}>
-                        {group.options.map((option) => {
-                          const checked = selected.includes(option.id);
-                          const inputId = `${group.id}-${option.id}`;
-                          const atMax =
-                            group.selectionType === "multiple" &&
-                            group.maxSelections !== null &&
-                            selected.length >= group.maxSelections &&
-                            !checked;
-
-                          return (
-                            <li key={option.id}>
-                              <label
-                                htmlFor={inputId}
-                                className={`${styles.optionRow}${
-                                  checked ? ` ${styles.optionRowSelected}` : ""
-                                }`}
-                              >
-                                <input
-                                  id={inputId}
-                                  type={
-                                    group.selectionType === "single" ? "radio" : "checkbox"
-                                  }
-                                  name={
-                                    group.selectionType === "single"
-                                      ? `group-${group.id}`
-                                      : undefined
-                                  }
-                                  checked={checked}
-                                  disabled={atMax}
-                                  onChange={() => {
-                                    if (group.selectionType === "single") {
-                                      toggleSingle(group.id, option.id);
-                                      return;
-                                    }
-                                    toggleMultiple(
-                                      group.id,
-                                      option.id,
-                                      group.maxSelections
-                                    );
-                                  }}
-                                />
-                                <span className={styles.optionCopy}>
-                                  <strong>{option.name}</strong>
-                                  {option.description ? <small>{option.description}</small> : null}
-                                </span>
-                                {option.priceDelta > 0 ? (
-                                  <span className={styles.optionDelta}>
-                                    +{formatPublicCatalogCurrency(option.priceDelta)}
-                                  </span>
-                                ) : null}
-                              </label>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    )}
-
-                    {groupIssue ? (
-                      <p className={styles.groupError} role="alert">
-                        {groupIssue}
-                      </p>
-                    ) : null}
-                  </section>
-                );
-              })}
-
-              {loadState.config.upsellGroup && upsellCopy ? (
-                <section className={styles.upsell}>
-                  <div className={styles.groupHeader}>
-                    <h3>{upsellCopy.title}</h3>
-                    <span className={styles.groupMeta}>Opcional</span>
-                  </div>
-                  <p className={styles.groupDescription}>{upsellCopy.description}</p>
-                  <ul className={styles.optionList}>
-                    {loadState.config.upsellGroup.products.map((product) => {
-                      const checked = selectedUpsellProductIds.includes(product.id);
-                      const inputId = `upsell-${product.id}`;
-
-                      return (
-                        <li key={product.id}>
-                          <label
-                            htmlFor={inputId}
-                            className={`${styles.optionRow}${
-                              checked ? ` ${styles.optionRowSelected}` : ""
-                            }`}
-                          >
-                            <input
-                              id={inputId}
-                              type="checkbox"
-                              checked={checked}
-                              onChange={() => toggleUpsell(product.id)}
-                            />
-                            <span className={styles.optionCopy}>
-                              <strong>{product.name}</strong>
-                            </span>
-                            <span className={styles.optionDelta}>
-                              {formatUpsellOptionPrice(
-                                product.price,
-                                formatPublicCatalogCurrency
-                              )}
-                            </span>
-                          </label>
-                        </li>
+              {loadState.config.groups.map((group) => (
+                <CustomizationOptionGroup
+                  key={group.id}
+                  group={group}
+                  selectedOptionIds={selectedOptionsByGroupId[group.id] ?? []}
+                  issue={issueByGroupId.get(group.id) ?? null}
+                  onSelectOption={(optionId) => {
+                    if (group.selectionType === "single") {
+                      setSelectedOptionsByGroupId((current) =>
+                        selectSingleOption(current, group.id, optionId)
                       );
-                    })}
-                  </ul>
-                </section>
+                    } else {
+                      setSelectedOptionsByGroupId((current) =>
+                        toggleMultipleOption(
+                          current,
+                          group.id,
+                          optionId,
+                          group.maxSelections
+                        )
+                      );
+                    }
+                    setConfirmError(null);
+                  }}
+                />
+              ))}
+
+              {loadState.config.upsellGroup ? (
+                <UpsellSuggestionGroup
+                  upsellGroup={loadState.config.upsellGroup}
+                  selectedProductIds={selectedUpsellProductIds}
+                  onToggleProduct={(upsellProductId) => {
+                    setSelectedUpsellProductIds((current) =>
+                      toggleUpsellProduct(current, upsellProductId)
+                    );
+                    setConfirmError(null);
+                  }}
+                />
               ) : null}
             </>
           ) : null}
@@ -488,29 +344,24 @@ export default function CustomizationModal({
 
         {loadState.status === "ready" ? (
           <footer className={styles.footer}>
-            <div className={styles.footerTotal}>
-              <span>Total</span>
-              <strong>{formatPublicCatalogCurrency(visualTotal)}</strong>
-            </div>
-
-            {confirmError ? (
-              <p className={styles.groupError} role="alert">
-                {confirmError}
-              </p>
-            ) : null}
-
-            {!validation.valid && validation.issues.length > 0 ? (
-              <p className={styles.footerHint}>Completá las opciones requeridas para continuar.</p>
-            ) : null}
-
-            <button
-              type="button"
-              className={styles.primaryButton}
-              disabled={!validation.valid}
-              onClick={handleConfirm}
+            <CustomizationPriceSummary
+              total={visualTotal}
+              confirmError={confirmError}
+              incompleteHint={
+                !validation.valid && validation.issues.length > 0
+                  ? "Completá las opciones requeridas para continuar."
+                  : null
+              }
             >
-              {ctaLabel}
-            </button>
+              <button
+                type="button"
+                className={styles.primaryButton}
+                disabled={!validation.valid}
+                onClick={handleConfirm}
+              >
+                {ctaLabel}
+              </button>
+            </CustomizationPriceSummary>
           </footer>
         ) : null}
       </div>
