@@ -11,6 +11,7 @@
 - Sandbox: prune de selection ids invisibles
 - Piloto sin overrides `is_enabled=false` → browser hide N/A (in-memory rules OK)
 - Doc: `docs/product-customization-admin-preview-overrides-1-preview-overrides-fidelity.md`
+- Deploy: commit `dee486a` → `origin/main` → https://orderops.vercel.app
 - **Próxima:** QA opcional con override disable real autorizado · monitor piloto
 
 ---

@@ -117,7 +117,13 @@ Sin writes · sin pedidos · sin localStorage admin · sin schema/RLS · sin car
 
 ## Deploy
 
-Pendiente completar tras commit (ver CURRENT_PHASE).
+| Campo | Valor |
+|-------|-------|
+| Commit | `dee486a` |
+| Mensaje | Reflect Product Customization overrides in admin preview |
+| Remote | `origin/main` pushed |
+| URL | https://orderops.vercel.app |
+| Hora aprox. | 2026-07-18 (madrugada AR) |
 
 ## Browser QA
 

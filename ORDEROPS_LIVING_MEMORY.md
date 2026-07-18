@@ -759,7 +759,7 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ### 2026-07-18 — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-OVERRIDES-1 — Admin Preview Product Overrides Fidelity
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-OVERRIDES-1 ejecutada. La preview interactiva del admin ahora respeta las excepciones del producto seleccionado, ocultando grupos u opciones desactivadas por override y manteniendo grupos propios/product-specific. La fase ajustó el mapper/admin read model sin tocar checkout, carrito, pedidos, stock, RLS ni schema. Resultado: **PASS WITH DATA QA DEBT**.
-- Archivos: `admin.ts` (load overrides), `admin-preview-mapper.ts`, `preview-selection.ts` (prune), live preview + builder + page, docs de fase
+- Archivos: `admin.ts` (load overrides), `admin-preview-mapper.ts`, `preview-selection.ts` (prune), live preview + builder + page, docs de fase; commit `dee486a`
 
 ### 2026-07-17 — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-CLEANUP-1 — Admin Preview Dead Code & Wiring Cleanup
 
