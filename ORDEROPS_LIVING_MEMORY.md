@@ -756,6 +756,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-18 — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-OVERRIDES-1 — Admin Preview Product Overrides Fidelity
+
+- **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-OVERRIDES-1 ejecutada. La preview interactiva del admin ahora respeta las excepciones del producto seleccionado, ocultando grupos u opciones desactivadas por override y manteniendo grupos propios/product-specific. La fase ajustó el mapper/admin read model sin tocar checkout, carrito, pedidos, stock, RLS ni schema. Resultado: **PASS WITH DATA QA DEBT**.
+- Archivos: `admin.ts` (load overrides), `admin-preview-mapper.ts`, `preview-selection.ts` (prune), live preview + builder + page, docs de fase
+
 ### 2026-07-17 — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-CLEANUP-1 — Admin Preview Dead Code & Wiring Cleanup
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-CLEANUP-1 ejecutada. Se limpió deuda técnica de la preview admin anterior de Product Customization, eliminando código muerto/imports/CSS obsoleto donde correspondía. La preview sandbox interactiva y el modal público se mantienen operativos sin tocar DB, RLS, checkout, cart, stock ni pedidos. Resultado: **PASS**.

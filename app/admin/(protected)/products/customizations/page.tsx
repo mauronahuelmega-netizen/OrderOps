@@ -29,7 +29,7 @@ export default async function AdminProductCustomizationsPage({ searchParams }: P
     isProductCustomizationEnabled(adminContext.businessId)
   ]);
 
-  const { groups, assignments, upsellGroups, products } = config;
+  const { groups, assignments, upsellGroups, products, overrides } = config;
   const nextGroupSort = suggestNextGroupSortOrder(groups);
   const nextAssignmentSort = suggestNextAssignmentSortOrder(assignments);
   const nextUpsellSort = suggestNextUpsellSortOrder(upsellGroups);
@@ -51,6 +51,7 @@ export default async function AdminProductCustomizationsPage({ searchParams }: P
         products={products}
         assignments={assignments}
         upsellGroups={upsellGroups}
+        overrides={overrides}
         nextGroupSort={nextGroupSort}
         nextAssignmentSort={nextAssignmentSort}
         nextUpsellSort={nextUpsellSort}

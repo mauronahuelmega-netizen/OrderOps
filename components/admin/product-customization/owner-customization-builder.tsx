@@ -17,6 +17,7 @@ import type {
   AdminCatalogProductOption,
   AdminCustomizationAssignment,
   AdminCustomizationGroup,
+  AdminProductCustomizationOverride,
   AdminUpsellGroup
 } from "@/lib/product-customization/shared";
 import styles from "./product-customization-admin.module.css";
@@ -31,6 +32,7 @@ type Props = {
   products: AdminCatalogProductOption[];
   assignments: AdminCustomizationAssignment[];
   upsellGroups: AdminUpsellGroup[];
+  overrides: AdminProductCustomizationOverride[];
   nextGroupSort: number;
   nextAssignmentSort: number;
   nextUpsellSort: number;
@@ -67,6 +69,7 @@ export default function OwnerCustomizationBuilder({
   products,
   assignments,
   upsellGroups,
+  overrides,
   nextGroupSort,
   nextAssignmentSort,
   nextUpsellSort
@@ -340,6 +343,7 @@ export default function OwnerCustomizationBuilder({
               groups={groups}
               assignments={assignments}
               upsellGroups={upsellGroups}
+              overrides={overrides}
             />
           </div>
           <div className={styles.previewMobile}>
@@ -348,6 +352,7 @@ export default function OwnerCustomizationBuilder({
               groups={groups}
               assignments={assignments}
               upsellGroups={upsellGroups}
+              overrides={overrides}
               collapsible
               defaultOpen={false}
             />

@@ -34,6 +34,9 @@ export type AdminCustomizationAssignment = Tables<"customization_group_assignmen
   target_name: string;
 };
 
+/** Read-only admin row for product_customization_overrides (preview + inheritance). */
+export type AdminProductCustomizationOverride = Tables<"product_customization_overrides">;
+
 export type AdminCatalogProductOption = {
   id: string;
   name: string;

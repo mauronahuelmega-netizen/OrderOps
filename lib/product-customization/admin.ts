@@ -5,6 +5,7 @@ import {
   type AdminCustomizationAssignment,
   type AdminCustomizationGroup,
   type AdminCustomizationOption,
+  type AdminProductCustomizationOverride,
   type AdminUpsellGroup,
   type AdminUpsellGroupItem,
   type ProductCustomizationInheritance,
@@ -17,6 +18,7 @@ export type {
   AdminCustomizationAssignment,
   AdminCustomizationGroup,
   AdminCustomizationOption,
+  AdminProductCustomizationOverride,
   AdminUpsellGroup,
   AdminUpsellGroupItem,
   CustomizationSelectionType,
@@ -411,13 +413,32 @@ export async function getProductCustomizationInheritanceForAdmin(
   };
 }
 
+export async function getCustomizationOverridesForAdmin(
+  businessId: string
+): Promise<AdminProductCustomizationOverride[]> {
+  const supabase = await createSupabaseServerClient();
+  const { data, error } = await supabase
+    .from("product_customization_overrides")
+    .select(
+      "id, business_id, product_id, override_type, group_id, option_id, is_enabled, created_at, updated_at"
+    )
+    .eq("business_id", businessId);
+
+  if (error) {
+    throw new Error("No pudimos cargar las excepciones de personalización.");
+  }
+
+  return data ?? [];
+}
+
 export async function getCustomizationAdminConfig(businessId: string) {
-  const [groups, assignments, upsellGroups, products] = await Promise.all([
+  const [groups, assignments, upsellGroups, products, overrides] = await Promise.all([
     getCustomizationGroupsForAdmin(businessId),
     getCustomizationAssignmentsForAdmin(businessId),
     getUpsellGroupsForAdmin(businessId),
-    getCatalogProductsForCustomizationAdmin(businessId)
+    getCatalogProductsForCustomizationAdmin(businessId),
+    getCustomizationOverridesForAdmin(businessId)
   ]);
 
-  return { groups, assignments, upsellGroups, products };
+  return { groups, assignments, upsellGroups, products, overrides };
 }

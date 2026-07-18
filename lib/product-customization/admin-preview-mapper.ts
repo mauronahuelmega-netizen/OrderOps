@@ -2,14 +2,15 @@
  * Maps admin customization corpus → PublicProductCustomizationConfig-like preview shape.
  * Client-safe. No public server actions, no writes.
  *
- * Note: product_customization_overrides are not loaded in getCustomizationAdminConfig V1,
- * so preview may include options that public hides via product overrides (documented debt).
+ * Applies product_customization_overrides the same way as public resolveGroupsForProduct:
+ * is_enabled === false hides groups / options for that product.
  */
 
 import type {
   AdminCatalogProductOption,
   AdminCustomizationAssignment,
   AdminCustomizationGroup,
+  AdminProductCustomizationOverride,
   AdminUpsellGroup
 } from "@/lib/product-customization/shared";
 import type {
@@ -23,16 +24,47 @@ export type AdminPreviewMapperInput = {
   groups: AdminCustomizationGroup[];
   assignments: AdminCustomizationAssignment[];
   upsellGroups: AdminUpsellGroup[];
+  overrides: AdminProductCustomizationOverride[];
   productDescription?: string | null;
 };
+
+function overridesForProduct(
+  overrides: AdminProductCustomizationOverride[],
+  productId: string
+): AdminProductCustomizationOverride[] {
+  return overrides.filter((row) => row.product_id === productId);
+}
 
 function resolvePreviewGroups(params: {
   productId: string;
   categoryId: string | null;
   groups: AdminCustomizationGroup[];
   assignments: AdminCustomizationAssignment[];
+  overrides: AdminProductCustomizationOverride[];
 }): PublicCustomizationGroup[] {
   const groupsById = new Map(params.groups.map((group) => [group.id, group]));
+
+  const disabledGroupIds = new Set(
+    params.overrides
+      .filter(
+        (row) =>
+          row.override_type === "group" &&
+          row.group_id &&
+          row.is_enabled === false
+      )
+      .map((row) => row.group_id as string)
+  );
+
+  const disabledOptionIds = new Set(
+    params.overrides
+      .filter(
+        (row) =>
+          row.override_type === "option" &&
+          row.option_id &&
+          row.is_enabled === false
+      )
+      .map((row) => row.option_id as string)
+  );
 
   type Resolved = {
     group: AdminCustomizationGroup;
@@ -64,6 +96,10 @@ function resolvePreviewGroups(params: {
       continue;
     }
 
+    if (disabledGroupIds.has(group.id)) {
+      continue;
+    }
+
     const candidate: Resolved = {
       group,
       sortOrder: assignment.sort_order,
@@ -91,7 +127,9 @@ function resolvePreviewGroups(params: {
     })
     .map((resolved) => {
       const options = [...resolved.group.options]
-        .filter((option) => option.is_available)
+        .filter(
+          (option) => option.is_available && !disabledOptionIds.has(option.id)
+        )
         .sort((a, b) => {
           if (a.sort_order !== b.sort_order) {
             return a.sort_order - b.sort_order;
@@ -169,6 +207,13 @@ function resolvePreviewUpsell(params: {
   };
 }
 
+/** Pure effective preview config (assignments + overrides). Alias of mapAdminCorpusToPreviewConfig. */
+export function resolveAdminEffectivePreviewConfig(
+  input: AdminPreviewMapperInput
+): PublicProductCustomizationConfig | null {
+  return mapAdminCorpusToPreviewConfig(input);
+}
+
 export function mapAdminCorpusToPreviewConfig(
   input: AdminPreviewMapperInput
 ): PublicProductCustomizationConfig | null {
@@ -176,11 +221,14 @@ export function mapAdminCorpusToPreviewConfig(
     return null;
   }
 
+  const productOverrides = overridesForProduct(input.overrides, input.product.id);
+
   const groups = resolvePreviewGroups({
     productId: input.product.id,
     categoryId: input.product.category_id,
     groups: input.groups,
-    assignments: input.assignments
+    assignments: input.assignments,
+    overrides: productOverrides
   });
 
   const upsellGroup = resolvePreviewUpsell({
@@ -198,4 +246,14 @@ export function mapAdminCorpusToPreviewConfig(
     groups,
     upsellGroup
   };
+}
+
+/** True when the product has at least one disable override (group or option). */
+export function productHasDisableOverrides(
+  overrides: AdminProductCustomizationOverride[],
+  productId: string
+): boolean {
+  return overridesForProduct(overrides, productId).some(
+    (row) => row.is_enabled === false
+  );
 }

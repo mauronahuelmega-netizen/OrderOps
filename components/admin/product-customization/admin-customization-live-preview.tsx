@@ -5,8 +5,13 @@ import CustomizationOptionGroup from "@/components/product-customization/shared/
 import CustomizationPriceSummary from "@/components/product-customization/shared/customization-price-summary";
 import UpsellSuggestionGroup from "@/components/product-customization/shared/upsell-suggestion-group";
 import sharedStyles from "@/components/product-customization/shared/customization-shared.module.css";
-import { mapAdminCorpusToPreviewConfig } from "@/lib/product-customization/admin-preview-mapper";
 import {
+  mapAdminCorpusToPreviewConfig,
+  productHasDisableOverrides
+} from "@/lib/product-customization/admin-preview-mapper";
+import {
+  pruneSelectedOptionsByGroupId,
+  pruneSelectedUpsellProductIds,
   selectSingleOption,
   toggleMultipleOption,
   toggleUpsellProduct
@@ -20,6 +25,7 @@ import type {
   AdminCatalogProductOption,
   AdminCustomizationAssignment,
   AdminCustomizationGroup,
+  AdminProductCustomizationOverride,
   AdminUpsellGroup
 } from "@/lib/product-customization/shared";
 import styles from "./product-customization-admin.module.css";
@@ -29,6 +35,7 @@ type Props = {
   groups: AdminCustomizationGroup[];
   assignments: AdminCustomizationAssignment[];
   upsellGroups: AdminUpsellGroup[];
+  overrides: AdminProductCustomizationOverride[];
   collapsible?: boolean;
   defaultOpen?: boolean;
 };
@@ -38,6 +45,7 @@ export default function AdminCustomizationLivePreview({
   groups,
   assignments,
   upsellGroups,
+  overrides,
   collapsible = false,
   defaultOpen = true
 }: Props) {
@@ -47,9 +55,15 @@ export default function AdminCustomizationLivePreview({
         product,
         groups,
         assignments,
-        upsellGroups
+        upsellGroups,
+        overrides
       }),
-    [product, groups, assignments, upsellGroups]
+    [product, groups, assignments, upsellGroups, overrides]
+  );
+
+  const hasDisableOverrides = useMemo(
+    () => (product ? productHasDisableOverrides(overrides, product.id) : false),
+    [product, overrides]
   );
 
   const [selectedOptionsByGroupId, setSelectedOptionsByGroupId] = useState<
@@ -63,6 +77,21 @@ export default function AdminCustomizationLivePreview({
     setSelectedOptionsByGroupId({});
     setSelectedUpsellProductIds([]);
   }, [product?.id]);
+
+  useEffect(() => {
+    if (!config) {
+      setSelectedOptionsByGroupId({});
+      setSelectedUpsellProductIds([]);
+      return;
+    }
+
+    setSelectedOptionsByGroupId((current) =>
+      pruneSelectedOptionsByGroupId(current, config.groups)
+    );
+    setSelectedUpsellProductIds((current) =>
+      pruneSelectedUpsellProductIds(current, config.upsellGroup)
+    );
+  }, [config]);
 
   const validation = useMemo(() => {
     if (!config) {
@@ -94,7 +123,11 @@ export default function AdminCustomizationLivePreview({
 
   const body = (
     <div className={styles.previewBody}>
-      <p className={styles.previewNote}>Vista previa interactiva · no agrega al carrito</p>
+      <p className={styles.previewNote}>
+        {hasDisableOverrides
+          ? "Vista previa según las excepciones de este producto · no agrega al carrito"
+          : "Vista previa interactiva · no agrega al carrito"}
+      </p>
 
       {!product || !config ? (
         <p className={styles.previewEmpty}>
@@ -190,7 +223,9 @@ export default function AdminCustomizationLivePreview({
         <div className={styles.previewHeader}>
           <h2 className={styles.panelTitle}>Así lo verá el cliente</h2>
           <p className={styles.panelSubtitle}>
-            Preview interactiva del modal público. No escribe carrito ni pedidos.
+            {hasDisableOverrides
+              ? "Preview según las excepciones de este producto. No escribe carrito ni pedidos."
+              : "Preview interactiva del modal público. No escribe carrito ni pedidos."}
           </p>
         </div>
         {body}
@@ -202,7 +237,9 @@ export default function AdminCustomizationLivePreview({
     <details className={styles.previewPanel} open={defaultOpen}>
       <summary className={styles.previewSummary}>
         <span className={styles.panelTitle}>Así lo verá el cliente</span>
-        <span className={styles.panelSubtitleInline}>Vista previa interactiva</span>
+        <span className={styles.panelSubtitleInline}>
+          {hasDisableOverrides ? "Vista previa con excepciones" : "Vista previa interactiva"}
+        </span>
       </summary>
       {body}
     </details>

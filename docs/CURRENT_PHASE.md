@@ -1,5 +1,20 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-OVERRIDES-1 (2026-07-18)
+
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-OVERRIDES-1 — Admin Preview Product Overrides Fidelity  
+**Estado:** PASS WITH DATA QA DEBT  
+**Resultado:** La preview sandbox de `/admin/products/customizations` ahora refleja overrides/excepciones del producto seleccionado. Los grupos u opciones ocultos por override no aparecen en la vista previa, los grupos propios se mantienen y la selección local se limpia cuando cambian las opciones efectivas.
+
+- Loader: `getCustomizationOverridesForAdmin` en corpus admin
+- Mapper: `resolveAdminEffectivePreviewConfig` / overrides filter alineado a público
+- Sandbox: prune de selection ids invisibles
+- Piloto sin overrides `is_enabled=false` → browser hide N/A (in-memory rules OK)
+- Doc: `docs/product-customization-admin-preview-overrides-1-preview-overrides-fidelity.md`
+- **Próxima:** QA opcional con override disable real autorizado · monitor piloto
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-CLEANUP-1 (2026-07-17)
 
 **Fase:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-CLEANUP-1 — Admin Preview Dead Code & Wiring Cleanup  
