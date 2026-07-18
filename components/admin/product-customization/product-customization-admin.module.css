@@ -86,12 +86,6 @@
   line-height: 1.4;
 }
 
-.metaRow {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
 .chip {
   display: inline-flex;
   align-items: center;
@@ -192,12 +186,6 @@
   height: 1rem;
 }
 
-.groupsColumn {
-  display: grid;
-  gap: 14px;
-  min-width: 0;
-}
-
 .sectionBlock {
   display: grid;
   gap: 14px;
@@ -245,12 +233,6 @@
   outline: 1px dashed var(--border-subtle);
   outline-offset: 2px;
   border-radius: var(--radius-md, 12px);
-}
-
-.sortableCardShell {
-  display: grid;
-  gap: 8px;
-  min-width: 0;
 }
 
 .sortableToolbar,
@@ -391,21 +373,11 @@
     grid-column: 1 / -1;
   }
 
-  .layout .groupsColumn {
-    grid-column: 2;
-    grid-row: 2;
-  }
-
   .fieldsTwo {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .sectionGrid {
-    grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.3fr);
-    align-items: start;
-  }
-
-  .sectionsLayout {
     grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.3fr);
     align-items: start;
   }
@@ -484,14 +456,7 @@
   min-width: 0;
 }
 
-.sectionsWorkspace,
 .plusWorkspace {
-  display: grid;
-  gap: 14px;
-  min-width: 0;
-}
-
-.sectionsLayout {
   display: grid;
   gap: 14px;
   min-width: 0;
@@ -927,11 +892,6 @@
     align-items: start;
   }
 
-  .sectionsLayout {
-    grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
-    align-items: start;
-  }
-
   .previewDesktop {
     display: none;
   }
@@ -955,12 +915,6 @@
     gap: 16px;
   }
 
-  .sectionsLayout {
-    grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
-    align-items: start;
-    gap: 16px;
-  }
-
   .previewDesktop {
     display: grid;
     position: sticky;
@@ -974,8 +928,7 @@
 
 @media (max-width: 899px) {
   .productWorkspace,
-  .categoryWorkspace,
-  .sectionsLayout {
+  .categoryWorkspace {
     grid-template-columns: 1fr;
   }
 

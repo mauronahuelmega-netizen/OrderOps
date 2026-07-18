@@ -1,5 +1,18 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-CLEANUP-1 (2026-07-18)
+
+**Fase:** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-CLEANUP-1 — Reusable Sections Legacy Cleanup  
+**Estado:** PASS  
+**Resultado:** Se eliminaron componentes legacy e imports/CSS obsoletos del flujo inline anterior de Secciones reutilizables. La UI compacta sigue funcionando y no se modificó lógica operativa.
+
+- Eliminados: `create-group-form.tsx`, `customization-group-card.tsx`, `sortable-groups-list.tsx`
+- CSS huérfano sections-only removido del module admin (compartido Plus/assignments conservado)
+- Doc: `docs/product-customization-reusable-sections-cleanup-1-legacy-cleanup.md`
+- **Próxima:** opcional compact Plus sugeridos · monitor piloto
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-COMPACT-1 (2026-07-18)
 
 **Fase:** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-COMPACT-1 — Compact Reusable Sections UI  

@@ -756,6 +756,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-18 — PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-CLEANUP-1 — Reusable Sections Legacy Cleanup
+
+- **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-CLEANUP-1 ejecutada. Se limpió deuda técnica posterior a la compactación de Secciones reutilizables, eliminando componentes legacy/imports/CSS obsoletos del flujo inline anterior donde fue seguro hacerlo. La UI compacta, preview admin, tabs restantes y catálogo público se mantienen operativos sin tocar DB, RLS, checkout, cart, stock ni pedidos. Resultado: **PASS**.
+- Archivos eliminados: `create-group-form.tsx`, `customization-group-card.tsx`, `sortable-groups-list.tsx`; CSS huérfano en `product-customization-admin.module.css`; docs de fase
+
 ### 2026-07-18 — PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-COMPACT-1 — Compact Reusable Sections UI
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-COMPACT-1 ejecutada. Se compactó la pestaña Secciones reutilizables del admin de Product Customization. La pantalla principal ahora usa cards resumidas, menú de acciones y modales para editar secciones/opciones, reduciendo scroll y mejorando comprensión para el dueño del negocio. La fase reutilizó actions existentes y no modificó DB, RLS, checkout, cart, stock ni pedidos. Resultado: **PASS**.

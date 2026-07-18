@@ -42,7 +42,7 @@ AUTORIZO_DEPLOY_PRODUCT_CUSTOMIZATION_REUSABLE_SECTIONS_COMPACT_TO_VERCEL=yes
 | Option forms inline | `OptionsManagementModal` + `OptionEditModal` |
 | `SortableGroupsList` + dense cards | `ReusableSectionsTab` + `SortableReorderList` |
 
-Legacy files (`create-group-form.tsx`, `customization-group-card.tsx`, `sortable-groups-list.tsx`) quedan en repo sin uso del tab (cleanup opcional futuro).
+Legacy files (`create-group-form.tsx`, `customization-group-card.tsx`, `sortable-groups-list.tsx`) fueron eliminados en PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-CLEANUP-1.
 
 ## Arquitectura implementada
 
@@ -168,7 +168,7 @@ DB · RLS · create_order · checkout · cart · stock · public modal logic · 
 
 | Deuda | Notas |
 |-------|-------|
-| Legacy unused components | `create-group-form` / `customization-group-card` / `sortable-groups-list` |
+| Legacy unused components | Eliminados en CLEANUP-1 |
 | Nested dialog stacking | Option modal sobre Options modal — OK en Chromium |
 | Menú details en a11y tree | Contenido puede listarse aunque cerrado |
 
