@@ -756,6 +756,16 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-19 — PRODUCT-CUSTOMIZATION-ADMIN-COPY-POLISH-1 — Owner-Friendly Premium Copy Polish
+
+- **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-COPY-POLISH-1 ejecutada. Se pulió el lenguaje owner-facing del admin de Product Customization para acercarlo a un estándar SaaS premium. Se reemplazaron términos técnicos o ambiguos como “Desactivar”, “Preview”, “Herencia”, “Origen”, “Min/Max” y referencias internas por copy más claro y orientado al dueño del negocio. No se modificó DB, RLS, actions, checkout, cart, stock ni pedidos. Resultado: **PASS**.
+- Archivos: componentes `components/admin/product-customization/*` (strings UI), `page.tsx` description, docs de fase.
+
+### 2026-07-19 — PRODUCT-CUSTOMIZATION-ADMIN-V1-POLISH-MONITOR-1 — Enterprise Premium QA & UX/UI Polish Audit
+
+- **QA / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-V1-POLISH-MONITOR-1 ejecutada. Se realizó una auditoría premium del módulo admin de Product Customization V1, evaluando funcionalidad, copy, jerarquía, UX/UI, intuitividad, responsive, accesibilidad básica, preview admin y catálogo público. No se modificó runtime ni lógica operativa. Se generó un backlog priorizado para llevar la experiencia a estándar enterprise. Resultado: **NEEDS POLISH** (Enterprise Readiness 3.1/5; P1 en categoría vs producto, copy “Desactivar”, inconsistencia compact vs dense, mobile width, excepciones vía query).
+- Archivos: `docs/product-customization-admin-v1-polish-monitor-1-premium-qa.md`, `docs/CURRENT_PHASE.md` (sin cambios runtime)
+
 ### 2026-07-19 — PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1 — Plus Suggestions Legacy Cleanup
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1 ejecutada. Se limpió deuda técnica posterior a la compactación de Plus sugeridos, eliminando el componente legacy/imports/CSS obsoletos del flujo inline anterior donde fue seguro hacerlo. La UI compacta, Secciones reutilizables, preview admin, tabs restantes y catálogo público se mantienen operativos sin tocar DB, RLS, checkout, cart, stock ni pedidos. Resultado: **PASS**.

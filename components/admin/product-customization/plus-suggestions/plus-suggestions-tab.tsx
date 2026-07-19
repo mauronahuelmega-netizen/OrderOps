@@ -75,7 +75,7 @@ export default function PlusSuggestionsTab({
           <p className={styles.tabSubtitle}>
             Sugerí productos extra para aumentar el ticket promedio. Por ejemplo,
             ofrecé una bebida cuando el cliente personaliza una hamburguesa. Cada
-            producto o categoría puede tener una venta sugerida activa.
+            producto o categoría puede tener un plus sugerido visible.
           </p>
         </div>
         <button
@@ -94,10 +94,10 @@ export default function PlusSuggestionsTab({
 
         {sortedGroups.length === 0 ? (
           <div className="admin-empty-state">
-            <h2>Todavía no estás sugiriendo productos extra</h2>
+            <h2>Sin productos sugeridos todavía</h2>
             <p>
-              Creá una venta sugerida para una categoría o producto y sumá ítems del
-              catálogo.
+              Agregá un producto del catálogo para ofrecerlo como adicional antes de
+              sumar al carrito.
             </p>
             <button
               type="button"

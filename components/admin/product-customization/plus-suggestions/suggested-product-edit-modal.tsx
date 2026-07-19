@@ -179,7 +179,7 @@ export default function SuggestedProductEditModal({
                   key={mode === "edit" ? `avail-${item?.id}` : "avail-create"}
                 />
                 <span>
-                  Visible para el cliente
+                  Visible para clientes
                   <span className={styles.helper}>
                     {" "}
                     Si está oculto, no aparece en este plus.

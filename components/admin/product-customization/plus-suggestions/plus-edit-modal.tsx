@@ -187,8 +187,8 @@ export default function PlusEditModal({
                   </label>
                 </div>
                 <p className={styles.helper}>
-                  Solo puede haber una venta sugerida por categoría o producto. Si ya
-                  existe una, editá o mostrá/ocultá la existente.
+                  Solo puede haber un plus sugerido por categoría o producto. Si ya
+                  existe uno, editá o mostrá/ocultá el existente.
                 </p>
               </>
             ) : (
@@ -235,7 +235,7 @@ export default function PlusEditModal({
                 key={mode === "edit" ? `avail-${group?.id}` : "avail-create"}
               />
               <span>
-                Visible para el cliente
+                Visible para clientes
                 <span className={styles.helper}>
                   {" "}
                   Aparece en el modal del catálogo público.

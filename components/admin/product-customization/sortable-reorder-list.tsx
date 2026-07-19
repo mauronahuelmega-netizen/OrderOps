@@ -195,8 +195,8 @@ export default function SortableReorderList<T extends { id: string }>({
               className={styles.dragHandle}
               draggable={canReorder}
               disabled={!canReorder}
-              aria-label={`Arrastrar para ordenar: ${getItemAriaLabel(item)}`}
-              title="Arrastrar para ordenar"
+              aria-label={`Arrastrar para reordenar: ${getItemAriaLabel(item)}`}
+              title="Arrastrar para reordenar"
               onDragStart={(event) => handleDragStart(item.id, event)}
               onDragEnd={handleDragEnd}
             >
@@ -209,7 +209,7 @@ export default function SortableReorderList<T extends { id: string }>({
               <button
                 type="button"
                 className={styles.moveButton}
-                aria-label={`Subir ${getItemAriaLabel(item)}`}
+                aria-label={`Mover ${getItemAriaLabel(item)} hacia arriba`}
                 disabled={!canReorder || index === 0}
                 onClick={() => applyReorder(index, index - 1)}
               >
@@ -218,7 +218,7 @@ export default function SortableReorderList<T extends { id: string }>({
               <button
                 type="button"
                 className={styles.moveButton}
-                aria-label={`Bajar ${getItemAriaLabel(item)}`}
+                aria-label={`Mover ${getItemAriaLabel(item)} hacia abajo`}
                 disabled={!canReorder || index === orderedItems.length - 1}
                 onClick={() => applyReorder(index, index + 1)}
               >

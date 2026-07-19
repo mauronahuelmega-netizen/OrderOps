@@ -125,8 +125,8 @@ export default function AdminCustomizationLivePreview({
     <div className={styles.previewBody}>
       <p className={styles.previewNote}>
         {hasDisableOverrides
-          ? "Vista previa según las excepciones de este producto · no agrega al carrito"
-          : "Vista previa interactiva · no agrega al carrito"}
+          ? "Vista previa del cliente según las excepciones de este producto · no agrega al carrito"
+          : "Vista previa del cliente · no agrega productos reales al carrito"}
       </p>
 
       {!product || !config ? (
@@ -195,7 +195,7 @@ export default function AdminCustomizationLivePreview({
               note="Vista previa. El pedido real se valida al finalizar la compra."
               incompleteHint={
                 !validation.valid && validation.issues.length > 0
-                  ? "Faltan opciones requeridas (solo aviso — la preview sigue usable)."
+                  ? "Faltan opciones requeridas (solo aviso — la vista previa sigue usable)."
                   : null
               }
             >
@@ -208,7 +208,7 @@ export default function AdminCustomizationLivePreview({
                 Agregar al pedido
               </button>
               <p className={sharedStyles.previewCtaHint}>
-                Solo vista previa · no agrega al carrito
+                Solo vista previa · no agrega productos reales al carrito
               </p>
             </CustomizationPriceSummary>
           </div>
@@ -221,11 +221,11 @@ export default function AdminCustomizationLivePreview({
     return (
       <aside className={styles.previewPanel}>
         <div className={styles.previewHeader}>
-          <h2 className={styles.panelTitle}>Así lo verá el cliente</h2>
+          <h2 className={styles.panelTitle}>Vista previa del cliente</h2>
           <p className={styles.panelSubtitle}>
             {hasDisableOverrides
-              ? "Preview según las excepciones de este producto. No escribe carrito ni pedidos."
-              : "Preview interactiva del modal público. No escribe carrito ni pedidos."}
+              ? "Probá cómo lo verá el cliente con las excepciones de este producto. Esta vista no agrega productos reales al carrito."
+              : "Probá cómo lo verá el cliente. Esta vista no agrega productos reales al carrito."}
           </p>
         </div>
         {body}
@@ -236,9 +236,11 @@ export default function AdminCustomizationLivePreview({
   return (
     <details className={styles.previewPanel} open={defaultOpen}>
       <summary className={styles.previewSummary}>
-        <span className={styles.panelTitle}>Así lo verá el cliente</span>
+        <span className={styles.panelTitle}>Vista previa del cliente</span>
         <span className={styles.panelSubtitleInline}>
-          {hasDisableOverrides ? "Vista previa con excepciones" : "Vista previa interactiva"}
+          {hasDisableOverrides
+            ? "Vista previa con excepciones"
+            : "Solo vista previa · no agrega al carrito"}
         </span>
       </summary>
       {body}

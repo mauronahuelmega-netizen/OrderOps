@@ -167,7 +167,7 @@ export default function OptionEditModal({
                   key={mode === "edit" ? `oavail-${option?.id}` : "oavail-create"}
                 />
                 <span>
-                  Visible para el cliente
+                  Visible para clientes
                   <span className={styles.helper}>
                     {" "}
                     Si está oculta, el cliente no la verá en el catálogo.

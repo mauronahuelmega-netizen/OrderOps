@@ -131,7 +131,7 @@ export default function SectionEditModal({
 
             <div className={styles.fieldsTwo}>
               <label className="admin-field">
-                <span>Tipo de selección</span>
+                <span>Cómo elige el cliente</span>
                 <select
                   name="selection_type"
                   value={selectionType}
@@ -142,12 +142,12 @@ export default function SectionEditModal({
                   }
                   disabled={pending}
                 >
-                  <option value="single">Única</option>
-                  <option value="multiple">Múltiple</option>
+                  <option value="single">Una opción</option>
+                  <option value="multiple">Varias opciones</option>
                 </select>
                 <p className={styles.helper}>
                   {selectionType === "single"
-                    ? "El cliente elige una sola opción."
+                    ? "El cliente debe elegir una sola opción."
                     : "El cliente puede elegir varias opciones."}
                 </p>
               </label>
@@ -171,7 +171,7 @@ export default function SectionEditModal({
 
             <div className={styles.fieldsTwo}>
               <label className="admin-field">
-                <span>Mínimo</span>
+                <span>Mínimo de opciones</span>
                 <input
                   name="min_selections"
                   type="number"
@@ -192,13 +192,18 @@ export default function SectionEditModal({
                       : `min-create-${isRequired}`
                   }
                 />
+                <p className={styles.helper}>
+                  {isRequired
+                    ? "El cliente debe elegir al menos una opción."
+                    : "Podés dejar 0 si la sección es opcional."}
+                </p>
               </label>
 
               {selectionType === "single" ? (
                 <input type="hidden" name="max_selections" value="1" />
               ) : (
                 <label className="admin-field">
-                  <span>Máximo</span>
+                  <span>Máximo de opciones</span>
                   <input
                     name="max_selections"
                     type="number"
@@ -210,6 +215,9 @@ export default function SectionEditModal({
                     }
                     key={mode === "edit" ? `max-${group?.id}` : "max-create"}
                   />
+                  <p className={styles.helper}>
+                    Límite de opciones que el cliente puede elegir.
+                  </p>
                 </label>
               )}
             </div>
@@ -244,10 +252,11 @@ export default function SectionEditModal({
                 key={mode === "edit" ? `avail-${group?.id}` : "avail-create"}
               />
               <span>
-                Visible para el cliente
+                Visible para clientes
                 <span className={styles.helper}>
                   {" "}
-                  Aparece en el catálogo público.
+                  Al ocultarlo, los clientes no lo verán en el catálogo. Podés volver
+                  a mostrarlo cuando quieras.
                 </span>
               </span>
             </label>

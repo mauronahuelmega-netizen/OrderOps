@@ -57,22 +57,23 @@ export default function ProductCustomizationOverridesPanel({ productId }: Props)
       <div className={styles.productPanelHeader}>
         <div>
           <h3 id="product-customization-panel-title" className={styles.optionsTitle}>
-            Opcionales y extras
+            Excepciones del producto
           </h3>
           <p className={styles.groupSummary}>
-            Herencia por categoría y asignaciones directas. Solo desactivar / restaurar.
+            Ajustes propios de este producto. Podés ocultar una sección u opción solo
+            acá y volver a mostrarla cuando quieras.
           </p>
         </div>
         <a
           className="admin-secondary-link admin-secondary-link--compact"
           href={`/admin/products/customizations?product=${encodeURIComponent(productId)}`}
         >
-          Configurar en Opcionales
+          Ir a personalización
         </a>
       </div>
 
       {isLoading && !inheritance ? (
-        <p className={styles.emptyOptions}>Cargando herencia…</p>
+        <p className={styles.emptyOptions}>Cargando excepciones…</p>
       ) : null}
 
       {loadError ? (
@@ -86,13 +87,13 @@ export default function ProductCustomizationOverridesPanel({ productId }: Props)
           <p className={styles.groupSummary}>
             {inheritance.categoryName
               ? `Categoría: ${inheritance.categoryName}`
-              : "Sin categoría — solo se muestran grupos asignados al producto."}
+              : "Sin categoría — solo se muestran secciones asignadas a este producto."}
           </p>
 
           {inheritance.groups.length === 0 ? (
             <div className="admin-empty-state">
-              <h2>Sin grupos asignados</h2>
-              <p>Este producto todavía no tiene grupos asignados.</p>
+              <h2>Sin secciones en este producto</h2>
+              <p>Este producto todavía no tiene secciones de opciones para ajustar.</p>
             </div>
           ) : (
             <div className={styles.optionList}>
@@ -147,14 +148,15 @@ function InheritanceGroupCard({
         <div>
           <p className={styles.optionName}>{group.groupName}</p>
           <p className={styles.optionPrice}>
-            Origen: {group.source === "category" ? "Categoría" : "Producto"}
-            {!group.assignmentEnabled ? " · asignación desactivada" : ""}
+            Aplicado desde:{" "}
+            {group.source === "category" ? "la categoría" : "este producto"}
+            {!group.assignmentEnabled ? " · sección oculta en la asignación" : ""}
           </p>
         </div>
         <span
           className={`${styles.chip} ${group.isDisabledForProduct ? styles.chipDanger : ""}`}
         >
-          {group.isDisabledForProduct ? "Desactivado aquí" : "Activo"}
+          {group.isDisabledForProduct ? "Oculta aquí" : "Visible"}
         </span>
       </div>
 
@@ -167,7 +169,7 @@ function InheritanceGroupCard({
             className="admin-secondary-link admin-secondary-link--compact"
             disabled={isRestoring}
           >
-            {isRestoring ? "Restaurando…" : "Restaurar grupo"}
+            {isRestoring ? "Mostrando…" : "Mostrar para este producto"}
           </button>
         </form>
       ) : (
@@ -179,7 +181,7 @@ function InheritanceGroupCard({
             className="admin-secondary-link admin-secondary-link--compact"
             disabled={isDisabling}
           >
-            {isDisabling ? "Desactivando…" : "Desactivar para este producto"}
+            {isDisabling ? "Ocultando…" : "Ocultar para este producto"}
           </button>
         </form>
       )}
@@ -203,7 +205,7 @@ function InheritanceGroupCard({
           ))}
         </div>
       ) : (
-        <p className={styles.emptyOptions}>Este grupo no tiene opciones.</p>
+        <p className={styles.emptyOptions}>Esta sección no tiene opciones todavía.</p>
       )}
     </div>
   );
@@ -243,8 +245,8 @@ function InheritanceOptionRow({
         <p className={styles.optionName}>{option.optionName}</p>
         <p className={styles.optionPrice}>
           {formatCustomizationPriceDelta(option.priceDelta)}
-          {!option.optionAvailable ? " · opción global desactivada" : ""}
-          {option.isDisabledForProduct ? " · desactivada aquí" : ""}
+          {!option.optionAvailable ? " · oculta en la sección" : ""}
+          {option.isDisabledForProduct ? " · oculta aquí" : ""}
         </p>
       </div>
 
@@ -257,7 +259,7 @@ function InheritanceOptionRow({
             className="admin-secondary-link admin-secondary-link--compact"
             disabled={isRestoring}
           >
-            {isRestoring ? "…" : "Restaurar"}
+            {isRestoring ? "…" : "Mostrar"}
           </button>
         </form>
       ) : (
@@ -270,7 +272,7 @@ function InheritanceOptionRow({
             className="admin-secondary-link admin-secondary-link--compact"
             disabled={isDisabling}
           >
-            {isDisabling ? "…" : "Desactivar"}
+            {isDisabling ? "…" : "Ocultar"}
           </button>
         </form>
       )}

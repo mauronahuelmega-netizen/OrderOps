@@ -1,5 +1,33 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-ADMIN-COPY-POLISH-1 (2026-07-19)
+
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-COPY-POLISH-1 — Owner-Friendly Premium Copy Polish  
+**Estado:** PASS  
+**Resultado:** Se pulió el copy owner-facing del admin de Product Customization, reemplazando lenguaje técnico o ambiguo por términos claros y premium como “Vista previa”, “Mostrar/Ocultar para clientes”, “Aplicado desde”, “Excepciones del producto” y “Orden de aparición”, sin cambiar lógica operativa.
+
+- Doc: `docs/product-customization-admin-copy-polish-1-owner-friendly-copy.md`
+- CLI: `tsc` PASS · `build` PASS
+- Deuda menor: mensajes de success en actions con “Herencia…” (actions no tocadas por scope)
+- **Próxima:** PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 · EXCEPTIONS-UX-1 · ASSIGNMENTS-COMPACT-1
+
+---
+
+## Registro — PRODUCT-CUSTOMIZATION-ADMIN-V1-POLISH-MONITOR-1 (2026-07-19)
+
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-V1-POLISH-MONITOR-1 — Enterprise Premium QA & UX/UI Polish Audit  
+**Estado:** NEEDS POLISH  
+**Resultado:** Se auditó críticamente el módulo admin de Product Customization V1 con foco enterprise/premium, revisando funcionalidad, copy, jerarquía, UX/UI, responsive, accesibilidad básica, preview admin y no regresión pública. Se generó una matriz priorizada de hallazgos y próximas fases quirúrgicas.
+
+- Doc: `docs/product-customization-admin-v1-polish-monitor-1-premium-qa.md`
+- Enterprise Readiness Score: **3.1/5**
+- Hallazgos: P0=0 · P1=5 · P2=8 · P3=4 · público sin regresión
+- CLI: `tsc` PASS · `build` PASS
+- Sin cambios runtime / DB / actions / deploy funcional
+- **Próxima:** PRODUCT-CUSTOMIZATION-ADMIN-COPY-POLISH-1 → HIERARCHY / EXCEPTIONS → ASSIGNMENTS-COMPACT → RESPONSIVE
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1 (2026-07-19)
 
 **Fase:** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1 — Plus Suggestions Legacy Cleanup  

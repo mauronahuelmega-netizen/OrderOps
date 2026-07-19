@@ -125,7 +125,7 @@ export default function PlusSuggestionCard({
         </div>
 
         <div className={styles.sectionToolbar}>
-          <ActionsMenu label={`Acciones de ${group.name}`}>
+          <ActionsMenu label={`Abrir menú de plus sugerido ${group.name}`}>
             <button
               type="button"
               className={styles.menuItem}
@@ -165,8 +165,8 @@ export default function PlusSuggestionCard({
                 {togglePending
                   ? "Guardando…"
                   : group.is_available
-                    ? "Ocultar plus"
-                    : "Mostrar plus"}
+                    ? "Ocultar para clientes"
+                    : "Mostrar para clientes"}
               </button>
             </form>
           </ActionsMenu>

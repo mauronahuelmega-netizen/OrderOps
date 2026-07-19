@@ -80,7 +80,7 @@ export default function ReusableOptionRow({ option, chrome, onEdit }: Props) {
           {option.is_available ? "Visible" : "Oculta"}
         </span>
 
-        <ActionsMenu label={`Acciones de ${option.name}`}>
+        <ActionsMenu label={`Abrir menú de opción ${option.name}`}>
           <button
             type="button"
             className={styles.menuItem}
@@ -109,8 +109,8 @@ export default function ReusableOptionRow({ option, chrome, onEdit }: Props) {
               {togglePending
                 ? "Guardando…"
                 : option.is_available
-                  ? "Ocultar opción"
-                  : "Mostrar opción"}
+                  ? "Ocultar para clientes"
+                  : "Mostrar para clientes"}
             </button>
           </form>
         </ActionsMenu>

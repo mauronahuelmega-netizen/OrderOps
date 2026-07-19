@@ -77,7 +77,7 @@ export default function SuggestedProductRow({
         <button
           type="button"
           className={styles.moveButton}
-          aria-label={`Subir ${item.product_name}`}
+          aria-label={`Mover ${item.product_name} hacia arriba`}
           disabled={!canMoveUp || reorderPending || togglePending}
           onClick={onMoveUp}
         >
@@ -86,7 +86,7 @@ export default function SuggestedProductRow({
         <button
           type="button"
           className={styles.moveButton}
-          aria-label={`Bajar ${item.product_name}`}
+          aria-label={`Mover ${item.product_name} hacia abajo`}
           disabled={!canMoveDown || reorderPending || togglePending}
           onClick={onMoveDown}
         >
@@ -113,7 +113,7 @@ export default function SuggestedProductRow({
           {item.is_available ? "Visible" : "Oculto"}
         </span>
 
-        <ActionsMenu label={`Acciones de ${item.product_name}`}>
+        <ActionsMenu label={`Abrir menú de producto sugerido ${item.product_name}`}>
           <button
             type="button"
             className={styles.menuItem}
@@ -142,8 +142,8 @@ export default function SuggestedProductRow({
               {togglePending
                 ? "Guardando…"
                 : item.is_available
-                  ? "Ocultar producto"
-                  : "Mostrar producto"}
+                  ? "Ocultar para clientes"
+                  : "Mostrar para clientes"}
             </button>
           </form>
         </ActionsMenu>

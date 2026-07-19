@@ -40,7 +40,7 @@ export default async function AdminProductCustomizationsPage({ searchParams }: P
         variant="operational"
         eyebrow="Catálogo"
         title="Opcionales, extras y plus"
-        description="Configurá qué puede elegir el cliente antes de agregar un producto al carrito. También podés sugerir productos extra para aumentar el ticket promedio."
+        description="Configurá las opciones, extras y productos sugeridos que verán tus clientes al personalizar un pedido."
       />
 
       <OwnerCustomizationBuilder

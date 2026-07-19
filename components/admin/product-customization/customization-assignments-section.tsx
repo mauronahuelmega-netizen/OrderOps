@@ -155,7 +155,11 @@ export default function CustomizationAssignmentsSection({
             ))
           ) : (
             <div className="admin-empty-state">
-              <h2>Nada aparece todavía</h2>
+              <h2>
+                {mode === "category"
+                  ? "Esta categoría todavía no tiene secciones asignadas"
+                  : "Nada aparece todavía"}
+              </h2>
               <p>
                 Agregá una sección a{" "}
                 {mode === "product"
@@ -164,6 +168,9 @@ export default function CustomizationAssignmentsSection({
                     ? "esta categoría"
                     : "una categoría o producto"}{" "}
                 para que el cliente pueda elegir opciones.
+                {mode === "category"
+                  ? " Esto no incluye secciones configuradas individualmente por producto."
+                  : ""}
               </p>
             </div>
           )}
@@ -294,6 +301,9 @@ function AssignmentCreateForm({
               disabled={isPending}
               required
             />
+            <p className={styles.helperText}>
+              Define en qué posición se muestra para el cliente.
+            </p>
           </label>
         </details>
 
@@ -306,7 +316,7 @@ function AssignmentCreateForm({
             defaultChecked
             disabled={isPending}
           />
-          <span>Visible para el cliente</span>
+          <span>Visible para clientes</span>
         </label>
       </div>
 

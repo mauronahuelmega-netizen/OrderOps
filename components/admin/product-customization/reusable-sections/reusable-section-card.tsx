@@ -105,7 +105,7 @@ export default function ReusableSectionCard({
           <div className={styles.chipRow}>
             <span className={styles.chip}>{selectionChip}</span>
             <span className={styles.chip}>{requiredChip}</span>
-            <span className={styles.chip}>Min {group.min_selections}</span>
+            <span className={styles.chip}>Mín. {group.min_selections}</span>
             <span className={styles.chip}>{maxChip}</span>
             <span className={styles.chip}>
               {group.options.length}{" "}
@@ -124,7 +124,7 @@ export default function ReusableSectionCard({
         <div className={styles.sectionToolbar}>
           {chrome?.dragHandle}
           {chrome?.moveControls}
-          <ActionsMenu label={`Acciones de ${group.name}`}>
+          <ActionsMenu label={`Abrir menú de sección ${group.name}`}>
             <button
               type="button"
               className={styles.menuItem}
@@ -164,8 +164,8 @@ export default function ReusableSectionCard({
                 {togglePending
                   ? "Guardando…"
                   : group.is_available
-                    ? "Ocultar sección"
-                    : "Mostrar sección"}
+                    ? "Ocultar para clientes"
+                    : "Mostrar para clientes"}
               </button>
             </form>
           </ActionsMenu>

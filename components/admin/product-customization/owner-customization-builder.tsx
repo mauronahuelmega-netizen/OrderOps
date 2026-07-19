@@ -51,7 +51,7 @@ const TABS: Array<{ id: BuilderTab; label: string; description: string }> = [
   {
     id: "sections",
     label: "Secciones reutilizables",
-    description: "Creá grupos de opciones que podés usar en varios productos."
+    description: "Creá secciones de opciones que podés usar en varios productos."
   },
   {
     id: "plus",
@@ -132,7 +132,11 @@ export default function OwnerCustomizationBuilder({
         </p>
       </aside>
 
-      <div className={styles.builderTabs} role="tablist" aria-label="Navegación del builder">
+      <div
+        className={styles.builderTabs}
+        role="tablist"
+        aria-label="Navegación de personalización"
+      >
         {TABS.map((item) => {
           const isActive = item.id === tab;
           return (
@@ -203,7 +207,7 @@ export default function OwnerCustomizationBuilder({
             <div className={styles.paneHeader}>
               <h2 className={styles.panelTitle}>Qué puede elegir el cliente</h2>
               <p className={styles.panelSubtitle}>
-                Este producto puede usar opciones propias o heredadas de su categoría.
+                Este producto puede usar opciones propias o aplicadas desde su categoría.
               </p>
             </div>
 
@@ -219,7 +223,7 @@ export default function OwnerCustomizationBuilder({
                   <p className={styles.productSelectMeta}>
                     {selectedProduct.categoryName ?? "Sin categoría"}
                     {selectedProduct.hasUpsell
-                      ? ` · plus: ${selectedProduct.upsellLabel ?? "activo"}`
+                      ? ` · plus sugerido: ${selectedProduct.upsellLabel ?? "visible"}`
                       : ""}
                   </p>
                 </div>
@@ -269,7 +273,7 @@ export default function OwnerCustomizationBuilder({
                               : "Solo en este producto"}
                             {" · "}
                             {section.isEnabled
-                              ? "Visible para el cliente"
+                              ? "Visible para clientes"
                               : "Oculta / no disponible"}
                             {" · "}
                             {section.options.length}{" "}
@@ -293,7 +297,7 @@ export default function OwnerCustomizationBuilder({
                     href={`/admin/products/customizations?product=${selectedProduct.id}`}
                     className={styles.secondaryCta}
                   >
-                    Gestionar excepciones
+                    Excepciones del producto
                   </Link>
                   <button
                     type="button"
@@ -310,8 +314,9 @@ export default function OwnerCustomizationBuilder({
                   </div>
                 ) : (
                   <p className={styles.helperText}>
-                    Las excepciones (ocultar una sección u opción solo en este producto) se
-                    abren con “Gestionar excepciones”.
+                    Usá excepciones del producto cuando este ítem no deba mostrar una
+                    sección u opción que sí aparece en otros. Abrilas con “Excepciones del
+                    producto”.
                   </p>
                 )}
 
@@ -365,7 +370,8 @@ export default function OwnerCustomizationBuilder({
             <div className={styles.paneHeader}>
               <h2 className={styles.panelTitle}>Categorías</h2>
               <p className={styles.panelSubtitle}>
-                Todo lo que configures acá aparecerá en los productos de esta categoría.
+                Las secciones asignadas a una categoría se aplican automáticamente a los
+                productos de esa categoría.
               </p>
             </div>
 
@@ -415,9 +421,9 @@ export default function OwnerCustomizationBuilder({
               <div className={styles.selectedProductHeader}>
                 <h2 className={styles.panelTitle}>Categoría: {selectedCategory.name}</h2>
                 <p className={styles.panelSubtitle}>
-                  Secciones que aparecen en esta categoría
+                  Secciones asignadas a esta categoría
                   {selectedCategory.sections.length === 0
-                    ? ": todavía ninguna."
+                    ? ": todavía ninguna. Esto no incluye secciones configuradas individualmente por producto."
                     : ":"}
                 </p>
                 {selectedCategory.sections.length > 0 ? (
@@ -427,7 +433,7 @@ export default function OwnerCustomizationBuilder({
                         <p className={styles.sectionSummaryName}>{section.groupName}</p>
                         <p className={styles.productSelectMeta}>
                           {section.isEnabled
-                            ? "Visible para el cliente"
+                            ? "Visible para clientes"
                             : "Oculta / no disponible"}
                           {" · "}
                           {section.options.length}{" "}
@@ -450,6 +456,13 @@ export default function OwnerCustomizationBuilder({
               preferredTargetId={selectedCategory?.id}
               hideIntro
             />
+            {selectedCategory && selectedCategory.sections.length === 0 ? (
+              <p className={styles.helperText}>
+                Esta categoría todavía no tiene secciones asignadas. Las opciones
+                configuradas solo en un producto (por ejemplo en Por producto) no
+                aparecen acá.
+              </p>
+            ) : null}
           </section>
         </div>
       ) : null}
