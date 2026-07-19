@@ -759,7 +759,7 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ### 2026-07-19 — PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 — Product & Category Hierarchy Premium Polish
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 ejecutada. Se pulió la jerarquía visual de Por producto y Por categoría dentro del admin de Product Customization, mejorando headers, agrupación de información, empty states, presentación de excepciones y consistencia con las tabs compactas. No se modificó DB, RLS, actions, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS WITH HIERARCHY DEBT**.
-- Archivos: `owner-customization-builder.tsx`, `product-customization-overrides-panel.tsx`, `customization-assignments-section.tsx`, `admin-customization-live-preview.tsx`, `product-customization-admin.module.css`, `page.tsx`, docs de fase.
+- Archivos: `owner-customization-builder.tsx`, `product-customization-overrides-panel.tsx`, `customization-assignments-section.tsx`, `admin-customization-live-preview.tsx`, `product-customization-admin.module.css`, `page.tsx`, docs de fase; commit `a16de09`.
 
 ### 2026-07-19 — PRODUCT-CUSTOMIZATION-ADMIN-COPY-POLISH-1 — Owner-Friendly Premium Copy Polish
 

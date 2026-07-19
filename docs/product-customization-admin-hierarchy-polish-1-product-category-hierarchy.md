@@ -147,7 +147,11 @@ Confirmado: sin migrations, schema, RLS, actions, preview mapper, cart/checkout/
 
 ## Deploy
 
-Autorizado. Commit + push a `main` documentados en CURRENT_PHASE / living memory tras deploy.
+Autorizado y ejecutado.
+
+- Commit: `a16de09` — `Polish Product Customization admin hierarchy`
+- Push: `origin/main` (`6eb74f2..a16de09`)
+- URL: https://orderops.vercel.app
 
 ## Browser QA
 

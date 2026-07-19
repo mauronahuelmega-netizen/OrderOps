@@ -7,6 +7,7 @@
 **Resultado:** Se mejoró la jerarquía visual y comprensión de los tabs Por producto y Por categoría, reforzando headers, agrupación, empty states, presentación de excepciones y consistencia visual con las secciones compactas, sin cambiar lógica operativa.
 
 - Doc: `docs/product-customization-admin-hierarchy-polish-1-product-category-hierarchy.md`
+- Deploy: commit `a16de09` → `origin/main` → https://orderops.vercel.app
 - CLI: `tsc` PASS · `build` PASS
 - Browser QA local admin + público Doble Smash PASS
 - Deuda: assignments densos · excepciones vía `?product=` · responsive estructural → fases posteriores
