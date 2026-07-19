@@ -9,6 +9,7 @@
 - Components: `plus-suggestions/*` · wired en `owner-customization-builder`
 - Actions reutilizadas (create/update/toggle group + add/update/toggle item; ↑↓ vía update item)
 - Doc: `docs/product-customization-plus-suggestions-compact-1-compact-plus-suggestions-ui.md`
+- Deploy: commit `a2a9b26` → `origin/main` → https://orderops.vercel.app
 - **Próxima:** cleanup legacy `upsell-groups-section` · monitor piloto
 
 ---

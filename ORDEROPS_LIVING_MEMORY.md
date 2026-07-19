@@ -759,7 +759,7 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ### 2026-07-18 — PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-COMPACT-1 — Compact Plus Suggestions UI
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-COMPACT-1 ejecutada. Se compactó la pestaña Plus sugeridos del admin de Product Customization. La pantalla principal ahora usa cards resumidas, menú de acciones y modales para editar ventas sugeridas/productos sugeridos, reduciendo scroll y mejorando comprensión comercial para el dueño del negocio. La fase reutilizó actions existentes y no modificó DB, RLS, checkout, cart, stock ni pedidos. Resultado: **PASS**.
-- Archivos: `components/admin/product-customization/plus-suggestions/*`, `owner-customization-builder.tsx`, docs de fase
+- Archivos: `components/admin/product-customization/plus-suggestions/*`, `owner-customization-builder.tsx`, docs de fase; commit `a2a9b26`
 
 ### 2026-07-18 — PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-UX-SPEC-1 — Plus Suggestions Compact UX Specification
 

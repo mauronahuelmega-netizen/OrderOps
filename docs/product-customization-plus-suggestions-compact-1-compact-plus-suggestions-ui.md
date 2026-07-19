@@ -147,7 +147,11 @@ Sin migrations/schema/RLS/actions nuevas/cart/checkout/stock/pedidos/flags.
 
 ## Deploy
 
-Documentado en CURRENT_PHASE tras push.
+Autorizado y ejecutado.
+
+- Commit: `a2a9b26` — `Compact Product Customization plus suggestions`
+- Push: `origin/main`
+- App: https://orderops.vercel.app
 
 ## Browser QA
 
