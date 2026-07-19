@@ -759,7 +759,7 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ### 2026-07-19 — PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1 — Plus Suggestions Legacy Cleanup
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1 ejecutada. Se limpió deuda técnica posterior a la compactación de Plus sugeridos, eliminando el componente legacy/imports/CSS obsoletos del flujo inline anterior donde fue seguro hacerlo. La UI compacta, Secciones reutilizables, preview admin, tabs restantes y catálogo público se mantienen operativos sin tocar DB, RLS, checkout, cart, stock ni pedidos. Resultado: **PASS**.
-- Archivos eliminados: `upsell-groups-section.tsx`; CSS huérfano `.plusWorkspace` / `.optionsSection`; docs de fase
+- Archivos eliminados: `upsell-groups-section.tsx`; CSS huérfano `.plusWorkspace` / `.optionsSection`; docs de fase; commit `6b0e153`
 
 ### 2026-07-18 — PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-COMPACT-1 — Compact Plus Suggestions UI
 

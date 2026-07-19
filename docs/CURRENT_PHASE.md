@@ -9,6 +9,7 @@
 - Eliminado: `upsell-groups-section.tsx` (0 imports)
 - CSS huérfano: `.plusWorkspace`, `.optionsSection` (compartido assignments/overrides conservado)
 - Doc: `docs/product-customization-plus-suggestions-cleanup-1-legacy-cleanup.md`
+- Deploy: commit `6b0e153` → `origin/main` → https://orderops.vercel.app
 - **Próxima:** monitor piloto · opcional densificar Por producto / Por categoría
 
 ---

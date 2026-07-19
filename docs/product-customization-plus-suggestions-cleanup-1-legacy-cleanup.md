@@ -90,7 +90,11 @@ Sin migrations/schema/RLS/actions/cart/checkout/stock/pedidos/flags/stock contex
 
 ## Deploy
 
-Autorizado. Commit + push documentados en CURRENT_PHASE.
+Autorizado y ejecutado.
+
+- Commit: `6b0e153` — `Clean up legacy Product Customization plus suggestions`
+- Push: `origin/main`
+- App: https://orderops.vercel.app
 
 ## Browser QA
 
