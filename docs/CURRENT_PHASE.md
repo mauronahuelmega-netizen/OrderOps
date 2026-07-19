@@ -1,5 +1,19 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 (2026-07-19)
+
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 — Product & Category Hierarchy Premium Polish  
+**Estado:** PASS WITH HIERARCHY DEBT  
+**Resultado:** Se mejoró la jerarquía visual y comprensión de los tabs Por producto y Por categoría, reforzando headers, agrupación, empty states, presentación de excepciones y consistencia visual con las secciones compactas, sin cambiar lógica operativa.
+
+- Doc: `docs/product-customization-admin-hierarchy-polish-1-product-category-hierarchy.md`
+- CLI: `tsc` PASS · `build` PASS
+- Browser QA local admin + público Doble Smash PASS
+- Deuda: assignments densos · excepciones vía `?product=` · responsive estructural → fases posteriores
+- **Próxima:** EXCEPTIONS-UX-1 · ASSIGNMENTS-COMPACT-1 · RESPONSIVE-POLISH-1
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-ADMIN-COPY-POLISH-1 (2026-07-19)
 
 **Fase:** PRODUCT-CUSTOMIZATION-ADMIN-COPY-POLISH-1 — Owner-Friendly Premium Copy Polish  

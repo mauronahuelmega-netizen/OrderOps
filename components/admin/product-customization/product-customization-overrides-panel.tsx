@@ -53,15 +53,21 @@ export default function ProductCustomizationOverridesPanel({ productId }: Props)
   }, [reload]);
 
   return (
-    <section className={styles.productPanel} aria-labelledby="product-customization-panel-title">
+    <section
+      className={`${styles.productPanel} ${styles.exceptionsPanel}`}
+      aria-labelledby="product-customization-panel-title"
+    >
       <div className={styles.productPanelHeader}>
         <div>
-          <h3 id="product-customization-panel-title" className={styles.optionsTitle}>
-            Excepciones del producto
-          </h3>
+          <div className={styles.blockTitleRow}>
+            <h3 id="product-customization-panel-title" className={styles.optionsTitle}>
+              Ajustes propios de este producto
+            </h3>
+            <span className={styles.advancedBadge}>Avanzado</span>
+          </div>
           <p className={styles.groupSummary}>
-            Ajustes propios de este producto. Podés ocultar una sección u opción solo
-            acá y volver a mostrarla cuando quieras.
+            Ocultá secciones u opciones solo para este producto cuando necesite
+            comportarse distinto al resto.
           </p>
         </div>
         <a

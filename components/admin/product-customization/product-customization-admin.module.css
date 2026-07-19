@@ -442,11 +442,129 @@
   line-height: 1.45;
 }
 
+.guideLine {
+  margin: 4px 0 0;
+  color: var(--text-tertiary);
+  font-size: 0.8125rem;
+  line-height: 1.45;
+}
+
 .productWorkspace,
 .categoryWorkspace {
   display: grid;
   gap: 14px;
   min-width: 0;
+}
+
+.summaryCard {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--surface-elevated-border, var(--border-subtle));
+  border-radius: var(--radius-lg, 14px);
+  background: var(--surface-elevated-bg, var(--bg-surface));
+  box-shadow: var(--surface-elevated-shadow, var(--shadow-sm, none));
+}
+
+.hierarchyBlock {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+
+.secondaryBlock {
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--surface-soft-border, var(--border-subtle));
+  border-radius: var(--radius-lg, 14px);
+  background: var(--surface-soft-bg, var(--bg-canvas));
+  box-shadow: none;
+}
+
+.blockTitleRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.summaryLine {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.summaryLabel {
+  display: inline-block;
+  margin-right: 6px;
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.softChip,
+.advancedBadge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--surface-muted-border, var(--border-subtle));
+  background: var(--surface-muted-bg, var(--bg-surface-hover));
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.advancedBadge {
+  border-color: color-mix(in srgb, var(--accent-primary) 28%, var(--border-subtle));
+  background: color-mix(in srgb, var(--accent-soft) 45%, var(--bg-surface));
+  color: var(--text-primary);
+}
+
+.sectionSummaryTop {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.builderEmptyMuted {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px dashed var(--surface-muted-border, var(--border-subtle));
+  border-radius: var(--radius-md, 12px);
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.builderEmptyMuted h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+  font-weight: 650;
+}
+
+.builderEmptyMuted p {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.exceptionsPanel {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
 }
 
 .paneHeader {
@@ -765,6 +883,14 @@
   display: grid;
   gap: 10px;
   min-width: 0;
+}
+
+.secondaryBlock .productPanelHeader {
+  margin-bottom: 4px;
+}
+
+.secondaryBlock .optionsTitle {
+  font-size: 1rem;
 }
 
 .previewDesktop {

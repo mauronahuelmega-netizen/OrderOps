@@ -224,8 +224,8 @@ export default function AdminCustomizationLivePreview({
           <h2 className={styles.panelTitle}>Vista previa del cliente</h2>
           <p className={styles.panelSubtitle}>
             {hasDisableOverrides
-              ? "Probá cómo lo verá el cliente con las excepciones de este producto. Esta vista no agrega productos reales al carrito."
-              : "Probá cómo lo verá el cliente. Esta vista no agrega productos reales al carrito."}
+              ? "Soporte visual con las excepciones de este producto. No agrega productos reales al carrito."
+              : "Probá cómo se verá la personalización. Esta vista no agrega productos reales al carrito."}
           </p>
         </div>
         {body}

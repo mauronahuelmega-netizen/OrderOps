@@ -39,8 +39,8 @@ export default async function AdminProductCustomizationsPage({ searchParams }: P
       <AdminPageHeader
         variant="operational"
         eyebrow="Catálogo"
-        title="Opcionales, extras y plus"
-        description="Configurá las opciones, extras y productos sugeridos que verán tus clientes al personalizar un pedido."
+        title="Opciones, extras y plus"
+        description="Configurá las opciones, agregados y productos sugeridos que verán tus clientes al personalizar un pedido."
       />
 
       <OwnerCustomizationBuilder

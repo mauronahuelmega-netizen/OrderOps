@@ -157,20 +157,15 @@ export default function CustomizationAssignmentsSection({
             <div className="admin-empty-state">
               <h2>
                 {mode === "category"
-                  ? "Esta categoría todavía no tiene secciones asignadas"
+                  ? "Sin secciones asignadas a nivel categoría"
                   : "Nada aparece todavía"}
               </h2>
               <p>
-                Agregá una sección a{" "}
-                {mode === "product"
-                  ? "este producto"
-                  : mode === "category"
-                    ? "esta categoría"
-                    : "una categoría o producto"}{" "}
-                para que el cliente pueda elegir opciones.
                 {mode === "category"
-                  ? " Esto no incluye secciones configuradas individualmente por producto."
-                  : ""}
+                  ? "Esta categoría todavía no aplica secciones en lote. Los productos pueden tener ajustes propios en “Por producto”."
+                  : `Agregá una sección a ${
+                      mode === "product" ? "este producto" : "una categoría o producto"
+                    } para que el cliente pueda elegir opciones.`}
               </p>
             </div>
           )}

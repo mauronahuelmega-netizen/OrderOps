@@ -41,12 +41,14 @@ const TABS: Array<{ id: BuilderTab; label: string; description: string }> = [
   {
     id: "product",
     label: "Por producto",
-    description: "Elegí un producto y revisá qué opciones verá el cliente."
+    description:
+      "Configurá lo que verá el cliente cuando personalice un producto específico."
   },
   {
     id: "category",
     label: "Por categoría",
-    description: "Aplicá opciones a todos los productos de una categoría."
+    description:
+      "Aplicá secciones a todos los productos de una categoría. Esto no incluye ajustes configurados individualmente por producto."
   },
   {
     id: "sections",
@@ -114,6 +116,36 @@ export default function OwnerCustomizationBuilder({
 
   const activeTab = TABS.find((item) => item.id === tab) ?? TABS[0];
 
+  const productSummaryLabels = selectedProduct
+    ? [
+        ...selectedProduct.sections.map((section) => section.groupName),
+        ...(selectedProduct.hasUpsell
+          ? [`Plus ${selectedProduct.upsellLabel ?? "sugerido"}`]
+          : [])
+      ]
+    : [];
+
+  const productAppliedFrom = selectedProduct
+    ? (() => {
+        const fromCategory = selectedProduct.sections.some(
+          (section) => section.source === "category"
+        );
+        const fromProduct = selectedProduct.sections.some(
+          (section) => section.source === "product"
+        );
+        if (fromCategory && fromProduct) {
+          return "categoría + ajustes propios";
+        }
+        if (fromCategory) {
+          return "la categoría";
+        }
+        if (fromProduct) {
+          return "este producto";
+        }
+        return null;
+      })()
+    : null;
+
   return (
     <div className={styles.builderShell}>
       <aside className={styles.notice} aria-live="polite">
@@ -129,6 +161,10 @@ export default function OwnerCustomizationBuilder({
           {customizationEnabled
             ? "La personalización está encendida para este negocio. Los cambios de esta pantalla pueden verse en el catálogo público."
             : "Estas opciones todavía no son visibles para clientes. Podés prepararlas y revisarlas antes de activar la personalización."}
+        </p>
+        <p className={styles.guideLine}>
+          Usá secciones reutilizables para crear opciones, asigná por categoría para
+          aplicar en lote y ajustá por producto cuando necesites excepciones.
         </p>
       </aside>
 
@@ -160,9 +196,9 @@ export default function OwnerCustomizationBuilder({
         <div className={styles.productWorkspace}>
           <section className={styles.productListPane} aria-label="Productos">
             <div className={styles.paneHeader}>
-              <h2 className={styles.panelTitle}>Productos</h2>
+              <h2 className={styles.panelTitle}>1. Elegí el producto</h2>
               <p className={styles.panelSubtitle}>
-                Elegí uno para ver qué puede elegir el cliente.
+                Seleccioná un producto para revisar qué verá el cliente al personalizarlo.
               </p>
             </div>
 
@@ -203,75 +239,97 @@ export default function OwnerCustomizationBuilder({
             )}
           </section>
 
-          <section className={styles.configPane} aria-label="Qué puede elegir el cliente">
-            <div className={styles.paneHeader}>
-              <h2 className={styles.panelTitle}>Qué puede elegir el cliente</h2>
-              <p className={styles.panelSubtitle}>
-                Este producto puede usar opciones propias o aplicadas desde su categoría.
-              </p>
-            </div>
-
+          <section className={styles.configPane} aria-label="Configuración del producto">
             {!selectedProduct ? (
               <div className={styles.builderEmpty}>
-                <h3>Elegí un producto</h3>
-                <p>Elegí un producto para ver qué opciones puede elegir el cliente.</p>
+                <h3>Elegí un producto para ver sus opciones</h3>
+                <p>
+                  Seleccioná un producto a la izquierda y revisá qué verá el cliente al
+                  personalizarlo.
+                </p>
               </div>
             ) : (
               <>
-                <div className={styles.selectedProductHeader}>
-                  <h3 className={styles.selectedProductName}>{selectedProduct.name}</h3>
-                  <p className={styles.productSelectMeta}>
-                    {selectedProduct.categoryName ?? "Sin categoría"}
-                    {selectedProduct.hasUpsell
-                      ? ` · plus sugerido: ${selectedProduct.upsellLabel ?? "visible"}`
-                      : ""}
-                  </p>
-                </div>
-
-                {selectedProduct.sections.length === 0 ? (
-                  <div className={styles.builderEmpty}>
-                    <h3>Sin opciones todavía</h3>
-                    <p>Este producto todavía no tiene opciones configuradas.</p>
-                    <div className={styles.actionsRow}>
-                      <button
-                        type="button"
-                        className={styles.primaryCta}
-                        onClick={() => setTab("sections")}
-                      >
-                        Agregar una sección
-                      </button>
-                      <button
-                        type="button"
-                        className={styles.secondaryCta}
-                        onClick={() => {
-                          if (selectedProduct.categoryId) {
-                            setSelectedCategoryId(selectedProduct.categoryId);
-                          }
-                          setTab("category");
-                        }}
-                      >
-                        Usar opciones de su categoría
-                      </button>
-                      <button
-                        type="button"
-                        className={styles.secondaryCta}
-                        onClick={() => setTab("plus")}
-                      >
-                        Agregar un plus sugerido
-                      </button>
-                    </div>
+                <article className={styles.summaryCard}>
+                  <div className={styles.blockTitleRow}>
+                    <h2 className={styles.panelTitle}>Producto seleccionado</h2>
+                    <span className={styles.softChip}>
+                      {selectedProduct.categoryName ?? "Sin categoría"}
+                    </span>
                   </div>
-                ) : (
-                  <ul className={styles.sectionSummaryList}>
-                    {selectedProduct.sections.map((section) => (
-                      <li key={section.groupId} className={styles.sectionSummaryItem}>
-                        <div>
-                          <p className={styles.sectionSummaryName}>{section.groupName}</p>
+                  <h3 className={styles.selectedProductName}>{selectedProduct.name}</h3>
+                  <p className={styles.summaryLine}>
+                    <span className={styles.summaryLabel}>Cliente verá</span>
+                    {productSummaryLabels.length > 0
+                      ? productSummaryLabels.join(" · ")
+                      : "Todavía sin opciones configuradas"}
+                  </p>
+                  {productAppliedFrom ? (
+                    <p className={styles.summaryLine}>
+                      <span className={styles.summaryLabel}>Aplicado desde</span>
+                      {productAppliedFrom}
+                    </p>
+                  ) : null}
+                </article>
+
+                <div className={styles.hierarchyBlock}>
+                  <div className={styles.paneHeader}>
+                    <h2 className={styles.panelTitle}>Secciones que verá el cliente</h2>
+                    <p className={styles.panelSubtitle}>
+                      Incluye opciones aplicadas desde la categoría y las propias de este
+                      producto.
+                    </p>
+                  </div>
+
+                  {selectedProduct.sections.length === 0 ? (
+                    <div className={styles.builderEmpty}>
+                      <h3>Sin opciones todavía</h3>
+                      <p>
+                        Este producto todavía no tiene secciones configuradas. Creá una
+                        sección o asignala desde su categoría.
+                      </p>
+                      <div className={styles.actionsRow}>
+                        <button
+                          type="button"
+                          className={styles.primaryCta}
+                          onClick={() => setTab("sections")}
+                        >
+                          Crear sección
+                        </button>
+                        <button
+                          type="button"
+                          className={styles.secondaryCta}
+                          onClick={() => {
+                            if (selectedProduct.categoryId) {
+                              setSelectedCategoryId(selectedProduct.categoryId);
+                            }
+                            setTab("category");
+                          }}
+                        >
+                          Asignar por categoría
+                        </button>
+                        <button
+                          type="button"
+                          className={styles.secondaryCta}
+                          onClick={() => setTab("plus")}
+                        >
+                          Agregar plus sugerido
+                        </button>
+                      </div>
+                    </div>
+                  ) : (
+                    <ul className={styles.sectionSummaryList}>
+                      {selectedProduct.sections.map((section) => (
+                        <li key={section.groupId} className={styles.sectionSummaryItem}>
+                          <div className={styles.sectionSummaryTop}>
+                            <p className={styles.sectionSummaryName}>{section.groupName}</p>
+                            <span className={styles.softChip}>
+                              {section.source === "category"
+                                ? "Aplicado desde categoría"
+                                : "Solo en este producto"}
+                            </span>
+                          </div>
                           <p className={styles.productSelectMeta}>
-                            {section.source === "category"
-                              ? "Desde la categoría"
-                              : "Solo en este producto"}
-                            {" · "}
                             {section.isEnabled
                               ? "Visible para clientes"
                               : "Oculta / no disponible"}
@@ -279,45 +337,59 @@ export default function OwnerCustomizationBuilder({
                             {section.options.length}{" "}
                             {section.options.length === 1 ? "opción" : "opciones"}
                           </p>
-                        </div>
-                      </li>
-                    ))}
-                  </ul>
-                )}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
 
-                <div className={styles.actionsRow}>
-                  <button
-                    type="button"
-                    className={styles.primaryCta}
-                    onClick={() => setTab("sections")}
-                  >
-                    Agregar sección de opciones
-                  </button>
-                  <Link
-                    href={`/admin/products/customizations?product=${selectedProduct.id}`}
-                    className={styles.secondaryCta}
-                  >
-                    Excepciones del producto
-                  </Link>
-                  <button
-                    type="button"
-                    className={styles.secondaryCta}
-                    onClick={() => setTab("plus")}
-                  >
-                    Configurar plus sugerido
-                  </button>
+                  <div className={styles.actionsRow}>
+                    <button
+                      type="button"
+                      className={styles.primaryCta}
+                      onClick={() => setTab("sections")}
+                    >
+                      Gestionar secciones
+                    </button>
+                    <button
+                      type="button"
+                      className={styles.secondaryCta}
+                      onClick={() => setTab("plus")}
+                    >
+                      Configurar plus sugerido
+                    </button>
+                  </div>
                 </div>
 
                 {initialProductId === selectedProduct.id ? (
-                  <div className={styles.overridesEmbed}>
-                    <ProductCustomizationOverridesPanel productId={selectedProduct.id} />
+                  <div className={styles.secondaryBlock}>
+                    <div className={styles.overridesEmbed}>
+                      <ProductCustomizationOverridesPanel productId={selectedProduct.id} />
+                    </div>
                   </div>
                 ) : (
-                  <p className={styles.helperText}>
-                    Usá excepciones del producto cuando este ítem no deba mostrar una
-                    sección u opción que sí aparece en otros. Abrilas con “Excepciones del
-                    producto”.
-                  </p>
+                  <div className={styles.secondaryBlock}>
+                    <div className={styles.blockTitleRow}>
+                      <h2 className={styles.panelTitle}>Ajustes propios de este producto</h2>
+                      <span className={styles.advancedBadge}>Avanzado</span>
+                    </div>
+                    <p className={styles.panelSubtitle}>
+                      Usá excepciones solo si este producto no debe mostrar una sección u
+                      opción que sí aparece en otros.
+                    </p>
+                    <div className={styles.builderEmptyMuted}>
+                      <h3>Sin excepciones todavía</h3>
+                      <p>
+                        Este producto usa la configuración general. Abrí excepciones solo
+                        si necesitás ocultar algo para este producto.
+                      </p>
+                      <Link
+                        href={`/admin/products/customizations?product=${selectedProduct.id}`}
+                        className={styles.secondaryCta}
+                      >
+                        Abrir excepciones del producto
+                      </Link>
+                    </div>
+                  </div>
                 )}
 
                 <details className={styles.advancedBlock}>
@@ -368,10 +440,10 @@ export default function OwnerCustomizationBuilder({
         <div className={styles.categoryWorkspace}>
           <section className={styles.productListPane} aria-label="Categorías">
             <div className={styles.paneHeader}>
-              <h2 className={styles.panelTitle}>Categorías</h2>
+              <h2 className={styles.panelTitle}>1. Elegí la categoría</h2>
               <p className={styles.panelSubtitle}>
-                Las secciones asignadas a una categoría se aplican automáticamente a los
-                productos de esa categoría.
+                Las secciones asignadas aquí se aplican en lote a todos los productos de
+                la categoría.
               </p>
             </div>
 
@@ -403,9 +475,11 @@ export default function OwnerCustomizationBuilder({
                           {category.productCount === 1 ? "producto" : "productos"}
                           {category.sections.length > 0
                             ? ` · ${category.sections.length} ${
-                                category.sections.length === 1 ? "sección" : "secciones"
+                                category.sections.length === 1
+                                  ? "sección a nivel categoría"
+                                  : "secciones a nivel categoría"
                               }`
-                            : " · sin secciones"}
+                            : " · sin secciones a nivel categoría"}
                           {category.hasUpsell ? " · plus" : ""}
                         </span>
                       </button>
@@ -416,53 +490,103 @@ export default function OwnerCustomizationBuilder({
             )}
           </section>
 
-          <section className={styles.configPaneWide}>
+          <section className={styles.configPaneWide} aria-label="Configuración de categoría">
             {selectedCategory ? (
-              <div className={styles.selectedProductHeader}>
-                <h2 className={styles.panelTitle}>Categoría: {selectedCategory.name}</h2>
-                <p className={styles.panelSubtitle}>
-                  Secciones asignadas a esta categoría
-                  {selectedCategory.sections.length === 0
-                    ? ": todavía ninguna. Esto no incluye secciones configuradas individualmente por producto."
-                    : ":"}
-                </p>
-                {selectedCategory.sections.length > 0 ? (
-                  <ul className={styles.sectionSummaryList}>
-                    {selectedCategory.sections.map((section) => (
-                      <li key={section.groupId} className={styles.sectionSummaryItem}>
-                        <p className={styles.sectionSummaryName}>{section.groupName}</p>
-                        <p className={styles.productSelectMeta}>
-                          {section.isEnabled
-                            ? "Visible para clientes"
-                            : "Oculta / no disponible"}
-                          {" · "}
-                          {section.options.length}{" "}
-                          {section.options.length === 1 ? "opción" : "opciones"}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-              </div>
-            ) : null}
+              <>
+                <article className={styles.summaryCard}>
+                  <div className={styles.blockTitleRow}>
+                    <h2 className={styles.panelTitle}>Categoría seleccionada</h2>
+                    <span className={styles.softChip}>
+                      {selectedCategory.productCount}{" "}
+                      {selectedCategory.productCount === 1 ? "producto" : "productos"}
+                    </span>
+                  </div>
+                  <h3 className={styles.selectedProductName}>{selectedCategory.name}</h3>
+                  <p className={styles.summaryLine}>
+                    <span className={styles.summaryLabel}>Impacto</span>
+                    Las secciones de esta categoría se aplican automáticamente a sus
+                    productos.
+                  </p>
+                  <p className={styles.helperText}>
+                    Esto no incluye ni modifica ajustes configurados individualmente en
+                    “Por producto”.
+                  </p>
+                </article>
 
-            <CustomizationAssignmentsSection
-              groups={groups}
-              categories={categories}
-              products={products}
-              assignments={assignments}
-              defaultSortOrder={nextAssignmentSort}
-              mode="category"
-              preferredTargetId={selectedCategory?.id}
-              hideIntro
-            />
-            {selectedCategory && selectedCategory.sections.length === 0 ? (
-              <p className={styles.helperText}>
-                Esta categoría todavía no tiene secciones asignadas. Las opciones
-                configuradas solo en un producto (por ejemplo en Por producto) no
-                aparecen acá.
-              </p>
-            ) : null}
+                <div className={styles.hierarchyBlock}>
+                  <div className={styles.paneHeader}>
+                    <h2 className={styles.panelTitle}>
+                      Secciones asignadas a nivel categoría
+                    </h2>
+                    <p className={styles.panelSubtitle}>
+                      Solo aparecen las secciones aplicadas en lote a esta categoría.
+                    </p>
+                  </div>
+
+                  {selectedCategory.sections.length > 0 ? (
+                    <ul className={styles.sectionSummaryList}>
+                      {selectedCategory.sections.map((section) => (
+                        <li key={section.groupId} className={styles.sectionSummaryItem}>
+                          <div className={styles.sectionSummaryTop}>
+                            <p className={styles.sectionSummaryName}>{section.groupName}</p>
+                            <span className={styles.softChip}>Nivel categoría</span>
+                          </div>
+                          <p className={styles.productSelectMeta}>
+                            {section.isEnabled
+                              ? "Visible para clientes"
+                              : "Oculta / no disponible"}
+                            {" · "}
+                            {section.options.length}{" "}
+                            {section.options.length === 1 ? "opción" : "opciones"}
+                          </p>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <div className={styles.builderEmpty}>
+                      <h3>Sin secciones asignadas directamente</h3>
+                      <p>
+                        Esta categoría todavía no aplica secciones en lote. Los productos
+                        pueden tener ajustes propios en “Por producto”.
+                      </p>
+                      <button
+                        type="button"
+                        className={styles.secondaryCta}
+                        onClick={() => setTab("product")}
+                      >
+                        Revisar por producto
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </>
+            ) : (
+              <div className={styles.builderEmpty}>
+                <h3>Elegí una categoría</h3>
+                <p>
+                  Seleccioná una categoría para asignar secciones a todos sus productos.
+                </p>
+              </div>
+            )}
+
+            <div className={styles.hierarchyBlock}>
+              <div className={styles.paneHeader}>
+                <h2 className={styles.panelTitle}>Asignar secciones a la categoría</h2>
+                <p className={styles.panelSubtitle}>
+                  Agregá o reordená las secciones que se aplican en lote.
+                </p>
+              </div>
+              <CustomizationAssignmentsSection
+                groups={groups}
+                categories={categories}
+                products={products}
+                assignments={assignments}
+                defaultSortOrder={nextAssignmentSort}
+                mode="category"
+                preferredTargetId={selectedCategory?.id}
+                hideIntro
+              />
+            </div>
           </section>
         </div>
       ) : null}
