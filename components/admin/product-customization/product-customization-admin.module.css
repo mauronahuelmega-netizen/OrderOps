@@ -119,13 +119,6 @@
   align-items: center;
 }
 
-.optionsSection {
-  display: grid;
-  gap: 12px;
-  padding-top: 4px;
-  border-top: 1px solid var(--border-subtle);
-}
-
 .optionsTitle {
   margin: 0;
   color: var(--text-primary);
@@ -451,12 +444,6 @@
 
 .productWorkspace,
 .categoryWorkspace {
-  display: grid;
-  gap: 14px;
-  min-width: 0;
-}
-
-.plusWorkspace {
   display: grid;
   gap: 14px;
   min-width: 0;

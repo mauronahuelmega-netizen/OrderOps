@@ -1,5 +1,18 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1 (2026-07-19)
+
+**Fase:** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1 — Plus Suggestions Legacy Cleanup  
+**Estado:** PASS  
+**Resultado:** Se eliminó el componente legacy del flujo inline anterior de Plus sugeridos y se limpiaron referencias/CSS obsoletos donde fue seguro hacerlo. La UI compacta sigue funcionando y no se modificó lógica operativa.
+
+- Eliminado: `upsell-groups-section.tsx` (0 imports)
+- CSS huérfano: `.plusWorkspace`, `.optionsSection` (compartido assignments/overrides conservado)
+- Doc: `docs/product-customization-plus-suggestions-cleanup-1-legacy-cleanup.md`
+- **Próxima:** monitor piloto · opcional densificar Por producto / Por categoría
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-COMPACT-1 (2026-07-18)
 
 **Fase:** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-COMPACT-1 — Compact Plus Suggestions UI  
@@ -10,7 +23,7 @@
 - Actions reutilizadas (create/update/toggle group + add/update/toggle item; ↑↓ vía update item)
 - Doc: `docs/product-customization-plus-suggestions-compact-1-compact-plus-suggestions-ui.md`
 - Deploy: commit `a2a9b26` → `origin/main` → https://orderops.vercel.app
-- **Próxima:** cleanup legacy `upsell-groups-section` · monitor piloto
+- **Próxima:** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1 (hecho) · monitor piloto
 
 ---
 

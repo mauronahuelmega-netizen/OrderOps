@@ -756,6 +756,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-19 — PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1 — Plus Suggestions Legacy Cleanup
+
+- **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1 ejecutada. Se limpió deuda técnica posterior a la compactación de Plus sugeridos, eliminando el componente legacy/imports/CSS obsoletos del flujo inline anterior donde fue seguro hacerlo. La UI compacta, Secciones reutilizables, preview admin, tabs restantes y catálogo público se mantienen operativos sin tocar DB, RLS, checkout, cart, stock ni pedidos. Resultado: **PASS**.
+- Archivos eliminados: `upsell-groups-section.tsx`; CSS huérfano `.plusWorkspace` / `.optionsSection`; docs de fase
+
 ### 2026-07-18 — PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-COMPACT-1 — Compact Plus Suggestions UI
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-COMPACT-1 ejecutada. Se compactó la pestaña Plus sugeridos del admin de Product Customization. La pantalla principal ahora usa cards resumidas, menú de acciones y modales para editar ventas sugeridas/productos sugeridos, reduciendo scroll y mejorando comprensión comercial para el dueño del negocio. La fase reutilizó actions existentes y no modificó DB, RLS, checkout, cart, stock ni pedidos. Resultado: **PASS**.

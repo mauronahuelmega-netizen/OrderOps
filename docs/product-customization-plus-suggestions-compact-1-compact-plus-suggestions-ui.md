@@ -173,7 +173,7 @@ DB · RLS · actions semantics · public modal · cart · checkout · stock · d
 
 | Deuda | Notas |
 |-------|-------|
-| Legacy `upsell-groups-section.tsx` | Sin imports runtime → CLEANUP-1 |
+| Legacy `upsell-groups-section.tsx` | Eliminado en CLEANUP-1 |
 | Stock en row | No en `AdminCatalogProductOption` → omitido |
 | Nested dialogs | Add/edit sobre manage — OK Chromium |
 
@@ -187,4 +187,4 @@ Revertir commit; restaurar `UpsellGroupsSection` en builder.
 
 ## Próxima fase recomendada
 
-`PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1` — eliminar `upsell-groups-section.tsx` si sigue sin uso.
+`PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1` — ejecutada (legacy eliminado).
