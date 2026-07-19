@@ -7,6 +7,7 @@
 **Resultado:** Se pulió el copy owner-facing del admin de Product Customization, reemplazando lenguaje técnico o ambiguo por términos claros y premium como “Vista previa”, “Mostrar/Ocultar para clientes”, “Aplicado desde”, “Excepciones del producto” y “Orden de aparición”, sin cambiar lógica operativa.
 
 - Doc: `docs/product-customization-admin-copy-polish-1-owner-friendly-copy.md`
+- Deploy: commit `40d4cd1` → `origin/main` → https://orderops.vercel.app
 - CLI: `tsc` PASS · `build` PASS
 - Deuda menor: mensajes de success en actions con “Herencia…” (actions no tocadas por scope)
 - **Próxima:** PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 · EXCEPTIONS-UX-1 · ASSIGNMENTS-COMPACT-1

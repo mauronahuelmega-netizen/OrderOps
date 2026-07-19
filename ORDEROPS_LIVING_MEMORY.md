@@ -759,7 +759,7 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ### 2026-07-19 — PRODUCT-CUSTOMIZATION-ADMIN-COPY-POLISH-1 — Owner-Friendly Premium Copy Polish
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-COPY-POLISH-1 ejecutada. Se pulió el lenguaje owner-facing del admin de Product Customization para acercarlo a un estándar SaaS premium. Se reemplazaron términos técnicos o ambiguos como “Desactivar”, “Preview”, “Herencia”, “Origen”, “Min/Max” y referencias internas por copy más claro y orientado al dueño del negocio. No se modificó DB, RLS, actions, checkout, cart, stock ni pedidos. Resultado: **PASS**.
-- Archivos: componentes `components/admin/product-customization/*` (strings UI), `page.tsx` description, docs de fase.
+- Archivos: componentes `components/admin/product-customization/*` (strings UI), `page.tsx` description, docs de fase; commit `40d4cd1`.
 
 ### 2026-07-19 — PRODUCT-CUSTOMIZATION-ADMIN-V1-POLISH-MONITOR-1 — Enterprise Premium QA & UX/UI Polish Audit
 
