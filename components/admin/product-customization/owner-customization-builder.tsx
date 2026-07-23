@@ -1,7 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CustomizationAssignmentsSection from "@/components/admin/product-customization/customization-assignments-section";
 import AdminCustomizationLivePreview from "@/components/admin/product-customization/admin-customization-live-preview";
 import ProductCustomizationOverridesPanel from "@/components/admin/product-customization/product-customization-overrides-panel";
@@ -78,6 +77,22 @@ export default function OwnerCustomizationBuilder({
   const [tab, setTab] = useState<BuilderTab>("product");
   const [selectedProductId, setSelectedProductId] = useState(initialProductId);
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
+
+  // Keep ?product= as a shareable deep-link without forcing navigation or remounts.
+  useEffect(() => {
+    if (typeof window === "undefined" || !selectedProductId) {
+      return;
+    }
+
+    const url = new URL(window.location.href);
+    if (url.searchParams.get("product") === selectedProductId) {
+      return;
+    }
+
+    url.searchParams.set("product", selectedProductId);
+    const next = `${url.pathname}?${url.searchParams.toString()}${url.hash}`;
+    window.history.replaceState(window.history.state, "", next);
+  }, [selectedProductId]);
 
   const productRows = useMemo(
     () =>
@@ -242,10 +257,10 @@ export default function OwnerCustomizationBuilder({
           <section className={styles.configPane} aria-label="Configuración del producto">
             {!selectedProduct ? (
               <div className={styles.builderEmpty}>
-                <h3>Elegí un producto para ver sus opciones</h3>
+                <h3>Elegí un producto para revisar sus ajustes</h3>
                 <p>
-                  Seleccioná un producto a la izquierda y revisá qué verá el cliente al
-                  personalizarlo.
+                  Seleccioná un producto y vas a ver qué secciones aplica, qué ajustes
+                  propios tiene y cómo se verá para el cliente.
                 </p>
               </div>
             ) : (
@@ -360,37 +375,14 @@ export default function OwnerCustomizationBuilder({
                   </div>
                 </div>
 
-                {initialProductId === selectedProduct.id ? (
-                  <div className={styles.secondaryBlock}>
-                    <div className={styles.overridesEmbed}>
-                      <ProductCustomizationOverridesPanel productId={selectedProduct.id} />
-                    </div>
+                <div className={styles.secondaryBlock}>
+                  <div className={styles.overridesEmbed}>
+                    <ProductCustomizationOverridesPanel
+                      productId={selectedProduct.id}
+                      productName={selectedProduct.name}
+                    />
                   </div>
-                ) : (
-                  <div className={styles.secondaryBlock}>
-                    <div className={styles.blockTitleRow}>
-                      <h2 className={styles.panelTitle}>Ajustes propios de este producto</h2>
-                      <span className={styles.advancedBadge}>Avanzado</span>
-                    </div>
-                    <p className={styles.panelSubtitle}>
-                      Usá excepciones solo si este producto no debe mostrar una sección u
-                      opción que sí aparece en otros.
-                    </p>
-                    <div className={styles.builderEmptyMuted}>
-                      <h3>Sin excepciones todavía</h3>
-                      <p>
-                        Este producto usa la configuración general. Abrí excepciones solo
-                        si necesitás ocultar algo para este producto.
-                      </p>
-                      <Link
-                        href={`/admin/products/customizations?product=${selectedProduct.id}`}
-                        className={styles.secondaryCta}
-                      >
-                        Abrir excepciones del producto
-                      </Link>
-                    </div>
-                  </div>
-                )}
+                </div>
 
                 <details className={styles.advancedBlock}>
                   <summary>Avanzado: asignar sección solo a este producto</summary>

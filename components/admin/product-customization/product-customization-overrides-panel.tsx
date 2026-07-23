@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState, useCallback, useEffect, useState, useTransition } from "react";
+import { useActionState, useCallback, useEffect, useMemo, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import {
   disableProductCustomizationGroupOverrideAction,
@@ -11,7 +11,9 @@ import {
 } from "@/app/admin/(protected)/products/customizations/actions";
 import {
   formatCustomizationPriceDelta,
-  type ProductCustomizationInheritance
+  type ProductCustomizationInheritance,
+  type ProductCustomizationInheritanceGroup,
+  type ProductCustomizationInheritanceOption
 } from "@/lib/product-customization/shared";
 import styles from "./product-customization-admin.module.css";
 
@@ -25,9 +27,23 @@ const initialState: ActionState = {};
 
 type Props = {
   productId: string;
+  productName?: string;
 };
 
-export default function ProductCustomizationOverridesPanel({ productId }: Props) {
+function formatActiveCount(count: number): string {
+  if (count === 0) {
+    return "0 excepciones activas";
+  }
+  if (count === 1) {
+    return "1 excepción activa";
+  }
+  return `${count} excepciones activas`;
+}
+
+export default function ProductCustomizationOverridesPanel({
+  productId,
+  productName
+}: Props) {
   const router = useRouter();
   const [inheritance, setInheritance] = useState<ProductCustomizationInheritance | null>(
     null
@@ -52,6 +68,41 @@ export default function ProductCustomizationOverridesPanel({ productId }: Props)
     reload();
   }, [reload]);
 
+  const displayName = productName?.trim() || inheritance?.productName || "este producto";
+
+  const exceptionSummary = useMemo(() => {
+    if (!inheritance) {
+      return { count: 0, labels: [] as string[] };
+    }
+
+    const labels: string[] = [];
+    for (const group of inheritance.groups) {
+      if (group.isDisabledForProduct) {
+        labels.push(group.groupName);
+      }
+      for (const option of group.options) {
+        if (option.isDisabledForProduct) {
+          labels.push(option.optionName);
+        }
+      }
+    }
+
+    return { count: labels.length, labels };
+  }, [inheritance]);
+
+  const optionRows = useMemo(() => {
+    if (!inheritance) {
+      return [] as Array<{
+        group: ProductCustomizationInheritanceGroup;
+        option: ProductCustomizationInheritanceOption;
+      }>;
+    }
+
+    return inheritance.groups.flatMap((group) =>
+      group.options.map((option) => ({ group, option }))
+    );
+  }, [inheritance]);
+
   return (
     <section
       className={`${styles.productPanel} ${styles.exceptionsPanel}`}
@@ -66,20 +117,17 @@ export default function ProductCustomizationOverridesPanel({ productId }: Props)
             <span className={styles.advancedBadge}>Avanzado</span>
           </div>
           <p className={styles.groupSummary}>
-            Ocultá secciones u opciones solo para este producto cuando necesite
+            Ocultá secciones u opciones solo para {displayName} cuando necesite
             comportarse distinto al resto.
           </p>
+          <p className={styles.helperText}>
+            Esto no cambia la configuración de otros productos.
+          </p>
         </div>
-        <a
-          className="admin-secondary-link admin-secondary-link--compact"
-          href={`/admin/products/customizations?product=${encodeURIComponent(productId)}`}
-        >
-          Ir a personalización
-        </a>
       </div>
 
       {isLoading && !inheritance ? (
-        <p className={styles.emptyOptions}>Cargando excepciones…</p>
+        <p className={styles.emptyOptions}>Cargando ajustes…</p>
       ) : null}
 
       {loadError ? (
@@ -90,30 +138,98 @@ export default function ProductCustomizationOverridesPanel({ productId }: Props)
 
       {inheritance ? (
         <>
-          <p className={styles.groupSummary}>
-            {inheritance.categoryName
-              ? `Categoría: ${inheritance.categoryName}`
-              : "Sin categoría — solo se muestran secciones asignadas a este producto."}
-          </p>
+          <div className={styles.exceptionsSummary}>
+            <div className={styles.blockTitleRow}>
+              <span className={styles.softChip}>
+                {formatActiveCount(exceptionSummary.count)}
+              </span>
+              {exceptionSummary.count === 0 ? (
+                <span className={styles.softChip}>Usa configuración general</span>
+              ) : null}
+            </div>
+            {exceptionSummary.count > 0 ? (
+              <p className={styles.summaryLine}>
+                <span className={styles.summaryLabel}>Oculto solo aquí</span>
+                {exceptionSummary.labels.join(" · ")}
+              </p>
+            ) : (
+              <p className={styles.helperText}>
+                Sin excepciones todavía. Este producto usa la configuración general.
+                Ocultá algo solo si necesita comportarse distinto.
+              </p>
+            )}
+            {inheritance.categoryName ? (
+              <p className={styles.helperText}>
+                Categoría: {inheritance.categoryName}
+              </p>
+            ) : (
+              <p className={styles.helperText}>
+                Sin categoría — solo se muestran secciones asignadas a este producto.
+              </p>
+            )}
+          </div>
 
           {inheritance.groups.length === 0 ? (
-            <div className="admin-empty-state">
-              <h2>Sin secciones en este producto</h2>
-              <p>Este producto todavía no tiene secciones de opciones para ajustar.</p>
+            <div className={styles.builderEmptyMuted}>
+              <h3>No hay secciones disponibles para ajustar</h3>
+              <p>
+                Primero asigná secciones por categoría o por producto. Después vas a
+                poder crear excepciones.
+              </p>
             </div>
           ) : (
-            <div className={styles.optionList}>
-              {inheritance.groups.map((group) => (
-                <InheritanceGroupCard
-                  key={group.groupId}
-                  productId={productId}
-                  group={group}
-                  onChanged={() => {
-                    reload();
-                    router.refresh();
-                  }}
-                />
-              ))}
+            <div className={styles.exceptionsStacks}>
+              <div className={styles.exceptionsStack}>
+                <div className={styles.paneHeader}>
+                  <h4 className={styles.exceptionsStackTitle}>Secciones</h4>
+                  <p className={styles.helperText}>
+                    Ocultá una sección completa solo en este producto.
+                  </p>
+                </div>
+                <div className={styles.exceptionsRows}>
+                  {inheritance.groups.map((group) => (
+                    <InheritanceGroupRow
+                      key={group.groupId}
+                      productId={productId}
+                      group={group}
+                      onChanged={() => {
+                        reload();
+                        router.refresh();
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.exceptionsStack}>
+                <div className={styles.paneHeader}>
+                  <h4 className={styles.exceptionsStackTitle}>Opciones</h4>
+                  <p className={styles.helperText}>
+                    Ocultá una opción puntual sin ocultar toda la sección.
+                  </p>
+                </div>
+                {optionRows.length === 0 ? (
+                  <p className={styles.emptyOptions}>
+                    Estas secciones todavía no tienen opciones para ajustar.
+                  </p>
+                ) : (
+                  <div className={styles.exceptionsRows}>
+                    {optionRows.map(({ group, option }) => (
+                      <InheritanceOptionRow
+                        key={option.optionId}
+                        productId={productId}
+                        groupId={group.groupId}
+                        groupName={group.groupName}
+                        option={option}
+                        onChanged={() => {
+                          reload();
+                          router.refresh();
+                        }}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </>
@@ -122,13 +238,13 @@ export default function ProductCustomizationOverridesPanel({ productId }: Props)
   );
 }
 
-function InheritanceGroupCard({
+function InheritanceGroupRow({
   productId,
   group,
   onChanged
 }: {
   productId: string;
-  group: ProductCustomizationInheritance["groups"][number];
+  group: ProductCustomizationInheritanceGroup;
   onChanged: () => void;
 }) {
   const [disableState, disableAction, isDisabling] = useActionState(
@@ -148,71 +264,62 @@ function InheritanceGroupCard({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [disableState.success, restoreState.success]);
 
+  const actionError = disableState.error || restoreState.error;
+
   return (
-    <div className={styles.optionCard}>
-      <div className={styles.optionHeader}>
-        <div>
+    <div className={styles.exceptionRow}>
+      <div className={styles.exceptionRowMain}>
+        <div className={styles.exceptionRowCopy}>
           <p className={styles.optionName}>{group.groupName}</p>
           <p className={styles.optionPrice}>
-            Aplicado desde:{" "}
-            {group.source === "category" ? "la categoría" : "este producto"}
+            {group.source === "category"
+              ? "Aplicado desde categoría"
+              : "Propia de este producto"}
             {!group.assignmentEnabled ? " · sección oculta en la asignación" : ""}
           </p>
         </div>
         <span
-          className={`${styles.chip} ${group.isDisabledForProduct ? styles.chipDanger : ""}`}
+          className={`${styles.softChip} ${
+            group.isDisabledForProduct ? styles.exceptionChipHidden : ""
+          }`}
         >
-          {group.isDisabledForProduct ? "Oculta aquí" : "Visible"}
+          {group.isDisabledForProduct ? "Oculta solo aquí" : "Visible en este producto"}
         </span>
       </div>
 
-      {group.isDisabledForProduct ? (
-        <form action={restoreAction}>
-          <input type="hidden" name="product_id" value={productId} />
-          <input type="hidden" name="group_id" value={group.groupId} />
-          <button
-            type="submit"
-            className="admin-secondary-link admin-secondary-link--compact"
-            disabled={isRestoring}
-          >
-            {isRestoring ? "Mostrando…" : "Mostrar para este producto"}
-          </button>
-        </form>
-      ) : (
-        <form action={disableAction}>
-          <input type="hidden" name="product_id" value={productId} />
-          <input type="hidden" name="group_id" value={group.groupId} />
-          <button
-            type="submit"
-            className="admin-secondary-link admin-secondary-link--compact"
-            disabled={isDisabling}
-          >
-            {isDisabling ? "Ocultando…" : "Ocultar para este producto"}
-          </button>
-        </form>
-      )}
+      <div className={styles.exceptionRowActions}>
+        {group.isDisabledForProduct ? (
+          <form action={restoreAction}>
+            <input type="hidden" name="product_id" value={productId} />
+            <input type="hidden" name="group_id" value={group.groupId} />
+            <button
+              type="submit"
+              className={styles.exceptionAction}
+              disabled={isRestoring}
+            >
+              {isRestoring ? "Mostrando…" : "Volver a mostrar en este producto"}
+            </button>
+          </form>
+        ) : (
+          <form action={disableAction}>
+            <input type="hidden" name="product_id" value={productId} />
+            <input type="hidden" name="group_id" value={group.groupId} />
+            <button
+              type="submit"
+              className={styles.exceptionAction}
+              disabled={isDisabling}
+            >
+              {isDisabling ? "Ocultando…" : "Ocultar solo en este producto"}
+            </button>
+          </form>
+        )}
+      </div>
 
-      {(disableState.error || restoreState.error) && (
+      {actionError ? (
         <p className="admin-feedback admin-feedback--error" role="alert">
-          {disableState.error || restoreState.error}
+          {actionError}
         </p>
-      )}
-
-      {group.options.length > 0 ? (
-        <div className={styles.optionList}>
-          {group.options.map((option) => (
-            <InheritanceOptionRow
-              key={option.optionId}
-              productId={productId}
-              groupId={group.groupId}
-              option={option}
-              onChanged={onChanged}
-            />
-          ))}
-        </div>
-      ) : (
-        <p className={styles.emptyOptions}>Esta sección no tiene opciones todavía.</p>
-      )}
+      ) : null}
     </div>
   );
 }
@@ -220,12 +327,14 @@ function InheritanceGroupCard({
 function InheritanceOptionRow({
   productId,
   groupId,
+  groupName,
   option,
   onChanged
 }: {
   productId: string;
   groupId: string;
-  option: ProductCustomizationInheritance["groups"][number]["options"][number];
+  groupName: string;
+  option: ProductCustomizationInheritanceOption;
   onChanged: () => void;
 }) {
   const [disableState, disableAction, isDisabling] = useActionState(
@@ -245,49 +354,63 @@ function InheritanceOptionRow({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [disableState.success, restoreState.success]);
 
+  const actionError = disableState.error || restoreState.error;
+
   return (
-    <div className={styles.inlineOption}>
-      <div>
-        <p className={styles.optionName}>{option.optionName}</p>
-        <p className={styles.optionPrice}>
-          {formatCustomizationPriceDelta(option.priceDelta)}
-          {!option.optionAvailable ? " · oculta en la sección" : ""}
-          {option.isDisabledForProduct ? " · oculta aquí" : ""}
-        </p>
+    <div className={styles.exceptionRow}>
+      <div className={styles.exceptionRowMain}>
+        <div className={styles.exceptionRowCopy}>
+          <p className={styles.optionName}>{option.optionName}</p>
+          <p className={styles.optionPrice}>
+            En {groupName}
+            {" · "}
+            {formatCustomizationPriceDelta(option.priceDelta)}
+            {!option.optionAvailable ? " · oculta en la sección" : ""}
+          </p>
+        </div>
+        <span
+          className={`${styles.softChip} ${
+            option.isDisabledForProduct ? styles.exceptionChipHidden : ""
+          }`}
+        >
+          {option.isDisabledForProduct ? "Oculta solo aquí" : "Visible en este producto"}
+        </span>
       </div>
 
-      {option.isDisabledForProduct ? (
-        <form action={restoreAction}>
-          <input type="hidden" name="product_id" value={productId} />
-          <input type="hidden" name="option_id" value={option.optionId} />
-          <button
-            type="submit"
-            className="admin-secondary-link admin-secondary-link--compact"
-            disabled={isRestoring}
-          >
-            {isRestoring ? "…" : "Mostrar"}
-          </button>
-        </form>
-      ) : (
-        <form action={disableAction}>
-          <input type="hidden" name="product_id" value={productId} />
-          <input type="hidden" name="group_id" value={groupId} />
-          <input type="hidden" name="option_id" value={option.optionId} />
-          <button
-            type="submit"
-            className="admin-secondary-link admin-secondary-link--compact"
-            disabled={isDisabling}
-          >
-            {isDisabling ? "…" : "Ocultar"}
-          </button>
-        </form>
-      )}
+      <div className={styles.exceptionRowActions}>
+        {option.isDisabledForProduct ? (
+          <form action={restoreAction}>
+            <input type="hidden" name="product_id" value={productId} />
+            <input type="hidden" name="option_id" value={option.optionId} />
+            <button
+              type="submit"
+              className={styles.exceptionAction}
+              disabled={isRestoring}
+            >
+              {isRestoring ? "Mostrando…" : "Volver a mostrar en este producto"}
+            </button>
+          </form>
+        ) : (
+          <form action={disableAction}>
+            <input type="hidden" name="product_id" value={productId} />
+            <input type="hidden" name="group_id" value={groupId} />
+            <input type="hidden" name="option_id" value={option.optionId} />
+            <button
+              type="submit"
+              className={styles.exceptionAction}
+              disabled={isDisabling}
+            >
+              {isDisabling ? "Ocultando…" : "Ocultar solo en este producto"}
+            </button>
+          </form>
+        )}
+      </div>
 
-      {(disableState.error || restoreState.error) && (
+      {actionError ? (
         <p className="admin-feedback admin-feedback--error" role="alert">
-          {disableState.error || restoreState.error}
+          {actionError}
         </p>
-      )}
+      ) : null}
     </div>
   );
 }

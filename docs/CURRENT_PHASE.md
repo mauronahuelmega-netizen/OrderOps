@@ -1,5 +1,18 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-ADMIN-EXCEPTIONS-UX-1 (2026-07-23)
+
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-EXCEPTIONS-UX-1 — Product Exceptions Guided UX  
+**Estado:** PASS  
+**Resultado:** Se mejoró la UX de Excepciones del producto, presentándolas como ajustes propios guiados para el producto seleccionado, con empty states, resumen y acciones owner-friendly, sin cambiar la lógica de overrides ni el modelo de datos.
+
+- Doc: `docs/product-customization-admin-exceptions-ux-1-guided-product-exceptions.md`
+- CLI: `tsc` PASS · `build` PASS
+- Browser QA: panel por selección · hide/restore BBQ · preview · público Doble Smash
+- **Próxima:** ASSIGNMENTS-COMPACT-1 · RESPONSIVE-POLISH-1
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 (2026-07-19)
 
 **Fase:** PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 — Product & Category Hierarchy Premium Polish  

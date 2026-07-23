@@ -534,7 +534,10 @@ export default function EditProductForm({
         </div>
       </form>
 
-      <ProductCustomizationOverridesPanel productId={product.id} />
+      <ProductCustomizationOverridesPanel
+        productId={product.id}
+        productName={product.name}
+      />
 
       <dialog ref={categoryDialogRef} className={styles.categoryDialog}>
         <form

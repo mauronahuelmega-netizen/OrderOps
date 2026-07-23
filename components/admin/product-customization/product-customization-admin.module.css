@@ -567,6 +567,100 @@
   padding: 0;
 }
 
+.exceptionsSummary {
+  display: grid;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--surface-muted-border, var(--border-subtle));
+  border-radius: var(--radius-md, 12px);
+  background: var(--surface-muted-bg, var(--bg-surface-hover));
+}
+
+.exceptionsStacks {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.exceptionsStack {
+  display: grid;
+  gap: 10px;
+  min-width: 0;
+}
+
+.exceptionsStackTitle {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+  font-weight: 650;
+}
+
+.exceptionsRows {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.exceptionRow {
+  display: grid;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid var(--surface-elevated-border, var(--border-subtle));
+  border-radius: var(--radius-md, 12px);
+  background: var(--surface-elevated-bg, var(--bg-surface));
+}
+
+.exceptionRowMain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px 12px;
+}
+
+.exceptionRowCopy {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+  flex: 1 1 180px;
+}
+
+.exceptionRowActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.exceptionAction {
+  appearance: none;
+  border: 1px solid var(--surface-muted-border, var(--border-subtle));
+  border-radius: var(--radius-md, 10px);
+  background: var(--surface-interactive-bg, var(--bg-surface-hover));
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.exceptionAction:hover {
+  border-color: color-mix(in srgb, var(--accent-primary) 35%, var(--border-subtle));
+}
+
+.exceptionAction:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.exceptionChipHidden {
+  border-color: color-mix(in srgb, var(--color-cancelled, #ef4444) 28%, var(--border-subtle));
+  background: color-mix(in srgb, var(--color-cancelled, #ef4444) 12%, var(--bg-surface));
+  color: var(--text-primary);
+}
+
 .paneHeader {
   display: grid;
   gap: 4px;
