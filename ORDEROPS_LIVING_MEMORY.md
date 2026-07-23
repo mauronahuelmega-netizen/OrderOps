@@ -756,6 +756,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-V1-PREMIUM-RESCORE-1 — Enterprise Premium Rescore & Residual Handoff
+
+- **QA / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-V1-PREMIUM-RESCORE-1 ejecutada. Se re-auditó el admin de Product Customization V1 después de las fases de copy, jerarquía, excepciones, assignments, remove y responsive. Se recalculó el Enterprise Readiness Score, se revisaron los P1 originales y se documentó deuda residual priorizada sin modificar runtime, DB, RLS, actions, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS WITH RESIDUAL POLISH DEBT** (score 4.3/5 · P0=0 · P1=0).
+- Archivos: `docs/product-customization-admin-v1-premium-rescore-1-enterprise-readiness.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
+
 ### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-RESPONSIVE-POLISH-1 — Responsive Premium Polish
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-RESPONSIVE-POLISH-1 ejecutada. Se pulió la experiencia responsive del admin de Product Customization, corrigiendo ancho útil en mobile, tabs, cards, chips, modales, menús y vista previa. La fase fue UI/CSS-only y no modificó DB, RLS, actions, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS**.
