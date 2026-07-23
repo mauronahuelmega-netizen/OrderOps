@@ -759,7 +759,7 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-REMOVE-1 — Safe Assignment Unassign Action & UX
 
 - **Frontend / Admin UX + Server Action** PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-REMOVE-1 ejecutada. Se agregó una acción segura para quitar asignaciones de secciones desde Por producto y Por categoría en Product Customization. La UX diferencia Ocultar para clientes de Quitar asignación, incluye confirmación owner-friendly y conserva secciones/opciones reutilizables. No se modificó DB, RLS, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS**.
-- Archivos: `actions.ts` (`removeCustomizationGroupAssignmentAction`), `assignment-card.tsx`, `assignments.module.css`, `customization-assignments-section.tsx`, docs de fase.
+- Archivos: `actions.ts` (`removeCustomizationGroupAssignmentAction`), `assignment-card.tsx`, `assignments.module.css`, `customization-assignments-section.tsx`, docs de fase; commit `e8383e0`.
 
 ### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-COMPACT-1 — Product & Category Assignments Compact UI
 

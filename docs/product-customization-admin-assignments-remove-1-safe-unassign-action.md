@@ -132,7 +132,7 @@ Sin migrations/schema/RLS/mapper/cart/checkout/stock/pedidos QA. Sin delete de g
 
 ## Deploy
 
-Commit + push `origin/main` tras tsc/build → https://orderops.vercel.app
+Commit `e8383e0` + push `origin/main` tras tsc/build → https://orderops.vercel.app
 
 ## Browser QA
 
