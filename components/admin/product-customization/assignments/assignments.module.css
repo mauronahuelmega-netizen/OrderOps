@@ -255,8 +255,30 @@
   cursor: not-allowed;
 }
 
+.menuItemDanger {
+  color: var(--color-cancelled, var(--text-primary));
+}
+
+.menuItemDanger:hover {
+  background: color-mix(
+    in srgb,
+    var(--color-cancelled, var(--bg-surface-hover)) 12%,
+    var(--bg-surface)
+  );
+}
+
 .menuItemForm {
   margin: 0;
+}
+
+.dangerButton {
+  background: var(--color-cancelled, var(--accent-primary));
+  border-color: transparent;
+}
+
+.dangerButton:hover,
+.dangerButton:focus-visible {
+  filter: brightness(0.96);
 }
 
 .feedback {

@@ -756,6 +756,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-REMOVE-1 — Safe Assignment Unassign Action & UX
+
+- **Frontend / Admin UX + Server Action** PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-REMOVE-1 ejecutada. Se agregó una acción segura para quitar asignaciones de secciones desde Por producto y Por categoría en Product Customization. La UX diferencia Ocultar para clientes de Quitar asignación, incluye confirmación owner-friendly y conserva secciones/opciones reutilizables. No se modificó DB, RLS, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS**.
+- Archivos: `actions.ts` (`removeCustomizationGroupAssignmentAction`), `assignment-card.tsx`, `assignments.module.css`, `customization-assignments-section.tsx`, docs de fase.
+
 ### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-COMPACT-1 — Product & Category Assignments Compact UI
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-COMPACT-1 ejecutada. Se compactó la experiencia de asignaciones de Product Customization en Por producto y Por categoría, haciendo más claras las secciones propias, las aplicadas desde categoría y las asignadas directamente a categoría. Se reutilizaron actions existentes y no se modificó DB, RLS, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS WITH REMOVE DEBT** (no hay action segura de quitar asignación; solo toggle hide/show + reorder).

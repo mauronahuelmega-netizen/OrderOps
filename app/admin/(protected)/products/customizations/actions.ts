@@ -425,7 +425,7 @@ async function assertAssignmentOwnership(assignmentId: string, businessId: strin
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("customization_group_assignments")
-    .select("id")
+    .select("id, group_id, target_type, target_id")
     .eq("id", assignmentId)
     .eq("business_id", businessId)
     .maybeSingle();
@@ -438,7 +438,7 @@ async function assertAssignmentOwnership(assignmentId: string, businessId: strin
     return { error: "La asignación no existe o no pertenece a tu negocio." } as const;
   }
 
-  return { ok: true as const, supabase };
+  return { ok: true as const, supabase, assignment: data };
 }
 
 async function assertUpsellGroupOwnership(upsellGroupId: string, businessId: string) {
@@ -682,6 +682,88 @@ export async function toggleCustomizationGroupAssignmentAction(
       error: getActionErrorMessage(
         error,
         "No pudimos actualizar el estado de la asignación."
+      )
+    };
+  }
+}
+
+export async function removeCustomizationGroupAssignmentAction(
+  _prevState: ActionState,
+  formData: FormData
+): Promise<ActionState> {
+  const assignmentId = getId(formData, "assignment_id");
+  const targetTypeRaw = getId(formData, "target_type");
+  const targetId = getId(formData, "target_id");
+
+  if (!assignmentId) {
+    return { error: "Falta identificar la asignación." };
+  }
+
+  try {
+    const adminContext = await requireAdminPermission("manageProducts");
+    const ownership = await assertAssignmentOwnership(
+      assignmentId,
+      adminContext.businessId
+    );
+
+    // Idempotent no-op: already gone (or not visible to this tenant) after auth.
+    if ("error" in ownership) {
+      revalidateCustomizationPaths();
+      return {
+        success: true,
+        message: "La asignación ya no estaba presente."
+      };
+    }
+
+    if (
+      targetTypeRaw === "product" ||
+      targetTypeRaw === "category"
+    ) {
+      if (ownership.assignment.target_type !== targetTypeRaw) {
+        return {
+          error: "La asignación no coincide con el destino indicado."
+        };
+      }
+      if (targetId && ownership.assignment.target_id !== targetId) {
+        return {
+          error: "La asignación no coincide con el destino indicado."
+        };
+      }
+    }
+
+    const targetOwnership = await assertTargetOwnership(
+      ownership.assignment.target_type,
+      ownership.assignment.target_id,
+      adminContext.businessId
+    );
+    if ("error" in targetOwnership) {
+      return { error: targetOwnership.error };
+    }
+
+    const { error } = await ownership.supabase
+      .from("customization_group_assignments")
+      .delete()
+      .eq("id", assignmentId)
+      .eq("business_id", adminContext.businessId);
+
+    if (error) {
+      throw new Error("No pudimos quitar la asignación.");
+    }
+
+    revalidateCustomizationPaths();
+    return {
+      success: true,
+      message:
+        ownership.assignment.target_type === "category"
+          ? "Sección quitada de esta categoría."
+          : "Sección quitada de este producto."
+    };
+  } catch (error) {
+    logActionFailure("customizations.assignment.remove", error, { assignmentId });
+    return {
+      error: getActionErrorMessage(
+        error,
+        "No se pudo quitar la asignación. Revisá los datos e intentá nuevamente."
       )
     };
   }

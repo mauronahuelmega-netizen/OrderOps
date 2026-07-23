@@ -1,8 +1,11 @@
 "use client";
 
-import { useActionState, useEffect, type ReactNode } from "react";
+import { useActionState, useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
-import { toggleCustomizationGroupAssignmentAction } from "@/app/admin/(protected)/products/customizations/actions";
+import {
+  removeCustomizationGroupAssignmentAction,
+  toggleCustomizationGroupAssignmentAction
+} from "@/app/admin/(protected)/products/customizations/actions";
 import ActionsMenu, {
   closeNearestMenu
 } from "@/components/admin/product-customization/reusable-sections/actions-menu";
@@ -20,10 +23,13 @@ type ActionState = {
 
 const initialState: ActionState = {};
 
+type AssignmentTargetMode = "product" | "category";
+
 type Props = {
   assignment: AdminCustomizationAssignment;
   group: AdminCustomizationGroup | null;
   originLabel: string;
+  mode?: AssignmentTargetMode;
   chrome?: {
     dragHandle?: ReactNode;
     moveControls?: ReactNode;
@@ -55,19 +61,61 @@ export default function AssignmentCard({
   assignment,
   group,
   originLabel,
+  mode,
   chrome
 }: Props) {
   const router = useRouter();
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const titleId = useId();
+  const [confirmOpen, setConfirmOpen] = useState(false);
   const [toggleState, toggleAction, isToggling] = useActionState(
     toggleCustomizationGroupAssignmentAction,
     initialState
   );
+  const [removeState, removeAction, isRemoving] = useActionState(
+    removeCustomizationGroupAssignmentAction,
+    initialState
+  );
+
+  const targetMode: AssignmentTargetMode =
+    mode ?? (assignment.target_type === "category" ? "category" : "product");
+
+  const removeLabel =
+    targetMode === "category" ? "Quitar de esta categoría" : "Quitar de este producto";
+  const confirmTitle =
+    targetMode === "category"
+      ? "Quitar sección de esta categoría"
+      : "Quitar sección de este producto";
+  const confirmBody =
+    targetMode === "category"
+      ? "Esta sección dejará de aplicarse automáticamente a los productos de esta categoría. La sección reutilizable y sus opciones no se eliminarán."
+      : "Esta sección dejará de aplicarse solo a este producto. La sección reutilizable y sus opciones no se eliminarán.";
 
   useEffect(() => {
     if (toggleState.success) {
       router.refresh();
     }
   }, [toggleState.success, router]);
+
+  useEffect(() => {
+    if (removeState.success) {
+      setConfirmOpen(false);
+      router.refresh();
+    }
+  }, [removeState.success, router]);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) {
+      return;
+    }
+    if (confirmOpen && !dialog.open) {
+      dialog.showModal();
+    }
+    if (!confirmOpen && dialog.open) {
+      dialog.close();
+    }
+  }, [confirmOpen]);
 
   const chips = buildMetaChips(assignment, group);
   const description =
@@ -97,6 +145,10 @@ export default function AssignmentCard({
             ))}
             <span className={styles.chip}>{originLabel}</span>
           </div>
+          <p className={styles.helperText}>
+            Ocultar conserva la asignación para usarla después. Quitar la remueve de
+            esta lista.
+          </p>
         </div>
 
         <div className={styles.toolbar}>
@@ -114,7 +166,7 @@ export default function AssignmentCard({
                 type="submit"
                 className={styles.menuItem}
                 role="menuitem"
-                disabled={isToggling}
+                disabled={isToggling || isRemoving}
                 onClick={(event) => {
                   closeNearestMenu(event.currentTarget);
                 }}
@@ -126,6 +178,18 @@ export default function AssignmentCard({
                     : "Mostrar para clientes"}
               </button>
             </form>
+            <button
+              type="button"
+              className={`${styles.menuItem} ${styles.menuItemDanger}`}
+              role="menuitem"
+              disabled={isRemoving}
+              onClick={(event) => {
+                closeNearestMenu(event.currentTarget);
+                setConfirmOpen(true);
+              }}
+            >
+              {removeLabel}
+            </button>
           </ActionsMenu>
         </div>
       </div>
@@ -140,6 +204,52 @@ export default function AssignmentCard({
           {toggleState.message}
         </p>
       ) : null}
+      {removeState.error ? (
+        <p className={`admin-feedback admin-feedback--error ${styles.feedback}`} role="alert">
+          {removeState.error}
+        </p>
+      ) : null}
+
+      <dialog
+        ref={dialogRef}
+        className={styles.dialog}
+        onClose={() => setConfirmOpen(false)}
+        aria-labelledby={titleId}
+      >
+        <form action={removeAction} className={styles.dialogForm}>
+          <input type="hidden" name="assignment_id" value={assignment.id} />
+          <input type="hidden" name="target_type" value={targetMode} />
+          <input type="hidden" name="target_id" value={assignment.target_id} />
+          <div className={styles.dialogHeader}>
+            <h2 id={titleId} className={styles.dialogTitle}>
+              {confirmTitle}
+            </h2>
+            <p className={styles.dialogSubtitle}>{confirmBody}</p>
+          </div>
+          {removeState.error ? (
+            <p className="admin-feedback admin-feedback--error" role="alert">
+              {removeState.error}
+            </p>
+          ) : null}
+          <div className={styles.dialogFooter}>
+            <button
+              type="button"
+              className="admin-secondary-link admin-secondary-link--compact"
+              onClick={() => setConfirmOpen(false)}
+              disabled={isRemoving}
+            >
+              Cancelar
+            </button>
+            <button
+              type="submit"
+              className={`admin-primary-button ${styles.dangerButton}`}
+              disabled={isRemoving}
+            >
+              {isRemoving ? "Quitando sección…" : removeLabel}
+            </button>
+          </div>
+        </form>
+      </dialog>
     </article>
   );
 }

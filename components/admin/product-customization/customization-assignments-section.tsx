@@ -203,6 +203,7 @@ export default function CustomizationAssignmentsSection({
               assignment={assignment}
               group={groupsById.get(assignment.group_id) ?? null}
               originLabel={originLabel}
+              mode={targetMeta.kind}
               chrome={{
                 dragHandle: chrome.dragHandle,
                 moveControls: chrome.moveControls
@@ -218,6 +219,9 @@ export default function CustomizationAssignmentsSection({
               assignment={assignment}
               group={groupsById.get(assignment.group_id) ?? null}
               originLabel={originLabel}
+              mode={
+                mode === "product" || mode === "category" ? mode : undefined
+              }
             />
           ))}
         </div>

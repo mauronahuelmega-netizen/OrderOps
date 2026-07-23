@@ -1,5 +1,19 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-REMOVE-1 (2026-07-23)
+
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-REMOVE-1 — Safe Assignment Unassign Action & UX  
+**Estado:** PASS  
+**Resultado:** Se implementó una action segura para quitar asignaciones de secciones en Por producto y Por categoría, con validaciones tenant/permiso, confirmación owner-friendly y QA controlado, sin eliminar secciones/opciones ni modificar lógica pública.
+
+- Doc: `docs/product-customization-admin-assignments-remove-1-safe-unassign-action.md`
+- Deploy: commit pendiente de documentar post-push → `origin/main` → https://orderops.vercel.app
+- CLI: `tsc` PASS · `build` PASS
+- Browser QA: Mozzarella temp assign/unassign · Secciones intactas · público Doble Smash
+- **Próxima:** RESPONSIVE-POLISH-1
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-COMPACT-1 (2026-07-23)
 
 **Fase:** PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-COMPACT-1 — Product & Category Assignments Compact UI  
