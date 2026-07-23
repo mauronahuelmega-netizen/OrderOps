@@ -125,7 +125,7 @@ export default function PlusSuggestionCard({
         </div>
 
         <div className={styles.sectionToolbar}>
-          <ActionsMenu label={`Abrir menú de plus sugerido ${group.name}`}>
+          <ActionsMenu label={group.name}>
             <button
               type="button"
               className={styles.menuItem}

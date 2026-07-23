@@ -113,7 +113,7 @@ export default function SuggestedProductRow({
           {item.is_available ? "Visible" : "Oculto"}
         </span>
 
-        <ActionsMenu label={`Abrir menú de producto sugerido ${item.product_name}`}>
+        <ActionsMenu label={item.product_name}>
           <button
             type="button"
             className={styles.menuItem}

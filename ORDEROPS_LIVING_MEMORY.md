@@ -756,6 +756,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-A11Y-POLISH-1 — Accessible Menus, Focus & Keyboard Polish
+
+- **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-A11Y-POLISH-1 ejecutada. Se pulió la accesibilidad de menús, dialogs, foco y navegación por teclado en Product Customization Admin. Los menús cerrados dejaron de exponer menuitems en el accessibility tree y se reforzaron aria-expanded, labels contextuales, Escape, click fuera y restauración de foco. No se modificó DB, RLS, actions, preview mapper, cart, checkout, stock ni pedidos. Resultado: **PASS WITH DND TOUCH DEBT**.
+- Archivos: `reusable-sections/actions-menu.tsx`, call sites de cards, CSS focus-ring, `assignment-card.tsx` (confirm a11y), docs de fase.
+
 ### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-V1-PREMIUM-RESCORE-1 — Enterprise Premium Rescore & Residual Handoff
 
 - **QA / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-V1-PREMIUM-RESCORE-1 ejecutada. Se re-auditó el admin de Product Customization V1 después de las fases de copy, jerarquía, excepciones, assignments, remove y responsive. Se recalculó el Enterprise Readiness Score, se revisaron los P1 originales y se documentó deuda residual priorizada sin modificar runtime, DB, RLS, actions, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS WITH RESIDUAL POLISH DEBT** (score 4.3/5 · P0=0 · P1=0).

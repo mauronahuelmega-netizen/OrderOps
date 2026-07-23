@@ -252,6 +252,12 @@
   background: var(--surface-interactive-bg, var(--bg-surface-hover));
 }
 
+.menuItem:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  background: var(--surface-interactive-bg, var(--bg-surface-hover));
+}
+
 .menuItem:disabled {
   opacity: 0.55;
   cursor: not-allowed;

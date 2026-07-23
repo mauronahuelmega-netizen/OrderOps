@@ -124,7 +124,7 @@ export default function ReusableSectionCard({
         <div className={styles.sectionToolbar}>
           {chrome?.dragHandle}
           {chrome?.moveControls}
-          <ActionsMenu label={`Abrir menú de sección ${group.name}`}>
+          <ActionsMenu label={group.name}>
             <button
               type="button"
               className={styles.menuItem}

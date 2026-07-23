@@ -65,8 +65,11 @@ export default function AssignmentCard({
   chrome
 }: Props) {
   const router = useRouter();
+  const cardRef = useRef<HTMLElement>(null);
   const dialogRef = useRef<HTMLDialogElement>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
   const titleId = useId();
+  const descriptionId = useId();
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [toggleState, toggleAction, isToggling] = useActionState(
     toggleCustomizationGroupAssignmentAction,
@@ -122,8 +125,19 @@ export default function AssignmentCard({
     group?.description?.trim() ||
     "Sección aplicada al catálogo. Podés ocultarla sin borrarla.";
 
+  function restoreMenuTriggerFocus() {
+    const trigger =
+      returnFocusRef.current ??
+      cardRef.current?.querySelector<HTMLElement>("[data-actions-menu-trigger]");
+    returnFocusRef.current = null;
+    queueMicrotask(() => {
+      trigger?.focus();
+    });
+  }
+
   return (
     <article
+      ref={cardRef}
       className={`${styles.assignmentCard} ${
         assignment.is_enabled ? "" : styles.assignmentCardHidden
       }`}
@@ -154,7 +168,7 @@ export default function AssignmentCard({
         <div className={styles.toolbar}>
           {chrome?.dragHandle}
           {chrome?.moveControls}
-          <ActionsMenu label={`Abrir menú de asignación ${assignment.group_name}`}>
+          <ActionsMenu label={assignment.group_name}>
             <form action={toggleAction} className={styles.menuItemForm}>
               <input type="hidden" name="assignment_id" value={assignment.id} />
               <input
@@ -184,6 +198,10 @@ export default function AssignmentCard({
               role="menuitem"
               disabled={isRemoving}
               onClick={(event) => {
+                returnFocusRef.current =
+                  cardRef.current?.querySelector<HTMLElement>(
+                    "[data-actions-menu-trigger]"
+                  ) ?? null;
                 closeNearestMenu(event.currentTarget);
                 setConfirmOpen(true);
               }}
@@ -213,8 +231,12 @@ export default function AssignmentCard({
       <dialog
         ref={dialogRef}
         className={styles.dialog}
-        onClose={() => setConfirmOpen(false)}
+        onClose={() => {
+          setConfirmOpen(false);
+          restoreMenuTriggerFocus();
+        }}
         aria-labelledby={titleId}
+        aria-describedby={descriptionId}
       >
         <form action={removeAction} className={styles.dialogForm}>
           <input type="hidden" name="assignment_id" value={assignment.id} />
@@ -224,7 +246,9 @@ export default function AssignmentCard({
             <h2 id={titleId} className={styles.dialogTitle}>
               {confirmTitle}
             </h2>
-            <p className={styles.dialogSubtitle}>{confirmBody}</p>
+            <p id={descriptionId} className={styles.dialogSubtitle}>
+              {confirmBody}
+            </p>
           </div>
           {removeState.error ? (
             <p className="admin-feedback admin-feedback--error" role="alert">
@@ -235,7 +259,7 @@ export default function AssignmentCard({
             <button
               type="button"
               className="admin-secondary-link admin-secondary-link--compact"
-              onClick={() => setConfirmOpen(false)}
+              onClick={() => dialogRef.current?.close()}
               disabled={isRemoving}
             >
               Cancelar

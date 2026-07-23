@@ -80,7 +80,7 @@ export default function ReusableOptionRow({ option, chrome, onEdit }: Props) {
           {option.is_available ? "Visible" : "Oculta"}
         </span>
 
-        <ActionsMenu label={`Abrir menú de opción ${option.name}`}>
+        <ActionsMenu label={option.name}>
           <button
             type="button"
             className={styles.menuItem}

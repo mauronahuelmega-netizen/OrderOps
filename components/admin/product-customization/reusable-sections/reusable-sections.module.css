@@ -169,12 +169,13 @@
   contain: paint layout;
 }
 
-.menuSummary::-webkit-details-marker {
-  display: none;
-}
-
 .menuSummary:hover {
   background: var(--bg-surface-hover);
+}
+
+.menuSummary:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
 }
 
 .menuPanel {
@@ -205,10 +206,14 @@
   cursor: pointer;
 }
 
-.menuItem:hover,
+.menuItem:hover {
+  background: var(--bg-surface-hover);
+}
+
 .menuItem:focus-visible {
   background: var(--bg-surface-hover);
   outline: none;
+  box-shadow: var(--focus-ring);
 }
 
 .menuItem:disabled {
