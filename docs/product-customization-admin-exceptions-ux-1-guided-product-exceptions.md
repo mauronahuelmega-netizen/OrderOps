@@ -144,7 +144,11 @@ Sin migrations, schema, RLS, actions, mapper, cart/checkout/stock, flags, assign
 
 ## Deploy
 
-Autorizado. Commit + push a `main` documentados en CURRENT_PHASE.
+Autorizado y ejecutado.
+
+- Commit: `f4d5260` — `Polish Product Customization product exceptions UX`
+- Push: `origin/main` (`5102e01..f4d5260`)
+- URL: https://orderops.vercel.app
 
 ## Browser QA
 

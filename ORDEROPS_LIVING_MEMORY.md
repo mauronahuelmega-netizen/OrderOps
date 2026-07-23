@@ -759,7 +759,7 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-EXCEPTIONS-UX-1 — Product Exceptions Guided UX
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-EXCEPTIONS-UX-1 ejecutada. Se pulió la experiencia de Excepciones del producto dentro del admin de Product Customization, convirtiendo el flujo en una experiencia guiada para el producto seleccionado. Se mejoraron empty states, resumen de excepciones, copy y acciones owner-friendly sin modificar DB, RLS, actions, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS**.
-- Archivos: `owner-customization-builder.tsx`, `product-customization-overrides-panel.tsx`, `product-customization-admin.module.css`, `edit-product-form.tsx` (productName), docs de fase.
+- Archivos: `owner-customization-builder.tsx`, `product-customization-overrides-panel.tsx`, `product-customization-admin.module.css`, `edit-product-form.tsx` (productName), docs de fase; commit `f4d5260`.
 
 ### 2026-07-19 — PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 — Product & Category Hierarchy Premium Polish
 

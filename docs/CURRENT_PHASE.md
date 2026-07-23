@@ -7,6 +7,7 @@
 **Resultado:** Se mejoró la UX de Excepciones del producto, presentándolas como ajustes propios guiados para el producto seleccionado, con empty states, resumen y acciones owner-friendly, sin cambiar la lógica de overrides ni el modelo de datos.
 
 - Doc: `docs/product-customization-admin-exceptions-ux-1-guided-product-exceptions.md`
+- Deploy: commit `f4d5260` → `origin/main` → https://orderops.vercel.app
 - CLI: `tsc` PASS · `build` PASS
 - Browser QA: panel por selección · hide/restore BBQ · preview · público Doble Smash
 - **Próxima:** ASSIGNMENTS-COMPACT-1 · RESPONSIVE-POLISH-1
