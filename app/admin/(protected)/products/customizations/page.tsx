@@ -35,7 +35,7 @@ export default async function AdminProductCustomizationsPage({ searchParams }: P
   const nextUpsellSort = suggestNextUpsellSortOrder(upsellGroups);
 
   return (
-    <AdminPageLayout size="operational">
+    <AdminPageLayout size="operational" className="admin-page-layout--customizations-mobile">
       <AdminPageHeader
         variant="operational"
         eyebrow="Catálogo"

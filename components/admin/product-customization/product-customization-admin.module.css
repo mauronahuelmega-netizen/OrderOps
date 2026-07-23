@@ -1137,6 +1137,7 @@
   .productWorkspace,
   .categoryWorkspace {
     grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .previewDesktop {
@@ -1145,6 +1146,89 @@
 
   .previewMobile {
     display: grid;
+  }
+
+  .builderShell {
+    gap: 12px;
+  }
+
+  .builderTabs {
+    gap: 6px;
+    padding: 4px;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: 4px;
+    overscroll-behavior-x: contain;
+  }
+
+  .builderTab,
+  .builderTabActive {
+    min-height: 40px;
+    padding: 10px 12px;
+    scroll-snap-align: start;
+  }
+
+  .summaryCard,
+  .secondaryBlock,
+  .notice {
+    padding: 12px;
+  }
+
+  .productSelectList {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .productSelectItem,
+  .productSelectItemActive {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+  }
+
+  .exceptionRowCopy {
+    flex: 1 1 100%;
+  }
+
+  .exceptionAction {
+    min-height: 40px;
+    padding: 10px 12px;
+  }
+
+  .softChip,
+  .advancedBadge {
+    white-space: normal;
+    max-width: 100%;
+  }
+
+  .previewPanel {
+    padding: 12px;
+  }
+
+  .previewLiveHeader,
+  .previewLiveBody,
+  .previewLiveFooter {
+    padding-inline: 12px;
+  }
+
+  .previewLiveBody {
+    max-height: min(52vh, 420px);
+  }
+
+  .builderEmptyMuted {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 479px) {
+  .builderTab,
+  .builderTabActive {
+    padding: 10px 11px;
+    font-size: 0.8125rem;
+  }
+
+  .summaryCard,
+  .secondaryBlock {
+    padding: 10px 12px;
   }
 }
 

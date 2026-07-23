@@ -756,6 +756,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-RESPONSIVE-POLISH-1 — Responsive Premium Polish
+
+- **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-RESPONSIVE-POLISH-1 ejecutada. Se pulió la experiencia responsive del admin de Product Customization, corrigiendo ancho útil en mobile, tabs, cards, chips, modales, menús y vista previa. La fase fue UI/CSS-only y no modificó DB, RLS, actions, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS**.
+- Archivos: `customizations/page.tsx` (class mobile), `admin-shell.css` (`:has` padding scoped), `product-customization-admin.module.css`, `assignments.module.css`, `reusable-sections.module.css`, `plus-suggestions.module.css`, docs de fase.
+
 ### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-REMOVE-1 — Safe Assignment Unassign Action & UX
 
 - **Frontend / Admin UX + Server Action** PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-REMOVE-1 ejecutada. Se agregó una acción segura para quitar asignaciones de secciones desde Por producto y Por categoría en Product Customization. La UX diferencia Ocultar para clientes de Quitar asignación, incluye confirmación owner-friendly y conserva secciones/opciones reutilizables. No se modificó DB, RLS, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS**.

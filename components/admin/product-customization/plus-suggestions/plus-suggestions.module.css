@@ -463,6 +463,65 @@
 
   .dialog,
   .dialogWide {
-    width: min(100% - 16px, 720px);
+    width: min(100% - 24px, 720px);
+    max-height: calc(100vh - 24px);
+    margin: auto;
+  }
+
+  .dialogForm {
+    padding: 16px;
+    max-height: calc(100vh - 24px);
+  }
+
+  .dialogFooter {
+    position: sticky;
+    bottom: 0;
+    padding-top: 8px;
+    background: linear-gradient(
+      to top,
+      var(--surface-elevated-bg, var(--bg-surface)) 70%,
+      transparent
+    );
+  }
+
+  .dialogFooter :global(.admin-primary-button),
+  .dialogFooter :global(.admin-secondary-link) {
+    min-height: 40px;
+  }
+
+  .sectionCard {
+    padding: 12px;
+  }
+
+  .sectionCardMeta {
+    flex: 1 1 100%;
+  }
+
+  .chip {
+    white-space: normal;
+    max-width: 100%;
+  }
+
+  .menuSummary {
+    width: 40px;
+    height: 40px;
+  }
+
+  .menuPanel {
+    min-width: min(220px, calc(100vw - 32px));
+    max-width: calc(100vw - 24px);
+  }
+
+  .menuItem {
+    min-height: 40px;
+    padding: 10px 12px;
+  }
+
+  .tabHeaderText {
+    flex: 1 1 100%;
+  }
+
+  .listShell {
+    padding: 12px;
   }
 }

@@ -199,6 +199,8 @@
   display: grid;
   gap: 14px;
   padding: 18px;
+  max-height: calc(100vh - 48px);
+  overflow: auto;
 }
 
 .dialogHeader {
@@ -283,4 +285,61 @@
 
 .feedback {
   margin: 0;
+}
+
+@media (max-width: 639px) {
+  .panelHeaderText {
+    flex: 1 1 100%;
+  }
+
+  .assignmentCard {
+    padding: 12px;
+  }
+
+  .assignmentMeta {
+    flex: 1 1 100%;
+  }
+
+  .chip {
+    white-space: normal;
+    max-width: 100%;
+  }
+
+  .toolbar {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .dialog {
+    width: min(100% - 24px, 520px);
+    max-height: calc(100vh - 24px);
+    margin: auto;
+  }
+
+  .dialogForm {
+    gap: 12px;
+    padding: 16px;
+    max-height: calc(100vh - 24px);
+  }
+
+  .dialogFooter {
+    position: sticky;
+    bottom: 0;
+    padding-top: 8px;
+    background: linear-gradient(
+      to top,
+      var(--surface-elevated-bg, var(--bg-surface)) 70%,
+      transparent
+    );
+  }
+
+  .dialogFooter :global(.admin-primary-button),
+  .dialogFooter :global(.admin-secondary-link) {
+    min-height: 40px;
+  }
+
+  .menuItem {
+    min-height: 40px;
+    padding: 10px 12px;
+  }
 }

@@ -64,6 +64,11 @@
     padding: var(--space-xl) var(--space-lg) 40px;
     gap: 1.25rem;
   }
+
+  /* Scoped bleed for Product Customization: reclaim lateral width on narrow phones. */
+  .admin-shell__page-container:has(.admin-page-layout--customizations-mobile) {
+    padding: var(--space-lg) var(--space-md) 32px;
+  }
 }
 
 @media (min-width: 720px) and (max-width: 899px) {
