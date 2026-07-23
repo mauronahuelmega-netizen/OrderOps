@@ -7,7 +7,7 @@
 **Resultado:** Se corrigió el responsive del admin de Product Customization, mejorando ancho útil mobile, tabs, cards, chips, modales, menús y vista previa sin cambiar lógica operativa.
 
 - Doc: `docs/product-customization-admin-responsive-polish-1-mobile-layout.md`
-- Deploy: (pendiente hash post-push) → `origin/main` → https://orderops.vercel.app
+- Deploy: commit `fa8265e` → `origin/main` → https://orderops.vercel.app
 - CLI: `tsc` PASS · `build` PASS
 - Browser QA: 390/414/768/1024/1440 · light/dark · 4 tabs · modales · preview · público Doble Smash parent+ADICIONAL
 - Shell: padding scoped `:has(.admin-page-layout--customizations-mobile)` ≤719px

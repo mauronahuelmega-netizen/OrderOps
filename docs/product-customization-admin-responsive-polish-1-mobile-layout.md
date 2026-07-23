@@ -169,7 +169,9 @@ Lectura/escritura CSS/UI scoped · docs · tsc/build · browser QA local · comm
 
 ## Deploy
 
-Push a `origin/main` tras `tsc`/`build` PASS → Vercel producción.
+- Commit: `fa8265e` — `Polish Product Customization admin responsive layout`
+- Push: `origin/main` (`1d2ead3..fa8265e`)
+- Prod: https://orderops.vercel.app (Vercel auto-deploy)
 
 ## Browser QA
 
