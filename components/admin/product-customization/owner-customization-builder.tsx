@@ -375,32 +375,69 @@ export default function OwnerCustomizationBuilder({
                   </div>
                 </div>
 
-                <div className={styles.secondaryBlock}>
-                  <div className={styles.overridesEmbed}>
-                    <ProductCustomizationOverridesPanel
-                      productId={selectedProduct.id}
-                      productName={selectedProduct.name}
+                  <div className={styles.hierarchyBlock}>
+                    <CustomizationAssignmentsSection
+                      groups={groups}
+                      categories={categories}
+                      products={products}
+                      assignments={assignments}
+                      defaultSortOrder={nextAssignmentSort}
+                      mode="product"
+                      preferredTargetId={selectedProduct.id}
+                      hideIntro
+                      onNavigateToSections={() => setTab("sections")}
                     />
                   </div>
-                </div>
 
-                <details className={styles.advancedBlock}>
-                  <summary>Avanzado: asignar sección solo a este producto</summary>
-                  <p className={styles.helperText}>
-                    Normalmente conviene aplicar opciones por categoría. Usá esto si este
-                    producto necesita una sección distinta.
-                  </p>
-                  <CustomizationAssignmentsSection
-                    groups={groups}
-                    categories={categories}
-                    products={products}
-                    assignments={assignments}
-                    defaultSortOrder={nextAssignmentSort}
-                    mode="product"
-                    preferredTargetId={selectedProduct.id}
-                    hideIntro
-                  />
-                </details>
+                  {selectedProduct.sections.some(
+                    (section) => section.source === "category"
+                  ) ? (
+                    <div className={styles.hierarchyBlock}>
+                      <div className={styles.paneHeader}>
+                        <h2 className={styles.panelTitle}>Aplicadas desde categoría</h2>
+                        <p className={styles.panelSubtitle}>
+                          Estas secciones vienen de la categoría del producto. No se
+                          editan acá.
+                        </p>
+                      </div>
+                      <ul className={styles.sectionSummaryList}>
+                        {selectedProduct.sections
+                          .filter((section) => section.source === "category")
+                          .map((section) => (
+                            <li
+                              key={section.groupId}
+                              className={styles.sectionSummaryItem}
+                            >
+                              <div className={styles.sectionSummaryTop}>
+                                <p className={styles.sectionSummaryName}>
+                                  {section.groupName}
+                                </p>
+                                <span className={styles.softChip}>
+                                  Aplicado desde categoría
+                                </span>
+                              </div>
+                              <p className={styles.productSelectMeta}>
+                                {section.isEnabled
+                                  ? "Visible para clientes"
+                                  : "Oculta / no disponible"}
+                                {" · "}
+                                {section.options.length}{" "}
+                                {section.options.length === 1 ? "opción" : "opciones"}
+                              </p>
+                            </li>
+                          ))}
+                      </ul>
+                    </div>
+                  ) : null}
+
+                  <div className={styles.secondaryBlock}>
+                    <div className={styles.overridesEmbed}>
+                      <ProductCustomizationOverridesPanel
+                        productId={selectedProduct.id}
+                        productName={selectedProduct.name}
+                      />
+                    </div>
+                  </div>
               </>
             )}
           </section>
@@ -506,50 +543,17 @@ export default function OwnerCustomizationBuilder({
                 </article>
 
                 <div className={styles.hierarchyBlock}>
-                  <div className={styles.paneHeader}>
-                    <h2 className={styles.panelTitle}>
-                      Secciones asignadas a nivel categoría
-                    </h2>
-                    <p className={styles.panelSubtitle}>
-                      Solo aparecen las secciones aplicadas en lote a esta categoría.
-                    </p>
-                  </div>
-
-                  {selectedCategory.sections.length > 0 ? (
-                    <ul className={styles.sectionSummaryList}>
-                      {selectedCategory.sections.map((section) => (
-                        <li key={section.groupId} className={styles.sectionSummaryItem}>
-                          <div className={styles.sectionSummaryTop}>
-                            <p className={styles.sectionSummaryName}>{section.groupName}</p>
-                            <span className={styles.softChip}>Nivel categoría</span>
-                          </div>
-                          <p className={styles.productSelectMeta}>
-                            {section.isEnabled
-                              ? "Visible para clientes"
-                              : "Oculta / no disponible"}
-                            {" · "}
-                            {section.options.length}{" "}
-                            {section.options.length === 1 ? "opción" : "opciones"}
-                          </p>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div className={styles.builderEmpty}>
-                      <h3>Sin secciones asignadas directamente</h3>
-                      <p>
-                        Esta categoría todavía no aplica secciones en lote. Los productos
-                        pueden tener ajustes propios en “Por producto”.
-                      </p>
-                      <button
-                        type="button"
-                        className={styles.secondaryCta}
-                        onClick={() => setTab("product")}
-                      >
-                        Revisar por producto
-                      </button>
-                    </div>
-                  )}
+                  <CustomizationAssignmentsSection
+                    groups={groups}
+                    categories={categories}
+                    products={products}
+                    assignments={assignments}
+                    defaultSortOrder={nextAssignmentSort}
+                    mode="category"
+                    preferredTargetId={selectedCategory.id}
+                    hideIntro
+                    onNavigateToSections={() => setTab("sections")}
+                  />
                 </div>
               </>
             ) : (
@@ -560,25 +564,6 @@ export default function OwnerCustomizationBuilder({
                 </p>
               </div>
             )}
-
-            <div className={styles.hierarchyBlock}>
-              <div className={styles.paneHeader}>
-                <h2 className={styles.panelTitle}>Asignar secciones a la categoría</h2>
-                <p className={styles.panelSubtitle}>
-                  Agregá o reordená las secciones que se aplican en lote.
-                </p>
-              </div>
-              <CustomizationAssignmentsSection
-                groups={groups}
-                categories={categories}
-                products={products}
-                assignments={assignments}
-                defaultSortOrder={nextAssignmentSort}
-                mode="category"
-                preferredTargetId={selectedCategory?.id}
-                hideIntro
-              />
-            </div>
           </section>
         </div>
       ) : null}

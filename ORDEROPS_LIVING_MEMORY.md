@@ -756,6 +756,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - QA: `#754A` `21064f2b-…` create UI Coca 4→3; cancel UI 3→4 + restock; idempotencia “No hubo cambios”
 - Próxima: deploy WIP customization / cleanup QA `#9632` opcional
 
+### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-COMPACT-1 — Product & Category Assignments Compact UI
+
+- **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-COMPACT-1 ejecutada. Se compactó la experiencia de asignaciones de Product Customization en Por producto y Por categoría, haciendo más claras las secciones propias, las aplicadas desde categoría y las asignadas directamente a categoría. Se reutilizaron actions existentes y no se modificó DB, RLS, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS WITH REMOVE DEBT** (no hay action segura de quitar asignación; solo toggle hide/show + reorder).
+- Archivos: `assignments/*`, `customization-assignments-section.tsx`, `owner-customization-builder.tsx`, docs de fase.
+
 ### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-EXCEPTIONS-UX-1 — Product Exceptions Guided UX
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-EXCEPTIONS-UX-1 ejecutada. Se pulió la experiencia de Excepciones del producto dentro del admin de Product Customization, convirtiendo el flujo en una experiencia guiada para el producto seleccionado. Se mejoraron empty states, resumen de excepciones, copy y acciones owner-friendly sin modificar DB, RLS, actions, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS**.

@@ -1,5 +1,20 @@
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
+## Registro — PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-COMPACT-1 (2026-07-23)
+
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-COMPACT-1 — Product & Category Assignments Compact UI  
+**Estado:** PASS WITH REMOVE DEBT  
+**Resultado:** Se compactó la UX de asignaciones en Por producto y Por categoría, reemplazando bloques densos por cards/rows resumidas, modales de agregado y acciones secundarias más claras, sin cambiar lógica operativa. No existe action segura de quitar asignación (solo Ocultar/Mostrar).
+
+- Doc: `docs/product-customization-admin-assignments-compact-1-product-category-assignments.md`
+- Deploy: commit pendiente de documentar post-push → `origin/main` → https://orderops.vercel.app
+- CLI: `tsc` PASS · `build` PASS
+- Browser QA: Por producto compacto · Por categoría empty/CTA · Secciones/Plus · preview · público Doble Smash parent+adicional
+- Deuda: sin remove/unassign seguro → fase REMOVE opcional
+- **Próxima:** ASSIGNMENTS-REMOVE-1 (opcional) · RESPONSIVE-POLISH-1
+
+---
+
 ## Registro — PRODUCT-CUSTOMIZATION-ADMIN-EXCEPTIONS-UX-1 (2026-07-23)
 
 **Fase:** PRODUCT-CUSTOMIZATION-ADMIN-EXCEPTIONS-UX-1 — Product Exceptions Guided UX  
