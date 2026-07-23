@@ -148,7 +148,7 @@ Confirmado: sin migrations · sin schema/RLS · sin actions modificadas · sin p
 
 ## Deploy
 
-Commit + push `origin/main` tras tsc/build PASS. Vercel vía deploy automático del push.
+Commit `4f6ebfe` + push `origin/main` tras tsc/build PASS. Vercel vía deploy automático del push → https://orderops.vercel.app
 
 ## Browser QA
 

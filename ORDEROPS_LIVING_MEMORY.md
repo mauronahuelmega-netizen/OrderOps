@@ -759,7 +759,7 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-COMPACT-1 — Product & Category Assignments Compact UI
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-COMPACT-1 ejecutada. Se compactó la experiencia de asignaciones de Product Customization en Por producto y Por categoría, haciendo más claras las secciones propias, las aplicadas desde categoría y las asignadas directamente a categoría. Se reutilizaron actions existentes y no se modificó DB, RLS, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS WITH REMOVE DEBT** (no hay action segura de quitar asignación; solo toggle hide/show + reorder).
-- Archivos: `assignments/*`, `customization-assignments-section.tsx`, `owner-customization-builder.tsx`, docs de fase.
+- Archivos: `assignments/*`, `customization-assignments-section.tsx`, `owner-customization-builder.tsx`, docs de fase; commit `4f6ebfe`.
 
 ### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-EXCEPTIONS-UX-1 — Product Exceptions Guided UX
 

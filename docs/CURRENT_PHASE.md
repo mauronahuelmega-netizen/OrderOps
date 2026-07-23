@@ -7,7 +7,7 @@
 **Resultado:** Se compactó la UX de asignaciones en Por producto y Por categoría, reemplazando bloques densos por cards/rows resumidas, modales de agregado y acciones secundarias más claras, sin cambiar lógica operativa. No existe action segura de quitar asignación (solo Ocultar/Mostrar).
 
 - Doc: `docs/product-customization-admin-assignments-compact-1-product-category-assignments.md`
-- Deploy: commit pendiente de documentar post-push → `origin/main` → https://orderops.vercel.app
+- Deploy: commit `4f6ebfe` → `origin/main` → https://orderops.vercel.app
 - CLI: `tsc` PASS · `build` PASS
 - Browser QA: Por producto compacto · Por categoría empty/CTA · Secciones/Plus · preview · público Doble Smash parent+adicional
 - Deuda: sin remove/unassign seguro → fase REMOVE opcional
