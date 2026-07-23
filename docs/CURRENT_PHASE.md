@@ -7,7 +7,7 @@
 **Resultado:** Se corrigió la accesibilidad de los menús y dialogs del admin de Product Customization. Los menuitems cerrados ya no permanecen en el accessibility tree, los triggers exponen estado y contexto, Escape/click fuera cierran correctamente y el foco vuelve al control de origen, sin modificar lógica operativa.
 
 - Doc: `docs/product-customization-admin-a11y-polish-1-menus-focus-keyboard.md`
-- Deploy: (pendiente hash post-push) → `origin/main` → https://orderops.vercel.app
+- Deploy: commit `128fac2` → `origin/main` → https://orderops.vercel.app
 - CLI: `tsc` PASS · `build` PASS
 - A11y tree: cerrado `menuitems=0` · Escape/click fuera · foco al trigger · confirm remove accesible
 - Deuda: drag handle ~32px → DND-TOUCH-POLISH-1

@@ -156,7 +156,9 @@ Sin migrations · RLS · actions · mapper · cart/checkout/stock · pedidos · 
 
 ## Deploy
 
-Commit + push `origin/main` → Vercel (ver CURRENT_PHASE / hash post-push).
+- Commit: `128fac2` — `Polish Product Customization admin accessibility`
+- Push: `origin/main` (`469386b..128fac2`)
+- Prod: https://orderops.vercel.app
 
 ## Compatibilidad
 

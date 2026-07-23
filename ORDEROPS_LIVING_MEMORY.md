@@ -759,7 +759,7 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-A11Y-POLISH-1 — Accessible Menus, Focus & Keyboard Polish
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-A11Y-POLISH-1 ejecutada. Se pulió la accesibilidad de menús, dialogs, foco y navegación por teclado en Product Customization Admin. Los menús cerrados dejaron de exponer menuitems en el accessibility tree y se reforzaron aria-expanded, labels contextuales, Escape, click fuera y restauración de foco. No se modificó DB, RLS, actions, preview mapper, cart, checkout, stock ni pedidos. Resultado: **PASS WITH DND TOUCH DEBT**.
-- Archivos: `reusable-sections/actions-menu.tsx`, call sites de cards, CSS focus-ring, `assignment-card.tsx` (confirm a11y), docs de fase.
+- Archivos: `reusable-sections/actions-menu.tsx`, call sites de cards, CSS focus-ring, `assignment-card.tsx` (confirm a11y), docs de fase; commit `128fac2`.
 
 ### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-V1-PREMIUM-RESCORE-1 — Enterprise Premium Rescore & Residual Handoff
 
