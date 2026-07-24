@@ -1,4 +1,4 @@
-export const ADMIN_PWA_NAME = "OrderOps Admin";
+export const ADMIN_PWA_NAME = "OrderOps";
 export const ADMIN_PWA_SHORT_NAME = "OrderOps";
 export const ADMIN_PWA_DESCRIPTION = "Panel operativo de OrderOps";
 export const ADMIN_PWA_START_URL = "/admin";

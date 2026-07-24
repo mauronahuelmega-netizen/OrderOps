@@ -796,6 +796,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - **Frontend / Admin PWA** ADMIN-PWA-FOUNDATION-1 completada. Se agregó una base PWA instalable para la experiencia admin de OrderOps en /admin, orientada a probar la operación desde teléfono en modo standalone. La implementación agregó manifest admin, metadata de instalación, iconos PWA y soporte básico iOS/Android. No se agregó service worker ni caching offline para evitar riesgos con sesión, dashboards, pedidos, productos, precios, stock y datos operativos. No se modificó auth, lógica admin, catálogo público, carrito, checkout, pricing, stock, DB, RLS, actions ni pedidos. Resultado: **PASS WITH DEVICE QA DEBT**.
 - Archivos: `lib/admin/pwa-manifest.ts`, `app/admin/manifest.webmanifest/route.ts`, `app/admin/layout.tsx`, `public/icons/orderops-admin-*.png`, `scripts/generate-admin-pwa-icons.mjs`, `docs/admin-pwa-foundation-1-installable-standalone.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`; commit `b8dcbb1`.
 
+### 2026-07-24 — ADMIN-PWA-BRANDING-POLISH-1 — Admin PWA branding polish
+
+- **Frontend / Admin PWA** ADMIN-PWA-BRANDING-POLISH-1 completada. Se pulió branding PWA admin: nombre instalado "OrderOps", icono OrderOps más completo (no O aislada). start_url/scope/id /admin. Sin SW/offline. Sin cambios auth/admin/catalog/cart/checkout/pricing/stock/DB/RLS/actions/pedidos.
+- Archivos: `lib/admin/pwa-manifest.ts`, `scripts/generate-admin-pwa-icons.mjs`, `public/icons/orderops-admin-*.png`, `docs/admin-pwa-branding-polish-1-app-name-icon.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
+
 ### 2026-07-19 — PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 — Product & Category Hierarchy Premium Polish
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 ejecutada. Se pulió la jerarquía visual de Por producto y Por categoría dentro del admin de Product Customization, mejorando headers, agrupación de información, empty states, presentación de excepciones y consistencia con las tabs compactas. No se modificó DB, RLS, actions, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS WITH HIERARCHY DEBT**.
