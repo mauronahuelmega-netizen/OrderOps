@@ -759,7 +759,7 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-V1-FINAL-HANDOFF-1 — Final Technical & Product Handoff
 
 - **Docs / Cierre V1** PRODUCT-CUSTOMIZATION-ADMIN-V1-FINAL-HANDOFF-1 completada. Product Customization Admin V1 quedó cerrado como premium-ready para piloto, con Enterprise Readiness 4.3/5, P0=0 y P1=0. El handoff final consolidó arquitectura, modelo de datos, RLS, permisos, server actions, secciones reutilizables, assignments, excepciones, plus sugeridos, preview, público, pricing, cart, checkout, snapshots, stock, restock, QA, rollback e invariantes de no regresión. No se modificó runtime, DB, RLS, actions, preview mapper, cart, checkout, stock ni pedidos. Resultado: **PASS**.
-- Archivos: `docs/product-customization-admin-v1-final-handoff-1.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
+- Archivos: `docs/product-customization-admin-v1-final-handoff-1.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`; commit `6731a16`.
 
 ### 2026-07-23 — PRODUCT-CUSTOMIZATION-ADMIN-A11Y-POLISH-1 — Accessible Menus, Focus & Keyboard Polish
 

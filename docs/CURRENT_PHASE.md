@@ -7,7 +7,7 @@
 **Resultado:** Product Customization Admin V1 quedó formalmente cerrado y documentado como premium-ready para piloto. El módulo conserva Enterprise Readiness 4.3/5, P0=0 y P1=0. El handoff consolida arquitectura, datos, permisos, actions, flujos admin/público, pricing, cart, checkout, snapshots, stock, QA, invariantes, rollback y deuda residual aceptada.
 
 - Doc: `docs/product-customization-admin-v1-final-handoff-1.md`
-- Deploy: (pendiente hash post-push) → `origin/main` → https://orderops.vercel.app
+- Deploy: commit `6731a16` → `origin/main` → https://orderops.vercel.app
 - CLI: `tsc` PASS · `build` PASS · **docs-only**
 - Smoke: admin 4 tabs + a11y menús · público Doble Smash parent+ADICIONAL (sin pedido)
 - **Próxima obligatoria:** ninguna  

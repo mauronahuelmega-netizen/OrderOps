@@ -4,7 +4,9 @@ Documento autónomo de cierre técnico y de producto. Fuente de verdad para reto
 
 **Fecha de cierre:** 2026-07-23  
 **HEAD al iniciar handoff:** `0c33d59`  
+**Commit handoff:** `6731a16`  
 **Branch:** `main`  
+**Prod:** https://orderops.vercel.app  
 **Piloto:** La Burguesía · `demohamburgueseria` · `business_id=e21b8fc2-3016-4dec-92ef-ebb04e58ecdf`
 
 ---
