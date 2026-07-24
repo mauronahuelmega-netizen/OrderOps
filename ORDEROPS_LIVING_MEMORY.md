@@ -791,6 +791,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-EXCEPTIONS-UX-1 ejecutada. Se pulió la experiencia de Excepciones del producto dentro del admin de Product Customization, convirtiendo el flujo en una experiencia guiada para el producto seleccionado. Se mejoraron empty states, resumen de excepciones, copy y acciones owner-friendly sin modificar DB, RLS, actions, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS**.
 - Archivos: `owner-customization-builder.tsx`, `product-customization-overrides-panel.tsx`, `product-customization-admin.module.css`, `edit-product-form.tsx` (productName), docs de fase; commit `f4d5260`.
 
+### 2026-07-24 — ADMIN-PWA-FOUNDATION-1 — OrderOps Admin Installable Standalone PWA Foundation
+
+- **Frontend / Admin PWA** ADMIN-PWA-FOUNDATION-1 completada. Se agregó una base PWA instalable para la experiencia admin de OrderOps en /admin, orientada a probar la operación desde teléfono en modo standalone. La implementación agregó manifest admin, metadata de instalación, iconos PWA y soporte básico iOS/Android. No se agregó service worker ni caching offline para evitar riesgos con sesión, dashboards, pedidos, productos, precios, stock y datos operativos. No se modificó auth, lógica admin, catálogo público, carrito, checkout, pricing, stock, DB, RLS, actions ni pedidos. Resultado: **PASS WITH DEVICE QA DEBT**.
+- Archivos: `lib/admin/pwa-manifest.ts`, `app/admin/manifest.webmanifest/route.ts`, `app/admin/layout.tsx`, `public/icons/orderops-admin-*.png`, `scripts/generate-admin-pwa-icons.mjs`, `docs/admin-pwa-foundation-1-installable-standalone.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`; commit `b8dcbb1`.
+
 ### 2026-07-19 — PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 — Product & Category Hierarchy Premium Polish
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 ejecutada. Se pulió la jerarquía visual de Por producto y Por categoría dentro del admin de Product Customization, mejorando headers, agrupación de información, empty states, presentación de excepciones y consistencia con las tabs compactas. No se modificó DB, RLS, actions, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS WITH HIERARCHY DEBT**.
@@ -1084,12 +1089,6 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ---
 
 
-### 2026-07-24 — Admin PWA foundation (/admin standalone)
-
-- **UI/API** Manifest instalable solo admin: lib/admin/pwa-manifest.ts, pp/admin/manifest.webmanifest/route.ts, metadata en pp/admin/layout.tsx, iconos public/icons/orderops-admin-*.png, script scripts/generate-admin-pwa-icons.mjs.
-- Sin service worker, sin offline cache, sin PWA pública; middleware sin redirect; login /admin/login dentro de scope /admin.
-- Archivos: ver docs/admin-pwa-foundation-1-installable-standalone.md
-- Breaking: no
 ## 4. Convenciones de Actualización
 
 Al registrar un cambio, incluir:
