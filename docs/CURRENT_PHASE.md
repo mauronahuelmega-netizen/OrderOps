@@ -10,7 +10,9 @@
 - CLI: `tsc` PASS → `build` PASS
 - **Deuda:** resolución master ≥512 px + DEVICE QA manual
 
----## Registro â€” ADMIN-PWA-BRANDING-POLISH-1 (2026-07-24)
+---
+
+## Registro — ADMIN-PWA-BRANDING-POLISH-1 (2026-07-24)
 
 **Fase:** ADMIN-PWA-BRANDING-POLISH-1 â€” Admin PWA app name & icon polish  
 **Estado:** PASS WITH BRAND ASSET AND DEVICE QA DEBT  
