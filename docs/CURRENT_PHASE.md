@@ -1,3 +1,17 @@
+## Registro — ADMIN-PWA-FOUNDATION-1 (2026-07-24)
+
+**Fase:** ADMIN-PWA-FOUNDATION-1 — Installable Standalone PWA (/admin only)  
+**Estado:** PASS WITH DEVICE QA DEBT  
+**Resultado:** Se añadió manifest web app, metadata/viewport e iconos de marca para instalar OrderOps Admin como standalone en `/admin`, sin service worker, sin offline cache y sin PWA pública en catálogo.
+
+- Doc: `docs/admin-pwa-foundation-1-installable-standalone.md`
+- Auth/scope: login en `/admin/login`; `start_url`/`scope`/`id` = `/admin`; middleware solo `updateSession`
+- CLI: `tsc` PASS · `build` PASS
+- Smoke: manifest JSON + iconos 200 · `/admin` · catálogo público sin manifest tenant
+- **Deuda:** instalación real en dispositivo no verificada por agente (DEVICE QA)
+- **Fuera de scope:** SW, offline, cambios auth, PWA pública `/b/[slug]`
+
+---
 # OrderOps: Estado de Desarrollo y Fase Actual (6 de Junio)
 
 ## Registro — PRODUCT-CUSTOMIZATION-ADMIN-V1-FINAL-HANDOFF-1 (2026-07-23)

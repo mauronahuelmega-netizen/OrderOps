@@ -1083,6 +1083,13 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 ---
 
+
+### 2026-07-24 — Admin PWA foundation (/admin standalone)
+
+- **UI/API** Manifest instalable solo admin: lib/admin/pwa-manifest.ts, pp/admin/manifest.webmanifest/route.ts, metadata en pp/admin/layout.tsx, iconos public/icons/orderops-admin-*.png, script scripts/generate-admin-pwa-icons.mjs.
+- Sin service worker, sin offline cache, sin PWA pública; middleware sin redirect; login /admin/login dentro de scope /admin.
+- Archivos: ver docs/admin-pwa-foundation-1-installable-standalone.md
+- Breaking: no
 ## 4. Convenciones de Actualización
 
 Al registrar un cambio, incluir:
