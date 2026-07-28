@@ -802,6 +802,10 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - Archivos: `lib/admin/pwa-manifest.ts`, `scripts/generate-admin-pwa-icons.mjs`, `public/icons/orderops-admin-*.png`, `docs/admin-pwa-branding-polish-1-app-name-icon.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
 
 
+### 2026-07-28 — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-DEPLOY-1 — Controlled Deploy for Mobile Feel + Shell Polish
+
+- **Deploy / Admin Preview UX** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-DEPLOY-1 completada. Commit único `5843fd9` en `main` (touch-pan, mobile-feel, shell premium, layout QA fix + docs). Push `origin/main`; producción https://orderops.vercel.app LIVE (markers clear-cart + pan/cursor CSS). Smoke: preview shell, layout 1440 (Δ=0, pad 16/16), clear-cart preview keys `[]` / public intactas, checkout preview “Confirmación deshabilitada”, público sin pan/cursor + “Enviar pedido”, customizations/settings OK, CSP `frame-ancestors 'self'`. Estado: **DEPLOYED WITH NON-BLOCKING QA DEBT**. Doc: `docs/admin-catalog-preview-mobile-feel-deploy-1.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-HANDOFF-1**. Sin migraciones/Supabase/pedidos.
+
 ### 2026-07-28 — ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-1 — Two-Column Centering & Phone Frame Alignment
 
 - **Frontend / Admin Preview UX (layout-only)** ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-1 completada. Grid desktop `minmax(0,1fr) minmax(420px,1fr)` con phone centrado en mitad derecha; eliminados `justify-self:end` / `flex-end`. Phone frame envuelve viewport (padding simétrico; ancho definido 422 evita colapso intrinsic iframe ~300). Sticky ≥1024 centrado; mobile una columna sin overflowX. Shell `max-width: 1360px`. Estado: **PASS**. Doc: `docs/admin-catalog-preview-shell-layout-qa-fix-1.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-DEPLOY-1**. Sin commit/push/deploy ni DB/CSP/cookie/guard/mobile-feel.

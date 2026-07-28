@@ -1,4 +1,18 @@
-﻿## Registro — ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-1 (2026-07-28)
+﻿## Registro — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-DEPLOY-1 (2026-07-28)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-DEPLOY-1 — Controlled Deploy for Mobile Feel + Shell Polish  
+**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Resumen:** Commit `5843fd9` pusheado a `main` y live en https://orderops.vercel.app. Paquete touch-pan + mobile-feel + shell polish + layout. Smoke prod: preview, layout, clear-cart, checkout guard, público, CSP, customizations/settings PASS. P3 residual (device touch, clipboard automation, press feedback, momentum synthetic flake, lint histórico).
+
+- Doc: `docs/admin-catalog-preview-mobile-feel-deploy-1.md`
+- Commit: `5843fd9` · Push: `origin/main` · Deploy: live
+- CLI pre-commit: `tsc` PASS · `build` PASS · lint FAIL preexistente
+- **Próximo:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-HANDOFF-1
+- **Sin:** migraciones, Supabase, pedidos reales, cambios funcionales post-commit
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-1 (2026-07-28)
 
 **Fase:** ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-1 — Two-Column Centering & Phone Frame Alignment  
 **Estado:** PASS  
