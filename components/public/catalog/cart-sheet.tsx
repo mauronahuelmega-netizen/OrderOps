@@ -39,7 +39,12 @@ export default function CartSheet({
   const isEmpty = items.length === 0;
 
   return (
-    <div className={styles.backdrop} role="presentation" onClick={onClose}>
+    <div
+      className={styles.backdrop}
+      role="presentation"
+      data-preview-pan-ignore
+      onClick={onClose}
+    >
       <div
         className={styles.sheet}
         role="dialog"

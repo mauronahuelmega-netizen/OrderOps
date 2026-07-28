@@ -802,6 +802,38 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - Archivos: `lib/admin/pwa-manifest.ts`, `scripts/generate-admin-pwa-icons.mjs`, `public/icons/orderops-admin-*.png`, `docs/admin-pwa-branding-polish-1-app-name-icon.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
 
 
+### 2026-07-28 — ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-1 — Two-Column Centering & Phone Frame Alignment
+
+- **Frontend / Admin Preview UX (layout-only)** ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-1 completada. Grid desktop `minmax(0,1fr) minmax(420px,1fr)` con phone centrado en mitad derecha; eliminados `justify-self:end` / `flex-end`. Phone frame envuelve viewport (padding simétrico; ancho definido 422 evita colapso intrinsic iframe ~300). Sticky ≥1024 centrado; mobile una columna sin overflowX. Shell `max-width: 1360px`. Estado: **PASS**. Doc: `docs/admin-catalog-preview-shell-layout-qa-fix-1.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-DEPLOY-1**. Sin commit/push/deploy ni DB/CSP/cookie/guard/mobile-feel.
+
+### 2026-07-28 — ADMIN-CATALOG-PREVIEW-SHELL-PREMIUM-POLISH-1 — Preview Shell UX Polish Before Deploy
+
+- **Frontend / Admin Preview UX** ADMIN-CATALOG-PREVIEW-SHELL-PREMIUM-POLISH-1 completada. Shell premium sin panel izquierdo ni estado de carrito: acciones jerarquizadas, checklist, copy “Modo seguro activo”, phone sticky ≥1024, empty/loading/error, toasts `useAdminToast`, clear preview cart via `postMessage` same-origin (`ORDEROPS_PREVIEW_CLEAR_CART` + ACK + remount 1s). Vaciar refleja iframe 0; public keys intactas; checkout preview bloqueado. Clipboard success toast automation UNVERIFIED (P3). Estado: **PASS WITH NON-BLOCKING UX DEBT**. Doc: `docs/admin-catalog-preview-shell-premium-polish-1.md`. Siguiente pasó por **SHELL-LAYOUT-QA-FIX-1** antes de deploy. Sin commit/push/deploy ni DB/CSP/guard.
+
+### 2026-07-28 — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-AUTH-QA-1 — Authenticated Iframe QA for Mobile Feel
+
+- **QA / Admin Preview UX (docs-only)** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-AUTH-QA-1 completada. Sesión owner en `:3015`: `/admin/products/preview` iframe same-origin — cursor circular, momentum RAF (Δ≈−75), anti-selection, storage preview aislado, Vaciar limpia preview keys, checkout preview bloqueado (`Confirmación deshabilitada`, sin `create_order`). Público normal sin pan/cursor; checkout público “Enviar pedido”. Customizations + Settings catalogo smoke PASS. Estado: **READY WITH NON-BLOCKING QA DEBT** (device touch / cookie DevTools / pressed visual P3). Doc: `docs/admin-catalog-preview-mobile-feel-auth-qa-1.md`. Siguiente pasó por **SHELL-PREMIUM-POLISH-1** antes de deploy. Sin código, commit, push, deploy ni pedidos.
+
+### 2026-07-28 — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-POLISH-1 — Mobile Feel Implementation
+
+- **Frontend / Admin Preview UX** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-POLISH-1 completada. Momentum vertical (RAF + friction, caps velocity/duration) en `usePreviewPointerPanScroll`; cursor circular en `usePreviewTouchCursor` (`pointer-events: none`); scrollbar thin scoped a `html[data-preview-pan-enabled]`. Press feedback diferido. Solo `isCatalogPreview` + mouse. Public preview PASS; admin iframe UNVERIFIED. Resultado: **PASS WITH AUTH QA DEBT**. Doc: `docs/admin-catalog-preview-mobile-feel-polish-1.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-AUTH-QA-1**. Sin commit/push/deploy ni tocar carrito/cookie/guard/CSP/DB.
+
+### 2026-07-28 — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-SPEC-1 — Mobile Feel UX Specification
+
+- **Docs / Admin Preview UX** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-SPEC-1 completada. Mobile Feel Spec cerrada: próximo polish debe implementar cursor circular + momentum vertical solo en preview/mouse. No tocar carrito/cookie/checkout/CSP/DB. Admin iframe QA obligatorio antes de deploy. Estado: **SPEC READY FOR IMPLEMENTATION**. Doc: `docs/admin-catalog-preview-mobile-feel-spec-1.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-POLISH-1**. Sin código, commit, push, deploy ni pedidos.
+
+### 2026-07-28 — ADMIN-CATALOG-PREVIEW-TOUCH-PAN-QA-FIX-1 — Prevent Text Selection During Preview Pan
+
+- **Frontend / Admin Preview UX** ADMIN-CATALOG-PREVIEW-TOUCH-PAN-QA-FIX-1 completada. Fix selección de texto en mouse-pan: fases `candidate`/`active`, `html[data-preview-pan-state]`, `user-select: none` desde enabled, `selectstart`/`dragstart` prevent, `removeAllRanges`, `pointermove` non-passive + `preventDefault`. Selector interactivo omite `[role="button"]` para panear sobre texto/imagen de card sin romper botones reales. Público preview PASS (sin selección / sin drag fantasma); admin iframe UNVERIFIED. Resultado: **PASS WITH PUBLIC QA ONLY**. Doc: `docs/admin-catalog-preview-touch-pan-qa-fix-1.md`. Deploy bloqueado hasta auth smoke. Siguiente tras PASS: **ADMIN-CATALOG-PREVIEW-TOUCH-PAN-DEPLOY-1**. Sin commit/push/deploy ni tocar carrito/cookie/guard/CSP/DB.
+
+### 2026-07-27 — ADMIN-CATALOG-PREVIEW-TOUCH-PAN-POLISH-1 — Mouse Drag Touch-Scroll Polish
+
+- **Frontend / Admin Preview UX** ADMIN-CATALOG-PREVIEW-TOUCH-PAN-POLISH-1 completada. Hook `usePreviewPointerPanScroll` en CatalogClient: solo `isCatalogPreview` + mouse; threshold 8px; scroll vertical vía `scrollingElement`; ignore interactivos/overlays (`data-preview-pan-ignore`). Cursor grab/grabbing en module CSS. Público/touch/cookie/guard/CSP/DB intactos. Resultado: **PASS WITH AUTH QA DEBT**. Doc: `docs/admin-catalog-preview-touch-pan-polish-1.md`. Siguiente pasó a **ADMIN-CATALOG-PREVIEW-TOUCH-PAN-QA-FIX-1** (selección de texto bloqueó deploy). Sin commit/push/deploy ni pedidos.
+
+### 2026-07-27 — ADMIN-CATALOG-PREVIEW-HANDOFF-1 — Final Technical & Product Handoff
+
+- **Handoff / Admin Preview (docs-only)** ADMIN-CATALOG-PREVIEW-HANDOFF-1 completada. Cierre formal de Vista previa del catálogo: `/admin/products/preview`, iframe same-origin, carrito `orderops-preview-cart*`, checkout bloqueado UI+server, cookie `orderops-admin-catalog-preview` Max-Age 300 + clear al vaciar, CSP `frame-ancestors 'self'`, CTA dual Productos. Commits `c4b3e18` / `84c0c48`. Deploy https://orderops.vercel.app. Estado: **FEATURE CLOSED — DEPLOYED WITH NON-BLOCKING QA DEBT**. Deuda P2/P3 (auth DevTools, iframe refresh, device/PWA). Rollback: `git revert c4b3e18`. Opcionales: TOUCH-PAN / AUTH-SMOKE / RESPONSIVE / DEVICE. Doc: `docs/admin-catalog-preview-handoff-1.md`. Sin código, deploy, rollback ni pedidos.
+
 ### 2026-07-27 — ADMIN-CATALOG-PREVIEW-DEPLOY-1 — Controlled Deploy & Production Smoke
 
 - **Deploy / Admin Preview** ADMIN-CATALOG-PREVIEW-DEPLOY-1 completada. Commit `c4b3e18` (*Add safe admin catalog preview*) pushed a `main`; producción https://orderops.vercel.app con CSP `frame-ancestors 'self'`. Smoke: preview cart aislado; checkout preview bloqueado; público “Enviar pedido”; admin auth/cookie DevTools UNVERIFIED. Estado: **DEPLOYED WITH NON-BLOCKING QA DEBT**. Doc: `docs/admin-catalog-preview-deploy-1.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-HANDOFF-1**. Sin DB/RLS/RPC/pedidos/rollback.

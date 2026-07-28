@@ -1,0 +1,33 @@
+.panSurface[data-preview-pan-enabled="true"] {
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.panSurface[data-preview-pan-enabled="true"] img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.panSurface[data-preview-pan-candidate="true"],
+.panSurface[data-preview-pan-dragging="true"] {
+  cursor: grabbing;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.panSurface[data-preview-pan-enabled="true"]
+  :is(button, a, input, textarea, select, label, summary, [role="button"], [role="link"]) {
+  cursor: pointer;
+  user-select: auto;
+  -webkit-user-select: auto;
+}
+
+/* Scoped to preview gesture only — cleared on idle / unmount. */
+:global(html[data-preview-pan-state="candidate"]),
+:global(html[data-preview-pan-state="active"]) {
+  cursor: grabbing;
+  user-select: none;
+  -webkit-user-select: none;
+}

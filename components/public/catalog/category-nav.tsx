@@ -27,7 +27,7 @@ export default function CategoryNav({
   }
 
   return (
-    <div className="catalog-category-nav">
+    <div className="catalog-category-nav" data-preview-pan-ignore>
       <div className="catalog-category-nav__inner" aria-label="Categorías">
         {items.map((category) => (
           <button

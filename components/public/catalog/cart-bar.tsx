@@ -10,7 +10,7 @@ export default function CartBar({ count, total, onOpenCart }: CartBarProps) {
   const isEmpty = count === 0;
 
   return (
-    <div className="catalog-cart-bar">
+    <div className="catalog-cart-bar" data-preview-pan-ignore>
       <div className="catalog-cart-bar__copy">
         <strong>
           {count} {count === 1 ? "producto" : "productos"}

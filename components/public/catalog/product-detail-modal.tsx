@@ -85,6 +85,7 @@ export default function ProductDetailModal({
     <div
       className="catalog-modal-backdrop"
       role="presentation"
+      data-preview-pan-ignore
       onClick={onClose}
     >
       <div

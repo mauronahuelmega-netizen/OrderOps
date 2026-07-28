@@ -1,4 +1,112 @@
-﻿## Registro — ADMIN-CATALOG-PREVIEW-DEPLOY-1 (2026-07-27)
+﻿## Registro — ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-1 (2026-07-28)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-1 — Two-Column Centering & Phone Frame Alignment  
+**Estado:** PASS  
+**Resumen:** Layout desktop en dos mitades (`1fr`/`1fr`); teléfono centrado en mitad derecha (sin `justify-self: end`); frame envuelve viewport con padding simétrico 16/16 y ancho 422; sticky ≥1024; mobile una columna sin overflowX. Solo CSS/markup shell.
+
+- Doc: `docs/admin-catalog-preview-shell-layout-qa-fix-1.md`
+- Código: `catalog-preview-shell.tsx`, `catalog-preview-shell.module.css`
+- CLI: `tsc` PASS · `build` PASS · lint FAIL preexistente
+- **Próximo:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-DEPLOY-1
+- **Sin:** commit, push, deploy, DB, cookie, CSP, guard, carrito público, mobile-feel logic
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-SHELL-PREMIUM-POLISH-1 (2026-07-28)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-SHELL-PREMIUM-POLISH-1 — Preview Shell UX Polish Before Deploy  
+**Estado:** PASS WITH NON-BLOCKING UX DEBT  
+**Resumen:** Shell premium sin panel izquierdo: acciones jerarquizadas, checklist, Modo seguro, phone sticky, toasts admin, clear-cart via postMessage+ACK+remount. Vaciar refleja 0 en iframe. Clipboard success toast automation = deuda P3.
+
+- Doc: `docs/admin-catalog-preview-shell-premium-polish-1.md`
+- Código: `catalog-preview-shell.*`, `catalog-client.tsx`, `catalog-preview-shared.ts`
+- CLI: `tsc` PASS · `build` PASS · lint FAIL preexistente
+- **Próximo:** ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-1 → luego MOBILE-FEEL-DEPLOY-1
+- **Sin:** commit, push, deploy, pedidos, panel izquierdo, estado carrito shell
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-AUTH-QA-1 (2026-07-28)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-AUTH-QA-1 — Authenticated Iframe QA for Mobile Feel  
+**Estado:** READY WITH NON-BLOCKING QA DEBT  
+**Resumen:** QA autenticado en `/admin/products/preview`: cursor + momentum + anti-selection + storage aislado + checkout bloqueado PASS dentro del iframe. Público normal intacto. Sin código. Próximo: MOBILE-FEEL-DEPLOY-1 (pausado por shell polish).
+
+- Doc: `docs/admin-catalog-preview-mobile-feel-auth-qa-1.md`
+- CLI: `tsc` PASS · `build` PASS · lint FAIL preexistente
+- **Próximo:** ADMIN-CATALOG-PREVIEW-SHELL-PREMIUM-POLISH-1 → luego DEPLOY
+- **Sin:** código, commit, push, deploy, pedidos
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-POLISH-1 (2026-07-28)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-POLISH-1 — Mobile Feel Implementation  
+**Estado:** PASS WITH AUTH QA DEBT  
+**Resumen:** Cursor circular + momentum vertical RAF + scrollbar sutil solo en preview/mouse. Press feedback diferido. Public preview PASS; admin iframe UNVERIFIED. Sin tocar carrito/cookie/guard/CSP/DB.
+
+- Doc: `docs/admin-catalog-preview-mobile-feel-polish-1.md`
+- Código: `use-preview-pointer-pan-scroll.ts`, `use-preview-touch-cursor.ts`, `catalog-preview-mobile-feel.module.css`, `catalog-client.tsx`
+- CLI: `tsc` PASS · `build` PASS · lint FAIL preexistente
+- **Próximo:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-AUTH-QA-1
+- **Sin:** commit, push, deploy, pedidos
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-SPEC-1 (2026-07-28)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-SPEC-1 — Mobile Feel UX Specification  
+**Estado:** SPEC READY FOR IMPLEMENTATION  
+**Resumen:** Se definió el polish mobile-feel para la preview: cursor circular tipo touch, momentum/inertia vertical, feedback táctil sutil y scrollbars menos protagonistas, siempre solo en preview desktop/mouse. Sin código funcional. Próximo: MOBILE-FEEL-POLISH-1.
+
+- Doc: `docs/admin-catalog-preview-mobile-feel-spec-1.md`
+- **Próximo:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-POLISH-1
+- **Sin:** código, commit, push, deploy, pedidos
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-TOUCH-PAN-QA-FIX-1 (2026-07-28)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-TOUCH-PAN-QA-FIX-1 — Prevent Text Selection During Preview Pan  
+**Estado:** PASS WITH PUBLIC QA ONLY  
+**Resumen:** Anti-selección en mouse-pan preview: fase `candidate` inmediata, `user-select: none`, `selectstart`/`dragstart` prevent, cleanup de selection. Cards `role="button"` ya no bloquean pan sobre texto/imagen. Público preview PASS; admin iframe UNVERIFIED. Deploy sigue bloqueado hasta auth smoke.
+
+- Doc: `docs/admin-catalog-preview-touch-pan-qa-fix-1.md`
+- Código: `use-preview-pointer-pan-scroll.ts`, `catalog-preview-pan.module.css`
+- CLI: `tsc` PASS · `build` PASS · lint FAIL preexistente (si corre)
+- **Próximo (tras auth iframe):** ADMIN-CATALOG-PREVIEW-TOUCH-PAN-DEPLOY-1
+- **Sin:** commit, push, deploy, pedidos, carrito/cookie/guard/CSP/DB
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-TOUCH-PAN-POLISH-1 (2026-07-27)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-TOUCH-PAN-POLISH-1 — Mouse Drag Touch-Scroll Polish  
+**Estado:** PASS WITH AUTH QA DEBT  
+**Resumen:** Mouse drag vertical scrollea el catálogo solo en preview (`isCatalogPreview` + pointer mouse). Hook aislado, threshold 8px, ignore interactivos/overlays. Público/touch/cookie/guard/CSP intactos. Admin iframe UNVERIFIED.
+
+- Doc: `docs/admin-catalog-preview-touch-pan-polish-1.md`
+- Código: `use-preview-pointer-pan-scroll.ts`, `catalog-preview-pan.module.css`, `catalog-client.tsx` + ignore attrs
+- CLI: `tsc` PASS · `build` PASS · lint FAIL preexistente
+- **Próximo:** ADMIN-CATALOG-PREVIEW-TOUCH-PAN-QA-FIX-1 (bloqueó deploy por selección de texto)
+- **Sin:** commit, push, deploy, pedidos
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-HANDOFF-1 (2026-07-27)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-HANDOFF-1 — Final Technical & Product Handoff  
+**Estado:** FEATURE CLOSED — DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Resumen:** Se consolidó el cierre técnico/producto de Vista previa del catálogo desplegada en producción. Feature en `/admin/products/preview` con iframe real, carrito preview aislado, checkout bloqueado UI+server, cookie 300s, clear al vaciar y CSP self. Sin DB/RLS/RPC/pedidos. Quedan deudas P2/P3 no bloqueantes.
+
+- Doc: `docs/admin-catalog-preview-handoff-1.md`
+- Commits: feature `c4b3e18` · docs deploy `84c0c48`
+- **Próximo opcional:** TOUCH-PAN-POLISH-1 o AUTH-SMOKE-1
+- **Sin:** código, deploy, rollback, pedidos
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-DEPLOY-1 (2026-07-27)
 
 **Fase:** ADMIN-CATALOG-PREVIEW-DEPLOY-1 — Controlled Deploy & Production Smoke  
 **Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  

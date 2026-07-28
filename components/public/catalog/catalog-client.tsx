@@ -13,6 +13,7 @@ import {
   loadUnifiedCartItems,
   mergeCustomizedSelectionIntoCart,
   persistUnifiedCartItems,
+  clearUnifiedCartItems,
   removeSingleCartLine,
   selectionStateFromCartParent,
   setLegacyProductQuantity,
@@ -21,14 +22,22 @@ import {
   type LocalCartItem,
   type LocalCartItemV2
 } from "@/lib/cart/local";
-import { buildCatalogPreviewPath } from "@/lib/admin/catalog-preview-shared";
+import {
+  ORDEROPS_PREVIEW_CLEAR_CART_ACK_MESSAGE,
+  ORDEROPS_PREVIEW_CLEAR_CART_MESSAGE,
+  buildCatalogPreviewPath,
+  type OrderOpsPreviewClearCartMessage
+} from "@/lib/admin/catalog-preview-shared";
 import CartBar from "@/components/public/catalog/cart-bar";
 import CartSheet from "@/components/public/catalog/cart-sheet";
 import CategoryNav from "@/components/public/catalog/category-nav";
 import ProductCard from "@/components/public/catalog/product-card";
 import ProductDetailModal from "@/components/public/catalog/product-detail-modal";
 import type { CustomizationConfirmResult } from "@/components/public/catalog/customization-modal";
+import { usePreviewPointerPanScroll } from "@/components/public/catalog/use-preview-pointer-pan-scroll";
+import { usePreviewTouchCursor } from "@/components/public/catalog/use-preview-touch-cursor";
 import { productNeedsCustomizationModal } from "@/lib/product-customization/public-shared";
+import panStyles from "./catalog-preview-pan.module.css";
 
 const CustomizationModal = dynamic(
   () => import("@/components/public/catalog/customization-modal"),
@@ -80,6 +89,16 @@ export default function CatalogClient({
     business.cover_image_url ? "idle" : "error"
   );
   const coverImageRef = useRef<HTMLImageElement | null>(null);
+  const catalogScrollRef = useRef<HTMLElement | null>(null);
+
+  usePreviewPointerPanScroll({
+    enabled: isCatalogPreview,
+    targetRef: catalogScrollRef
+  });
+  usePreviewTouchCursor({
+    enabled: isCatalogPreview,
+    targetRef: catalogScrollRef
+  });
 
   const productMap = useMemo(
     () => new Map(products.map((product) => [product.id, product])),
@@ -197,6 +216,54 @@ export default function CatalogClient({
       // localStorage may be unavailable; keep in-memory cart.
     }
   }, [business.id, cartHydrated, cartItems, cartScope]);
+
+  useEffect(() => {
+    if (!isCatalogPreview) {
+      return;
+    }
+
+    const onMessage = (event: MessageEvent) => {
+      if (event.origin !== window.location.origin) {
+        return;
+      }
+
+      const data = event.data as OrderOpsPreviewClearCartMessage | null;
+      if (!data || data.type !== ORDEROPS_PREVIEW_CLEAR_CART_MESSAGE) {
+        return;
+      }
+
+      if (data.businessId !== business.id) {
+        return;
+      }
+
+      try {
+        clearUnifiedCartItems(business.id, "preview");
+      } catch {
+        // Still clear in-memory state below.
+      }
+
+      setCartItems([]);
+      setIsCartSheetOpen(false);
+      setSelectedProductId(null);
+      setCustomizationSession(null);
+
+      const ack = {
+        type: ORDEROPS_PREVIEW_CLEAR_CART_ACK_MESSAGE,
+        businessId: business.id
+      };
+
+      try {
+        window.parent?.postMessage(ack, window.location.origin);
+      } catch {
+        // Parent may be unavailable; clear still applied locally.
+      }
+    };
+
+    window.addEventListener("message", onMessage);
+    return () => {
+      window.removeEventListener("message", onMessage);
+    };
+  }, [business.id, isCatalogPreview]);
 
   useEffect(() => {
     if (selectedCategoryId || categoriesWithProducts.length === 0) {
@@ -344,8 +411,12 @@ export default function CatalogClient({
 
   return (
     <main
-      className="catalog-page catalog-page--with-cart"
+      ref={catalogScrollRef}
+      className={`catalog-page catalog-page--with-cart${
+        isCatalogPreview ? ` ${panStyles.panSurface}` : ""
+      }`}
       data-theme={resolvedTheme}
+      data-preview-pan-enabled={isCatalogPreview ? "true" : undefined}
       style={businessStyles}
     >
       <header className="catalog-hero">

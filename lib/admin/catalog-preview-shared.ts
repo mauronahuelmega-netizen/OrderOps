@@ -11,6 +11,23 @@ export const CATALOG_PREVIEW_COOKIE_MAX_AGE_SECONDS = 300;
 export const CATALOG_PREVIEW_ORDER_BLOCKED_MESSAGE =
   "La confirmación de pedidos está deshabilitada en la vista previa del catálogo.";
 
+/** Same-origin postMessage: parent → iframe (clear preview cart React state). */
+export const ORDEROPS_PREVIEW_CLEAR_CART_MESSAGE = "ORDEROPS_PREVIEW_CLEAR_CART" as const;
+
+/** Same-origin postMessage: iframe → parent (ACK after clear). */
+export const ORDEROPS_PREVIEW_CLEAR_CART_ACK_MESSAGE =
+  "ORDEROPS_PREVIEW_CLEAR_CART_ACK" as const;
+
+export type OrderOpsPreviewClearCartMessage = {
+  type: typeof ORDEROPS_PREVIEW_CLEAR_CART_MESSAGE;
+  businessId: string;
+};
+
+export type OrderOpsPreviewClearCartAckMessage = {
+  type: typeof ORDEROPS_PREVIEW_CLEAR_CART_ACK_MESSAGE;
+  businessId: string;
+};
+
 export function isCatalogPreviewQueryFlag(value: string | string[] | undefined): boolean {
   if (Array.isArray(value)) {
     return value.includes(CATALOG_PREVIEW_QUERY_VALUE);

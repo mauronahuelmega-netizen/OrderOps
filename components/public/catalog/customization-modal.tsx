@@ -236,7 +236,12 @@ export default function CustomizationModal({
   const ctaLabel = editingCartLineId ? "Actualizar carrito" : "Agregar al carrito";
 
   return (
-    <div className={styles.backdrop} role="presentation" onClick={onClose}>
+    <div
+      className={styles.backdrop}
+      role="presentation"
+      data-preview-pan-ignore
+      onClick={onClose}
+    >
       <div
         className={styles.modal}
         role="dialog"
