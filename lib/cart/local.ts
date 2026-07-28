@@ -34,12 +34,34 @@ export {
 
 export { buildCartConfigurationSignature } from "@/lib/cart/signature";
 
-export function getCartStorageKey(businessId: string) {
-  return `orderops-cart:${businessId}`;
+export type CartStorageScope = "public" | "preview";
+
+export function getCartStorageKey(
+  businessId: string,
+  scope: CartStorageScope = "public"
+) {
+  return scope === "preview"
+    ? `orderops-preview-cart:${businessId}`
+    : `orderops-cart:${businessId}`;
 }
 
-export function getCartV2StorageKey(businessId: string) {
-  return `orderops-cart-v2:${businessId}`;
+export function getCartV2StorageKey(
+  businessId: string,
+  scope: CartStorageScope = "public"
+) {
+  return scope === "preview"
+    ? `orderops-preview-cart-v2:${businessId}`
+    : `orderops-cart-v2:${businessId}`;
+}
+
+export function getCartStorageKeys(
+  businessId: string,
+  scope: CartStorageScope = "public"
+) {
+  return {
+    legacy: getCartStorageKey(businessId, scope),
+    v2: getCartV2StorageKey(businessId, scope)
+  };
 }
 
 function createCartLineId() {
@@ -139,27 +161,46 @@ export function parseLocalCartV2Items(value: string | null): LocalCartItemV2[] {
   }
 }
 
-export function loadUnifiedCartItems(businessId: string): LocalCartItem[] {
+export function loadUnifiedCartItems(
+  businessId: string,
+  scope: CartStorageScope = "public"
+): LocalCartItem[] {
   if (typeof window === "undefined") {
     return [];
   }
 
-  const legacy = parseLocalCartItems(
-    window.localStorage.getItem(getCartStorageKey(businessId))
-  );
-  const v2 = parseLocalCartV2Items(
-    window.localStorage.getItem(getCartV2StorageKey(businessId))
-  );
+  const keys = getCartStorageKeys(businessId, scope);
+  const legacy = parseLocalCartItems(window.localStorage.getItem(keys.legacy));
+  const v2 = parseLocalCartV2Items(window.localStorage.getItem(keys.v2));
 
   return [...legacy, ...v2];
 }
 
-export function persistUnifiedCartItems(businessId: string, items: LocalCartItem[]) {
+export function persistUnifiedCartItems(
+  businessId: string,
+  items: LocalCartItem[],
+  scope: CartStorageScope = "public"
+) {
+  const keys = getCartStorageKeys(businessId, scope);
   const legacyItems = items.filter(isLocalCartLegacyItem);
   const v2Items = items.filter(isLocalCartItemV2);
 
-  window.localStorage.setItem(getCartStorageKey(businessId), JSON.stringify(legacyItems));
-  window.localStorage.setItem(getCartV2StorageKey(businessId), JSON.stringify(v2Items));
+  window.localStorage.setItem(keys.legacy, JSON.stringify(legacyItems));
+  window.localStorage.setItem(keys.v2, JSON.stringify(v2Items));
+}
+
+/** Clears only the given scope keys (preview must never touch public keys). */
+export function clearUnifiedCartItems(
+  businessId: string,
+  scope: CartStorageScope = "public"
+) {
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  const keys = getCartStorageKeys(businessId, scope);
+  window.localStorage.removeItem(keys.legacy);
+  window.localStorage.removeItem(keys.v2);
 }
 
 export function getCartItemCount(items: LocalCartItem[]) {

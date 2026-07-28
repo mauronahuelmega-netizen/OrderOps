@@ -1,4 +1,86 @@
-﻿## Registro — ADMIN-PWA-ICON-CONSISTENCY-1 (2026-07-24)
+﻿## Registro — ADMIN-CATALOG-PREVIEW-RE-QA-1 (2026-07-27)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-RE-QA-1 — Authenticated Re-QA After Cookie Polish  
+**Estado:** READY WITH NON-BLOCKING QA DEBT  
+**Resumen:** Source confirma Max-Age 300 + clear cookie + vaciar wiring. Runtime `:3012`: carrito aislado, checkout preview bloqueado, público normal con “Enviar pedido”, CSP OK. Admin auth / cookie DevTools / clear al vaciar UNVERIFIED sin E2E. Sin P0/P1 nuevos.
+
+- Doc: `docs/admin-catalog-preview-re-qa-1.md`
+- CLI: `tsc` PASS · `build` PASS · lint FAIL preexistente
+- **Próximo:** ADMIN-CATALOG-PREVIEW-DEPLOY-1
+- **Sin:** código, commit, push, deploy, pedidos
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-COOKIE-POLISH-1 (2026-07-27)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-COOKIE-POLISH-1 — Preview Cookie Lifetime & Cleanup Polish  
+**Estado:** PASS WITH AUTH QA DEBT  
+**Resumen:** Cookie `orderops-admin-catalog-preview` pasa de Max-Age 3600 → **300**. “Vaciar carrito de prueba” limpia keys preview y expira cookie vía Server Action (`manageProducts` + tenant match). Checkout guard UI+server intacto. Sin DB/RLS/RPC ni botón nuevo.
+
+- Doc: `docs/admin-catalog-preview-cookie-polish-1.md`
+- Código: `catalog-preview-shared.ts`, `catalog-preview.ts`, `preview/actions.ts`, `catalog-preview-shell.tsx`
+- **Próximo:** ADMIN-CATALOG-PREVIEW-RE-QA-1
+- **Sin:** commit, push, deploy, pedidos
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-QA-1 (2026-07-27)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-QA-1 — Authenticated Browser QA & Release Readiness  
+**Estado:** READY AFTER COOKIE POLISH  
+**Resumen:** Source/headers PASS. Path público `?orderopsPreview=1` confirma carrito aislado (preview cambia, public no) y checkout con submit deshabilitado + mensaje de bloqueo; sin pedidos/success. Admin autenticado UNVERIFIED (sin sesión E2E). Cookie preview 1h clasificada **P1** (afecta admin same-browser, no customers anónimos).
+
+- Doc: `docs/admin-catalog-preview-qa-1.md`
+- CLI: `tsc` PASS · `build` PASS · lint FAIL preexistente
+- **Próximo:** ADMIN-CATALOG-PREVIEW-COOKIE-POLISH-1
+- **Sin:** código, commit, push, deploy, pedidos
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-IMPL-SAFE-V1-1 (2026-07-27)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-IMPL-SAFE-V1-1 — Implementación segura V1  
+**Estado:** PASS WITH DEBT  
+**Resumen:** Se implementó `/admin/products/preview` (`manageProducts`) con iframe del catálogo real, cookie httpOnly de preview, carrito aislado `orderops-preview-cart*`, checkout visual con bloqueo UI+server (sin `create_order`), CTA dual en Productos y CSP `frame-ancestors 'self'`. Sin DB/RLS/RPC/sidebar/recargar/pedidos.
+
+- Doc: `docs/admin-catalog-preview-impl-safe-v1-1.md`
+- CLI: `tsc` PASS · `build` PASS · lint FAIL preexistente
+- Headers local: CSP `frame-ancestors 'self'` OK
+- **Deuda:** browser QA autenticado + cookie 1h bloquea pedidos reales en mismo browser/path
+- **Próximo:** ADMIN-CATALOG-PREVIEW-QA-1
+- **Sin:** commit, push, deploy
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-SPEC-CLOSURE-1 (2026-07-27)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-SPEC-CLOSURE-1 — Product & Technical Spec Closure  
+**Estado:** PRODUCT SPEC DECISIONS CLOSED · READY FOR IMPLEMENTATION  
+**Resumen:** Se congelaron las decisiones P0/P1 del Product Owner para la Vista previa del catálogo en `/admin/products/preview`: iframe same-origin, carrito aislado (`orderops-preview-cart*`), checkout visual sin confirmación (UI+server), sin success, `manageProducts`, CTA dual (preview + copiar link), CSP `frame-ancestors 'self'`, sin recargar/sidebar/device selector. Preview mode debe ser verificable server-side (no solo query).
+
+- Doc: `docs/admin-catalog-preview-spec-closure-1.md`
+- Audit base: `docs/admin-catalog-preview-audit-1-forensic-architecture.md`
+- **Próximo paso:** implementación (IMPL foundation / cart / checkout-guard) — **no iniciada**
+- **Sin:** código, commit, push, deploy, pedidos
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-AUDIT-1 (2026-07-26)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-AUDIT-1 — Forensic Architecture & Product Audit  
+**Estado:** READY WITH TECHNICAL CONDITIONS  
+**Resumen:** Auditoría forense (solo docs) de la futura vista previa móvil del catálogo público en admin vía iframe same-origin. Confirmado: ruta `/b/[slug]/catalogo`, auth por layout, carrito `localStorage` por `businessId` compartido same-origin, checkout → `create_order` real sin `preview_mode`, sin XFO/CSP framing en repo ni prod. Iframe **VIABLE WITH CONDITIONS**.
+
+- Doc: `docs/admin-catalog-preview-audit-1-forensic-architecture.md`
+- Hallazgos: P0 pedidos/carrito/tenant/CTA/framing · P1 PWA/naming/responsive · P2 a11y/perf
+- Recomendación preliminar: híbrido (E) o iframe+guards (B); no iframe naive (A)
+- CLI baseline: `tsc` PASS · `build` PASS · lint FAIL preexistente (ESLint config)
+- **Próximo paso:** ADMIN-CATALOG-PREVIEW-SPEC-CLOSURE-1 (decisiones P0 del PO)
+- **Sin:** código, commit, push, deploy, pedidos
+
+---
+
+## Registro — ADMIN-PWA-ICON-CONSISTENCY-1 (2026-07-24)
 
 **Fase:** ADMIN-PWA-ICON-CONSISTENCY-1 — Admin PWA icon real branding alignment  
 **Estado:** PASS WITH ICON SOURCE RESOLUTION AND DEVICE QA DEBT  

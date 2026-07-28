@@ -7,11 +7,13 @@ import { getPublicCustomizationSummariesForProducts } from "@/lib/product-custom
 type PublicCatalogPageContentProps = {
   business: PublicBusiness;
   slug: string;
+  isCatalogPreview?: boolean;
 };
 
 export default async function PublicCatalogPageContent({
   business,
-  slug
+  slug,
+  isCatalogPreview = false
 }: PublicCatalogPageContentProps) {
   const [{ categories, products }, customizationEnabled] = await Promise.all([
     getPublicCatalogByBusinessId(business.id),
@@ -51,6 +53,7 @@ export default async function PublicCatalogPageContent({
       products={enrichedProducts}
       slug={slug}
       customizationEnabled={customizationEnabled}
+      isCatalogPreview={isCatalogPreview}
     />
   );
 }

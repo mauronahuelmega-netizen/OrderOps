@@ -1,7 +1,9 @@
 "use client";
 
+import { useCallback, useState } from "react";
 import Button from "@/components/ui/Button";
 import { useProductsManagement } from "@/components/admin/products/products-management-provider";
+import { buildPublicCatalogPath } from "@/lib/admin/catalog-preview-shared";
 import styles from "./products-header-actions.module.css";
 
 type ProductsHeaderActionsProps = {
@@ -10,9 +12,32 @@ type ProductsHeaderActionsProps = {
 
 export default function ProductsHeaderActions({ businessSlug }: ProductsHeaderActionsProps) {
   const { categoriesCount, flyoutMode, closeFlyout, openCreateProduct } = useProductsManagement();
+  const [copyStatus, setCopyStatus] = useState<"idle" | "copied" | "error">("idle");
 
   const isProductOpen = flyoutMode === "create-product";
-  const catalogHref = businessSlug ? `/b/${businessSlug}/catalogo` : null;
+  const normalizedSlug = businessSlug?.trim().toLowerCase() || null;
+  const publicCatalogPath = normalizedSlug ? buildPublicCatalogPath(normalizedSlug) : null;
+
+  const handleCopyPublicLink = useCallback(async () => {
+    if (!publicCatalogPath) {
+      return;
+    }
+
+    setCopyStatus("idle");
+    const absoluteUrl =
+      typeof window !== "undefined"
+        ? `${window.location.origin}${publicCatalogPath}`
+        : publicCatalogPath;
+
+    try {
+      await navigator.clipboard.writeText(absoluteUrl);
+      setCopyStatus("copied");
+      window.setTimeout(() => setCopyStatus("idle"), 2000);
+    } catch {
+      setCopyStatus("error");
+      window.setTimeout(() => setCopyStatus("idle"), 2500);
+    }
+  }, [publicCatalogPath]);
 
   return (
     <div className={styles.actions}>
@@ -34,11 +59,32 @@ export default function ProductsHeaderActions({ businessSlug }: ProductsHeaderAc
         Opcionales y extras
       </Button>
 
-      {catalogHref ? (
-        <Button href={catalogHref} className="admin-ghost-link" variant="ghost">
-          Ver catálogo
-        </Button>
-      ) : null}
+      <Button
+        href="/admin/products/preview"
+        className="admin-ghost-link"
+        variant="ghost"
+      >
+        Vista previa del catálogo
+      </Button>
+
+      <Button
+        type="button"
+        className="admin-ghost-link"
+        variant="ghost"
+        disabled={!publicCatalogPath}
+        aria-label={
+          publicCatalogPath
+            ? "Copiar link catálogo público"
+            : "Copiar link catálogo público no disponible: falta dirección pública"
+        }
+        onClick={handleCopyPublicLink}
+      >
+        {copyStatus === "copied"
+          ? "Link copiado"
+          : copyStatus === "error"
+            ? "No se pudo copiar"
+            : "Copiar link catálogo público"}
+      </Button>
     </div>
   );
 }

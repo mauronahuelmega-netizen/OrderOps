@@ -802,10 +802,35 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - Archivos: `lib/admin/pwa-manifest.ts`, `scripts/generate-admin-pwa-icons.mjs`, `public/icons/orderops-admin-*.png`, `docs/admin-pwa-branding-polish-1-app-name-icon.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
 
 
+### 2026-07-27 — ADMIN-CATALOG-PREVIEW-RE-QA-1 — Authenticated Re-QA After Cookie Polish
+
+- **QA / Admin Preview (docs-only)** ADMIN-CATALOG-PREVIEW-RE-QA-1 completada. Source: Max-Age 300, clear cookie tenant-safe, vaciar limpia preview keys. Runtime `:3012`: preview cart aislado; checkout preview con mensaje + “Confirmación deshabilitada”; público normal “Enviar pedido” sin bloqueo preview; CSP `frame-ancestors 'self'`. Admin autenticado / cookie DevTools / clear al vaciar UNVERIFIED. Estado: **READY WITH NON-BLOCKING QA DEBT**. Doc: `docs/admin-catalog-preview-re-qa-1.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-DEPLOY-1**. Sin código, commit, push, deploy ni pedidos.
+
+### 2026-07-27 — ADMIN-CATALOG-PREVIEW-COOKIE-POLISH-1 — Preview Cookie Lifetime & Cleanup Polish
+
+- **Frontend / Admin Preview** ADMIN-CATALOG-PREVIEW-COOKIE-POLISH-1 completada. Cookie `orderops-admin-catalog-preview`: Max-Age **300** (antes 3600); clear vía `clearCatalogPreviewCookieAction` (manageProducts + tenant match, path `/b/{slug}`, maxAge 0). “Vaciar carrito de prueba” limpia `orderops-preview-cart*` y expira cookie; no toca carrito público. Checkout guard intacto (`shouldBlockCatalogPreviewOrder` + UI). Resultado: **PASS WITH AUTH QA DEBT**. Doc: `docs/admin-catalog-preview-cookie-polish-1.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-RE-QA-1**. Sin commit/push/deploy ni pedidos.
+
+### 2026-07-27 — ADMIN-CATALOG-PREVIEW-QA-1 — Authenticated Browser QA & Release Readiness
+
+- **QA / Admin Preview (docs-only)** ADMIN-CATALOG-PREVIEW-QA-1 completada. Source QA y CSP `frame-ancestors 'self'` PASS. Runtime en `:3011` con `?orderopsPreview=1`: carrito aislado confirmado (preview keys cambian; public keys intactas); checkout muestra bloqueo y botón “Confirmación deshabilitada”; sin create_order/success/pedidos. Admin `/admin/products/preview` UNVERIFIED sin credenciales. Cookie preview Max-Age 1h = **P1** (bloquea pedidos del admin en mismo browser bajo `/b/{slug}`; no afecta customers anónimos). Estado: **READY AFTER COOKIE POLISH**. Doc: `docs/admin-catalog-preview-qa-1.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-COOKIE-POLISH-1**. Sin código, commit, push, deploy ni pedidos.
+
+### 2026-07-27 — ADMIN-CATALOG-PREVIEW-IMPL-SAFE-V1-1 — Implementación segura V1
+
+- **Frontend / Admin Preview** ADMIN-CATALOG-PREVIEW-IMPL-SAFE-V1-1 completada. Ruta `/admin/products/preview` con permiso `manageProducts`, iframe same-origin del catálogo, cookie httpOnly `orderops-admin-catalog-preview` (armado via Server Action antes del iframe), carrito aislado `orderops-preview-cart*` / `orderops-preview-cart-v2*`, checkout con submit bloqueado UI+server antes de `create_order`, CTA Productos dual (Vista previa + Copiar link), CSP `frame-ancestors 'self'` en `next.config.ts`. Sin success, sin RPC SQL, sin DB/RLS, sin Settings/Presence, sin sidebar. Resultado: **PASS WITH DEBT** (QA autenticado pendiente; cookie 1h puede bloquear pedidos reales en el mismo browser). Doc: `docs/admin-catalog-preview-impl-safe-v1-1.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-QA-1**. Sin commit/push/deploy.
+
+### 2026-07-27 — ADMIN-CATALOG-PREVIEW-SPEC-CLOSURE-1 — Product & Technical Spec Closure
+
+- **Spec / Admin Preview (docs-only)** ADMIN-CATALOG-PREVIEW-SPEC-CLOSURE-1 completada. Decisiones de producto cerradas para la Vista previa del catálogo: ruta `/admin/products/preview`, permiso `manageProducts`, iframe same-origin del catálogo real, carrito aislado `orderops-preview-cart*` / `orderops-preview-cart-v2*`, checkout visual con bloqueo UI+server de `create_order`, sin success, CTA Productos dual (Vista previa + Copiar link), CSP `frame-ancestors 'self'`, preview mode verificable server-side (no solo query/slug client). Diferenciada de “Vista previa del cliente” (Product Customization). Estado: **PRODUCT SPEC DECISIONS CLOSED · READY FOR IMPLEMENTATION**. Doc: `docs/admin-catalog-preview-spec-closure-1.md`. Siguiente: fases IMPL (foundation / isolated-cart / checkout-guard) a decisión del usuario. Sin código, commit, push, deploy ni pedidos.
+
+### 2026-07-26 — ADMIN-CATALOG-PREVIEW-AUDIT-1 — Forensic Architecture & Product Audit
+
+- **Audit / Admin Preview (docs-only)** ADMIN-CATALOG-PREVIEW-AUDIT-1 completada. Propósito de la feature futura: vista previa móvil del catálogo público para administradores (hipótesis iframe same-origin). Estado: **READY WITH TECHNICAL CONDITIONS**. Invariantes: auth admin en `(protected)` layout (no middleware); slug desde `businessId`/join (nullable); catálogo en `/b/[slug]/catalogo`; carrito `orderops-cart` + `orderops-cart-v2` por `businessId` compartido same-origin; checkout → `create_order` real sin `preview_mode`; sin XFO/CSP framing en repo/prod; PWA scope `/admin` (iframe preserva shell; top-level `/b` lo abandona). Riesgos P0: pedidos reales, contaminación carrito, slug client-trust, framing abierto. Decisión pendiente: Product Owner (P0 pedidos/carrito/permiso/ubicación CTA/headers). Doc: `docs/admin-catalog-preview-audit-1-forensic-architecture.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-SPEC-CLOSURE-1**. Sin código, commit, push, deploy ni pedidos.
+
 ### 2026-07-24 — ADMIN-PWA-ICON-CONSISTENCY-1 — Admin PWA icon web branding consistency
 
 - **Frontend / Admin PWA** ADMIN-PWA-ICON-CONSISTENCY-1 completada. Se alinearon los iconos instalables del admin con la marca web en `public/icon.png` (anillos OO de pestaña), eliminando el fallback del generador que dibujaba wordmark **Ops** sobre panel índigo. El script `generate-admin-pwa-icons.mjs` ahora compone PNG desde la fuente 192×192 con upscale a 512 (deuda de resolución de fuente). `name`/`short_name` OrderOps y `start_url`/`scope`/`id` `/admin` sin cambio. Sin SW/offline. Sin cambios auth/admin/catalog/cart/checkout/pricing/stock/DB/RLS/actions/pedidos. Resultado: **PASS WITH ICON SOURCE RESOLUTION AND DEVICE QA DEBT**.
 - Archivos: `scripts/generate-admin-pwa-icons.mjs`, `public/icons/orderops-admin-*.png`, `docs/admin-pwa-icon-consistency-1-real-branding.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
+
 ### 2026-07-19 â€” PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 â€” Product & Category Hierarchy Premium Polish
 
 - **Frontend / Admin UX** PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 ejecutada. Se puliÃ³ la jerarquÃ­a visual de Por producto y Por categorÃ­a dentro del admin de Product Customization, mejorando headers, agrupaciÃ³n de informaciÃ³n, empty states, presentaciÃ³n de excepciones y consistencia con las tabs compactas. No se modificÃ³ DB, RLS, actions, preview mapper, checkout, cart, stock ni pedidos. Resultado: **PASS WITH HIERARCHY DEBT**.

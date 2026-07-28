@@ -17,9 +17,11 @@ import {
   selectionStateFromCartParent,
   setLegacyProductQuantity,
   setV2ParentQuantity,
+  type CartStorageScope,
   type LocalCartItem,
   type LocalCartItemV2
 } from "@/lib/cart/local";
+import { buildCatalogPreviewPath } from "@/lib/admin/catalog-preview-shared";
 import CartBar from "@/components/public/catalog/cart-bar";
 import CartSheet from "@/components/public/catalog/cart-sheet";
 import CategoryNav from "@/components/public/catalog/category-nav";
@@ -39,6 +41,7 @@ type CatalogClientProps = {
   products: PublicProduct[];
   slug: string;
   customizationEnabled?: boolean;
+  isCatalogPreview?: boolean;
 };
 
 type ResolvedTheme = "light" | "dark";
@@ -60,9 +63,11 @@ export default function CatalogClient({
   categories,
   products,
   slug,
-  customizationEnabled = false
+  customizationEnabled = false,
+  isCatalogPreview = false
 }: CatalogClientProps) {
   const router = useRouter();
+  const cartScope: CartStorageScope = isCatalogPreview ? "preview" : "public";
   const [cartItems, setCartItems] = useState<LocalCartItem[]>([]);
   const [cartHydrated, setCartHydrated] = useState(false);
   const [isCartSheetOpen, setIsCartSheetOpen] = useState(false);
@@ -171,7 +176,7 @@ export default function CatalogClient({
   }
 
   useEffect(() => {
-    const loaded = loadUnifiedCartItems(business.id).filter((item) => {
+    const loaded = loadUnifiedCartItems(business.id, cartScope).filter((item) => {
       if ("schemaVersion" in item && item.schemaVersion === 2) {
         return productMap.has(item.productId);
       }
@@ -179,7 +184,7 @@ export default function CatalogClient({
     });
     setCartItems(loaded);
     setCartHydrated(true);
-  }, [business.id, productMap]);
+  }, [business.id, cartScope, productMap]);
 
   useEffect(() => {
     if (!cartHydrated) {
@@ -187,11 +192,11 @@ export default function CatalogClient({
     }
 
     try {
-      persistUnifiedCartItems(business.id, cartItems);
+      persistUnifiedCartItems(business.id, cartItems, cartScope);
     } catch {
       // localStorage may be unavailable; keep in-memory cart.
     }
-  }, [business.id, cartHydrated, cartItems]);
+  }, [business.id, cartHydrated, cartItems, cartScope]);
 
   useEffect(() => {
     if (selectedCategoryId || categoriesWithProducts.length === 0) {
@@ -314,7 +319,11 @@ export default function CatalogClient({
 
   function handleCheckoutFromSheet() {
     setIsCartSheetOpen(false);
-    router.push(`/b/${slug}/checkout`);
+    router.push(
+      isCatalogPreview
+        ? buildCatalogPreviewPath(slug, "checkout")
+        : `/b/${slug}/checkout`
+    );
   }
 
   const businessStyles = {

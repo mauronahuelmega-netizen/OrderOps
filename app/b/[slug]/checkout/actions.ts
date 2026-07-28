@@ -1,6 +1,10 @@
 "use server";
 
 import {
+  CATALOG_PREVIEW_ORDER_BLOCKED_MESSAGE,
+  shouldBlockCatalogPreviewOrder
+} from "@/lib/admin/catalog-preview";
+import {
   getScheduledDeliveryDateError,
   normalizeScheduledDeliveryRules
 } from "@/lib/business/scheduled-delivery-rules";
@@ -23,6 +27,8 @@ export type CreatePublicCheckoutOrderInput = {
   deliveryMethod: "delivery" | "pickup";
   address?: string | null;
   notes?: string | null;
+  /** Client-declared preview flag (defense-in-depth; cookie is primary). */
+  isPreview?: boolean;
   /** @deprecated Prefer `cart`. Kept for transitional callers. */
   items?: Array<{
     productId: string;
@@ -63,6 +69,15 @@ export async function createPublicCheckoutOrderAction(
 
     if (!business) {
       return { ok: false, error: "No pudimos crear el pedido. Intentá nuevamente." };
+    }
+
+    const blockPreviewOrder = await shouldBlockCatalogPreviewOrder({
+      businessId: business.id,
+      clientDeclaredPreview: input.isPreview === true
+    });
+
+    if (blockPreviewOrder) {
+      return { ok: false, error: CATALOG_PREVIEW_ORDER_BLOCKED_MESSAGE };
     }
 
     const acceptingOrders = await isBusinessAcceptingPublicOrders(business.id);

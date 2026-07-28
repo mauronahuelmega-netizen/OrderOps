@@ -18,10 +18,10 @@ import {
   buildHierarchicalCartRows,
   getCartItemCount,
   getCartItemsTotal,
-  getCartStorageKey,
-  getCartV2StorageKey,
+  getCartStorageKeys,
   isLocalCartItemV2,
   loadUnifiedCartItems,
+  type CartStorageScope,
   type LocalCartItem
 } from "@/lib/cart/local";
 import { formatPublicCatalogCurrency } from "@/lib/product-customization/public-shared";
@@ -29,11 +29,16 @@ import {
   UPSELL_ASSOCIATED_LABEL,
   formatUpsellAssociatedLine
 } from "@/lib/product-customization/upsell-copy";
+import {
+  CATALOG_PREVIEW_ORDER_BLOCKED_MESSAGE,
+  buildCatalogPreviewPath
+} from "@/lib/admin/catalog-preview-shared";
 import { createPublicCheckoutOrderAction } from "@/app/b/[slug]/checkout/actions";
 
 type CheckoutClientProps = {
   business: PublicBusiness;
   slug: string;
+  isCatalogPreview?: boolean;
 };
 
 type CheckoutFormState = {
@@ -54,19 +59,26 @@ const initialFormState: CheckoutFormState = {
   notes: ""
 };
 
-export default function CheckoutClient({ business, slug }: CheckoutClientProps) {
+export default function CheckoutClient({
+  business,
+  slug,
+  isCatalogPreview = false
+}: CheckoutClientProps) {
   const router = useRouter();
+  const cartScope: CartStorageScope = isCatalogPreview ? "preview" : "public";
   const [unifiedCartItems, setUnifiedCartItems] = useState<LocalCartItem[]>([]);
   const [formState, setFormState] = useState<CheckoutFormState>(initialFormState);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const storageKey = getCartStorageKey(business.id);
-  const storageV2Key = getCartV2StorageKey(business.id);
+  const storageKeys = getCartStorageKeys(business.id, cartScope);
+  const catalogHref = isCatalogPreview
+    ? buildCatalogPreviewPath(slug, "catalogo")
+    : `/b/${slug}/catalogo`;
 
   useEffect(() => {
-    setUnifiedCartItems(loadUnifiedCartItems(business.id));
-  }, [business.id, storageKey, storageV2Key]);
+    setUnifiedCartItems(loadUnifiedCartItems(business.id, cartScope));
+  }, [business.id, cartScope, storageKeys.legacy, storageKeys.v2]);
 
   const cartRows = useMemo(
     () => buildHierarchicalCartRows(unifiedCartItems),
@@ -141,6 +153,12 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
     event.preventDefault();
     setErrorMessage(null);
     setStatusMessage(null);
+
+    if (isCatalogPreview) {
+      setErrorMessage(CATALOG_PREVIEW_ORDER_BLOCKED_MESSAGE);
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -149,7 +167,7 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
         return;
       }
 
-      const latestUnified = loadUnifiedCartItems(business.id);
+      const latestUnified = loadUnifiedCartItems(business.id, cartScope);
       if (latestUnified.length === 0) {
         setErrorMessage("Tu carrito está vacío.");
         return;
@@ -203,7 +221,8 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
             ? formState.address.trim()
             : null,
         notes: formState.notes.trim() ? formState.notes.trim() : null,
-        cart
+        cart,
+        isPreview: false
       });
 
       if (!result.ok) {
@@ -221,8 +240,8 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
         // Push delivery is best-effort. Never block checkout success on this call.
       });
 
-      window.localStorage.removeItem(storageKey);
-      window.localStorage.removeItem(storageV2Key);
+      window.localStorage.removeItem(storageKeys.legacy);
+      window.localStorage.removeItem(storageKeys.v2);
       router.push(`/b/${slug}/success?order_id=${encodeURIComponent(orderId)}`);
     } catch {
       setErrorMessage("No pudimos crear el pedido. Intentá nuevamente.");
@@ -248,7 +267,7 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
               <p>Para continuar con el pedido, primero agregá productos desde el catálogo.</p>
             </div>
 
-            <Link className="checkout-empty-button" href={`/b/${slug}/catalogo`}>
+            <Link className="checkout-empty-button" href={catalogHref}>
               Volver al catálogo
             </Link>
           </Card>
@@ -264,7 +283,7 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
           <p className="catalog-eyebrow">Checkout</p>
           <h1>{business.name}</h1>
         </div>
-        <Link className="checkout-backlink" href={`/b/${slug}/catalogo`}>
+        <Link className="checkout-backlink" href={catalogHref}>
           Volver al catálogo
         </Link>
       </header>
@@ -277,7 +296,13 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
           </div>
 
           <form className="checkout-form" onSubmit={handleSubmit}>
-            {!onDemandModeActive ? (
+            {isCatalogPreview ? (
+              <p className="checkout-message checkout-message--error" role="status">
+                {CATALOG_PREVIEW_ORDER_BLOCKED_MESSAGE}
+              </p>
+            ) : null}
+
+            {!onDemandModeActive && !isCatalogPreview ? (
               <p className="checkout-message checkout-message--error" role="status">
                 {ordersClosedMessage}
               </p>
@@ -415,9 +440,13 @@ export default function CheckoutClient({ business, slug }: CheckoutClientProps) 
               type="submit"
               className="checkout-submit"
               variant="primary"
-              disabled={isSubmitting || !onDemandModeActive}
+              disabled={isSubmitting || !onDemandModeActive || isCatalogPreview}
             >
-              {isSubmitting ? "Guardando..." : "Enviar pedido"}
+              {isCatalogPreview
+                ? "Confirmación deshabilitada"
+                : isSubmitting
+                  ? "Guardando..."
+                  : "Enviar pedido"}
             </Button>
           </form>
         </Card>
