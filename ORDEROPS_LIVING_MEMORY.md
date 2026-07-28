@@ -802,6 +802,10 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - Archivos: `lib/admin/pwa-manifest.ts`, `scripts/generate-admin-pwa-icons.mjs`, `public/icons/orderops-admin-*.png`, `docs/admin-pwa-branding-polish-1-app-name-icon.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
 
 
+### 2026-07-27 — ADMIN-CATALOG-PREVIEW-DEPLOY-1 — Controlled Deploy & Production Smoke
+
+- **Deploy / Admin Preview** ADMIN-CATALOG-PREVIEW-DEPLOY-1 completada. Commit `c4b3e18` (*Add safe admin catalog preview*) pushed a `main`; producción https://orderops.vercel.app con CSP `frame-ancestors 'self'`. Smoke: preview cart aislado; checkout preview bloqueado; público “Enviar pedido”; admin auth/cookie DevTools UNVERIFIED. Estado: **DEPLOYED WITH NON-BLOCKING QA DEBT**. Doc: `docs/admin-catalog-preview-deploy-1.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-HANDOFF-1**. Sin DB/RLS/RPC/pedidos/rollback.
+
 ### 2026-07-27 — ADMIN-CATALOG-PREVIEW-RE-QA-1 — Authenticated Re-QA After Cookie Polish
 
 - **QA / Admin Preview (docs-only)** ADMIN-CATALOG-PREVIEW-RE-QA-1 completada. Source: Max-Age 300, clear cookie tenant-safe, vaciar limpia preview keys. Runtime `:3012`: preview cart aislado; checkout preview con mensaje + “Confirmación deshabilitada”; público normal “Enviar pedido” sin bloqueo preview; CSP `frame-ancestors 'self'`. Admin autenticado / cookie DevTools / clear al vaciar UNVERIFIED. Estado: **READY WITH NON-BLOCKING QA DEBT**. Doc: `docs/admin-catalog-preview-re-qa-1.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-DEPLOY-1**. Sin código, commit, push, deploy ni pedidos.

@@ -1,4 +1,16 @@
-﻿## Registro — ADMIN-CATALOG-PREVIEW-RE-QA-1 (2026-07-27)
+﻿## Registro — ADMIN-CATALOG-PREVIEW-DEPLOY-1 (2026-07-27)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-DEPLOY-1 — Controlled Deploy & Production Smoke  
+**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Resumen:** Commit `c4b3e18` pushed a `main`; producción live en https://orderops.vercel.app con CSP `frame-ancestors 'self'`. Smoke público: carrito preview aislado + checkout bloqueado; público normal “Enviar pedido”. Admin auth / cookie DevTools UNVERIFIED. Sin pedidos / DB / RLS / RPC.
+
+- Doc: `docs/admin-catalog-preview-deploy-1.md`
+- **Próximo:** ADMIN-CATALOG-PREVIEW-HANDOFF-1
+- **Sin:** migraciones, pedidos reales, rollback
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-RE-QA-1 (2026-07-27)
 
 **Fase:** ADMIN-CATALOG-PREVIEW-RE-QA-1 — Authenticated Re-QA After Cookie Polish  
 **Estado:** READY WITH NON-BLOCKING QA DEBT  
