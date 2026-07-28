@@ -11,15 +11,16 @@ export default async function AdminCatalogPreviewPage() {
 
   return (
     <AdminPageLayout size="operational">
-      <AdminPageHeader
-        variant="operational"
-        eyebrow="Catálogo"
-        title="Vista previa del catálogo"
-        description="Probá la experiencia móvil del catálogo público sin confirmar pedidos reales."
-      />
-
       {!hasValidSlug || !businessSlug ? (
-        <CatalogPreviewShell mode="empty" />
+        <>
+          <AdminPageHeader
+            variant="operational"
+            eyebrow="Catálogo"
+            title="Vista previa del catálogo"
+            description="Probá la experiencia móvil del catálogo público sin confirmar pedidos reales."
+          />
+          <CatalogPreviewShell mode="empty" />
+        </>
       ) : (
         <CatalogPreviewShell
           mode="preview"

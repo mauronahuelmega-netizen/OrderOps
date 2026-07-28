@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import AdminPageHeader from "@/components/admin/admin-page-header";
 import Button from "@/components/ui/Button";
 import { useAdminToast } from "@/components/admin/admin-toast-provider";
 import {
@@ -258,6 +259,14 @@ function CatalogPreviewActiveShell({
     <div className={styles.shell}>
       <div className={styles.layout}>
         <div className={styles.contentColumn}>
+          <AdminPageHeader
+            className={styles.pageHeader}
+            variant="operational"
+            eyebrow="Catálogo"
+            title="Vista previa del catálogo"
+            description="Probá la experiencia móvil del catálogo público sin confirmar pedidos reales."
+          />
+
           <section className={styles.safety} aria-labelledby="catalog-preview-safety-title">
             <p className={styles.safetyEyebrow}>Modo seguro</p>
             <h2 id="catalog-preview-safety-title" className={styles.safetyTitle}>

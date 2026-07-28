@@ -1,4 +1,32 @@
-﻿## Registro — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-DEPLOY-1 (2026-07-28)
+﻿## Registro — ADMIN-CATALOG-PREVIEW-SHELL-WIDTH-PARITY-FIX-1 (2026-07-28)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-SHELL-WIDTH-PARITY-FIX-1 — Products Page Width Parity  
+**Estado:** PASS  
+**Resumen:** Se quitó `max-width: 1360px` del shell de preview para llenar el ancho operational (`page-container` 1600px, igual que `/admin/products`). Header left 104 / shell width 1289 @1440 = paridad Products. Rail izquierdo 560px y phone centrado intactos. Solo CSS.
+
+- Doc: `docs/admin-catalog-preview-shell-width-parity-fix-1.md`
+- Código: `catalog-preview-shell.module.css`
+- CLI: `tsc` PASS · `build` PASS · lint FAIL preexistente
+- **Próximo:** ADMIN-CATALOG-PREVIEW-FINAL-QA-DEVICE-1 (tras commit/push autorizado)
+- **Sin:** commit, push, deploy, DB, cookie, CSP, guard, mobile-feel logic
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-2 (2026-07-28)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-2 — Header Alignment & Left Column Width Polish  
+**Estado:** PASS  
+**Resumen:** Header movido dentro de la columna izquierda del grid (phone top Δ=0 vs header). Rail izquierdo `max-width: 560px` con eje compartido header/safety/acciones/checklist. Phone sigue centrado en mitad derecha; sticky ≥1024; mobile una columna. Layout-only; sin commit/push/deploy.
+
+- Doc: `docs/admin-catalog-preview-shell-layout-qa-fix-2.md`
+- Código: `catalog-preview-shell.*`, `app/admin/(protected)/products/preview/page.tsx`
+- CLI: `tsc` PASS · `build` PASS · lint FAIL preexistente
+- **Próximo:** ADMIN-CATALOG-PREVIEW-FINAL-QA-DEVICE-1 (tras commit/push autorizado)
+- **Sin:** commit, push, deploy, DB, cookie, CSP, guard, mobile-feel logic
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-DEPLOY-1 (2026-07-28)
 
 **Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-DEPLOY-1 — Controlled Deploy for Mobile Feel + Shell Polish  
 **Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  
