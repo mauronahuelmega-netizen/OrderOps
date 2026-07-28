@@ -1,4 +1,18 @@
-﻿## Registro — ADMIN-CATALOG-PREVIEW-SHELL-WIDTH-PARITY-FIX-1 (2026-07-28)
+﻿## Registro — ADMIN-CATALOG-PREVIEW-LAYOUT-FINAL-DEPLOY-1 (2026-07-28)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-LAYOUT-FINAL-DEPLOY-1 — Controlled Deploy for Final Preview Layout Polish  
+**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Resumen:** Commit `0dce5b3` en `main` (LAYOUT-FIX-2 + WIDTH-PARITY). Live en https://orderops.vercel.app. Paridad Products (container 1600 / header left 104 / shell max-width none). Smoke: layout, clear-cart, checkout guard, público, customizations/settings PASS. P3 residual (device touch, clipboard, press, momentum automation, lint).
+
+- Doc: `docs/admin-catalog-preview-layout-final-deploy-1.md`
+- Commit: `0dce5b3` · Push: `origin/main` · Deploy: live
+- CLI: `tsc` PASS · `build` PASS · lint FAIL preexistente
+- **Próximo:** ADMIN-CATALOG-PREVIEW-FINAL-QA-DEVICE-1
+- **Sin:** migraciones, Supabase, pedidos, re-deploy mobile-feel
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-SHELL-WIDTH-PARITY-FIX-1 (2026-07-28)
 
 **Fase:** ADMIN-CATALOG-PREVIEW-SHELL-WIDTH-PARITY-FIX-1 — Products Page Width Parity  
 **Estado:** PASS  

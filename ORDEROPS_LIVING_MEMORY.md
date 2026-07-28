@@ -802,6 +802,10 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - Archivos: `lib/admin/pwa-manifest.ts`, `scripts/generate-admin-pwa-icons.mjs`, `public/icons/orderops-admin-*.png`, `docs/admin-pwa-branding-polish-1-app-name-icon.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
 
 
+### 2026-07-28 — ADMIN-CATALOG-PREVIEW-LAYOUT-FINAL-DEPLOY-1 — Controlled Deploy for Final Preview Layout Polish
+
+- **Deploy / Admin Preview UX** ADMIN-CATALOG-PREVIEW-LAYOUT-FINAL-DEPLOY-1 completada. Commit `0dce5b3` (“Polish admin catalog preview layout”) en `main`: LAYOUT-QA-FIX-2 + WIDTH-PARITY-FIX-1. Push `origin/main`; prod LIVE (`shellMaxNone`, header in contentColumn, sin 1360). Paridad Products @1440 (container 1600, left 104). Smoke: clear-cart preview `[]` / public intactas, checkout “Confirmación deshabilitada”, público sin pan + “Enviar pedido”, customizations/settings OK, CSP `frame-ancestors 'self'`. Estado: **DEPLOYED WITH NON-BLOCKING QA DEBT**. Doc: `docs/admin-catalog-preview-layout-final-deploy-1.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-FINAL-QA-DEVICE-1**. Sin migraciones/Supabase/pedidos.
+
 ### 2026-07-28 — ADMIN-CATALOG-PREVIEW-SHELL-WIDTH-PARITY-FIX-1 — Products Page Width Parity
 
 - **Frontend / Admin Preview UX (layout-only)** ADMIN-CATALOG-PREVIEW-SHELL-WIDTH-PARITY-FIX-1 completada. Causa: `.shell { max-width: 1360px }` estrecho vs Products (`admin-shell__page-container:has(.admin-page-layout--operational)` → 1600px). Fix: shell `max-width: none; width: 100%`; gap desktop `clamp(48px, 6vw, 96px)`. Paridad @1440: container 1600, layout/shell 1289, header left 104. Phone centrado / header Δ0 / pad 16/16 / sticky OK. Estado: **PASS**. Doc: `docs/admin-catalog-preview-shell-width-parity-fix-1.md`. Siguiente: commit/push → **ADMIN-CATALOG-PREVIEW-FINAL-QA-DEVICE-1**. Sin commit/push/deploy ni DB/CSP/cookie/guard.
