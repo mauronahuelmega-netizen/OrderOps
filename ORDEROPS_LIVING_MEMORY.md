@@ -802,6 +802,26 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - Archivos: `lib/admin/pwa-manifest.ts`, `scripts/generate-admin-pwa-icons.mjs`, `public/icons/orderops-admin-*.png`, `docs/admin-pwa-branding-polish-1-app-name-icon.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
 
 
+### 2026-07-28 — PUBLIC-CATALOG-PERFORMANCE-FIX-1 — Public Catalog Server Calls & Render Cost Reduction
+
+- **Frontend / Public Catalog** PUBLIC-CATALOG-PERFORMANCE-FIX-1: loader `getPublicCatalogPageData`; dedupe `business_settings`/`onDemandModeActive`/`product_customization_enabled` en path público; summaries con products preloaded + sin waterfall suggested en page; `memo(ProductCard)` + callbacks estables. Estado: **PASS WITH RESIDUAL PERFORMANCE DEBT** (corpus groups/options overfetch, `noStore`, scroll jank, preview hooks graph, image transforms infra). Doc: `docs/public-catalog-performance-fix-1.md`. Siguiente: **PUBLIC-CATALOG-CACHE-STRATEGY-1**. Sin DB/RLS/RPC/cache/checkout/commit/push.
+
+### 2026-07-28 — PUBLIC-CATALOG-IMAGE-TRANSFORMS-QA-FIX-1 — Supabase Image Transformations QA/Fix for Public Catalog
+
+- **QA/Fix / Public Catalog Images** PUBLIC-CATALOG-IMAGE-TRANSFORMS-QA-FIX-1: curl object **200** vs render/image **403 FeatureNotEnabled** (tenant). Loader OK; fix `PublicStorageImage` reset fallback on `src`. Estado: **PASS WITH INFRA IMAGE DEBT**. Acción externa: habilitar Image Transformations en Supabase. Doc: `docs/public-catalog-image-transforms-qa-fix-1.md`. Siguiente: **PUBLIC-CATALOG-PERFORMANCE-FIX-1**.
+
+### 2026-07-28 — PUBLIC-CATALOG-IMAGE-OPTIMIZATION-1 — Public Catalog Image Loading & Rendering Optimization
+
+- **Frontend / Public Catalog** PUBLIC-CATALOG-IMAGE-OPTIMIZATION-1: migración `<img>` → `next/image` en cover, logo header, product thumbs y detail modal vía `PublicStorageImage` + `getSupabaseImageLoader` (fallback object). Thumbs lazy/sized; cover priority. Estado: **PASS WITH MINOR IMAGE DEBT** (transforms fallback, landing imgs, checkout/preview smoke UNVERIFIED). Doc: `docs/public-catalog-image-optimization-1.md`. Siguiente: **PUBLIC-CATALOG-PERFORMANCE-FIX-1**. Sin DB/RLS/RPC/cache/checkout/commit/push.
+
+### 2026-07-28 — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-HANDOFF-1 — Final Handoff for Admin Catalog Preview Mobile Feel
+
+- **Handoff / Admin Preview (docs-only)** Admin Catalog Preview cerrada: `/admin/products/preview` live con iframe real, cart preview aislado, checkout bloqueado, cookie 300s, clear-cart postMessage, mobile-feel desktop/mouse, shell premium y layout paridad Products. Estado final **FEATURE CLOSED — DEPLOYED WITH ACCEPTED DEVICE QA DEBT**. No DB/RLS/RPC/pedidos. Próximo opcional device hardware QA. Doc: `docs/admin-catalog-preview-mobile-feel-final-handoff-1.md`. Commits: `c4b3e18` · `5843fd9` · `0dce5b3` · HEAD docs `4dd5dce`.
+
+### 2026-07-28 — ADMIN-CATALOG-PREVIEW-FINAL-QA-DEVICE-1 — Real Device Final QA for Admin Catalog Preview
+
+- **QA / Admin Preview (docs-only)** ADMIN-CATALOG-PREVIEW-FINAL-QA-DEVICE-1 completada. Prod https://orderops.vercel.app @ HEAD docs `4dd5dce` (layout `0dce5b3`, mobile-feel `5843fd9`). Desktop smoke: preview shell+iframe, clear-cart visual 0, checkout preview bloqueado, público sin preview + “Enviar pedido”, CSP `frame-ancestors 'self'`, Products/Customizations/Settings OK, sin pedidos/migraciones/Supabase. Android Chrome / PWA / iOS **UNVERIFIED — device unavailable** (P2). Pan/cursor gated `pointerType === "mouse"`. Estado: **READY WITH DEVICE QA DEBT**. Doc: `docs/admin-catalog-preview-final-qa-device-1.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-HANDOFF-1** (o DEVICE-2). Sin código/deploy/commit/push.
+
 ### 2026-07-28 — ADMIN-CATALOG-PREVIEW-LAYOUT-FINAL-DEPLOY-1 — Controlled Deploy for Final Preview Layout Polish
 
 - **Deploy / Admin Preview UX** ADMIN-CATALOG-PREVIEW-LAYOUT-FINAL-DEPLOY-1 completada. Commit `0dce5b3` (“Polish admin catalog preview layout”) en `main`: LAYOUT-QA-FIX-2 + WIDTH-PARITY-FIX-1. Push `origin/main`; prod LIVE (`shellMaxNone`, header in contentColumn, sin 1360). Paridad Products @1440 (container 1600, left 104). Smoke: clear-cart preview `[]` / public intactas, checkout “Confirmación deshabilitada”, público sin pan + “Enviar pedido”, customizations/settings OK, CSP `frame-ancestors 'self'`. Estado: **DEPLOYED WITH NON-BLOCKING QA DEBT**. Doc: `docs/admin-catalog-preview-layout-final-deploy-1.md`. Siguiente: **ADMIN-CATALOG-PREVIEW-FINAL-QA-DEVICE-1**. Sin migraciones/Supabase/pedidos.

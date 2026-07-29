@@ -6,6 +6,7 @@ import {
   formatPublicCatalogCurrency,
   shouldShowPriceFrom
 } from "@/lib/product-customization/public-shared";
+import PublicStorageImage from "@/components/public/catalog/public-storage-image";
 
 type ProductDetailModalProps = {
   product: PublicProduct;
@@ -112,11 +113,15 @@ export default function ProductDetailModal({
 
           <div className="catalog-modal__media">
             {product.image_url ? (
-              <img
-                className="catalog-modal__image"
-                src={product.image_url}
-                alt={product.name}
-              />
+              <div className="catalog-modal__image-shell">
+                <PublicStorageImage
+                  className="catalog-modal__image"
+                  src={product.image_url}
+                  alt={product.name}
+                  fill
+                  sizes="(max-width: 640px) 92vw, 480px"
+                />
+              </div>
             ) : (
               <div className="catalog-modal__placeholder">Sin foto</div>
             )}

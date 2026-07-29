@@ -22,6 +22,8 @@ export type PublicBusiness = {
   is_active: boolean;
   name: string;
   on_demand_mode_active: boolean;
+  /** Fail-closed flag from business_settings (same request as other settings). */
+  product_customization_enabled: boolean;
   scheduled_cutoff_time: string;
   scheduled_max_days_in_advance: number;
   scheduled_min_lead_time_hours: number;
@@ -59,7 +61,7 @@ export async function getPublicBusinessBySlug(slug: string): Promise<PublicBusin
   const { data: settings, error: settingsError } = await serviceSupabase
     .from("business_settings")
     .select(
-      "on_demand_mode_active, scheduled_mode_active, scheduled_min_lead_time_hours, scheduled_max_days_in_advance, scheduled_cutoff_time, inactive_working_days"
+      "on_demand_mode_active, scheduled_mode_active, scheduled_min_lead_time_hours, scheduled_max_days_in_advance, scheduled_cutoff_time, inactive_working_days, product_customization_enabled"
     )
     .eq("business_id", data.id)
     .maybeSingle();
@@ -72,12 +74,15 @@ export async function getPublicBusinessBySlug(slug: string): Promise<PublicBusin
     });
   }
 
-  const acceptingOrders = await isBusinessAcceptingPublicOrders(data.id);
+  const acceptingOrders = await isBusinessAcceptingPublicOrders(data.id, {
+    onDemandModeActive: settings?.on_demand_mode_active ?? false
+  });
   const normalizedRules = normalizeScheduledDeliveryRules(settings);
 
   return {
     ...data,
     on_demand_mode_active: acceptingOrders,
+    product_customization_enabled: settings?.product_customization_enabled === true,
     scheduled_mode_active: settings?.scheduled_mode_active ?? false,
     scheduled_min_lead_time_hours:
       normalizedRules.scheduled_min_lead_time_hours ??

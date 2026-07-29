@@ -18,31 +18,43 @@ function isMissingStoreSessionsTableError(error: { code?: string; message?: stri
   );
 }
 
+type IsBusinessAcceptingPublicOrdersOptions = {
+  /** When provided, skips a second business_settings read (per-request dedupe). */
+  onDemandModeActive?: boolean;
+};
+
 /**
  * Public order acceptance aligned with create_order:
  * requires on_demand_mode_active=true, and an open store session when the
  * sessions table is available. Prevents UI false-positives when sessions are
  * open but the column RPC checks is still false.
  */
-export async function isBusinessAcceptingPublicOrders(businessId: string): Promise<boolean> {
+export async function isBusinessAcceptingPublicOrders(
+  businessId: string,
+  options?: IsBusinessAcceptingPublicOrdersOptions
+): Promise<boolean> {
   const supabase = createSupabaseServiceClient();
 
-  const { data: settings, error: settingsError } = await supabase
-    .from("business_settings")
-    .select("on_demand_mode_active")
-    .eq("business_id", businessId)
-    .maybeSingle();
+  let onDemandModeActive = options?.onDemandModeActive;
 
-  if (settingsError) {
-    console.error("[store-sessions:public] settings lookup failed", {
-      businessId,
-      code: settingsError.code,
-      message: settingsError.message
-    });
-    return false;
+  if (typeof onDemandModeActive !== "boolean") {
+    const { data: settings, error: settingsError } = await supabase
+      .from("business_settings")
+      .select("on_demand_mode_active")
+      .eq("business_id", businessId)
+      .maybeSingle();
+
+    if (settingsError) {
+      console.error("[store-sessions:public] settings lookup failed", {
+        businessId,
+        code: settingsError.code,
+        message: settingsError.message
+      });
+      return false;
+    }
+
+    onDemandModeActive = settings?.on_demand_mode_active ?? false;
   }
-
-  const onDemandModeActive = settings?.on_demand_mode_active ?? false;
 
   if (!onDemandModeActive) {
     return false;

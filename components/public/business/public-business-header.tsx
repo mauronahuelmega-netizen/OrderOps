@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "@/components/public/catalog/theme-toggle";
+import PublicStorageImage from "@/components/public/catalog/public-storage-image";
 import type { PublicBusiness } from "@/lib/business/public";
 
 type PublicBusinessHeaderProps = {
@@ -150,10 +151,13 @@ export default function PublicBusinessHeader({
           <Link href={`/b/${slug}`} className="public-business-header__brand">
             {business.logo_url ? (
               <div className="public-business-header__logo-frame">
-                <img
+                <PublicStorageImage
                   className="public-business-header__logo"
                   src={business.logo_url}
                   alt={`${business.name} logo`}
+                  width={64}
+                  height={64}
+                  sizes="64px"
                 />
               </div>
             ) : (
@@ -213,10 +217,13 @@ export default function PublicBusinessHeader({
             <div className="public-business-header__sheet-brand">
               {business.logo_url ? (
                 <div className="public-business-header__logo-frame">
-                  <img
+                  <PublicStorageImage
                     className="public-business-header__logo"
                     src={business.logo_url}
                     alt={`${business.name} logo`}
+                    width={64}
+                    height={64}
+                    sizes="64px"
                   />
                 </div>
               ) : (

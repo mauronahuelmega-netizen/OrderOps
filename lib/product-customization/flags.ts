@@ -2,6 +2,11 @@ import "server-only";
 
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
 
+type IsProductCustomizationEnabledOptions = {
+  /** When provided, skips a second business_settings read (per-request dedupe). */
+  productCustomizationEnabled?: boolean;
+};
+
 /**
  * Tenant rollout guard for Product Customization V1 (D8).
  *
@@ -12,8 +17,13 @@ import { createSupabaseServiceClient } from "@/lib/supabase/service";
  * Does not activate the flag — read-only.
  */
 export async function isProductCustomizationEnabled(
-  businessId: string
+  businessId: string,
+  options?: IsProductCustomizationEnabledOptions
 ): Promise<boolean> {
+  if (typeof options?.productCustomizationEnabled === "boolean") {
+    return options.productCustomizationEnabled;
+  }
+
   const normalizedBusinessId = businessId.trim();
 
   if (!normalizedBusinessId) {

@@ -2,7 +2,7 @@
 
 import type { CSSProperties } from "react";
 import dynamic from "next/dynamic";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import type { PublicBusiness } from "@/lib/business/public";
 import type { PublicCategory, PublicProduct } from "@/lib/catalog/public";
@@ -37,6 +37,7 @@ import type { CustomizationConfirmResult } from "@/components/public/catalog/cus
 import { usePreviewPointerPanScroll } from "@/components/public/catalog/use-preview-pointer-pan-scroll";
 import { usePreviewTouchCursor } from "@/components/public/catalog/use-preview-touch-cursor";
 import { productNeedsCustomizationModal } from "@/lib/product-customization/public-shared";
+import PublicStorageImage from "@/components/public/catalog/public-storage-image";
 import panStyles from "./catalog-preview-pan.module.css";
 
 const CustomizationModal = dynamic(
@@ -88,7 +89,6 @@ export default function CatalogClient({
   const [coverState, setCoverState] = useState<"idle" | "loaded" | "error">(
     business.cover_image_url ? "idle" : "error"
   );
-  const coverImageRef = useRef<HTMLImageElement | null>(null);
   const catalogScrollRef = useRef<HTMLElement | null>(null);
 
   usePreviewPointerPanScroll({
@@ -136,54 +136,125 @@ export default function CatalogClient({
   const cartCount = useMemo(() => getCartItemCount(cartItems), [cartItems]);
   const cartTotal = useMemo(() => getCartItemsTotal(cartItems), [cartItems]);
 
+  const quantityByProductId = useMemo(() => {
+    const map = new Map<string, number>();
+    for (const product of products) {
+      map.set(product.id, getLegacyQuantityForProduct(cartItems, product.id));
+    }
+    return map;
+  }, [cartItems, products]);
+
+  const requiresCustomizationByProductId = useMemo(() => {
+    const map = new Map<string, boolean>();
+    for (const product of products) {
+      if (!customizationEnabled) {
+        map.set(product.id, false);
+        continue;
+      }
+
+      const summary = product.customizationSummary;
+      if (!summary) {
+        map.set(product.id, false);
+        continue;
+      }
+
+      map.set(
+        product.id,
+        productNeedsCustomizationModal({
+          productId: product.id,
+          hasCustomizations: summary.hasCustomizations,
+          hasPaidCustomizations: summary.hasPaidCustomizations,
+          hasUpsell: summary.hasUpsell,
+          priceFrom: summary.priceFrom
+        })
+      );
+    }
+    return map;
+  }, [customizationEnabled, products]);
+
   const selectedProduct = selectedProductId ? productMap.get(selectedProductId) ?? null : null;
   const customizingProduct = customizationSession
     ? productMap.get(customizationSession.productId) ?? null
     : null;
 
   function productRequiresCustomization(product: PublicProduct) {
-    if (!customizationEnabled) {
-      return false;
-    }
-
-    const summary = product.customizationSummary;
-    if (!summary) {
-      return false;
-    }
-
-    return productNeedsCustomizationModal({
-      productId: product.id,
-      hasCustomizations: summary.hasCustomizations,
-      hasPaidCustomizations: summary.hasPaidCustomizations,
-      hasUpsell: summary.hasUpsell,
-      priceFrom: summary.priceFrom
-    });
+    return requiresCustomizationByProductId.get(product.id) ?? false;
   }
 
-  function openCustomizationModal(
-    product: PublicProduct,
-    options?: {
-      editingCartLineId?: string | null;
-      initialSelection?: CustomizationSession["initialSelection"];
-    }
-  ) {
-    setSelectedProductId(null);
-    setIsCartSheetOpen(false);
-    setCustomizationSession({
-      productId: product.id,
-      editingCartLineId: options?.editingCartLineId ?? null,
-      initialSelection: options?.initialSelection ?? null
-    });
-  }
+  const openCustomizationModal = useCallback(
+    (
+      product: PublicProduct,
+      options?: {
+        editingCartLineId?: string | null;
+        initialSelection?: CustomizationSession["initialSelection"];
+      }
+    ) => {
+      setSelectedProductId(null);
+      setIsCartSheetOpen(false);
+      setCustomizationSession({
+        productId: product.id,
+        editingCartLineId: options?.editingCartLineId ?? null,
+        initialSelection: options?.initialSelection ?? null
+      });
+    },
+    []
+  );
 
-  function handleAddProduct(product: PublicProduct) {
-    if (productRequiresCustomization(product)) {
-      openCustomizationModal(product);
-      return;
-    }
+  const handleOpenProduct = useCallback((productId: string) => {
+    setSelectedProductId(productId);
+  }, []);
 
-    setCartItems((current) => setLegacyProductQuantity(current, product, 1));
-  }
+  const handleAddProductById = useCallback(
+    (productId: string) => {
+      const product = productMap.get(productId);
+      if (!product) {
+        return;
+      }
+
+      if (requiresCustomizationByProductId.get(productId)) {
+        openCustomizationModal(product);
+        return;
+      }
+
+      setCartItems((current) => setLegacyProductQuantity(current, product, 1));
+    },
+    [openCustomizationModal, productMap, requiresCustomizationByProductId]
+  );
+
+  const handleIncrementProductById = useCallback(
+    (productId: string) => {
+      const product = productMap.get(productId);
+      if (!product) {
+        return;
+      }
+
+      if (requiresCustomizationByProductId.get(productId)) {
+        openCustomizationModal(product);
+        return;
+      }
+
+      setCartItems((current) => {
+        const quantity = getLegacyQuantityForProduct(current, productId);
+        return setLegacyProductQuantity(current, product, quantity + 1);
+      });
+    },
+    [openCustomizationModal, productMap, requiresCustomizationByProductId]
+  );
+
+  const handleDecrementProductById = useCallback(
+    (productId: string) => {
+      const product = productMap.get(productId);
+      if (!product) {
+        return;
+      }
+
+      setCartItems((current) => {
+        const quantity = getLegacyQuantityForProduct(current, productId);
+        return setLegacyProductQuantity(current, product, quantity - 1);
+      });
+    },
+    [productMap]
+  );
 
   function handleConfirmCustomizationSelection(result: CustomizationConfirmResult) {
     setCartItems((current) =>
@@ -348,22 +419,6 @@ export default function CatalogClient({
     setCoverState(business.cover_image_url ? "idle" : "error");
   }, [business.cover_image_url]);
 
-  useEffect(() => {
-    if (!business.cover_image_url) {
-      return;
-    }
-
-    const image = coverImageRef.current;
-
-    if (!image) {
-      return;
-    }
-
-    if (image.complete) {
-      setCoverState(image.naturalWidth > 0 ? "loaded" : "error");
-    }
-  }, [business.cover_image_url]);
-
   function handleCategorySelect(categoryId: string) {
     setSelectedCategoryId(categoryId);
     document.getElementById(`category-${categoryId}`)?.scrollIntoView({
@@ -434,13 +489,13 @@ export default function CatalogClient({
 
           {business.cover_image_url ? (
             <>
-              <img
-                ref={coverImageRef}
+              <PublicStorageImage
                 className="catalog-hero__cover"
                 src={business.cover_image_url}
-                alt={`${business.name} cover`}
-                loading="eager"
-                decoding="async"
+                alt={`Portada de ${business.name}`}
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, min(100vw, 1040px)"
                 onLoad={() => setCoverState("loaded")}
                 onError={() => setCoverState("error")}
               />
@@ -499,35 +554,20 @@ export default function CatalogClient({
                   </div>
 
                   <div className="catalog-product-list">
-                    {categoryProducts.map((product) => {
-                      const quantity = getLegacyQuantityForProduct(cartItems, product.id);
-                      const requiresCustomization = productRequiresCustomization(product);
-
-                      return (
-                        <ProductCard
-                          key={product.id}
-                          product={product}
-                          quantity={quantity}
-                          requiresCustomization={requiresCustomization}
-                          onOpen={() => setSelectedProductId(product.id)}
-                          onAdd={() => handleAddProduct(product)}
-                          onIncrement={() => {
-                            if (requiresCustomization) {
-                              openCustomizationModal(product);
-                              return;
-                            }
-                            setCartItems((current) =>
-                              setLegacyProductQuantity(current, product, quantity + 1)
-                            );
-                          }}
-                          onDecrement={() =>
-                            setCartItems((current) =>
-                              setLegacyProductQuantity(current, product, quantity - 1)
-                            )
-                          }
-                        />
-                      );
-                    })}
+                    {categoryProducts.map((product) => (
+                      <ProductCard
+                        key={product.id}
+                        product={product}
+                        quantity={quantityByProductId.get(product.id) ?? 0}
+                        requiresCustomization={
+                          requiresCustomizationByProductId.get(product.id) ?? false
+                        }
+                        onOpenProduct={handleOpenProduct}
+                        onAddProduct={handleAddProductById}
+                        onIncrementProduct={handleIncrementProductById}
+                        onDecrementProduct={handleDecrementProductById}
+                      />
+                    ))}
                   </div>
                 </section>
               );

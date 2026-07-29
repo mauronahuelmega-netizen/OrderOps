@@ -1,35 +1,37 @@
 "use client";
 
+import { memo, type KeyboardEvent } from "react";
 import type { PublicProduct } from "@/lib/catalog/public";
 import {
   formatPublicCatalogCurrency,
   shouldShowPriceFrom
 } from "@/lib/product-customization/public-shared";
+import PublicStorageImage from "@/components/public/catalog/public-storage-image";
 
 type ProductCardProps = {
   product: PublicProduct;
   quantity: number;
-  /** When true, hide legacy quantity controls and always route add through onAdd. */
+  /** When true, hide legacy quantity controls and always route add through onAddProduct. */
   requiresCustomization?: boolean;
-  onOpen: () => void;
-  onAdd: () => void;
-  onIncrement: () => void;
-  onDecrement: () => void;
+  onOpenProduct: (productId: string) => void;
+  onAddProduct: (productId: string) => void;
+  onIncrementProduct: (productId: string) => void;
+  onDecrementProduct: (productId: string) => void;
 };
 
-export default function ProductCard({
+function ProductCard({
   product,
   quantity,
   requiresCustomization = false,
-  onOpen,
-  onAdd,
-  onIncrement,
-  onDecrement
+  onOpenProduct,
+  onAddProduct,
+  onIncrementProduct,
+  onDecrementProduct
 }: ProductCardProps) {
-  function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
+  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
-      onOpen();
+      onOpenProduct(product.id);
     }
   }
 
@@ -55,16 +57,19 @@ export default function ProductCard({
         className="catalog-product-card__hit"
         role="button"
         tabIndex={0}
-        onClick={onOpen}
+        onClick={() => onOpenProduct(product.id)}
         onKeyDown={handleKeyDown}
         aria-label={`Ver ${product.name}`}
       >
         <div className="catalog-product-card__media">
           {product.image_url ? (
-            <img
+            <PublicStorageImage
               className="catalog-product-card__image"
               src={product.image_url}
               alt={product.name}
+              width={228}
+              height={216}
+              sizes="114px"
             />
           ) : (
             <div className="catalog-product-card__placeholder">Sin foto</div>
@@ -90,11 +95,11 @@ export default function ProductCard({
             aria-label={`Cantidad de ${product.name}`}
             onClick={(event) => event.stopPropagation()}
           >
-            <button type="button" onClick={onDecrement}>
+            <button type="button" onClick={() => onDecrementProduct(product.id)}>
               -
             </button>
             <span>{quantity}</span>
-            <button type="button" onClick={onIncrement}>
+            <button type="button" onClick={() => onIncrementProduct(product.id)}>
               +
             </button>
           </div>
@@ -104,7 +109,7 @@ export default function ProductCard({
             className="catalog-product-card__add-button"
             onClick={(event) => {
               event.stopPropagation();
-              onAdd();
+              onAddProduct(product.id);
             }}
           >
             Agregar
@@ -116,7 +121,7 @@ export default function ProductCard({
           className="catalog-product-card__edit-link"
           onClick={(event) => {
             event.stopPropagation();
-            onOpen();
+            onOpenProduct(product.id);
           }}
         >
           Ver detalle
@@ -126,3 +131,6 @@ export default function ProductCard({
   );
 }
 
+ProductCard.displayName = "ProductCard";
+
+export default memo(ProductCard);

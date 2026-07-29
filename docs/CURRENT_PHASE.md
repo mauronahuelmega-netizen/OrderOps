@@ -1,4 +1,73 @@
-﻿## Registro — ADMIN-CATALOG-PREVIEW-LAYOUT-FINAL-DEPLOY-1 (2026-07-28)
+﻿## Registro — PUBLIC-CATALOG-PERFORMANCE-FIX-1 (2026-07-28)
+
+**Fase:** PUBLIC-CATALOG-PERFORMANCE-FIX-1 — Public Catalog Server Calls & Render Cost Reduction  
+**Estado:** PASS WITH RESIDUAL PERFORMANCE DEBT  
+**Resumen:** Se redujo el costo server/render del catálogo público sin cache persistente: dedupe de settings/flags/products donde fue seguro, summaries de customization usando datos ya cargados, menor waterfall y ProductCard/CatalogClient ajustados para reducir re-renders por carrito. Sin DB/RLS/RPC/cache/revalidation/checkout/carrito schema/preview admin.  
+- Doc: `docs/public-catalog-performance-fix-1.md`
+- Código: `lib/catalog/public-page-data.ts`, `lib/business/public.ts`, `lib/store-sessions/public.server.ts`, `lib/product-customization/{flags,public}.ts`, `components/public/catalog/{public-catalog-page,catalog-client,product-card}.tsx`
+- CLI: `tsc` PASS · `build` PASS · lint histórico
+- **Próximo:** PUBLIC-CATALOG-CACHE-STRATEGY-1 o PUBLIC-CATALOG-SCROLL-JANK-POLISH-1
+- **Sin:** DB, RLS, RPC, cache persistente, checkout, pedidos, deploy, commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-IMAGE-TRANSFORMS-QA-FIX-1 (2026-07-28)
+
+**Fase:** PUBLIC-CATALOG-IMAGE-TRANSFORMS-QA-FIX-1 — Supabase Image Transformations QA/Fix for Public Catalog  
+**Estado:** PASS WITH INFRA IMAGE DEBT  
+**Resumen:** Se auditó/corrigió el path de Supabase Image Transformations usado por `next/image` en el catálogo público. Object URLs 200; render/image 403 FeatureNotEnabled (tenant). Loader URL correcto; fix menor: reset de fallback en `PublicStorageImage` al cambiar `src`. Fallback seguro; camino principal sigue siendo transform. Sin DB/RLS/RPC/cache/checkout/carrito/preview admin.
+
+- Doc: `docs/public-catalog-image-transforms-qa-fix-1.md`
+- Código: `components/public/catalog/public-storage-image.tsx`
+- CLI: `tsc` PASS · `build` PASS · lint histórico
+- **Próximo:** PUBLIC-CATALOG-PERFORMANCE-FIX-1
+- **Sin:** DB, RLS, RPC, cache, checkout, pedidos, deploy, commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-IMAGE-OPTIMIZATION-1 (2026-07-28)
+
+**Fase:** PUBLIC-CATALOG-IMAGE-OPTIMIZATION-1 — Public Catalog Image Loading & Rendering Optimization  
+**Estado:** PASS WITH MINOR IMAGE DEBT  
+**Resumen:** Se migraron imágenes públicas críticas del catálogo de `<img>` raw a `next/image` usando la infraestructura existente de Supabase loader. Product thumbs lazy/sized, cover priority/sized, logo sized y modal detail optimizado. Sin cambios de DB/RLS/RPC/cache/checkout/carrito/preview admin. Objetivo: reducir bytes, decode y jank percibido. Deuda: transforms fallback full-res, landing `<img>`, smoke checkout/preview UNVERIFIED.
+
+- Doc: `docs/public-catalog-image-optimization-1.md`
+- Código: `public-storage-image.tsx`, `product-card.tsx`, `product-detail-modal.tsx`, `catalog-client.tsx`, `public-business-header.tsx`, `globals.css` (wrappers)
+- CLI: `tsc` PASS · `build` PASS · lint histórico
+- **Próximo:** PUBLIC-CATALOG-PERFORMANCE-FIX-1
+- **Sin:** DB, RLS, RPC, cache, checkout, pedidos, deploy, commit/push
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-HANDOFF-1 (2026-07-28)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-HANDOFF-1 — Final Handoff for Admin Catalog Preview Mobile Feel  
+**Estado:** FEATURE CLOSED — DEPLOYED WITH ACCEPTED DEVICE QA DEBT  
+**Resumen:** Se cerró formalmente la Vista previa del catálogo con mobile-feel y shell premium. Producción live en /admin/products/preview: iframe real, carrito preview aislado, checkout bloqueado UI+server, cookie 300s, clear-cart postMessage+ACK/fallback, cursor/momentum/anti-selection solo preview/mouse, layout final con paridad Products, CSP self. Sin DB/RLS/RPC/pedidos. Deuda aceptada: Android/PWA/iOS device QA P2 + polish P3.
+
+- Doc: `docs/admin-catalog-preview-mobile-feel-final-handoff-1.md`
+- Commits: `c4b3e18` · `5843fd9` · `0dce5b3` · HEAD docs `4dd5dce`
+- CLI: `tsc` PASS
+- **Próximo opcional:** FINAL-QA-DEVICE-2 si se exige hardware real; si no, feature cerrada.
+- **Sin:** código, CSS, deploy, commit, push, DB, pedidos
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-FINAL-QA-DEVICE-1 (2026-07-28)
+
+**Fase:** ADMIN-CATALOG-PREVIEW-FINAL-QA-DEVICE-1 — Real Device Final QA for Admin Catalog Preview  
+**Estado:** READY WITH DEVICE QA DEBT  
+**Resumen:** QA-only prod. Desktop: preview layout, clear-cart → 0, checkout “Confirmación deshabilitada”, público “Enviar pedido”, CSP `frame-ancestors 'self'`, Products/Customizations/Settings PASS, sin pedidos. Android Chrome / PWA / iOS **UNVERIFIED — device unavailable** (P2 cobertura). Código pan/cursor sigue mouse-only. Sin código/deploy/commit.
+
+- Doc: `docs/admin-catalog-preview-final-qa-device-1.md`
+- HEAD: `4dd5dce` · Layout live `0dce5b3` · Mobile-feel `5843fd9`
+- CLI: `tsc` PASS · build/lint no ejecutados
+- **Próximo:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-HANDOFF-1 (o DEVICE-2 si se exige Android real)
+- **Sin:** código, CSS, deploy, commit, push, DB, pedidos
+
+---
+
+## Registro — ADMIN-CATALOG-PREVIEW-LAYOUT-FINAL-DEPLOY-1 (2026-07-28)
 
 **Fase:** ADMIN-CATALOG-PREVIEW-LAYOUT-FINAL-DEPLOY-1 — Controlled Deploy for Final Preview Layout Polish  
 **Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  

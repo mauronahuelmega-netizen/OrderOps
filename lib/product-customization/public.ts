@@ -214,24 +214,46 @@ function resolveGroupsForProduct(params: {
   return result;
 }
 
-async function loadPublicCustomizationCorpus(businessId: string, productIds: string[]) {
+type LoadPublicCustomizationCorpusOptions = {
+  /** When provided, skips the products re-fetch for the summary/config product ids. */
+  products?: ProductRow[];
+  /**
+   * When true with `products`, resolve suggested/upsell product cards only from
+   * that set (no second products query). Safe for full public catalog loads.
+   */
+  reuseProductsForSuggested?: boolean;
+};
+
+async function loadPublicCustomizationCorpus(
+  businessId: string,
+  productIds: string[],
+  corpusOptions?: LoadPublicCustomizationCorpusOptions
+) {
   // Anon/authenticated SSR client. Public SELECT policies gate on
   // is_public_product_customization_enabled(business_id) (SECURITY DEFINER
   // boolean helper) so anon does not need SELECT on business_settings.
   // Callers already fail-closed via isProductCustomizationEnabled.
   const supabase = await createSupabaseServerClient();
 
-  const { data: products, error: productsError } = await supabase
-    .from("products")
-    .select("id, category_id, name, description, price, image_url, is_available")
-    .eq("business_id", businessId)
-    .in("id", productIds);
+  let productRows: ProductRow[];
 
-  if (productsError) {
-    throw new Error("No pudimos cargar productos para personalización.");
+  if (corpusOptions?.products) {
+    const requestedIds = new Set(productIds);
+    productRows = corpusOptions.products.filter((row) => requestedIds.has(row.id));
+  } else {
+    const { data: products, error: productsError } = await supabase
+      .from("products")
+      .select("id, category_id, name, description, price, image_url, is_available")
+      .eq("business_id", businessId)
+      .in("id", productIds);
+
+    if (productsError) {
+      throw new Error("No pudimos cargar productos para personalización.");
+    }
+
+    productRows = (products ?? []) as ProductRow[];
   }
 
-  const productRows = (products ?? []) as ProductRow[];
   const categoryIds = [
     ...new Set(productRows.map((row) => row.category_id).filter(Boolean))
   ];
@@ -318,18 +340,50 @@ async function loadPublicCustomizationCorpus(businessId: string, productIds: str
     ...new Set((upsellItems ?? []).map((item) => item.product_id))
   ];
 
-  const { data: suggestedProducts, error: suggestedError } =
-    suggestedProductIds.length > 0
-      ? await supabase
-          .from("products")
-          .select("id, name, price, image_url, is_available")
-          .eq("business_id", businessId)
-          .eq("is_available", true)
-          .in("id", suggestedProductIds)
-      : { data: [], error: null };
+  const preloadedById = new Map(productRows.map((row) => [row.id, row]));
+  const suggestedById = new Map<
+    string,
+    { id: string; name: string; price: number; imageUrl: string | null }
+  >();
 
-  if (suggestedError) {
-    throw new Error("No pudimos cargar productos sugeridos.");
+  for (const suggestedProductId of suggestedProductIds) {
+    const preloaded = preloadedById.get(suggestedProductId);
+    if (preloaded?.is_available) {
+      suggestedById.set(suggestedProductId, {
+        id: preloaded.id,
+        name: preloaded.name,
+        price: Number(preloaded.price),
+        imageUrl: preloaded.image_url
+      });
+    }
+  }
+
+  const missingSuggestedIds = suggestedProductIds.filter(
+    (productId) => !suggestedById.has(productId)
+  );
+
+  // Waterfall remains only when suggested ids are outside the preloaded set
+  // (e.g. single-product modal config). Catalog page passes reuseProductsForSuggested.
+  if (missingSuggestedIds.length > 0 && !corpusOptions?.reuseProductsForSuggested) {
+    const { data: suggestedProducts, error: suggestedError } = await supabase
+      .from("products")
+      .select("id, name, price, image_url, is_available")
+      .eq("business_id", businessId)
+      .eq("is_available", true)
+      .in("id", missingSuggestedIds);
+
+    if (suggestedError) {
+      throw new Error("No pudimos cargar productos sugeridos.");
+    }
+
+    for (const row of suggestedProducts ?? []) {
+      suggestedById.set(row.id, {
+        id: row.id,
+        name: row.name,
+        price: Number(row.price),
+        imageUrl: row.image_url
+      });
+    }
   }
 
   const groupsById = new Map((groups ?? []).map((row) => [row.id, row as GroupRow]));
@@ -347,18 +401,6 @@ async function loadPublicCustomizationCorpus(businessId: string, productIds: str
     current.push(row as OverrideRow);
     overridesByProductId.set(productId, current);
   }
-
-  const suggestedById = new Map(
-    (suggestedProducts ?? []).map((row) => [
-      row.id,
-      {
-        id: row.id,
-        name: row.name,
-        price: Number(row.price),
-        imageUrl: row.image_url
-      }
-    ])
-  );
 
   const itemsByUpsellGroupId = new Map<string, typeof upsellItems>();
   for (const item of upsellItems ?? []) {
@@ -469,6 +511,12 @@ function buildSummaryForProduct(params: {
 export async function getPublicCustomizationSummariesForProducts(params: {
   businessId: string;
   productIds: string[];
+  /** When provided, skips the feature-flag settings read. */
+  productCustomizationEnabled?: boolean;
+  /** When provided, skips the products re-fetch inside the corpus loader. */
+  products?: ProductRow[];
+  /** See loadPublicCustomizationCorpus reuseProductsForSuggested. */
+  reuseProductsForSuggested?: boolean;
 }): Promise<Map<string, PublicProductCustomizationSummary>> {
   noStore();
 
@@ -483,7 +531,9 @@ export async function getPublicCustomizationSummariesForProducts(params: {
     return result;
   }
 
-  const enabled = await isProductCustomizationEnabled(params.businessId);
+  const enabled = await isProductCustomizationEnabled(params.businessId, {
+    productCustomizationEnabled: params.productCustomizationEnabled
+  });
   if (!enabled) {
     return result;
   }
@@ -491,7 +541,13 @@ export async function getPublicCustomizationSummariesForProducts(params: {
   try {
     const corpus = await loadPublicCustomizationCorpus(
       params.businessId,
-      uniqueProductIds
+      uniqueProductIds,
+      params.products
+        ? {
+            products: params.products,
+            reuseProductsForSuggested: params.reuseProductsForSuggested === true
+          }
+        : undefined
     );
 
     for (const product of corpus.productRows) {
