@@ -1,4 +1,18 @@
-﻿## Registro — PUBLIC-CATALOG-CACHE-STRATEGY-1 (2026-07-29)
+﻿## Registro — PUBLIC-CATALOG-CACHE-DEPLOY-1 (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-CACHE-DEPLOY-1 — Controlled Deploy for Public Catalog Cache Strategy  
+**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Resumen:** Se desplegó la estrategia de cache segura del catálogo público: datos estables cacheados con TTL 60s + tags, aceptación de pedidos separada y fresca con `noStore`, e invalidación centralizada desde actions admin. Producción smokeada en catálogo, checkout boundary y preview admin según disponibilidad. Sin DB/RLS/RPC/checkout action/carrito schema/preview logic/CSP/pedidos reales.
+- Doc: `docs/public-catalog-cache-deploy-1.md`
+- Commit funcional: `81ae607`
+- Deploy: `https://orderops.vercel.app`
+- CLI: `tsc` PASS · `build` PASS · lint histórico
+- **Próximo:** PUBLIC-CATALOG-SCROLL-JANK-POLISH-1 o PUBLIC-CATALOG-CACHE-INVALIDATION-QA-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales
+
+---
+
+## Registro — PUBLIC-CATALOG-CACHE-STRATEGY-1 (2026-07-29)
 
 **Fase:** PUBLIC-CATALOG-CACHE-STRATEGY-1 — Public Catalog Data Cache Strategy & Safe Invalidation  
 **Estado:** PASS WITH RESIDUAL CACHE DEBT  

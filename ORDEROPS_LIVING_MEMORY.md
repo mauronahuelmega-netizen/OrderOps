@@ -802,6 +802,10 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - Archivos: `lib/admin/pwa-manifest.ts`, `scripts/generate-admin-pwa-icons.mjs`, `public/icons/orderops-admin-*.png`, `docs/admin-pwa-branding-polish-1-app-name-icon.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
 
 
+### 2026-07-29 — PUBLIC-CATALOG-CACHE-DEPLOY-1 — Controlled Deploy for Public Catalog Cache Strategy
+
+- **Deploy / Public Catalog Cache** Public Catalog Cache Strategy deployed: stable public catalog data cached with TTL 60s + tags, ordering status remains fresh/noStore, admin actions invalidate via central public catalog cache helper. Checkout/create_order, DB/RLS/RPC, cart schema and preview logic untouched. Residual debt: runtime mutation invalidation smoke if not authorized, corpus overfetch, scroll/jank, Supabase Image Transformations infra. Commit funcional `81ae607`. Doc: `docs/public-catalog-cache-deploy-1.md`. Próximo: **PUBLIC-CATALOG-CACHE-INVALIDATION-QA-1** o **PUBLIC-CATALOG-SCROLL-JANK-POLISH-1**.
+
 ### 2026-07-29 — PUBLIC-CATALOG-CACHE-STRATEGY-1 — Public Catalog Data Cache Strategy & Safe Invalidation
 
 - **Frontend / Public Catalog Cache** PUBLIC-CATALOG-CACHE-STRATEGY-1: `unstable_cache` TTL 60s + tags `public-business`/`public-catalog`/`public-customization`; stable branding/products/summaries cacheados (service client); `getFreshPublicOrderingStatus` con `noStore`; invalidación `updateTag` vía `revalidatePublicCatalogCache` en products/categories/settings/operations/customizations. Estado: **PASS WITH RESIDUAL CACHE DEBT**. Doc: `docs/public-catalog-cache-strategy-1.md`. Próximo: **PUBLIC-CATALOG-CACHE-DEPLOY-1**. Sin DB/RLS/RPC/checkout/commit/push/deploy.
