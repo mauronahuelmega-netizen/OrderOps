@@ -5,7 +5,7 @@
 **Resumen:** Se desplegó el paquete agrupado del roadmap de catálogo público: scroll mobile polish, corpus customization filtrado, UX de conversión y observability foundation privacy-safe. Image Transforms queda como deuda infra (`FeatureNotEnabled`) hasta autorización. Producción smokeada en catálogo, observability debug, checkout boundary y preview admin según auth disponible. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/preview logic/CSP/pedidos reales.
 - Doc: `docs/public-catalog-roadmap-deploy-1.md`
 - Commit funcional: `fb19a3a`
-- Commit docs: `Document public catalog roadmap deploy` (hash en log)
+- Commit docs: `55f866f`
 - Deploy: `https://orderops.vercel.app`
 - CLI: `tsc` PASS · `build` PASS · lint histórico
 - **Próximo:** PUBLIC-CATALOG-FINAL-HANDOFF-1 o PUBLIC-CATALOG-POST-DEPLOY-MONITOR-1

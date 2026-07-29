@@ -32,7 +32,7 @@ PUBLIC-CATALOG-OBSERVABILITY-1
 | Tipo | Hash | Mensaje |
 | ---- | ---- | ------- |
 | funcional | `fb19a3a` | Polish public catalog experience and observability |
-| docs | (este commit) | Document public catalog roadmap deploy |
+| docs | `55f866f` | Document public catalog roadmap deploy |
 
 Push funcional: `9fae258..fb19a3a` → `origin/main`
 
