@@ -802,6 +802,10 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - Archivos: `lib/admin/pwa-manifest.ts`, `scripts/generate-admin-pwa-icons.mjs`, `public/icons/orderops-admin-*.png`, `docs/admin-pwa-branding-polish-1-app-name-icon.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
 
 
+### 2026-07-28 — PUBLIC-CATALOG-PERFORMANCE-DEPLOY-1 — Controlled Deploy for Public Catalog Performance Package
+
+- **Deploy / Public Catalog** PUBLIC-CATALOG-PERFORMANCE-DEPLOY-1: Public Catalog Performance package deployed: imágenes críticas con `next/image`/PublicStorageImage, transforms fallback seguro por FeatureNotEnabled, data path dedupeado con `public-page-data`, settings/flag/products reducidos, summaries reusando catálogo y ProductCard memoizado. Sin DB/RLS/RPC/cache/checkout/pedidos. Commit `2b60bb3`. Próximo: **PUBLIC-CATALOG-CACHE-STRATEGY-1**. Doc: `docs/public-catalog-performance-deploy-1.md`.
+
 ### 2026-07-28 — PUBLIC-CATALOG-PERFORMANCE-FIX-1 — Public Catalog Server Calls & Render Cost Reduction
 
 - **Frontend / Public Catalog** PUBLIC-CATALOG-PERFORMANCE-FIX-1: loader `getPublicCatalogPageData`; dedupe `business_settings`/`onDemandModeActive`/`product_customization_enabled` en path público; summaries con products preloaded + sin waterfall suggested en page; `memo(ProductCard)` + callbacks estables. Estado: **PASS WITH RESIDUAL PERFORMANCE DEBT** (corpus groups/options overfetch, `noStore`, scroll jank, preview hooks graph, image transforms infra). Doc: `docs/public-catalog-performance-fix-1.md`. Siguiente: **PUBLIC-CATALOG-CACHE-STRATEGY-1**. Sin DB/RLS/RPC/cache/checkout/commit/push.

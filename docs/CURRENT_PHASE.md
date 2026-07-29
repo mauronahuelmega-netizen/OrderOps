@@ -1,4 +1,18 @@
-﻿## Registro — PUBLIC-CATALOG-PERFORMANCE-FIX-1 (2026-07-28)
+﻿## Registro — PUBLIC-CATALOG-PERFORMANCE-DEPLOY-1 (2026-07-28)
+
+**Fase:** PUBLIC-CATALOG-PERFORMANCE-DEPLOY-1 — Controlled Deploy for Public Catalog Performance Package  
+**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Resumen:** Se desplegó el paquete de performance del catálogo público: `next/image` + helper público, fallback transforms seguro, dedupe de settings/flags/products, summaries sin re-fetch de productos en page path y ProductCard/CatalogClient optimizados para menor re-render por carrito. Producción smokeada en `/b/demohamburgueseria/catalogo` y checkout boundary sin enviar pedido. Sin DB/RLS/RPC/cache/revalidation/checkout action/carrito schema/preview admin logic.
+- Doc: `docs/public-catalog-performance-deploy-1.md`
+- Commit: `2b60bb3`
+- Deploy: `https://orderops.vercel.app`
+- CLI: `tsc` PASS · `build` PASS · lint histórico
+- **Próximo:** PUBLIC-CATALOG-CACHE-STRATEGY-1
+- **Sin:** DB, RLS, RPC, cache persistente, checkout action, pedidos reales
+
+---
+
+## Registro — PUBLIC-CATALOG-PERFORMANCE-FIX-1 (2026-07-28)
 
 **Fase:** PUBLIC-CATALOG-PERFORMANCE-FIX-1 — Public Catalog Server Calls & Render Cost Reduction  
 **Estado:** PASS WITH RESIDUAL PERFORMANCE DEBT  
