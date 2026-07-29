@@ -16,7 +16,7 @@ import {
   type PublicCategory,
   type PublicProduct
 } from "@/lib/catalog/public";
-import { loadPublicCustomizationSummariesForProducts } from "@/lib/product-customization/public";
+import { loadPublicCustomizationSummariesForCatalogProducts } from "@/lib/product-customization/public";
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
 
 /** Fallback TTL if a tag invalidation is missed (seconds). */
@@ -131,22 +131,17 @@ function getCachedEnrichedCatalogProducts(params: {
         return params.products;
       }
 
-      const corpusProducts = params.products.map((product) => ({
-        id: product.id,
-        category_id: product.category_id,
-        name: product.name,
-        description: product.description,
-        price: product.price,
-        image_url: product.image_url,
-        is_available: true
-      }));
-
-      const summaries = await loadPublicCustomizationSummariesForProducts({
+      const summaries = await loadPublicCustomizationSummariesForCatalogProducts({
         businessId: normalizedBusinessId,
-        productIds: params.products.map((product) => product.id),
-        productCustomizationEnabled: true,
-        products: corpusProducts,
-        reuseProductsForSuggested: true
+        products: params.products.map((product) => ({
+          id: product.id,
+          category_id: product.category_id,
+          name: product.name,
+          description: product.description,
+          price: product.price,
+          image_url: product.image_url
+        })),
+        productCustomizationEnabled: true
       });
 
       return params.products.map((product) => {

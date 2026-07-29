@@ -224,6 +224,10 @@ type LoadPublicCustomizationCorpusOptions = {
   reuseProductsForSuggested?: boolean;
 };
 
+/**
+ * Loads only customization rows relevant to `productIds` (and their categories).
+ * Does NOT fetch all tenant groups/options/upsell items.
+ */
 async function loadPublicCustomizationCorpus(
   businessId: string,
   productIds: string[],
@@ -266,13 +270,11 @@ async function loadPublicCustomizationCorpus(
 
   const upsellOrFilters = [...assignmentOrFilters];
 
+  // Phase 1: scoped targets only (assignments / overrides / upsell groups).
   const [
     { data: assignments, error: assignmentsError },
-    { data: groups, error: groupsError },
-    { data: options, error: optionsError },
     { data: overrides, error: overridesError },
-    { data: upsellGroups, error: upsellGroupsError },
-    { data: upsellItems, error: upsellItemsError }
+    { data: upsellGroups, error: upsellGroupsError }
   ] = await Promise.all([
     assignmentOrFilters.length > 0
       ? supabase
@@ -284,22 +286,6 @@ async function loadPublicCustomizationCorpus(
           .eq("is_enabled", true)
           .or(assignmentOrFilters.join(","))
       : Promise.resolve({ data: [], error: null }),
-    supabase
-      .from("customization_groups")
-      .select(
-        "id, name, description, selection_type, is_required, min_selections, max_selections, is_available, sort_order, created_at"
-      )
-      .eq("business_id", businessId)
-      .eq("is_available", true),
-    supabase
-      .from("customization_options")
-      .select(
-        "id, group_id, name, description, price_delta, is_available, sort_order, created_at"
-      )
-      .eq("business_id", businessId)
-      .eq("is_available", true)
-      .order("sort_order", { ascending: true })
-      .order("created_at", { ascending: true }),
     supabase
       .from("product_customization_overrides")
       .select("override_type, group_id, option_id, is_enabled, product_id")
@@ -314,23 +300,60 @@ async function loadPublicCustomizationCorpus(
           .eq("business_id", businessId)
           .eq("is_available", true)
           .or(upsellOrFilters.join(","))
-      : Promise.resolve({ data: [], error: null }),
-    supabase
-      .from("upsell_group_items")
-      .select("id, upsell_group_id, product_id, is_available, sort_order")
-      .eq("business_id", businessId)
-      .eq("is_available", true)
-      .order("sort_order", { ascending: true })
+      : Promise.resolve({ data: [], error: null })
   ]);
 
-  if (
-    assignmentsError ||
-    groupsError ||
-    optionsError ||
-    overridesError ||
-    upsellGroupsError ||
-    upsellItemsError
-  ) {
+  if (assignmentsError || overridesError || upsellGroupsError) {
+    throw new Error("No pudimos cargar la configuración pública de personalización.");
+  }
+
+  const relevantGroupIds = [
+    ...new Set((assignments ?? []).map((row) => row.group_id).filter(Boolean))
+  ];
+  const relevantUpsellGroupIds = [
+    ...new Set((upsellGroups ?? []).map((row) => row.id).filter(Boolean))
+  ];
+
+  // Phase 2: groups/options/items only for IDs derived above.
+  const [
+    { data: groups, error: groupsError },
+    { data: options, error: optionsError },
+    { data: upsellItems, error: upsellItemsError }
+  ] = await Promise.all([
+    relevantGroupIds.length > 0
+      ? supabase
+          .from("customization_groups")
+          .select(
+            "id, name, description, selection_type, is_required, min_selections, max_selections, is_available, sort_order, created_at"
+          )
+          .eq("business_id", businessId)
+          .eq("is_available", true)
+          .in("id", relevantGroupIds)
+      : Promise.resolve({ data: [], error: null }),
+    relevantGroupIds.length > 0
+      ? supabase
+          .from("customization_options")
+          .select(
+            "id, group_id, name, description, price_delta, is_available, sort_order, created_at"
+          )
+          .eq("business_id", businessId)
+          .eq("is_available", true)
+          .in("group_id", relevantGroupIds)
+          .order("sort_order", { ascending: true })
+          .order("created_at", { ascending: true })
+      : Promise.resolve({ data: [], error: null }),
+    relevantUpsellGroupIds.length > 0
+      ? supabase
+          .from("upsell_group_items")
+          .select("id, upsell_group_id, product_id, is_available, sort_order")
+          .eq("business_id", businessId)
+          .eq("is_available", true)
+          .in("upsell_group_id", relevantUpsellGroupIds)
+          .order("sort_order", { ascending: true })
+      : Promise.resolve({ data: [], error: null })
+  ]);
+
+  if (groupsError || optionsError || upsellItemsError) {
     throw new Error("No pudimos cargar la configuración pública de personalización.");
   }
 
@@ -593,6 +616,44 @@ export async function getPublicCustomizationSummariesForProducts(
 ): Promise<Map<string, PublicProductCustomizationSummary>> {
   noStore();
   return loadPublicCustomizationSummariesForProducts(params);
+}
+
+type CatalogSummaryProductInput = {
+  id: string;
+  category_id: string;
+  name: string;
+  description: string | null;
+  price: number;
+  image_url: string | null;
+};
+
+/**
+ * Summary-lite entrypoint for the public catalog page.
+ * Computes card summaries for visible products only (filtered corpus).
+ * Does not load modal config, checkout validation, or full tenant groups/options.
+ */
+export async function loadPublicCustomizationSummariesForCatalogProducts(params: {
+  businessId: string;
+  products: CatalogSummaryProductInput[];
+  productCustomizationEnabled: boolean;
+}): Promise<Map<string, PublicProductCustomizationSummary>> {
+  const corpusProducts: ProductRow[] = params.products.map((product) => ({
+    id: product.id,
+    category_id: product.category_id,
+    name: product.name,
+    description: product.description,
+    price: product.price,
+    image_url: product.image_url,
+    is_available: true
+  }));
+
+  return loadPublicCustomizationSummariesForProducts({
+    businessId: params.businessId,
+    productIds: corpusProducts.map((product) => product.id),
+    productCustomizationEnabled: params.productCustomizationEnabled,
+    products: corpusProducts,
+    reuseProductsForSuggested: true
+  });
 }
 
 export async function getPublicProductCustomizationConfig(params: {

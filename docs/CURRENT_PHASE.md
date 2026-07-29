@@ -1,4 +1,83 @@
-﻿## Registro — PUBLIC-CATALOG-CACHE-DEPLOY-1 (2026-07-29)
+﻿## Registro — PUBLIC-CATALOG-OBSERVABILITY-1 (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-OBSERVABILITY-1 — Public Catalog Web Vitals & UX Observability Foundation  
+**Estado:** PASS WITH PREVIEW QA DEBT  
+**Resumen:** Se agregó una base privacy-safe de observabilidad para el catálogo público: Web Vitals, métricas custom livianas, debug mode y endpoint 204 sin DB/Supabase/PII, preservando checkout, cart schema, cache, corpus summary-lite, image loader, preview admin y UX polish. Sin DB/RLS/RPC/checkout action/carrito schema/cache/corpus/preview logic/CSP/pedidos reales.  
+- Doc: `docs/public-catalog-observability-1.md`
+- Código: `components/public/catalog/public-catalog-observability.tsx`, `lib/observability/public-catalog-metrics.ts`, `app/api/observability/public-catalog/route.ts`, `components/public/catalog/public-catalog-page.tsx`
+- CLI: `tsc` PASS · `build` PASS · lint histórico
+- **Próximo:** PUBLIC-CATALOG-ROADMAP-DEPLOY-1 o PUBLIC-CATALOG-FINAL-HANDOFF-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-CONVERSION-UX-POLISH-1 (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-CONVERSION-UX-POLISH-1 — Public Catalog Shopping Experience & Conversion Clarity  
+**Estado:** PASS WITH PREVIEW QA DEBT  
+**Resumen:** Se mejoró la claridad de compra del catálogo público: cards, CTAs, “Desde”, productos con opciones, modal customization, carrito y microcopy customer-facing, preservando pricing, cart schema, checkout, cache, corpus summary-lite, preview admin y scroll polish. Sin DB/RLS/RPC/checkout action/carrito schema/cache/corpus/preview logic/CSP/pedidos reales.  
+- Doc: `docs/public-catalog-conversion-ux-polish-1.md`
+- Código: `product-card.tsx`, `product-detail-modal.tsx`, `cart-bar.tsx`, `cart-sheet.tsx`, `customization-modal.tsx`, `catalog-client.tsx`, `customization-option-group.tsx`, `app/globals.css`, `customization-modal.module.css`
+- CLI: `tsc` PASS · `build` PASS · lint histórico
+- **Próximo:** PUBLIC-CATALOG-OBSERVABILITY-1 o PUBLIC-CATALOG-ROADMAP-DEPLOY-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1 (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1 — Enable Supabase Image Transformations & Verify Real Bytes  
+**Estado:** PASS WITH INFRA AUTH DEBT  
+**Resumen:** Se validó/habilitó Supabase Image Transformations para el catálogo público: `render/image` 403 FeatureNotEnabled, browser `currentSrc` object (fallback tras intento render), bytes reales object medidos por curl (logo ~918 KB / cover ~1.8 MB / thumb ~338 KB), fallback seguro intacto. Sin autorización para habilitar infra. Sin DB/RLS/RPC/checkout action/carrito schema/cache/corpus/scroll/preview logic/CSP/pedidos reales.  
+- Doc: `docs/public-catalog-image-transforms-infra-1.md`
+- Código: `<sin cambios>`
+- Infra: `sin autorización — FeatureNotEnabled`
+- CLI: `tsc` PASS · `build` PASS · lint histórico
+- **Próximo:** PUBLIC-CATALOG-ROADMAP-DEPLOY-1 o PUBLIC-CATALOG-OBSERVABILITY-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-CORPUS-OVERFETCH-FIX-1 (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-CORPUS-OVERFETCH-FIX-1 — Public Customization Corpus Overfetch Reduction  
+**Estado:** PASS WITH PREVIEW QA DEBT  
+**Resumen:** Se redujo el overfetch del corpus público de Product Customization para el catálogo: summaries calculados con un read model limitado a productos/categorías visibles, groups/options/overrides/upsells relevantes y modal config on-demand intacta. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/preview logic/CSP/pedidos reales.  
+- Doc: `docs/public-catalog-corpus-overfetch-fix-1.md`
+- Código: `lib/product-customization/public.ts`, `lib/catalog/public-cached-data.ts`
+- CLI: `tsc` PASS · `build` PASS · lint histórico
+- **Próximo:** PUBLIC-CATALOG-ROADMAP-DEPLOY-1 o PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-SCROLL-JANK-POLISH-1 (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-SCROLL-JANK-POLISH-1 — Public Catalog Mobile Scroll Smoothness & Glass Cost Reduction  
+**Estado:** PASS WITH DEVICE QA DEBT  
+**Resumen:** Se redujo el costo visual del catálogo público en mobile: menor uso de blur/backdrop-filter/sombras en superficies sticky/fixed, preservando look premium, ProductCard, carrito, modal customization, preview admin y checkout boundary. Sin DB/RLS/RPC/cache/checkout action/carrito schema/preview logic/CSP/pedidos reales.  
+- Doc: `docs/public-catalog-scroll-jank-polish-1.md`
+- Código: `app/globals.css`, `components/public/catalog/cart-sheet.module.css`, `components/public/catalog/customization-modal.module.css`
+- CLI: `tsc` PASS · `build` PASS · lint histórico
+- **Próximo:** PUBLIC-CATALOG-SCROLL-JANK-DEPLOY-1 o PUBLIC-CATALOG-CORPUS-OVERFETCH-FIX-1
+- **Sin:** DB, RLS, RPC, cache, checkout action, pedidos reales, deploy/commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-CACHE-INVALIDATION-QA-1 (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-CACHE-INVALIDATION-QA-1 — Runtime QA for Public Catalog Cache Invalidation  
+**Estado:** PASS WITH MUTATION QA DEBT  
+**Resumen:** Se validó la frescura operativa del cache del catálogo público: source audit de tags/updateTag/revalidatePath, coverage de actions admin y smoke productivo en catálogo/checkout/preview. Runtime mutation smoke de invalidación y ordering status: UNVERIFIED (sin auth env). Sin DB/RLS/RPC/checkout action/carrito schema/preview logic/CSP/pedidos reales.  
+- Doc: `docs/public-catalog-cache-invalidation-qa-1.md`
+- Código: `<sin cambios>`
+- CLI: `tsc` PASS · `build` PASS · lint histórico
+- **Próximo:** PUBLIC-CATALOG-SCROLL-JANK-POLISH-1 o PUBLIC-CATALOG-CORPUS-OVERFETCH-FIX-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push si QA-only
+
+---
+
+## Registro — PUBLIC-CATALOG-CACHE-DEPLOY-1 (2026-07-29)
 
 **Fase:** PUBLIC-CATALOG-CACHE-DEPLOY-1 — Controlled Deploy for Public Catalog Cache Strategy  
 **Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  

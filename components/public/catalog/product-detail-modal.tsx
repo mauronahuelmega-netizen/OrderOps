@@ -58,7 +58,7 @@ export default function ProductDetailModal({
 
   const primaryLabel = useMemo(() => {
     if (requiresCustomization) {
-      return "Personalizar";
+      return "Elegir opciones";
     }
 
     if (currentQuantity === 0) {
@@ -130,15 +130,23 @@ export default function ProductDetailModal({
           <div className="catalog-modal__content">
             <div className="catalog-modal__summary">
               <strong>
-                {showFrom ? "Desde " : null}
+                {showFrom ? (
+                  <span className="catalog-product-card__price-from">Desde </span>
+                ) : null}
                 {formatPublicCatalogCurrency(displayPrice)}
               </strong>
+              {showFrom ? (
+                <p className="catalog-modal__helper">
+                  El precio final depende de las opciones que elijas.
+                </p>
+              ) : null}
               {product.description ? <p>{product.description}</p> : null}
             </div>
 
             {requiresCustomization ? (
               <p className="catalog-modal__helper">
-                Este producto se personaliza antes de sumarlo al pedido.
+                Elegí las opciones obligatorias y, si querés, sumá extras antes de
+                agregarlo al pedido.
               </p>
             ) : (
               <div className="catalog-modal__quantity-block">
@@ -172,7 +180,7 @@ export default function ProductDetailModal({
           <div className="catalog-modal__footer-copy">
             {requiresCustomization ? (
               <>
-                <strong>Personalización</strong>
+                <strong>Opciones</strong>
                 <span>
                   {showFrom ? "Desde " : null}
                   {formatPublicCatalogCurrency(displayPrice)}
@@ -180,7 +188,11 @@ export default function ProductDetailModal({
               </>
             ) : (
               <>
-                <strong>{draftQuantity > 0 ? `${draftQuantity} item(s)` : "Sin items"}</strong>
+                <strong>
+                  {draftQuantity > 0
+                    ? `${draftQuantity} ${draftQuantity === 1 ? "producto" : "productos"}`
+                    : "Sin productos"}
+                </strong>
                 <span>
                   {formatPublicCatalogCurrency(
                     Number(product.price) * Math.max(draftQuantity, 0)

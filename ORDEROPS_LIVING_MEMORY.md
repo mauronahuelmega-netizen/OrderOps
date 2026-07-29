@@ -802,6 +802,30 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - Archivos: `lib/admin/pwa-manifest.ts`, `scripts/generate-admin-pwa-icons.mjs`, `public/icons/orderops-admin-*.png`, `docs/admin-pwa-branding-polish-1-app-name-icon.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
 
 
+### 2026-07-29 — PUBLIC-CATALOG-OBSERVABILITY-1 — Public Catalog Web Vitals & UX Observability Foundation
+
+- **Frontend / Public Catalog Observability** Public Catalog Observability: added privacy-safe Web Vitals + lightweight public catalog metrics foundation with debug query mode and a 204 same-origin endpoint, no DB/Supabase/PII/cart/customer data. Preserves checkout/create_order, cart schema, cache, corpus summary-lite, image loader, preview logic and UX polish. Pending grouped deploy. Doc: `docs/public-catalog-observability-1.md`. Estado: **PASS WITH PREVIEW QA DEBT**. Próximo: **PUBLIC-CATALOG-ROADMAP-DEPLOY-1**.
+
+### 2026-07-29 — PUBLIC-CATALOG-CONVERSION-UX-POLISH-1 — Public Catalog Shopping Experience & Conversion Clarity
+
+- **Frontend / Public Catalog** Public Catalog Conversion UX Polish: improved customer-facing clarity across product cards, Desde/option CTAs, customization modal, cart bar/sheet and empty/closed states while preserving pricing, cart schema, checkout/create_order, cache, corpus summary-lite, preview logic and scroll polish. No DB/RLS/RPC/checkout/orders. Pending grouped deploy with scroll polish/corpus UX package. Doc: `docs/public-catalog-conversion-ux-polish-1.md`. Estado: **PASS WITH PREVIEW QA DEBT**. Próximo: **PUBLIC-CATALOG-ROADMAP-DEPLOY-1**.
+
+### 2026-07-29 — PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1 — Enable Supabase Image Transformations & Verify Real Bytes
+
+- **Infra / Public Catalog Images** Public Catalog Image Transforms Infra: Supabase Image Transformations blocked/unverified (no auth); render/image status 403 FeatureNotEnabled; real image bytes measured via curl object (logo ~918KB, cover ~1.8MB, thumb ~338KB); PublicStorageImage fallback remains safe; no DB/RLS/RPC/cache/checkout/orders. Pending grouped deploy with scroll polish and corpus overfetch if no blockers. Doc: `docs/public-catalog-image-transforms-infra-1.md`. Estado: **PASS WITH INFRA AUTH DEBT**. Próximo: **PUBLIC-CATALOG-ROADMAP-DEPLOY-1**.
+
+### 2026-07-29 — PUBLIC-CATALOG-CORPUS-OVERFETCH-FIX-1 — Public Customization Corpus Overfetch Reduction
+
+- **Frontend / Public Catalog** Public Catalog Corpus Overfetch Fix: customization summaries now use a summary-lite read model limited to visible catalog products/categories and relevant groups/options/overrides/upsells. Modal config remains on-demand; checkout/create_order, DB/RLS/RPC, cache tags and preview logic untouched. Residual: deploy grouped with scroll polish, Image Transforms infra, mutation QA with auth, web vitals. Doc: `docs/public-catalog-corpus-overfetch-fix-1.md`. Estado: **PASS WITH PREVIEW QA DEBT**. Próximo: **PUBLIC-CATALOG-ROADMAP-DEPLOY-1**.
+
+### 2026-07-29 — PUBLIC-CATALOG-SCROLL-JANK-POLISH-1 — Public Catalog Mobile Scroll Smoothness & Glass Cost Reduction
+
+- **Frontend / Public Catalog** Public Catalog Scroll Jank Polish: reduced mobile glass/backdrop-filter/shadow cost on public catalog sticky/fixed surfaces while preserving catalog behavior, cart, customization modal, checkout boundary and admin preview. No DB/RLS/RPC/cache/checkout/orders. Residual: real device Android QA if unavailable, corpus overfetch, Image Transforms infra, optional web vitals. Doc: `docs/public-catalog-scroll-jank-polish-1.md`. Estado: **PASS WITH DEVICE QA DEBT**. Próximo: **PUBLIC-CATALOG-SCROLL-JANK-DEPLOY-1**.
+
+### 2026-07-29 — PUBLIC-CATALOG-CACHE-INVALIDATION-QA-1 — Runtime QA for Public Catalog Cache Invalidation
+
+- **QA / Public Catalog Cache** Public Catalog Cache Invalidation QA: cache tags/source coverage verified; runtime mutation invalidation UNVERIFIED; ordering status freshness UNVERIFIED; catalog/checkout/preview smoke passed; no DB/RLS/RPC/checkout/orders. Residual: scroll/jank, corpus overfetch, Image Transforms infra, optional stricter web vitals. Doc: `docs/public-catalog-cache-invalidation-qa-1.md`. Estado: **PASS WITH MUTATION QA DEBT**. Próximo: **PUBLIC-CATALOG-SCROLL-JANK-POLISH-1**.
+
 ### 2026-07-29 — PUBLIC-CATALOG-CACHE-DEPLOY-1 — Controlled Deploy for Public Catalog Cache Strategy
 
 - **Deploy / Public Catalog Cache** Public Catalog Cache Strategy deployed: stable public catalog data cached with TTL 60s + tags, ordering status remains fresh/noStore, admin actions invalidate via central public catalog cache helper. Checkout/create_order, DB/RLS/RPC, cart schema and preview logic untouched. Residual debt: runtime mutation invalidation smoke if not authorized, corpus overfetch, scroll/jank, Supabase Image Transformations infra. Commit funcional `81ae607`. Doc: `docs/public-catalog-cache-deploy-1.md`. Próximo: **PUBLIC-CATALOG-CACHE-INVALIDATION-QA-1** o **PUBLIC-CATALOG-SCROLL-JANK-POLISH-1**.

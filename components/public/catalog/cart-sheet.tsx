@@ -25,7 +25,7 @@ type CartSheetProps = {
 };
 
 export default function CartSheet({
-  slug,
+  slug: _checkoutSlug,
   items,
   onClose,
   onCheckout,
@@ -34,6 +34,7 @@ export default function CartSheet({
   onChangeParentQuantity,
   onChangeLegacyQuantity
 }: CartSheetProps) {
+  void _checkoutSlug;
   const rows = buildHierarchicalCartRows(items);
   const total = getCartItemsTotal(items);
   const isEmpty = items.length === 0;
@@ -55,7 +56,7 @@ export default function CartSheet({
         <header className={styles.header}>
           <div>
             <p className={styles.eyebrow}>Tu pedido</p>
-            <h2 id="cart-sheet-title">Carrito</h2>
+            <h2 id="cart-sheet-title">Revisá tu carrito</h2>
           </div>
           <button type="button" className={styles.closeButton} onClick={onClose}>
             Cerrar
@@ -64,7 +65,10 @@ export default function CartSheet({
 
         <div className={styles.body}>
           {isEmpty ? (
-            <p className={styles.empty}>Todavía no agregaste productos.</p>
+            <p className={styles.empty}>
+              Tu carrito está vacío. Volvé al catálogo y sumá productos para
+              armar el pedido.
+            </p>
           ) : (
             <ul className={styles.list}>
               {rows.map((row) => {
@@ -222,14 +226,16 @@ export default function CartSheet({
             disabled={isEmpty}
             onClick={onCheckout}
           >
-            Continuar al checkout
+            Ir a confirmar pedido
           </button>
 
           {!isEmpty ? (
             <p className={styles.helper}>
-              Vas a continuar a <code>/b/{slug}/checkout</code>
+              En el siguiente paso completás tus datos para enviar el pedido.
             </p>
-          ) : null}
+          ) : (
+            <p className={styles.helper}>Agregá productos desde el catálogo para continuar.</p>
+          )}
         </footer>
       </div>
     </div>

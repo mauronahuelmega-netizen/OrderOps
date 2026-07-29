@@ -456,7 +456,7 @@ export default function CatalogClient({
   const heroHeadline = business.catalog_hero_headline?.trim() || "Listo para pedir.";
   const heroBadge = business.catalog_hero_badge?.trim() || "Te confirmamos por WhatsApp";
   const heroMicrocopy =
-    business.catalog_hero_microcopy?.trim() || "Hace tu pedido y seguimos por WhatsApp.";
+    business.catalog_hero_microcopy?.trim() || "Hacé tu pedido y seguimos por WhatsApp.";
   const showCoverImage = Boolean(business.cover_image_url) && coverState !== "error";
   const coverMediaState = showCoverImage
     ? coverState === "loaded"
@@ -482,8 +482,8 @@ export default function CatalogClient({
 
           {coverMediaState === "fallback" ? (
             <div className="catalog-hero__cover-fallback">
-              <span className="catalog-hero__cover-kicker">Catalogo listo para pedir</span>
-              <small>Elegi tus productos favoritos y envia el pedido.</small>
+              <span className="catalog-hero__cover-kicker">Catálogo listo para pedir</span>
+              <small>Elegí tus productos favoritos y enviá el pedido.</small>
             </div>
           ) : null}
 
@@ -505,8 +505,20 @@ export default function CatalogClient({
         </div>
 
         <div className="catalog-hero__copy">
-          <p className="catalog-eyebrow">Pedi online</p>
+          <p className="catalog-eyebrow">Pedí online</p>
           <p className="catalog-hero__description">{heroHeadline}</p>
+          <p
+            className={`catalog-hero__status${
+              business.on_demand_mode_active
+                ? " catalog-hero__status--open"
+                : " catalog-hero__status--closed"
+            }`}
+            role="status"
+          >
+            {business.on_demand_mode_active
+              ? "Estamos tomando pedidos"
+              : "Por ahora no estamos tomando pedidos"}
+          </p>
         </div>
 
         <div className="catalog-hero__notes">
@@ -527,13 +539,13 @@ export default function CatalogClient({
       <div className="catalog-content">
         {categories.length === 0 ? (
           <section className="catalog-empty-panel">
-            <h2>El catalogo todavia no esta listo.</h2>
-            <p>Estamos preparando las categorias para que puedas hacer tu pedido.</p>
+            <h2>El catálogo todavía no está listo</h2>
+            <p>Estamos preparando las categorías para que puedas armar tu pedido.</p>
           </section>
         ) : categoriesWithProducts.length === 0 ? (
           <section className="catalog-empty-panel">
-            <h2>Todavia no hay productos disponibles.</h2>
-            <p>Volve a consultar mas tarde o contacta al negocio.</p>
+            <h2>Todavía no hay productos disponibles</h2>
+            <p>Volvé a consultar más tarde o contactá al negocio.</p>
           </section>
         ) : (
           <div className="catalog-groups">

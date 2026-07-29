@@ -13,9 +13,13 @@ export default function CartBar({ count, total, onOpenCart }: CartBarProps) {
     <div className="catalog-cart-bar" data-preview-pan-ignore>
       <div className="catalog-cart-bar__copy">
         <strong>
-          {count} {count === 1 ? "producto" : "productos"}
+          {isEmpty
+            ? "Carrito vacío"
+            : `${count} ${count === 1 ? "producto" : "productos"}`}
         </strong>
-        <span>{formatCurrency(total)}</span>
+        <span>
+          {isEmpty ? "Sumá algo para continuar" : `Total ${formatCurrency(total)}`}
+        </span>
       </div>
 
       <button
@@ -27,6 +31,11 @@ export default function CartBar({ count, total, onOpenCart }: CartBarProps) {
         }}
         disabled={isEmpty}
         aria-disabled={isEmpty}
+        aria-label={
+          isEmpty
+            ? "Carrito vacío"
+            : `Ver pedido con ${count} ${count === 1 ? "producto" : "productos"}`
+        }
         className={`catalog-cart-bar__button${
           isEmpty ? " catalog-cart-bar__button--disabled" : ""
         }`}

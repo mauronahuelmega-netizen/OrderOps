@@ -81,10 +81,17 @@ function ProductCard({
             <h3>{product.name}</h3>
             {product.description ? <p>{product.description}</p> : null}
           </div>
-          <strong className="catalog-product-card__price">
-            {showFrom ? "Desde " : null}
-            {formatPublicCatalogCurrency(displayPrice)}
-          </strong>
+          <div className="catalog-product-card__pricing">
+            <strong className="catalog-product-card__price">
+              {showFrom ? (
+                <span className="catalog-product-card__price-from">Desde </span>
+              ) : null}
+              {formatPublicCatalogCurrency(displayPrice)}
+            </strong>
+            {requiresCustomization ? (
+              <p className="catalog-product-card__hint">Personalizalo antes de agregar</p>
+            ) : null}
+          </div>
         </div>
       </div>
 
@@ -95,11 +102,19 @@ function ProductCard({
             aria-label={`Cantidad de ${product.name}`}
             onClick={(event) => event.stopPropagation()}
           >
-            <button type="button" onClick={() => onDecrementProduct(product.id)}>
+            <button
+              type="button"
+              aria-label={`Quitar uno de ${product.name}`}
+              onClick={() => onDecrementProduct(product.id)}
+            >
               -
             </button>
-            <span>{quantity}</span>
-            <button type="button" onClick={() => onIncrementProduct(product.id)}>
+            <span aria-live="polite">{quantity}</span>
+            <button
+              type="button"
+              aria-label={`Sumar uno de ${product.name}`}
+              onClick={() => onIncrementProduct(product.id)}
+            >
               +
             </button>
           </div>
@@ -107,18 +122,24 @@ function ProductCard({
           <button
             type="button"
             className="catalog-product-card__add-button"
+            aria-label={
+              requiresCustomization
+                ? `Elegir opciones de ${product.name}`
+                : `Agregar ${product.name} al pedido`
+            }
             onClick={(event) => {
               event.stopPropagation();
               onAddProduct(product.id);
             }}
           >
-            Agregar
+            {requiresCustomization ? "Elegir opciones" : "Agregar"}
           </button>
         )}
 
         <button
           type="button"
           className="catalog-product-card__edit-link"
+          aria-label={`Ver detalle de ${product.name}`}
           onClick={(event) => {
             event.stopPropagation();
             onOpenProduct(product.id);

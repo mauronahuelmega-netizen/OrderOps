@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import CatalogClient from "@/components/public/catalog/catalog-client";
+import PublicCatalogObservability from "@/components/public/catalog/public-catalog-observability";
 import { getPublicCatalogPageData } from "@/lib/catalog/public-page-data";
 
 type PublicCatalogPageContentProps = {
@@ -18,13 +19,19 @@ export default async function PublicCatalogPageContent({
   }
 
   return (
-    <CatalogClient
-      business={pageData.business}
-      categories={pageData.categories}
-      products={pageData.products}
-      slug={slug}
-      customizationEnabled={pageData.productCustomizationEnabled}
-      isCatalogPreview={isCatalogPreview}
-    />
+    <>
+      <PublicCatalogObservability
+        businessSlug={pageData.business.slug}
+        isPreview={isCatalogPreview}
+      />
+      <CatalogClient
+        business={pageData.business}
+        categories={pageData.categories}
+        products={pageData.products}
+        slug={slug}
+        customizationEnabled={pageData.productCustomizationEnabled}
+        isCatalogPreview={isCatalogPreview}
+      />
+    </>
   );
 }

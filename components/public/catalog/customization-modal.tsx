@@ -233,7 +233,7 @@ export default function CustomizationModal({
     return map;
   }, [validation.issues]);
 
-  const ctaLabel = editingCartLineId ? "Actualizar carrito" : "Agregar al carrito";
+  const ctaLabel = editingCartLineId ? "Actualizar pedido" : "Agregar al pedido";
 
   return (
     <div
@@ -251,11 +251,13 @@ export default function CustomizationModal({
       >
         <header className={styles.header}>
           <div>
-            <p className={styles.eyebrow}>Personalizar</p>
+            <p className={styles.eyebrow}>Armá tu pedido</p>
             <h2 id="customization-modal-title">{productName}</h2>
             {loadState.status === "ready" ? (
               <p className={styles.basePrice}>
                 Precio base {formatPublicCatalogCurrency(loadState.config.productPrice)}
+                {" · "}
+                Completá las opciones marcadas como obligatorias
               </p>
             ) : null}
           </div>
@@ -354,7 +356,7 @@ export default function CustomizationModal({
               confirmError={confirmError}
               incompleteHint={
                 !validation.valid && validation.issues.length > 0
-                  ? "Completá las opciones requeridas para continuar."
+                  ? "Completá las opciones obligatorias para agregar al pedido."
                   : null
               }
             >

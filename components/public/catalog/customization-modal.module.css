@@ -18,7 +18,7 @@
   border-radius: 1.25rem 1.25rem 0 0;
   background: var(--bg-surface);
   color: var(--text-primary);
-  box-shadow: var(--shadow-floating);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--text-primary) 16%, transparent);
 }
 
 .header,
@@ -62,6 +62,7 @@
   margin: 0.35rem 0 0;
   font-size: 0.875rem;
   color: var(--text-secondary);
+  line-height: 1.4;
 }
 
 .closeButton,
@@ -262,5 +263,6 @@
 
   .modal {
     border-radius: 1.25rem;
+    box-shadow: var(--shadow-floating);
   }
 }

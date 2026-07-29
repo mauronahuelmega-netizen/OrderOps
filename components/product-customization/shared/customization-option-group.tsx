@@ -22,7 +22,7 @@ export default function CustomizationOptionGroup({
       <div className={styles.groupHeader}>
         <h3>{group.name}</h3>
         <span className={styles.groupMeta}>
-          {group.isRequired ? "Requerido" : "Opcional"}
+          {group.isRequired ? "Obligatorio" : "Opcional"}
           {group.selectionType === "multiple" && group.minSelections > 0
             ? ` · mín. ${group.minSelections}`
             : null}
