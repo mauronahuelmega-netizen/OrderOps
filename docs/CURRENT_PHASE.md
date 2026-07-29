@@ -1,4 +1,19 @@
-﻿## Registro — PUBLIC-CATALOG-OBSERVABILITY-1 (2026-07-29)
+﻿## Registro — PUBLIC-CATALOG-ROADMAP-DEPLOY-1 (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-ROADMAP-DEPLOY-1 — Controlled Deploy for Public Catalog Roadmap Package  
+**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Resumen:** Se desplegó el paquete agrupado del roadmap de catálogo público: scroll mobile polish, corpus customization filtrado, UX de conversión y observability foundation privacy-safe. Image Transforms queda como deuda infra (`FeatureNotEnabled`) hasta autorización. Producción smokeada en catálogo, observability debug, checkout boundary y preview admin según auth disponible. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/preview logic/CSP/pedidos reales.
+- Doc: `docs/public-catalog-roadmap-deploy-1.md`
+- Commit funcional: `fb19a3a`
+- Commit docs: `Document public catalog roadmap deploy` (hash en log)
+- Deploy: `https://orderops.vercel.app`
+- CLI: `tsc` PASS · `build` PASS · lint histórico
+- **Próximo:** PUBLIC-CATALOG-FINAL-HANDOFF-1 o PUBLIC-CATALOG-POST-DEPLOY-MONITOR-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales
+
+---
+
+## Registro — PUBLIC-CATALOG-OBSERVABILITY-1 (2026-07-29)
 
 **Fase:** PUBLIC-CATALOG-OBSERVABILITY-1 — Public Catalog Web Vitals & UX Observability Foundation  
 **Estado:** PASS WITH PREVIEW QA DEBT  

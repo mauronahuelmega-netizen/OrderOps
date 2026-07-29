@@ -802,6 +802,10 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - Archivos: `lib/admin/pwa-manifest.ts`, `scripts/generate-admin-pwa-icons.mjs`, `public/icons/orderops-admin-*.png`, `docs/admin-pwa-branding-polish-1-app-name-icon.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
 
 
+### 2026-07-29 — PUBLIC-CATALOG-ROADMAP-DEPLOY-1 — Controlled Deploy for Public Catalog Roadmap Package
+
+- **Deploy / Public Catalog** Public Catalog Roadmap Deploy: grouped deploy of scroll jank polish, customization corpus overfetch reduction, conversion UX polish and privacy-safe observability foundation. Supabase Image Transformations remains infra auth debt (`FeatureNotEnabled`). Production smoke covered public catalog, observability debug endpoint, checkout boundary and preview according to auth availability. No DB/RLS/RPC/checkout/orders. Commit funcional `fb19a3a`. Doc: `docs/public-catalog-roadmap-deploy-1.md`. Estado: **DEPLOYED WITH NON-BLOCKING QA DEBT**. Próximo: **PUBLIC-CATALOG-FINAL-HANDOFF-1**.
+
 ### 2026-07-29 — PUBLIC-CATALOG-OBSERVABILITY-1 — Public Catalog Web Vitals & UX Observability Foundation
 
 - **Frontend / Public Catalog Observability** Public Catalog Observability: added privacy-safe Web Vitals + lightweight public catalog metrics foundation with debug query mode and a 204 same-origin endpoint, no DB/Supabase/PII/cart/customer data. Preserves checkout/create_order, cart schema, cache, corpus summary-lite, image loader, preview logic and UX polish. Pending grouped deploy. Doc: `docs/public-catalog-observability-1.md`. Estado: **PASS WITH PREVIEW QA DEBT**. Próximo: **PUBLIC-CATALOG-ROADMAP-DEPLOY-1**.
