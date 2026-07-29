@@ -1,14 +1,8 @@
 import "server-only";
 
-import { unstable_noStore as noStore } from "next/cache";
 import { notFound } from "next/navigation";
-import {
-  DEFAULT_SCHEDULED_DELIVERY_RULES,
-  normalizeScheduledDeliveryRules
-} from "@/lib/business/scheduled-delivery-rules";
-import { isBusinessAcceptingPublicOrders } from "@/lib/store-sessions/public.server";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
-import { createSupabaseServiceClient } from "@/lib/supabase/service";
+import { getCachedPublicBusinessStable } from "@/lib/catalog/public-cached-data";
+import { getFreshPublicOrderingStatus } from "@/lib/store-sessions/public.server";
 
 export type PublicBusiness = {
   catalog_hero_badge: string | null;
@@ -21,8 +15,12 @@ export type PublicBusiness = {
   instagram_url: string | null;
   is_active: boolean;
   name: string;
+  /**
+   * Live order acceptance (open session + on_demand), NOT the raw settings column.
+   * Always overlaid fresh via getFreshPublicOrderingStatus.
+   */
   on_demand_mode_active: boolean;
-  /** Fail-closed flag from business_settings (same request as other settings). */
+  /** Fail-closed flag from business_settings (cacheable stable). */
   product_customization_enabled: boolean;
   scheduled_cutoff_time: string;
   scheduled_max_days_in_advance: number;
@@ -34,68 +32,20 @@ export type PublicBusiness = {
   logo_url: string | null;
 };
 
+/**
+ * Public business by slug: stable branding/settings from cache + fresh acceptance.
+ */
 export async function getPublicBusinessBySlug(slug: string): Promise<PublicBusiness | null> {
-  noStore();
-
-  const normalizedSlug = slug.trim().toLowerCase();
-
-  if (!normalizedSlug) {
+  const stable = await getCachedPublicBusinessStable(slug);
+  if (!stable) {
     return null;
   }
 
-  const supabase = await createSupabaseServerClient();
-  const { data } = await supabase
-    .from("businesses")
-    .select(
-      "id, name, slug, whatsapp_number, logo_url, description, primary_color, cover_image_url, instagram_url, catalog_hero_headline, catalog_hero_badge, catalog_hero_microcopy, is_active"
-    )
-    .eq("slug", normalizedSlug)
-    .eq("is_active", true)
-    .maybeSingle();
-
-  if (!data) {
-    return null;
-  }
-
-  const serviceSupabase = createSupabaseServiceClient();
-  const { data: settings, error: settingsError } = await serviceSupabase
-    .from("business_settings")
-    .select(
-      "on_demand_mode_active, scheduled_mode_active, scheduled_min_lead_time_hours, scheduled_max_days_in_advance, scheduled_cutoff_time, inactive_working_days, product_customization_enabled"
-    )
-    .eq("business_id", data.id)
-    .maybeSingle();
-
-  if (settingsError) {
-    console.error("[public-business] settings lookup failed", {
-      businessId: data.id,
-      code: settingsError.code,
-      message: settingsError.message
-    });
-  }
-
-  const acceptingOrders = await isBusinessAcceptingPublicOrders(data.id, {
-    onDemandModeActive: settings?.on_demand_mode_active ?? false
-  });
-  const normalizedRules = normalizeScheduledDeliveryRules(settings);
+  const acceptingOrders = await getFreshPublicOrderingStatus(stable.id);
 
   return {
-    ...data,
-    on_demand_mode_active: acceptingOrders,
-    product_customization_enabled: settings?.product_customization_enabled === true,
-    scheduled_mode_active: settings?.scheduled_mode_active ?? false,
-    scheduled_min_lead_time_hours:
-      normalizedRules.scheduled_min_lead_time_hours ??
-      DEFAULT_SCHEDULED_DELIVERY_RULES.scheduled_min_lead_time_hours,
-    scheduled_max_days_in_advance:
-      normalizedRules.scheduled_max_days_in_advance ??
-      DEFAULT_SCHEDULED_DELIVERY_RULES.scheduled_max_days_in_advance,
-    scheduled_cutoff_time:
-      normalizedRules.scheduled_cutoff_time ??
-      DEFAULT_SCHEDULED_DELIVERY_RULES.scheduled_cutoff_time,
-    inactive_working_days:
-      normalizedRules.inactive_working_days ??
-      DEFAULT_SCHEDULED_DELIVERY_RULES.inactive_working_days
+    ...stable,
+    on_demand_mode_active: acceptingOrders
   };
 }
 

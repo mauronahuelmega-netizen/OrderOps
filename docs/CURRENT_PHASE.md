@@ -1,4 +1,17 @@
-﻿## Registro — PUBLIC-CATALOG-PERFORMANCE-DEPLOY-1 (2026-07-28)
+﻿## Registro — PUBLIC-CATALOG-CACHE-STRATEGY-1 (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-CACHE-STRATEGY-1 — Public Catalog Data Cache Strategy & Safe Invalidation  
+**Estado:** PASS WITH RESIDUAL CACHE DEBT  
+**Resumen:** Se implementó una estrategia de cache segura para el catálogo público: datos estables del catálogo cacheados con tags/TTL corto, estado de aceptación de pedidos separado y fresco, e invalidación centralizada desde actions admin que cambian productos/categorías/settings/customizations. Sin DB/RLS/RPC/checkout action/carrito schema/preview admin logic.  
+- Doc: `docs/public-catalog-cache-strategy-1.md`
+- Código: `lib/catalog/public-cache-tags.ts`, `public-cached-data.ts`, `public-page-data.ts`, `public.ts`, `lib/business/public.ts`, `lib/store-sessions/public.server.ts`, `lib/product-customization/public.ts`, `app/b/[slug]/catalogo/page.tsx`, `public-catalog-page.tsx`, admin products/categories/settings/operations/customizations actions
+- CLI: `tsc` PASS · `build` PASS · lint histórico
+- **Próximo:** PUBLIC-CATALOG-CACHE-DEPLOY-1 o PUBLIC-CATALOG-SCROLL-JANK-POLISH-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy, commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-PERFORMANCE-DEPLOY-1 (2026-07-28)
 
 **Fase:** PUBLIC-CATALOG-PERFORMANCE-DEPLOY-1 — Controlled Deploy for Public Catalog Performance Package  
 **Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  

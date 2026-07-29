@@ -802,6 +802,10 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 - Archivos: `lib/admin/pwa-manifest.ts`, `scripts/generate-admin-pwa-icons.mjs`, `public/icons/orderops-admin-*.png`, `docs/admin-pwa-branding-polish-1-app-name-icon.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
 
 
+### 2026-07-29 — PUBLIC-CATALOG-CACHE-STRATEGY-1 — Public Catalog Data Cache Strategy & Safe Invalidation
+
+- **Frontend / Public Catalog Cache** PUBLIC-CATALOG-CACHE-STRATEGY-1: `unstable_cache` TTL 60s + tags `public-business`/`public-catalog`/`public-customization`; stable branding/products/summaries cacheados (service client); `getFreshPublicOrderingStatus` con `noStore`; invalidación `updateTag` vía `revalidatePublicCatalogCache` en products/categories/settings/operations/customizations. Estado: **PASS WITH RESIDUAL CACHE DEBT**. Doc: `docs/public-catalog-cache-strategy-1.md`. Próximo: **PUBLIC-CATALOG-CACHE-DEPLOY-1**. Sin DB/RLS/RPC/checkout/commit/push/deploy.
+
 ### 2026-07-28 — PUBLIC-CATALOG-PERFORMANCE-DEPLOY-1 — Controlled Deploy for Public Catalog Performance Package
 
 - **Deploy / Public Catalog** PUBLIC-CATALOG-PERFORMANCE-DEPLOY-1: Public Catalog Performance package deployed: imágenes críticas con `next/image`/PublicStorageImage, transforms fallback seguro por FeatureNotEnabled, data path dedupeado con `public-page-data`, settings/flag/products reducidos, summaries reusando catálogo y ProductCard memoizado. Sin DB/RLS/RPC/cache/checkout/pedidos. Commit `2b60bb3`. Próximo: **PUBLIC-CATALOG-CACHE-STRATEGY-1**. Doc: `docs/public-catalog-performance-deploy-1.md`.

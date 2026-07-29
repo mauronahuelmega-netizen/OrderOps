@@ -1,5 +1,6 @@
 import "server-only";
 
+import { unstable_noStore as noStore } from "next/cache";
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
 import { computeOrderAcceptanceActive } from "@/lib/store-sessions/acceptance";
 
@@ -28,11 +29,15 @@ type IsBusinessAcceptingPublicOrdersOptions = {
  * requires on_demand_mode_active=true, and an open store session when the
  * sessions table is available. Prevents UI false-positives when sessions are
  * open but the column RPC checks is still false.
+ *
+ * Always dynamic — never cache this result with the stable catalog payload.
  */
 export async function isBusinessAcceptingPublicOrders(
   businessId: string,
   options?: IsBusinessAcceptingPublicOrdersOptions
 ): Promise<boolean> {
+  noStore();
+
   const supabase = createSupabaseServiceClient();
 
   let onDemandModeActive = options?.onDemandModeActive;
@@ -89,4 +94,12 @@ export async function isBusinessAcceptingPublicOrders(
     onDemandModeActive,
     hasOpenStoreSession: Boolean(activeSession)
   });
+}
+
+/**
+ * Fresh public ordering acceptance for catalog/checkout UI.
+ * Explicit alias kept for cache-boundary clarity.
+ */
+export async function getFreshPublicOrderingStatus(businessId: string): Promise<boolean> {
+  return isBusinessAcceptingPublicOrders(businessId);
 }

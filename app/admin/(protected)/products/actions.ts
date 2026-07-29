@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { getActionErrorMessage, logActionFailure } from "@/lib/admin/action-errors";
 import { requireAdminPermission } from "@/lib/admin/context";
+import { revalidatePublicCatalogCache } from "@/lib/catalog/public-cache-tags";
 import { getAdminProductById, type AdminProduct } from "@/lib/products/admin";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -120,6 +121,11 @@ export async function createProductAction(
     }
 
     revalidatePath("/admin/products");
+    revalidatePublicCatalogCache({
+      businessId: adminContext.businessId,
+      slug: adminContext.businessSlug,
+      scope: "catalog"
+    });
     return { success: true };
   } catch (error) {
     logActionFailure("products.create", error, { categoryId });
@@ -165,6 +171,11 @@ export async function setProductAvailabilityAction(
     }
 
     revalidatePath("/admin/products");
+    revalidatePublicCatalogCache({
+      businessId: adminContext.businessId,
+      slug: adminContext.businessSlug,
+      scope: "catalog"
+    });
     return { success: true };
   } catch (error) {
     logActionFailure("products.setAvailability", error, { productId, isAvailable });
@@ -275,6 +286,11 @@ export async function updateProductAction(
     }
 
     revalidatePath("/admin/products");
+    revalidatePublicCatalogCache({
+      businessId: adminContext.businessId,
+      slug: adminContext.businessSlug,
+      scope: "catalog"
+    });
     return { success: true };
   } catch (error) {
     logActionFailure("products.update", error, { productId, categoryId });

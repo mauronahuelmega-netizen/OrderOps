@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { getActionErrorMessage, logActionFailure } from "@/lib/admin/action-errors";
 import { requireAdminPermission } from "@/lib/admin/context";
+import { revalidatePublicCatalogCache } from "@/lib/catalog/public-cache-tags";
 import {
   getProductCustomizationInheritanceForAdmin,
   parseCustomizationAssignmentInput,
@@ -30,9 +31,20 @@ type ActionState = {
 const CUSTOMIZATIONS_PATH = "/admin/products/customizations";
 const PRODUCTS_PATH = "/admin/products";
 
-function revalidateCustomizationPaths() {
+function revalidateCustomizationPaths(input?: {
+  businessId?: string;
+  slug?: string | null;
+}) {
   revalidatePath(CUSTOMIZATIONS_PATH);
   revalidatePath(PRODUCTS_PATH);
+
+  if (input?.businessId) {
+    revalidatePublicCatalogCache({
+      businessId: input.businessId,
+      slug: input.slug,
+      scope: "customization"
+    });
+  }
 }
 
 function getId(formData: FormData, key: string) {
@@ -117,7 +129,7 @@ export async function createCustomizationGroupAction(
       throw new Error("No pudimos crear el grupo.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return {
       success: true,
       message: "Grupo creado.",
@@ -171,7 +183,7 @@ export async function updateCustomizationGroupAction(
       throw new Error("No pudimos actualizar el grupo.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return { success: true, message: "Grupo actualizado." };
   } catch (error) {
     logActionFailure("customizations.group.update", error, { groupId });
@@ -209,7 +221,7 @@ export async function toggleCustomizationGroupAvailabilityAction(
       throw new Error("No pudimos actualizar la disponibilidad del grupo.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return {
       success: true,
       message: isAvailable ? "Grupo activado." : "Grupo desactivado."
@@ -264,7 +276,7 @@ export async function createCustomizationOptionAction(
       throw new Error("No pudimos crear la opción.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return {
       success: true,
       message: "Opción creada.",
@@ -315,7 +327,7 @@ export async function updateCustomizationOptionAction(
       throw new Error("No pudimos actualizar la opción.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return { success: true, message: "Opción actualizada." };
   } catch (error) {
     logActionFailure("customizations.option.update", error, { optionId });
@@ -353,7 +365,7 @@ export async function toggleCustomizationOptionAvailabilityAction(
       throw new Error("No pudimos actualizar la disponibilidad de la opción.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return {
       success: true,
       message: isAvailable ? "Opción activada." : "Opción desactivada."
@@ -570,7 +582,7 @@ export async function createCustomizationGroupAssignmentAction(
       throw new Error("No pudimos crear la asignación.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return {
       success: true,
       message: "Asignación creada.",
@@ -630,7 +642,7 @@ export async function updateCustomizationGroupAssignmentAction(
       throw new Error("No pudimos actualizar la asignación.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return { success: true, message: "Asignación actualizada." };
   } catch (error) {
     logActionFailure("customizations.assignment.update", error, { assignmentId });
@@ -671,7 +683,7 @@ export async function toggleCustomizationGroupAssignmentAction(
       throw new Error("No pudimos actualizar el estado de la asignación.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return {
       success: true,
       message: isEnabled ? "Asignación activada." : "Asignación desactivada."
@@ -708,7 +720,7 @@ export async function removeCustomizationGroupAssignmentAction(
 
     // Idempotent no-op: already gone (or not visible to this tenant) after auth.
     if ("error" in ownership) {
-      revalidateCustomizationPaths();
+      revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
       return {
         success: true,
         message: "La asignación ya no estaba presente."
@@ -750,7 +762,7 @@ export async function removeCustomizationGroupAssignmentAction(
       throw new Error("No pudimos quitar la asignación.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return {
       success: true,
       message:
@@ -839,7 +851,7 @@ export async function disableProductCustomizationGroupOverrideAction(
       }
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return { success: true, message: "Grupo desactivado para este producto." };
   } catch (error) {
     logActionFailure("customizations.override.group.disable", error, {
@@ -888,7 +900,7 @@ export async function restoreProductCustomizationGroupOverrideAction(
       throw new Error("No pudimos restaurar la herencia del grupo.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return { success: true, message: "Herencia del grupo restaurada." };
   } catch (error) {
     logActionFailure("customizations.override.group.restore", error, {
@@ -979,7 +991,7 @@ export async function disableProductCustomizationOptionOverrideAction(
       }
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return { success: true, message: "Opción desactivada para este producto." };
   } catch (error) {
     logActionFailure("customizations.override.option.disable", error, {
@@ -1028,7 +1040,7 @@ export async function restoreProductCustomizationOptionOverrideAction(
       throw new Error("No pudimos restaurar la herencia de la opción.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return { success: true, message: "Herencia de la opción restaurada." };
   } catch (error) {
     logActionFailure("customizations.override.option.restore", error, {
@@ -1107,7 +1119,7 @@ export async function createUpsellGroupAction(
       throw new Error("No pudimos crear el grupo de plus.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return {
       success: true,
       message: "Grupo de plus creado.",
@@ -1196,7 +1208,7 @@ export async function updateUpsellGroupAction(
       throw new Error("No pudimos actualizar el grupo de plus.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return { success: true, message: "Grupo de plus actualizado." };
   } catch (error) {
     logActionFailure("customizations.upsell.update", error, { upsellGroupId });
@@ -1238,7 +1250,7 @@ export async function toggleUpsellGroupAction(
       throw new Error("No pudimos actualizar la disponibilidad del grupo de plus.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return {
       success: true,
       message: isAvailable ? "Grupo de plus activado." : "Grupo de plus desactivado."
@@ -1323,7 +1335,7 @@ export async function addUpsellGroupItemAction(
       throw new Error("No pudimos agregar el producto sugerido.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return {
       success: true,
       message: "Producto sugerido agregado.",
@@ -1380,7 +1392,7 @@ export async function updateUpsellGroupItemAction(
       throw new Error("No pudimos actualizar el producto sugerido.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return { success: true, message: "Producto sugerido actualizado." };
   } catch (error) {
     logActionFailure("customizations.upsell.item.update", error, { itemId });
@@ -1418,7 +1430,7 @@ export async function toggleUpsellGroupItemAction(
       throw new Error("No pudimos actualizar la disponibilidad del producto sugerido.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return {
       success: true,
       message: isAvailable
@@ -1516,7 +1528,7 @@ export async function reorderCustomizationGroupsAction(
       throw new Error("No pudimos actualizar el orden de grupos.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return { success: true, message: "Orden de grupos actualizado." };
   } catch (error) {
     logActionFailure("customizations.groups.reorder", error);
@@ -1587,7 +1599,7 @@ export async function reorderCustomizationOptionsAction(
       throw new Error("No pudimos actualizar el orden de opciones.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return { success: true, message: "Orden de opciones actualizado." };
   } catch (error) {
     logActionFailure("customizations.options.reorder", error, { groupId });
@@ -1696,7 +1708,7 @@ export async function reorderCustomizationAssignmentsAction(
       throw new Error("No pudimos actualizar el orden de asignaciones.");
     }
 
-    revalidateCustomizationPaths();
+    revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
     return { success: true, message: "Orden de assignments actualizado." };
   } catch (error) {
     logActionFailure("customizations.assignments.reorder", error, {

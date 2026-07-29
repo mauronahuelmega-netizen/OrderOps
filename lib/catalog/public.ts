@@ -1,7 +1,7 @@
 import "server-only";
 
 import { unstable_noStore as noStore } from "next/cache";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createSupabaseServiceClient } from "@/lib/supabase/service";
 
 export type PublicCategory = {
   id: string;
@@ -25,13 +25,15 @@ export type PublicProduct = {
   } | null;
 };
 
-export async function getPublicCatalogByBusinessId(businessId: string): Promise<{
+/**
+ * Cookie-free catalog rows loader (service role + business_id filter).
+ * Safe for unstable_cache. Prefer getPublicCatalogByBusinessId for dynamic callers.
+ */
+export async function loadPublicCatalogByBusinessId(businessId: string): Promise<{
   categories: PublicCategory[];
   products: PublicProduct[];
 }> {
-  noStore();
-
-  const supabase = await createSupabaseServerClient();
+  const supabase = createSupabaseServiceClient();
 
   const [{ data: categories, error: categoriesError }, { data: products, error: productsError }] =
     await Promise.all([
@@ -61,4 +63,12 @@ export async function getPublicCatalogByBusinessId(businessId: string): Promise<
     categories: categories ?? [],
     products: products ?? []
   };
+}
+
+export async function getPublicCatalogByBusinessId(businessId: string): Promise<{
+  categories: PublicCategory[];
+  products: PublicProduct[];
+}> {
+  noStore();
+  return loadPublicCatalogByBusinessId(businessId);
 }

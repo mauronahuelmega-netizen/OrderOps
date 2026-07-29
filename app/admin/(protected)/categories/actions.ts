@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { getActionErrorMessage, logActionFailure } from "@/lib/admin/action-errors";
 import { requireAdminPermission } from "@/lib/admin/context";
+import { revalidatePublicCatalogCache } from "@/lib/catalog/public-cache-tags";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type ActionState = {
@@ -40,6 +41,11 @@ export async function createCategoryAction(
 
     revalidatePath("/admin/categories");
     revalidatePath("/admin/products");
+    revalidatePublicCatalogCache({
+      businessId: adminContext.businessId,
+      slug: adminContext.businessSlug,
+      scope: "catalog"
+    });
     return { success: true, categoryId: data.id };
   } catch (error) {
     logActionFailure("categories.create", error);
@@ -96,6 +102,11 @@ export async function updateCategoryAction(
 
     revalidatePath("/admin/categories");
     revalidatePath("/admin/products");
+    revalidatePublicCatalogCache({
+      businessId: adminContext.businessId,
+      slug: adminContext.businessSlug,
+      scope: "catalog"
+    });
     return { success: true };
   } catch (error) {
     logActionFailure("categories.update", error, { categoryId });

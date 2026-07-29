@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { getActionErrorMessage, logActionFailure } from "@/lib/admin/action-errors";
 import { requireAdminPermission } from "@/lib/admin/context";
+import { revalidatePublicCatalogCache } from "@/lib/catalog/public-cache-tags";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type ActionState = {
@@ -86,11 +87,11 @@ export async function updatePublicBusinessSettingsAction(
     revalidatePath("/admin/settings/public");
     revalidatePath("/admin/settings/public/landing");
     revalidatePath("/admin/settings/public/catalogo");
-
-    if (adminContext.businessSlug) {
-      revalidatePath(`/b/${adminContext.businessSlug}`);
-      revalidatePath(`/b/${adminContext.businessSlug}/catalogo`);
-    }
+    revalidatePublicCatalogCache({
+      businessId: adminContext.businessId,
+      slug: adminContext.businessSlug,
+      scope: "business"
+    });
 
     return { success: true };
   } catch (error) {
@@ -128,10 +129,11 @@ export async function updateCatalogHeroSettingsAction(
 
     revalidatePath("/admin/settings/public");
     revalidatePath("/admin/settings/public/catalogo");
-
-    if (adminContext.businessSlug) {
-      revalidatePath(`/b/${adminContext.businessSlug}/catalogo`);
-    }
+    revalidatePublicCatalogCache({
+      businessId: adminContext.businessId,
+      slug: adminContext.businessSlug,
+      scope: "business"
+    });
 
     return { success: true };
   } catch (error) {

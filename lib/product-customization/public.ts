@@ -9,7 +9,7 @@ import {
   type PublicProductCustomizationSummary,
   type PublicUpsellGroupView
 } from "@/lib/product-customization/public-shared";
-import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { createSupabaseServiceClient } from "@/lib/supabase/service";
 
 type ProductRow = {
   id: string;
@@ -229,11 +229,9 @@ async function loadPublicCustomizationCorpus(
   productIds: string[],
   corpusOptions?: LoadPublicCustomizationCorpusOptions
 ) {
-  // Anon/authenticated SSR client. Public SELECT policies gate on
-  // is_public_product_customization_enabled(business_id) (SECURITY DEFINER
-  // boolean helper) so anon does not need SELECT on business_settings.
-  // Callers already fail-closed via isProductCustomizationEnabled.
-  const supabase = await createSupabaseServerClient();
+  // Cookie-free service client so corpus can run inside unstable_cache.
+  // Callers already fail-closed via isProductCustomizationEnabled before load.
+  const supabase = createSupabaseServiceClient();
 
   let productRows: ProductRow[];
 
@@ -508,7 +506,7 @@ function buildSummaryForProduct(params: {
   };
 }
 
-export async function getPublicCustomizationSummariesForProducts(params: {
+type PublicCustomizationSummariesParams = {
   businessId: string;
   productIds: string[];
   /** When provided, skips the feature-flag settings read. */
@@ -517,9 +515,15 @@ export async function getPublicCustomizationSummariesForProducts(params: {
   products?: ProductRow[];
   /** See loadPublicCustomizationCorpus reuseProductsForSuggested. */
   reuseProductsForSuggested?: boolean;
-}): Promise<Map<string, PublicProductCustomizationSummary>> {
-  noStore();
+};
 
+/**
+ * Cookie-free summaries loader for unstable_cache.
+ * Callers must fail-closed on productCustomizationEnabled / flag first.
+ */
+export async function loadPublicCustomizationSummariesForProducts(
+  params: PublicCustomizationSummariesParams
+): Promise<Map<string, PublicProductCustomizationSummary>> {
   const result = new Map<string, PublicProductCustomizationSummary>();
   const uniqueProductIds = [...new Set(params.productIds.filter(Boolean))];
 
@@ -582,6 +586,13 @@ export async function getPublicCustomizationSummariesForProducts(params: {
     });
     return result;
   }
+}
+
+export async function getPublicCustomizationSummariesForProducts(
+  params: PublicCustomizationSummariesParams
+): Promise<Map<string, PublicProductCustomizationSummary>> {
+  noStore();
+  return loadPublicCustomizationSummariesForProducts(params);
 }
 
 export async function getPublicProductCustomizationConfig(params: {
