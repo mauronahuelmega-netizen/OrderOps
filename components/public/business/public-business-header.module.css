@@ -1,0 +1,28 @@
+.header {
+  transition: transform 180ms ease;
+}
+
+/* Checkout: keep tenant branding in document flow — do not stick over the form.
+   Specificity beats globals `.public-business-header { position: sticky }`. */
+:global(.public-business-header).headerCheckout {
+  position: static;
+  top: auto;
+  transform: none;
+  pointer-events: auto;
+}
+
+.headerHidden {
+  transform: translateY(calc(-100% - 16px));
+  pointer-events: none;
+}
+
+.headerVisible {
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .header {
+    transition: none;
+  }
+}

@@ -1,4 +1,4 @@
-import type { LocalCartSelectedGroup } from "@/lib/cart/types";
+import type { LocalCartItemV2, LocalCartSelectedGroup } from "@/lib/cart/types";
 
 /**
  * Stable configuration signature for cart dedup.
@@ -31,4 +31,38 @@ export function selectedGroupsToSignatureInput(groups: LocalCartSelectedGroup[])
     groupId: group.groupId,
     selectedOptionIds: group.selectedOptions.map((option) => option.optionId)
   }));
+}
+
+/**
+ * Signature a parent would have after including the listed upsell product IDs
+ * (deduped + stable order via buildCartConfigurationSignature).
+ */
+export function buildParentConfigurationSignature(params: {
+  productId: string;
+  selectedGroups: LocalCartSelectedGroup[];
+  upsellProductIds: string[];
+}): string {
+  return buildCartConfigurationSignature({
+    productId: params.productId,
+    selectedGroups: selectedGroupsToSignatureInput(params.selectedGroups),
+    upsellProductIds: params.upsellProductIds
+  });
+}
+
+/**
+ * Hypothetical parent signature after attaching one additional upsell product.
+ */
+export function buildCartConfigurationSignatureWithUpsell(params: {
+  parent: Pick<LocalCartItemV2, "productId" | "selectedGroups">;
+  existingUpsellProductIds: string[];
+  additionalUpsellProductId: string;
+}): string {
+  return buildParentConfigurationSignature({
+    productId: params.parent.productId,
+    selectedGroups: params.parent.selectedGroups,
+    upsellProductIds: [
+      ...params.existingUpsellProductIds,
+      params.additionalUpsellProductId
+    ]
+  });
 }

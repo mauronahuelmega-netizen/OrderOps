@@ -1,12 +1,15 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "@/components/public/catalog/theme-toggle";
 import PublicStorageImage from "@/components/public/catalog/public-storage-image";
+import { dispatchPublicHeaderHidden } from "@/components/public/business/public-header-visibility";
+import { useHideOnScroll } from "@/components/public/business/use-hide-on-scroll";
 import type { PublicBusiness } from "@/lib/business/public";
+import styles from "./public-business-header.module.css";
 
 type PublicBusinessHeaderProps = {
   business: PublicBusiness;
@@ -31,10 +34,12 @@ export default function PublicBusinessHeader({
   slug
 }: PublicBusinessHeaderProps) {
   const pathname = usePathname();
+  const isCheckoutRoute = /\/b\/[^/]+\/checkout\/?$/.test(pathname);
+  const headerRef = useRef<HTMLElement | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [themePreference, setThemePreference] = useState<ThemePreference>("system");
   const [systemTheme, setSystemTheme] = useState<ResolvedTheme>("light");
+  const headerHidden = useHideOnScroll({ disabled: isMenuOpen || isCheckoutRoute });
 
   const resolvedTheme: ResolvedTheme =
     themePreference === "system" ? systemTheme : themePreference;
@@ -44,15 +49,17 @@ export default function PublicBusinessHeader({
   }, [pathname]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 12);
-    };
+    const headerEl = headerRef.current;
+    const headerOffsetPx = headerEl?.offsetHeight ?? 78;
+    dispatchPublicHeaderHidden({
+      hidden: headerHidden && !isMenuOpen,
+      headerOffsetPx
+    });
+  }, [headerHidden, isMenuOpen]);
 
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
+  useEffect(() => {
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      dispatchPublicHeaderHidden({ hidden: false, headerOffsetPx: 78 });
     };
   }, []);
 
@@ -142,10 +149,16 @@ export default function PublicBusinessHeader({
   return (
     <>
       <header
-        className={`public-business-header${
-          isScrolled ? " public-business-header--scrolled" : ""
+        ref={headerRef}
+        className={`public-business-header ${styles.header} ${
+          isCheckoutRoute ? styles.headerCheckout : ""
+        } ${
+          headerHidden && !isMenuOpen ? styles.headerHidden : styles.headerVisible
         }`}
         style={headerStyles}
+        data-header-hidden={headerHidden && !isMenuOpen ? "true" : "false"}
+        data-checkout-static={isCheckoutRoute ? "true" : "false"}
+        aria-hidden={headerHidden && !isMenuOpen ? true : undefined}
       >
         <div className="public-business-header__inner">
           <Link href={`/b/${slug}`} className="public-business-header__brand">

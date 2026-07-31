@@ -67,6 +67,21 @@ export function isLocalCartLegacyItem(item: LocalCartItem): item is LocalCartLeg
   return !isLocalCartItemV2(item);
 }
 
+export function isV2ParentCartItem(item: LocalCartItem): item is LocalCartItemV2 {
+  return isLocalCartItemV2(item) && item.itemKind === "product" && item.parentCartLineId === null;
+}
+
+export function isUpsellChildForParent(
+  item: LocalCartItem,
+  parentCartLineId: string
+): item is LocalCartItemV2 {
+  return (
+    isLocalCartItemV2(item) &&
+    item.itemKind === "upsell" &&
+    item.parentCartLineId === parentCartLineId
+  );
+}
+
 export function cartContainsCustomizedItems(items: LocalCartItem[]): boolean {
   return items.some((item) => isLocalCartItemV2(item));
 }

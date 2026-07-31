@@ -1,6 +1,7 @@
 import {
   buildCartConfigurationSignature,
-  selectedGroupsToSignatureInput
+  buildCartConfigurationSignatureWithUpsell,
+  buildParentConfigurationSignature
 } from "@/lib/cart/signature";
 import type {
   LocalCartItem,
@@ -11,7 +12,9 @@ import type {
 import {
   cartContainsCustomizedItems,
   isLocalCartItemV2,
-  isLocalCartLegacyItem
+  isLocalCartLegacyItem,
+  isUpsellChildForParent,
+  isV2ParentCartItem
 } from "@/lib/cart/types";
 import type {
   PublicCustomizationGroup,
@@ -29,10 +32,17 @@ export type {
 export {
   cartContainsCustomizedItems,
   isLocalCartItemV2,
-  isLocalCartLegacyItem
+  isLocalCartLegacyItem,
+  isUpsellChildForParent,
+  isV2ParentCartItem
 } from "@/lib/cart/types";
 
-export { buildCartConfigurationSignature } from "@/lib/cart/signature";
+export {
+  buildCartConfigurationSignature,
+  buildCartConfigurationSignatureWithUpsell,
+  buildParentConfigurationSignature
+} from "@/lib/cart/signature";
+
 
 export type CartStorageScope = "public" | "preview";
 
@@ -203,8 +213,21 @@ export function clearUnifiedCartItems(
   window.localStorage.removeItem(keys.v2);
 }
 
+/**
+ * Customer-facing product count for public UI (FAB, cart sheet, checkout).
+ * Sums quantity of each hierarchical root only (legacy lines + V2 parents).
+ * Linked upsell children do not increment the count; they remain billable/removable.
+ * Orphan upsells (no parent in cart) are excluded from hierarchical rows and from this count
+ * (same as `buildHierarchicalCartRows`); they are not reparented or repaired here.
+ */
 export function getCartItemCount(items: LocalCartItem[]) {
-  return items.reduce((total, item) => total + item.quantity, 0);
+  return buildHierarchicalCartRows(items).reduce((total, row) => {
+    if (row.kind === "legacy") {
+      return total + row.item.quantity;
+    }
+
+    return total + row.parent.quantity;
+  }, 0);
 }
 
 export function getCartItemsTotal(items: LocalCartItem[]) {
@@ -332,6 +355,44 @@ function buildSelectedGroupsFromConfig(
   return result;
 }
 
+export function buildUpsellChildCartLine(params: {
+  suggested: PublicUpsellSuggestedProduct;
+  parentCartLineId: string;
+  categoryId: string;
+  quantity: number;
+  cartLineId?: string;
+  createdAt?: string;
+}): LocalCartItemV2 {
+  const quantity = Math.max(params.quantity, 1);
+  const timestamp = params.createdAt ?? nowIso();
+  const cartLineId = params.cartLineId ?? createCartLineId();
+
+  return {
+    schemaVersion: 2,
+    cartLineId,
+    productId: params.suggested.id,
+    productName: params.suggested.name,
+    categoryId: params.categoryId,
+    productImageUrl: params.suggested.imageUrl,
+    baseUnitPrice: params.suggested.price,
+    quantity,
+    itemKind: "upsell",
+    parentCartLineId: params.parentCartLineId,
+    selectedGroups: [],
+    customizationTotal: 0,
+    finalUnitPrice: params.suggested.price,
+    lineTotal: params.suggested.price * quantity,
+    configurationSignature: buildCartConfigurationSignature({
+      productId: params.suggested.id,
+      selectedGroups: [],
+      upsellProductIds: []
+    }),
+    displaySummary: [`Plus: ${params.suggested.name}`],
+    createdAt: timestamp,
+    updatedAt: timestamp
+  };
+}
+
 export function buildCartLinesFromCustomizationSelection(params: {
   config: PublicProductCustomizationConfig;
   categoryId: string;
@@ -362,9 +423,9 @@ export function buildCartLinesFromCustomizationSelection(params: {
     .map((productId) => upsellProducts.find((product) => product.id === productId))
     .filter((product): product is PublicUpsellSuggestedProduct => Boolean(product));
 
-  const configurationSignature = buildCartConfigurationSignature({
+  const configurationSignature = buildParentConfigurationSignature({
     productId: params.config.productId,
-    selectedGroups: selectedGroupsToSignatureInput(selectedGroups),
+    selectedGroups,
     upsellProductIds: selectedUpsells.map((product) => product.id)
   });
 
@@ -389,69 +450,224 @@ export function buildCartLinesFromCustomizationSelection(params: {
     updatedAt: timestamp
   };
 
-  const children: LocalCartItemV2[] = selectedUpsells.map((product) => {
-    const childId = createCartLineId();
-    return {
-      schemaVersion: 2,
-      cartLineId: childId,
-      productId: product.id,
-      productName: product.name,
-      categoryId: params.categoryId,
-      productImageUrl: product.imageUrl,
-      baseUnitPrice: product.price,
-      quantity,
-      itemKind: "upsell",
+  const children: LocalCartItemV2[] = selectedUpsells.map((product) =>
+    buildUpsellChildCartLine({
+      suggested: product,
       parentCartLineId,
-      selectedGroups: [],
-      customizationTotal: 0,
-      finalUnitPrice: product.price,
-      lineTotal: product.price * quantity,
-      configurationSignature: buildCartConfigurationSignature({
-        productId: product.id,
-        selectedGroups: [],
-        upsellProductIds: []
-      }),
-      displaySummary: [`Plus: ${product.name}`],
-      createdAt: timestamp,
-      updatedAt: timestamp
-    };
-  });
+      categoryId: params.categoryId,
+      quantity,
+      createdAt: timestamp
+    })
+  );
 
   return { parent, children };
+}
+
+export type MergeCustomizedSelectionResult =
+  | {
+      outcome: "created" | "merged" | "replaced";
+      items: LocalCartItem[];
+      parentCartLineId: string;
+    }
+  | {
+      outcome: "signature_conflict";
+      items: LocalCartItem[];
+      parentCartLineId: string;
+      conflictingParentCartLineId: string;
+    }
+  | {
+      outcome: "parent_missing";
+      items: LocalCartItem[];
+      parentCartLineId: string;
+    };
+
+export type PreserveAttachedUpsellsForEditResult = {
+  children: LocalCartItemV2[];
+  removedIneligibleProductIds: string[];
+};
+
+/**
+ * Keep eligible attached upsell children when rebuilding from modal selections.
+ * Modal children win on productId; preserved children sync to next parent quantity.
+ */
+export function preserveAttachedUpsellsForEdit(params: {
+  existingChildren: LocalCartItemV2[];
+  nextParent: LocalCartItemV2;
+  nextModalChildren: LocalCartItemV2[];
+  eligibleAttachedUpsellProductIds: ReadonlySet<string>;
+}): PreserveAttachedUpsellsForEditResult {
+  const modalProductIds = new Set(
+    params.nextModalChildren.map((child) => child.productId)
+  );
+  const removedIneligibleProductIds: string[] = [];
+  const preserved: LocalCartItemV2[] = [];
+
+  for (const child of params.existingChildren) {
+    if (child.itemKind !== "upsell") {
+      continue;
+    }
+    if (modalProductIds.has(child.productId)) {
+      continue;
+    }
+    if (child.productId === params.nextParent.productId) {
+      removedIneligibleProductIds.push(child.productId);
+      continue;
+    }
+    if (!params.eligibleAttachedUpsellProductIds.has(child.productId)) {
+      removedIneligibleProductIds.push(child.productId);
+      continue;
+    }
+
+    preserved.push(
+      recalculateV2Line(
+        {
+          ...child,
+          parentCartLineId: params.nextParent.cartLineId
+        },
+        params.nextParent.quantity
+      )
+    );
+  }
+
+  const children = [
+    ...params.nextModalChildren.map((child) =>
+      recalculateV2Line(
+        {
+          ...child,
+          parentCartLineId: params.nextParent.cartLineId
+        },
+        params.nextParent.quantity
+      )
+    ),
+    ...preserved
+  ];
+
+  return { children, removedIneligibleProductIds };
+}
+
+function findConflictingParent(
+  items: LocalCartItem[],
+  signature: string,
+  excludeCartLineId: string | null
+): LocalCartItemV2 | null {
+  for (const item of items) {
+    if (!isV2ParentCartItem(item)) {
+      continue;
+    }
+    if (excludeCartLineId && item.cartLineId === excludeCartLineId) {
+      continue;
+    }
+    if (item.configurationSignature === signature) {
+      return item;
+    }
+  }
+  return null;
+}
+
+function childrenForParent(
+  items: LocalCartItem[],
+  parentCartLineId: string
+): LocalCartItemV2[] {
+  return items.filter((item): item is LocalCartItemV2 =>
+    isUpsellChildForParent(item, parentCartLineId)
+  );
 }
 
 /**
  * Upsert customized parent (+ synced upsell children).
  * Upsell quantity tracks parent quantity.
+ * Returns a discriminated result; failure branches leave items unchanged.
  */
 export function mergeCustomizedSelectionIntoCart(
   items: LocalCartItem[],
   parent: LocalCartItemV2,
   children: LocalCartItemV2[],
-  options?: { replaceCartLineId?: string | null }
-): LocalCartItem[] {
-  let working = items;
-
-  if (options?.replaceCartLineId) {
-    working = removeCartLineWithChildren(working, options.replaceCartLineId);
+  options?: {
+    replaceCartLineId?: string | null;
+    eligibleAttachedUpsellProductIds?: ReadonlySet<string>;
   }
+): MergeCustomizedSelectionResult {
+  const replaceCartLineId = options?.replaceCartLineId ?? null;
 
-  const existingParent = working.find(
-    (item) =>
-      isLocalCartItemV2(item) &&
-      item.itemKind === "product" &&
-      item.configurationSignature === parent.configurationSignature
-  );
-
-  if (existingParent && isLocalCartItemV2(existingParent)) {
-    const nextQuantity = existingParent.quantity + parent.quantity;
-    const updatedParent = recalculateV2Line(existingParent, nextQuantity);
-
-    const withoutExistingFamily = removeCartLineWithChildren(
-      working,
-      existingParent.cartLineId
+  if (replaceCartLineId) {
+    const existingParent = items.find(
+      (item): item is LocalCartItemV2 =>
+        isV2ParentCartItem(item) && item.cartLineId === replaceCartLineId
     );
 
+    if (!existingParent) {
+      return {
+        outcome: "parent_missing",
+        items,
+        parentCartLineId: replaceCartLineId
+      };
+    }
+
+    const existingChildren = childrenForParent(items, replaceCartLineId);
+    // Quantity is authoritative from the existing cart line. The modal builder
+    // always emits quantity 1 for a new selection; edit must not reset N → 1.
+    const preservedQuantity = Math.max(existingParent.quantity, 1);
+    const nextParentBase: LocalCartItemV2 = {
+      ...parent,
+      cartLineId: replaceCartLineId,
+      quantity: preservedQuantity,
+      lineTotal: parent.finalUnitPrice * preservedQuantity,
+      createdAt: existingParent.createdAt,
+      updatedAt: nowIso()
+    };
+
+    const eligible =
+      options?.eligibleAttachedUpsellProductIds ?? new Set<string>();
+    const preserved = preserveAttachedUpsellsForEdit({
+      existingChildren,
+      nextParent: nextParentBase,
+      nextModalChildren: children,
+      eligibleAttachedUpsellProductIds: eligible
+    });
+
+    const nextSignature = buildParentConfigurationSignature({
+      productId: nextParentBase.productId,
+      selectedGroups: nextParentBase.selectedGroups,
+      upsellProductIds: preserved.children.map((child) => child.productId)
+    });
+
+    const conflict = findConflictingParent(items, nextSignature, replaceCartLineId);
+    if (conflict) {
+      return {
+        outcome: "signature_conflict",
+        items,
+        parentCartLineId: replaceCartLineId,
+        conflictingParentCartLineId: conflict.cartLineId
+      };
+    }
+
+    const nextParent: LocalCartItemV2 = {
+      ...nextParentBase,
+      configurationSignature: nextSignature,
+      lineTotal: nextParentBase.finalUnitPrice * nextParentBase.quantity
+    };
+
+    const withoutFamily = removeCartLineWithChildren(items, replaceCartLineId);
+    return {
+      outcome: "replaced",
+      items: [...withoutFamily, nextParent, ...preserved.children],
+      parentCartLineId: replaceCartLineId
+    };
+  }
+
+  const existingParent = findConflictingParent(
+    items,
+    parent.configurationSignature,
+    null
+  );
+
+  if (existingParent) {
+    const nextQuantity = existingParent.quantity + parent.quantity;
+    const updatedParent = recalculateV2Line(existingParent, nextQuantity);
+    const withoutExistingFamily = removeCartLineWithChildren(
+      items,
+      existingParent.cartLineId
+    );
     const remappedChildren = children.map((child) =>
       recalculateV2Line(
         {
@@ -463,12 +679,146 @@ export function mergeCustomizedSelectionIntoCart(
       )
     );
 
-    // Preserve any prior upsells that match by productId if children empty? No — children
-    // from new selection fully replace upsell set for this signature.
-    return [...withoutExistingFamily, updatedParent, ...remappedChildren];
+    return {
+      outcome: "merged",
+      items: [...withoutExistingFamily, updatedParent, ...remappedChildren],
+      parentCartLineId: updatedParent.cartLineId
+    };
   }
 
-  return [...working, parent, ...children];
+  return {
+    outcome: "created",
+    items: [...items, parent, ...children],
+    parentCartLineId: parent.cartLineId
+  };
+}
+
+export type AttachUpsellChildResult =
+  | {
+      outcome: "attached";
+      items: LocalCartItem[];
+      parentCartLineId: string;
+    }
+  | {
+      outcome: "already_attached";
+      items: LocalCartItem[];
+      parentCartLineId: string;
+    }
+  | {
+      outcome: "signature_conflict";
+      items: LocalCartItem[];
+      parentCartLineId: string;
+      conflictingParentCartLineId: string;
+    }
+  | {
+      outcome: "parent_missing";
+      items: LocalCartItem[];
+    };
+
+/**
+ * Attach a Plus child to an existing V2 parent after the initial add.
+ * Pure / idempotent. Does not touch localStorage.
+ *
+ * Self-product (suggested.id === parent.productId): fail-safe no-op as `already_attached`.
+ */
+export function attachUpsellChildToParent(params: {
+  items: LocalCartItem[];
+  parentCartLineId: string;
+  suggestedProduct: PublicUpsellSuggestedProduct;
+}): AttachUpsellChildResult {
+  const parent = params.items.find(
+    (item): item is LocalCartItemV2 =>
+      isV2ParentCartItem(item) && item.cartLineId === params.parentCartLineId
+  );
+
+  if (!parent) {
+    return { outcome: "parent_missing", items: params.items };
+  }
+
+  if (params.suggestedProduct.id === parent.productId) {
+    return {
+      outcome: "already_attached",
+      items: params.items,
+      parentCartLineId: parent.cartLineId
+    };
+  }
+
+  const existingChildren = childrenForParent(params.items, parent.cartLineId);
+  if (existingChildren.some((child) => child.productId === params.suggestedProduct.id)) {
+    return {
+      outcome: "already_attached",
+      items: params.items,
+      parentCartLineId: parent.cartLineId
+    };
+  }
+
+  const existingUpsellProductIds = existingChildren.map((child) => child.productId);
+  const nextSignature = buildCartConfigurationSignatureWithUpsell({
+    parent,
+    existingUpsellProductIds,
+    additionalUpsellProductId: params.suggestedProduct.id
+  });
+
+  const conflict = findConflictingParent(
+    params.items,
+    nextSignature,
+    parent.cartLineId
+  );
+  if (conflict) {
+    return {
+      outcome: "signature_conflict",
+      items: params.items,
+      parentCartLineId: parent.cartLineId,
+      conflictingParentCartLineId: conflict.cartLineId
+    };
+  }
+
+  const child = buildUpsellChildCartLine({
+    suggested: params.suggestedProduct,
+    parentCartLineId: parent.cartLineId,
+    categoryId: parent.categoryId,
+    quantity: parent.quantity
+  });
+
+  const updatedParent: LocalCartItemV2 = {
+    ...parent,
+    configurationSignature: nextSignature,
+    updatedAt: nowIso()
+  };
+
+  const nextItems = params.items.map((item) =>
+    isLocalCartItemV2(item) && item.cartLineId === parent.cartLineId
+      ? updatedParent
+      : item
+  );
+
+  const parentIndex = nextItems.findIndex(
+    (item) => isLocalCartItemV2(item) && item.cartLineId === parent.cartLineId
+  );
+  if (parentIndex < 0) {
+    return { outcome: "parent_missing", items: params.items };
+  }
+
+  // Insert child immediately after parent and its existing children.
+  let insertAt = parentIndex + 1;
+  while (
+    insertAt < nextItems.length &&
+    isUpsellChildForParent(nextItems[insertAt]!, parent.cartLineId)
+  ) {
+    insertAt += 1;
+  }
+
+  const items = [
+    ...nextItems.slice(0, insertAt),
+    child,
+    ...nextItems.slice(insertAt)
+  ];
+
+  return {
+    outcome: "attached",
+    items,
+    parentCartLineId: parent.cartLineId
+  };
 }
 
 export function removeCartLineWithChildren(
@@ -508,8 +858,46 @@ export function removeSingleCartLine(
     return removeCartLineWithChildren(items, cartLineId);
   }
 
-  return items.filter(
+  // Upsell child removal must rebuild the parent signature so merge/dedup stay correct.
+  const parentId = target.parentCartLineId;
+  const withoutChild = items.filter(
     (item) => !(isLocalCartItemV2(item) && item.cartLineId === cartLineId)
+  );
+
+  if (!parentId) {
+    return withoutChild;
+  }
+
+  const parent = withoutChild.find(
+    (item): item is LocalCartItemV2 =>
+      isV2ParentCartItem(item) && item.cartLineId === parentId
+  );
+
+  if (!parent) {
+    return withoutChild;
+  }
+
+  const remainingUpsellIds = childrenForParent(withoutChild, parentId).map(
+    (child) => child.productId
+  );
+  const nextSignature = buildParentConfigurationSignature({
+    productId: parent.productId,
+    selectedGroups: parent.selectedGroups,
+    upsellProductIds: remainingUpsellIds
+  });
+
+  if (parent.configurationSignature === nextSignature) {
+    return withoutChild;
+  }
+
+  return withoutChild.map((item) =>
+    isLocalCartItemV2(item) && item.cartLineId === parentId
+      ? {
+          ...item,
+          configurationSignature: nextSignature,
+          updatedAt: nowIso()
+        }
+      : item
   );
 }
 

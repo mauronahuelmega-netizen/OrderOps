@@ -34,14 +34,30 @@ import CategoryNav from "@/components/public/catalog/category-nav";
 import ProductCard from "@/components/public/catalog/product-card";
 import ProductDetailModal from "@/components/public/catalog/product-detail-modal";
 import type { CustomizationConfirmResult } from "@/components/public/catalog/customization-modal";
+import type { PostAddUpsellOpportunity } from "@/components/public/catalog/post-add-upsell-sheet";
+import {
+  customizationCacheKey,
+  loadStateFromActionResult,
+  loadStateFromCacheEntry,
+  type CustomizationConfigCacheEntry,
+  type CustomizationLoadState
+} from "@/components/public/catalog/customization-config-cache";
 import { usePreviewPointerPanScroll } from "@/components/public/catalog/use-preview-pointer-pan-scroll";
 import { usePreviewTouchCursor } from "@/components/public/catalog/use-preview-touch-cursor";
+import { decidePostAddOverlay } from "@/lib/cart/post-add-upsell";
 import { productNeedsCustomizationModal } from "@/lib/product-customization/public-shared";
 import PublicStorageImage from "@/components/public/catalog/public-storage-image";
+import { getPublicProductCustomizationConfigAction } from "@/app/b/[slug]/catalogo/actions";
 import panStyles from "./catalog-preview-pan.module.css";
+import shellStyles from "./catalog-shell.module.css";
 
 const CustomizationModal = dynamic(
   () => import("@/components/public/catalog/customization-modal"),
+  { ssr: false }
+);
+
+const PostAddUpsellSheet = dynamic(
+  () => import("@/components/public/catalog/post-add-upsell-sheet"),
   { ssr: false }
 );
 
@@ -63,6 +79,7 @@ type CustomizationSession = {
     selectedOptionsByGroupId: Record<string, string[]>;
     selectedUpsellProductIds: string[];
   } | null;
+  loadState: CustomizationLoadState;
 };
 
 const THEME_STORAGE_KEY = "orderops-public-theme";
@@ -81,6 +98,9 @@ export default function CatalogClient({
   const [cartItems, setCartItems] = useState<LocalCartItem[]>([]);
   const [cartHydrated, setCartHydrated] = useState(false);
   const [isCartSheetOpen, setIsCartSheetOpen] = useState(false);
+  const [postAddOpportunity, setPostAddOpportunity] =
+    useState<PostAddUpsellOpportunity | null>(null);
+  const [cartNotice, setCartNotice] = useState<string | null>(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [customizationSession, setCustomizationSession] =
@@ -90,6 +110,12 @@ export default function CatalogClient({
     business.cover_image_url ? "idle" : "error"
   );
   const catalogScrollRef = useRef<HTMLElement | null>(null);
+  const customizationConfigCacheRef = useRef(
+    new Map<string, CustomizationConfigCacheEntry>()
+  );
+  const customizationInflightRef = useRef(
+    new Map<string, Promise<CustomizationLoadState>>()
+  );
 
   usePreviewPointerPanScroll({
     enabled: isCatalogPreview,
@@ -181,6 +207,51 @@ export default function CatalogClient({
     return requiresCustomizationByProductId.get(product.id) ?? false;
   }
 
+  const ensureCustomizationConfig = useCallback(
+    (productId: string): Promise<CustomizationLoadState> => {
+      const key = customizationCacheKey(slug, productId);
+      const cached = customizationConfigCacheRef.current.get(key);
+      if (cached) {
+        return Promise.resolve(loadStateFromCacheEntry(cached));
+      }
+
+      const inflight = customizationInflightRef.current.get(key);
+      if (inflight) {
+        return inflight;
+      }
+
+      const request = (async (): Promise<CustomizationLoadState> => {
+        const result = await getPublicProductCustomizationConfigAction({
+          slug,
+          productId
+        });
+        const mapped = loadStateFromActionResult(result);
+        if (mapped.cacheEntry) {
+          customizationConfigCacheRef.current.set(key, mapped.cacheEntry);
+        }
+        return mapped.loadState;
+      })().finally(() => {
+        customizationInflightRef.current.delete(key);
+      });
+
+      customizationInflightRef.current.set(key, request);
+      return request;
+    },
+    [slug]
+  );
+
+  const applyCustomizationLoadState = useCallback(
+    (productId: string, loadState: CustomizationLoadState) => {
+      setCustomizationSession((current) => {
+        if (!current || current.productId !== productId) {
+          return current;
+        }
+        return { ...current, loadState };
+      });
+    },
+    []
+  );
+
   const openCustomizationModal = useCallback(
     (
       product: PublicProduct,
@@ -191,14 +262,50 @@ export default function CatalogClient({
     ) => {
       setSelectedProductId(null);
       setIsCartSheetOpen(false);
-      setCustomizationSession({
+      setPostAddOpportunity(null);
+
+      const key = customizationCacheKey(slug, product.id);
+      const cached = customizationConfigCacheRef.current.get(key);
+      const baseSession = {
         productId: product.id,
         editingCartLineId: options?.editingCartLineId ?? null,
         initialSelection: options?.initialSelection ?? null
+      };
+
+      if (cached) {
+        setCustomizationSession({
+          ...baseSession,
+          loadState: loadStateFromCacheEntry(cached)
+        });
+        return;
+      }
+
+      setCustomizationSession({
+        ...baseSession,
+        loadState: { status: "loading" }
+      });
+
+      void ensureCustomizationConfig(product.id).then((loadState) => {
+        applyCustomizationLoadState(product.id, loadState);
       });
     },
-    []
+    [applyCustomizationLoadState, ensureCustomizationConfig, slug]
   );
+
+  const retryCustomizationLoad = useCallback(() => {
+    setCustomizationSession((current) => {
+      if (!current) {
+        return current;
+      }
+
+      const productId = current.productId;
+      void ensureCustomizationConfig(productId).then((loadState) => {
+        applyCustomizationLoadState(productId, loadState);
+      });
+
+      return { ...current, loadState: { status: "loading" } };
+    });
+  }, [applyCustomizationLoadState, ensureCustomizationConfig]);
 
   const handleOpenProduct = useCallback((productId: string) => {
     setSelectedProductId(productId);
@@ -256,12 +363,68 @@ export default function CatalogClient({
     [productMap]
   );
 
-  function handleConfirmCustomizationSelection(result: CustomizationConfirmResult) {
-    setCartItems((current) =>
-      mergeCustomizedSelectionIntoCart(current, result.parent, result.children, {
-        replaceCartLineId: result.replaceCartLineId
-      })
+  function handleConfirmCustomizationSelection(
+    result: CustomizationConfirmResult
+  ): { ok: true } | { ok: false; error: string } {
+    const mergeResult = mergeCustomizedSelectionIntoCart(
+      cartItems,
+      result.parent,
+      result.children,
+      {
+        replaceCartLineId: result.replaceCartLineId,
+        eligibleAttachedUpsellProductIds: result.eligibleAttachedUpsellProductIds
+      }
     );
+
+    if (mergeResult.outcome === "signature_conflict") {
+      return {
+        ok: false,
+        error: "Ya tenés esta combinación en tu pedido."
+      };
+    }
+
+    if (mergeResult.outcome === "parent_missing") {
+      return {
+        ok: false,
+        error: "No pudimos actualizar este producto. Volvé a intentarlo."
+      };
+    }
+
+    setCartItems(mergeResult.items);
+
+    // Overlay order: close modal (caller) → optional post-add → else cart sheet.
+    if (mergeResult.outcome === "created") {
+      const decision = decidePostAddOverlay({
+        outcome: "created",
+        items: mergeResult.items,
+        parentCartLineId: mergeResult.parentCartLineId,
+        suggestedProducts: result.suggestedUpsellProducts ?? []
+      });
+
+      if (decision.openPostAdd) {
+        setIsCartSheetOpen(false);
+        setCartNotice(null);
+        setPostAddOpportunity({
+          parentCartLineId: mergeResult.parentCartLineId,
+          candidates: decision.candidates
+        });
+        return { ok: true };
+      }
+    }
+
+    setPostAddOpportunity(null);
+    setIsCartSheetOpen(true);
+    return { ok: true };
+  }
+
+  function finishPostAddUpsell() {
+    setPostAddOpportunity(null);
+    setIsCartSheetOpen(true);
+  }
+
+  function handlePostAddParentMissing(message: string) {
+    setPostAddOpportunity(null);
+    setCartNotice(message);
     setIsCartSheetOpen(true);
   }
 
@@ -315,6 +478,8 @@ export default function CatalogClient({
 
       setCartItems([]);
       setIsCartSheetOpen(false);
+      setPostAddOpportunity(null);
+      setCartNotice(null);
       setSelectedProductId(null);
       setCustomizationSession(null);
 
@@ -403,7 +568,7 @@ export default function CatalogClient({
         }
       },
       {
-        rootMargin: "-20% 0px -55% 0px",
+        rootMargin: "-12% 0px -55% 0px",
         threshold: [0.2, 0.35, 0.6]
       }
     );
@@ -467,15 +632,17 @@ export default function CatalogClient({
   return (
     <main
       ref={catalogScrollRef}
-      className={`catalog-page catalog-page--with-cart${
+      className={`catalog-page${cartCount > 0 ? " catalog-page--with-cart" : ""}${
         isCatalogPreview ? ` ${panStyles.panSurface}` : ""
       }`}
       data-theme={resolvedTheme}
       data-preview-pan-enabled={isCatalogPreview ? "true" : undefined}
       style={businessStyles}
     >
-      <header className="catalog-hero">
-        <div className={`catalog-hero__media catalog-hero__media--${coverMediaState}`}>
+      <header className={`catalog-hero ${shellStyles.hero}`}>
+        <div
+          className={`catalog-hero__media catalog-hero__media--${coverMediaState} ${shellStyles.heroMedia}`}
+        >
           {coverMediaState === "loading" ? (
             <div className="catalog-hero__cover-skeleton" aria-hidden="true" />
           ) : null}
@@ -502,26 +669,26 @@ export default function CatalogClient({
               <div className="catalog-hero__cover-overlay" aria-hidden="true" />
             </>
           ) : null}
+
+          <div className={shellStyles.heroOverlayCopy}>
+            <p className="catalog-eyebrow">Pedí online</p>
+            <p className="catalog-hero__description">{heroHeadline}</p>
+            <p
+              className={`catalog-hero__status${
+                business.on_demand_mode_active
+                  ? " catalog-hero__status--open"
+                  : " catalog-hero__status--closed"
+              }`}
+              role="status"
+            >
+              {business.on_demand_mode_active
+                ? "Estamos tomando pedidos"
+                : "Por ahora no estamos tomando pedidos"}
+            </p>
+          </div>
         </div>
 
-        <div className="catalog-hero__copy">
-          <p className="catalog-eyebrow">Pedí online</p>
-          <p className="catalog-hero__description">{heroHeadline}</p>
-          <p
-            className={`catalog-hero__status${
-              business.on_demand_mode_active
-                ? " catalog-hero__status--open"
-                : " catalog-hero__status--closed"
-            }`}
-            role="status"
-          >
-            {business.on_demand_mode_active
-              ? "Estamos tomando pedidos"
-              : "Por ahora no estamos tomando pedidos"}
-          </p>
-        </div>
-
-        <div className="catalog-hero__notes">
+        <div className={`catalog-hero__notes ${shellStyles.heroNotes}`}>
           <span className="catalog-hero__trust-chip">{heroBadge}</span>
           <p>{heroMicrocopy}</p>
         </div>
@@ -594,11 +761,15 @@ export default function CatalogClient({
         onOpenCart={() => setIsCartSheetOpen(true)}
       />
 
-      {isCartSheetOpen ? (
+      {isCartSheetOpen && !postAddOpportunity ? (
         <CartSheet
           slug={slug}
           items={cartItems}
-          onClose={() => setIsCartSheetOpen(false)}
+          notice={cartNotice}
+          onClose={() => {
+            setIsCartSheetOpen(false);
+            setCartNotice(null);
+          }}
           onCheckout={handleCheckoutFromSheet}
           onEditParent={handleEditParent}
           onRemoveLine={(cartLineId) =>
@@ -621,6 +792,16 @@ export default function CatalogClient({
         />
       ) : null}
 
+      {postAddOpportunity && !customizationSession ? (
+        <PostAddUpsellSheet
+          opportunity={postAddOpportunity}
+          items={cartItems}
+          onItemsChange={setCartItems}
+          onFinish={finishPostAddUpsell}
+          onParentMissing={handlePostAddParentMissing}
+        />
+      ) : null}
+
       {selectedProduct ? (
         <ProductDetailModal
           product={selectedProduct}
@@ -638,13 +819,14 @@ export default function CatalogClient({
 
       {customizingProduct && customizationSession ? (
         <CustomizationModal
-          slug={slug}
           productId={customizingProduct.id}
           productName={customizingProduct.name}
           categoryId={customizingProduct.category_id}
+          loadState={customizationSession.loadState}
           editingCartLineId={customizationSession.editingCartLineId}
           initialSelection={customizationSession.initialSelection}
           onClose={() => setCustomizationSession(null)}
+          onRetry={retryCustomizationLoad}
           onConfirmSelection={handleConfirmCustomizationSelection}
         />
       ) : null}

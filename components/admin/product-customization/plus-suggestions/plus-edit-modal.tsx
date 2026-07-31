@@ -110,8 +110,8 @@ export default function PlusEditModal({
               {mode === "create" ? "Crear plus sugerido" : "Editar plus"}
             </h2>
             <p className={styles.dialogSubtitle}>
-              Un plus sugerido es un producto extra que se ofrece antes de agregar el
-              pedido al carrito. Ejemplo: sugerir una bebida junto a una hamburguesa.
+              Un plus sugerido es un producto extra que se ofrece junto a un producto
+              del catálogo. Ejemplo: sugerir una bebida junto a una hamburguesa.
             </p>
           </div>
 
@@ -144,7 +144,7 @@ export default function PlusEditModal({
               <>
                 <div className={styles.fieldsTwo}>
                   <label className="admin-field">
-                    <span>Dónde aparece</span>
+                    <span>Destino</span>
                     <select
                       name="target_type"
                       value={targetType}
@@ -187,8 +187,7 @@ export default function PlusEditModal({
                   </label>
                 </div>
                 <p className={styles.helper}>
-                  Solo puede haber un plus sugerido por categoría o producto. Si ya
-                  existe uno, editá o mostrá/ocultá el existente.
+                  Solo un grupo de plus por producto o categoría.
                 </p>
               </>
             ) : (
@@ -199,8 +198,7 @@ export default function PlusEditModal({
                   {group?.target_name}
                 </p>
                 <p className={styles.helper}>
-                  Para cambiar dónde aparece este plus, creá uno nuevo para otro
-                  producto o categoría.
+                  Para cambiar el producto o categoría destino, creá un plus nuevo.
                 </p>
               </div>
             )}

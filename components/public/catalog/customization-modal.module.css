@@ -15,7 +15,7 @@
   width: min(100%, 32rem);
   max-height: min(92vh, 52rem);
   overflow: hidden;
-  border-radius: 1.25rem 1.25rem 0 0;
+  border-radius: 1.15rem 1.15rem 0 0;
   background: var(--bg-surface);
   color: var(--text-primary);
   box-shadow: 0 12px 28px color-mix(in srgb, var(--text-primary) 16%, transparent);
@@ -24,7 +24,7 @@
 .header,
 .footer {
   flex-shrink: 0;
-  padding: 1rem 1.1rem;
+  padding: 0.85rem 1rem;
   border-bottom: 1px solid var(--border-subtle);
 }
 
@@ -33,36 +33,44 @@
   border-top: 1px solid var(--border-subtle);
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.55rem;
+  padding-bottom: calc(0.85rem + env(safe-area-inset-bottom, 0px));
+  background: var(--bg-surface);
 }
 
 .header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 0.65rem;
+  padding-top: 0.75rem;
+}
+
+.headerCopy {
+  min-width: 0;
+  flex: 1;
 }
 
 .eyebrow {
-  margin: 0 0 0.2rem;
-  font-size: 0.75rem;
-  letter-spacing: 0.04em;
+  margin: 0 0 0.12rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
   color: var(--text-tertiary);
 }
 
 .header h2 {
   margin: 0;
-  font-size: 1.15rem;
-  line-height: 1.25;
+  font-size: 1.1rem;
+  line-height: 1.2;
   color: var(--text-primary);
 }
 
 .basePrice {
-  margin: 0.35rem 0 0;
-  font-size: 0.875rem;
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
   color: var(--text-secondary);
-  line-height: 1.4;
+  line-height: 1.35;
 }
 
 .closeButton,
@@ -78,17 +86,25 @@
 
 .closeButton,
 .secondaryButton {
+  min-height: 2.75rem;
+  min-width: 2.75rem;
   padding: 0.45rem 0.75rem;
   font-size: 0.875rem;
+  flex-shrink: 0;
 }
 
 .primaryButton {
   width: 100%;
-  padding: 0.85rem 1rem;
+  min-height: 3rem;
+  padding: 0.8rem 1rem;
   border-color: transparent;
   background: var(--business-primary, var(--color-primary));
   color: var(--business-primary-foreground, #fff);
   font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
 }
 
 .primaryButton:disabled {
@@ -96,22 +112,59 @@
   cursor: not-allowed;
 }
 
+.primaryButton:focus-visible,
+.closeButton:focus-visible,
+.secondaryButton:focus-visible {
+  outline: 2px solid var(--business-primary, var(--color-primary));
+  outline-offset: 2px;
+}
+
+.ctaVerb,
+.ctaSep {
+  flex-shrink: 0;
+}
+
+.ctaPrice {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+  transform-origin: center;
+}
+
+.ctaPriceBump {
+  animation: ctaPriceBump 180ms ease-out;
+}
+
+@keyframes ctaPriceBump {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  40% {
+    transform: scale(1.045) translateY(-1px);
+    opacity: 0.92;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .body {
   flex: 1;
   overflow-y: auto;
-  padding: 1rem 1.1rem 1.25rem;
+  overscroll-behavior: contain;
+  padding: 0.85rem 1rem 1.15rem;
   display: flex;
   flex-direction: column;
-  gap: 1.15rem;
+  gap: 1rem;
 }
 
 .description,
-.statusMessage,
-.groupDescription {
+.statusMessage {
   margin: 0;
   color: var(--text-secondary);
-  font-size: 0.9rem;
-  line-height: 1.45;
+  font-size: 0.85rem;
+  line-height: 1.4;
 }
 
 .errorPanel {
@@ -129,130 +182,23 @@
   color: var(--text-primary);
 }
 
-.group,
-.upsell {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-}
-
-.groupHeader {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.35rem 0.75rem;
-}
-
-.groupHeader h3 {
-  margin: 0;
-  font-size: 1rem;
-  color: var(--text-primary);
-}
-
-.groupMeta {
-  font-size: 0.75rem;
-  color: var(--text-tertiary);
-}
-
-.optionList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-}
-
-.optionRow {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.7rem 0.75rem;
-  border-radius: 0.85rem;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-canvas);
-  cursor: pointer;
-}
-
-.optionRowSelected {
-  border-color: color-mix(in srgb, var(--business-primary, var(--color-primary)) 55%, var(--border-subtle));
-  background: color-mix(
-    in srgb,
-    var(--business-primary, var(--color-primary)) 8%,
-    var(--bg-surface)
-  );
-}
-
-.optionRow input {
-  width: 1rem;
-  height: 1rem;
-  accent-color: var(--business-primary, var(--color-primary));
-}
-
-.optionCopy {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  min-width: 0;
-}
-
-.optionCopy strong {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.optionCopy small {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
-  line-height: 1.35;
-}
-
-.optionDelta {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  white-space: nowrap;
-}
-
-.groupError,
-.footerHint,
-.pendingMessage {
+.groupError {
   margin: 0;
   font-size: 0.82rem;
   line-height: 1.4;
-}
-
-.groupError,
-.footerHint {
   color: var(--color-cancelled);
 }
 
-.pendingMessage {
-  padding: 0.65rem 0.75rem;
-  border-radius: 0.75rem;
-  background: var(--bg-surface-hover);
-  color: var(--text-secondary);
-  border: 1px solid var(--border-subtle);
-}
+@media (prefers-reduced-motion: reduce) {
+  .ctaPriceBump {
+    animation: none;
+  }
 
-.footerTotal {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.75rem;
-}
-
-.footerTotal span {
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-}
-
-.footerTotal strong {
-  font-size: 1.15rem;
-  color: var(--text-primary);
+  .primaryButton,
+  .closeButton,
+  .secondaryButton {
+    transition: none;
+  }
 }
 
 @media (min-width: 640px) {
@@ -262,7 +208,11 @@
   }
 
   .modal {
-    border-radius: 1.25rem;
+    border-radius: 1.15rem;
     box-shadow: var(--shadow-floating);
+  }
+
+  .footer {
+    padding-bottom: 0.85rem;
   }
 }

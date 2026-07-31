@@ -10,6 +10,7 @@ type Props = {
   option: PublicCustomizationOption;
   checked: boolean;
   disabled?: boolean;
+  compact?: boolean;
   onSelect: (optionId: string) => void;
 };
 
@@ -19,11 +20,13 @@ export default function CustomizationOptionRow({
   option,
   checked,
   disabled = false,
+  compact = false,
   onSelect
 }: Props) {
   const inputId = `${groupId}-${option.id}`;
   const rowClass = [
     styles.optionRow,
+    compact ? styles.optionRowCompact : "",
     checked ? styles.optionRowSelected : "",
     disabled ? styles.optionRowDisabled : ""
   ]

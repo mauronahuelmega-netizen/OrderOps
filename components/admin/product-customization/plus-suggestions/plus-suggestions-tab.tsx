@@ -73,9 +73,8 @@ export default function PlusSuggestionsTab({
         <div className={styles.tabHeaderText}>
           <h2 className={styles.tabTitle}>Plus sugeridos</h2>
           <p className={styles.tabSubtitle}>
-            Sugerí productos extra para aumentar el ticket promedio. Por ejemplo,
-            ofrecé una bebida cuando el cliente personaliza una hamburguesa. Cada
-            producto o categoría puede tener un plus sugerido visible.
+            Sugerí productos extra para aumentar el ticket promedio. Un grupo por
+            producto o categoría, visible en el modal de personalización.
           </p>
         </div>
         <button

@@ -9,6 +9,11 @@ import {
   type PublicProductCustomizationSummary,
   type PublicUpsellGroupView
 } from "@/lib/product-customization/public-shared";
+import { resolveUpsellForProduct } from "@/lib/product-customization/resolve-upsell";
+import {
+  getSafeErrorDetails,
+  throwLoggedCorpusError
+} from "@/lib/product-customization/safe-error-details";
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
 
 type ProductRow = {
@@ -250,7 +255,11 @@ async function loadPublicCustomizationCorpus(
       .in("id", productIds);
 
     if (productsError) {
-      throw new Error("No pudimos cargar productos para personalización.");
+      throwLoggedCorpusError(
+        "No pudimos cargar productos para personalización.",
+        productsError,
+        { businessId, stage: "products" }
+      );
     }
 
     productRows = (products ?? []) as ProductRow[];
@@ -304,7 +313,14 @@ async function loadPublicCustomizationCorpus(
   ]);
 
   if (assignmentsError || overridesError || upsellGroupsError) {
-    throw new Error("No pudimos cargar la configuración pública de personalización.");
+    throwLoggedCorpusError(
+      "No pudimos cargar la configuración pública de personalización.",
+      assignmentsError ?? overridesError ?? upsellGroupsError,
+      {
+        businessId,
+        stage: "assignments_overrides_upsell_groups"
+      }
+    );
   }
 
   const relevantGroupIds = [
@@ -354,7 +370,14 @@ async function loadPublicCustomizationCorpus(
   ]);
 
   if (groupsError || optionsError || upsellItemsError) {
-    throw new Error("No pudimos cargar la configuración pública de personalización.");
+    throwLoggedCorpusError(
+      "No pudimos cargar la configuración pública de personalización.",
+      groupsError ?? optionsError ?? upsellItemsError,
+      {
+        businessId,
+        stage: "groups_options_upsell_items"
+      }
+    );
   }
 
   const suggestedProductIds = [
@@ -394,7 +417,11 @@ async function loadPublicCustomizationCorpus(
       .in("id", missingSuggestedIds);
 
     if (suggestedError) {
-      throw new Error("No pudimos cargar productos sugeridos.");
+      throwLoggedCorpusError(
+        "No pudimos cargar productos sugeridos.",
+        suggestedError,
+        { businessId, stage: "suggested_products" }
+      );
     }
 
     for (const row of suggestedProducts ?? []) {
@@ -442,63 +469,11 @@ async function loadPublicCustomizationCorpus(
   };
 }
 
-function resolveUpsellForProduct(params: {
-  productId: string;
-  categoryId: string | null;
-  upsellGroups: Array<{
-    id: string;
-    name: string;
-    description: string | null;
-    target_type: "category" | "product";
-    target_id: string;
-    is_available: boolean;
-  }>;
-  itemsByUpsellGroupId: Map<
-    string,
-    Array<{ product_id: string; is_available: boolean; sort_order: number }>
-  >;
-  suggestedById: Map<
-    string,
-    { id: string; name: string; price: number; imageUrl: string | null }
-  >;
-}): PublicUpsellGroupView | null {
-  const productGroup = params.upsellGroups.find(
-    (group) =>
-      group.is_available &&
-      group.target_type === "product" &&
-      group.target_id === params.productId
-  );
-  const categoryGroup =
-    !productGroup && params.categoryId
-      ? params.upsellGroups.find(
-          (group) =>
-            group.is_available &&
-            group.target_type === "category" &&
-            group.target_id === params.categoryId
-        )
-      : null;
-
-  const selected = productGroup ?? categoryGroup ?? null;
-  if (!selected) {
-    return null;
-  }
-
-  const products = (params.itemsByUpsellGroupId.get(selected.id) ?? [])
-    .filter((item) => item.is_available && item.product_id !== params.productId)
-    .map((item) => params.suggestedById.get(item.product_id))
-    .filter((product): product is NonNullable<typeof product> => Boolean(product));
-
-  if (products.length === 0) {
-    return null;
-  }
-
-  return {
-    id: selected.id,
-    name: selected.name,
-    description: selected.description,
-    products
-  };
-}
+/**
+ * Resolve the single effective upsell group for a product.
+ * Precedence: available product-target → available category-target.
+ */
+export { resolveUpsellForProduct } from "@/lib/product-customization/resolve-upsell";
 
 function buildSummaryForProduct(params: {
   product: ProductRow;
@@ -603,10 +578,13 @@ export async function loadPublicCustomizationSummariesForProducts(
 
     return result;
   } catch (error) {
-    console.error("[product-customization] Failed to load public summaries", {
-      businessId: params.businessId,
-      message: error instanceof Error ? error.message : "unknown"
-    });
+    console.error(
+      "[product-customization] Failed to load public summaries",
+      JSON.stringify({
+        businessId: params.businessId,
+        ...getSafeErrorDetails(error)
+      })
+    );
     return result;
   }
 }

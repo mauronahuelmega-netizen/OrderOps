@@ -1,17 +1,19 @@
 "use client";
 
-import { memo, type KeyboardEvent } from "react";
+import { memo, type KeyboardEvent, type MouseEvent } from "react";
+import { Plus } from "lucide-react";
 import type { PublicProduct } from "@/lib/catalog/public";
 import {
   formatPublicCatalogCurrency,
   shouldShowPriceFrom
 } from "@/lib/product-customization/public-shared";
 import PublicStorageImage from "@/components/public/catalog/public-storage-image";
+import styles from "./product-card.module.css";
 
 type ProductCardProps = {
   product: PublicProduct;
   quantity: number;
-  /** When true, hide legacy quantity controls and always route add through onAddProduct. */
+  /** When true, hide quantity controls and always route add through onAddProduct. */
   requiresCustomization?: boolean;
   onOpenProduct: (productId: string) => void;
   onAddProduct: (productId: string) => void;
@@ -35,6 +37,10 @@ function ProductCard({
     }
   }
 
+  function stopCardOpen(event: MouseEvent) {
+    event.stopPropagation();
+  }
+
   const summary = product.customizationSummary
     ? {
         productId: product.id,
@@ -51,57 +57,54 @@ function ProductCard({
       ? summary.priceFrom
       : Number(product.price);
 
+  const showQuantityControl = !requiresCustomization && quantity > 0;
+  const plusLabel = requiresCustomization
+    ? `Elegir opciones para ${product.name}`
+    : `Agregar ${product.name} al pedido`;
+
   return (
-    <article className="catalog-product-card">
+    <article className={`catalog-product-card ${styles.card}`}>
       <div
-        className="catalog-product-card__hit"
+        className={styles.hit}
         role="button"
         tabIndex={0}
         onClick={() => onOpenProduct(product.id)}
         onKeyDown={handleKeyDown}
         aria-label={`Ver ${product.name}`}
       >
-        <div className="catalog-product-card__media">
+        <div className={styles.media}>
           {product.image_url ? (
             <PublicStorageImage
-              className="catalog-product-card__image"
+              className={styles.image}
               src={product.image_url}
-              alt={product.name}
-              width={228}
-              height={216}
-              sizes="114px"
+              alt=""
+              fill
+              sizes="(max-width: 359px) 100vw, (max-width: 767px) 50vw, (max-width: 1199px) 33vw, 260px"
             />
           ) : (
-            <div className="catalog-product-card__placeholder">Sin foto</div>
+            <div className={styles.placeholder} aria-hidden="true">
+              Sin foto
+            </div>
           )}
         </div>
 
-        <div className="catalog-product-card__body">
-          <div className="catalog-product-card__copy">
-            <h3>{product.name}</h3>
-            {product.description ? <p>{product.description}</p> : null}
-          </div>
-          <div className="catalog-product-card__pricing">
-            <strong className="catalog-product-card__price">
-              {showFrom ? (
-                <span className="catalog-product-card__price-from">Desde </span>
-              ) : null}
+        <div className={styles.body}>
+          <h3 className={styles.name}>{product.name}</h3>
+          {product.description ? (
+            <p className={styles.description}>{product.description}</p>
+          ) : null}
+          <div className={styles.priceRow}>
+            <strong className={styles.price}>
+              {showFrom ? <span className={styles.priceFrom}>Desde </span> : null}
               {formatPublicCatalogCurrency(displayPrice)}
             </strong>
-            {requiresCustomization ? (
-              <p className="catalog-product-card__hint">Personalizalo antes de agregar</p>
-            ) : null}
           </div>
         </div>
       </div>
 
-      <div className="catalog-product-card__actions">
-        {!requiresCustomization && quantity > 0 ? (
-          <div
-            className="catalog-quantity-control"
-            aria-label={`Cantidad de ${product.name}`}
-            onClick={(event) => event.stopPropagation()}
-          >
+      <div className={styles.quickAction} onClick={stopCardOpen}>
+        {showQuantityControl ? (
+          <div className={styles.qty} aria-label={`Cantidad de ${product.name}`}>
             <button
               type="button"
               aria-label={`Quitar uno de ${product.name}`}
@@ -121,32 +124,13 @@ function ProductCard({
         ) : (
           <button
             type="button"
-            className="catalog-product-card__add-button"
-            aria-label={
-              requiresCustomization
-                ? `Elegir opciones de ${product.name}`
-                : `Agregar ${product.name} al pedido`
-            }
-            onClick={(event) => {
-              event.stopPropagation();
-              onAddProduct(product.id);
-            }}
+            className={styles.plus}
+            aria-label={plusLabel}
+            onClick={() => onAddProduct(product.id)}
           >
-            {requiresCustomization ? "Elegir opciones" : "Agregar"}
+            <Plus className={styles.plusIcon} aria-hidden="true" strokeWidth={2.5} />
           </button>
         )}
-
-        <button
-          type="button"
-          className="catalog-product-card__edit-link"
-          aria-label={`Ver detalle de ${product.name}`}
-          onClick={(event) => {
-            event.stopPropagation();
-            onOpenProduct(product.id);
-          }}
-        >
-          Ver detalle
-        </button>
       </div>
     </article>
   );

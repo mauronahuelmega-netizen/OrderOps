@@ -1,0 +1,57 @@
+.hero {
+  position: relative;
+}
+
+.heroMedia {
+  /* Compact mobile cover — reduce first-viewport cost vs 16/9 card stack */
+  aspect-ratio: 2 / 1;
+  max-height: 220px;
+}
+
+.heroOverlayCopy {
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 2;
+  display: grid;
+  gap: 8px;
+  padding: 28px 14px 12px;
+  background: linear-gradient(
+    to top,
+    rgba(18, 16, 13, 0.88) 0%,
+    rgba(18, 16, 13, 0.55) 55%,
+    rgba(18, 16, 13, 0) 100%
+  );
+  color: #f8f2e8;
+  pointer-events: none;
+}
+
+.heroOverlayCopy :global(.catalog-eyebrow),
+.heroOverlayCopy :global(.catalog-hero__description),
+.heroOverlayCopy :global(.catalog-hero__status) {
+  color: inherit;
+}
+
+.heroOverlayCopy :global(.catalog-hero__status--open) {
+  border-color: color-mix(in srgb, var(--catalog-accent-green, #4ec28c) 70%, transparent);
+  background: color-mix(in srgb, var(--catalog-accent-green, #4ec28c) 18%, transparent);
+}
+
+.heroOverlayCopy :global(.catalog-hero__status--closed) {
+  border-color: color-mix(in srgb, #f8f2e8 28%, transparent);
+  background: color-mix(in srgb, #f8f2e8 10%, transparent);
+}
+
+.heroNotes {
+  margin-top: 8px;
+}
+
+@media (min-width: 768px) {
+  .heroMedia {
+    aspect-ratio: 16 / 9;
+    max-height: none;
+  }
+
+  .heroOverlayCopy {
+    padding: 36px 18px 16px;
+  }
+}

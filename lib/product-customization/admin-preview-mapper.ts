@@ -166,15 +166,22 @@ function resolvePreviewUpsell(params: {
   categoryId: string | null;
   upsellGroups: AdminUpsellGroup[];
 }): PublicUpsellGroupView | null {
-  const match =
-    params.upsellGroups.find(
-      (group) =>
-        group.is_available &&
-        ((group.target_type === "product" && group.target_id === params.productId) ||
-          (group.target_type === "category" &&
-            params.categoryId !== null &&
-            group.target_id === params.categoryId))
-    ) ?? null;
+  const eligible = params.upsellGroups.filter((group) => group.is_available);
+
+  const productMatch = eligible.find(
+    (group) =>
+      group.target_type === "product" && group.target_id === params.productId
+  );
+  const categoryMatch =
+    !productMatch && params.categoryId
+      ? eligible.find(
+          (group) =>
+            group.target_type === "category" &&
+            group.target_id === params.categoryId
+        )
+      : null;
+
+  const match = productMatch ?? categoryMatch ?? null;
 
   if (!match) {
     return null;

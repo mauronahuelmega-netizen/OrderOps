@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { revalidatePublicCatalogCache } from "@/lib/catalog/public-cache-tags";
 import { requireSuperAdmin } from "@/lib/super-admin/context";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
@@ -207,11 +208,30 @@ export async function updateBusinessAction(
     return { error: "Ingresá un número de WhatsApp." };
   }
 
+  const { data: currentBusiness, error: currentBusinessError } = await supabase
+    .from("businesses")
+    .select("id, slug")
+    .eq("id", businessId)
+    .maybeSingle();
+
+  if (currentBusinessError) {
+    return {
+      error: currentBusinessError.message || "No pudimos cargar el negocio."
+    };
+  }
+
+  if (!currentBusiness) {
+    return { error: "El negocio ya no existe." };
+  }
+
+  const previousSlug = currentBusiness.slug?.trim().toLowerCase() || null;
+  const nextSlug = slug;
+
   const { error } = await supabase
     .from("businesses")
     .update({
       name,
-      slug,
+      slug: nextSlug,
       whatsapp_number: whatsappNumber,
       is_active: isActive
     })
@@ -222,6 +242,14 @@ export async function updateBusinessAction(
   }
 
   revalidatePath("/super-admin");
+  revalidatePath("/super-admin/businesses");
+  revalidatePublicCatalogCache({
+    businessId,
+    slug: nextSlug,
+    previousSlug: previousSlug && previousSlug !== nextSlug ? previousSlug : undefined,
+    scope: "all"
+  });
+
   return { success: true };
 }
 

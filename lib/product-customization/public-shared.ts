@@ -51,6 +51,7 @@ export type PublicProductCustomizationConfig = {
   productImageUrl: string | null;
   productDescription: string | null;
   groups: PublicCustomizationGroup[];
+  /** Single effective Plus group (product target wins over category). */
   upsellGroup: PublicUpsellGroupView | null;
 };
 
@@ -68,7 +69,8 @@ export function productNeedsCustomizationModal(
     return false;
   }
 
-  return summary.hasCustomizations || summary.hasUpsell;
+  // Plus-only products use quick-add; post-add sheet is only after configurable created.
+  return summary.hasCustomizations;
 }
 
 export function shouldShowPriceFrom(

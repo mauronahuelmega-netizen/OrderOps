@@ -1,56 +1,32 @@
 "use client";
 
+import { ShoppingCart } from "lucide-react";
+import styles from "./cart-bar.module.css";
+
 type CartBarProps = {
   count: number;
-  total: number;
+  /** Kept for call-site compatibility; FAB intentionally does not show total. */
+  total?: number;
   onOpenCart: () => void;
 };
 
-export default function CartBar({ count, total, onOpenCart }: CartBarProps) {
-  const isEmpty = count === 0;
+export default function CartBar({ count, onOpenCart }: CartBarProps) {
+  if (count <= 0) {
+    return null;
+  }
+
+  const label = `Ver pedido, ${count} ${count === 1 ? "producto" : "productos"}`;
 
   return (
-    <div className="catalog-cart-bar" data-preview-pan-ignore>
-      <div className="catalog-cart-bar__copy">
-        <strong>
-          {isEmpty
-            ? "Carrito vacío"
-            : `${count} ${count === 1 ? "producto" : "productos"}`}
-        </strong>
-        <span>
-          {isEmpty ? "Sumá algo para continuar" : `Total ${formatCurrency(total)}`}
-        </span>
-      </div>
-
-      <button
-        type="button"
-        onClick={() => {
-          if (!isEmpty) {
-            onOpenCart();
-          }
-        }}
-        disabled={isEmpty}
-        aria-disabled={isEmpty}
-        aria-label={
-          isEmpty
-            ? "Carrito vacío"
-            : `Ver pedido con ${count} ${count === 1 ? "producto" : "productos"}`
-        }
-        className={`catalog-cart-bar__button${
-          isEmpty ? " catalog-cart-bar__button--disabled" : ""
-        }`}
-        style={{ border: "none", font: "inherit", cursor: isEmpty ? "default" : "pointer" }}
-      >
-        Ver pedido
-      </button>
-    </div>
+    <button
+      type="button"
+      className={styles.fab}
+      onClick={onOpenCart}
+      aria-label={label}
+      data-preview-pan-ignore
+    >
+      <ShoppingCart className={styles.icon} aria-hidden="true" />
+      <span className={styles.count}>{count}</span>
+    </button>
   );
-}
-
-function formatCurrency(value: number) {
-  return new Intl.NumberFormat("es-AR", {
-    style: "currency",
-    currency: "ARS",
-    maximumFractionDigits: 2
-  }).format(value);
 }

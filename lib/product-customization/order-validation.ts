@@ -176,9 +176,9 @@ export async function validateCheckoutCartForCreateOrder(params: {
     const finalUnitPrice = baseUnitPrice + customizationTotal;
 
     const upsellPayload = Array.isArray(item.upsellItems) ? item.upsellItems : [];
-    const allowedUpsellIds = new Set(
-      (config.upsellGroup?.products ?? []).map((product) => product.id)
-    );
+    const allowedUpsellIds = new Set([
+      ...(config.upsellGroup?.products ?? []).map((product) => product.id)
+    ]);
 
     const normalizedUpsells: Array<{
       cartLineId: string;

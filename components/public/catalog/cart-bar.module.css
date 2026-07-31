@@ -1,0 +1,58 @@
+.fab {
+  position: fixed;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: max(14px, env(safe-area-inset-bottom));
+  z-index: 9;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 52px;
+  min-height: 52px;
+  padding: 0 14px;
+  border: 1px solid var(--catalog-border, var(--border-subtle));
+  border-radius: 999px;
+  background: var(--catalog-surface-strong, var(--bg-surface));
+  color: var(--catalog-text, var(--text-primary));
+  box-shadow: var(--shadow-floating, 0 10px 22px rgba(31, 26, 20, 0.12));
+  cursor: pointer;
+  font: inherit;
+  animation: catalogCartFabIn 200ms ease;
+  contain: layout style paint;
+}
+
+.fab:focus-visible {
+  outline: 2px solid var(--business-primary, var(--color-primary));
+  outline-offset: 3px;
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  contain: paint layout;
+}
+
+.count {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1;
+  min-width: 1ch;
+}
+
+@keyframes catalogCartFabIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fab {
+    animation: none;
+  }
+}

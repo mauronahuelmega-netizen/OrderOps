@@ -11,29 +11,37 @@ import styles from "./customization-shared.module.css";
 type Props = {
   upsellGroup: PublicUpsellGroupView;
   selectedProductIds: string[];
+  /** Public modal: compact optional grid. Default list preserves admin preview. */
+  optionLayout?: "list" | "compact-grid";
   onToggleProduct: (productId: string) => void;
 };
 
 export default function UpsellSuggestionGroup({
   upsellGroup,
   selectedProductIds,
+  optionLayout = "list",
   onToggleProduct
 }: Props) {
   const copy = getUpsellGroupCopy(upsellGroup.name);
+  const isCompact = optionLayout === "compact-grid";
+  const listClass = [styles.optionList, isCompact ? styles.optionListCompact : ""]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <section className={styles.upsell}>
+    <section className={styles.upsell} data-option-layout={optionLayout}>
       <div className={styles.groupHeader}>
         <h3>{copy.title}</h3>
         <span className={styles.groupMeta}>Opcional</span>
       </div>
       <p className={styles.groupDescription}>{copy.description}</p>
-      <ul className={styles.optionList}>
+      <ul className={listClass}>
         {upsellGroup.products.map((product) => {
           const checked = selectedProductIds.includes(product.id);
           const inputId = `upsell-${product.id}`;
           const rowClass = [
             styles.optionRow,
+            isCompact ? styles.optionRowCompact : "",
             checked ? styles.optionRowSelected : ""
           ]
             .filter(Boolean)

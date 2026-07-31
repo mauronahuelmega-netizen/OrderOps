@@ -42,16 +42,50 @@
   gap: 0.45rem;
 }
 
+.optionListCompact {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+@media (max-width: 359px) {
+  .optionListCompact {
+    grid-template-columns: 1fr;
+  }
+}
+
 .optionRow {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: 0.65rem;
+  min-height: 2.75rem;
   padding: 0.7rem 0.75rem;
   border-radius: 0.85rem;
   border: 1px solid var(--border-subtle);
   background: var(--bg-canvas);
   cursor: pointer;
+  contain: layout style paint;
+}
+
+.optionRowCompact {
+  gap: 0.45rem;
+  min-height: 2.75rem;
+  padding: 0.55rem 0.6rem;
+  border-radius: 0.75rem;
+}
+
+.optionRowCompact .optionCopy strong {
+  font-size: 0.82rem;
+  line-height: 1.25;
+}
+
+.optionRowCompact .optionCopy small {
+  font-size: 0.72rem;
+}
+
+.optionRowCompact .optionDelta {
+  font-size: 0.75rem;
 }
 
 .optionRowSelected {
