@@ -219,8 +219,8 @@ Ver commit documental posterior a este archivo.
 
 ```text
 FUNCTIONAL_COMMIT_SHA=6d138a617f99add0620ae9ff6cc8c037d5c0b10a
-DOCUMENTATION_COMMIT_SHA=<filled after docs push>
-FINAL_PRODUCTION_SHA=<docs SHA if redeployed, else functional>
+DOCUMENTATION_COMMIT_SHA=779bc7c912405b36132b731d94c22c5c8c085110
+FINAL_PRODUCTION_SHA=779bc7c912405b36132b731d94c22c5c8c085110
 ```
 
 ## 51. Remaining debt
