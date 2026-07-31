@@ -1,4 +1,428 @@
-﻿## Registro — PUBLIC-CATALOG-ROADMAP-DEPLOY-1 (2026-07-29)
+﻿## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-DEPLOY-1 (2026-07-31)
+
+**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-DEPLOY-1 — Controlled Package Audit, Atomic Git Release, Production Deployment, Read-Only Smoke & Safe Revert Rollback
+**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT — SINGLE-GROUP POST-ADD UPSELL LIVE
+**Resumen:** Commit funcional `6d138a6` pusheado a `origin/main`. Vercel production Ready (`dpl_6Z7qqAG3a8uJHbpm4HSBqow4zcAR` → `https://orderops.vercel.app`). Smoke prod: modal sin Plus, post-add created, attach, qty/edit preserve, remove signature, checkout sin submit. Sin DB/migrations/pedidos. Rollback no requerido.
+- Doc: `docs/public-catalog-post-add-upsell-deploy-1.md`
+- **QUEUE_GATE:** PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1 = ALLOWED
+- **Próximo:** PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1 (read-only)
+- **Sin:** monitor extendido en esta fase; submit; DB
+
+---
+
+## Registro — PUBLIC-CATALOG-CART-EDIT-QUANTITY-PRESERVATION-FIX-1 (2026-07-31)
+
+**Fase:** PUBLIC-CATALOG-CART-EDIT-QUANTITY-PRESERVATION-FIX-1 — Preserve Parent and Child Quantity Through Customized Cart Editing Without Reopening Post-Add
+**Estado:** PASS — CUSTOMIZED CART EDIT PRESERVES ROOT AND CHILD QUANTITY
+**Resumen:** P1 quantity reset N→1 en edit `replaced` corregido en C1: `preservedQuantity` desde `existingParent`. Children/totals/root-only count correctos; `replaced` sin post-add; created/merged intactos. Fixtures EDIT-QTY-01…15 + Cleanup/C1/U1 + tsc/build + browser core PASS. Sin DB/checkout submit/commit/push/deploy.
+- Doc: `docs/public-catalog-cart-edit-quantity-preservation-fix-1.md`
+- **QUEUE_GATE:** PUBLIC-CATALOG-POST-ADD-UPSELL-DEPLOY-1 = HUMAN_REVIEW_REQUIRED
+- **Deploy:** READY FOR HUMAN DEPLOY REVIEW
+- **Próximo:** PUBLIC-CATALOG-POST-ADD-UPSELL-DEPLOY-1 (revisión humana)
+
+---
+
+## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-QA-2 (2026-07-31)
+
+**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-QA-2 — Integrated Single-Group Post-Add Upsell QA, Authorized Local Fixes & Human-Reviewed Deploy Readiness
+**Estado:** PASS WITH NON-BLOCKING QA DEBT — SINGLE-GROUP POST-ADD UPSELL VERIFIED AND READY FOR HUMAN DEPLOY REVIEW
+**Resumen:** Gate IMPL ALLOWED revalidado. Fixtures Cleanup/C1/U1 + tsc/build PASS. Browser core PASS (modal sin Plus, created→post-add, attach, merge, edit, checkout sin submit). Fix P1: rebuild signature al remover child Plus. Fix P2: focus trap Tab en sheet. Deploy readiness HUMAN REVIEW. Sin DB/checkout submit/commit/push/deploy.
+- Doc: `docs/public-catalog-post-add-upsell-qa-2.md`
+- **QUEUE_GATE:** PUBLIC-CATALOG-POST-ADD-UPSELL-DEPLOY-1 = HUMAN_REVIEW_REQUIRED
+- **Deploy:** READY FOR HUMAN DEPLOY REVIEW
+- **Cola:** TERMINA AQUÍ — sin deploy automático
+
+---
+
+## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-IMPL-1 (2026-07-31)
+
+**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-IMPL-1 — Move Single Plus Group from Modal to Safe Post-Add Sheet
+**Estado:** PASS WITH NON-BLOCKING QA DEBT — SIMPLIFIED SINGLE-GROUP POST-ADD UPSELL IMPLEMENTED
+**Resumen:** Plus fuera del modal; `productNeedsCustomizationModal` = `hasCustomizations`; post-add solo `created` + candidatos desde `config.upsellGroup`; attach vía C1; merged/replaced → CartSheet; simple quick-add sin post-add. Fixtures U1/C1/Cleanup + tsc/build + browser core PASS. Sin DB/checkout/submit/deploy/commit.
+- Doc: `docs/public-catalog-post-add-upsell-impl-1.md`
+- **QUEUE_GATE:** PUBLIC-CATALOG-POST-ADD-UPSELL-QA-2 = ALLOWED
+- **Próximo:** PUBLIC-CATALOG-POST-ADD-UPSELL-QA-2
+- **Sin:** placement, segundo grupo, migration, checkout submit, deploy/commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-UPSELL-REALIGNMENT-CLEANUP-1 (2026-07-31)
+
+**Fase:** PUBLIC-CATALOG-UPSELL-REALIGNMENT-CLEANUP-1 — Remove Unnecessary Placement Domain, Restore Single Plus Group, Recover Public Customization & Preserve Safe Cart Foundations
+**Estado:** PASS — D1 REMOVED, SINGLE-UPSELL BASELINE RESTORED, CATALOG RECOVERED
+**Resumen:** Placement/postAddUpsellGroup/migración D1 retirados. Un solo upsellGroup; Plus vuelve al modal; summaries recuperados (42703 placement confirmado y eliminado). C1 retenido + `eligibleAttachedUpsellProductIds`. Logging safe conservado. Sin U1/UI post-add. Sin mutaciones DB/prod.
+- Doc: `docs/public-catalog-upsell-realignment-cleanup-1.md`
+- **QUEUE_GATE:** PUBLIC-CATALOG-POST-ADD-UPSELL-IMPL-1 = ALLOWED
+- **Próximo:** PUBLIC-CATALOG-POST-ADD-UPSELL-IMPL-1
+- **Sin:** post-add sheet, placement, migration apply, checkout submit, deploy/commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-D1-SCHEMA-RUNTIME-FIX-1 (2026-07-31)
+
+**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-D1-SCHEMA-RUNTIME-FIX-1 — Active Database Identification, Placement Schema Alignment, Safe Diagnostics & Public Catalog Recovery
+**Estado:** BLOCKED — PRODUCTION MIGRATION OUT OF SCOPE · DIAGNOSTICS IMPROVED · CATALOG NOT RECOVERED · **SUPERSEDED BY UPSELL REALIGNMENT CLEANUP-1**
+**Resumen:** `next dev` apunta a producción `pkrsedmwxekbhlohhqds`. Docker local caído. Tokens remote-dev ausentes. Migration D1 NO aplicada. Logging PostgREST restaurado (`safe-error-details` + corpus throws). Fixtures/tsc/build PASS. Sin U1/checkout/pedidos/deploy.
+- Doc: `docs/public-catalog-post-add-upsell-d1-schema-runtime-fix-1.md`
+- **Próximo:** (superseded) realignment cleanup → IMPL-1
+- **Sin:** production migration, U1, checkout, pedidos, deploy/commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-QA-1 (2026-07-31)
+
+**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-QA-1 — Integrated Domain, Cart Contract, Public UX, Network, Accessibility & No-Order Verification
+**Estado:** BLOCKED — PUBLIC-CATALOG-POST-ADD-UPSELL-IMPL-1 NOT COMPLETE · NOT READY FOR DEPLOY
+**Resumen:** Mode A QA-only. Gate U1 FAIL: sin doc IMPL-1, sin sheet, sin candidate filter, sin orquestación `created`→post-add, sin attach desde UI. Fixtures D1/C1 + tsc/build PASS. Schema local UNAVAILABLE. Sin browser integrado, sin pedidos, sin fixes, sin adelantar U1.
+- Doc: `docs/public-catalog-post-add-upsell-qa-1.md`
+- **Próximo:** PUBLIC-CATALOG-POST-ADD-UPSELL-IMPL-1 → re-ejecutar Q1
+- **Sin:** U1 implementation, runtime fixes, remote migration, deploy/commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-CART-CONTRACT-1 (2026-07-31)
+
+**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-CART-CONTRACT-1 — Deterministic Parent Mutation Outcomes, Child Attachment, Signature Safety & Edit Preservation
+**Estado:** PASS WITH CART RUNTIME QA DEBT · D1 LOCAL DB MIGRATION QA DEBT — INHERITED
+**Resumen:** Merge discriminado (`created`/`merged`/`replaced` + fallos); `parentCartLineId` final; `attachUpsellChildToParent` idempotente con signature conflict; `buildUpsellChildCartLine` compartido; preserve post-add en edit; callsites sin UI post-add. Fixtures/tsc/build PASS. Runtime browser no corrido (schema D1).
+- Doc: `docs/public-catalog-post-add-upsell-cart-contract-1.md`
+- Fixture: `lib/cart/post-add-upsell-contract.verify.ts`
+- **Próximo:** PUBLIC-CATALOG-POST-ADD-UPSELL-IMPL-1
+- **Sin:** post-add UI, DB, placement, checkout, create_order, deploy/commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-DOMAIN-1 (2026-07-31)
+
+**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-DOMAIN-1 — Placement Domain, Admin Configuration & Public Surface Resolution  
+**Estado:** PASS WITH LOCAL DB MIGRATION QA DEBT · PASS WITH ADMIN RUNTIME QA DEBT  
+**Resumen:** `upsell_groups.placement` (`in_modal`|`post_add`, default/backfill `in_modal`); unique por target+placement; admin radios/badges; resolver por superficie; config `upsellGroup` + `postAddUpsellGroup`; modal/hasUpsell solo in_modal; sin UI post-add; sin cart contract. Fixtures/tsc/build PASS. Migration local UNVERIFIED (Docker down).
+- Doc: `docs/public-catalog-post-add-upsell-domain-1.md`
+- Migration: `supabase/migrations/20260731233000_post_add_upsell_group_placement.sql`
+- **Próximo:** PUBLIC-CATALOG-POST-ADD-UPSELL-CART-CONTRACT-1 (completado en código)
+- **Sin:** both, post-add UI, merge/attach cart, checkout, remote migration, deploy/commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-SPEC-1 (2026-07-31)
+
+**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-SPEC-1 — Post-Add Upsell Product, Domain & Technical Specification  
+**Estado:** SPEC COMPLETE · **GO WITH DOMAIN PREREQUISITE** · DOCS-ONLY  
+**Resumen:** Spec cerrada del post-add Plus. Placement **no existe** hoy; Opción A (repetir Plus in-modal) rechazada. MVP = V2 parent nuevo + cache 0 POST + placement group-level `in_modal|post_add|both` (spec closure fijó binario sin `both`) + merge outcome/`cartLineId` + attach child helper + sheet descartable + count root-only. Legacy/cross-sell root fuera. Sin implementación runtime/DB.
+- Doc: `docs/public-catalog-post-add-upsell-spec-1.md`
+- Preflight: `main` @ `5dd9b41` · dirty ajeno no limpiado
+- **Próximo:** PUBLIC-CATALOG-POST-ADD-UPSELL-DOMAIN-1 (completado en código; apply DB pendiente)
+- **Sin:** código, DB, RLS, RPC, actions, cart, checkout, deps, deploy/commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-INTEGRATED-CONVERSION-QA-1 (2026-07-31)
+
+**Fase:** PUBLIC-CATALOG-INTEGRATED-CONVERSION-QA-1 — End-to-End Public Catalog Conversion Funnel QA Without Real Order Creation  
+**Estado:** PASS WITH PREVIEW QA DEBT · PASS WITH DEVICE QA DEBT · SUBMIT REAL NOT EXECUTED BY SCOPE  
+**Resumen:** QA-only del funnel catálogo → modal → FAB → sheet → checkout. Root-only count, parent/child prices, Plus remove/edit/qty, mix (5), remove parent sin orphans, cache 1/0 POST, checkout modality 0 fetch, empty states. Preview/device/closed-store deuda. Sin fixes de código. Action/`create_order` intactos.
+- Doc: `docs/public-catalog-integrated-conversion-qa-1.md`
+- Runtime: `localhost:3000/b/demohamburgueseria/*` · viewport ~390×844
+- CLI: `tsc` PASS · `build` PASS · `actions.ts` limpio
+- **Próximo:** PUBLIC-CATALOG-POST-ADD-UPSELL-SPEC-1 (completado)
+- **Sin:** DB, RLS, RPC, checkout action, create_order, payload, cart schema, pedidos reales, deploy/commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-CHECKOUT-SUMMARY-VISUAL-QA-FIX-1 (2026-07-30)
+
+**Fase:** PUBLIC-CATALOG-CHECKOUT-SUMMARY-VISUAL-QA-FIX-1 — Parent/Upsell Price Clarity, Customer-Facing Root Count & Mobile Overlay Verification  
+**Estado:** PASS WITH PREVIEW QA DEBT · PASS WITH DEVICE QA DEBT · SUBMIT REAL NOT EXECUTED BY SCOPE  
+**Resumen:** Contador customer-facing root-only (`getCartItemCount` via hierarchical rows; Plus no inflan). Precios parent/child separados (`lineTotal` propio; sin groupTotal ambiguo) en checkout y cart sheet. Header comercial estático solo en `/checkout` (sticky real corregido). CTA sticky con scroll-padding/margin; foco sin cobertura. Totals/payload/action/`create_order` intactos.
+- Doc: `docs/public-catalog-checkout-summary-visual-qa-fix-1.md`
+- Runtime: checkout “1 producto” + parent $15.250 / child $3.000 / total $18.250 · FAB simple “1 producto” · header `position:static` en checkout
+- CLI: `tsc` PASS · `build` PASS · tsx fixtures PASS
+- **Próximo:** PUBLIC-CATALOG-INTEGRATED-CONVERSION-QA-1 (completado)
+- **Sin:** DB, RLS, RPC, checkout action, create_order, payload, cart schema, pedidos reales, deploy/commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-CHECKOUT-CONVERSION-POLISH-1 (2026-07-30)
+
+**Fase:** PUBLIC-CATALOG-CHECKOUT-CONVERSION-POLISH-1 — Segmented Mobile Checkout, Form Clarity & Final Conversion Surface  
+**Estado:** PASS WITH PREVIEW QA DEBT · PASS WITH DEVICE QA DEBT · SUBMIT REAL NOT EXECUTED BY SCOPE  
+**Resumen:** Checkout público reorganizado en secciones mobile-first (header “Finalizá tu pedido”, segmented Envío/Retiro con values `delivery`/`pickup`, Tus datos, entrega/retiro condicional, notas, resumen jerárquico, CTA sticky `Enviar pedido · $X`). Module CSS con tokens. Payload, `createPublicCheckoutOrderAction`, `create_order`, cart schema, pricing y preview guard intactos. Sin forma de pago (N/A). Sin Google Places ni phone AR. Sin pedidos reales.
+- Doc: `docs/public-catalog-checkout-conversion-polish-1.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- Runtime: modality/typing `0` fetch · V2+upsell summary `$12.000` · empty PASS · client validation PASS · preview UNVERIFIED
+- CLI: `tsc` PASS · `build` PASS · lint no ejecutado
+- **Próximo:** PUBLIC-CATALOG-INTEGRATED-CONVERSION-QA-1
+- **Sin:** DB, RLS, RPC, checkout action, create_order, payload, cart schema, pedidos reales, deploy/commit/push
+
+---
+
+## Registro — PUBLIC-CATALOG-CART-SHEET-USABILITY-1 (2026-07-30)
+
+**Fase:** PUBLIC-CATALOG-CART-SHEET-USABILITY-1 — Mobile Cart Sheet Hierarchy, Controls & Checkout Readiness  
+**Estado:** PASS WITH PREVIEW QA DEBT  
+**Resumen:** Se pulió el cart sheet público mobile: header “Tu pedido” + conteo, jerarquía clara simple/V2/upsell, controles iconográficos (lucide), stepper tocable, footer sticky con Total + “Continuar al checkout”, empty state con “Seguir comprando”. Se preservaron cart schema, callbacks de qty/edit/remove, pricing, checkout destination y preview isolation. Acciones locales sin fetch. Sin post-add upsell, DB/RLS/RPC, create_order, deps nuevas ni deploy.
+- Doc: `docs/public-catalog-cart-sheet-usability-1.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- Runtime: qty/remove `0` POST · edit modal cache-hit `0` POST · empty state PASS · checkout boundary sin submit
+- CLI: `tsc` PASS · `build` PASS · lint no ejecutado
+- **Próximo:** PUBLIC-CATALOG-CHECKOUT-CONVERSION-POLISH-1 (completado) o PUBLIC-CATALOG-POST-ADD-UPSELL-SPEC-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-CUSTOMIZATION-MODAL-UX-POLISH-1 (2026-07-30)
+
+**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-UX-POLISH-1 — Compact Premium UX for Public Customization Modal  
+**Estado:** PASS WITH PREVIEW QA DEBT  
+**Resumen:** Se implementó el polish UX mobile del modal público de personalización: header más compacto/premium, grupos obligatorios full-width, grupos no obligatorios en grilla compacta, opciones más densas pero tocables, CTA inferior con total final (`Agregar · $X`) y micro-interacción CSS-only del precio al cambiar el total. Se preservó el fix de performance anterior: cache `slug:productId`, dedupe in-flight, reopen cache-hit sin loading/POST, productos simples sin fetch y detail path compartido. No se implementó post-add upsell ni Google Places. Sin DB/RLS/RPC/checkout action/create_order/cart schema/cache tags/image/env/CSP/deploy.
+- Doc: `docs/public-catalog-customization-modal-ux-polish-1.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- Runtime: first open `1` POST · reopen same product `0` POST · simple product `0` POST
+- CLI: `tsc` PASS · `build` PASS · lint no ejecutado
+- **Próximo:** PUBLIC-CATALOG-POST-ADD-UPSELL-SPEC-1 o PUBLIC-CATALOG-CART-SHEET-USABILITY-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-FIX-1 (2026-07-30)
+
+**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-FIX-1 — Client Cache & In-flight Dedupe for Customization Modal  
+**Estado:** PASS WITH PREVIEW QA DEBT  
+**Resumen:** Se implementó el fix A+B recomendado por la auditoría del modal de personalización: cache client-side por `productId` en `CatalogClient` e in-flight dedupe por producto para evitar refetch/loading repetido al cerrar y reabrir el mismo producto. El primer open sigue on-demand; los reopens cache-hit no disparan nuevos `Next-Action` POST; productos simples siguen sin fetch; el path desde detail comparte cache. Se preservaron cart schema, checkout, create_order, Product Customization server-side validation, cache strategy/tags, image loader, preview boundaries, CSP y PWA. Sin DB/RLS/RPC/migraciones/pedidos reales/deploy.
+- Doc: `docs/public-catalog-customization-modal-perf-fix-1.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- Runtime: first open `1` POST · reopen same product `0` POST · simple product `0` POST
+- CLI: `tsc` PASS · `build` PASS · lint no ejecutado
+- **Próximo:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-UX-POLISH-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-AUDIT-1 (2026-07-30)
+
+**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-AUDIT-1 — Forensic Audit of Customization Modal Repeated Loading  
+**Estado:** PERF AUDIT COMPLETE — FIX RECOMMENDED  
+**Resumen:** Se auditó forensemente el flujo de carga del modal de personalización público, revisando source, loader/endpoint, requests al primer open, close/reopen del mismo producto, apertura de múltiples productos, control de productos simples, path desde detail modal, network profile, performance percibida y tenant/security boundaries. La fase es audit-only: sin fix de cache, sin prefetch, sin cambios de modal UX, sin DB/RLS/RPC/checkout/create_order/cart schema/cache/image/env/CSP/deploy.
+- Doc: `docs/public-catalog-customization-modal-perf-audit-1.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- Runtime finding: cada open/reopen refetch via server action + `noStore()`; config solo en estado local del modal (unmount al cerrar); local/dev 2× Next-Action POST ~3s ready
+- CLI: `tsc` no ejecutado · `build` no ejecutado · lint no ejecutado
+- **Próximo:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-FIX-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-PRODUCT-CARDS-SINGLETON-WIDTH-FIX-1 (2026-07-30)
+
+**Fase:** PUBLIC-CATALOG-PRODUCT-CARDS-SINGLETON-WIDTH-FIX-1 — Keep Single-Product Categories at Grid Card Width  
+**Estado:** PASS WITH PREVIEW QA DEBT  
+**Resumen:** Se corrigió el comportamiento visual de categorías con un solo producto para que la card conserve el mismo ancho que las cards normales de la grilla de 2 columnas, en lugar de ocupar todo el ancho. Se preservaron cards image-first, quick `+`, header hide, category sticky, FAB, cart schema, checkout, create_order, cache, Product Customization server-side, image loader, CSP y PWA. Sin DB/RLS/RPC/migraciones/pedidos reales/deploy.
+- Doc: `docs/public-catalog-product-cards-singleton-width-fix-1.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- CLI: `tsc` PASS · `build` PASS · lint no ejecutado
+- **Próximo:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-AUDIT-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-PRODUCT-CARDS-GRID-POLISH-1 (2026-07-30)
+
+**Fase:** PUBLIC-CATALOG-PRODUCT-CARDS-GRID-POLISH-1 — Mobile 2-Column Product Cards & Quick Add Polish  
+**Estado:** PASS WITH PREVIEW QA DEBT  
+**Resumen:** Se implementó la segunda fase de conversión del catálogo público: cards mobile en 2 columnas, layout image-first, descripción truncada, card completa abre detalle y acción rápida `+` agrega productos simples o abre el modal si el producto requiere personalización. Se eliminó “Ver detalle” de las cards y se ajustaron sizes de imágenes para el nuevo layout. Se preservaron header/FAB del shell, cache, checkout, create_order, cart schema, Product Customization server-side, image loader, preview admin boundaries, CSP y PWA. Sin DB/RLS/RPC/migraciones/pedidos reales/deploy.
+- Doc: `docs/public-catalog-product-cards-grid-polish-1.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- CLI: `tsc` PASS · `build` PASS · lint no ejecutado
+- **Próximo:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-AUDIT-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-SHELL-CART-SURFACES-POLISH-1 (2026-07-30)
+
+**Fase:** PUBLIC-CATALOG-SHELL-CART-SURFACES-POLISH-1 — Header Hide, Sticky Categories & Compact Cart FAB  
+**Estado:** PASS WITH PREVIEW QA DEBT  
+**Resumen:** Se implementó el primer bloque de conversión del catálogo público: header hide-on-scroll, categorías sticky con offset correcto, carrito vacío sin superficie visible y cart FAB compacto solo con ícono+cantidad cuando hay productos. Se aplicó hero mobile compacto/premium si fue seguro dentro del shell. Se preservaron cache, checkout, create_order, cart schema, Product Customization, preview admin, image loader, CSP y PWA. Sin DB/RLS/RPC/migraciones/pedidos reales/deploy.
+- Doc: `docs/public-catalog-shell-cart-surfaces-polish-1.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- CLI: `tsc` PASS · `build` PASS · lint no ejecutado
+- **Próximo:** PUBLIC-CATALOG-PRODUCT-CARDS-GRID-POLISH-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-CONVERSION-SPEC-CLOSURE-1 (2026-07-30)
+
+**Fase:** PUBLIC-CATALOG-CONVERSION-SPEC-CLOSURE-1 — Final Product & Technical Spec Closure for Public Catalog Conversion Roadmap  
+**Estado:** SPEC CLOSED  
+**Resumen:** Se cerró formalmente la spec de producto/técnica para la línea Public Catalog Conversion Surfaces. Quedaron congeladas las decisiones finales: header hide-on-scroll, hero compacto premium, categorías sticky/active, cart vacío oculto, cart FAB solo ícono+cantidad, cards 2 columnas con quick `+`, modal performance audit/fix, modal UX compacta, post-add upsell solo spec por ahora, cart sheet con iconos, checkout segmented, phone AR y Google Places como spec futura. Se definió deploy agrupado tras implementación + QA integrada. Docs-only, sin código funcional, sin DB/RLS/RPC/checkout action/create_order/cart schema/cache/Product Customization/image/env/CSP/deploy.
+- Doc: `docs/public-catalog-conversion-spec-closure-1.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- CLI: `tsc` no ejecutado · `build` no ejecutado · lint histórico
+- **Próximo:** PUBLIC-CATALOG-SHELL-CART-SURFACES-POLISH-1
+- **Sin:** código funcional, DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-CONVERSION-SURFACES-AUDIT-SPEC-1 (2026-07-30)
+
+**Fase:** PUBLIC-CATALOG-CONVERSION-SURFACES-AUDIT-SPEC-1 — Public Catalog Conversion Surfaces Audit & Product Spec  
+**Estado:** SPEC READY  
+**Resumen:** Se auditó y especificó la próxima evolución de conversión del catálogo público, cubriendo header, hero, categorías, cards, cart FAB, modal de personalización, post-add upsell, carrito y checkout. La fase fue docs/spec-only, preservando el performance budget: sin server calls nuevos, sin cache changes, sin Google Places implementation, sin librerías pesadas, sin DB/RLS/RPC/checkout action/create_order/cart schema/Product Customization/image/env/CSP/deploy.
+- Doc: `docs/public-catalog-conversion-surfaces-audit-spec-1.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- CLI: `tsc` no ejecutado · `build` no ejecutado · lint histórico
+- **Próximo:** PUBLIC-CATALOG-SHELL-CART-SURFACES-POLISH-1
+- **Sin:** código funcional, DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-PREVIOUS-SLUG-CALLERS-FIX-1 (2026-07-30)
+
+**Fase:** PUBLIC-CATALOG-PREVIOUS-SLUG-CALLERS-FIX-1 — Pass previousSlug Through Public Catalog Cache Invalidation Callers  
+**Estado:** PASS WITH RUNTIME SLUG QA DEBT  
+**Resumen:** Se corrigió el wiring de invalidación del catálogo público para que el server action capaz de cambiar el slug público (`updateBusinessAction` super-admin) capture el slug anterior antes del update y lo pase como `previousSlug` a `revalidatePublicCatalogCache`. El helper invalida paths del slug actual y anterior, preservando tags/scopes existentes. Callers tenant admin no cambian slug (sin contaminación). Sin DB/RLS/RPC/checkout action/carrito schema/Product Customization/image transforms/CSP/envs/pedidos reales. Runtime slug rename QA no ejecutado por falta de auth.
+- Doc: `docs/public-catalog-previous-slug-callers-fix-1.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- CLI: `tsc` PASS · `build` PASS · lint no ejecutado
+- Runtime slug QA: `NOT RUN`
+- **Próximo:** PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2-FOLLOWUP o slug rename QA con `AUTORIZO_SLUG_RENAME_CACHE_QA_PROD=yes`
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-REAL-DEVICE-QA-1 (2026-07-30)
+
+**Fase:** PUBLIC-CATALOG-REAL-DEVICE-QA-1 — Real Device QA for Public Catalog V1  
+**Estado:** BLOCKED — REAL DEVICE UNAVAILABLE  
+**Resumen:** No se ejecutó QA real-device porque no hubo hardware disponible operable (sin ADB/platform-tools; PnP Samsung USB Unknown; browser Cursor = desktop Chromium). No se reemplazó por emulación como PASS. Deuda P3 Real device QA permanece. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/Product Customization/image transforms/CSP/envs/código.
+- Doc: `docs/public-catalog-real-device-qa-1.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- Devices: `Android Chrome UNAVAILABLE / iOS UNVERIFIED / PWA UNVERIFIED`
+- CLI: `tsc` no ejecutado · `build` no ejecutado · lint histórico
+- **Próximo:** PUBLIC-CATALOG-REAL-DEVICE-QA-1-FOLLOWUP (con Android Chrome real) o PUBLIC-CATALOG-PREVIOUS-SLUG-CALLERS-FIX-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, código funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-PREVIEW-AUTH-SMOKE-1 (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-PREVIEW-AUTH-SMOKE-1 — Authenticated Admin Preview Deep Smoke for Public Catalog V1  
+**Estado:** PASS WITH MINOR PREVIEW QA DEBT  
+**Resumen:** Se ejecutó smoke autenticado profundo de `/admin/products/preview`, validando shell admin, iframe real del catálogo, modo seguro, carrito preview aislado, clear cart, Product Customization dentro del iframe, checkout preview bloqueado, público normal intacto, CSP/frame boundary y ausencia de pedidos reales. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/Product Customization/image transforms/CSP/envs.
+- Doc: `docs/public-catalog-preview-auth-smoke-1.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- Auth: `PASS`
+- Iframe deep: `PASS`
+- CLI: `tsc` no ejecutado · `build` no ejecutado · lint histórico
+- **Próximo:** PUBLIC-CATALOG-REAL-DEVICE-QA-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, código funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1-MODE-B (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1-MODE-B — Authorized Supabase Image Transformations Enablement & Production Verification  
+**Estado:** BLOCKED — MISSING IMAGE TRANSFORMS ENABLE AUTH  
+**Resumen:** No se tocó Supabase infra porque faltó autorización explícita de enable y/o billing (`AUTORIZO_SUPABASE_IMAGE_TRANSFORMATIONS_ENABLE=yes` y `AUTORIZO_SUPABASE_IMAGE_TRANSFORMATIONS_BILLING_ACCEPTED=yes`). Source loader/fallback intacto; baseline object **200** / render **403 FeatureNotEnabled**. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/Product Customization/CSP/pedidos reales.
+- Doc: `docs/public-catalog-image-transforms-infra-1-mode-b.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- Render status: `403`
+- Billing/plan: `blocked`
+- CLI: `tsc` no ejecutado · `build` no ejecutado · lint histórico
+- **Próximo:** re-run Mode B con ambos tokens auth, o PUBLIC-CATALOG-OBSERVABILITY-PROD-ENABLE-1 / PUBLIC-CATALOG-PREVIEW-AUTH-SMOKE-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, código funcional salvo fix mínimo autorizado
+
+---
+
+## Registro — PUBLIC-CATALOG-OBSERVABILITY-PROD-ENABLE-1 (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-OBSERVABILITY-PROD-ENABLE-1 — Controlled Production Enablement for Public Catalog Observability  
+**Estado:** BLOCKED — MISSING OBSERVABILITY PROD ENABLE AUTH  
+**Resumen:** No se tocaron envs de Vercel porque faltó `AUTORIZO_PUBLIC_CATALOG_OBSERVABILITY_PROD_ENABLE=yes`. Source privacy-safe y endpoint 204 intactos; normal beacons siguen debug-only. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/Product Customization/image transforms/CSP/pedidos reales.
+- Doc: `docs/public-catalog-observability-prod-enable-1.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- Env principal: `off/blocked`
+- Logs prod: `off`
+- CLI: `tsc` no ejecutado · `build` no ejecutado · lint histórico
+- **Próximo:** re-run con `AUTORIZO_PUBLIC_CATALOG_OBSERVABILITY_PROD_ENABLE=yes` o PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1-MODE-B
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, código funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2-FOLLOWUP (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2-FOLLOWUP — Authorized Runtime QA for Public Catalog Cache Invalidation  
+**Estado:** BLOCKED — MISSING MUTATION AUTH  
+**Resumen:** No se ejecutó el followup runtime porque faltó `AUTORIZO_CACHE_MUTATION_RUNTIME_QA_PROD=yes`. Sin mutaciones productivas. Source/baseline previos de QA-2 Modo A siguen vigentes. Checkout/create_order/cart/pricing/stock/cache strategy/CSP/pedidos no tocados.
+- Doc: `docs/public-catalog-cache-mutation-runtime-qa-2-followup.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- CLI: `tsc` no ejecutado · `build` no ejecutado · lint histórico
+- **Próximo:** re-run FOLLOWUP con `AUTORIZO_CACHE_MUTATION_RUNTIME_QA_PROD=yes` o PUBLIC-CATALOG-OBSERVABILITY-PROD-ENABLE-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2 (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2 — Runtime QA for Public Catalog Cache Invalidation After Admin Mutations  
+**Estado:** PASS WITH RUNTIME MUTATION AUTH DEBT  
+**Resumen:** Se validó source-level la invalidación del cache público (`revalidatePublicCatalogCache` + tags + fresh ordering noStore) y baseline productivo read-only. No se ejecutaron mutaciones admin productivas por falta de `AUTORIZO_CACHE_MUTATION_RUNTIME_QA_PROD=yes`. Checkout boundary y metrics 204 intactos; sin pedidos reales. Slug rename/flag toggle/ordering status quedan documentados como UNVERIFIED pending autorización.
+- Doc: `docs/public-catalog-cache-mutation-runtime-qa-2.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- CLI: `tsc` no ejecutado · `build` no ejecutado · lint histórico
+- **Próximo:** PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2-FOLLOWUP (con auth) o PUBLIC-CATALOG-OBSERVABILITY-PROD-ENABLE-1
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-POST-DEPLOY-MONITOR-1 (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-POST-DEPLOY-MONITOR-1 — Post-Deploy Production Monitor for Public Catalog V1  
+**Estado:** PASS WITH NON-BLOCKING QA DEBT  
+**Resumen:** Se ejecutó monitor productivo read-only del catálogo público V1 luego del deploy agrupado y handoff final. Se validaron health checks, catálogo, Product Customization, cart/checkout boundary, observability debug, performance sanity, Image Transforms debt, preview boundary, console/network, mobile smoke y frescura observacional. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/preview logic/CSP/pedidos reales.
+- Doc: `docs/public-catalog-post-deploy-monitor-1.md`
+- Deploy base: `fb19a3a`
+- Live: `https://orderops.vercel.app`
+- CLI: `tsc` no ejecutado · `build` no ejecutado · lint histórico
+- **Próximo:** PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2 o PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1-MODE-B
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-FINAL-HANDOFF-1 (2026-07-29)
+
+**Fase:** PUBLIC-CATALOG-FINAL-HANDOFF-1 — Public Catalog V1 Final Technical & Product Handoff  
+**Estado:** FEATURE CLOSED — DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Resumen:** Se cerró formalmente el roadmap V1 del catálogo público. Quedan consolidados arquitectura, data path, cache/invalidation, Product Customization summary-lite, UX de compra, scroll mobile polish, observability privacy-safe, seguridad, QA productiva, rollback y deuda residual. Producción live en `https://orderops.vercel.app`; último paquete funcional `fb19a3a`. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/preview logic/CSP/pedidos reales.
+- Doc: `docs/public-catalog-final-handoff-1.md`
+- Deploy base: `PUBLIC-CATALOG-ROADMAP-DEPLOY-1`
+- Commit funcional roadmap: `fb19a3a`
+- Estado deploy: `DEPLOYED WITH NON-BLOCKING QA DEBT`
+- CLI: `tsc` no ejecutado · `build` no ejecutado · lint histórico
+- **Próximo opcional:** PUBLIC-CATALOG-POST-DEPLOY-MONITOR-1 o PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1-MODE-B
+- **Sin:** DB, RLS, RPC, checkout action, pedidos reales, deploy/commit/push funcional
+
+---
+
+## Registro — PUBLIC-CATALOG-ROADMAP-DEPLOY-1 (2026-07-29)
 
 **Fase:** PUBLIC-CATALOG-ROADMAP-DEPLOY-1 — Controlled Deploy for Public Catalog Roadmap Package  
 **Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  
