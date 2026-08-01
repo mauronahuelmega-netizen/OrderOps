@@ -262,6 +262,19 @@ FORCE PUSH — NONE
 
 `REAL ORDERS — 0`.
 
+## Consolidated monitor resolution
+
+```text
+Initial Codex HTTP/Git run = PARTIAL
+Browser followup-1 = BLOCKED - P2 focus trap
+Focus trap fix = PASS
+Browser followup-2 = PARTIAL - automation coverage incomplete
+Consolidated monitor = PARTIAL - FOLLOWUP-2 PRODUCTION COVERAGE INCOMPLETE
+QUEUE_GATE: PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1 = BLOCKED
+```
+
+Followup-2 revalidated focus containment before and after attach with zero escapes, but did not complete the CartSheet-dependent remainder of the funnel or the full A/B/C observation window. Historical evidence remains distinct from this incomplete run.
+
 ## 48. Fixtures
 
 ```text

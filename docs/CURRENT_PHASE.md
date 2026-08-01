@@ -1,3 +1,14 @@
+## Registro - PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP-2 (2026-08-01)
+
+**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP-2 - Full Post-Fix Production Re-Monitor
+**Estado:** PARTIAL - FOLLOWUP-2 PRODUCTION COVERAGE INCOMPLETE
+**Resumen:** Git, focus trap pre/post attach, modal sin Plus, created-to-post-add y attach pasaron en produccion. El unico retry completo alcanzo `Listo`, pero el locator de CartSheet hizo timeout; el resto del funnel y la ventana A/B/C quedan unverified. No hay P0/P1/P2 confirmado.
+- Doc: `docs/public-catalog-post-add-upsell-post-deploy-monitor-1-followup-2.md`
+- **QUEUE_GATE:** PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1 = BLOCKED
+- **Proximo:** repetir FOLLOWUP-2 con automatizacion estable del CartSheet.
+
+---
+
 ## Registro - PUBLIC-CATALOG-POST-ADD-UPSELL-FOCUS-TRAP-FIX-1 (2026-08-01)
 
 **Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-FOCUS-TRAP-FIX-1 - Targeted Post-Add Dialog Focus Containment

@@ -9,6 +9,10 @@
 
 ---
 
+### 2026-08-01 - Public Catalog Post-Add Followup-2 Partial Re-Monitor
+- **[Ops]** `origin/main` reconciled at `3f253ee`; focus fix ancestry and runtime continuity passed. Production Chrome verified Doble Smash modal, Plus absence, created-to-post-add, attach, and eight forward/backward Tab cycles before and after attach with zero escapes.
+- **[Ops]** The single complete-suite retry timed out on the CartSheet locator after `Listo`; classified inconclusive automation coverage, not an application regression. Final handoff remains blocked; no runtime, DB, checkout submit, or real orders.
+
 ### 2026-08-01 - Public Catalog Post-Add Focus Trap Fix
 - **[UI/Ops]** `2322999434ed113f897a67c796eb3adde55d7743` moves the post-add Tab handler to document capture, filters visible focusables, and prevents empty-cycle escape. Production Chrome + bundled Codex Playwright verified focus containment before and after attach.
 - Files: `components/public/catalog/post-add-upsell-sheet.tsx`, `docs/public-catalog-post-add-upsell-focus-trap-fix-1.md`
