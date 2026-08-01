@@ -1,4 +1,17 @@
-﻿## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-DEPLOY-1 (2026-07-31)
+## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-PARTIAL-HANDOFF-1 (2026-08-01)
+
+**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-PARTIAL-HANDOFF-1 — Document Partial Codex Monitor Evidence, Reconcile Active Phase & Preserve Final Handoff Block
+**Estado:** PARTIAL HANDOFF COMPLETE — CODEX HTTP/GIT MONITOR DOCUMENTED · BROWSER CORE STILL BLOCKED
+**Resumen:** Codex reanudó el monitor post-deploy en MODE C HTTP/GIT ONLY. Git y `origin/main` quedaron reconciliados en `eac9d17`; arquitectura single-group verificada; catálogo y checkout HTTP 200. Browser funnel, network, console y Vercel deployment/log identity quedaron UNVERIFIED por limitaciones del entorno. Se documentó el monitor parcial. Final handoff permanece bloqueado.
+- Doc: `docs/public-catalog-post-add-upsell-post-deploy-monitor-1.md`
+- **QUEUE_GATE:** PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP = ALLOWED
+- **QUEUE_GATE:** PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1 = BLOCKED
+- **Próximo:** PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP
+- **Sin:** re-run runtime, browser claims, Vercel claims, DB, checkout submit, commit, push o deploy
+
+---
+
+## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-DEPLOY-1 (2026-07-31)
 
 **Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-DEPLOY-1 — Controlled Package Audit, Atomic Git Release, Production Deployment, Read-Only Smoke & Safe Revert Rollback
 **Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT — SINGLE-GROUP POST-ADD UPSELL LIVE

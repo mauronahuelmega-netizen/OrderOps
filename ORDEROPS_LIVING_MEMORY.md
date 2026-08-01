@@ -385,6 +385,12 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-08-01 — PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-PARTIAL-HANDOFF-1
+
+- **Ops / Release** Handoff documental append-only del monitor post-deploy parcial de Codex. El deploy single-group post-add sigue live como evidencia histórica; Codex operó en `MODE C — HTTP/GIT ONLY`, sincronizó Git/origin en `eac9d17`, verificó la arquitectura single-group y `PLACEMENT_RUNTIME = ABSENT`, y obtuvo HTTP 200 de catálogo y checkout. Browser core, identidad/logs Vercel, Round C y ventana completa quedaron **UNVERIFIED**. Fixtures agotaron 60 s y son inconclusos; TypeScript PASS; build unverified. Sin rollback, DB, migraciones, mutaciones productivas, submit ni pedidos reales (`0`). Final handoff bloqueado; followup monitor permitido.
+- Archivos: `docs/public-catalog-post-add-upsell-post-deploy-monitor-1.md`, `docs/CURRENT_PHASE.md`, `docs/public-catalog-post-add-upsell-deploy-1.md`, `ORDEROPS_LIVING_MEMORY.md`.
+- Breaking: no — solo documentación. `QUEUE_GATE: PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP = ALLOWED`; `QUEUE_GATE: PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1 = BLOCKED`.
+
 ### 2026-04-26 â€” FundaciÃ³n (T1â€“T8)
 
 - **DB** `t1`: Tablas `businesses`, `profiles` â€” multi-tenant base con `slug` Ãºnico.
