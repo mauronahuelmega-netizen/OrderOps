@@ -110,7 +110,12 @@ export default function PostAddUpsellSheet({
         ...root.querySelectorAll<HTMLElement>(
           'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
         )
-      ].filter((el) => !el.hasAttribute("disabled") && el.tabIndex !== -1);
+      ].filter(
+        (el) =>
+          !el.hasAttribute("disabled") &&
+          el.tabIndex !== -1 &&
+          el.getClientRects().length > 0
+      );
     }
 
     function onKeyDown(event: KeyboardEvent) {
@@ -126,6 +131,7 @@ export default function PostAddUpsellSheet({
 
       const focusables = focusableElements();
       if (focusables.length === 0) {
+        event.preventDefault();
         return;
       }
 
@@ -147,8 +153,8 @@ export default function PostAddUpsellSheet({
       }
     }
 
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    document.addEventListener("keydown", onKeyDown, true);
+    return () => document.removeEventListener("keydown", onKeyDown, true);
   }, []);
 
   function finishOnce() {
