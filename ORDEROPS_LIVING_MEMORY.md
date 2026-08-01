@@ -9,6 +9,13 @@
 
 ---
 
+### 2026-08-01 - Public Catalog Post-Add Focus Trap Fix
+- **[UI/Ops]** `2322999434ed113f897a67c796eb3adde55d7743` moves the post-add Tab handler to document capture, filters visible focusables, and prevents empty-cycle escape. Production Chrome + bundled Codex Playwright verified focus containment before and after attach.
+- Files: `components/public/catalog/post-add-upsell-sheet.tsx`, `docs/public-catalog-post-add-upsell-focus-trap-fix-1.md`
+- Safety: no DB/migrations/RLS/RPC/admin/product/upsell/store-session mutations; checkout submit not executed; real orders `0`; no manual deploy or Vercel CLI.
+- Gates: `PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP-2 = ALLOWED`; `PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1 = BLOCKED`.
+- Debt: local build/browser blocked by pre-existing CSS module errors; provider logs/deployment identity, real device, screen reader, preview, closed-store, PWA, and historical fixture timeouts remain unverified.
+
 ## 1. Resumen ArquitectÃ³nico
 
 ### VisiÃ³n

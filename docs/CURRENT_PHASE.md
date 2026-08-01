@@ -1,3 +1,15 @@
+## Registro - PUBLIC-CATALOG-POST-ADD-UPSELL-FOCUS-TRAP-FIX-1 (2026-08-01)
+
+**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-FOCUS-TRAP-FIX-1 - Targeted Post-Add Dialog Focus Containment
+**Estado:** PASS - POST-ADD FOCUS TRAP FIX VERIFIED IN PRODUCTION - FINAL HANDOFF STILL BLOCKED
+**Resumen:** El P2 reproducible de Tab/Shift+Tab que escapaba del post-add fue corregido con un cambio minimo en el listener de teclado del sheet. Chrome + Playwright de Codex verificaron ocho ciclos Tab y Shift+Tab dentro del dialogo antes y despues de adjuntar Coca Cola 500ml. Sin DB, submit ni pedidos reales.
+- Doc: `docs/public-catalog-post-add-upsell-focus-trap-fix-1.md`
+- **QUEUE_GATE:** PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP-2 = ALLOWED
+- **QUEUE_GATE:** PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1 = BLOCKED
+- **Proximo:** PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP-2
+
+---
+
 ## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP (2026-08-01)
 
 **Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP — Browser-Core Production Verification
