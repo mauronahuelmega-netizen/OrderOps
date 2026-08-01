@@ -3,7 +3,7 @@
 
 **Date:** 2026-08-01
 **Target:** `https://orderops.vercel.app/b/demohamburgueseria/catalogo`
-**Status:** **PASS WITH NON-BLOCKING QA DEBT — POST-ADD UPSELL STABLE IN PRODUCTION**
+**Status:** **BLOCKED — RUNTIME FIX REQUIRED**
 
 ```text
 MODE — CODEX BROWSER-CORE POST-DEPLOY MONITOR FOLLOWUP
@@ -153,7 +153,7 @@ No browser `console.error` or warning was observed in the round B/C probe. Reque
 
 ## 34. Accessibility sanity
 
-Dialog role, title, named close controls, disabled state, Tab focus on post-add candidate CTA, Escape, and single-overlay behavior were observed. `KEYBOARD_DIALOG_SANITY = PASS`; `FOCUS_TRAP_SANITY = PASS`; `SCREEN READER — UNVERIFIED`.
+Dialog role, title, named close controls, disabled state, and Escape were observed. A focused Tab/Shift+Tab follow-up probe reproduced focus escape from the post-add dialog to the catalog cart button/category controls. `KEYBOARD_DIALOG_SANITY = FAIL`; `FOCUS_TRAP_SANITY = FAIL`; `SCREEN READER — UNVERIFIED`.
 
 ## 35. Responsive
 
@@ -216,7 +216,7 @@ FORCE PUSH — NONE
 
 ## 45. Findings by severity
 
-`P0 = none`; `P1 = none`; `P2 = none`. P3: provider logs/deployment identity, screen reader, real device, preview, closed-store, PWA, prior fixture timeout/build not re-run, checkout-modality network probe, and non-functional image failures.
+`P0 = none`; `P1 = none`; `P2 = POST-ADD FOCUS TRAP REGRESSION`. The focused Tab/Shift+Tab probe left `[role=dialog]` and reached `Ver pedido, 1 producto` and category controls. P3: provider logs/deployment identity, screen reader, real device, preview, closed-store, PWA, prior fixture timeout/build not re-run, checkout-modality network probe, and non-functional image failures.
 
 ## 46. Rollback decision
 
@@ -224,12 +224,12 @@ FORCE PUSH — NONE
 
 ## 47. Final status
 
-**PASS WITH NON-BLOCKING QA DEBT — POST-ADD UPSELL STABLE IN PRODUCTION**.
+**BLOCKED — RUNTIME FIX REQUIRED**. Browser core otherwise passed, but the reproducible P2 focus-trap regression prevents final handoff.
 
 ## 48. Queue gate
 
 ```text
-QUEUE_GATE: PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1 = ALLOWED
+QUEUE_GATE: PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1 = BLOCKED
 ```
 
 ## 49. Remaining debt
@@ -238,4 +238,4 @@ P3 only, as listed in findings.
 
 ## 50. Proximo paso
 
-`PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1`.
+`RUNTIME FIX REQUIRED — OPEN NEW PHASE` for the post-add focus trap, then rerun this browser followup.

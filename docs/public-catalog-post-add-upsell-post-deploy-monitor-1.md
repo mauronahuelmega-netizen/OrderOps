@@ -3,7 +3,7 @@
 
 **Date:** 2026-08-01
 **Branch:** `main`
-**Status:** **PASS WITH NON-BLOCKING QA DEBT — POST-ADD UPSELL STABLE IN PRODUCTION**
+**Status:** **BLOCKED — RUNTIME FIX REQUIRED**
 
 > This document records a partial monitor run. It does not supersede the requirement for browser-core production verification.
 
@@ -336,9 +336,9 @@ QUEUE_GATE: PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP = ALLO
 
 ```text
 Initial Codex run = PARTIAL
-Followup browser run = PASS
-Consolidated monitor = PASS WITH NON-BLOCKING QA DEBT — POST-ADD UPSELL STABLE IN PRODUCTION
-QUEUE_GATE: PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1 = ALLOWED
+Followup browser run = BLOCKED — RUNTIME FIX REQUIRED
+Consolidated monitor = BLOCKED — RUNTIME FIX REQUIRED
+QUEUE_GATE: PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1 = BLOCKED
 ```
 
-P3 remains for provider logs/deployment identity, real device, screen reader, preview, closed-store, PWA, fixture timeout/build continuity, checkout-modality network probe, and non-functional image request failures. `REAL ORDERS — 0`; `CHECKOUT SUBMIT — NOT EXECUTED`.
+P2: focused Tab/Shift+Tab escaped the post-add dialog into catalog controls (`POST-ADD FOCUS TRAP REGRESSION`). A runtime fix is required; no runtime change was made in this monitor. P3 remains for provider logs/deployment identity, real device, screen reader, preview, closed-store, PWA, fixture timeout/build continuity, checkout-modality network probe, and non-functional image request failures. `REAL ORDERS — 0`; `CHECKOUT SUBMIT — NOT EXECUTED`.

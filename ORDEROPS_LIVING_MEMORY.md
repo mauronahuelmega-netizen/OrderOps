@@ -385,6 +385,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-08-01 — PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP CORRECTION
+
+- **Ops / Release** Corrección documental de cierre: el probe final Tab/Shift+Tab reprodujo que el foco escapa de `PostAddUpsellSheet` al botón de carrito y categorías del catálogo. Hallazgo **P2 — POST-ADD FOCUS TRAP REGRESSION**. Aunque modal/Plus absence/created/attach/cart/quantity/edit/persistence/remove-signature-merge/quick-add/checkout visual pasaron, el estado consolidado queda **BLOCKED — RUNTIME FIX REQUIRED**. No se tocó runtime ni se hizo rollback. `QUEUE_GATE: PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1 = BLOCKED`.
+- Archivos: `docs/public-catalog-post-add-upsell-post-deploy-monitor-1-followup.md`, `docs/public-catalog-post-add-upsell-post-deploy-monitor-1.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
+
 ### 2026-08-01 — PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP
 
 - **Ops / Release** Browser-core followup sobre baseline `7c894d0`, con runtime sin cambios desde `6d138a6`. Chrome del sistema + Playwright bundled, contextos efímeros, verificaron `Doble Smash`: modal sin Plus, created → post-add, attach Coca, CartSheet jerárquico/root-only, quantity 1→2, edit preservando parent/child, refresh persistence, checkout visual sin submit, remove/signature/merge y simple quick-add. Network local sin acciones adicionales después del primer config open; consola sin error release-related. Rounds A/B/C PASS. Sin DB, runtime, admin, producto, sesión, submit ni pedidos reales. Estado: **PASS WITH NON-BLOCKING QA DEBT — POST-ADD UPSELL STABLE IN PRODUCTION**.
