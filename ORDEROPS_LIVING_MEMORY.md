@@ -385,6 +385,12 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-08-01 — PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP
+
+- **Ops / Release** Browser-core followup sobre baseline `7c894d0`, con runtime sin cambios desde `6d138a6`. Chrome del sistema + Playwright bundled, contextos efímeros, verificaron `Doble Smash`: modal sin Plus, created → post-add, attach Coca, CartSheet jerárquico/root-only, quantity 1→2, edit preservando parent/child, refresh persistence, checkout visual sin submit, remove/signature/merge y simple quick-add. Network local sin acciones adicionales después del primer config open; consola sin error release-related. Rounds A/B/C PASS. Sin DB, runtime, admin, producto, sesión, submit ni pedidos reales. Estado: **PASS WITH NON-BLOCKING QA DEBT — POST-ADD UPSELL STABLE IN PRODUCTION**.
+- Archivos: `docs/public-catalog-post-add-upsell-post-deploy-monitor-1-followup.md`, `docs/public-catalog-post-add-upsell-post-deploy-monitor-1.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
+- Breaking: no — solo documentación. `QUEUE_GATE: PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1 = ALLOWED`. Deuda P3: provider logs/identity, real device, screen reader, preview, closed-store, PWA, fixtures/build continuity, modality-network probe e imágenes no funcionales.
+
 ### 2026-08-01 — PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-PARTIAL-HANDOFF-1
 
 - **Ops / Release** Handoff documental append-only del monitor post-deploy parcial de Codex. El deploy single-group post-add sigue live como evidencia histórica; Codex operó en `MODE C — HTTP/GIT ONLY`, sincronizó Git/origin en `eac9d17`, verificó la arquitectura single-group y `PLACEMENT_RUNTIME = ABSENT`, y obtuvo HTTP 200 de catálogo y checkout. Browser core, identidad/logs Vercel, Round C y ventana completa quedaron **UNVERIFIED**. Fixtures agotaron 60 s y son inconclusos; TypeScript PASS; build unverified. Sin rollback, DB, migraciones, mutaciones productivas, submit ni pedidos reales (`0`). Final handoff bloqueado; followup monitor permitido.

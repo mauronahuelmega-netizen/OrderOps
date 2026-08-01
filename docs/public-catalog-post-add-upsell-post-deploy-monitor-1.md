@@ -3,7 +3,7 @@
 
 **Date:** 2026-08-01
 **Branch:** `main`
-**Status:** **PARTIAL — PRODUCTION HEALTHY, FUNCTIONAL BROWSER MONITOR UNVERIFIED**
+**Status:** **PASS WITH NON-BLOCKING QA DEBT — POST-ADD UPSELL STABLE IN PRODUCTION**
 
 > This document records a partial monitor run. It does not supersede the requirement for browser-core production verification.
 
@@ -329,3 +329,16 @@ QUEUE_GATE: PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP = ALLO
 ## Historical evidence preserved
 
 **HISTORICAL EVIDENCE — NOT REVERIFIED BY CODEX:** the functional deployment, deployment ID `dpl_6Z7qqAG3a8uJHbpm4HSBqow4zcAR`, historical deployment URL and alias `https://orderops.vercel.app`, prior browser smoke, modal without Plus, created → post-add, attach, quantity/edit preservation, remove/signature, checkout without submit, and zero-fetch local-operation observations.
+
+## Followup browser-core run
+
+**VERIFIED IN FOLLOWUP RUN:** system Chrome plus bundled Codex Playwright completed the public browser core in ephemeral contexts. Modal personalization PASS; Plus absent; created → post-add PASS; attach PASS; CartSheet PASS; quantity/edit/persistence PASS; remove/signature/merge PASS; simple quick-add PASS; checkout visual PASS without submit; mobile and desktop sanity PASS; Round A/B/C PASS.
+
+```text
+Initial Codex run = PARTIAL
+Followup browser run = PASS
+Consolidated monitor = PASS WITH NON-BLOCKING QA DEBT — POST-ADD UPSELL STABLE IN PRODUCTION
+QUEUE_GATE: PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1 = ALLOWED
+```
+
+P3 remains for provider logs/deployment identity, real device, screen reader, preview, closed-store, PWA, fixture timeout/build continuity, checkout-modality network probe, and non-functional image request failures. `REAL ORDERS — 0`; `CHECKOUT SUBMIT — NOT EXECUTED`.

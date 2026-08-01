@@ -1,3 +1,15 @@
+## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP (2026-08-01)
+
+**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP — Browser-Core Production Verification
+**Estado:** PASS WITH NON-BLOCKING QA DEBT — BROWSER CORE VERIFIED · FINAL HANDOFF ALLOWED
+**Resumen:** Followup de Codex con Chrome del sistema y Playwright bundled en contextos efímeros. Git/runtime continuity verificados; modal sin Plus, created → post-add, attach, CartSheet, quantity/edit, persistence, remove/signature/merge, quick-add y checkout visual PASS. Sin submit, pedidos reales, runtime, DB o deploy manual.
+- Doc: `docs/public-catalog-post-add-upsell-post-deploy-monitor-1-followup.md`
+- **QUEUE_GATE:** PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1 = ALLOWED
+- **Próximo:** PUBLIC-CATALOG-POST-ADD-UPSELL-FINAL-HANDOFF-1
+- **Sin:** Vercel CLI/logs, real device, screen reader, preview, closed-store, PWA
+
+---
+
 ## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-PARTIAL-HANDOFF-1 (2026-08-01)
 
 **Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-PARTIAL-HANDOFF-1 — Document Partial Codex Monitor Evidence, Reconcile Active Phase & Preserve Final Handoff Block
