@@ -1,0 +1,58 @@
+.field {
+  position: relative;
+}
+
+.input {
+  width: 100%;
+}
+
+.listbox {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 0.35rem);
+  right: 0;
+  left: 0;
+  max-height: min(16rem, 45vh);
+  margin: 0;
+  padding: 0.35rem;
+  overflow-y: auto;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.75rem;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-card);
+  list-style: none;
+}
+
+.option {
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.65rem 0.7rem;
+  border: 0;
+  border-radius: 0.55rem;
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.875rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+  text-align: left;
+}
+
+.option:hover,
+.optionActive {
+  background: color-mix(in srgb, var(--business-primary, var(--color-primary)) 10%, var(--bg-surface));
+}
+
+.option:focus-visible,
+.input:focus-visible {
+  outline: 2px solid var(--business-primary, var(--color-primary));
+  outline-offset: 2px;
+}
+
+.status {
+  margin: 0.35rem 0 0;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.35;
+}

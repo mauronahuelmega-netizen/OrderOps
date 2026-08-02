@@ -1401,3 +1401,7 @@ Al registrar un cambio, incluir:
 ---
 
 *Este documento es la fuente de verdad para contexto arquitectÃ³nico. Si contradice otro doc, prevalece este archivo tras confirmaciÃ³n en el Registro de Cambios.*
+### 2026-08-02 — Public Catalog Residual Roadmap Deploy 1
+- **[UI]** Release en progreso para búsqueda local de catálogos grandes, validación AR de teléfono y autocomplete de dirección con fallback manual.
+- Archivos: catálogo público, checkout público y documentación del roadmap residual.
+- Breaking: no — sin DB, migraciones, RPC, contratos de pedido ni cambios de paquetes.

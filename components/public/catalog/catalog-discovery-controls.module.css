@@ -1,0 +1,9 @@
+.surface { position: relative; z-index: 7; width: min(100%, 1080px); margin: -10px auto 12px; padding: 8px 0 10px; background: var(--catalog-bg); }
+.trigger, .field, .clear { min-height: 44px; font: inherit; }
+.trigger { width: 100%; border: 1px solid var(--catalog-border); border-radius: 14px; background: var(--catalog-surface-strong); color: var(--catalog-text); text-align: left; padding: 0 14px; }
+.label { display: block; margin-bottom: 6px; color: var(--catalog-text); font-size: 14px; font-weight: 700; }
+.fieldWrap { display: flex; gap: 8px; }
+.field { min-width: 0; flex: 1; border: 1px solid var(--catalog-border); border-radius: 14px; background: var(--catalog-surface-strong); color: var(--catalog-text); padding: 0 12px; }
+.clear { border: 0; border-radius: 12px; background: transparent; color: var(--business-primary); padding: 0 10px; font-weight: 700; }
+.status { min-height: 20px; margin: 6px 2px 0; color: var(--catalog-muted); font-size: 13px; }
+.trigger:focus-visible, .field:focus-visible, .clear:focus-visible { outline: 3px solid color-mix(in srgb, var(--business-primary) 40%, transparent); outline-offset: 2px; }

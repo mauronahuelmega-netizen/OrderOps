@@ -7,14 +7,18 @@ type CategoryNavProps = {
   categories: PublicCategory[];
   countsByCategoryId: Map<string, number>;
   activeCategoryId: string | null;
+  isSearchActive?: boolean;
   onSelect: (categoryId: string) => void;
+  onAll?: () => void;
 };
 
 export default function CategoryNav({
   categories,
   countsByCategoryId,
   activeCategoryId,
-  onSelect
+  isSearchActive = false,
+  onSelect,
+  onAll
 }: CategoryNavProps) {
   const items = useMemo(
     () =>
@@ -28,7 +32,10 @@ export default function CategoryNav({
 
   return (
     <div className="catalog-category-nav" data-preview-pan-ignore>
-      <div className="catalog-category-nav__inner" aria-label="Categorías">
+      <nav className="catalog-category-nav__inner" aria-label="Categorías">
+        {isSearchActive ? (
+          <button type="button" className={`catalog-category-chip${activeCategoryId === null ? " catalog-category-chip--active" : ""}`} onClick={onAll} aria-pressed={activeCategoryId === null}>Todos</button>
+        ) : null}
         {items.map((category) => (
           <button
             key={category.id}
@@ -37,11 +44,12 @@ export default function CategoryNav({
               activeCategoryId === category.id ? " catalog-category-chip--active" : ""
             }`}
             onClick={() => onSelect(category.id)}
+            aria-pressed={isSearchActive ? activeCategoryId === category.id : undefined}
           >
             {category.name}
           </button>
         ))}
-      </div>
+      </nav>
     </div>
   );
 }

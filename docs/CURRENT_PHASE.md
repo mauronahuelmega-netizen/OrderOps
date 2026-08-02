@@ -1,3 +1,13 @@
+## Registro — PUBLIC-CATALOG-RESIDUAL-ROADMAP-DEPLOY-1 (2026-08-02)
+
+**Fase:** PUBLIC-CATALOG-RESIDUAL-ROADMAP-DEPLOY-1 — Consolidación, commit, push, deploy y smoke de producción
+**Estado:** RELEASE IN PROGRESS
+**Resumen:** Consolidación del roadmap residual: navegación/búsqueda client-side de catálogos grandes, validación argentina de teléfono, autocomplete de dirección con fallback manual y correcciones visuales/semánticas. Sin DB, migraciones, RPC, packages ni pedidos reales.
+- **QUEUE_GATE:** PUBLIC-CATALOG-RESIDUAL-ROADMAP-DEPLOY-1 = IN PROGRESS
+- **Próximo:** Validación, commit, push, deployment y smoke de producción
+
+---
+
 ## Registro - PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP-2 (2026-08-01)
 
 **Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP-2 - Full Post-Fix Production Re-Monitor

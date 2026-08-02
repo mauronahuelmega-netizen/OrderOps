@@ -16,6 +16,7 @@ import {
 } from "@/lib/product-customization/order-validation";
 import { isBusinessAcceptingPublicOrders } from "@/lib/store-sessions/public.server";
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
+import { parseArgentineMobilePhone } from "@/lib/checkout/argentine-phone";
 import type { Json } from "@/types/database";
 
 const ORDERS_CLOSED_MESSAGE = "El negocio no está aceptando pedidos en este momento.";
@@ -87,15 +88,22 @@ export async function createPublicCheckoutOrderAction(
     }
 
     const customerName = input.customerName.trim();
-    const phone = input.phone.trim();
+    const parsedPhone = parseArgentineMobilePhone(input.phone);
 
     if (!customerName) {
       return { ok: false, error: "Ingresá tu nombre." };
     }
 
-    if (!phone) {
-      return { ok: false, error: "Ingresá tu teléfono." };
+    if (!parsedPhone.ok) {
+      return {
+        ok: false,
+        error:
+          parsedPhone.reason === "empty"
+            ? "Ingresá tu teléfono."
+            : "Ingresá un número de celular argentino válido."
+      };
     }
+    const phone = parsedPhone.e164;
 
     if (input.deliveryMethod !== "delivery" && input.deliveryMethod !== "pickup") {
       return { ok: false, error: "Seleccioná un método de entrega válido." };

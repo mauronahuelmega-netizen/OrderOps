@@ -30,6 +30,7 @@ import {
 } from "@/lib/admin/catalog-preview-shared";
 import CartBar from "@/components/public/catalog/cart-bar";
 import CartSheet from "@/components/public/catalog/cart-sheet";
+import CatalogDiscoveryControls from "@/components/public/catalog/catalog-discovery-controls";
 import CategoryNav from "@/components/public/catalog/category-nav";
 import ProductCard from "@/components/public/catalog/product-card";
 import ProductDetailModal from "@/components/public/catalog/product-detail-modal";
@@ -46,6 +47,7 @@ import { usePreviewPointerPanScroll } from "@/components/public/catalog/use-prev
 import { usePreviewTouchCursor } from "@/components/public/catalog/use-preview-touch-cursor";
 import { decidePostAddOverlay } from "@/lib/cart/post-add-upsell";
 import { productNeedsCustomizationModal } from "@/lib/product-customization/public-shared";
+import { createCatalogSearchIndex, filterCatalogSearchEntries, getCatalogSearchTokens, getCatalogSize, normalizeCatalogSearchText } from "@/lib/catalog/catalog-search";
 import PublicStorageImage from "@/components/public/catalog/public-storage-image";
 import { getPublicProductCustomizationConfigAction } from "@/app/b/[slug]/catalogo/actions";
 import panStyles from "./catalog-preview-pan.module.css";
@@ -102,6 +104,9 @@ export default function CatalogClient({
     useState<PostAddUpsellOpportunity | null>(null);
   const [cartNotice, setCartNotice] = useState<string | null>(null);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchCategoryId, setSearchCategoryId] = useState<string | null>(null);
+  const [isMediumSearchExpanded, setIsMediumSearchExpanded] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [customizationSession, setCustomizationSession] =
     useState<CustomizationSession | null>(null);
@@ -110,6 +115,8 @@ export default function CatalogClient({
     business.cover_image_url ? "idle" : "error"
   );
   const catalogScrollRef = useRef<HTMLElement | null>(null);
+  const searchInputRef = useRef<HTMLInputElement | null>(null);
+  const searchSurfaceRef = useRef<HTMLDivElement | null>(null);
   const customizationConfigCacheRef = useRef(
     new Map<string, CustomizationConfigCacheEntry>()
   );
@@ -158,6 +165,23 @@ export default function CatalogClient({
 
     return counts;
   }, [categoriesWithProducts, productsByCategoryId]);
+
+  const catalogSize = useMemo(() => getCatalogSize({ productCount: products.length, categoryCount: categoriesWithProducts.length, maxVisibleProductsInCategory: Math.max(0, ...productCountsByCategoryId.values()) }), [categoriesWithProducts.length, productCountsByCategoryId, products.length]);
+  const shouldShowSearch = catalogSize !== "small";
+  const isMediumCatalog = catalogSize === "medium";
+  const isSearchActive = normalizeCatalogSearchText(searchQuery).length > 0;
+  const catalogSearchIndex = useMemo(() => createCatalogSearchIndex(products, categories), [categories, products]);
+  const searchTokens = useMemo(() => getCatalogSearchTokens(searchQuery), [searchQuery]);
+  const queryMatchedEntries = useMemo(() => filterCatalogSearchEntries(catalogSearchIndex, searchTokens, null), [catalogSearchIndex, searchTokens]);
+  const availableSearchCategoryIds = useMemo(() => new Set(queryMatchedEntries.map((entry) => entry.categoryId)), [queryMatchedEntries]);
+  const visibleEntries = useMemo(() => isSearchActive ? filterCatalogSearchEntries(catalogSearchIndex, searchTokens, searchCategoryId) : catalogSearchIndex, [catalogSearchIndex, isSearchActive, searchCategoryId, searchTokens]);
+  const visibleProductsByCategoryId = useMemo(() => {
+    const grouped = new Map<string, PublicProduct[]>();
+    visibleEntries.forEach((entry) => grouped.set(entry.categoryId, [...(grouped.get(entry.categoryId) ?? []), entry.product]));
+    return grouped;
+  }, [visibleEntries]);
+  const visibleCategories = useMemo(() => categories.filter((category) => (visibleProductsByCategoryId.get(category.id)?.length ?? 0) > 0), [categories, visibleProductsByCategoryId]);
+  const visibleProductCountsByCategoryId = useMemo(() => new Map(visibleCategories.map((category) => [category.id, visibleProductsByCategoryId.get(category.id)?.length ?? 0])), [visibleCategories, visibleProductsByCategoryId]);
 
   const cartCount = useMemo(() => getCartItemCount(cartItems), [cartItems]);
   const cartTotal = useMemo(() => getCartItemsTotal(cartItems), [cartItems]);
@@ -502,12 +526,20 @@ export default function CatalogClient({
   }, [business.id, isCatalogPreview]);
 
   useEffect(() => {
-    if (selectedCategoryId || categoriesWithProducts.length === 0) {
+    if (isSearchActive || selectedCategoryId || categoriesWithProducts.length === 0) {
       return;
     }
 
     setSelectedCategoryId(categoriesWithProducts[0].id);
-  }, [categoriesWithProducts, selectedCategoryId]);
+  }, [categoriesWithProducts, isSearchActive, selectedCategoryId]);
+
+  useEffect(() => {
+    if (!isSearchActive && searchCategoryId) {
+      setSearchCategoryId(null);
+    } else if (searchCategoryId && !availableSearchCategoryIds.has(searchCategoryId)) {
+      setSearchCategoryId(null);
+    }
+  }, [availableSearchCategoryIds, isSearchActive, searchCategoryId]);
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -545,7 +577,7 @@ export default function CatalogClient({
   }, []);
 
   useEffect(() => {
-    if (categoriesWithProducts.length === 0) {
+    if (isSearchActive || categoriesWithProducts.length === 0) {
       return;
     }
 
@@ -578,18 +610,29 @@ export default function CatalogClient({
     return () => {
       observer.disconnect();
     };
-  }, [categoriesWithProducts]);
+  }, [categoriesWithProducts, isSearchActive]);
 
   useEffect(() => {
     setCoverState(business.cover_image_url ? "idle" : "error");
   }, [business.cover_image_url]);
 
   function handleCategorySelect(categoryId: string) {
+    if (isSearchActive) {
+      setSearchCategoryId(categoryId);
+      return;
+    }
     setSelectedCategoryId(categoryId);
     document.getElementById(`category-${categoryId}`)?.scrollIntoView({
       behavior: "smooth",
       block: "start"
     });
+  }
+
+  function clearSearch() {
+    setSearchQuery("");
+    setSearchCategoryId(null);
+    searchSurfaceRef.current?.scrollIntoView({ behavior: "auto", block: "start" });
+    requestAnimationFrame(() => searchInputRef.current?.focus());
   }
 
   function handleEditParent(parent: LocalCartItemV2, children: LocalCartItemV2[]) {
@@ -696,12 +739,16 @@ export default function CatalogClient({
 
       {categories.length > 0 ? (
         <CategoryNav
-          categories={categories}
-          countsByCategoryId={productCountsByCategoryId}
-          activeCategoryId={selectedCategoryId}
+          categories={isSearchActive ? visibleCategories : categories}
+          countsByCategoryId={isSearchActive ? visibleProductCountsByCategoryId : productCountsByCategoryId}
+          activeCategoryId={isSearchActive ? searchCategoryId : selectedCategoryId}
+          isSearchActive={isSearchActive}
           onSelect={handleCategorySelect}
+          onAll={() => setSearchCategoryId(null)}
         />
       ) : null}
+
+      {shouldShowSearch ? <CatalogDiscoveryControls isMediumCatalog={isMediumCatalog} isExpanded={!isMediumCatalog || isMediumSearchExpanded} query={searchQuery} resultCount={visibleEntries.length} inputRef={searchInputRef} surfaceRef={searchSurfaceRef} onExpand={() => { setIsMediumSearchExpanded(true); requestAnimationFrame(() => searchInputRef.current?.focus()); }} onQueryChange={setSearchQuery} onClear={clearSearch} /> : null}
 
       <div className="catalog-content">
         {categories.length === 0 ? (
@@ -714,10 +761,17 @@ export default function CatalogClient({
             <h2>Todavía no hay productos disponibles</h2>
             <p>Volvé a consultar más tarde o contactá al negocio.</p>
           </section>
+        ) : isSearchActive && visibleCategories.length === 0 ? (
+          <section className="catalog-empty-panel">
+            <h2>No encontramos productos</h2>
+            <p>Probá con otro nombre o limpiá los filtros.</p>
+            <button type="button" onClick={clearSearch}>Limpiar búsqueda</button>
+            {searchCategoryId ? <button type="button" onClick={() => setSearchCategoryId(null)}>Ver todas las categorías</button> : null}
+          </section>
         ) : (
           <div className="catalog-groups">
-            {categoriesWithProducts.map((category) => {
-              const categoryProducts = productsByCategoryId.get(category.id) ?? [];
+            {visibleCategories.map((category) => {
+              const categoryProducts = visibleProductsByCategoryId.get(category.id) ?? [];
 
               return (
                 <section

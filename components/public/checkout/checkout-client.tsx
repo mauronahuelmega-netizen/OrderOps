@@ -37,6 +37,8 @@ import {
   buildCatalogPreviewPath
 } from "@/lib/admin/catalog-preview-shared";
 import { createPublicCheckoutOrderAction } from "@/app/b/[slug]/checkout/actions";
+import { parseArgentineMobilePhone } from "@/lib/checkout/argentine-phone";
+import AddressAutocomplete from "./address-autocomplete";
 import styles from "./checkout-client.module.css";
 
 type CheckoutClientProps = {
@@ -179,6 +181,7 @@ export default function CheckoutClient({
   const [unifiedCartItems, setUnifiedCartItems] = useState<LocalCartItem[]>([]);
   const [formState, setFormState] = useState<CheckoutFormState>(initialFormState);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [phoneError, setPhoneError] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const storageKeys = getCartStorageKeys(business.id, cartScope);
@@ -259,6 +262,7 @@ export default function CheckoutClient({
     field: keyof CheckoutFormState,
     value: string | CheckoutFormState["deliveryMethod"]
   ) {
+    if (field === "phone") setPhoneError(null);
     setFormState((current) => ({
       ...current,
       [field]: value
@@ -294,8 +298,14 @@ export default function CheckoutClient({
         return;
       }
 
-      if (!formState.phone.trim()) {
-        setErrorMessage("Ingresá tu teléfono.");
+      const parsedPhone = parseArgentineMobilePhone(formState.phone);
+      if (!parsedPhone.ok) {
+        setPhoneError(
+          parsedPhone.reason === "empty"
+            ? "Ingresá tu teléfono."
+            : "Ingresá un número de celular argentino válido."
+        );
+        document.getElementById("phone")?.focus();
         return;
       }
 
@@ -329,7 +339,7 @@ export default function CheckoutClient({
 
       const result = await createPublicCheckoutOrderAction(slug, {
         customerName: formState.customerName.trim(),
-        phone: formState.phone.trim(),
+        phone: parsedPhone.e164,
         deliveryDate,
         deliveryMethod: formState.deliveryMethod,
         address:
@@ -528,14 +538,9 @@ export default function CheckoutClient({
                     <h2>¿Dónde lo entregamos?</h2>
                     <p>Usá una dirección donde puedan recibirte.</p>
                   </div>
-                  <Input
-                    label="Dirección"
-                    name="address"
-                    type="text"
-                    autoComplete="street-address"
+                  <AddressAutocomplete
                     value={formState.address}
-                    onChange={(event) => handleFieldChange("address", event.target.value)}
-                    required
+                    onChange={(value) => handleFieldChange("address", value)}
                   />
                 </div>
               ) : (
@@ -569,8 +574,24 @@ export default function CheckoutClient({
                   inputMode="tel"
                   value={formState.phone}
                   onChange={(event) => handleFieldChange("phone", event.target.value)}
+                  onBlur={() => {
+                    if (formState.phone.trim() && !parseArgentineMobilePhone(formState.phone).ok) {
+                      setPhoneError("Ingresá un número de celular argentino válido.");
+                    }
+                  }}
+                  aria-invalid={Boolean(phoneError)}
+                  aria-describedby={phoneError ? "checkout-phone-error" : "checkout-phone-helper"}
                   required
                 />
+                {phoneError ? (
+                  <p id="checkout-phone-error" className="ui-error">
+                    {phoneError}
+                  </p>
+                ) : (
+                  <p id="checkout-phone-helper" className="ui-helper">
+                    Ejemplo: 11 1234-5678
+                  </p>
+                )}
               </div>
             </section>
 
