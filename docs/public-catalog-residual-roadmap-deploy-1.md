@@ -1,7 +1,7 @@
 # PUBLIC-CATALOG-RESIDUAL-ROADMAP-DEPLOY-1
 ## Consolidacion, commit, deploy y smoke de produccion
 
-**Estado inicial:** RELEASE IN PROGRESS
+**Estado final:** PASS WITH ACCEPTED REAL-DEVICE AND PROVIDER-ACTIVATION QA DEBT — RESIDUAL ROADMAP DEPLOYED
 
 ## Alcance publicado
 
@@ -25,9 +25,16 @@ La busqueda y los filtros son client-side y no hacen requests, Next Actions ni q
 ## Release
 
 ```text
-RELEASE_COMMIT_SHA = PENDING
-RELEASE_COMMIT_PARENT = PENDING
-VERCEL_DEPLOYMENT = PENDING
+RELEASE_COMMIT_SHA = 3bd26ffd7e6e3cd09bf80e926d2e70bc1bf55fc7
+RELEASE_COMMIT_PARENT = 598a86d0c7fa3ec78f590ebd3a143b58f48762d9
+VERCEL_DEPLOYMENT = dpl_DPv6mEwxE6UsaS5pMec3TZME35V2 (Ready)
 PRODUCTION_ALIAS = https://orderops.vercel.app
 ROLLBACK = git revert <RELEASE_COMMIT_SHA> for confirmed P0/P1 or blocking P2
 ```
+
+## Resultado de release
+
+- TypeScript y build pasaron sobre el commit rebasado.
+- Smoke local y production: catálogo y checkout respondieron HTTP 200 sin submit ni pedidos reales.
+- Vercel reportó deployment production `Ready`; los logs de error read-only no devolvieron entradas.
+- `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` no pudo verificarse por la CLI sin exponer valores. Maps real, billing, APIs y restricciones quedan como activación pendiente; el fallback manual permanece disponible.

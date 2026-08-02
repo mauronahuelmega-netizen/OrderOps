@@ -1,10 +1,11 @@
 ## Registro — PUBLIC-CATALOG-RESIDUAL-ROADMAP-DEPLOY-1 (2026-08-02)
 
 **Fase:** PUBLIC-CATALOG-RESIDUAL-ROADMAP-DEPLOY-1 — Consolidación, commit, push, deploy y smoke de producción
-**Estado:** RELEASE IN PROGRESS
+**Estado:** PASS WITH ACCEPTED REAL-DEVICE AND PROVIDER-ACTIVATION QA DEBT — RESIDUAL ROADMAP DEPLOYED
 **Resumen:** Consolidación del roadmap residual: navegación/búsqueda client-side de catálogos grandes, validación argentina de teléfono, autocomplete de dirección con fallback manual y correcciones visuales/semánticas. Sin DB, migraciones, RPC, packages ni pedidos reales.
-- **QUEUE_GATE:** PUBLIC-CATALOG-RESIDUAL-ROADMAP-DEPLOY-1 = IN PROGRESS
-- **Próximo:** Validación, commit, push, deployment y smoke de producción
+- **Release:** `3bd26ff` → Vercel `dpl_DPv6mEwxE6UsaS5pMec3TZME35V2` Ready → `https://orderops.vercel.app`
+- **QUEUE_GATE:** PUBLIC-CATALOG-RESIDUAL-ROADMAP-DEPLOY-1 = COMPLETE
+- **Próximo:** Roadmap residual cerrado; QA real-device/Maps permanece deuda aceptada.
 
 ---
 

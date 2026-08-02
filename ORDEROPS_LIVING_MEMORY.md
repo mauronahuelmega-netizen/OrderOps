@@ -1405,3 +1405,8 @@ Al registrar un cambio, incluir:
 - **[UI]** Release en progreso para búsqueda local de catálogos grandes, validación AR de teléfono y autocomplete de dirección con fallback manual.
 - Archivos: catálogo público, checkout público y documentación del roadmap residual.
 - Breaking: no — sin DB, migraciones, RPC, contratos de pedido ni cambios de paquetes.
+
+### 2026-08-02 — Public Catalog Residual Roadmap Deploy 1 Closure
+- **[Ops]** Commit `3bd26ff` publicado en `main`; Vercel production `dpl_DPv6mEwxE6UsaS5pMec3TZME35V2` Ready y alias `https://orderops.vercel.app` smokeado con catálogo/checkout HTTP 200.
+- QA aceptada: Android/Chrome físico, interacción MEDIUM/LARGE, screen reader y activación real de Maps (key/billing/APIs/restricciones) pendientes.
+- Breaking: no — sin DB, migraciones, RLS, RPC, paquetes ni pedidos reales; rollback no ejecutado.
