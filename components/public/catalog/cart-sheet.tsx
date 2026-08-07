@@ -1,6 +1,7 @@
 "use client";
 
 import { Minus, Pencil, Plus, Trash2, X } from "lucide-react";
+import { useEffect, useId, useRef } from "react";
 import {
   buildHierarchicalCartRows,
   getCartItemCount,
@@ -42,36 +43,151 @@ export default function CartSheet({
 }: CartSheetProps) {
   usePublicOverlayScrollLock();
   void _checkoutSlug;
+
   const rows = buildHierarchicalCartRows(items);
   const total = getCartItemsTotal(items);
   const itemCount = getCartItemCount(items);
   const isEmpty = items.length === 0;
+
+  const reactId = useId();
+  const titleId = `cart-sheet-title-${reactId}`;
+  const descriptionId = `cart-sheet-description-${reactId}`;
+
+  const sheetRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const restoreFocusTimeoutRef = useRef<number | null>(null);
+  const closingRef = useRef(false);
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
+  useEffect(() => {
+    if (!triggerRef.current && document.activeElement instanceof HTMLElement) {
+      triggerRef.current = document.activeElement;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      closeButtonRef.current?.focus();
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      restoreFocusTimeoutRef.current = window.setTimeout(() => {
+        if (!sheetRef.current && triggerRef.current?.isConnected) {
+          triggerRef.current.focus();
+        }
+      }, 0);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (restoreFocusTimeoutRef.current !== null) {
+      window.clearTimeout(restoreFocusTimeoutRef.current);
+      restoreFocusTimeoutRef.current = null;
+    }
+
+    function closeOnce() {
+      if (closingRef.current) {
+        return;
+      }
+      closingRef.current = true;
+      onCloseRef.current();
+    }
+
+    function focusableElements() {
+      const root = sheetRef.current;
+      if (!root) {
+        return [] as HTMLElement[];
+      }
+
+      return [
+        ...root.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      ].filter(
+        (element) =>
+          !element.hasAttribute("disabled") &&
+          element.tabIndex !== -1 &&
+          element.getClientRects().length > 0
+      );
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
+        closeOnce();
+        return;
+      }
+
+      if (event.key !== "Tab") {
+        return;
+      }
+
+      const focusables = focusableElements();
+      if (focusables.length === 0) {
+        event.preventDefault();
+        return;
+      }
+
+      const first = focusables[0]!;
+      const last = focusables[focusables.length - 1]!;
+      const active = document.activeElement as HTMLElement | null;
+
+      if (event.shiftKey) {
+        if (!active || active === first || !sheetRef.current?.contains(active)) {
+          event.preventDefault();
+          last.focus();
+        }
+        return;
+      }
+
+      if (!active || active === last || !sheetRef.current?.contains(active)) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown, true);
+    return () => document.removeEventListener("keydown", onKeyDown, true);
+  }, []);
+
+  function handleClose() {
+    if (closingRef.current) {
+      return;
+    }
+    closingRef.current = true;
+    onClose();
+  }
 
   return (
     <div
       className={styles.backdrop}
       role="presentation"
       data-preview-pan-ignore
-      onClick={onClose}
+      onClick={handleClose}
     >
       <div
+        ref={sheetRef}
         className={styles.sheet}
         role="dialog"
         aria-modal="true"
-        aria-labelledby="cart-sheet-title"
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
         onClick={(event) => event.stopPropagation()}
       >
         <header className={styles.header}>
           <div className={styles.headerCopy}>
-            <h2 id="cart-sheet-title">Tu pedido</h2>
-            <p className={styles.headerMeta}>
+            <h2 id={titleId}>Tu pedido</h2>
+            <p id={descriptionId} className={styles.headerMeta}>
               {isEmpty ? "Sin productos" : formatProductCount(itemCount)}
             </p>
           </div>
           <button
+            ref={closeButtonRef}
             type="button"
             className={styles.iconButton}
-            onClick={onClose}
+            onClick={handleClose}
             aria-label="Cerrar carrito"
           >
             <X className={styles.icon} aria-hidden="true" strokeWidth={2.25} />
@@ -93,7 +209,7 @@ export default function CartSheet({
               <button
                 type="button"
                 className={styles.secondaryButton}
-                onClick={onClose}
+                onClick={handleClose}
               >
                 Seguir comprando
               </button>
@@ -222,7 +338,7 @@ export default function CartSheet({
                                 <Trash2
                                   className={styles.icon}
                                   aria-hidden="true"
-                                  strokeWidth={2.1}
+                                  strokeWidth={1.85}
                                 />
                               </button>
                             </li>
@@ -242,7 +358,7 @@ export default function CartSheet({
                           <Pencil
                             className={styles.icon}
                             aria-hidden="true"
-                            strokeWidth={2.1}
+                            strokeWidth={1.85}
                           />
                         </button>
                         <button
@@ -254,7 +370,7 @@ export default function CartSheet({
                           <Trash2
                             className={styles.icon}
                             aria-hidden="true"
-                            strokeWidth={2.1}
+                            strokeWidth={1.85}
                           />
                         </button>
                       </div>
