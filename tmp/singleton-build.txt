@@ -1,0 +1,61 @@
+
+> orderops@0.1.0 build
+> next build
+
+▲ Next.js 16.2.9 (Turbopack)
+- Environments: .env.local
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 30.9s
+  Running TypeScript ...
+  Finished TypeScript in 32.5s ...
+  Collecting page data using 3 workers ...
+  Generating static pages using 3 workers (0/23) ...
+  Generating static pages using 3 workers (5/23) 
+  Generating static pages using 3 workers (11/23) 
+  Generating static pages using 3 workers (17/23) 
+✓ Generating static pages using 3 workers (23/23) in 2.9s
+  Finalizing page optimization ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /admin
+├ ƒ /admin/categories
+├ ƒ /admin/dashboard
+├ ƒ /admin/dashboard/orders
+├ ƒ /admin/kitchen
+├ ƒ /admin/login
+├ ƒ /admin/manifest.webmanifest
+├ ƒ /admin/orders/[id]
+├ ƒ /admin/orders/[id]/summary
+├ ƒ /admin/orders/[id]/workspace
+├ ƒ /admin/products
+├ ƒ /admin/products/customizations
+├ ƒ /admin/products/preview
+├ ƒ /admin/settings
+├ ƒ /admin/settings/notifications
+├ ƒ /admin/settings/operations
+├ ƒ /admin/settings/public
+├ ƒ /admin/settings/public/catalogo
+├ ƒ /admin/settings/public/landing
+├ ƒ /admin/settings/team
+├ ƒ /admin/team
+├ ƒ /api/internal/orders/[id]/push
+├ ƒ /api/observability/public-catalog
+├ ƒ /b/[slug]
+├ ƒ /b/[slug]/catalogo
+├ ƒ /b/[slug]/checkout
+├ ƒ /b/[slug]/success
+├ ƒ /super-admin
+├ ƒ /super-admin/businesses
+└ ƒ /super-admin/users
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+
+BUILD_EXIT=0

@@ -1,0 +1,1664 @@
+<timestamp>Thursday, Jul 30, 2026, 9:19 PM (UTC-3)</timestamp>
+<user_query>
+````text
+# PUBLIC-CATALOG-INTEGRATED-CONVERSION-QA-1
+## End-to-End Public Catalog Conversion Funnel QA Without Real Order Creation
+
+Actuá como Staff QA Engineer, Staff Frontend Engineer, Product Designer y Release Engineer sobre el repositorio actual de OrderOps.
+
+Tu misión es ejecutar la fase:
+
+PUBLIC-CATALOG-INTEGRATED-CONVERSION-QA-1
+
+Esta es una fase de QA integrada y cierre del funnel público:
+
+CATÁLOGO
+→ PRODUCT CARD / QUICK ADD
+→ DETAIL
+→ MODAL DE PERSONALIZACIÓN
+→ CART FAB
+→ CART SHEET
+→ CHECKOUT
+
+El objetivo es verificar que todas las fases recientemente implementadas funcionan correctamente juntas, con especial atención a:
+
+- productos simples;
+- productos personalizados;
+- grupos obligatorios;
+- opciones con incremento de precio;
+- Plus / upsells asociados;
+- contador customer-facing root-only;
+- cantidades;
+- edición;
+- eliminación;
+- jerarquía parent/child;
+- precios propios de parent y child;
+- total consistente;
+- cache del modal;
+- navegación;
+- checkout;
+- preview isolation;
+- responsive;
+- accesibilidad;
+- network;
+- ausencia de pedidos reales.
+
+Esta fase debe comenzar como QA-only.
+
+Solo se permite modificar código si se reproduce una regresión real P0 o P1, o un defecto P2 pequeño, localizado y directamente relacionado con el funnel integrado.
+
+No implementar nuevas funcionalidades.
+
+No rediseñar superficies aprobadas.
+
+No crear pedidos reales.
+
+No hacer deploy, commit ni push.
+
+---
+
+# 1. ESTADO BASE CONFIRMADO
+
+Las fases previas dejaron implementado:
+
+## Catálogo
+
+- header hide-on-scroll;
+- hero compacto;
+- categorías sticky;
+- cards mobile en dos columnas;
+- quick add;
+- productos simples sin modal;
+- productos configurables con modal;
+- cart FAB visible solo con carrito no vacío.
+
+## Modal de personalización
+
+- primer open on-demand;
+- cache client-side por producto;
+- dedupe in-flight;
+- primer open: 1 POST esperado;
+- reopen del mismo producto: 0 POST;
+- producto simple: 0 POST;
+- grupos obligatorios full-width;
+- opcionales en grilla;
+- CTA `Agregar · $X`;
+- precios visuales reactivos sin fetch.
+
+## Carrito
+
+- productos legacy y V2;
+- parent personalizado;
+- children upsell;
+- edición de parent;
+- eliminación de parent;
+- eliminación individual de child;
+- quantity stepper;
+- footer sticky;
+- CTA `Continuar al checkout`;
+- empty state.
+
+## Conteo customer-facing
+
+- suma quantity de productos raíz;
+- children upsell no aumentan el contador;
+- 1 combo + cualquier cantidad de Plus = 1 producto;
+- 3 unidades del combo + Plus = 3 productos;
+- productos independientes sí suman.
+
+## Precios
+
+- parent muestra `parent.lineTotal`;
+- child muestra `child.lineTotal`;
+- total general usa `getCartItemsTotal`;
+- no se presenta `groupTotal` como precio propio del parent cuando children se muestran aparte.
+
+## Checkout
+
+- header `Finalizá tu pedido`;
+- modalidad `delivery` / `pickup`;
+- secciones claras;
+- datos de contacto;
+- dirección condicional;
+- notas;
+- resumen jerárquico;
+- CTA sticky `Enviar pedido · $X`;
+- payload intacto;
+- action intacta;
+- `create_order` intacto;
+- preview submit bloqueado;
+- header comercial estático dentro de checkout.
+
+La fase debe verificar estas invariantes juntas.
+
+---
+
+# 2. PRINCIPIO RECTOR
+
+Esta fase no debe responder:
+
+“Cada componente funciona por separado”.
+
+Debe responder:
+
+“Un cliente puede completar todo el recorrido sin encontrar inconsistencias entre superficies”.
+
+Cada dato crítico debe permanecer coherente durante todo el funnel:
+
+| Dato | Catálogo/FAB | Cart sheet | Checkout |
+|------|--------------|------------|----------|
+| cantidad customer-facing | igual | igual | igual |
+| producto raíz | igual | igual | igual |
+| personalizaciones | — | igual | igual |
+| Plus asociados | — | igual | igual |
+| precio parent | — | igual | igual |
+| precio child | — | igual | igual |
+| total | igual cuando visible | igual | igual |
+
+No aceptar como PASS una superficie aislada si otra muestra un valor distinto.
+
+---
+
+# 3. MODO DE EJECUCIÓN
+
+## Modo A — QA-only
+
+Es el modo inicial obligatorio.
+
+En este modo:
+
+- no modificar código;
+- ejecutar source audit;
+- ejecutar browser QA;
+- registrar network;
+- registrar consola;
+- tomar screenshots;
+- documentar resultados;
+- clasificar defectos.
+
+## Modo B — Fix mínimo condicionado
+
+Entrar en Modo B únicamente si se reproduce un defecto real:
+
+- P0: pérdida de pedido, pedido real accidental, total incorrecto, preview capaz de crear pedido;
+- P1: conteo inconsistente, duplicación, parent/child roto, edición corrupta, checkout divergente;
+- P2: overflow, acción inaccesible, foco cubierto, copy claramente incorrecto.
+
+Para aplicar un fix:
+
+1. documentar reproducción exacta;
+2. localizar causa;
+3. limitar cambios al menor conjunto posible;
+4. ejecutar nuevamente toda la matriz afectada;
+5. comprobar no-regression;
+6. documentar antes/después.
+
+No entrar en Modo B para:
+
+- preferencias cosméticas;
+- refactors;
+- limpieza general;
+- deuda histórica;
+- mejoras futuras;
+- post-add upsell;
+- Google Places;
+- phone AR.
+
+Si no hay defectos bloqueantes, la fase debe ser docs/QA-only.
+
+---
+
+# 4. PREFLIGHT OBLIGATORIO
+
+Antes de cualquier QA o modificación, ejecutar:
+
+- `git status --short`
+- `git branch --show-current`
+- `git rev-parse --short HEAD`
+- `git diff --stat`
+- `git diff --name-only`
+
+Registrar:
+
+- branch;
+- HEAD;
+- dirty tree previo;
+- fases acumuladas;
+- archivos modificados de catálogo;
+- archivos modificados de modal;
+- archivos modificados de cart sheet;
+- archivos modificados de checkout;
+- `lib/cart/local.ts`;
+- business header;
+- docs;
+- temp files;
+- `app/super-admin/(protected)/actions.ts`;
+- `app/globals.css`;
+- cualquier cambio ajeno.
+
+Confirmar que no existen cambios inesperados en:
+
+- `app/b/[slug]/checkout/actions.ts`;
+- create_order;
+- migrations;
+- tipos de carrito;
+- cart schema;
+- payload;
+- pricing;
+- localStorage keys;
+- package.json;
+- envs;
+- CSP;
+- PWA.
+
+No ejecutar:
+
+- reset;
+- restore;
+- stash;
+- clean;
+- rebase;
+- merge;
+- commit;
+- push.
+
+No limpiar cambios previos.
+
+No mezclar archivos ajenos en un eventual fix.
+
+---
+
+# 5. SOURCE AUDIT INTEGRADO
+
+Antes del browser QA, reconstruir el flujo real completo.
+
+Inspeccionar como mínimo:
+
+## Catálogo
+
+- `CatalogClient`;
+- `ProductCard`;
+- quick-add;
+- detail modal;
+- Cart FAB / Cart Bar;
+- loader de configuración;
+- cache y dedupe del modal;
+- storage scope público y preview.
+
+## Modal
+
+- apertura;
+- load state;
+- cache key;
+- in-flight map;
+- required group validation;
+- selection state;
+- total visual;
+- add;
+- edit;
+- merge/update semantics.
+
+## Carrito
+
+- `loadUnifiedCartItems`;
+- `buildHierarchicalCartRows`;
+- `getCartItemCount`;
+- `getCartItemsTotal`;
+- quantity callbacks;
+- remove parent;
+- remove child;
+- edit parent;
+- signatures;
+- merge/dedupe;
+- localStorage keys.
+
+## Checkout
+
+- hydration;
+- order summary;
+- delivery/pickup;
+- payload builder;
+- submit handler;
+- action;
+- preview guard;
+- closed-store guard;
+- empty cart;
+- success cleanup, read-only.
+
+## Header / layout
+
+- public business header;
+- checkout static variant;
+- footer sticky;
+- safe-area;
+- scroll padding;
+- z-index;
+- preview wrapper.
+
+Crear internamente un mapa:
+
+```text
+ProductCard / quick add
+  → simple: local cart
+  → configurable: load config
+      → modal selections
+      → mergeCustomizedSelectionIntoCart
+          → localStorage
+          → CatalogClient state
+          → Cart FAB
+          → CartSheet hierarchical rows
+          → Checkout hydration
+          → checkout payload builder
+````
+
+No empezar QA hasta comprender el recorrido.
+
+---
+
+# 6. ENTORNO Y SEGURIDAD
+
+Usar preferentemente:
+
+* localhost;
+* tenant `demohamburgueseria`;
+* configuración real existente;
+* carrito público normal;
+* preview solo si existe auth disponible.
+
+No modificar:
+
+* DB;
+* configuración comercial;
+* store session;
+* on-demand;
+* flags;
+* precios;
+* assignments;
+* productos;
+* opciones;
+* upsells.
+
+No crear fixtures persistentes en código.
+
+Puede usarse localStorage aislado para casos difíciles, pero:
+
+* priorizar primero el flujo UI real;
+* marcar claramente qué caso fue UI real y cuál synthetic seed;
+* limpiar solamente las keys creadas por el propio QA;
+* no tocar storage preview durante QA público;
+* no borrar datos ajenos.
+
+---
+
+# 7. BASELINE LIMPIO
+
+Antes de cada escenario principal:
+
+1. registrar storage scope;
+2. vaciar el carrito de QA usando el mecanismo público seguro disponible;
+3. recargar;
+4. confirmar:
+
+   * FAB oculto;
+   * cart count 0;
+   * checkout empty state;
+   * sin errores de consola;
+   * sin requests inesperados.
+
+No reutilizar un carrito contaminado entre escenarios sin documentarlo.
+
+Registrar:
+
+* items raw;
+* hierarchical rows;
+* count;
+* total;
+* URL;
+* storage key.
+
+---
+
+# 8. ESCENARIO E2E-01 — PRODUCTO SIMPLE
+
+Usar Coca Cola u otro producto simple real.
+
+Flujo:
+
+1. abrir catálogo;
+2. localizar card;
+3. presionar quick add;
+4. verificar que no abre customization modal;
+5. verificar que no genera POST de configuración;
+6. verificar FAB visible;
+7. verificar count = 1;
+8. abrir cart sheet;
+9. verificar:
+
+   * “1 producto”;
+   * nombre;
+   * quantity 1;
+   * precio propio;
+   * total;
+   * sin botón editar;
+10. incrementar quantity a 2;
+11. verificar:
+
+* FAB count = 2;
+* cart sheet = “2 productos”;
+* total duplicado correctamente;
+* 0 POST;
+
+12. decrementar a 1;
+13. verificar count y total;
+14. continuar al checkout;
+15. verificar:
+
+* “1 producto”;
+* mismo nombre;
+* mismo total;
+* CTA con mismo total;
+
+16. volver al catálogo;
+17. confirmar carrito conservado.
+
+No ejecutar submit real.
+
+---
+
+# 9. ESCENARIO E2E-02 — PRODUCTO PERSONALIZADO SIN PLUS
+
+Usar Doble Smash u otro producto configurable real.
+
+Flujo:
+
+1. carrito limpio;
+2. presionar quick add;
+3. verificar modal;
+4. network:
+
+   * first open del producto = 1 request de configuración esperado;
+   * no requests duplicados;
+5. intentar continuar sin grupo requerido:
+
+   * required gate visible;
+   * no add;
+   * no fetch;
+6. seleccionar Papas;
+7. seleccionar opciones sin Plus;
+8. verificar total del modal;
+9. agregar;
+10. verificar:
+
+    * FAB count = 1;
+    * producto agregado una vez;
+11. abrir cart sheet;
+12. verificar:
+
+    * “1 producto”;
+    * parent;
+    * `displaySummary`;
+    * parent lineTotal;
+    * sin children;
+    * total;
+13. ir al checkout;
+14. verificar los mismos datos;
+15. volver al catálogo;
+16. reabrir el mismo producto desde card:
+
+    * 0 POST;
+    * sin loading perceptible si cache-hit;
+17. cerrar sin modificar.
+
+No ejecutar submit.
+
+---
+
+# 10. ESCENARIO E2E-03 — PRODUCTO PERSONALIZADO CON PLUS
+
+Configurar:
+
+* Doble Smash;
+* Papas;
+* una Salsa con delta;
+* un Agregado con delta;
+* Coca Cola como Plus/upsell.
+
+Flujo obligatorio:
+
+1. carrito limpio;
+2. abrir modal;
+3. seleccionar configuración;
+4. registrar total modal;
+5. agregar;
+6. verificar FAB count:
+
+```text
+1 parent + 1 Plus = 1 producto
+```
+
+7. abrir cart sheet;
+8. verificar:
+
+   * “1 producto”;
+   * parent visible;
+   * child subordinado;
+   * child removible;
+   * parent `lineTotal`;
+   * child `lineTotal`;
+   * total = parent + child;
+   * sin apariencia de doble cobro;
+9. checkout:
+
+   * “1 producto”;
+   * mismos precios;
+   * mismo total;
+10. comparar los tres totals:
+
+    * modal al agregar;
+    * cart sheet;
+    * checkout.
+
+Todos deben coincidir.
+
+---
+
+# 11. ESCENARIO E2E-04 — REMOVE PLUS EN UI
+
+Este caso es obligatorio y debe ejecutarse mediante UI real.
+
+Partir del escenario E2E-03.
+
+Registrar antes:
+
+* root count;
+* raw lines;
+* parent lineTotal;
+* child lineTotal;
+* total;
+* FAB count;
+* cart sheet meta.
+
+Luego:
+
+1. eliminar solamente el Plus desde cart sheet;
+2. verificar:
+
+   * child desaparece;
+   * parent permanece;
+   * personalizaciones permanecen;
+   * count continúa en 1;
+   * FAB continúa en 1;
+   * total disminuye exactamente en child.lineTotal;
+   * 0 POST;
+   * no orphan visible;
+   * localStorage actualizado;
+3. cerrar y reabrir cart sheet;
+4. verificar persistencia;
+5. recargar página;
+6. verificar persistencia;
+7. ir al checkout;
+8. verificar:
+
+   * 1 producto;
+   * sin child;
+   * total actualizado.
+
+Este caso no puede quedar únicamente como source PASS.
+
+Debe ser runtime UI PASS o quedar UNVERIFIED con causa explícita.
+
+---
+
+# 12. ESCENARIO E2E-05 — EDITAR Y REAGREGAR PLUS
+
+Partir del parent sin Plus resultante de E2E-04.
+
+1. abrir cart sheet;
+2. presionar editar parent;
+3. verificar:
+
+   * modal abre en modo edición;
+   * configuración actual restaurada;
+   * 0 POST si cache-hit;
+4. volver a agregar el Plus;
+5. confirmar `Actualizar`;
+6. verificar:
+
+   * sigue existiendo un solo parent;
+   * no aparece parent duplicado;
+   * child reaparece una vez;
+   * count continúa en 1;
+   * total recupera exactamente el importe esperado;
+   * signature/line semantics coherentes;
+7. cerrar/reabrir;
+8. recargar;
+9. verificar persistencia;
+10. checkout refleja el cambio.
+
+Registrar:
+
+* número de roots antes/después;
+* número de children antes/después;
+* cartLineId parent, si es visible en source/debug;
+* total antes/después.
+
+---
+
+# 13. ESCENARIO E2E-06 — QUANTITY DEL PARENT
+
+Partir de:
+
+* 1 parent;
+* 1 Plus asociado.
+
+Mediante cart sheet:
+
+1. incrementar parent quantity 1 → 2;
+2. verificar:
+
+   * FAB 1 → 2;
+   * cart sheet “2 productos”;
+   * checkout “2 productos”;
+   * Plus no suma un tercer producto;
+   * total sigue el contrato vigente;
+   * child quantity/lineTotal sigue la semántica actual;
+   * 0 POST;
+3. incrementar 2 → 3;
+4. verificar:
+
+   * count = 3;
+   * nunca 4, 5 o 6 por children;
+5. decrementar 3 → 2;
+6. decrementar 2 → 1;
+7. comprobar count y totals en cada paso;
+8. recargar;
+9. comprobar persistencia.
+
+No asumir cómo escala el child.
+
+Auditar y registrar el comportamiento real:
+
+* child lineTotal fijo;
+* child quantity ligado al parent;
+* otro contrato.
+
+No cambiarlo durante QA salvo que exista una regresión real contra el dominio actual.
+
+---
+
+# 14. ESCENARIO E2E-07 — CARRITO MIXTO
+
+Construir mediante UI real, cuando sea posible:
+
+* Doble Smash quantity 3 + uno o más Plus;
+* Coca Cola independiente quantity 2.
+
+Esperado:
+
+```text
+customer-facing count = 5
+```
+
+No debe ser:
+
+* 6;
+* 7;
+* cantidad de raw lines;
+* cantidad de children.
+
+Validar:
+
+* FAB = 5;
+* cart sheet = “5 productos”;
+* checkout = “5 productos”;
+* parent y simple diferenciados;
+* children subordinados;
+* total igual en cart sheet y checkout;
+* remove Plus mantiene count 5;
+* remove Coca independiente quantity 2 reduce count a 3;
+* remove parent reduce count según quantity vigente.
+
+Este caso puede usar una combinación de UI y fixture localStorage solamente si la UI no permite construirlo de forma segura. Documentar origen.
+
+---
+
+# 15. ESCENARIO E2E-08 — EDICIÓN QUE CAMBIA SIGNATURE
+
+Auditar el comportamiento vigente al cambiar una opción del parent:
+
+1. editar parent;
+2. cambiar Papas o Salsa;
+3. confirmar;
+4. verificar:
+
+   * no duplicación accidental;
+   * comportamiento de merge/dedupe correcto;
+   * root count coherente;
+   * child relationship intacta;
+   * total actualizado;
+   * checkout consistente.
+
+Si la semántica vigente crea/mergea otra línea por diseño:
+
+* documentar;
+* no clasificar como bug automáticamente;
+* verificar contra el helper real.
+
+No cambiar signature rules.
+
+---
+
+# 16. ESCENARIO E2E-09 — REMOVE PARENT
+
+Con parent + children:
+
+1. eliminar parent desde cart sheet;
+2. verificar:
+
+   * parent desaparece;
+   * children asociados desaparecen;
+   * no quedan Plus huérfanos;
+   * count disminuye por quantity del parent;
+   * total disminuye por group completo;
+   * localStorage no conserva children asociados;
+   * 0 POST;
+3. recargar;
+4. verificar ausencia;
+5. checkout refleja carrito restante o empty state.
+
+Si aparece un orphan:
+
+* clasificar P1;
+* documentar raw storage;
+* no reparar silenciosamente;
+* entrar en Modo B solo con fix mínimo seguro.
+
+---
+
+# 17. ESCENARIO E2E-10 — REOPEN CACHE Y OTROS PRODUCTOS
+
+Validar modal performance dentro de un recorrido real:
+
+| Interacción                | Resultado esperado  |
+| -------------------------- | ------------------- |
+| primer open configurable A | 1 POST              |
+| close + reopen A           | 0 POST              |
+| edit A desde cart          | 0 POST si cache-hit |
+| open simple                | 0 POST              |
+| open configurable B        | 1 POST para B       |
+| reopen B                   | 0 POST              |
+| seleccionar opciones       | 0 POST              |
+
+También validar:
+
+* sin loading flash en cache-hit;
+* sin stale config cruzada entre A y B;
+* sin selections de A dentro de B;
+* cerrar modal no altera carrito.
+
+No prefetch nuevo.
+
+---
+
+# 18. ESCENARIO E2E-11 — CHECKOUT
+
+Usar carrito mixto válido.
+
+Validar:
+
+## Resumen
+
+* root count correcto;
+* simple;
+* parent;
+* selections;
+* children;
+* parent own price;
+* child own price;
+* total.
+
+## Modalidad
+
+Alternar:
+
+* `delivery`;
+* `pickup`.
+
+Verificar:
+
+* 0 fetch;
+* dirección visible/oculta;
+* values internos preservados;
+* total sin cambios si esa es la lógica actual.
+
+## Datos
+
+Escribir:
+
+* nombre;
+* teléfono;
+* dirección;
+* notas.
+
+Verificar:
+
+* 0 fetch;
+* campos no tapados por CTA;
+* header comercial no cubre contenido;
+* scroll correcto;
+* back tenant-safe.
+
+## Submit boundary
+
+No ejecutar submit real.
+
+Se permite validar client-side early return solo si puede garantizarse por source que no llegará a la action.
+
+En caso contrario:
+
+* no presionar CTA;
+* registrar `SUBMIT REAL NOT EXECUTED BY SCOPE`.
+
+No navegar a success.
+
+No crear pedido.
+
+---
+
+# 19. ESCENARIO E2E-12 — EMPTY STATES
+
+Validar:
+
+## Catálogo
+
+* carrito vacío;
+* FAB oculto.
+
+## Cart sheet
+
+Si se elimina el último item con sheet abierto:
+
+* empty state o comportamiento vigente;
+* no superficie rota;
+* “Seguir comprando” funcional;
+* FAB desaparece.
+
+## Checkout
+
+Acceso con carrito vacío:
+
+* sin form enviable;
+* empty state;
+* volver al catálogo;
+* sin action;
+* sin error de consola.
+
+---
+
+# 20. ESCENARIO E2E-13 — PREVIEW ADMIN
+
+Si existe autenticación disponible:
+
+1. abrir `/admin/products/preview`;
+2. limpiar carrito preview mediante mecanismo aprobado;
+3. construir:
+
+   * simple;
+   * parent;
+   * Plus;
+4. verificar:
+
+   * storage preview aislado;
+   * count root-only;
+   * cart sheet;
+   * checkout;
+   * precios;
+   * remove Plus;
+   * quantity;
+   * header checkout;
+   * CTA bloqueado;
+   * copy de confirmación deshabilitada;
+   * sin success;
+   * sin pedido;
+5. abrir catálogo público normal;
+6. verificar que su carrito no fue alterado.
+
+Si no existe auth:
+
+* marcar UNVERIFIED;
+* mantener `PASS WITH PREVIEW QA DEBT`;
+* no usar solamente query param para afirmar PASS;
+* no inventar autenticación.
+
+---
+
+# 21. ESCENARIO E2E-14 — CLOSED STORE
+
+No mutar store session ni on-demand.
+
+Auditar source del gate.
+
+Si existe un estado local o entorno seguro ya cerrado, validar:
+
+* CTA disabled;
+* mensaje;
+* carrito preservado;
+* no action.
+
+Si requiere mutación:
+
+* runtime UNVERIFIED;
+* source PASS;
+* no modificar DB;
+* no cambiar sesión.
+
+---
+
+# 22. NETWORK QA
+
+Registrar un baseline y deltas reales.
+
+Matriz mínima:
+
+| Interacción               | Requests esperados |
+| ------------------------- | -----------------: |
+| quick add simple          |      0 config POST |
+| first configurable open   |      1 config POST |
+| reopen mismo configurable |                  0 |
+| seleccionar opción        |                  0 |
+| agregar modal al carrito  |                  0 |
+| abrir cart sheet          |                  0 |
+| quantity                  |                  0 |
+| remove child              |                  0 |
+| remove parent             |                  0 |
+| editar cache-hit          |                  0 |
+| cambiar delivery/pickup   |                  0 |
+| escribir checkout         |                  0 |
+| submit                    |       NO EJECUTADO |
+
+Distinguir:
+
+* navegación/document requests;
+* Next-Action;
+* fetch/XHR;
+* observability existente;
+* image requests;
+* HMR/dev noise.
+
+No atribuir ruido de desarrollo al funnel sin analizarlo.
+
+---
+
+# 23. CONSOLA Y REACT QA
+
+Durante cada escenario revisar:
+
+* errores;
+* warnings;
+* hydration mismatch;
+* duplicate keys;
+* controlled/uncontrolled inputs;
+* state update after unmount;
+* failed requests;
+* unhandled promise rejection;
+* accessibility warnings;
+* infinite render;
+* duplicate POST;
+* stale closure;
+* scroll lock residual.
+
+Registrar textos reales.
+
+No ignorar errores nuevos aunque el UI parezca funcionar.
+
+---
+
+# 24. INTEGRIDAD DEL STORAGE
+
+En puntos relevantes inspeccionar storage:
+
+* carrito vacío;
+* simple;
+* parent;
+* parent + child;
+* child removed;
+* parent quantity 3;
+* parent edited;
+* parent removed.
+
+Confirmar:
+
+* keys intactas;
+* schema intacto;
+* parentCartLineId intacto;
+* children eliminados con parent;
+* sin duplicates;
+* sin orphan creado por UI;
+* preview/public aislados;
+* reload consistente.
+
+No modificar manualmente datos para “corregir” un caso fallido.
+
+Guardar evidencia antes de limpiar.
+
+---
+
+# 25. MATRIZ DE COHERENCIA DE TOTALES
+
+Para cada escenario registrar:
+
+| Escenario       | Modal | Cart sheet | Checkout | Resultado       |
+| --------------- | ----: | ---------: | -------: | --------------- |
+| simple qty 1    |   N/A |          X |        X | deben coincidir |
+| simple qty 2    |   N/A |          X |        X | deben coincidir |
+| parent sin Plus |     X |          X |        X | deben coincidir |
+| parent + Plus   |     X |          X |        X | deben coincidir |
+| Plus eliminado  |   N/A |          X |        X | deben coincidir |
+| parent qty 3    |   N/A |          X |        X | deben coincidir |
+| carrito mixto   |   N/A |          X |        X | deben coincidir |
+
+No aceptar diferencias por formato más allá de separadores visuales equivalentes.
+
+Comparar valores numéricos.
+
+---
+
+# 26. MATRIZ DE CONTEO OBLIGATORIA
+
+Ejecutar o verificar:
+
+| Caso                        | Count esperado |
+| --------------------------- | -------------: |
+| simple qty 1                |              1 |
+| simple qty 2                |              2 |
+| parent qty 1                |              1 |
+| parent + 1 Plus             |              1 |
+| parent + varios Plus        |              1 |
+| parent qty 3 + Plus         |              3 |
+| parent qty 3 + simple qty 2 |              5 |
+| remove Plus                 |     sin cambio |
+| remove simple qty 2         |             -2 |
+| remove parent qty 3         |             -3 |
+
+Validar en:
+
+* FAB;
+* cart sheet;
+* checkout.
+
+No dejar un caso marcado PASS solo porque el helper retorna el valor esperado en fixture; cuando la UI sea operable, ejecutar UI real.
+
+---
+
+# 27. RESPONSIVE QA
+
+Validar como mínimo:
+
+* 320 × 568;
+* 360 × 800;
+* 390 × 844;
+* 412 × 915;
+* 430 × 932;
+* tablet;
+* desktop.
+
+Superficies:
+
+* catálogo;
+* modal;
+* cart sheet;
+* checkout.
+
+Verificar:
+
+* overflowX;
+* sticky categories;
+* FAB;
+* modal scroll;
+* footer modal;
+* cart sheet scroll;
+* controls ≥44 px;
+* labels largas;
+* parent/child prices;
+* CTA checkout;
+* header estático;
+* focus;
+* safe-area;
+* teclado simulado cuando sea posible.
+
+No clasificar emulación como Android real.
+
+---
+
+# 28. ACCESSIBILITY QA
+
+Validar mediante source y keyboard:
+
+* orden de tab;
+* quick add;
+* card opening;
+* modal close;
+* radios/checkboxes;
+* required group;
+* cart icon buttons;
+* aria-label count root-only;
+* quantity controls;
+* edit/remove;
+* checkout radios;
+* labels;
+* alert;
+* CTA;
+* focus-visible;
+* Escape según comportamiento existente;
+* no nested buttons;
+* reduced-motion;
+* singular/plural.
+
+No afirmar:
+
+* VoiceOver PASS;
+* TalkBack PASS;
+* screen-reader PASS;
+
+sin prueba real.
+
+---
+
+# 29. CRITERIOS DE SEVERIDAD
+
+## P0 — Bloqueante
+
+* pedido real creado durante QA;
+* preview puede crear pedido;
+* total monetario incorrecto;
+* pérdida total del carrito;
+* corrupción persistente;
+* security/tenant leak.
+
+## P1 — Bloqueante para cierre
+
+* Plus cuenta como producto;
+* surfaces muestran counts distintos;
+* parent/child prices aparentan doble cobro;
+* edit duplica parent;
+* remove parent deja children;
+* checkout diverge del carrito;
+* modal dispara POST repetidos;
+* payload/action modificados accidentalmente.
+
+## P2 — Corregible con microfix
+
+* overflow;
+* CTA cubre campo;
+* header cubre formulario;
+* botón inaccesible;
+* copy inconsistente;
+* focus perdido;
+* layout roto en un viewport.
+
+## P3 — Deuda
+
+* polish menor;
+* real-device no disponible;
+* screenshots tooling;
+* focus trap no implementado previamente;
+* CSS legacy no usado.
+
+No convertir P3 en refactor durante esta fase.
+
+---
+
+# 30. REGLAS PARA FIXES
+
+Si aparece un defecto:
+
+1. reproducir dos veces;
+2. guardar evidencia;
+3. identificar causa;
+4. clasificar severidad;
+5. inspeccionar el contrato;
+6. aplicar fix mínimo;
+7. volver a ejecutar:
+
+   * escenario fallido;
+   * escenario anterior;
+   * escenario siguiente;
+   * tsc;
+   * build;
+   * diff check;
+8. documentar.
+
+No modificar más de lo necesario.
+
+No hacer mejoras “ya que estamos”.
+
+Si el fix requiere:
+
+* schema;
+* payload;
+* action;
+* RPC;
+* migration;
+* pricing domain;
+* storage contract;
+
+detener implementación y marcar BLOCKED.
+
+---
+
+# 31. FUERA DE ALCANCE
+
+No implementar:
+
+* post-add upsell;
+* nuevas sugerencias;
+* métodos de pago;
+* Google Places;
+* phone AR;
+* cupones;
+* descuentos;
+* propina;
+* delivery fee;
+* scheduling nuevo;
+* login;
+* cuentas;
+* tracking;
+* analytics nuevos;
+* DB;
+* RLS;
+* RPC;
+* migrations;
+* create_order changes;
+* checkout action changes;
+* payload changes;
+* cart schema changes;
+* localStorage key changes;
+* Product Customization config changes;
+* cache changes;
+* PWA;
+* CSP;
+* envs;
+* dependencias;
+* pedidos reales;
+* deploy;
+* commit;
+* push.
+
+---
+
+# 32. VALIDACIÓN TÉCNICA
+
+Ejecutar:
+
+* `npx tsc --noEmit`
+* `npm run build`
+* `git diff --check`
+* `git status --short`
+* `git diff --stat`
+* `git diff --name-only`
+
+Ejecutar fixtures/tests puntuales existentes si los hay:
+
+* count;
+* pricing;
+* hierarchy;
+* cart helpers.
+
+No instalar framework.
+
+Lint:
+
+* ejecutar solo si es seguro;
+* separar deuda histórica;
+* no arreglar lint ajeno.
+
+Revisar el diff completo.
+
+Si la fase queda QA-only, confirmar que no hubo cambios funcionales.
+
+---
+
+# 33. EVIDENCIA OBLIGATORIA
+
+Guardar evidencia de:
+
+1. catálogo vacío;
+2. quick add simple;
+3. modal configurable first open;
+4. modal cache-hit reopen;
+5. required gate;
+6. parent sin Plus;
+7. parent + Plus;
+8. cart sheet parent/child;
+9. remove Plus;
+10. edit + re-add Plus;
+11. parent quantity 3;
+12. carrito mixto count 5;
+13. checkout summary;
+14. checkout delivery;
+15. checkout pickup;
+16. input en foco con CTA;
+17. empty cart;
+18. preview, si disponible.
+
+Para cada evidencia registrar:
+
+* URL;
+* viewport;
+* estado del carrito;
+* count;
+* total;
+* network delta;
+* consola;
+* UI real o synthetic seed.
+
+No depender únicamente de screenshots full-page.
+
+---
+
+# 34. DOCUMENTACIÓN OBLIGATORIA
+
+Crear:
+
+`docs/public-catalog-integrated-conversion-qa-1.md`
+
+Debe contener:
+
+1. Estado.
+2. Resumen ejecutivo.
+3. Modo final: QA-only o QA + fix.
+4. Preflight.
+5. Source audit.
+6. Arquitectura integrada.
+7. Entorno.
+8. Storage scope.
+9. Baseline vacío.
+10. Producto simple.
+11. Parent sin Plus.
+12. Parent con Plus.
+13. Remove Plus runtime.
+14. Edit/re-add Plus.
+15. Quantity parent.
+16. Carrito mixto.
+17. Edit/signature.
+18. Remove parent.
+19. Modal cache/network.
+20. Checkout.
+21. Preview.
+22. Closed-store.
+23. Count matrix.
+24. Total matrix.
+25. Storage integrity.
+26. Network.
+27. Console.
+28. Responsive.
+29. Accessibility.
+30. Defectos encontrados.
+31. Fixes aplicados, si existen.
+32. Resultado de comandos.
+33. Seguridad/no-regression.
+34. Deuda residual.
+35. Rollback, si hubo cambios.
+36. Próximo paso.
+
+Actualizar al inicio de:
+
+* `docs/CURRENT_PHASE.md`
+
+Actualizar:
+
+* `ORDEROPS_LIVING_MEMORY.md`
+
+Solo con hechos estables:
+
+* funnel integrado validado;
+* count root-only confirmado por UI;
+* remove Plus no cambia count;
+* quantity parent controla count;
+* parent/child totals consistentes;
+* modal cache integrada validada;
+* checkout coherente;
+* submit real no ejecutado;
+* preview/device debts reales;
+* defectos/fixes reales.
+
+No registrar como PASS un caso source-only si el objetivo exigía UI runtime.
+
+---
+
+# 35. ESTADOS FINALES POSIBLES
+
+## PASS
+
+Todo el funnel principal fue validado y no hay deuda relevante.
+
+## PASS WITH PREVIEW QA DEBT
+
+Funnel público PASS, preview autenticado no disponible.
+
+## PASS WITH DEVICE QA DEBT
+
+Browser emulado PASS, hardware real no disponible.
+
+## PASS WITH NON-BLOCKING QA DEBT
+
+Solo quedan P3 documentados.
+
+## PASS WITH FIXES
+
+Se encontraron defectos localizados, se corrigieron y toda la matriz relevante volvió a pasar.
+
+## PARTIAL
+
+Casos importantes no pudieron ejecutarse.
+
+## BLOCKED
+
+Existe P0/P1 sin solución segura dentro del alcance.
+
+Siempre incluir:
+
+`SUBMIT REAL NOT EXECUTED BY SCOPE`
+
+No utilizar “PASS” genérico si remove Plus, quantity o edición no fueron ejecutados mediante UI real.
+
+---
+
+# 36. CRITERIOS DE ACEPTACIÓN
+
+La fase puede cerrarse cuando:
+
+* simple quick-add funciona;
+* configurable first open = 1 POST;
+* reopen = 0 POST;
+* selections = 0 POST;
+* add al carrito no duplica;
+* 1 parent + Plus = 1 producto;
+* remove Plus mantiene count;
+* quantity parent actualiza count;
+* parent qty 3 + simple qty 2 = 5;
+* parent/child precios propios son claros;
+* total coincide cart sheet/checkout;
+* edit restaura y actualiza sin duplicar;
+* remove parent elimina children;
+* reload preserva estado válido;
+* checkout delivery/pickup funciona localmente;
+* CTA no tapa campos;
+* header checkout no cubre form;
+* empty states funcionan;
+* preview guard sigue intacto por source;
+* tsc PASS;
+* build PASS;
+* diff check PASS;
+* no P0/P1;
+* no pedido real.
+
+---
+
+# 37. ROLLBACK
+
+Si no hubo cambios funcionales:
+
+* rollback = no aplicable;
+* solo revertir documentación si fuera necesario.
+
+Si hubo fix:
+
+* listar exactamente cada archivo;
+* explicar qué revierte;
+* no incluir archivos dirty previos;
+* no tocar action, create_order, schema o pricing.
+
+---
+
+# 38. PRÓXIMO PASO RECOMENDADO
+
+Si la fase queda PASS:
+
+`PUBLIC-CATALOG-POST-ADD-UPSELL-SPEC-1`
+
+Debe ser spec-only inicialmente.
+
+No implementarlo dentro de esta fase.
+
+Como alternativa, si aparecen defectos de integridad de orphans:
+
+`PUBLIC-CART-HIERARCHY-INTEGRITY-AUDIT-1`
+
+No iniciar esa auditoría dentro de la QA integrada.
+
+---
+
+# 39. PROHIBICIONES FINALES
+
+No:
+
+* crear pedidos;
+* presionar submit real;
+* modificar DB;
+* cambiar store session;
+* cambiar flags;
+* cambiar config;
+* cambiar schema;
+* cambiar payload;
+* cambiar action;
+* cambiar create_order;
+* cambiar pricing;
+* cambiar localStorage keys;
+* implementar nuevas features;
+* hacer refactor amplio;
+* limpiar dirty tree;
+* instalar deps;
+* deploy;
+* commit;
+* push;
+* afirmar UI PASS a partir de source;
+* afirmar device PASS con emulación;
+* ocultar defectos.
+
+---
+
+# 40. FORMATO DE RESPUESTA FINAL
+
+Entregar exactamente:
+
+## 1. Resumen ejecutivo
+
+## 2. Estado final
+
+## 3. Modo ejecutado
+
+## 4. Archivos creados
+
+## 5. Archivos modificados
+
+## 6. Preflight
+
+## 7. Source audit
+
+## 8. Arquitectura integrada
+
+## 9. Entorno y storage scope
+
+## 10. Baseline vacío
+
+## 11. Producto simple
+
+## 12. Parent sin Plus
+
+## 13. Parent con Plus
+
+## 14. Remove Plus runtime
+
+## 15. Edit y re-add Plus
+
+## 16. Quantity del parent
+
+## 17. Carrito mixto
+
+## 18. Edit / signature behavior
+
+## 19. Remove parent
+
+## 20. Modal cache / network
+
+## 21. Checkout
+
+## 22. Preview boundary
+
+## 23. Closed-store boundary
+
+## 24. Matriz de conteo
+
+## 25. Matriz de totales
+
+## 26. Integridad del storage
+
+## 27. Network QA
+
+## 28. Console QA
+
+## 29. Responsive QA
+
+## 30. Accessibility
+
+## 31. Defectos encontrados
+
+## 32. Fixes aplicados
+
+## 33. Resultado de comandos
+
+## 34. Seguridad / no-regression
+
+## 35. Deuda residual
+
+## 36. Rollback plan
+
+## 37. Próximo paso recomendado
+
+Incluir:
+
+* valores reales;
+* counts reales;
+* prices reales;
+* URLs;
+* viewports;
+* requests observados;
+* raw line/root/child counts cuando sea útil;
+* casos UI real;
+* casos synthetic;
+* PASS;
+* UNVERIFIED;
+* NOT APPLICABLE;
+* severidades;
+* `SUBMIT REAL NOT EXECUTED BY SCOPE`.
+
+No devolver una explicación genérica.
+
+Ejecutar, verificar, corregir solo si es imprescindible y documentar.
+
+```
+
+Este prompt obliga a que **eliminar el Plus y cambiar la cantidad del combo se prueben mediante interacción real**, en lugar de volver a cerrarlos únicamente por inspección de código.
+```
+</user_query>

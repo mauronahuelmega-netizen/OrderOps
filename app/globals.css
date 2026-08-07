@@ -934,9 +934,7 @@ img {
   --catalog-shadow: 0 18px 44px rgba(31, 26, 20, 0.08);
   min-height: 100vh;
   padding: 18px 14px 36px;
-  background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.62), transparent 34%),
-    var(--catalog-bg);
+  background: var(--catalog-bg);
   color: var(--catalog-text);
 }
 
@@ -1462,13 +1460,13 @@ img {
 }
 
 .catalog-quantity-control--large {
-  grid-template-columns: 48px 56px 48px;
-  min-height: 48px;
+  grid-template-columns: 44px 48px 44px;
+  min-height: 44px;
 }
 
 .catalog-quantity-control--large button,
 .catalog-quantity-control--large span {
-  min-height: 48px;
+  min-height: 44px;
   font-size: 16px;
 }
 
@@ -1541,26 +1539,46 @@ img {
   align-items: end;
   padding: 12px;
   /* Opaque scrim replaces blur for cheaper mobile composition */
-  background: rgba(17, 12, 8, 0.48);
+  background: rgba(17, 12, 8, 0.6);
   backdrop-filter: none;
 }
 
 .catalog-modal {
+  --catalog-modal-surface: var(--catalog-surface-strong);
+  --catalog-modal-border: var(--catalog-border);
   display: grid;
   gap: 0;
   width: min(100%, 720px);
   max-height: min(92vh, 880px);
   margin: 0 auto;
   overflow: hidden;
-  border: 1px solid var(--catalog-border);
+  border: 1px solid var(--catalog-modal-border);
   border-radius: 28px;
-  background: var(--catalog-surface-strong);
+  background: var(--catalog-modal-surface);
   color: var(--catalog-text);
-  box-shadow: 0 16px 36px rgba(31, 26, 20, 0.16);
+  box-shadow: 0 22px 52px rgba(31, 26, 20, 0.24);
+}
+
+.catalog-page[data-theme="dark"] .catalog-modal-backdrop {
+  background: rgba(0, 0, 0, 0.74);
+}
+
+.catalog-page[data-theme="dark"] .catalog-modal {
+  --catalog-modal-surface: color-mix(in srgb, var(--catalog-surface-strong) 90%, var(--catalog-text));
+  --catalog-modal-border: color-mix(in srgb, var(--catalog-border) 64%, var(--catalog-text));
+  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.56);
 }
 
 .catalog-modal__scroll {
+  min-height: 0;
   overflow: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+html[data-public-overlay-open="true"],
+html[data-public-overlay-open="true"] body {
+  overscroll-behavior: none;
 }
 
 .catalog-modal__header {
@@ -1568,46 +1586,57 @@ img {
   top: 0;
   z-index: 1;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 18px 18px 14px;
-  background: var(--catalog-surface-strong);
+  padding: 14px 16px 12px;
+  background: var(--catalog-modal-surface);
   backdrop-filter: none;
   border-bottom: 1px solid var(--catalog-border);
 }
 
+.catalog-modal__header h2 {
+  min-width: 0;
+  font-size: clamp(20px, 5vw, 28px);
+  font-weight: 700;
+  line-height: 1.12;
+}
+
 .catalog-page[data-theme="dark"] .catalog-modal__header {
-  background: var(--catalog-surface-strong);
+  background: var(--catalog-modal-surface);
 }
 
 .catalog-modal__close {
-  min-height: 36px;
-  padding: 0 12px;
-  border: 1px solid var(--catalog-border);
-  border-radius: 999px;
+  display: grid;
+  flex: 0 0 auto;
+  width: 44px;
+  min-width: 44px;
+  min-height: 44px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid var(--catalog-modal-border);
+  border-radius: 12px;
   background: transparent;
-  color: var(--catalog-muted);
-  font-weight: 600;
+  color: var(--catalog-text);
 }
 
 .catalog-modal__media {
-  padding: 16px 16px 0;
+  padding: 0;
 }
 
 .catalog-modal__image,
 .catalog-modal__placeholder {
   width: 100%;
-  height: 240px;
-  border-radius: 22px;
+  height: 100%;
+  border-radius: 0;
 }
 
 .catalog-modal__image-shell {
   position: relative;
   width: 100%;
-  height: 240px;
+  aspect-ratio: 1 / 1;
   overflow: hidden;
-  border-radius: 22px;
+  border-radius: 0;
 }
 
 .catalog-modal__image {
@@ -1618,6 +1647,7 @@ img {
 .catalog-modal__placeholder {
   display: grid;
   place-items: center;
+  aspect-ratio: 1 / 1;
   background: linear-gradient(135deg, #ebdfd0, #d8c8b3);
   color: #6f614f;
   font-size: 15px;
@@ -1626,8 +1656,8 @@ img {
 
 .catalog-modal__content {
   display: grid;
-  gap: 18px;
-  padding: 18px 18px 20px;
+  gap: 14px;
+  padding: 16px;
 }
 
 .catalog-modal__summary {
@@ -1660,14 +1690,14 @@ img {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 14px 18px calc(14px + env(safe-area-inset-bottom));
-  background: var(--catalog-surface-strong);
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+  background: var(--catalog-modal-surface);
   backdrop-filter: none;
   border-top: 1px solid var(--catalog-border);
 }
 
 .catalog-page[data-theme="dark"] .catalog-modal__footer {
-  background: var(--catalog-surface-strong);
+  background: var(--catalog-modal-surface);
 }
 
 .catalog-modal__footer-copy {
@@ -1678,6 +1708,13 @@ img {
 .catalog-modal__footer-copy span {
   color: var(--catalog-muted);
   font-size: 14px;
+}
+
+.catalog-modal__close:focus-visible,
+.catalog-modal__submit:focus-visible,
+.catalog-quantity-control button:focus-visible {
+  outline: 2px solid var(--business-primary);
+  outline-offset: 2px;
 }
 
 .catalog-empty {
@@ -2438,6 +2475,209 @@ html[data-catalog-theme="dark"] .public-business-header__preferences .catalog-th
     inset 0 1px 0 rgba(255, 255, 255, 0.36);
 }
 
+/* Keep the public drawer compact and aligned with the flat catalog surfaces. */
+.public-business-header__sheet {
+  top: max(10px, env(safe-area-inset-top));
+  right: max(10px, env(safe-area-inset-right));
+  bottom: max(10px, env(safe-area-inset-bottom));
+  width: min(86vw, 360px);
+  min-height: calc(100dvh - max(20px, env(safe-area-inset-top)) - max(20px, env(safe-area-inset-bottom)));
+  max-height: calc(100dvh - max(20px, env(safe-area-inset-top)) - max(20px, env(safe-area-inset-bottom)));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px;
+  overflow: hidden;
+  border-radius: 22px;
+  box-shadow: 0 18px 44px rgba(17, 24, 39, 0.12);
+}
+
+.public-business-header__sheet-header {
+  min-height: 44px;
+}
+
+.public-business-header__sheet-title {
+  margin: 0;
+  color: var(--business-drawer-header-text);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.public-business-header__sheet-close {
+  border-radius: 12px;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
+.public-business-header__sheet-close:hover,
+.public-business-header__sheet-close:focus-visible {
+  background: color-mix(in srgb, var(--business-primary) 7%, var(--business-drawer-surface));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--business-primary) 18%, transparent);
+  transform: none;
+}
+
+.public-business-header__sheet-close svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1.9;
+}
+
+.public-business-header__sheet-stack,
+.public-business-header__nav {
+  gap: 4px;
+}
+
+.public-business-header__sheet-stack {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.public-business-header__sheet-utilities {
+  display: grid;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 14px;
+}
+
+.public-business-header__section {
+  gap: 6px;
+}
+
+.public-business-header__link,
+.public-business-header__link--secondary,
+.public-business-header__section--footer .public-business-header__link--secondary {
+  min-height: 56px;
+  padding: 10px 12px;
+  border-color: transparent;
+  border-radius: 14px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.public-business-header__link--with-icon {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+}
+
+.public-business-header__link-icon {
+  width: 19px;
+  height: 19px;
+  color: color-mix(in srgb, var(--business-primary) 68%, var(--business-drawer-text));
+  stroke-width: 1.8;
+}
+
+.public-business-header__section--footer .public-business-header__link-icon {
+  color: var(--business-drawer-muted);
+}
+
+.public-business-header__link:hover,
+.public-business-header__link:focus-visible,
+.public-business-header__section--footer .public-business-header__link--secondary:hover,
+.public-business-header__section--footer .public-business-header__link--secondary:focus-visible {
+  border-color: color-mix(in srgb, var(--business-primary) 16%, var(--business-drawer-border));
+  background: color-mix(in srgb, var(--business-primary) 5%, var(--business-drawer-surface));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--business-primary) 14%, transparent);
+  transform: none;
+}
+
+.public-business-header__link--active,
+.public-business-header__link--active:hover,
+.public-business-header__link--active:focus-visible {
+  border-color: var(--business-drawer-border);
+  background: color-mix(in srgb, var(--business-primary) 5%, var(--business-drawer-surface));
+  box-shadow: none;
+}
+
+.public-business-header__link-indicator {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--business-primary);
+  box-shadow: none;
+}
+
+.public-business-header__preferences-surface {
+  padding: 8px 10px;
+  border-radius: 14px;
+  background: var(--business-drawer-surface);
+  box-shadow: none;
+}
+
+.public-business-header__preferences .catalog-theme-switch__track {
+  min-height: 40px;
+  min-width: 78px;
+  box-shadow: none;
+}
+
+.public-business-header__preferences .catalog-theme-switch__thumb {
+  width: 32px;
+  height: 32px;
+  box-shadow: none;
+}
+
+.public-business-header__preferences .catalog-theme-switch--dark .catalog-theme-switch__thumb {
+  transform: translateX(36px);
+}
+
+.catalog-theme-switch__icon svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
+}
+
+html[data-catalog-theme="dark"] .public-business-header__sheet {
+  --business-drawer-bg: var(--business-header-bg);
+  --business-drawer-surface: color-mix(in srgb, var(--business-header-bg) 88%, var(--business-header-text) 12%);
+  --business-drawer-border: color-mix(in srgb, var(--business-header-text) 11%, transparent);
+  background: var(--business-drawer-bg);
+  opacity: 1;
+  backdrop-filter: none;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.28);
+}
+
+/* The portal is a sibling of the header, so it needs the dark tokens in its own scope. */
+html[data-catalog-theme="dark"] .public-business-header__portal {
+  --business-header-bg: #1d1712;
+  --business-header-border: rgba(255, 244, 230, 0.09);
+  --business-header-text: #fdf7ef;
+  --business-header-muted: #d5c7b6;
+}
+
+html[data-catalog-theme="dark"] .public-business-header__sheet-close {
+  background: transparent;
+  box-shadow: none;
+}
+
+html[data-catalog-theme="dark"] .public-business-header__link,
+html[data-catalog-theme="dark"] .public-business-header__link--secondary,
+html[data-catalog-theme="dark"] .public-business-header__preferences-surface {
+  border-color: var(--business-drawer-border);
+  background: var(--business-drawer-surface);
+  box-shadow: none;
+}
+
+html[data-catalog-theme="dark"] .public-business-header__link--active,
+html[data-catalog-theme="dark"] .public-business-header__link--active:hover,
+html[data-catalog-theme="dark"] .public-business-header__link--active:focus-visible {
+  background: color-mix(in srgb, var(--business-primary) 10%, var(--business-drawer-surface));
+  border-color: var(--business-drawer-border);
+  box-shadow: none;
+}
+
+html[data-catalog-theme="dark"] .public-business-header__preferences .catalog-theme-switch__track {
+  background: var(--business-drawer-bg);
+  box-shadow: none;
+}
+
 html[data-catalog-theme="dark"] .public-business-header__logo-frame {
   background: rgba(255, 255, 255, 0.04);
   border-color: var(--business-header-border);
@@ -3059,7 +3299,8 @@ body.admin-drawer-open {
 
   .catalog-modal__image-shell,
   .catalog-modal__placeholder {
-    height: 320px;
+    height: auto;
+    aspect-ratio: 1 / 1;
   }
 
   .checkout-page {
@@ -3180,21 +3421,21 @@ body.admin-drawer-open {
   }
 
   .catalog-modal__header {
-    background: rgba(255, 255, 255, 0.94);
-    backdrop-filter: blur(10px);
+    background: var(--catalog-modal-surface);
+    backdrop-filter: none;
   }
 
   .catalog-page[data-theme="dark"] .catalog-modal__header {
-    background: rgba(29, 23, 18, 0.94);
+    background: var(--catalog-modal-surface);
   }
 
   .catalog-modal__footer {
-    background: rgba(255, 255, 255, 0.96);
-    backdrop-filter: blur(10px);
+    background: var(--catalog-modal-surface);
+    backdrop-filter: none;
   }
 
   .catalog-page[data-theme="dark"] .catalog-modal__footer {
-    background: rgba(29, 23, 18, 0.96);
+    background: var(--catalog-modal-surface);
   }
 
   .public-business-header {
@@ -3305,4 +3546,306 @@ svg {
   /* Evita que un cálculo matemático infinito rompa el compositor */
   max-width: 100%;
   height: auto;
+}
+
+/* Flat public catalog shell polish. Scoped overrides protect unrelated UI surfaces. */
+.catalog-hero {
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.catalog-hero__media {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  border: 1px solid var(--catalog-border);
+  border-radius: 20px;
+  background: color-mix(in srgb, var(--business-primary) 4%, var(--catalog-surface-strong));
+  box-shadow: none;
+}
+
+.catalog-hero__notes {
+  display: block;
+}
+
+.catalog-hero__notes p {
+  max-width: 36ch;
+  color: var(--catalog-muted);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.catalog-page[data-theme="dark"] .catalog-hero__media {
+  background: color-mix(in srgb, var(--business-primary) 6%, var(--catalog-surface-strong));
+  box-shadow: none;
+}
+
+.public-business-header {
+  padding: 0 14px;
+  border-bottom: 1px solid var(--business-header-border);
+}
+
+.public-business-header__inner,
+.public-business-header--scrolled .public-business-header__inner {
+  padding: 10px 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.public-business-header__logo-frame {
+  padding: 0;
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  box-shadow: none;
+}
+
+.public-business-header__logo {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: inherit;
+}
+
+.public-business-header__brand-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.public-business-header__brand-name-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.public-business-header__business-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex: 0 0 auto;
+  color: var(--business-header-muted);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 650;
+}
+
+.public-business-header__business-status > span {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--catalog-accent-green, #1f7a58);
+}
+
+.public-business-header__business-status--closed > span {
+  background: var(--business-header-muted);
+}
+
+.public-business-header__business-status em {
+  font-style: normal;
+}
+
+/* Flat category and product-grid polish. These selectors are limited to catalog discovery. */
+.catalog-category-nav {
+  margin-bottom: 16px;
+  padding: 8px 0;
+}
+
+.catalog-category-nav__inner {
+  gap: 10px;
+  padding: 2px 0 6px;
+  scrollbar-width: none;
+}
+
+.catalog-category-nav__inner::-webkit-scrollbar {
+  display: none;
+}
+
+.catalog-category-chip {
+  min-height: 44px;
+  padding: 0 16px;
+  border-radius: 16px;
+  background: var(--catalog-surface-strong);
+  box-shadow: none;
+}
+
+.catalog-category-chip:focus-visible {
+  outline: 2px solid var(--business-primary);
+  outline-offset: 2px;
+}
+
+.catalog-page[data-theme="dark"] .catalog-category-chip {
+  background: var(--catalog-surface-strong);
+  box-shadow: none;
+}
+
+.catalog-group {
+  gap: 16px;
+}
+
+.catalog-group__header {
+  align-items: flex-start;
+}
+
+.catalog-group__header h2 {
+  font-size: clamp(1.125rem, 1rem + 0.5vw, 1.375rem);
+  font-weight: 650;
+  line-height: 1.2;
+  text-transform: none;
+}
+
+.catalog-group__header p {
+  margin-top: 4px;
+  color: var(--catalog-muted);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.catalog-product-list {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+  align-items: stretch;
+  gap: 16px;
+}
+
+.catalog-product-card {
+  min-width: 0;
+  max-width: 100%;
+  box-shadow: none;
+}
+
+/* Mobile density corrective pass. Keep discovery controls compact without changing behavior. */
+@media (max-width: 767px) {
+  .public-business-header {
+    padding: 0 12px;
+  }
+
+  .public-business-header__inner,
+  .public-business-header--scrolled .public-business-header__inner {
+    min-height: 72px;
+    padding: 8px 0;
+  }
+
+  .public-business-header__logo-frame {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+  }
+
+  .public-business-header__menu-button {
+    width: 44px;
+    min-width: 44px;
+    min-height: 44px;
+    gap: 5px;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .public-business-header__menu-button span {
+    width: 22px;
+    height: 3px;
+  }
+
+  .catalog-hero {
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .catalog-hero__notes p {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+
+  .catalog-category-nav {
+    margin-bottom: 10px;
+    padding: 4px 0;
+  }
+
+  .catalog-category-nav__inner {
+    gap: 8px;
+    padding: 2px 0 4px;
+    -ms-overflow-style: none;
+  }
+
+  .catalog-category-chip {
+    min-height: 42px;
+    padding: 0 14px;
+    border-radius: 14px;
+    font-size: 14px;
+  }
+
+  .catalog-category-chip.catalog-category-chip--active {
+    border-color: var(--business-primary);
+    background: var(--business-primary);
+    color: var(--business-primary-foreground, var(--catalog-surface-strong));
+    opacity: 1;
+  }
+
+  .catalog-group {
+    gap: 10px;
+  }
+
+  .catalog-group__header h2 {
+    font-size: 21px;
+    line-height: 1.1;
+  }
+
+  .catalog-group__header p {
+    margin-top: 2px;
+    font-size: 14px;
+    line-height: 1.25;
+  }
+
+  .catalog-product-list {
+    gap: 12px;
+  }
+}
+
+/* The scroll-spy active chip needs the same explicit contrast contract as filter mode. */
+.catalog-category-chip.catalog-category-chip--active {
+  border-color: var(--business-primary);
+  background: var(--business-primary);
+  color: var(--business-primary-foreground, var(--catalog-surface-strong));
+  box-shadow: none;
+  opacity: 1;
+}
+
+/* Catalog hero content hierarchy: tenant headline followed by fixed supporting copy. */
+.catalog-hero__notes {
+  display: grid;
+  gap: 6px;
+}
+
+.catalog-hero__headline {
+  margin: 0;
+  color: var(--catalog-text);
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+.catalog-hero__notes p {
+  margin: 0;
+  color: var(--catalog-muted);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.38;
+}
+
+@media (min-width: 768px) {
+  .catalog-hero__headline {
+    font-size: clamp(26px, 2vw, 30px);
+  }
 }

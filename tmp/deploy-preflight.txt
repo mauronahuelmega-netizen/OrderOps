@@ -1,0 +1,666 @@
+﻿main
+5dd9b419ce0da953eeca42d657b1fb653b75f847
+5dd9b41
+# branch.oid 5dd9b419ce0da953eeca42d657b1fb653b75f847
+# branch.head main
+# branch.upstream origin/main
+# branch.ab +0 -0
+1 .M N... 100644 100644 100644 a68c280cb88ee86496894a93b3ed37c6e226b4eb a68c280cb88ee86496894a93b3ed37c6e226b4eb ORDEROPS_LIVING_MEMORY.md
+1 .M N... 100644 100644 100644 692d18dc7e6dd098fe2c257e9766b311ffb24b92 692d18dc7e6dd098fe2c257e9766b311ffb24b92 app/admin/(protected)/products/customizations/actions.ts
+1 .M N... 100644 100644 100644 2cbe6f4d3b05570899947f525ff6eb6a1e2162c4 2cbe6f4d3b05570899947f525ff6eb6a1e2162c4 app/globals.css
+1 .M N... 100644 100644 100644 ae9b2b71a81d468333e2d446cde2c4d3c4b93260 ae9b2b71a81d468333e2d446cde2c4d3c4b93260 app/super-admin/(protected)/actions.ts
+1 .M N... 100644 100644 100644 a826c52dc66d0f574e35b7b5ad5180b29edb93f8 a826c52dc66d0f574e35b7b5ad5180b29edb93f8 components/admin/orders/admin-dashboard-orders.tsx
+1 .M N... 100644 100644 100644 9035b43d6fda4340604896f0091580b3a4766999 9035b43d6fda4340604896f0091580b3a4766999 components/admin/product-customization/plus-suggestions/plus-edit-modal.tsx
+1 .M N... 100644 100644 100644 2a24245ff0ca1b7065abeaac9421968a000845d1 2a24245ff0ca1b7065abeaac9421968a000845d1 components/admin/product-customization/plus-suggestions/plus-suggestions-tab.tsx
+1 .M N... 100644 100644 100644 9dcea31d1f01adb4a6d6effc3f30b868e3db9b99 9dcea31d1f01adb4a6d6effc3f30b868e3db9b99 components/admin/product-customization/plus-suggestions/plus-suggestions.module.css
+1 .M N... 100644 100644 100644 4dc94978ec681559b4c078b169885832332b5944 4dc94978ec681559b4c078b169885832332b5944 components/product-customization/shared/customization-option-group.tsx
+1 .M N... 100644 100644 100644 1542367591b9df7d39aa80c6c6e20c5825ec7efc 1542367591b9df7d39aa80c6c6e20c5825ec7efc components/product-customization/shared/customization-option-row.tsx
+1 .M N... 100644 100644 100644 a83069c4828292cb15331c5a32f1b79772d339c0 a83069c4828292cb15331c5a32f1b79772d339c0 components/product-customization/shared/customization-price-summary.tsx
+1 .M N... 100644 100644 100644 38d8b47bc16e4616ef42c04bacde01134d7ebca6 38d8b47bc16e4616ef42c04bacde01134d7ebca6 components/product-customization/shared/customization-shared.module.css
+1 .M N... 100644 100644 100644 755ae82c865c6b27b232276fdb2360bb406f5b13 755ae82c865c6b27b232276fdb2360bb406f5b13 components/product-customization/shared/upsell-suggestion-group.tsx
+1 .M N... 100644 100644 100644 0f55bee0d584dda348abc3e556a5216bece118e4 0f55bee0d584dda348abc3e556a5216bece118e4 components/public/business/public-business-header.tsx
+1 .M N... 100644 100644 100644 345a373fd624b8d0807e28cd30867cf7f640ff44 345a373fd624b8d0807e28cd30867cf7f640ff44 components/public/catalog/cart-bar.tsx
+1 .M N... 100644 100644 100644 629ead9cd622a002e93ec6e92e1d264b8eb4bc96 629ead9cd622a002e93ec6e92e1d264b8eb4bc96 components/public/catalog/cart-sheet.module.css
+1 .M N... 100644 100644 100644 4a2953abedd35e06d4a790127d128b53c47fd823 4a2953abedd35e06d4a790127d128b53c47fd823 components/public/catalog/cart-sheet.tsx
+1 .M N... 100644 100644 100644 ee78adf6a62a61171d22f37342d29397bc843b9b ee78adf6a62a61171d22f37342d29397bc843b9b components/public/catalog/catalog-client.tsx
+1 .M N... 100644 100644 100644 adad93be9b05b6d2c5e41158afc70b4215fc7d0a adad93be9b05b6d2c5e41158afc70b4215fc7d0a components/public/catalog/customization-modal.module.css
+1 .M N... 100644 100644 100644 9dc618b20d0e3996258c44a08962cfc3bf782b91 9dc618b20d0e3996258c44a08962cfc3bf782b91 components/public/catalog/customization-modal.tsx
+1 .M N... 100644 100644 100644 c532dd27bcdfd2126495cc4fcac3b49ff19c2f00 c532dd27bcdfd2126495cc4fcac3b49ff19c2f00 components/public/catalog/product-card.tsx
+1 .M N... 100644 100644 100644 2ae58f66fdf295110c3ba1bd592b684ddb76a375 2ae58f66fdf295110c3ba1bd592b684ddb76a375 components/public/checkout/checkout-client.tsx
+1 .M N... 100644 100644 100644 d8d8c05850c1417330d637c2c07d32847cd25978 d8d8c05850c1417330d637c2c07d32847cd25978 docs/CURRENT_PHASE.md
+1 .M N... 100644 100644 100644 13903c7bb6fe0f34a1c4780b293b207d59761f65 13903c7bb6fe0f34a1c4780b293b207d59761f65 docs/admin-catalog-preview-mobile-feel-deploy-1.md
+1 .M N... 100644 100644 100644 d976a99898e14b7356348728793507b46f55b0e1 d976a99898e14b7356348728793507b46f55b0e1 lib/cart/local.ts
+1 .M N... 100644 100644 100644 d6ee8f4a1427023409bff63617850e03dfb70aed d6ee8f4a1427023409bff63617850e03dfb70aed lib/cart/signature.ts
+1 .M N... 100644 100644 100644 a796fc7570014c8979491987c3300fef665ed503 a796fc7570014c8979491987c3300fef665ed503 lib/cart/types.ts
+1 .M N... 100644 100644 100644 5cb2234b3d53a9d3c991a4a9f38a23c8bdcd33cf 5cb2234b3d53a9d3c991a4a9f38a23c8bdcd33cf lib/product-customization/admin-preview-mapper.ts
+1 .M N... 100644 100644 100644 6e3517f23e32928b2f45b1651f122861fd86f26f 6e3517f23e32928b2f45b1651f122861fd86f26f lib/product-customization/order-validation.ts
+1 .M N... 100644 100644 100644 b57f2b49db34e63884487337997be164e2b94c9b b57f2b49db34e63884487337997be164e2b94c9b lib/product-customization/public-shared.ts
+1 .M N... 100644 100644 100644 caf1a47d18136c7b977e628c6f8ac1aee9ae77d9 caf1a47d18136c7b977e628c6f8ac1aee9ae77d9 lib/product-customization/public.ts
+1 .M N... 100644 100644 100644 9edff1c7cacb3bfac9a1eadcf6f51eaa99565e38 9edff1c7cacb3bfac9a1eadcf6f51eaa99565e38 next-env.d.ts
+1 .M N... 100644 100644 100644 3c0bedf6f8672ea67a126b3f0994922188e3acd3 3c0bedf6f8672ea67a126b3f0994922188e3acd3 tsconfig.tsbuildinfo
+? components/public/business/public-business-header.module.css
+? components/public/business/public-header-visibility.ts
+? components/public/business/use-hide-on-scroll.ts
+? components/public/catalog/cart-bar.module.css
+? components/public/catalog/catalog-shell.module.css
+? components/public/catalog/customization-config-cache.ts
+? components/public/catalog/post-add-upsell-sheet.module.css
+? components/public/catalog/post-add-upsell-sheet.tsx
+? components/public/catalog/product-card.module.css
+? components/public/checkout/checkout-client.module.css
+? docs/admin-catalog-preview-final-qa-device-1.md
+? docs/admin-catalog-preview-mobile-feel-final-handoff-1.md
+? docs/deploy-qa-2-upload-fresh-login-production-qa.md
+? docs/deploy-redeploy-qa-1-staging-production-smoke.md
+? docs/live-ops-gate-1-store-session-on-demand-reconciliation.md
+? docs/orders-flow-qa-1-production-smoke.md
+? docs/product-customization-admin-1-groups-options-admin.md
+? docs/product-customization-admin-2-assignments-overrides-upsell.md
+? docs/product-customization-admin-2-qa-authenticated-browser-smoke.md
+? docs/product-customization-admin-dnd-1-sortable-groups-options.md
+? docs/product-customization-admin-ux-1-owner-friendly-builder-shell.md
+? docs/product-customization-admin-ux-spec-1-owner-friendly-builder.md
+? docs/product-customization-admin-v1-polish-monitor-1-premium-qa.md
+? docs/product-customization-audit-1-options-extras-upsell-architecture.md
+? docs/product-customization-checkout-ui-smoke-1-browser-checkout-validation.md
+? docs/product-customization-dashboard-1-render-snapshot-upsell-children.md
+? docs/product-customization-db-1-schema-rls-types.md
+? docs/product-customization-db-apply-1-staging-migration-schema-smoke.md
+? docs/product-customization-e2e-qa-1-flag-on-full-runtime-smoke.md
+? docs/product-customization-flag-1-tenant-rollout-guard.md
+? docs/product-customization-flag-off-rls-fixture-qa-1-flag-off-corpus-fixture-negative-qa.md
+? docs/product-customization-flag-off-rls-qa-1-flag-off-public-rls-negative-qa.md
+? docs/product-customization-group-descriptions-1-customer-facing-descriptions.md
+? docs/product-customization-group-naming-1-customer-facing-group-names.md
+? docs/product-customization-order-1-db-apply-qa-runtime-smoke.md
+? docs/product-customization-order-1-rpc-server-validation-snapshot.md
+? docs/product-customization-pilot-monitor-1-live-pilot-monitoring-real-config-readiness.md
+? docs/product-customization-pilot-monitor-2-plus-ui-stock-public-rls-live-monitoring.md
+? docs/product-customization-plus-bebidas-1-real-beverage-upsell-setup.md
+? docs/product-customization-plus-bebidas-availability-1-reactivate-beverage-product-for-upsell-qa.md
+? docs/product-customization-plus-bebidas-qa-1-real-order-snapshot-dashboard-validation.md
+? docs/product-customization-qa-order-cleanup-1-cancel-qa-orders-safely.md
+? docs/product-customization-real-config-polish-1-owner-config-copy-commercial-cleanup.md
+? docs/product-customization-rollout-pilot-1-controlled-tenant-rollout.md
+? docs/product-customization-spec-1-final-product-technical-spec.md
+? docs/product-customization-v1-final-handoff.md
+? docs/product-image-randomuuid-hotfix-1-client-safe-image-upload-id-fallback.md
+? docs/product-stock-admin-ux-1-stock-tracking-controls-product-admin.md
+? docs/product-stock-decrement-audit-1-order-stock-consumption-product-upsell-items.md
+? docs/product-stock-decrement-design-1-inventory-consumption-contract.md
+? docs/product-stock-decrement-ledger-1-record-order-decrement-movements-create-order.md
+? docs/product-stock-decrement-order-1-transactional-stock-consumption-create-order.md
+? docs/product-stock-movements-schema-1-stock-movements-ledger-idempotency-schema.md
+? docs/product-stock-restock-design-1-cancel-restock-contract-idempotency.md
+? docs/product-stock-tracking-schema-1-add-product-track-stock-flag.md
+? docs/public-catalog-cache-invalidation-qa-1.md
+? docs/public-catalog-cache-mutation-runtime-qa-2-followup.md
+? docs/public-catalog-cache-mutation-runtime-qa-2.md
+? docs/public-catalog-cart-edit-quantity-preservation-fix-1.md
+? docs/public-catalog-cart-sheet-usability-1.md
+? docs/public-catalog-checkout-conversion-polish-1.md
+? docs/public-catalog-checkout-summary-visual-qa-fix-1.md
+? docs/public-catalog-conversion-spec-closure-1.md
+? docs/public-catalog-conversion-surfaces-audit-spec-1.md
+? docs/public-catalog-customization-modal-perf-audit-1.md
+? docs/public-catalog-customization-modal-perf-fix-1.md
+? docs/public-catalog-customization-modal-ux-polish-1.md
+? docs/public-catalog-final-handoff-1.md
+? docs/public-catalog-image-transforms-infra-1-mode-b.md
+? docs/public-catalog-integrated-conversion-qa-1.md
+? docs/public-catalog-observability-prod-enable-1.md
+? docs/public-catalog-performance-forensic-audit-1.md
+? docs/public-catalog-post-add-upsell-cart-contract-1.md
+? docs/public-catalog-post-add-upsell-d1-schema-runtime-fix-1.md
+? docs/public-catalog-post-add-upsell-domain-1.md
+? docs/public-catalog-post-add-upsell-impl-1.md
+? docs/public-catalog-post-add-upsell-qa-1.md
+? docs/public-catalog-post-add-upsell-qa-2.md
+? docs/public-catalog-post-add-upsell-spec-1.md
+? docs/public-catalog-post-deploy-monitor-1.md
+? docs/public-catalog-preview-auth-smoke-1.md
+? docs/public-catalog-previous-slug-callers-fix-1.md
+? docs/public-catalog-product-cards-grid-polish-1.md
+? docs/public-catalog-product-cards-singleton-width-fix-1.md
+? docs/public-catalog-real-device-qa-1.md
+? docs/public-catalog-shell-cart-surfaces-polish-1.md
+? docs/public-catalog-upsell-realignment-cleanup-1.md
+? lib/cart/post-add-upsell-contract.verify.ts
+? lib/cart/post-add-upsell-ui-contract.verify.ts
+? lib/cart/post-add-upsell.ts
+? lib/product-customization/resolve-upsell.ts
+? lib/product-customization/safe-error-details.ts
+? lib/product-customization/safe-error-details.verify.ts
+? lib/product-customization/upsell-resolution.verify.ts
+? tmp/
+5dd9b41 (HEAD -> main, origin/main) docs: stamp roadmap deploy commit hash
+55f866f Document public catalog roadmap deploy
+fb19a3a Polish public catalog experience and observability
+9fae258 Document public catalog cache deploy
+81ae607 Cache public catalog data safely
+origin	https://github.com/mauronahuelmega-netizen/OrderOps (fetch)
+origin	https://github.com/mauronahuelmega-netizen/OrderOps (push)
+===DIFF STAT===
+ ORDEROPS_LIVING_MEMORY.md                          |  96 ++++
+ .../(protected)/products/customizations/actions.ts |  17 +-
+ app/globals.css                                    | 150 +-----
+ app/super-admin/(protected)/actions.ts             |  30 +-
+ components/admin/orders/admin-dashboard-orders.tsx | 116 ++---
+ .../plus-suggestions/plus-edit-modal.tsx           |  12 +-
+ .../plus-suggestions/plus-suggestions-tab.tsx      |   5 +-
+ .../plus-suggestions/plus-suggestions.module.css   |  64 +++
+ .../shared/customization-option-group.tsx          |  13 +-
+ .../shared/customization-option-row.tsx            |   3 +
+ .../shared/customization-price-summary.tsx         |  13 +-
+ .../shared/customization-shared.module.css         |  34 ++
+ .../shared/upsell-suggestion-group.tsx             |  12 +-
+ .../public/business/public-business-header.tsx     |  35 +-
+ components/public/catalog/cart-bar.tsx             |  66 +--
+ components/public/catalog/cart-sheet.module.css    | 290 ++++++++----
+ components/public/catalog/cart-sheet.tsx           | 238 +++++++---
+ components/public/catalog/catalog-client.tsx       | 244 ++++++++--
+ .../public/catalog/customization-modal.module.css  | 224 ++++-----
+ components/public/catalog/customization-modal.tsx  | 256 +++++-----
+ components/public/catalog/product-card.tsx         |  92 ++--
+ components/public/checkout/checkout-client.tsx     | 527 +++++++++++++--------
+ docs/CURRENT_PHASE.md                              | 414 +++++++++++++++-
+ docs/admin-catalog-preview-mobile-feel-deploy-1.md |   3 +-
+ lib/cart/local.ts                                  | 490 +++++++++++++++++--
+ lib/cart/signature.ts                              |  36 +-
+ lib/cart/types.ts                                  |  15 +
+ lib/product-customization/admin-preview-mapper.ts  |  25 +-
+ lib/product-customization/order-validation.ts      |   6 +-
+ lib/product-customization/public-shared.ts         |   4 +-
+ lib/product-customization/public.ts                | 108 ++---
+ next-env.d.ts                                      |   2 +-
+ tsconfig.tsbuildinfo                               |   2 +-
+ 33 files changed, 2528 insertions(+), 1114 deletions(-)
+===NAME STATUS===
+M	ORDEROPS_LIVING_MEMORY.md
+M	app/admin/(protected)/products/customizations/actions.ts
+M	app/globals.css
+M	app/super-admin/(protected)/actions.ts
+M	components/admin/orders/admin-dashboard-orders.tsx
+M	components/admin/product-customization/plus-suggestions/plus-edit-modal.tsx
+M	components/admin/product-customization/plus-suggestions/plus-suggestions-tab.tsx
+M	components/admin/product-customization/plus-suggestions/plus-suggestions.module.css
+M	components/product-customization/shared/customization-option-group.tsx
+M	components/product-customization/shared/customization-option-row.tsx
+M	components/product-customization/shared/customization-price-summary.tsx
+M	components/product-customization/shared/customization-shared.module.css
+M	components/product-customization/shared/upsell-suggestion-group.tsx
+M	components/public/business/public-business-header.tsx
+M	components/public/catalog/cart-bar.tsx
+M	components/public/catalog/cart-sheet.module.css
+M	components/public/catalog/cart-sheet.tsx
+M	components/public/catalog/catalog-client.tsx
+M	components/public/catalog/customization-modal.module.css
+M	components/public/catalog/customization-modal.tsx
+M	components/public/catalog/product-card.tsx
+M	components/public/checkout/checkout-client.tsx
+M	docs/CURRENT_PHASE.md
+M	docs/admin-catalog-preview-mobile-feel-deploy-1.md
+M	lib/cart/local.ts
+M	lib/cart/signature.ts
+M	lib/cart/types.ts
+M	lib/product-customization/admin-preview-mapper.ts
+M	lib/product-customization/order-validation.ts
+M	lib/product-customization/public-shared.ts
+M	lib/product-customization/public.ts
+M	next-env.d.ts
+M	tsconfig.tsbuildinfo
+===UNTRACKED===
+components/public/business/public-business-header.module.css
+components/public/business/public-header-visibility.ts
+components/public/business/use-hide-on-scroll.ts
+components/public/catalog/cart-bar.module.css
+components/public/catalog/catalog-shell.module.css
+components/public/catalog/customization-config-cache.ts
+components/public/catalog/post-add-upsell-sheet.module.css
+components/public/catalog/post-add-upsell-sheet.tsx
+components/public/catalog/product-card.module.css
+components/public/checkout/checkout-client.module.css
+docs/admin-catalog-preview-final-qa-device-1.md
+docs/admin-catalog-preview-mobile-feel-final-handoff-1.md
+docs/deploy-qa-2-upload-fresh-login-production-qa.md
+docs/deploy-redeploy-qa-1-staging-production-smoke.md
+docs/live-ops-gate-1-store-session-on-demand-reconciliation.md
+docs/orders-flow-qa-1-production-smoke.md
+docs/product-customization-admin-1-groups-options-admin.md
+docs/product-customization-admin-2-assignments-overrides-upsell.md
+docs/product-customization-admin-2-qa-authenticated-browser-smoke.md
+docs/product-customization-admin-dnd-1-sortable-groups-options.md
+docs/product-customization-admin-ux-1-owner-friendly-builder-shell.md
+docs/product-customization-admin-ux-spec-1-owner-friendly-builder.md
+docs/product-customization-admin-v1-polish-monitor-1-premium-qa.md
+docs/product-customization-audit-1-options-extras-upsell-architecture.md
+docs/product-customization-checkout-ui-smoke-1-browser-checkout-validation.md
+docs/product-customization-dashboard-1-render-snapshot-upsell-children.md
+docs/product-customization-db-1-schema-rls-types.md
+docs/product-customization-db-apply-1-staging-migration-schema-smoke.md
+docs/product-customization-e2e-qa-1-flag-on-full-runtime-smoke.md
+docs/product-customization-flag-1-tenant-rollout-guard.md
+docs/product-customization-flag-off-rls-fixture-qa-1-flag-off-corpus-fixture-negative-qa.md
+docs/product-customization-flag-off-rls-qa-1-flag-off-public-rls-negative-qa.md
+docs/product-customization-group-descriptions-1-customer-facing-descriptions.md
+docs/product-customization-group-naming-1-customer-facing-group-names.md
+docs/product-customization-order-1-db-apply-qa-runtime-smoke.md
+docs/product-customization-order-1-rpc-server-validation-snapshot.md
+docs/product-customization-pilot-monitor-1-live-pilot-monitoring-real-config-readiness.md
+docs/product-customization-pilot-monitor-2-plus-ui-stock-public-rls-live-monitoring.md
+docs/product-customization-plus-bebidas-1-real-beverage-upsell-setup.md
+docs/product-customization-plus-bebidas-availability-1-reactivate-beverage-product-for-upsell-qa.md
+docs/product-customization-plus-bebidas-qa-1-real-order-snapshot-dashboard-validation.md
+docs/product-customization-qa-order-cleanup-1-cancel-qa-orders-safely.md
+docs/product-customization-real-config-polish-1-owner-config-copy-commercial-cleanup.md
+docs/product-customization-rollout-pilot-1-controlled-tenant-rollout.md
+docs/product-customization-spec-1-final-product-technical-spec.md
+docs/product-customization-v1-final-handoff.md
+docs/product-image-randomuuid-hotfix-1-client-safe-image-upload-id-fallback.md
+docs/product-stock-admin-ux-1-stock-tracking-controls-product-admin.md
+docs/product-stock-decrement-audit-1-order-stock-consumption-product-upsell-items.md
+docs/product-stock-decrement-design-1-inventory-consumption-contract.md
+docs/product-stock-decrement-ledger-1-record-order-decrement-movements-create-order.md
+docs/product-stock-decrement-order-1-transactional-stock-consumption-create-order.md
+docs/product-stock-movements-schema-1-stock-movements-ledger-idempotency-schema.md
+docs/product-stock-restock-design-1-cancel-restock-contract-idempotency.md
+docs/product-stock-tracking-schema-1-add-product-track-stock-flag.md
+docs/public-catalog-cache-invalidation-qa-1.md
+docs/public-catalog-cache-mutation-runtime-qa-2-followup.md
+docs/public-catalog-cache-mutation-runtime-qa-2.md
+docs/public-catalog-cart-edit-quantity-preservation-fix-1.md
+docs/public-catalog-cart-sheet-usability-1.md
+docs/public-catalog-checkout-conversion-polish-1.md
+docs/public-catalog-checkout-summary-visual-qa-fix-1.md
+docs/public-catalog-conversion-spec-closure-1.md
+docs/public-catalog-conversion-surfaces-audit-spec-1.md
+docs/public-catalog-customization-modal-perf-audit-1.md
+docs/public-catalog-customization-modal-perf-fix-1.md
+docs/public-catalog-customization-modal-ux-polish-1.md
+docs/public-catalog-final-handoff-1.md
+docs/public-catalog-image-transforms-infra-1-mode-b.md
+docs/public-catalog-integrated-conversion-qa-1.md
+docs/public-catalog-observability-prod-enable-1.md
+docs/public-catalog-performance-forensic-audit-1.md
+docs/public-catalog-post-add-upsell-cart-contract-1.md
+docs/public-catalog-post-add-upsell-d1-schema-runtime-fix-1.md
+docs/public-catalog-post-add-upsell-domain-1.md
+docs/public-catalog-post-add-upsell-impl-1.md
+docs/public-catalog-post-add-upsell-qa-1.md
+docs/public-catalog-post-add-upsell-qa-2.md
+docs/public-catalog-post-add-upsell-spec-1.md
+docs/public-catalog-post-deploy-monitor-1.md
+docs/public-catalog-preview-auth-smoke-1.md
+docs/public-catalog-previous-slug-callers-fix-1.md
+docs/public-catalog-product-cards-grid-polish-1.md
+docs/public-catalog-product-cards-singleton-width-fix-1.md
+docs/public-catalog-real-device-qa-1.md
+docs/public-catalog-shell-cart-surfaces-polish-1.md
+docs/public-catalog-upsell-realignment-cleanup-1.md
+lib/cart/post-add-upsell-contract.verify.ts
+lib/cart/post-add-upsell-ui-contract.verify.ts
+lib/cart/post-add-upsell.ts
+lib/product-customization/resolve-upsell.ts
+lib/product-customization/safe-error-details.ts
+lib/product-customization/safe-error-details.verify.ts
+lib/product-customization/upsell-resolution.verify.ts
+tmp/actions-build.txt
+tmp/actions-build2.txt
+tmp/actions-lint.txt
+tmp/actions-tsc.txt
+tmp/actions2-build.txt
+tmp/actions2-lint.txt
+tmp/actions2-tsc.txt
+tmp/admin-login-head.html
+tmp/admin-pwa-branding-build-post.txt
+tmp/admin-pwa-branding-build-pre.txt
+tmp/admin-pwa-branding-tsc-post.txt
+tmp/admin-pwa-branding-tsc-pre.txt
+tmp/admin-pwa-build-post.txt
+tmp/admin-pwa-icon-consistency-1-build.txt
+tmp/admin-pwa-icon-consistency-1-tsc-post.txt
+tmp/admin-pwa-icon-consistency-1-tsc-pre.txt
+tmp/admin-pwa-tsc-post.txt
+tmp/admin-pwa-tsc-pre.txt
+tmp/anon-rls-check.ps1
+tmp/anon-rls-hardening-check.txt
+tmp/assignments-compact-1-build-post.txt
+tmp/assignments-compact-1-build-pre.txt
+tmp/assignments-compact-build.txt
+tmp/assignments-compact-tsc.txt
+tmp/assignments-remove-build-post.txt
+tmp/assignments-remove-build-pre.txt
+tmp/assignments-remove-tsc-mid.txt
+tmp/assignments-remove-tsc-post.txt
+tmp/assignments-remove-tsc-pre.txt
+tmp/build-cmd-out.txt
+tmp/c1-hello.txt
+tmp/cache-deploy-1-build.txt
+tmp/cache-deploy-1-lint.txt
+tmp/cache-deploy-1-tsc.txt
+tmp/cache-inv-qa-build.txt
+tmp/cache-inv-qa-lint.txt
+tmp/cache-inv-qa-tsc.txt
+tmp/cache-strategy-1-build.txt
+tmp/cache-strategy-1-lint.txt
+tmp/cache-strategy-1-tsc-post.txt
+tmp/cache-strategy-1-tsc.txt
+tmp/cards-grid-build.txt
+tmp/cards-grid-tsc.txt
+tmp/cart-contract-build-full.txt
+tmp/cart-contract-build.txt
+tmp/cart-contract-tsc-full.txt
+tmp/cart-contract-tsc.txt
+tmp/cart-contract-verify.txt
+tmp/cart-sheet-ux-1-build-full.txt
+tmp/cart-sheet-ux-1-build.txt
+tmp/cart-sheet-ux-1-tsc-full.txt
+tmp/cart-sheet-ux-1-tsc.txt
+tmp/cart1-build.txt
+tmp/cart1-tsc.txt
+tmp/catalog1-build.txt
+tmp/catalog1-tsc.txt
+tmp/check-layout-deploy.mjs
+tmp/check-prod-deploy.mjs
+tmp/cleanup-build.txt
+tmp/cleanup-error-capture.txt
+tmp/cleanup-lint.txt
+tmp/cleanup-preflight.txt
+tmp/cleanup-probe-out.txt
+tmp/cleanup-probe2.txt
+tmp/cleanup-tsc.txt
+tmp/cleanup-validate.txt
+tmp/closure-lock-build.txt
+tmp/closure-lock-tsc.txt
+tmp/cmd-build-check-out.txt
+tmp/cmd-diffcheck-out.txt
+tmp/cmd-exec-build-out.txt
+tmp/cmd-status-out.txt
+tmp/compact-build.txt
+tmp/compact-build2.txt
+tmp/compact-tsc.txt
+tmp/compact-tsc2.txt
+tmp/conversion-ux-build-pre.txt
+tmp/conversion-ux-build.txt
+tmp/conversion-ux-lint.txt
+tmp/conversion-ux-tsc-pre.txt
+tmp/conversion-ux-tsc.txt
+tmp/cookie-polish-build-exit.txt
+tmp/cookie-polish-build.txt
+tmp/cookie-polish-lint-exit.txt
+tmp/cookie-polish-lint.txt
+tmp/cookie-polish-tsc-exit.txt
+tmp/cookie-polish-tsc.txt
+tmp/copy-polish-1-build.txt
+tmp/corpus-post-build.txt
+tmp/corpus-post-lint.txt
+tmp/corpus-post-tsc.txt
+tmp/corpus-pre-tsc.txt
+tmp/create_order_body.sql
+tmp/create_order_decrement_base.sql
+tmp/database.working.ts
+tmp/deploy-preflight.txt
+tmp/deploy1-build-exit.txt
+tmp/deploy1-build.txt
+tmp/deploy1-lint-exit.txt
+tmp/deploy1-lint.txt
+tmp/deploy1-tsc-exit.txt
+tmp/deploy1-tsc.txt
+tmp/dev-origin-build.txt
+tmp/dev-origin-tsc.txt
+tmp/device-qa-head.txt
+tmp/device-qa-tsc.txt
+tmp/domain1-build-raw.txt
+tmp/domain1-build.txt
+tmp/domain1-tsc-raw.txt
+tmp/domain1-tsc.txt
+tmp/e2e-qa1-extract.txt
+tmp/e2e-qa1-full.txt
+tmp/edit-qty-build.txt
+tmp/exceptions-ux-1-build-post.txt
+tmp/exceptions-ux-1-build-pre.txt
+tmp/final-qa-device-tsc.txt
+tmp/fix-current-phase.mjs
+tmp/flag-off-anon-check.ps1
+tmp/flag-off-anon-check.txt
+tmp/flag-off-fixture-anon.ps1
+tmp/flag-off-fixture-anon.txt
+tmp/flag-off-qa-precheck.txt
+tmp/git-diff-confirm-err.txt
+tmp/git-diff-confirm-out.txt
+tmp/git-diff-names-err.txt
+tmp/git-diff-names-out.txt
+tmp/git-diff-stat-err.txt
+tmp/git-diff-stat-out.txt
+tmp/git-status-rls.txt
+tmp/group-desc-1-build-post.txt
+tmp/group-desc-1-build-pre.txt
+tmp/group-desc-1-tsc-post.txt
+tmp/group-naming-1-build-post.txt
+tmp/group-naming-1-build-pre.txt
+tmp/group-naming-1-tsc-post.txt
+tmp/group-naming-1-tsc-pre.txt
+tmp/handoff-build.txt
+tmp/handoff-lint.txt
+tmp/handoff-preflight.txt
+tmp/handoff-tsc-final.txt
+tmp/handoff-tsc.txt
+tmp/handoff-validate-status.txt
+tmp/hierarchy-polish-1-build.txt
+tmp/icon-compare.mjs
+tmp/image-uuid-hotfix-build.txt
+tmp/img-infra-build.txt
+tmp/img-infra-lint.txt
+tmp/img-infra-tsc.txt
+tmp/img-opt-build.txt
+tmp/img-opt-build2.txt
+tmp/img-opt-lint.txt
+tmp/img-opt-preflight.txt
+tmp/img-opt-tsc.txt
+tmp/img-opt-tsc2.txt
+tmp/img-xform-build.txt
+tmp/img-xform-curl.txt
+tmp/img-xform-lint.txt
+tmp/img-xform-preflight.txt
+tmp/img-xform-tsc.txt
+tmp/img-xform-tsc2.txt
+tmp/insert-living-memory.mjs
+tmp/inspect-prod-html.mjs
+tmp/integrated-qa-build.txt
+tmp/integrated-qa-tsc.txt
+tmp/layout-final-deploy-build.txt
+tmp/layout-final-deploy-lint.txt
+tmp/layout-final-deploy-tsc.txt
+tmp/layout-fix2-build-post.txt
+tmp/layout-fix2-lint-post.txt
+tmp/layout-fix2-tsc-post.txt
+tmp/layout-fix2-tsc-pre.txt
+tmp/ledger-apply.json
+tmp/live-ops-gate-1-build-post.txt
+tmp/live-ops-gate-1-build-pre.txt
+tmp/live-ops-gate-1-tsc-mid.txt
+tmp/live-ops-gate-1-tsc-post.txt
+tmp/live-ops-gate-1-tsc-pre.txt
+tmp/manifest-body.json
+tmp/mobile-feel-auth-qa-build.txt
+tmp/mobile-feel-auth-qa-lint.txt
+tmp/mobile-feel-auth-qa-tsc.txt
+tmp/mobile-feel-deploy-build.txt
+tmp/mobile-feel-deploy-lint.txt
+tmp/mobile-feel-deploy-tsc.txt
+tmp/mobile-feel-polish-build-debug.txt
+tmp/mobile-feel-polish-build-debug2.txt
+tmp/mobile-feel-polish-build-final.txt
+tmp/mobile-feel-polish-build-mid.txt
+tmp/mobile-feel-polish-build-post.txt
+tmp/mobile-feel-polish-build-pre.txt
+tmp/mobile-feel-polish-lint.txt
+tmp/mobile-feel-polish-tsc-final.txt
+tmp/mobile-feel-polish-tsc-post.txt
+tmp/mobile-feel-polish-tsc-pre.txt
+tmp/modal-perf-fix-build.txt
+tmp/modal-perf-fix-tsc.txt
+tmp/monitor2-precheck.txt
+tmp/obs-build-pre.txt
+tmp/obs-build.txt
+tmp/obs-lint.txt
+tmp/obs-tsc-pre.txt
+tmp/obs-tsc.txt
+tmp/order1-apply-build.txt
+tmp/order1-build.txt
+tmp/order1-tsc.txt
+tmp/overrides-build.txt
+tmp/overrides-tsc.txt
+tmp/perf-deploy-1-build.txt
+tmp/perf-deploy-1-lint.txt
+tmp/perf-deploy-1-tsc.txt
+tmp/perf-deploy-catalog.html
+tmp/perf-fix-1-build-full.txt
+tmp/perf-fix-1-build-post.txt
+tmp/perf-fix-1-build.txt
+tmp/perf-fix-1-lint.txt
+tmp/perf-fix-1-tsc-full.txt
+tmp/perf-fix-1-tsc-post.txt
+tmp/perf-fix-1-tsc.txt
+tmp/pilot-monitor-1-build-pre.txt
+tmp/pilot-monitor-1-tsc-pre.txt
+tmp/plus-bebidas-1-build-post.txt
+tmp/plus-bebidas-1-build-pre.txt
+tmp/plus-bebidas-1-tsc-post.txt
+tmp/plus-bebidas-2-build-post.txt
+tmp/plus-bebidas-2-build-pre.txt
+tmp/plus-bebidas-2-tsc-post.txt
+tmp/plus-bebidas-qa-1-build-post.txt
+tmp/plus-bebidas-qa-1-build-pre.txt
+tmp/plus-bebidas-qa-1-tsc-post.txt
+tmp/polish-monitor-1-build-final.txt
+tmp/polish-monitor-1-build.txt
+tmp/previous-slug-build.txt
+tmp/previous-slug-tsc.txt
+tmp/probe-image-transforms.mjs
+tmp/probe.txt
+tmp/prod-catalogo.html
+tmp/prod-catalogo2.html
+tmp/prod-checkout.html
+tmp/pub-audit-build.txt
+tmp/pub-audit-lint.txt
+tmp/pub-audit-preflight.txt
+tmp/pub-audit-tsc.txt
+tmp/public-audit-build.txt
+tmp/public-audit-tsc.txt
+tmp/pwa-foundation-build.txt
+tmp/pwa-foundation-tsc.txt
+tmp/qa-assets/invalid-file.txt
+tmp/qa-assets/original-cover.png
+tmp/qa-assets/original-logo.png
+tmp/qa-assets/too-large-cover.png
+tmp/qa-assets/valid-cover.jpg
+tmp/qa-assets/valid-logo.png
+tmp/qa2-build.txt
+tmp/qa2-tsc.txt
+tmp/re-qa-build-exit.txt
+tmp/re-qa-build.txt
+tmp/re-qa-lint-exit.txt
+tmp/re-qa-lint.txt
+tmp/re-qa-tsc-exit.txt
+tmp/re-qa-tsc.txt
+tmp/real-config-polish-1-build-post.txt
+tmp/real-config-polish-1-build-pre.txt
+tmp/real-config-polish-1-tsc-post.txt
+tmp/real-config-polish-1-tsc-pre.txt
+tmp/responsive-polish-build-post.txt
+tmp/responsive-polish-build-pre.txt
+tmp/responsive-polish-tsc-post.txt
+tmp/responsive-polish-tsc-pre.txt
+tmp/roadmap-deploy-build.txt
+tmp/roadmap-deploy-lint.txt
+tmp/rollout-pilot-cli.txt
+tmp/rollout-pilot-mode-b-build-out.txt
+tmp/rollout-pilot-mode-b-cli-post.txt
+tmp/rollout-pilot-mode-b-cli-pre.txt
+tmp/rollout-pilot-mode-b-tsc-out.txt
+tmp/rollout-pilot-mode-c-cli-post.txt
+tmp/rollout-pilot-mode-c-cli-pre.txt
+tmp/rollout-pilot-mode-c-retry-build-post.txt
+tmp/rollout-pilot-mode-c-retry-cli-pre.txt
+tmp/rollout-pilot-mode-c-retry-tsc-post.txt
+tmp/rollout-pilot-mode-c-retry2-build-post.txt
+tmp/rollout-pilot-mode-c-retry2-build-pre.txt
+tmp/rollout-pilot-mode-c-retry2-tsc-post.txt
+tmp/rollout-pilot-mode-c-retry2-tsc-pre.txt
+tmp/scroll-jank-build.txt
+tmp/scroll-jank-lint.txt
+tmp/scroll-jank-tsc.txt
+tmp/sections-cleanup-build.txt
+tmp/sections-cleanup-tsc.txt
+tmp/sections-ux-build.txt
+tmp/sections-ux-tsc.txt
+tmp/shell-cart-build-final.txt
+tmp/shell-cart-build.txt
+tmp/shell-cart-tsc-final.txt
+tmp/shell-cart-tsc-rerun.txt
+tmp/shell-cart-tsc.txt
+tmp/shell-cart-typecheck-out.txt
+tmp/shell-layout-1024.png
+tmp/shell-layout-1440-full.png
+tmp/shell-layout-1440.png
+tmp/shell-layout-build-post.txt
+tmp/shell-layout-build-post2.txt
+tmp/shell-layout-lint-post.txt
+tmp/shell-layout-phone-clip.png
+tmp/shell-layout-tsc-post.txt
+tmp/shell-layout-tsc-post2.txt
+tmp/shell-layout-tsc-pre.txt
+tmp/shell-premium-build-final.txt
+tmp/shell-premium-build-pre.txt
+tmp/shell-premium-lint.txt
+tmp/shell-premium-tsc-final.txt
+tmp/shell-premium-tsc-post.txt
+tmp/shell-premium-tsc-post2.txt
+tmp/shell-premium-tsc-post3.txt
+tmp/shell-premium-tsc-pre.txt
+tmp/singleton-build.txt
+tmp/singleton-tsc.txt
+tmp/stock-decrement-apply.sql
+tmp/stock-decrement-query.json
+tmp/touch-pan-build-exit.txt
+tmp/touch-pan-build.txt
+tmp/touch-pan-fix-build-exit.txt
+tmp/touch-pan-fix-build.txt
+tmp/touch-pan-fix-lint-exit.txt
+tmp/touch-pan-fix-lint.txt
+tmp/touch-pan-fix-tsc-exit.txt
+tmp/touch-pan-fix-tsc.txt
+tmp/touch-pan-lint-exit.txt
+tmp/touch-pan-lint.txt
+tmp/touch-pan-qa-fix-build.txt
+tmp/touch-pan-qa-fix-lint.txt
+tmp/touch-pan-qa-fix-tsc.txt
+tmp/touch-pan-tsc-exit.txt
+tmp/touch-pan-tsc.txt
+tmp/u1-build.txt
+tmp/u1-out.txt
+tmp/u1-tsc.txt
+tmp/u1-tsc2.txt
+tmp/upsell-placement-verify.txt
+tmp/ux-polish-1-build-full.txt
+tmp/ux-polish-1-build.txt
+tmp/ux-polish-1-tsc-full.txt
+tmp/ux-polish-1-tsc.txt
+tmp/v-build.txt
+tmp/v-cart.txt
+tmp/v-curl-root.txt
+tmp/v-curl.txt
+tmp/v-safe.txt
+tmp/v-tsc.txt
+tmp/v-upsell.txt
+tmp/validation-build.txt
+tmp/validation-git-status.txt
+tmp/validation-lint.txt
+tmp/validation-tsc.txt
+tmp/verify-build-out.txt
+tmp/width-parity-build-post.txt
+tmp/width-parity-lint-post.txt
+tmp/width-parity-tsc-post.txt
+tmp/width-parity-tsc-pre.txt
+tmp/write-preview-polish-doc.mjs

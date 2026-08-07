@@ -1,0 +1,168 @@
+﻿git : warning: in the working copy of 'ORDEROPS_LIVING_MEMORY.md', LF will be replaced by CRLF the next time Git 
+touches it
+En C:\Users\Oasis Desktop\AppData\Local\Temp\ps-script-7cb92a7c-0136-48d9-93a6-99e2f6b7fbe9.ps1: 100 Carácter: 129
++ ... ite-Output "STATUS_EXIT=$LASTEXITCODE"; git diff --check 2>&1 | Out-F ...
++                                             ~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (warning: in the... Git touches it:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+warning: in the working copy of 'app/admin/(protected)/products/customizations/actions.ts', LF will be replaced by 
+CRLF the next time Git touches it
+warning: in the working copy of 'app/globals.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'app/super-admin/(protected)/actions.ts', LF will be replaced by CRLF the next time 
+Git touches it
+warning: in the working copy of 'components/admin/orders/admin-dashboard-orders.tsx', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'components/admin/product-customization/plus-suggestions/plus-edit-modal.tsx', LF will 
+be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/admin/product-customization/plus-suggestions/plus-suggestion-card.tsx', LF 
+will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/admin/product-customization/plus-suggestions/plus-suggestions-tab.tsx', LF 
+will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/admin/product-customization/plus-suggestions/plus-suggestions.module.css', 
+LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/product-customization/shared/customization-option-group.tsx', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/product-customization/shared/customization-option-row.tsx', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/product-customization/shared/customization-price-summary.tsx', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/product-customization/shared/customization-shared.module.css', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/product-customization/shared/upsell-suggestion-group.tsx', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 'components/public/business/public-business-header.tsx', LF will be replaced by CRLF 
+the next time Git touches it
+warning: in the working copy of 'components/public/catalog/cart-bar.tsx', LF will be replaced by CRLF the next time 
+Git touches it
+warning: in the working copy of 'components/public/catalog/cart-sheet.module.css', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'components/public/catalog/cart-sheet.tsx', LF will be replaced by CRLF the next time 
+Git touches it
+warning: in the working copy of 'components/public/catalog/catalog-client.tsx', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'components/public/catalog/customization-modal.module.css', LF will be replaced by 
+CRLF the next time Git touches it
+warning: in the working copy of 'components/public/catalog/customization-modal.tsx', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'components/public/catalog/product-card.tsx', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'components/public/checkout/checkout-client.tsx', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'docs/CURRENT_PHASE.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/admin-catalog-preview-mobile-feel-deploy-1.md', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'lib/cart/local.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'lib/cart/signature.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'lib/cart/types.ts', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'lib/product-customization/admin-preview-mapper.ts', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'lib/product-customization/admin.ts', LF will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'lib/product-customization/builder-presentation.ts', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'lib/product-customization/order-validation.ts', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'lib/product-customization/public-shared.ts', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'lib/product-customization/public.ts', LF will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'lib/product-customization/shared.ts', LF will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'types/database.ts', LF will be replaced by CRLF the next time Git touches it
+docs/CURRENT_PHASE.md:3: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-CART-CONTRACT-1 ÔÇö Deterministic Parent Mutation Outcomes, Child Attachment, Signature Safety & Edit Preservation  
+docs/CURRENT_PHASE.md:4: trailing whitespace.
++**Estado:** PASS WITH CART RUNTIME QA DEBT ┬À D1 LOCAL DB MIGRATION QA DEBT ÔÇö INHERITED  
+docs/CURRENT_PHASE.md:15: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-DOMAIN-1 ÔÇö Placement Domain, Admin Configuration & Public Surface Resolution  
+docs/CURRENT_PHASE.md:16: trailing whitespace.
++**Estado:** PASS WITH LOCAL DB MIGRATION QA DEBT ┬À PASS WITH ADMIN RUNTIME QA DEBT  
+docs/CURRENT_PHASE.md:27: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-SPEC-1 ÔÇö Post-Add Upsell Product, Domain & Technical Specification  
+docs/CURRENT_PHASE.md:28: trailing whitespace.
++**Estado:** SPEC COMPLETE ┬À **GO WITH DOMAIN PREREQUISITE** ┬À DOCS-ONLY  
+docs/CURRENT_PHASE.md:39: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-INTEGRATED-CONVERSION-QA-1 ÔÇö End-to-End Public Catalog Conversion Funnel QA Without Real Order Creation  
+docs/CURRENT_PHASE.md:40: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT ┬À PASS WITH DEVICE QA DEBT ┬À SUBMIT REAL NOT EXECUTED BY SCOPE  
+docs/CURRENT_PHASE.md:52: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CHECKOUT-SUMMARY-VISUAL-QA-FIX-1 ÔÇö Parent/Upsell Price Clarity, Customer-Facing Root Count & Mobile Overlay Verification  
+docs/CURRENT_PHASE.md:53: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT ┬À PASS WITH DEVICE QA DEBT ┬À SUBMIT REAL NOT EXECUTED BY SCOPE  
+docs/CURRENT_PHASE.md:65: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CHECKOUT-CONVERSION-POLISH-1 ÔÇö Segmented Mobile Checkout, Form Clarity & Final Conversion Surface  
+docs/CURRENT_PHASE.md:66: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT ┬À PASS WITH DEVICE QA DEBT ┬À SUBMIT REAL NOT EXECUTED BY SCOPE  
+docs/CURRENT_PHASE.md:80: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CART-SHEET-USABILITY-1 ÔÇö Mobile Cart Sheet Hierarchy, Controls & Checkout Readiness  
+docs/CURRENT_PHASE.md:81: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT  
+docs/CURRENT_PHASE.md:95: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-UX-POLISH-1 ÔÇö Compact Premium UX for Public Customization Modal  
+docs/CURRENT_PHASE.md:96: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT  
+docs/CURRENT_PHASE.md:110: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-FIX-1 ÔÇö Client Cache & In-flight Dedupe for Customization Modal  
+docs/CURRENT_PHASE.md:111: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT  
+docs/CURRENT_PHASE.md:125: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-AUDIT-1 ÔÇö Forensic Audit of Customization Modal Repeated Loading  
+docs/CURRENT_PHASE.md:126: trailing whitespace.
++**Estado:** PERF AUDIT COMPLETE ÔÇö FIX RECOMMENDED  
+docs/CURRENT_PHASE.md:140: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-PRODUCT-CARDS-SINGLETON-WIDTH-FIX-1 ÔÇö Keep Single-Product Categories at Grid Card Width  
+docs/CURRENT_PHASE.md:141: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT  
+docs/CURRENT_PHASE.md:154: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-PRODUCT-CARDS-GRID-POLISH-1 ÔÇö Mobile 2-Column Product Cards & Quick Add Polish  
+docs/CURRENT_PHASE.md:155: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT  
+docs/CURRENT_PHASE.md:168: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-SHELL-CART-SURFACES-POLISH-1 ÔÇö Header Hide, Sticky Categories & Compact Cart FAB  
+docs/CURRENT_PHASE.md:169: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT  
+docs/CURRENT_PHASE.md:182: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CONVERSION-SPEC-CLOSURE-1 ÔÇö Final Product & Technical Spec Closure for Public Catalog Conversion Roadmap  
+docs/CURRENT_PHASE.md:183: trailing whitespace.
++**Estado:** SPEC CLOSED  
+docs/CURRENT_PHASE.md:196: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CONVERSION-SURFACES-AUDIT-SPEC-1 ÔÇö Public Catalog Conversion Surfaces Audit & Product Spec  
+docs/CURRENT_PHASE.md:197: trailing whitespace.
++**Estado:** SPEC READY  
+docs/CURRENT_PHASE.md:210: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-PREVIOUS-SLUG-CALLERS-FIX-1 ÔÇö Pass previousSlug Through Public Catalog Cache Invalidation Callers  
+docs/CURRENT_PHASE.md:211: trailing whitespace.
++**Estado:** PASS WITH RUNTIME SLUG QA DEBT  
+docs/CURRENT_PHASE.md:225: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-REAL-DEVICE-QA-1 ÔÇö Real Device QA for Public Catalog V1  
+docs/CURRENT_PHASE.md:226: trailing whitespace.
++**Estado:** BLOCKED ÔÇö REAL DEVICE UNAVAILABLE  
+docs/CURRENT_PHASE.md:240: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-PREVIEW-AUTH-SMOKE-1 ÔÇö Authenticated Admin Preview Deep Smoke for Public Catalog V1  
+docs/CURRENT_PHASE.md:241: trailing whitespace.
++**Estado:** PASS WITH MINOR PREVIEW QA DEBT  
+docs/CURRENT_PHASE.md:256: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1-MODE-B ÔÇö Authorized Supabase Image Transformations Enablement & Production Verification  
+docs/CURRENT_PHASE.md:257: trailing whitespace.
++**Estado:** BLOCKED ÔÇö MISSING IMAGE TRANSFORMS ENABLE AUTH  
+docs/CURRENT_PHASE.md:272: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-OBSERVABILITY-PROD-ENABLE-1 ÔÇö Controlled Production Enablement for Public Catalog Observability  
+docs/CURRENT_PHASE.md:273: trailing whitespace.
++**Estado:** BLOCKED ÔÇö MISSING OBSERVABILITY PROD ENABLE AUTH  
+docs/CURRENT_PHASE.md:288: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2-FOLLOWUP ÔÇö Authorized Runtime QA for Public Catalog Cache Invalidation  
+docs/CURRENT_PHASE.md:289: trailing whitespace.
++**Estado:** BLOCKED ÔÇö MISSING MUTATION AUTH  
+docs/CURRENT_PHASE.md:302: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2 ÔÇö Runtime QA for Public Catalog Cache Invalidation After Admin Mutations  
+docs/CURRENT_PHASE.md:303: trailing whitespace.
++**Estado:** PASS WITH RUNTIME MUTATION AUTH DEBT  
+docs/CURRENT_PHASE.md:316: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-POST-DEPLOY-MONITOR-1 ÔÇö Post-Deploy Production Monitor for Public Catalog V1  
+docs/CURRENT_PHASE.md:317: trailing whitespace.
++**Estado:** PASS WITH NON-BLOCKING QA DEBT  
+docs/CURRENT_PHASE.md:330: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-FINAL-HANDOFF-1 ÔÇö Public Catalog V1 Final Technical & Product Handoff  
+docs/CURRENT_PHASE.md:331: trailing whitespace.
++**Estado:** FEATURE CLOSED ÔÇö DEPLOYED WITH NON-BLOCKING QA DEBT  

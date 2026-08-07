@@ -1,0 +1,11 @@
+CURL_AT=2026-07-31T07:46:28.952Z
+HTTP_CODE=200
+HTTP_ERR=
+BODY_BYTES=110672
+LOG_BEFORE_BYTES=252810
+LOG_AFTER_BYTES=252810
+NEW_LOG_LINES=0
+NEW_ERROR_HITS=0
+LAST_HISTORICAL_HIT_LINE=368
+LAST_HISTORICAL_HIT={"timestamp":"01:35:06.730","source":"Server","level":"ERROR","message":"[product-customization] Failed to load public summaries \"{\\\"businessId\\\":\\\"e21b8fc2-3016-4dec-92ef-ebb04e58ecdf\\\",\\\"name\\\":\\\"Error\\\",\\\"message\\\":\\\"No pudimos cargar la configuración pública de personalización. [42703] column upsell_groups.placement does not exist\\\"}\""}
+POST_CURL_NO_NEW_SUMMARY_OR_PLACEMENT_ERRORS=YES

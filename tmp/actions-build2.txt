@@ -1,0 +1,65 @@
+﻿node.exe : npm warn Unknown env config "devdir". This will stop working in the next major version of npm.
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm warn Unknow...version of npm.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+> orderops@0.1.0 build
+> next build
+
+Ôû▓ Next.js 16.2.9 (Turbopack)
+- Environments: .env.local
+
+ÔÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: 
+https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+Ô£ô Compiled successfully in 12.5s
+  Running TypeScript ...
+  Finished TypeScript in 17.1s ...
+  Collecting page data using 3 workers ...
+  Generating static pages using 3 workers (0/21) ...
+  Generating static pages using 3 workers (5/21) 
+  Generating static pages using 3 workers (10/21) 
+  Generating static pages using 3 workers (15/21) 
+Ô£ô Generating static pages using 3 workers (21/21) in 837ms
+  Finalizing page optimization ...
+
+Route (app)
+Ôöî Ôùï /
+Ôö£ Ôùï /_not-found
+Ôö£ ãÆ /admin
+Ôö£ ãÆ /admin/categories
+Ôö£ ãÆ /admin/dashboard
+Ôö£ ãÆ /admin/dashboard/orders
+Ôö£ ãÆ /admin/kitchen
+Ôö£ ãÆ /admin/login
+Ôö£ ãÆ /admin/orders/[id]
+Ôö£ ãÆ /admin/orders/[id]/summary
+Ôö£ ãÆ /admin/orders/[id]/workspace
+Ôö£ ãÆ /admin/products
+Ôö£ ãÆ /admin/settings
+Ôö£ ãÆ /admin/settings/notifications
+Ôö£ ãÆ /admin/settings/operations
+Ôö£ ãÆ /admin/settings/public
+Ôö£ ãÆ /admin/settings/public/catalogo
+Ôö£ ãÆ /admin/settings/public/landing
+Ôö£ ãÆ /admin/settings/team
+Ôö£ ãÆ /admin/team
+Ôö£ ãÆ /api/internal/orders/[id]/push
+Ôö£ ãÆ /b/[slug]
+Ôö£ ãÆ /b/[slug]/catalogo
+Ôö£ ãÆ /b/[slug]/checkout
+Ôö£ ãÆ /b/[slug]/success
+Ôö£ ãÆ /super-admin
+Ôö£ ãÆ /super-admin/businesses
+Ôöö ãÆ /super-admin/users
+
+
+ãÆ Proxy (Middleware)
+
+Ôùï  (Static)   prerendered as static content
+ãÆ  (Dynamic)  server-rendered on demand
+
+EXIT:0

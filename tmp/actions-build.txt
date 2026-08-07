@@ -1,0 +1,313 @@
+﻿node.exe : npm warn Unknown env config "devdir". This will stop working in the next major version of npm.
+En línea: 1 Carácter: 1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm warn Unknow...version of npm.:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+> orderops@0.1.0 build
+> next build
+
+Ôû▓ Next.js 16.2.9 (Turbopack)
+- Environments: .env.local
+
+ÔÜá The "middleware" file convention is deprecated. Please use "proxy" instead. Learn more: 
+https://nextjs.org/docs/messages/middleware-to-proxy
+  Creating an optimized production build ...
+
+> Build error occurred
+Error: Turbopack build failed with 9 errors:
+./app/admin/(protected)/settings/public/actions.ts:149:1
+Only async functions are allowed to be exported in a "use server" file.
+  [90m147 |[0m [90m// Deprecated compatibility re-export.[0m
+  [90m148 |[0m [90m// Prefer importing notification actions from settings/notifications/actions.[0m
+[31m[1m>[0m [90m149 |[0m [36mexport[0m { updateNotificationPreferencesAction } [36mfrom[0m 
+[32m"../notifications/actions"[0m;
+  [90m    |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m150 |[0m
+  [90m151 |[0m [36mexport[0m [36masync[0m [36mfunction[0m savePushSubscriptionAction(input: unknown) {
+  [90m152 |[0m   [36mtry[0m {
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./app/admin/(protected)/settings/public/actions.ts [Client Component Browser]
+    ./components/admin/settings/public-catalog-settings-form.tsx [Client Component Browser]
+    ./components/admin/settings/public-catalog-settings-form.tsx [Server Component]
+    ./app/admin/(protected)/settings/public/catalogo/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/admin/(protected)/settings/public/actions.ts [Client Component SSR]
+    ./components/admin/settings/public-catalog-settings-form.tsx [Client Component SSR]
+    ./components/admin/settings/public-catalog-settings-form.tsx [Server Component]
+    ./app/admin/(protected)/settings/public/catalogo/page.tsx [Server Component]
+
+
+./components/admin/notifications/use-push-subscription.ts:4:1
+Export revokePushSubscriptionAction doesn't exist in target module
+  [90m 2 |[0m
+  [90m 3 |[0m [36mimport[0m { useCallback, useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m 4 |[0m [36mimport[0m {
+  [90m   |[0m [31m[1m^^^^^^^[0m
+[31m[1m>[0m [90m 5 |[0m   revokePushSubscriptionAction,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 6 |[0m   savePushSubscriptionAction
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 7 |[0m } [36mfrom[0m [32m"@/app/admin/(protected)/settings/public/actions"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m {
+  [90m 9 |[0m   canUsePushInBrowser,
+  [90m10 |[0m   getWebPushPublicKey,
+
+The export revokePushSubscriptionAction was not found in module 
+[project]/app/admin/(protected)/settings/public/actions.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the 
+requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./components/admin/notifications/use-push-subscription.ts [Client Component Browser]
+    ./components/admin/notifications/push-device-settings.tsx [Client Component Browser]
+    ./components/admin/notifications/notification-settings-card.tsx [Client Component Browser]
+    ./components/admin/notifications/notification-settings-card.tsx [Server Component]
+    ./app/admin/(protected)/settings/notifications/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/admin/notifications/use-push-subscription.ts [Client Component SSR]
+    ./components/admin/notifications/push-device-settings.tsx [Client Component SSR]
+    ./components/admin/notifications/notification-settings-card.tsx [Client Component SSR]
+    ./components/admin/notifications/notification-settings-card.tsx [Server Component]
+    ./app/admin/(protected)/settings/notifications/page.tsx [Server Component]
+
+
+./components/admin/notifications/use-push-subscription.ts:4:1
+Export revokePushSubscriptionAction doesn't exist in target module
+  [90m 2 |[0m
+  [90m 3 |[0m [36mimport[0m { useCallback, useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m 4 |[0m [36mimport[0m {
+  [90m   |[0m [31m[1m^^^^^^^[0m
+[31m[1m>[0m [90m 5 |[0m   revokePushSubscriptionAction,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 6 |[0m   savePushSubscriptionAction
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 7 |[0m } [36mfrom[0m [32m"@/app/admin/(protected)/settings/public/actions"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m {
+  [90m 9 |[0m   canUsePushInBrowser,
+  [90m10 |[0m   getWebPushPublicKey,
+
+The export revokePushSubscriptionAction was not found in module 
+[project]/app/admin/(protected)/settings/public/actions.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the 
+requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./components/admin/notifications/use-push-subscription.ts [Client Component Browser]
+    ./components/admin/notifications/push-device-settings.tsx [Client Component Browser]
+    ./components/admin/notifications/notification-settings-card.tsx [Client Component Browser]
+    ./components/admin/notifications/notification-settings-card.tsx [Server Component]
+    ./app/admin/(protected)/settings/notifications/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/admin/notifications/use-push-subscription.ts [Client Component SSR]
+    ./components/admin/notifications/push-device-settings.tsx [Client Component SSR]
+    ./components/admin/notifications/notification-settings-card.tsx [Client Component SSR]
+    ./components/admin/notifications/notification-settings-card.tsx [Server Component]
+    ./app/admin/(protected)/settings/notifications/page.tsx [Server Component]
+
+
+./components/admin/notifications/use-push-subscription.ts:4:1
+Export savePushSubscriptionAction doesn't exist in target module
+  [90m 2 |[0m
+  [90m 3 |[0m [36mimport[0m { useCallback, useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m 4 |[0m [36mimport[0m {
+  [90m   |[0m [31m[1m^^^^^^^[0m
+[31m[1m>[0m [90m 5 |[0m   revokePushSubscriptionAction,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 6 |[0m   savePushSubscriptionAction
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 7 |[0m } [36mfrom[0m [32m"@/app/admin/(protected)/settings/public/actions"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m {
+  [90m 9 |[0m   canUsePushInBrowser,
+  [90m10 |[0m   getWebPushPublicKey,
+
+The export savePushSubscriptionAction was not found in module 
+[project]/app/admin/(protected)/settings/public/actions.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the 
+requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./components/admin/notifications/use-push-subscription.ts [Client Component Browser]
+    ./components/admin/notifications/push-device-settings.tsx [Client Component Browser]
+    ./components/admin/notifications/notification-settings-card.tsx [Client Component Browser]
+    ./components/admin/notifications/notification-settings-card.tsx [Server Component]
+    ./app/admin/(protected)/settings/notifications/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/admin/notifications/use-push-subscription.ts [Client Component SSR]
+    ./components/admin/notifications/push-device-settings.tsx [Client Component SSR]
+    ./components/admin/notifications/notification-settings-card.tsx [Client Component SSR]
+    ./components/admin/notifications/notification-settings-card.tsx [Server Component]
+    ./app/admin/(protected)/settings/notifications/page.tsx [Server Component]
+
+
+./components/admin/notifications/use-push-subscription.ts:4:1
+Export savePushSubscriptionAction doesn't exist in target module
+  [90m 2 |[0m
+  [90m 3 |[0m [36mimport[0m { useCallback, useEffect, useMemo, useState } [36mfrom[0m [32m"react"[0m;
+[31m[1m>[0m [90m 4 |[0m [36mimport[0m {
+  [90m   |[0m [31m[1m^^^^^^^[0m
+[31m[1m>[0m [90m 5 |[0m   revokePushSubscriptionAction,
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 6 |[0m   savePushSubscriptionAction
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+[31m[1m>[0m [90m 7 |[0m } [36mfrom[0m [32m"@/app/admin/(protected)/settings/public/actions"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m [36mimport[0m {
+  [90m 9 |[0m   canUsePushInBrowser,
+  [90m10 |[0m   getWebPushPublicKey,
+
+The export savePushSubscriptionAction was not found in module 
+[project]/app/admin/(protected)/settings/public/actions.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the 
+requested export doesn't exist.
+
+Import traces:
+  Client Component Browser:
+    ./components/admin/notifications/use-push-subscription.ts [Client Component Browser]
+    ./components/admin/notifications/push-device-settings.tsx [Client Component Browser]
+    ./components/admin/notifications/notification-settings-card.tsx [Client Component Browser]
+    ./components/admin/notifications/notification-settings-card.tsx [Server Component]
+    ./app/admin/(protected)/settings/notifications/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/admin/notifications/use-push-subscription.ts [Client Component SSR]
+    ./components/admin/notifications/push-device-settings.tsx [Client Component SSR]
+    ./components/admin/notifications/notification-settings-card.tsx [Client Component SSR]
+    ./components/admin/notifications/notification-settings-card.tsx [Server Component]
+    ./app/admin/(protected)/settings/notifications/page.tsx [Server Component]
+
+
+./components/admin/settings/public-catalog-settings-form.tsx:8:1
+Export updateCatalogHeroSettingsAction doesn't exist in target module
+  [90m 6 |[0m ... [33mPublicPresencePreview[0m [36mfrom[0m 
+[32m"@/components/admin/settings/public-presence-preview"[0m;
+  [90m 7 |[0m ... [33mPublicPresenceReadiness[0m [36mfrom[0m 
+[32m"@/components/admin/settings/public-presence-readiness"[0m;
+[31m[1m>[0m [90m 8 |[0m ... { updateCatalogHeroSettingsAction } [36mfrom[0m 
+[32m"@/app/admin/(protected)/settings/public/acti...[0m
+  [90m   |[0m    
+[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m ...
+  [90m10 |[0m ...[33mctionState[0m = {
+  [90m11 |[0m ...r?: string;
+
+The export updateCatalogHeroSettingsAction was not found in module 
+[project]/app/admin/(protected)/settings/public/actions.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the 
+requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/settings/public-catalog-settings-form.tsx
+    ./app/admin/(protected)/settings/public/catalogo/page.tsx
+
+
+./components/admin/settings/public-catalog-settings-form.tsx:8:1
+Export updateCatalogHeroSettingsAction doesn't exist in target module
+  [90m 6 |[0m ... [33mPublicPresencePreview[0m [36mfrom[0m 
+[32m"@/components/admin/settings/public-presence-preview"[0m;
+  [90m 7 |[0m ... [33mPublicPresenceReadiness[0m [36mfrom[0m 
+[32m"@/components/admin/settings/public-presence-readiness"[0m;
+[31m[1m>[0m [90m 8 |[0m ... { updateCatalogHeroSettingsAction } [36mfrom[0m 
+[32m"@/app/admin/(protected)/settings/public/acti...[0m
+  [90m   |[0m    
+[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 9 |[0m ...
+  [90m10 |[0m ...[33mctionState[0m = {
+  [90m11 |[0m ...r?: string;
+
+The export updateCatalogHeroSettingsAction was not found in module 
+[project]/app/admin/(protected)/settings/public/actions.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the 
+requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/settings/public-catalog-settings-form.tsx
+    ./app/admin/(protected)/settings/public/catalogo/page.tsx
+
+
+./components/admin/settings/public-settings-form.tsx:15:1
+Export updatePublicBusinessSettingsAction doesn't exist in target module
+  [90m13 |[0m ...[33mPublicPresenceReadiness[0m [36mfrom[0m 
+[32m"@/components/admin/settings/public-presence-readiness"[0m;
+  [90m14 |[0m ...[33mPublicPresencePreview[0m [36mfrom[0m 
+[32m"@/components/admin/settings/public-presence-preview"[0m;
+[31m[1m>[0m [90m15 |[0m ...{ updatePublicBusinessSettingsAction } [36mfrom[0m 
+[32m"@/app/admin/(protected)/settings/public/ac...[0m
+  [90m   |[0m    
+[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m16 |[0m ...{ createSupabaseBrowserClient } [36mfrom[0m [32m"@/lib/supabase/client"[0m;
+  [90m17 |[0m ...
+  [90m18 |[0m ...[33mtionState[0m = {
+
+The export updatePublicBusinessSettingsAction was not found in module 
+[project]/app/admin/(protected)/settings/public/actions.ts [app-client] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the 
+requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/settings/public-settings-form.tsx
+    ./app/admin/(protected)/settings/public/landing/page.tsx
+
+
+./components/admin/settings/public-settings-form.tsx:15:1
+Export updatePublicBusinessSettingsAction doesn't exist in target module
+  [90m13 |[0m ...[33mPublicPresenceReadiness[0m [36mfrom[0m 
+[32m"@/components/admin/settings/public-presence-readiness"[0m;
+  [90m14 |[0m ...[33mPublicPresencePreview[0m [36mfrom[0m 
+[32m"@/components/admin/settings/public-presence-preview"[0m;
+[31m[1m>[0m [90m15 |[0m ...{ updatePublicBusinessSettingsAction } [36mfrom[0m 
+[32m"@/app/admin/(protected)/settings/public/ac...[0m
+  [90m   |[0m    
+[31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m16 |[0m ...{ createSupabaseBrowserClient } [36mfrom[0m [32m"@/lib/supabase/client"[0m;
+  [90m17 |[0m ...
+  [90m18 |[0m ...[33mtionState[0m = {
+
+The export updatePublicBusinessSettingsAction was not found in module 
+[project]/app/admin/(protected)/settings/public/actions.ts [app-ssr] (ecmascript).
+The module has no exports at all.
+All exports of the module are statically known (It doesn't have dynamic exports). So it's known statically that the 
+requested export doesn't exist.
+
+Import trace:
+  Server Component:
+    ./components/admin/settings/public-settings-form.tsx
+    ./app/admin/(protected)/settings/public/landing/page.tsx
+
+
+    at <unknown> (./app/admin/(protected)/settings/public/actions.ts:149:1)
+    at <unknown> (./components/admin/notifications/use-push-subscription.ts:4:1)
+    at <unknown> (./components/admin/notifications/use-push-subscription.ts:4:1)
+    at <unknown> (./components/admin/notifications/use-push-subscription.ts:4:1)
+    at <unknown> (./components/admin/notifications/use-push-subscription.ts:4:1)
+    at <unknown> (./components/admin/settings/public-catalog-settings-form.tsx:8:1)
+    at <unknown> (./components/admin/settings/public-catalog-settings-form.tsx:8:1)
+    at <unknown> (./components/admin/settings/public-settings-form.tsx:15:1)
+    at <unknown> (./components/admin/settings/public-settings-form.tsx:15:1)
+EXIT:1

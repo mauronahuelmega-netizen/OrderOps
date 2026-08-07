@@ -3,6 +3,25 @@
 import { useMemo } from "react";
 import type { PublicCategory } from "@/lib/catalog/public";
 
+export function formatCatalogCategoryName(name: string) {
+  const locale = "es-AR";
+  const trimmed = name.trim();
+
+  if (
+    !trimmed ||
+    trimmed === trimmed.toLocaleLowerCase(locale) ||
+    trimmed !== trimmed.toLocaleUpperCase(locale)
+  ) {
+    return name;
+  }
+
+  return trimmed
+    .toLocaleLowerCase(locale)
+    .replace(/(^|[\s/-])(\p{L})/gu, (_, prefix: string, letter: string) =>
+      `${prefix}${letter.toLocaleUpperCase(locale)}`
+    );
+}
+
 type CategoryNavProps = {
   categories: PublicCategory[];
   countsByCategoryId: Map<string, number>;
@@ -46,7 +65,7 @@ export default function CategoryNav({
             onClick={() => onSelect(category.id)}
             aria-pressed={isSearchActive ? activeCategoryId === category.id : undefined}
           >
-            {category.name}
+            {formatCatalogCategoryName(category.name)}
           </button>
         ))}
       </nav>

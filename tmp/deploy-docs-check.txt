@@ -1,0 +1,437 @@
+﻿docs/CURRENT_PHASE.md:97: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-DOMAIN-1 ÔÇö Placement Domain, Admin Configuration & Public Surface Resolution  
+docs/CURRENT_PHASE.md:98: trailing whitespace.
++**Estado:** PASS WITH LOCAL DB MIGRATION QA DEBT ┬À PASS WITH ADMIN RUNTIME QA DEBT  
+docs/CURRENT_PHASE.md:109: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-SPEC-1 ÔÇö Post-Add Upsell Product, Domain & Technical Specification  
+docs/CURRENT_PHASE.md:110: trailing whitespace.
++**Estado:** SPEC COMPLETE ┬À **GO WITH DOMAIN PREREQUISITE** ┬À DOCS-ONLY  
+docs/CURRENT_PHASE.md:121: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-INTEGRATED-CONVERSION-QA-1 ÔÇö End-to-End Public Catalog Conversion Funnel QA Without Real Order Creation  
+docs/CURRENT_PHASE.md:122: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT ┬À PASS WITH DEVICE QA DEBT ┬À SUBMIT REAL NOT EXECUTED BY SCOPE  
+docs/CURRENT_PHASE.md:134: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CHECKOUT-SUMMARY-VISUAL-QA-FIX-1 ÔÇö Parent/Upsell Price Clarity, Customer-Facing Root Count & Mobile Overlay Verification  
+docs/CURRENT_PHASE.md:135: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT ┬À PASS WITH DEVICE QA DEBT ┬À SUBMIT REAL NOT EXECUTED BY SCOPE  
+docs/CURRENT_PHASE.md:147: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CHECKOUT-CONVERSION-POLISH-1 ÔÇö Segmented Mobile Checkout, Form Clarity & Final Conversion Surface  
+docs/CURRENT_PHASE.md:148: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT ┬À PASS WITH DEVICE QA DEBT ┬À SUBMIT REAL NOT EXECUTED BY SCOPE  
+docs/CURRENT_PHASE.md:162: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CART-SHEET-USABILITY-1 ÔÇö Mobile Cart Sheet Hierarchy, Controls & Checkout Readiness  
+docs/CURRENT_PHASE.md:163: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT  
+docs/CURRENT_PHASE.md:177: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-UX-POLISH-1 ÔÇö Compact Premium UX for Public Customization Modal  
+docs/CURRENT_PHASE.md:178: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT  
+docs/CURRENT_PHASE.md:192: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-FIX-1 ÔÇö Client Cache & In-flight Dedupe for Customization Modal  
+docs/CURRENT_PHASE.md:193: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT  
+docs/CURRENT_PHASE.md:207: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-AUDIT-1 ÔÇö Forensic Audit of Customization Modal Repeated Loading  
+docs/CURRENT_PHASE.md:208: trailing whitespace.
++**Estado:** PERF AUDIT COMPLETE ÔÇö FIX RECOMMENDED  
+docs/CURRENT_PHASE.md:222: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-PRODUCT-CARDS-SINGLETON-WIDTH-FIX-1 ÔÇö Keep Single-Product Categories at Grid Card Width  
+docs/CURRENT_PHASE.md:223: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT  
+docs/CURRENT_PHASE.md:236: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-PRODUCT-CARDS-GRID-POLISH-1 ÔÇö Mobile 2-Column Product Cards & Quick Add Polish  
+docs/CURRENT_PHASE.md:237: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT  
+docs/CURRENT_PHASE.md:250: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-SHELL-CART-SURFACES-POLISH-1 ÔÇö Header Hide, Sticky Categories & Compact Cart FAB  
+docs/CURRENT_PHASE.md:251: trailing whitespace.
++**Estado:** PASS WITH PREVIEW QA DEBT  
+docs/CURRENT_PHASE.md:264: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CONVERSION-SPEC-CLOSURE-1 ÔÇö Final Product & Technical Spec Closure for Public Catalog Conversion Roadmap  
+docs/CURRENT_PHASE.md:265: trailing whitespace.
++**Estado:** SPEC CLOSED  
+docs/CURRENT_PHASE.md:278: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CONVERSION-SURFACES-AUDIT-SPEC-1 ÔÇö Public Catalog Conversion Surfaces Audit & Product Spec  
+docs/CURRENT_PHASE.md:279: trailing whitespace.
++**Estado:** SPEC READY  
+docs/CURRENT_PHASE.md:292: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-PREVIOUS-SLUG-CALLERS-FIX-1 ÔÇö Pass previousSlug Through Public Catalog Cache Invalidation Callers  
+docs/CURRENT_PHASE.md:293: trailing whitespace.
++**Estado:** PASS WITH RUNTIME SLUG QA DEBT  
+docs/CURRENT_PHASE.md:307: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-REAL-DEVICE-QA-1 ÔÇö Real Device QA for Public Catalog V1  
+docs/CURRENT_PHASE.md:308: trailing whitespace.
++**Estado:** BLOCKED ÔÇö REAL DEVICE UNAVAILABLE  
+docs/CURRENT_PHASE.md:322: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-PREVIEW-AUTH-SMOKE-1 ÔÇö Authenticated Admin Preview Deep Smoke for Public Catalog V1  
+docs/CURRENT_PHASE.md:323: trailing whitespace.
++**Estado:** PASS WITH MINOR PREVIEW QA DEBT  
+docs/CURRENT_PHASE.md:338: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1-MODE-B ÔÇö Authorized Supabase Image Transformations Enablement & Production Verification  
+docs/CURRENT_PHASE.md:339: trailing whitespace.
++**Estado:** BLOCKED ÔÇö MISSING IMAGE TRANSFORMS ENABLE AUTH  
+docs/CURRENT_PHASE.md:354: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-OBSERVABILITY-PROD-ENABLE-1 ÔÇö Controlled Production Enablement for Public Catalog Observability  
+docs/CURRENT_PHASE.md:355: trailing whitespace.
++**Estado:** BLOCKED ÔÇö MISSING OBSERVABILITY PROD ENABLE AUTH  
+docs/CURRENT_PHASE.md:370: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2-FOLLOWUP ÔÇö Authorized Runtime QA for Public Catalog Cache Invalidation  
+docs/CURRENT_PHASE.md:371: trailing whitespace.
++**Estado:** BLOCKED ÔÇö MISSING MUTATION AUTH  
+docs/CURRENT_PHASE.md:384: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2 ÔÇö Runtime QA for Public Catalog Cache Invalidation After Admin Mutations  
+docs/CURRENT_PHASE.md:385: trailing whitespace.
++**Estado:** PASS WITH RUNTIME MUTATION AUTH DEBT  
+docs/CURRENT_PHASE.md:398: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-POST-DEPLOY-MONITOR-1 ÔÇö Post-Deploy Production Monitor for Public Catalog V1  
+docs/CURRENT_PHASE.md:399: trailing whitespace.
++**Estado:** PASS WITH NON-BLOCKING QA DEBT  
+docs/CURRENT_PHASE.md:412: trailing whitespace.
++**Fase:** PUBLIC-CATALOG-FINAL-HANDOFF-1 ÔÇö Public Catalog V1 Final Technical & Product Handoff  
+docs/CURRENT_PHASE.md:413: trailing whitespace.
++**Estado:** FEATURE CLOSED ÔÇö DEPLOYED WITH NON-BLOCKING QA DEBT  
+docs/public-catalog-cart-edit-quantity-preservation-fix-1.md:5: trailing whitespace.
++**Fecha:** 2026-07-31  
+docs/public-catalog-cart-edit-quantity-preservation-fix-1.md:6: trailing whitespace.
++**Branch:** `main` @ `5dd9b41`  
+docs/public-catalog-cart-edit-quantity-preservation-fix-1.md:87: trailing whitespace.
++**Antes del fix (QA-2 hist├│rico):** qty ÔåÆ 1  
+docs/public-catalog-cart-edit-quantity-preservation-fix-1.md:158: trailing whitespace.
++Fuente autoritativa en `replaced`: **existing parent** localizado por `replaceCartLineId`.  
+docs/public-catalog-cart-edit-quantity-preservation-fix-1.md:177: trailing whitespace.
++Preserva `cartLineId`, quantity N, children Plus v├ílidos.  
+docs/public-catalog-cart-edit-quantity-preservation-fix-1.md:178: trailing whitespace.
++Reconstruye opciones, unit price, summaries, signature.  
+docs/public-catalog-cart-edit-quantity-preservation-fix-1.md:209: trailing whitespace.
++Antes: 1ÔåÆ2ÔåÆeditÔåÆ2 PASS.  
+docs/public-catalog-cart-edit-quantity-preservation-fix-1.md:308: trailing whitespace.
++Checkout summary: qty 3, root-only count 3, total $37.500, CTA `Enviar pedido ┬À $37.500,00`.  
+docs/public-catalog-checkout-conversion-polish-1.md:7: trailing whitespace.
++Fecha: 2026-07-30  
+docs/public-catalog-checkout-conversion-polish-1.md:8: trailing whitespace.
++Branch: `main` @ `5dd9b41`  
+docs/public-catalog-checkout-conversion-polish-1.md:9: trailing whitespace.
++Deploy base: `fb19a3a`  
+docs/public-catalog-checkout-conversion-polish-1.md:10: trailing whitespace.
++Live: `https://orderops.vercel.app`  
+docs/public-catalog-checkout-conversion-polish-1.md:152: trailing whitespace.
++Mobile: header ÔåÆ modality ÔåÆ contact ÔåÆ notes ÔåÆ summary ÔåÆ sticky CTA.  
+docs/public-catalog-checkout-conversion-polish-1.md:328: trailing whitespace.
++- Preview iframe auth QA  
+docs/public-catalog-checkout-conversion-polish-1.md:329: trailing whitespace.
++- Device QA hardware  
+docs/public-catalog-checkout-conversion-polish-1.md:330: trailing whitespace.
++- Closed-store runtime  
+docs/public-catalog-checkout-conversion-polish-1.md:331: trailing whitespace.
++- Submit real (fuera de scope)  
+docs/public-catalog-checkout-conversion-polish-1.md:332: trailing whitespace.
++- Opcional: retirar CSS legacy `.checkout-*` en fase de cleanup  
+docs/public-catalog-checkout-summary-visual-qa-fix-1.md:7: trailing whitespace.
++Fecha: 2026-07-30  
+docs/public-catalog-checkout-summary-visual-qa-fix-1.md:8: trailing whitespace.
++Branch: `main` @ `5dd9b41`  
+docs/public-catalog-checkout-summary-visual-qa-fix-1.md:69: trailing whitespace.
++Antes: `╬ú quantity(all lines)`  
+docs/public-catalog-checkout-summary-visual-qa-fix-1.md:88: trailing whitespace.
++- Legacy independiente: root  
+docs/public-catalog-checkout-summary-visual-qa-fix-1.md:89: trailing whitespace.
++- V2 `itemKind: "product"`: root  
+docs/public-catalog-checkout-summary-visual-qa-fix-1.md:90: trailing whitespace.
++- V2 `itemKind: "upsell"` con `parentCartLineId`: child, excluido del count  
+docs/public-catalog-checkout-summary-visual-qa-fix-1.md:91: trailing whitespace.
++- Remove child: count estable; total baja  
+docs/public-catalog-checkout-summary-visual-qa-fix-1.md:92: trailing whitespace.
++- Qty parent: count sigue quantity del parent  
+docs/public-catalog-checkout-summary-visual-qa-fix-1.md:272: trailing whitespace.
++**PUBLIC-CATALOG-INTEGRATED-CONVERSION-QA-1**  
+docs/public-catalog-integrated-conversion-qa-1.md:7: trailing whitespace.
++Fecha: 2026-07-31  
+docs/public-catalog-integrated-conversion-qa-1.md:8: trailing whitespace.
++Branch: `main` @ `5dd9b41`  
+docs/public-catalog-integrated-conversion-qa-1.md:9: trailing whitespace.
++Modo: **QA-only (Modo A)** ÔÇö sin fixes de c├│digo  
+docs/public-catalog-integrated-conversion-qa-1.md:10: trailing whitespace.
++Runtime: `http://localhost:3000/b/demohamburgueseria/*`  
+docs/public-catalog-integrated-conversion-qa-1.md:11: trailing whitespace.
++Viewport: emulado ~390├ù844  
+docs/public-catalog-integrated-conversion-qa-1.md:69: trailing whitespace.
++- Browser IDE MCP ┬À localhost:3000  
+docs/public-catalog-integrated-conversion-qa-1.md:70: trailing whitespace.
++- Network monkeypatch `window.__qaNet` (Next-Action POST)  
+docs/public-catalog-integrated-conversion-qa-1.md:260: trailing whitespace.
++- Sin pedidos reales / sin success navigation por submit  
+docs/public-catalog-integrated-conversion-qa-1.md:261: trailing whitespace.
++- Action/payload/`create_order`/schema/pricing domain intactos  
+docs/public-catalog-integrated-conversion-qa-1.md:262: trailing whitespace.
++- Tenancy storage keyed por `business_id`  
+docs/public-catalog-integrated-conversion-qa-1.md:269: trailing whitespace.
++1. Preview admin autenticado  
+docs/public-catalog-integrated-conversion-qa-1.md:270: trailing whitespace.
++2. Device hardware real  
+docs/public-catalog-integrated-conversion-qa-1.md:271: trailing whitespace.
++3. Closed-store runtime sin mutar sesi├│n  
+docs/public-catalog-integrated-conversion-qa-1.md:272: trailing whitespace.
++4. E2E-08 signature-change dedicado  
+docs/public-catalog-integrated-conversion-qa-1.md:285: trailing whitespace.
++**PUBLIC-CATALOG-POST-ADD-UPSELL-SPEC-1** (spec-only).  
+docs/public-catalog-post-add-upsell-cart-contract-1.md:5: trailing whitespace.
++**Fecha:** 2026-07-31  
+docs/public-catalog-post-add-upsell-cart-contract-1.md:6: trailing whitespace.
++**Branch:** `main` @ `5dd9b41`  
+docs/public-catalog-post-add-upsell-cart-contract-1.md:7: trailing whitespace.
++**Estado:** **PASS WITH CART RUNTIME QA DEBT** ┬À **D1 LOCAL DB MIGRATION QA DEBT ÔÇö INHERITED**  
+docs/public-catalog-post-add-upsell-cart-contract-1.md:277: trailing whitespace.
++`lib/cart/post-add-upsell-contract.verify.ts` ÔÇö merge/attach/signature/qty/count/total/edit preserve/remove/equivalencia.  
+docs/public-catalog-post-add-upsell-d1-schema-runtime-fix-1.md:5: trailing whitespace.
++**Fecha:** 2026-07-31  
+docs/public-catalog-post-add-upsell-d1-schema-runtime-fix-1.md:6: trailing whitespace.
++**Branch:** `main` @ `5dd9b41`  
+docs/public-catalog-post-add-upsell-d1-schema-runtime-fix-1.md:7: trailing whitespace.
++**Estado:** **BLOCKED ÔÇö PRODUCTION MIGRATION OUT OF SCOPE**  
+docs/public-catalog-post-add-upsell-d1-schema-runtime-fix-1.md:172: trailing whitespace.
++1. Arrancar Docker + Supabase local **o** proveer remoto no-prod con tokens exactos  
+docs/public-catalog-post-add-upsell-d1-schema-runtime-fix-1.md:173: trailing whitespace.
++2. Aplicar D1 en target seguro  
+docs/public-catalog-post-add-upsell-d1-schema-runtime-fix-1.md:174: trailing whitespace.
++3. Verificar constraints/backfill  
+docs/public-catalog-post-add-upsell-d1-schema-runtime-fix-1.md:175: trailing whitespace.
++4. Recuperar cat├ílogo  
+docs/public-catalog-post-add-upsell-d1-schema-runtime-fix-1.md:176: trailing whitespace.
++5. Luego U1 ÔåÆ Q1  
+docs/public-catalog-post-add-upsell-d1-schema-runtime-fix-1.md:194: trailing whitespace.
++1. Restaurar Docker/Supabase local **o** autorizar remoto no-prod (`AUTORIZO_POST_ADD_UPSELL_D1_REMOTE_DEV_MIGRATION=yes` + `PROJECT_REF` exacto Ôëá prod).  
+docs/public-catalog-post-add-upsell-d1-schema-runtime-fix-1.md:195: trailing whitespace.
++2. Re-ejecutar esta fase hasta PASS schema.  
+docs/public-catalog-post-add-upsell-d1-schema-runtime-fix-1.md:196: trailing whitespace.
++3. **No** iniciar U1 mientras summaries fallen.  
+docs/public-catalog-post-add-upsell-deploy-1.md:5: trailing whitespace.
++**Fecha:** 2026-07-31  
+docs/public-catalog-post-add-upsell-deploy-1.md:6: trailing whitespace.
++**Branch:** `main`  
+docs/public-catalog-post-add-upsell-deploy-1.md:78: trailing whitespace.
++Hist├│rico confirmado: `git push origin main` ÔåÆ Vercel Git integration ÔåÆ `https://orderops.vercel.app`  
+docs/public-catalog-post-add-upsell-deploy-1.md:155: trailing whitespace.
++Message: `feat(public-catalog): add single-group post-add upsell flow`  
+docs/public-catalog-post-add-upsell-deploy-1.md:156: trailing whitespace.
++Push: `5dd9b41..6d138a6  main -> main`  
+docs/public-catalog-post-add-upsell-deploy-1.md:212: trailing whitespace.
++- P0/P1/P2: ninguno abierto  
+docs/public-catalog-post-add-upsell-deploy-1.md:213: trailing whitespace.
++- Rollback: **NO EJECUTADO** (no requerido)  
+docs/public-catalog-post-add-upsell-domain-1.md:5: trailing whitespace.
++**Fecha:** 2026-07-31  
+docs/public-catalog-post-add-upsell-domain-1.md:6: trailing whitespace.
++**Branch:** `main` @ `5dd9b41`  
+docs/public-catalog-post-add-upsell-domain-1.md:7: trailing whitespace.
++**Estado:** **PASS WITH LOCAL DB MIGRATION QA DEBT** ┬À **PASS WITH ADMIN RUNTIME QA DEBT**  
+docs/public-catalog-post-add-upsell-domain-1.md:94: trailing whitespace.
++`lib/product-customization/upsell-placement.ts`  
+docs/public-catalog-post-add-upsell-domain-1.md:275: trailing whitespace.
++- Tenant-scoped mutations  
+docs/public-catalog-post-add-upsell-domain-1.md:276: trailing whitespace.
++- Placement solo admin  
+docs/public-catalog-post-add-upsell-domain-1.md:277: trailing whitespace.
++- Modal no muestra post_add  
+docs/public-catalog-post-add-upsell-domain-1.md:278: trailing whitespace.
++- Cart/signature/checkout/`create_order` sin cambios D1  
+docs/public-catalog-post-add-upsell-domain-1.md:285: trailing whitespace.
++1. Apply migration local + SQL invariants  
+docs/public-catalog-post-add-upsell-domain-1.md:286: trailing whitespace.
++2. Admin browser QA AÔÇôG  
+docs/public-catalog-post-add-upsell-domain-1.md:287: trailing whitespace.
++3. Public regression AÔÇôG  
+docs/public-catalog-post-add-upsell-domain-1.md:288: trailing whitespace.
++4. Regenerar types desde DB tras apply  
+docs/public-catalog-post-add-upsell-domain-1.md:294: trailing whitespace.
++1. Aplicar migraci├│n DB  
+docs/public-catalog-post-add-upsell-domain-1.md:295: trailing whitespace.
++2. Verificar backfill + constraints  
+docs/public-catalog-post-add-upsell-domain-1.md:296: trailing whitespace.
++3. Desplegar c├│digo Domain  
+docs/public-catalog-post-add-upsell-domain-1.md:303: trailing whitespace.
++- C├│digo: revertir D1; DB migrada sigue con default in_modal.  
+docs/public-catalog-post-add-upsell-domain-1.md:310: trailing whitespace.
++**PUBLIC-CATALOG-POST-ADD-UPSELL-CART-CONTRACT-1**  
+docs/public-catalog-post-add-upsell-impl-1.md:5: trailing whitespace.
++**Fecha:** 2026-07-31  
+docs/public-catalog-post-add-upsell-impl-1.md:6: trailing whitespace.
++**Branch:** `main` @ `5dd9b41`  
+docs/public-catalog-post-add-upsell-impl-1.md:106: trailing whitespace.
++`productNeedsCustomizationModal` = `summary.hasCustomizations` ├║nicamente.  
+docs/public-catalog-post-add-upsell-impl-1.md:113: trailing whitespace.
++Markup/`UpsellSuggestionGroup` eliminados. Confirm usa `selectedUpsellProductIds: []`.  
+docs/public-catalog-post-add-upsell-impl-1.md:151: trailing whitespace.
++`getEligiblePostAddUpsellCandidates` + `wouldUpsellAttachmentConflict` + `decidePostAddOverlay` en `lib/cart/post-add-upsell.ts`.  
+docs/public-catalog-post-add-upsell-impl-1.md:164: trailing whitespace.
++`attachUpsellChildToParent` por candidato.  
+docs/public-catalog-post-add-upsell-impl-1.md:165: trailing whitespace.
++`attached` ÔåÆ persist + Agregado.  
+docs/public-catalog-post-add-upsell-impl-1.md:166: trailing whitespace.
++`already_attached` ÔåÆ Agregado idempotente.  
+docs/public-catalog-post-add-upsell-impl-1.md:167: trailing whitespace.
++`signature_conflict` ÔåÆ inline error, sin mutar.  
+docs/public-catalog-post-add-upsell-impl-1.md:234: trailing whitespace.
++Dialog + aria-modal + labelledby/describedby + Escape + scroll lock + disabled real.  
+docs/public-catalog-post-add-upsell-impl-1.md:247: trailing whitespace.
++Mismo wiring; opportunity en memoria; storage preview aislado.  
+docs/public-catalog-post-add-upsell-impl-1.md:279: trailing whitespace.
++`npx tsx lib/cart/post-add-upsell-ui-contract.verify.ts` ÔåÆ **PASS** (U1-01ÔÇªU1-20)  
+docs/public-catalog-post-add-upsell-impl-1.md:280: trailing whitespace.
++`npx tsx lib/cart/post-add-upsell-contract.verify.ts` ÔåÆ **PASS**  
+docs/public-catalog-post-add-upsell-impl-1.md:281: trailing whitespace.
++`npx tsx lib/product-customization/safe-error-details.verify.ts` ÔåÆ **PASS**  
+docs/public-catalog-post-add-upsell-impl-1.md:301: trailing whitespace.
++URL: `http://localhost:3000/b/demohamburgueseria/catalogo`  
+docs/public-catalog-post-add-upsell-impl-1.md:338: trailing whitespace.
++1. Trigger modal ÔåÆ `hasCustomizations` only.  
+docs/public-catalog-post-add-upsell-impl-1.md:339: trailing whitespace.
++2. Retiro render Plus del modal.  
+docs/public-catalog-post-add-upsell-impl-1.md:340: trailing whitespace.
++3. Helpers + sheet + wiring created-only.  
+docs/public-catalog-post-add-upsell-impl-1.md:341: trailing whitespace.
++4. Merge confirm s├¡ncrono (evitar holder null).  
+docs/public-catalog-post-add-upsell-impl-1.md:342: trailing whitespace.
++5. CartSheet `notice` para parent_missing.  
+docs/public-catalog-post-add-upsell-impl-1.md:355: trailing whitespace.
++- SCREEN READER ÔÇö UNVERIFIED  
+docs/public-catalog-post-add-upsell-impl-1.md:356: trailing whitespace.
++- REAL-DEVICE ÔÇö UNVERIFIED  
+docs/public-catalog-post-add-upsell-impl-1.md:357: trailing whitespace.
++- PREVIEW AUTH QA ÔÇö UNVERIFIED  
+docs/public-catalog-post-add-upsell-impl-1.md:358: trailing whitespace.
++- IMPL-10 demo product sin Plus  
+docs/public-catalog-post-add-upsell-qa-1.md:5: trailing whitespace.
++**Fecha:** 2026-07-31  
+docs/public-catalog-post-add-upsell-qa-1.md:6: trailing whitespace.
++**Branch:** `main` @ `5dd9b41`  
+docs/public-catalog-post-add-upsell-qa-1.md:7: trailing whitespace.
++**Modo:** `MODE A ÔÇö QA ONLY`  
+docs/public-catalog-post-add-upsell-qa-1.md:8: trailing whitespace.
++**Token fixes:** `AUTORIZO_PUBLIC_CATALOG_POST_ADD_UPSELL_QA_FIXES` ÔÇö **ABSENT**  
+docs/public-catalog-post-add-upsell-qa-1.md:9: trailing whitespace.
++**Estado:** **BLOCKED ÔÇö PUBLIC-CATALOG-POST-ADD-UPSELL-IMPL-1 NOT COMPLETE**  
+docs/public-catalog-post-add-upsell-qa-1.md:40: trailing whitespace.
++**BLOCKED ÔÇö PUBLIC-CATALOG-POST-ADD-UPSELL-IMPL-1 NOT COMPLETE**  
+docs/public-catalog-post-add-upsell-qa-1.md:110: trailing whitespace.
++`supabase status` ÔåÆ **FAIL** (Docker engine pipe missing).  
+docs/public-catalog-post-add-upsell-qa-1.md:119: trailing whitespace.
++**UNVERIFIED** ÔÇö sin DB local.  
+docs/public-catalog-post-add-upsell-qa-1.md:140: trailing whitespace.
++**FIXTURE PASS** ÔÇö `upsell-placement.verify.ts` RESOLVE-A..E / SUMMARY-A..D.  
+docs/public-catalog-post-add-upsell-qa-1.md:149: trailing whitespace.
++Checkout boundary source: sin diff de action/`create_order` atribuible a U1 (U1 inexistente).  
+docs/public-catalog-post-add-upsell-qa-1.md:222: trailing whitespace.
++1. Implementar **PUBLIC-CATALOG-POST-ADD-UPSELL-IMPL-1**  
+docs/public-catalog-post-add-upsell-qa-1.md:223: trailing whitespace.
++2. Aplicar migraci├│n D1 en Supabase local aislado  
+docs/public-catalog-post-add-upsell-qa-1.md:224: trailing whitespace.
++3. Re-ejecutar Q1 completa  
+docs/public-catalog-post-add-upsell-qa-1.md:225: trailing whitespace.
++4. Admin/public browser matrices  
+docs/public-catalog-post-add-upsell-qa-1.md:236: trailing whitespace.
++1. Aplicar migraci├│n D1  
+docs/public-catalog-post-add-upsell-qa-1.md:237: trailing whitespace.
++2. Verificar constraints/backfill  
+docs/public-catalog-post-add-upsell-qa-1.md:238: trailing whitespace.
++3. Desplegar D1+C1+U1  
+docs/public-catalog-post-add-upsell-qa-1.md:239: trailing whitespace.
++4. Smoke read-only  
+docs/public-catalog-post-add-upsell-qa-1.md:240: trailing whitespace.
++5. Sin pedidos reales  
+docs/public-catalog-post-add-upsell-qa-1.md:241: trailing whitespace.
++6. Observar / rollback si hace falta  
+docs/public-catalog-post-add-upsell-qa-2.md:5: trailing whitespace.
++**Fecha:** 2026-07-31  
+docs/public-catalog-post-add-upsell-qa-2.md:6: trailing whitespace.
++**Branch:** `main` @ `5dd9b41`  
+docs/public-catalog-post-add-upsell-qa-2.md:47: trailing whitespace.
++**PASS WITH NON-BLOCKING QA DEBT**  
+docs/public-catalog-post-add-upsell-qa-2.md:48: trailing whitespace.
++**READY FOR HUMAN DEPLOY REVIEW**  
+docs/public-catalog-post-add-upsell-qa-2.md:55: trailing whitespace.
++Doc: `docs/public-catalog-post-add-upsell-impl-1.md`  
+docs/public-catalog-post-add-upsell-qa-2.md:56: trailing whitespace.
++Estado: `PASS WITH NON-BLOCKING QA DEBT ÔÇö SIMPLIFIED SINGLE-GROUP POST-ADD UPSELL IMPLEMENTED`  
+docs/public-catalog-post-add-upsell-qa-2.md:57: trailing whitespace.
++Gate: `QUEUE_GATE: PUBLIC-CATALOG-POST-ADD-UPSELL-QA-2 = ALLOWED`  
+docs/public-catalog-post-add-upsell-qa-2.md:100: trailing whitespace.
++Runtime `ts/tsx`: cero funcionales de `postAddUpsellGroup` / `UpsellPlacement` / `parseUpsellPlacement` / migration placement.  
+docs/public-catalog-post-add-upsell-qa-2.md:107: trailing whitespace.
++Tenant: `demohamburgueseria`  
+docs/public-catalog-post-add-upsell-qa-2.md:108: trailing whitespace.
++- **A:** Doble Smash ÔÇö customizations + Plus (Coca)  
+docs/public-catalog-post-add-upsell-qa-2.md:109: trailing whitespace.
++- **B:** BBQ Bacon ÔÇö customizations (Plus absence en modal verificado; grupos espec├¡ficos UNVERIFIED en un intento de carga parcial)  
+docs/public-catalog-post-add-upsell-qa-2.md:110: trailing whitespace.
++- **C:** Coca Cola 500ml ÔÇö simple quick-add  
+docs/public-catalog-post-add-upsell-qa-2.md:111: trailing whitespace.
++- **D/E:** misma config Doble Smash para merge / edit+child  
+docs/public-catalog-post-add-upsell-qa-2.md:197: trailing whitespace.
++CartSheet jerarqu├¡a/ADICIONAL/total/CTA **PASS**.  
+docs/public-catalog-post-add-upsell-qa-2.md:198: trailing whitespace.
++Checkout `/b/demohamburgueseria/checkout` ÔÇö resumen parent visible, total correcto, modalidad Env├¡o/Retiro **0 fetch**.  
+docs/public-catalog-post-add-upsell-qa-2.md:211: trailing whitespace.
++- Confirm+post-add: sin config POST adicional atribuible al sheet (attach 0 fetch).  
+docs/public-catalog-post-add-upsell-qa-2.md:212: trailing whitespace.
++- Simple quick-add: 0 fetch.  
+docs/public-catalog-post-add-upsell-qa-2.md:213: trailing whitespace.
++- Modalidad checkout: 0 fetch.  
+docs/public-catalog-post-add-upsell-qa-2.md:220: trailing whitespace.
++Dialog semantics, Escape, close name, disabled CTAs, scroll lock **PASS**.  
+docs/public-catalog-post-add-upsell-qa-2.md:221: trailing whitespace.
++Focus trap Tab **PASS** (fix QA-2).  
+docs/public-catalog-post-add-upsell-qa-2.md:222: trailing whitespace.
++SCREEN READER ÔÇö **UNVERIFIED**.  
+docs/public-catalog-post-add-upsell-qa-2.md:229: trailing whitespace.
++PREVIEW AUTH ÔÇö **UNVERIFIED**  
+docs/public-catalog-post-add-upsell-qa-2.md:230: trailing whitespace.
++CLOSED-STORE ÔÇö **UNVERIFIED**  
+docs/public-catalog-post-add-upsell-qa-2.md:276: trailing whitespace.
++- SCREEN READER ÔÇö UNVERIFIED  
+docs/public-catalog-post-add-upsell-qa-2.md:277: trailing whitespace.
++- REAL-DEVICE / iOS/PWA ÔÇö UNVERIFIED  
+docs/public-catalog-post-add-upsell-qa-2.md:278: trailing whitespace.
++- PREVIEW AUTH ÔÇö UNVERIFIED  
+docs/public-catalog-post-add-upsell-qa-2.md:279: trailing whitespace.
++- CLOSED-STORE ÔÇö UNVERIFIED  
+docs/public-catalog-post-add-upsell-qa-2.md:280: trailing whitespace.
++- Edit quantity preservation (P3)  
+docs/public-catalog-post-add-upsell-qa-2.md:287: trailing whitespace.
++**READY FOR HUMAN DEPLOY REVIEW**  
+docs/public-catalog-post-add-upsell-qa-2.md:310: trailing whitespace.
++Revisi├│n humana ÔåÆ posible **PUBLIC-CATALOG-POST-ADD-UPSELL-DEPLOY-1**.  
+docs/public-catalog-post-add-upsell-spec-1.md:5: trailing whitespace.
++**Fase:** SPEC-ONLY ┬À AUDIT-ONLY ┬À DOCS-ONLY  
+docs/public-catalog-post-add-upsell-spec-1.md:6: trailing whitespace.
++**Fecha:** 2026-07-31  
+docs/public-catalog-post-add-upsell-spec-1.md:7: trailing whitespace.
++**Branch:** `main` @ `5dd9b41`  
+docs/public-catalog-post-add-upsell-spec-1.md:77: trailing whitespace.
++UI: `components/admin/product-customization/plus-suggestions/*`  
+docs/public-catalog-post-add-upsell-spec-1.md:104: trailing whitespace.
++Children solo se construyen **junto** al parent en el build inicial.  
+docs/public-catalog-post-add-upsell-spec-1.md:277: trailing whitespace.
++En create/edit Plus group: control segmented o select ÔÇ£D├│nde mostrarÔÇØ: Modal / Despu├®s de agregar / Ambas.  
+docs/public-catalog-post-add-upsell-spec-1.md:282: trailing whitespace.
++Extender `PublicUpsellGroupView` con `placement`.  
+docs/public-catalog-post-add-upsell-spec-1.md:393: trailing whitespace.
++**Pol├¡tica recomendada:**  
+docs/public-catalog-post-add-upsell-spec-1.md:394: trailing whitespace.
++Si hay candidatos post-add ÔåÆ **no** abrir cart sheet hasta dismiss/complete del post-add.  
+docs/public-catalog-post-add-upsell-spec-1.md:529: trailing whitespace.
++**Explicitamente no GO:** reutilizar ciegamente Plus in-modal (Opci├│n A).  
+docs/public-catalog-post-add-upsell-spec-1.md:553: trailing whitespace.
++**`PUBLIC-CATALOG-POST-ADD-UPSELL-DOMAIN-1`** ÔÇö migraci├│n placement + admin + public filter (sin UI post-add),  
+docs/public-catalog-upsell-realignment-cleanup-1.md:5: trailing whitespace.
++**Fecha:** 2026-07-31  
+docs/public-catalog-upsell-realignment-cleanup-1.md:6: trailing whitespace.
++**Branch:** `main` @ `5dd9b41`  
+docs/public-catalog-upsell-realignment-cleanup-1.md:117: trailing whitespace.
++Conservado: outcomes, attach, signature, count/totals.  
+docs/public-catalog-upsell-realignment-cleanup-1.md:130: trailing whitespace.
++**Created:** `upsell-resolution.verify.ts`, este doc.  
+docs/public-catalog-upsell-realignment-cleanup-1.md:131: trailing whitespace.
++**Deleted:** migration D1, `upsell-placement.ts`, `upsell-placement.verify.ts`.  
+docs/public-catalog-upsell-realignment-cleanup-1.md:165: trailing whitespace.
++Network: sin failed placement queries post-fix.  
+CHECK=2

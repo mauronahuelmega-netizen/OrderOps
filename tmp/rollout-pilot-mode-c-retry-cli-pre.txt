@@ -1,0 +1,2 @@
+tsc --noEmit exit code: 0
+npm run build exit code: 0

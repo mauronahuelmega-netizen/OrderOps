@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Moon, Sun } from "lucide-react";
 
 type ThemeToggleProps = {
   theme: "light" | "dark";
@@ -30,10 +31,10 @@ export default function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
     >
       <span className="catalog-theme-switch__track">
         <span className="catalog-theme-switch__icon" aria-hidden="true">
-          ☀️
+          <Sun aria-hidden="true" focusable="false" />
         </span>
         <span className="catalog-theme-switch__icon" aria-hidden="true">
-          🌙
+          <Moon aria-hidden="true" focusable="false" />
         </span>
         <span className="catalog-theme-switch__thumb" aria-hidden="true" />
       </span>

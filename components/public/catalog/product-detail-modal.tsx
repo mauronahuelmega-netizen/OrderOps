@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { X } from "lucide-react";
 import type { PublicProduct } from "@/lib/catalog/public";
 import {
   formatPublicCatalogCurrency,
   shouldShowPriceFrom
 } from "@/lib/product-customization/public-shared";
 import PublicStorageImage from "@/components/public/catalog/public-storage-image";
+import { usePublicOverlayScrollLock } from "@/components/public/catalog/public-overlay-scroll-lock";
 
 type ProductDetailModalProps = {
   product: PublicProduct;
@@ -26,17 +28,87 @@ export default function ProductDetailModal({
   onCustomize
 }: ProductDetailModalProps) {
   const [draftQuantity, setDraftQuantity] = useState(Math.max(currentQuantity, 1));
+  const modalRef = useRef<HTMLDivElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const restoreFocusTimeoutRef = useRef<number | null>(null);
+  const onCloseRef = useRef(onClose);
+
+  onCloseRef.current = onClose;
+  usePublicOverlayScrollLock();
 
   useEffect(() => {
     setDraftQuantity(Math.max(currentQuantity, 1));
   }, [currentQuantity, product.id]);
 
   useEffect(() => {
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    triggerRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      closeButtonRef.current?.focus();
+    });
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      window.cancelAnimationFrame(focusFrame);
+      restoreFocusTimeoutRef.current = window.setTimeout(() => {
+        if (!modalRef.current && triggerRef.current?.isConnected) {
+          triggerRef.current.focus();
+        }
+      }, 0);
+    };
+  }, []);
+
+  useEffect(() => {
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
+        onCloseRef.current();
+        return;
+      }
+
+      if (event.key !== "Tab") {
+        return;
+      }
+
+      const modal = modalRef.current;
+      if (!modal) {
+        return;
+      }
+
+      const focusableElements = Array.from(
+        modal.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      );
+
+      if (focusableElements.length === 0) {
+        event.preventDefault();
+        modal.focus();
+        return;
+      }
+
+      const firstElement = focusableElements[0];
+      const lastElement = focusableElements[focusableElements.length - 1];
+      const activeElement = document.activeElement;
+
+      if (event.shiftKey) {
+        if (activeElement === firstElement || !modal.contains(activeElement)) {
+          event.preventDefault();
+          lastElement.focus();
+        }
+        return;
+      }
+
+      if (activeElement === lastElement || !modal.contains(activeElement)) {
+        event.preventDefault();
+        firstElement.focus();
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown, true);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown, true);
     };
   }, []);
 
@@ -90,24 +162,25 @@ export default function ProductDetailModal({
       onClick={onClose}
     >
       <div
+        ref={modalRef}
         className="catalog-modal"
         role="dialog"
         aria-modal="true"
         aria-labelledby="catalog-product-modal-title"
+        tabIndex={-1}
         onClick={(event) => event.stopPropagation()}
       >
         <div className="catalog-modal__scroll">
           <header className="catalog-modal__header">
-            <div>
-              <p className="catalog-modal__eyebrow">Producto</p>
-              <h2 id="catalog-product-modal-title">{product.name}</h2>
-            </div>
+            <h2 id="catalog-product-modal-title">{product.name}</h2>
             <button
+              ref={closeButtonRef}
               type="button"
               className="catalog-modal__close"
+              aria-label="Cerrar detalle del producto"
               onClick={onClose}
             >
-              Cerrar
+              <X aria-hidden="true" focusable="false" size={20} strokeWidth={2} />
             </button>
           </header>
 
@@ -135,32 +208,33 @@ export default function ProductDetailModal({
                 ) : null}
                 {formatPublicCatalogCurrency(displayPrice)}
               </strong>
-              {showFrom ? (
+              {product.description ? <p>{product.description}</p> : null}
+              {requiresCustomization ? (
                 <p className="catalog-modal__helper">
-                  El precio final depende de las opciones que elijas.
+                  El precio se actualiza según las opciones y extras que elijas.
                 </p>
               ) : null}
-              {product.description ? <p>{product.description}</p> : null}
             </div>
 
-            {requiresCustomization ? (
-              <p className="catalog-modal__helper">
-                Elegí las opciones obligatorias y, si querés, sumá extras antes de
-                agregarlo al pedido.
-              </p>
-            ) : (
+            {!requiresCustomization ? (
               <div className="catalog-modal__quantity-block">
                 <span>Cantidad</span>
-                <div className="catalog-quantity-control catalog-quantity-control--large">
+                <div
+                  className="catalog-quantity-control catalog-quantity-control--large"
+                  role="group"
+                  aria-label={`Cantidad de ${product.name}`}
+                >
                   <button
                     type="button"
+                    aria-label={`Disminuir cantidad de ${product.name}`}
                     onClick={() => setDraftQuantity((current) => Math.max(current - 1, 0))}
                   >
                     -
                   </button>
-                  <span>{draftQuantity}</span>
+                  <span aria-live="polite">{draftQuantity}</span>
                   <button
                     type="button"
+                    aria-label={`Aumentar cantidad de ${product.name}`}
                     onClick={() => setDraftQuantity((current) => current + 1)}
                   >
                     +
@@ -172,7 +246,7 @@ export default function ProductDetailModal({
                   </p>
                 ) : null}
               </div>
-            )}
+            ) : null}
           </div>
         </div>
 
@@ -180,7 +254,7 @@ export default function ProductDetailModal({
           <div className="catalog-modal__footer-copy">
             {requiresCustomization ? (
               <>
-                <strong>Opciones</strong>
+                <strong>Personalización</strong>
                 <span>
                   {showFrom ? "Desde " : null}
                   {formatPublicCatalogCurrency(displayPrice)}
@@ -194,18 +268,12 @@ export default function ProductDetailModal({
                     : "Sin productos"}
                 </strong>
                 <span>
-                  {formatPublicCatalogCurrency(
-                    Number(product.price) * Math.max(draftQuantity, 0)
-                  )}
+                  {formatPublicCatalogCurrency(Number(product.price) * Math.max(draftQuantity, 0))}
                 </span>
               </>
             )}
           </div>
-          <button
-            type="button"
-            className="catalog-modal__submit"
-            onClick={submitQuantity}
-          >
+          <button type="button" className="catalog-modal__submit" onClick={submitQuantity}>
             {primaryLabel}
           </button>
         </footer>
@@ -213,4 +281,3 @@ export default function ProductDetailModal({
     </div>
   );
 }
-

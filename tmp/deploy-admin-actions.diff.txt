@@ -1,0 +1,57 @@
+﻿diff --git a/app/admin/(protected)/products/customizations/actions.ts b/app/admin/(protected)/products/customizations/actions.ts
+index 692d18d..1cbad19 100644
+--- a/app/admin/(protected)/products/customizations/actions.ts
++++ b/app/admin/(protected)/products/customizations/actions.ts
+@@ -1091,7 +1091,7 @@ export async function createUpsellGroupAction(
+     if (existing) {
+       return {
+         error:
+-          "Este destino ya tiene un grupo de plus. Edit├í o activ├í/desactiv├í el existente (m├íximo 1 por destino)."
++          "Este destino ya tiene un grupo de plus. Edit├í el existente (m├íximo 1 por destino)."
+       };
+     }
+ 
+@@ -1113,7 +1113,7 @@ export async function createUpsellGroupAction(
+       if (error?.code === "23505") {
+         return {
+           error:
+-            "Este destino ya tiene un grupo de plus. Edit├í o activ├í/desactiv├í el existente."
++            "Este destino ya tiene un grupo de plus. Edit├í el existente (m├íximo 1 por destino)."
+         };
+       }
+       throw new Error("No pudimos crear el grupo de plus.");
+@@ -1166,10 +1166,11 @@ export async function updateUpsellGroupAction(
+       return { error: targetOwnership.error };
+     }
+ 
+-    if (
++    const targetChanged =
+       ownership.upsellGroup.target_type !== parsed.targetType ||
+-      ownership.upsellGroup.target_id !== parsed.targetId
+-    ) {
++      ownership.upsellGroup.target_id !== parsed.targetId;
++
++    if (targetChanged) {
+       const { data: conflict } = await ownership.supabase
+         .from("upsell_groups")
+         .select("id")
+@@ -1181,7 +1182,8 @@ export async function updateUpsellGroupAction(
+ 
+       if (conflict) {
+         return {
+-          error: "Ese destino ya tiene otro grupo de plus. M├íximo 1 por destino."
++          error:
++            "Este destino ya tiene un grupo de plus. Edit├í el existente (m├íximo 1 por destino)."
+         };
+       }
+     }
+@@ -1202,7 +1204,8 @@ export async function updateUpsellGroupAction(
+     if (error) {
+       if (error.code === "23505") {
+         return {
+-          error: "Ese destino ya tiene otro grupo de plus. M├íximo 1 por destino."
++          error:
++            "Este destino ya tiene un grupo de plus. Edit├í el existente (m├íximo 1 por destino)."
+         };
+       }
+       throw new Error("No pudimos actualizar el grupo de plus.");

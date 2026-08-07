@@ -1,0 +1,90 @@
+﻿ M app/admin/(protected)/settings/operations/operations-settings-client.tsx
+ M app/admin/(protected)/settings/operations/page.tsx
+ M app/admin/(protected)/settings/public/catalogo/page.tsx
+ M app/admin/(protected)/settings/public/landing/page.tsx
+ M app/admin/(protected)/settings/public/page.tsx
+ M app/admin/(protected)/team/actions.ts
+ M app/admin/(protected)/team/page.tsx
+ M components/admin/admin-nav-config.ts
+ M components/admin/layout/admin-nav-list.tsx
+ M components/admin/layout/admin-sidebar.module.css
+ M components/admin/notifications/notification-settings-card.tsx
+ M components/admin/notifications/push-device-settings.tsx
+ M components/admin/settings/public-catalog-settings-form.tsx
+ M components/admin/settings/public-settings-form.tsx
+ M components/admin/settings/public-settings-nav.tsx
+ M components/admin/settings/public-settings.css
+ M components/admin/team/create-team-member-form.tsx
+ M components/admin/team/team-member-role-form.tsx
+ M docs/board-orders-execution-area-v1-final-handoff.md
+ M next-env.d.ts
+ M tsconfig.tsbuildinfo
+?? app/admin/(protected)/settings/notifications/
+?? app/admin/(protected)/settings/page.tsx
+?? app/admin/(protected)/settings/team/
+?? components/admin/notifications/notification-settings.module.css
+?? components/admin/settings/brand-palette-control.module.css
+?? components/admin/settings/brand-palette-control.tsx
+?? components/admin/settings/brand-palette.ts
+?? components/admin/settings/public-asset-upload.module.css
+?? components/admin/settings/public-asset-upload.tsx
+?? components/admin/settings/public-presence-editor-shell.module.css
+?? components/admin/settings/public-presence-editor-shell.tsx
+?? components/admin/settings/public-presence-preview.module.css
+?? components/admin/settings/public-presence-preview.tsx
+?? components/admin/settings/public-presence-readiness-model.ts
+?? components/admin/settings/public-presence-readiness.module.css
+?? components/admin/settings/public-presence-readiness.tsx
+?? components/admin/settings/public-presence-summary.module.css
+?? components/admin/settings/public-presence-summary.tsx
+?? components/admin/settings/settings-card.module.css
+?? components/admin/settings/settings-card.tsx
+?? components/admin/settings/settings-hub-index.module.css
+?? components/admin/settings/settings-hub-index.tsx
+?? components/admin/settings/settings-hub.module.css
+?? components/admin/settings/settings-navigation.module.css
+?? components/admin/settings/settings-navigation.tsx
+?? components/admin/settings/settings-shell.module.css
+?? components/admin/settings/settings-shell.tsx
+?? components/admin/team/admin-team-settings-view.tsx
+?? components/admin/team/team-settings.module.css
+?? docs/admin-settings-hotfix-1g-a-useactionstate-transition.md
+?? docs/admin-settings-notif-1-visual-ia-polish.md
+?? docs/admin-settings-notifications-team-alignment-audit.md
+?? docs/admin-settings-phase-settings-2-ia-team-consolidation.md
+?? docs/admin-settings-phase-settings-3-shell-premium-alignment.md
+?? docs/admin-settings-phase-settings-4-public-presence-polish.md
+?? docs/admin-settings-phase-settings-5-operations-notifications-polish.md
+?? docs/admin-settings-phase-settings-6-5-hub-enterprise-ia-polish.md
+?? docs/admin-settings-phase-settings-6-6-hub-layout-density-polish.md
+?? docs/admin-settings-phase-settings-6-7-hub-light-density-final-polish.md
+?? docs/admin-settings-phase-settings-6-8-viewport-footer-anchoring-polish.md
+?? docs/admin-settings-phase-settings-6-team-migration.md
+?? docs/admin-settings-phase-settings-7-responsive-qa-final-handoff.md
+?? docs/admin-settings-public-cleanup-1-legacy-cleanup.md
+?? docs/admin-settings-public-landing-forensic-audit-page-1a.md
+?? docs/admin-settings-public-landing-page-1a-layout-overflow-fix.md
+?? docs/admin-settings-public-landing-page-1b-preview-form-hierarchy-polish.md
+?? docs/admin-settings-public-landing-page-1c-mobile-tablet-responsive-polish.md
+?? docs/admin-settings-public-landing-page-1d-asset-upload-ux.md
+?? docs/admin-settings-public-landing-page-1d-qa-asset-upload-interaction.md
+?? docs/admin-settings-public-landing-page-1e-brand-color-control-ux.md
+?? docs/admin-settings-public-landing-page-1e-brand-palette-control-ux.md
+?? docs/admin-settings-public-landing-page-1f-preview-accuracy-publish-confidence.md
+?? docs/admin-settings-public-landing-page-1g-save-flow-dirty-state.md
+?? docs/admin-settings-public-phase-public-1-unified-ia.md
+?? docs/admin-settings-public-phase-public-2-editor-shell.md
+?? docs/admin-settings-public-phase-public-3-catalog-dirty-state-parity.md
+?? docs/admin-settings-public-phase-public-4-qa-unified-readiness-browser-smoke.md
+?? docs/admin-settings-public-phase-public-4-unified-readiness.md
+?? docs/admin-settings-public-phase-public-5-dual-public-preview.md
+?? docs/admin-settings-public-phase-public-6-index-readiness-summary.md
+?? docs/admin-settings-public-unified-architecture-audit.md
+?? docs/admin-settings-public-v1-final-handoff.md
+?? docs/admin-settings-root-1a-sticky-navigation-shell.md
+?? docs/admin-settings-staging-qa-1-browser-qa.md
+?? docs/admin-settings-team-1-visual-ia-polish.md
+?? docs/admin-settings-team-forensic-audit-settings-1.md
+?? docs/admin-settings-v1-final-handoff.md
+?? docs/admin-sidebar-collapsed-theme-active-icon-s1-2.md
+?? tmp/

@@ -1,0 +1,8 @@
+﻿business_settings_count=0
+customization_groups_count=3
+customization_options_count=11
+customization_group_assignments_count=6
+upsell_groups_count=1
+upsell_group_names=Bebidas
+upsell_group_items_count=1
+helper_enabled=True

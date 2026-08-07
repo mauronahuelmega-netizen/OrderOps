@@ -584,7 +584,7 @@ export default function AdminDashboardOrders({
     onHydrateRequest: hydrateStoreSession,
     onPayloadFallback: (session) => {
       if (session?.status === "open" && session.closedAt == null) {
-        setActiveStoreSessionState(session);
+      setActiveStoreSessionState(session);
       } else if (session?.status === "closed" && session.closedAt != null) {
         setActiveStoreSessionState(null);
         setLastClosedStoreSessionState(session);
@@ -1496,10 +1496,10 @@ export default function AdminDashboardOrders({
         const activeSelectedOrderId = selectedOrderIdRef.current;
 
         if (activeSelectedOrderId) {
-          const nextSelectedOrder =
-            reconciledOrders.find((order) => order.id === activeSelectedOrderId) ?? null;
+        const nextSelectedOrder =
+          reconciledOrders.find((order) => order.id === activeSelectedOrderId) ?? null;
 
-          setSelectedOrderSeed(nextSelectedOrder);
+        setSelectedOrderSeed(nextSelectedOrder);
         }
 
         return true;
@@ -1681,7 +1681,7 @@ export default function AdminDashboardOrders({
       return "Abr\u00ed una sesi\u00f3n activa para crear pedidos.";
     }
 
-    return null;
+            return null;
   }, [
     activeStoreSessionState,
     canUpdateOrders,
@@ -2320,29 +2320,29 @@ export default function AdminDashboardOrders({
       });
 
       if (pendingResolution.finalAssignment) {
-        setOptimisticOrders((currentOrders) =>
-          sortOrdersForOperationalBoard(
-            currentOrders.map((currentOrder) =>
-              currentOrder.id === orderId
+      setOptimisticOrders((currentOrders) =>
+        sortOrdersForOperationalBoard(
+          currentOrders.map((currentOrder) =>
+            currentOrder.id === orderId
                 ? patchAdminOrderDashboardItemAssignment(
                     currentOrder,
                     pendingResolution.finalAssignment!
                   )
-                : currentOrder
-            )
+              : currentOrder
           )
-        );
+        )
+      );
 
-        setSelectedOrderSeed((currentSeed) => {
-          if (!currentSeed || currentSeed.id !== orderId) {
-            return currentSeed;
-          }
+      setSelectedOrderSeed((currentSeed) => {
+        if (!currentSeed || currentSeed.id !== orderId) {
+          return currentSeed;
+        }
 
           return patchAdminOrderDashboardItemAssignment(
             currentSeed,
             pendingResolution.finalAssignment!
           );
-        });
+      });
       }
 
       if (pendingResolution.needsRefresh) {
@@ -2479,19 +2479,19 @@ export default function AdminDashboardOrders({
     setPendingStoreSessionAction("opening");
     startStoreSessionTransition(async () => {
       try {
-        const result = await openStoreSessionAction();
+      const result = await openStoreSessionAction();
 
         if (result.error || !result.success) {
           setStoreSessionError(
             result.error ?? "No pudimos abrir la sesi\u00f3n del negocio."
           );
-          return;
-        }
+        return;
+      }
 
-        setActiveStoreSessionState(result.session ?? null);
+      setActiveStoreSessionState(result.session ?? null);
         await hydrateStoreSession("manual-action");
       } finally {
-        setPendingStoreSessionAction(null);
+      setPendingStoreSessionAction(null);
       }
     });
   }, [
@@ -2531,8 +2531,8 @@ export default function AdminDashboardOrders({
           setStoreSessionError(
             result.error ?? "No pudimos cerrar la sesi\u00f3n del negocio."
           );
-          return;
-        }
+        return;
+      }
 
         setActiveStoreSessionState(null);
         if (result.session) {
@@ -2540,7 +2540,7 @@ export default function AdminDashboardOrders({
         }
         await hydrateStoreSession("manual-action");
       } finally {
-        setPendingStoreSessionAction(null);
+      setPendingStoreSessionAction(null);
       }
     });
   }, [
@@ -2621,14 +2621,14 @@ export default function AdminDashboardOrders({
         return;
       }
 
-      if (event.key === "Enter" || event.key === " ") {
-        event.preventDefault();
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
         const order = optimisticOrdersRef.current.find((candidate) => candidate.id === orderId);
 
-        if (order) {
-          openOrder(order);
-        }
+      if (order) {
+        openOrder(order);
       }
+    }
     },
     [openOrder]
   );
@@ -2665,30 +2665,30 @@ export default function AdminDashboardOrders({
       onOpen={openOrder}
       onCardKeyDown={handleCardKeyDown}
       isOrderStatusPending={isOrderStatusPending}
-      onOptimisticStatusChange={applyOptimisticStatusChange}
-      onOptimisticStatusRollback={rollbackOptimisticStatusChange}
-      onOptimisticStatusSettled={finalizeOptimisticStatusChange}
+          onOptimisticStatusChange={applyOptimisticStatusChange}
+          onOptimisticStatusRollback={rollbackOptimisticStatusChange}
+          onOptimisticStatusSettled={finalizeOptimisticStatusChange}
       emptyLaneLabel={hasSearchQuery ? "Sin resultados" : "Sin pedidos"}
       isSearchEmpty={isSearchEmptyKanban}
       isEmptyBoard={shouldRenderPersistentEmptyKanban}
-    />
-  );
+        />
+    );
 
   const renderOperationalEmptyState = () => (
     <div className={surfaceStyles.emptyContext} aria-live="polite">
       <div className={surfaceStyles.emptyContextCopy}>
-        <strong>
+          <strong>
           {renderMode === "day-scope-empty"
             ? operationalWindow.source === "last-closed-store-session"
               ? "No hay pedidos en la \u00faltima sesi\u00f3n cerrada"
               : operationalWindow.source === "store-session"
                 ? "No hay pedidos en la sesi\u00f3n activa"
                 : "No hay pedidos en la jornada actual"
-            : "Todavia no hay pedidos"}
-        </strong>
-        <p>{"Los nuevos ingresos aparecer\u00e1n ac\u00e1 autom\u00e1ticamente."}</p>
-      </div>
-    </div>
+              : "Todavia no hay pedidos"}
+          </strong>
+          <p>{"Los nuevos ingresos aparecer\u00e1n ac\u00e1 autom\u00e1ticamente."}</p>
+        </div>
+          </div>
   );
 
   const renderFilteredEmptyState = () => (
@@ -2768,25 +2768,25 @@ export default function AdminDashboardOrders({
       </div>
 
       {selectedOrder ? (
-        <AdminOrderWorkspaceModal
-          order={selectedOrder}
+      <AdminOrderWorkspaceModal
+        order={selectedOrder}
           isOpen
-          activeFilter={activeFilter}
-          onClose={closeOrder}
-          dashboardHref={buildDashboardHref(activeFilter, null)}
-          canUpdateOrders={canUpdateOrders}
+        activeFilter={activeFilter}
+        onClose={closeOrder}
+        dashboardHref={buildDashboardHref(activeFilter, null)}
+        canUpdateOrders={canUpdateOrders}
           orderActionPolicy={orderActionPolicy}
-          currentUserId={currentUserId}
-          operationalMetrics={operationalMetrics}
-          assignmentLabel={selectedOrderAssignmentLabel}
-          orderPresenceLabel={selectedOrderPresenceLabel}
-          orderPresenceNames={selectedOrderPresenceNames}
-          onOptimisticStatusChange={applyOptimisticStatusChange}
-          onOptimisticStatusRollback={rollbackOptimisticStatusChange}
-          onOptimisticStatusSettled={finalizeOptimisticStatusChange}
-          onOptimisticAssignmentChange={applyOptimisticAssignmentChange}
-          onOptimisticAssignmentRollback={rollbackOptimisticAssignmentChange}
-          onOptimisticAssignmentSettled={finalizeOptimisticAssignmentChange}
+        currentUserId={currentUserId}
+        operationalMetrics={operationalMetrics}
+        assignmentLabel={selectedOrderAssignmentLabel}
+        orderPresenceLabel={selectedOrderPresenceLabel}
+        orderPresenceNames={selectedOrderPresenceNames}
+        onOptimisticStatusChange={applyOptimisticStatusChange}
+        onOptimisticStatusRollback={rollbackOptimisticStatusChange}
+        onOptimisticStatusSettled={finalizeOptimisticStatusChange}
+        onOptimisticAssignmentChange={applyOptimisticAssignmentChange}
+        onOptimisticAssignmentRollback={rollbackOptimisticAssignmentChange}
+        onOptimisticAssignmentSettled={finalizeOptimisticAssignmentChange}
         />
       ) : null}
 

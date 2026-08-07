@@ -1,0 +1,73 @@
+﻿node.exe : Fetching deployments in mauro-s-projects-f82304ad
+En C:\Users\Oasis Desktop\AppData\Roaming\npm\vercel.ps1: 24 Carácter: 5
++     & "node$exe"  "$basedir/node_modules/vercel/dist/vc.js" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Fetching deploy...ojects-f82304ad:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+> Production deployments for mauro-s-projects-f82304ad/order-ops [386ms]
+
+  Age     Project                                 Deployment                                                       
+Status         Environment     Duration     Username                 
+  32s     mauro-s-projects-f82304ad/order-ops     https://order-1dzzv4hmd-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Building     Production      --           mauronahuelmega-3080     
+  2d      mauro-s-projects-f82304ad/order-ops     https://order-8wrj99fsy-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      55s          mauronahuelmega-3080     
+  2d      mauro-s-projects-f82304ad/order-ops     https://order-rhvwow23i-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      44s          mauronahuelmega-3080     
+  2d      mauro-s-projects-f82304ad/order-ops     https://order-6zi73tt2s-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      46s          mauronahuelmega-3080     
+  3d      mauro-s-projects-f82304ad/order-ops     https://order-fefyu58a0-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      40s          mauronahuelmega-3080     
+  3d      mauro-s-projects-f82304ad/order-ops     https://order-a67svm0vd-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      43s          mauronahuelmega-3080     
+  3d      mauro-s-projects-f82304ad/order-ops     https://order-c7zjwyvnf-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      47s          mauronahuelmega-3080     
+  3d      mauro-s-projects-f82304ad/order-ops     https://order-iwg71j9i4-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      45s          mauronahuelmega-3080     
+  3d      mauro-s-projects-f82304ad/order-ops     https://order-94esmq6u6-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      44s          mauronahuelmega-3080     
+  3d      mauro-s-projects-f82304ad/order-ops     https://order-68fk6nk5r-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      45s          mauronahuelmega-3080     
+https://order-1dzzv4hmd-mauro-s-projects-f82304ad.vercel.app
+https://order-8wrj99fsy-mauro-s-projects-f82304ad.vercel.app
+https://order-rhvwow23i-mauro-s-projects-f82304ad.vercel.app
+https://order-6zi73tt2s-mauro-s-projects-f82304ad.vercel.app
+https://order-fefyu58a0-mauro-s-projects-f82304ad.vercel.app
+https://order-a67svm0vd-mauro-s-projects-f82304ad.vercel.app
+https://order-c7zjwyvnf-mauro-s-projects-f82304ad.vercel.app
+https://order-iwg71j9i4-mauro-s-projects-f82304ad.vercel.app
+https://order-94esmq6u6-mauro-s-projects-f82304ad.vercel.app
+https://order-68fk6nk5r-mauro-s-projects-f82304ad.vercel.app
+https://order-o3jknuj1e-mauro-s-projects-f82304ad.vercel.app
+https://order-lswpaffyd-mauro-s-projects-f82304ad.vercel.app
+https://order-nmvbt5azb-mauro-s-projects-f82304ad.vercel.app
+https://order-edc1eyeqq-mauro-s-projects-f82304ad.vercel.app
+https://order-1q6n3pcwm-mauro-s-projects-f82304ad.vercel.app
+https://order-q7ezho1mc-mauro-s-projects-f82304ad.vercel.app
+https://order-l52sz31j8-mauro-s-projects-f82304ad.vercel.app
+https://order-hw5w9qfzx-mauro-s-projects-f82304ad.vercel.app
+https://order-pl8oxglh1-mauro-s-projects-f82304ad.vercel.app
+https://order-aqcym1z9h-mauro-s-projects-f82304ad.vercel.app
+  3d      mauro-s-projects-f82304ad/order-ops     https://order-o3jknuj1e-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      44s          mauronahuelmega-3080     
+  4d      mauro-s-projects-f82304ad/order-ops     https://order-lswpaffyd-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      42s          mauronahuelmega-3080     
+  4d      mauro-s-projects-f82304ad/order-ops     https://order-nmvbt5azb-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      44s          mauronahuelmega-3080     
+  7d      mauro-s-projects-f82304ad/order-ops     https://order-edc1eyeqq-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      43s          mauronahuelmega-3080     
+  7d      mauro-s-projects-f82304ad/order-ops     https://order-1q6n3pcwm-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      49s          mauronahuelmega-3080     
+  7d      mauro-s-projects-f82304ad/order-ops     https://order-q7ezho1mc-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      41s          mauronahuelmega-3080     
+  7d      mauro-s-projects-f82304ad/order-ops     https://order-l52sz31j8-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      45s          mauronahuelmega-3080     
+  7d      mauro-s-projects-f82304ad/order-ops     https://order-hw5w9qfzx-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      43s          mauronahuelmega-3080     
+  8d      mauro-s-projects-f82304ad/order-ops     https://order-pl8oxglh1-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      55s          mauronahuelmega-3080     
+  8d      mauro-s-projects-f82304ad/order-ops     https://order-aqcym1z9h-mauro-s-projects-f82304ad.vercel.app     ÔùÅ 
+Ready        Production      46s          mauronahuelmega-3080     
+
+> To display the next page, run `vercel ls order-ops --prod --next 1784852953471`

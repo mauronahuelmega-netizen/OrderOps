@@ -1,0 +1,147 @@
+﻿ .../(protected)/products/customizations/actions.ts |  17 ++-
+ app/globals.css                                    | 150 +++------------------
+ app/super-admin/(protected)/actions.ts             |  30 ++++-
+ components/admin/orders/admin-dashboard-orders.tsx | 116 ++++++++--------
+ docs/admin-catalog-preview-mobile-feel-deploy-1.md |   3 +-
+ next-env.d.ts                                      |   2 +-
+ tsconfig.tsbuildinfo                               |   2 +-
+ 7 files changed, 117 insertions(+), 203 deletions(-)
+diff --git a/components/admin/orders/admin-dashboard-orders.tsx b/components/admin/orders/admin-dashboard-orders.tsx
+index a826c52..1a219d7 100644
+--- a/components/admin/orders/admin-dashboard-orders.tsx
++++ b/components/admin/orders/admin-dashboard-orders.tsx
+@@ -584,7 +584,7 @@ export default function AdminDashboardOrders({
+     onHydrateRequest: hydrateStoreSession,
+     onPayloadFallback: (session) => {
+       if (session?.status === "open" && session.closedAt == null) {
+-        setActiveStoreSessionState(session);
++      setActiveStoreSessionState(session);
+       } else if (session?.status === "closed" && session.closedAt != null) {
+         setActiveStoreSessionState(null);
+         setLastClosedStoreSessionState(session);
+@@ -1496,10 +1496,10 @@ export default function AdminDashboardOrders({
+         const activeSelectedOrderId = selectedOrderIdRef.current;
+ 
+         if (activeSelectedOrderId) {
+-          const nextSelectedOrder =
+-            reconciledOrders.find((order) => order.id === activeSelectedOrderId) ?? null;
++        const nextSelectedOrder =
++          reconciledOrders.find((order) => order.id === activeSelectedOrderId) ?? null;
+ 
+-          setSelectedOrderSeed(nextSelectedOrder);
++        setSelectedOrderSeed(nextSelectedOrder);
+         }
+ 
+         return true;
+@@ -1681,7 +1681,7 @@ export default function AdminDashboardOrders({
+       return "Abr\u00ed una sesi\u00f3n activa para crear pedidos.";
+     }
+ 
+-    return null;
++            return null;
+   }, [
+     activeStoreSessionState,
+     canUpdateOrders,
+@@ -2320,29 +2320,29 @@ export default function AdminDashboardOrders({
+       });
+ 
+       if (pendingResolution.finalAssignment) {
+-        setOptimisticOrders((currentOrders) =>
+-          sortOrdersForOperationalBoard(
+-            currentOrders.map((currentOrder) =>
+-              currentOrder.id === orderId
++      setOptimisticOrders((currentOrders) =>
++        sortOrdersForOperationalBoard(
++          currentOrders.map((currentOrder) =>
++            currentOrder.id === orderId
+                 ? patchAdminOrderDashboardItemAssignment(
+                     currentOrder,
+                     pendingResolution.finalAssignment!
+                   )
+-                : currentOrder
+-            )
++              : currentOrder
+           )
+-        );
++        )
++      );
+ 
+-        setSelectedOrderSeed((currentSeed) => {
+-          if (!currentSeed || currentSeed.id !== orderId) {
+-            return currentSeed;
+-          }
++      setSelectedOrderSeed((currentSeed) => {
++        if (!currentSeed || currentSeed.id !== orderId) {
++          return currentSeed;
++        }
+ 
+           return patchAdminOrderDashboardItemAssignment(
+             currentSeed,
+             pendingResolution.finalAssignment!
+           );
+-        });
++      });
+       }
+ 
+       if (pendingResolution.needsRefresh) {
+@@ -2479,19 +2479,19 @@ export default function AdminDashboardOrders({
+     setPendingStoreSessionAction("opening");
+diff --git a/app/super-admin/(protected)/actions.ts b/app/super-admin/(protected)/actions.ts
+index ae9b2b7..bf8fabc 100644
+--- a/app/super-admin/(protected)/actions.ts
++++ b/app/super-admin/(protected)/actions.ts
+@@ -1,6 +1,7 @@
+ "use server";
+ 
+ import { revalidatePath } from "next/cache";
++import { revalidatePublicCatalogCache } from "@/lib/catalog/public-cache-tags";
+ import { requireSuperAdmin } from "@/lib/super-admin/context";
+ import { createSupabaseServerClient } from "@/lib/supabase/server";
+ import { createSupabaseServiceClient } from "@/lib/supabase/service";
+@@ -207,11 +208,30 @@ export async function updateBusinessAction(
+     return { error: "Ingres├í un n├║mero de WhatsApp." };
+   }
+ 
++  const { data: currentBusiness, error: currentBusinessError } = await supabase
++    .from("businesses")
++    .select("id, slug")
++    .eq("id", businessId)
++    .maybeSingle();
++
++  if (currentBusinessError) {
++    return {
++      error: currentBusinessError.message || "No pudimos cargar el negocio."
++    };
++  }
++
++  if (!currentBusiness) {
++    return { error: "El negocio ya no existe." };
++  }
++
++  const previousSlug = currentBusiness.slug?.trim().toLowerCase() || null;
++  const nextSlug = slug;
++
+   const { error } = await supabase
+     .from("businesses")
+     .update({
+       name,
+-      slug,
++      slug: nextSlug,
+       whatsapp_number: whatsappNumber,
+       is_active: isActive
+     })
+@@ -222,6 +242,14 @@ export async function updateBusinessAction(
+   }
+ 
+   revalidatePath("/super-admin");
++  revalidatePath("/super-admin/businesses");
++  revalidatePublicCatalogCache({
++    businessId,
++    slug: nextSlug,
++    previousSlug: previousSlug && previousSlug !== nextSlug ? previousSlug : undefined,
++    scope: "all"
++  });
++
+   return { success: true };
+ }
+ 

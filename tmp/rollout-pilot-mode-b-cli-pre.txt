@@ -1,0 +1,4 @@
+﻿tsc_exit_code=0
+build_exit_code=0
+tsc_passed=True
+build_passed=True

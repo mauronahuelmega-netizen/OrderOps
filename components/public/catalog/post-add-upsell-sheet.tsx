@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { X } from "lucide-react";
 import {
   attachUpsellChildToParent,
   type LocalCartItem
@@ -11,6 +12,7 @@ import {
 } from "@/lib/product-customization/public-shared";
 import PublicStorageImage from "@/components/public/catalog/public-storage-image";
 import styles from "./post-add-upsell-sheet.module.css";
+import { usePublicOverlayScrollLock } from "./public-overlay-scroll-lock";
 
 export type PostAddUpsellOpportunity = {
   parentCartLineId: string;
@@ -51,6 +53,7 @@ export default function PostAddUpsellSheet({
   onFinish,
   onParentMissing
 }: PostAddUpsellSheetProps) {
+  usePublicOverlayScrollLock();
   const titleId = useId();
   const descriptionId = useId();
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -83,12 +86,9 @@ export default function PostAddUpsellSheet({
   const footerLabel = attachedCount > 0 ? "Listo" : "Ahora no";
 
   useEffect(() => {
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
     closeRef.current?.focus();
 
     return () => {
-      document.body.style.overflow = previousOverflow;
     };
   }, []);
 
@@ -266,9 +266,9 @@ export default function PostAddUpsellSheet({
             type="button"
             className={styles.iconButton}
             onClick={finishOnce}
-            aria-label="Cerrar adicionales"
+            aria-label="Cerrar sugerencias"
           >
-            Cerrar
+            <X aria-hidden="true" focusable="false" size={20} strokeWidth={2} />
           </button>
         </header>
 
@@ -282,7 +282,10 @@ export default function PostAddUpsellSheet({
                 state.pending || state.attached || state.blocked;
               const ctaLabel = state.attached
                 ? "Agregado"
-                : `Agregar · ${formattedPrice}`;
+                : "Agregar";
+              const ctaAriaLabel = state.attached
+                ? `${candidate.name} agregado`
+                : `Agregar ${candidate.name} por ${formattedPrice}`;
 
               return (
                 <li key={candidate.id} className={styles.row}>
@@ -300,32 +303,37 @@ export default function PostAddUpsellSheet({
                     ) : (
                       <div className={styles.thumbPlaceholder} aria-hidden="true" />
                     )}
-                    <div className={styles.rowCopy}>
-                      <strong className={styles.productName}>{candidate.name}</strong>
-                      <span className={styles.unitPrice}>{formattedPrice}</span>
-                      {state.error ? (
-                        <p
-                          id={errorId}
-                          className={styles.candidateError}
-                          role="alert"
+                    <div className={styles.rowContent}>
+                      <div className={styles.rowCopy}>
+                        <strong className={styles.productName}>{candidate.name}</strong>
+                        <span className={styles.unitPrice}>{formattedPrice}</span>
+                        {state.error ? (
+                          <p
+                            id={errorId}
+                            className={styles.candidateError}
+                            role="alert"
+                          >
+                            {state.error}
+                          </p>
+                        ) : null}
+                      </div>
+                      <div className={styles.rowAction}>
+                        <button
+                          type="button"
+                          className={
+                            state.attached ? styles.attachedButton : styles.addButton
+                          }
+                          disabled={ctaDisabled}
+                          aria-busy={state.pending || undefined}
+                          aria-describedby={state.error ? errorId : undefined}
+                          aria-label={ctaAriaLabel}
+                          onClick={() => handleAttach(candidate)}
                         >
-                          {state.error}
-                        </p>
-                      ) : null}
+                          {ctaLabel}
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    className={
-                      state.attached ? styles.attachedButton : styles.addButton
-                    }
-                    disabled={ctaDisabled}
-                    aria-busy={state.pending || undefined}
-                    aria-describedby={state.error ? errorId : undefined}
-                    onClick={() => handleAttach(candidate)}
-                  >
-                    {ctaLabel}
-                  </button>
                 </li>
               );
             })}

@@ -1,0 +1,46 @@
+
+=== COVER_OBJECT ===
+https://pkrsedmwxekbhlohhqds.supabase.co/storage/v1/object/public/business-assets/e21b8fc2-3016-4dec-92ef-ebb04e58ecdf/cover/1783648518184-1ab0fba4-47ef-4173-9fef-cbcb2405dd86.png
+HTTP/1.1 200 OK
+Content-Type: image/png
+
+=== COVER_RENDER ===
+https://pkrsedmwxekbhlohhqds.supabase.co/storage/v1/render/image/public/business-assets/e21b8fc2-3016-4dec-92ef-ebb04e58ecdf/cover/1783648518184-1ab0fba4-47ef-4173-9fef-cbcb2405dd86.png
+HTTP/1.1 403 Forbidden
+Content-Type: application/json; charset=utf-8
+BODY: {"statusCode":"403","error":"FeatureNotEnabled","message":"feature not enabled for this tenant"}
+
+=== COVER_RENDER_RESIZE ===
+https://pkrsedmwxekbhlohhqds.supabase.co/storage/v1/render/image/public/business-assets/e21b8fc2-3016-4dec-92ef-ebb04e58ecdf/cover/1783648518184-1ab0fba4-47ef-4173-9fef-cbcb2405dd86.png
+HTTP/1.1 403 Forbidden
+Content-Type: application/json; charset=utf-8
+BODY: {"statusCode":"403","error":"FeatureNotEnabled","message":"feature not enabled for this tenant"}
+
+=== LOGO_OBJECT ===
+https://pkrsedmwxekbhlohhqds.supabase.co/storage/v1/object/public/business-assets/e21b8fc2-3016-4dec-92ef-ebb04e58ecdf/logo/1783648516989-adeeaccb-e47e-4e4f-b404-2b91e9293f39.png
+HTTP/1.1 200 OK
+Content-Type: image/png
+
+=== LOGO_RENDER ===
+https://pkrsedmwxekbhlohhqds.supabase.co/storage/v1/render/image/public/business-assets/e21b8fc2-3016-4dec-92ef-ebb04e58ecdf/logo/1783648516989-adeeaccb-e47e-4e4f-b404-2b91e9293f39.png
+HTTP/1.1 403 Forbidden
+Content-Type: application/json; charset=utf-8
+BODY: {"statusCode":"403","error":"FeatureNotEnabled","message":"feature not enabled for this tenant"}
+
+=== PROD_OBJECT ===
+https://pkrsedmwxekbhlohhqds.supabase.co/storage/v1/object/public/product-images/e21b8fc2-3016-4dec-92ef-ebb04e58ecdf/c5d56371-629e-4883-a57c-1a2ba59c8485/product-image-8ae73705-f0a9-4fa1-b25d-be74ae99dd8d.jpg
+HTTP/1.1 200 OK
+Content-Type: image/jpeg
+
+=== PROD_RENDER ===
+https://pkrsedmwxekbhlohhqds.supabase.co/storage/v1/render/image/public/product-images/e21b8fc2-3016-4dec-92ef-ebb04e58ecdf/c5d56371-629e-4883-a57c-1a2ba59c8485/product-image-8ae73705-f0a9-4fa1-b25d-be74ae99dd8d.jpg
+HTTP/1.1 403 Forbidden
+Content-Type: application/json; charset=utf-8
+BODY: {"statusCode":"403","error":"FeatureNotEnabled","message":"feature not enabled for this tenant"}
+
+=== PROD_RENDER_RESIZE ===
+https://pkrsedmwxekbhlohhqds.supabase.co/storage/v1/render/image/public/product-images/e21b8fc2-3016-4dec-92ef-ebb04e58ecdf/c5d56371-629e-4883-a57c-1a2ba59c8485/product-image-8ae73705-f0a9-4fa1-b25d-be74ae99dd8d.jpg
+HTTP/1.1 403 Forbidden
+Content-Type: application/json; charset=utf-8
+BODY: {"statusCode":"403","error":"FeatureNotEnabled","message":"feature not enabled for this tenant"}
+

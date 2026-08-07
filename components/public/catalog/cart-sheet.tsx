@@ -11,6 +11,7 @@ import {
 import { formatPublicCatalogCurrency } from "@/lib/product-customization/public-shared";
 import { UPSELL_ASSOCIATED_LABEL } from "@/lib/product-customization/upsell-copy";
 import styles from "./cart-sheet.module.css";
+import { usePublicOverlayScrollLock } from "./public-overlay-scroll-lock";
 
 type CartSheetProps = {
   slug: string;
@@ -39,6 +40,7 @@ export default function CartSheet({
   onChangeParentQuantity,
   onChangeLegacyQuantity
 }: CartSheetProps) {
+  usePublicOverlayScrollLock();
   void _checkoutSlug;
   const rows = buildHierarchicalCartRows(items);
   const total = getCartItemsTotal(items);

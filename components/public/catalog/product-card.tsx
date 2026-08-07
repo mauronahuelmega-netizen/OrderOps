@@ -56,6 +56,7 @@ function ProductCard({
     showFrom && summary?.priceFrom !== null && summary?.priceFrom !== undefined
       ? summary.priceFrom
       : Number(product.price);
+  const formattedPrice = formatPublicCatalogCurrency(displayPrice);
 
   const showQuantityControl = !requiresCustomization && quantity > 0;
   const plusLabel = requiresCustomization
@@ -93,44 +94,48 @@ function ProductCard({
           {product.description ? (
             <p className={styles.description}>{product.description}</p>
           ) : null}
-          <div className={styles.priceRow}>
-            <strong className={styles.price}>
-              {showFrom ? <span className={styles.priceFrom}>Desde </span> : null}
-              {formatPublicCatalogCurrency(displayPrice)}
-            </strong>
-          </div>
         </div>
       </div>
 
-      <div className={styles.quickAction} onClick={stopCardOpen}>
-        {showQuantityControl ? (
-          <div className={styles.qty} aria-label={`Cantidad de ${product.name}`}>
-            <button
-              type="button"
-              aria-label={`Quitar uno de ${product.name}`}
-              onClick={() => onDecrementProduct(product.id)}
-            >
-              -
-            </button>
-            <span aria-live="polite">{quantity}</span>
-            <button
-              type="button"
-              aria-label={`Sumar uno de ${product.name}`}
-              onClick={() => onIncrementProduct(product.id)}
-            >
-              +
-            </button>
-          </div>
-        ) : (
-          <button
-            type="button"
-            className={styles.plus}
-            aria-label={plusLabel}
-            onClick={() => onAddProduct(product.id)}
+      <div className={styles.footer}>
+        <div className={styles.priceRow}>
+          <strong
+            className={styles.price}
+            aria-label={showFrom ? `Desde ${formattedPrice}` : undefined}
           >
-            <Plus className={styles.plusIcon} aria-hidden="true" strokeWidth={2.5} />
-          </button>
-        )}
+            {formattedPrice}
+          </strong>
+        </div>
+        <div className={styles.quickAction} onClick={stopCardOpen}>
+          {showQuantityControl ? (
+            <div className={styles.qty} aria-label={`Cantidad de ${product.name}`}>
+              <button
+                type="button"
+                aria-label={`Quitar uno de ${product.name}`}
+                onClick={() => onDecrementProduct(product.id)}
+              >
+                -
+              </button>
+              <span aria-live="polite">{quantity}</span>
+              <button
+                type="button"
+                aria-label={`Sumar uno de ${product.name}`}
+                onClick={() => onIncrementProduct(product.id)}
+              >
+                +
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              className={styles.plus}
+              aria-label={plusLabel}
+              onClick={() => onAddProduct(product.id)}
+            >
+              <Plus className={styles.plusIcon} aria-hidden="true" strokeWidth={2.5} />
+            </button>
+          )}
+        </div>
       </div>
     </article>
   );

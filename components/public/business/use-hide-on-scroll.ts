@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 type UseHideOnScrollOptions = {
   /** When true, force visible and skip hide logic (e.g. menu open). */
   disabled?: boolean;
+  /** When true, preserve the current state and ignore transient overlay scroll. */
+  freeze?: boolean;
   thresholdPx?: number;
   minDeltaPx?: number;
 };
@@ -15,6 +17,7 @@ type UseHideOnScrollOptions = {
  */
 export function useHideOnScroll({
   disabled = false,
+  freeze = false,
   thresholdPx = 36,
   minDeltaPx = 7
 }: UseHideOnScrollOptions = {}): boolean {
@@ -23,6 +26,10 @@ export function useHideOnScroll({
   useEffect(() => {
     if (disabled) {
       setHidden(false);
+      return;
+    }
+
+    if (freeze) {
       return;
     }
 
@@ -75,7 +82,7 @@ export function useHideOnScroll({
         window.cancelAnimationFrame(rafId);
       }
     };
-  }, [disabled, thresholdPx, minDeltaPx]);
+  }, [disabled, freeze, thresholdPx, minDeltaPx]);
 
   return disabled ? false : hidden;
 }

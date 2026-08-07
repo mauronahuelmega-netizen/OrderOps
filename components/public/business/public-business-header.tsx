@@ -4,8 +4,13 @@ import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { House, LockKeyhole, Store, X } from "lucide-react";
 import ThemeToggle from "@/components/public/catalog/theme-toggle";
 import PublicStorageImage from "@/components/public/catalog/public-storage-image";
+import {
+  PUBLIC_OVERLAY_LOCK_CHANGE_EVENT,
+  usePublicOverlayScrollLock
+} from "@/components/public/catalog/public-overlay-scroll-lock";
 import { dispatchPublicHeaderHidden } from "@/components/public/business/public-header-visibility";
 import { useHideOnScroll } from "@/components/public/business/use-hide-on-scroll";
 import type { PublicBusiness } from "@/lib/business/public";
@@ -21,6 +26,7 @@ type PublicNavItem = {
   label: string;
   description: string;
   isActive: boolean;
+  icon: typeof House;
 };
 
 type ThemePreference = "light" | "dark" | "system";
@@ -36,10 +42,19 @@ export default function PublicBusinessHeader({
   const pathname = usePathname();
   const isCheckoutRoute = /\/b\/[^/]+\/checkout\/?$/.test(pathname);
   const headerRef = useRef<HTMLElement | null>(null);
+  const menuButtonRef = useRef<HTMLButtonElement | null>(null);
+  const menuSheetRef = useRef<HTMLDivElement | null>(null);
+  const menuCloseButtonRef = useRef<HTMLButtonElement | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isPublicOverlayOpen, setIsPublicOverlayOpen] = useState(false);
   const [themePreference, setThemePreference] = useState<ThemePreference>("system");
   const [systemTheme, setSystemTheme] = useState<ResolvedTheme>("light");
-  const headerHidden = useHideOnScroll({ disabled: isMenuOpen || isCheckoutRoute });
+  const headerHidden = useHideOnScroll({
+    disabled: isMenuOpen || isCheckoutRoute,
+    freeze: isPublicOverlayOpen
+  });
+  usePublicOverlayScrollLock(isMenuOpen);
+  const isBusinessOpen = business.on_demand_mode_active;
 
   const resolvedTheme: ResolvedTheme =
     themePreference === "system" ? systemTheme : themePreference;
@@ -47,6 +62,21 @@ export default function PublicBusinessHeader({
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
+
+  useEffect(() => {
+    const syncOverlayState = (event?: Event) => {
+      const detail = event instanceof CustomEvent ? event.detail : null;
+      setIsPublicOverlayOpen(
+        typeof detail?.isOpen === "boolean"
+          ? detail.isOpen
+          : document.documentElement.dataset.publicOverlayOpen === "true"
+      );
+    };
+
+    syncOverlayState();
+    window.addEventListener(PUBLIC_OVERLAY_LOCK_CHANGE_EVENT, syncOverlayState);
+    return () => window.removeEventListener(PUBLIC_OVERLAY_LOCK_CHANGE_EVENT, syncOverlayState);
+  }, []);
 
   useEffect(() => {
     const headerEl = headerRef.current;
@@ -68,19 +98,49 @@ export default function PublicBusinessHeader({
       return;
     }
 
-    const previousOverflow = document.body.style.overflow;
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
         setIsMenuOpen(false);
+        return;
+      }
+
+      if (event.key !== "Tab") {
+        return;
+      }
+
+      const focusableElements = menuSheetRef.current?.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+
+      if (!focusableElements?.length) {
+        event.preventDefault();
+        menuSheetRef.current?.focus();
+        return;
+      }
+
+      const first = focusableElements[0];
+      const last = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
 
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKeyDown);
+    const focusFrame = window.requestAnimationFrame(() => {
+      menuCloseButtonRef.current?.focus();
+    });
+    window.addEventListener("keydown", handleKeyDown, true);
 
     return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
+      window.cancelAnimationFrame(focusFrame);
+      window.removeEventListener("keydown", handleKeyDown, true);
+      menuButtonRef.current?.focus();
     };
   }, [isMenuOpen]);
 
@@ -136,13 +196,15 @@ export default function PublicBusinessHeader({
       href: `/b/${slug}`,
       label: "Home",
       description: "Inicio del negocio",
-      isActive: pathname === `/b/${slug}`
+      isActive: pathname === `/b/${slug}`,
+      icon: House
     },
     {
       href: `/b/${slug}/catalogo`,
       label: "Catálogo",
       description: "Ver productos y hacer pedido",
-      isActive: pathname === `/b/${slug}/catalogo`
+      isActive: pathname === `/b/${slug}/catalogo`,
+      icon: Store
     }
   ];
 
@@ -182,12 +244,23 @@ export default function PublicBusinessHeader({
             )}
 
             <div className="public-business-header__brand-copy">
-              <span className="public-business-header__brand-kicker">Pedido online</span>
-              <strong>{business.name}</strong>
+              <strong className="public-business-header__brand-name">
+                <span className="public-business-header__brand-name-text">{business.name}</span>
+                <span
+                  className={`public-business-header__business-status public-business-header__business-status--${
+                    isBusinessOpen ? "open" : "closed"
+                  }`}
+                  aria-label={isBusinessOpen ? "Abierto" : "Cerrado"}
+                >
+                  <span aria-hidden="true" />
+                  {isBusinessOpen ? null : <em>Cerrado</em>}
+                </span>
+              </strong>
             </div>
           </Link>
 
           <button
+            ref={menuButtonRef}
             type="button"
             className={`public-business-header__menu-button${
               isMenuOpen ? " public-business-header__menu-button--open" : ""
@@ -208,6 +281,7 @@ export default function PublicBusinessHeader({
         className={`public-business-header__portal${
           isMenuOpen ? " public-business-header__portal--open" : ""
         }`}
+        style={headerStyles}
         role="presentation"
         aria-hidden={!isMenuOpen}
       >
@@ -215,135 +289,118 @@ export default function PublicBusinessHeader({
           type="button"
           className="public-business-header__overlay"
           aria-label="Cerrar menú"
-          tabIndex={isMenuOpen ? 0 : -1}
+          tabIndex={-1}
           onClick={() => setIsMenuOpen(false)}
         />
 
         <div
+          ref={menuSheetRef}
           id="public-business-header-sheet"
           className="public-business-header__sheet"
           role="dialog"
           aria-modal="true"
-          aria-label="Navegación pública"
+          aria-labelledby="public-business-header-sheet-title"
+          tabIndex={-1}
         >
           <div className="public-business-header__sheet-header">
-            <div className="public-business-header__sheet-brand">
-              {business.logo_url ? (
-                <div className="public-business-header__logo-frame">
-                  <PublicStorageImage
-                    className="public-business-header__logo"
-                    src={business.logo_url}
-                    alt={`${business.name} logo`}
-                    width={64}
-                    height={64}
-                    sizes="64px"
-                  />
-                </div>
-              ) : (
-                <div className="public-business-header__logo-frame public-business-header__logo-frame--placeholder">
-                  <div className="public-business-header__logo public-business-header__logo--placeholder">
-                    {business.name.charAt(0).toUpperCase()}
-                  </div>
-                </div>
-              )}
-
-              <div className="public-business-header__brand-copy">
-                <span className="public-business-header__brand-kicker">Pedido online</span>
-                <strong>{business.name}</strong>
-              </div>
-            </div>
+            <h2 id="public-business-header-sheet-title" className="public-business-header__sheet-title">
+              Menú
+            </h2>
 
             <button
+              ref={menuCloseButtonRef}
               type="button"
               className="public-business-header__sheet-close"
               aria-label="Cerrar menú"
               onClick={() => setIsMenuOpen(false)}
             >
-              <span />
-              <span />
+              <X aria-hidden="true" focusable="false" />
             </button>
           </div>
 
           <div className="public-business-header__sheet-stack">
             <section className="public-business-header__section" aria-label="Navegación principal">
               <nav className="public-business-header__nav" aria-label="Navegación pública">
-                {navigationItems.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className={`public-business-header__link${
-                      item.isActive ? " public-business-header__link--active" : ""
-                    }`}
-                  >
-                    <span className="public-business-header__link-copy">
-                      <strong>{item.label}</strong>
-                      <small>{item.description}</small>
-                    </span>
-                    {item.isActive ? (
-                      <span className="public-business-header__link-indicator" aria-hidden="true" />
-                    ) : null}
-                  </Link>
-                ))}
+                {navigationItems.map((item) => {
+                  const Icon = item.icon;
+
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`public-business-header__link public-business-header__link--with-icon${
+                        item.isActive ? " public-business-header__link--active" : ""
+                      }`}
+                    >
+                      <Icon className="public-business-header__link-icon" aria-hidden="true" focusable="false" />
+                      <span className="public-business-header__link-copy">
+                        <strong>{item.label}</strong>
+                        <small>{item.description}</small>
+                      </span>
+                      {item.isActive ? (
+                        <span className="public-business-header__link-indicator" aria-hidden="true" />
+                      ) : null}
+                    </Link>
+                  );
+                })}
               </nav>
             </section>
 
-            {business.instagram_url ? (
-              <section className="public-business-header__section" aria-label="Redes">
-                <a
-                  href={business.instagram_url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="public-business-header__link public-business-header__link--secondary"
-                >
-                  <span className="public-business-header__link-copy">
-                    <strong>Instagram</strong>
-                    <small>Ver novedades y contenido del negocio</small>
-                  </span>
-                </a>
-              </section>
-            ) : null}
+            <div className="public-business-header__sheet-utilities">
+              {business.instagram_url ? (
+                <section className="public-business-header__section" aria-label="Redes">
+                  <a
+                    href={business.instagram_url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="public-business-header__link public-business-header__link--secondary"
+                  >
+                    <span className="public-business-header__link-copy">
+                      <strong>Instagram</strong>
+                      <small>Ver novedades y contenido del negocio</small>
+                    </span>
+                  </a>
+                </section>
+              ) : null}
 
-            <section className="public-business-header__section" aria-label="Preferencias">
-              <div className="public-business-header__preferences-copy">
-                <span className="public-business-header__preferences-title">Preferencias</span>
-                <p>Ajustá cómo querés ver el catálogo.</p>
-              </div>
+              <section className="public-business-header__section" aria-label="Preferencias">
+                <div className="public-business-header__preferences-surface">
+                  <div className="public-business-header__preferences-copy public-business-header__preferences-copy--inline">
+                    <span className="public-business-header__preferences-title">Modo visual</span>
+                    <p>Claro / Oscuro</p>
+                  </div>
 
-              <div className="public-business-header__preferences-surface">
-                <div className="public-business-header__preferences-copy public-business-header__preferences-copy--inline">
-                  <span className="public-business-header__preferences-title">Modo visual</span>
-                  <p>Elegí entre claro y oscuro.</p>
+                  <ThemeToggle
+                    theme={resolvedTheme}
+                    onToggle={() =>
+                      setThemePreference((currentPreference) => {
+                        const currentTheme =
+                          currentPreference === "system" ? systemTheme : currentPreference;
+                        return currentTheme === "dark" ? "light" : "dark";
+                      })
+                    }
+                  />
                 </div>
+              </section>
 
-                <ThemeToggle
-                  theme={resolvedTheme}
-                  onToggle={() =>
-                    setThemePreference((currentPreference) => {
-                      const currentTheme =
-                        currentPreference === "system" ? systemTheme : currentPreference;
-                      return currentTheme === "dark" ? "light" : "dark";
-                    })
-                  }
-                />
-              </div>
-            </section>
-
-            <section
-              className="public-business-header__section public-business-header__section--footer"
-              aria-label="Acceso interno"
-            >
-              <div className="public-business-header__separator" />
-
-              <Link
-                href="/admin/login"
-                className="public-business-header__link public-business-header__link--secondary"
+              <section
+                className="public-business-header__section public-business-header__section--footer"
+                aria-label="Acceso interno"
               >
-                <span className="public-business-header__link-copy">
-                  <strong>Staff</strong>
-                  <small>Acceso interno para administrar pedidos y catálogo</small>
-                </span>
-              </Link>
-            </section>
+                <div className="public-business-header__separator" />
+
+                <Link
+                  href="/admin/login"
+                  className="public-business-header__link public-business-header__link--secondary public-business-header__link--with-icon"
+                >
+                  <LockKeyhole className="public-business-header__link-icon" aria-hidden="true" focusable="false" />
+                  <span className="public-business-header__link-copy">
+                    <strong>Staff</strong>
+                    <small>Acceso interno para administrar pedidos y catálogo</small>
+                  </span>
+                </Link>
+              </section>
+            </div>
           </div>
         </div>
       </div>

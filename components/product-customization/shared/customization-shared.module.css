@@ -1,149 +1,154 @@
-/* Shared Product Customization presentational styles (public modal + admin preview). */
+/* Shared presentational styles for public customization and preview. */
 
 .group,
 .upsell {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: 0.5rem;
 }
 
 .groupHeader {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 0.35rem 0.75rem;
+  gap: 0.35rem 0.6rem;
 }
 
 .groupHeader h3 {
   margin: 0;
-  font-size: 1rem;
-  color: var(--text-primary);
+  color: var(--customization-text, var(--text-primary));
+  font-size: 0.96rem;
+  line-height: 1.25;
 }
 
 .groupMeta {
-  font-size: 0.75rem;
-  color: var(--text-tertiary);
+  padding: 0.16rem 0.4rem;
+  border: 1px solid var(--customization-border, var(--border-subtle));
+  border-radius: 999px;
+  background: color-mix(
+    in srgb,
+    var(--customization-row-bg, var(--bg-canvas)) 78%,
+    var(--customization-sheet-bg, var(--bg-surface))
+  );
+  color: var(--customization-subtle, var(--text-tertiary));
+  font-size: 0.7rem;
+  line-height: 1.2;
+  white-space: nowrap;
 }
 
 .groupDescription {
   margin: 0;
-  color: var(--text-secondary);
-  font-size: 0.9rem;
-  line-height: 1.45;
+  color: var(--customization-muted, var(--text-secondary));
+  font-size: 0.82rem;
+  line-height: 1.42;
 }
 
 .optionList {
-  list-style: none;
-  margin: 0;
-  padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .optionListCompact {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.5rem;
+  gap: 0.42rem;
 }
 
 @media (max-width: 359px) {
-  .optionListCompact {
-    grid-template-columns: 1fr;
-  }
+  .optionListCompact { grid-template-columns: minmax(0, 1fr); }
 }
 
 .optionRow {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.56rem;
   min-height: 2.75rem;
-  padding: 0.7rem 0.75rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--customization-border, var(--border-subtle));
   border-radius: 0.85rem;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-canvas);
+  background: var(--customization-row-bg, var(--bg-canvas));
   cursor: pointer;
   contain: layout style paint;
 }
 
 .optionRowCompact {
-  gap: 0.45rem;
-  min-height: 2.75rem;
-  padding: 0.55rem 0.6rem;
-  border-radius: 0.75rem;
-}
-
-.optionRowCompact .optionCopy strong {
-  font-size: 0.82rem;
-  line-height: 1.25;
-}
-
-.optionRowCompact .optionCopy small {
-  font-size: 0.72rem;
-}
-
-.optionRowCompact .optionDelta {
-  font-size: 0.75rem;
+  align-items: start;
+  gap: 0.4rem;
+  min-height: 2.9rem;
+  padding: 0.56rem;
+  border-radius: 0.78rem;
 }
 
 .optionRowSelected {
-  border-color: color-mix(
-    in srgb,
-    var(--business-primary, var(--color-primary, var(--accent-primary))) 55%,
-    var(--border-subtle)
-  );
-  background: color-mix(
-    in srgb,
-    var(--business-primary, var(--color-primary, var(--accent-primary))) 8%,
-    var(--bg-surface)
-  );
+  border-color: color-mix(in srgb, var(--business-primary, var(--color-primary, var(--accent-primary))) 58%, var(--customization-border, var(--border-subtle)));
+  background: color-mix(in srgb, var(--business-primary, var(--color-primary, var(--accent-primary))) 9%, var(--customization-sheet-bg, var(--bg-surface)));
 }
 
 .optionRowDisabled {
-  opacity: 0.55;
+  opacity: 0.58;
   cursor: not-allowed;
+}
+
+.optionRow:has(input:focus-visible) {
+  outline: 2px solid var(--business-primary, var(--color-primary, var(--accent-primary)));
+  outline-offset: 2px;
 }
 
 .optionRow input {
   width: 1rem;
   height: 1rem;
+  margin: 0;
   accent-color: var(--business-primary, var(--color-primary, var(--accent-primary)));
 }
 
 .optionCopy {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
   min-width: 0;
+  gap: 0.14rem;
 }
 
 .optionCopy strong {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text-primary);
+  color: var(--customization-text, var(--text-primary));
+  font-size: 0.86rem;
+  font-weight: 650;
+  line-height: 1.28;
+  overflow-wrap: anywhere;
 }
 
 .optionCopy small {
-  font-size: 0.78rem;
-  color: var(--text-secondary);
+  color: var(--customization-muted, var(--text-secondary));
+  font-size: 0.75rem;
   line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .optionDelta {
-  font-size: 0.82rem;
+  align-self: center;
+  color: var(--customization-muted, var(--text-secondary));
+  font-size: 0.76rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  line-height: 1.2;
+  text-align: right;
   white-space: nowrap;
 }
+
+.optionRowCompact .optionCopy strong { font-size: 0.81rem; }
+.optionRowCompact .optionCopy small { font-size: 0.71rem; }
+.optionRowCompact .optionDelta { font-size: 0.71rem; }
 
 .groupError,
 .footerHint {
   margin: 0;
-  font-size: 0.82rem;
+  color: var(--customization-error, var(--color-cancelled));
+  font-size: 0.76rem;
   line-height: 1.4;
-  color: var(--color-cancelled);
 }
 
 .footerTotal {
@@ -154,27 +159,27 @@
 }
 
 .footerTotal span {
-  color: var(--text-secondary);
+  color: var(--customization-muted, var(--text-secondary));
   font-size: 0.875rem;
 }
 
 .footerTotal strong {
+  color: var(--customization-text, var(--text-primary));
   font-size: 1.15rem;
-  color: var(--text-primary);
 }
 
 .footerNote {
   margin: 0;
+  color: var(--customization-subtle, var(--text-tertiary));
   font-size: 0.75rem;
   line-height: 1.4;
-  color: var(--text-tertiary);
 }
 
 .previewCta {
   width: 100%;
   padding: 0.85rem 1rem;
-  border-radius: 0.75rem;
   border: 1px solid transparent;
+  border-radius: 0.75rem;
   background: var(--accent-primary, var(--color-primary));
   color: #fff;
   font: inherit;
@@ -185,7 +190,7 @@
 
 .previewCtaHint {
   margin: 0;
-  font-size: 0.75rem;
   color: var(--text-tertiary);
+  font-size: 0.75rem;
   text-align: center;
 }

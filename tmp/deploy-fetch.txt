@@ -1,0 +1,5 @@
+﻿PRE_DEPLOY_REMOTE=5dd9b419ce0da953eeca42d657b1fb653b75f847
+LOCAL_HEAD=5dd9b419ce0da953eeca42d657b1fb653b75f847
+0	0
+===HEAD..origin===
+===origin..HEAD===

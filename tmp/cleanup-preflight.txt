@@ -1,0 +1,210 @@
+﻿=== git status --short ===
+ M ORDEROPS_LIVING_MEMORY.md
+ M app/admin/(protected)/products/customizations/actions.ts
+ M app/globals.css
+ M app/super-admin/(protected)/actions.ts
+ M components/admin/orders/admin-dashboard-orders.tsx
+ M components/admin/product-customization/plus-suggestions/plus-edit-modal.tsx
+ M components/admin/product-customization/plus-suggestions/plus-suggestion-card.tsx
+ M components/admin/product-customization/plus-suggestions/plus-suggestions-tab.tsx
+ M components/admin/product-customization/plus-suggestions/plus-suggestions.module.css
+ M components/product-customization/shared/customization-option-group.tsx
+ M components/product-customization/shared/customization-option-row.tsx
+ M components/product-customization/shared/customization-price-summary.tsx
+ M components/product-customization/shared/customization-shared.module.css
+ M components/product-customization/shared/upsell-suggestion-group.tsx
+ M components/public/business/public-business-header.tsx
+ M components/public/catalog/cart-bar.tsx
+ M components/public/catalog/cart-sheet.module.css
+ M components/public/catalog/cart-sheet.tsx
+ M components/public/catalog/catalog-client.tsx
+ M components/public/catalog/customization-modal.module.css
+ M components/public/catalog/customization-modal.tsx
+ M components/public/catalog/product-card.tsx
+ M components/public/checkout/checkout-client.tsx
+ M docs/CURRENT_PHASE.md
+ M docs/admin-catalog-preview-mobile-feel-deploy-1.md
+ M lib/cart/local.ts
+ M lib/cart/signature.ts
+ M lib/cart/types.ts
+ M lib/product-customization/admin-preview-mapper.ts
+ M lib/product-customization/admin.ts
+ M lib/product-customization/builder-presentation.ts
+ M lib/product-customization/order-validation.ts
+ M lib/product-customization/public-shared.ts
+ M lib/product-customization/public.ts
+ M lib/product-customization/shared.ts
+ M tsconfig.tsbuildinfo
+ M types/database.ts
+?? components/public/business/public-business-header.module.css
+?? components/public/business/public-header-visibility.ts
+?? components/public/business/use-hide-on-scroll.ts
+?? components/public/catalog/cart-bar.module.css
+?? components/public/catalog/catalog-shell.module.css
+?? components/public/catalog/customization-config-cache.ts
+?? components/public/catalog/product-card.module.css
+?? components/public/checkout/checkout-client.module.css
+?? docs/admin-catalog-preview-final-qa-device-1.md
+?? docs/admin-catalog-preview-mobile-feel-final-handoff-1.md
+?? docs/deploy-qa-2-upload-fresh-login-production-qa.md
+?? docs/deploy-redeploy-qa-1-staging-production-smoke.md
+?? docs/live-ops-gate-1-store-session-on-demand-reconciliation.md
+?? docs/orders-flow-qa-1-production-smoke.md
+?? docs/product-customization-admin-1-groups-options-admin.md
+?? docs/product-customization-admin-2-assignments-overrides-upsell.md
+?? docs/product-customization-admin-2-qa-authenticated-browser-smoke.md
+?? docs/product-customization-admin-dnd-1-sortable-groups-options.md
+?? docs/product-customization-admin-ux-1-owner-friendly-builder-shell.md
+?? docs/product-customization-admin-ux-spec-1-owner-friendly-builder.md
+?? docs/product-customization-admin-v1-polish-monitor-1-premium-qa.md
+?? docs/product-customization-audit-1-options-extras-upsell-architecture.md
+?? docs/product-customization-checkout-ui-smoke-1-browser-checkout-validation.md
+?? docs/product-customization-dashboard-1-render-snapshot-upsell-children.md
+?? docs/product-customization-db-1-schema-rls-types.md
+?? docs/product-customization-db-apply-1-staging-migration-schema-smoke.md
+?? docs/product-customization-e2e-qa-1-flag-on-full-runtime-smoke.md
+?? docs/product-customization-flag-1-tenant-rollout-guard.md
+?? docs/product-customization-flag-off-rls-fixture-qa-1-flag-off-corpus-fixture-negative-qa.md
+?? docs/product-customization-flag-off-rls-qa-1-flag-off-public-rls-negative-qa.md
+?? docs/product-customization-group-descriptions-1-customer-facing-descriptions.md
+?? docs/product-customization-group-naming-1-customer-facing-group-names.md
+?? docs/product-customization-order-1-db-apply-qa-runtime-smoke.md
+?? docs/product-customization-order-1-rpc-server-validation-snapshot.md
+?? docs/product-customization-pilot-monitor-1-live-pilot-monitoring-real-config-readiness.md
+?? docs/product-customization-pilot-monitor-2-plus-ui-stock-public-rls-live-monitoring.md
+?? docs/product-customization-plus-bebidas-1-real-beverage-upsell-setup.md
+?? docs/product-customization-plus-bebidas-availability-1-reactivate-beverage-product-for-upsell-qa.md
+?? docs/product-customization-plus-bebidas-qa-1-real-order-snapshot-dashboard-validation.md
+?? docs/product-customization-qa-order-cleanup-1-cancel-qa-orders-safely.md
+?? docs/product-customization-real-config-polish-1-owner-config-copy-commercial-cleanup.md
+?? docs/product-customization-rollout-pilot-1-controlled-tenant-rollout.md
+?? docs/product-customization-spec-1-final-product-technical-spec.md
+?? docs/product-customization-v1-final-handoff.md
+?? docs/product-image-randomuuid-hotfix-1-client-safe-image-upload-id-fallback.md
+?? docs/product-stock-admin-ux-1-stock-tracking-controls-product-admin.md
+?? docs/product-stock-decrement-audit-1-order-stock-consumption-product-upsell-items.md
+?? docs/product-stock-decrement-design-1-inventory-consumption-contract.md
+?? docs/product-stock-decrement-ledger-1-record-order-decrement-movements-create-order.md
+?? docs/product-stock-decrement-order-1-transactional-stock-consumption-create-order.md
+?? docs/product-stock-movements-schema-1-stock-movements-ledger-idempotency-schema.md
+?? docs/product-stock-restock-design-1-cancel-restock-contract-idempotency.md
+?? docs/product-stock-tracking-schema-1-add-product-track-stock-flag.md
+?? docs/public-catalog-cache-invalidation-qa-1.md
+?? docs/public-catalog-cache-mutation-runtime-qa-2-followup.md
+?? docs/public-catalog-cache-mutation-runtime-qa-2.md
+?? docs/public-catalog-cart-sheet-usability-1.md
+?? docs/public-catalog-checkout-conversion-polish-1.md
+?? docs/public-catalog-checkout-summary-visual-qa-fix-1.md
+?? docs/public-catalog-conversion-spec-closure-1.md
+?? docs/public-catalog-conversion-surfaces-audit-spec-1.md
+?? docs/public-catalog-customization-modal-perf-audit-1.md
+?? docs/public-catalog-customization-modal-perf-fix-1.md
+?? docs/public-catalog-customization-modal-ux-polish-1.md
+?? docs/public-catalog-final-handoff-1.md
+?? docs/public-catalog-image-transforms-infra-1-mode-b.md
+?? docs/public-catalog-integrated-conversion-qa-1.md
+?? docs/public-catalog-observability-prod-enable-1.md
+?? docs/public-catalog-performance-forensic-audit-1.md
+?? docs/public-catalog-post-add-upsell-cart-contract-1.md
+?? docs/public-catalog-post-add-upsell-d1-schema-runtime-fix-1.md
+?? docs/public-catalog-post-add-upsell-domain-1.md
+?? docs/public-catalog-post-add-upsell-qa-1.md
+?? docs/public-catalog-post-add-upsell-spec-1.md
+?? docs/public-catalog-post-deploy-monitor-1.md
+?? docs/public-catalog-preview-auth-smoke-1.md
+?? docs/public-catalog-previous-slug-callers-fix-1.md
+?? docs/public-catalog-product-cards-grid-polish-1.md
+?? docs/public-catalog-product-cards-singleton-width-fix-1.md
+?? docs/public-catalog-real-device-qa-1.md
+?? docs/public-catalog-shell-cart-surfaces-polish-1.md
+?? lib/cart/post-add-upsell-contract.verify.ts
+?? lib/product-customization/resolve-upsell.ts
+?? lib/product-customization/safe-error-details.ts
+?? lib/product-customization/safe-error-details.verify.ts
+?? lib/product-customization/upsell-placement.ts
+?? lib/product-customization/upsell-placement.verify.ts
+?? supabase/migrations/20260731233000_post_add_upsell_group_placement.sql
+?? tmp/
+=== branch ===
+main
+=== HEAD ===
+5dd9b41
+=== log -1 ===
+5dd9b41 docs: stamp roadmap deploy commit hash
+=== git diff --stat ===
+ ORDEROPS_LIVING_MEMORY.md                          |  88 ++++
+ .../(protected)/products/customizations/actions.ts |  55 ++-
+ app/globals.css                                    | 150 +-----
+ app/super-admin/(protected)/actions.ts             |  30 +-
+ components/admin/orders/admin-dashboard-orders.tsx | 116 ++---
+ .../plus-suggestions/plus-edit-modal.tsx           |  52 +-
+ .../plus-suggestions/plus-suggestion-card.tsx      |  10 +
+ .../plus-suggestions/plus-suggestions-tab.tsx      |   6 +-
+ .../plus-suggestions/plus-suggestions.module.css   |  64 +++
+ .../shared/customization-option-group.tsx          |  13 +-
+ .../shared/customization-option-row.tsx            |   3 +
+ .../shared/customization-price-summary.tsx         |  13 +-
+ .../shared/customization-shared.module.css         |  34 ++
+ .../shared/upsell-suggestion-group.tsx             |  12 +-
+ .../public/business/public-business-header.tsx     |  35 +-
+ components/public/catalog/cart-bar.tsx             |  66 +--
+ components/public/catalog/cart-sheet.module.css    | 281 +++++++----
+ components/public/catalog/cart-sheet.tsx           | 231 ++++++---
+ components/public/catalog/catalog-client.tsx       | 197 ++++++--
+ .../public/catalog/customization-modal.module.css  | 224 ++++-----
+ components/public/catalog/customization-modal.tsx  | 204 +++++---
+ components/public/catalog/product-card.tsx         |  92 ++--
+ components/public/checkout/checkout-client.tsx     | 527 +++++++++++++--------
+ docs/CURRENT_PHASE.md                              | 366 +++++++++++++-
+ docs/admin-catalog-preview-mobile-feel-deploy-1.md |   3 +-
+ lib/cart/local.ts                                  | 445 +++++++++++++++--
+ lib/cart/signature.ts                              |  36 +-
+ lib/cart/types.ts                                  |  15 +
+ lib/product-customization/admin-preview-mapper.ts  |  46 +-
+ lib/product-customization/admin.ts                 |   2 +-
+ lib/product-customization/builder-presentation.ts  |   2 +
+ lib/product-customization/order-validation.ts      |   7 +-
+ lib/product-customization/public-shared.ts         |   9 +
+ lib/product-customization/public.ts                | 126 +++--
+ lib/product-customization/shared.ts                |  19 +-
+ tsconfig.tsbuildinfo                               |   2 +-
+ types/database.ts                                  |   3 +
+ 37 files changed, 2499 insertions(+), 1085 deletions(-)
+=== git diff --name-only ===
+ORDEROPS_LIVING_MEMORY.md
+app/admin/(protected)/products/customizations/actions.ts
+app/globals.css
+app/super-admin/(protected)/actions.ts
+components/admin/orders/admin-dashboard-orders.tsx
+components/admin/product-customization/plus-suggestions/plus-edit-modal.tsx
+components/admin/product-customization/plus-suggestions/plus-suggestion-card.tsx
+components/admin/product-customization/plus-suggestions/plus-suggestions-tab.tsx
+components/admin/product-customization/plus-suggestions/plus-suggestions.module.css
+components/product-customization/shared/customization-option-group.tsx
+components/product-customization/shared/customization-option-row.tsx
+components/product-customization/shared/customization-price-summary.tsx
+components/product-customization/shared/customization-shared.module.css
+components/product-customization/shared/upsell-suggestion-group.tsx
+components/public/business/public-business-header.tsx
+components/public/catalog/cart-bar.tsx
+components/public/catalog/cart-sheet.module.css
+components/public/catalog/cart-sheet.tsx
+components/public/catalog/catalog-client.tsx
+components/public/catalog/customization-modal.module.css
+components/public/catalog/customization-modal.tsx
+components/public/catalog/product-card.tsx
+components/public/checkout/checkout-client.tsx
+docs/CURRENT_PHASE.md
+docs/admin-catalog-preview-mobile-feel-deploy-1.md
+lib/cart/local.ts
+lib/cart/signature.ts
+lib/cart/types.ts
+lib/product-customization/admin-preview-mapper.ts
+lib/product-customization/admin.ts
+lib/product-customization/builder-presentation.ts
+lib/product-customization/order-validation.ts
+lib/product-customization/public-shared.ts
+lib/product-customization/public.ts
+lib/product-customization/shared.ts
+tsconfig.tsbuildinfo
+types/database.ts

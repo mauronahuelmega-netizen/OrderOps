@@ -1,0 +1,8 @@
+﻿git : To https://github.com/mauronahuelmega-netizen/OrderOps
+En C:\Users\Oasis Desktop\AppData\Local\Temp\ps-script-8a89c1a6-51c2-4b66-871d-bc0211d4aeff.ps1: 139 Carácter: 1
++ git push origin main 2>&1 | Out-File tmp/deploy-docs-push.txt -Encodi ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (To https://gith...etizen/OrderOps:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+   6d138a6..779bc7c  main -> main

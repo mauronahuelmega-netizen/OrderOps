@@ -1,0 +1,29 @@
+﻿npm warn Unknown env config "devdir". This will stop working in the next major version of npm.
+components/public/catalog/catalog-client.tsx(379,9): error TS2367: This comparison appears to be unintentional because the types '"created"' and '"signature_conflict"' have no overlap.
+components/public/catalog/catalog-client.tsx(386,9): error TS2367: This comparison appears to be unintentional because the types '"created"' and '"parent_missing"' have no overlap.
+lib/cart/local.ts(609,33): error TS2339: Property 'createdAt' does not exist on type 'LocalCartItem'.
+  Property 'createdAt' does not exist on type 'LocalCartLegacyItem'.
+lib/cart/local.ts(735,32): error TS2339: Property 'cartLineId' does not exist on type 'LocalCartItem'.
+  Property 'cartLineId' does not exist on type 'LocalCartLegacyItem'.
+lib/cart/local.ts(739,67): error TS2339: Property 'cartLineId' does not exist on type 'LocalCartItem'.
+  Property 'cartLineId' does not exist on type 'LocalCartLegacyItem'.
+lib/cart/local.ts(744,32): error TS2339: Property 'cartLineId' does not exist on type 'LocalCartItem'.
+  Property 'cartLineId' does not exist on type 'LocalCartLegacyItem'.
+lib/cart/local.ts(750,5): error TS2322: Type 'LocalCartItem' is not assignable to type 'Pick<LocalCartItemV2, "productId" | "selectedGroups">'.
+  Property 'selectedGroups' is missing in type 'LocalCartLegacyItem' but required in type 'Pick<LocalCartItemV2, "productId" | "selectedGroups">'.
+lib/cart/local.ts(758,12): error TS2339: Property 'cartLineId' does not exist on type 'LocalCartItem'.
+  Property 'cartLineId' does not exist on type 'LocalCartLegacyItem'.
+lib/cart/local.ts(764,32): error TS2339: Property 'cartLineId' does not exist on type 'LocalCartItem'.
+  Property 'cartLineId' does not exist on type 'LocalCartLegacyItem'.
+lib/cart/local.ts(771,30): error TS2339: Property 'cartLineId' does not exist on type 'LocalCartItem'.
+  Property 'cartLineId' does not exist on type 'LocalCartLegacyItem'.
+lib/cart/local.ts(776,9): error TS2322: Type '{ configurationSignature: string; updatedAt: string; schemaVersion?: 1 | undefined; productId: string; categoryId: string; name: string; description: string | null; imageUrl: string | null; price: number; quantity: number; } | { ...; }' is not assignable to type 'LocalCartItemV2'.
+  Type '{ configurationSignature: string; updatedAt: string; schemaVersion?: 1 | undefined; productId: string; categoryId: string; name: string; description: string | null; imageUrl: string | null; price: number; quantity: number; }' is missing the following properties from type 'LocalCartItemV2': cartLineId, productName, productImageUrl, baseUnitPrice, and 8 more.
+lib/cart/local.ts(783,59): error TS2339: Property 'cartLineId' does not exist on type 'LocalCartItem'.
+  Property 'cartLineId' does not exist on type 'LocalCartLegacyItem'.
+lib/cart/local.ts(789,69): error TS2339: Property 'cartLineId' does not exist on type 'LocalCartItem'.
+  Property 'cartLineId' does not exist on type 'LocalCartLegacyItem'.
+lib/cart/local.ts(799,57): error TS2339: Property 'cartLineId' does not exist on type 'LocalCartItem'.
+  Property 'cartLineId' does not exist on type 'LocalCartLegacyItem'.
+lib/cart/local.ts(813,30): error TS2339: Property 'cartLineId' does not exist on type 'LocalCartItem'.
+  Property 'cartLineId' does not exist on type 'LocalCartLegacyItem'.

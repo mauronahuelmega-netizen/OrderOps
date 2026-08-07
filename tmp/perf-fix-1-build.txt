@@ -1,0 +1,40 @@
+﻿Route (app)
+Ôöî Ôùï /
+Ôö£ Ôùï /_not-found
+Ôö£ ãÆ /admin
+Ôö£ ãÆ /admin/categories
+Ôö£ ãÆ /admin/dashboard
+Ôö£ ãÆ /admin/dashboard/orders
+Ôö£ ãÆ /admin/kitchen
+Ôö£ ãÆ /admin/login
+Ôö£ ãÆ /admin/manifest.webmanifest
+Ôö£ ãÆ /admin/orders/[id]
+Ôö£ ãÆ /admin/orders/[id]/summary
+Ôö£ ãÆ /admin/orders/[id]/workspace
+Ôö£ ãÆ /admin/products
+Ôö£ ãÆ /admin/products/customizations
+Ôö£ ãÆ /admin/products/preview
+Ôö£ ãÆ /admin/settings
+Ôö£ ãÆ /admin/settings/notifications
+Ôö£ ãÆ /admin/settings/operations
+Ôö£ ãÆ /admin/settings/public
+Ôö£ ãÆ /admin/settings/public/catalogo
+Ôö£ ãÆ /admin/settings/public/landing
+Ôö£ ãÆ /admin/settings/team
+Ôö£ ãÆ /admin/team
+Ôö£ ãÆ /api/internal/orders/[id]/push
+Ôö£ ãÆ /api/observability/public-catalog
+Ôö£ ãÆ /b/[slug]
+Ôö£ ãÆ /b/[slug]/catalogo
+Ôö£ ãÆ /b/[slug]/checkout
+Ôö£ ãÆ /b/[slug]/success
+Ôö£ ãÆ /super-admin
+Ôö£ ãÆ /super-admin/businesses
+Ôöö ãÆ /super-admin/users
+
+
+ãÆ Proxy (Middleware)
+
+Ôùï  (Static)   prerendered as static content
+ãÆ  (Dynamic)  server-rendered on demand
+

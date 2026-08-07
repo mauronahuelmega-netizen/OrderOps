@@ -1,0 +1,1702 @@
+<timestamp>Thursday, Jul 30, 2026, 7:09 PM (UTC-3)</timestamp>
+<user_query>
+# PUBLIC-CATALOG-CHECKOUT-CONVERSION-POLISH-1
+## Segmented Mobile Checkout, Form Clarity & Final Conversion Surface
+
+Actuá como Staff Frontend Engineer, Product Designer, Accessibility Engineer y QA Engineer sobre el repositorio actual de OrderOps.
+
+Tu misión es implementar la fase:
+
+PUBLIC-CATALOG-CHECKOUT-CONVERSION-POLISH-1
+
+El objetivo es convertir el checkout público actual en una superficie mobile clara, compacta, confiable y orientada a conversión, preservando completamente:
+
+- la acción de checkout existente;
+- el contrato del payload;
+- create_order;
+- la validación server-side;
+- los valores internos actuales;
+- el cart schema;
+- LocalCartItem / LocalCartItemV2;
+- pricing;
+- totales;
+- disponibilidad operativa;
+- preview isolation;
+- comportamiento posterior al pedido.
+
+Esta fase es principalmente de UX, presentación, accesibilidad y organización visual.
+
+No rediseñes el dominio.
+No agregues nuevos datos obligatorios.
+No cambies reglas comerciales.
+No implementes Google Places.
+No implementes todavía la normalización o máscara específica de teléfono argentino.
+No crees pedidos reales durante QA.
+No hagas deploy, commit ni push.
+
+Trabajá directamente sobre el estado real del repositorio.
+
+No supongas nombres de componentes, campos, valores, tipos, rutas, actions, callbacks o estilos sin verificarlos primero.
+
+---
+
+# 1. OBJETIVO DE PRODUCTO
+
+El cliente llega al checkout después de:
+
+catálogo
+→ selección de producto
+→ personalización
+→ revisión del carrito
+→ checkout
+
+El checkout debe permitirle responder rápidamente:
+
+1. ¿Qué estoy pidiendo?
+2. ¿Cuánto voy a pagar?
+3. ¿Cómo voy a recibirlo?
+4. ¿Qué datos tengo que completar?
+5. ¿Cómo voy a pagarlo?
+6. ¿Qué falta para poder enviarlo?
+7. ¿Qué ocurrirá al presionar el CTA?
+
+La superficie debe reducir carga cognitiva y evitar que el formulario se perciba como una sucesión extensa y desordenada de campos.
+
+Debe sentirse como un cierre de compra confiable, no como un formulario administrativo.
+
+---
+
+# 2. CONTEXTO CONFIRMADO
+
+El catálogo público ya cuenta con:
+
+- header mobile optimizado;
+- categorías sticky;
+- cards en dos columnas;
+- quick add;
+- modal de personalización;
+- cache client-side del modal;
+- cart FAB compacto;
+- cart sheet jerárquico;
+- productos simples;
+- productos personalizados V2;
+- upsells child;
+- cantidades editables;
+- total consistente;
+- CTA “Continuar al checkout”;
+- checkout público funcional;
+- checkout preview bloqueado;
+- carrito preview aislado;
+- create_order y validación server-side existentes;
+- light y dark theme;
+- infraestructura PWA y CSP existente.
+
+La fase anterior confirmó:
+
+- cart sheet → checkout destination intacto;
+- pricing intacto;
+- cart schema intacto;
+- simple / parent / upsell representados;
+- cantidades y ediciones locales con 0 POST;
+- checkout público muestra “Enviar pedido”;
+- no se ejecutó submit;
+- no se creó pedido real;
+- preview admin quedó UNVERIFIED por falta de auth.
+
+Decisiones ya cerradas para esta fase:
+
+- checkout visualmente segmentado;
+- secciones claras;
+- mobile-first;
+- CTA final de alta claridad;
+- resumen del pedido legible;
+- estados de error customer-facing;
+- no Google Places;
+- no nuevas dependencias;
+- no cambios de DB/RLS/RPC;
+- no cambios de create_order;
+- no cambios del payload;
+- no pedidos reales durante QA.
+
+---
+
+# 3. PRINCIPIO RECTOR
+
+La mejora debe reorganizar y presentar mejor lo que ya existe.
+
+No debe cambiar qué información se solicita, qué valores se envían ni cómo se crea el pedido.
+
+La regla central es:
+
+MISMO DOMINIO
++ MISMO PAYLOAD
++ MISMA VALIDACIÓN
++ MISMO SUBMIT
++ MEJOR JERARQUÍA VISUAL
++ MENOR FRICCIÓN
+
+Si una mejora visual requiere cambiar el contrato de checkout o create_order, no implementarla en esta fase.
+
+Documentar el bloqueo en lugar de improvisar una evolución del dominio.
+
+---
+
+# 4. PREFLIGHT OBLIGATORIO
+
+Antes de modificar código, ejecutar:
+
+- git status --short
+- git branch --show-current
+- git rev-parse --short HEAD
+- git diff --stat
+- git diff --name-only
+
+Registrar:
+
+- branch actual;
+- HEAD actual;
+- archivos dirty esperados;
+- cambios acumulados de catálogo;
+- cambios del cart sheet;
+- documentación acumulada;
+- archivo previo de super-admin;
+- cualquier modificación ajena.
+
+Confirmar específicamente si existen cambios previos en:
+
+- checkout;
+- create_order;
+- actions;
+- migrations;
+- lib/cart;
+- Product Customization;
+- pricing;
+- localStorage;
+- cache;
+- CSP;
+- envs.
+
+No ejecutar:
+
+- git reset;
+- git restore;
+- git checkout sobre archivos dirty;
+- git clean;
+- stash;
+- rebase;
+- merge;
+- commit;
+- push.
+
+No limpiar cambios ajenos.
+
+No incluir modificaciones previas no relacionadas en esta fase.
+
+---
+
+# 5. SOURCE AUDIT OBLIGATORIO
+
+Antes de implementar, localizar e inspeccionar como mínimo:
+
+## 5.1 Checkout route y componentes
+
+- route pública `/b/[slug]/checkout`;
+- page server si existe;
+- client component del formulario;
+- CSS module o estilos globales del checkout;
+- componentes compartidos de formulario;
+- componentes de resumen del pedido;
+- success route o estado posterior;
+- empty cart behavior.
+
+## 5.2 Flujo de datos
+
+Auditar:
+
+- cómo se hidrata el carrito;
+- cómo se distingue carrito legacy y V2;
+- cómo se construyen las líneas jerárquicas;
+- cómo se calcula el total;
+- cómo se muestran personalizaciones;
+- cómo se muestran upsells;
+- cómo se serializa el carrito para submit;
+- cuándo se limpia localStorage;
+- qué sucede después del success.
+
+## 5.3 Formulario
+
+Inventariar todos los campos reales:
+
+- nombre;
+- teléfono;
+- dirección;
+- localidad;
+- referencias;
+- notas;
+- modalidad de entrega/retiro;
+- forma de pago;
+- efectivo y monto, si existe;
+- cualquier otro campo real.
+
+Para cada campo documentar:
+
+- nombre visible;
+- name HTML;
+- valor inicial;
+- tipo;
+- obligatoriedad;
+- validación client-side;
+- validación server-side;
+- valor enviado;
+- condición de render;
+- autocomplete actual;
+- inputMode actual;
+- mensajes de error.
+
+No inventar campos que no existan.
+
+## 5.4 Modalidad de recepción
+
+Auditar:
+
+- valores internos reales;
+- labels customer-facing actuales;
+- si existen retiro y entrega;
+- si alguna opción depende de configuración del negocio;
+- cuál es el default;
+- qué campos se ocultan o requieren según la selección;
+- si cambia pricing;
+- si cambia disponibilidad;
+- si afecta el payload.
+
+No asumir que los valores internos son `pickup`, `delivery`, `retiro` o `envio`.
+
+Usar exclusivamente los valores reales encontrados.
+
+## 5.5 Forma de pago
+
+Auditar:
+
+- opciones reales;
+- valores internos;
+- disponibilidad;
+- default;
+- campos condicionales;
+- validación;
+- impacto en payload.
+
+No agregar Mercado Pago, transferencia, efectivo u otra opción si no existe actualmente.
+
+## 5.6 Submit
+
+Inspeccionar, pero no modificar:
+
+- action;
+- handler;
+- create_order;
+- validación server-side;
+- idempotencia;
+- loading state;
+- error handling;
+- success behavior;
+- preview guard;
+- store-open/on-demand guard.
+
+Registrar exactamente:
+
+- archivo;
+- función;
+- payload;
+- campos;
+- resultado;
+- errores;
+- condición de preview.
+
+## 5.7 Preview
+
+Auditar:
+
+- detección server-side de preview;
+- carrito aislado;
+- submit bloqueado;
+- copy de seguridad;
+- disabled state;
+- ausencia de success;
+- ruta del iframe.
+
+## 5.8 Iconos y tokens
+
+Confirmar:
+
+- lucide-react disponible;
+- tokens semánticos;
+- componentes input/button existentes;
+- patrones focus-visible;
+- safe-area;
+- dark theme.
+
+No agregar dependencias.
+
+---
+
+# 6. SOURCE AUDIT REPORT
+
+Antes de tocar código, elaborar internamente una tabla con:
+
+| Área | Implementación actual | Riesgo | Decisión |
+|------|-----------------------|--------|----------|
+| Checkout route | real | — | preservar |
+| Cart hydration | real | — | preservar |
+| Fulfillment values | reales | alto | no renombrar internamente |
+| Payment values | reales | alto | no modificar |
+| Payload | real | crítico | congelado |
+| Validation | real | crítico | conservar reglas |
+| Submit action | real | crítico | no modificar |
+| Preview guard | real | crítico | no modificar |
+| Success cleanup | real | crítico | no modificar |
+| UI/CSS | real | bajo | alcance principal |
+
+No implementar hasta comprender estos límites.
+
+---
+
+# 7. ALCANCE PERMITIDO
+
+Se permite modificar solamente lo necesario para:
+
+- jerarquía visual del checkout;
+- layout mobile/desktop;
+- header;
+- navegación segura hacia el catálogo o carrito;
+- agrupación de campos;
+- segmented control sobre opciones ya existentes;
+- labels y ayudas visuales customer-facing;
+- presentación de errores existentes;
+- estructura del resumen;
+- presentación de productos personalizados;
+- presentación de upsells;
+- footer o CTA sticky;
+- loading state visual;
+- accessibility;
+- responsive;
+- microinteracciones CSS;
+- documentación.
+
+Archivos probables, sujetos al source audit:
+
+- app/b/[slug]/checkout/page.tsx
+- componente client del checkout
+- checkout.module.css
+- componentes presentacionales de checkout
+- algún helper exclusivamente visual
+- docs/CURRENT_PHASE.md
+- ORDEROPS_LIVING_MEMORY.md
+- docs/public-catalog-checkout-conversion-polish-1.md
+
+No modificar archivos adicionales por conveniencia.
+
+---
+
+# 8. FUERA DE ALCANCE — BLOQUEANTE
+
+No modificar ni implementar:
+
+- DB.
+- Supabase.
+- RLS.
+- RPC.
+- migraciones.
+- create_order.
+- checkout server action.
+- payload del checkout.
+- nombres de propiedades enviados.
+- tipos persistidos.
+- cart schema.
+- LocalCartItem.
+- LocalCartItemV2.
+- signatures.
+- localStorage keys.
+- merge/dedupe del carrito.
+- pricing.
+- subtotal.
+- descuentos.
+- impuestos.
+- delivery fee.
+- stock.
+- store sessions.
+- on-demand gate.
+- reglas de disponibilidad.
+- Product Customization.
+- snapshots.
+- parent/child relationships.
+- cache.
+- cache tags.
+- noStore.
+- revalidation.
+- observability.
+- CSP.
+- PWA.
+- image loader.
+- envs.
+- Google Maps.
+- Google Places.
+- geocoding.
+- autocompletado de dirección externo.
+- normalización específica de teléfono argentino.
+- máscara de teléfono.
+- conversión automática a +54.
+- validación telefónica nueva.
+- post-add upsell.
+- nuevas formas de pago.
+- nuevas modalidades de entrega.
+- login.
+- cuenta de cliente.
+- cupones.
+- propina.
+- scheduling.
+- deploy.
+- commit.
+- push.
+- pedidos reales.
+
+No tocar el modal de personalización ni el cart sheet salvo una corrección mínima imprescindible para integración visual. Cualquier modificación en ellos debe justificarse explícitamente.
+
+---
+
+# 9. DECISIONES DE PRODUCTO CERRADAS
+
+## 9.1 Header del checkout
+
+Crear o pulir un header compacto con:
+
+- acción volver;
+- título principal: “Finalizá tu pedido”;
+- texto secundario breve:
+  “Completá tus datos para enviarlo al negocio.”
+
+La acción volver debe dirigirse a un destino tenant-safe.
+
+Prioridad:
+
+1. reutilizar el control o URL existente;
+2. volver al catálogo del mismo slug;
+3. no usar `router.back()` si puede sacar al usuario del tenant o de la aplicación.
+
+El control debe tener:
+
+- target mínimo de 44 × 44 px;
+- icono existente;
+- aria-label claro;
+- focus-visible.
+
+No agregar breadcrumbs extensos.
+
+---
+
+## 9.2 Jerarquía general
+
+Mobile:
+
+1. Header.
+2. Cómo recibís el pedido.
+3. Tus datos.
+4. Datos condicionales de entrega o retiro.
+5. Forma de pago.
+6. Notas, si existen.
+7. Resumen del pedido.
+8. CTA final sticky.
+
+Desktop:
+
+- formulario principal;
+- resumen del pedido en columna secundaria;
+- summary sticky solo si no produce scroll anidado o solapamiento;
+- ancho máximo coherente con el catálogo;
+- sin convertirlo en dashboard.
+
+No crear una colección excesiva de cards dentro de cards.
+
+Cada sección debe tener:
+
+- título;
+- descripción breve solo cuando aporte información;
+- campos relacionados;
+- separación clara.
+
+---
+
+## 9.3 Segmented control de modalidad
+
+Transformar la selección existente de modalidad en un segmented control accesible y compacto.
+
+Ejemplos conceptuales:
+
+[ Retiro ] [ Envío ]
+
+o los labels reales encontrados.
+
+Condiciones obligatorias:
+
+- usar exclusivamente opciones existentes;
+- conservar exactamente los values internos;
+- conservar el default;
+- conservar disabled states;
+- conservar disponibilidad del negocio;
+- conservar campos condicionales;
+- conservar payload;
+- conservar validación;
+- cero fetch al alternar;
+- no cambiar precios.
+
+Implementación preferida:
+
+- `fieldset`;
+- `legend` accesible;
+- inputs radio reales;
+- labels estilizados;
+- iconos opcionales únicamente si lucide ya está instalado;
+- navegación con teclado;
+- focus-visible;
+- target táctil ≥44 px.
+
+No implementar el segmented control con simples `div` clickeables.
+
+No esconder el input de una forma que elimine accesibilidad.
+
+Si solamente existe una modalidad habilitada:
+
+- no mostrar un selector falso;
+- presentar la modalidad como estado confirmado;
+- no permitir cambiar a una opción inexistente.
+
+---
+
+## 9.4 Sección “Tus datos”
+
+Agrupar solamente los campos reales de identificación y contacto.
+
+Labels claros y persistentes.
+
+No utilizar placeholders como único label.
+
+Permitir, cuando sea compatible con el campo existente:
+
+- `autoComplete="name"`;
+- `autoComplete="tel"`;
+- `inputMode="tel"`;
+- `enterKeyHint`;
+- `autoCapitalize`;
+- atributos semánticos nativos.
+
+No transformar el número telefónico.
+
+No agregar:
+
+- prefijo +54 automático;
+- máscara;
+- parser;
+- normalizador;
+- librería telefónica;
+- validación argentina nueva.
+
+Preservar exactamente el valor que actualmente consume el submit.
+
+---
+
+## 9.5 Datos de entrega
+
+Mostrar los campos existentes solamente cuando la modalidad real los requiera.
+
+Agrupar bajo un heading customer-facing, por ejemplo:
+
+“¿Dónde lo entregamos?”
+
+Usar los nombres reales de los campos.
+
+No implementar Google Places.
+
+No agregar scripts externos.
+
+No agregar mapa.
+
+No consultar APIs.
+
+No guardar coordenadas.
+
+No cambiar el address contract.
+
+Se permite mejorar:
+
+- label;
+- spacing;
+- orden visual;
+- hint;
+- autocomplete HTML estándar, si no altera valores;
+- asociación label/input;
+- mensajes de error.
+
+No inventar barrio, piso, departamento, entrecalles o referencias si esos campos no existen.
+
+No concatenar o separar la dirección de manera diferente a la actual.
+
+---
+
+## 9.6 Datos de retiro
+
+Cuando la modalidad sea retiro:
+
+- ocultar campos de entrega solo si ya es el comportamiento actual;
+- mostrar información real del negocio si ya está disponible;
+- no inventar dirección, horarios ni tiempos;
+- no consultar otra fuente;
+- no cambiar reglas de obligatoriedad.
+
+Puede mostrarse un bloque informativo compacto con icono y copy existente.
+
+No introducir un mapa.
+
+---
+
+## 9.7 Forma de pago
+
+Presentar las opciones existentes como cards-radio o segmented options claras.
+
+Debe ser evidente:
+
+- cuál está seleccionada;
+- cuáles están habilitadas;
+- si existe información secundaria;
+- qué campo adicional se requiere.
+
+Preservar:
+
+- values internos;
+- payload;
+- default;
+- reglas condicionales;
+- validación;
+- cálculo.
+
+No agregar métodos nuevos.
+
+No renombrar valores persistidos.
+
+No convertir botones visuales en valores distintos.
+
+Si existe “efectivo” y un campo de monto:
+
+- preservar regla actual;
+- mejorar label y hint;
+- no calcular vuelto con lógica nueva;
+- no inventar validación monetaria.
+
+---
+
+## 9.8 Notas del pedido
+
+Si ya existe un campo de notas:
+
+- mantenerlo opcional si actualmente es opcional;
+- mostrarlo como textarea;
+- usar label persistente;
+- incluir contador solo si ya existe un límite real conocido;
+- no inventar límite;
+- no sanitizar de forma diferente;
+- no modificar payload.
+
+Copy sugerido, solo si es compatible:
+
+“Notas para el pedido”
+
+Hint posible:
+
+“Aclaraciones que el negocio deba tener en cuenta.”
+
+No prometer que todas las solicitudes podrán cumplirse.
+
+---
+
+## 9.9 Resumen del pedido
+
+Reutilizar helpers y formato customer-facing existentes.
+
+El resumen debe representar:
+
+- productos simples;
+- quantity;
+- productos personalizados;
+- `displaySummary` o equivalente;
+- upsells asociados;
+- line totals;
+- total final.
+
+No mostrar:
+
+- JSON;
+- IDs;
+- signatures;
+- snapshot raw;
+- parent_order_item_id;
+- estructura técnica.
+
+No reconstruir personalizaciones desde datos diferentes si ya existe un presenter estable.
+
+No recalcular pricing.
+
+No dividir lineTotal para inferir precios ambiguos.
+
+Jerarquía sugerida:
+
+Producto × cantidad                  total línea
+Personalización elegida
+Adicional / Plus
+
+El resumen del checkout puede ser visualmente más compacto que el cart sheet porque aquí su función es confirmación, no edición.
+
+No agregar steppers ni edición dentro del checkout en esta fase.
+
+Puede existir una acción secundaria:
+
+“Editar pedido”
+
+que vuelva al catálogo o carrito utilizando el flujo existente y tenant-safe.
+
+No duplicar un segundo carrito completo dentro del checkout.
+
+---
+
+## 9.10 Totales
+
+Mostrar solamente conceptos existentes.
+
+Siempre:
+
+- Total.
+
+Solamente si ya existen datos reales:
+
+- subtotal;
+- envío;
+- descuento;
+- otros conceptos.
+
+No mostrar filas ficticias con:
+
+- “Envío a calcular”;
+- “Impuestos incluidos”;
+- “Descuento”;
+- “Servicio”;
+- “Propina”;
+
+salvo que el modelo real ya las posea.
+
+Usar el formatter monetario existente.
+
+El total debe coincidir exactamente con:
+
+- cart sheet;
+- payload;
+- checkout action;
+- create_order.
+
+---
+
+## 9.11 CTA sticky
+
+En mobile, implementar o pulir un footer sticky/fixed seguro.
+
+Debe incluir:
+
+- total final;
+- CTA de submit;
+- safe-area inferior;
+- estado loading;
+- estado disabled;
+- copy de error o seguridad solo cuando corresponda.
+
+Para checkout público normal, CTA preferido:
+
+“Enviar pedido · $X”
+
+Usar el total real y el formatter existente.
+
+Si la arquitectura actual hace más seguro mantener:
+
+“Enviar pedido”
+
+con una fila “Total” separada, conservar esa estructura y documentar la decisión.
+
+El botón debe continuar siendo el submit real del mismo formulario.
+
+No crear un segundo handler.
+
+No duplicar submit.
+
+No llamar manualmente a create_order desde un nuevo callback.
+
+Si el footer queda fuera del `<form>`, utilizar de forma segura el atributo HTML `form` apuntando al formulario real, sin crear otra ruta de ejecución.
+
+Durante loading:
+
+- evitar doble envío;
+- conservar protección actual;
+- mostrar copy breve, por ejemplo “Enviando…”;
+- no cambiar idempotencia;
+- no implementar optimistic success.
+
+En preview:
+
+- preservar disabled state;
+- preservar copy de confirmación deshabilitada;
+- preservar guard UI y server;
+- no permitir submit;
+- no navegar a success;
+- no llamar create_order.
+
+---
+
+## 9.12 Validación
+
+No crear reglas nuevas.
+
+Reutilizar:
+
+- schemas;
+- predicates;
+- error maps;
+- server errors;
+- validación client-side existente.
+
+Mejorar solamente presentación y timing visual cuando sea seguro.
+
+Reglas UX:
+
+- no mostrar el formulario completamente rojo al entrar;
+- errores inline junto al campo;
+- texto específico;
+- `aria-invalid`;
+- `aria-describedby`;
+- reservar espacio razonable sin grandes layout shifts;
+- focus-visible;
+- conservar valor escrito;
+- no limpiar campos ante error;
+- no usar toast como único canal;
+- no ocultar errores server-side.
+
+Si existe submit attempt state, reutilizarlo.
+
+Si no existe touched state y agregarlo implicaría duplicar validación o modificar reglas, no inventarlo.
+
+En ese caso, conservar timing actual y mejorar solo el estilo.
+
+Cuando el submit detecta errores client-side:
+
+- enfocar o desplazar al primer campo inválido solo si puede hacerse con la infraestructura existente;
+- respetar `prefers-reduced-motion`;
+- no agregar una librería de scroll.
+
+No afirmar que esta conducta fue implementada si no fue posible.
+
+---
+
+## 9.13 Errores generales
+
+Los errores de submit deben mostrarse en una superficie accesible y clara.
+
+Debe existir:
+
+- `role="alert"` o equivalente;
+- mensaje customer-facing;
+- posibilidad de corregir campos;
+- no pérdida del carrito;
+- no pérdida de los datos ingresados cuando la arquitectura ya los conserva.
+
+No mostrar códigos internos, stack traces, RPC names ni mensajes raw de base de datos.
+
+No cambiar el mapping de errores sin auditarlo.
+
+---
+
+## 9.14 Empty cart
+
+Preservar la protección actual.
+
+Si el usuario accede al checkout sin productos:
+
+- no renderizar un formulario enviable;
+- mostrar un empty state claro;
+- ofrecer volver al catálogo del mismo tenant;
+- no crear carrito artificial;
+- no agregar productos demo;
+- no llamar create_order;
+- no alterar localStorage.
+
+Copy sugerido:
+
+“Tu pedido está vacío”
+
+“Agregá productos antes de continuar.”
+
+---
+
+## 9.15 Negocio no disponible
+
+Preservar cualquier gate real de:
+
+- negocio cerrado;
+- sesión cerrada;
+- on-demand desactivado;
+- pedidos no aceptados.
+
+No permitir que el polish visual evite o esconda ese gate.
+
+No cambiar reglas ni mensajes server-side sin comprenderlos.
+
+Puede mejorarse la presentación de un estado ya existente, pero no su lógica.
+
+---
+
+# 10. ESTILO VISUAL
+
+El checkout debe compartir lenguaje visual con:
+
+- catálogo;
+- modal de personalización;
+- cart sheet;
+- light theme;
+- dark theme.
+
+Usar:
+
+- tokens existentes;
+- radios consistentes;
+- jerarquía tipográfica;
+- bordes suaves;
+- superficies neutrales;
+- spacing compacto;
+- sombras mínimas;
+- iconos lucide existentes.
+
+Evitar:
+
+- glass excesivo;
+- backdrop-filter;
+- blur costoso;
+- gradientes decorativos;
+- cards demasiado anidadas;
+- campos gigantes;
+- bordes demasiado contrastados;
+- texto gris con contraste insuficiente;
+- nuevos colores hardcodeados;
+- estética de panel admin.
+
+La página debe sentirse premium, pero continuar siendo rápida.
+
+---
+
+# 11. RESPONSIVE
+
+Validar como mínimo:
+
+- 320 × 568.
+- 360 × 800.
+- 390 × 844.
+- 412 × 915.
+- 430 × 932.
+- tablet.
+- desktop.
+
+Requisitos:
+
+- cero overflow horizontal;
+- labels no truncados;
+- segmented control usable;
+- campos condicionales sin saltos rotos;
+- teclado mobile no tapa permanentemente el campo activo;
+- footer accesible;
+- contenido no queda debajo del CTA;
+- safe-area respetada;
+- summary legible;
+- precios no se montan;
+- mensajes de error envuelven;
+- botones ≥44 px;
+- desktop no queda excesivamente ancho;
+- dark/light coherentes.
+
+En 320 px:
+
+- segmented control puede apilarse si es necesario;
+- no reducir targets táctiles;
+- no comprimir labels hasta volverlos ilegibles.
+
+---
+
+# 12. PERFORMANCE
+
+Esta fase no debe agregar carga remota.
+
+Validar:
+
+- carga inicial: sin fetch nuevo atribuible al polish;
+- cambiar modalidad: 0 fetch;
+- cambiar pago: 0 fetch;
+- escribir campos: 0 fetch;
+- abrir/cerrar resumen: 0 fetch;
+- validación client-side: 0 fetch;
+- no autosave;
+- no geocoding;
+- no Google Places;
+- no analytics nuevos;
+- no prefetch custom;
+- no nueva dependencia;
+- no Framer Motion;
+- no blur costoso;
+- no listener global sin cleanup.
+
+El único request de creación debe continuar siendo el submit existente.
+
+No ejecutarlo durante QA.
+
+---
+
+# 13. ACCESIBILIDAD
+
+Validar:
+
+- headings en orden lógico;
+- formulario con label accesible;
+- fieldset/legend para grupos;
+- radios reales;
+- segmented control keyboard-accessible;
+- aria-invalid;
+- aria-describedby;
+- mensajes de error asociados;
+- botones iconográficos con aria-label;
+- foco visible;
+- estados disabled;
+- loading comunicado;
+- `aria-live` o `role=status` donde ya sea apropiado;
+- contraste;
+- target táctil ≥44 px;
+- navegación completa por teclado;
+- no nested buttons;
+- reduced-motion;
+- orden DOM coherente;
+- autocomplete semántico cuando sea seguro.
+
+No afirmar:
+
+- focus trap;
+- screen reader PASS;
+- VoiceOver PASS;
+- TalkBack PASS;
+
+si no fueron verificados realmente.
+
+---
+
+# 14. MATRIZ DE QA FUNCIONAL
+
+No crear pedidos reales.
+
+## Caso A — Checkout con producto simple
+
+Usar un producto simple real.
+
+Validar:
+
+- hidratación;
+- nombre;
+- cantidad;
+- line total;
+- total final;
+- formulario visible;
+- CTA visible;
+- no submit.
+
+## Caso B — Producto personalizado
+
+Usar Doble Smash u otro producto configurado real.
+
+Validar:
+
+- parent;
+- personalizaciones;
+- deltas customer-facing;
+- total;
+- ausencia de JSON;
+- payload no modificado;
+- no submit.
+
+## Caso C — Producto personalizado + upsell
+
+Validar:
+
+- child subordinado;
+- label customer-facing;
+- precio;
+- total;
+- parent relationship intacta;
+- no submit.
+
+Si no existe configuración utilizable, marcar UNVERIFIED.
+
+No modificar DB ni configuración para fabricarla.
+
+## Caso D — Modalidad principal 1
+
+Usar la primera modalidad real habilitada.
+
+Validar:
+
+- selected state;
+- campos correctos;
+- required fields reales;
+- payload values mediante source audit;
+- 0 fetch al seleccionar.
+
+No enviar.
+
+## Caso E — Modalidad principal 2
+
+Usar la segunda modalidad real, si existe.
+
+Validar:
+
+- conditional rendering;
+- valores conservados o limpiados según comportamiento previo;
+- required fields;
+- dirección;
+- 0 fetch.
+
+No enviar.
+
+Si no existe segunda modalidad, marcar NOT APPLICABLE.
+
+## Caso F — Forma de pago
+
+Probar todas las formas reales visibles.
+
+Validar:
+
+- selected state;
+- campos condicionales;
+- disabled;
+- values internos;
+- 0 fetch.
+
+No enviar.
+
+## Caso G — Errores de formulario
+
+Intentar submit solamente en un entorno donde el handler pueda ser interceptado antes de cualquier creación real, o validar la función client-side directamente.
+
+Prioridad:
+
+1. probar validación client-side sin alcanzar la action;
+2. impedir network submit;
+3. verificar errores inline;
+4. no crear pedido.
+
+Si no puede garantizarse que el submit será interceptado:
+
+- no presionarlo;
+- validar source y estados manualmente;
+- marcar submit runtime como NOT EXECUTED BY SCOPE.
+
+No asumir que no se creará un pedido.
+
+## Caso H — Loading visual
+
+Validar por source o mediante mock seguro.
+
+No ejecutar create_order real.
+
+No agregar mocks permanentes al código.
+
+## Caso I — Empty cart
+
+Validar:
+
+- no formulario enviable;
+- empty state;
+- vuelta tenant-safe;
+- no errores;
+- no pedido.
+
+## Caso J — Preview admin
+
+Si existe auth:
+
+- abrir preview;
+- carrito preview;
+- navegar al checkout dentro del iframe;
+- comprobar segmented/form/summary;
+- CTA bloqueado;
+- confirmación deshabilitada;
+- no success;
+- carrito público normal intacto.
+
+Si no existe auth:
+
+- UNVERIFIED;
+- estado PASS WITH PREVIEW QA DEBT;
+- no inventar PASS.
+
+## Caso K — Negocio cerrado
+
+Validar solo si puede hacerse sin mutaciones productivas ni DB.
+
+De lo contrario:
+
+- source audit;
+- UNVERIFIED runtime;
+- no modificar sesión;
+- no cambiar on-demand.
+
+## Caso L — Back navigation
+
+Validar:
+
+- vuelve al catálogo correcto;
+- mismo slug;
+- carrito conservado;
+- sin pérdida accidental;
+- sin navegación fuera del tenant.
+
+---
+
+# 15. NETWORK QA
+
+Registrar por separado:
+
+| Interacción | Requests nuevos esperados |
+|-------------|---------------------------|
+| Cambiar modalidad | 0 |
+| Cambiar pago | 0 |
+| Escribir nombre | 0 |
+| Escribir teléfono | 0 |
+| Escribir dirección | 0 |
+| Abrir resumen | 0 |
+| Validación client-side | 0 |
+| Volver al catálogo | navegación normal |
+| Submit | NO EJECUTADO |
+
+Revisar:
+
+- Network;
+- Next-Action;
+- fetch/XHR;
+- consola;
+- hydration warnings;
+- React key warnings;
+- controlled/uncontrolled warnings.
+
+---
+
+# 16. SEGURIDAD Y NO REGRESSION
+
+Confirmar explícitamente:
+
+- no DB;
+- no RLS;
+- no RPC;
+- no migration;
+- no create_order change;
+- no checkout action change;
+- no payload change;
+- no cart schema change;
+- no localStorage change;
+- no pricing change;
+- no total formula change;
+- no Product Customization change;
+- no cache change;
+- no noStore change;
+- no revalidation change;
+- no CSP change;
+- no PWA change;
+- no env change;
+- no Google Places;
+- no phone parser;
+- no new dependencies;
+- no order real;
+- no deploy;
+- no commit;
+- no push.
+
+Inspeccionar `git diff` para comprobarlo.
+
+---
+
+# 17. VALIDACIÓN TÉCNICA
+
+Ejecutar:
+
+- npx tsc --noEmit
+- npm run build
+- git diff --check
+- git status --short
+- git diff --stat
+- git diff --name-only
+
+Lint:
+
+- ejecutar solamente si es seguro;
+- separar deuda histórica de errores nuevos;
+- no corregir archivos ajenos.
+
+Revisar el diff completo manualmente.
+
+No dar PASS si:
+
+- cambia el payload;
+- cambia create_order;
+- cambia una regla required;
+- cambia un value interno;
+- cambia pricing;
+- el total diverge;
+- preview puede enviar pedidos;
+- se pierde el carrito;
+- se rompe producto V2;
+- se rompe upsell;
+- existe overflow P0/P1;
+- aparece submit duplicado.
+
+---
+
+# 18. EVIDENCIA VISUAL
+
+Tomar screenshots de:
+
+1. Header y segmented control.
+2. Modalidad retiro o equivalente.
+3. Modalidad entrega o equivalente.
+4. Forma de pago.
+5. Producto personalizado en summary.
+6. Upsell en summary.
+7. Footer sticky con total.
+8. Estado con error inline seguro.
+9. Empty cart.
+10. 320 px.
+11. 360 px.
+12. 412 px.
+13. Desktop.
+14. Dark theme.
+15. Light theme.
+16. Preview, si hay auth.
+
+No clasificar emulación como dispositivo real.
+
+Android Chrome real continúa como DEVICE QA DEBT si no hay hardware.
+
+---
+
+# 19. DOCUMENTACIÓN OBLIGATORIA
+
+Crear:
+
+docs/public-catalog-checkout-conversion-polish-1.md
+
+Debe incluir:
+
+1. Estado.
+2. Resumen ejecutivo.
+3. Preflight.
+4. Source audit.
+5. Checkout architecture.
+6. Form fields inventory.
+7. Fulfillment model.
+8. Payment model.
+9. Payload contract.
+10. Submit boundary.
+11. Preview boundary.
+12. Archivos creados.
+13. Archivos modificados.
+14. Layout.
+15. Header/navigation.
+16. Segmented control.
+17. Contact fields.
+18. Delivery/pickup conditional fields.
+19. Payment methods.
+20. Notes.
+21. Order summary.
+22. Pricing and totals.
+23. CTA/footer.
+24. Validation UX.
+25. Error handling.
+26. Empty cart.
+27. Store availability.
+28. Responsive.
+29. Accessibility.
+30. Performance/network.
+31. Runtime/browser QA.
+32. Resultado de comandos.
+33. Hallazgos con severidad.
+34. Seguridad/no-regression.
+35. Deuda residual.
+36. Rollback plan.
+37. Próximo paso.
+
+Actualizar al inicio de:
+
+docs/CURRENT_PHASE.md
+
+o el path real existente de CURRENT_PHASE.
+
+Actualizar:
+
+ORDEROPS_LIVING_MEMORY.md
+
+solamente con hechos estables:
+
+- checkout segmentado implementado;
+- payload intacto;
+- create_order intacto;
+- preview guard intacto;
+- Google Places no implementado;
+- phone AR no implementado;
+- submit real no ejecutado;
+- deudas reales de preview/device.
+
+No documentar como PASS algo no ejecutado.
+
+---
+
+# 20. CRITERIOS DE ACEPTACIÓN
+
+La fase puede quedar PASS cuando:
+
+- checkout tiene jerarquía clara;
+- segmented control usa values reales;
+- campos condicionales funcionan;
+- payment options conservan values;
+- payload permanece idéntico;
+- action permanece idéntica;
+- create_order permanece idéntico;
+- resumen simple/V2/upsell es correcto;
+- total coincide;
+- CTA utiliza el submit existente;
+- preview sigue bloqueado;
+- empty cart funciona;
+- no hay nuevos fetch locales;
+- no hay errores de consola nuevos;
+- no hay overflow en 320 px;
+- light/dark funcionan;
+- tsc PASS;
+- build PASS;
+- git diff check PASS;
+- no regresiones P0/P1.
+
+Puede quedar:
+
+PASS WITH PREVIEW QA DEBT
+
+si el iframe autenticado no puede verificarse.
+
+Puede quedar:
+
+PASS WITH DEVICE QA DEBT
+
+si falta Android/iOS real.
+
+Debe registrar:
+
+SUBMIT REAL NOT EXECUTED BY SCOPE
+
+porque no se deben crear pedidos reales.
+
+Debe quedar PARTIAL o BLOCKED si:
+
+- requiere modificar payload;
+- requiere modificar checkout action;
+- requiere modificar create_order;
+- requiere una migración;
+- segmented control cambia los values;
+- total diverge;
+- preview pierde su guard;
+- empty cart permite submit;
+- se rompe V2;
+- se rompe upsell;
+- el submit queda duplicado;
+- aparece una regresión P0/P1.
+
+No maquillar esos estados.
+
+---
+
+# 21. ROLLBACK
+
+El rollback debe poder hacerse revirtiendo únicamente:
+
+- markup presentacional del checkout;
+- CSS del checkout;
+- componentes presentacionales pequeños;
+- wiring visual local;
+- documentación.
+
+El rollback no debe tocar:
+
+- action;
+- create_order;
+- payload;
+- schemas;
+- cart;
+- localStorage;
+- Product Customization;
+- pricing;
+- cache;
+- preview guard;
+- success cleanup.
+
+Documentar paths exactos.
+
+---
+
+# 22. PRÓXIMO PASO RECOMENDADO
+
+Si esta fase queda PASS:
+
+PUBLIC-CATALOG-INTEGRATED-CONVERSION-QA-1
+
+para validar el funnel completo:
+
+catálogo
+→ modal
+→ carrito
+→ checkout
+
+sin pedido real.
+
+Después:
+
+PUBLIC-CATALOG-POST-ADD-UPSELL-SPEC-1
+
+No implementar el post-add upsell dentro de esta fase.
+
+---
+
+# 23. PROHIBICIONES FINALES
+
+No:
+
+- improvisar dominio;
+- agregar campos;
+- agregar valores;
+- modificar enums;
+- cambiar payload;
+- cambiar action;
+- cambiar create_order;
+- cambiar pricing;
+- cambiar cart schema;
+- cambiar localStorage;
+- crear pedido;
+- hacer submit real;
+- implementar Google Places;
+- implementar phone AR;
+- instalar dependencias;
+- refactorizar ampliamente;
+- tocar DB;
+- hacer deploy;
+- hacer commit;
+- hacer push;
+- limpiar dirty tree ajeno;
+- afirmar QA no ejecutada.
+
+---
+
+# 24. FORMATO DE RESPUESTA FINAL
+
+Entregar exactamente:
+
+## 1. Resumen ejecutivo
+
+## 2. Estado final
+
+## 3. Archivos creados
+
+## 4. Archivos modificados
+
+## 5. Preflight
+
+## 6. Source audit
+
+## 7. Arquitectura real del checkout
+
+## 8. Inventario de campos
+
+## 9. Modelo de modalidad encontrado
+
+## 10. Modelo de pagos encontrado
+
+## 11. Payload y submit boundary
+
+## 12. Implementación
+
+## 13. Layout general
+
+## 14. Header y navegación
+
+## 15. Segmented control
+
+## 16. Datos de contacto
+
+## 17. Entrega / retiro
+
+## 18. Forma de pago
+
+## 19. Notas
+
+## 20. Resumen del pedido
+
+## 21. Productos personalizados y upsells
+
+## 22. Precios y total
+
+## 23. CTA sticky
+
+## 24. Validación y errores
+
+## 25. Empty cart
+
+## 26. Store availability boundary
+
+## 27. Responsive QA
+
+## 28. Accessibility
+
+## 29. Performance / network
+
+## 30. Preview admin boundary
+
+## 31. Runtime/browser QA
+
+## 32. Resultado de comandos
+
+## 33. Hallazgos y severidad
+
+## 34. Seguridad / no-regression
+
+## 35. Deuda residual
+
+## 36. Rollback plan
+
+## 37. Próximo paso recomendado
+
+Incluir:
+
+- paths reales;
+- nombres reales de funciones;
+- values reales;
+- campos reales;
+- cifras reales;
+- requests observados;
+- screenshots obtenidos;
+- casos PASS;
+- casos UNVERIFIED;
+- casos NOT APPLICABLE;
+- `SUBMIT REAL NOT EXECUTED BY SCOPE`.
+
+No devolver una explicación genérica.
+
+Implementar, verificar y documentar.
+</user_query>

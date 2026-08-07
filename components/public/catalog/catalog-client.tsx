@@ -31,7 +31,9 @@ import {
 import CartBar from "@/components/public/catalog/cart-bar";
 import CartSheet from "@/components/public/catalog/cart-sheet";
 import CatalogDiscoveryControls from "@/components/public/catalog/catalog-discovery-controls";
-import CategoryNav from "@/components/public/catalog/category-nav";
+import CategoryNav, {
+  formatCatalogCategoryName
+} from "@/components/public/catalog/category-nav";
 import ProductCard from "@/components/public/catalog/product-card";
 import ProductDetailModal from "@/components/public/catalog/product-detail-modal";
 import type { CustomizationConfirmResult } from "@/components/public/catalog/customization-modal";
@@ -106,7 +108,6 @@ export default function CatalogClient({
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchCategoryId, setSearchCategoryId] = useState<string | null>(null);
-  const [isMediumSearchExpanded, setIsMediumSearchExpanded] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [customizationSession, setCustomizationSession] =
     useState<CustomizationSession | null>(null);
@@ -168,7 +169,6 @@ export default function CatalogClient({
 
   const catalogSize = useMemo(() => getCatalogSize({ productCount: products.length, categoryCount: categoriesWithProducts.length, maxVisibleProductsInCategory: Math.max(0, ...productCountsByCategoryId.values()) }), [categoriesWithProducts.length, productCountsByCategoryId, products.length]);
   const shouldShowSearch = catalogSize !== "small";
-  const isMediumCatalog = catalogSize === "medium";
   const isSearchActive = normalizeCatalogSearchText(searchQuery).length > 0;
   const catalogSearchIndex = useMemo(() => createCatalogSearchIndex(products, categories), [categories, products]);
   const searchTokens = useMemo(() => getCatalogSearchTokens(searchQuery), [searchQuery]);
@@ -662,9 +662,6 @@ export default function CatalogClient({
   } as CSSProperties;
 
   const heroHeadline = business.catalog_hero_headline?.trim() || "Listo para pedir.";
-  const heroBadge = business.catalog_hero_badge?.trim() || "Te confirmamos por WhatsApp";
-  const heroMicrocopy =
-    business.catalog_hero_microcopy?.trim() || "Hacé tu pedido y seguimos por WhatsApp.";
   const showCoverImage = Boolean(business.cover_image_url) && coverState !== "error";
   const coverMediaState = showCoverImage
     ? coverState === "loaded"
@@ -682,7 +679,7 @@ export default function CatalogClient({
       data-preview-pan-enabled={isCatalogPreview ? "true" : undefined}
       style={businessStyles}
     >
-      <header className={`catalog-hero ${shellStyles.hero}`}>
+      <section className={`catalog-hero ${shellStyles.hero}`}>
         <div
           className={`catalog-hero__media catalog-hero__media--${coverMediaState} ${shellStyles.heroMedia}`}
         >
@@ -709,33 +706,16 @@ export default function CatalogClient({
                 onLoad={() => setCoverState("loaded")}
                 onError={() => setCoverState("error")}
               />
-              <div className="catalog-hero__cover-overlay" aria-hidden="true" />
-            </>
-          ) : null}
+             </>
+           ) : null}
 
-          <div className={shellStyles.heroOverlayCopy}>
-            <p className="catalog-eyebrow">Pedí online</p>
-            <p className="catalog-hero__description">{heroHeadline}</p>
-            <p
-              className={`catalog-hero__status${
-                business.on_demand_mode_active
-                  ? " catalog-hero__status--open"
-                  : " catalog-hero__status--closed"
-              }`}
-              role="status"
-            >
-              {business.on_demand_mode_active
-                ? "Estamos tomando pedidos"
-                : "Por ahora no estamos tomando pedidos"}
-            </p>
-          </div>
         </div>
 
         <div className={`catalog-hero__notes ${shellStyles.heroNotes}`}>
-          <span className="catalog-hero__trust-chip">{heroBadge}</span>
-          <p>{heroMicrocopy}</p>
+          <h1 className="catalog-hero__headline">{heroHeadline}</h1>
+          <p>Personalizá tu pedido y te lo confirmamos por WhatsApp.</p>
         </div>
-      </header>
+      </section>
 
       {categories.length > 0 ? (
         <CategoryNav
@@ -748,7 +728,16 @@ export default function CatalogClient({
         />
       ) : null}
 
-      {shouldShowSearch ? <CatalogDiscoveryControls isMediumCatalog={isMediumCatalog} isExpanded={!isMediumCatalog || isMediumSearchExpanded} query={searchQuery} resultCount={visibleEntries.length} inputRef={searchInputRef} surfaceRef={searchSurfaceRef} onExpand={() => { setIsMediumSearchExpanded(true); requestAnimationFrame(() => searchInputRef.current?.focus()); }} onQueryChange={setSearchQuery} onClear={clearSearch} /> : null}
+      {shouldShowSearch ? (
+        <CatalogDiscoveryControls
+          query={searchQuery}
+          resultCount={visibleEntries.length}
+          inputRef={searchInputRef}
+          surfaceRef={searchSurfaceRef}
+          onQueryChange={setSearchQuery}
+          onClear={clearSearch}
+        />
+      ) : null}
 
       <div className="catalog-content">
         {categories.length === 0 ? (
@@ -781,7 +770,7 @@ export default function CatalogClient({
                 >
                   <div className="catalog-group__header">
                     <div>
-                      <h2>{category.name}</h2>
+                      <h2>{formatCatalogCategoryName(category.name)}</h2>
                       <p>{formatCount(categoryProducts.length, "producto", "productos")}</p>
                     </div>
                   </div>

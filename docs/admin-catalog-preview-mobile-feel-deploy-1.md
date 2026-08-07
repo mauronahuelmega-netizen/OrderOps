@@ -18,9 +18,10 @@ Se desplegó en producción el paquete acumulado de Admin Catalog Preview: touch
 | Campo | Valor |
 |-------|-------|
 | Commit | `5843fd9` — Add mobile feel and shell polish to admin catalog preview |
+| Docs follow-up | `311568b` — docs: record ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-DEPLOY-1 production smoke |
 | Parent | `84c0c48` |
 | Branch | `main` |
-| Push | `84c0c48..5843fd9` → `origin/main` |
+| Push | `84c0c48..5843fd9` (+ docs `311568b`) → `origin/main` |
 | Deploy URL | https://orderops.vercel.app |
 | Vercel status | LIVE (asset markers detectados en prod) |
 | Hora aprox. | 2026-07-28 ~16:05–16:20 UTC |

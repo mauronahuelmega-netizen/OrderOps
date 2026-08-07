@@ -1,0 +1,23 @@
+npm warn Unknown env config "devdir". This will stop working in the next major version of npm.
+
+✓ REALIGN-01 product target wins
+
+✓ REALIGN-02 category fallback
+
+✓ REALIGN-03 unavailable product → category fallback
+
+✓ REALIGN-04 no group
+
+✓ REALIGN-05 single public shape
+
+✓ REALIGN-06 / 07 summary + modal trigger
+
+✓ REALIGN-08 admin parse has no placement
+
+✓ REALIGN-09 self-product excluded from group products
+
+✓ REALIGN-10 other business groups never in input
+
+ALL_PASS upsell-resolution.verify.ts
+
+EXIT_UPSELL=0  

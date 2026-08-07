@@ -1,0 +1,17 @@
+﻿pilot_business_settings=0
+off1_business_settings=0
+off2_business_settings=0
+pilot_customization_groups=3
+off1_customization_groups=0
+off2_customization_groups=0
+pilot_upsell_groups=1
+off1_upsell_groups=0
+off2_upsell_groups=0
+pilot_upsell_group_items=1
+off1_upsell_group_items=0
+off2_upsell_group_items=0
+pilot_customization_options=11
+off1_customization_options=0
+helper_pilot=True
+helper_off1_roticeriajuan=False
+helper_off2_majopasteleria=False

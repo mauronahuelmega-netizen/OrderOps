@@ -1,0 +1,15 @@
+TIMESTAMP=2026-07-31T07:45:52.121Z
+HTTP_CODE=200
+LOG_EXISTS=YES
+LOG_BYTES=252903
+LOG_MTIME=2026-07-31T07:43:57.748Z
+HIT_COUNT=5
+---LAST_5_HITS---
+L63: {"timestamp":"00:00:54.901","source":"Server","level":"ERROR","message":"[product-customization] Failed to load public summaries {}"}
+L64: {"timestamp":"00:00:55.054","source":"Server","level":"ERROR","message":"[product-customization] Failed to load public summaries {}"}
+L359: {"timestamp":"00:37:28.895","source":"Server","level":"ERROR","message":"[product-customization] Corpus query failed \"{\\\"businessId\\\":\\\"e21b8fc2-3016-4dec-92ef-ebb04e58ecdf\\\",\\\"stage\\\":\\\"assignments_overrides_upsell_groups\\\",\\\"userMessage\\\":\\\"No pudimos cargar la configuración pública de personalización.\\\",\\\"message\\\":\\\"column upsell_groups.placement does not exist\\\",\\\"code\\\":\\\"42703\\\"}\""}
+L367: {"timestamp":"01:35:06.668","source":"Server","level":"ERROR","message":"[product-customization] Corpus query failed \"{\\\"businessId\\\":\\\"e21b8fc2-3016-4dec-92ef-ebb04e58ecdf\\\",\\\"stage\\\":\\\"assignments_overrides_upsell_groups\\\",\\\"userMessage\\\":\\\"No pudimos cargar la configuración pública de personalización.\\\",\\\"message\\\":\\\"column upsell_groups.placement does not exist\\\",\\\"code\\\":\\\"42703\\\"}\""}
+L368: {"timestamp":"01:35:06.730","source":"Server","level":"ERROR","message":"[product-customization] Failed to load public summaries \"{\\\"businessId\\\":\\\"e21b8fc2-3016-4dec-92ef-ebb04e58ecdf\\\",\\\"name\\\":\\\"Error\\\",\\\"message\\\":\\\"No pudimos cargar la configuración pública de personalización. [42703] column upsell_groups.placement does not exist\\\"}\""}
+MIG=NO
+PLACEMENT_TS=NO
+PLACEMENT_VERIFY=NO

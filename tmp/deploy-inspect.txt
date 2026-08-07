@@ -1,0 +1,37 @@
+﻿node.exe : Fetching deployment "order-1dzzv4hmd-mauro-s-projects-f82304ad.vercel.app" in mauro-s-projects-f82304ad
+En C:\Users\Oasis Desktop\AppData\Roaming\npm\vercel.ps1: 24 Carácter: 5
++     & "node$exe"  "$basedir/node_modules/vercel/dist/vc.js" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Fetching deploy...ojects-f82304ad:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+> Fetched deployment "order-1dzzv4hmd-mauro-s-projects-f82304ad.vercel.app" in mauro-s-projects-f82304ad [767ms]
+
+  General
+
+    id		dpl_6Z7qqAG3a8uJHbpm4HSBqow4zcAR
+    name	order-ops
+    target	production
+    status	ÔùÅ Ready
+    url		https://order-1dzzv4hmd-mauro-s-projects-f82304ad.vercel.app
+    created	Fri Jul 31 2026 15:38:33 GMT-0300 (hora est├índar de Argentina) [9m ago]
+
+
+  Aliases
+
+    ÔòÂ https://orderops.vercel.app
+    ÔòÂ https://order-ops-mauro-s-projects-f82304ad.vercel.app
+    ÔòÂ https://order-ops-git-main-mauro-s-projects-f82304ad.vercel.app
+    
+
+  Builds
+
+    Ôöî .        [0ms]
+    Ôö£ÔöÇÔöÇ ╬╗ _middleware (120.4KB) [bom1, fra1, gru1, iad1, lhr1, sfo1, sin1, syd1]
+    Ôö£ÔöÇÔöÇ ╬╗ index (1.27MB) [iad1]
+    Ôö£ÔöÇÔöÇ ╬╗ _global-error (1.27MB) [iad1]
+    Ôö£ÔöÇÔöÇ ╬╗ _global-error.rsc (1.27MB) [iad1]
+    Ôö£ÔöÇÔöÇ ╬╗ _global-error.segments/__PAGE__.segment.rsc (1.27MB) [iad1]
+    ÔööÔöÇÔöÇ 72 output items hidden
+    
+

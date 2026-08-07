@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { X } from "lucide-react";
 import CustomizationOptionGroup from "@/components/product-customization/shared/customization-option-group";
 import CustomizationPriceSummary from "@/components/product-customization/shared/customization-price-summary";
 import {
@@ -21,6 +22,7 @@ import {
 } from "@/lib/product-customization/public-shared";
 import type { CustomizationLoadState } from "@/components/public/catalog/customization-config-cache";
 import styles from "./customization-modal.module.css";
+import { usePublicOverlayScrollLock } from "./public-overlay-scroll-lock";
 
 export type CustomizationModalInitialSelection = {
   selectedOptionsByGroupId: Record<string, string[]>;
@@ -102,15 +104,107 @@ export default function CustomizationModal({
   const [priceBump, setPriceBump] = useState(false);
   const previousTotalRef = useRef<number | null>(null);
   const priceBumpTimeoutRef = useRef<number | null>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const triggerRef = useRef<HTMLElement | null>(null);
+  const restoreFocusTimeoutRef = useRef<number | null>(null);
+  const closingRef = useRef(false);
+  const onCloseRef = useRef(onClose);
+
+  onCloseRef.current = onClose;
+  usePublicOverlayScrollLock();
 
   useEffect(() => {
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    if (!triggerRef.current && document.activeElement instanceof HTMLElement) {
+      triggerRef.current = document.activeElement;
+    }
+
+    closeButtonRef.current?.focus();
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      // Delay restoration so Strict Mode's effect replay cannot steal focus.
+      restoreFocusTimeoutRef.current = window.setTimeout(() => {
+        if (!modalRef.current && triggerRef.current?.isConnected) {
+          triggerRef.current.focus();
+        }
+      }, 0);
     };
   }, []);
+
+  useEffect(() => {
+    if (restoreFocusTimeoutRef.current !== null) {
+      window.clearTimeout(restoreFocusTimeoutRef.current);
+      restoreFocusTimeoutRef.current = null;
+    }
+
+    function closeOnce() {
+      if (closingRef.current) {
+        return;
+      }
+      closingRef.current = true;
+      onCloseRef.current();
+    }
+
+    function focusableElements() {
+      const root = modalRef.current;
+      if (!root) {
+        return [] as HTMLElement[];
+      }
+
+      return [
+        ...root.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      ].filter((element) => element.tabIndex !== -1 && element.getClientRects().length > 0);
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        event.stopPropagation();
+        closeOnce();
+        return;
+      }
+
+      if (event.key !== "Tab") {
+        return;
+      }
+
+      const focusables = focusableElements();
+      if (focusables.length === 0) {
+        event.preventDefault();
+        return;
+      }
+
+      const first = focusables[0]!;
+      const last = focusables[focusables.length - 1]!;
+      const active = document.activeElement as HTMLElement | null;
+
+      if (event.shiftKey) {
+        if (!active || active === first || !modalRef.current?.contains(active)) {
+          event.preventDefault();
+          last.focus();
+        }
+        return;
+      }
+
+      if (!active || active === last || !modalRef.current?.contains(active)) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown, true);
+    return () => document.removeEventListener("keydown", onKeyDown, true);
+  }, []);
+
+  function requestClose() {
+    if (closingRef.current) {
+      return;
+    }
+    closingRef.current = true;
+    onCloseRef.current();
+  }
 
   useEffect(() => {
     if (loadState.status !== "ready") {
@@ -234,7 +328,7 @@ export default function CustomizationModal({
         return;
       }
 
-      onClose();
+      requestClose();
     } catch {
       setConfirmError("No pudimos agregar la personalización al carrito. Probá de nuevo.");
     }
@@ -257,9 +351,10 @@ export default function CustomizationModal({
       className={styles.backdrop}
       role="presentation"
       data-preview-pan-ignore
-      onClick={onClose}
+      onClick={requestClose}
     >
       <div
+        ref={modalRef}
         className={styles.modal}
         role="dialog"
         aria-modal="true"
@@ -279,10 +374,11 @@ export default function CustomizationModal({
           <button
             type="button"
             className={styles.closeButton}
-            onClick={onClose}
+            ref={closeButtonRef}
+            onClick={requestClose}
             aria-label="Cerrar personalización"
           >
-            Cerrar
+            <X aria-hidden="true" focusable="false" size={20} strokeWidth={2} />
           </button>
         </header>
 
@@ -297,7 +393,7 @@ export default function CustomizationModal({
               <button type="button" className={styles.secondaryButton} onClick={onRetry}>
                 Reintentar
               </button>
-              <button type="button" className={styles.secondaryButton} onClick={onClose}>
+              <button type="button" className={styles.secondaryButton} onClick={requestClose}>
                 Cerrar
               </button>
             </div>
@@ -306,7 +402,7 @@ export default function CustomizationModal({
           {loadState.status === "disabled" ? (
             <div className={styles.errorPanel}>
               <p>La personalización no está disponible para este producto.</p>
-              <button type="button" className={styles.secondaryButton} onClick={onClose}>
+              <button type="button" className={styles.secondaryButton} onClick={requestClose}>
                 Cerrar
               </button>
             </div>
@@ -370,7 +466,7 @@ export default function CustomizationModal({
               confirmError={confirmError}
               incompleteHint={
                 !validation.valid && validation.issues.length > 0
-                  ? "Completá las opciones obligatorias para agregar al pedido."
+                  ? "Completá las opciones obligatorias para continuar."
                   : null
               }
             >

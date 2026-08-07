@@ -1,0 +1,40 @@
+cleanup-validate — OrderOps
+Generated: 2026-07-31T07:47:34.334Z
+No commit / push / migrate performed.
+
+=== 1. Verify scripts / tsc / build ===
+
+safe-error-details.verify.ts     EXIT=0  ALL_PASS
+upsell-resolution.verify.ts      EXIT=0  ALL_PASS
+post-add-upsell-contract.verify.ts EXIT=0  ALL_PASS
+npx tsc --noEmit                 EXIT=0  OK
+npm run build                    EXIT=0  OK
+
+OVERALL: ALL_PASS
+
+=== 2. Catalog recovery touch ===
+
+Dev server: already running (did not start npm run dev)
+GET http://localhost:3000/b/demohamburgueseria/catalogo
+  HTTP_CODE: 200
+  BODY_BYTES: ~110672
+  CURL_AT: 2026-07-31T07:46:28.952Z
+
+Log: .next/dev/logs/next-development.log
+  LOG_BYTES around curl: 252810 (unchanged)
+  NEW_LOG_LINES after curl: 0
+  NEW hits Failed to load public summaries | placement after curl: 0
+  POST_CURL_NO_NEW_SUMMARY_OR_PLACEMENT_ERRORS: YES
+
+Last HISTORICAL match (stale, pre-curl):
+  L368 Failed to load public summaries ... [42703] column upsell_groups.placement does not exist
+  (relative ts 01:35:06.730 — not after recovery curl)
+
+=== 3. Deleted / absent files ===
+
+supabase/migrations/20260731233000_post_add_upsell_group_placement.sql  EXISTS=NO
+lib/product-customization/upsell-placement.ts                           EXISTS=NO
+lib/product-customization/upsell-placement.verify.ts                    EXISTS=NO
+
+=== Verdict ===
+ALL_PASS: verifies+tsc+build green; catalog HTTP 200; no new placement/summary errors after curl; placement files absent.
