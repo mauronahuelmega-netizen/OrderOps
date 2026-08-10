@@ -16,10 +16,11 @@
   margin: 0;
   padding: 0.35rem;
   overflow-y: auto;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--checkout-input-border, var(--checkout-border, var(--border-subtle)));
   border-radius: 0.75rem;
-  background: var(--bg-surface);
-  box-shadow: var(--shadow-card);
+  background: var(--checkout-input-surface, var(--checkout-surface, var(--bg-surface)));
+  color: var(--checkout-text, var(--text-primary));
+  box-shadow: none;
   list-style: none;
 }
 
@@ -30,7 +31,7 @@
   border: 0;
   border-radius: 0.55rem;
   background: transparent;
-  color: var(--text-primary);
+  color: var(--checkout-text, var(--text-primary));
   cursor: pointer;
   font: inherit;
   font-size: 0.875rem;
@@ -41,18 +42,32 @@
 
 .option:hover,
 .optionActive {
-  background: color-mix(in srgb, var(--business-primary, var(--color-primary)) 10%, var(--bg-surface));
+  background: color-mix(
+    in srgb,
+    var(--checkout-accent, var(--business-primary, var(--color-primary))) 12%,
+    var(--checkout-input-surface, var(--checkout-card, var(--bg-surface)))
+  );
 }
 
 .option:focus-visible,
 .input:focus-visible {
-  outline: 2px solid var(--business-primary, var(--color-primary));
+  outline: 2px solid var(--checkout-accent, var(--business-primary, var(--color-primary)));
   outline-offset: 2px;
 }
 
 .status {
-  margin: 0.35rem 0 0;
-  color: var(--text-secondary);
-  font-size: 0.8rem;
-  line-height: 1.35;
+  margin: 0.3rem 0 0;
+  color: var(--checkout-muted, var(--text-secondary));
+  font-size: 0.78rem;
+  line-height: 1.3;
+  font-weight: 400;
+}
+
+/* Secondary helper — not an error; manual address remains the valid path. */
+.statusHint {
+  margin: 0.25rem 0 0;
+  color: var(--checkout-subtle, var(--text-tertiary, var(--text-secondary)));
+  font-size: 0.75rem;
+  line-height: 1.3;
+  font-weight: 400;
 }

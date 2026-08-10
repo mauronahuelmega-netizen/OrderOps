@@ -10,6 +10,7 @@ import {
   getCartItemCount,
   getCartItemsTotal,
   getLegacyQuantityForProduct,
+  getRootQuantityForProduct,
   loadUnifiedCartItems,
   mergeCustomizedSelectionIntoCart,
   persistUnifiedCartItems,
@@ -186,10 +187,11 @@ export default function CatalogClient({
   const cartCount = useMemo(() => getCartItemCount(cartItems), [cartItems]);
   const cartTotal = useMemo(() => getCartItemsTotal(cartItems), [cartItems]);
 
+  /** Root display qty for ProductCard badges (legacy + V2 parents; excludes upsell children). */
   const quantityByProductId = useMemo(() => {
     const map = new Map<string, number>();
     for (const product of products) {
-      map.set(product.id, getLegacyQuantityForProduct(cartItems, product.id));
+      map.set(product.id, getRootQuantityForProduct(cartItems, product.id));
     }
     return map;
   }, [cartItems, products]);
@@ -787,7 +789,6 @@ export default function CatalogClient({
                         onOpenProduct={handleOpenProduct}
                         onAddProduct={handleAddProductById}
                         onIncrementProduct={handleIncrementProductById}
-                        onDecrementProduct={handleDecrementProductById}
                       />
                     ))}
                   </div>

@@ -8,9 +8,10 @@ import {
   type ChangeEvent,
   type KeyboardEvent
 } from "react";
-import {
+  import {
   loadGooglePlacesLibrary,
   type GoogleAutocompleteSuggestion,
+  type GooglePlacePrediction,
   type GooglePlacesLibrary
 } from "@/lib/maps/google-maps-loader";
 import styles from "./address-autocomplete.module.css";
@@ -21,9 +22,20 @@ const MAX_SUGGESTIONS = 5;
 
 type ProviderStatus = "idle" | "loading" | "ready" | "unavailable";
 
+/** Client-only address metadata (Modelo A). Not sent to server/RPC/DB in this phase. */
+export type CheckoutAddressMetadata = {
+  source: "manual" | "places";
+  inputValue: string;
+  formattedAddress?: string;
+  placeId?: string;
+  provider?: "google_places";
+};
+
 type AddressAutocompleteProps = {
   value: string;
   onChange: (value: string) => void;
+  /** Additive: fired after a Places suggestion is applied (onChange still runs first). */
+  onSelect?: (metadata: CheckoutAddressMetadata) => void;
   disabled?: boolean;
   inputId?: string;
 };
@@ -32,9 +44,29 @@ function isEligibleQuery(value: string) {
   return value.trim().length >= MINIMUM_QUERY_LENGTH;
 }
 
+function readOptionalTrimmedString(value: unknown): string | undefined {
+  return typeof value === "string" && value.trim() ? value.trim() : undefined;
+}
+
+/** Read placeId only when exposed trivially on prediction/place — no extra Places request. */
+function readOptionalPlaceId(prediction: GooglePlacePrediction, place: unknown): string | undefined {
+  const predictionRecord = prediction as GooglePlacePrediction & {
+    placeId?: unknown;
+  };
+  const fromPrediction = readOptionalTrimmedString(predictionRecord.placeId);
+  if (fromPrediction) return fromPrediction;
+
+  if (place && typeof place === "object" && "id" in place) {
+    return readOptionalTrimmedString((place as { id?: unknown }).id);
+  }
+
+  return undefined;
+}
+
 export default function AddressAutocomplete({
   value,
   onChange,
+  onSelect,
   disabled = false,
   inputId = "address"
 }: AddressAutocompleteProps) {
@@ -156,7 +188,17 @@ export default function AddressAutocomplete({
     try {
       const place = prediction.toPlace();
       await place.fetchFields({ fields: ["formattedAddress"] });
-      if (place.formattedAddress) onChange(place.formattedAddress);
+      const formattedAddress = place.formattedAddress?.trim();
+      if (!formattedAddress) return;
+
+      onChange(formattedAddress);
+      onSelect?.({
+        source: "places",
+        inputValue: formattedAddress,
+        formattedAddress,
+        placeId: readOptionalPlaceId(prediction, place),
+        provider: "google_places"
+      });
     } catch {
       setProviderStatus("unavailable");
     } finally {
@@ -246,11 +288,13 @@ export default function AddressAutocomplete({
       ) : null}
 
       {providerStatus === "loading" ? (
-        <p className={styles.status} role="status">Cargando sugerencias...</p>
+        <p className={styles.status} role="status">
+          Cargando sugerencias...
+        </p>
       ) : null}
       {providerStatus === "unavailable" ? (
-        <p className={styles.status} role="status">
-          No pudimos cargar las sugerencias. Podés escribir la dirección manualmente.
+        <p className={styles.statusHint} role="status">
+          Podés escribir la dirección manualmente.
         </p>
       ) : null}
     </div>

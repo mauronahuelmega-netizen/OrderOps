@@ -1,4 +1,11 @@
 .fab {
+  --cart-fab-accent: var(--business-primary, var(--color-primary));
+  --cart-fab-accent-fg: var(--business-primary-foreground, #ffffff);
+  --cart-fab-canvas: var(--catalog-bg, #f6f2ea);
+  --cart-fab-border: color-mix(in srgb, var(--cart-fab-accent) 76%, #000 24%);
+  --cart-fab-halo: color-mix(in srgb, var(--cart-fab-canvas) 86%, transparent);
+  --cart-fab-shadow: 0 12px 28px rgba(32, 23, 15, 0.18);
+
   position: fixed;
   right: max(14px, env(safe-area-inset-right));
   bottom: max(14px, env(safe-area-inset-bottom));
@@ -10,19 +17,30 @@
   min-width: 52px;
   min-height: 52px;
   padding: 0 14px;
-  border: 1px solid var(--catalog-border, var(--border-subtle));
+  border: 1px solid var(--cart-fab-border);
   border-radius: 999px;
-  background: var(--catalog-surface-strong, var(--bg-surface));
-  color: var(--catalog-text, var(--text-primary));
-  box-shadow: var(--shadow-floating, 0 10px 22px rgba(31, 26, 20, 0.12));
+  background: var(--cart-fab-accent);
+  color: var(--cart-fab-accent-fg);
+  box-shadow:
+    0 0 0 4px var(--cart-fab-halo),
+    var(--cart-fab-shadow);
   cursor: pointer;
   font: inherit;
   animation: catalogCartFabIn 200ms ease;
   contain: layout style paint;
 }
 
+:global(html[data-catalog-theme="dark"]) .fab,
+:global(.catalog-page[data-theme="dark"]) .fab {
+  /* Solid accent stays; canvas halo uses dark catalog bg for lift. */
+  --cart-fab-canvas: #12100d;
+  --cart-fab-border: color-mix(in srgb, var(--cart-fab-accent) 70%, #000 30%);
+  --cart-fab-halo: color-mix(in srgb, var(--cart-fab-canvas) 82%, transparent);
+  --cart-fab-shadow: 0 14px 32px rgba(0, 0, 0, 0.56);
+}
+
 .fab:focus-visible {
-  outline: 2px solid var(--business-primary, var(--color-primary));
+  outline: 3px solid color-mix(in srgb, var(--cart-fab-accent) 35%, #fff 65%);
   outline-offset: 3px;
 }
 

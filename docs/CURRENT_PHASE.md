@@ -1,3 +1,38 @@
+## Registro — PUBLIC-CATALOG-UI-REDESIGN-FINAL-COMMIT-1 (2026-08-10)
+
+**Fase:** PUBLIC-CATALOG-UI-REDESIGN-FINAL-COMMIT-1 — Final local commit for Public Catalog UI Redesign package
+**Estado:** PASS WITH COMMIT DEBT — PUBLIC CATALOG UI REDESIGN FINAL COMMIT CREATED
+**Resumen:** Commit local `feat(public-catalog): complete UI redesign closeout` con runtime catalog/checkout/success/FAB/ProductCard/header/nav + docs de fases + closeout. Sin push/deploy. Lint tooling circular aceptado (P3). Maps PAUSED; public_order_code BACKLOG; success edge OPTIONAL.
+- Doc: `docs/public-catalog-ui-redesign-final-commit-1.md`
+- Branch: `cursor-handoff-public-catalog-ui-redesign`
+- **QUEUE_GATE:** PUBLIC-CATALOG-UI-REDESIGN-PUSH-DEPLOY-1 = ALLOWED
+- **QUEUE_GATE:** PUBLIC-CATALOG-PRODUCTION-SMOKE-QA-1 = PAUSED_UNTIL_DEPLOY
+- **QUEUE_GATE:** PUBLIC-CATALOG-SUCCESS-EDGE-STATES-POLISH-1 = OPTIONAL
+- **QUEUE_GATE:** PUBLIC-ORDERS-PUBLIC-CODE-SPEC-1 = BACKLOG
+- **QUEUE_GATE:** PUBLIC-CATALOG-CHECKOUT-ADDRESS-MAPS-* = PAUSED
+- **Próximo:** PUBLIC-CATALOG-UI-REDESIGN-PUSH-DEPLOY-1
+- **Sin:** push, deploy, DB, create_order, pedidos reales
+
+---
+
+## Registro — PUBLIC-CATALOG-UI-REDESIGN-CLOSEOUT-1 (2026-08-10)
+
+**Fase:** PUBLIC-CATALOG-UI-REDESIGN-CLOSEOUT-1 — Public Catalog UI Redesign final closeout before commit / push / deploy
+**Estado:** PASS WITH CLOSEOUT DEBT — PUBLIC CATALOG UI REDESIGN CLOSEOUT READY FOR COMMIT
+**Resumen:** Closeout formal del rediseño visual/UX (catalog shell, ProductCard badge roots, FAB, checkout flat, success flat, header/nav). Inventario runtime+docs, contratos preservados, QA browser final, tsc/build/HTTP PASS. Lint tooling fallido (ESLint circular). Sin commit/push/deploy. Maps pausado; public_order_code backlog; success edge optional.
+- Doc: `docs/public-catalog-ui-redesign-closeout-1.md`
+- Branch: `cursor-handoff-public-catalog-ui-redesign` @ `b2321b0` (working tree dirty)
+- **QUEUE_GATE:** PUBLIC-CATALOG-UI-REDESIGN-FINAL-COMMIT-1 = ALLOWED
+- **QUEUE_GATE:** PUBLIC-CATALOG-UI-REDESIGN-PUSH-DEPLOY-1 = PAUSED_UNTIL_COMMIT
+- **QUEUE_GATE:** PUBLIC-CATALOG-PRODUCTION-SMOKE-QA-1 = PAUSED_UNTIL_DEPLOY
+- **QUEUE_GATE:** PUBLIC-CATALOG-SUCCESS-EDGE-STATES-POLISH-1 = OPTIONAL
+- **QUEUE_GATE:** PUBLIC-ORDERS-PUBLIC-CODE-SPEC-1 = BACKLOG
+- **QUEUE_GATE:** PUBLIC-CATALOG-CHECKOUT-ADDRESS-MAPS-* = PAUSED
+- **Próximo:** PUBLIC-CATALOG-UI-REDESIGN-FINAL-COMMIT-1
+- **Sin:** commit, push, deploy, DB, create_order, pedidos reales
+
+---
+
 ## Registro — PUBLIC-CATALOG-RESIDUAL-ROADMAP-DEPLOY-1 (2026-08-02)
 
 **Fase:** PUBLIC-CATALOG-RESIDUAL-ROADMAP-DEPLOY-1 — Consolidación, commit, push, deploy y smoke de producción
@@ -153,8 +188,8 @@
 
 ## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-DOMAIN-1 (2026-07-31)
 
-**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-DOMAIN-1 — Placement Domain, Admin Configuration & Public Surface Resolution  
-**Estado:** PASS WITH LOCAL DB MIGRATION QA DEBT · PASS WITH ADMIN RUNTIME QA DEBT  
+**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-DOMAIN-1 — Placement Domain, Admin Configuration & Public Surface Resolution
+**Estado:** PASS WITH LOCAL DB MIGRATION QA DEBT · PASS WITH ADMIN RUNTIME QA DEBT
 **Resumen:** `upsell_groups.placement` (`in_modal`|`post_add`, default/backfill `in_modal`); unique por target+placement; admin radios/badges; resolver por superficie; config `upsellGroup` + `postAddUpsellGroup`; modal/hasUpsell solo in_modal; sin UI post-add; sin cart contract. Fixtures/tsc/build PASS. Migration local UNVERIFIED (Docker down).
 - Doc: `docs/public-catalog-post-add-upsell-domain-1.md`
 - Migration: `supabase/migrations/20260731233000_post_add_upsell_group_placement.sql`
@@ -165,8 +200,8 @@
 
 ## Registro — PUBLIC-CATALOG-POST-ADD-UPSELL-SPEC-1 (2026-07-31)
 
-**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-SPEC-1 — Post-Add Upsell Product, Domain & Technical Specification  
-**Estado:** SPEC COMPLETE · **GO WITH DOMAIN PREREQUISITE** · DOCS-ONLY  
+**Fase:** PUBLIC-CATALOG-POST-ADD-UPSELL-SPEC-1 — Post-Add Upsell Product, Domain & Technical Specification
+**Estado:** SPEC COMPLETE · **GO WITH DOMAIN PREREQUISITE** · DOCS-ONLY
 **Resumen:** Spec cerrada del post-add Plus. Placement **no existe** hoy; Opción A (repetir Plus in-modal) rechazada. MVP = V2 parent nuevo + cache 0 POST + placement group-level `in_modal|post_add|both` (spec closure fijó binario sin `both`) + merge outcome/`cartLineId` + attach child helper + sheet descartable + count root-only. Legacy/cross-sell root fuera. Sin implementación runtime/DB.
 - Doc: `docs/public-catalog-post-add-upsell-spec-1.md`
 - Preflight: `main` @ `5dd9b41` · dirty ajeno no limpiado
@@ -177,8 +212,8 @@
 
 ## Registro — PUBLIC-CATALOG-INTEGRATED-CONVERSION-QA-1 (2026-07-31)
 
-**Fase:** PUBLIC-CATALOG-INTEGRATED-CONVERSION-QA-1 — End-to-End Public Catalog Conversion Funnel QA Without Real Order Creation  
-**Estado:** PASS WITH PREVIEW QA DEBT · PASS WITH DEVICE QA DEBT · SUBMIT REAL NOT EXECUTED BY SCOPE  
+**Fase:** PUBLIC-CATALOG-INTEGRATED-CONVERSION-QA-1 — End-to-End Public Catalog Conversion Funnel QA Without Real Order Creation
+**Estado:** PASS WITH PREVIEW QA DEBT · PASS WITH DEVICE QA DEBT · SUBMIT REAL NOT EXECUTED BY SCOPE
 **Resumen:** QA-only del funnel catálogo → modal → FAB → sheet → checkout. Root-only count, parent/child prices, Plus remove/edit/qty, mix (5), remove parent sin orphans, cache 1/0 POST, checkout modality 0 fetch, empty states. Preview/device/closed-store deuda. Sin fixes de código. Action/`create_order` intactos.
 - Doc: `docs/public-catalog-integrated-conversion-qa-1.md`
 - Runtime: `localhost:3000/b/demohamburgueseria/*` · viewport ~390×844
@@ -190,8 +225,8 @@
 
 ## Registro — PUBLIC-CATALOG-CHECKOUT-SUMMARY-VISUAL-QA-FIX-1 (2026-07-30)
 
-**Fase:** PUBLIC-CATALOG-CHECKOUT-SUMMARY-VISUAL-QA-FIX-1 — Parent/Upsell Price Clarity, Customer-Facing Root Count & Mobile Overlay Verification  
-**Estado:** PASS WITH PREVIEW QA DEBT · PASS WITH DEVICE QA DEBT · SUBMIT REAL NOT EXECUTED BY SCOPE  
+**Fase:** PUBLIC-CATALOG-CHECKOUT-SUMMARY-VISUAL-QA-FIX-1 — Parent/Upsell Price Clarity, Customer-Facing Root Count & Mobile Overlay Verification
+**Estado:** PASS WITH PREVIEW QA DEBT · PASS WITH DEVICE QA DEBT · SUBMIT REAL NOT EXECUTED BY SCOPE
 **Resumen:** Contador customer-facing root-only (`getCartItemCount` via hierarchical rows; Plus no inflan). Precios parent/child separados (`lineTotal` propio; sin groupTotal ambiguo) en checkout y cart sheet. Header comercial estático solo en `/checkout` (sticky real corregido). CTA sticky con scroll-padding/margin; foco sin cobertura. Totals/payload/action/`create_order` intactos.
 - Doc: `docs/public-catalog-checkout-summary-visual-qa-fix-1.md`
 - Runtime: checkout “1 producto” + parent $15.250 / child $3.000 / total $18.250 · FAB simple “1 producto” · header `position:static` en checkout
@@ -203,8 +238,8 @@
 
 ## Registro — PUBLIC-CATALOG-CHECKOUT-CONVERSION-POLISH-1 (2026-07-30)
 
-**Fase:** PUBLIC-CATALOG-CHECKOUT-CONVERSION-POLISH-1 — Segmented Mobile Checkout, Form Clarity & Final Conversion Surface  
-**Estado:** PASS WITH PREVIEW QA DEBT · PASS WITH DEVICE QA DEBT · SUBMIT REAL NOT EXECUTED BY SCOPE  
+**Fase:** PUBLIC-CATALOG-CHECKOUT-CONVERSION-POLISH-1 — Segmented Mobile Checkout, Form Clarity & Final Conversion Surface
+**Estado:** PASS WITH PREVIEW QA DEBT · PASS WITH DEVICE QA DEBT · SUBMIT REAL NOT EXECUTED BY SCOPE
 **Resumen:** Checkout público reorganizado en secciones mobile-first (header “Finalizá tu pedido”, segmented Envío/Retiro con values `delivery`/`pickup`, Tus datos, entrega/retiro condicional, notas, resumen jerárquico, CTA sticky `Enviar pedido · $X`). Module CSS con tokens. Payload, `createPublicCheckoutOrderAction`, `create_order`, cart schema, pricing y preview guard intactos. Sin forma de pago (N/A). Sin Google Places ni phone AR. Sin pedidos reales.
 - Doc: `docs/public-catalog-checkout-conversion-polish-1.md`
 - Deploy base: `fb19a3a`
@@ -218,8 +253,8 @@
 
 ## Registro — PUBLIC-CATALOG-CART-SHEET-USABILITY-1 (2026-07-30)
 
-**Fase:** PUBLIC-CATALOG-CART-SHEET-USABILITY-1 — Mobile Cart Sheet Hierarchy, Controls & Checkout Readiness  
-**Estado:** PASS WITH PREVIEW QA DEBT  
+**Fase:** PUBLIC-CATALOG-CART-SHEET-USABILITY-1 — Mobile Cart Sheet Hierarchy, Controls & Checkout Readiness
+**Estado:** PASS WITH PREVIEW QA DEBT
 **Resumen:** Se pulió el cart sheet público mobile: header “Tu pedido” + conteo, jerarquía clara simple/V2/upsell, controles iconográficos (lucide), stepper tocable, footer sticky con Total + “Continuar al checkout”, empty state con “Seguir comprando”. Se preservaron cart schema, callbacks de qty/edit/remove, pricing, checkout destination y preview isolation. Acciones locales sin fetch. Sin post-add upsell, DB/RLS/RPC, create_order, deps nuevas ni deploy.
 - Doc: `docs/public-catalog-cart-sheet-usability-1.md`
 - Deploy base: `fb19a3a`
@@ -233,8 +268,8 @@
 
 ## Registro — PUBLIC-CATALOG-CUSTOMIZATION-MODAL-UX-POLISH-1 (2026-07-30)
 
-**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-UX-POLISH-1 — Compact Premium UX for Public Customization Modal  
-**Estado:** PASS WITH PREVIEW QA DEBT  
+**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-UX-POLISH-1 — Compact Premium UX for Public Customization Modal
+**Estado:** PASS WITH PREVIEW QA DEBT
 **Resumen:** Se implementó el polish UX mobile del modal público de personalización: header más compacto/premium, grupos obligatorios full-width, grupos no obligatorios en grilla compacta, opciones más densas pero tocables, CTA inferior con total final (`Agregar · $X`) y micro-interacción CSS-only del precio al cambiar el total. Se preservó el fix de performance anterior: cache `slug:productId`, dedupe in-flight, reopen cache-hit sin loading/POST, productos simples sin fetch y detail path compartido. No se implementó post-add upsell ni Google Places. Sin DB/RLS/RPC/checkout action/create_order/cart schema/cache tags/image/env/CSP/deploy.
 - Doc: `docs/public-catalog-customization-modal-ux-polish-1.md`
 - Deploy base: `fb19a3a`
@@ -248,8 +283,8 @@
 
 ## Registro — PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-FIX-1 (2026-07-30)
 
-**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-FIX-1 — Client Cache & In-flight Dedupe for Customization Modal  
-**Estado:** PASS WITH PREVIEW QA DEBT  
+**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-FIX-1 — Client Cache & In-flight Dedupe for Customization Modal
+**Estado:** PASS WITH PREVIEW QA DEBT
 **Resumen:** Se implementó el fix A+B recomendado por la auditoría del modal de personalización: cache client-side por `productId` en `CatalogClient` e in-flight dedupe por producto para evitar refetch/loading repetido al cerrar y reabrir el mismo producto. El primer open sigue on-demand; los reopens cache-hit no disparan nuevos `Next-Action` POST; productos simples siguen sin fetch; el path desde detail comparte cache. Se preservaron cart schema, checkout, create_order, Product Customization server-side validation, cache strategy/tags, image loader, preview boundaries, CSP y PWA. Sin DB/RLS/RPC/migraciones/pedidos reales/deploy.
 - Doc: `docs/public-catalog-customization-modal-perf-fix-1.md`
 - Deploy base: `fb19a3a`
@@ -263,8 +298,8 @@
 
 ## Registro — PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-AUDIT-1 (2026-07-30)
 
-**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-AUDIT-1 — Forensic Audit of Customization Modal Repeated Loading  
-**Estado:** PERF AUDIT COMPLETE — FIX RECOMMENDED  
+**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MODAL-PERF-AUDIT-1 — Forensic Audit of Customization Modal Repeated Loading
+**Estado:** PERF AUDIT COMPLETE — FIX RECOMMENDED
 **Resumen:** Se auditó forensemente el flujo de carga del modal de personalización público, revisando source, loader/endpoint, requests al primer open, close/reopen del mismo producto, apertura de múltiples productos, control de productos simples, path desde detail modal, network profile, performance percibida y tenant/security boundaries. La fase es audit-only: sin fix de cache, sin prefetch, sin cambios de modal UX, sin DB/RLS/RPC/checkout/create_order/cart schema/cache/image/env/CSP/deploy.
 - Doc: `docs/public-catalog-customization-modal-perf-audit-1.md`
 - Deploy base: `fb19a3a`
@@ -278,8 +313,8 @@
 
 ## Registro — PUBLIC-CATALOG-PRODUCT-CARDS-SINGLETON-WIDTH-FIX-1 (2026-07-30)
 
-**Fase:** PUBLIC-CATALOG-PRODUCT-CARDS-SINGLETON-WIDTH-FIX-1 — Keep Single-Product Categories at Grid Card Width  
-**Estado:** PASS WITH PREVIEW QA DEBT  
+**Fase:** PUBLIC-CATALOG-PRODUCT-CARDS-SINGLETON-WIDTH-FIX-1 — Keep Single-Product Categories at Grid Card Width
+**Estado:** PASS WITH PREVIEW QA DEBT
 **Resumen:** Se corrigió el comportamiento visual de categorías con un solo producto para que la card conserve el mismo ancho que las cards normales de la grilla de 2 columnas, en lugar de ocupar todo el ancho. Se preservaron cards image-first, quick `+`, header hide, category sticky, FAB, cart schema, checkout, create_order, cache, Product Customization server-side, image loader, CSP y PWA. Sin DB/RLS/RPC/migraciones/pedidos reales/deploy.
 - Doc: `docs/public-catalog-product-cards-singleton-width-fix-1.md`
 - Deploy base: `fb19a3a`
@@ -292,8 +327,8 @@
 
 ## Registro — PUBLIC-CATALOG-PRODUCT-CARDS-GRID-POLISH-1 (2026-07-30)
 
-**Fase:** PUBLIC-CATALOG-PRODUCT-CARDS-GRID-POLISH-1 — Mobile 2-Column Product Cards & Quick Add Polish  
-**Estado:** PASS WITH PREVIEW QA DEBT  
+**Fase:** PUBLIC-CATALOG-PRODUCT-CARDS-GRID-POLISH-1 — Mobile 2-Column Product Cards & Quick Add Polish
+**Estado:** PASS WITH PREVIEW QA DEBT
 **Resumen:** Se implementó la segunda fase de conversión del catálogo público: cards mobile en 2 columnas, layout image-first, descripción truncada, card completa abre detalle y acción rápida `+` agrega productos simples o abre el modal si el producto requiere personalización. Se eliminó “Ver detalle” de las cards y se ajustaron sizes de imágenes para el nuevo layout. Se preservaron header/FAB del shell, cache, checkout, create_order, cart schema, Product Customization server-side, image loader, preview admin boundaries, CSP y PWA. Sin DB/RLS/RPC/migraciones/pedidos reales/deploy.
 - Doc: `docs/public-catalog-product-cards-grid-polish-1.md`
 - Deploy base: `fb19a3a`
@@ -306,8 +341,8 @@
 
 ## Registro — PUBLIC-CATALOG-SHELL-CART-SURFACES-POLISH-1 (2026-07-30)
 
-**Fase:** PUBLIC-CATALOG-SHELL-CART-SURFACES-POLISH-1 — Header Hide, Sticky Categories & Compact Cart FAB  
-**Estado:** PASS WITH PREVIEW QA DEBT  
+**Fase:** PUBLIC-CATALOG-SHELL-CART-SURFACES-POLISH-1 — Header Hide, Sticky Categories & Compact Cart FAB
+**Estado:** PASS WITH PREVIEW QA DEBT
 **Resumen:** Se implementó el primer bloque de conversión del catálogo público: header hide-on-scroll, categorías sticky con offset correcto, carrito vacío sin superficie visible y cart FAB compacto solo con ícono+cantidad cuando hay productos. Se aplicó hero mobile compacto/premium si fue seguro dentro del shell. Se preservaron cache, checkout, create_order, cart schema, Product Customization, preview admin, image loader, CSP y PWA. Sin DB/RLS/RPC/migraciones/pedidos reales/deploy.
 - Doc: `docs/public-catalog-shell-cart-surfaces-polish-1.md`
 - Deploy base: `fb19a3a`
@@ -320,8 +355,8 @@
 
 ## Registro — PUBLIC-CATALOG-CONVERSION-SPEC-CLOSURE-1 (2026-07-30)
 
-**Fase:** PUBLIC-CATALOG-CONVERSION-SPEC-CLOSURE-1 — Final Product & Technical Spec Closure for Public Catalog Conversion Roadmap  
-**Estado:** SPEC CLOSED  
+**Fase:** PUBLIC-CATALOG-CONVERSION-SPEC-CLOSURE-1 — Final Product & Technical Spec Closure for Public Catalog Conversion Roadmap
+**Estado:** SPEC CLOSED
 **Resumen:** Se cerró formalmente la spec de producto/técnica para la línea Public Catalog Conversion Surfaces. Quedaron congeladas las decisiones finales: header hide-on-scroll, hero compacto premium, categorías sticky/active, cart vacío oculto, cart FAB solo ícono+cantidad, cards 2 columnas con quick `+`, modal performance audit/fix, modal UX compacta, post-add upsell solo spec por ahora, cart sheet con iconos, checkout segmented, phone AR y Google Places como spec futura. Se definió deploy agrupado tras implementación + QA integrada. Docs-only, sin código funcional, sin DB/RLS/RPC/checkout action/create_order/cart schema/cache/Product Customization/image/env/CSP/deploy.
 - Doc: `docs/public-catalog-conversion-spec-closure-1.md`
 - Deploy base: `fb19a3a`
@@ -334,8 +369,8 @@
 
 ## Registro — PUBLIC-CATALOG-CONVERSION-SURFACES-AUDIT-SPEC-1 (2026-07-30)
 
-**Fase:** PUBLIC-CATALOG-CONVERSION-SURFACES-AUDIT-SPEC-1 — Public Catalog Conversion Surfaces Audit & Product Spec  
-**Estado:** SPEC READY  
+**Fase:** PUBLIC-CATALOG-CONVERSION-SURFACES-AUDIT-SPEC-1 — Public Catalog Conversion Surfaces Audit & Product Spec
+**Estado:** SPEC READY
 **Resumen:** Se auditó y especificó la próxima evolución de conversión del catálogo público, cubriendo header, hero, categorías, cards, cart FAB, modal de personalización, post-add upsell, carrito y checkout. La fase fue docs/spec-only, preservando el performance budget: sin server calls nuevos, sin cache changes, sin Google Places implementation, sin librerías pesadas, sin DB/RLS/RPC/checkout action/create_order/cart schema/Product Customization/image/env/CSP/deploy.
 - Doc: `docs/public-catalog-conversion-surfaces-audit-spec-1.md`
 - Deploy base: `fb19a3a`
@@ -348,8 +383,8 @@
 
 ## Registro — PUBLIC-CATALOG-PREVIOUS-SLUG-CALLERS-FIX-1 (2026-07-30)
 
-**Fase:** PUBLIC-CATALOG-PREVIOUS-SLUG-CALLERS-FIX-1 — Pass previousSlug Through Public Catalog Cache Invalidation Callers  
-**Estado:** PASS WITH RUNTIME SLUG QA DEBT  
+**Fase:** PUBLIC-CATALOG-PREVIOUS-SLUG-CALLERS-FIX-1 — Pass previousSlug Through Public Catalog Cache Invalidation Callers
+**Estado:** PASS WITH RUNTIME SLUG QA DEBT
 **Resumen:** Se corrigió el wiring de invalidación del catálogo público para que el server action capaz de cambiar el slug público (`updateBusinessAction` super-admin) capture el slug anterior antes del update y lo pase como `previousSlug` a `revalidatePublicCatalogCache`. El helper invalida paths del slug actual y anterior, preservando tags/scopes existentes. Callers tenant admin no cambian slug (sin contaminación). Sin DB/RLS/RPC/checkout action/carrito schema/Product Customization/image transforms/CSP/envs/pedidos reales. Runtime slug rename QA no ejecutado por falta de auth.
 - Doc: `docs/public-catalog-previous-slug-callers-fix-1.md`
 - Deploy base: `fb19a3a`
@@ -363,8 +398,8 @@
 
 ## Registro — PUBLIC-CATALOG-REAL-DEVICE-QA-1 (2026-07-30)
 
-**Fase:** PUBLIC-CATALOG-REAL-DEVICE-QA-1 — Real Device QA for Public Catalog V1  
-**Estado:** BLOCKED — REAL DEVICE UNAVAILABLE  
+**Fase:** PUBLIC-CATALOG-REAL-DEVICE-QA-1 — Real Device QA for Public Catalog V1
+**Estado:** BLOCKED — REAL DEVICE UNAVAILABLE
 **Resumen:** No se ejecutó QA real-device porque no hubo hardware disponible operable (sin ADB/platform-tools; PnP Samsung USB Unknown; browser Cursor = desktop Chromium). No se reemplazó por emulación como PASS. Deuda P3 Real device QA permanece. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/Product Customization/image transforms/CSP/envs/código.
 - Doc: `docs/public-catalog-real-device-qa-1.md`
 - Deploy base: `fb19a3a`
@@ -378,8 +413,8 @@
 
 ## Registro — PUBLIC-CATALOG-PREVIEW-AUTH-SMOKE-1 (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-PREVIEW-AUTH-SMOKE-1 — Authenticated Admin Preview Deep Smoke for Public Catalog V1  
-**Estado:** PASS WITH MINOR PREVIEW QA DEBT  
+**Fase:** PUBLIC-CATALOG-PREVIEW-AUTH-SMOKE-1 — Authenticated Admin Preview Deep Smoke for Public Catalog V1
+**Estado:** PASS WITH MINOR PREVIEW QA DEBT
 **Resumen:** Se ejecutó smoke autenticado profundo de `/admin/products/preview`, validando shell admin, iframe real del catálogo, modo seguro, carrito preview aislado, clear cart, Product Customization dentro del iframe, checkout preview bloqueado, público normal intacto, CSP/frame boundary y ausencia de pedidos reales. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/Product Customization/image transforms/CSP/envs.
 - Doc: `docs/public-catalog-preview-auth-smoke-1.md`
 - Deploy base: `fb19a3a`
@@ -394,8 +429,8 @@
 
 ## Registro — PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1-MODE-B (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1-MODE-B — Authorized Supabase Image Transformations Enablement & Production Verification  
-**Estado:** BLOCKED — MISSING IMAGE TRANSFORMS ENABLE AUTH  
+**Fase:** PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1-MODE-B — Authorized Supabase Image Transformations Enablement & Production Verification
+**Estado:** BLOCKED — MISSING IMAGE TRANSFORMS ENABLE AUTH
 **Resumen:** No se tocó Supabase infra porque faltó autorización explícita de enable y/o billing (`AUTORIZO_SUPABASE_IMAGE_TRANSFORMATIONS_ENABLE=yes` y `AUTORIZO_SUPABASE_IMAGE_TRANSFORMATIONS_BILLING_ACCEPTED=yes`). Source loader/fallback intacto; baseline object **200** / render **403 FeatureNotEnabled**. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/Product Customization/CSP/pedidos reales.
 - Doc: `docs/public-catalog-image-transforms-infra-1-mode-b.md`
 - Deploy base: `fb19a3a`
@@ -410,8 +445,8 @@
 
 ## Registro — PUBLIC-CATALOG-OBSERVABILITY-PROD-ENABLE-1 (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-OBSERVABILITY-PROD-ENABLE-1 — Controlled Production Enablement for Public Catalog Observability  
-**Estado:** BLOCKED — MISSING OBSERVABILITY PROD ENABLE AUTH  
+**Fase:** PUBLIC-CATALOG-OBSERVABILITY-PROD-ENABLE-1 — Controlled Production Enablement for Public Catalog Observability
+**Estado:** BLOCKED — MISSING OBSERVABILITY PROD ENABLE AUTH
 **Resumen:** No se tocaron envs de Vercel porque faltó `AUTORIZO_PUBLIC_CATALOG_OBSERVABILITY_PROD_ENABLE=yes`. Source privacy-safe y endpoint 204 intactos; normal beacons siguen debug-only. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/Product Customization/image transforms/CSP/pedidos reales.
 - Doc: `docs/public-catalog-observability-prod-enable-1.md`
 - Deploy base: `fb19a3a`
@@ -426,8 +461,8 @@
 
 ## Registro — PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2-FOLLOWUP (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2-FOLLOWUP — Authorized Runtime QA for Public Catalog Cache Invalidation  
-**Estado:** BLOCKED — MISSING MUTATION AUTH  
+**Fase:** PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2-FOLLOWUP — Authorized Runtime QA for Public Catalog Cache Invalidation
+**Estado:** BLOCKED — MISSING MUTATION AUTH
 **Resumen:** No se ejecutó el followup runtime porque faltó `AUTORIZO_CACHE_MUTATION_RUNTIME_QA_PROD=yes`. Sin mutaciones productivas. Source/baseline previos de QA-2 Modo A siguen vigentes. Checkout/create_order/cart/pricing/stock/cache strategy/CSP/pedidos no tocados.
 - Doc: `docs/public-catalog-cache-mutation-runtime-qa-2-followup.md`
 - Deploy base: `fb19a3a`
@@ -440,8 +475,8 @@
 
 ## Registro — PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2 (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2 — Runtime QA for Public Catalog Cache Invalidation After Admin Mutations  
-**Estado:** PASS WITH RUNTIME MUTATION AUTH DEBT  
+**Fase:** PUBLIC-CATALOG-CACHE-MUTATION-RUNTIME-QA-2 — Runtime QA for Public Catalog Cache Invalidation After Admin Mutations
+**Estado:** PASS WITH RUNTIME MUTATION AUTH DEBT
 **Resumen:** Se validó source-level la invalidación del cache público (`revalidatePublicCatalogCache` + tags + fresh ordering noStore) y baseline productivo read-only. No se ejecutaron mutaciones admin productivas por falta de `AUTORIZO_CACHE_MUTATION_RUNTIME_QA_PROD=yes`. Checkout boundary y metrics 204 intactos; sin pedidos reales. Slug rename/flag toggle/ordering status quedan documentados como UNVERIFIED pending autorización.
 - Doc: `docs/public-catalog-cache-mutation-runtime-qa-2.md`
 - Deploy base: `fb19a3a`
@@ -454,8 +489,8 @@
 
 ## Registro — PUBLIC-CATALOG-POST-DEPLOY-MONITOR-1 (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-POST-DEPLOY-MONITOR-1 — Post-Deploy Production Monitor for Public Catalog V1  
-**Estado:** PASS WITH NON-BLOCKING QA DEBT  
+**Fase:** PUBLIC-CATALOG-POST-DEPLOY-MONITOR-1 — Post-Deploy Production Monitor for Public Catalog V1
+**Estado:** PASS WITH NON-BLOCKING QA DEBT
 **Resumen:** Se ejecutó monitor productivo read-only del catálogo público V1 luego del deploy agrupado y handoff final. Se validaron health checks, catálogo, Product Customization, cart/checkout boundary, observability debug, performance sanity, Image Transforms debt, preview boundary, console/network, mobile smoke y frescura observacional. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/preview logic/CSP/pedidos reales.
 - Doc: `docs/public-catalog-post-deploy-monitor-1.md`
 - Deploy base: `fb19a3a`
@@ -468,8 +503,8 @@
 
 ## Registro — PUBLIC-CATALOG-FINAL-HANDOFF-1 (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-FINAL-HANDOFF-1 — Public Catalog V1 Final Technical & Product Handoff  
-**Estado:** FEATURE CLOSED — DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Fase:** PUBLIC-CATALOG-FINAL-HANDOFF-1 — Public Catalog V1 Final Technical & Product Handoff
+**Estado:** FEATURE CLOSED — DEPLOYED WITH NON-BLOCKING QA DEBT
 **Resumen:** Se cerró formalmente el roadmap V1 del catálogo público. Quedan consolidados arquitectura, data path, cache/invalidation, Product Customization summary-lite, UX de compra, scroll mobile polish, observability privacy-safe, seguridad, QA productiva, rollback y deuda residual. Producción live en `https://orderops.vercel.app`; último paquete funcional `fb19a3a`. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/preview logic/CSP/pedidos reales.
 - Doc: `docs/public-catalog-final-handoff-1.md`
 - Deploy base: `PUBLIC-CATALOG-ROADMAP-DEPLOY-1`
@@ -483,8 +518,8 @@
 
 ## Registro — PUBLIC-CATALOG-ROADMAP-DEPLOY-1 (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-ROADMAP-DEPLOY-1 — Controlled Deploy for Public Catalog Roadmap Package  
-**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Fase:** PUBLIC-CATALOG-ROADMAP-DEPLOY-1 — Controlled Deploy for Public Catalog Roadmap Package
+**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT
 **Resumen:** Se desplegó el paquete agrupado del roadmap de catálogo público: scroll mobile polish, corpus customization filtrado, UX de conversión y observability foundation privacy-safe. Image Transforms queda como deuda infra (`FeatureNotEnabled`) hasta autorización. Producción smokeada en catálogo, observability debug, checkout boundary y preview admin según auth disponible. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/preview logic/CSP/pedidos reales.
 - Doc: `docs/public-catalog-roadmap-deploy-1.md`
 - Commit funcional: `fb19a3a`
@@ -498,9 +533,9 @@
 
 ## Registro — PUBLIC-CATALOG-OBSERVABILITY-1 (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-OBSERVABILITY-1 — Public Catalog Web Vitals & UX Observability Foundation  
-**Estado:** PASS WITH PREVIEW QA DEBT  
-**Resumen:** Se agregó una base privacy-safe de observabilidad para el catálogo público: Web Vitals, métricas custom livianas, debug mode y endpoint 204 sin DB/Supabase/PII, preservando checkout, cart schema, cache, corpus summary-lite, image loader, preview admin y UX polish. Sin DB/RLS/RPC/checkout action/carrito schema/cache/corpus/preview logic/CSP/pedidos reales.  
+**Fase:** PUBLIC-CATALOG-OBSERVABILITY-1 — Public Catalog Web Vitals & UX Observability Foundation
+**Estado:** PASS WITH PREVIEW QA DEBT
+**Resumen:** Se agregó una base privacy-safe de observabilidad para el catálogo público: Web Vitals, métricas custom livianas, debug mode y endpoint 204 sin DB/Supabase/PII, preservando checkout, cart schema, cache, corpus summary-lite, image loader, preview admin y UX polish. Sin DB/RLS/RPC/checkout action/carrito schema/cache/corpus/preview logic/CSP/pedidos reales.
 - Doc: `docs/public-catalog-observability-1.md`
 - Código: `components/public/catalog/public-catalog-observability.tsx`, `lib/observability/public-catalog-metrics.ts`, `app/api/observability/public-catalog/route.ts`, `components/public/catalog/public-catalog-page.tsx`
 - CLI: `tsc` PASS · `build` PASS · lint histórico
@@ -511,9 +546,9 @@
 
 ## Registro — PUBLIC-CATALOG-CONVERSION-UX-POLISH-1 (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-CONVERSION-UX-POLISH-1 — Public Catalog Shopping Experience & Conversion Clarity  
-**Estado:** PASS WITH PREVIEW QA DEBT  
-**Resumen:** Se mejoró la claridad de compra del catálogo público: cards, CTAs, “Desde”, productos con opciones, modal customization, carrito y microcopy customer-facing, preservando pricing, cart schema, checkout, cache, corpus summary-lite, preview admin y scroll polish. Sin DB/RLS/RPC/checkout action/carrito schema/cache/corpus/preview logic/CSP/pedidos reales.  
+**Fase:** PUBLIC-CATALOG-CONVERSION-UX-POLISH-1 — Public Catalog Shopping Experience & Conversion Clarity
+**Estado:** PASS WITH PREVIEW QA DEBT
+**Resumen:** Se mejoró la claridad de compra del catálogo público: cards, CTAs, “Desde”, productos con opciones, modal customization, carrito y microcopy customer-facing, preservando pricing, cart schema, checkout, cache, corpus summary-lite, preview admin y scroll polish. Sin DB/RLS/RPC/checkout action/carrito schema/cache/corpus/preview logic/CSP/pedidos reales.
 - Doc: `docs/public-catalog-conversion-ux-polish-1.md`
 - Código: `product-card.tsx`, `product-detail-modal.tsx`, `cart-bar.tsx`, `cart-sheet.tsx`, `customization-modal.tsx`, `catalog-client.tsx`, `customization-option-group.tsx`, `app/globals.css`, `customization-modal.module.css`
 - CLI: `tsc` PASS · `build` PASS · lint histórico
@@ -524,9 +559,9 @@
 
 ## Registro — PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1 (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1 — Enable Supabase Image Transformations & Verify Real Bytes  
-**Estado:** PASS WITH INFRA AUTH DEBT  
-**Resumen:** Se validó/habilitó Supabase Image Transformations para el catálogo público: `render/image` 403 FeatureNotEnabled, browser `currentSrc` object (fallback tras intento render), bytes reales object medidos por curl (logo ~918 KB / cover ~1.8 MB / thumb ~338 KB), fallback seguro intacto. Sin autorización para habilitar infra. Sin DB/RLS/RPC/checkout action/carrito schema/cache/corpus/scroll/preview logic/CSP/pedidos reales.  
+**Fase:** PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1 — Enable Supabase Image Transformations & Verify Real Bytes
+**Estado:** PASS WITH INFRA AUTH DEBT
+**Resumen:** Se validó/habilitó Supabase Image Transformations para el catálogo público: `render/image` 403 FeatureNotEnabled, browser `currentSrc` object (fallback tras intento render), bytes reales object medidos por curl (logo ~918 KB / cover ~1.8 MB / thumb ~338 KB), fallback seguro intacto. Sin autorización para habilitar infra. Sin DB/RLS/RPC/checkout action/carrito schema/cache/corpus/scroll/preview logic/CSP/pedidos reales.
 - Doc: `docs/public-catalog-image-transforms-infra-1.md`
 - Código: `<sin cambios>`
 - Infra: `sin autorización — FeatureNotEnabled`
@@ -538,9 +573,9 @@
 
 ## Registro — PUBLIC-CATALOG-CORPUS-OVERFETCH-FIX-1 (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-CORPUS-OVERFETCH-FIX-1 — Public Customization Corpus Overfetch Reduction  
-**Estado:** PASS WITH PREVIEW QA DEBT  
-**Resumen:** Se redujo el overfetch del corpus público de Product Customization para el catálogo: summaries calculados con un read model limitado a productos/categorías visibles, groups/options/overrides/upsells relevantes y modal config on-demand intacta. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/preview logic/CSP/pedidos reales.  
+**Fase:** PUBLIC-CATALOG-CORPUS-OVERFETCH-FIX-1 — Public Customization Corpus Overfetch Reduction
+**Estado:** PASS WITH PREVIEW QA DEBT
+**Resumen:** Se redujo el overfetch del corpus público de Product Customization para el catálogo: summaries calculados con un read model limitado a productos/categorías visibles, groups/options/overrides/upsells relevantes y modal config on-demand intacta. Sin DB/RLS/RPC/checkout action/carrito schema/cache strategy/preview logic/CSP/pedidos reales.
 - Doc: `docs/public-catalog-corpus-overfetch-fix-1.md`
 - Código: `lib/product-customization/public.ts`, `lib/catalog/public-cached-data.ts`
 - CLI: `tsc` PASS · `build` PASS · lint histórico
@@ -551,9 +586,9 @@
 
 ## Registro — PUBLIC-CATALOG-SCROLL-JANK-POLISH-1 (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-SCROLL-JANK-POLISH-1 — Public Catalog Mobile Scroll Smoothness & Glass Cost Reduction  
-**Estado:** PASS WITH DEVICE QA DEBT  
-**Resumen:** Se redujo el costo visual del catálogo público en mobile: menor uso de blur/backdrop-filter/sombras en superficies sticky/fixed, preservando look premium, ProductCard, carrito, modal customization, preview admin y checkout boundary. Sin DB/RLS/RPC/cache/checkout action/carrito schema/preview logic/CSP/pedidos reales.  
+**Fase:** PUBLIC-CATALOG-SCROLL-JANK-POLISH-1 — Public Catalog Mobile Scroll Smoothness & Glass Cost Reduction
+**Estado:** PASS WITH DEVICE QA DEBT
+**Resumen:** Se redujo el costo visual del catálogo público en mobile: menor uso de blur/backdrop-filter/sombras en superficies sticky/fixed, preservando look premium, ProductCard, carrito, modal customization, preview admin y checkout boundary. Sin DB/RLS/RPC/cache/checkout action/carrito schema/preview logic/CSP/pedidos reales.
 - Doc: `docs/public-catalog-scroll-jank-polish-1.md`
 - Código: `app/globals.css`, `components/public/catalog/cart-sheet.module.css`, `components/public/catalog/customization-modal.module.css`
 - CLI: `tsc` PASS · `build` PASS · lint histórico
@@ -564,9 +599,9 @@
 
 ## Registro — PUBLIC-CATALOG-CACHE-INVALIDATION-QA-1 (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-CACHE-INVALIDATION-QA-1 — Runtime QA for Public Catalog Cache Invalidation  
-**Estado:** PASS WITH MUTATION QA DEBT  
-**Resumen:** Se validó la frescura operativa del cache del catálogo público: source audit de tags/updateTag/revalidatePath, coverage de actions admin y smoke productivo en catálogo/checkout/preview. Runtime mutation smoke de invalidación y ordering status: UNVERIFIED (sin auth env). Sin DB/RLS/RPC/checkout action/carrito schema/preview logic/CSP/pedidos reales.  
+**Fase:** PUBLIC-CATALOG-CACHE-INVALIDATION-QA-1 — Runtime QA for Public Catalog Cache Invalidation
+**Estado:** PASS WITH MUTATION QA DEBT
+**Resumen:** Se validó la frescura operativa del cache del catálogo público: source audit de tags/updateTag/revalidatePath, coverage de actions admin y smoke productivo en catálogo/checkout/preview. Runtime mutation smoke de invalidación y ordering status: UNVERIFIED (sin auth env). Sin DB/RLS/RPC/checkout action/carrito schema/preview logic/CSP/pedidos reales.
 - Doc: `docs/public-catalog-cache-invalidation-qa-1.md`
 - Código: `<sin cambios>`
 - CLI: `tsc` PASS · `build` PASS · lint histórico
@@ -577,8 +612,8 @@
 
 ## Registro — PUBLIC-CATALOG-CACHE-DEPLOY-1 (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-CACHE-DEPLOY-1 — Controlled Deploy for Public Catalog Cache Strategy  
-**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Fase:** PUBLIC-CATALOG-CACHE-DEPLOY-1 — Controlled Deploy for Public Catalog Cache Strategy
+**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT
 **Resumen:** Se desplegó la estrategia de cache segura del catálogo público: datos estables cacheados con TTL 60s + tags, aceptación de pedidos separada y fresca con `noStore`, e invalidación centralizada desde actions admin. Producción smokeada en catálogo, checkout boundary y preview admin según disponibilidad. Sin DB/RLS/RPC/checkout action/carrito schema/preview logic/CSP/pedidos reales.
 - Doc: `docs/public-catalog-cache-deploy-1.md`
 - Commit funcional: `81ae607`
@@ -591,9 +626,9 @@
 
 ## Registro — PUBLIC-CATALOG-CACHE-STRATEGY-1 (2026-07-29)
 
-**Fase:** PUBLIC-CATALOG-CACHE-STRATEGY-1 — Public Catalog Data Cache Strategy & Safe Invalidation  
-**Estado:** PASS WITH RESIDUAL CACHE DEBT  
-**Resumen:** Se implementó una estrategia de cache segura para el catálogo público: datos estables del catálogo cacheados con tags/TTL corto, estado de aceptación de pedidos separado y fresco, e invalidación centralizada desde actions admin que cambian productos/categorías/settings/customizations. Sin DB/RLS/RPC/checkout action/carrito schema/preview admin logic.  
+**Fase:** PUBLIC-CATALOG-CACHE-STRATEGY-1 — Public Catalog Data Cache Strategy & Safe Invalidation
+**Estado:** PASS WITH RESIDUAL CACHE DEBT
+**Resumen:** Se implementó una estrategia de cache segura para el catálogo público: datos estables del catálogo cacheados con tags/TTL corto, estado de aceptación de pedidos separado y fresco, e invalidación centralizada desde actions admin que cambian productos/categorías/settings/customizations. Sin DB/RLS/RPC/checkout action/carrito schema/preview admin logic.
 - Doc: `docs/public-catalog-cache-strategy-1.md`
 - Código: `lib/catalog/public-cache-tags.ts`, `public-cached-data.ts`, `public-page-data.ts`, `public.ts`, `lib/business/public.ts`, `lib/store-sessions/public.server.ts`, `lib/product-customization/public.ts`, `app/b/[slug]/catalogo/page.tsx`, `public-catalog-page.tsx`, admin products/categories/settings/operations/customizations actions
 - CLI: `tsc` PASS · `build` PASS · lint histórico
@@ -604,8 +639,8 @@
 
 ## Registro — PUBLIC-CATALOG-PERFORMANCE-DEPLOY-1 (2026-07-28)
 
-**Fase:** PUBLIC-CATALOG-PERFORMANCE-DEPLOY-1 — Controlled Deploy for Public Catalog Performance Package  
-**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Fase:** PUBLIC-CATALOG-PERFORMANCE-DEPLOY-1 — Controlled Deploy for Public Catalog Performance Package
+**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT
 **Resumen:** Se desplegó el paquete de performance del catálogo público: `next/image` + helper público, fallback transforms seguro, dedupe de settings/flags/products, summaries sin re-fetch de productos en page path y ProductCard/CatalogClient optimizados para menor re-render por carrito. Producción smokeada en `/b/demohamburgueseria/catalogo` y checkout boundary sin enviar pedido. Sin DB/RLS/RPC/cache/revalidation/checkout action/carrito schema/preview admin logic.
 - Doc: `docs/public-catalog-performance-deploy-1.md`
 - Commit: `2b60bb3`
@@ -618,9 +653,9 @@
 
 ## Registro — PUBLIC-CATALOG-PERFORMANCE-FIX-1 (2026-07-28)
 
-**Fase:** PUBLIC-CATALOG-PERFORMANCE-FIX-1 — Public Catalog Server Calls & Render Cost Reduction  
-**Estado:** PASS WITH RESIDUAL PERFORMANCE DEBT  
-**Resumen:** Se redujo el costo server/render del catálogo público sin cache persistente: dedupe de settings/flags/products donde fue seguro, summaries de customization usando datos ya cargados, menor waterfall y ProductCard/CatalogClient ajustados para reducir re-renders por carrito. Sin DB/RLS/RPC/cache/revalidation/checkout/carrito schema/preview admin.  
+**Fase:** PUBLIC-CATALOG-PERFORMANCE-FIX-1 — Public Catalog Server Calls & Render Cost Reduction
+**Estado:** PASS WITH RESIDUAL PERFORMANCE DEBT
+**Resumen:** Se redujo el costo server/render del catálogo público sin cache persistente: dedupe de settings/flags/products donde fue seguro, summaries de customization usando datos ya cargados, menor waterfall y ProductCard/CatalogClient ajustados para reducir re-renders por carrito. Sin DB/RLS/RPC/cache/revalidation/checkout/carrito schema/preview admin.
 - Doc: `docs/public-catalog-performance-fix-1.md`
 - Código: `lib/catalog/public-page-data.ts`, `lib/business/public.ts`, `lib/store-sessions/public.server.ts`, `lib/product-customization/{flags,public}.ts`, `components/public/catalog/{public-catalog-page,catalog-client,product-card}.tsx`
 - CLI: `tsc` PASS · `build` PASS · lint histórico
@@ -631,8 +666,8 @@
 
 ## Registro — PUBLIC-CATALOG-IMAGE-TRANSFORMS-QA-FIX-1 (2026-07-28)
 
-**Fase:** PUBLIC-CATALOG-IMAGE-TRANSFORMS-QA-FIX-1 — Supabase Image Transformations QA/Fix for Public Catalog  
-**Estado:** PASS WITH INFRA IMAGE DEBT  
+**Fase:** PUBLIC-CATALOG-IMAGE-TRANSFORMS-QA-FIX-1 — Supabase Image Transformations QA/Fix for Public Catalog
+**Estado:** PASS WITH INFRA IMAGE DEBT
 **Resumen:** Se auditó/corrigió el path de Supabase Image Transformations usado por `next/image` en el catálogo público. Object URLs 200; render/image 403 FeatureNotEnabled (tenant). Loader URL correcto; fix menor: reset de fallback en `PublicStorageImage` al cambiar `src`. Fallback seguro; camino principal sigue siendo transform. Sin DB/RLS/RPC/cache/checkout/carrito/preview admin.
 
 - Doc: `docs/public-catalog-image-transforms-qa-fix-1.md`
@@ -645,8 +680,8 @@
 
 ## Registro — PUBLIC-CATALOG-IMAGE-OPTIMIZATION-1 (2026-07-28)
 
-**Fase:** PUBLIC-CATALOG-IMAGE-OPTIMIZATION-1 — Public Catalog Image Loading & Rendering Optimization  
-**Estado:** PASS WITH MINOR IMAGE DEBT  
+**Fase:** PUBLIC-CATALOG-IMAGE-OPTIMIZATION-1 — Public Catalog Image Loading & Rendering Optimization
+**Estado:** PASS WITH MINOR IMAGE DEBT
 **Resumen:** Se migraron imágenes públicas críticas del catálogo de `<img>` raw a `next/image` usando la infraestructura existente de Supabase loader. Product thumbs lazy/sized, cover priority/sized, logo sized y modal detail optimizado. Sin cambios de DB/RLS/RPC/cache/checkout/carrito/preview admin. Objetivo: reducir bytes, decode y jank percibido. Deuda: transforms fallback full-res, landing `<img>`, smoke checkout/preview UNVERIFIED.
 
 - Doc: `docs/public-catalog-image-optimization-1.md`
@@ -659,8 +694,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-HANDOFF-1 (2026-07-28)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-HANDOFF-1 — Final Handoff for Admin Catalog Preview Mobile Feel  
-**Estado:** FEATURE CLOSED — DEPLOYED WITH ACCEPTED DEVICE QA DEBT  
+**Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-HANDOFF-1 — Final Handoff for Admin Catalog Preview Mobile Feel
+**Estado:** FEATURE CLOSED — DEPLOYED WITH ACCEPTED DEVICE QA DEBT
 **Resumen:** Se cerró formalmente la Vista previa del catálogo con mobile-feel y shell premium. Producción live en /admin/products/preview: iframe real, carrito preview aislado, checkout bloqueado UI+server, cookie 300s, clear-cart postMessage+ACK/fallback, cursor/momentum/anti-selection solo preview/mouse, layout final con paridad Products, CSP self. Sin DB/RLS/RPC/pedidos. Deuda aceptada: Android/PWA/iOS device QA P2 + polish P3.
 
 - Doc: `docs/admin-catalog-preview-mobile-feel-final-handoff-1.md`
@@ -673,8 +708,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-FINAL-QA-DEVICE-1 (2026-07-28)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-FINAL-QA-DEVICE-1 — Real Device Final QA for Admin Catalog Preview  
-**Estado:** READY WITH DEVICE QA DEBT  
+**Fase:** ADMIN-CATALOG-PREVIEW-FINAL-QA-DEVICE-1 — Real Device Final QA for Admin Catalog Preview
+**Estado:** READY WITH DEVICE QA DEBT
 **Resumen:** QA-only prod. Desktop: preview layout, clear-cart → 0, checkout “Confirmación deshabilitada”, público “Enviar pedido”, CSP `frame-ancestors 'self'`, Products/Customizations/Settings PASS, sin pedidos. Android Chrome / PWA / iOS **UNVERIFIED — device unavailable** (P2 cobertura). Código pan/cursor sigue mouse-only. Sin código/deploy/commit.
 
 - Doc: `docs/admin-catalog-preview-final-qa-device-1.md`
@@ -687,8 +722,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-LAYOUT-FINAL-DEPLOY-1 (2026-07-28)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-LAYOUT-FINAL-DEPLOY-1 — Controlled Deploy for Final Preview Layout Polish  
-**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Fase:** ADMIN-CATALOG-PREVIEW-LAYOUT-FINAL-DEPLOY-1 — Controlled Deploy for Final Preview Layout Polish
+**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT
 **Resumen:** Commit `0dce5b3` en `main` (LAYOUT-FIX-2 + WIDTH-PARITY). Live en https://orderops.vercel.app. Paridad Products (container 1600 / header left 104 / shell max-width none). Smoke: layout, clear-cart, checkout guard, público, customizations/settings PASS. P3 residual (device touch, clipboard, press, momentum automation, lint).
 
 - Doc: `docs/admin-catalog-preview-layout-final-deploy-1.md`
@@ -701,8 +736,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-SHELL-WIDTH-PARITY-FIX-1 (2026-07-28)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-SHELL-WIDTH-PARITY-FIX-1 — Products Page Width Parity  
-**Estado:** PASS  
+**Fase:** ADMIN-CATALOG-PREVIEW-SHELL-WIDTH-PARITY-FIX-1 — Products Page Width Parity
+**Estado:** PASS
 **Resumen:** Se quitó `max-width: 1360px` del shell de preview para llenar el ancho operational (`page-container` 1600px, igual que `/admin/products`). Header left 104 / shell width 1289 @1440 = paridad Products. Rail izquierdo 560px y phone centrado intactos. Solo CSS.
 
 - Doc: `docs/admin-catalog-preview-shell-width-parity-fix-1.md`
@@ -715,8 +750,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-2 (2026-07-28)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-2 — Header Alignment & Left Column Width Polish  
-**Estado:** PASS  
+**Fase:** ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-2 — Header Alignment & Left Column Width Polish
+**Estado:** PASS
 **Resumen:** Header movido dentro de la columna izquierda del grid (phone top Δ=0 vs header). Rail izquierdo `max-width: 560px` con eje compartido header/safety/acciones/checklist. Phone sigue centrado en mitad derecha; sticky ≥1024; mobile una columna. Layout-only; sin commit/push/deploy.
 
 - Doc: `docs/admin-catalog-preview-shell-layout-qa-fix-2.md`
@@ -729,8 +764,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-DEPLOY-1 (2026-07-28)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-DEPLOY-1 — Controlled Deploy for Mobile Feel + Shell Polish  
-**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-DEPLOY-1 — Controlled Deploy for Mobile Feel + Shell Polish
+**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT
 **Resumen:** Commit `5843fd9` pusheado a `main` y live en https://orderops.vercel.app. Paquete touch-pan + mobile-feel + shell polish + layout. Smoke prod: preview, layout, clear-cart, checkout guard, público, CSP, customizations/settings PASS. P3 residual (device touch, clipboard automation, press feedback, momentum synthetic flake, lint histórico).
 
 - Doc: `docs/admin-catalog-preview-mobile-feel-deploy-1.md`
@@ -743,8 +778,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-1 (2026-07-28)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-1 — Two-Column Centering & Phone Frame Alignment  
-**Estado:** PASS  
+**Fase:** ADMIN-CATALOG-PREVIEW-SHELL-LAYOUT-QA-FIX-1 — Two-Column Centering & Phone Frame Alignment
+**Estado:** PASS
 **Resumen:** Layout desktop en dos mitades (`1fr`/`1fr`); teléfono centrado en mitad derecha (sin `justify-self: end`); frame envuelve viewport con padding simétrico 16/16 y ancho 422; sticky ≥1024; mobile una columna sin overflowX. Solo CSS/markup shell.
 
 - Doc: `docs/admin-catalog-preview-shell-layout-qa-fix-1.md`
@@ -757,8 +792,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-SHELL-PREMIUM-POLISH-1 (2026-07-28)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-SHELL-PREMIUM-POLISH-1 — Preview Shell UX Polish Before Deploy  
-**Estado:** PASS WITH NON-BLOCKING UX DEBT  
+**Fase:** ADMIN-CATALOG-PREVIEW-SHELL-PREMIUM-POLISH-1 — Preview Shell UX Polish Before Deploy
+**Estado:** PASS WITH NON-BLOCKING UX DEBT
 **Resumen:** Shell premium sin panel izquierdo: acciones jerarquizadas, checklist, Modo seguro, phone sticky, toasts admin, clear-cart via postMessage+ACK+remount. Vaciar refleja 0 en iframe. Clipboard success toast automation = deuda P3.
 
 - Doc: `docs/admin-catalog-preview-shell-premium-polish-1.md`
@@ -771,8 +806,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-AUTH-QA-1 (2026-07-28)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-AUTH-QA-1 — Authenticated Iframe QA for Mobile Feel  
-**Estado:** READY WITH NON-BLOCKING QA DEBT  
+**Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-AUTH-QA-1 — Authenticated Iframe QA for Mobile Feel
+**Estado:** READY WITH NON-BLOCKING QA DEBT
 **Resumen:** QA autenticado en `/admin/products/preview`: cursor + momentum + anti-selection + storage aislado + checkout bloqueado PASS dentro del iframe. Público normal intacto. Sin código. Próximo: MOBILE-FEEL-DEPLOY-1 (pausado por shell polish).
 
 - Doc: `docs/admin-catalog-preview-mobile-feel-auth-qa-1.md`
@@ -784,8 +819,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-POLISH-1 (2026-07-28)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-POLISH-1 — Mobile Feel Implementation  
-**Estado:** PASS WITH AUTH QA DEBT  
+**Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-POLISH-1 — Mobile Feel Implementation
+**Estado:** PASS WITH AUTH QA DEBT
 **Resumen:** Cursor circular + momentum vertical RAF + scrollbar sutil solo en preview/mouse. Press feedback diferido. Public preview PASS; admin iframe UNVERIFIED. Sin tocar carrito/cookie/guard/CSP/DB.
 
 - Doc: `docs/admin-catalog-preview-mobile-feel-polish-1.md`
@@ -798,8 +833,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-SPEC-1 (2026-07-28)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-SPEC-1 — Mobile Feel UX Specification  
-**Estado:** SPEC READY FOR IMPLEMENTATION  
+**Fase:** ADMIN-CATALOG-PREVIEW-MOBILE-FEEL-SPEC-1 — Mobile Feel UX Specification
+**Estado:** SPEC READY FOR IMPLEMENTATION
 **Resumen:** Se definió el polish mobile-feel para la preview: cursor circular tipo touch, momentum/inertia vertical, feedback táctil sutil y scrollbars menos protagonistas, siempre solo en preview desktop/mouse. Sin código funcional. Próximo: MOBILE-FEEL-POLISH-1.
 
 - Doc: `docs/admin-catalog-preview-mobile-feel-spec-1.md`
@@ -810,8 +845,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-TOUCH-PAN-QA-FIX-1 (2026-07-28)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-TOUCH-PAN-QA-FIX-1 — Prevent Text Selection During Preview Pan  
-**Estado:** PASS WITH PUBLIC QA ONLY  
+**Fase:** ADMIN-CATALOG-PREVIEW-TOUCH-PAN-QA-FIX-1 — Prevent Text Selection During Preview Pan
+**Estado:** PASS WITH PUBLIC QA ONLY
 **Resumen:** Anti-selección en mouse-pan preview: fase `candidate` inmediata, `user-select: none`, `selectstart`/`dragstart` prevent, cleanup de selection. Cards `role="button"` ya no bloquean pan sobre texto/imagen. Público preview PASS; admin iframe UNVERIFIED. Deploy sigue bloqueado hasta auth smoke.
 
 - Doc: `docs/admin-catalog-preview-touch-pan-qa-fix-1.md`
@@ -824,8 +859,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-TOUCH-PAN-POLISH-1 (2026-07-27)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-TOUCH-PAN-POLISH-1 — Mouse Drag Touch-Scroll Polish  
-**Estado:** PASS WITH AUTH QA DEBT  
+**Fase:** ADMIN-CATALOG-PREVIEW-TOUCH-PAN-POLISH-1 — Mouse Drag Touch-Scroll Polish
+**Estado:** PASS WITH AUTH QA DEBT
 **Resumen:** Mouse drag vertical scrollea el catálogo solo en preview (`isCatalogPreview` + pointer mouse). Hook aislado, threshold 8px, ignore interactivos/overlays. Público/touch/cookie/guard/CSP intactos. Admin iframe UNVERIFIED.
 
 - Doc: `docs/admin-catalog-preview-touch-pan-polish-1.md`
@@ -838,8 +873,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-HANDOFF-1 (2026-07-27)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-HANDOFF-1 — Final Technical & Product Handoff  
-**Estado:** FEATURE CLOSED — DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Fase:** ADMIN-CATALOG-PREVIEW-HANDOFF-1 — Final Technical & Product Handoff
+**Estado:** FEATURE CLOSED — DEPLOYED WITH NON-BLOCKING QA DEBT
 **Resumen:** Se consolidó el cierre técnico/producto de Vista previa del catálogo desplegada en producción. Feature en `/admin/products/preview` con iframe real, carrito preview aislado, checkout bloqueado UI+server, cookie 300s, clear al vaciar y CSP self. Sin DB/RLS/RPC/pedidos. Quedan deudas P2/P3 no bloqueantes.
 
 - Doc: `docs/admin-catalog-preview-handoff-1.md`
@@ -851,8 +886,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-DEPLOY-1 (2026-07-27)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-DEPLOY-1 — Controlled Deploy & Production Smoke  
-**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT  
+**Fase:** ADMIN-CATALOG-PREVIEW-DEPLOY-1 — Controlled Deploy & Production Smoke
+**Estado:** DEPLOYED WITH NON-BLOCKING QA DEBT
 **Resumen:** Commit `c4b3e18` pushed a `main`; producción live en https://orderops.vercel.app con CSP `frame-ancestors 'self'`. Smoke público: carrito preview aislado + checkout bloqueado; público normal “Enviar pedido”. Admin auth / cookie DevTools UNVERIFIED. Sin pedidos / DB / RLS / RPC.
 
 - Doc: `docs/admin-catalog-preview-deploy-1.md`
@@ -863,8 +898,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-RE-QA-1 (2026-07-27)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-RE-QA-1 — Authenticated Re-QA After Cookie Polish  
-**Estado:** READY WITH NON-BLOCKING QA DEBT  
+**Fase:** ADMIN-CATALOG-PREVIEW-RE-QA-1 — Authenticated Re-QA After Cookie Polish
+**Estado:** READY WITH NON-BLOCKING QA DEBT
 **Resumen:** Source confirma Max-Age 300 + clear cookie + vaciar wiring. Runtime `:3012`: carrito aislado, checkout preview bloqueado, público normal con “Enviar pedido”, CSP OK. Admin auth / cookie DevTools / clear al vaciar UNVERIFIED sin E2E. Sin P0/P1 nuevos.
 
 - Doc: `docs/admin-catalog-preview-re-qa-1.md`
@@ -876,8 +911,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-COOKIE-POLISH-1 (2026-07-27)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-COOKIE-POLISH-1 — Preview Cookie Lifetime & Cleanup Polish  
-**Estado:** PASS WITH AUTH QA DEBT  
+**Fase:** ADMIN-CATALOG-PREVIEW-COOKIE-POLISH-1 — Preview Cookie Lifetime & Cleanup Polish
+**Estado:** PASS WITH AUTH QA DEBT
 **Resumen:** Cookie `orderops-admin-catalog-preview` pasa de Max-Age 3600 → **300**. “Vaciar carrito de prueba” limpia keys preview y expira cookie vía Server Action (`manageProducts` + tenant match). Checkout guard UI+server intacto. Sin DB/RLS/RPC ni botón nuevo.
 
 - Doc: `docs/admin-catalog-preview-cookie-polish-1.md`
@@ -889,8 +924,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-QA-1 (2026-07-27)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-QA-1 — Authenticated Browser QA & Release Readiness  
-**Estado:** READY AFTER COOKIE POLISH  
+**Fase:** ADMIN-CATALOG-PREVIEW-QA-1 — Authenticated Browser QA & Release Readiness
+**Estado:** READY AFTER COOKIE POLISH
 **Resumen:** Source/headers PASS. Path público `?orderopsPreview=1` confirma carrito aislado (preview cambia, public no) y checkout con submit deshabilitado + mensaje de bloqueo; sin pedidos/success. Admin autenticado UNVERIFIED (sin sesión E2E). Cookie preview 1h clasificada **P1** (afecta admin same-browser, no customers anónimos).
 
 - Doc: `docs/admin-catalog-preview-qa-1.md`
@@ -902,8 +937,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-IMPL-SAFE-V1-1 (2026-07-27)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-IMPL-SAFE-V1-1 — Implementación segura V1  
-**Estado:** PASS WITH DEBT  
+**Fase:** ADMIN-CATALOG-PREVIEW-IMPL-SAFE-V1-1 — Implementación segura V1
+**Estado:** PASS WITH DEBT
 **Resumen:** Se implementó `/admin/products/preview` (`manageProducts`) con iframe del catálogo real, cookie httpOnly de preview, carrito aislado `orderops-preview-cart*`, checkout visual con bloqueo UI+server (sin `create_order`), CTA dual en Productos y CSP `frame-ancestors 'self'`. Sin DB/RLS/RPC/sidebar/recargar/pedidos.
 
 - Doc: `docs/admin-catalog-preview-impl-safe-v1-1.md`
@@ -917,8 +952,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-SPEC-CLOSURE-1 (2026-07-27)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-SPEC-CLOSURE-1 — Product & Technical Spec Closure  
-**Estado:** PRODUCT SPEC DECISIONS CLOSED · READY FOR IMPLEMENTATION  
+**Fase:** ADMIN-CATALOG-PREVIEW-SPEC-CLOSURE-1 — Product & Technical Spec Closure
+**Estado:** PRODUCT SPEC DECISIONS CLOSED · READY FOR IMPLEMENTATION
 **Resumen:** Se congelaron las decisiones P0/P1 del Product Owner para la Vista previa del catálogo en `/admin/products/preview`: iframe same-origin, carrito aislado (`orderops-preview-cart*`), checkout visual sin confirmación (UI+server), sin success, `manageProducts`, CTA dual (preview + copiar link), CSP `frame-ancestors 'self'`, sin recargar/sidebar/device selector. Preview mode debe ser verificable server-side (no solo query).
 
 - Doc: `docs/admin-catalog-preview-spec-closure-1.md`
@@ -930,8 +965,8 @@
 
 ## Registro — ADMIN-CATALOG-PREVIEW-AUDIT-1 (2026-07-26)
 
-**Fase:** ADMIN-CATALOG-PREVIEW-AUDIT-1 — Forensic Architecture & Product Audit  
-**Estado:** READY WITH TECHNICAL CONDITIONS  
+**Fase:** ADMIN-CATALOG-PREVIEW-AUDIT-1 — Forensic Architecture & Product Audit
+**Estado:** READY WITH TECHNICAL CONDITIONS
 **Resumen:** Auditoría forense (solo docs) de la futura vista previa móvil del catálogo público en admin vía iframe same-origin. Confirmado: ruta `/b/[slug]/catalogo`, auth por layout, carrito `localStorage` por `businessId` compartido same-origin, checkout → `create_order` real sin `preview_mode`, sin XFO/CSP framing en repo ni prod. Iframe **VIABLE WITH CONDITIONS**.
 
 - Doc: `docs/admin-catalog-preview-audit-1-forensic-architecture.md`
@@ -945,8 +980,8 @@
 
 ## Registro — ADMIN-PWA-ICON-CONSISTENCY-1 (2026-07-24)
 
-**Fase:** ADMIN-PWA-ICON-CONSISTENCY-1 — Admin PWA icon real branding alignment  
-**Estado:** PASS WITH ICON SOURCE RESOLUTION AND DEVICE QA DEBT  
+**Fase:** ADMIN-PWA-ICON-CONSISTENCY-1 — Admin PWA icon real branding alignment
+**Estado:** PASS WITH ICON SOURCE RESOLUTION AND DEVICE QA DEBT
 **Resultado:** Los iconos PWA admin se regeneraron desde `public/icon.png` (misma marca que la pestaña /icon.png), eliminando el fallback SVG con texto **Ops**. Nombre **OrderOps** y start_url/scope/id /admin sin cambio. Sin SW/offline ni cambios auth/admin/catálogo.
 
 - Doc: `docs/admin-pwa-icon-consistency-1-real-branding.md`
@@ -959,8 +994,8 @@
 
 ## Registro — ADMIN-PWA-BRANDING-POLISH-1 (2026-07-24)
 
-**Fase:** ADMIN-PWA-BRANDING-POLISH-1 â€” Admin PWA app name & icon polish  
-**Estado:** PASS WITH BRAND ASSET AND DEVICE QA DEBT  
+**Fase:** ADMIN-PWA-BRANDING-POLISH-1 â€” Admin PWA app name & icon polish
+**Estado:** PASS WITH BRAND ASSET AND DEVICE QA DEBT
 **Resultado:** Se unificÃ³ el nombre instalado a **OrderOps** y se reemplazÃ³ el icono tipo "O" aislada por una marca compuesta (checklist + anillos + **Ops**) en iconos admin PWA. `start_url`/`scope`/`id` permanecen en `/admin`. Sin SW/offline ni cambios auth/admin/catÃ¡logo.
 
 - Doc: `docs/admin-pwa-branding-polish-1-app-name-icon.md`
@@ -972,8 +1007,8 @@
 ---
 ## Registro â€” ADMIN-PWA-FOUNDATION-1 (2026-07-24)
 
-**Fase:** ADMIN-PWA-FOUNDATION-1 â€” Installable Standalone PWA (/admin only)  
-**Estado:** PASS WITH DEVICE QA DEBT  
+**Fase:** ADMIN-PWA-FOUNDATION-1 â€” Installable Standalone PWA (/admin only)
+**Estado:** PASS WITH DEVICE QA DEBT
 **Resultado:** Se aÃ±adiÃ³ manifest web app, metadata/viewport e iconos de marca para instalar OrderOps Admin como standalone en `/admin`, sin service worker, sin offline cache y sin PWA pÃºblica en catÃ¡logo.
 
 - Doc: `docs/admin-pwa-foundation-1-installable-standalone.md`
@@ -988,23 +1023,23 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-V1-FINAL-HANDOFF-1 (2026-07-23)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-V1-FINAL-HANDOFF-1 â€” Product Customization Admin V1 Final Technical & Product Handoff  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-V1-FINAL-HANDOFF-1 â€” Product Customization Admin V1 Final Technical & Product Handoff
+**Estado:** PASS
 **Resultado:** Product Customization Admin V1 quedÃ³ formalmente cerrado y documentado como premium-ready para piloto. El mÃ³dulo conserva Enterprise Readiness 4.3/5, P0=0 y P1=0. El handoff consolida arquitectura, datos, permisos, actions, flujos admin/pÃºblico, pricing, cart, checkout, snapshots, stock, QA, invariantes, rollback y deuda residual aceptada.
 
 - Doc: `docs/product-customization-admin-v1-final-handoff-1.md`
 - Deploy: commit `6731a16` â†’ `origin/main` â†’ https://orderops.vercel.app
 - CLI: `tsc` PASS Â· `build` PASS Â· **docs-only**
 - Smoke: admin 4 tabs + a11y menÃºs Â· pÃºblico Doble Smash parent+ADICIONAL (sin pedido)
-- **PrÃ³xima obligatoria:** ninguna  
+- **PrÃ³xima obligatoria:** ninguna
 - **Opcionales:** DND-TOUCH-POLISH-1 Â· PILOT-MONITOR-3
 
 ---
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-A11Y-POLISH-1 (2026-07-23)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-A11Y-POLISH-1 â€” Accessible Menus, Focus & Keyboard Polish  
-**Estado:** PASS WITH DND TOUCH DEBT  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-A11Y-POLISH-1 â€” Accessible Menus, Focus & Keyboard Polish
+**Estado:** PASS WITH DND TOUCH DEBT
 **Resultado:** Se corrigiÃ³ la accesibilidad de los menÃºs y dialogs del admin de Product Customization. Los menuitems cerrados ya no permanecen en el accessibility tree, los triggers exponen estado y contexto, Escape/click fuera cierran correctamente y el foco vuelve al control de origen, sin modificar lÃ³gica operativa.
 
 - Doc: `docs/product-customization-admin-a11y-polish-1-menus-focus-keyboard.md`
@@ -1018,8 +1053,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-V1-PREMIUM-RESCORE-1 (2026-07-23)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-V1-PREMIUM-RESCORE-1 â€” Enterprise Premium Rescore & Residual Handoff  
-**Estado:** PASS WITH RESIDUAL POLISH DEBT  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-V1-PREMIUM-RESCORE-1 â€” Enterprise Premium Rescore & Residual Handoff
+**Estado:** PASS WITH RESIDUAL POLISH DEBT
 **Resultado:** Se re-auditÃ³ el admin de Product Customization V1 despuÃ©s de las fases de polish principales. Los P1 del monitor original quedaron cerrados, el score enterprise mejorÃ³ y solo queda deuda residual P2/P3 para handoff.
 
 - Doc: `docs/product-customization-admin-v1-premium-rescore-1-enterprise-readiness.md`
@@ -1033,8 +1068,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-RESPONSIVE-POLISH-1 (2026-07-23)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-RESPONSIVE-POLISH-1 â€” Responsive Premium Polish  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-RESPONSIVE-POLISH-1 â€” Responsive Premium Polish
+**Estado:** PASS
 **Resultado:** Se corrigiÃ³ el responsive del admin de Product Customization, mejorando ancho Ãºtil mobile, tabs, cards, chips, modales, menÃºs y vista previa sin cambiar lÃ³gica operativa.
 
 - Doc: `docs/product-customization-admin-responsive-polish-1-mobile-layout.md`
@@ -1048,8 +1083,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-REMOVE-1 (2026-07-23)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-REMOVE-1 â€” Safe Assignment Unassign Action & UX  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-REMOVE-1 â€” Safe Assignment Unassign Action & UX
+**Estado:** PASS
 **Resultado:** Se implementÃ³ una action segura para quitar asignaciones de secciones en Por producto y Por categorÃ­a, con validaciones tenant/permiso, confirmaciÃ³n owner-friendly y QA controlado, sin eliminar secciones/opciones ni modificar lÃ³gica pÃºblica.
 
 - Doc: `docs/product-customization-admin-assignments-remove-1-safe-unassign-action.md`
@@ -1062,8 +1097,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-COMPACT-1 (2026-07-23)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-COMPACT-1 â€” Product & Category Assignments Compact UI  
-**Estado:** PASS WITH REMOVE DEBT  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-ASSIGNMENTS-COMPACT-1 â€” Product & Category Assignments Compact UI
+**Estado:** PASS WITH REMOVE DEBT
 **Resultado:** Se compactÃ³ la UX de asignaciones en Por producto y Por categorÃ­a, reemplazando bloques densos por cards/rows resumidas, modales de agregado y acciones secundarias mÃ¡s claras, sin cambiar lÃ³gica operativa. No existe action segura de quitar asignaciÃ³n (solo Ocultar/Mostrar).
 
 - Doc: `docs/product-customization-admin-assignments-compact-1-product-category-assignments.md`
@@ -1077,8 +1112,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-EXCEPTIONS-UX-1 (2026-07-23)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-EXCEPTIONS-UX-1 â€” Product Exceptions Guided UX  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-EXCEPTIONS-UX-1 â€” Product Exceptions Guided UX
+**Estado:** PASS
 **Resultado:** Se mejorÃ³ la UX de Excepciones del producto, presentÃ¡ndolas como ajustes propios guiados para el producto seleccionado, con empty states, resumen y acciones owner-friendly, sin cambiar la lÃ³gica de overrides ni el modelo de datos.
 
 - Doc: `docs/product-customization-admin-exceptions-ux-1-guided-product-exceptions.md`
@@ -1091,8 +1126,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 (2026-07-19)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 â€” Product & Category Hierarchy Premium Polish  
-**Estado:** PASS WITH HIERARCHY DEBT  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-HIERARCHY-POLISH-1 â€” Product & Category Hierarchy Premium Polish
+**Estado:** PASS WITH HIERARCHY DEBT
 **Resultado:** Se mejorÃ³ la jerarquÃ­a visual y comprensiÃ³n de los tabs Por producto y Por categorÃ­a, reforzando headers, agrupaciÃ³n, empty states, presentaciÃ³n de excepciones y consistencia visual con las secciones compactas, sin cambiar lÃ³gica operativa.
 
 - Doc: `docs/product-customization-admin-hierarchy-polish-1-product-category-hierarchy.md`
@@ -1106,8 +1141,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-COPY-POLISH-1 (2026-07-19)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-COPY-POLISH-1 â€” Owner-Friendly Premium Copy Polish  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-COPY-POLISH-1 â€” Owner-Friendly Premium Copy Polish
+**Estado:** PASS
 **Resultado:** Se puliÃ³ el copy owner-facing del admin de Product Customization, reemplazando lenguaje tÃ©cnico o ambiguo por tÃ©rminos claros y premium como â€œVista previaâ€, â€œMostrar/Ocultar para clientesâ€, â€œAplicado desdeâ€, â€œExcepciones del productoâ€ y â€œOrden de apariciÃ³nâ€, sin cambiar lÃ³gica operativa.
 
 - Doc: `docs/product-customization-admin-copy-polish-1-owner-friendly-copy.md`
@@ -1120,8 +1155,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-V1-POLISH-MONITOR-1 (2026-07-19)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-V1-POLISH-MONITOR-1 â€” Enterprise Premium QA & UX/UI Polish Audit  
-**Estado:** NEEDS POLISH  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-V1-POLISH-MONITOR-1 â€” Enterprise Premium QA & UX/UI Polish Audit
+**Estado:** NEEDS POLISH
 **Resultado:** Se auditÃ³ crÃ­ticamente el mÃ³dulo admin de Product Customization V1 con foco enterprise/premium, revisando funcionalidad, copy, jerarquÃ­a, UX/UI, responsive, accesibilidad bÃ¡sica, preview admin y no regresiÃ³n pÃºblica. Se generÃ³ una matriz priorizada de hallazgos y prÃ³ximas fases quirÃºrgicas.
 
 - Doc: `docs/product-customization-admin-v1-polish-monitor-1-premium-qa.md`
@@ -1135,8 +1170,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1 (2026-07-19)
 
-**Fase:** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1 â€” Plus Suggestions Legacy Cleanup  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-CLEANUP-1 â€” Plus Suggestions Legacy Cleanup
+**Estado:** PASS
 **Resultado:** Se eliminÃ³ el componente legacy del flujo inline anterior de Plus sugeridos y se limpiaron referencias/CSS obsoletos donde fue seguro hacerlo. La UI compacta sigue funcionando y no se modificÃ³ lÃ³gica operativa.
 
 - Eliminado: `upsell-groups-section.tsx` (0 imports)
@@ -1149,8 +1184,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-COMPACT-1 (2026-07-18)
 
-**Fase:** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-COMPACT-1 â€” Compact Plus Suggestions UI  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-COMPACT-1 â€” Compact Plus Suggestions UI
+**Estado:** PASS
 **Resultado:** La pestaÃ±a Plus sugeridos fue compactada: las ventas sugeridas ahora se muestran como cards resumidas, la ediciÃ³n ocurre en modales y los productos sugeridos se gestionan en un modal dedicado sin tocar la lÃ³gica operativa.
 
 - Components: `plus-suggestions/*` Â· wired en `owner-customization-builder`
@@ -1163,8 +1198,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-UX-SPEC-1 (2026-07-18)
 
-**Fase:** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-UX-SPEC-1 â€” Plus Suggestions Compact UX Specification  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-PLUS-SUGGESTIONS-UX-SPEC-1 â€” Plus Suggestions Compact UX Specification
+**Estado:** PASS
 **Resultado:** Se definiÃ³ la UX compacta para Plus sugeridos, reemplazando formularios inline extensos por cards resumidas, menÃºs de acciones y modales de ediciÃ³n para ventas sugeridas y productos sugeridos, sin cambiar lÃ³gica operativa.
 
 - Doc: `docs/product-customization-plus-suggestions-ux-spec-1-compact-plus-suggestions.md`
@@ -1177,8 +1212,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-CLEANUP-1 (2026-07-18)
 
-**Fase:** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-CLEANUP-1 â€” Reusable Sections Legacy Cleanup  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-CLEANUP-1 â€” Reusable Sections Legacy Cleanup
+**Estado:** PASS
 **Resultado:** Se eliminaron componentes legacy e imports/CSS obsoletos del flujo inline anterior de Secciones reutilizables. La UI compacta sigue funcionando y no se modificÃ³ lÃ³gica operativa.
 
 - Eliminados: `create-group-form.tsx`, `customization-group-card.tsx`, `sortable-groups-list.tsx`
@@ -1191,8 +1226,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-COMPACT-1 (2026-07-18)
 
-**Fase:** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-COMPACT-1 â€” Compact Reusable Sections UI  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-COMPACT-1 â€” Compact Reusable Sections UI
+**Estado:** PASS
 **Resultado:** La pestaÃ±a Secciones reutilizables fue compactada: las secciones ahora se muestran como cards resumidas, la ediciÃ³n ocurre en modales, las opciones se gestionan en un modal dedicado y se eliminaron los formularios inline extensos sin tocar la lÃ³gica operativa.
 
 - Components: `reusable-sections/*` Â· wired en `owner-customization-builder`
@@ -1205,8 +1240,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-UX-SPEC-1 (2026-07-18)
 
-**Fase:** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-UX-SPEC-1 â€” Reusable Sections Compact UX Specification  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-REUSABLE-SECTIONS-UX-SPEC-1 â€” Reusable Sections Compact UX Specification
+**Estado:** PASS
 **Resultado:** Se definiÃ³ la UX compacta para Secciones reutilizables, reemplazando formularios inline extensos por cards resumidas, menÃºs de acciones y modales de ediciÃ³n para secciones y opciones, sin cambiar lÃ³gica operativa.
 
 - Doc: `docs/product-customization-reusable-sections-ux-spec-1-compact-reusable-sections.md`
@@ -1218,8 +1253,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-OVERRIDES-1 (2026-07-18)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-OVERRIDES-1 â€” Admin Preview Product Overrides Fidelity  
-**Estado:** PASS WITH DATA QA DEBT  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-OVERRIDES-1 â€” Admin Preview Product Overrides Fidelity
+**Estado:** PASS WITH DATA QA DEBT
 **Resultado:** La preview sandbox de `/admin/products/customizations` ahora refleja overrides/excepciones del producto seleccionado. Los grupos u opciones ocultos por override no aparecen en la vista previa, los grupos propios se mantienen y la selecciÃ³n local se limpia cuando cambian las opciones efectivas.
 
 - Loader: `getCustomizationOverridesForAdmin` en corpus admin
@@ -1234,8 +1269,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-CLEANUP-1 (2026-07-17)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-CLEANUP-1 â€” Admin Preview Dead Code & Wiring Cleanup  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-CLEANUP-1 â€” Admin Preview Dead Code & Wiring Cleanup
+**Estado:** PASS
 **Resultado:** Se eliminÃ³ la preview placeholder anterior y se limpiÃ³ wiring/imports/CSS obsoleto relacionado. La preview sandbox interactiva sigue funcionando y el modal pÃºblico conserva su comportamiento.
 
 - Eliminado: `customer-preview-panel.tsx` (0 imports)
@@ -1249,8 +1284,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-POLISH-1 (2026-07-17)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-POLISH-1 â€” Interactive Admin Preview Sandbox  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-POLISH-1 â€” Interactive Admin Preview Sandbox
+**Estado:** PASS
 **Resultado:** La preview admin de Product Customization ahora es interactiva y sandbox. Permite probar selecciÃ³n single/multi, plus/adicionales y total estimado reutilizando componentes presentacionales del modal pÃºblico, sin agregar al carrito, sin localStorage, sin checkout y sin writes.
 
 - Shared: option-group/row Â· upsell Â· price-summary Â· \`preview-selection.ts\`
@@ -1263,8 +1298,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-SPEC-1 (2026-07-17)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-SPEC-1 â€” Interactive Admin Preview Architecture Spec  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-PREVIEW-SPEC-1 â€” Interactive Admin Preview Architecture Spec
+**Estado:** PASS
 **Resultado:** Se auditÃ³ el modal pÃºblico y la preview admin actual. Se definiÃ³ una arquitectura segura para una preview interactiva en modo sandbox, reutilizando componentes presentacionales sin arrastrar carrito, checkout, localStorage ni side effects.
 
 - Veredicto: **no** importar `CustomizationModal` completo
@@ -1277,8 +1312,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-BUTTON-THEME-POLISH-1 (2026-07-17)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-BUTTON-THEME-POLISH-1 â€” Admin Customizations Button Theme Polish  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-BUTTON-THEME-POLISH-1 â€” Admin Customizations Button Theme Polish
+**Estado:** PASS
 **Resultado:** Los botones y controles interactivos de `/admin/products/customizations` quedaron alineados con los tokens de theme del admin. Dark/light se ven consistentes, los disabled states son claros y la pantalla conserva la lÃ³gica operativa intacta.
 
 - Primary: accent (`--accent-primary`) en lugar de ink `text-primary` (evita blanco crudo en dark)
@@ -1291,8 +1326,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-ADMIN-VISUAL-POLISH-1 (2026-07-17)
 
-**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-VISUAL-POLISH-1 â€” Admin Customizations Layout & Theme Polish  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-ADMIN-VISUAL-POLISH-1 â€” Admin Customizations Layout & Theme Polish
+**Estado:** PASS
 **Resultado:** La pantalla `/admin/products/customizations` quedÃ³ alineada visualmente con el resto del admin. Usa mejor el ancho disponible, elimina estilos legacy/hardcoded relevantes y mantiene compatibilidad dark/light sin tocar lÃ³gica operativa.
 
 - Shell: `AdminPageLayout size="operational"` + header operational (mismo ancho efectivo que Products / 1600px)
@@ -1305,8 +1340,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-FLAG-OFF-RLS-FIXTURE-QA-1 (2026-07-17)
 
-**Fase:** PRODUCT-CUSTOMIZATION-FLAG-OFF-RLS-FIXTURE-QA-1 â€” Flag OFF Corpus Fixture Negative QA  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-FLAG-OFF-RLS-FIXTURE-QA-1 â€” Flag OFF Corpus Fixture Negative QA
+**Estado:** PASS
 **Resultado:** Se creÃ³ un fixture no piloto con Product Customization flag OFF y corpus real. La lectura privilegiada confirma que existen filas, pero anon no puede leerlas por RLS. El piloto flag ON sigue funcionando y business_settings permanece cerrado para anon.
 
 - Fixture: `qa-rls-flag-off-customization` / `59db34de-â€¦` Â· flag OFF Â· corpus 1/1/1/1/1 + override
@@ -1318,8 +1353,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-FLAG-OFF-RLS-QA-1 (2026-07-17)
 
-**Fase:** PRODUCT-CUSTOMIZATION-FLAG-OFF-RLS-QA-1 â€” Flag OFF Public RLS Negative QA  
-**Estado:** PASS WITH FIXTURE DEBT  
+**Fase:** PRODUCT-CUSTOMIZATION-FLAG-OFF-RLS-QA-1 â€” Flag OFF Public RLS Negative QA
+**Estado:** PASS WITH FIXTURE DEBT
 **Resultado:** El helper y business_settings cerrado fueron validados, y el control positivo del piloto ON pasÃ³. No se encontrÃ³ tenant flag OFF con corpus real para probar negaciÃ³n completa; queda deuda de fixture.
 
 - Helper false: `roticeriajuan` / `majopasteleria` (sin settings) Â· piloto helper true Â· anon settings=0
@@ -1331,8 +1366,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-PILOT-MONITOR-2 (2026-07-17)
 
-**Fase:** PRODUCT-CUSTOMIZATION-PILOT-MONITOR-2 â€” Plus UI + Stock + Public RLS Live Monitoring  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-PILOT-MONITOR-2 â€” Plus UI + Stock + Public RLS Live Monitoring
+**Estado:** PASS
 **Resultado:** El piloto live se mantiene estable luego de Plus UI, copy polish, inventario tracked y public RLS hardening. CatÃ¡logo, modal, carrito, checkout, dashboard, stock Coca, ledger y corpus anon fueron validados sin writes.
 
 - Flags ON Â· sesiÃ³n abierta Â· Coca stock **4** Â· anon corpus OK Â· `business_settings` count=0
@@ -1344,8 +1379,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-PUBLIC-RLS-HARDENING-1 (2026-07-17)
 
-**Fase:** PRODUCT-CUSTOMIZATION-PUBLIC-RLS-HARDENING-1 â€” Public Customization Corpus RLS Hardening  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-PUBLIC-RLS-HARDENING-1 â€” Public Customization Corpus RLS Hardening
+**Estado:** PASS
 **Resultado:** El corpus pÃºblico de Product Customization / Plus UI dejÃ³ de depender del service role directo. RLS pÃºblica ahora usa un helper SECURITY DEFINER que expone solo el booleano del flag y permite leer customizations/upsells disponibles cuando Product Customization estÃ¡ activo.
 
 - Helper: `public.is_public_product_customization_enabled(uuid)` Â· policies public SELECT actualizadas
@@ -1358,8 +1393,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-PLUS-COPY-POLISH-1 (2026-07-17)
 
-**Fase:** PRODUCT-CUSTOMIZATION-PLUS-COPY-POLISH-1 â€” Customer-facing Plus Copy Alignment  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-PLUS-COPY-POLISH-1 â€” Customer-facing Plus Copy Alignment
+**Estado:** PASS
 **Resultado:** El copy pÃºblico de Plus Bebidas quedÃ³ alineado para clientes. La secciÃ³n del modal comunica la venta sugerida como una bebida adicional al pedido, manteniendo intacta la lÃ³gica de parent+upsell, checkout, stock y restock.
 
 - Helper: `lib/product-customization/upsell-copy.ts` Â· modal â€œSumÃ¡ una bebidaâ€ Â· carrito/checkout â€œAdicionalâ€
@@ -1371,8 +1406,8 @@
 
 ## Registro â€” PRODUCT-CUSTOMIZATION-PLUS-UI-DEPLOY-1 (2026-07-17)
 
-**Fase:** PRODUCT-CUSTOMIZATION-PLUS-UI-DEPLOY-1 â€” Deploy Plus Suggestions UI  
-**Estado:** PASS  
+**Fase:** PRODUCT-CUSTOMIZATION-PLUS-UI-DEPLOY-1 â€” Deploy Plus Suggestions UI
+**Estado:** PASS
 **Resultado:** Plus Bebidas quedÃ³ desplegado y validado en la UI pÃºblica productiva. El cliente puede agregar Coca Cola 500ml como plus dentro del modal de Doble Smash; checkout, dashboard, decremento de stock, ledger y restock al cancelar funcionan end-to-end.
 
 - Deploy: `a284a23` Plus UI + `d1b8e7f` service-role public corpus (fix RLS/anon gap) â†’ `https://orderops.vercel.app`

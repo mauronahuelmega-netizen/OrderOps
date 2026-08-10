@@ -250,6 +250,30 @@ export function getLegacyQuantityForProduct(
   return legacy?.quantity ?? 0;
 }
 
+/**
+ * Display quantity for ProductCard badges: legacy roots + V2 parent product roots
+ * for the same base productId. Excludes upsell children and any non-root V2 lines.
+ */
+export function getRootQuantityForProduct(
+  items: LocalCartItem[],
+  productId: string
+): number {
+  let total = 0;
+
+  for (const item of items) {
+    if (isLocalCartLegacyItem(item) && item.productId === productId) {
+      total += item.quantity;
+      continue;
+    }
+
+    if (isV2ParentCartItem(item) && item.productId === productId) {
+      total += item.quantity;
+    }
+  }
+
+  return total;
+}
+
 export function setLegacyProductQuantity(
   items: LocalCartItem[],
   product: {

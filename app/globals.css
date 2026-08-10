@@ -2322,11 +2322,17 @@ html[data-catalog-theme="dark"] .public-business-header {
   --business-header-text: #fdf7ef;
   --business-header-muted: #d5c7b6;
   --business-header-shadow: 0 8px 18px rgba(0, 0, 0, 0.22);
-  background: #12100d;
+  /* Full-bleed header surface — not canvas dark sides + inner pill. */
+  background: var(--business-header-bg);
   backdrop-filter: none;
 }
 
-html[data-catalog-theme="dark"] .public-business-header__inner,
+html[data-catalog-theme="dark"] .public-business-header__inner {
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+
 html[data-catalog-theme="dark"] .public-business-header__sheet {
   border-color: var(--business-header-border);
   background: var(--business-header-bg);
@@ -2354,7 +2360,8 @@ html[data-catalog-theme="dark"] .public-business-header__overlay {
 }
 
 html[data-catalog-theme="dark"] .public-business-header--scrolled .public-business-header__inner {
-  background: var(--business-header-bg);
+  background: transparent;
+  box-shadow: none;
 }
 
 html[data-catalog-theme="dark"] .public-business-header__menu-button,
@@ -2902,67 +2909,6 @@ html[data-catalog-theme="dark"] .public-business-header__logo-frame {
   font-weight: 600;
 }
 
-.success-page {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-  padding: 20px 16px 40px;
-  background: var(--color-bg);
-}
-
-.success-panel {
-  display: grid;
-  gap: 18px;
-  width: 100%;
-  max-width: 520px;
-}
-
-.success-heading {
-  display: grid;
-  gap: 8px;
-}
-
-.success-panel h1,
-.success-order-id strong {
-  margin: 0;
-}
-
-.success-business-name {
-  margin: 0;
-  color: var(--color-text-secondary);
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.success-copy,
-.success-order-id span {
-  color: var(--color-text-secondary);
-}
-
-.success-copy,
-.success-order-id span,
-.success-order-id strong {
-  margin: 0;
-}
-
-.success-order-id {
-  display: grid;
-  gap: 4px;
-  padding: 14px;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
-  background: rgba(37, 99, 235, 0.06);
-}
-
-.success-actions {
-  display: grid;
-  gap: 10px;
-}
-
-.success-link {
-  width: 100%;
-}
-
 .admin-page {
   min-height: 100vh;
   padding: 20px 16px 40px;
@@ -3307,10 +3253,6 @@ body.admin-drawer-open {
     padding: 28px 24px 56px;
   }
 
-  .success-page {
-    padding: 28px 24px 56px;
-  }
-
   .admin-page {
     padding: 28px 24px 56px;
   }
@@ -3390,6 +3332,13 @@ body.admin-drawer-open {
     box-shadow: 0 8px 16px rgba(31, 26, 20, 0.05);
   }
 
+  .catalog-category-chip.catalog-category-chip--active {
+    background: var(--business-primary, var(--color-primary));
+    border-color: var(--business-primary, var(--color-primary));
+    color: var(--business-primary-foreground, #ffffff);
+    box-shadow: none;
+  }
+
   .catalog-product-card {
     background: var(--catalog-surface);
     box-shadow: var(--catalog-shadow);
@@ -3453,16 +3402,15 @@ body.admin-drawer-open {
   }
 
   html[data-catalog-theme="dark"] .public-business-header {
-    --business-header-bg: rgba(24, 21, 18, 0.92);
+    --business-header-bg: #1d1712;
     --business-header-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
-    background:
-      linear-gradient(to bottom, rgba(12, 10, 9, 0.96), rgba(12, 10, 9, 0.8)),
-      transparent;
+    background: var(--business-header-bg);
     backdrop-filter: blur(10px);
   }
 
   html[data-catalog-theme="dark"] .public-business-header--scrolled .public-business-header__inner {
-    background: rgba(23, 19, 15, 0.94);
+    background: transparent;
+    box-shadow: none;
   }
 
   .public-business-header__overlay {
@@ -3513,7 +3461,7 @@ body.admin-drawer-open {
   }
 
   html[data-catalog-theme="dark"] .public-business-header {
-    background: #12100d;
+    background: #1d1712;
   }
 }
 
@@ -3601,6 +3549,18 @@ svg {
   box-shadow: none;
 }
 
+/* PUBLIC-CATALOG-HEADER-DARK-FULL-BLEED-SURFACE-FIX-1
+   Reinforce: root paints full-width surface; inner stays content-only. */
+html[data-catalog-theme="dark"] .public-business-header {
+  background: var(--business-header-bg, #1d1712);
+}
+
+html[data-catalog-theme="dark"] .public-business-header__inner,
+html[data-catalog-theme="dark"] .public-business-header--scrolled .public-business-header__inner {
+  background: transparent;
+  box-shadow: none;
+}
+
 .public-business-header__logo-frame {
   padding: 0;
   border: 0;
@@ -3679,11 +3639,16 @@ svg {
 }
 
 .catalog-category-chip:focus-visible {
-  outline: 2px solid var(--business-primary);
-  outline-offset: 2px;
+  outline: 3px solid color-mix(
+    in srgb,
+    var(--business-primary, var(--color-primary)) 35%,
+    #fff 65%
+  );
+  outline-offset: 3px;
 }
 
 .catalog-page[data-theme="dark"] .catalog-category-chip {
+  /* Inactive baseline only — active filled by dark accent rule below. */
   background: var(--catalog-surface-strong);
   box-shadow: none;
 }
@@ -3819,6 +3784,36 @@ svg {
   color: var(--business-primary-foreground, var(--catalog-surface-strong));
   box-shadow: none;
   opacity: 1;
+}
+
+/* PUBLIC-CATALOG-CATEGORY-NAV-DARK-ACTIVE-ACCENT-FIX-1
+   Dark active must match light: solid business-primary fill (not outline/surface).
+   Higher specificity beats `.catalog-page[data-theme="dark"] .catalog-category-chip`. */
+.catalog-page[data-theme="dark"] .catalog-category-chip.catalog-category-chip--active,
+html[data-catalog-theme="dark"] .catalog-category-chip.catalog-category-chip--active {
+  border-color: var(--business-primary, var(--color-primary));
+  background: var(--business-primary, var(--color-primary));
+  color: var(--business-primary-foreground, #ffffff);
+  box-shadow: none;
+  opacity: 1;
+}
+
+.catalog-page[data-theme="dark"] .catalog-category-chip:not(.catalog-category-chip--active),
+html[data-catalog-theme="dark"] .catalog-category-chip:not(.catalog-category-chip--active) {
+  background: var(--catalog-surface-strong, #1d1712);
+  color: var(--catalog-muted, #c8b9a7);
+  border-color: var(--catalog-border, rgba(255, 244, 230, 0.08));
+  box-shadow: none;
+}
+
+.catalog-page[data-theme="dark"] .catalog-category-chip:focus-visible,
+html[data-catalog-theme="dark"] .catalog-category-chip:focus-visible {
+  outline: 3px solid color-mix(
+    in srgb,
+    var(--business-primary, var(--color-primary)) 42%,
+    #fff 58%
+  );
+  outline-offset: 3px;
 }
 
 /* Catalog hero content hierarchy: tenant headline followed by fixed supporting copy. */

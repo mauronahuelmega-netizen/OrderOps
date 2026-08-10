@@ -38,7 +38,9 @@ import {
 } from "@/lib/admin/catalog-preview-shared";
 import { createPublicCheckoutOrderAction } from "@/app/b/[slug]/checkout/actions";
 import { parseArgentineMobilePhone } from "@/lib/checkout/argentine-phone";
-import AddressAutocomplete from "./address-autocomplete";
+import AddressAutocomplete, {
+  type CheckoutAddressMetadata
+} from "./address-autocomplete";
 import styles from "./checkout-client.module.css";
 
 type CheckoutClientProps = {
@@ -180,6 +182,10 @@ export default function CheckoutClient({
   const cartScope: CartStorageScope = isCatalogPreview ? "preview" : "public";
   const [unifiedCartItems, setUnifiedCartItems] = useState<LocalCartItem[]>([]);
   const [formState, setFormState] = useState<CheckoutFormState>(initialFormState);
+  /** Client-only; never included in createPublicCheckoutOrderAction payload. */
+  const [addressMetadata, setAddressMetadata] = useState<CheckoutAddressMetadata | null>(
+    null
+  );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [phoneError, setPhoneError] = useState<string | null>(null);
   const [statusMessage, setStatusMessage] = useState<string | null>(null);
@@ -263,10 +269,27 @@ export default function CheckoutClient({
     value: string | CheckoutFormState["deliveryMethod"]
   ) {
     if (field === "phone") setPhoneError(null);
+    if (field === "deliveryMethod" && value === "pickup") {
+      setAddressMetadata(null);
+    }
     setFormState((current) => ({
       ...current,
       [field]: value
     }));
+  }
+
+  function handleAddressInputChange(value: string) {
+    setFormState((current) => ({
+      ...current,
+      address: value
+    }));
+    setAddressMetadata(
+      value.trim() ? { source: "manual", inputValue: value } : null
+    );
+  }
+
+  function handleAddressSelect(metadata: CheckoutAddressMetadata) {
+    setAddressMetadata(metadata);
   }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
@@ -443,19 +466,13 @@ export default function CheckoutClient({
 
             {hasCustomizedItems ? (
               <p className={styles.message} role="status">
-                Tu pedido incluye productos personalizados. Los precios se confirman al
-                enviar.
+                Los precios se confirman al enviar.
               </p>
             ) : null}
 
             <section className={styles.section}>
               <div className={styles.sectionHeader}>
-                <h2>Cómo recibís el pedido</h2>
-                <p>
-                  {scheduledModeActive
-                    ? "Elegí modalidad y cuándo lo necesitás."
-                    : "Elegí si lo retirás o te lo enviamos."}
-                </p>
+                <h2>Cómo lo recibís</h2>
               </div>
 
               <fieldset className={styles.segmented}>
@@ -533,14 +550,18 @@ export default function CheckoutClient({
               ) : null}
 
               {formState.deliveryMethod === "delivery" ? (
-                <div className={styles.fieldGrid}>
+                <div
+                  className={styles.fieldGrid}
+                  data-address-source={addressMetadata?.source ?? "none"}
+                  data-address-has-place-id={addressMetadata?.placeId ? "yes" : "no"}
+                >
                   <div className={styles.sectionHeader}>
-                    <h2>¿Dónde lo entregamos?</h2>
-                    <p>Usá una dirección donde puedan recibirte.</p>
+                    <h2>Dirección de entrega</h2>
                   </div>
                   <AddressAutocomplete
                     value={formState.address}
-                    onChange={(value) => handleFieldChange("address", value)}
+                    onChange={handleAddressInputChange}
+                    onSelect={handleAddressSelect}
                   />
                 </div>
               ) : (
@@ -553,7 +574,6 @@ export default function CheckoutClient({
             <section className={styles.section}>
               <div className={styles.sectionHeader}>
                 <h2>Tus datos</h2>
-                <p>Así sabemos a nombre de quién preparar el pedido.</p>
               </div>
               <div className={styles.fieldGrid}>
                 <Input
@@ -598,7 +618,7 @@ export default function CheckoutClient({
             <section className={styles.section}>
               <div className={styles.sectionHeader}>
                 <h2>Notas para el pedido</h2>
-                <p>Aclaraciones que el negocio deba tener en cuenta.</p>
+                <p>Opcional</p>
               </div>
               <label className={styles.textareaField} htmlFor="notes">
                 <span className={styles.textareaLabel}>Notas</span>
@@ -637,10 +657,6 @@ export default function CheckoutClient({
 
             <div className={styles.stickyFooter}>
               <div className={styles.stickyInner}>
-                <div className={styles.stickyTotal}>
-                  <span>Total</span>
-                  <strong>{formattedTotal}</strong>
-                </div>
                 <button
                   type="submit"
                   className={styles.submitButton}

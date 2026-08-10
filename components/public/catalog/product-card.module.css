@@ -103,9 +103,9 @@
 }
 
 .footer {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 6px;
   margin-top: auto;
   padding: 0 10px 10px;
@@ -129,6 +129,17 @@
   align-items: center;
   min-height: 44px;
   gap: 6px;
+}
+
+/* Safe area so floating badge stays inside card overflow:hidden. */
+.quickAddSlot {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.95rem;
+  height: 2.85rem;
+  flex: 0 0 auto;
 }
 
 .plus {
@@ -174,8 +185,47 @@
   z-index: 1;
   width: 18px;
   height: 18px;
+  flex: 0 0 auto;
   contain: paint layout;
   line-height: 1;
+}
+
+.quantityBadge {
+  position: absolute;
+  top: 0.08rem;
+  right: 0.02rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  padding: 0 0.22rem;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+  background: var(--catalog-surface-strong, #ffffff);
+  color: var(--business-primary, var(--color-primary));
+  border: 1px solid color-mix(
+    in srgb,
+    var(--business-primary, var(--color-primary)) 32%,
+    var(--catalog-border, rgba(86, 67, 43, 0.12))
+  );
+  box-shadow: 0 0 0 2px var(--catalog-surface-strong, #ffffff);
+}
+
+:global(html[data-catalog-theme="dark"]) .quantityBadge,
+:global(.catalog-page[data-theme="dark"]) .quantityBadge {
+  background: color-mix(in srgb, #1d1712 78%, #f8f2e8 22%);
+  color: #f8f2e8;
+  border-color: color-mix(
+    in srgb,
+    var(--business-primary, var(--color-primary)) 42%,
+    rgba(255, 244, 230, 0.16)
+  );
+  box-shadow: 0 0 0 2px var(--catalog-surface-strong, #1d1712);
 }
 
 @media (max-width: 23.99rem) {
@@ -186,56 +236,6 @@
   .price {
     font-size: 14px;
   }
-
-  /* Keep only the wider in-cart stepper on its own row at narrow widths. */
-  .footer:has(.qty) .priceRow {
-    grid-column: 1 / -1;
-  }
-
-  .footer:has(.qty) .quickAction {
-    grid-column: 2;
-    justify-self: end;
-  }
-}
-
-.qty {
-  display: inline-grid;
-  grid-template-columns: 32px 28px 32px;
-  align-items: center;
-  min-height: 40px;
-  border: 1px solid var(--catalog-border, var(--border-subtle));
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--catalog-surface-strong, var(--bg-surface));
-  box-shadow: none;
-}
-
-.qty button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 32px;
-  min-height: 40px;
-  border: none;
-  background: transparent;
-  color: var(--catalog-text, var(--text-primary));
-  cursor: pointer;
-  font: inherit;
-  font-weight: 700;
-}
-
-.qty button:focus-visible {
-  outline: 2px solid var(--business-primary, var(--color-primary));
-  outline-offset: -2px;
-}
-
-.qty span {
-  display: grid;
-  place-items: center;
-  min-height: 40px;
-  font-size: 13px;
-  font-weight: 800;
-  color: var(--catalog-text, var(--text-primary));
 }
 
 @media (min-width: 768px) {

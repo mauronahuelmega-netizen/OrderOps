@@ -1,18 +1,124 @@
 .page {
-  --checkout-sticky-footer-space: calc(9.5rem + env(safe-area-inset-bottom, 0px));
+  /* Compact sticky (CTA-only) — recalibrated after removing sticky Total row. */
+  --checkout-sticky-footer-space: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+  --checkout-canvas: #f6f2ea;
+  --checkout-surface: #ffffff;
+  --checkout-card: color-mix(in srgb, #ffffff 94%, #f6f2ea);
+  --checkout-card-strong: #ffffff;
+  --checkout-border: rgba(86, 67, 43, 0.12);
+  --checkout-text: #20170f;
+  --checkout-muted: #6a5d4f;
+  --checkout-subtle: #8a7b6b;
+  --checkout-accent: var(--business-primary, var(--color-primary));
+  --checkout-accent-foreground: var(--business-primary-foreground, #ffffff);
+  --checkout-hover: color-mix(in srgb, var(--checkout-surface) 88%, var(--checkout-text));
+  --checkout-child-bg: color-mix(
+    in srgb,
+    var(--checkout-surface) 86%,
+    var(--checkout-canvas)
+  );
+  --checkout-child-accent: color-mix(
+    in srgb,
+    var(--checkout-accent) 42%,
+    var(--checkout-border)
+  );
+  --checkout-error: var(--color-cancelled, #dc2626);
+  /* Field fills: cream in light; lifted mix in dark (never absolute black holes). */
+  --checkout-input-surface: var(--checkout-canvas);
+  --checkout-input-surface-focus: var(--checkout-canvas);
+  --checkout-input-border: var(--checkout-border);
+  --checkout-input-placeholder: var(--checkout-subtle);
+
   min-height: 100vh;
-  padding: 1rem 1rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
-  background: var(--bg-canvas);
-  color: var(--text-primary);
-  scroll-padding-bottom: var(--checkout-sticky-footer-space);
+  /* Short end breath only — do not reserve full sticky height here (ghost scroll). */
+  padding: 0.85rem 0.85rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
+  background: var(--checkout-canvas);
+  color: var(--checkout-text);
+  scroll-padding-bottom: calc(var(--checkout-sticky-footer-space) + 0.5rem);
+}
+
+:global(html[data-catalog-theme="dark"]) .page,
+:global(.catalog-page[data-theme="dark"]) .page {
+  --checkout-canvas: #12100d;
+  --checkout-surface: #1d1712;
+  --checkout-card: color-mix(in srgb, #1d1712 90%, #f8f2e8);
+  --checkout-card-strong: #1d1712;
+  --checkout-border: rgba(255, 244, 230, 0.13);
+  --checkout-text: #f8f2e8;
+  --checkout-muted: #c8b9a7;
+  --checkout-subtle: #c8b9a7;
+  --checkout-hover: color-mix(in srgb, #1d1712 84%, #f8f2e8);
+  --checkout-child-bg: color-mix(in srgb, #1d1712 88%, #f8f2e8);
+  --checkout-child-accent: color-mix(
+    in srgb,
+    var(--checkout-accent) 48%,
+    rgba(255, 244, 230, 0.13)
+  );
+  --checkout-input-surface: color-mix(
+    in srgb,
+    var(--checkout-card) 72%,
+    var(--checkout-canvas) 28%
+  );
+  --checkout-input-surface-focus: color-mix(
+    in srgb,
+    var(--checkout-card) 82%,
+    var(--checkout-canvas) 18%
+  );
+  --checkout-input-border: color-mix(
+    in srgb,
+    var(--checkout-border) 84%,
+    var(--checkout-text) 16%
+  );
+  --checkout-input-placeholder: var(--checkout-subtle);
+}
+
+.page :global(.ui-label) {
+  color: var(--checkout-text);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.page :global(.ui-input) {
+  min-height: 2.75rem;
+  border: 1px solid var(--checkout-input-border);
+  border-radius: 0.75rem;
+  background: var(--checkout-input-surface);
+  color: var(--checkout-text);
+  box-shadow: none;
+  transition: none;
+}
+
+.page :global(.ui-input::placeholder) {
+  color: var(--checkout-input-placeholder);
+}
+
+.page :global(.ui-input:focus),
+.page :global(.ui-input:focus-visible) {
+  border-color: color-mix(in srgb, var(--checkout-accent) 55%, var(--checkout-input-border));
+  background: var(--checkout-input-surface-focus);
+  outline: 2px solid var(--checkout-accent);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+
+.page :global(.ui-input[aria-invalid="true"]) {
+  border-color: color-mix(in srgb, var(--checkout-error) 55%, var(--checkout-input-border));
+}
+
+.page :global(.ui-helper) {
+  color: var(--checkout-muted);
+}
+
+.page :global(.ui-error) {
+  color: var(--checkout-error);
 }
 
 .header {
   display: flex;
   align-items: flex-start;
-  gap: 0.75rem;
+  gap: 0.65rem;
   max-width: 60rem;
-  margin: 0 auto 1.25rem;
+  margin: 0 auto 0.95rem;
 }
 
 .backButton {
@@ -20,50 +126,53 @@
   align-items: center;
   justify-content: center;
   width: 2.75rem;
+  min-width: 2.75rem;
   height: 2.75rem;
+  min-height: 2.75rem;
   flex-shrink: 0;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--checkout-border);
   border-radius: 0.75rem;
-  background: var(--bg-surface);
-  color: var(--text-primary);
+  background: var(--checkout-card);
+  color: var(--checkout-text);
   text-decoration: none;
 }
 
 .backButton:hover {
-  background: var(--bg-surface-hover);
+  background: var(--checkout-hover);
 }
 
 .backButton:focus-visible,
 .segmentOption:focus-within,
 .editLink:focus-visible,
-.submitButton:focus-visible {
-  outline: 2px solid var(--business-primary, var(--color-primary));
+.submitButton:focus-visible,
+.emptyButton:focus-visible {
+  outline: 2px solid var(--checkout-accent);
   outline-offset: 2px;
 }
 
 .headerCopy {
   min-width: 0;
   flex: 1;
-  padding-top: 0.15rem;
+  padding-top: 0.1rem;
 }
 
 .headerCopy h1 {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   line-height: 1.2;
-  color: var(--text-primary);
+  color: var(--checkout-text);
 }
 
 .headerCopy p {
-  margin: 0.3rem 0 0;
-  font-size: 0.875rem;
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
   line-height: 1.4;
-  color: var(--text-secondary);
+  color: var(--checkout-muted);
 }
 
 .layout {
   display: grid;
-  gap: 1.15rem;
+  gap: 0.95rem;
   max-width: 60rem;
   margin: 0 auto;
 }
@@ -85,41 +194,42 @@
 .section {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  padding: 1rem;
-  border: 1px solid var(--border-subtle);
+  gap: 0.75rem;
+  padding: 0.85rem;
+  border: 1px solid var(--checkout-border);
   border-radius: 0.95rem;
-  background: var(--bg-surface);
-  scroll-margin-bottom: var(--checkout-sticky-footer-space);
+  background: var(--checkout-card);
+  scroll-margin-bottom: calc(var(--checkout-sticky-footer-space) + 0.25rem);
+  box-shadow: none;
 }
 
 .section + .section {
-  margin-top: 0.85rem;
+  margin-top: 0.7rem;
 }
 
 .sectionHeader h2 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.98rem;
   line-height: 1.25;
-  color: var(--text-primary);
+  color: var(--checkout-text);
 }
 
 .sectionHeader p {
-  margin: 0.25rem 0 0;
-  font-size: 0.82rem;
+  margin: 0.22rem 0 0;
+  font-size: 0.8rem;
   line-height: 1.4;
-  color: var(--text-secondary);
+  color: var(--checkout-muted);
 }
 
 .fieldGrid {
   display: grid;
-  gap: 0.85rem;
+  gap: 0.75rem;
 }
 
 .segmented {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.5rem;
+  gap: 0.45rem;
   margin: 0;
   padding: 0;
   border: none;
@@ -145,15 +255,16 @@
   justify-content: center;
   gap: 0.4rem;
   min-height: 2.75rem;
-  padding: 0.55rem 0.75rem;
-  border: 1px solid var(--border-subtle);
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--checkout-border);
   border-radius: 0.8rem;
-  background: var(--bg-canvas);
-  color: var(--text-primary);
+  background: var(--checkout-canvas);
+  color: var(--checkout-text);
   font-size: 0.9rem;
   font-weight: 550;
   cursor: pointer;
   text-align: center;
+  box-shadow: none;
 }
 
 .segmentOption input {
@@ -172,16 +283,15 @@
 .segmentOptionSelected {
   border-color: color-mix(
     in srgb,
-    var(--business-primary, var(--color-primary)) 55%,
-    var(--border-subtle)
+    var(--checkout-accent) 48%,
+    var(--checkout-border)
   );
   background: color-mix(
     in srgb,
-    var(--business-primary, var(--color-primary)) 10%,
-    var(--bg-surface)
+    var(--checkout-accent) 12%,
+    var(--checkout-card)
   );
-  box-shadow: inset 0 0 0 1px
-    color-mix(in srgb, var(--business-primary, var(--color-primary)) 25%, transparent);
+  box-shadow: none;
 }
 
 .segmentIcon {
@@ -198,20 +308,20 @@
   min-height: 2.75rem;
   padding: 0.65rem 0.8rem;
   border-radius: 0.8rem;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-canvas);
-  color: var(--text-primary);
+  border: 1px solid var(--checkout-border);
+  background: var(--checkout-canvas);
+  color: var(--checkout-text);
   font-size: 0.9rem;
   font-weight: 550;
 }
 
 .pickupInfo {
   margin: 0;
-  padding: 0.7rem 0.8rem;
+  padding: 0.65rem 0.75rem;
   border-radius: 0.75rem;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-canvas);
-  color: var(--text-secondary);
+  border: 1px solid var(--checkout-border);
+  background: var(--checkout-canvas);
+  color: var(--checkout-muted);
   font-size: 0.85rem;
   line-height: 1.4;
 }
@@ -220,61 +330,66 @@
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  scroll-margin-bottom: var(--checkout-sticky-footer-space);
+  scroll-margin-bottom: calc(var(--checkout-sticky-footer-space) + 0.25rem);
 }
 
 .textareaLabel {
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--text-primary);
+  color: var(--checkout-text);
 }
 
 .textarea {
-  min-height: 5.5rem;
-  padding: 0.75rem 0.85rem;
-  border: 1px solid var(--border-subtle);
+  min-height: 5rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--checkout-input-border);
   border-radius: 0.75rem;
-  background: var(--bg-canvas);
-  color: var(--text-primary);
+  background: var(--checkout-input-surface);
+  color: var(--checkout-text);
   font: inherit;
   resize: vertical;
+  box-shadow: none;
 }
 
 .textarea:focus-visible {
-  outline: 2px solid var(--business-primary, var(--color-primary));
-  outline-offset: 1px;
+  border-color: color-mix(in srgb, var(--checkout-accent) 55%, var(--checkout-input-border));
+  background: var(--checkout-input-surface-focus);
+  outline: 2px solid var(--checkout-accent);
+  outline-offset: 2px;
 }
 
 .message {
-  margin: 0.85rem 0 0;
-  padding: 0.7rem 0.8rem;
+  margin: 0.7rem 0 0;
+  padding: 0.65rem 0.75rem;
   border-radius: 0.75rem;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-canvas);
-  color: var(--text-secondary);
+  border: 1px solid var(--checkout-border);
+  background: var(--checkout-canvas);
+  color: var(--checkout-muted);
   font-size: 0.85rem;
   line-height: 1.4;
+  scroll-margin-bottom: calc(var(--checkout-sticky-footer-space) + 0.25rem);
 }
 
 .messageError {
-  color: var(--color-cancelled);
-  border-color: color-mix(in srgb, var(--color-cancelled) 35%, var(--border-subtle));
-  background: color-mix(in srgb, var(--color-cancelled) 8%, var(--bg-surface));
+  color: var(--checkout-error);
+  border-color: color-mix(in srgb, var(--checkout-error) 35%, var(--checkout-border));
+  background: color-mix(in srgb, var(--checkout-error) 10%, var(--checkout-card));
 }
 
 .messageSuccess {
-  color: var(--text-primary);
+  color: var(--checkout-text);
 }
 
 .summaryPanel {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  padding: 1rem;
-  border: 1px solid var(--border-subtle);
+  gap: 0.75rem;
+  padding: 0.85rem;
+  border: 1px solid var(--checkout-border);
   border-radius: 0.95rem;
-  background: var(--bg-surface);
+  background: var(--checkout-card);
   min-width: 0;
+  box-shadow: none;
 }
 
 .summaryHeader {
@@ -286,13 +401,14 @@
 
 .summaryHeader h2 {
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.98rem;
+  color: var(--checkout-text);
 }
 
 .summaryMeta {
-  margin: 0;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
+  margin: 0.15rem 0 0;
+  font-size: 0.78rem;
+  color: var(--checkout-muted);
 }
 
 .editLink {
@@ -300,31 +416,29 @@
   align-items: center;
   min-height: 2.75rem;
   font-size: 0.85rem;
-  color: var(--text-secondary);
+  color: var(--checkout-muted);
   text-decoration: none;
 }
 
 .editLink:hover {
-  color: var(--text-primary);
+  color: var(--checkout-text);
 }
 
 .summaryList {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 0.55rem;
 }
 
 .summaryItem {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.summaryItem:last-of-type {
-  border-bottom: none;
-  padding-bottom: 0;
+  padding: 0.62rem 0.68rem;
+  border: 1px solid var(--checkout-border);
+  border-radius: 0.85rem;
+  background: var(--checkout-surface);
+  box-shadow: none;
 }
 
 .summaryItemCopy {
@@ -332,14 +446,14 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.32rem;
 }
 
 .summaryParentRow {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 0.7rem;
 }
 
 .summaryParentCopy {
@@ -350,14 +464,16 @@
 .summaryItemCopy h3 {
   margin: 0;
   font-size: 0.92rem;
+  font-weight: 600;
   line-height: 1.25;
+  color: var(--checkout-text);
   overflow-wrap: anywhere;
 }
 
 .summaryQty {
-  margin: 0.2rem 0 0;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
+  margin: 0.15rem 0 0;
+  font-size: 0.78rem;
+  color: var(--checkout-muted);
 }
 
 .summaryLines {
@@ -366,47 +482,48 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.18rem;
+  gap: 0.15rem;
 }
 
 .summaryLines li {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   line-height: 1.35;
-  color: var(--text-secondary);
+  color: var(--checkout-muted);
   overflow-wrap: anywhere;
 }
 
 .upsellBlock {
-  margin-top: 0.15rem;
-  padding-left: 0.55rem;
-  border-left: 2px solid
-    color-mix(in srgb, var(--business-primary, var(--color-primary)) 35%, var(--border-subtle));
+  margin-top: 0.05rem;
+  padding: 0.2rem 0.15rem 0.1rem 0.5rem;
+  border-left: 2px solid var(--checkout-child-accent);
+  border-radius: 0 0.45rem 0.45rem 0;
+  background: var(--checkout-child-bg);
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.28rem;
 }
 
 .upsellLabel {
   margin: 0;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   font-weight: 600;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: var(--text-tertiary);
+  color: var(--checkout-subtle);
 }
 
 .upsellLine {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 0.75rem;
+  gap: 0.65rem;
   margin: 0;
 }
 
 .upsellName {
   min-width: 0;
   font-size: 0.8rem;
-  color: var(--text-secondary);
+  color: var(--checkout-muted);
   overflow-wrap: anywhere;
 }
 
@@ -414,13 +531,14 @@
   flex-shrink: 0;
   font-size: 0.8rem;
   font-weight: 600;
-  color: var(--text-primary);
+  color: var(--checkout-text);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
 .summaryItemTotal {
   font-size: 0.92rem;
+  color: var(--checkout-text);
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
@@ -430,16 +548,19 @@
   align-items: baseline;
   justify-content: space-between;
   gap: 0.75rem;
-  padding-top: 0.35rem;
+  margin-top: 0.15rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--checkout-border);
 }
 
 .summaryTotalRow span {
-  color: var(--text-secondary);
+  color: var(--checkout-muted);
   font-size: 0.875rem;
 }
 
 .summaryTotalRow strong {
-  font-size: 1.15rem;
+  font-size: 1.12rem;
+  color: var(--checkout-text);
   font-variant-numeric: tabular-nums;
 }
 
@@ -448,48 +569,40 @@
 }
 
 .mobileSummary {
-  margin-top: 0.85rem;
+  margin-top: 0.7rem;
+  /* Keeps summary readable above stuck sticky CTA while scrolling. */
+  padding-bottom: 0.35rem;
+  scroll-margin-bottom: calc(var(--checkout-sticky-footer-space) + 0.25rem);
+}
+
+.page :global(.ui-field),
+.page :global(.ui-input) {
+  scroll-margin-bottom: calc(var(--checkout-sticky-footer-space) + 0.25rem);
 }
 
 .stickyFooter {
   position: sticky;
   bottom: 0;
   z-index: 5;
-  margin-top: 0.85rem;
-  padding: 0.85rem 0 calc(0.35rem + env(safe-area-inset-bottom, 0px));
+  margin-top: 0.55rem;
+  padding: 0.45rem 0 calc(0.4rem + env(safe-area-inset-bottom, 0px));
   background: linear-gradient(
     to top,
-    var(--bg-canvas) 70%,
-    color-mix(in srgb, var(--bg-canvas) 85%, transparent)
+    var(--checkout-canvas) 78%,
+    color-mix(in srgb, var(--checkout-canvas) 90%, transparent)
   );
+  box-shadow: none;
 }
 
 .stickyInner {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
-  padding: 0.85rem;
-  border: 1px solid var(--border-subtle);
+  gap: 0;
+  padding: 0.55rem 0.65rem;
+  border: 1px solid var(--checkout-border);
   border-radius: 0.95rem;
-  background: var(--bg-surface);
-  box-shadow: var(--shadow-card);
-}
-
-.stickyTotal {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 0.75rem;
-}
-
-.stickyTotal span {
-  color: var(--text-secondary);
-  font-size: 0.875rem;
-}
-
-.stickyTotal strong {
-  font-size: 1.15rem;
-  font-variant-numeric: tabular-nums;
+  background: var(--checkout-surface);
+  box-shadow: none;
 }
 
 .submitButton {
@@ -497,11 +610,12 @@
   min-height: 3rem;
   border: none;
   border-radius: 0.75rem;
-  background: var(--business-primary, var(--color-primary));
-  color: var(--business-primary-foreground, #fff);
+  background: var(--checkout-accent);
+  color: var(--checkout-accent-foreground);
   font: inherit;
   font-weight: 600;
   cursor: pointer;
+  box-shadow: none;
 }
 
 .submitButton:disabled {
@@ -518,21 +632,23 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 0.65rem;
-  padding: 1.15rem;
-  border: 1px solid var(--border-subtle);
+  gap: 0.55rem;
+  padding: 1rem;
+  border: 1px solid var(--checkout-border);
   border-radius: 0.95rem;
-  background: var(--bg-surface);
+  background: var(--checkout-card);
+  box-shadow: none;
 }
 
 .emptyCard h2 {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.05rem;
+  color: var(--checkout-text);
 }
 
 .emptyCard p {
   margin: 0;
-  color: var(--text-secondary);
+  color: var(--checkout-muted);
   font-size: 0.9rem;
   line-height: 1.4;
 }
@@ -542,18 +658,18 @@
   align-items: center;
   justify-content: center;
   min-height: 2.75rem;
-  margin-top: 0.25rem;
+  margin-top: 0.2rem;
   padding: 0.55rem 0.95rem;
   border-radius: 0.75rem;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-surface);
-  color: var(--text-primary);
+  border: 1px solid var(--checkout-border);
+  background: var(--checkout-canvas);
+  color: var(--checkout-text);
   text-decoration: none;
   font-weight: 550;
 }
 
 .emptyButton:hover {
-  background: var(--bg-surface-hover);
+  background: var(--checkout-hover);
 }
 
 .icon {
@@ -578,7 +694,7 @@
 
 @media (min-width: 900px) {
   .page {
-    padding: 1.5rem 1.5rem 2.5rem;
+    padding: 1.35rem 1.35rem 2.25rem;
     scroll-padding-bottom: 0;
     --checkout-sticky-footer-space: 0px;
   }
@@ -586,7 +702,7 @@
   .layout {
     grid-template-columns: minmax(0, 1.35fr) minmax(17rem, 0.9fr);
     align-items: start;
-    gap: 1.35rem;
+    gap: 1.2rem;
   }
 
   .mobileSummary {
@@ -604,7 +720,7 @@
     background: none;
     box-shadow: none;
     padding: 0;
-    margin-top: 0.85rem;
+    margin-top: 0.7rem;
   }
 
   .stickyInner {

@@ -9,6 +9,19 @@
 
 ---
 
+### 2026-08-10 - Public Catalog UI Redesign Final Commit-1
+- **[Release]** Local commit `feat(public-catalog): complete UI redesign closeout` on `cursor-handoff-public-catalog-ui-redesign`. Packages catalog/checkout/success/FAB/ProductCard/header/nav runtime + phase docs. No push/deploy.
+- Doc: `docs/public-catalog-ui-redesign-final-commit-1.md`
+- Gates: `PUBLIC-CATALOG-UI-REDESIGN-PUSH-DEPLOY-1 = ALLOWED`; production smoke PAUSED_UNTIL_DEPLOY; Maps PAUSED; `public_order_code` BACKLOG.
+- Debt: ESLint tooling circular P3; hydration overlay P3.
+
+### 2026-08-10 - Public Catalog UI Redesign Closeout-1
+- **[Release/UI]** Closeout formal del rediseño público (catalog/checkout/success/FAB/ProductCard/header/nav) en branch `cursor-handoff-public-catalog-ui-redesign`. Helper `getRootQuantityForProduct` para badges ProductCard (legacy + V2 parents; excluye upsells). Sin commit/push/deploy en esta fase.
+- Files: runtime catalog/checkout/success/globals + `lib/cart/local.ts`; docs de fases + `docs/public-catalog-ui-redesign-closeout-1.md`; `docs/CURRENT_PHASE.md`.
+- Safety: DB/migrations/RPC/actions/package/lockfile/cart signatures/storage/create_order unchanged; real orders `0`.
+- Gates: `PUBLIC-CATALOG-UI-REDESIGN-FINAL-COMMIT-1 = ALLOWED`; push/deploy/smoke PAUSED_UNTIL_COMMIT/DEPLOY; Maps PAUSED; `public_order_code` BACKLOG; success edge OPTIONAL.
+- Debt: ESLint tooling circular; hydration overlay P3 en dev; keyboard/Maps QA debt previo.
+
 ### 2026-08-01 - Public Catalog Post-Add Followup-2 Partial Re-Monitor
 - **[Ops]** `origin/main` reconciled at `3f253ee`; focus fix ancestry and runtime continuity passed. Production Chrome verified Doble Smash modal, Plus absence, created-to-post-add, attach, and eight forward/backward Tab cycles before and after attach with zero escapes.
 - **[Ops]** The single complete-suite retry timed out on the CartSheet locator after `Listo`; classified inconclusive automation coverage, not an application regression. Final handoff remains blocked; no runtime, DB, checkout submit, or real orders.
@@ -395,6 +408,16 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ## 3. Registro de Cambios ArquitectÃ³nicos (Changelog)
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
+
+### 2026-08-10 — PUBLIC-CATALOG-UI-REDESIGN-FINAL-COMMIT-1
+
+- **Release / Public Catalog UX** Local commit package `feat(public-catalog): complete UI redesign closeout` on `cursor-handoff-public-catalog-ui-redesign`. No push/deploy. Push gate ALLOWED.
+- Archivos: runtime catalog/checkout/success/globals/`lib/cart/local.ts` + docs de fases + `docs/public-catalog-ui-redesign-final-commit-1.md`.
+
+### 2026-08-10 — PUBLIC-CATALOG-UI-REDESIGN-CLOSEOUT-1
+
+- **Frontend / Public Catalog UX** Closeout del rediseño UI/UX público en `cursor-handoff-public-catalog-ui-redesign`: ProductCard display qty = legacy + V2 parent roots (`getRootQuantityForProduct`); checkout/success flat; FAB/header/nav polish. Sin commit/push/deploy. Gates: FINAL-COMMIT ALLOWED; Maps PAUSED; public_order_code BACKLOG.
+- Archivos: `lib/cart/local.ts`, catalog/checkout/success/globals runtime, `docs/public-catalog-ui-redesign-closeout-1.md`, `docs/CURRENT_PHASE.md`, `ORDEROPS_LIVING_MEMORY.md`.
 
 ### 2026-08-01 — PUBLIC-CATALOG-POST-ADD-UPSELL-POST-DEPLOY-MONITOR-1-FOLLOWUP CORRECTION
 

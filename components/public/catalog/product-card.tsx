@@ -13,12 +13,11 @@ import styles from "./product-card.module.css";
 type ProductCardProps = {
   product: PublicProduct;
   quantity: number;
-  /** When true, hide quantity controls and always route add through onAddProduct. */
+  /** When true, always route add through onAddProduct (modal/options). */
   requiresCustomization?: boolean;
   onOpenProduct: (productId: string) => void;
   onAddProduct: (productId: string) => void;
   onIncrementProduct: (productId: string) => void;
-  onDecrementProduct: (productId: string) => void;
 };
 
 function ProductCard({
@@ -27,8 +26,7 @@ function ProductCard({
   requiresCustomization = false,
   onOpenProduct,
   onAddProduct,
-  onIncrementProduct,
-  onDecrementProduct
+  onIncrementProduct
 }: ProductCardProps) {
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     if (event.key === "Enter" || event.key === " ") {
@@ -58,10 +56,24 @@ function ProductCard({
       : Number(product.price);
   const formattedPrice = formatPublicCatalogCurrency(displayPrice);
 
-  const showQuantityControl = !requiresCustomization && quantity > 0;
+  const hasQuantity = quantity > 0;
+  const canInlineIncrement = !requiresCustomization && hasQuantity;
+
   const plusLabel = requiresCustomization
-    ? `Elegir opciones para ${product.name}`
-    : `Agregar ${product.name} al pedido`;
+    ? hasQuantity
+      ? `Elegir opciones para ${product.name}. ${quantity} en el carrito.`
+      : `Elegir opciones para ${product.name}`
+    : canInlineIncrement
+      ? `Agregar otra unidad de ${product.name}. ${quantity} en el carrito.`
+      : `Agregar ${product.name} al pedido`;
+
+  function handleQuickAdd() {
+    if (canInlineIncrement) {
+      onIncrementProduct(product.id);
+      return;
+    }
+    onAddProduct(product.id);
+  }
 
   return (
     <article className={`catalog-product-card ${styles.card}`}>
@@ -107,34 +119,21 @@ function ProductCard({
           </strong>
         </div>
         <div className={styles.quickAction} onClick={stopCardOpen}>
-          {showQuantityControl ? (
-            <div className={styles.qty} aria-label={`Cantidad de ${product.name}`}>
-              <button
-                type="button"
-                aria-label={`Quitar uno de ${product.name}`}
-                onClick={() => onDecrementProduct(product.id)}
-              >
-                -
-              </button>
-              <span aria-live="polite">{quantity}</span>
-              <button
-                type="button"
-                aria-label={`Sumar uno de ${product.name}`}
-                onClick={() => onIncrementProduct(product.id)}
-              >
-                +
-              </button>
-            </div>
-          ) : (
+          <div className={styles.quickAddSlot}>
             <button
               type="button"
               className={styles.plus}
               aria-label={plusLabel}
-              onClick={() => onAddProduct(product.id)}
+              onClick={handleQuickAdd}
             >
               <Plus className={styles.plusIcon} aria-hidden="true" strokeWidth={2.5} />
             </button>
-          )}
+            {hasQuantity ? (
+              <span className={styles.quantityBadge} aria-hidden="true">
+                {quantity}
+              </span>
+            ) : null}
+          </div>
         </div>
       </div>
     </article>
