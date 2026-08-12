@@ -38,6 +38,16 @@ import CategoryNav, {
 import ProductCard from "@/components/public/catalog/product-card";
 import ProductDetailModal from "@/components/public/catalog/product-detail-modal";
 import type { CustomizationConfirmResult } from "@/components/public/catalog/customization-modal";
+
+function getMotionAwareScrollBehavior(): ScrollBehavior {
+  if (typeof window === "undefined") {
+    return "auto";
+  }
+
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ? "auto"
+    : "smooth";
+}
 import type { PostAddUpsellOpportunity } from "@/components/public/catalog/post-add-upsell-sheet";
 import {
   customizationCacheKey,
@@ -625,7 +635,7 @@ export default function CatalogClient({
     }
     setSelectedCategoryId(categoryId);
     document.getElementById(`category-${categoryId}`)?.scrollIntoView({
-      behavior: "smooth",
+      behavior: getMotionAwareScrollBehavior(),
       block: "start"
     });
   }

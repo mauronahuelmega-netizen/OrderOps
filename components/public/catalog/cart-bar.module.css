@@ -26,8 +26,20 @@
     var(--cart-fab-shadow);
   cursor: pointer;
   font: inherit;
-  animation: catalogCartFabIn 200ms ease;
+  animation: catalogCartFabIn var(--motion-normal, 220ms) ease;
   contain: layout style paint;
+}
+
+.fabMotionSurface {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transform-origin: center;
+}
+
+.fabPulse .fabMotionSurface {
+  animation: catalogCartFabPulse var(--motion-normal, 220ms) ease-out;
 }
 
 :global(html[data-catalog-theme="dark"]) .fab,
@@ -56,6 +68,12 @@
   font-weight: 800;
   line-height: 1;
   min-width: 1ch;
+  display: inline-block;
+  transform-origin: center;
+}
+
+.countPop {
+  animation: catalogCartCountPop var(--motion-fast, 160ms) ease-out;
 }
 
 @keyframes catalogCartFabIn {
@@ -69,8 +87,41 @@
   }
 }
 
+@keyframes catalogCartFabPulse {
+  0% {
+    transform: scale(1);
+  }
+
+  48% {
+    transform: scale(1.045);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes catalogCartCountPop {
+  0% {
+    transform: scale(0.9);
+  }
+
+  60% {
+    transform: scale(1.08);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .fab {
+    animation: none;
+  }
+
+  .fabPulse .fabMotionSurface,
+  .countPop {
     animation: none;
   }
 }

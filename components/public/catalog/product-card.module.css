@@ -161,6 +161,12 @@
   text-align: center;
   box-shadow: none;
   contain: layout style paint;
+  transition: transform var(--motion-fast, 160ms) ease;
+  transform-origin: center;
+}
+
+.plus:active {
+  transform: scale(0.97);
 }
 
 .plus::before {
@@ -206,6 +212,7 @@
   line-height: 1;
   font-variant-numeric: tabular-nums;
   pointer-events: none;
+  transform-origin: center;
   background: var(--catalog-surface-strong, #ffffff);
   color: var(--business-primary, var(--color-primary));
   border: 1px solid color-mix(
@@ -214,6 +221,27 @@
     var(--catalog-border, rgba(86, 67, 43, 0.12))
   );
   box-shadow: 0 0 0 2px var(--catalog-surface-strong, #ffffff);
+}
+
+.quantityBadgePop {
+  animation: catalogQuantityBadgePop var(--motion-fast, 160ms) ease-out;
+}
+
+@keyframes catalogQuantityBadgePop {
+  0% {
+    opacity: 0.82;
+    transform: scale(0.86);
+  }
+
+  64% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 :global(html[data-catalog-theme="dark"]) .quantityBadge,
@@ -269,5 +297,14 @@
 @media (prefers-reduced-motion: reduce) {
   .plus {
     box-shadow: none;
+    transition: none;
+  }
+
+  .plus:active {
+    transform: none;
+  }
+
+  .quantityBadgePop {
+    animation: none;
   }
 }

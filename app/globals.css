@@ -1359,6 +1359,16 @@ img {
   color: var(--catalog-muted);
   box-shadow: 0 2px 8px rgba(31, 26, 20, 0.04);
   white-space: nowrap;
+  transform-origin: center;
+  transition:
+    background-color var(--motion-fast, 160ms) ease,
+    color var(--motion-fast, 160ms) ease,
+    border-color var(--motion-fast, 160ms) ease,
+    transform var(--motion-fast, 160ms) ease;
+}
+
+.catalog-category-chip:active {
+  transform: scale(0.98);
 }
 
 .catalog-category-chip--active {
@@ -3474,12 +3484,17 @@ body.admin-drawer-open {
   .public-business-header__inner,
   .public-business-header__menu-button,
   .public-business-header__overlay,
-  .public-business-header__sheet {
+  .public-business-header__sheet,
+  .catalog-category-chip {
     transition: none !important;
     animation: none !important;
   }
 
   .catalog-hero__cover {
+    transform: none;
+  }
+
+  .catalog-category-chip:active {
     transform: none;
   }
 }

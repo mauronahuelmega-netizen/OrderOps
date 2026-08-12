@@ -1,6 +1,13 @@
 "use client";
 
-import { memo, type KeyboardEvent, type MouseEvent } from "react";
+import {
+  memo,
+  useEffect,
+  useRef,
+  useState,
+  type KeyboardEvent,
+  type MouseEvent
+} from "react";
 import { Plus } from "lucide-react";
 import type { PublicProduct } from "@/lib/catalog/public";
 import {
@@ -28,6 +35,26 @@ function ProductCard({
   onAddProduct,
   onIncrementProduct
 }: ProductCardProps) {
+  const previousQuantityRef = useRef(quantity);
+  const hasMountedQuantityRef = useRef(false);
+  const [quantityPopKey, setQuantityPopKey] = useState(0);
+
+  useEffect(() => {
+    const previousQuantity = previousQuantityRef.current;
+
+    if (!hasMountedQuantityRef.current) {
+      hasMountedQuantityRef.current = true;
+      previousQuantityRef.current = quantity;
+      return;
+    }
+
+    if (quantity > previousQuantity && quantity > 0) {
+      setQuantityPopKey((current) => current + 1);
+    }
+
+    previousQuantityRef.current = quantity;
+  }, [quantity]);
+
   function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
     if (event.key === "Enter" || event.key === " ") {
       event.preventDefault();
@@ -129,7 +156,13 @@ function ProductCard({
               <Plus className={styles.plusIcon} aria-hidden="true" strokeWidth={2.5} />
             </button>
             {hasQuantity ? (
-              <span className={styles.quantityBadge} aria-hidden="true">
+              <span
+                key={quantityPopKey}
+                className={`${styles.quantityBadge} ${
+                  quantityPopKey > 0 ? styles.quantityBadgePop : ""
+                }`}
+                aria-hidden="true"
+              >
                 {quantity}
               </span>
             ) : null}
