@@ -1,7 +1,7 @@
 "use client";
 
 import { Minus, Pencil, Plus, Trash2, X } from "lucide-react";
-import { useEffect, useId, useRef } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import {
   buildHierarchicalCartRows,
   getCartItemCount,
@@ -26,8 +26,19 @@ type CartSheetProps = {
   onChangeLegacyQuantity: (productId: string, quantity: number) => void;
 };
 
+/** Matches CSS exit duration; keep in sync with `.backdropClosing` / `.sheetClosing`. */
+const CART_SHEET_EXIT_MS = 180;
+
 function formatProductCount(count: number) {
   return `${count} ${count === 1 ? "producto" : "productos"}`;
+}
+
+function prefersReducedMotion(): boolean {
+  if (typeof window === "undefined") {
+    return true;
+  }
+
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
 export default function CartSheet({
@@ -58,8 +69,47 @@ export default function CartSheet({
   const triggerRef = useRef<HTMLElement | null>(null);
   const restoreFocusTimeoutRef = useRef<number | null>(null);
   const closingRef = useRef(false);
+  const closeTimerRef = useRef<number | null>(null);
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
+
+  const [isClosing, setIsClosing] = useState(false);
+
+  const clearCloseTimer = useCallback(() => {
+    if (closeTimerRef.current !== null) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  }, []);
+
+  const finishClose = useCallback(() => {
+    clearCloseTimer();
+    onCloseRef.current();
+  }, [clearCloseTimer]);
+
+  const requestClose = useCallback(() => {
+    if (closingRef.current) {
+      return;
+    }
+
+    closingRef.current = true;
+
+    if (prefersReducedMotion()) {
+      onCloseRef.current();
+      return;
+    }
+
+    setIsClosing(true);
+    closeTimerRef.current = window.setTimeout(() => {
+      finishClose();
+    }, CART_SHEET_EXIT_MS);
+  }, [finishClose]);
+
+  useEffect(() => {
+    return () => {
+      clearCloseTimer();
+    };
+  }, [clearCloseTimer]);
 
   useEffect(() => {
     if (!triggerRef.current && document.activeElement instanceof HTMLElement) {
@@ -86,14 +136,6 @@ export default function CartSheet({
       restoreFocusTimeoutRef.current = null;
     }
 
-    function closeOnce() {
-      if (closingRef.current) {
-        return;
-      }
-      closingRef.current = true;
-      onCloseRef.current();
-    }
-
     function focusableElements() {
       const root = sheetRef.current;
       if (!root) {
@@ -116,7 +158,7 @@ export default function CartSheet({
       if (event.key === "Escape") {
         event.preventDefault();
         event.stopPropagation();
-        closeOnce();
+        requestClose();
         return;
       }
 
@@ -150,26 +192,19 @@ export default function CartSheet({
 
     document.addEventListener("keydown", onKeyDown, true);
     return () => document.removeEventListener("keydown", onKeyDown, true);
-  }, []);
-
-  function handleClose() {
-    if (closingRef.current) {
-      return;
-    }
-    closingRef.current = true;
-    onClose();
-  }
+  }, [requestClose]);
 
   return (
     <div
-      className={styles.backdrop}
+      className={`${styles.backdrop}${isClosing ? ` ${styles.backdropClosing}` : ""}`}
       role="presentation"
       data-preview-pan-ignore
-      onClick={handleClose}
+      data-closing={isClosing ? "true" : "false"}
+      onClick={requestClose}
     >
       <div
         ref={sheetRef}
-        className={styles.sheet}
+        className={`${styles.sheet}${isClosing ? ` ${styles.sheetClosing}` : ""}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
@@ -187,7 +222,7 @@ export default function CartSheet({
             ref={closeButtonRef}
             type="button"
             className={styles.iconButton}
-            onClick={handleClose}
+            onClick={requestClose}
             aria-label="Cerrar carrito"
           >
             <X className={styles.icon} aria-hidden="true" strokeWidth={2.25} />
@@ -209,7 +244,7 @@ export default function CartSheet({
               <button
                 type="button"
                 className={styles.secondaryButton}
-                onClick={handleClose}
+                onClick={requestClose}
               >
                 Seguir comprando
               </button>

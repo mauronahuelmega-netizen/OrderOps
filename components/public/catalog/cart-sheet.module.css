@@ -6,6 +6,12 @@
   align-items: flex-end;
   justify-content: center;
   background: color-mix(in srgb, var(--catalog-text, var(--text-primary)) 58%, transparent);
+  animation: catalogCartSheetBackdropIn var(--motion-fast, 180ms) ease-out both;
+}
+
+.backdropClosing {
+  pointer-events: none;
+  animation: catalogCartSheetBackdropOut var(--motion-fast, 160ms) ease-in both;
 }
 
 .sheet {
@@ -49,6 +55,56 @@
   background: var(--cart-sheet-surface);
   color: var(--cart-sheet-text);
   box-shadow: none;
+  animation: catalogCartSheetIn var(--motion-normal, 240ms) ease-out both;
+  will-change: transform, opacity;
+}
+
+.sheetClosing {
+  animation: catalogCartSheetOut var(--motion-fast, 180ms) ease-in both;
+}
+
+@keyframes catalogCartSheetBackdropIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes catalogCartSheetBackdropOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes catalogCartSheetIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes catalogCartSheetOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(12px);
+  }
 }
 
 :global(.catalog-page[data-theme="dark"]) .backdrop {
@@ -312,6 +368,11 @@
 .primaryButton {
   font: inherit;
   cursor: pointer;
+  transition:
+    transform var(--motion-fast, 160ms) ease,
+    background-color var(--motion-fast, 160ms) ease,
+    border-color var(--motion-fast, 160ms) ease,
+    color var(--motion-fast, 160ms) ease;
 }
 
 /* Ghost secondary actions: edit/delete/child trash stay 44px, low visual weight. */
@@ -427,6 +488,10 @@
   background: var(--cart-sheet-hover);
 }
 
+.secondaryButton:active {
+  transform: scale(0.97);
+}
+
 .footerTotal {
   display: flex;
   justify-content: space-between;
@@ -457,6 +522,10 @@
   font-weight: 600;
 }
 
+.primaryButton:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
 .primaryButton:disabled {
   opacity: 0.45;
   cursor: not-allowed;
@@ -478,8 +547,24 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .sheet,
+  .backdropClosing,
+  .sheetClosing {
+    animation: none;
+  }
+
+  .iconButton,
+  .qtyButton,
+  .secondaryButton,
+  .primaryButton {
+    transition: none;
+  }
+
   .iconButton:active,
-  .qtyButton:active {
+  .qtyButton:active,
+  .secondaryButton:active,
+  .primaryButton:active:not(:disabled) {
     transform: none;
   }
 }
