@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { X } from "lucide-react";
 import type { PublicProduct } from "@/lib/catalog/public";
 import {
@@ -8,6 +8,10 @@ import {
   shouldShowPriceFrom
 } from "@/lib/product-customization/public-shared";
 import PublicStorageImage from "@/components/public/catalog/public-storage-image";
+import {
+  prefersReducedMotion,
+  PUBLIC_OVERLAY_EXIT_MS
+} from "@/components/public/catalog/public-overlay-motion";
 import { usePublicOverlayScrollLock } from "@/components/public/catalog/public-overlay-scroll-lock";
 
 type ProductDetailModalProps = {
@@ -19,6 +23,9 @@ type ProductDetailModalProps = {
   onCustomize?: () => void;
 };
 
+/** Matches CSS exit duration; keep in sync with catalog-modal*[data-closing]. */
+const PRODUCT_DETAIL_EXIT_MS = PUBLIC_OVERLAY_EXIT_MS;
+
 export default function ProductDetailModal({
   product,
   currentQuantity,
@@ -28,14 +35,64 @@ export default function ProductDetailModal({
   onCustomize
 }: ProductDetailModalProps) {
   const [draftQuantity, setDraftQuantity] = useState(Math.max(currentQuantity, 1));
+  const [isClosing, setIsClosing] = useState(false);
   const modalRef = useRef<HTMLDivElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
   const triggerRef = useRef<HTMLElement | null>(null);
   const restoreFocusTimeoutRef = useRef<number | null>(null);
+  const closingRef = useRef(false);
+  const closeTimerRef = useRef<number | null>(null);
   const onCloseRef = useRef(onClose);
 
   onCloseRef.current = onClose;
   usePublicOverlayScrollLock();
+
+  const clearCloseTimer = useCallback(() => {
+    if (closeTimerRef.current !== null) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  }, []);
+
+  const finishClose = useCallback(() => {
+    clearCloseTimer();
+    onCloseRef.current();
+  }, [clearCloseTimer]);
+
+  const requestClose = useCallback(() => {
+    if (closingRef.current) {
+      return;
+    }
+
+    closingRef.current = true;
+
+    if (prefersReducedMotion()) {
+      onCloseRef.current();
+      return;
+    }
+
+    setIsClosing(true);
+    closeTimerRef.current = window.setTimeout(() => {
+      finishClose();
+    }, PRODUCT_DETAIL_EXIT_MS);
+  }, [finishClose]);
+
+  /** Immediate close after save/customize handoff — no delayed unmount. */
+  const closeImmediate = useCallback(() => {
+    if (closingRef.current) {
+      return;
+    }
+
+    closingRef.current = true;
+    clearCloseTimer();
+    onCloseRef.current();
+  }, [clearCloseTimer]);
+
+  useEffect(() => {
+    return () => {
+      clearCloseTimer();
+    };
+  }, [clearCloseTimer]);
 
   useEffect(() => {
     setDraftQuantity(Math.max(currentQuantity, 1));
@@ -63,7 +120,7 @@ export default function ProductDetailModal({
       if (event.key === "Escape") {
         event.preventDefault();
         event.stopPropagation();
-        onCloseRef.current();
+        requestClose();
         return;
       }
 
@@ -110,7 +167,7 @@ export default function ProductDetailModal({
     return () => {
       document.removeEventListener("keydown", handleKeyDown, true);
     };
-  }, []);
+  }, [requestClose]);
 
   const summary = product.customizationSummary
     ? {
@@ -151,7 +208,7 @@ export default function ProductDetailModal({
     }
 
     onSaveQuantity(draftQuantity);
-    onClose();
+    closeImmediate();
   }
 
   return (
@@ -159,7 +216,8 @@ export default function ProductDetailModal({
       className="catalog-modal-backdrop"
       role="presentation"
       data-preview-pan-ignore
-      onClick={onClose}
+      data-closing={isClosing ? "true" : "false"}
+      onClick={requestClose}
     >
       <div
         ref={modalRef}
@@ -168,6 +226,7 @@ export default function ProductDetailModal({
         aria-modal="true"
         aria-labelledby="catalog-product-modal-title"
         tabIndex={-1}
+        data-closing={isClosing ? "true" : "false"}
         onClick={(event) => event.stopPropagation()}
       >
         <div className="catalog-modal__scroll">
@@ -178,7 +237,7 @@ export default function ProductDetailModal({
               type="button"
               className="catalog-modal__close"
               aria-label="Cerrar detalle del producto"
-              onClick={onClose}
+              onClick={requestClose}
             >
               <X aria-hidden="true" focusable="false" size={20} strokeWidth={2} />
             </button>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { X } from "lucide-react";
 import CustomizationOptionGroup from "@/components/product-customization/shared/customization-option-group";
 import CustomizationPriceSummary from "@/components/product-customization/shared/customization-price-summary";
@@ -22,7 +22,14 @@ import {
 } from "@/lib/product-customization/public-shared";
 import type { CustomizationLoadState } from "@/components/public/catalog/customization-config-cache";
 import styles from "./customization-modal.module.css";
+import {
+  prefersReducedMotion,
+  PUBLIC_OVERLAY_EXIT_MS
+} from "./public-overlay-motion";
 import { usePublicOverlayScrollLock } from "./public-overlay-scroll-lock";
+
+/** Matches CSS exit duration; keep in sync with `.backdropClosing` / `.modalClosing`. */
+const CUSTOMIZATION_MODAL_EXIT_MS = PUBLIC_OVERLAY_EXIT_MS;
 
 export type CustomizationModalInitialSelection = {
   selectedOptionsByGroupId: Record<string, string[]>;
@@ -102,6 +109,7 @@ export default function CustomizationModal({
   const [staleWarning, setStaleWarning] = useState<string | null>(null);
   const [confirmError, setConfirmError] = useState<string | null>(null);
   const [priceBump, setPriceBump] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
   const previousTotalRef = useRef<number | null>(null);
   const priceBumpTimeoutRef = useRef<number | null>(null);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -109,10 +117,59 @@ export default function CustomizationModal({
   const triggerRef = useRef<HTMLElement | null>(null);
   const restoreFocusTimeoutRef = useRef<number | null>(null);
   const closingRef = useRef(false);
+  const closeTimerRef = useRef<number | null>(null);
   const onCloseRef = useRef(onClose);
 
   onCloseRef.current = onClose;
   usePublicOverlayScrollLock();
+
+  const clearCloseTimer = useCallback(() => {
+    if (closeTimerRef.current !== null) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  }, []);
+
+  const finishClose = useCallback(() => {
+    clearCloseTimer();
+    onCloseRef.current();
+  }, [clearCloseTimer]);
+
+  /** Dismiss/close with exit animation. Not for confirm/add handoff. */
+  const requestClose = useCallback(() => {
+    if (closingRef.current) {
+      return;
+    }
+
+    closingRef.current = true;
+
+    if (prefersReducedMotion()) {
+      onCloseRef.current();
+      return;
+    }
+
+    setIsClosing(true);
+    closeTimerRef.current = window.setTimeout(() => {
+      finishClose();
+    }, CUSTOMIZATION_MODAL_EXIT_MS);
+  }, [finishClose]);
+
+  /** Immediate close after successful confirm — preserves upsell/cart handoff. */
+  const closeImmediate = useCallback(() => {
+    if (closingRef.current) {
+      return;
+    }
+
+    closingRef.current = true;
+    clearCloseTimer();
+    onCloseRef.current();
+  }, [clearCloseTimer]);
+
+  useEffect(() => {
+    return () => {
+      clearCloseTimer();
+    };
+  }, [clearCloseTimer]);
 
   useEffect(() => {
     if (!triggerRef.current && document.activeElement instanceof HTMLElement) {
@@ -137,14 +194,6 @@ export default function CustomizationModal({
       restoreFocusTimeoutRef.current = null;
     }
 
-    function closeOnce() {
-      if (closingRef.current) {
-        return;
-      }
-      closingRef.current = true;
-      onCloseRef.current();
-    }
-
     function focusableElements() {
       const root = modalRef.current;
       if (!root) {
@@ -162,7 +211,7 @@ export default function CustomizationModal({
       if (event.key === "Escape") {
         event.preventDefault();
         event.stopPropagation();
-        closeOnce();
+        requestClose();
         return;
       }
 
@@ -196,15 +245,7 @@ export default function CustomizationModal({
 
     document.addEventListener("keydown", onKeyDown, true);
     return () => document.removeEventListener("keydown", onKeyDown, true);
-  }, []);
-
-  function requestClose() {
-    if (closingRef.current) {
-      return;
-    }
-    closingRef.current = true;
-    onCloseRef.current();
-  }
+  }, [requestClose]);
 
   useEffect(() => {
     if (loadState.status !== "ready") {
@@ -328,7 +369,7 @@ export default function CustomizationModal({
         return;
       }
 
-      requestClose();
+      closeImmediate();
     } catch {
       setConfirmError("No pudimos agregar la personalización al carrito. Probá de nuevo.");
     }
@@ -348,14 +389,15 @@ export default function CustomizationModal({
 
   return (
     <div
-      className={styles.backdrop}
+      className={`${styles.backdrop}${isClosing ? ` ${styles.backdropClosing}` : ""}`}
       role="presentation"
       data-preview-pan-ignore
+      data-closing={isClosing ? "true" : "false"}
       onClick={requestClose}
     >
       <div
         ref={modalRef}
-        className={styles.modal}
+        className={`${styles.modal}${isClosing ? ` ${styles.modalClosing}` : ""}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby="customization-modal-title"

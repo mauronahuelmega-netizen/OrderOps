@@ -1441,6 +1441,15 @@ img {
   background: var(--business-primary);
   color: var(--business-primary-foreground);
   font-weight: 700;
+  transition:
+    transform var(--motion-fast, 160ms) ease,
+    background-color var(--motion-fast, 160ms) ease,
+    border-color var(--motion-fast, 160ms) ease,
+    color var(--motion-fast, 160ms) ease;
+}
+
+.catalog-modal__submit:active {
+  transform: scale(0.97);
 }
 
 .catalog-quantity-control {
@@ -1551,6 +1560,12 @@ img {
   /* Opaque scrim replaces blur for cheaper mobile composition */
   background: rgba(17, 12, 8, 0.6);
   backdrop-filter: none;
+  animation: catalogProductDetailBackdropIn var(--motion-fast, 180ms) ease-out both;
+}
+
+.catalog-modal-backdrop[data-closing="true"] {
+  pointer-events: none;
+  animation: catalogProductDetailBackdropOut var(--motion-fast, 160ms) ease-in both;
 }
 
 .catalog-modal {
@@ -1567,6 +1582,56 @@ img {
   background: var(--catalog-modal-surface);
   color: var(--catalog-text);
   box-shadow: 0 22px 52px rgba(31, 26, 20, 0.24);
+  animation: catalogProductDetailModalIn var(--motion-normal, 220ms) ease-out both;
+  will-change: transform, opacity;
+}
+
+.catalog-modal[data-closing="true"] {
+  animation: catalogProductDetailModalOut var(--motion-fast, 180ms) ease-in both;
+}
+
+@keyframes catalogProductDetailBackdropIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes catalogProductDetailBackdropOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes catalogProductDetailModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes catalogProductDetailModalOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(12px);
+  }
 }
 
 .catalog-page[data-theme="dark"] .catalog-modal-backdrop {
@@ -1628,6 +1693,25 @@ html[data-public-overlay-open="true"] body {
   border-radius: 12px;
   background: transparent;
   color: var(--catalog-text);
+  transition:
+    transform var(--motion-fast, 160ms) ease,
+    background-color var(--motion-fast, 160ms) ease,
+    border-color var(--motion-fast, 160ms) ease,
+    color var(--motion-fast, 160ms) ease;
+}
+
+.catalog-modal__close:active {
+  transform: scale(0.97);
+}
+
+.catalog-modal .catalog-quantity-control button {
+  transition:
+    transform var(--motion-fast, 160ms) ease,
+    background-color var(--motion-fast, 160ms) ease;
+}
+
+.catalog-modal .catalog-quantity-control button:active {
+  transform: scale(0.97);
 }
 
 .catalog-modal__media {
@@ -3495,6 +3579,25 @@ body.admin-drawer-open {
   }
 
   .catalog-category-chip:active {
+    transform: none;
+  }
+
+  .catalog-modal-backdrop,
+  .catalog-modal,
+  .catalog-modal-backdrop[data-closing="true"],
+  .catalog-modal[data-closing="true"] {
+    animation: none;
+  }
+
+  .catalog-modal__close,
+  .catalog-modal__submit,
+  .catalog-modal .catalog-quantity-control button {
+    transition: none;
+  }
+
+  .catalog-modal__close:active,
+  .catalog-modal__submit:active,
+  .catalog-modal .catalog-quantity-control button:active {
     transform: none;
   }
 }

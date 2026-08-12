@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { X } from "lucide-react";
 import {
   attachUpsellChildToParent,
@@ -12,6 +12,10 @@ import {
 } from "@/lib/product-customization/public-shared";
 import PublicStorageImage from "@/components/public/catalog/public-storage-image";
 import styles from "./post-add-upsell-sheet.module.css";
+import {
+  prefersReducedMotion,
+  PUBLIC_OVERLAY_EXIT_MS
+} from "./public-overlay-motion";
 import { usePublicOverlayScrollLock } from "./public-overlay-scroll-lock";
 
 export type PostAddUpsellOpportunity = {
@@ -33,6 +37,9 @@ type PostAddUpsellSheetProps = {
   onFinish: () => void;
   onParentMissing: (message: string) => void;
 };
+
+/** Matches CSS exit duration; keep in sync with `.backdropClosing` / `.sheetClosing`. */
+const UPSELL_SHEET_EXIT_MS = PUBLIC_OVERLAY_EXIT_MS;
 
 const PARENT_MISSING_MESSAGE =
   "No pudimos agregar este adicional. Revisá tu pedido.";
@@ -59,6 +66,7 @@ export default function PostAddUpsellSheet({
   const closeRef = useRef<HTMLButtonElement>(null);
   const sheetRef = useRef<HTMLDivElement>(null);
   const finishingRef = useRef(false);
+  const closeTimerRef = useRef<number | null>(null);
   const mutationLockRef = useRef(false);
   const itemsRef = useRef(items);
   const onFinishRef = useRef(onFinish);
@@ -70,6 +78,7 @@ export default function PostAddUpsellSheet({
   onParentMissingRef.current = onParentMissing;
   onItemsChangeRef.current = onItemsChange;
 
+  const [isClosing, setIsClosing] = useState(false);
   const [candidateState, setCandidateState] = useState<
     Record<string, CandidateUiState>
   >(() => {
@@ -85,6 +94,43 @@ export default function PostAddUpsellSheet({
   ).length;
   const footerLabel = attachedCount > 0 ? "Listo" : "Ahora no";
 
+  const clearCloseTimer = useCallback(() => {
+    if (closeTimerRef.current !== null) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  }, []);
+
+  const completeFinish = useCallback(() => {
+    clearCloseTimer();
+    onFinishRef.current();
+  }, [clearCloseTimer]);
+
+  /** Dismiss / finish → cart handoff with exit animation (max 180ms). Attach stays immediate. */
+  const requestFinish = useCallback(() => {
+    if (finishingRef.current) {
+      return;
+    }
+
+    finishingRef.current = true;
+
+    if (prefersReducedMotion()) {
+      onFinishRef.current();
+      return;
+    }
+
+    setIsClosing(true);
+    closeTimerRef.current = window.setTimeout(() => {
+      completeFinish();
+    }, UPSELL_SHEET_EXIT_MS);
+  }, [completeFinish]);
+
+  useEffect(() => {
+    return () => {
+      clearCloseTimer();
+    };
+  }, [clearCloseTimer]);
+
   useEffect(() => {
     closeRef.current?.focus();
 
@@ -93,14 +139,6 @@ export default function PostAddUpsellSheet({
   }, []);
 
   useEffect(() => {
-    function finishOnce() {
-      if (finishingRef.current) {
-        return;
-      }
-      finishingRef.current = true;
-      onFinishRef.current();
-    }
-
     function focusableElements() {
       const root = sheetRef.current;
       if (!root) {
@@ -121,7 +159,7 @@ export default function PostAddUpsellSheet({
     function onKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
         event.preventDefault();
-        finishOnce();
+        requestFinish();
         return;
       }
 
@@ -155,15 +193,7 @@ export default function PostAddUpsellSheet({
 
     document.addEventListener("keydown", onKeyDown, true);
     return () => document.removeEventListener("keydown", onKeyDown, true);
-  }, []);
-
-  function finishOnce() {
-    if (finishingRef.current) {
-      return;
-    }
-    finishingRef.current = true;
-    onFinishRef.current();
-  }
+  }, [requestFinish]);
 
   function updateCandidate(
     productId: string,
@@ -184,7 +214,8 @@ export default function PostAddUpsellSheet({
       mutationLockRef.current ||
       state?.pending ||
       state?.attached ||
-      state?.blocked
+      state?.blocked ||
+      finishingRef.current
     ) {
       return;
     }
@@ -240,14 +271,15 @@ export default function PostAddUpsellSheet({
 
   return (
     <div
-      className={styles.backdrop}
+      className={`${styles.backdrop}${isClosing ? ` ${styles.backdropClosing}` : ""}`}
       role="presentation"
       data-preview-pan-ignore
-      onClick={finishOnce}
+      data-closing={isClosing ? "true" : "false"}
+      onClick={requestFinish}
     >
       <div
         ref={sheetRef}
-        className={styles.sheet}
+        className={`${styles.sheet}${isClosing ? ` ${styles.sheetClosing}` : ""}`}
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
@@ -265,7 +297,7 @@ export default function PostAddUpsellSheet({
             ref={closeRef}
             type="button"
             className={styles.iconButton}
-            onClick={finishOnce}
+            onClick={requestFinish}
             aria-label="Cerrar sugerencias"
           >
             <X aria-hidden="true" focusable="false" size={20} strokeWidth={2} />
@@ -344,7 +376,7 @@ export default function PostAddUpsellSheet({
           <button
             type="button"
             className={styles.primaryButton}
-            onClick={finishOnce}
+            onClick={requestFinish}
           >
             {footerLabel}
           </button>
