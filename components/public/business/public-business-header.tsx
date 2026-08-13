@@ -4,7 +4,7 @@ import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { House, LockKeyhole, Store, X } from "lucide-react";
+import { LockKeyhole, Store, X } from "lucide-react";
 import ThemeToggle from "@/components/public/catalog/theme-toggle";
 import PublicStorageImage from "@/components/public/catalog/public-storage-image";
 import {
@@ -26,7 +26,7 @@ type PublicNavItem = {
   label: string;
   description: string;
   isActive: boolean;
-  icon: typeof House;
+  icon: typeof Store;
 };
 
 type ThemePreference = "light" | "dark" | "system";
@@ -191,14 +191,9 @@ export default function PublicBusinessHeader({
     "--business-primary-soft": "color-mix(in srgb, var(--business-primary) 12%, transparent)"
   } as CSSProperties;
 
+  // MVP catalog-first: no visible "Home" nav item (long landing out of primary path).
+  // Brand href remains `/b/${slug}` → ready redirect / not-ready fallback via page.tsx.
   const navigationItems: PublicNavItem[] = [
-    {
-      href: `/b/${slug}`,
-      label: "Home",
-      description: "Inicio del negocio",
-      isActive: pathname === `/b/${slug}`,
-      icon: House
-    },
     {
       href: `/b/${slug}/catalogo`,
       label: "Catálogo",

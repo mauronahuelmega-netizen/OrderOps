@@ -15,3 +15,22 @@ export function buildPublicOrderWhatsappUrl(input: {
 
   return `https://wa.me/${cleanedNumber}?text=${message}`;
 }
+
+/**
+ * Inquiry CTA for public entry fallback when catalog is not ready.
+ * Returns null when the number cannot form a valid wa.me destination.
+ */
+export function buildPublicBusinessInquiryWhatsappUrl(params: {
+  businessName: string;
+  whatsappNumber: string | null | undefined;
+}): string | null {
+  const digits = params.whatsappNumber?.replace(/[^\d]/g, "") ?? "";
+
+  if (digits.length === 0) {
+    return null;
+  }
+
+  const message = `Hola, quiero consultar por el catálogo de ${params.businessName}.`;
+
+  return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
+}

@@ -9,6 +9,72 @@
 
 ---
 
+### 2026-08-12 - Public Catalog MVP Entry Routing — Catalog-first
+
+Status: **COMPLETE_WITH_ACCEPTED_P3_FALLBACK_DEBT**.
+
+Release: `feat(public-catalog): add catalog-first entry routing` on `cursor-handoff-public-catalog-ui-redesign` → production `https://orderops.vercel.app`.
+
+Behavior:
+
+- `/b/[slug]` Case A: invalid/inactive → `notFound()`
+- Case B ready: server `redirect()` → `/b/[slug]/catalogo` (+ preserve searchParams; never external `redirectTo`/`next` as destination)
+- Case C not-ready: `PublicBusinessFallbackHome` (no “Ver catálogo”; WA inquiry CTA only if number valid)
+- Readiness: `hasReadyPublicCatalog` via `loadPublicCatalogByBusinessId` — **does not** use `on_demand_mode_active` / store sessions
+- Header: no visible Home; brand → `/b/[slug]`; Catálogo visible
+- Long landing (`BusinessLandingPage`) preserved unused as primary entry
+
+Key files:
+
+- `app/b/[slug]/page.tsx`
+- `lib/business/public-catalog-readiness.ts`
+- `components/public/business/public-business-fallback-home.tsx` (+ module CSS)
+- `components/public/business/public-business-header.tsx`
+- `lib/whatsapp/public.ts` (`buildPublicBusinessInquiryWhatsappUrl`; `buildPublicOrderWhatsappUrl` intact)
+
+Docs: `docs/public-catalog-mvp-entry-routing-{audit,spec,impl,qa}-1.md`.
+
+Accepted debt: P3 — no real not-ready public tenant for browser QA without DB/product mutation.
+
+Gates: `PUBLIC-CATALOG-MVP-V1-ENTRY-COMPLETE = COMPLETE_WITH_ACCEPTED_P3_FALLBACK_DEBT`; success edge OPTIONAL; Maps PAUSED.
+
+### 2026-08-12 - Public Catalog Motion — Final Handoff
+
+Status: **COMPLETE**.
+
+Final production commit: `3d83afd6f0919598df46066fb3aabd34ecfb5d06` (`feat(public-catalog): add remaining overlay motion`).
+
+Production: `https://orderops.vercel.app` — deployment `dpl_EFjoBKzm7mi2A39zNmynDXeGRWsT`.
+
+Public catalog motion now includes:
+
+- ProductCard press / badge pop
+- Cart FAB/count pulse
+- category transition
+- CartSheet enter/exit
+- Customization modal enter/exit
+- Post-add upsell enter/exit
+- Product detail modal enter/exit
+- reduced-motion support (`public-overlay-motion.ts`, CSS + JS PRM gates)
+
+Release chain: `ebfa5b2` (interactions) → `e682568` (CartSheet overlay) → `3d83afd` (remaining overlays).
+
+Doc: `docs/public-catalog-motion-final-handoff-1.md`.
+
+Safety:
+
+- create_order: 0
+- pedidos reales: 0
+- WhatsApp: 0
+- DB/RPC/actions/packages: 0
+
+Known debt:
+
+- ESLint 9 circular JSON/config-validator = P3 tooling
+- hydration warning catálogo público = P3 preexisting
+
+Gates: `PUBLIC-CATALOG-MOTION-PUBLIC-CATALOG-COMPLETE = COMPLETE`; success edge OPTIONAL; Maps PAUSED; public_order_code BACKLOG.
+
 ### 2026-08-10 - Public Catalog UI Redesign Final Commit-1
 - **[Release]** Local commit `feat(public-catalog): complete UI redesign closeout` on `cursor-handoff-public-catalog-ui-redesign`. Packages catalog/checkout/success/FAB/ProductCard/header/nav runtime + phase docs. No push/deploy.
 - Doc: `docs/public-catalog-ui-redesign-final-commit-1.md`

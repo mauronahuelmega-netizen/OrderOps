@@ -1,3 +1,125 @@
+# Current Phase
+
+## Estado actual
+
+PUBLIC-CATALOG-MVP-ENTRY-ROUTING-COMMIT-DEPLOY-1 complete with accepted P3 not-ready fallback browser debt.
+
+## PUBLIC-CATALOG-MVP-ENTRY-ROUTING-COMMIT-DEPLOY-1
+
+Status: PASS WITH ACCEPTED P3 FALLBACK DEBT — committed, pushed, production promoted.
+
+Decision released:
+Option D — Hybrid catalog-first (`/b/[slug]` ready → 307 `/catalogo`; not-ready → fallback; invalid → notFound).
+
+Commit message: `feat(public-catalog): add catalog-first entry routing`
+
+Safety:
+- no checkout/create_order mutations;
+- no motion reopen;
+- no DB/RPC/actions/packages;
+- no merge to main;
+- P3 not-ready browser fallback debt accepted.
+
+## Último bloque cerrado (previo)
+
+Public Catalog Motion complete (prod baseline `3d83afd` / `dpl_EFjoBKzm7mi2A39zNmynDXeGRWsT`).
+Entry routing QA-1 passed with accepted P3 fallback debt.
+
+## Producción
+
+- URL: https://orderops.vercel.app
+- Entry routing commit: `feat(public-catalog): add catalog-first entry routing` on `cursor-handoff-public-catalog-ui-redesign`
+- Prior motion commit: `3d83afd6f0919598df46066fb3aabd34ecfb5d06`
+
+## Próximas fases permitidas
+
+- PUBLIC-CATALOG-SUCCESS-EDGE-STATES-POLISH-1 = OPTIONAL
+- PUBLIC-TENANT-BROWSER-BRANDING-FAVICON-CACHE-BUST-1 = BACKLOG_OPTIONAL
+- PUBLIC-ORDERS-PUBLIC-CODE-SPEC-1 = BACKLOG
+- PUBLIC-CATALOG-CHECKOUT-ADDRESS-MAPS-* = PAUSED
+
+---
+
+## Registro — PUBLIC-CATALOG-MVP-ENTRY-ROUTING-COMMIT-DEPLOY-1 (2026-08-12)
+
+**Fase:** PUBLIC-CATALOG-MVP-ENTRY-ROUTING-COMMIT-DEPLOY-1 — Commit, push and production deploy catalog-first entry
+**Estado:** PASS WITH ACCEPTED P3 FALLBACK DEBT — PUBLIC CATALOG MVP ENTRY ROUTING COMMITTED AND DEPLOYED
+**Resumen:** Release Option D: ready redirect `/catalogo`, not-ready fallback, header sin Home, WA inquiry gated. P3 fallback browser debt accepted (no empty tenant without DB mutation). No merge main; no checkout/create_order/motion/DB.
+- Docs: audit/spec/impl/qa + motion final handoff + `CURRENT_PHASE` + living memory
+- Branch: `cursor-handoff-public-catalog-ui-redesign`
+- **QUEUE_GATE:** PUBLIC-CATALOG-MVP-ENTRY-ROUTING-COMMIT-DEPLOY-1 = COMPLETE_WITH_ACCEPTED_P3_FALLBACK_DEBT
+- **QUEUE_GATE:** PUBLIC-CATALOG-MVP-V1-ENTRY-COMPLETE = COMPLETE_WITH_ACCEPTED_P3_FALLBACK_DEBT
+
+---
+
+## Registro — PUBLIC-CATALOG-MVP-ENTRY-ROUTING-QA-1 (2026-08-12)
+
+**Fase:** PUBLIC-CATALOG-MVP-ENTRY-ROUTING-QA-1 — Formal QA for MVP hybrid catalog-first entry routing
+**Estado:** QA COMPLETE WITH ACCEPTED P3 FALLBACK DEBT — PUBLIC CATALOG MVP ENTRY ROUTING QA-1 PASSED
+**Resumen:** Ready 307 + UTM + open-redirect safety PASS; catalog/checkout/success/404 PASS; header sin Home; WA helper null PASS; readiness sin store session; branding PASS. Not-ready browser: P3 accepted (no empty tenant without DB mutation; code path evidenced). Sin commit/push/deploy.
+- Doc: `docs/public-catalog-mvp-entry-routing-qa-1.md`
+- Branch: `cursor-handoff-public-catalog-ui-redesign` @ `3d83afd` (+ dirty IMPL + QA doc)
+- **QUEUE_GATE:** PUBLIC-CATALOG-MVP-ENTRY-ROUTING-COMMIT-DEPLOY-1 = ALLOWED_WITH_ACCEPTED_P3_FALLBACK_DEBT
+- **QUEUE_GATE:** PUBLIC-CATALOG-MVP-ENTRY-ROUTING-QA-1 = COMPLETE_WITH_ACCEPTED_P3_FALLBACK_DEBT
+- **Sin:** runtime/CSS/routing/DB changes, commit, push, deploy
+
+---
+
+## Registro — PUBLIC-CATALOG-MVP-ENTRY-ROUTING-IMPL-1 (2026-08-12)
+
+**Fase:** PUBLIC-CATALOG-MVP-ENTRY-ROUTING-IMPL-1 — Implement MVP hybrid catalog-first public business entry
+**Estado:** PASS WITH QA DEBT — PUBLIC CATALOG MVP ENTRY ROUTING IMPL-1 COMPLETE
+**Resumen:** `/b/[slug]` ready → 307 `/catalogo`; not-ready → fallback mínimo; header sin Home; WA inquiry gated; readiness sin `on_demand`. P3: no tenant not-ready real para browser QA. Sin commit/push/deploy.
+- Doc: `docs/public-catalog-mvp-entry-routing-impl-1.md`
+- Branch: `cursor-handoff-public-catalog-ui-redesign` @ `3d83afd` (+ dirty IMPL)
+- **QUEUE_GATE:** PUBLIC-CATALOG-MVP-ENTRY-ROUTING-QA-1 = ALLOWED
+- **QUEUE_GATE:** PUBLIC-CATALOG-MVP-ENTRY-ROUTING-COMMIT-DEPLOY-1 = PAUSED_UNTIL_QA_OR_ACCEPTED_DEBT
+- **Sin:** commit, push, deploy, checkout/create_order, motion, DB
+
+---
+
+## Registro — PUBLIC-CATALOG-MVP-ENTRY-ROUTING-SPEC-1 (2026-08-12)
+
+**Fase:** PUBLIC-CATALOG-MVP-ENTRY-ROUTING-SPEC-1 — Product and technical spec for MVP catalog-first public entry
+**Estado:** SPEC COMPLETE — PUBLIC CATALOG MVP ENTRY ROUTING READY FOR IMPL
+**Resumen:** Spec Option D hybrid catalog-first: ready → redirect `/catalogo`; not-ready → fallback mínimo; landing larga preservada fuera del path; header sin “Home”; WA gated; readiness = productos visibles (`is_available`) sin `on_demand`. Solo docs.
+- Doc: `docs/public-catalog-mvp-entry-routing-spec-1.md`
+- Branch: `cursor-handoff-public-catalog-ui-redesign` @ `3d83afd`
+- **QUEUE_GATE:** PUBLIC-CATALOG-MVP-ENTRY-ROUTING-IMPL-1 = ALLOWED
+- **QUEUE_GATE:** PUBLIC-CATALOG-MVP-ENTRY-ROUTING-SPEC-1 = COMPLETE
+- **Sin:** runtime, CSS, routing, DB, commit, push, deploy
+
+---
+
+## Registro — PUBLIC-CATALOG-MVP-ENTRY-ROUTING-AUDIT-1 (2026-08-12)
+
+**Fase:** PUBLIC-CATALOG-MVP-ENTRY-ROUTING-AUDIT-1 — Forensic audit before MVP public business entry spec
+**Estado:** AUDIT COMPLETE — PUBLIC CATALOG MVP ENTRY ROUTING READY FOR SPEC
+**Resumen:** Auditoría forense de rutas públicas, landing, readiness (sin flag publish), WhatsApp CTA, metadata. Recomendación Option D hybrid catalog-first. Solo docs; sin runtime/CSS/routing/commit/push/deploy. `ORDEROPS_LIVING_MEMORY.md` no tocado (se actualiza en spec/impl).
+- Doc: `docs/public-catalog-mvp-entry-routing-audit-1.md`
+- Branch: `cursor-handoff-public-catalog-ui-redesign` @ `3d83afd`
+- **QUEUE_GATE:** PUBLIC-CATALOG-MVP-ENTRY-ROUTING-SPEC-1 = ALLOWED
+- **QUEUE_GATE:** PUBLIC-CATALOG-MOTION-PUBLIC-CATALOG-COMPLETE = COMPLETE
+- **Sin:** runtime, CSS, routing, DB, commit, push, deploy
+
+---
+
+## Registro — PUBLIC-CATALOG-MOTION-FINAL-HANDOFF-1 (2026-08-12)
+
+**Fase:** PUBLIC-CATALOG-MOTION-FINAL-HANDOFF-1 — Final documentation handoff for completed public catalog motion block
+**Estado:** HANDOFF COMPLETE — PUBLIC CATALOG MOTION BLOCK CLOSED
+**Resumen:** Handoff documental del bloque motion completo (interactions + CartSheet + Customization + upsell + product detail + PRM). Producción validada en `3d83afd` / `dpl_EFjoBKzm7mi2A39zNmynDXeGRWsT`. Solo docs; sin runtime/CSS/commit/push/deploy.
+- Doc: `docs/public-catalog-motion-final-handoff-1.md`
+- Branch: `cursor-handoff-public-catalog-ui-redesign` @ `3d83afd`
+- **QUEUE_GATE:** PUBLIC-CATALOG-MOTION-PUBLIC-CATALOG-COMPLETE = COMPLETE
+- **QUEUE_GATE:** PUBLIC-CATALOG-SUCCESS-EDGE-STATES-POLISH-1 = OPTIONAL
+- **QUEUE_GATE:** PUBLIC-TENANT-BROWSER-BRANDING-FAVICON-CACHE-BUST-1 = BACKLOG_OPTIONAL
+- **QUEUE_GATE:** PUBLIC-ORDERS-PUBLIC-CODE-SPEC-1 = BACKLOG
+- **QUEUE_GATE:** PUBLIC-CATALOG-CHECKOUT-ADDRESS-MAPS-* = PAUSED
+- **Sin:** commit, push, deploy, DB, create_order, pedidos reales
+
+---
+
 ## Registro — PUBLIC-CATALOG-UI-REDESIGN-FINAL-COMMIT-1 (2026-08-10)
 
 **Fase:** PUBLIC-CATALOG-UI-REDESIGN-FINAL-COMMIT-1 — Final local commit for Public Catalog UI Redesign package
