@@ -2,41 +2,102 @@
 
 ## Estado actual
 
-PUBLIC-CATALOG-MVP-ENTRY-ROUTING-COMMIT-DEPLOY-1 complete with accepted P3 not-ready fallback browser debt.
+PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-COMMIT-DEPLOY-1 in progress / complete with accepted P3 admin-save debt.
 
-## PUBLIC-CATALOG-MVP-ENTRY-ROUTING-COMMIT-DEPLOY-1
+## PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-COMMIT-DEPLOY-1
 
-Status: PASS WITH ACCEPTED P3 FALLBACK DEBT — committed, pushed, production promoted.
+Status: PASS WITH ACCEPTED P3 ADMIN SAVE DEBT — committed, migration applied, production promoted.
 
-Decision released:
-Option D — Hybrid catalog-first (`/b/[slug]` ready → 307 `/catalogo`; not-ready → fallback; invalid → notFound).
+Release:
+`feat(public-catalog): add quantity extras schema admin config`
 
-Commit message: `feat(public-catalog): add catalog-first entry routing`
+Scope released:
+Schema columns + admin quantity config only. Public steppers deferred to PUBLIC-CART IMPL.
 
 Safety:
-- no checkout/create_order mutations;
-- no motion reopen;
-- no DB/RPC/actions/packages;
-- no merge to main;
-- P3 not-ready browser fallback debt accepted.
+- DB-first migration before promote;
+- no commercial data mutation;
+- no quantity toggles activated;
+- no public modal/cart/checkout/create_order;
+- no merge main.
 
 ## Último bloque cerrado (previo)
 
-Public Catalog Motion complete (prod baseline `3d83afd` / `dpl_EFjoBKzm7mi2A39zNmynDXeGRWsT`).
-Entry routing QA-1 passed with accepted P3 fallback debt.
+PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-QA-1 complete with accepted P3 admin-save debt.
+PUBLIC-CATALOG-MVP-ENTRY-ROUTING-COMMIT-DEPLOY-1 complete (`89aecc2`).
 
 ## Producción
 
 - URL: https://orderops.vercel.app
-- Entry routing commit: `feat(public-catalog): add catalog-first entry routing` on `cursor-handoff-public-catalog-ui-redesign`
-- Prior motion commit: `3d83afd6f0919598df46066fb3aabd34ecfb5d06`
+- Quantity extras schema/admin: this release commit on `cursor-handoff-public-catalog-ui-redesign`
+- Prior entry routing: `89aecc23df2e1add6bd22dbd28203d3efe5061cf`
 
 ## Próximas fases permitidas
 
+- PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-PUBLIC-CART-IMPL-1 = ALLOWED_WITH_ACCEPTED_P3_ADMIN_SAVE_DEBT
 - PUBLIC-CATALOG-SUCCESS-EDGE-STATES-POLISH-1 = OPTIONAL
 - PUBLIC-TENANT-BROWSER-BRANDING-FAVICON-CACHE-BUST-1 = BACKLOG_OPTIONAL
 - PUBLIC-ORDERS-PUBLIC-CODE-SPEC-1 = BACKLOG
 - PUBLIC-CATALOG-CHECKOUT-ADDRESS-MAPS-* = PAUSED
+
+---
+
+## Registro — PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-COMMIT-DEPLOY-1 (2026-08-13)
+
+**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-COMMIT-DEPLOY-1 — Commit, migrate, deploy schema/admin quantity config
+**Estado:** PASS WITH ACCEPTED P3 ADMIN SAVE DEBT — MULTI-QUANTITY EXTRAS SCHEMA ADMIN COMMITTED AND DEPLOYED
+**Resumen:** Release schema+admin only. Migration `20260813010000` applied before promote. Public binary behavior unchanged. P3 admin save debt accepted. No merge main.
+- Branch: `cursor-handoff-public-catalog-ui-redesign`
+- **QUEUE_GATE:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-PUBLIC-CART-IMPL-1 = ALLOWED_WITH_ACCEPTED_P3_ADMIN_SAVE_DEBT
+- **QUEUE_GATE:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-COMMIT-DEPLOY-1 = COMPLETE_WITH_ACCEPTED_P3_ADMIN_SAVE_DEBT
+
+---
+
+## Registro — PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-QA-1 (2026-08-13)
+
+**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-QA-1 — Formal QA for schema + admin quantity config
+**Estado:** QA COMPLETE WITH ACCEPTED P3 ADMIN SAVE DEBT — MULTI-QUANTITY EXTRAS SCHEMA ADMIN QA-1 PASSED
+**Resumen:** SQL/types/admin code PASS; public modal sigue radio/checkbox; tsc/build PASS. P3: admin save + local migration (Docker down) + types manual. Sin commit/push/deploy/remote DB.
+- Doc: `docs/public-catalog-customization-multi-quantity-extras-schema-admin-qa-1.md`
+- Branch: `cursor-handoff-public-catalog-ui-redesign` @ `89aecc2` (+ dirty IMPL)
+- **QUEUE_GATE:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-COMMIT-DEPLOY-1 = ALLOWED_WITH_ACCEPTED_P3_ADMIN_SAVE_DEBT
+- **Sin:** runtime/CSS/DB remote, product mutation, commit, push, deploy
+
+---
+
+## Registro — PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-IMPL-1 (2026-08-13)
+
+**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-IMPL-1 — Schema + admin config for quantity-enabled extras
+**Estado:** PASS WITH ADMIN SAVE QA DEBT — MULTI-QUANTITY EXTRAS SCHEMA ADMIN IMPL-1 COMPLETE
+**Resumen:** Migration columns + CHECKs; types manual; admin toggle/max units/max option qty; parsers + persist; public untouched. P3: no admin save (avoid DB mutation); types gen script absent. Sin commit/push/deploy/remote push.
+- Doc: `docs/public-catalog-customization-multi-quantity-extras-schema-admin-impl-1.md`
+- Branch: `cursor-handoff-public-catalog-ui-redesign` @ `89aecc2` (+ dirty IMPL)
+- **QUEUE_GATE:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-QA-1 = ALLOWED_WITH_ADMIN_SAVE_DEBT
+- **Sin:** public modal, cart, checkout, create_order, production DB push, commit, push, deploy
+
+---
+
+## Registro — PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SPEC-1 (2026-08-12)
+
+**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SPEC-1 — Product/technical spec for quantity-enabled extras
+**Estado:** SPEC COMPLETE WITH DATA MODEL MIGRATION REQUIRED — MULTI-QUANTITY EXTRAS READY FOR PHASED IMPL
+**Resumen:** Locked Option E+B/C: group/option fields, dual max semantics, selection V2, pricing × qty, signature with xN, snapshot V2, admin + modal UX, phased SCHEMA→PUBLIC-CART→ORDER→QA/DEPLOY. Solo docs.
+- Doc: `docs/public-catalog-customization-multi-quantity-extras-spec-1.md`
+- Branch: `cursor-handoff-public-catalog-ui-redesign` @ `89aecc2`
+- **QUEUE_GATE:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-IMPL-1 = ALLOWED
+- **Sin:** runtime, CSS, DB, migrations, checkout/create_order, commit, push, deploy
+
+---
+
+## Registro — PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-AUDIT-1 (2026-08-12)
+
+**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-AUDIT-1 — Forensic audit for repeated optional extras quantity
+**Estado:** AUDIT COMPLETE WITH DATA MODEL DEBT — MULTI-QUANTITY EXTRAS READY FOR SPEC
+**Resumen:** Modelo actual = IDs binarios; máx. N = opciones distintas; pricing/cart/snapshot sin qty por extra. UX rec: E+B/C. Spec debe migrar end-to-end (signature + snapshot). Solo docs.
+- Doc: `docs/public-catalog-customization-multi-quantity-extras-audit-1.md`
+- Branch: `cursor-handoff-public-catalog-ui-redesign` @ `89aecc2`
+- **QUEUE_GATE:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SPEC-1 = ALLOWED_WITH_AUDIT_DEBT
+- **Sin:** runtime, CSS, DB, commit, push, deploy
 
 ---
 

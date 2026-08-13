@@ -61,7 +61,7 @@ async function assertGroupOwnership(groupId: string, businessId: string) {
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("customization_groups")
-    .select("id")
+    .select("id, selection_type, allows_option_quantity")
     .eq("id", groupId)
     .eq("business_id", businessId)
     .maybeSingle();
@@ -74,7 +74,7 @@ async function assertGroupOwnership(groupId: string, businessId: string) {
     return { error: "El grupo no existe o no pertenece a tu negocio." } as const;
   }
 
-  return { ok: true as const, supabase };
+  return { ok: true as const, supabase, group: data };
 }
 
 async function assertOptionOwnership(optionId: string, businessId: string) {
@@ -119,6 +119,8 @@ export async function createCustomizationGroupAction(
         is_required: parsed.isRequired,
         min_selections: parsed.minSelections,
         max_selections: parsed.maxSelections,
+        allows_option_quantity: parsed.allowsOptionQuantity,
+        max_total_quantity: parsed.maxTotalQuantity,
         is_available: parsed.isAvailable,
         sort_order: parsed.sortOrder
       })
@@ -173,6 +175,8 @@ export async function updateCustomizationGroupAction(
         is_required: parsed.isRequired,
         min_selections: parsed.minSelections,
         max_selections: parsed.maxSelections,
+        allows_option_quantity: parsed.allowsOptionQuantity,
+        max_total_quantity: parsed.maxTotalQuantity,
         is_available: parsed.isAvailable,
         sort_order: parsed.sortOrder
       })
@@ -181,6 +185,18 @@ export async function updateCustomizationGroupAction(
 
     if (error) {
       throw new Error("No pudimos actualizar el grupo.");
+    }
+
+    if (!parsed.allowsOptionQuantity) {
+      const { error: optionsResetError } = await ownership.supabase
+        .from("customization_options")
+        .update({ max_quantity: 1 })
+        .eq("group_id", groupId)
+        .eq("business_id", adminContext.businessId);
+
+      if (optionsResetError) {
+        throw new Error("No pudimos normalizar las cantidades máximas de las opciones.");
+      }
     }
 
     revalidateCustomizationPaths({ businessId: adminContext.businessId, slug: adminContext.businessSlug });
@@ -246,16 +262,22 @@ export async function createCustomizationOptionAction(
     return { error: "Falta identificar el grupo." };
   }
 
-  const parsed = parseCustomizationOptionInput(formData);
-  if ("error" in parsed) {
-    return { error: parsed.error };
-  }
-
   try {
     const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertGroupOwnership(groupId, adminContext.businessId);
     if ("error" in ownership) {
       return { error: ownership.error };
+    }
+
+    const groupAllowsOptionQuantity =
+      ownership.group.selection_type === "multiple" &&
+      ownership.group.allows_option_quantity;
+
+    const parsed = parseCustomizationOptionInput(formData, {
+      groupAllowsOptionQuantity
+    });
+    if ("error" in parsed) {
+      return { error: parsed.error };
     }
 
     const { data, error } = await ownership.supabase
@@ -266,6 +288,7 @@ export async function createCustomizationOptionAction(
         name: parsed.name,
         description: parsed.description,
         price_delta: parsed.priceDelta,
+        max_quantity: parsed.maxQuantity,
         is_available: parsed.isAvailable,
         sort_order: parsed.sortOrder
       })
@@ -299,16 +322,30 @@ export async function updateCustomizationOptionAction(
     return { error: "Falta identificar la opción." };
   }
 
-  const parsed = parseCustomizationOptionInput(formData);
-  if ("error" in parsed) {
-    return { error: parsed.error };
-  }
-
   try {
     const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertOptionOwnership(optionId, adminContext.businessId);
     if ("error" in ownership) {
       return { error: ownership.error };
+    }
+
+    const groupOwnership = await assertGroupOwnership(
+      ownership.option.group_id,
+      adminContext.businessId
+    );
+    if ("error" in groupOwnership) {
+      return { error: groupOwnership.error };
+    }
+
+    const groupAllowsOptionQuantity =
+      groupOwnership.group.selection_type === "multiple" &&
+      groupOwnership.group.allows_option_quantity;
+
+    const parsed = parseCustomizationOptionInput(formData, {
+      groupAllowsOptionQuantity
+    });
+    if ("error" in parsed) {
+      return { error: parsed.error };
     }
 
     const { error } = await ownership.supabase
@@ -317,6 +354,7 @@ export async function updateCustomizationOptionAction(
         name: parsed.name,
         description: parsed.description,
         price_delta: parsed.priceDelta,
+        max_quantity: parsed.maxQuantity,
         is_available: parsed.isAvailable,
         sort_order: parsed.sortOrder
       })

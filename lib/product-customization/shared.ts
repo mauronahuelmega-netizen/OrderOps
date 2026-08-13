@@ -15,6 +15,8 @@ export type ParsedCustomizationGroupInput = {
   isRequired: boolean;
   minSelections: number;
   maxSelections: number | null;
+  allowsOptionQuantity: boolean;
+  maxTotalQuantity: number | null;
   isAvailable: boolean;
   sortOrder: number;
 };
@@ -23,6 +25,7 @@ export type ParsedCustomizationOptionInput = {
   name: string;
   description: string | null;
   priceDelta: number;
+  maxQuantity: number;
   isAvailable: boolean;
   sortOrder: number;
 };
@@ -242,6 +245,35 @@ export function parseCustomizationGroupInput(
     return { error: "La selección única admite máximo 1 opción." };
   }
 
+  const allowsOptionQuantityRaw = getBoolean(formData, "allows_option_quantity", false);
+  const allowsOptionQuantity =
+    selectionType === "multiple" && allowsOptionQuantityRaw;
+  const maxTotalRaw = getTrimmedString(formData, "max_total_quantity");
+
+  let maxTotalQuantity: number | null = null;
+
+  if (allowsOptionQuantity) {
+    if (!maxTotalRaw) {
+      return {
+        error: "El máximo de unidades en total es obligatorio si permitís cantidades."
+      };
+    }
+
+    const maxTotalParsed = parseNonNegativeInteger(
+      maxTotalRaw,
+      "El máximo de unidades en total"
+    );
+    if ("error" in maxTotalParsed) {
+      return maxTotalParsed;
+    }
+
+    if (maxTotalParsed.value < 1) {
+      return { error: "El máximo de unidades en total debe ser al menos 1." };
+    }
+
+    maxTotalQuantity = maxTotalParsed.value;
+  }
+
   return {
     name,
     description,
@@ -249,19 +281,24 @@ export function parseCustomizationGroupInput(
     isRequired,
     minSelections,
     maxSelections,
+    allowsOptionQuantity,
+    maxTotalQuantity,
     isAvailable,
     sortOrder: sortParsed.value
   };
 }
 
 export function parseCustomizationOptionInput(
-  formData: FormData
+  formData: FormData,
+  options?: { groupAllowsOptionQuantity?: boolean }
 ): ParsedCustomizationOptionInput | { error: string } {
   const name = getTrimmedString(formData, "name");
   const description = getOptionalDescription(formData, "description");
   const priceRaw = getTrimmedString(formData, "price_delta");
   const isAvailable = getBoolean(formData, "is_available", true);
   const sortRaw = getTrimmedString(formData, "sort_order");
+  const maxQuantityRaw = getTrimmedString(formData, "max_quantity");
+  const groupAllowsOptionQuantity = Boolean(options?.groupAllowsOptionQuantity);
 
   if (!name) {
     return { error: "El nombre es obligatorio." };
@@ -277,10 +314,29 @@ export function parseCustomizationOptionInput(
     return sortParsed;
   }
 
+  let maxQuantity = 1;
+
+  if (groupAllowsOptionQuantity) {
+    const maxQuantityParsed = parseNonNegativeInteger(
+      maxQuantityRaw || "1",
+      "La cantidad máxima por opción"
+    );
+    if ("error" in maxQuantityParsed) {
+      return maxQuantityParsed;
+    }
+
+    if (maxQuantityParsed.value < 1) {
+      return { error: "La cantidad máxima por opción debe ser al menos 1." };
+    }
+
+    maxQuantity = maxQuantityParsed.value;
+  }
+
   return {
     name,
     description,
     priceDelta: priceParsed.value,
+    maxQuantity,
     isAvailable,
     sortOrder: sortParsed.value
   };

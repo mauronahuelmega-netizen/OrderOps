@@ -36,6 +36,7 @@ export default function SectionEditModal({
   const dialogRef = useRef<HTMLDialogElement>(null);
   const [selectionType, setSelectionType] = useState<"single" | "multiple">("single");
   const [isRequired, setIsRequired] = useState(false);
+  const [allowsOptionQuantity, setAllowsOptionQuantity] = useState(false);
   const [createState, createAction, createPending] = useActionState(
     createCustomizationGroupAction,
     initialState
@@ -69,10 +70,14 @@ export default function SectionEditModal({
     if (mode === "edit" && group) {
       setSelectionType(group.selection_type);
       setIsRequired(group.is_required);
+      setAllowsOptionQuantity(
+        group.selection_type === "multiple" && group.allows_option_quantity
+      );
       return;
     }
     setSelectionType("single");
     setIsRequired(false);
+    setAllowsOptionQuantity(false);
   }, [open, mode, group]);
 
   useEffect(() => {
@@ -135,11 +140,14 @@ export default function SectionEditModal({
                 <select
                   name="selection_type"
                   value={selectionType}
-                  onChange={(event) =>
-                    setSelectionType(
-                      event.target.value === "multiple" ? "multiple" : "single"
-                    )
-                  }
+                  onChange={(event) => {
+                    const next =
+                      event.target.value === "multiple" ? "multiple" : "single";
+                    setSelectionType(next);
+                    if (next === "single") {
+                      setAllowsOptionQuantity(false);
+                    }
+                  }}
                   disabled={pending}
                 >
                   <option value="single">Una opción</option>
@@ -203,7 +211,7 @@ export default function SectionEditModal({
                 <input type="hidden" name="max_selections" value="1" />
               ) : (
                 <label className="admin-field">
-                  <span>Máximo de opciones</span>
+                  <span>Máximo de opciones distintas</span>
                   <input
                     name="max_selections"
                     type="number"
@@ -216,11 +224,67 @@ export default function SectionEditModal({
                     key={mode === "edit" ? `max-${group?.id}` : "max-create"}
                   />
                   <p className={styles.helper}>
-                    Límite de opciones que el cliente puede elegir.
+                    Límite de opciones distintas que el cliente puede elegir.
                   </p>
                 </label>
               )}
             </div>
+
+            {selectionType === "multiple" ? (
+              <>
+                <label className={styles.checkboxRow}>
+                  <input type="hidden" name="allows_option_quantity" value="false" />
+                  <input
+                    name="allows_option_quantity"
+                    type="checkbox"
+                    value="true"
+                    checked={allowsOptionQuantity}
+                    onChange={(event) => setAllowsOptionQuantity(event.target.checked)}
+                    disabled={pending}
+                  />
+                  <span>
+                    Permitir cantidades por opción
+                    <span className={styles.helper}>
+                      {" "}
+                      Usalo para agregados que el cliente puede pedir varias veces, como
+                      Bacon x2.
+                    </span>
+                  </span>
+                </label>
+
+                {allowsOptionQuantity ? (
+                  <label className="admin-field">
+                    <span>Máximo de unidades en total</span>
+                    <input
+                      name="max_total_quantity"
+                      type="number"
+                      min={1}
+                      step={1}
+                      required
+                      disabled={pending}
+                      defaultValue={
+                        mode === "edit" ? (group?.max_total_quantity ?? 5) : 5
+                      }
+                      key={
+                        mode === "edit"
+                          ? `max-total-${group?.id}`
+                          : "max-total-create"
+                      }
+                    />
+                    <p className={styles.helper}>
+                      Suma máxima de unidades entre todas las opciones de esta sección.
+                    </p>
+                  </label>
+                ) : (
+                  <input type="hidden" name="max_total_quantity" value="" />
+                )}
+              </>
+            ) : (
+              <>
+                <input type="hidden" name="allows_option_quantity" value="false" />
+                <input type="hidden" name="max_total_quantity" value="" />
+              </>
+            )}
 
             <label className={styles.checkboxRow}>
               <input type="hidden" name="is_required" value="false" />

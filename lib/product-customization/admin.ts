@@ -58,7 +58,7 @@ export async function getCustomizationGroupsForAdmin(
       supabase
         .from("customization_groups")
         .select(
-          "id, business_id, name, description, selection_type, is_required, min_selections, max_selections, is_available, sort_order, created_at, updated_at"
+          "id, business_id, name, description, selection_type, is_required, min_selections, max_selections, allows_option_quantity, max_total_quantity, is_available, sort_order, created_at, updated_at"
         )
         .eq("business_id", businessId)
         .order("sort_order", { ascending: true })
@@ -66,7 +66,7 @@ export async function getCustomizationGroupsForAdmin(
       supabase
         .from("customization_options")
         .select(
-          "id, business_id, group_id, name, description, price_delta, is_available, sort_order, created_at, updated_at"
+          "id, business_id, group_id, name, description, price_delta, max_quantity, is_available, sort_order, created_at, updated_at"
         )
         .eq("business_id", businessId)
         .order("sort_order", { ascending: true })

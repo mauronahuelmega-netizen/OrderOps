@@ -216,6 +216,7 @@ export type Database = {
       };
       customization_groups: {
         Row: {
+          allows_option_quantity: boolean;
           business_id: string;
           created_at: string;
           description: string | null;
@@ -223,6 +224,7 @@ export type Database = {
           is_available: boolean;
           is_required: boolean;
           max_selections: number | null;
+          max_total_quantity: number | null;
           min_selections: number;
           name: string;
           selection_type: "single" | "multiple";
@@ -230,6 +232,7 @@ export type Database = {
           updated_at: string;
         };
         Insert: {
+          allows_option_quantity?: boolean;
           business_id: string;
           created_at?: string;
           description?: string | null;
@@ -237,6 +240,7 @@ export type Database = {
           is_available?: boolean;
           is_required?: boolean;
           max_selections?: number | null;
+          max_total_quantity?: number | null;
           min_selections?: number;
           name: string;
           selection_type: "single" | "multiple";
@@ -244,6 +248,7 @@ export type Database = {
           updated_at?: string;
         };
         Update: {
+          allows_option_quantity?: boolean;
           business_id?: string;
           created_at?: string;
           description?: string | null;
@@ -251,6 +256,7 @@ export type Database = {
           is_available?: boolean;
           is_required?: boolean;
           max_selections?: number | null;
+          max_total_quantity?: number | null;
           min_selections?: number;
           name?: string;
           selection_type?: "single" | "multiple";
@@ -275,6 +281,7 @@ export type Database = {
           group_id: string;
           id: string;
           is_available: boolean;
+          max_quantity: number;
           name: string;
           price_delta: number;
           sort_order: number;
@@ -287,6 +294,7 @@ export type Database = {
           group_id: string;
           id?: string;
           is_available?: boolean;
+          max_quantity?: number;
           name: string;
           price_delta?: number;
           sort_order?: number;
@@ -299,6 +307,7 @@ export type Database = {
           group_id?: string;
           id?: string;
           is_available?: boolean;
+          max_quantity?: number;
           name?: string;
           price_delta?: number;
           sort_order?: number;

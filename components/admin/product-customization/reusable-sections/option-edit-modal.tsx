@@ -154,27 +154,52 @@ export default function OptionEditModal({
                   key={mode === "edit" ? `osort-${option?.id}` : "osort-create"}
                 />
               </label>
-              <label className={styles.checkboxRow}>
-                <input type="hidden" name="is_available" value="false" />
-                <input
-                  name="is_available"
-                  type="checkbox"
-                  value="true"
-                  defaultChecked={
-                    mode === "edit" ? (option?.is_available ?? true) : true
-                  }
-                  disabled={pending}
-                  key={mode === "edit" ? `oavail-${option?.id}` : "oavail-create"}
-                />
-                <span>
-                  Visible para clientes
-                  <span className={styles.helper}>
-                    {" "}
-                    Si está oculta, el cliente no la verá en el catálogo.
-                  </span>
-                </span>
-              </label>
+              {group.selection_type === "multiple" && group.allows_option_quantity ? (
+                <label className="admin-field">
+                  <span>Cantidad máxima por opción</span>
+                  <input
+                    name="max_quantity"
+                    type="number"
+                    min={1}
+                    step={1}
+                    required
+                    disabled={pending}
+                    defaultValue={
+                      mode === "edit" ? (option?.max_quantity ?? 1) : 1
+                    }
+                    key={
+                      mode === "edit" ? `omaxq-${option?.id}` : "omaxq-create"
+                    }
+                  />
+                  <p className={styles.helper}>
+                    Cuántas veces puede pedirse esta opción (ej. Bacon x2).
+                  </p>
+                </label>
+              ) : (
+                <input type="hidden" name="max_quantity" value="1" />
+              )}
             </div>
+
+            <label className={styles.checkboxRow}>
+              <input type="hidden" name="is_available" value="false" />
+              <input
+                name="is_available"
+                type="checkbox"
+                value="true"
+                defaultChecked={
+                  mode === "edit" ? (option?.is_available ?? true) : true
+                }
+                disabled={pending}
+                key={mode === "edit" ? `oavail-${option?.id}` : "oavail-create"}
+              />
+              <span>
+                Visible para clientes
+                <span className={styles.helper}>
+                  {" "}
+                  Si está oculta, el cliente no la verá en el catálogo.
+                </span>
+              </span>
+            </label>
           </div>
 
           {state.error ? (
