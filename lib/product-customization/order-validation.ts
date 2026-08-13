@@ -4,9 +4,13 @@ import {
   buildCartConfigurationSignature,
   selectedGroupsToSignatureInput
 } from "@/lib/cart/signature";
+import {
+  normalizeCheckoutGroups,
+  selectionMapsFromNormalizedGroups
+} from "@/lib/product-customization/checkout-payload-v2";
 import { isProductCustomizationEnabled } from "@/lib/product-customization/flags";
 import {
-  buildCustomizationSnapshotV1,
+  buildCustomizationSnapshotV2,
   buildSelectedGroupsFromConfig
 } from "@/lib/product-customization/order-snapshot";
 import type {
@@ -15,6 +19,10 @@ import type {
 } from "@/lib/product-customization/order-types";
 import { getPublicProductCustomizationConfig } from "@/lib/product-customization/public";
 import { validateCustomizationSelection } from "@/lib/product-customization/public-shared";
+import {
+  getEffectiveAllowsOptionQuantity,
+  isSelectionStrictlyWithinLimits
+} from "@/lib/product-customization/selection-v2";
 import { createSupabaseServiceClient } from "@/lib/supabase/service";
 
 const MAX_LINE_QUANTITY = 99;
@@ -113,19 +121,13 @@ export async function validateCheckoutCartForCreateOrder(params: {
       return { ok: false, error: "El producto ya no está disponible." };
     }
 
-    const selectedOptionsByGroupId: Record<string, string[]> = {};
-    for (const group of item.selectedGroups ?? []) {
-      if (!group || typeof group.groupId !== "string") {
-        return {
-          ok: false,
-          error: "La configuración del producto cambió. Revisá el carrito."
-        };
-      }
-      const optionIds = Array.isArray(group.selectedOptionIds)
-        ? group.selectedOptionIds.filter((id): id is string => typeof id === "string")
-        : [];
-      selectedOptionsByGroupId[group.groupId] = [...new Set(optionIds)];
+    const normalizedGroups = normalizeCheckoutGroups(item.selectedGroups);
+    if (!normalizedGroups.ok) {
+      return { ok: false, error: normalizedGroups.error };
     }
+
+    const { selectedOptionsByGroupId, selectedQuantitiesByGroupId } =
+      selectionMapsFromNormalizedGroups(normalizedGroups.byGroupId);
 
     // Reject unknown groups from client.
     const applicableGroupIds = new Set(config.groups.map((group) => group.id));
@@ -138,9 +140,43 @@ export async function validateCheckoutCartForCreateOrder(params: {
       }
     }
 
+    // Integrity: reject qty > 1 on single / non-quantity groups before soft validate.
+    for (const group of config.groups) {
+      const quantities = selectedQuantitiesByGroupId[group.id] ?? {};
+      for (const qty of Object.values(quantities)) {
+        if (group.selectionType === "single" && qty > 1) {
+          return {
+            ok: false,
+            error: "La configuración del producto cambió. Revisá el carrito."
+          };
+        }
+        if (!getEffectiveAllowsOptionQuantity(group) && qty > 1) {
+          return {
+            ok: false,
+            error: "La configuración del producto cambió. Revisá el carrito."
+          };
+        }
+      }
+    }
+
+    // Reject over-limit quantities. validateCustomizationSelection clamps for UI drafts;
+    // create_order must not persist the unclamped client payload.
+    if (
+      !isSelectionStrictlyWithinLimits(
+        config.groups,
+        selectedQuantitiesByGroupId
+      )
+    ) {
+      return {
+        ok: false,
+        error: "Seleccionaste más opciones de las permitidas."
+      };
+    }
+
     const validation = validateCustomizationSelection(
       config.groups,
-      selectedOptionsByGroupId
+      selectedOptionsByGroupId,
+      selectedQuantitiesByGroupId
     );
 
     if (!validation.valid) {
@@ -148,7 +184,10 @@ export async function validateCheckoutCartForCreateOrder(params: {
       if (firstIssue?.message.includes("no tiene opciones")) {
         return { ok: false, error: firstIssue.message };
       }
-      if (firstIssue?.message.includes("hasta")) {
+      if (
+        firstIssue?.message.includes("hasta") ||
+        firstIssue?.message.includes("unidades")
+      ) {
         return { ok: false, error: "Seleccionaste más opciones de las permitidas." };
       }
       return {
@@ -159,16 +198,22 @@ export async function validateCheckoutCartForCreateOrder(params: {
 
     const selectedGroups = buildSelectedGroupsFromConfig(
       config.groups,
-      selectedOptionsByGroupId
+      selectedOptionsByGroupId,
+      selectedQuantitiesByGroupId
     );
 
     const customizationTotal = selectedGroups.reduce(
       (sum, group) =>
         sum +
-        group.selectedOptions.reduce(
-          (optionSum, option) => optionSum + option.priceDelta,
-          0
-        ),
+        group.selectedOptions.reduce((optionSum, option) => {
+          const qty =
+            typeof option.quantity === "number" &&
+            Number.isFinite(option.quantity) &&
+            option.quantity >= 1
+              ? Math.floor(option.quantity)
+              : 1;
+          return optionSum + option.priceDelta * qty;
+        }, 0),
       0
     );
 
@@ -252,14 +297,15 @@ export async function validateCheckoutCartForCreateOrder(params: {
       };
     }
 
-    const snapshot = buildCustomizationSnapshotV1({
+    const snapshot = buildCustomizationSnapshotV2({
       configurationSignature: serverSignature,
       productId: config.productId,
       productName: config.productName,
       baseUnitPrice,
       customizationTotal,
       finalUnitPrice,
-      selectedGroups
+      selectedGroups,
+      configGroups: config.groups
     });
 
     rpcItems.push({

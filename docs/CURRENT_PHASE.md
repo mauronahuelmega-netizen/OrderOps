@@ -2,43 +2,82 @@
 
 ## Estado actual
 
-PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-COMMIT-DEPLOY-1 in progress / complete with accepted P3 admin-save debt.
+PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-QA-1 complete with accepted order-submit QA debt.
 
-## PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-COMMIT-DEPLOY-1
+## PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-QA-1
 
-Status: PASS WITH ACCEPTED P3 ADMIN SAVE DEBT — committed, migration applied, production promoted.
+Status: QA COMPLETE WITH ACCEPTED ORDER SUBMIT QA DEBT — MULTI-QUANTITY EXTRAS ORDER QA-1 PASSED
 
-Release:
-`feat(public-catalog): add quantity extras schema admin config`
+Validated:
+Helper/static PASS (incl. P1 strict-limits microfix); payload V2; server normalize/validate/price; Snapshot V2; admin V1/V2; browser no-submit; no production mutation. Submit real not exercised (no local Docker/safe env).
 
-Scope released:
-Schema columns + admin quantity config only. Public steppers deferred to PUBLIC-CART IMPL.
-
-Safety:
-- DB-first migration before promote;
-- no commercial data mutation;
-- no quantity toggles activated;
-- no public modal/cart/checkout/create_order;
-- no merge main.
+Next:
+PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-COMMIT-DEPLOY-1 = ALLOWED_WITH_ACCEPTED_ORDER_SUBMIT_QA_DEBT_AND_REAL_ENABLEMENT_GUARD
+REAL QUANTITY GROUP ENABLEMENT remains blocked until safe submit QA or owner accepts production risk.
 
 ## Último bloque cerrado (previo)
 
-PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-QA-1 complete with accepted P3 admin-save debt.
-PUBLIC-CATALOG-MVP-ENTRY-ROUTING-COMMIT-DEPLOY-1 complete (`89aecc2`).
+PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-IMPL-1 complete with order-submit QA debt.
+PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-PUBLIC-CART-QA-1 complete with local-only qty fixture.
+PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-SCHEMA-ADMIN-COMMIT-DEPLOY-1 complete (`842c2fc`).
 
 ## Producción
 
 - URL: https://orderops.vercel.app
-- Quantity extras schema/admin: this release commit on `cursor-handoff-public-catalog-ui-redesign`
-- Prior entry routing: `89aecc23df2e1add6bd22dbd28203d3efe5061cf`
+- Schema/admin quantity config: `842c2fc`
+- Public cart + order qty path: local uncommitted; quantity not enabled on real groups
 
 ## Próximas fases permitidas
 
-- PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-PUBLIC-CART-IMPL-1 = ALLOWED_WITH_ACCEPTED_P3_ADMIN_SAVE_DEBT
+- PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-COMMIT-DEPLOY-1 = ALLOWED_WITH_ACCEPTED_ORDER_SUBMIT_QA_DEBT_AND_REAL_ENABLEMENT_GUARD
 - PUBLIC-CATALOG-SUCCESS-EDGE-STATES-POLISH-1 = OPTIONAL
 - PUBLIC-TENANT-BROWSER-BRANDING-FAVICON-CACHE-BUST-1 = BACKLOG_OPTIONAL
 - PUBLIC-ORDERS-PUBLIC-CODE-SPEC-1 = BACKLOG
 - PUBLIC-CATALOG-CHECKOUT-ADDRESS-MAPS-* = PAUSED
+
+---
+
+## Registro — PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-QA-1 (2026-08-13)
+
+**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-QA-1 — Formal ORDER path QA
+**Estado:** QA COMPLETE WITH ACCEPTED ORDER SUBMIT QA DEBT — MULTI-QUANTITY EXTRAS ORDER QA-1 PASSED
+**Resumen:** Helper/browser PASS. P1 microfix: reject over-limit qty (no silent clamp on create_order). No safe local submit env. No production mutation. No commit/push/deploy.
+- Doc: `docs/public-catalog-customization-multi-quantity-extras-order-qa-1.md`
+- **QUEUE_GATE:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-COMMIT-DEPLOY-1 = ALLOWED_WITH_ACCEPTED_ORDER_SUBMIT_QA_DEBT_AND_REAL_ENABLEMENT_GUARD
+- **QUEUE_GATE:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-QA-1 = COMPLETE_WITH_ACCEPTED_ORDER_SUBMIT_QA_DEBT
+- **Guard:** REAL QUANTITY GROUP ENABLEMENT REMAINS BLOCKED UNTIL SAFE ORDER SUBMIT QA OR OWNER ACCEPTS PRODUCTION RISK.
+
+---
+
+## Registro — PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-IMPL-1 (2026-08-13)
+
+**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-IMPL-1 — Checkout/order quantity path
+**Estado:** PASS WITH ORDER SUBMIT QA DEBT — MULTI-QUANTITY EXTRAS ORDER IMPL-1 COMPLETE
+**Resumen:** Payload V2 + TS validation/pricing/snapshot V2 + admin V1/V2 display. Case C hybrid (TS SoT). No RPC migration. No real submit. WhatsApp extras = P3. No commit/push/deploy.
+- Doc: `docs/public-catalog-customization-multi-quantity-extras-order-impl-1.md`
+- **QUEUE_GATE:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-QA-1 = ALLOWED_WITH_ORDER_SUBMIT_QA_DEBT
+- **QUEUE_GATE:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-IMPL-1 = COMPLETE_WITH_ORDER_SUBMIT_QA_DEBT
+- **QUEUE_GATE:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-COMMIT-DEPLOY-1 = BLOCKED_UNTIL_ORDER_QA
+
+---
+
+## Registro — PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-PUBLIC-CART-QA-1 (2026-08-13)
+
+**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-PUBLIC-CART-QA-1 — Public cart quantity QA
+**Estado:** QA COMPLETE WITH LOCAL-ONLY QTY FIXTURE — MULTI-QUANTITY EXTRAS PUBLIC CART QA-1 PASSED
+**Resumen:** Option B temporary fixture exercised qty steppers/pricing/signature/merge; fixture removed. Current tenant flag-off regression PASS. No production data mutation. No commit/push/deploy.
+- Doc: `docs/public-catalog-customization-multi-quantity-extras-public-cart-qa-1.md`
+- **QUEUE_GATE:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-IMPL-1 = ALLOWED_WITH_LOCAL_ONLY_QTY_FIXTURE_QA
+
+---
+
+## Registro — PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-PUBLIC-CART-IMPL-1 (2026-08-13)
+
+**Fase:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-PUBLIC-CART-IMPL-1 — Public modal/cart quantity path
+**Estado:** PASS WITH LIVE QTY GROUP QA DEBT — MULTI-QUANTITY EXTRAS PUBLIC CART IMPL-1 COMPLETE
+**Resumen:** Public/cart only. Flag-off groups unchanged. No checkout/order. No commit/push/deploy. Live qty-group browser QA debt accepted (no data mutation).
+- Doc: `docs/public-catalog-customization-multi-quantity-extras-public-cart-impl-1.md`
+- **QUEUE_GATE:** PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-PUBLIC-CART-QA-1 = ALLOWED_WITH_LIVE_QTY_GROUP_QA_DEBT
 
 ---
 

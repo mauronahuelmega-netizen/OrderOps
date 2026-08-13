@@ -44,6 +44,8 @@ type GroupRow = {
   is_required: boolean;
   min_selections: number;
   max_selections: number | null;
+  allows_option_quantity?: boolean | null;
+  max_total_quantity?: number | null;
   is_available: boolean;
   sort_order: number;
   created_at: string;
@@ -55,6 +57,7 @@ type OptionRow = {
   name: string;
   description: string | null;
   price_delta: number;
+  max_quantity?: number | null;
   is_available: boolean;
   sort_order: number;
   created_at: string;
@@ -193,7 +196,13 @@ function resolveGroupsForProduct(params: {
         id: option.id,
         name: option.name,
         description: option.description,
-        priceDelta: Number(option.price_delta)
+        priceDelta: Number(option.price_delta),
+        maxQuantity:
+          typeof option.max_quantity === "number" &&
+          Number.isFinite(option.max_quantity) &&
+          option.max_quantity >= 1
+            ? Math.floor(option.max_quantity)
+            : 1
       }));
 
     const isRequired = resolved.group.is_required;
@@ -211,6 +220,15 @@ function resolveGroupsForProduct(params: {
       isRequired,
       minSelections: resolved.group.min_selections,
       maxSelections: resolved.group.max_selections,
+      allowsOptionQuantity:
+        resolved.group.selection_type === "multiple" &&
+        Boolean(resolved.group.allows_option_quantity),
+      maxTotalQuantity:
+        typeof resolved.group.max_total_quantity === "number" &&
+        Number.isFinite(resolved.group.max_total_quantity) &&
+        resolved.group.max_total_quantity >= 1
+          ? Math.floor(resolved.group.max_total_quantity)
+          : null,
       options,
       isBlocked
     });
@@ -340,7 +358,7 @@ async function loadPublicCustomizationCorpus(
       ? supabase
           .from("customization_groups")
           .select(
-            "id, name, description, selection_type, is_required, min_selections, max_selections, is_available, sort_order, created_at"
+            "id, name, description, selection_type, is_required, min_selections, max_selections, allows_option_quantity, max_total_quantity, is_available, sort_order, created_at"
           )
           .eq("business_id", businessId)
           .eq("is_available", true)
@@ -350,7 +368,7 @@ async function loadPublicCustomizationCorpus(
       ? supabase
           .from("customization_options")
           .select(
-            "id, group_id, name, description, price_delta, is_available, sort_order, created_at"
+            "id, group_id, name, description, price_delta, max_quantity, is_available, sort_order, created_at"
           )
           .eq("business_id", businessId)
           .eq("is_available", true)

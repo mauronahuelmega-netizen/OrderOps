@@ -15,6 +15,8 @@ export type LocalCartSelectedOption = {
   optionId: string;
   optionName: string;
   priceDelta: number;
+  /** Extra option quantity. Missing/legacy → treat as 1. */
+  quantity?: number;
   sortOrder: number;
 };
 
@@ -25,6 +27,8 @@ export type LocalCartSelectedGroup = {
   isRequired: boolean;
   minSelections: number;
   maxSelections: number | null;
+  /** Hint from config at add time; missing on legacy lines. */
+  allowsOptionQuantity?: boolean;
   sortOrder: number;
   selectedOptions: LocalCartSelectedOption[];
 };

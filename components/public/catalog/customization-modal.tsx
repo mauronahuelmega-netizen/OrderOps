@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { X } from "lucide-react";
+import { Minus, Plus, X } from "lucide-react";
 import CustomizationOptionGroup from "@/components/product-customization/shared/customization-option-group";
 import CustomizationPriceSummary from "@/components/product-customization/shared/customization-price-summary";
 import {
@@ -20,6 +20,18 @@ import {
   type PublicProductCustomizationConfig,
   type PublicUpsellSuggestedProduct
 } from "@/lib/product-customization/public-shared";
+import {
+  canIncrementOptionQuantity,
+  decrementOptionQuantity,
+  formatQuantityGroupMeta,
+  getEffectiveAllowsOptionQuantity,
+  getSelectedOptionQuantity,
+  incrementOptionQuantity,
+  normalizeLegacySelectionToV2,
+  normalizeSelectionToV2,
+  selectionV2ToLegacyOptionIds,
+  type CustomizationSelectionStateV2
+} from "@/lib/product-customization/selection-v2";
 import type { CustomizationLoadState } from "@/components/public/catalog/customization-config-cache";
 import styles from "./customization-modal.module.css";
 import {
@@ -33,6 +45,7 @@ const CUSTOMIZATION_MODAL_EXIT_MS = PUBLIC_OVERLAY_EXIT_MS;
 
 export type CustomizationModalInitialSelection = {
   selectedOptionsByGroupId: Record<string, string[]>;
+  selectedQuantitiesByGroupId?: Record<string, Record<string, number>>;
   selectedUpsellProductIds: string[];
 };
 
@@ -63,33 +76,49 @@ type CustomizationModalProps = {
 function filterInitialSelection(
   config: PublicProductCustomizationConfig,
   initial: CustomizationModalInitialSelection | null | undefined
-): Pick<CustomizationModalInitialSelection, "selectedOptionsByGroupId"> & {
+): {
+  selection: CustomizationSelectionStateV2;
   droppedStale: boolean;
 } {
   if (!initial) {
-    return { selectedOptionsByGroupId: {}, droppedStale: false };
+    return { selection: {}, droppedStale: false };
   }
 
-  const selectedOptionsByGroupId: Record<string, string[]> = {};
+  const fromQuantities = initial.selectedQuantitiesByGroupId
+    ? normalizeSelectionToV2(initial.selectedQuantitiesByGroupId, config.groups)
+    : normalizeLegacySelectionToV2(initial.selectedOptionsByGroupId, config.groups);
+
+  const requestedLegacy = initial.selectedOptionsByGroupId;
   let droppedStale = false;
 
   for (const group of config.groups) {
-    const requested = initial.selectedOptionsByGroupId[group.id] ?? [];
+    const requested = requestedLegacy[group.id] ?? [];
     const allowed = new Set(group.options.map((option) => option.id));
-    const kept = requested.filter((optionId) => allowed.has(optionId));
-    if (kept.length !== requested.length) {
+    if (requested.some((optionId) => !allowed.has(optionId))) {
       droppedStale = true;
     }
-    if (kept.length > 0) {
-      selectedOptionsByGroupId[group.id] = kept;
+    const qtyMap = initial.selectedQuantitiesByGroupId?.[group.id];
+    if (qtyMap) {
+      for (const optionId of Object.keys(qtyMap)) {
+        if (!allowed.has(optionId)) {
+          droppedStale = true;
+        }
+      }
     }
   }
 
-  return { selectedOptionsByGroupId, droppedStale };
+  return { selection: fromQuantities, droppedStale };
 }
 
 function groupUsesRequiredLayout(group: PublicCustomizationGroup): boolean {
   return group.isRequired || group.minSelections >= 1;
+}
+
+function formatOptionUnitDelta(priceDelta: number): string | null {
+  if (priceDelta <= 0) {
+    return null;
+  }
+  return `${formatPublicCatalogCurrency(priceDelta)} c/u`;
 }
 
 export default function CustomizationModal({
@@ -103,9 +132,7 @@ export default function CustomizationModal({
   onRetry,
   onConfirmSelection
 }: CustomizationModalProps) {
-  const [selectedOptionsByGroupId, setSelectedOptionsByGroupId] = useState<
-    Record<string, string[]>
-  >({});
+  const [selectionV2, setSelectionV2] = useState<CustomizationSelectionStateV2>({});
   const [staleWarning, setStaleWarning] = useState<string | null>(null);
   const [confirmError, setConfirmError] = useState<string | null>(null);
   const [priceBump, setPriceBump] = useState(false);
@@ -255,15 +282,12 @@ export default function CustomizationModal({
     const filtered = filterInitialSelection(loadState.config, initialSelection);
     const hadInitial =
       Boolean(initialSelection) &&
-      Object.keys(initialSelection?.selectedOptionsByGroupId ?? {}).length > 0;
-    const lostOptions =
-      hadInitial &&
-      JSON.stringify(filtered.selectedOptionsByGroupId) !==
-        JSON.stringify(initialSelection?.selectedOptionsByGroupId ?? {});
+      (Object.keys(initialSelection?.selectedOptionsByGroupId ?? {}).length > 0 ||
+        Object.keys(initialSelection?.selectedQuantitiesByGroupId ?? {}).length > 0);
 
-    setSelectedOptionsByGroupId(filtered.selectedOptionsByGroupId);
+    setSelectionV2(filtered.selection);
     setStaleWarning(
-      lostOptions || filtered.droppedStale
+      hadInitial && filtered.droppedStale
         ? "Algunas opciones ya no están disponibles. Revisá tu selección antes de continuar."
         : null
     );
@@ -274,6 +298,11 @@ export default function CustomizationModal({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId, loadState.status === "ready" ? loadState.config.productId : null]);
 
+  const selectedOptionsByGroupId = useMemo(
+    () => selectionV2ToLegacyOptionIds(selectionV2),
+    [selectionV2]
+  );
+
   const validation = useMemo(() => {
     if (loadState.status !== "ready") {
       return { valid: false, issues: [] as { groupId: string; message: string }[] };
@@ -281,9 +310,10 @@ export default function CustomizationModal({
 
     return validateCustomizationSelection(
       loadState.config.groups,
-      selectedOptionsByGroupId
+      selectedOptionsByGroupId,
+      selectionV2
     );
-  }, [loadState, selectedOptionsByGroupId]);
+  }, [loadState, selectedOptionsByGroupId, selectionV2]);
 
   const visualTotal = useMemo(() => {
     if (loadState.status !== "ready") {
@@ -294,10 +324,11 @@ export default function CustomizationModal({
       basePrice: loadState.config.productPrice,
       groups: loadState.config.groups,
       selectedOptionsByGroupId,
+      selectedQuantitiesByGroupId: selectionV2,
       upsellProducts: [],
       selectedUpsellProductIds: []
     });
-  }, [loadState, selectedOptionsByGroupId]);
+  }, [loadState, selectedOptionsByGroupId, selectionV2]);
 
   useEffect(() => {
     if (loadState.status !== "ready") {
@@ -339,6 +370,7 @@ export default function CustomizationModal({
         config: loadState.config,
         categoryId,
         selectedOptionsByGroupId,
+        selectedQuantitiesByGroupId: selectionV2,
         selectedUpsellProductIds: [],
         quantity: 1
       });
@@ -468,34 +500,177 @@ export default function CustomizationModal({
                 </p>
               ) : null}
 
-              {loadState.config.groups.map((group) => (
-                <CustomizationOptionGroup
-                  key={group.id}
-                  group={group}
-                  selectedOptionIds={selectedOptionsByGroupId[group.id] ?? []}
-                  issue={issueByGroupId.get(group.id) ?? null}
-                  optionLayout={
-                    groupUsesRequiredLayout(group) ? "list" : "compact-grid"
-                  }
-                  onSelectOption={(optionId) => {
-                    if (group.selectionType === "single") {
-                      setSelectedOptionsByGroupId((current) =>
-                        selectSingleOption(current, group.id, optionId)
-                      );
-                    } else {
-                      setSelectedOptionsByGroupId((current) =>
-                        toggleMultipleOption(
-                          current,
-                          group.id,
-                          optionId,
-                          group.maxSelections
-                        )
-                      );
+              {loadState.config.groups.map((group) => {
+                if (getEffectiveAllowsOptionQuantity(group)) {
+                  return (
+                    <section key={group.id} className={styles.quantityGroup}>
+                      <div className={styles.quantityGroupHeader}>
+                        <h3>{group.name}</h3>
+                        <span className={styles.quantityGroupMeta}>
+                          {formatQuantityGroupMeta(group)}
+                        </span>
+                      </div>
+                      {group.description ? (
+                        <p className={styles.quantityGroupDescription}>{group.description}</p>
+                      ) : null}
+
+                      <ul className={styles.quantityOptionList}>
+                        {group.options.map((option) => {
+                          const qty = getSelectedOptionQuantity(
+                            selectionV2,
+                            group.id,
+                            option.id
+                          );
+                          const canPlus = canIncrementOptionQuantity({
+                            selection: selectionV2,
+                            group,
+                            optionId: option.id
+                          });
+                          const unitLabel = formatOptionUnitDelta(option.priceDelta);
+                          const lineDelta = option.priceDelta * qty;
+
+                          return (
+                            <li key={option.id} className={styles.quantityOptionCard}>
+                              <div className={styles.quantityOptionCopy}>
+                                <p className={styles.quantityOptionName}>{option.name}</p>
+                                <p className={styles.quantityOptionMeta}>
+                                  {unitLabel ? (
+                                    <span>{unitLabel}</span>
+                                  ) : (
+                                    <span>Sin costo</span>
+                                  )}
+                                  {qty > 1 && lineDelta > 0 ? (
+                                    <span>
+                                      {" "}
+                                      · x{qty} · +{formatPublicCatalogCurrency(lineDelta)}
+                                    </span>
+                                  ) : null}
+                                </p>
+                              </div>
+
+                              {qty < 1 ? (
+                                <button
+                                  type="button"
+                                  className={styles.quantityAddButton}
+                                  disabled={!canPlus}
+                                  onClick={() => {
+                                    setSelectionV2((current) =>
+                                      incrementOptionQuantity({
+                                        selection: current,
+                                        groups: loadState.config.groups,
+                                        group,
+                                        optionId: option.id
+                                      })
+                                    );
+                                    setConfirmError(null);
+                                  }}
+                                >
+                                  Agregar
+                                </button>
+                              ) : (
+                                <div className={styles.quantityStepper}>
+                                  <button
+                                    type="button"
+                                    className={styles.quantityStepperButton}
+                                    aria-label={`Quitar una unidad de ${option.name}`}
+                                    onClick={() => {
+                                      setSelectionV2((current) =>
+                                        decrementOptionQuantity({
+                                          selection: current,
+                                          groups: loadState.config.groups,
+                                          group,
+                                          optionId: option.id
+                                        })
+                                      );
+                                      setConfirmError(null);
+                                    }}
+                                  >
+                                    <Minus aria-hidden="true" focusable="false" size={16} />
+                                  </button>
+                                  <span
+                                    className={styles.quantityStepperValue}
+                                    aria-live="polite"
+                                  >
+                                    {qty}
+                                  </span>
+                                  <button
+                                    type="button"
+                                    className={styles.quantityStepperButton}
+                                    aria-label={`Sumar una unidad de ${option.name}`}
+                                    disabled={!canPlus}
+                                    onClick={() => {
+                                      setSelectionV2((current) =>
+                                        incrementOptionQuantity({
+                                          selection: current,
+                                          groups: loadState.config.groups,
+                                          group,
+                                          optionId: option.id
+                                        })
+                                      );
+                                      setConfirmError(null);
+                                    }}
+                                  >
+                                    <Plus aria-hidden="true" focusable="false" size={16} />
+                                  </button>
+                                </div>
+                              )}
+                            </li>
+                          );
+                        })}
+                      </ul>
+
+                      {issueByGroupId.get(group.id) ? (
+                        <p className={styles.groupError} role="alert">
+                          {issueByGroupId.get(group.id)}
+                        </p>
+                      ) : null}
+                    </section>
+                  );
+                }
+
+                return (
+                  <CustomizationOptionGroup
+                    key={group.id}
+                    group={group}
+                    selectedOptionIds={selectedOptionsByGroupId[group.id] ?? []}
+                    issue={issueByGroupId.get(group.id) ?? null}
+                    optionLayout={
+                      groupUsesRequiredLayout(group) ? "list" : "compact-grid"
                     }
-                    setConfirmError(null);
-                  }}
-                />
-              ))}
+                    onSelectOption={(optionId) => {
+                      if (group.selectionType === "single") {
+                        setSelectionV2((current) =>
+                          normalizeSelectionToV2(
+                            normalizeLegacySelectionToV2(
+                              selectSingleOption(
+                                selectionV2ToLegacyOptionIds(current),
+                                group.id,
+                                optionId
+                              )
+                            ),
+                            loadState.config.groups
+                          )
+                        );
+                      } else {
+                        setSelectionV2((current) =>
+                          normalizeSelectionToV2(
+                            normalizeLegacySelectionToV2(
+                              toggleMultipleOption(
+                                selectionV2ToLegacyOptionIds(current),
+                                group.id,
+                                optionId,
+                                group.maxSelections
+                              )
+                            ),
+                            loadState.config.groups
+                          )
+                        );
+                      }
+                      setConfirmError(null);
+                    }}
+                  />
+                );
+              })}
             </>
           ) : null}
         </div>

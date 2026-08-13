@@ -315,6 +315,132 @@
   line-height: 1.4;
 }
 
+.quantityGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.85rem;
+}
+
+.quantityGroupHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.35rem 0.75rem;
+}
+
+.quantityGroupHeader h3 {
+  margin: 0;
+  font-size: 0.98rem;
+  font-weight: 650;
+  color: var(--customization-text);
+}
+
+.quantityGroupMeta {
+  color: var(--customization-subtle);
+  font-size: 0.75rem;
+  line-height: 1.3;
+}
+
+.quantityGroupDescription {
+  margin: 0;
+  color: var(--customization-muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+
+.quantityOptionList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.quantityOptionCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  min-height: 3.4rem;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid var(--customization-border);
+  border-radius: 0.9rem;
+  background: var(--customization-row-bg);
+}
+
+.quantityOptionCopy {
+  min-width: 0;
+  flex: 1;
+}
+
+.quantityOptionName {
+  margin: 0;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--customization-text);
+  line-height: 1.3;
+}
+
+.quantityOptionMeta {
+  margin: 0.15rem 0 0;
+  color: var(--customization-muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.quantityAddButton,
+.quantityStepperButton {
+  flex-shrink: 0;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--customization-border);
+  background: color-mix(in srgb, var(--customization-sheet-bg) 88%, var(--catalog-accent, var(--color-primary)));
+  color: var(--customization-text);
+  font-size: 0.86rem;
+  font-weight: 600;
+  cursor: pointer;
+  contain: layout style paint;
+}
+
+.quantityAddButton {
+  padding: 0 0.95rem;
+  background: color-mix(
+    in srgb,
+    var(--catalog-accent, var(--color-primary)) 16%,
+    var(--customization-sheet-bg)
+  );
+  border-color: color-mix(
+    in srgb,
+    var(--catalog-accent, var(--color-primary)) 34%,
+    var(--customization-border)
+  );
+}
+
+.quantityAddButton:disabled,
+.quantityStepperButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.quantityStepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.quantityStepperValue {
+  min-width: 1.5rem;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: var(--customization-text);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .backdrop,
   .modal,
@@ -327,6 +453,8 @@
   .closeButton,
   .secondaryButton,
   .primaryButton,
+  .quantityAddButton,
+  .quantityStepperButton,
   .modal :global([role="radio"]),
   .modal :global([role="checkbox"]) {
     transition: none;
@@ -335,6 +463,8 @@
   .closeButton:active,
   .secondaryButton:active,
   .primaryButton:active:not(:disabled),
+  .quantityAddButton:active:not(:disabled),
+  .quantityStepperButton:active:not(:disabled),
   .modal :global([role="radio"]:active),
   .modal :global([role="checkbox"]:active) {
     transform: none;

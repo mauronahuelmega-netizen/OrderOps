@@ -146,7 +146,8 @@ export function parseLocalCartV2Items(value: string | null): LocalCartItemV2[] {
       return [];
     }
 
-    return parsedValue.filter((item): item is LocalCartItemV2 => {
+    return parsedValue
+      .filter((item): item is LocalCartItemV2 => {
       if (!item || typeof item !== "object") {
         return false;
       }
@@ -165,7 +166,17 @@ export function parseLocalCartV2Items(value: string | null): LocalCartItemV2[] {
         typeof candidate.finalUnitPrice === "number" &&
         typeof candidate.lineTotal === "number"
       );
-    });
+      })
+      .map((item) => ({
+        ...item,
+        selectedGroups: (item.selectedGroups ?? []).map((group) => ({
+          ...group,
+          selectedOptions: (group.selectedOptions ?? []).map((option) => ({
+            ...option,
+            quantity: normalizeCartOptionQuantity(option.quantity)
+          }))
+        }))
+      }));
   } catch {
     return [];
   }
@@ -314,10 +325,18 @@ function buildDisplaySummary(groups: LocalCartSelectedGroup[]): string[] {
     .map((group) => {
       const optionsLabel = group.selectedOptions
         .map((option) => {
-          if (option.priceDelta > 0) {
-            return `${option.optionName} (+$${formatPlainAmount(option.priceDelta)})`;
+          const qty =
+            typeof option.quantity === "number" &&
+            Number.isFinite(option.quantity) &&
+            option.quantity >= 1
+              ? Math.floor(option.quantity)
+              : 1;
+          const namePart = qty > 1 ? `${option.optionName} x${qty}` : option.optionName;
+          const lineDelta = option.priceDelta * qty;
+          if (lineDelta > 0) {
+            return `${namePart} (+$${formatPlainAmount(lineDelta)})`;
           }
-          return option.optionName;
+          return namePart;
         })
         .join(", ");
 
@@ -331,30 +350,54 @@ function formatPlainAmount(value: number) {
   }).format(value);
 }
 
+function normalizeCartOptionQuantity(quantity: number | undefined): number {
+  if (typeof quantity !== "number" || !Number.isFinite(quantity) || quantity < 1) {
+    return 1;
+  }
+  return Math.floor(quantity);
+}
+
 function buildSelectedGroupsFromConfig(
   groups: PublicCustomizationGroup[],
-  selectedOptionsByGroupId: Record<string, string[]>
+  selectedOptionsByGroupId: Record<string, string[]>,
+  selectedQuantitiesByGroupId?: Record<string, Record<string, number>>
 ): LocalCartSelectedGroup[] {
   const result: LocalCartSelectedGroup[] = [];
+  const selection =
+    selectedQuantitiesByGroupId ??
+    Object.fromEntries(
+      Object.entries(selectedOptionsByGroupId).map(([groupId, optionIds]) => [
+        groupId,
+        Object.fromEntries(optionIds.map((optionId) => [optionId, 1]))
+      ])
+    );
 
   groups.forEach((group, groupIndex) => {
-    const selectedIds = selectedOptionsByGroupId[group.id] ?? [];
-    if (selectedIds.length === 0) {
+    const groupSelection = selection[group.id] ?? {};
+    const selectedEntries = Object.entries(groupSelection).filter(
+      ([, qty]) => typeof qty === "number" && Number.isFinite(qty) && qty >= 1
+    );
+    if (selectedEntries.length === 0) {
       return;
     }
 
     const optionById = new Map(group.options.map((option) => [option.id, option]));
-    const selectedOptions = selectedIds
-      .map((optionId, optionIndex) => {
+    const selectedOptions = selectedEntries
+      .map(([optionId, qtyRaw], optionIndex) => {
         const option = optionById.get(optionId);
         if (!option) {
           return null;
         }
 
+        const quantity = group.allowsOptionQuantity
+          ? normalizeCartOptionQuantity(qtyRaw)
+          : 1;
+
         return {
           optionId: option.id,
           optionName: option.name,
           priceDelta: option.priceDelta,
+          quantity,
           sortOrder: optionIndex
         };
       })
@@ -371,6 +414,7 @@ function buildSelectedGroupsFromConfig(
       isRequired: group.isRequired,
       minSelections: group.minSelections,
       maxSelections: group.maxSelections,
+      allowsOptionQuantity: Boolean(group.allowsOptionQuantity),
       sortOrder: groupIndex,
       selectedOptions
     });
@@ -421,19 +465,24 @@ export function buildCartLinesFromCustomizationSelection(params: {
   config: PublicProductCustomizationConfig;
   categoryId: string;
   selectedOptionsByGroupId: Record<string, string[]>;
+  selectedQuantitiesByGroupId?: Record<string, Record<string, number>>;
   selectedUpsellProductIds: string[];
   quantity?: number;
 }): { parent: LocalCartItemV2; children: LocalCartItemV2[] } {
   const quantity = Math.max(params.quantity ?? 1, 1);
   const selectedGroups = buildSelectedGroupsFromConfig(
     params.config.groups,
-    params.selectedOptionsByGroupId
+    params.selectedOptionsByGroupId,
+    params.selectedQuantitiesByGroupId
   );
 
   const customizationTotal = selectedGroups.reduce(
     (sum, group) =>
       sum +
-      group.selectedOptions.reduce((optionSum, option) => optionSum + option.priceDelta, 0),
+      group.selectedOptions.reduce((optionSum, option) => {
+        const qty = normalizeCartOptionQuantity(option.quantity);
+        return optionSum + option.priceDelta * qty;
+      }, 0),
     0
   );
 
@@ -1003,15 +1052,22 @@ export function buildHierarchicalCartRows(items: LocalCartItem[]): HierarchicalC
 
 export function selectionStateFromCartParent(parent: LocalCartItemV2, children: LocalCartItemV2[]) {
   const selectedOptionsByGroupId: Record<string, string[]> = {};
+  const selectedQuantitiesByGroupId: Record<string, Record<string, number>> = {};
 
   for (const group of parent.selectedGroups) {
     selectedOptionsByGroupId[group.groupId] = group.selectedOptions.map(
       (option) => option.optionId
     );
+    const quantities: Record<string, number> = {};
+    for (const option of group.selectedOptions) {
+      quantities[option.optionId] = normalizeCartOptionQuantity(option.quantity);
+    }
+    selectedQuantitiesByGroupId[group.groupId] = quantities;
   }
 
   return {
     selectedOptionsByGroupId,
+    selectedQuantitiesByGroupId,
     selectedUpsellProductIds: children.map((child) => child.productId)
   };
 }
@@ -1023,7 +1079,11 @@ export function buildCheckoutCartPayload(items: LocalCartItem[]): {
     productId: string;
     quantity: number;
     configurationSignature: string;
-    selectedGroups: Array<{ groupId: string; selectedOptionIds: string[] }>;
+    selectedGroups: Array<{
+      groupId: string;
+      selectedOptions: Array<{ optionId: string; quantity: number }>;
+      selectedOptionIds: string[];
+    }>;
     upsellItems: Array<{
       cartLineId: string;
       productId: string;
@@ -1059,10 +1119,17 @@ export function buildCheckoutCartPayload(items: LocalCartItem[]): {
       productId: parent.productId,
       quantity: parent.quantity,
       configurationSignature: parent.configurationSignature,
-      selectedGroups: parent.selectedGroups.map((group) => ({
-        groupId: group.groupId,
-        selectedOptionIds: group.selectedOptions.map((option) => option.optionId)
-      })),
+      selectedGroups: parent.selectedGroups.map((group) => {
+        const selectedOptions = group.selectedOptions.map((option) => ({
+          optionId: option.optionId,
+          quantity: normalizeCartOptionQuantity(option.quantity)
+        }));
+        return {
+          groupId: group.groupId,
+          selectedOptions,
+          selectedOptionIds: selectedOptions.map((option) => option.optionId)
+        };
+      }),
       upsellItems: children.map((child) => ({
         cartLineId: child.cartLineId,
         productId: child.productId,

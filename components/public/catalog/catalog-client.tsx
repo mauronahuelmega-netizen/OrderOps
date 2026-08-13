@@ -92,6 +92,7 @@ type CustomizationSession = {
   editingCartLineId: string | null;
   initialSelection: {
     selectedOptionsByGroupId: Record<string, string[]>;
+    selectedQuantitiesByGroupId?: Record<string, Record<string, number>>;
     selectedUpsellProductIds: string[];
   } | null;
   loadState: CustomizationLoadState;

@@ -370,7 +370,7 @@ businesses (1) â”€â”€â”¬â”€â”€ (N) profiles
 | `order_id` | uuid FK | CASCADE delete |
 | `product_id` | uuid? FK | Snapshot si producto eliminado |
 | `product_name`, `unit_price`, `quantity` | | Snapshot inmutable |
-| `customization_snapshot` | jsonb? | V1 Product Customization; null = legacy |
+| `customization_snapshot` | jsonb? | V1/V2 Product Customization; null = legacy; V2 adds option `quantity` + `total_price_delta` |
 | `parent_order_item_id` | uuid? self FK | Plus hijo; ON DELETE CASCADE |
 | `item_kind` | text | `product` \| `upsell`; default `product` |
 
@@ -474,6 +474,16 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ## 3. Registro de Cambios ArquitectÃ³nicos (Changelog)
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
+
+### 2026-08-13 — PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-QA-1
+
+- **QA / Orders** Formal ORDER path QA. Helper/browser PASS. P1 microfix: `isSelectionStrictlyWithinLimits` rejects over-max qty on create_order (UI clamp must not silently persist). No local Docker submit. Gate: COMMIT-DEPLOY ALLOWED_WITH_ACCEPTED_ORDER_SUBMIT_QA_DEBT_AND_REAL_ENABLEMENT_GUARD. Real qty enablement blocked until safe submit or owner risk accept.
+- Archivos: `selection-v2.ts`, `order-validation.ts`, `order-qty-helpers.verify.ts`, `docs/public-catalog-customization-multi-quantity-extras-order-qa-1.md`, `docs/CURRENT_PHASE.md`.
+
+### 2026-08-13 — PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-IMPL-1
+
+- **Orders / Checkout** Checkout payload V2 (`selectedOptions` + legacy `selectedOptionIds`); TS server normalize/validate/price (`price_delta × qty`); Snapshot V2; admin readers V1+V2 (`Bacon x2`). Hybrid Case C — TS is SoT for qty (no new RPC migration). WhatsApp admin extras = P3. No submit/DB push/commit. Gate: ORDER-QA ALLOWED_WITH_ORDER_SUBMIT_QA_DEBT; COMMIT-DEPLOY BLOCKED_UNTIL_ORDER_QA.
+- Archivos: `lib/cart/local.ts`, `lib/product-customization/checkout-payload-v2.ts`, `order-validation.ts`, `order-snapshot.ts`, `order-types.ts`, `order-dashboard.ts`, `lib/orders/customization-summary.ts`, docs ORDER IMPL + CURRENT_PHASE.
 
 ### 2026-08-10 — PUBLIC-CATALOG-UI-REDESIGN-FINAL-COMMIT-1
 

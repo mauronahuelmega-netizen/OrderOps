@@ -1,5 +1,16 @@
 /** Client-safe types and pure helpers for public Product Customization (no server-only). */
 
+import {
+  getEffectiveAllowsOptionQuantity,
+  getEffectiveMaxTotalQuantity,
+  getEffectiveOptionMaxQuantity,
+  getSelectedOptionQuantity,
+  getSelectedTotalUnits,
+  normalizeLegacySelectionToV2,
+  normalizeSelectionToV2,
+  type CustomizationSelectionStateV2
+} from "@/lib/product-customization/selection-v2";
+
 export type PublicCustomizationSelectionType = "single" | "multiple";
 
 export type PublicProductCustomizationSummary = {
@@ -15,6 +26,8 @@ export type PublicCustomizationOption = {
   name: string;
   description: string | null;
   priceDelta: number;
+  /** Per-option qty cap when group is quantity-enabled. Missing/legacy → 1. */
+  maxQuantity?: number;
 };
 
 export type PublicCustomizationGroup = {
@@ -25,6 +38,10 @@ export type PublicCustomizationGroup = {
   isRequired: boolean;
   minSelections: number;
   maxSelections: number | null;
+  /** Quantity-enabled multiple groups only. Missing/legacy → false. */
+  allowsOptionQuantity?: boolean;
+  /** Cap on total option units when quantity-enabled. */
+  maxTotalQuantity?: number | null;
   options: PublicCustomizationOption[];
   /** Required group with no selectable options after filters/overrides. */
   isBlocked: boolean;
@@ -126,21 +143,38 @@ export function computeVisualCustomizationTotal(params: {
   basePrice: number;
   groups: PublicCustomizationGroup[];
   selectedOptionsByGroupId: Record<string, string[]>;
+  selectedQuantitiesByGroupId?: CustomizationSelectionStateV2;
   upsellProducts: PublicUpsellSuggestedProduct[];
   selectedUpsellProductIds: string[];
 }): number {
   const optionById = new Map<string, PublicCustomizationOption>();
+  const groupByOptionId = new Map<string, PublicCustomizationGroup>();
   for (const group of params.groups) {
     for (const option of group.options) {
       optionById.set(option.id, option);
+      groupByOptionId.set(option.id, group);
     }
   }
 
   let total = params.basePrice;
 
-  for (const optionIds of Object.values(params.selectedOptionsByGroupId)) {
-    for (const optionId of optionIds) {
-      total += optionById.get(optionId)?.priceDelta ?? 0;
+  const selection =
+    params.selectedQuantitiesByGroupId ??
+    normalizeLegacySelectionToV2(params.selectedOptionsByGroupId);
+
+  for (const [groupId, options] of Object.entries(selection)) {
+    void groupId;
+    for (const [optionId, qtyRaw] of Object.entries(options)) {
+      const option = optionById.get(optionId);
+      if (!option) {
+        continue;
+      }
+      const group = groupByOptionId.get(optionId);
+      const qty =
+        group && getEffectiveAllowsOptionQuantity(group)
+          ? Math.max(1, Math.floor(qtyRaw))
+          : 1;
+      total += option.priceDelta * qty;
     }
   }
 
@@ -159,9 +193,15 @@ export type GroupValidationIssue = {
 
 export function validateCustomizationSelection(
   groups: PublicCustomizationGroup[],
-  selectedOptionsByGroupId: Record<string, string[]>
+  selectedOptionsByGroupId: Record<string, string[]>,
+  selectedQuantitiesByGroupId?: CustomizationSelectionStateV2
 ): { valid: boolean; issues: GroupValidationIssue[] } {
   const issues: GroupValidationIssue[] = [];
+  const selection = normalizeSelectionToV2(
+    selectedQuantitiesByGroupId ??
+      normalizeLegacySelectionToV2(selectedOptionsByGroupId, groups),
+    groups
+  );
 
   for (const group of groups) {
     if (group.isBlocked) {
@@ -172,8 +212,8 @@ export function validateCustomizationSelection(
       continue;
     }
 
-    const selected = selectedOptionsByGroupId[group.id] ?? [];
-    const uniqueSelected = [...new Set(selected)];
+    const groupSelection = selection[group.id] ?? {};
+    const uniqueSelected = Object.keys(groupSelection);
     const allowedIds = new Set(group.options.map((option) => option.id));
 
     if (uniqueSelected.some((id) => !allowedIds.has(id))) {
@@ -201,8 +241,10 @@ export function validateCustomizationSelection(
 
     const min = group.isRequired ? Math.max(group.minSelections, 1) : group.minSelections;
     const max = group.maxSelections;
+    const distinct = uniqueSelected.length;
+    const units = getSelectedTotalUnits(selection, group.id);
 
-    if (uniqueSelected.length < min) {
+    if (distinct < min) {
       issues.push({
         groupId: group.id,
         message:
@@ -212,11 +254,36 @@ export function validateCustomizationSelection(
       });
     }
 
-    if (max !== null && uniqueSelected.length > max) {
+    if (max !== null && distinct > max) {
       issues.push({
         groupId: group.id,
-        message: `Podés elegir hasta ${max} opciones en “${group.name}”.`
+        message: `Podés elegir hasta ${max} opciones distintas en “${group.name}”.`
       });
+    }
+
+    if (getEffectiveAllowsOptionQuantity(group)) {
+      const maxUnits = getEffectiveMaxTotalQuantity(group);
+      if (maxUnits !== null && units > maxUnits) {
+        issues.push({
+          groupId: group.id,
+          message: `Podés sumar hasta ${maxUnits} unidades en “${group.name}”.`
+        });
+      }
+
+      for (const optionId of uniqueSelected) {
+        const option = group.options.find((item) => item.id === optionId);
+        if (!option) {
+          continue;
+        }
+        const qty = getSelectedOptionQuantity(selection, group.id, optionId);
+        const optionMax = getEffectiveOptionMaxQuantity(group, option);
+        if (qty > optionMax) {
+          issues.push({
+            groupId: group.id,
+            message: `“${option.name}” admite hasta ${optionMax} unidades.`
+          });
+        }
+      }
     }
   }
 
