@@ -475,6 +475,89 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-08-14 — PUBLIC-CATALOG-CUSTOMIZATION-POLISH-HANDOFF (block close)
+
+- **Frontend / Public Catalog** Polish block closed: catalog chrome (header flow, sticky categories), product detail modal mobile shell, customization modal (V2 qty P1 fix, controls, extras cards/motion, info hierarchy). Handoff: `docs/public-catalog-customization-polish-handoff-2026-08-14.md`. Android final smoke PENDING. No legacy round-trip on public Papas/Salsas handler.
+
+### 2026-08-14 — CUSTOMIZATION-MODAL-INFORMATION-HIERARCHY-POLISH
+
+- **Frontend / Public Catalog Customization** Modal info hierarchy: removed product description + optional group badges/helpers (Salsas, Extras); Papas required badge+helper preserved. Limits metadata via `sr-only`. Props `showGroupMeta`/`showGroupDescription` on shared group component (admin defaults unchanged). No logic/pricing/motion/P1 changes.
+- Archivos: `customization-modal.tsx`, `customization-option-group.tsx`; doc information-hierarchy-polish.
+
+### 2026-08-14 — PUBLIC-CATALOG-CUSTOMIZATION-MODAL-EXTRAS-MOTION-POLISH-1
+
+- **Frontend / Public Catalog Customization** Extras quantity tiles motion: card bg/border transition 180ms; Agregar/stepper entrance 150ms opacity+scale; button press scale(0.96) 100ms; quantity bump 140ms via `key={qty}` on value span. prefers-reduced-motion disables all. CSS-only + 1 TSX key line. P1 verify PASS. Android device QA pending.
+- Archivos: `customization-modal.module.css`, `customization-modal.tsx`; doc EXTRAS-MOTION-POLISH-1.
+
+### 2026-08-14 — PUBLIC-CATALOG-CUSTOMIZATION-MODAL-EXTRAS-CARD-POLISH-1
+
+- **Frontend / Public Catalog Customization** Extra quantity tiles: 2-row layout (name+price / action). Per-option “máx. N” removed from tile UI only; max clamping and `+` disable unchanged. Group header badge preserved. ~17px card height reduction. P1 qty preservation re-verified. Android device QA pending.
+- Archivos: `customization-modal.tsx`, `customization-modal.module.css`; doc EXTRAS-CARD-POLISH-1.
+
+### 2026-08-14 — PUBLIC-CATALOG-CUSTOMIZATION-MODAL-CONTROLS-FIX-1
+
+- **Frontend / Public Catalog Customization** P1 quantity preservation: group-scoped V2 helpers (`selectSingleOptionInV2`, `toggleMultipleOptionInV2`) replace legacy round-trip in modal `onSelectOption`. P2 salsa circular checkbox indicator (CSS). P2/P3 extra tile compaction + 44px touch controls. Verify tests in `order-qty-helpers.verify.ts`. No DB/checkout/cache changes. Android device QA pending.
+- Archivos: `selection-v2.ts`, `customization-modal.tsx`, `customization-shared.module.css`, `customization-modal.module.css`, `order-qty-helpers.verify.ts`; doc FIX-1.
+
+### 2026-08-14 — PUBLIC-CATALOG-CUSTOMIZATION-MODAL-CONTROLS-STATE-AUDIT-1 (read-only)
+
+- **QA / Public Catalog Customization** Audit-only: mapped render paths (Papas/Salsas → shared `CustomizationOptionGroup`/`CustomizationOptionRow`; quantity extras → inline modal). Confirmed P1 bug — extra option qty >1 resets to 1 when changing Papas/Salsas because `onSelectOption` round-trips via `selectionV2ToLegacyOptionIds` → `normalizeLegacySelectionToV2` (forces qty=1 per option). Documented salsa visual congruence (CSS circular checkbox) and extra tile height drivers. No runtime/DB/commit. Doc: `docs/public-catalog-customization-modal-controls-state-audit-1.md`. Próximo: **PUBLIC-CATALOG-CUSTOMIZATION-MODAL-CONTROLS-FIX-1**.
+
+### 2026-08-14 — PUBLIC-CATALOG-PRODUCT-DETAIL-MODAL-VISUAL-POLISH-2
+
+- **Frontend / Public Catalog UX** Product detail modal: mobile L/R/B shell borders removed (top hairline only) to eliminate lateral rails on 1:1 image; “Desde” secondary via existing `.catalog-product-card__price-from` scoped under summary; helper microcopy quieter (`12px`). Full-width/radii/1:1/desktop restore preserved. CSS-only. Android real-device QA pending.
+- Archivos: `app/globals.css`; `docs/public-catalog-product-detail-modal-visual-polish-2.md`.
+
+### 2026-08-14 — PUBLIC-CATALOG-CATEGORIES-STICKY-TOP-BOUNDARY-POLISH-1
+
+- **Frontend / Public Catalog UX** Sticky category nav gains `border-top: 1px solid var(--catalog-border)` hairline to separate hero/copy from the nav band. Bottom border + downward shadow unchanged. No spacing/sticky/full-bleed/header changes. Doc dedicated. Android real-device QA pending.
+- Archivos: `app/globals.css`; `docs/public-catalog-categories-sticky-top-boundary-polish-1.md`.
+
+### 2026-08-14 — PUBLIC-CATALOG-CHROME-ELEVATION-POLISH-1-FOLLOWUP-2
+
+- **Frontend / Public Catalog UX** Header `.header` `position: relative` (still document-flow) so existing `z-index: 18` paints shadow above opaque `.catalog-page` sibling. Category main shadow spread `-12` → `-8`. No alpha/layout/sticky/scroll changes. Checkout keeps `headerCheckout { position: static }`.
+- Archivos: `public-business-header.module.css`, `app/globals.css`.
+
+### 2026-08-14 — PUBLIC-CATALOG-CHROME-ELEVATION-POLISH-1-FOLLOWUP-1
+
+- **Frontend / Public Catalog UX** Header elevation ownership → `public-business-header.module.css` (`.header`); removed duplicate header shadows from globals. Category + header shadows retuned with negative spread (downward-only, no top halo). Borders/full-bleed/sticky/flow unchanged. No blur/JS/animation.
+- Archivos: `public-business-header.module.css`, `app/globals.css`.
+
+### 2026-08-14 — PUBLIC-CATALOG-CHROME-ELEVATION-POLISH-1
+
+- **Frontend / Public Catalog UX** Subtle static downward `box-shadow` on public chrome: header root (weaker) + sticky category nav (slightly stronger). Borders preserved; dimensions/full-bleed/sticky/header flow untouched. Inner header stays flat (no double shadow). No blur/filter/JS/animation. Dark overrides use low-alpha black only.
+- Archivos: `app/globals.css` only (runtime).
+
+### 2026-08-14 — PUBLIC-CATALOG-CATEGORIES-STICKY-SURFACE-POLISH-1
+
+- **Frontend / Public Catalog UX** Sticky category nav surface polish: real full-bleed via `width: calc(100% + 2×page-padding)` (negative margins alone left a right-edge gap under border-box); symmetric vertical padding; `border-bottom: 1px solid var(--catalog-border)`. Sticky `top: 0` / header document-flow preserved. No interaction/header/modal changes.
+- Archivos: `app/globals.css` only (runtime).
+
+### 2026-08-13 — PUBLIC-CATALOG-HEADER-CATEGORIES-SCROLL-UX-POLISH-1
+
+- **Frontend / Public Catalog UX** Business header returns to document flow (no sticky/fixed, no hide-on-scroll-up). Category nav is the only sticky chrome (`top: 0`, opaque `--catalog-bg` band with full-bleed). Removed `useHideOnScroll` + `public-header-visibility` CSS vars/event. `scroll-margin-top` on groups set to static `64px` (categories-only). No Chrome UI control / visualViewport / modal changes. Gate: ANDROID-CHROME-QA REQUIRED for Chrome address-bar coexistence.
+- Archivos: `public-business-header.tsx`/+`.module.css`, `app/globals.css`; deleted `use-hide-on-scroll.ts`, `public-header-visibility.ts`.
+
+### 2026-08-13 — PUBLIC-CATALOG-CUSTOMIZATION-MODAL-LOADING-SPINNER-MOTION-POLISH-1
+
+- **Frontend / Public Catalog UX** Loading spinner upgraded to ~68px CSS-only conic-arc + center dot; continuous 780ms spin; reduced-motion static fallback. Loading copy/footer/header semantics unchanged. No fetch/cache/logic changes. Gate: VISUAL-QA ALLOWED_WITH_THROTTLED_SPINNER_QA; COMMIT-DEPLOY BLOCKED_UNTIL_VISUAL_QA.
+- Archivos: `customization-modal.module.css`, docs SPINNER-MOTION-POLISH + CURRENT_PHASE + living memory.
+
+### 2026-08-13 — PUBLIC-CATALOG-CUSTOMIZATION-MODAL-LOADING-STATE-POLISH-1
+
+- **Frontend / Public Catalog UX** Customization modal loading → centered CSS-only spinner + “Preparando opciones” / “Un momento…”. `aria-busy` + status live region; reduced-motion disables spin; footer hidden while loading. No fetch/cache/selection/pricing changes. Gate: VISUAL-QA ALLOWED_WITH_THROTTLED_LOADING_QA; COMMIT-DEPLOY BLOCKED_UNTIL_VISUAL_QA.
+- Archivos: `customization-modal.tsx`/+`.module.css`, docs LOADING-STATE-POLISH + CURRENT_PHASE + living memory.
+
+### 2026-08-13 — PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-MODAL-SHELL-QTY-VISUAL-POLISH-1
+
+- **Frontend / Public Catalog UX** Mobile customization modal → full-height sheet (`100dvh`/`100svh`), sticky header/footer, internal body scroll. Quantity extras tiles densified to match checkbox grid language; quieter Agregar/stepper; compact unit copy; section meta pill without space-between gap. No business logic / cart / order / DB changes. Local-only visual fixture QA then removed. Gate: VISUAL-POLISH-QA ALLOWED_WITH_LOCAL_ONLY_VISUAL_QA; LIMITS-GRID-QA PAUSED_UNTIL_VISUAL_POLISH_QA; COMMIT-DEPLOY BLOCKED_UNTIL_VISUAL_QA.
+- Archivos: `customization-modal.tsx`/+`.module.css`, docs MODAL-SHELL-QTY-VISUAL-POLISH + CURRENT_PHASE + living memory.
+
+### 2026-08-13 — PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-LIMITS-GRID-POLISH-1
+
+- **Product / Public Catalog UX** Removed effective `max_total_quantity` cap (deprecated/no-op; column kept). Limits = `option.max_quantity` + distinct `max_selections`/`min_selections`. Admin hides total-units field and persists null. Public quantity extras restored to compact 2-col checkbox-like grid (Agregar / stepper). Selection V2 + snapshot null `max_total_quantity`; order validation does not reject on total units. Local-only grid fixture QA then removed. No migration/DB push/mutation/commit/push/deploy. Gate: LIMITS-GRID-POLISH-QA ALLOWED_WITH_LOCAL_ONLY_GRID_QA; COMMIT-DEPLOY BLOCKED_UNTIL_QA; real enablement still blocked.
+- Archivos: `customization-modal.tsx`/+`.module.css`, `section-edit-modal.tsx`, `selection-v2.ts`, `shared.ts`, `public-shared.ts`, `order-snapshot.ts`, `order-qty-helpers.verify.ts`, docs LIMITS-GRID-POLISH + CURRENT_PHASE.
+
 ### 2026-08-13 — PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-QA-1
 
 - **QA / Orders** Formal ORDER path QA. Helper/browser PASS. P1 microfix: `isSelectionStrictlyWithinLimits` rejects over-max qty on create_order (UI clamp must not silently persist). No local Docker submit. Gate: COMMIT-DEPLOY ALLOWED_WITH_ACCEPTED_ORDER_SUBMIT_QA_DEBT_AND_REAL_ENABLEMENT_GUARD. Real qty enablement blocked until safe submit or owner risk accept.

@@ -14,25 +14,18 @@ export function getEffectiveAllowsOptionQuantity(
   return group.selectionType === "multiple" && Boolean(group.allowsOptionQuantity);
 }
 
+/**
+ * @deprecated Total-units group cap removed (LIMITS-GRID-POLISH-1).
+ * Kept for API stability — always returns null. Limits are option.maxQuantity
+ * and maxSelections (distinct options) only. Column may still exist in DB.
+ */
 export function getEffectiveMaxTotalQuantity(
-  group: Pick<
+  _group: Pick<
     PublicCustomizationGroup,
     "allowsOptionQuantity" | "selectionType" | "maxTotalQuantity" | "maxSelections"
   >
 ): number | null {
-  if (!getEffectiveAllowsOptionQuantity(group)) {
-    return null;
-  }
-
-  if (group.maxTotalQuantity !== null && group.maxTotalQuantity !== undefined) {
-    return group.maxTotalQuantity >= 1 ? group.maxTotalQuantity : null;
-  }
-
-  // Bridge: quantity-enabled without explicit cap → reuse max_selections as units cap.
-  if (group.maxSelections !== null && group.maxSelections >= 1) {
-    return group.maxSelections;
-  }
-
+  void _group;
   return null;
 }
 
@@ -124,8 +117,6 @@ export function normalizeSelectionToV2(
         cleaned[optionId] = 1;
       }
     } else if (getEffectiveAllowsOptionQuantity(group)) {
-      const maxTotal = getEffectiveMaxTotalQuantity(group);
-      let unitsUsed = 0;
       let distinctUsed = 0;
       const maxDistinct = group.maxSelections;
 
@@ -143,22 +134,13 @@ export function normalizeSelectionToV2(
         }
 
         const optionMax = getEffectiveOptionMaxQuantity(group, option);
-        let qty = Math.min(Math.floor(rawQty), optionMax);
-
-        if (maxTotal !== null) {
-          const remaining = maxTotal - unitsUsed;
-          if (remaining < 1) {
-            continue;
-          }
-          qty = Math.min(qty, remaining);
-        }
+        const qty = Math.min(Math.floor(rawQty), optionMax);
 
         if (qty < 1) {
           continue;
         }
 
         cleaned[optionId] = qty;
-        unitsUsed += qty;
         distinctUsed += 1;
       }
     } else {
@@ -216,6 +198,63 @@ export function normalizeLegacySelectionToV2(
   return next;
 }
 
+/** Single-select patch — preserves all other group maps (including qty > 1). */
+export function selectSingleOptionInV2(params: {
+  selection: CustomizationSelectionStateV2;
+  groups: PublicCustomizationGroup[];
+  group: PublicCustomizationGroup;
+  optionId: string;
+}): CustomizationSelectionStateV2 {
+  const { selection, groups, group, optionId } = params;
+  const allowed = group.options.some((option) => option.id === optionId);
+  if (!allowed || group.selectionType !== "single") {
+    return selection;
+  }
+
+  const tentative: CustomizationSelectionStateV2 = {
+    ...selection,
+    [group.id]: { [optionId]: 1 }
+  };
+  return normalizeSelectionToV2(tentative, groups);
+}
+
+/** Multi-select toggle — preserves other groups and sibling option quantities. */
+export function toggleMultipleOptionInV2(params: {
+  selection: CustomizationSelectionStateV2;
+  groups: PublicCustomizationGroup[];
+  group: PublicCustomizationGroup;
+  optionId: string;
+}): CustomizationSelectionStateV2 {
+  const { selection, groups, group, optionId } = params;
+  const allowed = group.options.some((option) => option.id === optionId);
+  if (!allowed || group.selectionType !== "multiple") {
+    return selection;
+  }
+
+  const currentGroup = { ...(selection[group.id] ?? {}) };
+  const isSelected = getSelectedOptionQuantity(selection, group.id, optionId) >= 1;
+
+  if (isSelected) {
+    delete currentGroup[optionId];
+  } else {
+    if (group.maxSelections !== null) {
+      const distinct = getSelectedDistinctCount(selection, group.id);
+      if (distinct >= group.maxSelections) {
+        return selection;
+      }
+    }
+    currentGroup[optionId] = 1;
+  }
+
+  const tentative: CustomizationSelectionStateV2 = { ...selection };
+  if (Object.keys(currentGroup).length === 0) {
+    delete tentative[group.id];
+  } else {
+    tentative[group.id] = currentGroup;
+  }
+  return normalizeSelectionToV2(tentative, groups);
+}
+
 export function selectionV2ToLegacyOptionIds(
   selection: CustomizationSelectionStateV2
 ): Record<string, string[]> {
@@ -254,12 +293,7 @@ export function canIncrementOptionQuantity(params: {
     return false;
   }
 
-  const maxTotal = getEffectiveMaxTotalQuantity(group);
-  const totalUnits = getSelectedTotalUnits(selection, group.id);
-  if (maxTotal !== null && totalUnits >= maxTotal) {
-    return false;
-  }
-
+  // Distinct max only blocks adding a *new* option — not incrementing existing qty.
   if (currentQty === 0 && group.maxSelections !== null) {
     const distinct = getSelectedDistinctCount(selection, group.id);
     if (distinct >= group.maxSelections) {
@@ -304,12 +338,7 @@ export function setOptionQuantityInSelection(params: {
   } else {
     const optionMax = getEffectiveOptionMaxQuantity(group, option);
     const currentQty = getSelectedOptionQuantity(selection, group.id, optionId);
-    const othersUnits = getSelectedTotalUnits(selection, group.id) - currentQty;
-    const maxTotal = getEffectiveMaxTotalQuantity(group);
-    let qty = Math.min(desired, optionMax);
-    if (maxTotal !== null) {
-      qty = Math.min(qty, Math.max(0, maxTotal - othersUnits));
-    }
+    const qty = Math.min(desired, optionMax);
     if (
       currentQty === 0 &&
       group.maxSelections !== null &&
@@ -425,26 +454,16 @@ export function isSelectionStrictlyWithinLimits(
 export function formatQuantityGroupMeta(group: PublicCustomizationGroup): string {
   const parts: string[] = [group.isRequired ? "Obligatorio" : "Opcional"];
 
-  if (!getEffectiveAllowsOptionQuantity(group)) {
-    if (group.selectionType === "multiple" && group.minSelections > 0) {
-      parts.push(`mín. ${group.minSelections}`);
-    }
-    if (group.selectionType === "multiple" && group.maxSelections !== null) {
-      parts.push(`máx. ${group.maxSelections}`);
-    }
-    return parts.join(" · ");
+  if (group.selectionType === "multiple" && group.minSelections > 0) {
+    parts.push(`mín. ${group.minSelections}`);
   }
 
-  const maxUnits = getEffectiveMaxTotalQuantity(group);
-  const maxDistinct = group.maxSelections;
-
-  if (maxDistinct !== null && maxUnits !== null && maxDistinct !== maxUnits) {
-    parts.push(`máx. ${maxDistinct} opciones`);
-    parts.push(`${maxUnits} unidades`);
-  } else if (maxUnits !== null) {
-    parts.push(`máx. ${maxUnits} unidades`);
-  } else if (maxDistinct !== null) {
-    parts.push(`máx. ${maxDistinct} opciones`);
+  if (group.selectionType === "multiple" && group.maxSelections !== null) {
+    parts.push(
+      getEffectiveAllowsOptionQuantity(group)
+        ? `máx. ${group.maxSelections} opciones`
+        : `máx. ${group.maxSelections}`
+    );
   }
 
   return parts.join(" · ");

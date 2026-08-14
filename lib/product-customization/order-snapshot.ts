@@ -116,7 +116,7 @@ export function buildCustomizationSnapshotV2(params: {
         is_required: group.isRequired,
         min_selections: group.minSelections,
         max_selections: group.maxSelections,
-        max_total_quantity: configGroup?.maxTotalQuantity ?? null,
+        max_total_quantity: null,
         sort_order: group.sortOrder,
         selected_options: group.selectedOptions.map((option) => {
           const quantity = normalizeOptionQuantity(option.quantity);

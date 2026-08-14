@@ -2,10 +2,8 @@
 
 import {
   getEffectiveAllowsOptionQuantity,
-  getEffectiveMaxTotalQuantity,
   getEffectiveOptionMaxQuantity,
   getSelectedOptionQuantity,
-  getSelectedTotalUnits,
   normalizeLegacySelectionToV2,
   normalizeSelectionToV2,
   type CustomizationSelectionStateV2
@@ -40,7 +38,7 @@ export type PublicCustomizationGroup = {
   maxSelections: number | null;
   /** Quantity-enabled multiple groups only. Missing/legacy → false. */
   allowsOptionQuantity?: boolean;
-  /** Cap on total option units when quantity-enabled. */
+  /** @deprecated Total-units cap removed — ignored at runtime. Prefer null. */
   maxTotalQuantity?: number | null;
   options: PublicCustomizationOption[];
   /** Required group with no selectable options after filters/overrides. */
@@ -242,7 +240,6 @@ export function validateCustomizationSelection(
     const min = group.isRequired ? Math.max(group.minSelections, 1) : group.minSelections;
     const max = group.maxSelections;
     const distinct = uniqueSelected.length;
-    const units = getSelectedTotalUnits(selection, group.id);
 
     if (distinct < min) {
       issues.push({
@@ -262,14 +259,6 @@ export function validateCustomizationSelection(
     }
 
     if (getEffectiveAllowsOptionQuantity(group)) {
-      const maxUnits = getEffectiveMaxTotalQuantity(group);
-      if (maxUnits !== null && units > maxUnits) {
-        issues.push({
-          groupId: group.id,
-          message: `Podés sumar hasta ${maxUnits} unidades en “${group.name}”.`
-        });
-      }
-
       for (const optionId of uniqueSelected) {
         const option = group.options.find((item) => item.id === optionId);
         if (!option) {

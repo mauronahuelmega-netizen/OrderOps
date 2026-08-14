@@ -958,8 +958,7 @@ img {
 }
 
 .catalog-hero,
-.catalog-content,
-.catalog-category-nav {
+.catalog-content {
   width: min(100%, 1080px);
   margin: 0 auto;
 }
@@ -1334,19 +1333,29 @@ img {
 
 .catalog-category-nav {
   position: sticky;
-  top: var(--public-catalog-category-top, 0px);
+  top: 0;
   z-index: 8;
-  margin-bottom: 18px;
-  padding: 8px 0 10px;
-  /* Opaque sticky band avoids scroll-time compositing of translucent fades */
+  box-sizing: border-box;
+  /* Full-bleed into .catalog-page padding (14px × 2). Width must expand — negative
+     margins alone only shift a border-box 100% width and leave a right-edge gap. */
+  width: calc(100% + 28px);
+  margin: 0 -14px 18px;
+  padding: 6px 14px;
+  /* Opaque sticky band — content must not show through while scrolling */
   background: var(--catalog-bg);
+  border-top: 1px solid var(--catalog-border);
+  border-bottom: 1px solid var(--catalog-border);
+  /* Downward-only elevation (negative spread) — slightly stronger than header module */
+  box-shadow:
+    0 3px 5px -4px rgba(31, 26, 20, 0.05),
+    0 8px 14px -8px rgba(31, 26, 20, 0.06);
 }
 
 .catalog-category-nav__inner {
   display: flex;
   gap: 8px;
   overflow-x: auto;
-  padding: 2px 0 4px;
+  padding-block: 2px;
 }
 
 .catalog-category-chip {
@@ -1390,7 +1399,8 @@ img {
 .catalog-group {
   display: grid;
   gap: 14px;
-  scroll-margin-top: var(--public-catalog-scroll-margin, 84px);
+  /* Offset for sticky category nav only (header is no longer sticky). */
+  scroll-margin-top: 64px;
 }
 
 .catalog-group__header {
@@ -1424,6 +1434,14 @@ img {
 /* Legacy card class hooks retained for modal/detail shared price-from token */
 .catalog-product-card__price-from {
   font-weight: 600;
+  color: var(--catalog-muted);
+}
+
+/* Modal: “Desde” secondary to the dominant price amount */
+.catalog-modal__summary .catalog-product-card__price-from {
+  font-weight: 500;
+  font-size: 0.78em;
+  letter-spacing: 0.01em;
   color: var(--catalog-muted);
 }
 
@@ -1556,7 +1574,8 @@ img {
   z-index: 20;
   display: grid;
   align-items: end;
-  padding: 12px;
+  /* Mobile: no inset padding so the sheet can be true full-width */
+  padding: 0;
   /* Opaque scrim replaces blur for cheaper mobile composition */
   background: rgba(17, 12, 8, 0.6);
   backdrop-filter: none;
@@ -1573,12 +1592,16 @@ img {
   --catalog-modal-border: var(--catalog-border);
   display: grid;
   gap: 0;
-  width: min(100%, 720px);
+  width: 100%;
+  max-width: none;
   max-height: min(92vh, 880px);
-  margin: 0 auto;
+  margin: 0;
   overflow: hidden;
-  border: 1px solid var(--catalog-modal-border);
-  border-radius: 28px;
+  /* Mobile edge-to-edge: no side/bottom rails (image must meet viewport edges) */
+  border: solid var(--catalog-modal-border);
+  border-width: 1px 0 0;
+  /* Mobile sheet: rounded top only; flush bottom edge */
+  border-radius: 28px 28px 0 0;
   background: var(--catalog-modal-surface);
   color: var(--catalog-text);
   box-shadow: 0 22px 52px rgba(31, 26, 20, 0.24);
@@ -1774,7 +1797,9 @@ html[data-public-overlay-open="true"] body {
 }
 
 .catalog-modal__helper {
-  font-size: 13px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: color-mix(in srgb, var(--catalog-muted) 92%, transparent);
 }
 
 .catalog-modal__footer {
@@ -1818,10 +1843,6 @@ html[data-public-overlay-open="true"] body {
 
 /* Public business header */
 
-.public-business-layout {
-  --public-business-header-offset: 78px;
-}
-
 .public-business-layout__content {
   min-width: 0;
 }
@@ -1833,11 +1854,12 @@ html[data-public-overlay-open="true"] body {
   --business-header-muted: var(--color-text-secondary);
   --business-header-accent: var(--business-primary);
   --business-header-shadow: 0 6px 16px rgba(17, 24, 39, 0.05);
-  position: sticky;
-  top: 0;
+  /* Document flow — categories are the only sticky chrome in this zone. */
+  position: static;
+  top: auto;
   z-index: 18;
   padding: 10px 14px 0;
-  /* Solid sticky header — no blur on scroll frames (mobile-first) */
+  /* Solid header surface — no blur on scroll frames (mobile-first) */
   background: var(--catalog-bg, #f6f2ea);
   backdrop-filter: none;
   transition: padding 180ms ease, background 180ms ease;
@@ -2785,15 +2807,10 @@ html[data-catalog-theme="dark"] .public-business-header__logo-frame {
 }
 
 .catalog-category-nav {
-  /* Driven by public header hide-on-scroll via --public-catalog-category-top */
-  top: var(--public-catalog-category-top, var(--public-business-header-offset, 0px));
+  top: 0;
 }
 
 @media (min-width: 768px) {
-  .public-business-layout {
-    --public-business-header-offset: 86px;
-  }
-
   .public-business-header {
     padding-top: 12px;
   }
@@ -3319,8 +3336,13 @@ body.admin-drawer-open {
   }
 
   .catalog-category-nav {
-    /* Keep hide-on-scroll offset; 6px was a hard desktop pin that ignored header state */
-    top: var(--public-catalog-category-top, 6px);
+    top: 0;
+    /* Match .catalog-page padding-inline: 24px */
+    width: calc(100% + 48px);
+    margin-left: -24px;
+    margin-right: -24px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   .catalog-product-list {
@@ -3333,7 +3355,10 @@ body.admin-drawer-open {
   }
 
   .catalog-modal {
+    width: min(100%, 720px);
     max-height: min(88vh, 860px);
+    margin: 0 auto;
+    border: 1px solid var(--catalog-modal-border);
     border-radius: 30px;
   }
 
@@ -3413,12 +3438,8 @@ body.admin-drawer-open {
   }
 
   .catalog-category-nav {
-    background: linear-gradient(
-      to bottom,
-      var(--catalog-bg) 0%,
-      color-mix(in srgb, var(--catalog-bg) 72%, transparent) 72%,
-      transparent 100%
-    );
+    /* Keep opaque sticky band — do not fade to transparent over product content */
+    background: var(--catalog-bg);
   }
 
   .catalog-category-chip {
@@ -3735,12 +3756,21 @@ html[data-catalog-theme="dark"] .public-business-header--scrolled .public-busine
 /* Flat category and product-grid polish. These selectors are limited to catalog discovery. */
 .catalog-category-nav {
   margin-bottom: 16px;
-  padding: 8px 0;
+  /* Symmetric vertical rhythm; keep horizontal padding from sticky full-bleed owner */
+  padding-block: 8px;
+  background: var(--catalog-bg);
+}
+
+.catalog-page[data-theme="dark"] .catalog-category-nav {
+  /* Dark downward-only; stronger than header dark, no top halo */
+  box-shadow:
+    0 3px 5px -4px rgba(0, 0, 0, 0.14),
+    0 8px 14px -8px rgba(0, 0, 0, 0.18);
 }
 
 .catalog-category-nav__inner {
   gap: 10px;
-  padding: 2px 0 6px;
+  padding-block: 2px;
   scrollbar-width: none;
 }
 
@@ -3852,12 +3882,14 @@ html[data-catalog-theme="dark"] .public-business-header--scrolled .public-busine
 
   .catalog-category-nav {
     margin-bottom: 10px;
-    padding: 4px 0;
+    /* Symmetric: nav 6 + inner 2 each side ≈ equal air above/below chips */
+    padding-block: 6px;
+    background: var(--catalog-bg);
   }
 
   .catalog-category-nav__inner {
     gap: 8px;
-    padding: 2px 0 4px;
+    padding-block: 2px;
     -ms-overflow-style: none;
   }
 

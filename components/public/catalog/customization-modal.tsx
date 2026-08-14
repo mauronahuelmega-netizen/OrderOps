@@ -9,10 +9,6 @@ import {
   type LocalCartItemV2
 } from "@/lib/cart/local";
 import {
-  selectSingleOption,
-  toggleMultipleOption
-} from "@/lib/product-customization/preview-selection";
-import {
   computeVisualCustomizationTotal,
   formatPublicCatalogCurrency,
   validateCustomizationSelection,
@@ -29,7 +25,9 @@ import {
   incrementOptionQuantity,
   normalizeLegacySelectionToV2,
   normalizeSelectionToV2,
+  selectSingleOptionInV2,
   selectionV2ToLegacyOptionIds,
+  toggleMultipleOptionInV2,
   type CustomizationSelectionStateV2
 } from "@/lib/product-customization/selection-v2";
 import type { CustomizationLoadState } from "@/components/public/catalog/customization-config-cache";
@@ -114,11 +112,13 @@ function groupUsesRequiredLayout(group: PublicCustomizationGroup): boolean {
   return group.isRequired || group.minSelections >= 1;
 }
 
+/** Compact unit delta for quantity tiles — e.g. +$1.000 (no trailing ,00 / c/u). */
 function formatOptionUnitDelta(priceDelta: number): string | null {
   if (priceDelta <= 0) {
     return null;
   }
-  return `${formatPublicCatalogCurrency(priceDelta)} c/u`;
+  const formatted = formatPublicCatalogCurrency(priceDelta).replace(/,00$/, "");
+  return `+${formatted}`;
 }
 
 export default function CustomizationModal({
@@ -274,12 +274,20 @@ export default function CustomizationModal({
     return () => document.removeEventListener("keydown", onKeyDown, true);
   }, [requestClose]);
 
-  useEffect(() => {
+  const readyConfig = useMemo(() => {
     if (loadState.status !== "ready") {
+      return null;
+    }
+
+    return loadState.config;
+  }, [loadState]);
+
+  useEffect(() => {
+    if (!readyConfig) {
       return;
     }
 
-    const filtered = filterInitialSelection(loadState.config, initialSelection);
+    const filtered = filterInitialSelection(readyConfig, initialSelection);
     const hadInitial =
       Boolean(initialSelection) &&
       (Object.keys(initialSelection?.selectedOptionsByGroupId ?? {}).length > 0 ||
@@ -296,7 +304,7 @@ export default function CustomizationModal({
     setPriceBump(false);
     // Apply initial selection once per ready config for this product open.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [productId, loadState.status === "ready" ? loadState.config.productId : null]);
+  }, [productId, readyConfig?.productId ?? null]);
 
   const selectedOptionsByGroupId = useMemo(
     () => selectionV2ToLegacyOptionIds(selectionV2),
@@ -304,31 +312,31 @@ export default function CustomizationModal({
   );
 
   const validation = useMemo(() => {
-    if (loadState.status !== "ready") {
+    if (!readyConfig) {
       return { valid: false, issues: [] as { groupId: string; message: string }[] };
     }
 
     return validateCustomizationSelection(
-      loadState.config.groups,
+      readyConfig.groups,
       selectedOptionsByGroupId,
       selectionV2
     );
-  }, [loadState, selectedOptionsByGroupId, selectionV2]);
+  }, [readyConfig, selectedOptionsByGroupId, selectionV2]);
 
   const visualTotal = useMemo(() => {
-    if (loadState.status !== "ready") {
+    if (!readyConfig) {
       return 0;
     }
 
     return computeVisualCustomizationTotal({
-      basePrice: loadState.config.productPrice,
-      groups: loadState.config.groups,
+      basePrice: readyConfig.productPrice,
+      groups: readyConfig.groups,
       selectedOptionsByGroupId,
       selectedQuantitiesByGroupId: selectionV2,
       upsellProducts: [],
       selectedUpsellProductIds: []
     });
-  }, [loadState, selectedOptionsByGroupId, selectionV2]);
+  }, [readyConfig, selectedOptionsByGroupId, selectionV2]);
 
   useEffect(() => {
     if (loadState.status !== "ready") {
@@ -360,14 +368,14 @@ export default function CustomizationModal({
   }, [loadState.status, visualTotal]);
 
   function handleConfirm() {
-    if (loadState.status !== "ready" || !validation.valid) {
+    if (loadState.status !== "ready" || !readyConfig || !validation.valid) {
       return;
     }
 
     try {
       // Post-add owns Plus selection; modal always builds parent without Plus children.
       const { parent, children } = buildCartLinesFromCustomizationSelection({
-        config: loadState.config,
+        config: readyConfig,
         categoryId,
         selectedOptionsByGroupId,
         selectedQuantitiesByGroupId: selectionV2,
@@ -377,7 +385,7 @@ export default function CustomizationModal({
 
       const eligibleAttachedUpsellProductIds = editingCartLineId
         ? new Set(
-            (loadState.config.upsellGroup?.products ?? []).map(
+            (readyConfig.upsellGroup?.products ?? []).map(
               (product) => product.id
             )
           )
@@ -388,7 +396,7 @@ export default function CustomizationModal({
         children,
         replaceCartLineId: editingCartLineId,
         eligibleAttachedUpsellProductIds,
-        suggestedUpsellProducts: loadState.config.upsellGroup?.products ?? []
+        suggestedUpsellProducts: readyConfig.upsellGroup?.products ?? []
       });
 
       if (confirmResult && typeof confirmResult === "object" && confirmResult.ok === false) {
@@ -433,6 +441,7 @@ export default function CustomizationModal({
         role="dialog"
         aria-modal="true"
         aria-labelledby="customization-modal-title"
+        aria-busy={loadState.status === "loading" ? true : undefined}
         onClick={(event) => event.stopPropagation()}
       >
         <header className={styles.header}>
@@ -458,7 +467,11 @@ export default function CustomizationModal({
 
         <div className={styles.body}>
           {loadState.status === "loading" ? (
-            <p className={styles.statusMessage}>Cargando opciones…</p>
+            <div className={styles.loadingState} role="status" aria-live="polite">
+              <span className={styles.loadingSpinner} aria-hidden="true" />
+              <p className={styles.loadingTitle}>Preparando opciones</p>
+              <p className={styles.loadingHint}>Un momento…</p>
+            </div>
           ) : null}
 
           {loadState.status === "error" ? (
@@ -482,7 +495,7 @@ export default function CustomizationModal({
             </div>
           ) : null}
 
-          {loadState.status === "ready" ? (
+          {loadState.status === "ready" && readyConfig ? (
             <>
               {staleWarning ? (
                 <p className={styles.groupError} role="status">
@@ -490,28 +503,22 @@ export default function CustomizationModal({
                 </p>
               ) : null}
 
-              {loadState.config.productDescription ? (
-                <p className={styles.description}>{loadState.config.productDescription}</p>
-              ) : null}
-
-              {loadState.config.groups.length === 0 ? (
+              {readyConfig.groups.length === 0 ? (
                 <p className={styles.statusMessage}>
                   Este producto no tiene opciones de personalización activas.
                 </p>
               ) : null}
 
-              {loadState.config.groups.map((group) => {
+              {readyConfig.groups.map((group) => {
                 if (getEffectiveAllowsOptionQuantity(group)) {
                   return (
                     <section key={group.id} className={styles.quantityGroup}>
                       <div className={styles.quantityGroupHeader}>
                         <h3>{group.name}</h3>
-                        <span className={styles.quantityGroupMeta}>
-                          {formatQuantityGroupMeta(group)}
-                        </span>
+                        <span className="sr-only">{formatQuantityGroupMeta(group)}</span>
                       </div>
                       {group.description ? (
-                        <p className={styles.quantityGroupDescription}>{group.description}</p>
+                        <span className="sr-only">{group.description}</span>
                       ) : null}
 
                       <ul className={styles.quantityOptionList}>
@@ -527,25 +534,22 @@ export default function CustomizationModal({
                             optionId: option.id
                           });
                           const unitLabel = formatOptionUnitDelta(option.priceDelta);
-                          const lineDelta = option.priceDelta * qty;
+                          const cardClass = [
+                            styles.quantityOptionCard,
+                            qty >= 1 ? styles.quantityOptionCardSelected : ""
+                          ]
+                            .filter(Boolean)
+                            .join(" ");
 
                           return (
-                            <li key={option.id} className={styles.quantityOptionCard}>
-                              <div className={styles.quantityOptionCopy}>
-                                <p className={styles.quantityOptionName}>{option.name}</p>
-                                <p className={styles.quantityOptionMeta}>
-                                  {unitLabel ? (
-                                    <span>{unitLabel}</span>
-                                  ) : (
-                                    <span>Sin costo</span>
-                                  )}
-                                  {qty > 1 && lineDelta > 0 ? (
-                                    <span>
-                                      {" "}
-                                      · x{qty} · +{formatPublicCatalogCurrency(lineDelta)}
-                                    </span>
-                                  ) : null}
-                                </p>
+                            <li key={option.id} className={cardClass}>
+                              <div className={styles.quantityOptionTopRow}>
+                                <span className={styles.quantityOptionName}>
+                                  {option.name}
+                                </span>
+                                <span className={styles.quantityOptionPrice}>
+                                  {unitLabel ?? "Sin costo"}
+                                </span>
                               </div>
 
                               {qty < 1 ? (
@@ -557,7 +561,7 @@ export default function CustomizationModal({
                                     setSelectionV2((current) =>
                                       incrementOptionQuantity({
                                         selection: current,
-                                        groups: loadState.config.groups,
+                                        groups: readyConfig.groups,
                                         group,
                                         optionId: option.id
                                       })
@@ -577,7 +581,7 @@ export default function CustomizationModal({
                                       setSelectionV2((current) =>
                                         decrementOptionQuantity({
                                           selection: current,
-                                          groups: loadState.config.groups,
+                                          groups: readyConfig.groups,
                                           group,
                                           optionId: option.id
                                         })
@@ -585,9 +589,10 @@ export default function CustomizationModal({
                                       setConfirmError(null);
                                     }}
                                   >
-                                    <Minus aria-hidden="true" focusable="false" size={16} />
+                                    <Minus aria-hidden="true" focusable="false" size={14} />
                                   </button>
                                   <span
+                                    key={qty}
                                     className={styles.quantityStepperValue}
                                     aria-live="polite"
                                   >
@@ -602,7 +607,7 @@ export default function CustomizationModal({
                                       setSelectionV2((current) =>
                                         incrementOptionQuantity({
                                           selection: current,
-                                          groups: loadState.config.groups,
+                                          groups: readyConfig.groups,
                                           group,
                                           optionId: option.id
                                         })
@@ -610,7 +615,7 @@ export default function CustomizationModal({
                                       setConfirmError(null);
                                     }}
                                   >
-                                    <Plus aria-hidden="true" focusable="false" size={16} />
+                                    <Plus aria-hidden="true" focusable="false" size={14} />
                                   </button>
                                 </div>
                               )}
@@ -637,35 +642,25 @@ export default function CustomizationModal({
                     optionLayout={
                       groupUsesRequiredLayout(group) ? "list" : "compact-grid"
                     }
+                    showGroupMeta={group.isRequired}
+                    showGroupDescription={group.isRequired}
                     onSelectOption={(optionId) => {
-                      if (group.selectionType === "single") {
-                        setSelectionV2((current) =>
-                          normalizeSelectionToV2(
-                            normalizeLegacySelectionToV2(
-                              selectSingleOption(
-                                selectionV2ToLegacyOptionIds(current),
-                                group.id,
-                                optionId
-                              )
-                            ),
-                            loadState.config.groups
-                          )
-                        );
-                      } else {
-                        setSelectionV2((current) =>
-                          normalizeSelectionToV2(
-                            normalizeLegacySelectionToV2(
-                              toggleMultipleOption(
-                                selectionV2ToLegacyOptionIds(current),
-                                group.id,
-                                optionId,
-                                group.maxSelections
-                              )
-                            ),
-                            loadState.config.groups
-                          )
-                        );
-                      }
+                      setSelectionV2((current) => {
+                        if (group.selectionType === "single") {
+                          return selectSingleOptionInV2({
+                            selection: current,
+                            groups: readyConfig.groups,
+                            group,
+                            optionId
+                          });
+                        }
+                        return toggleMultipleOptionInV2({
+                          selection: current,
+                          groups: readyConfig.groups,
+                          group,
+                          optionId
+                        });
+                      });
                       setConfirmError(null);
                     }}
                   />

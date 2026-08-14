@@ -10,14 +10,31 @@ type Props = {
   issue?: string | null;
   /** Public modal: compact 2-col grid for optional groups. Default list for admin/required. */
   optionLayout?: "list" | "compact-grid";
+  /** When false, meta badge is visually hidden (sr-only fallback when applicable). Default true. */
+  showGroupMeta?: boolean;
+  /** When false, group description is visually hidden (sr-only fallback when applicable). Default true. */
+  showGroupDescription?: boolean;
   onSelectOption: (optionId: string) => void;
 };
+
+function groupMetaScreenReaderLabel(group: PublicCustomizationGroup): string {
+  const parts: string[] = [group.isRequired ? "Obligatorio" : "Opcional"];
+  if (group.selectionType === "multiple" && group.minSelections > 0) {
+    parts.push(`mínimo ${group.minSelections}`);
+  }
+  if (group.selectionType === "multiple" && group.maxSelections !== null) {
+    parts.push(`máximo ${group.maxSelections}`);
+  }
+  return parts.join(". ");
+}
 
 export default function CustomizationOptionGroup({
   group,
   selectedOptionIds,
   issue = null,
   optionLayout = "list",
+  showGroupMeta = true,
+  showGroupDescription = true,
   onSelectOption
 }: Props) {
   const isCompact = optionLayout === "compact-grid";
@@ -29,17 +46,26 @@ export default function CustomizationOptionGroup({
     <section className={styles.group} data-option-layout={optionLayout}>
       <div className={styles.groupHeader}>
         <h3>{group.name}</h3>
-        <span className={styles.groupMeta}>
-          {group.isRequired ? "Obligatorio" : "Opcional"}
-          {group.selectionType === "multiple" && group.minSelections > 0
-            ? ` · mín. ${group.minSelections}`
-            : null}
-          {group.selectionType === "multiple" && group.maxSelections !== null
-            ? ` · máx. ${group.maxSelections}`
-            : null}
-        </span>
+        {showGroupMeta ? (
+          <span className={styles.groupMeta}>
+            {group.isRequired ? "Obligatorio" : "Opcional"}
+            {group.selectionType === "multiple" && group.minSelections > 0
+              ? ` · mín. ${group.minSelections}`
+              : null}
+            {group.selectionType === "multiple" && group.maxSelections !== null
+              ? ` · máx. ${group.maxSelections}`
+              : null}
+          </span>
+        ) : null}
       </div>
-      {group.description ? (
+      {!showGroupMeta || (!showGroupDescription && group.description) ? (
+        <span className="sr-only">
+          {!showGroupMeta ? groupMetaScreenReaderLabel(group) : null}
+          {!showGroupMeta && !showGroupDescription && group.description ? ". " : null}
+          {!showGroupDescription && group.description ? group.description : null}
+        </span>
+      ) : null}
+      {showGroupDescription && group.description ? (
         <p className={styles.groupDescription}>{group.description}</p>
       ) : null}
 

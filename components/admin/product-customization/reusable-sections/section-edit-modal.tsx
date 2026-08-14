@@ -253,31 +253,12 @@ export default function SectionEditModal({
                 </label>
 
                 {allowsOptionQuantity ? (
-                  <label className="admin-field">
-                    <span>Máximo de unidades en total</span>
-                    <input
-                      name="max_total_quantity"
-                      type="number"
-                      min={1}
-                      step={1}
-                      required
-                      disabled={pending}
-                      defaultValue={
-                        mode === "edit" ? (group?.max_total_quantity ?? 5) : 5
-                      }
-                      key={
-                        mode === "edit"
-                          ? `max-total-${group?.id}`
-                          : "max-total-create"
-                      }
-                    />
-                    <p className={styles.helper}>
-                      Suma máxima de unidades entre todas las opciones de esta sección.
-                    </p>
-                  </label>
-                ) : (
-                  <input type="hidden" name="max_total_quantity" value="" />
-                )}
+                  <p className={styles.helper}>
+                    El límite de cantidad se configura en cada opción (máximo por
+                    opción). El máximo de opciones distintas sigue valiendo arriba.
+                  </p>
+                ) : null}
+                <input type="hidden" name="max_total_quantity" value="" />
               </>
             ) : (
               <>

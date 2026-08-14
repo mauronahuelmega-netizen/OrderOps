@@ -2,6 +2,26 @@
 
 ## Estado actual
 
+**PUBLIC CATALOG / CUSTOMIZATION POLISH BLOCK — CLOSED (handoff 2026-08-14)**
+
+Status: PASS WITH ANDROID FINAL SMOKE PENDING
+
+Handoff: `docs/public-catalog-customization-polish-handoff-2026-08-14.md`
+
+Checks at close: tsc PASS · build PASS · verify PASS · diff-check PASS · lint known debt
+
+Deploy: **NOT EXECUTED** — Android final gate PENDING; feature branch push only
+
+---
+
+## PUBLIC-CATALOG-CUSTOMIZATION-POLISH-HANDOFF-2026-08-14
+
+Closed scope: catalog chrome (header flow, sticky categories), product detail mobile shell, customization modal (V2 qty P1, controls, extras cards/motion, info hierarchy). See handoff doc for full detail.
+
+---
+
+## Previous phase (superseded by polish block close)
+
 PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-QA-1 complete with accepted order-submit QA debt.
 
 ## PUBLIC-CATALOG-CUSTOMIZATION-MULTI-QUANTITY-EXTRAS-ORDER-QA-1

@@ -7,12 +7,7 @@ import { usePathname } from "next/navigation";
 import { LockKeyhole, Store, X } from "lucide-react";
 import ThemeToggle from "@/components/public/catalog/theme-toggle";
 import PublicStorageImage from "@/components/public/catalog/public-storage-image";
-import {
-  PUBLIC_OVERLAY_LOCK_CHANGE_EVENT,
-  usePublicOverlayScrollLock
-} from "@/components/public/catalog/public-overlay-scroll-lock";
-import { dispatchPublicHeaderHidden } from "@/components/public/business/public-header-visibility";
-import { useHideOnScroll } from "@/components/public/business/use-hide-on-scroll";
+import { usePublicOverlayScrollLock } from "@/components/public/catalog/public-overlay-scroll-lock";
 import type { PublicBusiness } from "@/lib/business/public";
 import styles from "./public-business-header.module.css";
 
@@ -41,18 +36,12 @@ export default function PublicBusinessHeader({
 }: PublicBusinessHeaderProps) {
   const pathname = usePathname();
   const isCheckoutRoute = /\/b\/[^/]+\/checkout\/?$/.test(pathname);
-  const headerRef = useRef<HTMLElement | null>(null);
   const menuButtonRef = useRef<HTMLButtonElement | null>(null);
   const menuSheetRef = useRef<HTMLDivElement | null>(null);
   const menuCloseButtonRef = useRef<HTMLButtonElement | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isPublicOverlayOpen, setIsPublicOverlayOpen] = useState(false);
   const [themePreference, setThemePreference] = useState<ThemePreference>("system");
   const [systemTheme, setSystemTheme] = useState<ResolvedTheme>("light");
-  const headerHidden = useHideOnScroll({
-    disabled: isMenuOpen || isCheckoutRoute,
-    freeze: isPublicOverlayOpen
-  });
   usePublicOverlayScrollLock(isMenuOpen);
   const isBusinessOpen = business.on_demand_mode_active;
 
@@ -62,36 +51,6 @@ export default function PublicBusinessHeader({
   useEffect(() => {
     setIsMenuOpen(false);
   }, [pathname]);
-
-  useEffect(() => {
-    const syncOverlayState = (event?: Event) => {
-      const detail = event instanceof CustomEvent ? event.detail : null;
-      setIsPublicOverlayOpen(
-        typeof detail?.isOpen === "boolean"
-          ? detail.isOpen
-          : document.documentElement.dataset.publicOverlayOpen === "true"
-      );
-    };
-
-    syncOverlayState();
-    window.addEventListener(PUBLIC_OVERLAY_LOCK_CHANGE_EVENT, syncOverlayState);
-    return () => window.removeEventListener(PUBLIC_OVERLAY_LOCK_CHANGE_EVENT, syncOverlayState);
-  }, []);
-
-  useEffect(() => {
-    const headerEl = headerRef.current;
-    const headerOffsetPx = headerEl?.offsetHeight ?? 78;
-    dispatchPublicHeaderHidden({
-      hidden: headerHidden && !isMenuOpen,
-      headerOffsetPx
-    });
-  }, [headerHidden, isMenuOpen]);
-
-  useEffect(() => {
-    return () => {
-      dispatchPublicHeaderHidden({ hidden: false, headerOffsetPx: 78 });
-    };
-  }, []);
 
   useEffect(() => {
     if (!isMenuOpen) {
@@ -206,16 +165,11 @@ export default function PublicBusinessHeader({
   return (
     <>
       <header
-        ref={headerRef}
         className={`public-business-header ${styles.header} ${
           isCheckoutRoute ? styles.headerCheckout : ""
-        } ${
-          headerHidden && !isMenuOpen ? styles.headerHidden : styles.headerVisible
         }`}
         style={headerStyles}
-        data-header-hidden={headerHidden && !isMenuOpen ? "true" : "false"}
         data-checkout-static={isCheckoutRoute ? "true" : "false"}
-        aria-hidden={headerHidden && !isMenuOpen ? true : undefined}
       >
         <div className="public-business-header__inner">
           <Link href={`/b/${slug}`} className="public-business-header__brand">

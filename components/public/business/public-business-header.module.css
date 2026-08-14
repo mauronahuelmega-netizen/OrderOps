@@ -1,28 +1,27 @@
+/* Public business header shell — document flow only (no sticky / no hide-on-scroll). */
+
 .header {
-  transition: transform 180ms ease;
+  /* relative (still document-flow) so z-index can paint shadow above following siblings */
+  position: relative;
+  top: auto;
+  transform: none;
+  pointer-events: auto;
+  /* Sole owner of header chrome elevation — downward only (negative spread kills top halo). */
+  box-shadow:
+    0 3px 5px -4px rgba(31, 26, 20, 0.05),
+    0 8px 14px -10px rgba(31, 26, 20, 0.045);
 }
 
-/* Checkout: keep tenant branding in document flow — do not stick over the form.
-   Specificity beats globals `.public-business-header { position: sticky }`. */
+:global(html[data-catalog-theme="dark"]) .header {
+  box-shadow:
+    0 3px 5px -4px rgba(0, 0, 0, 0.12),
+    0 8px 14px -10px rgba(0, 0, 0, 0.14);
+}
+
+/* Checkout: keep tenant branding in document flow (explicit; matches catalog). */
 :global(.public-business-header).headerCheckout {
   position: static;
   top: auto;
   transform: none;
   pointer-events: auto;
-}
-
-.headerHidden {
-  transform: translateY(calc(-100% - 16px));
-  pointer-events: none;
-}
-
-.headerVisible {
-  transform: translateY(0);
-  pointer-events: auto;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .header {
-    transition: none;
-  }
 }

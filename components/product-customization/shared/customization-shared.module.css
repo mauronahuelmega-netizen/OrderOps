@@ -107,6 +107,40 @@
   accent-color: var(--business-primary, var(--color-primary, var(--accent-primary)));
 }
 
+/* Salsas: circular footprint congruent with Papas radio; check = multi-select affordance */
+.optionRow input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  flex-shrink: 0;
+  position: relative;
+  border: 2px solid var(--customization-border, var(--border-subtle));
+  border-radius: 50%;
+  background: var(--customization-row-bg, var(--bg-canvas));
+  cursor: pointer;
+}
+
+.optionRow input[type="checkbox"]:checked {
+  border-color: var(--business-primary, var(--color-primary, var(--accent-primary)));
+  background: var(--business-primary, var(--color-primary, var(--accent-primary)));
+}
+
+.optionRow input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: 0.2rem;
+  height: 0.38rem;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.optionRow input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
 .optionCopy {
   display: flex;
   flex-direction: column;

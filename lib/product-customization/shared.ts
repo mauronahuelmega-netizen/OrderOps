@@ -248,31 +248,9 @@ export function parseCustomizationGroupInput(
   const allowsOptionQuantityRaw = getBoolean(formData, "allows_option_quantity", false);
   const allowsOptionQuantity =
     selectionType === "multiple" && allowsOptionQuantityRaw;
-  const maxTotalRaw = getTrimmedString(formData, "max_total_quantity");
 
-  let maxTotalQuantity: number | null = null;
-
-  if (allowsOptionQuantity) {
-    if (!maxTotalRaw) {
-      return {
-        error: "El máximo de unidades en total es obligatorio si permitís cantidades."
-      };
-    }
-
-    const maxTotalParsed = parseNonNegativeInteger(
-      maxTotalRaw,
-      "El máximo de unidades en total"
-    );
-    if ("error" in maxTotalParsed) {
-      return maxTotalParsed;
-    }
-
-    if (maxTotalParsed.value < 1) {
-      return { error: "El máximo de unidades en total debe ser al menos 1." };
-    }
-
-    maxTotalQuantity = maxTotalParsed.value;
-  }
+  // max_total_quantity deprecated — always persist null (column kept, no-op at runtime).
+  const maxTotalQuantity: number | null = null;
 
   return {
     name,
