@@ -2,15 +2,17 @@
 
 ## Estado actual
 
-**PUBLIC CATALOG / CUSTOMIZATION POLISH BLOCK — CLOSED (handoff 2026-08-14)**
+**PUBLIC CATALOG / CUSTOMIZATION POLISH BLOCK — CLOSED + DEPLOYED (2026-08-14)**
 
-Status: PASS WITH ANDROID FINAL SMOKE PENDING
+Status: **PASS**
 
 Handoff: `docs/public-catalog-customization-polish-handoff-2026-08-14.md`
 
 Checks at close: tsc PASS · build PASS · verify PASS · diff-check PASS · lint known debt
 
-Deploy: **NOT EXECUTED** — Android final gate PENDING; feature branch push only
+Android final smoke: **PASS** (product owner, Android Chrome real device)
+
+Production deploy: **PASS** — fast-forward merge `cursor-handoff-public-catalog-ui-redesign` → `main` @ `831903f` · Vercel Git integration · https://orderops.vercel.app
 
 ---
 

@@ -81,9 +81,24 @@ Local browser smoke: catalog load, modal open, Papas required, Salsa toggle, Bac
 
 ## Device QA
 
-**ANDROID REAL-DEVICE FINAL SMOKE = PENDING**
+**ANDROID REAL-DEVICE FINAL SMOKE = PASS**
 
-No hay confirmación explícita del product owner sobre build final en Android Chrome real para este cierre. Local browser + unit verify PASS.
+Product owner validated build final (`831903f`) on Android Chrome real device (2026-08-14).
+
+Production browser smoke post-deploy: catalog load, product detail, customization (Papas/Salsas/Extras, Bacon×3 cross-group preservation, CTA pricing) — PASS.
+
+---
+
+## Production deploy
+
+| Field | Value |
+|-------|-------|
+| Date | 2026-08-14 |
+| Method | Fast-forward merge `cursor-handoff-public-catalog-ui-redesign` → `main` |
+| Production commit | `831903f` |
+| Mechanism | Vercel Git integration (push `main`) |
+| URL | https://orderops.vercel.app |
+| Catalog smoke | `/b/demohamburgueseria/catalogo` — PASS |
 
 ---
 
@@ -91,14 +106,11 @@ No hay confirmación explícita del product owner sobre build final en Android C
 
 - ESLint 9 circular JSON config (`plugins.react` closes circle)
 - Historical micro-phase docs: algunos chrome-elevation followups referenciados solo en `CURRENT_PHASE` / living memory
-- Android real-device final smoke pendiente antes de production deploy
 
 ---
 
 ## Next recommended starting point
 
-1. Android Chrome final smoke en `/b/demohamburgueseria/catalogo` (customization cross-group qty + sticky categories).
-2. Si PASS → merge PR `cursor-handoff-public-catalog-ui-redesign` → production path Vercel.
-3. No reabrir P1 handler path con legacy round-trip.
+Block closed and deployed. Do not reopen P1 legacy round-trip handler path. Pick next roadmap item from `CURRENT_PHASE` queue.
 
 Primary handoff doc for new chats: **this file**.

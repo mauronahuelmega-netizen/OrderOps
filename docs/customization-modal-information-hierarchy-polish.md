@@ -3,7 +3,7 @@
 ## Estado
 
 ```text
-PASS WITH ANDROID DEVICE QA PENDING — INFORMATION HIERARCHY POLISH COMPLETE (local)
+PASS — INFORMATION HIERARCHY POLISH COMPLETE (Android + production deploy 2026-08-14)
 ```
 
 **Fecha:** 2026-08-14
@@ -107,7 +107,7 @@ scrollHeight modal body: **not measured** (browser tooling unavailable for preci
 
 ## 9. Android QA
 
-**PENDING**
+**PASS** — product owner, Android Chrome real device, build `831903f`.
 
 ---
 
