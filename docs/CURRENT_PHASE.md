@@ -2,6 +2,60 @@
 
 ## Estado actual
 
+**PUBLIC-CATALOG-CHROME-FINAL-CLOSEOUT-1 — CLOSED (2026-08-15)**
+
+Status: **PASS** — ANDROID REAL-DEVICE QA COMPLETE (drawer + footer)
+
+Closes:
+- `PUBLIC-CATALOG-NAV-DRAWER-VISUAL-POLISH-1`
+- `PUBLIC-CATALOG-TENANT-FOOTER-1`
+
+Docs: `docs/public-catalog-nav-drawer-visual-polish-1.md`, `docs/public-catalog-tenant-footer-1.md`
+
+Footer final copy: `© {year} {businessName} · Pedidos online · Hecho con OrderOps` (link `/`, no ™).
+
+Production: Vercel via `main` → https://orderops.vercel.app
+
+---
+
+## Previous — PUBLIC-CATALOG-TENANT-FOOTER-1 (2026-08-15)
+
+**PUBLIC-CATALOG-TENANT-FOOTER-1 — CLOSED (2026-08-15)**
+
+Status: **PASS** — ANDROID REAL-DEVICE QA COMPLETE
+
+Doc: `docs/public-catalog-tenant-footer-1.md`
+
+Catalog-only footer: `business.name` + server `copyrightYear` + OrderOps → `/`. No fetch. No cart state. Inside `.catalog-page` before CartBar.
+
+---
+
+## Previous — PUBLIC-CATALOG-NAV-DRAWER-VISUAL-POLISH-1 (2026-08-15)
+
+**PUBLIC-CATALOG-NAV-DRAWER-VISUAL-POLISH-1 — CLOSED (2026-08-15)**
+
+Status: **PASS** — ANDROID REAL-DEVICE QA COMPLETE
+
+Doc: `docs/public-catalog-nav-drawer-visual-polish-1.md`
+
+Geometry: flush-right full-height side-sheet; `min(82vw, 348px)`; left radii `22px 0 0 22px`; safe-area internal padding; desktop MQ no longer reintroduces floating card. CSS-only in `app/globals.css`.
+
+---
+
+## Previous — PUBLIC-CATALOG-CHROME-DRAWER-FOOTER-AUDIT-1 (2026-08-15)
+
+**PUBLIC-CATALOG-CHROME-DRAWER-FOOTER-AUDIT-1 — AUDIT COMPLETE / READY FOR IMPLEMENTATION (2026-08-15)**
+
+Status: **AUDIT COMPLETE / READY FOR IMPLEMENTATION**
+
+Doc: `docs/public-catalog-chrome-drawer-footer-audit-1.md`
+
+Findings: drawer = `PublicBusinessHeader` + `globals.css` sheet (floating card → recommend flush side-sheet); footer = `CatalogClient` + `business.name`, OrderOps link `/`. Recommend **two microphases**. No runtime changes.
+
+---
+
+## Previous closed — PUBLIC-CATALOG-TAP-HIGHLIGHT-POLISH-1 (2026-08-15)
+
 **PUBLIC-CATALOG-TAP-HIGHLIGHT-POLISH-1 — CLOSED (2026-08-15)**
 
 Status: **PASS** — ANDROID REAL-DEVICE QA COMPLETE

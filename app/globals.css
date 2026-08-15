@@ -2065,23 +2065,28 @@ html[data-public-overlay-open="true"] body {
   --business-drawer-active-text: color-mix(in srgb, var(--business-primary) 62%, var(--business-drawer-text) 38%);
   --business-drawer-active-muted: color-mix(in srgb, var(--business-primary) 34%, var(--business-drawer-muted) 66%);
   --business-drawer-shadow: 0 34px 88px rgba(17, 24, 39, 0.14), 0 12px 26px rgba(17, 24, 39, 0.045);
+  /* PUBLIC-CATALOG-NAV-DRAWER-VISUAL-POLISH-1 — flush-right full-height side-sheet */
   position: absolute;
-  top: 10px;
-  right: 10px;
-  bottom: 10px;
-  width: min(86vw, 420px);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  width: min(82vw, 348px);
   display: grid;
   align-content: start;
   gap: 14px;
-  padding: 20px 18px 18px;
+  padding-top: max(14px, env(safe-area-inset-top));
+  padding-right: max(14px, env(safe-area-inset-right));
+  padding-bottom: max(14px, env(safe-area-inset-bottom));
+  padding-left: 14px;
   overflow: auto;
   border: 1px solid var(--business-drawer-border);
-  border-radius: 30px;
+  border-radius: 22px 0 0 22px;
   background: var(--business-drawer-bg);
   box-shadow: var(--business-drawer-shadow);
   isolation: isolate;
   backdrop-filter: none;
-  transform: translateX(calc(100% + 22px));
+  transform: translateX(100%);
   transition:
     transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 260ms ease,
@@ -2609,18 +2614,22 @@ html[data-catalog-theme="dark"] .public-business-header__preferences .catalog-th
 
 /* Keep the public drawer compact and aligned with the flat catalog surfaces. */
 .public-business-header__sheet {
-  top: max(10px, env(safe-area-inset-top));
-  right: max(10px, env(safe-area-inset-right));
-  bottom: max(10px, env(safe-area-inset-bottom));
-  width: min(86vw, 360px);
-  min-height: calc(100dvh - max(20px, env(safe-area-inset-top)) - max(20px, env(safe-area-inset-bottom)));
-  max-height: calc(100dvh - max(20px, env(safe-area-inset-top)) - max(20px, env(safe-area-inset-bottom)));
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: auto;
+  width: min(82vw, 348px);
+  min-height: 0;
+  max-height: none;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  padding: 14px;
+  padding-top: max(14px, env(safe-area-inset-top));
+  padding-right: max(14px, env(safe-area-inset-right));
+  padding-bottom: max(14px, env(safe-area-inset-bottom));
+  padding-left: 14px;
   overflow: hidden;
-  border-radius: 22px;
+  border-radius: 22px 0 0 22px;
   box-shadow: 0 18px 44px rgba(17, 24, 39, 0.12);
 }
 
@@ -2850,11 +2859,14 @@ html[data-catalog-theme="dark"] .public-business-header__logo-frame {
     padding: 4px;
   }
 
+  /* Flush-right side-sheet — do not reintroduce floating card margins/width. */
   .public-business-header__sheet {
-    top: 14px;
-    right: max(14px, calc((100vw - 1080px) / 2));
-    bottom: 14px;
-    width: min(420px, calc(100vw - 28px));
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: auto;
+    width: min(82vw, 348px);
+    border-radius: 22px 0 0 22px;
   }
 }
 

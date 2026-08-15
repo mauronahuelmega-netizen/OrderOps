@@ -29,6 +29,7 @@ export default async function PublicCatalogPageContent({
         categories={pageData.categories}
         products={pageData.products}
         slug={slug}
+        copyrightYear={new Date().getFullYear()}
         customizationEnabled={pageData.productCustomizationEnabled}
         isCatalogPreview={isCatalogPreview}
       />

@@ -475,6 +475,18 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-08-15 — PUBLIC-CATALOG-CHROME-FINAL-CLOSEOUT-1
+
+- **Frontend / Public Catalog** Closed drawer + tenant footer: flush-right full-height nav side-sheet; catalog-only footer with `business.name`, dynamic year, OrderOps link `/` (no ™). Android real-device QA PASS both. Docs: nav-drawer + tenant-footer polish.
+
+### 2026-08-15 — PUBLIC-CATALOG-TENANT-FOOTER-1
+
+- **Frontend / Public Catalog** Catalog-only tenant footer: `business.name`, server `copyrightYear`, OrderOps link `/`, no extra fetch. Rendered in `CatalogClient` after content, before cart/modals. Doc: `docs/public-catalog-tenant-footer-1.md`. Android QA PASS.
+
+### 2026-08-15 — PUBLIC-CATALOG-NAV-DRAWER-VISUAL-POLISH-1
+
+- **Frontend / Public Catalog** Public nav drawer = flush-right full-height side-sheet (`top/right/bottom: 0`), width `min(82vw, 348px)`, left radii only (`22px 0 0 22px`), safe-area via internal padding. Desktop MQ no longer reintroduces floating card. CSS-only (`app/globals.css`). Doc: `docs/public-catalog-nav-drawer-visual-polish-1.md`. Android QA PASS.
+
 ### 2026-08-15 — PUBLIC-CATALOG-TAP-HIGHLIGHT-POLISH-1
 
 - **Frontend / Public Catalog** Scoped `-webkit-tap-highlight-color: transparent` on `.public-business-layout` interactive descendants (`a`, `button`, `[role="button"]`, `label`, form controls). No prior tap-highlight rule. Focus-visible/outline untouched. Admin unaffected. Doc: `docs/public-catalog-tap-highlight-polish-1.md`. Android Chrome real-device QA PASS (tap flash removed; own feedback preserved).

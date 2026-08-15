@@ -31,6 +31,7 @@ import {
 } from "@/lib/admin/catalog-preview-shared";
 import CartBar from "@/components/public/catalog/cart-bar";
 import CartSheet from "@/components/public/catalog/cart-sheet";
+import PublicCatalogFooter from "@/components/public/catalog/public-catalog-footer";
 import CatalogDiscoveryControls from "@/components/public/catalog/catalog-discovery-controls";
 import CategoryNav, {
   formatCatalogCategoryName
@@ -81,6 +82,7 @@ type CatalogClientProps = {
   categories: PublicCategory[];
   products: PublicProduct[];
   slug: string;
+  copyrightYear: number;
   customizationEnabled?: boolean;
   isCatalogPreview?: boolean;
 };
@@ -106,6 +108,7 @@ export default function CatalogClient({
   categories,
   products,
   slug,
+  copyrightYear,
   customizationEnabled = false,
   isCatalogPreview = false
 }: CatalogClientProps) {
@@ -809,6 +812,8 @@ export default function CatalogClient({
           </div>
         )}
       </div>
+
+      <PublicCatalogFooter businessName={business.name} year={copyrightYear} />
 
       <CartBar
         count={cartCount}
