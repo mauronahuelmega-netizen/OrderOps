@@ -1847,6 +1847,15 @@ html[data-public-overlay-open="true"] body {
   min-width: 0;
 }
 
+/*
+ * PUBLIC-CATALOG-TAP-HIGHLIGHT-POLISH-1
+ * Remove Android/Chrome native tap flash on public interactive controls.
+ * Scoped to /b/[slug] layout only — does not alter :focus / :focus-visible / outline.
+ */
+.public-business-layout :is(a, button, [role="button"], label, input, select, textarea, summary) {
+  -webkit-tap-highlight-color: transparent;
+}
+
 .public-business-header {
   --business-header-bg: #ffffff;
   --business-header-border: rgba(17, 24, 39, 0.08);

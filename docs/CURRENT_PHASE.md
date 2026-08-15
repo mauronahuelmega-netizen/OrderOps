@@ -2,6 +2,18 @@
 
 ## Estado actual
 
+**PUBLIC-CATALOG-TAP-HIGHLIGHT-POLISH-1 — CLOSED (2026-08-15)**
+
+Status: **PASS** — ANDROID REAL-DEVICE QA COMPLETE
+
+Doc: `docs/public-catalog-tap-highlight-polish-1.md`
+
+Scope: `-webkit-tap-highlight-color: transparent` on `.public-business-layout` interactive descendants only. Focus-visible preserved. Android Chrome real-device confirmed tap flash removed with own button feedback intact. Production deploy via `main` + Vercel.
+
+---
+
+## Previous closed — PUBLIC CATALOG / CUSTOMIZATION POLISH BLOCK (2026-08-14)
+
 **PUBLIC CATALOG / CUSTOMIZATION POLISH BLOCK — CLOSED + DEPLOYED (2026-08-14)**
 
 Status: **PASS**

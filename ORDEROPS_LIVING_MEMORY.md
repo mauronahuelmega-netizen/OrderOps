@@ -475,6 +475,10 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-08-15 — PUBLIC-CATALOG-TAP-HIGHLIGHT-POLISH-1
+
+- **Frontend / Public Catalog** Scoped `-webkit-tap-highlight-color: transparent` on `.public-business-layout` interactive descendants (`a`, `button`, `[role="button"]`, `label`, form controls). No prior tap-highlight rule. Focus-visible/outline untouched. Admin unaffected. Doc: `docs/public-catalog-tap-highlight-polish-1.md`. Android Chrome real-device QA PASS (tap flash removed; own feedback preserved).
+
 ### 2026-08-14 — PUBLIC-CATALOG-CUSTOMIZATION-POLISH-HANDOFF (block close)
 
 - **Frontend / Public Catalog** Polish block closed and deployed to production (`831903f`, 2026-08-14): catalog chrome (header flow, sticky categories), product detail modal mobile shell, customization modal (V2 qty P1 fix, controls, extras cards/motion, info hierarchy). Handoff: `docs/public-catalog-customization-polish-handoff-2026-08-14.md`. Android final smoke PASS. Production: https://orderops.vercel.app. No legacy round-trip on public Papas/Salsas handler.
