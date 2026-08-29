@@ -97,9 +97,13 @@
 }
 
 .orderRef {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 0.25rem;
-  padding: 0.7rem 0.8rem;
+  padding: 0.75rem 1rem;
   border: 1px solid var(--success-border);
   border-radius: 0.75rem;
   background: var(--success-ref-surface);
@@ -108,20 +112,23 @@
 
 .orderRefLabel {
   margin: 0;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.02em;
   color: var(--success-subtle);
+  text-align: center;
 }
 
 .orderRefValue {
   margin: 0;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
     "Courier New", monospace;
-  font-size: 0.78rem;
-  font-weight: 500;
-  line-height: 1.35;
-  color: var(--success-muted);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.1em;
+  color: var(--success-text);
+  text-align: center;
   overflow-wrap: anywhere;
   word-break: break-word;
 }

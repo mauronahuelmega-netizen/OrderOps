@@ -782,6 +782,12 @@ Implemented: snapshot-derived structured preparation hierarchy (V2 qty-aware, V1
 ## Living Audit Changelog
 
 ```text
+2026-08-29 — PUBLIC-CATALOG-SUCCESS-ORDER-REF-VISUAL-HIERARCHY-1
+- polished the public success page order reference hierarchy so the six-character order code is centered, larger and shown without the # prefix;
+- preserved UUID success query identity, public WhatsApp business copy, admin #ORDER_CODE conventions, order_code schema/RPC, checkout flow, dashboard/admin and global CSS boundaries;
+- no DB/RPC/realtime changes;
+- baseline commit remains current release baseline (62d4a28)
+
 2026-08-29 — ADMIN-DASHBOARD-POLISH-PACKAGE-COMMIT-PUSH-DEPLOY-1
 - packaged and released the closed admin/dashboard polish set including order code adoption, dashboard metrics semantics, search/Kanban fixes, loading-state unification/restoration, product drilldown removal and mobile terminal order density;
 - committed and pushed the validated package after tsc/build/diff-check/verifies;

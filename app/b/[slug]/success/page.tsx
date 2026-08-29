@@ -34,12 +34,12 @@ export default async function SuccessPage({
         .maybeSingle();
 
       if (data) {
-        visibleOrderRef = `#${buildOrderDisplayRef(data)}`;
+        visibleOrderRef = buildOrderDisplayRef(data);
       } else {
-        visibleOrderRef = `#${buildOrderDisplayRef(orderId)}`;
+        visibleOrderRef = buildOrderDisplayRef(orderId);
       }
     } catch {
-      visibleOrderRef = `#${buildOrderDisplayRef(orderId)}`;
+      visibleOrderRef = buildOrderDisplayRef(orderId);
     }
   }
 

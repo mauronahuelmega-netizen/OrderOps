@@ -2,12 +2,19 @@
 
 ## Estado actual
 
-**ADMIN-DASHBOARD-POLISH-PACKAGE-COMMIT-PUSH-DEPLOY-1 — PASS — PACKAGE COMMITTED, PUSHED AND DEPLOYED (2026-08-29)**
+**PUBLIC-CATALOG-SUCCESS-ORDER-REF-VISUAL-HIERARCHY-1 — PASS — PUBLIC SUCCESS ORDER REF HIERARCHY POLISHED (2026-08-29)**
 
-Status: **PASS — PACKAGE COMMITTED, PUSHED AND DEPLOYED** — packaged and released the closed admin/dashboard polish set including order code adoption, dashboard metrics semantics, search/Kanban fixes, loading-state unification/restoration, product drilldown removal, and mobile terminal order density; committed and pushed the validated package after tsc/build/diff-check/verifies; deployed and smoke-tested the production admin/public surfaces; no additional runtime behavior changes were introduced during release packaging; baseline before this package was 81b1162
+Status: **PASS — PUBLIC SUCCESS ORDER REF HIERARCHY POLISHED** — polished the public success page order reference hierarchy so the six-character order code is centered, larger (`1.35rem`, bold, `0.1em` letter spacing), and shown without the `#` prefix; preserved UUID success query identity, public WhatsApp business copy, admin `#ORDER_CODE` conventions, order_code schema/RPC, checkout flow, dashboard/admin and global CSS boundaries; all deterministic verify scripts PASS — no commit / push / deploy
 
-Doc: `docs/admin-dashboard-polish-package-commit-push-deploy-1.md`
+Doc: `docs/public-catalog-success-order-ref-visual-hierarchy-1.md`
 
+Public success visible ref: **ORDER_CODE without #**
+Public success order ref hierarchy: **CENTERED / LARGER (1.35rem, bold, 0.1em letter spacing)**
+Public WhatsApp copy: **REMAINS FROZEN**
+Success query identity: **UUID UNCHANGED (?order_id=...)**
+Admin #ORDER_CODE convention: **UNCHANGED**
+Order code block: **REMAINS CLOSED**
+Dashboard/admin: **UNCHANGED**
 Mobile terminal density: **IMPLEMENTED / DEPLOYED**
 Mobile breakpoint: **≤767px stacked mode**
 Terminal cap: **5 initial completed/cancelled**
@@ -30,13 +37,11 @@ Dashboard search/Kanban: **REMAINS FIXED**
 Dashboard order_code partial search: **REMAINS FIXED**
 Dashboard metrics semantics: **REMAIN FROZEN**
 Dashboard card root count: **REMAINS FROZEN**
-Order code block: **REMAINS CLOSED**
-Public success WhatsApp copy: **REMAINS FROZEN**
 Dashboard overall polish: **OPEN**
 
 ---
 
-## Previous — ADMIN-DASHBOARD-MOBILE-TERMINAL-ORDERS-DENSITY-POLISH-1 — PASS — MOBILE TERMINAL ORDER DENSITY POLISHED (2026-08-28)
+## Previous — ADMIN-DASHBOARD-POLISH-PACKAGE-COMMIT-PUSH-DEPLOY-1 — PASS — PACKAGE COMMITTED, PUSHED AND DEPLOYED (2026-08-29)
 
 ---
 

@@ -475,6 +475,10 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-08-29 — PUBLIC-CATALOG-SUCCESS-ORDER-REF-VISUAL-HIERARCHY-1
+
+- **Public / Catalog** Polished the public success page order reference hierarchy (`/b/[slug]/success?order_id=<uuid>`) so the 6-character `order_code` is displayed centered, larger (`1.35rem`, bold, `0.1em` letter spacing), and without the `#` prefix; preserved internal UUID success query identity, public WhatsApp business copy, admin `#ORDER_CODE` conventions, order_code schema/RPC, checkout flow, dashboard/admin and global CSS boundaries. Doc: `docs/public-catalog-success-order-ref-visual-hierarchy-1.md`.
+
 ### 2026-08-29 — ADMIN-DASHBOARD-POLISH-PACKAGE-COMMIT-PUSH-DEPLOY-1
 
 - **Admin / Dashboard** Packaged and released the closed admin/dashboard polish set including order code adoption, dashboard metrics semantics, search/Kanban fixes, loading-state unification/restoration, product drilldown removal and mobile terminal order density; committed and pushed the validated package after tsc/build/diff-check/verifies; deployed and smoke-tested the production admin/public surfaces; no additional runtime behavior changes were introduced during release packaging; baseline before this package was 81b1162. Doc: `docs/admin-dashboard-polish-package-commit-push-deploy-1.md`.
