@@ -1,5 +1,6 @@
 import type { AdminOrderDashboardItem } from "@/lib/orders/admin";
 import { patchOrderAssignment } from "@/lib/orders/assignment";
+import { buildDashboardOrderCardSummary } from "@/lib/orders/dashboard-card-summary";
 import {
   buildOrderOperationalSummary,
   buildOrderRelativeTimeLabel,
@@ -23,6 +24,7 @@ export function patchDashboardOrderFromRealtime(
 
   const nextBase = {
     ...order,
+    order_code: row.order_code ?? order.order_code,
     created_at: row.created_at ?? order.created_at,
     customer_name: row.customer_name ?? order.customer_name,
     phone: row.phone ?? order.phone,
@@ -35,19 +37,20 @@ export function patchDashboardOrderFromRealtime(
     ...nextAssignment
   };
 
-  const summary = buildOrderOperationalSummary(
+  const cardSummary = buildDashboardOrderCardSummary(nextBase.order_items_preview);
+  const operationalSummary = buildOrderOperationalSummary(
     nextBase.customer_name,
     nextBase.notes,
-    nextBase.order_items_preview
+    []
   );
 
   return {
     ...nextBase,
-    item_count: summary.itemCount,
-    item_summary: summary.itemSummary,
-    customer_short_name: summary.customerShortName,
-    has_notes: summary.hasNotes,
-    notes_preview: summary.notesPreview,
+    item_count: cardSummary.itemCount,
+    item_summary: cardSummary.itemSummary,
+    customer_short_name: operationalSummary.customerShortName,
+    has_notes: operationalSummary.hasNotes,
+    notes_preview: operationalSummary.notesPreview,
     relative_time_label: buildOrderRelativeTimeLabel({ created_at: nextBase.created_at }),
     urgency_state: buildOrderUrgencyState(nextBase.status, nextBase.created_at),
     operational_aging: getOperationalAging(nextBase.status, nextBase.created_at),
@@ -66,6 +69,7 @@ export function patchWorkspaceOrderFromRealtime(
 
   return {
     ...nextAssignment,
+    order_code: row.order_code ?? order.order_code,
     created_at: row.created_at ?? order.created_at,
     customer_name: row.customer_name ?? order.customer_name,
     phone: row.phone ?? order.phone,

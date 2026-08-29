@@ -38,6 +38,7 @@ type OrderAssignmentControlsProps = {
     finalAssignment?: AdminOrderAssignment;
     event?: AdminOrderTimelineEvent | null;
   }) => void | Promise<void>;
+  orderResponsibilityEnabled?: boolean;
 };
 
 export default function OrderAssignmentControls({
@@ -51,10 +52,16 @@ export default function OrderAssignmentControls({
   onSessionMutationBlocked,
   onOptimisticAssignmentChange,
   onOptimisticAssignmentRollback,
-  onOptimisticAssignmentSettled
+  onOptimisticAssignmentSettled,
+  orderResponsibilityEnabled = true
 }: OrderAssignmentControlsProps) {
   const { pushToast } = useAdminToast();
   const [isPending, startTransition] = useTransition();
+
+  if (!orderResponsibilityEnabled) {
+    return null;
+  }
+
   const isAssignedToCurrentUser = assignment.assigned_to === currentUserId;
   const hasAssignment = Boolean(assignment.assigned_to);
   const actionLabel = buildOrderAssignmentActionLabel({

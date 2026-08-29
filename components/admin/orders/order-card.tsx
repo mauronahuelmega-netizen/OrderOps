@@ -6,6 +6,7 @@ import Button from "@/components/ui/Button";
 import OrderCardQuickActions from "@/components/admin/orders/order-card-quick-actions";
 import type { AdminOrderDashboardItem } from "@/lib/orders/admin";
 import { buildOrderAssignmentOwnerLabel } from "@/lib/orders/assignment";
+import { buildOrderDisplayRef } from "@/lib/orders/display-ref";
 import {
   buildOrderRelativeTimeLabel,
   formatAdminDeliveryMethod,
@@ -29,16 +30,13 @@ export type OrderCardProps = {
   isOrderStatusPending?: (orderId: string) => boolean;
   now: Date;
   showStatusBadge?: boolean;
+  orderResponsibilityEnabled?: boolean;
   onOpen: (order: AdminOrderDashboardItem) => void;
   onCardKeyDown: (event: KeyboardEvent<HTMLElement>, orderId: string) => void;
   onOptimisticStatusChange?: OrderCardQuickActionsProps["onOptimisticStatusChange"];
   onOptimisticStatusRollback?: OrderCardQuickActionsProps["onOptimisticStatusRollback"];
   onOptimisticStatusSettled?: OrderCardQuickActionsProps["onOptimisticStatusSettled"];
 };
-
-function buildOrderDisplayRef(orderId: string) {
-  return orderId.replace(/-/g, "").slice(-4).toUpperCase();
-}
 
 const ORDER_STATUS_ARIA_LABELS: Record<AdminOrderDashboardItem["status"], string> = {
   pending: "pendiente",
@@ -87,6 +85,7 @@ function areOrderCardPropsEqual(previousProps: OrderCardProps, nextProps: OrderC
     previousProps.riskAssessment?.level === nextProps.riskAssessment?.level &&
     previousProps.riskAssessment?.score === nextProps.riskAssessment?.score &&
     previousProps.showStatusBadge === nextProps.showStatusBadge &&
+    previousProps.orderResponsibilityEnabled === nextProps.orderResponsibilityEnabled &&
     previousProps.onOpen === nextProps.onOpen &&
     previousProps.onCardKeyDown === nextProps.onCardKeyDown &&
     previousProps.onOptimisticStatusChange === nextProps.onOptimisticStatusChange &&
@@ -106,6 +105,7 @@ function OrderCardComponent({
   isOrderStatusPending,
   now,
   showStatusBadge = true,
+  orderResponsibilityEnabled = true,
   onOpen,
   onCardKeyDown,
   onOptimisticStatusChange,
@@ -126,7 +126,7 @@ function OrderCardComponent({
     onlineOperators
   });
 
-  const orderDisplayRef = buildOrderDisplayRef(order.id);
+  const orderDisplayRef = buildOrderDisplayRef(order);
   const timeLabel =
     buildOrderRelativeTimeLabel({ created_at: order.created_at, now }) ??
     formatAdminOrderDate(order.delivery_date);
@@ -166,7 +166,8 @@ function OrderCardComponent({
     event.stopPropagation();
   };
 
-  const showAssignmentMeta = isActiveOrder || Boolean(order.assigned_to);
+  const showAssignmentMeta =
+    orderResponsibilityEnabled && (isActiveOrder || Boolean(order.assigned_to));
 
   return (
     <article

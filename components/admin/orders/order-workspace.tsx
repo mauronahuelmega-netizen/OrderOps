@@ -37,6 +37,7 @@ type OrderWorkspaceProps = {
   }) => void | Promise<void>;
   variant?: "default" | "modal" | "page";
   customerSignals?: string[];
+  orderResponsibilityEnabled?: boolean;
 };
 
 export default function OrderWorkspace({
@@ -52,7 +53,8 @@ export default function OrderWorkspace({
   onOptimisticAssignmentRollback,
   onOptimisticAssignmentSettled,
   variant = "default",
-  customerSignals = []
+  customerSignals = [],
+  orderResponsibilityEnabled = true
 }: OrderWorkspaceProps) {
   const isModal = variant === "modal";
   const isPage = variant === "page";
@@ -76,6 +78,7 @@ export default function OrderWorkspace({
         currentUserId={currentUserId}
         assignmentLabel={assignmentLabel}
         variant={variant}
+        orderResponsibilityEnabled={orderResponsibilityEnabled}
         onStatusSuccess={onStatusSuccess}
         onOptimisticStatusChange={onOptimisticStatusChange}
         onOptimisticStatusRollback={onOptimisticStatusRollback}

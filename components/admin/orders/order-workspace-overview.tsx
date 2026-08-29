@@ -8,7 +8,8 @@ import {
   buildOrderOperationalSummary,
   formatAdminDeliveryMethod,
   formatAdminOrderCurrency,
-  formatAdminOrderDate
+  formatAdminOrderDate,
+  formatAdminPhoneDisplay
 } from "@/lib/orders/presenter";
 import type { AdminOrderWorkspaceData } from "@/lib/orders/workspace";
 import OrderCustomerDeliveryInfo from "@/components/admin/orders/order-customer-delivery-info";
@@ -20,6 +21,7 @@ type OrderWorkspaceOverviewProps = {
   dashboardHref?: string;
   variant?: "modal" | "page" | "workstation";
   assignmentLabel?: string | null;
+  orderResponsibilityEnabled?: boolean;
 };
 
 export default function OrderWorkspaceOverview({
@@ -27,7 +29,8 @@ export default function OrderWorkspaceOverview({
   detailHref,
   dashboardHref,
   variant = "modal",
-  assignmentLabel
+  assignmentLabel,
+  orderResponsibilityEnabled = true
 }: OrderWorkspaceOverviewProps) {
   const router = useRouter();
   const operationalSummary = buildOrderOperationalSummary(
@@ -69,12 +72,15 @@ export default function OrderWorkspaceOverview({
     .join(" ");
 
   if (isWorkstation) {
+    const rawPhone = order.phone?.trim() || "";
+    const phoneLabel = rawPhone ? formatAdminPhoneDisplay(rawPhone) : "Sin telefono";
+
     return (
       <div className={rootClassName}>
         <OrderCustomerDeliveryInfo
           deliveryMethodLabel={deliveryLabel}
           customerName={order.customer_name}
-          phoneLabel={order.phone?.trim() || "Sin telefono"}
+          phoneLabel={phoneLabel}
           address={order.delivery_method === "delivery" ? order.address : null}
         />
       </div>
@@ -95,7 +101,7 @@ export default function OrderWorkspaceOverview({
               <span>Con notas</span>
             </p>
           ) : null}
-          {assignmentLabel ? (
+          {orderResponsibilityEnabled && assignmentLabel ? (
             <p className={styles["admin-order-workspace-overview__assignment"]}>{assignmentLabel}</p>
           ) : null}
         </div>

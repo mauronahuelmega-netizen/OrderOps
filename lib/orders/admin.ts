@@ -3,6 +3,7 @@ import {
   presentOrderTimelineEvent,
   type AdminOrderTimelineEvent
 } from "@/lib/orders/events.shared";
+import { buildDashboardOrderCardSummary } from "@/lib/orders/dashboard-card-summary";
 import {
   buildOrderOperationalSummary,
   buildOrderRelativeTimeLabel,
@@ -28,6 +29,7 @@ export {
 
 export type AdminOrderListItem = {
   id: string;
+  order_code: string;
   created_at: string;
   customer_name: string;
   phone: string;
@@ -93,6 +95,7 @@ export async function getAdminOrders(businessId: string): Promise<AdminOrderDash
     .select(
       `
         id,
+        order_code,
         created_at,
         customer_name,
         phone,
@@ -165,6 +168,7 @@ export async function getAdminDashboardOrderById(
     .select(
       `
         id,
+        order_code,
         created_at,
         customer_name,
         phone,
@@ -231,6 +235,7 @@ export async function getAdminOrderById(
     .select(
       `
         id,
+        order_code,
         created_at,
         customer_name,
         phone,
@@ -373,11 +378,6 @@ type RawOrderEvent = {
   order_id?: string;
 };
 
-type RawOrderListItem = {
-  product_name: string;
-  quantity: number;
-};
-
 function normalizeOrderItems(items: RawOrderItem[] | null | undefined): AdminOrderItem[] {
   if (!items) {
     return [];
@@ -399,17 +399,6 @@ function normalizeOrderItems(items: RawOrderItem[] | null | undefined): AdminOrd
       ...normalizeAdminOrderItemFields(item)
     };
   });
-}
-
-function normalizeListOrderItems(items: RawOrderListItem[] | null | undefined) {
-  if (!items) {
-    return [];
-  }
-
-  return items.map((item) => ({
-    product_name: item.product_name,
-    quantity: item.quantity
-  }));
 }
 
 function normalizeDashboardOrderItems(items: RawOrderItem[] | null | undefined): AdminOrderItem[] {
@@ -439,16 +428,15 @@ function buildAdminOrderDashboardItem(
   const safeCustomerName = normalizeDashboardString(order.customer_name, "Cliente");
   const safePhone = normalizeDashboardString(order.phone, "");
   const safeNotes = normalizeOptionalDashboardString(order.notes);
-  const operationalSummary = buildOrderOperationalSummary(
-    safeCustomerName,
-    safeNotes,
-    normalizeListOrderItems(order.order_items)
-  );
+  const orderItemsPreview = normalizeDashboardOrderItems(order.order_items);
+  const cardSummary = buildDashboardOrderCardSummary(orderItemsPreview);
+  const operationalSummary = buildOrderOperationalSummary(safeCustomerName, safeNotes, []);
   const customerKey = buildCustomerHistoryKey(safePhone, safeCustomerName);
   const customerOrders = customerOrdersMap.get(customerKey) ?? [];
 
   return {
     id: order.id,
+    order_code: order.order_code,
     created_at: order.created_at,
     customer_name: safeCustomerName,
     phone: safePhone,
@@ -461,9 +449,9 @@ function buildAdminOrderDashboardItem(
     notes: safeNotes,
     assigned_to: order.assigned_to ?? null,
     assigned_at: order.assigned_at ?? null,
-    order_items_preview: normalizeDashboardOrderItems(order.order_items),
-    item_count: operationalSummary.itemCount,
-    item_summary: operationalSummary.itemSummary,
+    order_items_preview: orderItemsPreview,
+    item_count: cardSummary.itemCount,
+    item_summary: cardSummary.itemSummary,
     customer_short_name: operationalSummary.customerShortName,
     has_notes: operationalSummary.hasNotes,
     notes_preview: operationalSummary.notesPreview,

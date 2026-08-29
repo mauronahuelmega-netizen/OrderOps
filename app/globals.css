@@ -953,8 +953,9 @@ img {
   --business-primary-border: color-mix(in srgb, var(--business-primary) 38%, rgba(255, 244, 230, 0.12));
 }
 
+/* Clearance for fixed cart FAB: height 52 + bottom max(14, safe-area) + 10px breath. */
 .catalog-page--with-cart {
-  padding-bottom: 100px;
+  padding-bottom: calc(52px + max(14px, env(safe-area-inset-bottom)) + 10px);
 }
 
 .catalog-hero,
@@ -3338,8 +3339,9 @@ body.admin-drawer-open {
     padding: 26px 24px 56px;
   }
 
+  /* Same FAB geometry as mobile — no extra historical slack. */
   .catalog-page--with-cart {
-    padding-bottom: 118px;
+    padding-bottom: calc(52px + max(14px, env(safe-area-inset-bottom)) + 10px);
   }
 
   .catalog-hero {

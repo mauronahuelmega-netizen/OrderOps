@@ -8,6 +8,7 @@ export type BuildRecommendedOrderActionInput = {
   assignedTo?: string | null;
   currentUserId?: string | null;
   canUpdateOrders: boolean;
+  orderResponsibilityEnabled?: boolean;
 };
 
 export type RecommendedOrderActionTone = "primary" | "neutral" | "success" | "warning";
@@ -32,15 +33,24 @@ function hasAssignedOperator(assignedTo?: string | null) {
   return Boolean(assignedTo?.trim());
 }
 
+function isTerminalOrderStatus(status: AdminOrderStatus) {
+  return status === "completed" || status === "cancelled";
+}
+
+function recommendedActionEyebrow(status: AdminOrderStatus) {
+  return isTerminalOrderStatus(status) ? "Estado final" : "Próximo paso";
+}
+
 export function buildRecommendedOrderAction({
   status,
   assignedTo,
-  canUpdateOrders
+  canUpdateOrders,
+  orderResponsibilityEnabled = true
 }: BuildRecommendedOrderActionInput): RecommendedOrderAction {
   if (!canUpdateOrders) {
     return {
       tone: "neutral",
-      eyebrow: "Acción recomendada",
+      eyebrow: recommendedActionEyebrow(status),
       title: "Modo lectura",
       description:
         "No tenés permisos para modificar este pedido. Podés revisar el contexto y el historial.",
@@ -51,7 +61,7 @@ export function buildRecommendedOrderAction({
   if (status === "cancelled") {
     return {
       tone: "neutral",
-      eyebrow: "Acción recomendada",
+      eyebrow: recommendedActionEyebrow(status),
       title: "Pedido cancelado",
       description: "Este pedido ya no requiere acción operativa.",
       ctaKind: "none"
@@ -61,20 +71,19 @@ export function buildRecommendedOrderAction({
   if (status === "completed") {
     return {
       tone: "success",
-      eyebrow: "Acción recomendada",
+      eyebrow: recommendedActionEyebrow(status),
       title: "Pedido completado",
       description: "Este pedido ya fue cerrado correctamente.",
       ctaKind: "none"
     };
   }
 
-  if (status === "pending" && !hasAssignedOperator(assignedTo)) {
+  if (orderResponsibilityEnabled && status === "pending" && !hasAssignedOperator(assignedTo)) {
     return {
       tone: "primary",
-      eyebrow: "Acción recomendada",
+      eyebrow: recommendedActionEyebrow(status),
       title: "Tomá el pedido",
       description: "Asignate este pedido para empezar a gestionarlo.",
-      ctaLabel: 'Usá el botón "Tomar pedido" debajo.',
       ctaKind: "claim"
     };
   }
@@ -82,10 +91,9 @@ export function buildRecommendedOrderAction({
   if (status === "pending") {
     return {
       tone: "warning",
-      eyebrow: "Acción recomendada",
+      eyebrow: recommendedActionEyebrow(status),
       title: "Prepará el pedido",
-      description: "Cuando el equipo empiece a trabajar, cambiá el estado a Preparando.",
-      ctaLabel: "Usá el selector de estado debajo.",
+      description: "Cuando cocina empiece, pasalo a Preparando.",
       ctaKind: "status-guidance"
     };
   }
@@ -93,10 +101,9 @@ export function buildRecommendedOrderAction({
   if (status === "preparing") {
     return {
       tone: "primary",
-      eyebrow: "Acción recomendada",
+      eyebrow: recommendedActionEyebrow(status),
       title: "Marcá cuando esté listo",
-      description: "Cuando el pedido salga de cocina, cambiá el estado a Listo.",
-      ctaLabel: "Usá el selector de estado debajo.",
+      description: "Cuando salga de cocina, pasalo a Listo.",
       ctaKind: "status-guidance"
     };
   }
@@ -104,19 +111,18 @@ export function buildRecommendedOrderAction({
   if (status === "ready") {
     return {
       tone: "primary",
-      eyebrow: "Acción recomendada",
+      eyebrow: recommendedActionEyebrow(status),
       title: "Cerrá la operación",
-      description: "Cuando el pedido se entregue o retire, cambialo a Completado.",
-      ctaLabel: "Usá el selector de estado debajo.",
+      description: "Al entregar o retirar, pasalo a Completado.",
       ctaKind: "status-guidance"
     };
   }
 
   return {
     tone: "neutral",
-    eyebrow: "Acción recomendada",
+    eyebrow: recommendedActionEyebrow(status),
     title: "Revisá el pedido",
-    description: "Usá los controles debajo para gestionar este pedido.",
+    description: "Usá los controles de estado para avanzar la operación.",
     ctaKind: "none"
   };
 }
@@ -126,19 +132,22 @@ type OrderRecommendedActionPanelProps = {
   assignedTo?: string | null;
   currentUserId?: string | null;
   canUpdateOrders: boolean;
+  orderResponsibilityEnabled?: boolean;
 };
 
 export default function OrderRecommendedActionPanel({
   status,
   assignedTo,
   currentUserId,
-  canUpdateOrders
+  canUpdateOrders,
+  orderResponsibilityEnabled = true
 }: OrderRecommendedActionPanelProps) {
   const recommendation = buildRecommendedOrderAction({
     status,
     assignedTo,
     currentUserId,
-    canUpdateOrders
+    canUpdateOrders,
+    orderResponsibilityEnabled
   });
 
   const panelClassName = [
@@ -148,7 +157,7 @@ export default function OrderRecommendedActionPanel({
   ].join(" ");
 
   return (
-    <section className={panelClassName} aria-label="Acción recomendada">
+    <section className={panelClassName} aria-label={recommendation.eyebrow}>
       <p className={styles.eyebrow}>{recommendation.eyebrow}</p>
       <h3 className={styles.title}>{recommendation.title}</h3>
       <p className={styles.description}>{recommendation.description}</p>

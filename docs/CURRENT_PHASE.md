@@ -2,6 +2,709 @@
 
 ## Estado actual
 
+**ADMIN-DASHBOARD-POLISH-PACKAGE-COMMIT-PUSH-DEPLOY-1 — PASS — PACKAGE COMMITTED, PUSHED AND DEPLOYED (2026-08-29)**
+
+Status: **PASS — PACKAGE COMMITTED, PUSHED AND DEPLOYED** — packaged and released the closed admin/dashboard polish set including order code adoption, dashboard metrics semantics, search/Kanban fixes, loading-state unification/restoration, product drilldown removal, and mobile terminal order density; committed and pushed the validated package after tsc/build/diff-check/verifies; deployed and smoke-tested the production admin/public surfaces; no additional runtime behavior changes were introduced during release packaging; baseline before this package was 81b1162
+
+Doc: `docs/admin-dashboard-polish-package-commit-push-deploy-1.md`
+
+Mobile terminal density: **IMPLEMENTED / DEPLOYED**
+Mobile breakpoint: **≤767px stacked mode**
+Terminal cap: **5 initial completed/cancelled**
+Active statuses: **UNCAPPED**
+Search active: **UNCAPPED**
+Desktop/tablet Kanban: **UNCHANGED**
+Admin loading owner: **AdminShell**
+Double loader: **FIXED**
+Dashboard route loader: **REMOVED**
+X/Y centering: **PRESERVED**
+Spinner size: **44–56px PRESERVED**
+Spinner visual style: **ORIGINAL RING/BORDER RESTORED**
+Copy: **Cargando panel + Un momento… PRESERVED**
+Product detail drilldown: **REMOVED**
+Workspace Products inline preparation: **FROZEN / INLINE-ONLY**
+Detail Products inline preparation: **FROZEN / INLINE-ONLY**
+OrderProductModal: **REMOVED / UNUSED**
+Workspace/status/contact: **UNCHANGED**
+Dashboard search/Kanban: **REMAINS FIXED**
+Dashboard order_code partial search: **REMAINS FIXED**
+Dashboard metrics semantics: **REMAIN FROZEN**
+Dashboard card root count: **REMAINS FROZEN**
+Order code block: **REMAINS CLOSED**
+Public success WhatsApp copy: **REMAINS FROZEN**
+Dashboard overall polish: **OPEN**
+
+---
+
+## Previous — ADMIN-DASHBOARD-MOBILE-TERMINAL-ORDERS-DENSITY-POLISH-1 — PASS — MOBILE TERMINAL ORDER DENSITY POLISHED (2026-08-28)
+
+---
+
+## Previous — ADMIN-DASHBOARD-LOADING-STATE-OWNERSHIP-AUDIT-1 — AUDIT COMPLETE — READY FOR LOADING UNIFICATION (2026-08-28)
+
+---
+
+## Previous — ADMIN-DASHBOARD-LOADING-STATE-SCALE-ALIGNMENT-FOLLOWUP-1 — PASS — DASHBOARD LOADING STATE SCALE ALIGNED (2026-08-28)
+
+---
+
+## Previous — ADMIN-DASHBOARD-LOADING-STATE-CENTERING-POLISH-1 — PASS — DASHBOARD LOADING STATE CENTERED (2026-08-28)
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-PRODUCT-DETAIL-DRILLDOWN-REMOVAL-1 — PASS — ORDER PRODUCT DRILLDOWN REMOVED (2026-08-28)
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-PRODUCT-DETAIL-DRILLDOWN-REMOVAL-AUDIT-1 — AUDIT COMPLETE — READY FOR REMOVAL IMPLEMENTATION (2026-08-28)
+
+---
+
+## Previous — ADMIN-DASHBOARD-SEARCH-KANBAN-VISUAL-STABILITY-FIX-1 — PASS — DASHBOARD SEARCH/KANBAN VISUAL STABILITY FIXED (2026-08-28)
+
+Status: **PASS — DASHBOARD SEARCH/KANBAN VISUAL STABILITY FIXED** — stabilized dashboard Kanban presentation during active search so visible lane windows remain structurally stable (4 desktop columns) and Cancelados does not disappear when filtered empty; refined operational search focus treatment to a single, quiet, accessible container `:focus-within` state (suppressing inner `.ui-input:focus` double ring); preserved order_code/name/phone search logic (`natural-search.ts` untouched), dashboard metrics, dashboard card root count, workspace/contact, DB/RPC/realtime and CSS-global boundaries; 14/14 deterministic verify scripts PASS — no commit / push / deploy
+
+Doc: `docs/admin-dashboard-search-kanban-visual-stability-fix-1.md`
+
+Dashboard search/Kanban visual stability: **FIXED**
+Cancelados lane during search: **STABLE**
+Search focus treatment: **SINGLE ACCESSIBLE FOCUS STATE**
+Dashboard order_code partial search: **REMAINS FIXED**
+Dashboard metrics semantics: **REMAIN FROZEN**
+Dashboard card root count: **REMAINS FROZEN**
+Order code block: **REMAINS CLOSED**
+Public success WhatsApp copy: **REMAINS FROZEN**
+Dashboard overall polish: **OPEN**
+
+---
+
+## Previous — ADMIN-DASHBOARD-ORDER-CODE-SEARCH-PARTIAL-MATCH-FIX-1 — PASS — DASHBOARD ORDER CODE PARTIAL SEARCH FIXED (2026-08-28)
+
+Status: **PASS — DASHBOARD ORDER CODE PARTIAL SEARCH FIXED** — fixed dashboard order_code partial search so alphanumeric code queries like `PGF5` remain constrained to matching order codes rather than falling through to broad single-digit phone matches and UUID hex matching; confirmed monotonic progressive narrowing (`PGF` $\to$ `PGF5` $\to$ `PGF5T` $\to$ `PGF5TU` $\to$ `#PGF5` $\to$ `pgf5`); preserved customer name, phone, legacy UUID-derived ref, and `#ORDER_CODE` search; 13/13 deterministic verify scripts PASS; zero changes to metrics, card root count, DB/SQL/RPC, or CSS — no commit / push / deploy
+
+Doc: `docs/admin-dashboard-order-code-search-partial-match-fix-1.md`
+
+Dashboard order_code partial search: **FIXED**
+PGF → PGF5 broadening bug: **CLOSED**
+Order code block: **REMAINS CLOSED**
+Dashboard metrics semantics: **REMAIN FROZEN**
+Dashboard card root count: **REMAINS FROZEN**
+Public success WhatsApp copy: **REMAINS FROZEN**
+Dashboard overall polish: **OPEN**
+
+---
+
+## Previous — ADMIN-DASHBOARD-METRICS-RUNTIME-QA-1 — PASS WITH ACCEPTED P3 QA DEBT — DASHBOARD METRICS SEMANTICS FROZEN (2026-08-28)
+
+Status: **PASS WITH ACCEPTED P3 QA DEBT — DASHBOARD METRICS SEMANTICS FROZEN** — completed formal runtime QA and closeout validation for admin dashboard metrics semantic fix; confirmed “Producto más pedido” strictly counts root products and excludes parent-linked child upsells (e.g., Coca Cola 500ml); confirmed ready waiting visible copy reflects “Listos para entrega/retiro” (detail: “Delivery y retiro en local”) while preserving `count(status === 'ready')`; confirmed revenue, average ticket, active orders, delayed orders, average prep time, kitchen status, dashboard card root count, order code `#ORDER_CODE` refs, workspace/contact, and public success WhatsApp remain intact; 12/12 deterministic verify scripts PASS; search partial-match edge case documented as separate P3 debt (`ADMIN-DASHBOARD-ORDER-CODE-SEARCH-PARTIAL-MATCH-FIX-1`); zero new runtime, CSS, or DB/SQL/RPC changes in this QA phase — no commit / push / deploy
+
+Doc: `docs/admin-dashboard-metrics-runtime-qa-1.md`
+
+Dashboard metrics semantics: **FROZEN**
+Top product KPI: **ROOT-ONLY PRODUCTO MÁS PEDIDO FROZEN**
+Ready waiting copy: **DELIVERY/RETIRO ACCURATE FROZEN**
+Revenue/ticket/active/delayed/time/kitchen formulas: **UNCHANGED**
+Dashboard card root count: **REMAINS FROZEN**
+Order code block: **REMAINS CLOSED**
+Public success WhatsApp copy: **REMAINS FROZEN**
+Search partial-match debt: **CLOSED (RESOLVED)**
+Dashboard overall polish: **OPEN**
+
+---
+
+## Previous — ADMIN-DASHBOARD-METRICS-SEMANTIC-FIX-1 — PASS — DASHBOARD METRICS SEMANTICS FIXED (2026-08-28)
+
+Status: **PASS — DASHBOARD METRICS SEMANTICS FIXED** — implemented targeted runtime semantic fix for admin dashboard top section metrics; updated `getTopProducts()` in `lib/orders/analytics.ts` to count root products only via `buildDashboardOrderItemTree` (excluding parent-linked child upsells like Coca Cola 500ml); relabeled KPI from “Más vendido” to “Producto más pedido”; updated ready waiting copy to “Listos para entrega/retiro” (detail: “Delivery y retiro en local”); preserved all other metric formulas (revenue, average ticket, active orders, delayed orders, average prep time, kitchen saturation); 8/8 test suites in `lib/orders/dashboard-metrics-semantic-fix.verify.ts` PASS; full regression verify suite PASS; 0 CSS, 0 DB/SQL/RPC, 0 realtime mutations — no commit / push / deploy
+
+Doc: `docs/admin-dashboard-metrics-semantic-fix-1.md`
+
+Dashboard metrics semantics: **IMPLEMENTED / READY FOR QA**
+Top product KPI: **ROOT-ONLY PRODUCTO MÁS PEDIDO**
+Ready waiting copy: **DELIVERY/RETIRO ACCURATE**
+Dashboard card root count: **REMAINS FROZEN**
+Order code block: **REMAINS CLOSED**
+Public success WhatsApp copy: **REMAINS FROZEN**
+Dashboard overall polish: **OPEN**
+
+---
+
+## Previous — ADMIN-DASHBOARD-METRICS-SEMANTIC-AUDIT-1 — PASS — AUDIT COMPLETE — READY FOR PRODUCT DECISION (2026-08-28)
+
+Status: **PASS — AUDIT COMPLETE — READY FOR PRODUCT DECISION** — completed forensic audit and product semantic specification of admin dashboard metrics across commercial KPIs (Revenue, Average Ticket, Active Orders, Top Product), operational KPIs (Kitchen Status, Delayed Orders, Average Prep Time, Ready Waiting), and session signals; pinpointed flat child upsell aggregation in `getTopProducts()` as root cause of "Coca Cola 500ml" surfacing as "Más vendido"; confirmed window scoping, status filters, and order item tree boundaries; zero runtime, CSS, DB/SQL/RPC, or realtime changes — no commit / push / deploy
+
+Doc: `docs/admin-dashboard-metrics-semantic-audit-1.md`
+
+Dashboard metrics semantics: **AUDITED / NOT IMPLEMENTED**
+Dashboard card root count: **REMAINS FROZEN**
+Order code block: **REMAINS CLOSED**
+Public success WhatsApp copy: **REMAINS FROZEN**
+Dashboard overall polish: **OPEN**
+
+---
+
+## Previous — PUBLIC-CATALOG-SUCCESS-WHATSAPP-BUSINESS-COPY-1 — PASS — PUBLIC SUCCESS WHATSAPP BUSINESS COPY FROZEN (2026-08-28)
+
+Status: **PASS — PUBLIC SUCCESS WHATSAPP BUSINESS COPY FROZEN** — updated the customer-facing WhatsApp message generated from the catalog success page (`/b/[slug]/success`) to be business-first (`Hola {businessName}, ya hice mi pedido {orderCode} desde el catálogo online. \nTe escribo para confirmarlo.`); raw orderCode used without `#` in WhatsApp text while success page card continues to display `#ORDER_CODE`; platform name and WhatsApp wording omitted; phone normalization preserved; deterministic verify `lib/whatsapp/public.verify.ts` PASS; full regression verify suite PASS; Next.js 16.2.9 production build PASS; TypeScript compilation PASS (0 errors); Order Code block, UUID routes, and Admin WhatsApp unchanged — no commit / push / deploy
+
+Doc: `docs/public-catalog-success-whatsapp-business-copy-1.md`
+
+Public success WhatsApp copy: **BUSINESS-FIRST + FROZEN**
+Order code block: **REMAINS CLOSED**
+UUID internal identity: **UNCHANGED**
+Public success visible ref: **REMAINS #ORDER_CODE**
+Admin WhatsApp/contact: **UNCHANGED**
+Dashboard overall polish: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDERS-ORDER-CODE-FINAL-RUNTIME-QA-1 — PASS WITH ACCEPTED P3 QA DEBT — ORDER CODE BLOCK CLOSED (2026-08-28)
+
+Status: **PASS WITH ACCEPTED P3 QA DEBT — ORDER CODE BLOCK CLOSED** — completed final runtime and verify closeout validation for the complete Order Code architectural block; confirmed visible references prefer `#ORDER_CODE` (`#K7M4Q9`) with safe legacy UUID-derived fallback; confirmed dashboard/admin search matches `order_code` with or without `#`, case-insensitively, alongside legacy ref, customer name, and phone searches; 10/10 deterministic verify scripts PASS; Next.js 16.2.9 production build PASS; TypeScript compilation PASS (0 errors); UUID routes, mutations, presence, realtime channels, pricing, and domain invariants strictly unchanged — no commit / push / deploy
+
+Doc: `docs/admin-orders-order-code-final-runtime-qa-1.md`
+
+Order code schema/RPC: **APPLIED + VALIDATED**
+Order code loaders/realtime: **IMPLEMENTED + FROZEN**
+Order code UI/search: **IMPLEMENTED + FROZEN**
+Order code block: **CLOSED**
+UUID internal identity: **UNCHANGED**
+Dashboard card root count: **REMAINS FROZEN**
+Contact/workspace scopes: **REMAIN FROZEN except order ref text adoption**
+Dashboard overall polish: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDERS-ORDER-CODE-UI-SEARCH-1 — PASS — ORDER CODE UI/SEARCH FROZEN (2026-08-28)
+
+Status: **PASS — ORDER CODE UI/SEARCH FROZEN** — migrated visible order references across admin dashboard cards, workspace modal header, order detail header, structured WhatsApp messages, plain-text Copy/Share summaries, and public success page to prefer `orders.order_code` with legacy UUID fallback; enabled operational search in dashboard/admin search by `order_code` (with/without `#`, case-insensitive, prefix/exact); verified deterministic helper and search coverage (`lib/orders/order-display-ref.verify.ts`, `lib/orders/order-code-ui-search.verify.ts`); verified 0 regressions in full verify suite; UUID internal identity strictly unchanged; no CSS or DB/RPC modifications — no commit / push / deploy
+
+Doc: `docs/admin-orders-order-code-ui-search-1.md`
+
+Order code schema/RPC: **APPLIED + VALIDATED**
+Order code loaders/realtime: **IMPLEMENTED + FROZEN**
+Order code UI/search: **IMPLEMENTED + FROZEN**
+UUID internal identity: **UNCHANGED**
+Dashboard card root count: **REMAINS FROZEN**
+Contact/workspace scopes: **REMAIN FROZEN except order ref text adoption**
+Dashboard overall polish: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDERS-ORDER-CODE-LOADERS-REALTIME-1 — PASS — ORDER CODE LOADERS/REALTIME READY (2026-08-28)
+
+Status: **PASS — ORDER CODE LOADERS/REALTIME READY** — propagated `orders.order_code` through admin data models (`AdminOrderListItem`, `AdminOrderDashboardItem`, `AdminOrderDetail`, `AdminOrderWorkspaceData`); updated initial dashboard loader (`getAdminOrders`), refresh endpoint (`/admin/dashboard/orders`), summary hydrate (`/admin/orders/[id]/summary`), workspace hydrate (`/admin/orders/[id]/workspace`), and detail page loader; updated realtime patchers (`patchDashboardOrderFromRealtime`, `patchWorkspaceOrderFromRealtime`) to preserve/update `order_code`; deterministic verify `lib/orders/order-code-loaders-realtime.verify.ts` PASS; UUID internal identity unchanged; UI/display/search migration deferred — no commit / push / deploy
+
+Doc: `docs/admin-orders-order-code-loaders-realtime-1.md`
+
+Order code schema/RPC: **APPLIED + VALIDATED**
+Order code loaders/realtime: **IMPLEMENTED + FROZEN**
+Order code display/search: **DEFERRED / NOT IMPLEMENTED**
+UUID internal identity: **UNCHANGED**
+Dashboard card root count: **REMAINS FROZEN**
+Contact messaging / workspace scopes: **REMAIN FROZEN**
+Dashboard overall polish: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDERS-ORDER-CODE-DB-APPLY-VALIDATION-1 — PASS — ORDER CODE DB APPLY VALIDATED (2026-08-28)
+
+Status: **PASS — ORDER CODE DB APPLY VALIDATED** — live DB introspection confirmed manual SQL apply; `orders.order_code` exists (text, NOT NULL); `orders_order_code_format_chk` enforces exact 30-char unambiguous alphabet `23456789ABCDEFGHJKMNPQRSTUVWXYZ`; `orders_business_order_code_uidx` enforces per-business uniqueness; `public.generate_order_code()` verified via 20-sample generation; `public.create_order` live definition verified (returns UUID, generates order_code with 5-retry loop); 100% of existing 67 orders backfilled with valid codes (0 null, 0 invalid, 0 duplicate); types aligned; UI/display/search migration deferred — no commit / push / deploy
+
+Doc: `docs/admin-orders-order-code-db-apply-validation-1.md`
+
+Order code schema/RPC: **APPLIED + VALIDATED**
+Order code display/search: **DEFERRED / NOT IMPLEMENTED**
+UUID internal identity: **UNCHANGED**
+Dashboard card root count: **REMAINS FROZEN**
+Contact messaging / workspace scopes: **REMAIN FROZEN**
+Dashboard overall polish: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDERS-ORDER-CODE-SCHEMA-RPC-1 — PASS WITH DB APPLY QA DEBT — ORDER CODE SCHEMA/RPC READY (2026-08-27)
+
+Status: **PASS WITH DB APPLY QA DEBT — ORDER CODE SCHEMA/RPC READY** — added SQL migration `20260827234500_add_orders_order_code.sql`; `generate_order_code()` with 30-char unambiguous alphabet `23456789ABCDEFGHJKMNPQRSTUVWXYZ`; idempotent backfill; `orders.order_code` NOT NULL + CHECK format + unique index per business `(business_id, order_code)`; `create_order` updated to generate `order_code` transactionally with 5-retry loop; `types/database.ts` updated; UUID routing/internal identity unchanged; UI/display/search migration deferred — no commit / push / deploy
+
+Doc: `docs/admin-orders-order-code-schema-rpc-1.md`
+
+Order code schema/RPC: **IMPLEMENTED LOCALLY / READY FOR DB APPLY**
+Order code display/search: **DEFERRED / NOT IMPLEMENTED**
+UUID internal identity: **UNCHANGED**
+Dashboard card root count: **REMAINS FROZEN**
+Contact messaging / workspace scopes: **REMAIN FROZEN**
+Dashboard overall polish: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDERS-ORDER-CODE-AUDIT-SPEC-1 — AUDIT/SPEC COMPLETE — READY FOR IMPLEMENTATION (2026-08-27)
+
+Status: **AUDIT/SPEC COMPLETE — READY FOR IMPLEMENTATION** — audited current UUID-derived order display reference ownership (`buildOrderDisplayRef`); specified future `orders.order_code` column (6-char unambiguous alphanumeric `[23456789ABCDEFGHJKMNPQRSTUVWXYZ]`, unique per tenant `(business_id, order_code)`); generation inside `create_order` RPC with 5-retry collision loop; backfill plan with fallback; display/search mapping; UUID internal identity strictly preserved — no runtime/CSS/DB/RPC changes — no commit / push / deploy
+
+Doc: `docs/admin-orders-order-code-audit-spec-1.md`
+
+Order code: **SPECIFIED — NOT IMPLEMENTED**
+UUID internal identity: **UNCHANGED**
+Dashboard card root count: **REMAINS FROZEN**
+Contact messaging / workspace scopes: **REMAIN FROZEN**
+Dashboard overall polish: **OPEN**
+
+---
+
+## Previous — ADMIN-DASHBOARD-ORDER-CARD-ROOT-ITEM-COUNT-IMPL-1 — PASS — DASHBOARD CARD ROOT COUNT FROZEN (2026-08-27)
+
+Status: **PASS — DASHBOARD CARD ROOT COUNT FROZEN** — root-product-based `item_count` and root-only compact `item_summary` on dashboard OrderCard; parent-linked upsell/Adicional children excluded from card scalars; initial load, summary hydrate and realtime patch share `buildDashboardOrderCardSummary`; workspace/modal/WhatsApp/pricing/natural search unchanged — no commit / push / deploy
+
+Doc: `docs/admin-dashboard-order-card-root-item-count-impl-1.md`
+
+Dashboard card root count: **IMPLEMENTED + FROZEN**
+Dashboard compact item summary: **ROOT-ONLY + FROZEN**
+Contact messaging / workspace scopes: **REMAIN FROZEN**
+Dashboard overall polish: **OPEN**
+
+---
+
+## Previous — ADMIN-DASHBOARD-ORDER-CARD-ROOT-ITEM-COUNT-AUDIT-1 — AUDIT COMPLETE — READY FOR IMPLEMENTATION (2026-08-27)
+
+Status: **AUDIT COMPLETE — READY FOR IMPLEMENTATION** — dashboard OrderCard `N items` / compact summary traced to `buildOrderOperationalSummary`; current semantics sum all flat `order_items` rows including upsell children; recommended root-quantity fix via shared helper + mapping/realtime — no runtime/CSS/DB changes — no commit / push / deploy
+
+Doc: `docs/admin-dashboard-order-card-root-item-count-audit-1.md`
+
+Dashboard card root count: **AUDITED — NOT IMPLEMENTED**
+Contact messaging / workspace scopes: **REMAIN FROZEN**
+Dashboard overall polish: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-CONTACT-SURFACE-CONTRAST-TUNING-1 — PASS WITH REAL-DEVICE QA DEBT (2026-08-27)
+
+Status: **PASS WITH REAL-DEVICE QA DEBT** — workspace right-rail Contact/control surface contrast tuned locally; light theme materiality improved; hierarchy/content/handlers unchanged; detail legacy unchanged; real Android NOT EXECUTED — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-contact-surface-contrast-tuning-1.md`
+
+Contact messaging content: **STRUCTURED + FROZEN**
+Contact messaging visual hierarchy: **FROZEN**
+Secondary utilities visual hierarchy: **FROZEN**
+Contact/right-rail surface contrast: **FROZEN**
+Contextual WhatsApp default: **REMAINS PASS**
+Information hierarchy: **REMAINS FROZEN**
+Products / Status / Persistent mobile CTA: **REMAIN FROZEN**
+Dashboard visual polish overall: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-SECONDARY-ACTIONS-VISUAL-POLISH-1 — PASS WITH REAL-DEVICE QA DEBT (2026-08-27)
+
+Status: **PASS WITH REAL-DEVICE QA DEBT** — workspace secondary utilities polished as compact icon-labeled tools; action targets/gating unchanged; Contact messaging frozen; detail legacy unchanged; real Android / explicit 390 light screenshot NOT EXECUTED — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-secondary-actions-visual-polish-1.md`
+
+Contact messaging content: **STRUCTURED + FROZEN**
+Contact messaging visual hierarchy: **FROZEN**
+Secondary utilities visual hierarchy: **FROZEN**
+Contextual WhatsApp default: **REMAINS PASS**
+Information hierarchy: **REMAINS FROZEN**
+Products / Status / Persistent mobile CTA: **REMAIN FROZEN**
+Dashboard visual polish overall: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-CONTACT-MESSAGING-VISUAL-HIERARCHY-VALIDATION-1 — PASS WITH REAL-DEVICE QA DEBT (2026-08-27)
+
+Status: **PASS WITH REAL-DEVICE QA DEBT** — authenticated browser matrix PASS @390/360/430/719/720/1440 light+dark; detail route legacy unchanged; manual override + delivery fixture PASS; real Android NOT EXECUTED — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-contact-messaging-visual-hierarchy-validation-1.md`
+
+Contact messaging content: **STRUCTURED / FROZEN**
+Contact messaging visual hierarchy: **FROZEN** (authenticated validation closed)
+Contextual WhatsApp default: **REMAINS PASS**
+Secondary utilities visual polish: **DEFERRED / NOT POLISHED**
+Information hierarchy: **REMAINS FROZEN**
+Products / Status / Persistent mobile CTA: **REMAIN FROZEN**
+Dashboard visual polish overall: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-CONTACT-MESSAGING-VISUAL-HIERARCHY-POLISH-1 — PASS WITH REAL-DEVICE QA DEBT (2026-08-22)
+
+Status: **PASS WITH REAL-DEVICE QA DEBT** — workspace Contacto hierarchy implemented; authenticated validation deferred — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-contact-messaging-visual-hierarchy-polish-1.md`
+
+Contact messaging content: **STRUCTURED / FROZEN**
+Contact messaging visual hierarchy: **FROZEN**
+Contextual WhatsApp default: **REMAINS PASS**
+Secondary utilities visual polish: **DEFERRED / NOT POLISHED**
+Dashboard visual polish overall: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-CONTACT-MESSAGING-STRUCTURED-CONTENT-IMPL-1 — PASS — STRUCTURED CONTACT MESSAGING FROZEN (2026-08-22)
+
+Status: **PASS** — snapshot-derived customer order summaries for WhatsApp/Copy/Share; received/summary rich; status pings minimal; Total omitted; contextual default unchanged — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-contact-messaging-structured-content-impl-1.md`
+
+Contact messaging content: **STRUCTURED / FROZEN** (superseded by visual hierarchy phase for presentation only)
+Contextual WhatsApp default: **REMAINS PASS**
+Secondary actions: **DEFERRED**
+Dashboard visual polish overall: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-CONTACT-MESSAGING-CONTENT-AUDIT-1 — AUDIT COMPLETE — READY FOR PRODUCT DECISIONS (2026-08-21)
+
+Status: **AUDIT COMPLETE — READY FOR PRODUCT DECISIONS** — WhatsApp/Contact message bodies audited vs V1/V2 preparation; flat `qty×name` gap documented; architecture Option B recommended; contextual default UNCHANGED; no runtime/CSS/DB changes — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-contact-messaging-content-audit-1.md`
+
+Contact messaging: **AUDITED / NOT YET IMPLEMENTED** (superseded by structured-content impl)
+Contextual WhatsApp default: **REMAINS PASS**
+Contact visual polish: **NOT STARTED**
+Secondary actions: **DEFERRED**
+Dashboard visual polish overall: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-MOBILE-INFORMATION-HIERARCHY-CLEANUP-1 — PASS WITH REAL-DEVICE QA DEBT (2026-08-21)
+
+Status: **PASS WITH REAL-DEVICE QA DEBT** — quieter Indicaciones; Cliente/Entrega compact 2×2 without visible micro-labels; full order-owned name; display-only BA phone formatting; Activity removed from workspace only; Contacto/status/Products/persistent CTA unchanged; real Android/light/1440 NOT EXECUTED — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-mobile-information-hierarchy-cleanup-1.md`
+
+Information hierarchy: **FROZEN**
+Manual status control: **REMAINS PASS**
+Persistent mobile contextual action: **REMAINS PASS**
+Contextual status runtime gate: **REMAINS CLOSED**
+Manual status cancellation safety: **REMAINS PASS**
+WhatsApp contextual default: **REMAINS PASS**
+Products: **REMAINS FROZEN**
+Contacto: **DEFERRED / UNCHANGED**
+Dashboard visual polish overall: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-MANUAL-STATUS-CONTROL-VISUAL-POLISH-1 — PASS WITH REAL-DEVICE QA DEBT (2026-08-21)
+
+Status: **PASS WITH REAL-DEVICE QA DEBT** — native select + feature-local chevron; Guardar secondary + disabled when unchanged; cancel/contextual/mutation architecture unchanged; real Android NOT EXECUTED — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-manual-status-control-visual-polish-1.md`
+
+Desktop workspace visual/UX: **REMAINS FROZEN** (manual-control polish only)
+Mobile workspace: **REMAINS FROZEN** (manual-control polish only)
+Persistent mobile contextual action: **REMAINS PASS**
+Contextual status runtime gate: **REMAINS CLOSED**
+Manual status cancellation safety: **REMAINS PASS**
+WhatsApp contextual default: **REMAINS PASS**
+Dashboard visual polish overall: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-MOBILE-PERSISTENT-STATUS-ACTION-1 — PASS WITH REAL-DEVICE QA DEBT — MOBILE WORKSPACE FROZEN (2026-08-21)
+
+Status: **PASS WITH REAL-DEVICE QA DEBT** — authenticated footer matrix pending→preparing→ready→completed PASS; 719/720 placement PASS; single mutation controller; mobile Estado heading sr-only; real Android NOT EXECUTED — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-mobile-persistent-status-action-1.md`
+
+Desktop workspace visual/UX: **REMAINS FROZEN**
+Mobile workspace: **FROZEN** (agent matrix PASS; real Android NOT EXECUTED)
+Contextual status runtime gate: **REMAINS CLOSED**
+Manual status cancellation safety: **REMAINS PASS**
+WhatsApp contextual default: **REMAINS PASS**
+Dashboard visual polish overall: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-MOBILE-PREPARATION-QUANTITY-THREE-TRACK-POLISH-1 — PASS WITH REAL-DEVICE QA DEBT (2026-08-21)
+
+Status: **PASS WITH REAL-DEVICE QA DEBT** — quantity-enabled mobile rows = label | per-unit | total; simple coverage/qty remain two-track; mapper/pricing/shell/header/desktop unchanged — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-mobile-preparation-quantity-three-track-polish-1.md`
+
+Desktop workspace visual/UX: **REMAINS FROZEN**
+Mobile workspace: **FROZEN** (agent matrix PASS; real Android NOT EXECUTED)
+Contextual status runtime gate: **REMAINS CLOSED**
+Manual status cancellation safety: **REMAINS PASS**
+WhatsApp contextual default: **REMAINS PASS**
+Dashboard visual polish overall: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-MOBILE-FULLSCREEN-LAYOUT-POLISH-1 — PASS WITH REAL-DEVICE QA DEBT (2026-08-21)
+
+Status: **PASS WITH REAL-DEVICE QA DEBT** — mobile ≤719px full-screen `100dvh` workstation; deliberate 2-row header; preparation option/metadata two-track (superseded for quantity-enabled by three-track follow-up); Cliente/Entrega address full-width; desktop ≥720 unchanged / FROZEN — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-mobile-fullscreen-layout-polish-1.md`
+
+Desktop workspace visual/UX: **REMAINS FROZEN**
+Mobile workspace: **FROZEN** (agent matrix PASS; real Android NOT EXECUTED)
+Contextual status runtime gate: **REMAINS CLOSED**
+Manual status cancellation safety: **REMAINS PASS**
+WhatsApp contextual default: **REMAINS PASS**
+Dashboard visual polish overall: **OPEN**
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-FINAL-VISUAL-UX-QA-1 — PASS WITH NON-BLOCKING P3 DEBT — WORKSPACE FROZEN (2026-08-21)
+
+Status: **PASS WITH NON-BLOCKING P3 DEBT — WORKSPACE FROZEN** — integrated visual/UX/operational QA; P0/P1/P2 = 0; manual correction ACCEPTABLE; non-sticky action KEEP; P3 only (age copy + dual pending labels); no runtime/CSS changes — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-final-visual-ux-qa-1.md`
+
+Workspace visual/UX: **FROZEN** (future changes need explicit regression or new product requirement)
+Contextual status runtime gate: **REMAINS CLOSED**
+Manual status cancellation safety: **REMAINS PASS**
+WhatsApp contextual default: **REMAINS PASS**
+Dashboard visual polish overall: **OPEN** (workspace sub-scope **CLOSED**)
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-WHATSAPP-CONTEXTUAL-DEFAULT-POLISH-1 — PASS (2026-08-20)
+
+Status: **PASS** — workspace WhatsApp default follows status + delivery_method; completed+delivery defaults to Enviar resumen (not Confirmar dirección); manual override preserved until context changes; detail surfaces unchanged — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-whatsapp-contextual-default-polish-1.md`
+
+Contextual status runtime gate: **REMAINS CLOSED**
+Manual status cancellation safety: **REMAINS PASS**
+Dashboard visual polish overall remains OPEN.
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-MANUAL-STATUS-CORRECTION-SAFETY-POLISH-1 — PASS (2026-08-20)
+
+Status: **PASS** — manual Cancelado requires inline confirmation before existing status mutation; first Guardar never mutates; Volver resets select; contextual CTA / non-cancel manual path unchanged; stock side effect not directly verified — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-manual-status-correction-safety-polish-1.md`
+
+Contextual status runtime gate: **REMAINS CLOSED**
+Dashboard visual polish overall remains OPEN.
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-CONTEXTUAL-STATUS-ACTION-RUNTIME-VALIDATION-RESUME-1 — PASS WITH NON-BLOCKING QA DEBT (2026-08-20)
+
+Status: **PASS WITH NON-BLOCKING QA DEBT** — authenticated matrix pending→preparing→ready→completed PASS; P1 expectedStatus crash NONE; hard contextual runtime gate CLOSED — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-contextual-status-action-runtime-validation-resume-1.md`
+
+Dashboard visual polish overall remains OPEN.
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-STATUS-PENDING-MUTATION-FINALIZATION-FIX-1 — PASS WITH QA DEBT (2026-08-20)
+
+Status: **PASS WITH QA DEBT** — P1 finalization crash fixed + regression verify PASS; authenticated runtime matrix still blocked at login — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-status-pending-mutation-finalization-fix-1.md`
+
+Root cause: `clearPendingMutationKind` deletes `status` in place; post-clear trace read `pendingMutation.status.expectedStatus`. Snapshot-before-clear fix. Dashboard visual polish overall remains OPEN.
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-CONTEXTUAL-STATUS-ACTION-VALIDATION-1 — PASS WITH FOLLOW-UP DEBT (2026-08-19)
+
+Status: **PASS WITH FOLLOW-UP DEBT** — runtime mutation QA blocked; source + static validation PASS — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-contextual-status-action-validation-1.md`
+
+Source architecture validated (single mutation path, CTA/manual isolation, terminal behavior). Authenticated runtime transition matrix, network/event proof, and responsive visual QA remain pending. Dashboard visual polish overall remains OPEN.
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-CONTEXTUAL-STATUS-ACTION-FLOW-1 — PASS WITH VISUAL QA DEBT (2026-08-19)
+
+Status: **PASS WITH VISUAL QA DEBT** — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-contextual-status-action-flow-1.md`
+
+Contextual status action flow: standalone Próximo paso/Estado final removed from workspace; one-click transitions via existing mutation path; manual selector secondary; workspace Activity max 2. WhatsApp smart default deferred. Dashboard visual polish overall remains OPEN.
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-CUSTOMER-DELIVERY-RAIL-REALIGNMENT-1 — PASS WITH VISUAL QA DEBT (2026-08-19)
+
+Status: **PASS WITH VISUAL QA DEBT** — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-customer-delivery-rail-realignment-1.md`
+
+Cliente/Entrega moved from execution rail to operational rail (after Estado, before Contacto). Left rail: Productos → Indicaciones → Actividad. Independent rails/ratio/scroll unchanged. Contextual CTA and WhatsApp default remain Phase B. Dashboard visual polish overall remains OPEN.
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-INFORMATION-HIERARCHY-POLISH-1 — PASS WITH VISUAL QA DEBT (2026-08-19)
+
+Status: **PASS WITH VISUAL QA DEBT** — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-information-hierarchy-polish-1.md`
+
+Phase A information hierarchy: workstation header includes Delivery/Retiro; Indicaciones after Productos (hidden when empty); Activity last on left rail; terminal eyebrow `Estado final`. Independent rails/ratio unchanged. Contextual CTA and WhatsApp default remain Phase B. Dashboard visual polish overall remains OPEN.
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-INFORMATION-ACTION-FLOW-AUDIT-1 — AUDIT COMPLETE — PRODUCT DECISIONS REQUIRED (2026-08-19)
+
+Status: **AUDIT COMPLETE — PRODUCT DECISIONS REQUIRED** — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-information-action-flow-audit-1.md`
+
+Information/action flow audit: workspace PARTIALLY OPTIMIZED; notes placement, non-actionable Próximo paso, WhatsApp default selection, and header delivery context are primary P2 gaps. Contextual status CTA feasible via existing mutation path. Implementation phasing A (hierarchy) + B (action flow) recommended.
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-INDEPENDENT-RAILS-LAYOUT-FIX-1 — PASS WITH VISUAL QA DEBT (2026-08-19)
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-PREPARATION-NUMERIC-DENSITY-VISUAL-POLISH-1 — PASS WITH VISUAL QA DEBT (2026-08-19)
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-PREPARATION-PRODUCT-HEADER-TRACK-REGRESSION-FIX-1 — PASS WITH VISUAL QA DEBT (2026-08-18)
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-PREPARATION-COLUMN-ALIGNMENT-VISUAL-FIX-1 — PASS WITH VISUAL QA DEBT (2026-08-18)
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-PREPARATION-PER-UNIT-TOTAL-ADDITIONAL-POLISH-1 — PASS WITH VISUAL QA DEBT (2026-08-18)
+
+Status: **PASS WITH VISUAL QA DEBT** — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-preparation-per-unit-total-additional-polish-1.md`
+
+Operational clarity polish: parent qty>1 shows unit price + line total; standard selections show `Ambas`/`N total`; V2 qty-enabled shows `×N c/u` + operational total; Adicional without child price. Mapper minimally extended for V2 `allows_option_quantity`. Authenticated viewport QA pending.
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-PRODUCT-PREPARATION-VISUAL-SEPARATION-POLISH-1 — PASS WITH VISUAL QA DEBT (2026-08-18)
+
+Status: **PASS WITH VISUAL QA DEBT** — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-product-preparation-visual-separation-polish-1.md`
+
+Visual separation polish: product-unit surface, spec-style groups, Adicional boundary. Mapper/data contract unchanged. Authenticated viewport QA pending.
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-PRODUCT-PREPARATION-HIERARCHY-1 — PASS WITH VISUAL QA DEBT (2026-08-18)
+
+Status: **PASS WITH VISUAL QA DEBT** — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-product-preparation-hierarchy-1.md`
+
+Snapshot-derived structured preparation hierarchy for admin workspace/detail Products: V2 quantity-aware, V1 structured fallback, legacy flat fallback, Adicional upsell label, option prices omitted. Shared renderer via `OrderProductsList`. Authenticated viewport QA pending.
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-PRODUCT-PREPARATION-HIERARCHY-AUDIT-1 — AUDIT COMPLETE (2026-08-18)
+
+Status: **AUDIT COMPLETE — READY FOR IMPLEMENTATION** — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-product-preparation-hierarchy-audit-1.md`
+
+Audited order-item → snapshot V1/V2 → admin Products renderer path. Verdict: PARTIALLY SUPPORTED. Presentation-only implementation feasible.
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-MODAL-ACTION-HIERARCHY-VISUAL-FIX-1 — PASS WITH VISUAL QA DEBT (2026-08-18)
+
+Status: **PASS WITH VISUAL QA DEBT** — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-modal-action-hierarchy-visual-fix-1.md`
+
+Corrective visual microfase: single visible Estado (sr-only field label); terminal CTA quiet surface; WhatsApp secondary; contact heading de-duplicated. Functional workflow unchanged. Authenticated viewport matrix still pending.
+
+---
+
+## Previous — ADMIN-ORDER-WORKSPACE-MODAL-HIERARCHY-POLISH-1 — PASS WITH VISUAL QA DEBT (2026-08-18)
+
+Status: **PASS WITH VISUAL QA DEBT** — no commit / push / deploy
+
+Doc: `docs/admin-order-workspace-modal-hierarchy-polish-1.md`
+
+Workspace modal hierarchy polish: information left / operations right; de-nested right rail; Próximo paso copy; Unicode fix; CTA hierarchy. Functional workflow unchanged. Browser viewport matrix pending login.
+
+---
+
+## Previous — ADMIN-ORDER-RESPONSIBILITY-FEATURE-FLAG-VALIDATION-1 — PASS (2026-08-17)**
+
+Status: **PASS — VALIDATED** — no commit / push / deploy
+
+Doc: `docs/admin-order-responsibility-feature-flag-validation-1.md`
+
+Schema aligned on dev target. Flag default OFF. OFF/ON/ON→OFF→ON matrix passed. Server assignment gate validated. Assignment data + realtime/reconciliation preserved. Final QA tenant restored to OFF.
+
+---
+
+## Previous — ADMIN-ORDER-RESPONSIBILITY-FEATURE-FLAG-1 (2026-08-17)
+
+Status: **PASS — VALIDATED**
+
+Doc: `docs/admin-order-responsibility-feature-flag-1.md`
+
+Tenant flag `order_assignment_enabled` (default OFF). UI gated via `orderResponsibilityEnabled`. Server action hardened. Data/realtime/reconciliation preserved. No Settings toggle.
+
+---
+
+## Previous — ADMIN-ORDER-RESPONSIBILITY-FEATURE-FLAG-AUDIT-1 (2026-08-17)
+
+Status: **AUDIT COMPLETE** — no runtime/CSS/DB changes
+
+Doc: `docs/admin-order-responsibility-feature-flag-audit-1.md`
+
+End-to-end map of order assignment/responsibility UI, actions, data, realtime. Recommended flag: `business_settings.order_assignment_enabled` (default false). Server-action hardening required. Living audit reconciled.
+
+---
+
+## Previous — ADMIN-DASHBOARD-KANBAN-LANE-PAGER-VISUAL-FIX-1 (2026-08-17)
+
+Status: **PASS** — visual follow-up closed; no commit / push / deploy
+
+Doc: `docs/admin-dashboard-kanban-lane-pager-visual-fix-1.md`
+
+Pager moved from Completados overlay to compact board navigation row (right primary / left terminal). Neutral secondary treatment. Lane geometry + realtime/domain unchanged.
+
+---
+
+## Previous — ADMIN-DASHBOARD-KANBAN-TERMINAL-LANE-PAGER-1 (2026-08-17)
+
+**ADMIN-DASHBOARD-KANBAN-TERMINAL-LANE-PAGER-1 — FUNCTIONAL PASS + VISUAL FOLLOW-UP CLOSED (2026-08-17)**
+
+Status: **FUNCTIONAL PASS** — visual placement closed in `ADMIN-DASHBOARD-KANBAN-LANE-PAGER-VISUAL-FIX-1`
+
+Doc: `docs/admin-dashboard-kanban-terminal-lane-pager-1.md`
+
+Desktop Kanban (≥1200px) always shows 4 lanes. Cancelled accessed via local `"primary" | "terminal"` pager. Realtime/reconciliation untouched. Living audit reconciled.
+
+---
+
+## Previous — ADMIN-DASHBOARD-FORENSIC-LIVING-AUDIT-1 (2026-08-17)
+
+**ADMIN-DASHBOARD-FORENSIC-LIVING-AUDIT-1 — AUDIT COMPLETE — LIVING SOURCE OF TRUTH ESTABLISHED (2026-08-17)**
+
+Status: **AUDIT COMPLETE — LIVING SOURCE OF TRUTH ESTABLISHED**
+
+Living doc: `docs/admin-dashboard-forensic-living-audit.md`
+Baseline commit: `81b1162`
+Docs-only. No runtime/CSS/DB changes.
+
+---
+
+## Previous — PUBLIC-CATALOG-FOOTER-CART-BOTTOM-SPACING-POLISH (2026-08-16)
+
+**PUBLIC-CATALOG-FOOTER-CART-BOTTOM-SPACING-POLISH — LOCAL COMPLETE (2026-08-16)**
+
+Status: PASS WITH ANDROID DEVICE QA PENDING
+
+Doc: `docs/public-catalog-footer-cart-bottom-spacing-polish.md`
+
+`.catalog-page--with-cart` padding-bottom: `100px`/`118px` → `calc(52px + max(14px, env(safe-area-inset-bottom)) + 10px)` (~76px base). FAB/footer design unchanged. CSS-only. No commit/push/deploy.
+
+---
+
+## Previous closed — PUBLIC-CATALOG-CHROME-FINAL-CLOSEOUT-1 (2026-08-15)
+
 **PUBLIC-CATALOG-CHROME-FINAL-CLOSEOUT-1 — CLOSED (2026-08-15)**
 
 Status: **PASS** — ANDROID REAL-DEVICE QA COMPLETE (drawer + footer)

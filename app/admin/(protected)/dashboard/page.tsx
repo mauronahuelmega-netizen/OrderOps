@@ -2,15 +2,18 @@ import AudioUnlockGate from "@/components/admin/notifications/audio-unlock-gate"
 import AdminDashboardOrders from "@/components/admin/orders/admin-dashboard-orders";
 import AdminPageLayout from "@/components/admin/admin-page-layout";
 import { requireAdminContext } from "@/lib/admin/context";
+import { isOrderAssignmentEnabled } from "@/lib/orders/assignment-flags";
 import { getAdminOrders } from "@/lib/orders/admin";
 import { getActiveStoreSession, getLastClosedStoreSession } from "@/lib/store-sessions/admin";
 
 export default async function AdminDashboardPage() {
   const adminContext = await requireAdminContext();
-  const [orders, activeStoreSession, lastClosedStoreSession] = await Promise.all([
+  const [orders, activeStoreSession, lastClosedStoreSession, orderResponsibilityEnabled] =
+    await Promise.all([
     getAdminOrders(adminContext.businessId),
     getActiveStoreSession(adminContext.businessId),
-    getLastClosedStoreSession(adminContext.businessId)
+    getLastClosedStoreSession(adminContext.businessId),
+    isOrderAssignmentEnabled(adminContext.businessId)
   ]);
   const catalogHref = adminContext.businessSlug
     ? `/b/${adminContext.businessSlug}/catalogo`
@@ -36,6 +39,7 @@ export default async function AdminDashboardPage() {
         initialActiveStoreSession={activeStoreSession}
         initialLastClosedStoreSession={lastClosedStoreSession}
         canManageStoreSession={adminContext.permissions.canManagePublicSettings}
+        orderResponsibilityEnabled={orderResponsibilityEnabled}
       />
     </AdminPageLayout>
   );

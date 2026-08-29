@@ -2,6 +2,7 @@
 
 import { getActionErrorMessage, logActionFailure } from "@/lib/admin/action-errors";
 import { requireAdminPermission } from "@/lib/admin/context";
+import { isOrderAssignmentEnabled } from "@/lib/orders/assignment-flags";
 import { createOrderEvent } from "@/lib/orders/events.server";
 import {
   presentOrderTimelineEvent,
@@ -324,6 +325,15 @@ export async function updateOrderAssignmentAction(
 
   try {
     const adminContext = await requireAdminPermission("updateOrders");
+
+    const orderAssignmentEnabled = await isOrderAssignmentEnabled(adminContext.businessId);
+
+    if (!orderAssignmentEnabled) {
+      return {
+        error: "La asignacion de responsables no esta habilitada para este negocio."
+      };
+    }
+
     const supabase = await createSupabaseServerClient();
 
     const { data: currentOrder, error: currentOrderError } = await supabase

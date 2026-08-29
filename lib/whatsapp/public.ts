@@ -1,15 +1,25 @@
 export function buildPublicOrderWhatsappUrl(input: {
   whatsappNumber: string;
+  businessName?: string;
   orderId?: string;
+  orderRef?: string;
 }) {
   const cleanedNumber = input.whatsappNumber.replace(/[^\d]/g, "");
-  const lines = ["¡Hola! Ya registré mi pedido en OrderOps."];
+  const businessGreeting = input.businessName?.trim()
+    ? `Hola ${input.businessName.trim()}`
+    : "Hola";
 
-  if (input.orderId) {
-    lines.push(`Pedido: ${input.orderId}`);
-  }
+  const rawRef = (input.orderRef || input.orderId || "").trim();
+  const orderCode = rawRef.replace(/^#+/, "");
 
-  lines.push("Te escribo para continuar la confirmación por WhatsApp.");
+  const firstLine = orderCode
+    ? `${businessGreeting}, ya hice mi pedido ${orderCode} desde el catálogo online.`
+    : `${businessGreeting}, ya hice mi pedido desde el catálogo online.`;
+
+  const lines = [
+    firstLine,
+    "Te escribo para confirmarlo."
+  ];
 
   const message = encodeURIComponent(lines.join("\n"));
 

@@ -35,6 +35,7 @@ export type Database = {
           inactive_working_days: number[];
           kitchen_mode_active: boolean;
           on_demand_mode_active: boolean;
+          order_assignment_enabled: boolean;
           product_customization_enabled: boolean;
           scheduled_cutoff_time: string;
           scheduled_max_days_in_advance: number;
@@ -49,6 +50,7 @@ export type Database = {
           inactive_working_days?: number[];
           kitchen_mode_active?: boolean;
           on_demand_mode_active?: boolean;
+          order_assignment_enabled?: boolean;
           product_customization_enabled?: boolean;
           scheduled_cutoff_time?: string;
           scheduled_max_days_in_advance?: number;
@@ -63,6 +65,7 @@ export type Database = {
           inactive_working_days?: number[];
           kitchen_mode_active?: boolean;
           on_demand_mode_active?: boolean;
+          order_assignment_enabled?: boolean;
           product_customization_enabled?: boolean;
           scheduled_cutoff_time?: string;
           scheduled_max_days_in_advance?: number;
@@ -453,6 +456,7 @@ export type Database = {
           delivery_time: string | null;
           id: string;
           notes: string | null;
+          order_code: string;
           phone: string;
           status: OrderStatus;
           total_price: number;
@@ -469,6 +473,7 @@ export type Database = {
           delivery_time?: string | null;
           id?: string;
           notes?: string | null;
+          order_code?: string;
           phone: string;
           status?: OrderStatus;
           total_price: number;
@@ -485,6 +490,7 @@ export type Database = {
           delivery_time?: string | null;
           id?: string;
           notes?: string | null;
+          order_code?: string;
           phone?: string;
           status?: OrderStatus;
           total_price?: number;

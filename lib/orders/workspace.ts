@@ -20,6 +20,7 @@ export function buildAdminOrderInitialDetail(
     return {
       ...cachedDetail,
       id: order.id,
+      order_code: order.order_code,
       created_at: order.created_at,
       customer_name: order.customer_name,
       phone: order.phone,
@@ -38,6 +39,7 @@ export function buildAdminOrderInitialDetail(
 
   return {
     id: order.id,
+    order_code: order.order_code,
     created_at: order.created_at,
     customer_name: order.customer_name,
     phone: order.phone,

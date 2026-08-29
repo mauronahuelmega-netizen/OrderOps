@@ -126,6 +126,7 @@ type AdminDashboardOrdersProps = {
   canManageProducts?: boolean;
   initialActiveStoreSession?: StoreSession | null;
   initialLastClosedStoreSession?: StoreSession | null;
+  orderResponsibilityEnabled?: boolean;
 };
 
 const DASHBOARD_SCROLL_KEY = "admin-dashboard-scroll";
@@ -307,7 +308,8 @@ export default function AdminDashboardOrders({
   notificationPreferences,
   currentUserRole,
   initialActiveStoreSession = null,
-  initialLastClosedStoreSession = null
+  initialLastClosedStoreSession = null,
+  orderResponsibilityEnabled = false
 }: AdminDashboardOrdersProps) {
   const router = useRouter();
   const { pushToast } = useAdminToast();
@@ -1768,10 +1770,11 @@ export default function AdminDashboardOrders({
         assessOrderRisk({
           order,
           operationalMetrics,
-          now
+          now,
+          includeAssignmentRisk: orderResponsibilityEnabled
         })
       ),
-    [filteredOrders, now, operationalMetrics]
+    [filteredOrders, now, operationalMetrics, orderResponsibilityEnabled]
   );
 
   const orderRiskAssessmentMap = useMemo(
@@ -1851,10 +1854,10 @@ export default function AdminDashboardOrders({
     () =>
       buildOrderContextualPresenceLabel({
         viewingNames: selectedOrderPresenceNames,
-        assignedTo: selectedOrder?.assigned_to ?? null,
+        assignedTo: orderResponsibilityEnabled ? (selectedOrder?.assigned_to ?? null) : null,
         onlineOperators
       }),
-    [onlineOperators, selectedOrder?.assigned_to, selectedOrderPresenceNames]
+    [onlineOperators, orderResponsibilityEnabled, selectedOrder?.assigned_to, selectedOrderPresenceNames]
   );
 
   const selectedOrderAssignmentLabel = useMemo(
@@ -1882,7 +1885,8 @@ export default function AdminDashboardOrders({
       operationalMetrics,
       queuePressure,
       now,
-      currentUserId
+      currentUserId,
+      orderResponsibilityEnabled
     });
   }, [
     activeFilter,
@@ -1891,6 +1895,7 @@ export default function AdminDashboardOrders({
     hasVisibleOrders,
     now,
     operationalMetrics,
+    orderResponsibilityEnabled,
     orderRiskAssessmentMap,
     queuePressure
   ]);
@@ -2645,6 +2650,7 @@ export default function AdminDashboardOrders({
       canUseQuickActions={canUseQuickActionsInScope}
       isOrderStatusPending={isOrderStatusPending}
       now={now}
+      orderResponsibilityEnabled={orderResponsibilityEnabled}
       onOpen={openOrder}
       onCardKeyDown={handleCardKeyDown}
       onOptimisticStatusChange={applyOptimisticStatusChange}
@@ -2668,6 +2674,7 @@ export default function AdminDashboardOrders({
           onOptimisticStatusChange={applyOptimisticStatusChange}
           onOptimisticStatusRollback={rollbackOptimisticStatusChange}
           onOptimisticStatusSettled={finalizeOptimisticStatusChange}
+      orderResponsibilityEnabled={orderResponsibilityEnabled}
       emptyLaneLabel={hasSearchQuery ? "Sin resultados" : "Sin pedidos"}
       isSearchEmpty={isSearchEmptyKanban}
       isEmptyBoard={shouldRenderPersistentEmptyKanban}
@@ -2778,9 +2785,10 @@ export default function AdminDashboardOrders({
           orderActionPolicy={orderActionPolicy}
         currentUserId={currentUserId}
         operationalMetrics={operationalMetrics}
-        assignmentLabel={selectedOrderAssignmentLabel}
+        assignmentLabel={orderResponsibilityEnabled ? selectedOrderAssignmentLabel : null}
         orderPresenceLabel={selectedOrderPresenceLabel}
         orderPresenceNames={selectedOrderPresenceNames}
+        orderResponsibilityEnabled={orderResponsibilityEnabled}
         onOptimisticStatusChange={applyOptimisticStatusChange}
         onOptimisticStatusRollback={rollbackOptimisticStatusChange}
         onOptimisticStatusSettled={finalizeOptimisticStatusChange}

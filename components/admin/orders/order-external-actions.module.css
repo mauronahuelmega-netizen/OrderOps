@@ -1,0 +1,307 @@
+/* Workspace Contact messaging visual hierarchy — feature-local only. */
+
+.workspaceRoot {
+  --contact-border: color-mix(in srgb, var(--border-subtle) 62%, var(--border-strong));
+  --contact-border-strong: color-mix(in srgb, var(--border-subtle) 44%, var(--border-strong));
+  --contact-surface: color-mix(in srgb, var(--bg-surface) 90%, var(--bg-surface-soft));
+  --contact-surface-raised: color-mix(in srgb, var(--bg-surface) 74%, var(--bg-surface-hover));
+  --contact-surface-muted: color-mix(in srgb, var(--bg-surface) 84%, var(--bg-surface-soft));
+  --contact-label: var(--text-secondary);
+  --contact-icon-muted: var(--text-secondary);
+  --contact-divider: color-mix(in srgb, var(--border-subtle) 68%, transparent);
+
+  display: grid;
+  gap: 0.875rem;
+  min-width: 0;
+}
+
+:global(html[data-dashboard-theme="light"]) .workspaceRoot {
+  --contact-border: color-mix(in srgb, var(--border-subtle) 24%, var(--border-strong));
+  --contact-border-strong: color-mix(in srgb, var(--border-subtle) 14%, var(--border-strong));
+  --contact-surface: var(--bg-surface);
+  --contact-surface-raised: color-mix(in srgb, var(--bg-surface) 88%, var(--bg-surface-hover));
+  --contact-surface-muted: color-mix(in srgb, var(--bg-surface) 97%, var(--bg-surface-soft));
+  --contact-divider: color-mix(in srgb, var(--border-subtle) 38%, var(--border-strong));
+}
+
+:global(html[data-dashboard-theme="dark"]) .workspaceRoot {
+  --contact-border: color-mix(in srgb, var(--border-subtle) 58%, var(--border-strong));
+  --contact-border-strong: color-mix(in srgb, var(--border-subtle) 46%, var(--border-strong));
+  --contact-divider: color-mix(in srgb, var(--border-subtle) 74%, transparent);
+}
+
+.messagingGroup {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.selectShell {
+  position: relative;
+  display: block;
+  min-width: 0;
+}
+
+.selectField {
+  margin: 0;
+}
+
+.selectField:global(.admin-field) select {
+  width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 8px 2.5rem 8px 12px;
+  border: 1px solid var(--contact-border-strong);
+  border-radius: 10px;
+  background: var(--contact-surface);
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  line-height: 1.25;
+  cursor: pointer;
+  transition:
+    border-color 120ms ease,
+    background-color 120ms ease,
+    color 120ms ease,
+    box-shadow 120ms ease;
+}
+
+.selectField:global(.admin-field) select:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--border-strong) 62%, var(--border-subtle));
+  background: color-mix(in srgb, var(--contact-surface) 88%, var(--bg-surface-hover));
+}
+
+.selectField:global(.admin-field) select:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--focus) 50%, var(--border-strong));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 20%, transparent);
+}
+
+.selectChevron {
+  position: absolute;
+  top: 50%;
+  right: 1.05rem;
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+  pointer-events: none;
+  contain: paint layout;
+}
+
+.whatsappPrimary {
+  display: grid;
+  min-width: 0;
+}
+
+.whatsappPrimary :global(.ui-button),
+.whatsappPrimary a {
+  width: 100%;
+}
+
+.whatsappButton:global(.ui-button--secondary) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  background: var(--contact-surface-raised);
+  border: 1px solid var(--contact-border-strong);
+  color: var(--text-primary);
+  box-shadow: none;
+}
+
+.whatsappButton:global(.ui-button--secondary):hover:not(:disabled) {
+  background: color-mix(in srgb, var(--contact-surface-raised) 82%, var(--bg-surface-hover));
+  border-color: color-mix(in srgb, var(--border-strong) 58%, var(--border-subtle));
+  box-shadow: none;
+  transform: none;
+}
+
+.whatsappButton:global(.ui-button--secondary):active:not(:disabled) {
+  background: color-mix(in srgb, var(--contact-surface-raised) 72%, var(--bg-surface-hover));
+}
+
+.whatsappButton:global(.ui-button--secondary):focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--focus) 45%, var(--border-strong));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 20%, transparent);
+}
+
+.whatsappIcon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  contain: paint layout;
+}
+
+.messagingSecondary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem;
+  min-width: 0;
+}
+
+.messagingSecondarySolo {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.messagingSecondaryAction {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 0 0.65rem;
+  border: 1px solid var(--contact-border);
+  border-radius: 10px;
+  background: var(--contact-surface-muted);
+  color: var(--text-secondary);
+  font-size: 0.74rem;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+.messagingSecondaryAction:hover {
+  background: color-mix(in srgb, var(--contact-surface-muted) 78%, var(--bg-surface-hover));
+  border-color: color-mix(in srgb, var(--border-strong) 42%, var(--border-subtle));
+  color: var(--text-primary);
+}
+
+.messagingSecondaryAction:active {
+  background: color-mix(in srgb, var(--contact-surface-muted) 68%, var(--bg-surface-hover));
+}
+
+.messagingSecondaryAction:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--focus) 45%, var(--border-strong));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 20%, transparent);
+}
+
+.messagingSecondaryIcon {
+  width: 0.9rem;
+  height: 0.9rem;
+  flex-shrink: 0;
+  color: var(--contact-icon-muted);
+  contain: paint layout;
+}
+
+.messagingSecondaryAction:hover .messagingSecondaryIcon {
+  color: var(--text-primary);
+}
+
+.utilitiesGroup {
+  display: grid;
+  gap: 0.5rem;
+  min-width: 0;
+  padding-top: 0.125rem;
+  border-top: 1px solid var(--contact-divider);
+}
+
+.utilitiesTitle {
+  margin: 0;
+  color: var(--contact-label);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1.15;
+  text-transform: none;
+}
+
+.utilitiesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+}
+
+.utilitiesGridSolo {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.utilityTool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.45rem;
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 0.65rem;
+  box-sizing: border-box;
+  border: 1px solid var(--contact-border);
+  border-radius: 10px;
+  background: var(--contact-surface-muted);
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+.utilityTool:hover {
+  background: color-mix(in srgb, var(--contact-surface-muted) 76%, var(--bg-surface-hover));
+  border-color: color-mix(in srgb, var(--border-strong) 38%, var(--border-subtle));
+  color: var(--text-primary);
+}
+
+.utilityTool:active {
+  background: color-mix(in srgb, var(--contact-surface-muted) 66%, var(--bg-surface-hover));
+}
+
+.utilityTool:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--focus) 45%, var(--border-strong));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 20%, transparent);
+}
+
+.utilityIcon {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex-shrink: 0;
+  color: var(--contact-icon-muted);
+  contain: paint layout;
+}
+
+.utilityTool:hover .utilityIcon {
+  color: var(--text-primary);
+}
+
+.utilityLabel {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+@media (max-width: 360px) {
+  .utilityTool {
+    padding: 0 0.5rem;
+    font-size: 0.72rem;
+    gap: 0.35rem;
+  }
+
+  .utilityIcon {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}

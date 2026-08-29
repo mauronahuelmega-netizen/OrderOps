@@ -1,11 +1,13 @@
 import Badge from "@/components/ui/Badge";
-import type { OrderStatus } from "@/types/database";
+import { formatAdminDeliveryMethod } from "@/lib/orders/presenter";
+import type { DeliveryMethod, OrderStatus } from "@/types/database";
 import styles from "./admin-order-modal.module.css";
 
 type OrderModalHeaderLeadingProps = {
   orderRef: string;
   customerLabel: string;
   status: OrderStatus;
+  deliveryMethod?: DeliveryMethod;
 };
 
 type OrderModalHeaderMetaProps = {
@@ -15,7 +17,8 @@ type OrderModalHeaderMetaProps = {
 export function OrderModalHeaderLeading({
   orderRef,
   customerLabel,
-  status
+  status,
+  deliveryMethod
 }: OrderModalHeaderLeadingProps) {
   return (
     <div className={styles["admin-order-modal-shell__workstation-title"]}>
@@ -23,7 +26,14 @@ export function OrderModalHeaderLeading({
         #{orderRef}
         <span> - {customerLabel}</span>
       </p>
-      <Badge status={status} />
+      <div className={styles["admin-order-modal-shell__workstation-badges"]}>
+        {deliveryMethod ? (
+          <span className={styles["admin-order-modal-shell__delivery-context"]}>
+            {formatAdminDeliveryMethod(deliveryMethod)}
+          </span>
+        ) : null}
+        <Badge status={status} />
+      </div>
     </div>
   );
 }

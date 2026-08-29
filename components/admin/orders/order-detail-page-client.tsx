@@ -23,6 +23,7 @@ import {
   buildOrderRelativeTimeLabel,
   formatAdminOrderCurrency
 } from "@/lib/orders/presenter";
+import { buildOrderDisplayRef } from "@/lib/orders/display-ref";
 import {
   patchWorkspaceOrderFromRealtime,
 } from "@/lib/orders/realtime";
@@ -44,6 +45,7 @@ type OrderDetailPageClientProps = {
   currentUserId: string;
   currentUserEmail?: string;
   currentUserRole: ProfileRole;
+  orderResponsibilityEnabled?: boolean;
 };
 
 export default function OrderDetailPageClient({
@@ -54,7 +56,8 @@ export default function OrderDetailPageClient({
   canUpdateOrders,
   currentUserId,
   currentUserEmail,
-  currentUserRole
+  currentUserRole,
+  orderResponsibilityEnabled = false
 }: OrderDetailPageClientProps) {
   const [order, setOrder] = useState<AdminOrderWorkspaceData>(initialOrder);
 
@@ -95,19 +98,21 @@ export default function OrderDetailPageClient({
   const orderPresenceLabel = useMemo(() => {
     return buildOrderContextualPresenceLabel({
       viewingNames: operatorsViewingOrder.map((entry) => entry.name),
-      assignedTo: order.assigned_to,
+      assignedTo: orderResponsibilityEnabled ? order.assigned_to : null,
       onlineOperators
     });
-  }, [onlineOperators, operatorsViewingOrder, order.assigned_to]);
+  }, [onlineOperators, operatorsViewingOrder, order.assigned_to, orderResponsibilityEnabled]);
 
   const assignmentLabel = useMemo(
     () =>
-      buildOrderAssignmentOwnerLabel({
-        assignedTo: order.assigned_to,
-        currentUserId,
-        onlineOperators
-      }),
-    [currentUserId, onlineOperators, order.assigned_to]
+      orderResponsibilityEnabled
+        ? buildOrderAssignmentOwnerLabel({
+            assignedTo: order.assigned_to,
+            currentUserId,
+            onlineOperators
+          })
+        : null,
+    [currentUserId, onlineOperators, order.assigned_to, orderResponsibilityEnabled]
   );
 
   const headerActions = (
@@ -236,7 +241,7 @@ export default function OrderDetailPageClient({
     <AdminPageLayout size="default">
       <AdminPageHeader
         eyebrow="Detalle del pedido"
-        title={`Pedido de ${order.customer_name}`}
+        title={`Pedido #${buildOrderDisplayRef(order)} · ${order.customer_name}`}
         description={
           relativeTime
             ? `${buildAdminOrderHeaderDescription(order)} - ${relativeTime}`
@@ -245,8 +250,13 @@ export default function OrderDetailPageClient({
         actions={headerActions}
       />
 
-      <OrderWorkspaceOverview order={order} variant="page" assignmentLabel={assignmentLabel} />
-      <OrderRiskPanel order={order} />
+      <OrderWorkspaceOverview
+        order={order}
+        variant="page"
+        assignmentLabel={assignmentLabel}
+        orderResponsibilityEnabled={orderResponsibilityEnabled}
+      />
+      <OrderRiskPanel order={order} orderResponsibilityEnabled={orderResponsibilityEnabled} />
       <OrderWorkspace
         order={order}
         canUpdateOrders={canUpdateOrders}
@@ -254,6 +264,7 @@ export default function OrderDetailPageClient({
         assignmentLabel={assignmentLabel}
         variant="page"
         customerSignals={customerSignals}
+        orderResponsibilityEnabled={orderResponsibilityEnabled}
         onOptimisticStatusChange={handleOptimisticStatusChange}
         onOptimisticStatusRollback={handleOptimisticStatusRollback}
         onOptimisticStatusSettled={handleOptimisticStatusSettled}
@@ -265,6 +276,7 @@ export default function OrderDetailPageClient({
         events={order.order_events ?? []}
         orderCreatedAt={order.created_at}
         currentStatus={order.status}
+        orderResponsibilityEnabled={orderResponsibilityEnabled}
       />
     </AdminPageLayout>
   );

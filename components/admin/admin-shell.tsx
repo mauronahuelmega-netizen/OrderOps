@@ -64,8 +64,9 @@ export default function AdminShell({
           aria-live="polite"
           role="status"
         >
-          <span className="admin-shell__loading-spinner" aria-hidden="true" />
-          <span className="admin-shell__loading-text">Cargando configuración…</span>
+          <div className="admin-shell__loading-spinner" aria-hidden="true" />
+          <p className="admin-shell__loading-title">Cargando panel</p>
+          <p className="admin-shell__loading-subtitle">Un momento…</p>
         </div>
       </div>
     );

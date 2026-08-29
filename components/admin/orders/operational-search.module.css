@@ -55,15 +55,21 @@
   margin: 0;
 }
 
-.admin-orders-search__input {
+.admin-orders-search__input-shell :global(.ui-input),
+.admin-orders-search__input-shell :global(.ui-input:focus),
+.admin-orders-search__input-shell :global(.ui-input:focus-visible),
+.admin-orders-search__input,
+.admin-orders-search__input:focus,
+.admin-orders-search__input:focus-visible {
   flex: 1 1 auto;
   min-width: 0;
   width: 100%;
   min-height: 1.75rem;
   padding: 0 var(--space-sm) 0 calc(var(--space-xl) + var(--space-xs));
-  border: none;
-  outline: none;
-  background: transparent;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
   color: var(--text-primary);
   font-size: 0.8125rem;
   line-height: 1.25;
@@ -71,10 +77,6 @@
 
 .admin-orders-search__input::placeholder {
   color: var(--text-tertiary);
-}
-
-.admin-orders-search__input:focus-visible {
-  outline: none;
 }
 
 .admin-orders-search__clear {

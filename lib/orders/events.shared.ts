@@ -126,6 +126,21 @@ export function buildOrderTimelineEntries(
   );
 }
 
+export function isAssignmentOnlyOrderEvent(event: AdminOrderTimelineEvent): boolean {
+  return event.event_type === "assignment_taken" || event.event_type === "assignment_released";
+}
+
+export function filterAssignmentTimelineEvents(
+  events: AdminOrderTimelineEvent[],
+  includeAssignmentEvents: boolean
+): AdminOrderTimelineEvent[] {
+  if (includeAssignmentEvents) {
+    return events;
+  }
+
+  return events.filter((event) => !isAssignmentOnlyOrderEvent(event));
+}
+
 export function buildPresentedOrderTimelineEntries(
   events: AdminOrderTimelineEvent[],
   createdAt: string

@@ -500,7 +500,13 @@ export function useAdminOrdersRealtime({
       };
     }
 
-    const expectedStatus = pendingMutation.status.expectedStatus;
+    // Snapshot before clear: clearPendingMutationKind deletes `status` in place on the
+    // same object reference. Reading pendingMutation.status.* after clear throws
+    // "Cannot read properties of undefined (reading 'expectedStatus')".
+    const statusPending = pendingMutation.status;
+    const expectedStatus = statusPending.expectedStatus;
+    const previousStatus = statusPending.previousStatus;
+    const mutationId = pendingMutation.mutationId;
 
     if (
       resolution.succeeded &&
@@ -512,9 +518,9 @@ export function useAdminOrdersRealtime({
         source: "pending.resolve",
         orderId,
         expectedStatus,
-        previousStatus: pendingMutation.status.previousStatus,
+        previousStatus,
         finalStatus: resolution.serverStatus,
-        mutationId: pendingMutation.mutationId,
+        mutationId,
         reason: "stale-finalize-ignored"
       });
 
@@ -536,9 +542,9 @@ export function useAdminOrdersRealtime({
         source: "pending.resolve",
         orderId,
         expectedStatus,
-        previousStatus: pendingMutation.status.previousStatus,
+        previousStatus,
         finalStatus: result.finalStatus,
-        mutationId: pendingMutation.mutationId,
+        mutationId,
         reason: "stale-finalize-ignored"
       });
 
@@ -550,23 +556,25 @@ export function useAdminOrdersRealtime({
       };
     }
 
+    const externalStatus = statusPending.externalStatus ?? null;
+
     clearPendingMutationKind(pendingMutationsRef, orderId, "status");
 
     traceKanbanTransition({
       source: "pending.resolve",
       orderId,
-      expectedStatus: pendingMutation.status.expectedStatus,
-      previousStatus: pendingMutation.status.previousStatus,
+      expectedStatus,
+      previousStatus,
       finalStatus: result.finalStatus ?? resolution.serverStatus ?? null,
-      externalStatus: pendingMutation.status.externalStatus ?? null,
-      mutationId: pendingMutation.mutationId,
+      externalStatus,
+      mutationId,
       reason: resolution.succeeded ? "succeeded" : "failed"
     });
 
     debugRealtime("[orders-realtime] pending status mutation resolved", {
       businessId,
       orderId,
-      mutationId: pendingMutation.mutationId,
+      mutationId,
       succeeded: resolution.succeeded,
       finalStatus: result.finalStatus ?? null,
       needsRefresh: result.needsRefresh

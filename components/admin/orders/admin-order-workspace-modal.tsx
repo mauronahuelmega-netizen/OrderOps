@@ -9,17 +9,14 @@ import {
 } from "@/components/admin/orders/order-modal-header";
 import { OrderModalErrorState, OrderModalLoadingState } from "@/components/admin/orders/order-modal-states";
 import OrderModalWorkspaceToolbar from "@/components/admin/orders/order-modal-workspace-toolbar";
+import OrderWorkspaceContextualStatusAction from "@/components/admin/orders/order-workspace-contextual-status-action";
+import { useOrderStatusMutation } from "@/components/admin/orders/use-order-status-mutation";
 import { useOrderWorkspaceHydration } from "@/components/admin/orders/use-order-workspace-hydration";
 import styles from "./admin-order-modal.module.css";
 import OrderExternalActions from "@/components/admin/orders/order-external-actions";
-import OrderAssignmentControls from "@/components/admin/orders/order-assignment-controls";
-import StatusForm from "@/components/admin/orders/status-form";
-import workspaceStyles from "./order-workspace.module.css";
-import OrderHumanTimeline from "@/components/admin/orders/order-human-timeline";
+import OrderWorkspaceStatusSection from "@/components/admin/orders/order-workspace-status-section";
 import OrderItemsSection from "@/components/admin/orders/order-items-section";
 import OrderNotesSection from "@/components/admin/orders/order-notes-section";
-import OrderRecommendedActionPanel from "@/components/admin/orders/order-recommended-action-panel";
-import OrderRiskPanel from "@/components/admin/orders/order-risk-panel";
 import OrderWorkspaceOverview from "@/components/admin/orders/order-workspace-overview";
 import type { AdminOrderAssignment } from "@/lib/orders/assignment";
 import type { AdminOrderTimelineEvent } from "@/lib/orders/events.shared";
@@ -29,6 +26,8 @@ import {
   type DashboardActionPolicy
 } from "@/lib/orders/analytics";
 import { type AdminOrderDashboardItem } from "@/lib/orders/admin";
+import { getContextualStatusTransition } from "@/lib/orders/contextual-status-action";
+import { buildOrderDisplayRef } from "@/lib/orders/display-ref";
 import { buildOrderOperationalSummary, buildOrderRelativeTimeLabel } from "@/lib/orders/presenter";
 import {
   buildAdminOrderInitialDetail,
@@ -83,11 +82,8 @@ type AdminOrderWorkspaceModalProps = {
       event?: AdminOrderTimelineEvent | null;
     }
   ) => void | Promise<void>;
+  orderResponsibilityEnabled?: boolean;
 };
-
-function buildOrderDisplayRef(orderId: string) {
-  return orderId.replace(/-/g, "").slice(-4).toUpperCase();
-}
 
 export default function AdminOrderWorkspaceModal({
   order,
@@ -107,7 +103,8 @@ export default function AdminOrderWorkspaceModal({
   onOptimisticStatusSettled,
   onOptimisticAssignmentChange,
   onOptimisticAssignmentRollback,
-  onOptimisticAssignmentSettled
+  onOptimisticAssignmentSettled,
+  orderResponsibilityEnabled = true
 }: AdminOrderWorkspaceModalProps) {
   const {
     displayOrder,
@@ -120,49 +117,11 @@ export default function AdminOrderWorkspaceModal({
     updateWorkspaceDetail
   } = useOrderWorkspaceHydration({ order, isOpen });
 
-  const modalTitle = useMemo(() => {
-    if (displayOrder) {
-      const operationalSummary = buildOrderOperationalSummary(
-        displayOrder.customer_name,
-        displayOrder.notes,
-        (displayOrder.order_items ?? []).map((item) => ({
-          product_name: item.product_name,
-          quantity: item.quantity
-        }))
-      );
-
-      return `#${buildOrderDisplayRef(displayOrder.id)} - ${operationalSummary.customerShortName}`;
-    }
-
-    if (order) {
-      return `#${buildOrderDisplayRef(order.id)} - ${order.customer_short_name}`;
-    }
-
-    return "Pedido";
-  }, [displayOrder, order]);
-
-  const workstationHeaderLeading = useMemo(() => {
-    if (!displayOrder) {
-      return null;
-    }
-
-    const operationalSummary = buildOrderOperationalSummary(
-      displayOrder.customer_name,
-      displayOrder.notes,
-      (displayOrder.order_items ?? []).map((item) => ({
-        product_name: item.product_name,
-        quantity: item.quantity
-      }))
-    );
-
-    return (
-      <OrderModalHeaderLeading
-        orderRef={buildOrderDisplayRef(displayOrder.id)}
-        customerLabel={operationalSummary.customerShortName}
-        status={displayOrder.status}
-      />
-    );
-  }, [displayOrder]);
+  const canChangeStatus =
+    Boolean(order) && canUpdateOrders && (orderActionPolicy?.canChangeStatus ?? true);
+  const authoritativeStatus =
+    displayOrder?.status ?? order?.status ?? ("pending" as AdminOrderDashboardItem["status"]);
+  const contextualTransition = getContextualStatusTransition(authoritativeStatus);
 
   const handleStatusSuccess = useCallback(() => {
     if (!order) {
@@ -233,6 +192,62 @@ export default function AdminOrderWorkspaceModal({
     [appendTimelineEvent, onOptimisticStatusSettled, order]
   );
 
+  // Single authoritative workspace status mutation controller (StatusForm reuses via prop).
+  const statusMutation = useOrderStatusMutation({
+    orderId: order?.id ?? "",
+    initialStatus: authoritativeStatus,
+    canChangeStatus,
+    onSuccess: handleStatusSuccess,
+    onOptimisticStatusChange: handleOptimisticStatusChange,
+    onOptimisticStatusRollback: handleOptimisticStatusRollback,
+    onOptimisticStatusSettled: handleOptimisticStatusSettled
+  });
+
+  const modalTitle = useMemo(() => {
+    if (displayOrder) {
+      const operationalSummary = buildOrderOperationalSummary(
+        displayOrder.customer_name,
+        displayOrder.notes,
+        (displayOrder.order_items ?? []).map((item) => ({
+          product_name: item.product_name,
+          quantity: item.quantity
+        }))
+      );
+
+      return `#${buildOrderDisplayRef(displayOrder)} - ${operationalSummary.customerShortName}`;
+    }
+
+    if (order) {
+      return `#${buildOrderDisplayRef(order)} - ${order.customer_short_name}`;
+    }
+
+    return "Pedido";
+  }, [displayOrder, order]);
+
+  const workstationHeaderLeading = useMemo(() => {
+    if (!displayOrder) {
+      return null;
+    }
+
+    const operationalSummary = buildOrderOperationalSummary(
+      displayOrder.customer_name,
+      displayOrder.notes,
+      (displayOrder.order_items ?? []).map((item) => ({
+        product_name: item.product_name,
+        quantity: item.quantity
+      }))
+    );
+
+    return (
+      <OrderModalHeaderLeading
+        orderRef={buildOrderDisplayRef(displayOrder)}
+        customerLabel={operationalSummary.customerShortName}
+        status={displayOrder.status}
+        deliveryMethod={displayOrder.delivery_method}
+      />
+    );
+  }, [displayOrder]);
+
   const handleOptimisticAssignmentChange = useCallback(
     (nextAssignment: AdminOrderAssignment, previousAssignment: AdminOrderAssignment) => {
       if (!order) {
@@ -292,16 +307,15 @@ export default function AdminOrderWorkspaceModal({
     return null;
   }
 
-  const canChangeStatus = canUpdateOrders && (orderActionPolicy?.canChangeStatus ?? true);
   const canAssignOrders = canUpdateOrders && (orderActionPolicy?.canAssignOrders ?? true);
   const statusReadOnlyReason = !canChangeStatus
     ? orderActionPolicy?.isReviewingLastClosedSession
-      ? "Sesi\u00f3n cerrada: estado bloqueado para revisi\u00f3n."
+      ? "Sesión cerrada: estado bloqueado para revisión."
       : DASHBOARD_REVIEW_MODE_BLOCKED_REASON
     : undefined;
   const assignmentReadOnlyReason = !canAssignOrders
     ? orderActionPolicy?.isReviewingLastClosedSession
-      ? "Sesi\u00f3n cerrada: asignaci\u00f3n bloqueada."
+      ? "Sesión cerrada: asignación bloqueada."
       : DASHBOARD_REVIEW_MODE_BLOCKED_REASON
     : undefined;
 
@@ -339,109 +353,78 @@ export default function AdminOrderWorkspaceModal({
 
           <div className={styles.workspaceGrid}>
             <div className={styles.executionColumn}>
-              <OrderItemsSection order={displayOrder} compact showTotal />
-              <OrderWorkspaceOverview
-                order={displayOrder}
-                assignmentLabel={assignmentLabel}
-                detailHref={detailHref}
-                dashboardHref={dashboardHref}
-                variant="workstation"
-              />
-              <OrderHumanTimeline
-                events={displayOrder.order_events ?? []}
-                orderCreatedAt={displayOrder.created_at}
-                currentStatus={displayOrder.status}
-                compact
-                detailHref={detailHref}
-              />
-              <OrderNotesSection notes={displayOrder.notes} />
+              <section className={styles.workspaceSectionProducts} aria-label="Productos">
+                <OrderItemsSection order={displayOrder} compact showTotal />
+              </section>
+
+              {displayOrder.notes?.trim() ? (
+                <section className={styles.workspaceSectionNotes} aria-label="Indicaciones">
+                  <OrderNotesSection notes={displayOrder.notes} variant="workstation" />
+                </section>
+              ) : null}
             </div>
 
             <div className={styles.commandColumn}>
-              <OrderRecommendedActionPanel
-                status={displayOrder.status}
-                assignedTo={displayOrder.assigned_to}
-                currentUserId={currentUserId}
-                canUpdateOrders={canChangeStatus}
-              />
-              <OrderRiskPanel
+              <OrderWorkspaceStatusSection
                 order={displayOrder}
+                canChangeStatus={canChangeStatus}
+                canUpdateOrders={canUpdateOrders}
+                canAssignOrders={canAssignOrders}
+                statusReadOnlyReason={statusReadOnlyReason}
+                assignmentReadOnlyReason={assignmentReadOnlyReason}
+                assignmentLabel={assignmentLabel}
+                currentUserId={currentUserId}
                 operationalMetrics={operationalMetrics}
-                compact
+                orderResponsibilityEnabled={orderResponsibilityEnabled}
+                mutation={statusMutation}
+                onStatusSuccess={handleStatusSuccess}
+                onOptimisticAssignmentChange={handleOptimisticAssignmentChange}
+                onOptimisticAssignmentRollback={handleOptimisticAssignmentRollback}
+                onOptimisticAssignmentSettled={handleOptimisticAssignmentSettled}
               />
-              <section
-                className={`${workspaceStyles["admin-detail-panel"]} ${workspaceStyles["admin-detail-panel--actions-workstation"]}`}
-                aria-label="Acciones operativas"
-              >
-                <section
-                  className={workspaceStyles["admin-actions-group"]}
-                  aria-labelledby="order-operational-controls-title"
-                >
-                  <div className={workspaceStyles["admin-actions-group__header"]}>
-                    <h3
-                      id="order-operational-controls-title"
-                      className={workspaceStyles["admin-actions-group__title"]}
-                    >
-                      Control operativo
-                    </h3>
-                    <p className={workspaceStyles["admin-actions-group__description"]}>
-                      {orderActionPolicy?.isReviewingLastClosedSession
-                        ? "Revis\u00e1 estado y responsable del pedido. Las acciones operativas est\u00e1n bloqueadas."
-                        : "Actualiz\u00e1 estado y responsable del pedido."}
-                    </p>
-                  </div>
-                  <div className={workspaceStyles["admin-actions-group__body"]}>
-                    <StatusForm
-                      orderId={displayOrder.id}
-                      initialStatus={displayOrder.status}
-                      variant="modal"
-                      canChangeStatus={canChangeStatus}
-                      readOnlyReason={statusReadOnlyReason}
-                      onSuccess={handleStatusSuccess}
-                      onOptimisticStatusChange={handleOptimisticStatusChange}
-                      onOptimisticStatusRollback={handleOptimisticStatusRollback}
-                      onOptimisticStatusSettled={handleOptimisticStatusSettled}
-                    />
-                    <OrderAssignmentControls
-                      orderId={displayOrder.id}
-                      assignment={{
-                        assigned_to: displayOrder.assigned_to,
-                        assigned_at: displayOrder.assigned_at
-                      }}
-                      assignmentLabel={assignmentLabel}
-                      currentUserId={currentUserId}
-                      canUpdateOrders={canUpdateOrders}
-                      canAssignOrders={canAssignOrders}
-                      readOnlyReason={assignmentReadOnlyReason}
-                      onOptimisticAssignmentChange={handleOptimisticAssignmentChange}
-                      onOptimisticAssignmentRollback={handleOptimisticAssignmentRollback}
-                      onOptimisticAssignmentSettled={handleOptimisticAssignmentSettled}
-                    />
-                  </div>
-                </section>
 
-                <section
-                  className={workspaceStyles["admin-actions-group"]}
-                  aria-labelledby="order-communication-controls-title"
-                >
-                  <div className={workspaceStyles["admin-actions-group__header"]}>
-                    <h3
-                      id="order-communication-controls-title"
-                      className={workspaceStyles["admin-actions-group__title"]}
-                    >
-                      Comunicaci\u00f3n
-                    </h3>
-                    <p className={workspaceStyles["admin-actions-group__description"]}>
-                      Contact\u00e1 al cliente y us\u00e1 accesos r\u00e1pidos.
-                    </p>
-                  </div>
-                  <div className={workspaceStyles["admin-actions-group__body"]}>
-                    <OrderExternalActions order={displayOrder} />
-                  </div>
-                </section>
+              <section className={styles.workspaceSectionContext} aria-label="Cliente y entrega">
+                <OrderWorkspaceOverview
+                  order={displayOrder}
+                  assignmentLabel={assignmentLabel}
+                  detailHref={detailHref}
+                  dashboardHref={dashboardHref}
+                  variant="workstation"
+                />
+              </section>
+
+              <section
+                className={styles.workspaceSectionContact}
+                aria-labelledby="order-contact-rail-title"
+              >
+                <h3 id="order-contact-rail-title" className={styles.commandRailEyebrow}>
+                  Contacto con el cliente
+                </h3>
+                <div className={styles.commandRailBody}>
+                  <OrderExternalActions
+                    key={displayOrder.id}
+                    order={displayOrder}
+                    compactContact
+                    contextualTemplateDefault
+                    presentation="workspace"
+                  />
+                </div>
               </section>
             </div>
           </div>
+
+          {canChangeStatus && contextualTransition ? (
+            <div className={styles.contextualStatusFooter}>
+              <OrderWorkspaceContextualStatusAction
+                placement="persistent"
+                label={contextualTransition.label}
+                isPending={statusMutation.isPending}
+                onAction={() =>
+                  statusMutation.submitStatusChange(contextualTransition.targetStatus)
+                }
+              />
+            </div>
+          ) : null}
         </AdminOrderWorkspaceErrorBoundary>
       ) : null}
     </AdminOrderModalShell>

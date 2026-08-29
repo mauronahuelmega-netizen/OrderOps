@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import OrderDetailPageClient from "@/components/admin/orders/order-detail-page-client";
+import { isOrderAssignmentEnabled } from "@/lib/orders/assignment-flags";
 import { requireAdminContext } from "@/lib/admin/context";
 import { getAdminOrderById, getAdminOrderCustomerContext } from "@/lib/orders/admin";
 import { getOrderEventsForOrder } from "@/lib/orders/events.server";
@@ -22,9 +23,10 @@ export default async function AdminOrderDetailPage({
   const adminContext = await requireAdminContext();
   const { id } = await params;
   const resolvedSearchParams = searchParams ? await searchParams : undefined;
-  const [order, orderEvents] = await Promise.all([
+  const [order, orderEvents, orderResponsibilityEnabled] = await Promise.all([
     getAdminOrderById(id, adminContext.businessId),
-    getOrderEventsForOrder(id, adminContext.businessId)
+    getOrderEventsForOrder(id, adminContext.businessId),
+    isOrderAssignmentEnabled(adminContext.businessId)
   ]);
 
   if (!order) {
@@ -55,6 +57,7 @@ export default async function AdminOrderDetailPage({
       currentUserId={adminContext.user.id}
       currentUserEmail={adminContext.user.email}
       currentUserRole={adminContext.profile.role}
+      orderResponsibilityEnabled={orderResponsibilityEnabled}
     />
   );
 }

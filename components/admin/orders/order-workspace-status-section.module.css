@@ -1,0 +1,60 @@
+.terminalContext {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.manualControls {
+  display: grid;
+  gap: 0.5rem;
+  padding-top: 0.125rem;
+}
+
+.manualLabel {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.15;
+}
+
+.readOnlyNote {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  line-height: 1.35;
+}
+
+.contextualAction {
+  width: 100%;
+  min-height: 2.625rem;
+  font-size: 0.9rem;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+/* Default: inline visible (tablet/desktop). Mobile ≤719 hides via modal CSS. */
+.contextualActionInline {
+  display: inline-flex;
+}
+
+.contextualActionPersistent {
+  width: 100%;
+}
+
+/* ≤719: hide redundant visible "Estado" after persistent CTA; keep for aria-labelledby. */
+@media (max-width: 719px) {
+  .statusSectionHeading {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}

@@ -475,6 +475,262 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-08-29 — ADMIN-DASHBOARD-POLISH-PACKAGE-COMMIT-PUSH-DEPLOY-1
+
+- **Admin / Dashboard** Packaged and released the closed admin/dashboard polish set including order code adoption, dashboard metrics semantics, search/Kanban fixes, loading-state unification/restoration, product drilldown removal and mobile terminal order density; committed and pushed the validated package after tsc/build/diff-check/verifies; deployed and smoke-tested the production admin/public surfaces; no additional runtime behavior changes were introduced during release packaging; baseline before this package was 81b1162. Doc: `docs/admin-dashboard-polish-package-commit-push-deploy-1.md`.
+
+### 2026-08-28 — ADMIN-DASHBOARD-MOBILE-TERMINAL-ORDERS-DENSITY-POLISH-1
+
+- **Admin / Dashboard** Implemented mobile-only terminal order density control for dashboard stacked view (`≤767px`); `completed` and `cancelled` sections now show the first 5 orders by default with local “Mostrar X más” / “Mostrar menos” progressive disclosure; `pending`, `preparing`, `ready` remain uncapped and search active bypasses the cap so all matches are visible; preserved desktop/tablet Kanban, terminal pager, dashboard metrics, root count, order code search/display, workspace, DB/RPC/realtime and global CSS/AdminShell/AdminPageLayout boundaries. Doc: `docs/admin-dashboard-mobile-terminal-orders-density-polish-1.md`.
+
+### 2026-08-28 — ADMIN-DASHBOARD-MOBILE-TERMINAL-ORDERS-DENSITY-AUDIT-1
+
+- **Admin / Dashboard** Audited mobile dashboard order-list density after completed/cancelled orders made the stacked mobile board excessively long; mapped mobile stacked renderer, terminal sections, search interaction, counts, and desktop Kanban boundaries; specified future mobile-only terminal cap behavior (default 5 orders initial preview + "Mostrar X más" / "Mostrar menos") while preserving active statuses uncapped, search visibility, desktop Kanban/pager, metrics, order code, root count, workspace, DB/RPC/realtime and global CSS boundaries; no runtime/CSS/DB/RPC/realtime changes. Doc: `docs/admin-dashboard-mobile-terminal-orders-density-audit-1.md`.
+
+### 2026-08-28 — ADMIN-DASHBOARD-LOADING-SPINNER-STYLE-RESTORATION-1
+
+- **Admin / Dashboard** Restored the `AdminShell` loading spinner to the original border/ring visual language while preserving the scaled 44–56px size, X/Y centering, single first-paint ownership, `Cargando panel` / `Un momento…` copy and accessibility semantics; kept the dashboard route loader removed and preserved dashboard data/realtime/search/Kanban/metrics/workspace/order code and global CSS/theme/AdminPageLayout boundaries. Doc: `docs/admin-dashboard-loading-spinner-style-restoration-1.md`.
+
+### 2026-08-28 — ADMIN-DASHBOARD-LOADING-STATE-VERTICAL-CENTERING-FOLLOWUP-1
+
+- **Admin / Dashboard** Corrected `AdminShell` unified loading geometry in `components/admin/admin-shell.css` so that the loading composition (scaled conic-gradient mask spinner + `Cargando panel` / `Un momento…`) is centered on both X and Y axes across all viewports (desktop, tablet, mobile); preserved `AdminShell` authoritative first-paint loading ownership, removed dashboard route loader state, spinner/copy hierarchy, dashboard data/realtime/search/Kanban/metrics/workspace/order code and global theme/AdminPageLayout boundaries. Doc: `docs/admin-dashboard-loading-state-vertical-centering-followup-1.md`.
+
+### 2026-08-28 — ADMIN-DASHBOARD-LOADING-STATE-OWNERSHIP-UNIFICATION-1
+
+- **Admin / Dashboard** Unified admin dashboard loading ownership at the shared `AdminShell` first-paint boundary; upgraded `AdminShell` loading to the scaled 44–56px conic-gradient mask spinner + `Cargando panel` / `Un momento…` two-tier hierarchy; removed redundant dashboard route loading files (`dashboard/loading.tsx`, `dashboard-loading.module.css`) that caused second-stage flicker; preserved dashboard data/realtime/search/Kanban/metrics/workspace/order code and global theme/AdminPageLayout boundaries. Doc: `docs/admin-dashboard-loading-state-ownership-unification-1.md`.
+
+### 2026-08-28 — ADMIN-DASHBOARD-LOADING-STATE-OWNERSHIP-AUDIT-1
+
+- **Admin / Dashboard** Forensically audited sequential double-loading flash on `/admin/dashboard`; mapped render order between `AdminShell` client-settings loading (T0–T1) and Next.js route segment loading `dashboard/loading.tsx` (T2); proved `AdminShell` is the true first-paint loading boundary and `dashboard/loading.tsx` causes redundant second-stage flicker; recommended Option A (upgrade `AdminShell` loading with 44–56px mask spinner + `Cargando panel` / `Un momento…` and remove redundant route loader); no runtime/CSS/DB changes. Doc: `docs/admin-dashboard-loading-state-ownership-audit-1.md`.
+
+### 2026-08-28 — ADMIN-DASHBOARD-LOADING-STATE-SCALE-ALIGNMENT-FOLLOWUP-1
+
+- **Admin / Dashboard** Refined dashboard loading state scale and hierarchy to align with public catalog loading feel; upgraded loading to centered route-specific spinner (`clamp(44px, 11vw, 56px)`) + bold title + muted subtitle composition (`Cargando panel` / `Un momento…`); preserved dashboard data/realtime/search/Kanban/metrics/workspace/order code and global CSS/theme/AdminShell/AdminPageLayout boundaries. Doc: `docs/admin-dashboard-loading-state-scale-alignment-followup-1.md`.
+
+### 2026-08-28 — ADMIN-DASHBOARD-LOADING-STATE-CENTERING-POLISH-1
+
+- **Admin / Dashboard** Centered admin dashboard loading state across desktop, tablet, and mobile viewports (`min-height: 100dvh; place-items: center;`); updated loading copy from “Cargando configuración...” to “Cargando panel…”; preserved accessible status semantics (`role="status"`, `aria-busy="true"`, `aria-live="polite"`); preserved dashboard data/realtime/search/Kanban/metrics/workspace/order code and global CSS/theme/AdminPageLayout boundaries. Doc: `docs/admin-dashboard-loading-state-centering-polish-1.md`.
+
+### 2026-08-28 — ADMIN-ORDER-WORKSPACE-PRODUCT-DETAIL-DRILLDOWN-REMOVAL-1
+
+- **Admin / Workspace** Globally removed internal product detail drilldown modal (`OrderProductModal`) from admin order workspace and order detail surfaces; eliminated product row click affordance and selected-item state; preserved inline snapshot-derived preparation hierarchy (`OrderPreparationItems`), pricing display, Adicional handling, workspace/status/contact, dashboard search/Kanban visual stability, metrics, order code, DB/RPC/realtime and global CSS boundaries. Doc: `docs/admin-order-workspace-product-detail-drilldown-removal-1.md`.
+
+### 2026-08-28 — ADMIN-ORDER-WORKSPACE-PRODUCT-DETAIL-DRILLDOWN-REMOVAL-AUDIT-1
+
+- **Admin / Workspace** Completed forensic audit and product/UX decision spec for internal product detail drilldown modal in order workspace and detail route; proved inline `OrderPreparationItems` already renders 100% of operational data with superior hierarchy; confirmed drilldown modal creates nested modal stacking/focus/scroll conflicts and catalog distraction; recommended Option B (global removal); no runtime/CSS/DB changes. Doc: `docs/admin-order-workspace-product-detail-drilldown-removal-audit-1.md`.
+
+### 2026-08-28 — ADMIN-DASHBOARD-SEARCH-KANBAN-VISUAL-STABILITY-FIX-1
+
+- **Admin / Kanban** Stabilized dashboard Kanban presentation during active search so visible lane windows remain structurally stable (4 desktop columns) and Cancelados does not disappear when filtered empty; refined search focus to single accessible container `:focus-within` state; search logic (`natural-search.ts`), metrics, card root count, DB/RPC/realtime and CSS-global boundaries preserved. Doc: `docs/admin-dashboard-search-kanban-visual-stability-fix-1.md`.
+
+### 2026-08-28 — ADMIN-DASHBOARD-ORDER-CODE-SEARCH-PARTIAL-MATCH-FIX-1
+
+- **Admin / Search** Corrected dashboard order_code partial match search logic so alphanumeric code queries like `PGF5` remain constrained to matching order codes instead of falling through to broad single-digit phone matches; verified progressive narrowing (`PGF` $\to$ `PGF5` $\to$ `PGF5T` $\to$ `PGF5TU`); preserved customer name, phone, legacy UUID-derived ref and `#ORDER_CODE` search; metrics, card root count, DB/RPC/realtime and CSS boundaries preserved. Doc: `docs/admin-dashboard-order-code-search-partial-match-fix-1.md`.
+
+### 2026-08-28 — ADMIN-DASHBOARD-METRICS-RUNTIME-QA-1
+
+- **Admin / Dashboard** Formal runtime QA and closeout validation completed for dashboard metrics semantic fix; confirmed “Producto más pedido” strictly root-only with child upsells excluded; confirmed “Listos para entrega/retiro” (detail: “Delivery y retiro en local”); confirmed revenue, average ticket, active orders, delayed orders, average prep time, kitchen saturation, and dashboard card root count frozen and preserved; search partial-match issue documented as separate P3 debt (`ADMIN-DASHBOARD-ORDER-CODE-SEARCH-PARTIAL-MATCH-FIX-1`). Doc: `docs/admin-dashboard-metrics-runtime-qa-1.md`.
+
+### 2026-08-28 — ADMIN-DASHBOARD-METRICS-SEMANTIC-FIX-1
+
+- **Admin / Dashboard** Corrected dashboard top product KPI from flat item aggregation to root-product-only semantics (`getTopProducts` filters root items via `buildDashboardOrderItemTree`); relabeled KPI from “Más vendido” to “Producto más pedido”; updated ready waiting copy to “Listos para entrega/retiro” (detail: “Delivery y retiro en local”); preserved all other metric formulas, DB/RPC/realtime, and dashboard card root count invariants. Doc: `docs/admin-dashboard-metrics-semantic-fix-1.md`.
+
+### 2026-08-28 — ADMIN-DASHBOARD-METRICS-SEMANTIC-AUDIT-1
+
+- **Admin / Dashboard** Forensic audit and product semantic specification of admin dashboard metrics completed; audited formulas, sources, windows, and status filters across commercial/operational KPIs and session signals; identified flat child upsell aggregation in `getTopProducts()` as root cause of "Coca Cola 500ml" top seller anomaly; no runtime/CSS/DB changes. Doc: `docs/admin-dashboard-metrics-semantic-audit-1.md`.
+
+### 2026-08-28 — PUBLIC-CATALOG-SUCCESS-WHATSAPP-BUSINESS-COPY-1
+
+- **Public / Catalog** Public catalog success WhatsApp prefilled message updated to business-first copy (`Hola {businessName}, ya hice mi pedido {orderCode} desde el catálogo online. \nTe escribo para confirmarlo.`); raw orderCode used without `#` in message text; platform name and WhatsApp label removed; HTML success card visible reference retains `#ORDER_CODE`. Doc: `docs/public-catalog-success-whatsapp-business-copy-1.md`.
+
+### 2026-08-28 — ADMIN-ORDERS-ORDER-CODE-FINAL-RUNTIME-QA-1
+
+- **Admin / Orders** Order code block end-to-end closeout validated: DB/RPC, loaders/realtime, UI display, and operational search complete and frozen; visible refs prefer `#order_code` with legacy UUID fallback; internal UUID identity preserved. Doc: `docs/admin-orders-order-code-final-runtime-qa-1.md`.
+
+### 2026-08-28 — ADMIN-ORDERS-ORDER-CODE-UI-SEARCH-1
+
+- **Admin / Orders** Order code UI/search adoption implemented: admin/customer visible refs now prefer `#order_code` with UUID fallback, and dashboard search supports `order_code` with/without `#`, case-insensitively; UUID remains internal route/mutation/realtime identity. Doc: `docs/admin-orders-order-code-ui-search-1.md`.
+
+### 2026-08-28 — ADMIN-ORDERS-ORDER-CODE-LOADERS-REALTIME-1
+
+- **Admin / Orders** Order code plumbing implemented: admin loaders/hydrates/realtime now carry `order_code`; UI/search still intentionally show old refs until adoption phase. Doc: `docs/admin-orders-order-code-loaders-realtime-1.md`.
+
+### 2026-08-28 — ADMIN-ORDERS-ORDER-CODE-DB-APPLY-VALIDATION-1
+
+- **Admin / Orders** Order code schema/RPC DB apply validated: Supabase now has `orders.order_code` generated by `create_order`; display/search adoption still deferred. Doc: `docs/admin-orders-order-code-db-apply-validation-1.md`.
+
+### 2026-08-27 — ADMIN-ORDERS-ORDER-CODE-SCHEMA-RPC-1
+
+- **Admin / Orders** Order code schema/RPC foundation implemented: `orders.order_code` generated by `create_order` with reduced 6-character alphabet `23456789ABCDEFGHJKMNPQRSTUVWXYZ`, unique per business; UUID remains internal route/relation identity; UI/search adoption deferred. Doc: `docs/admin-orders-order-code-schema-rpc-1.md`.
+
+### 2026-08-27 — ADMIN-ORDERS-ORDER-CODE-AUDIT-SPEC-1
+
+- **Admin / Orders** Order code audit/spec opened: future alphanumeric `order_code` should become display/search/customer-facing identity while UUID remains internal route/relation identity. Doc: `docs/admin-orders-order-code-audit-spec-1.md`.
+
+### 2026-08-27 — ADMIN-DASHBOARD-ORDER-CARD-ROOT-ITEM-COUNT-IMPL-1
+
+- **Admin / Dashboard** OrderCard `item_count` now counts root product quantities only; parent-linked upsell children are excluded from compact card summary but preserved in rich order surfaces (`order_items_preview`, workspace Products, WhatsApp/contact, pricing). Doc: `docs/admin-dashboard-order-card-root-item-count-impl-1.md`.
+
+### 2026-08-27 — ADMIN-DASHBOARD-ORDER-CARD-ROOT-ITEM-COUNT-AUDIT-1
+
+- **Admin / Dashboard** OrderCard root-item count audited; compact count currently sums all flat order_items including upsell children; future fix should use root quantity sum via shared helper — not implemented. Doc: `docs/admin-dashboard-order-card-root-item-count-audit-1.md`.
+
+### 2026-08-27 — ADMIN-ORDER-WORKSPACE-CONTACT-SURFACE-CONTRAST-TUNING-1
+
+- **Admin / Orders** Workspace Contact/right-rail surface contrast tuned locally; hierarchy/content unchanged; detail legacy preserved. Doc: `docs/admin-order-workspace-contact-surface-contrast-tuning-1.md`.
+
+### 2026-08-27 — ADMIN-ORDER-WORKSPACE-SECONDARY-ACTIONS-VISUAL-POLISH-1
+
+- **Admin / Orders** Workspace secondary utilities (phone/call/address/maps) are a distinct compact icon-labeled tool group under Más acciones; phone/address behavior and detail legacy presentation unchanged. Doc: `docs/admin-order-workspace-secondary-actions-visual-polish-1.md`.
+
+### 2026-08-27 — ADMIN-ORDER-WORKSPACE-CONTACT-MESSAGING-VISUAL-HIERARCHY-VALIDATION-1
+
+- **Admin / Orders** Contact messaging hierarchy authenticated browser QA passed; workspace variant frozen; detail legacy unchanged; real-device Android debt retained. Doc: `docs/admin-order-workspace-contact-messaging-visual-hierarchy-validation-1.md`.
+
+### 2026-08-22 — ADMIN-ORDER-WORKSPACE-CONTACT-MESSAGING-VISUAL-HIERARCHY-POLISH-1
+
+- **Admin / Orders** Workspace Contacto visually groups template + WhatsApp + Copy/Share; phone/call/address/maps remain separate secondary utilities under Más acciones; detail route unchanged. Doc: `docs/admin-order-workspace-contact-messaging-visual-hierarchy-polish-1.md`.
+
+### 2026-08-22 — ADMIN-ORDER-WORKSPACE-CONTACT-MESSAGING-STRUCTURED-CONTENT-IMPL-1
+
+- **Admin / Orders** Admin Contact messaging uses persisted snapshot-derived customer order summaries; received/summary are rich, status pings minimal, Copy/Share plain text, no live config. Doc: `docs/admin-order-workspace-contact-messaging-structured-content-impl-1.md`.
+
+### 2026-08-21 — ADMIN-ORDER-WORKSPACE-CONTACT-MESSAGING-CONTENT-AUDIT-1
+
+- **Admin / Orders** Admin WhatsApp contextual default is separate from message-content architecture; contact content audit found/assessed customization-summary parity gap (flat `qty×name` vs V1/V2 snapshots). Doc: `docs/admin-order-workspace-contact-messaging-content-audit-1.md`.
+
+### 2026-08-21 — ADMIN-ORDER-WORKSPACE-MOBILE-INFORMATION-HIERARCHY-CLEANUP-1
+
+- **Admin / Orders** Workspace no longer renders recent Activity; Indicaciones is quiet; Cliente/Entrega uses compact values without redundant visible labels; phone display formatting does not alter canonical action data. Doc: `docs/admin-order-workspace-mobile-information-hierarchy-cleanup-1.md`.
+
+### 2026-08-21 — ADMIN-ORDER-WORKSPACE-MANUAL-STATUS-CONTROL-VISUAL-POLISH-1
+
+- **Admin / Orders** Manual status correction uses native select with feature-local premium styling; Guardar activates only for real manual changes. Doc: `docs/admin-order-workspace-manual-status-control-visual-polish-1.md`.
+
+### 2026-08-21 — ADMIN-ORDER-WORKSPACE-MOBILE-PERSISTENT-STATUS-ACTION-1
+
+- **Admin / Orders** Mobile persistent contextual status action runtime validated/frozen (real-device QA debt). Doc: `docs/admin-order-workspace-mobile-persistent-status-action-1.md`.
+
+### 2026-08-21 — ADMIN-ORDER-WORKSPACE-MOBILE-PREPARATION-QUANTITY-NUMERIC-GUTTER-VISUAL-FIX-1
+
+- **Admin / Orders** Mobile preparation quantity columns keep three-track geometry with clear per-unit ↔ total separation. Doc: `docs/admin-order-workspace-mobile-preparation-quantity-numeric-gutter-visual-fix-1.md`.
+
+### 2026-08-21 — ADMIN-ORDER-WORKSPACE-MOBILE-PREPARATION-QUANTITY-THREE-TRACK-POLISH-1
+
+- **Admin / Orders** Mobile quantity-enabled preparation rows use label | per-unit | total. Doc: `docs/admin-order-workspace-mobile-preparation-quantity-three-track-polish-1.md`.
+
+### 2026-08-21 — ADMIN-ORDER-WORKSPACE-MOBILE-FULLSCREEN-LAYOUT-POLISH-1
+
+- **Admin / Orders** Order workspace desktop remains frozen; mobile ≤719 uses full-screen dynamic viewport + structured preparation rows. Doc: `docs/admin-order-workspace-mobile-fullscreen-layout-polish-1.md`.
+
+### 2026-08-21 — ADMIN-ORDER-WORKSPACE-FINAL-VISUAL-UX-QA-1
+
+- **Admin / Orders** Order workspace final visual/UX QA = **FROZEN** (P3 non-blocking only). Doc: `docs/admin-order-workspace-final-visual-ux-qa-1.md`.
+
+### 2026-08-20 — ADMIN-ORDER-WORKSPACE-WHATSAPP-CONTEXTUAL-DEFAULT-POLISH-1
+
+- **Admin / Orders** Workspace WhatsApp default follows status + delivery method; manual template override remains available. Doc: `docs/admin-order-workspace-whatsapp-contextual-default-polish-1.md`.
+
+### 2026-08-20 — ADMIN-ORDER-WORKSPACE-MANUAL-STATUS-CORRECTION-SAFETY-POLISH-1
+
+- **Admin / Orders** Manual correction to `cancelled` requires inline confirmation in `StatusForm` before shared status mutation; first Guardar never cancels. Doc: `docs/admin-order-workspace-manual-status-correction-safety-polish-1.md`.
+
+### 2026-08-20 — ADMIN-ORDER-WORKSPACE-CONTEXTUAL-STATUS-ACTION-RUNTIME-VALIDATION-RESUME-1
+
+- **Admin / Orders** Contextual status runtime matrix validated after pending-mutation finalization fix; hard gate CLOSED. Doc: `docs/admin-order-workspace-contextual-status-action-runtime-validation-resume-1.md`.
+
+### 2026-08-20 — ADMIN-ORDER-WORKSPACE-STATUS-PENDING-MUTATION-FINALIZATION-FIX-1
+
+- **Admin / Orders** Pending status finalization: snapshot status fields before in-place clear; late confirmation remains idempotent no-op. Regression: `lib/orders/pending-status-mutation-finalization.verify.ts`.
+
+### 2026-08-19 — ADMIN-ORDER-WORKSPACE-CONTEXTUAL-STATUS-ACTION-VALIDATION-1
+
+- **Admin / Orders** Contextual status flow source-validated; runtime mutation QA blocked pending authenticated disposable session. Doc: `docs/admin-order-workspace-contextual-status-action-validation-1.md`.
+
+### 2026-08-19 — ADMIN-ORDER-WORKSPACE-CONTEXTUAL-STATUS-ACTION-FLOW-1
+
+- **Admin / Orders** Workspace modal: active status → one contextual CTA; manual selector = secondary; terminal = no primary CTA; Activity = last 2; WhatsApp smart default pending. Doc: `docs/admin-order-workspace-contextual-status-action-flow-1.md`.
+
+### 2026-08-19 — ADMIN-ORDER-WORKSPACE-CUSTOMER-DELIVERY-RAIL-REALIGNMENT-1
+
+- **Admin / Orders** Workspace modal: LEFT = Products → Indicaciones → Activity; RIGHT = Next step/Final state → Status → Customer/Delivery → Contact. No action-flow changes yet. Doc: `docs/admin-order-workspace-customer-delivery-rail-realignment-1.md`.
+
+### 2026-08-19 — ADMIN-ORDER-WORKSPACE-INFORMATION-HIERARCHY-POLISH-1
+
+- **Admin / Orders** Workspace modal information hierarchy: Productos → Indicaciones → Actividad (Cliente/Entrega since moved to right rail); header includes Delivery/Retiro; terminal states use Estado final. Contextual actions remain pending Phase B. Doc: `docs/admin-order-workspace-information-hierarchy-polish-1.md`.
+
+### 2026-08-19 — ADMIN-ORDER-WORKSPACE-INFORMATION-ACTION-FLOW-AUDIT-1
+
+- **Admin / Orders** Workspace information/action flow audited by status and delivery modality; implementation pending product decisions. Doc: `docs/admin-order-workspace-information-action-flow-audit-1.md`.
+
+### 2026-08-19 — ADMIN-ORDER-WORKSPACE-INDEPENDENT-RAILS-LAYOUT-FIX-1
+
+- **Admin / Orders** Workspace desktop uses independent left/right vertical rails; long Products content cannot push operational right-rail controls downward. Doc: `docs/admin-order-workspace-independent-rails-layout-fix-1.md`.
+
+### 2026-08-19 — ADMIN-ORDER-WORKSPACE-PREPARATION-NUMERIC-DENSITY-VISUAL-POLISH-1
+
+- **Admin / Orders** Preparation body uses compact operational tracks and tabular numerals; header and modal 60/40 remain unchanged. Doc: `docs/admin-order-workspace-preparation-numeric-density-visual-polish-1.md`.
+
+### 2026-08-18 — ADMIN-ORDER-WORKSPACE-PREPARATION-PRODUCT-HEADER-TRACK-REGRESSION-FIX-1
+
+- **Admin / Orders** Product preparation header uses dedicated responsive tracks; body keeps 4-track group/option/per-unit/total grid; header overlap regression closed. Doc: `docs/admin-order-workspace-preparation-product-header-track-regression-fix-1.md`.
+
+### 2026-08-18 — ADMIN-ORDER-WORKSPACE-PREPARATION-COLUMN-ALIGNMENT-VISUAL-FIX-1
+
+- **Admin / Orders** Preparation column geometry aligned; per-unit vs total/coverage now visually distinct; data semantics unchanged. Doc: `docs/admin-order-workspace-preparation-column-alignment-visual-fix-1.md`.
+
+### 2026-08-18 — ADMIN-ORDER-WORKSPACE-PREPARATION-PER-UNIT-TOTAL-ADDITIONAL-POLISH-1
+
+- **Admin / Orders** Preparation UI distinguishes per-unit vs total quantities for multi-unit parents; Adicional renders without child price. Doc: `docs/admin-order-workspace-preparation-per-unit-total-additional-polish-1.md`.
+
+### 2026-08-18 — ADMIN-ORDER-WORKSPACE-PRODUCT-PREPARATION-VISUAL-SEPARATION-POLISH-1
+
+- **Admin / Orders** Preparation hierarchy visual separation polished (product unit, spec-style groups, Adicional boundary). Data/quantity/price contract unchanged. Doc: `docs/admin-order-workspace-product-preparation-visual-separation-polish-1.md`.
+
+### 2026-08-18 — ADMIN-ORDER-WORKSPACE-PRODUCT-PREPARATION-HIERARCHY-1
+
+- **Admin / Orders** Workspace/detail Products now use snapshot-derived preparation hierarchy (V2 qty, V1 structured, legacy flat); Adicional upsell label; option prices omitted. Doc: `docs/admin-order-workspace-product-preparation-hierarchy-1.md`.
+
+### 2026-08-18 — ADMIN-ORDER-WORKSPACE-PRODUCT-PREPARATION-HIERARCHY-AUDIT-1
+
+- **Admin / Orders** Products preparation hierarchy audited (snapshot V1/V2 → admin renderer); structured comanda feasible presentation-only; implementation pending. Doc: `docs/admin-order-workspace-product-preparation-hierarchy-audit-1.md`.
+
+### 2026-08-18 — ADMIN-ORDER-WORKSPACE-MODAL-ACTION-HIERARCHY-VISUAL-FIX-1
+
+- **Admin / Orders** Workspace modal action hierarchy visual fix (single Estado, quiet terminal CTA, secondary WhatsApp). Workflow unchanged. Doc: `docs/admin-order-workspace-modal-action-hierarchy-visual-fix-1.md`.
+
+### 2026-08-18 — ADMIN-ORDER-WORKSPACE-MODAL-HIERARCHY-POLISH-1
+
+- **Admin / Orders** Workspace modal hierarchy polished (info left / ops right); Unicode + CTA hierarchy fixes; workflow unchanged. Doc: `docs/admin-order-workspace-modal-hierarchy-polish-1.md`.
+
+### 2026-08-17 — ADMIN-ORDER-RESPONSIBILITY-FEATURE-FLAG-VALIDATION-1
+
+- **Admin / Orders** Validation PASS: schema aligned; OFF/ON/ON→OFF→ON matrix passed; server mutation gate validated; console error resolved; final tenant OFF. No runtime fixes. Doc: `docs/admin-order-responsibility-feature-flag-validation-1.md`.
+
+### 2026-08-17 — ADMIN-ORDER-RESPONSIBILITY-FEATURE-FLAG-1
+
+- **Admin / Orders** Tenant `business_settings.order_assignment_enabled` (default OFF). UI gated via `orderResponsibilityEnabled`; `updateOrderAssignmentAction` server-hardened. Assignment data + realtime/reconciliation preserved. Doc: `docs/admin-order-responsibility-feature-flag-1.md`.
+
+### 2026-08-17 — ADMIN-ORDER-RESPONSIBILITY-FEATURE-FLAG-AUDIT-1
+
+- **Admin / Orders** Forensic audit for tenant `order_assignment_enabled` feature flag (default OFF). Maps UI consumers, `updateOrderAssignmentAction`, data/realtime; recommends server hardening + UI gating without touching reconciliation hooks. Doc: `docs/admin-order-responsibility-feature-flag-audit-1.md`.
+
+### 2026-08-17 — ADMIN-DASHBOARD-KANBAN-LANE-PAGER-VISUAL-FIX-1
+
+- **Admin / Dashboard Kanban** Terminal pager moved off lane overlay into a compact in-flow navigation row above the 4-lane grid. Neutral secondary styling; cancelled accent only on count badge. Logic/windows/realtime unchanged. Doc: `docs/admin-dashboard-kanban-lane-pager-visual-fix-1.md`.
+
+### 2026-08-17 — ADMIN-DASHBOARD-KANBAN-TERMINAL-LANE-PAGER-1
+
+- **Admin / Dashboard Kanban** Desktop (≥1200px) always renders a 4-lane visible window. Cancelled is accessed via local UI state `"primary" | "terminal"` in `DashboardKanbanBoard` (pager controls). Domain/realtime lane derivation unchanged. Doc: `docs/admin-dashboard-kanban-terminal-lane-pager-1.md`. Living audit reconciled.
+
+### 2026-08-17 — ADMIN-DASHBOARD-FORENSIC-LIVING-AUDIT-1
+
+- **Admin / Architecture** Living SoT: `docs/admin-dashboard-forensic-living-audit.md` (baseline `81b1162`). Future admin architecture/ownership/route/shared-primitive changes must reconcile this doc before closeout.
+
+### 2026-08-16 — PUBLIC-CATALOG-FOOTER-CART-BOTTOM-SPACING-POLISH
+
+- **Frontend / Public Catalog** `.catalog-page--with-cart` bottom clearance derived from FAB geometry: `calc(52px + max(14px, env(safe-area-inset-bottom)) + 10px)` (~76px base; was 100/118). Doc: `docs/public-catalog-footer-cart-bottom-spacing-polish.md`.
+
 ### 2026-08-15 — PUBLIC-CATALOG-CHROME-FINAL-CLOSEOUT-1
 
 - **Frontend / Public Catalog** Closed drawer + tenant footer: flush-right full-height nav side-sheet; catalog-only footer with `business.name`, dynamic year, OrderOps link `/` (no ™). Android real-device QA PASS both. Docs: nav-drawer + tenant-footer polish.

@@ -9,29 +9,75 @@
   gap: 8px;
 }
 
-.admin-status-form--modal :global(.admin-field) > span {
+.admin-status-form--modal :global(.admin-field) > span:not([class]) {
   font-size: 0.84rem;
   font-weight: 600;
   color: var(--text-secondary);
 }
 
-.admin-status-form--modal :global(.admin-field) select {
-  min-height: 40px;
-  padding: 8px 11px;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 82%, var(--border-strong));
+.admin-status-form__field {
+  display: grid;
+  gap: inherit;
+  min-width: 0;
+}
+
+.admin-status-form__select-shell {
+  position: relative;
+  display: block;
+  min-width: 0;
+}
+
+/* Beat shared `.admin-field select` padding so value clears the chevron. */
+.admin-status-form :global(.admin-field) .admin-status-form__select {
+  width: 100%;
+  min-height: 44px;
+  box-sizing: border-box;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 8px 2.5rem 8px 12px;
+  border: 1px solid color-mix(in srgb, var(--border-subtle) 70%, var(--border-strong));
   border-radius: 10px;
-  background: color-mix(in srgb, var(--bg-surface) 92%, var(--bg-surface-soft));
+  background: color-mix(in srgb, var(--bg-surface) 88%, var(--bg-surface-soft));
+  color: var(--text-primary);
   font-size: 0.88rem;
+  line-height: 1.25;
+  cursor: pointer;
   transition:
     border-color 120ms ease,
     background-color 120ms ease,
-    color 120ms ease;
+    color 120ms ease,
+    box-shadow 120ms ease;
 }
 
-.admin-status-form--modal :global(.admin-field) select:focus-visible {
+.admin-status-form :global(.admin-field) .admin-status-form__select:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--border-strong) 55%, var(--border-subtle));
+  background: color-mix(in srgb, var(--bg-surface) 78%, var(--bg-surface-soft));
+}
+
+.admin-status-form :global(.admin-field) .admin-status-form__select:focus-visible {
   outline: none;
   border-color: color-mix(in srgb, var(--focus) 50%, var(--border-subtle));
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 18%, transparent);
+}
+
+.admin-status-form :global(.admin-field) .admin-status-form__select:disabled {
+  cursor: not-allowed;
+  color: var(--text-secondary);
+  background: color-mix(in srgb, var(--bg-surface-soft) 55%, var(--bg-surface));
+}
+
+.admin-status-form__select-chevron {
+  position: absolute;
+  top: 50%;
+  right: 1.05rem;
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  pointer-events: none;
+  contain: paint layout;
 }
 
 .admin-status-form select[data-syncing="true"] {
@@ -40,6 +86,7 @@
 
 .admin-status-form :global(.admin-primary-button) {
   width: 100%;
+  min-height: 44px;
 }
 
 .admin-status-form__read-only-note {
@@ -47,6 +94,154 @@
   color: var(--text-secondary);
   font-size: 0.8125rem;
   line-height: 1.35;
+}
+
+.admin-status-form--workstation-manual {
+  gap: 8px;
+}
+
+.admin-status-form--workstation-manual :global(.admin-field) .admin-status-form__select {
+  border-color: color-mix(in srgb, var(--border-subtle) 44%, var(--border-strong));
+  background: color-mix(in srgb, var(--bg-surface) 94%, var(--bg-surface-soft));
+}
+
+:global(html[data-dashboard-theme="light"]) .admin-status-form--workstation-manual :global(.admin-field) .admin-status-form__select {
+  border-color: color-mix(in srgb, var(--border-subtle) 18%, var(--border-strong));
+  background: var(--bg-surface);
+}
+
+.admin-status-form--workstation-manual :global(.admin-field) .admin-status-form__select:hover:not(:disabled) {
+  border-color: color-mix(in srgb, var(--border-strong) 58%, var(--border-subtle));
+}
+
+.admin-status-form--workstation-manual .admin-status-form__select-chevron {
+  color: var(--text-secondary);
+}
+
+.admin-status-form__manual-save {
+  width: 100%;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid color-mix(in srgb, var(--border-subtle) 78%, var(--border-strong));
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--bg-surface-soft) 42%, var(--bg-surface));
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    border-color 120ms ease,
+    color 120ms ease;
+}
+
+.admin-status-form__manual-save:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--bg-surface-hover) 70%, var(--bg-surface));
+  border-color: color-mix(in srgb, var(--border-strong) 48%, var(--border-subtle));
+  color: var(--text-primary);
+}
+
+.admin-status-form__manual-save:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--focus) 18%, transparent);
+}
+
+.admin-status-form__manual-save:disabled {
+  border-color: color-mix(in srgb, var(--border-subtle) 72%, var(--border-strong));
+  background: color-mix(in srgb, var(--bg-surface) 88%, var(--bg-surface-soft));
+  color: var(--text-secondary);
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+:global(html[data-dashboard-theme="light"]) .admin-status-form__manual-save:disabled {
+  border-color: color-mix(in srgb, var(--border-subtle) 32%, var(--border-strong));
+  background: color-mix(in srgb, var(--bg-surface) 96%, var(--bg-surface-soft));
+}
+
+.admin-status-form--confirming-cancel {
+  gap: 10px;
+}
+
+.admin-status-form__cancel-confirm {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--surface-critical-border);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--surface-critical-bg) 72%, var(--bg-surface));
+}
+
+.admin-status-form__cancel-confirm-title {
+  margin: 0;
+  font-size: 0.84rem;
+  font-weight: 650;
+  line-height: 1.25;
+  color: var(--text-cancelled-strong);
+}
+
+.admin-status-form__cancel-confirm-body {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+.admin-status-form__cancel-confirm-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.admin-status-form__cancel-back {
+  min-height: 2.25rem;
+  padding: 0 12px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  background: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-status-form__cancel-back:hover:not(:disabled) {
+  background: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.admin-status-form__cancel-back:disabled,
+.admin-status-form__cancel-confirm-action:disabled {
+  opacity: 0.72;
+  cursor: not-allowed;
+}
+
+.admin-status-form__cancel-confirm-action {
+  min-height: 2.25rem;
+  padding: 0 12px;
+  border: 1px solid color-mix(in srgb, var(--color-cancelled) 42%, var(--border-subtle));
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-cancelled) 12%, var(--bg-surface));
+  color: var(--text-cancelled-strong);
+  font-size: 0.84rem;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.admin-status-form__cancel-confirm-action:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-cancelled) 18%, var(--bg-surface));
+}
+
+.admin-status-form--modal .admin-status-form__cancel-confirm,
+.admin-status-form--workstation-manual .admin-status-form__cancel-confirm {
+  grid-column: 1 / -1;
+}
+
+@media (max-width: 419px) {
+  .admin-status-form__cancel-confirm-actions {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (min-width: 720px) {
@@ -59,5 +254,9 @@
   .admin-status-form--modal :global(.admin-primary-button) {
     white-space: nowrap;
     min-width: max-content;
+  }
+
+  .admin-status-form--modal :global(.admin-field) .admin-status-form__select {
+    min-height: 40px;
   }
 }

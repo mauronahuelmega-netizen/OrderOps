@@ -283,7 +283,7 @@ function buildBusinessKpis(ctx: PresenterContext): DashboardTopSectionKpiViewMod
     },
     {
       id: "topProduct",
-      label: "Más vendido",
+      label: "Producto más pedido",
       value: topProduct.value,
       detail: topProduct.detail,
       tone: topProduct.tone,
@@ -330,9 +330,9 @@ function buildOperationalKpis(ctx: PresenterContext): DashboardTopSectionKpiView
     },
     {
       id: "readyWaiting",
-      label: "Listos esperando salida",
+      label: "Listos para entrega/retiro",
       value: readyCount === 0 ? "Sin pedidos listos" : pluralizePedidos(readyCount),
-      detail: "En ready",
+      detail: "Delivery y retiro en local",
       tone: readyCount >= 2 ? "warning" : readyCount === 1 ? "info" : "success",
       priority: "secondary",
       iconKey: "package-ready"

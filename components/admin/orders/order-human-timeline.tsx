@@ -6,6 +6,7 @@ import Card from "@/components/ui/Card";
 import {
   buildOrderHistorySummary,
   buildPresentedOrderTimelineEntries,
+  filterAssignmentTimelineEvents,
   type AdminOrderTimelineEvent
 } from "@/lib/orders/events.shared";
 import type { OrderStatus } from "@/types/database";
@@ -17,7 +18,10 @@ type OrderHumanTimelineProps = {
   orderCreatedAt: string;
   currentStatus: OrderStatus;
   compact?: boolean;
+  compactEventLimit?: number;
+  compactHeading?: string;
   detailHref?: string;
+  orderResponsibilityEnabled?: boolean;
 };
 
 const HISTORY_SIGNAL_CLASS_NAMES: Record<string, string | undefined> = {
@@ -30,28 +34,37 @@ function OrderHumanTimelineComponent({
   orderCreatedAt,
   currentStatus,
   compact = false,
-  detailHref
+  compactEventLimit = 5,
+  compactHeading = "Actividad reciente",
+  detailHref,
+  orderResponsibilityEnabled = true
 }: OrderHumanTimelineProps) {
+  const visibleEvents = useMemo(
+    () => filterAssignmentTimelineEvents(events, orderResponsibilityEnabled),
+    [events, orderResponsibilityEnabled]
+  );
+
   const timelineEntries = useMemo(
-    () => buildPresentedOrderTimelineEntries(events, orderCreatedAt),
-    [events, orderCreatedAt]
+    () => buildPresentedOrderTimelineEntries(visibleEvents, orderCreatedAt),
+    [visibleEvents, orderCreatedAt]
   );
 
   const historySummary = useMemo(
     () =>
-      compact ? null : buildOrderHistorySummary(events, orderCreatedAt, currentStatus),
-    [compact, events, orderCreatedAt, currentStatus]
+      compact ? null : buildOrderHistorySummary(visibleEvents, orderCreatedAt, currentStatus),
+    [compact, visibleEvents, orderCreatedAt, currentStatus]
   );
 
   const { hiddenEventsCount, visibleTimelineEntries } = useMemo(() => {
-    const hiddenCount = compact && timelineEntries.length > 5 ? timelineEntries.length - 5 : 0;
+    const limit = compact ? compactEventLimit : timelineEntries.length;
+    const hiddenCount = compact && timelineEntries.length > limit ? timelineEntries.length - limit : 0;
 
     return {
       hiddenEventsCount: hiddenCount,
       visibleTimelineEntries:
-        compact && hiddenCount > 0 ? timelineEntries.slice(-5) : timelineEntries
+        compact && hiddenCount > 0 ? timelineEntries.slice(-limit) : timelineEntries
     };
-  }, [compact, timelineEntries]);
+  }, [compact, compactEventLimit, timelineEntries]);
 
   const timelineClassName = [
     timelineStyles["admin-order-human-timeline"],
@@ -86,13 +99,15 @@ function OrderHumanTimelineComponent({
             : workspaceStyles["admin-detail-header"]
         }
       >
-        <h2>{compact ? "Actividad reciente" : "Historial"}</h2>
+        <h2>{compact ? compactHeading : "Historial"}</h2>
       </div>
 
       {historySummary ? (
         <div className={historySummaryClassName}>
           <dl className={timelineStyles["admin-order-history-summary__metrics"]}>
-            {historySummary.metrics.map((metric) => (
+            {historySummary.metrics
+              .filter((metric) => orderResponsibilityEnabled || metric.key !== "reassignments")
+              .map((metric) => (
               <div key={metric.key} className={timelineStyles["admin-order-history-summary__metric"]}>
                 <dt>{metric.label}</dt>
                 <dd>{metric.value}</dd>
@@ -105,7 +120,9 @@ function OrderHumanTimelineComponent({
               className={timelineStyles["admin-order-history-summary__signals"]}
               aria-label="Senales del pedido"
             >
-              {historySummary.signals.map((signal) => (
+              {historySummary.signals
+            .filter((signal) => orderResponsibilityEnabled || signal.key !== "reassigned")
+            .map((signal) => (
                 <span
                   key={signal.key}
                   className={[
@@ -139,7 +156,7 @@ function OrderHumanTimelineComponent({
 
       {hiddenEventsCount > 0 ? (
         <div className={timelineStyles["admin-order-human-timeline__meta"]}>
-          <span>Mostrando ultimos 5 movimientos</span>
+          <span>Mostrando ultimos {compactEventLimit} movimientos</span>
           {detailHref ? (
             <Link className="admin-secondary-link" href={detailHref}>
               Ver historial completo
@@ -150,7 +167,7 @@ function OrderHumanTimelineComponent({
 
       <div
         className={timelineClassName}
-        aria-label={compact ? "Actividad reciente del pedido" : "Historial del pedido"}
+        aria-label={compact ? `${compactHeading} del pedido` : "Historial del pedido"}
       >
         {visibleTimelineEntries.map((entry) => (
           <article
@@ -190,7 +207,10 @@ function areOrderHumanTimelinePropsEqual(
     previous.orderCreatedAt !== next.orderCreatedAt ||
     previous.currentStatus !== next.currentStatus ||
     previous.compact !== next.compact ||
-    previous.detailHref !== next.detailHref
+    previous.compactEventLimit !== next.compactEventLimit ||
+    previous.compactHeading !== next.compactHeading ||
+    previous.detailHref !== next.detailHref ||
+    previous.orderResponsibilityEnabled !== next.orderResponsibilityEnabled
   ) {
     return false;
   }

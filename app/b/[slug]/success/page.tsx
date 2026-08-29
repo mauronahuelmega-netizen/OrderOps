@@ -1,5 +1,7 @@
 import Button from "@/components/ui/Button";
 import { requirePublicBusinessBySlug } from "@/lib/business/public";
+import { buildOrderDisplayRef } from "@/lib/orders/display-ref";
+import { createSupabaseServiceClient } from "@/lib/supabase/service";
 import { buildPublicOrderWhatsappUrl } from "@/lib/whatsapp/public";
 import type { CSSProperties } from "react";
 import styles from "./success-page.module.css";
@@ -19,9 +21,33 @@ export default async function SuccessPage({
 }: SuccessPageProps) {
   const [{ slug }, { order_id: orderId }] = await Promise.all([params, searchParams]);
   const business = await requirePublicBusinessBySlug(slug);
+
+  let visibleOrderRef: string | null = null;
+  if (orderId && typeof orderId === "string") {
+    try {
+      const supabase = createSupabaseServiceClient();
+      const { data } = await supabase
+        .from("orders")
+        .select("id, order_code")
+        .eq("id", orderId)
+        .eq("business_id", business.id)
+        .maybeSingle();
+
+      if (data) {
+        visibleOrderRef = `#${buildOrderDisplayRef(data)}`;
+      } else {
+        visibleOrderRef = `#${buildOrderDisplayRef(orderId)}`;
+      }
+    } catch {
+      visibleOrderRef = `#${buildOrderDisplayRef(orderId)}`;
+    }
+  }
+
   const whatsappUrl = buildPublicOrderWhatsappUrl({
     whatsappNumber: business.whatsapp_number,
-    orderId
+    businessName: business.name,
+    orderId,
+    orderRef: visibleOrderRef ?? undefined
   });
 
   const businessStyles = {
@@ -45,10 +71,10 @@ export default async function SuccessPage({
               ? "Ya registramos tu pedido. Confirmalo por WhatsApp para que el negocio pueda prepararlo."
               : "Ya registramos tu pedido. Si necesitás confirmarlo, escribile al negocio por WhatsApp."}
           </p>
-          {orderId ? (
+          {visibleOrderRef ? (
             <div className={styles.orderRef}>
               <span className={styles.orderRefLabel}>Referencia del pedido</span>
-              <p className={styles.orderRefValue}>{orderId}</p>
+              <p className={styles.orderRefValue}>{visibleOrderRef}</p>
             </div>
           ) : null}
           <div className={styles.actions}>

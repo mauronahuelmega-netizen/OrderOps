@@ -40,6 +40,7 @@ type BuildOperationalLaneMetricsInput = {
   queuePressure: AdminOrdersQueuePressure;
   now?: Date;
   currentUserId: string;
+  orderResponsibilityEnabled?: boolean;
 };
 
 const ACTIVE_STATUSES = new Set<OrderStatus>(["pending", "preparing", "ready"]);
@@ -48,6 +49,12 @@ export function buildOperationalLaneMetrics(
   input: BuildOperationalLaneMetricsInput
 ): OperationalLaneMetrics | null {
   if (input.orders.length === 0) {
+    return null;
+  }
+
+  const orderResponsibilityEnabled = input.orderResponsibilityEnabled ?? true;
+
+  if (!orderResponsibilityEnabled && (input.laneKey === "unassigned" || input.laneKey === "mine")) {
     return null;
   }
 
@@ -80,14 +87,17 @@ export function buildOperationalLaneMetrics(
         laneKey: input.laneKey,
         title: laneTitle,
         subtitle: "Ingreso y backlog operativo",
-        tone: riskCount > 0 || unassignedCount > 0 ? "attention" : "neutral",
-        alert: buildPendingAlert({ riskCount, unassignedCount, oldestMinutes }),
-        items: [
-          buildMetricItem("count", "Pedidos", countLabel, true),
-          buildMetricItem("unassigned", "Sin responsable", formatCount(unassignedCount)),
-          buildMetricItem("risk", "Con riesgo", formatCount(riskCount)),
-          buildMetricItem("oldest", "Mas antiguo", formatMinutes(oldestMinutes))
-        ]
+        tone: riskCount > 0 || (orderResponsibilityEnabled && unassignedCount > 0) ? "attention" : "neutral",
+        alert: buildPendingAlert({ riskCount, unassignedCount, oldestMinutes, orderResponsibilityEnabled }),
+        items: filterAssignmentLaneMetricItems(
+          [
+            buildMetricItem("count", "Pedidos", countLabel, true),
+            buildMetricItem("unassigned", "Sin responsable", formatCount(unassignedCount)),
+            buildMetricItem("risk", "Con riesgo", formatCount(riskCount)),
+            buildMetricItem("oldest", "Mas antiguo", formatMinutes(oldestMinutes))
+          ],
+          orderResponsibilityEnabled
+        )
       };
     case "preparing":
       return {
@@ -104,12 +114,15 @@ export function buildOperationalLaneMetrics(
           avgStateMinutes,
           queuePressure: input.queuePressure
         }),
-        items: [
-          buildMetricItem("count", "Pedidos", countLabel, true),
-          buildMetricItem("risk", "Con riesgo", formatCount(riskCount)),
-          buildMetricItem("assigned", "Asignados", `${laneOrders.length - unassignedCount}/${laneOrders.length}`),
-          buildMetricItem("average", "Promedio", formatMinutes(avgStateMinutes))
-        ]
+        items: filterAssignmentLaneMetricItems(
+          [
+            buildMetricItem("count", "Pedidos", countLabel, true),
+            buildMetricItem("risk", "Con riesgo", formatCount(riskCount)),
+            buildMetricItem("assigned", "Asignados", `${laneOrders.length - unassignedCount}/${laneOrders.length}`),
+            buildMetricItem("average", "Promedio", formatMinutes(avgStateMinutes))
+          ],
+          orderResponsibilityEnabled
+        )
       };
     case "ready":
       return {
@@ -128,12 +141,15 @@ export function buildOperationalLaneMetrics(
             : typeof oldestMinutes === "number" && oldestMinutes >= 20
               ? "Hay pedidos listos acumulados."
               : undefined,
-        items: [
-          buildMetricItem("count", "Pedidos", countLabel, true),
-          buildMetricItem("risk", "Con riesgo", formatCount(riskCount)),
-          buildMetricItem("unassigned", "Sin responsable", formatCount(unassignedCount)),
-          buildMetricItem("oldest", "Mas antiguo", formatMinutes(oldestMinutes))
-        ]
+        items: filterAssignmentLaneMetricItems(
+          [
+            buildMetricItem("count", "Pedidos", countLabel, true),
+            buildMetricItem("risk", "Con riesgo", formatCount(riskCount)),
+            buildMetricItem("unassigned", "Sin responsable", formatCount(unassignedCount)),
+            buildMetricItem("oldest", "Mas antiguo", formatMinutes(oldestMinutes))
+          ],
+          orderResponsibilityEnabled
+        )
       };
     case "completed":
       return {
@@ -142,24 +158,27 @@ export function buildOperationalLaneMetrics(
         title: laneTitle,
         subtitle: "Throughput y cierre del dia",
         tone: "positive",
-        items: [
-          buildMetricItem("count", "Pedidos", countLabel, true),
-          buildMetricItem(
-            "share",
-            "Peso",
-            formatPercent(laneOrders.length, input.allOrders.length)
-          ),
-          buildMetricItem(
-            "average-completion",
-            "Tiempo prom.",
-            formatMinutes(input.operationalMetrics.averageCompletionMinutes)
-          ),
-          buildMetricItem(
-            "mine",
-            "A mi cargo",
-            formatCount(assignedToCurrentUserCount)
-          )
-        ]
+        items: filterAssignmentLaneMetricItems(
+          [
+            buildMetricItem("count", "Pedidos", countLabel, true),
+            buildMetricItem(
+              "share",
+              "Peso",
+              formatPercent(laneOrders.length, input.allOrders.length)
+            ),
+            buildMetricItem(
+              "average-completion",
+              "Tiempo prom.",
+              formatMinutes(input.operationalMetrics.averageCompletionMinutes)
+            ),
+            buildMetricItem(
+              "mine",
+              "A mi cargo",
+              formatCount(assignedToCurrentUserCount)
+            )
+          ],
+          orderResponsibilityEnabled
+        )
       };
     case "cancelled":
       return {
@@ -231,12 +250,15 @@ export function buildOperationalLaneMetrics(
           riskOrders.length > 0
             ? `${riskOrders.length} ${riskOrders.length === 1 ? "pedido requiere revision inmediata" : "pedidos requieren revision inmediata"}.`
             : undefined,
-        items: [
-          buildMetricItem("count", "Pedidos", formatCount(riskOrders.length), true),
-          buildMetricItem("unassigned", "Sin responsable", formatCount(unassignedCount)),
-          buildMetricItem("pressure", "Cola", input.queuePressure.label),
-          buildMetricItem("oldest", "Mas antiguo", formatMinutes(oldestMinutes))
-        ]
+        items: filterAssignmentLaneMetricItems(
+          [
+            buildMetricItem("count", "Pedidos", formatCount(riskOrders.length), true),
+            buildMetricItem("unassigned", "Sin responsable", formatCount(unassignedCount)),
+            buildMetricItem("pressure", "Cola", input.queuePressure.label),
+            buildMetricItem("oldest", "Mas antiguo", formatMinutes(oldestMinutes))
+          ],
+          orderResponsibilityEnabled
+        )
       };
     }
     case "unassigned":
@@ -321,12 +343,26 @@ function buildLaneTitle(laneKey: OperationalLaneKey) {
   }
 }
 
+function filterAssignmentLaneMetricItems(
+  items: OperationalLaneMetricItem[],
+  orderResponsibilityEnabled: boolean
+): OperationalLaneMetricItem[] {
+  if (orderResponsibilityEnabled) {
+    return items;
+  }
+
+  return items.filter(
+    (item) => item.id !== "unassigned" && item.id !== "assigned" && item.id !== "mine"
+  );
+}
+
 function buildPendingAlert(input: {
   riskCount: number;
   unassignedCount: number;
   oldestMinutes: number | null;
+  orderResponsibilityEnabled?: boolean;
 }) {
-  if (input.unassignedCount > 0) {
+  if (input.orderResponsibilityEnabled !== false && input.unassignedCount > 0) {
     return `${input.unassignedCount} ${input.unassignedCount === 1 ? "pedido espera responsable" : "pedidos esperan responsable"}.`;
   }
 

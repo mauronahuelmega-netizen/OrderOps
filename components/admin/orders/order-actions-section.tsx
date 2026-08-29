@@ -35,6 +35,7 @@ type OrderActionsSectionProps = {
     event?: AdminOrderTimelineEvent | null;
   }) => void | Promise<void>;
   variant?: "default" | "modal" | "page" | "workstation";
+  orderResponsibilityEnabled?: boolean;
 };
 
 export default function OrderActionsSection({
@@ -49,7 +50,8 @@ export default function OrderActionsSection({
   onOptimisticAssignmentChange,
   onOptimisticAssignmentRollback,
   onOptimisticAssignmentSettled,
-  variant = "default"
+  variant = "default",
+  orderResponsibilityEnabled = true
 }: OrderActionsSectionProps) {
   const isWorkstation = variant === "workstation";
 
@@ -67,7 +69,7 @@ export default function OrderActionsSection({
     <p className={detailStyles.detailNote}>Acceso de solo lectura para el estado del pedido.</p>
   );
 
-  const assignmentControls = (
+  const assignmentControls = orderResponsibilityEnabled ? (
     <OrderAssignmentControls
       orderId={order.id}
       assignment={{
@@ -77,11 +79,16 @@ export default function OrderActionsSection({
       assignmentLabel={assignmentLabel}
       currentUserId={currentUserId}
       canUpdateOrders={canUpdateOrders}
+      orderResponsibilityEnabled={orderResponsibilityEnabled}
       onOptimisticAssignmentChange={onOptimisticAssignmentChange}
       onOptimisticAssignmentRollback={onOptimisticAssignmentRollback}
       onOptimisticAssignmentSettled={onOptimisticAssignmentSettled}
     />
-  );
+  ) : null;
+
+  const operationalDescription = orderResponsibilityEnabled
+    ? "Actualizá estado y responsable del pedido."
+    : "Actualizá el estado del pedido.";
 
   const externalActions = <OrderExternalActions order={order} />;
 
@@ -103,7 +110,7 @@ export default function OrderActionsSection({
               Control operativo
             </h3>
             <p className={workspaceStyles["admin-actions-group__description"]}>
-              Actualizá estado y responsable del pedido.
+              {operationalDescription}
             </p>
           </div>
           <div className={workspaceStyles["admin-actions-group__body"]}>

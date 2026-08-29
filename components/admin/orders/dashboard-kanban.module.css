@@ -1,3 +1,68 @@
+.boardShell {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.lanePagerRow {
+  display: none;
+}
+
+.lanePager {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0.125rem 0.25rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: none;
+  min-height: 1.75rem;
+}
+
+.lanePager:hover {
+  color: var(--text-primary);
+  background: color-mix(in srgb, var(--bg-surface-hover) 72%, transparent);
+}
+
+.lanePager:focus {
+  outline: none;
+}
+
+.lanePager:focus-visible {
+  outline: 2px solid var(--border-strong);
+  outline-offset: 2px;
+}
+
+.lanePagerCount {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.125rem;
+  height: 1.125rem;
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  background: color-mix(in srgb, var(--color-cancelled) 14%, transparent);
+  color: var(--text-cancelled-strong);
+}
+
+.lanePagerArrow {
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
 .boardWrapper {
   display: flex;
   flex: 1;
@@ -215,6 +280,23 @@
 }
 
 @media (min-width: 1200px) {
+  .boardShell[data-has-lane-pager="true"] .lanePagerRow {
+    display: flex;
+    align-items: center;
+    min-height: 1.75rem;
+    max-height: 2rem;
+    margin: 0;
+    padding: 0 0 0.25rem;
+  }
+
+  .lanePagerRow[data-align="end"] {
+    justify-content: flex-end;
+  }
+
+  .lanePagerRow[data-align="start"] {
+    justify-content: flex-start;
+  }
+
   .boardWrapper {
     display: grid;
     gap: 1rem;
@@ -229,16 +311,12 @@
     align-content: stretch;
     align-items: stretch;
     grid-auto-rows: minmax(0, 1fr);
-  }
-
-  .boardWrapper[data-lane-count="4"] {
+    /* Desktop kanban is a fixed 4-lane window (terminal pager; no 5-col compression). */
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    overflow-x: visible;
   }
 
-  .boardWrapper[data-lane-count="5"] {
-    grid-template-columns: repeat(5, minmax(15rem, 1fr));
-    overflow-x: auto;
+  .boardShell[data-has-lane-pager="true"] .boardWrapper {
+    padding-top: 0.35rem;
   }
 
   .lane {
@@ -325,5 +403,50 @@
     gap: 0.75rem;
     overflow-y: visible;
     max-height: none;
+  }
+}
+
+.mobileTerminalDisclosure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.5rem 1rem;
+  margin-top: 0.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  background-color: var(--bg-surface);
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.mobileTerminalDisclosure:hover {
+  background-color: var(--bg-surface-hover);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.mobileTerminalDisclosure:focus {
+  outline: none;
+}
+
+.mobileTerminalDisclosure:focus-visible {
+  outline: 2px solid var(--border-strong);
+  outline-offset: 2px;
+}
+
+.mobileTerminalDisclosure:active {
+  background-color: var(--bg-surface-soft);
+}
+
+@media (min-width: 768px) {
+  .mobileTerminalDisclosure {
+    display: none;
   }
 }

@@ -146,6 +146,7 @@ function buildBoardGroupedOrder(
 
 function buildGroupedBoardOrders(
   activeFilter: OrdersFilter,
+  baseOrders: AdminOrderDashboardItem[],
   filteredOrders: AdminOrderDashboardItem[]
 ): DashboardBoardGroupedOrders {
   if (activeFilter !== "all") {
@@ -156,9 +157,13 @@ function buildGroupedBoardOrders(
     buildBoardGroupedOrder(status, filteredOrders, true)
   );
 
-  const conditionalGroups = CONDITIONAL_BOARD_STATUSES.map((status) =>
-    buildBoardGroupedOrder(status, filteredOrders, false)
-  ).filter((group) => group.orders.length > 0);
+  const conditionalGroups = CONDITIONAL_BOARD_STATUSES.map((status) => {
+    const hasOrdersInBase = baseOrders.some((order) => order.status === status);
+    if (!hasOrdersInBase) {
+      return null;
+    }
+    return buildBoardGroupedOrder(status, filteredOrders, false);
+  }).filter((group): group is DashboardBoardGroupedOrder => group !== null);
 
   return [...persistentGroups, ...conditionalGroups];
 }
@@ -222,7 +227,11 @@ export function buildDashboardBoardViewModel(
   const isDayScopeEmpty = hasAnyOrders && !hasOrdersInScope;
   const isFilteredEmpty = hasOrdersInScope && !hasVisibleOrders;
 
-  const groupedOrders = buildGroupedBoardOrders(activeFilter, filteredOrders);
+  const groupedOrders = buildGroupedBoardOrders(
+    activeFilter,
+    baseFilteredOrders,
+    filteredOrders
+  );
   const renderMode = resolveBoardRenderMode(
     activeFilter,
     isOperationalEmpty,

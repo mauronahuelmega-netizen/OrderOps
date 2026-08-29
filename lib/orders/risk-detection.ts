@@ -62,10 +62,12 @@ export function assessOrderRisk(input: {
   timeline?: AdminOrderTimelineEvent[];
   operationalMetrics?: AdminOperationalMetrics;
   now?: Date;
+  includeAssignmentRisk?: boolean;
 }): OrderRiskAssessment {
   const now = input.now ?? new Date();
   const order = input.order;
   const timeline = input.timeline ?? order.order_events ?? [];
+  const includeAssignmentRisk = input.includeAssignmentRisk ?? true;
   const isActive = ACTIVE_STATUSES.has(order.status);
 
   if (!isActive) {
@@ -90,7 +92,7 @@ export function assessOrderRisk(input: {
   const hasRegressiveChange = timeline.some(
     (event) => getOrderTimelinePresentationKind(event) === "status_reverted"
   );
-  const reassignmentCount = countReassignmentSignals(timeline);
+  const reassignmentCount = includeAssignmentRisk ? countReassignmentSignals(timeline) : 0;
 
   if (
     typeof inactiveMinutes === "number" &&
@@ -115,7 +117,7 @@ export function assessOrderRisk(input: {
     signals.push("regressive");
   }
 
-  if (reassignmentCount > 0) {
+  if (includeAssignmentRisk && reassignmentCount > 0) {
     signals.push("reassigned");
   }
 

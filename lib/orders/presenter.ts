@@ -108,6 +108,43 @@ export function buildAdminOrderHeaderDescription(input: OrderHeaderInput) {
   )} · ${input.phone}`;
 }
 
+/**
+ * Display-only Argentine phone formatting for known deterministic patterns.
+ * Does not invent variable area-code boundaries; unknown shapes stay as stored.
+ * Canonical/raw value for tel:/WhatsApp/copy must remain unchanged by callers.
+ */
+export function formatAdminPhoneDisplay(phone: string): string {
+  const trimmed = phone.trim();
+  if (!trimmed) {
+    return trimmed;
+  }
+
+  const digits = trimmed.replace(/\D/g, "");
+
+  // +54 9 11 XXXX-XXXX (AR mobile, Buenos Aires area 11)
+  const mobileBa = digits.match(/^54911(\d{8})$/);
+  if (mobileBa) {
+    const local = mobileBa[1];
+    return `+54 9 11 ${local.slice(0, 4)}-${local.slice(4)}`;
+  }
+
+  // +54 11 XXXX-XXXX (AR landline BA without mobile 9)
+  const landlineBa = digits.match(/^5411(\d{8})$/);
+  if (landlineBa) {
+    const local = landlineBa[1];
+    return `+54 11 ${local.slice(0, 4)}-${local.slice(4)}`;
+  }
+
+  // 11 XXXX-XXXX (local BA 10 digits)
+  const localBa = digits.match(/^11(\d{8})$/);
+  if (localBa) {
+    const local = localBa[1];
+    return `11 ${local.slice(0, 4)}-${local.slice(4)}`;
+  }
+
+  return trimmed;
+}
+
 export function buildOrderOperationalSummary(
   customerName: string,
   notes: string | null,

@@ -1,27 +1,18 @@
 "use client";
 
-import { useEffect, useState, useTransition } from "react";
-import { useAdminToast } from "@/components/admin/admin-toast-provider";
+import { useEffect, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import Button from "@/components/ui/Button";
-import { updateOrderStatusAction } from "@/app/admin/(protected)/orders/[id]/actions";
-import type { AdminOrderTimelineEvent } from "@/lib/orders/events.shared";
-import { buildOrderStatusSuccessMessage } from "@/lib/orders/presenter";
-import { isSessionMutationBlockedCode } from "@/lib/store-sessions/types";
+import { useOrderStatusMutation } from "@/components/admin/orders/use-order-status-mutation";
+import type { OrderStatus } from "@/types/database";
 import styles from "./status-form.module.css";
-
-function notifySessionMutationBlocked(onSessionMutationBlocked?: () => void) {
-  onSessionMutationBlocked?.();
-  if (typeof window !== "undefined") {
-    window.dispatchEvent(new CustomEvent("orderops:operational-mutation-blocked"));
-  }
-}
-
-type OrderStatus = "pending" | "preparing" | "ready" | "completed" | "cancelled";
 
 type StatusFormProps = {
   orderId: string;
   initialStatus: OrderStatus;
-  variant?: "default" | "modal" | "page";
+  variant?: "default" | "modal" | "page" | "workstation";
+  /** Presentation-only: keep the accessible field label, hide the visible duplicate. */
+  hideFieldLabel?: boolean;
   canChangeStatus?: boolean;
   readOnlyReason?: string;
   onSessionMutationBlocked?: () => void;
@@ -31,111 +22,97 @@ type StatusFormProps = {
   onOptimisticStatusSettled?: (resolution?: {
     succeeded: boolean;
     finalStatus?: OrderStatus;
-    event?: AdminOrderTimelineEvent | null;
+    event?: import("@/lib/orders/events.shared").AdminOrderTimelineEvent | null;
   }) => void | Promise<void>;
+  mutation?: ReturnType<typeof useOrderStatusMutation>;
 };
 
 export default function StatusForm({
   orderId,
   initialStatus,
   variant = "default",
+  hideFieldLabel = false,
   canChangeStatus = true,
   readOnlyReason,
   onSessionMutationBlocked,
   onSuccess,
   onOptimisticStatusChange,
   onOptimisticStatusRollback,
-  onOptimisticStatusSettled
+  onOptimisticStatusSettled,
+  mutation: externalMutation
 }: StatusFormProps) {
-  const { pushToast } = useAdminToast();
-  const [selectedStatus, setSelectedStatus] = useState<OrderStatus>(initialStatus);
-  const [isPending, startTransition] = useTransition();
+  const internalMutation = useOrderStatusMutation({
+    orderId,
+    initialStatus,
+    canChangeStatus,
+    onSessionMutationBlocked,
+    onSuccess,
+    onOptimisticStatusChange,
+    onOptimisticStatusRollback,
+    onOptimisticStatusSettled
+  });
+
+  const mutation = externalMutation ?? internalMutation;
+  const isWorkstation = variant === "workstation";
+  const showFieldLabel = !hideFieldLabel && !isWorkstation;
+  const [isCancellationConfirmationOpen, setIsCancellationConfirmationOpen] = useState(false);
+  const hasManualChange = mutation.selectedStatus !== initialStatus;
+  const isSaveDisabled = mutation.isPending || !canChangeStatus || !hasManualChange;
 
   useEffect(() => {
-    setSelectedStatus(initialStatus);
+    setIsCancellationConfirmationOpen(false);
+  }, [orderId]);
+
+  useEffect(() => {
+    if (mutation.selectedStatus !== "cancelled") {
+      setIsCancellationConfirmationOpen(false);
+    }
+  }, [mutation.selectedStatus]);
+
+  useEffect(() => {
+    if (initialStatus === "cancelled") {
+      setIsCancellationConfirmationOpen(false);
+    }
   }, [initialStatus]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!canChangeStatus) {
+    if (!canChangeStatus || mutation.isPending || !hasManualChange) {
       return;
     }
 
-    const nextStatus = selectedStatus;
-    const previousStatus = initialStatus;
-
-    if (nextStatus === previousStatus) {
-      pushToast({
-        tone: "info",
-        message: "No hubo cambios para guardar"
-      });
+    if (mutation.selectedStatus === "cancelled" && initialStatus !== "cancelled") {
+      setIsCancellationConfirmationOpen(true);
       return;
     }
 
-    onOptimisticStatusChange?.(nextStatus, previousStatus);
+    mutation.submitManualChange();
+  };
 
-    startTransition(async () => {
-      let resolution: {
-        succeeded: boolean;
-        finalStatus?: OrderStatus;
-        event?: AdminOrderTimelineEvent | null;
-      } = {
-        succeeded: false
-      };
+  const handleStatusSelectChange = (nextStatus: OrderStatus) => {
+    mutation.setSelectedStatus(nextStatus);
 
-      try {
-        const formData = new FormData();
-        formData.set("order_id", orderId);
-        formData.set("status", nextStatus);
+    if (nextStatus !== "cancelled") {
+      setIsCancellationConfirmationOpen(false);
+    }
+  };
 
-        const result = await updateOrderStatusAction({}, formData);
+  const handleDismissCancellation = () => {
+    if (mutation.isPending) {
+      return;
+    }
 
-        if (result?.error) {
-          onOptimisticStatusRollback?.(previousStatus);
-          setSelectedStatus(previousStatus);
-          if (isSessionMutationBlockedCode(result.code)) {
-            notifySessionMutationBlocked(onSessionMutationBlocked);
-          }
-          pushToast({
-            tone: "error",
-            message: result.error
-          });
-          return;
-        }
+    setIsCancellationConfirmationOpen(false);
+    mutation.setSelectedStatus(initialStatus);
+  };
 
-        if (result?.changed === false) {
-          pushToast({
-            tone: "info",
-            message: result.message ?? "No hubo cambios para guardar"
-          });
-        }
+  const handleConfirmCancellation = () => {
+    if (mutation.isPending || !canChangeStatus) {
+      return;
+    }
 
-        resolution = {
-          succeeded: result?.changed !== false,
-          finalStatus: result.order?.status ?? nextStatus,
-          event: result.event ?? null
-        };
-        const finalStatus = resolution.finalStatus ?? nextStatus;
-
-        if (result?.changed !== false) {
-          pushToast({
-            tone: "success",
-            message: buildOrderStatusSuccessMessage(finalStatus)
-          });
-          onSuccess?.(finalStatus);
-        }
-      } catch {
-        onOptimisticStatusRollback?.(previousStatus);
-        setSelectedStatus(previousStatus);
-        pushToast({
-          tone: "error",
-          message: "No pudimos actualizar el pedido"
-        });
-      } finally {
-        await onOptimisticStatusSettled?.(resolution);
-      }
-    });
+    mutation.submitStatusChange("cancelled");
   };
 
   return (
@@ -143,37 +120,81 @@ export default function StatusForm({
       onSubmit={handleSubmit}
       className={[
         styles["admin-status-form"],
-        variant === "modal" ? styles["admin-status-form--modal"] : null
+        variant === "modal" ? styles["admin-status-form--modal"] : null,
+        isWorkstation ? styles["admin-status-form--workstation-manual"] : null,
+        isCancellationConfirmationOpen ? styles["admin-status-form--confirming-cancel"] : null
       ]
         .filter(Boolean)
         .join(" ")}
     >
-      <label className="admin-field">
-        <span>Estado</span>
-        <select
-          name="status"
-          value={selectedStatus}
-          onChange={(event) => setSelectedStatus(event.target.value as OrderStatus)}
-          disabled={isPending || !canChangeStatus}
-          data-syncing={isPending ? "true" : undefined}
-          aria-readonly={!canChangeStatus ? true : undefined}
-        >
-          <option value="pending">Pendiente</option>
-          <option value="preparing">Preparando</option>
-          <option value="ready">Listo</option>
-          <option value="completed">Completado</option>
-          <option value="cancelled">Cancelado</option>
-        </select>
+      <label className={`admin-field ${styles["admin-status-form__field"]}`}>
+        <span className={showFieldLabel ? undefined : "sr-only"}>
+          {isWorkstation ? "Estado manual" : "Estado"}
+        </span>
+        <span className={styles["admin-status-form__select-shell"]}>
+          <select
+            name="status"
+            className={styles["admin-status-form__select"]}
+            value={mutation.selectedStatus}
+            onChange={(event) => handleStatusSelectChange(event.target.value as OrderStatus)}
+            disabled={mutation.isPending || !canChangeStatus}
+            data-syncing={mutation.isPending ? "true" : undefined}
+            aria-readonly={!canChangeStatus ? true : undefined}
+          >
+            <option value="pending">Pendiente</option>
+            <option value="preparing">Preparando</option>
+            <option value="ready">Listo</option>
+            <option value="completed">Completado</option>
+            <option value="cancelled">Cancelado</option>
+          </select>
+          <ChevronDown
+            className={styles["admin-status-form__select-chevron"]}
+            aria-hidden="true"
+            size={16}
+            strokeWidth={2}
+          />
+        </span>
       </label>
 
-      {canChangeStatus ? (
+      {canChangeStatus && isCancellationConfirmationOpen ? (
+        <div className={styles["admin-status-form__cancel-confirm"]} role="group" aria-labelledby="status-cancel-confirm-title">
+          <h4 id="status-cancel-confirm-title" className={styles["admin-status-form__cancel-confirm-title"]}>
+            Cancelar pedido
+          </h4>
+          <p className={styles["admin-status-form__cancel-confirm-body"]}>
+            Esta acción cancela el pedido y puede devolver stock de productos con inventario
+            controlado.
+          </p>
+          <div className={styles["admin-status-form__cancel-confirm-actions"]}>
+            <Button
+              type="button"
+              className={styles["admin-status-form__cancel-back"]}
+              disabled={mutation.isPending}
+              onClick={handleDismissCancellation}
+            >
+              Volver
+            </Button>
+            <Button
+              type="button"
+              className={styles["admin-status-form__cancel-confirm-action"]}
+              disabled={mutation.isPending}
+              aria-busy={mutation.isPending}
+              onClick={handleConfirmCancellation}
+            >
+              {mutation.isPending ? "Cancelando…" : "Cancelar pedido"}
+            </Button>
+          </div>
+        </div>
+      ) : canChangeStatus ? (
         <Button
           type="submit"
-          className="admin-primary-button"
-          disabled={isPending}
-          aria-busy={isPending}
+          className={
+            isWorkstation ? styles["admin-status-form__manual-save"] : "admin-primary-button"
+          }
+          disabled={isSaveDisabled}
+          aria-busy={mutation.isPending}
         >
-          {isPending ? "Sincronizando..." : "Guardar estado"}
+          {mutation.isPending ? "Sincronizando..." : isWorkstation ? "Guardar" : "Guardar estado"}
         </Button>
       ) : readOnlyReason ? (
         <p className={styles["admin-status-form__read-only-note"]}>{readOnlyReason}</p>

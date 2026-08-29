@@ -1,5 +1,6 @@
 import type { AdminOrderDashboardItem } from "@/lib/orders/admin";
 import { formatAdminOrderCurrency } from "@/lib/orders/presenter";
+import { buildDashboardOrderItemTree } from "@/lib/product-customization/order-dashboard";
 
 type AdminOrderStatus = AdminOrderDashboardItem["status"];
 type AdminOrderDeliveryMethod = AdminOrderDashboardItem["delivery_method"];
@@ -464,7 +465,11 @@ export function getTopProducts(orders: AdminOrderDashboardItem[]) {
       continue;
     }
 
-    for (const item of order.order_items_preview ?? []) {
+    const rootItems = buildDashboardOrderItemTree(order.order_items_preview ?? []).map(
+      (node) => node.item
+    );
+
+    for (const item of rootItems) {
       const productName = item.product_name.trim();
 
       if (!productName) {

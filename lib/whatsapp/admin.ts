@@ -1,19 +1,39 @@
+import {
+  buildCustomerOrderSummary,
+  formatDeliveryContextLines,
+  formatIndicacionesLine,
+  formatPlainTextCustomerOrderSummary,
+  formatWhatsappCustomerOrderProducts
+} from "@/lib/orders/customer-order-summary";
+import type { OrderItemLike } from "@/lib/product-customization/order-dashboard";
+
 type AdminOrderWhatsappStatus = "pending" | "preparing" | "ready" | "completed" | "cancelled";
 type AdminOrderWhatsappMethod = "delivery" | "pickup";
 
-type AdminOrderWhatsappItem = {
+/** Persisted line shape accepted by Contact messaging (snapshot/tree fields optional). */
+export type AdminOrderWhatsappItem = {
+  id?: string | null;
+  product_id?: string | null;
   product_name: string;
   quantity: number;
+  unit_price?: number;
+  description?: string | null;
+  item_kind?: "product" | "upsell" | null;
+  parent_order_item_id?: string | null;
+  customization_snapshot?: unknown;
 };
 
 type AdminOrderWhatsappShape = {
   id: string;
+  order_code?: string | null;
   customer_name: string;
   phone: string | null;
   delivery_method: AdminOrderWhatsappMethod;
   address: string | null;
   status: AdminOrderWhatsappStatus;
+  /** Retained for call-site compatibility; unused in customer contact message bodies. */
   total_price: number;
+  notes?: string | null;
   item_summary?: string | null;
   order_items?: AdminOrderWhatsappItem[] | null;
 };
@@ -38,6 +58,32 @@ type BuildWhatsappUrlInput = {
   message: string;
 };
 
+function toOrderItemLike(items: AdminOrderWhatsappItem[] | null | undefined): OrderItemLike[] {
+  return (items ?? []).map((item) => ({
+    id: item.id,
+    product_id: item.product_id,
+    product_name: item.product_name,
+    quantity: item.quantity,
+    unit_price: item.unit_price ?? 0,
+    description: item.description ?? null,
+    item_kind: item.item_kind,
+    parent_order_item_id: item.parent_order_item_id ?? null,
+    customization_snapshot: item.customization_snapshot ?? null
+  }));
+}
+
+function buildSummaryFromOrder(order: AdminOrderWhatsappShape) {
+  return buildCustomerOrderSummary({
+    id: order.id,
+    order_code: order.order_code,
+    customer_name: order.customer_name,
+    delivery_method: order.delivery_method,
+    address: order.address,
+    notes: order.notes,
+    order_items: toOrderItemLike(order.order_items)
+  });
+}
+
 function normalizeCustomerName(customerName: string) {
   return customerName.trim().split(/\s+/)[0] || "cliente";
 }
@@ -56,33 +102,15 @@ function sanitizeWhatsappText(value: string) {
     .trim();
 }
 
-function formatWhatsappCurrency(value: number) {
-  const formattedValue = new Intl.NumberFormat("es-AR", {
-    minimumFractionDigits: 0,
-    maximumFractionDigits: 0
-  }).format(value);
-
-  return `$${formattedValue}`;
-}
-
 function buildGreeting(customerName: string) {
   return `Hola ${customerName}`;
 }
 
+/**
+ * Structured WhatsApp product body (exported for verifies / transitional callers).
+ */
 export function buildOrderSummaryText(order: AdminOrderWhatsappShape) {
-  const lines = (order.order_items ?? [])
-    .filter((item) => item.product_name.trim())
-    .map((item) => `- ${item.quantity}x ${item.product_name.trim()}`);
-
-  if (lines.length > 0) {
-    return lines.join("\n");
-  }
-
-  if (order.item_summary?.trim()) {
-    return `- ${order.item_summary.trim()}`;
-  }
-
-  return "- Pedido sin resumen disponible";
+  return formatWhatsappCustomerOrderProducts(buildSummaryFromOrder(order));
 }
 
 export function buildOrderWhatsappMessage(
@@ -90,89 +118,87 @@ export function buildOrderWhatsappMessage(
   order: AdminOrderWhatsappShape
 ) {
   const customerName = normalizeCustomerName(order.customer_name);
-  const summary = buildOrderSummaryText(order);
-  const total = formatWhatsappCurrency(order.total_price);
-  const address = order.address?.trim() || "Sin dirección registrada";
   const greeting = buildGreeting(customerName);
+  const summary = buildSummaryFromOrder(order);
+  const orderRefLabel = `#${summary.orderRef}`;
+  const products = formatWhatsappCustomerOrderProducts(summary);
+  const notesLine = formatIndicacionesLine(summary.notes);
+  const address = order.address?.trim() || "Sin dirección registrada";
 
   switch (template) {
-    case "received":
-      return sanitizeWhatsappText(
-        `${greeting}
+    case "received": {
+      const parts = [
+        greeting,
+        "",
+        `Recibimos tu pedido ${orderRefLabel}:`,
+        "",
+        products
+      ];
 
-Recibimos tu pedido:
+      if (notesLine) {
+        parts.push("", notesLine);
+      }
 
-${summary}
+      parts.push("", "Te avisamos apenas comience la preparación.");
 
-Total: ${total}
-
-Te avisamos apenas comience la preparación.`
-      );
+      return sanitizeWhatsappText(parts.join("\n"));
+    }
     case "preparing":
       return sanitizeWhatsappText(
         `${greeting}
 
-Tu pedido ya está en preparación.
-
-${summary}
-
-Total: ${total}`
+Tu pedido ${orderRefLabel} ya está en preparación.`
       );
     case "ready_pickup":
       return sanitizeWhatsappText(
         `${greeting}
 
-Tu pedido ya está listo para retirar.
+Tu pedido ${orderRefLabel} está listo para retirar.
 
-${summary}
-
-Total: ${total}
-        
 Te esperamos.`
       );
     case "ready_delivery":
       return sanitizeWhatsappText(
         `${greeting}
 
-Tu pedido ya está listo y pronto saldrá a delivery.
-
-${summary}
-
-Total: ${total}`
+Tu pedido ${orderRefLabel} está listo para delivery.`
       );
     case "on_the_way":
       return sanitizeWhatsappText(
         `${greeting}
 
-Tu pedido ya está en camino.
-
-${summary}
-
-Total: ${total}`
+Tu pedido ${orderRefLabel} ya está en camino.`
       );
     case "confirm_address":
       return sanitizeWhatsappText(
         `${greeting}
 
-Nos confirmás esta dirección para el envío?
+Nos confirmás esta dirección para el envío del pedido ${orderRefLabel}?
 
 ${address}`
       );
-    case "summary":
-      return sanitizeWhatsappText(
-        `${greeting}
+    case "summary": {
+      const parts = [
+        greeting,
+        "",
+        `Te compartimos el resumen de tu pedido ${orderRefLabel}:`,
+        "",
+        products
+      ];
 
-Te compartimos el resumen de tu pedido:
+      if (notesLine) {
+        parts.push("", notesLine);
+      }
 
-${summary}
+      parts.push("", ...formatDeliveryContextLines(summary));
 
-Total: ${total}`
-      );
+      return sanitizeWhatsappText(parts.join("\n"));
+    }
     default:
       return sanitizeWhatsappText(
         `${greeting}
 
-Te escribimos por tu pedido.`
+Te escribimos por tu pedido ${orderRefLabel}.`
       );
   }
 }
@@ -214,21 +240,65 @@ export function buildAdminOrderWhatsappUrl(input: BuildWhatsappUrlInput) {
   return `https://wa.me/${cleanedPhone}?text=${message}`;
 }
 
+/**
+ * Deterministic WhatsApp template preference from operational context.
+ * Used by workspace Contacto default selection and contextual URL builder.
+ */
+export function getPreferredWhatsappTemplateKeyForOrder(input: {
+  status: AdminOrderWhatsappStatus | string;
+  deliveryMethod: AdminOrderWhatsappMethod | string;
+}): AdminOrderWhatsappTemplateKey {
+  switch (input.status) {
+    case "pending":
+      return "received";
+    case "preparing":
+      return "preparing";
+    case "ready":
+      if (input.deliveryMethod === "pickup") {
+        return "ready_pickup";
+      }
+
+      if (input.deliveryMethod === "delivery") {
+        return "ready_delivery";
+      }
+
+      return "summary";
+    case "completed":
+    case "cancelled":
+      return "summary";
+    default:
+      return "summary";
+  }
+}
+
+/**
+ * Resolve a preferred key against currently available templates.
+ * preferred → summary → first available → empty.
+ */
+export function resolveWhatsappTemplateKey(
+  preferredKey: AdminOrderWhatsappTemplateKey,
+  availableKeys: readonly AdminOrderWhatsappTemplateKey[]
+): AdminOrderWhatsappTemplateKey | "" {
+  if (availableKeys.includes(preferredKey)) {
+    return preferredKey;
+  }
+
+  if (availableKeys.includes("summary")) {
+    return "summary";
+  }
+
+  return availableKeys[0] ?? "";
+}
+
 export function buildContextualOrderWhatsappUrl(order: AdminOrderWhatsappShape) {
   if (!order.phone) {
     return null;
   }
 
-  const preferredTemplate =
-    order.status === "pending"
-      ? "received"
-      : order.status === "preparing"
-        ? "preparing"
-        : order.status === "ready"
-          ? order.delivery_method === "pickup"
-            ? "ready_pickup"
-            : "ready_delivery"
-          : "summary";
+  const preferredTemplate = getPreferredWhatsappTemplateKeyForOrder({
+    status: order.status,
+    deliveryMethod: order.delivery_method
+  });
 
   return buildAdminOrderWhatsappUrl({
     customerPhone: order.phone,
@@ -245,18 +315,9 @@ export function buildOrderCallUrl(phone: string) {
 }
 
 export function buildOrderContactSummary(order: AdminOrderWhatsappShape) {
-  const parts = [
-    `Pedido de ${order.customer_name}`,
-    buildOrderSummaryText(order),
-    `Total: ${formatWhatsappCurrency(order.total_price)}`,
-    `Método: ${order.delivery_method === "delivery" ? "Delivery" : "Retiro"}`
-  ];
-
-  if (order.address?.trim()) {
-    parts.push(`Dirección: ${order.address.trim()}`);
-  }
-
-  return sanitizeWhatsappText(parts.join("\n"));
+  return sanitizeWhatsappText(
+    formatPlainTextCustomerOrderSummary(buildSummaryFromOrder(order))
+  );
 }
 
 function getWhatsappTemplateLabel(

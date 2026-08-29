@@ -15,6 +15,7 @@ type OrderRiskPanelProps = {
   order: RiskAssessableOrder;
   operationalMetrics?: AdminOperationalMetrics;
   compact?: boolean;
+  orderResponsibilityEnabled?: boolean;
 };
 
 const RISK_LEVEL_CLASS_NAMES = {
@@ -31,7 +32,8 @@ const RISK_LEVEL_SURFACE_CLASS_NAMES: Record<OrderRiskAssessment["level"], strin
 export default function OrderRiskPanel({
   order,
   operationalMetrics,
-  compact = false
+  compact = false,
+  orderResponsibilityEnabled = true
 }: OrderRiskPanelProps) {
   const [now, setNow] = useState(() => new Date());
 
@@ -46,8 +48,14 @@ export default function OrderRiskPanel({
   }, []);
 
   const assessment = useMemo(
-    () => assessOrderRisk({ order, operationalMetrics, now }),
-    [now, operationalMetrics, order]
+    () =>
+      assessOrderRisk({
+        order,
+        operationalMetrics,
+        now,
+        includeAssignmentRisk: orderResponsibilityEnabled
+      }),
+    [now, operationalMetrics, order, orderResponsibilityEnabled]
   );
 
   if (assessment.level === "stable") {

@@ -108,12 +108,23 @@ export default function AdminOrderModalShell({
             ) : null}
             <button
               type="button"
-              className={styles["admin-order-modal-shell__close"]}
+              className={[
+                styles["admin-order-modal-shell__close"],
+                variant === "workstation"
+                  ? styles["admin-order-modal-shell__close--quiet"]
+                  : null
+              ]
+                .filter(Boolean)
+                .join(" ")}
               aria-label="Cerrar detalle del pedido"
               onClick={onClose}
               ref={closeButtonRef}
             >
-              Cerrar
+              {variant === "workstation" ? (
+                <span aria-hidden="true">×</span>
+              ) : (
+                "Cerrar"
+              )}
             </button>
           </div>
         </div>

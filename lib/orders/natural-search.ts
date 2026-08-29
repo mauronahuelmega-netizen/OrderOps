@@ -1,4 +1,5 @@
 import type { AdminOrderDashboardItem } from "@/lib/orders/admin";
+import { buildOrderDisplayRef } from "@/lib/orders/display-ref";
 import type { OrderStatus } from "@/types/database";
 
 export const BOARD_OPERATIONAL_SEARCH_PLACEHOLDER =
@@ -45,10 +46,6 @@ function stripOrderNumberDecorators(value: string): string {
   return value.replace(/#/g, "").trim();
 }
 
-function buildOrderDisplayRef(orderId: string): string {
-  return orderId.replace(/-/g, "").slice(-4).toUpperCase();
-}
-
 function createEmptyOperationalSearchQuery(
   raw: string,
   normalized: string,
@@ -74,7 +71,10 @@ function createEmptyOperationalSearchQuery(
 export function parseOperationalSearch(input: string): OperationalSearchQuery {
   const raw = input ?? "";
   const normalized = normalizeText(stripOrderNumberDecorators(raw));
-  const normalizedDigits = extractDigits(raw);
+  // Only extract normalizedDigits if the query does not contain letters,
+  // preventing alphanumeric order codes like "PGF5" from falling through to single-digit phone matches.
+  const hasLetters = /[a-zA-Z]/.test(raw);
+  const normalizedDigits = hasLetters ? "" : extractDigits(raw);
 
   if (!normalized && !normalizedDigits) {
     return createEmptyOperationalSearchQuery(raw, "", "");
@@ -110,45 +110,107 @@ function matchesCustomerPhone(order: AdminOrderDashboardItem, normalizedDigits: 
 
 function matchesOrderNumber(
   order: AdminOrderDashboardItem,
-  normalizedQuery: string,
-  normalizedDigits: string
+  rawQuery: string,
+  normalizedQuery: string
 ): boolean {
   const compactOrderId = order.id.replace(/-/g, "").toLowerCase();
-  const displayRef = buildOrderDisplayRef(order.id).toLowerCase();
+  const legacyDisplayRef = buildOrderDisplayRef(order.id).toLowerCase();
+  const authoritativeDisplayRef = buildOrderDisplayRef(order).toLowerCase();
+  const compactOrderCode = (order.order_code ?? "").toLowerCase();
   const compactQuery = stripOrderNumberDecorators(normalizedQuery).replace(/\s+/g, "");
 
   if (compactQuery.length > 0) {
+    if (compactOrderCode && compactOrderCode.includes(compactQuery)) {
+      return true;
+    }
+
     if (compactOrderId.includes(compactQuery)) {
       return true;
     }
 
-    if (displayRef.includes(compactQuery)) {
+    if (legacyDisplayRef.includes(compactQuery)) {
+      return true;
+    }
+
+    if (authoritativeDisplayRef.includes(compactQuery)) {
       return true;
     }
   }
 
-  if (!normalizedDigits) {
-    return false;
+  return false;
+}
+
+function matchesSingleToken(
+  order: AdminOrderDashboardItem,
+  token: string,
+  rawQuery: string
+): boolean {
+  const cleanToken = stripOrderNumberDecorators(token);
+  const hasLetters = /[a-z]/.test(cleanToken);
+  const hasDigits = /[0-9]/.test(cleanToken);
+
+  if (hasLetters && hasDigits) {
+    return (
+      matchesOrderNumber(order, rawQuery, cleanToken) ||
+      matchesCustomerName(order, cleanToken)
+    );
   }
 
-  if (compactOrderId.includes(normalizedDigits)) {
-    return true;
+  if (!hasLetters && hasDigits) {
+    return (
+      matchesCustomerPhone(order, cleanToken) ||
+      matchesOrderNumber(order, rawQuery, cleanToken) ||
+      matchesCustomerName(order, cleanToken)
+    );
   }
 
-  return displayRef.includes(normalizedDigits);
+  return (
+    matchesCustomerName(order, cleanToken) ||
+    matchesOrderNumber(order, rawQuery, cleanToken)
+  );
 }
 
 export function matchesOperationalSearch({
   order,
   query
 }: MatchesOperationalSearchInput): boolean {
-  if (!query.normalized && !query.normalizedDigits) {
+  if (!query.normalized && !query.normalizedDigits && !query.raw.trim()) {
     return true;
   }
 
-  return (
-    matchesCustomerName(order, query.normalized) ||
-    matchesCustomerPhone(order, query.normalizedDigits) ||
-    matchesOrderNumber(order, query.normalized, query.normalizedDigits)
-  );
+  const rawTrimmed = query.raw.trim();
+  const startsWithHash = rawTrimmed.startsWith("#");
+
+  // Explicit order number / ref intent with leading '#'
+  if (startsWithHash) {
+    return matchesOrderNumber(order, query.raw, query.normalized);
+  }
+
+  // Multi-token or exact whole query match against customer name
+  if (matchesCustomerName(order, query.normalized)) {
+    return true;
+  }
+
+  // Exact whole query match against order code, legacy ref, or UUID
+  if (matchesOrderNumber(order, query.raw, query.normalized)) {
+    return true;
+  }
+
+  // Phone match for digit-only / phone formatted queries
+  if (query.normalizedDigits && matchesCustomerPhone(order, query.normalizedDigits)) {
+    return true;
+  }
+
+  // Multi-token evaluation: all space-separated tokens must match at least one field
+  const tokens = query.normalized.split(/\s+/).filter(Boolean);
+  if (tokens.length > 1) {
+    const allTokensMatch = tokens.every((token) =>
+      matchesSingleToken(order, token, query.raw)
+    );
+    if (allTokensMatch) {
+      return true;
+    }
+  }
+
+  return false;
 }
