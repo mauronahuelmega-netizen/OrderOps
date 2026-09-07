@@ -475,6 +475,10 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-09-07 — ADMIN-DASHBOARD-MOBILE-ORDERS-COMMIT-PUSH-DEPLOY-1
+
+- **Admin / Dashboard** Released closed mobile/orders block: commit `178d07c` → `origin/main`; Vercel prod Ready `dpl_8T1JKrzPhCsKhNYeo8xKTJUesgZn` on `https://orderops.vercel.app`; public smoke PASS; authenticated prod admin smoke debt accepted. Doc: `docs/admin-dashboard-mobile-orders-commit-push-deploy-1.md`. Next: `ADMIN-PRODUCTS-MOBILE-VISUAL-DEBT-AUDIT-1`.
+
 ### 2026-09-07 — ADMIN-DASHBOARD-MOBILE-ORDERS-FINAL-CLOSEOUT-1 — RESUME AFTER MODE B
 
 - **Admin / Dashboard** Final closeout **PASS**: D1 drawer, tap highlight, D2 toolbar, D3 manual order (through MODE B `#TJK9R5`), D4 footer closed as one block; created-order card/root/workspace/Contact verified; create_order/public/DB unchanged. Doc: `docs/admin-dashboard-mobile-orders-final-closeout-resume-after-mode-b-1.md`. Next: COMMIT-PUSH-DEPLOY-1 (not executed here).

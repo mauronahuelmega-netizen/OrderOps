@@ -782,6 +782,12 @@ Implemented: snapshot-derived structured preparation hierarchy (V2 qty-aware, V1
 ## Living Audit Changelog
 
 ```text
+2026-09-07 — ADMIN-DASHBOARD-MOBILE-ORDERS-COMMIT-PUSH-DEPLOY-1
+- packaged and released the closed admin dashboard mobile/orders block after final closeout PASS, including D1 drawer width/backdrop/motion, admin tap highlight, D2 toolbar density, D3 manual order scroll/customization/server/runtime flow and D4 mobile footer;
+- committed and pushed the validated package after full verify suite, TypeScript, production build, diff-check and known-lint-debt review;
+- deployed through the existing production deployment flow and completed read-only production smoke without creating orders, sending WhatsApp messages, mutating status or changing DB schema/RPC;
+- preserved create_order RPC, DB schema/migrations, public checkout/catalog, workspace/contact code, dashboard Kanban/search/metrics, drawer/toolbar/footer frozen states, realtime and global CSS/theme boundaries
+
 2026-09-07 — ADMIN-DASHBOARD-MOBILE-ORDERS-FINAL-CLOSEOUT-1 — RESUME AFTER MODE B
 - completed final closeout for the admin dashboard mobile/orders visual and manual-order block after MODE B authorized submit QA produced one validated disposable order #TJK9R5;
 - closed D1 drawer width/backdrop/motion, admin tap highlight, D2 toolbar density, D3 manual order scroll/customization/server/runtime flow and D4 mobile footer as one reconciled block;

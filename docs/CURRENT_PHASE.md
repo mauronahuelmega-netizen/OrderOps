@@ -2,19 +2,34 @@
 
 ## Estado actual
 
-**ADMIN-DASHBOARD-MOBILE-ORDERS-COMMIT-PUSH-DEPLOY-1 — IN PROGRESS — PACKAGE AUDIT / COMMIT / PUSH / DEPLOY (2026-09-07)**
+**ADMIN-DASHBOARD-MOBILE-ORDERS-COMMIT-PUSH-DEPLOY-1 — PASS WITH ACCEPTED PROD AUTH SMOKE DEBT — PACKAGE COMMITTED, PUSHED AND DEPLOYED (2026-09-07)**
 
-Status: **IN PROGRESS** — package audit + verifies + static checks PASS; committing closed D1–D4 + manual order block
+Status: **PASS WITH ACCEPTED PROD AUTH SMOKE DEBT** — commit `178d07c` pushed to `main`; Vercel prod Ready `dpl_8T1JKrzPhCsKhNYeo8xKTJUesgZn`; public smoke PASS; authenticated prod admin smoke not available
 
 Doc: `docs/admin-dashboard-mobile-orders-commit-push-deploy-1.md`
 
-Admin dashboard mobile/orders block: **CLOSED → PACKAGING**
-Final closeout: **PASS**
-MODE B QA order_code: **TJK9R5**
+Admin dashboard mobile/orders block: **COMMITTED / PUSHED / DEPLOYED**
+Commit hash: **178d07ced56d739f6f6d1370e4fcd72e8d3ac553**
+Production deployment: **READY** (`https://orderops.vercel.app`)
+Production smoke: **PASS READ-ONLY (public) + PROD AUTH DEBT**
+D1 drawer width/backdrop/motion: **DEPLOYED**
+Admin tap highlight: **DEPLOYED**
+D2 toolbar density: **DEPLOYED**
+D3 manual order flow: **DEPLOYED**
+D4 footer: **DEPLOYED**
+Manual order configured submit: **DEPLOYED**
+QA order #TJK9R5 evidence: **RECORDED FROM MODE B**
 create_order RPC: **UNCHANGED**
 DB schema/migrations: **UNCHANGED**
 Public checkout/catalog: **UNCHANGED**
-No new orders / no status mutation / no WhatsApp send
+No new production orders
+No status mutation
+No WhatsApp send
+Next phase: **ADMIN-PRODUCTS-MOBILE-VISUAL-DEBT-AUDIT-1**
+
+---
+
+## Previous — ADMIN-DASHBOARD-MOBILE-ORDERS-COMMIT-PUSH-DEPLOY-1 — IN PROGRESS — PACKAGE AUDIT / COMMIT / PUSH / DEPLOY (2026-09-07)
 
 ---
 
