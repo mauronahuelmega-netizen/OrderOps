@@ -225,3 +225,28 @@
     animation-duration: 1.6s;
   }
 }
+
+/*
+ * ADMIN-TAP-HIGHLIGHT-POLISH-1
+ * Neutralize Android/Chrome native tap flash on admin interactive controls.
+ * Uses html:has(.admin-shell) so body-mounted portals (drawer, order modal, crop)
+ * are covered while public catalog (no .admin-shell) stays untouched.
+ * Applied admin-wide (not only coarse pointer): transparent tap highlight is a
+ * no-op on fine-pointer desktop and reliably hits real Android/Chrome devices.
+ * Does not alter :focus / :focus-visible / outline / user-select.
+ */
+html:has(.admin-shell) :where(
+  a,
+  button,
+  input,
+  select,
+  textarea,
+  summary,
+  label,
+  [role="button"],
+  [role="tab"],
+  [role="menuitem"],
+  [tabindex]:not([tabindex="-1"])
+) {
+  -webkit-tap-highlight-color: transparent;
+}

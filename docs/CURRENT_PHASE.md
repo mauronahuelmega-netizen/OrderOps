@@ -2,42 +2,99 @@
 
 ## Estado actual
 
-**PUBLIC-CATALOG-SUCCESS-ORDER-REF-VISUAL-HIERARCHY-1 — PASS — PUBLIC SUCCESS ORDER REF HIERARCHY POLISHED (2026-08-29)**
+**ADMIN-DASHBOARD-MOBILE-ORDERS-COMMIT-PUSH-DEPLOY-1 — IN PROGRESS — PACKAGE AUDIT / COMMIT / PUSH / DEPLOY (2026-09-07)**
 
-Status: **PASS — PUBLIC SUCCESS ORDER REF HIERARCHY POLISHED** — polished the public success page order reference hierarchy so the six-character order code is centered, larger (`1.35rem`, bold, `0.1em` letter spacing), and shown without the `#` prefix; preserved UUID success query identity, public WhatsApp business copy, admin `#ORDER_CODE` conventions, order_code schema/RPC, checkout flow, dashboard/admin and global CSS boundaries; all deterministic verify scripts PASS — no commit / push / deploy
+Status: **IN PROGRESS** — package audit + verifies + static checks PASS; committing closed D1–D4 + manual order block
 
-Doc: `docs/public-catalog-success-order-ref-visual-hierarchy-1.md`
+Doc: `docs/admin-dashboard-mobile-orders-commit-push-deploy-1.md`
 
-Public success visible ref: **ORDER_CODE without #**
-Public success order ref hierarchy: **CENTERED / LARGER (1.35rem, bold, 0.1em letter spacing)**
-Public WhatsApp copy: **REMAINS FROZEN**
-Success query identity: **UUID UNCHANGED (?order_id=...)**
-Admin #ORDER_CODE convention: **UNCHANGED**
-Order code block: **REMAINS CLOSED**
-Dashboard/admin: **UNCHANGED**
-Mobile terminal density: **IMPLEMENTED / DEPLOYED**
-Mobile breakpoint: **≤767px stacked mode**
-Terminal cap: **5 initial completed/cancelled**
-Active statuses: **UNCAPPED**
-Search active: **UNCAPPED**
-Desktop/tablet Kanban: **UNCHANGED**
-Admin loading owner: **AdminShell**
-Double loader: **FIXED**
-Dashboard route loader: **REMOVED**
-X/Y centering: **PRESERVED**
-Spinner size: **44–56px PRESERVED**
-Spinner visual style: **ORIGINAL RING/BORDER RESTORED**
-Copy: **Cargando panel + Un momento… PRESERVED**
-Product detail drilldown: **REMOVED**
-Workspace Products inline preparation: **FROZEN / INLINE-ONLY**
-Detail Products inline preparation: **FROZEN / INLINE-ONLY**
-OrderProductModal: **REMOVED / UNUSED**
-Workspace/status/contact: **UNCHANGED**
-Dashboard search/Kanban: **REMAINS FIXED**
-Dashboard order_code partial search: **REMAINS FIXED**
-Dashboard metrics semantics: **REMAIN FROZEN**
-Dashboard card root count: **REMAINS FROZEN**
-Dashboard overall polish: **OPEN**
+Admin dashboard mobile/orders block: **CLOSED → PACKAGING**
+Final closeout: **PASS**
+MODE B QA order_code: **TJK9R5**
+create_order RPC: **UNCHANGED**
+DB schema/migrations: **UNCHANGED**
+Public checkout/catalog: **UNCHANGED**
+No new orders / no status mutation / no WhatsApp send
+
+---
+
+## Previous — ADMIN-DASHBOARD-MOBILE-ORDERS-FINAL-CLOSEOUT-1 — PASS — ADMIN DASHBOARD MOBILE ORDERS FINAL CLOSEOUT COMPLETE (2026-09-07)
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-RUNTIME-QA-1 — PASS — MODE B AUTHORIZED SUBMIT QA CLOSED (2026-09-07)
+
+---
+
+## Previous — ADMIN-DASHBOARD-MOBILE-ORDERS-FINAL-CLOSEOUT-1 — BLOCKED — MODE B AUTHORIZED SUBMIT QA REQUIRED BEFORE FINAL CLOSEOUT (2026-09-07)
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-RUNTIME-QA-1 — PASS WITH ACCEPTED ORDER-SUBMIT QA DEBT — NO-SUBMIT RUNTIME QA COMPLETE (2026-09-06)
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-SERVER-PAYLOAD-1 — PASS — MANUAL ORDER CUSTOMIZATION SERVER PAYLOAD READY (2026-09-06)
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-UI-1 — PASS — MANUAL ORDER CUSTOMIZATION PICKER UI READY (2026-09-06)
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-DOMAIN-1 — PASS — MANUAL ORDER CUSTOMIZATION DOMAIN HELPERS READY (2026-09-06)
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-SPEC-1 — SPEC COMPLETE — READY FOR PHASED IMPLEMENTATION (2026-09-06)
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-MODAL-MOBILE-SINGLE-SCROLL-FIX-1 — PASS — MANUAL ORDER MODAL MOBILE SINGLE-SCROLL FIXED (2026-09-06)
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-CUSTOMIZATION-SAFETY-GATE-RUNTIME-QA-1 — PASS — MANUAL ORDER CUSTOMIZATION SAFETY GATE RUNTIME QA CLOSED (2026-09-06)
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-CUSTOMIZATION-SAFETY-GATE-1 — PASS WITH RUNTIME QA DEBT — MANUAL ORDER CUSTOMIZATION SAFETY GATE READY (2026-09-06)
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-MODAL-MOBILE-SCROLL-AND-CUSTOMIZATION-AUDIT-1 — AUDIT COMPLETE — MANUAL ORDER CUSTOMIZATION PATH DECISION REQUIRED (2026-09-05)
+
+---
+
+## Previous — ADMIN-MOBILE-FOOTER-SINGLE-LINE-FOLLOWUP-1 — PASS — ADMIN MOBILE FOOTER SINGLE-LINE POLISHED (2026-09-05)
+
+---
+
+## Previous — ADMIN-MOBILE-FOOTER-COMPACT-POLISH-1 — PASS — ADMIN MOBILE FOOTER COMPACT POLISHED (2026-09-05)
+
+---
+
+## Previous — ADMIN-TAP-HIGHLIGHT-POLISH-1 — PASS — ADMIN TAP HIGHLIGHT POLISHED (2026-09-05)
+
+---
+
+## Previous — ADMIN-MOBILE-DRAWER-MOTION-POLISH-1 — PASS — ADMIN MOBILE DRAWER MOTION POLISHED (2026-09-05)
+
+---
+
+## Previous — ADMIN-MOBILE-DRAWER-BACKDROP-FOCUS-POLISH-1 — PASS — ADMIN MOBILE DRAWER BACKDROP FOCUS POLISHED (2026-09-05)
+
+---
+
+## Previous — ADMIN-MOBILE-DRAWER-WIDTH-DENSITY-POLISH-1 — PASS — ADMIN MOBILE DRAWER WIDTH POLISHED (2026-09-05)
+
+---
+
+## Previous — ADMIN-DASHBOARD-MOBILE-ORDERS-TOOLBAR-DENSITY-POLISH-1 — PASS — MOBILE ORDERS TOOLBAR DENSITY POLISHED (2026-09-05)
+
+---
+
+## Previous — ADMIN-DASHBOARD-MOBILE-ORDERS-FINAL-VISUAL-DEBT-AUDIT-1 — AUDIT COMPLETE — MANUAL ORDER MODAL NEEDS DEEPER AUDIT FIRST (2026-09-05)
 
 ---
 

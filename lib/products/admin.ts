@@ -1,6 +1,8 @@
 import "server-only";
 
+import { resolveManualOrderProductEligibilityMap } from "@/lib/orders/manual-order-customization-safety";
 import type { ManualOrderProductOption } from "@/lib/orders/manual-order-types";
+import { getPublicProductCustomizationConfig } from "@/lib/product-customization/public";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export type { ManualOrderProductOption };
@@ -163,13 +165,54 @@ export async function getManualOrderProductOptions(
     throw new Error(`Failed to load manual order products: ${error.message}`);
   }
 
-  return (data ?? []).map((row) => ({
-    id: row.id,
-    name: row.name,
-    price: row.price,
-    categoryName: normalizeCategoryRelation(row.categories)?.name ?? null,
-    isAvailable: row.is_available
-  }));
+  const rows = data ?? [];
+  const eligibilityById = await resolveManualOrderProductEligibilityMap(
+    businessId,
+    rows.map((row) => row.id)
+  );
+
+  const configurableProductIds = rows
+    .filter((row) => !(eligibilityById.get(row.id)?.isManualOrderAvailable ?? true))
+    .map((row) => row.id);
+
+  const customizationConfigEntries = await Promise.all(
+    configurableProductIds.map(async (productId) => {
+      const config = await getPublicProductCustomizationConfig({
+        businessId,
+        productId
+      });
+      return [productId, config] as const;
+    })
+  );
+  const customizationConfigById = new Map(customizationConfigEntries);
+
+  return rows.map((row) => {
+    const eligibility = eligibilityById.get(row.id) ?? {
+      isManualOrderAvailable: true,
+      manualOrderUnavailableReason: null
+    };
+    const publicConfig = customizationConfigById.get(row.id) ?? null;
+
+    return {
+      id: row.id,
+      name: row.name,
+      price: row.price,
+      categoryName: normalizeCategoryRelation(row.categories)?.name ?? null,
+      isAvailable: row.is_available,
+      isManualOrderAvailable: eligibility.isManualOrderAvailable,
+      manualOrderUnavailableReason: eligibility.manualOrderUnavailableReason,
+      customizationConfig:
+        publicConfig && !eligibility.isManualOrderAvailable
+          ? {
+              productId: publicConfig.productId,
+              productName: publicConfig.productName,
+              productPrice: publicConfig.productPrice,
+              groups: publicConfig.groups,
+              upsellGroup: publicConfig.upsellGroup
+            }
+          : null
+    };
+  });
 }
 
 export async function getAdminProductById(

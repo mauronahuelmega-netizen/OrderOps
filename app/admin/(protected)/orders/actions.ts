@@ -6,11 +6,21 @@ import {
   getAdminDashboardOrderById,
   type AdminOrderDashboardItem
 } from "@/lib/orders/admin";
-import type { ManualOrderProductOption } from "@/lib/orders/manual-order-types";
+import { manualCreateTicketLinesToCheckoutCart } from "@/lib/orders/manual-order-customization-payload";
+import { resolveManualOrderProductEligibilityMap } from "@/lib/orders/manual-order-customization-safety";
+import type {
+  ManualOrderCreateTicketLineInput,
+  ManualOrderProductOption
+} from "@/lib/orders/manual-order-types";
 import { getManualOrderProductOptions } from "@/lib/products/admin";
+import {
+  toCreateOrderRpcJson,
+  validateCheckoutCartForCreateOrder
+} from "@/lib/product-customization/order-validation";
 import { assertActiveStoreSessionForOrderCreation } from "@/lib/store-sessions/admin";
 import type { OrderCreationErrorCode } from "@/lib/store-sessions/types";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import type { Json } from "@/types/database";
 
 export type CreateManualOrderInput = {
   customerName: string;
@@ -18,27 +28,36 @@ export type CreateManualOrderInput = {
   deliveryMethod: "delivery" | "pickup";
   address?: string;
   notes?: string;
-  items: Array<{
+  /** Legacy simple-only path (still supported). */
+  items?: Array<{
     productId: string;
     quantity: number;
   }>;
+  /** Enriched ticket lines (simple / customized / upsell). Preferred when present. */
+  ticketLines?: ManualOrderCreateTicketLineInput[];
 };
 
 export type CreateManualOrderActionResult =
   | { ok: true; order: AdminOrderDashboardItem }
   | { ok: false; error: string; code?: OrderCreationErrorCode };
 
-type ValidatedCreateManualOrderInput = {
+type ValidatedCreateManualOrderCustomer = {
   customerName: string;
   phone: string;
   deliveryMethod: "delivery" | "pickup";
   address: string | null;
   notes: string | null;
-  items: Array<{
-    productId: string;
-    quantity: number;
-  }>;
 };
+
+type ValidatedCreateManualOrderInput =
+  | (ValidatedCreateManualOrderCustomer & {
+      mode: "legacy";
+      items: Array<{ productId: string; quantity: number }>;
+    })
+  | (ValidatedCreateManualOrderCustomer & {
+      mode: "enriched";
+      ticketLines: ManualOrderCreateTicketLineInput[];
+    });
 
 type CreateManualOrderValidationResult =
   | { ok: true; data: ValidatedCreateManualOrderInput }
@@ -50,6 +69,33 @@ function getOperationalDeliveryDate() {
 
 function isNonEmptyTrimmedString(value: unknown): value is string {
   return typeof value === "string" && value.trim().length > 0;
+}
+
+function mapManualCheckoutValidationError(message: string): string {
+  const normalized = message.toLowerCase();
+
+  if (
+    normalized.includes("adicional") ||
+    normalized.includes("plus seleccionado") ||
+    normalized.includes("producto principal")
+  ) {
+    return "Hay un adicional sin producto principal. Revisá el ticket.";
+  }
+
+  if (
+    normalized.includes("configuración del producto cambió") ||
+    normalized.includes("ya no está disponible") ||
+    normalized.includes("falta elegir") ||
+    normalized.includes("más opciones")
+  ) {
+    return "La configuración del producto está incompleta o ya no está disponible.";
+  }
+
+  if (normalized.includes("carrito")) {
+    return "La configuración del producto está incompleta o ya no está disponible.";
+  }
+
+  return message;
 }
 
 function validateCreateManualOrderInput(
@@ -71,11 +117,107 @@ function validateCreateManualOrderInput(
     return { ok: false, message: "La direcci\u00f3n es obligatoria para delivery." };
   }
 
+  const customer: ValidatedCreateManualOrderCustomer = {
+    customerName: input.customerName.trim(),
+    phone: input.phone.trim(),
+    deliveryMethod: input.deliveryMethod,
+    address:
+      input.deliveryMethod === "delivery" ? (input.address ?? "").trim() : null,
+    notes: isNonEmptyTrimmedString(input.notes) ? input.notes.trim() : null
+  };
+
+  const hasTicketLines =
+    Array.isArray(input.ticketLines) && input.ticketLines.length > 0;
+
+  if (hasTicketLines) {
+    const ticketLines: ManualOrderCreateTicketLineInput[] = [];
+
+    for (const line of input.ticketLines ?? []) {
+      if (
+        !line ||
+        (line.kind !== "simple" &&
+          line.kind !== "customized" &&
+          line.kind !== "upsell")
+      ) {
+        return { ok: false, message: "El pedido debe tener al menos un producto." };
+      }
+
+      if (!isNonEmptyTrimmedString(line.clientLineId)) {
+        return { ok: false, message: "El pedido debe tener al menos un producto." };
+      }
+
+      if (!isNonEmptyTrimmedString(line.productId)) {
+        return { ok: false, message: "El pedido debe tener al menos un producto." };
+      }
+
+      if (!Number.isInteger(line.quantity) || line.quantity < 1) {
+        return { ok: false, message: "La cantidad debe ser mayor a cero." };
+      }
+
+      if (line.kind === "simple") {
+        ticketLines.push({
+          kind: "simple",
+          clientLineId: line.clientLineId.trim(),
+          productId: line.productId.trim(),
+          quantity: line.quantity
+        });
+        continue;
+      }
+
+      if (line.kind === "upsell") {
+        if (!isNonEmptyTrimmedString(line.parentClientLineId)) {
+          return {
+            ok: false,
+            message: "Hay un adicional sin producto principal. Revisá el ticket."
+          };
+        }
+
+        ticketLines.push({
+          kind: "upsell",
+          clientLineId: line.clientLineId.trim(),
+          productId: line.productId.trim(),
+          quantity: line.quantity,
+          parentClientLineId: line.parentClientLineId.trim()
+        });
+        continue;
+      }
+
+      if (
+        !Array.isArray(line.selectedGroups) ||
+        line.selectedGroups.length === 0 ||
+        !isNonEmptyTrimmedString(line.configurationSignature)
+      ) {
+        return {
+          ok: false,
+          message: "Este producto requiere configuración antes de crear el pedido."
+        };
+      }
+
+      ticketLines.push({
+        kind: "customized",
+        clientLineId: line.clientLineId.trim(),
+        productId: line.productId.trim(),
+        quantity: line.quantity,
+        selectedGroups: line.selectedGroups,
+        configurationSignature: line.configurationSignature.trim()
+      });
+    }
+
+    return {
+      ok: true,
+      data: {
+        ...customer,
+        mode: "enriched",
+        ticketLines
+      }
+    };
+  }
+
   if (!Array.isArray(input.items) || input.items.length === 0) {
     return { ok: false, message: "El pedido debe tener al menos un producto." };
   }
 
-  const validatedItems: ValidatedCreateManualOrderInput["items"] = [];
+  const validatedItems: Array<{ productId: string; quantity: number }> = [];
 
   for (const item of input.items) {
     if (!isNonEmptyTrimmedString(item.productId)) {
@@ -95,12 +237,8 @@ function validateCreateManualOrderInput(
   return {
     ok: true,
     data: {
-      customerName: input.customerName.trim(),
-      phone: input.phone.trim(),
-      deliveryMethod: input.deliveryMethod,
-      address:
-        input.deliveryMethod === "delivery" ? (input.address ?? "").trim() : null,
-      notes: isNonEmptyTrimmedString(input.notes) ? input.notes.trim() : null,
+      ...customer,
+      mode: "legacy",
       items: validatedItems
     }
   };
@@ -192,6 +330,59 @@ function mapCreateOrderRpcError(error: unknown): {
   };
 }
 
+async function rejectBareCustomizableProducts(params: {
+  businessId: string;
+  productIds: string[];
+}): Promise<CreateManualOrderActionResult | null> {
+  const uniqueIds = [...new Set(params.productIds.filter(Boolean))];
+  if (uniqueIds.length === 0) {
+    return null;
+  }
+
+  const eligibilityById = await resolveManualOrderProductEligibilityMap(
+    params.businessId,
+    uniqueIds
+  );
+
+  const blockedProductIds = [
+    ...new Set(
+      uniqueIds.filter((productId) => {
+        const eligibility = eligibilityById.get(productId);
+        return eligibility ? !eligibility.isManualOrderAvailable : false;
+      })
+    )
+  ];
+
+  if (blockedProductIds.length === 0) {
+    return null;
+  }
+
+  const supabaseNames = await createSupabaseServerClient();
+  const { data: blockedRows } = await supabaseNames
+    .from("products")
+    .select("id, name")
+    .eq("business_id", params.businessId)
+    .in("id", blockedProductIds);
+
+  const named = (blockedRows ?? [])
+    .map((row) => row.name)
+    .filter((name): name is string => typeof name === "string" && name.trim().length > 0)
+    .slice(0, 3);
+
+  const error =
+    named.length === 1
+      ? `\u201c${named[0]}\u201d requiere configuraci\u00f3n antes de crear el pedido.`
+      : named.length > 1
+        ? `Algunos productos requieren configuraci\u00f3n antes de crear el pedido (${named.join(", ")}).`
+        : "Este producto requiere configuraci\u00f3n antes de crear el pedido.";
+
+  return {
+    ok: false,
+    code: "VALIDATION_ERROR",
+    error
+  };
+}
+
 export type GetManualOrderProductOptionsResult =
   | { ok: true; products: ManualOrderProductOption[] }
   | { ok: false; error: string };
@@ -239,6 +430,57 @@ export async function createManualOrderAction(
       };
     }
 
+    let pItems: Json;
+
+    if (validation.data.mode === "legacy") {
+      // Legacy simple path: still reject any customizable product sent bare.
+      const bareReject = await rejectBareCustomizableProducts({
+        businessId: adminContext.businessId,
+        productIds: validation.data.items.map((item) => item.productId)
+      });
+      if (bareReject) {
+        return bareReject;
+      }
+
+      pItems = validation.data.items.map((item) => ({
+        product_id: item.productId,
+        quantity: item.quantity
+      }));
+    } else {
+      const cartBuild = manualCreateTicketLinesToCheckoutCart(validation.data.ticketLines);
+      if (!cartBuild.ok) {
+        return {
+          ok: false,
+          code: "VALIDATION_ERROR",
+          error: cartBuild.error
+        };
+      }
+
+      // Bare customizable must not enter create_order as legacy simple lines.
+      const bareReject = await rejectBareCustomizableProducts({
+        businessId: adminContext.businessId,
+        productIds: cartBuild.cart.legacyItems.map((item) => item.productId)
+      });
+      if (bareReject) {
+        return bareReject;
+      }
+
+      const validatedCart = await validateCheckoutCartForCreateOrder({
+        businessId: adminContext.businessId,
+        cart: cartBuild.cart
+      });
+
+      if (!validatedCart.ok) {
+        return {
+          ok: false,
+          code: "VALIDATION_ERROR",
+          error: mapManualCheckoutValidationError(validatedCart.error)
+        };
+      }
+
+      pItems = toCreateOrderRpcJson(validatedCart.rpcItems) as Json;
+    }
+
     const supabase = await createSupabaseServerClient();
     const { data: orderId, error: rpcError } = await supabase.rpc("create_order", {
       p_business_id: adminContext.businessId,
@@ -248,10 +490,7 @@ export async function createManualOrderAction(
       p_delivery_method: validation.data.deliveryMethod,
       p_address: validation.data.address,
       p_notes: validation.data.notes,
-      p_items: validation.data.items.map((item) => ({
-        product_id: item.productId,
-        quantity: item.quantity
-      }))
+      p_items: pItems
     });
 
     if (rpcError) {

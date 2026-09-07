@@ -782,6 +782,134 @@ Implemented: snapshot-derived structured preparation hierarchy (V2 qty-aware, V1
 ## Living Audit Changelog
 
 ```text
+2026-09-07 — ADMIN-DASHBOARD-MOBILE-ORDERS-FINAL-CLOSEOUT-1 — RESUME AFTER MODE B
+- completed final closeout for the admin dashboard mobile/orders visual and manual-order block after MODE B authorized submit QA produced one validated disposable order #TJK9R5;
+- closed D1 drawer width/backdrop/motion, admin tap highlight, D2 toolbar density, D3 manual order scroll/customization/server/runtime flow and D4 mobile footer as one reconciled block;
+- verified created-order dashboard card/root-count behavior, order_code search/display, workspace Products snapshot hierarchy, Contact/WhatsApp structured summary without sending, hydration/realtime stability and frozen dashboard surfaces;
+- preserved create_order RPC, DB schema/migrations, public checkout/catalog, workspace/contact code, dashboard Kanban/search/metrics, drawer/toolbar/footer, realtime and global CSS/theme boundaries;
+- no code/CSS/SQL/RPC changes, no new orders, no status mutation, no WhatsApp send, no commit/push/deploy
+
+2026-09-07 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-RUNTIME-QA-1 — MODE B AUTHORIZED SUBMIT
+- completed the authorized one-order runtime submit QA for the admin manual order customization flow, creating exactly one disposable QA manual customized order and recording its order_code;
+- verified the configured manual order submit path end-to-end through server-side validation, unchanged create_order RPC, dashboard card hydration, workspace Products snapshot hierarchy and Contact/WhatsApp summary generation without sending WhatsApp;
+- verified root-count behavior so parent-linked Adicional/upsell child rows do not inflate dashboard card count/summary while remaining visible in workspace/contact/preparation surfaces;
+- preserved create_order RPC signature, DB schema/migrations, public checkout/catalog, dashboard Kanban/search/metrics, drawer/toolbar/footer, realtime and global CSS/theme boundaries;
+- no code/CSS/SQL/RPC changes, no second order, no status mutation, no WhatsApp send, no commit/push/deploy
+
+2026-09-07 — ADMIN-DASHBOARD-MOBILE-ORDERS-FINAL-CLOSEOUT-1
+- audited the admin dashboard mobile/orders final closeout gate after D1 drawer, admin tap highlight, D2 toolbar, D4 footer and manual order no-submit runtime QA were completed;
+- final closeout remains blocked because manual order configured submit MODE B has not been authorized/executed, so created-order dashboard card, workspace Products, Contact/WhatsApp summary, root count and hydration/realtime validation remain unverified;
+- preserved create_order RPC, DB schema/migrations, public checkout/catalog, dashboard Kanban/search/metrics, drawer/toolbar/footer, workspace/contact, realtime and global CSS/theme boundaries;
+- no code/CSS/SQL/RPC changes, no real orders, no commit/push/deploy
+
+2026-09-06 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-RUNTIME-QA-1
+- completed authenticated no-submit runtime QA for the admin manual order customization flow, validating simple quick-add, configurable product picker behavior, client validation, local ticket review, submit readiness, single-scroll preservation and regression surfaces without creating real orders;
+- order submit runtime QA remains deferred until explicit authorization for one disposable QA order;
+- preserved create_order RPC, DB schema/migrations, public checkout/catalog, workspace/contact, dashboard Kanban/search/metrics, drawer/toolbar/footer, realtime and global CSS/theme boundaries;
+- no real orders, no DB mutations, no commit/push/deploy
+
+2026-09-06 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-SERVER-PAYLOAD-1
+- wired the admin manual order create path to accept enriched manual customization ticket lines, validate configured products server-side, reject bare customizable payloads, rebuild/recompute snapshot and pricing, and serialize create_order-compatible p_items without changing the create_order RPC signature;
+- preserved simple-product manual create behavior, admin-native picker UI, manual modal single-scroll, order_code identity, public checkout/catalog UI, workspace/contact, dashboard Kanban/search/metrics, drawer/toolbar/footer, DB schema/migrations/realtime and global CSS/theme boundaries;
+- evolved the manual safety gate from hard-block-customizable to bare-vs-configured server validation while continuing to reject invalid/incomplete/stale/forged customized payloads before RPC;
+- no DB schema/RPC signature changes, no migrations and no real orders created in this phase unless explicitly documented as authorized QA;
+- baseline commit remains current release baseline
+
+2026-09-06 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-UI-1
+- implemented the admin-native manual order customization picker UI as an in-modal subview using the previously added pure domain helpers, allowing configurable products to be configured locally and added to the manual ticket preview without submitting enriched orders yet;
+- preserved simple-product quick-add, manual modal single-scroll, current server safety gate, createManualOrderAction wiring, create_order RPC, order_code identity, public checkout/catalog UI, workspace/contact, dashboard Kanban/search/metrics, drawer/toolbar/footer, DB/RPC/realtime and global CSS/theme boundaries;
+- added a temporary submit guard so tickets containing customized/upsell lines cannot be sent through the legacy simple-only server action until FLOW-SERVER-PAYLOAD-1;
+- no DB/RPC/realtime changes and no real orders created;
+- baseline commit remains current release baseline
+
+2026-09-06 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-DOMAIN-1
+- implemented pure domain helpers for the future admin manual order customization flow, including enriched manual ticket lines, simple/customized/upsell line construction, signature/merge/remove/quantity rules, estimated totals and a pure create_order p_items adapter;
+- reused or wrapped shared product-customization validation/snapshot/signature contracts without coupling admin to public route/UI assumptions;
+- preserved current safety gate behavior, manual modal UI/CSS, manual modal single-scroll, createManualOrderAction wiring, create_order RPC, order_code identity, public checkout/catalog, workspace/contact, dashboard Kanban/search/metrics, drawer/toolbar/footer, DB/RPC/realtime and global CSS/theme boundaries;
+- no UI picker, server wiring, DB/RPC/realtime or real order creation in this phase;
+- baseline commit remains current release baseline
+
+2026-09-06 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-SPEC-1
+- specified the future full admin manual order customization flow so local/manual orders can produce the same enriched order item model as public checkout, including required/optional groups, quantity-enabled extras, upsells/Adicional child lines, pricing, snapshots and create_order payload mapping;
+- recommended an admin-native picker that reuses shared product-customization domain/validation/snapshot helpers rather than coupling admin to public catalog route/UI assumptions;
+- preserved current safety gate, manual modal single-scroll, create_order RPC, order_code identity, public checkout/catalog, workspace/contact, dashboard Kanban/search/metrics, drawer/toolbar/footer, DB/RPC/realtime and global CSS/theme boundaries;
+- no runtime/CSS/DB/RPC/realtime changes;
+- baseline commit remains current release baseline
+
+2026-09-06 — ADMIN-MANUAL-ORDER-MODAL-MOBILE-SINGLE-SCROLL-FIX-1
+- fixed the admin manual order modal mobile/tablet scroll architecture so products and ticket content flow through one primary modal scroll owner on ≤899px instead of competing nested product/summary/workstation scrolls;
+- preserved desktop ≥900 dual-pane behavior, footer CTA visibility, simple-product manual local add flow, customization safety gate UI/server behavior, create_order RPC, public checkout/catalog, workspace/contact, dashboard Kanban/search/metrics, drawer/toolbar/footer, DB/RPC/realtime and global CSS/theme boundaries;
+- no customization picker or DB/RPC/realtime changes;
+- baseline commit remains current release baseline
+
+2026-09-06 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-SAFETY-GATE-RUNTIME-QA-1
+- closed authenticated runtime QA for the admin manual order customization safety gate, confirming simple products remain addable locally and customizable products (e.g. BBQ Bacon) stay blocked with clear UI copy and disabled add controls without creating real orders;
+- preserved create_order RPC, public checkout/catalog, workspace/contact, dashboard Kanban/search/metrics, drawer/toolbar/footer, DB/RPC/realtime and global CSS/theme boundaries;
+- no runtime/CSS/DB/RPC changes;
+- baseline commit remains current release baseline
+
+2026-09-06 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-SAFETY-GATE-1
+- added a defensive safety gate to the admin manual order flow so products that require the catalog customization flow are not addable as simple `{product_id, quantity}` manual items;
+- preserved simple-product manual orders, recalculated eligibility server-side before `create_order`, and kept `create_order` RPC, order_code generation, public checkout, public catalog, workspace/preparation/contact summaries, dashboard Kanban/search/metrics, drawer/toolbar/footer, DB/RPC/realtime and global CSS/theme boundaries unchanged;
+- no customization picker or manual modal single-scroll fix was implemented in this phase;
+- no DB/RPC/realtime changes;
+- baseline commit remains current release baseline
+
+2026-09-05 — ADMIN-MANUAL-ORDER-MODAL-MOBILE-SCROLL-AND-CUSTOMIZATION-AUDIT-1
+- audited the admin manual order modal scroll architecture and customization parity before any implementation;
+- mapped nested mobile/tablet scroll owners, manual product/item payload, createManualOrderAction/create_order contract, customization snapshot gaps, pricing/preparation/contact risks and recommended future phase sequence;
+- no runtime/CSS/DB/RPC/realtime changes;
+- baseline commit remains current release baseline
+
+2026-09-05 — ADMIN-MOBILE-FOOTER-SINGLE-LINE-FOLLOWUP-1
+- refined the admin mobile footer compact treatment into a single horizontal line with `© {year} OrderOps` on the left and `Panel protegido · v1.0` on the right;
+- preserved the desktop footer copy/layout, AdminShell layout, drawer width/backdrop/motion, admin tap highlight, dashboard toolbar, mobile terminal density, search/Kanban, metrics, manual modal, order_code, workspace, public success, public catalog, DB/RPC/realtime and global CSS/theme boundaries;
+- no DB/RPC/realtime changes;
+- baseline commit remains current release baseline
+
+2026-09-05 — ADMIN-MOBILE-FOOTER-COMPACT-POLISH-1
+- compacted the admin footer presentation on mobile so the protected panel/version metadata closes the admin surfaces with shorter, cleaner lines while preserving the desktop footer copy and layout;
+- preserved drawer width/backdrop/motion, admin tap highlight polish, dashboard toolbar, mobile terminal density, search/Kanban, metrics, manual modal, order_code, workspace, public success, public catalog, DB/RPC/realtime and global CSS/theme boundaries;
+- no DB/RPC/realtime changes;
+- baseline commit remains current release baseline
+
+2026-09-05 — ADMIN-TAP-HIGHLIGHT-POLISH-1
+- removed the native mobile browser tap highlight from admin-scoped interactive controls so Android/Chrome blue flashes no longer compete with the premium admin UI;
+- preserved focus-visible, keyboard accessibility, active/hover/selected/disabled states, drawer width/backdrop/motion, dashboard toolbar, mobile terminal density, search/Kanban, metrics, footer, manual modal, order_code, workspace, public success, public catalog, DB/RPC/realtime and global theme boundaries;
+- no DB/RPC/realtime changes;
+- baseline commit remains current release baseline
+
+2026-09-05 — ADMIN-MOBILE-DRAWER-MOTION-POLISH-1
+- added a subtle premium open/close motion to the admin mobile drawer so the sheet enters from the right and exits back to the right while the backdrop fades smoothly;
+- preserved the approved compact drawer width, backdrop scrim/blur treatment, navigation, theme toggle, logout, overlay/close/Escape/focus/scroll-lock behavior, desktop sidebar, AdminShell layout, dashboard toolbar, footer, mobile terminal density, search/Kanban, metrics, order_code, workspace, public success, DB/RPC/realtime and global CSS/theme boundaries;
+- included reduced-motion handling;
+- no DB/RPC/realtime changes;
+- baseline commit remains current release baseline
+
+2026-09-05 — ADMIN-MOBILE-DRAWER-BACKDROP-FOCUS-POLISH-1
+- polished the admin mobile drawer backdrop/scrim so the dashboard behind the compact drawer remains contextual but visually subordinated;
+- preserved the approved compact drawer width, navigation, theme toggle, logout, overlay/close behavior, desktop sidebar, AdminShell layout, dashboard toolbar, footer, mobile terminal density, search/Kanban, metrics, order_code, workspace, public success, DB/RPC/realtime and global CSS/theme boundaries;
+- no DB/RPC/realtime changes;
+- baseline commit remains current release baseline
+
+2026-09-05 — ADMIN-MOBILE-DRAWER-WIDTH-DENSITY-POLISH-1
+- polished the admin mobile drawer width from the previous near-full-screen treatment to a more compact mobile side sheet while preserving navigation, theme toggle, logout, overlay/close behavior, desktop sidebar and admin shell layout boundaries;
+- preserved dashboard toolbar, mobile terminal density, search/Kanban, metrics, order_code, workspace, public success, DB/RPC/realtime and global CSS/theme boundaries;
+- no DB/RPC/realtime changes;
+- baseline commit remains current release baseline
+
+2026-09-05 — ADMIN-DASHBOARD-MOBILE-ORDERS-TOOLBAR-DENSITY-POLISH-1
+- polished mobile-only dashboard orders toolbar density (≤768px) into compact session meta + actions rows while preserving ≥769 desktop/tablet layout via display:contents wrappers;
+- preserved session open/close, manual order, refresh/sync, search, filters, Kanban terminal density, metrics, order_code, realtime and shell/drawer/footer boundaries;
+- no DB/RPC/realtime changes;
+- baseline commit remains current release baseline
+
+2026-09-05 — ADMIN-DASHBOARD-MOBILE-ORDERS-FINAL-VISUAL-DEBT-AUDIT-1
+- audited final mobile admin/orders visual debts before moving to Products: drawer width, dashboard orders toolbar density, manual order modal scroll/customization risk and mobile footer compactness;
+- mapped source ownership, runtime behavior, risk and future phase sequencing for each debt;
+- no runtime/CSS/DB/RPC/realtime changes;
+- baseline commit remains current release baseline
+
 2026-08-29 — PUBLIC-CATALOG-SUCCESS-ORDER-REF-VISUAL-HIERARCHY-1
 - polished the public success page order reference hierarchy so the six-character order code is centered, larger and shown without the # prefix;
 - preserved UUID success query identity, public WhatsApp business copy, admin #ORDER_CODE conventions, order_code schema/RPC, checkout flow, dashboard/admin and global CSS boundaries;

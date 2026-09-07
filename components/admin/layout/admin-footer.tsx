@@ -15,14 +15,17 @@ export type AdminFooterProps = {
   className?: string;
 };
 
+const MOBILE_META = "Panel protegido · v1.0";
+
 export function AdminFooter({
-  brand = "© 2026 OrderOps",
+  brand,
   tagline = "Sistema operativo para pedidos",
   meta = "V1.0 · Panel protegido",
   links = [],
   variant = "default",
   className
 }: AdminFooterProps) {
+  const resolvedBrand = brand ?? `© ${new Date().getFullYear()} OrderOps`;
   const footerClassName = [
     styles.footer,
     variant === "compact" ? styles.footerCompact : "",
@@ -35,7 +38,7 @@ export function AdminFooter({
     <footer className={footerClassName}>
       <div className={styles.inner}>
         <p className={styles.brandLine}>
-          <span className={styles.brand}>{brand}</span>
+          <span className={styles.brand}>{resolvedBrand}</span>
           <span className={styles.separator} aria-hidden="true">
             ·
           </span>
@@ -51,7 +54,10 @@ export function AdminFooter({
               ))}
             </nav>
           ) : null}
-          <p className={styles.metaLine}>{meta}</p>
+          <p className={styles.metaLine}>
+            <span className={styles.metaDesktop}>{meta}</span>
+            <span className={styles.metaMobile}>{MOBILE_META}</span>
+          </p>
         </div>
       </div>
     </footer>

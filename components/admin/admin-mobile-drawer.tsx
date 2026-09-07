@@ -22,12 +22,17 @@ type AdminMobileDrawerProps = {
   role: ProfileRole;
 };
 
+/** Matches CSS close transition (~180ms) + small settle margin. */
+const DRAWER_CLOSE_MS = 200;
+
 const ADMIN_DRAWER_OPEN_CLASS = "admin-drawer-open";
 export const ADMIN_MOBILE_DRAWER_ID = "admin-mobile-drawer";
 export const ADMIN_MOBILE_DRAWER_TITLE_ID = "admin-mobile-drawer-title";
 
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])';
+
+type DrawerMotionState = "closed" | "open" | "closing";
 
 function getUserInitial(userLabel: string) {
   return userLabel.trim().charAt(0).toUpperCase() || "U";
@@ -50,38 +55,101 @@ export default function AdminMobileDrawer({
 }: AdminMobileDrawerProps) {
   const pathname = usePathname();
   const { settings, loading } = useAdminBusinessSettings();
-  const [isOpen, setIsOpen] = useState(false);
+  /** Portal remains mounted while open or closing (exit animation). */
+  const [isRendered, setIsRendered] = useState(false);
+  const [motionState, setMotionState] = useState<DrawerMotionState>("closed");
   const [isMounted, setIsMounted] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const drawerPanelRef = useRef<HTMLElement>(null);
   const wasOpenRef = useRef(false);
+  const closeTimeoutRef = useRef<number | null>(null);
+  const openFrameRef = useRef<number | null>(null);
   const visibleItems = getAdminNavItemsForRole(role).filter((item) =>
     isAdminNavItemFeatureEnabled(item, settings, loading)
   );
 
-  const closeDrawer = useCallback(() => {
-    setIsOpen(false);
+  const isInteractive = isRendered && motionState === "open";
+  /** Expanded while portal is mounted (including enter `closed` and exit `closing`). */
+  const isExpanded = isRendered;
+
+  const clearMotionTimers = useCallback(() => {
+    if (closeTimeoutRef.current !== null) {
+      window.clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
+    }
+
+    if (openFrameRef.current !== null) {
+      window.cancelAnimationFrame(openFrameRef.current);
+      openFrameRef.current = null;
+    }
   }, []);
+
+  const finishClose = useCallback(() => {
+    clearMotionTimers();
+    setIsRendered(false);
+    setMotionState("closed");
+  }, [clearMotionTimers]);
+
+  const closeDrawer = useCallback(() => {
+    if (!isRendered || motionState === "closing") {
+      return;
+    }
+
+    clearMotionTimers();
+    setMotionState("closing");
+    closeTimeoutRef.current = window.setTimeout(() => {
+      finishClose();
+    }, DRAWER_CLOSE_MS);
+  }, [clearMotionTimers, finishClose, isRendered, motionState]);
+
+  const openDrawer = useCallback(() => {
+    clearMotionTimers();
+
+    if (isRendered && motionState === "closing") {
+      setMotionState("open");
+      return;
+    }
+
+    if (isRendered && motionState === "open") {
+      return;
+    }
+
+    setIsRendered(true);
+    setMotionState("closed");
+    openFrameRef.current = window.requestAnimationFrame(() => {
+      openFrameRef.current = window.requestAnimationFrame(() => {
+        setMotionState("open");
+        openFrameRef.current = null;
+      });
+    });
+  }, [clearMotionTimers, isRendered, motionState]);
 
   useEffect(() => {
     setIsMounted(true);
 
     return () => {
+      clearMotionTimers();
       document.documentElement.classList.remove(ADMIN_DRAWER_OPEN_CLASS);
       document.body.classList.remove(ADMIN_DRAWER_OPEN_CLASS);
     };
-  }, []);
+  }, [clearMotionTimers]);
 
   useEffect(() => {
-    setIsOpen(false);
+    if (!isRendered) {
+      return;
+    }
+
+    closeDrawer();
+    // Pathname-driven close only; closeDrawer identity changes with motion state.
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional pathname gate
   }, [pathname]);
 
   useEffect(() => {
     const root = document.documentElement;
     const body = document.body;
 
-    if (!isOpen) {
+    if (!isRendered) {
       root.classList.remove(ADMIN_DRAWER_OPEN_CLASS);
       body.classList.remove(ADMIN_DRAWER_OPEN_CLASS);
       return undefined;
@@ -104,17 +172,20 @@ export default function AdminMobileDrawer({
       body.classList.remove(ADMIN_DRAWER_OPEN_CLASS);
       window.removeEventListener("keydown", handleEscape);
     };
-  }, [closeDrawer, isOpen]);
+  }, [closeDrawer, isRendered]);
 
   useEffect(() => {
-    if (!isOpen) {
-      if (wasOpenRef.current) {
+    if (!isInteractive) {
+      if (wasOpenRef.current && !isRendered) {
         requestAnimationFrame(() => {
           menuButtonRef.current?.focus();
         });
       }
 
-      wasOpenRef.current = false;
+      if (!isRendered) {
+        wasOpenRef.current = false;
+      }
+
       return undefined;
     }
 
@@ -166,16 +237,17 @@ export default function AdminMobileDrawer({
     return () => {
       document.removeEventListener("keydown", handleTab, true);
     };
-  }, [isOpen]);
+  }, [isInteractive, isRendered]);
 
   const drawerPortal =
-    isMounted && isOpen
+    isMounted && isRendered
       ? createPortal(
-          <div className="admin-mobile-drawer-portal">
+          <div className="admin-mobile-drawer-portal" data-state={motionState}>
             <button
               type="button"
               className="admin-mobile-drawer-overlay"
               aria-label="Cerrar menú de administración"
+              tabIndex={motionState === "closing" ? -1 : undefined}
               onClick={closeDrawer}
             />
 
@@ -186,6 +258,7 @@ export default function AdminMobileDrawer({
               role="dialog"
               aria-modal="true"
               aria-labelledby={ADMIN_MOBILE_DRAWER_TITLE_ID}
+              inert={motionState === "closing"}
             >
               <div className="admin-mobile-drawer__header">
                 <AdminBrand
@@ -249,10 +322,10 @@ export default function AdminMobileDrawer({
         type="button"
         className="admin-mobile-menu-button"
         aria-label="Abrir menú de administración"
-        aria-expanded={isOpen}
+        aria-expanded={isExpanded}
         aria-controls={ADMIN_MOBILE_DRAWER_ID}
         aria-haspopup="dialog"
-        onClick={() => setIsOpen(true)}
+        onClick={openDrawer}
       >
         <span className="admin-mobile-menu-button__icon" aria-hidden="true">
           <Menu strokeWidth={1.75} />

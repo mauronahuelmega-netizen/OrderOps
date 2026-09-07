@@ -12,8 +12,7 @@
   --drawer-active-bg-hover: color-mix(in srgb, var(--text-primary) 8%, transparent);
   --drawer-active-border: color-mix(in srgb, var(--border-subtle) 70%, transparent);
   --drawer-active-accent: color-mix(in srgb, var(--text-primary) 55%, var(--border-subtle));
-  --drawer-overlay-scrim: color-mix(in srgb, var(--text-primary) 50%, transparent);
-  --drawer-overlay: color-mix(in srgb, var(--bg-canvas) 45%, var(--drawer-overlay-scrim));
+  /* Overlay/scrim tokens live on `.admin-mobile-drawer-portal` (sibling of sheet). */
   --drawer-shadow-color: color-mix(in srgb, var(--text-primary) 18%, transparent);
   --drawer-shadow: -12px 0 32px var(--drawer-shadow-color);
   --drawer-radius: var(--radius-md, 8px);
@@ -21,12 +20,17 @@
   --drawer-row-min-height: 44px;
   --drawer-row-padding: 0.5625rem 14px;
   --drawer-row-gap: 0.6875rem;
-  --drawer-width: min(88vw, 360px);
+  /* D1 density: compact side sheet; keep labels/tap targets (≥40px rows). */
+  --drawer-width: min(78vw, 340px);
+  --drawer-motion-open-duration: 240ms;
+  --drawer-motion-close-duration: 180ms;
+  --drawer-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
 
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
+  z-index: 1;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -39,6 +43,9 @@
   background: var(--drawer-bg);
   box-shadow: var(--drawer-shadow);
   color: var(--drawer-text);
+  transform: translate3d(calc(100% + 12px), 0, 0);
+  transition: transform var(--drawer-motion-close-duration) var(--drawer-motion-ease);
+  will-change: transform;
 }
 
 .admin-mobile-menu-button {
@@ -105,22 +112,78 @@
 }
 
 .admin-mobile-drawer-portal {
+  /* Backdrop focus: portal-scoped so overlay (sibling of sheet) resolves tokens;
+     never apply opacity to the portal itself (would dim the drawer).
+     overflow visible so backdrop-filter can sample the dashboard behind. */
+  --drawer-overlay: rgba(15, 23, 42, 0.48);
+  --drawer-motion-open-duration: 240ms;
+  --drawer-motion-close-duration: 180ms;
+  --drawer-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100dvh;
   z-index: 60;
-  overflow: hidden;
+  overflow: visible;
+}
+
+.dark .admin-mobile-drawer-portal,
+html[data-dashboard-theme="dark"] .admin-mobile-drawer-portal {
+  --drawer-overlay: rgba(2, 6, 23, 0.64);
 }
 
 .admin-mobile-drawer-overlay {
   position: absolute;
   inset: 0;
+  z-index: 0;
   border: none;
-  background: var(--drawer-overlay);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   cursor: pointer;
+  background: var(--drawer-overlay);
+  /* Backdrop focus polish: opacity primary; blur(2px) documented max assist. */
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  opacity: 0;
+  transition: opacity var(--drawer-motion-close-duration, 180ms)
+    var(--drawer-motion-ease, cubic-bezier(0.22, 1, 0.36, 1));
+  will-change: opacity;
+  pointer-events: auto;
+}
+
+.admin-mobile-drawer-portal[data-state="closed"] .admin-mobile-drawer,
+.admin-mobile-drawer-portal[data-state="closing"] .admin-mobile-drawer {
+  transform: translate3d(calc(100% + 12px), 0, 0);
+}
+
+.admin-mobile-drawer-portal[data-state="open"] .admin-mobile-drawer {
+  transform: translate3d(0, 0, 0);
+  transition-duration: var(--drawer-motion-open-duration);
+}
+
+.admin-mobile-drawer-portal[data-state="closed"] .admin-mobile-drawer-overlay,
+.admin-mobile-drawer-portal[data-state="closing"] .admin-mobile-drawer-overlay {
+  opacity: 0;
+}
+
+.admin-mobile-drawer-portal[data-state="open"] .admin-mobile-drawer-overlay {
+  opacity: 1;
+  transition-duration: var(--drawer-motion-open-duration, 240ms);
+}
+
+.admin-mobile-drawer-portal[data-state="closing"] {
+  pointer-events: auto;
+}
+
+.admin-mobile-drawer-portal[data-state="closing"] .admin-mobile-drawer-overlay {
+  pointer-events: auto;
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .admin-mobile-drawer,
+  .admin-mobile-drawer-overlay {
+    transition-duration: 1ms !important;
+    animation-duration: 1ms !important;
+  }
 }
 
 .admin-mobile-drawer__header {
@@ -384,7 +447,8 @@
 
 @media (min-width: 768px) and (max-width: 899px) {
   .admin-mobile-drawer {
-    --drawer-width: min(88vw, 420px);
+    /* Slightly wider than phone cap, still compact vs prior 88vw/420px. */
+    --drawer-width: min(78vw, 360px);
   }
 }
 
@@ -392,12 +456,5 @@
   .admin-mobile-menu-button,
   .admin-mobile-drawer-portal {
     display: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .admin-mobile-drawer-overlay {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
   }
 }

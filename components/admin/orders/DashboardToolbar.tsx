@@ -75,67 +75,71 @@ export default function DashboardToolbar({
 
           {viewModel.showSessionControls ? (
             <div className={toolbarStyles.sessionCluster}>
-              <div className={toolbarStyles.sessionStatusGroup}>
-                <span className={toolbarStyles.sessionStatus}>{viewModel.sessionStatusLabel}</span>
-                {reviewModeHint ? (
-                  <span className={toolbarStyles.reviewModeHint}>{reviewModeHint}</span>
+              <div className={toolbarStyles.sessionMetaRow}>
+                <div className={toolbarStyles.sessionStatusGroup}>
+                  <span className={toolbarStyles.sessionStatus}>{viewModel.sessionStatusLabel}</span>
+                  {reviewModeHint ? (
+                    <span className={toolbarStyles.reviewModeHint}>{reviewModeHint}</span>
+                  ) : null}
+                </div>
+                {sessionPrimaryActionLabel && sessionPrimaryActionHandler ? (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    className={`${toolbarStyles.sessionButton}${
+                      viewModel.sessionPrimaryActionKind === "close"
+                        ? ` ${toolbarStyles.sessionButtonDanger}`
+                        : ""
+                    }`}
+                    onClick={sessionPrimaryActionHandler}
+                    disabled={viewModel.isStoreSessionPending}
+                  >
+                    {sessionPrimaryActionLabel}
+                  </Button>
                 ) : null}
               </div>
-              {sessionPrimaryActionLabel && sessionPrimaryActionHandler ? (
-                <Button
+              <div className={toolbarStyles.sessionActionsRow}>
+                {showManualOrderButton && onCreateManualOrder ? (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    className={toolbarStyles.manualOrderButton}
+                    onClick={onCreateManualOrder}
+                    disabled={!canCreateManualOrder}
+                    aria-label="Crear nuevo pedido manual"
+                    title={
+                      !canCreateManualOrder
+                        ? (manualOrderDisabledReason ?? "Abrí una sesión activa para crear pedidos.")
+                        : undefined
+                    }
+                  >
+                    <span className={toolbarStyles.manualOrderButtonLabelDesktop}>Nuevo pedido</span>
+                    <span className={toolbarStyles.manualOrderButtonLabelMobile}>+ Pedido</span>
+                  </Button>
+                ) : null}
+                <button
                   type="button"
-                  variant="secondary"
-                  className={`${toolbarStyles.sessionButton}${
-                    viewModel.sessionPrimaryActionKind === "close"
-                      ? ` ${toolbarStyles.sessionButtonDanger}`
-                      : ""
-                  }`}
-                  onClick={sessionPrimaryActionHandler}
-                  disabled={viewModel.isStoreSessionPending}
+                  className={toolbarStyles.syncButton}
+                  onClick={onManualOperationalResync}
+                  disabled={viewModel.isOperationalSyncing}
+                  aria-label={viewModel.operationalSyncAriaLabel}
+                  title={viewModel.operationalSyncTitle}
+                  data-sync-state={viewModel.syncState}
                 >
-                  {sessionPrimaryActionLabel}
-                </Button>
-              ) : null}
-              {showManualOrderButton && onCreateManualOrder ? (
-                <Button
-                  type="button"
-                  variant="secondary"
-                  className={toolbarStyles.manualOrderButton}
-                  onClick={onCreateManualOrder}
-                  disabled={!canCreateManualOrder}
-                  aria-label="Crear nuevo pedido manual"
-                  title={
-                    !canCreateManualOrder
-                      ? (manualOrderDisabledReason ?? "Abrí una sesión activa para crear pedidos.")
-                      : undefined
-                  }
-                >
-                  <span className={toolbarStyles.manualOrderButtonLabelDesktop}>Nuevo pedido</span>
-                  <span className={toolbarStyles.manualOrderButtonLabelMobile}>+ Pedido</span>
-                </Button>
-              ) : null}
-              <button
-                type="button"
-                className={toolbarStyles.syncButton}
-                onClick={onManualOperationalResync}
-                disabled={viewModel.isOperationalSyncing}
-                aria-label={viewModel.operationalSyncAriaLabel}
-                title={viewModel.operationalSyncTitle}
-                data-sync-state={viewModel.syncState}
-              >
-                <span className={toolbarStyles.syncStatusDot} aria-hidden="true" />
-                {viewModel.syncIcon === "refresh-off" ? (
-                  <RefreshCwOff aria-hidden="true" className={toolbarStyles.syncIcon} size={15} />
-                ) : (
-                  <RefreshCcw
-                    aria-hidden="true"
-                    className={`${toolbarStyles.syncIcon}${
-                      viewModel.syncState === "syncing" ? ` ${toolbarStyles.syncIconSpinning}` : ""
-                    }`}
-                    size={15}
-                  />
-                )}
-              </button>
+                  <span className={toolbarStyles.syncStatusDot} aria-hidden="true" />
+                  {viewModel.syncIcon === "refresh-off" ? (
+                    <RefreshCwOff aria-hidden="true" className={toolbarStyles.syncIcon} size={15} />
+                  ) : (
+                    <RefreshCcw
+                      aria-hidden="true"
+                      className={`${toolbarStyles.syncIcon}${
+                        viewModel.syncState === "syncing" ? ` ${toolbarStyles.syncIconSpinning}` : ""
+                      }`}
+                      size={15}
+                    />
+                  )}
+                </button>
+              </div>
             </div>
           ) : null}
         </div>

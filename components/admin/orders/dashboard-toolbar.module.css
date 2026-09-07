@@ -46,6 +46,12 @@
   max-width: 100%;
 }
 
+/* Desktop/tablet (≥769): wrappers dissolve so children keep the prior single-row flex order. */
+.sessionMetaRow,
+.sessionActionsRow {
+  display: contents;
+}
+
 .sessionStatus {
   color: var(--text-secondary);
   font-size: 0.8125rem;
@@ -307,15 +313,19 @@
   outline-offset: 2px;
 }
 
-/* Mobile (T8) */
+/* Mobile (T8 + D2 density polish) — compact two-row session controls */
 @media (max-width: 768px) {
+  .toolbar {
+    gap: var(--space-sm);
+  }
+
   .operationalRow {
-    gap: var(--space-md);
+    gap: var(--space-sm);
   }
 
   .viewControlsRow {
     flex-direction: column;
-    gap: var(--space-md);
+    gap: var(--space-sm);
   }
 
   .title {
@@ -324,15 +334,40 @@
   }
 
   .sessionCluster {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
     justify-content: flex-start;
-    align-items: center;
     width: 100%;
-    gap: var(--space-sm);
-    row-gap: var(--space-xs);
+    max-width: 100%;
+    gap: 0.5rem;
+  }
+
+  .sessionMetaRow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .sessionActionsRow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    min-width: 0;
+  }
+
+  .sessionStatusGroup {
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .sessionStatus {
-    flex: 1 1 auto;
+    display: block;
     max-width: 100%;
     white-space: nowrap;
     overflow: hidden;
@@ -340,20 +375,26 @@
   }
 
   .sessionButton {
-    min-height: 2.75rem;
-    padding-inline: 0.875rem;
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none;
+    min-height: 2.5rem;
+    padding-inline: 0.75rem;
+    white-space: nowrap;
   }
 
   .manualOrderButton {
-    min-height: 2.75rem;
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 2.5rem;
     padding-inline: 0.875rem;
   }
 
   .syncButton {
-    width: 2.75rem;
-    min-width: 2.75rem;
-    height: 2.75rem;
-    min-height: 2.75rem;
+    width: 2.5rem;
+    min-width: 2.5rem;
+    height: 2.5rem;
+    min-height: 2.5rem;
   }
 
   .searchCluster {

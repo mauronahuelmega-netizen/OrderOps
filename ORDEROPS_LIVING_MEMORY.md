@@ -475,6 +475,86 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-09-07 — ADMIN-DASHBOARD-MOBILE-ORDERS-FINAL-CLOSEOUT-1 — RESUME AFTER MODE B
+
+- **Admin / Dashboard** Final closeout **PASS**: D1 drawer, tap highlight, D2 toolbar, D3 manual order (through MODE B `#TJK9R5`), D4 footer closed as one block; created-order card/root/workspace/Contact verified; create_order/public/DB unchanged. Doc: `docs/admin-dashboard-mobile-orders-final-closeout-resume-after-mode-b-1.md`. Next: COMMIT-PUSH-DEPLOY-1 (not executed here).
+
+### 2026-09-07 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-RUNTIME-QA-1 — MODE B AUTHORIZED SUBMIT
+
+- **Admin / Dashboard** Authorized MODE B: exactly one disposable QA manual customized order `#TJK9R5` (UUID `69da8560-5f7a-4dc0-8ed3-ae451b32d78c`) — BBQ Bacon + Papas/Mayonesa/Cheddar + Adicional Coca; dashboard root count `1 item`; workspace Products + Contact/WhatsApp summary verified without sending; create_order unchanged. Doc: `docs/admin-manual-order-customization-flow-runtime-qa-mode-b-1.md`.
+
+### 2026-09-07 — ADMIN-DASHBOARD-MOBILE-ORDERS-FINAL-CLOSEOUT-1
+
+- **Admin / Dashboard** Final closeout gate audited and **BLOCKED**: D1/D2/D4 + MODE A closed; MODE B authorized submit + created-order validation still required before PASS. Doc: `docs/admin-dashboard-mobile-orders-final-closeout-1.md`.
+
+### 2026-09-06 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-RUNTIME-QA-1
+
+- **Admin / Dashboard** MODE A authenticated no-submit runtime QA for manual customization flow (simple quick-add, BBQ configure/required/optional/qty/Adicional, ticket review, single-scroll); MODE B submit deferred. Doc: `docs/admin-manual-order-customization-flow-runtime-qa-1.md`.
+
+### 2026-09-06 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-SERVER-PAYLOAD-1
+
+- **Admin / Dashboard** Enriched manual-order submit: `ticketLines` → checkout cart → `validateCheckoutCartForCreateOrder` → `toCreateOrderRpcJson` → unchanged `create_order`; bare customizable rejected; client temporary submit guard removed. Doc: `docs/admin-manual-order-customization-flow-server-payload-1.md`.
+
+### 2026-09-06 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-UI-1
+
+- **Admin / Dashboard** Admin-native manual-order customize subview + local enriched ticket via domain helpers; temporary submit guard blocks customized/upsell tickets until SERVER-PAYLOAD-1; createManualOrderAction/create_order unchanged. Doc: `docs/admin-manual-order-customization-flow-ui-1.md`.
+
+### 2026-09-06 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-DOMAIN-1
+
+- **Admin / Dashboard** Pure domain helpers for future manual-order customization: enriched ticket lines, simple/configured/upsell builders, merge/remove/qty/total rules, pure `p_items` adapter (mirrors public RPC JSON without importing server-only validation). No UI/server wiring. Doc: `docs/admin-manual-order-customization-flow-domain-1.md`.
+
+### 2026-09-06 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-FLOW-SPEC-1
+
+- **Admin / Dashboard** Spec-only design for full manual-order customization parity with public checkout: admin-native in-modal configurator subview, shared domain/validation/snapshot/RPC mapping, safety-gate evolution, upsell/Adicional parent-child, phased DOMAIN→UI→SERVER→QA. No runtime/CSS/DB/RPC. Doc: `docs/admin-manual-order-customization-flow-spec-1.md`.
+
+### 2026-09-06 — ADMIN-MANUAL-ORDER-MODAL-MOBILE-SINGLE-SCROLL-FIX-1
+
+- **Admin / Dashboard** CSS-first single-scroll for manual order modal on ≤899px: body owns overflow; products/summary nested scrolls and tablet 180px caps neutralized; desktop ≥900 dual-pane preserved; safety gate/picker/RPC untouched. Doc: `docs/admin-manual-order-modal-mobile-single-scroll-fix-1.md`.
+
+### 2026-09-06 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-SAFETY-GATE-RUNTIME-QA-1
+
+- **Admin / Dashboard** Closed authenticated runtime QA for manual-order customization safety gate: BBQ Bacon blocked with badge/helper/disabled `+`; Coca Cola simple local add/qty verified; no real orders; docs-only. Doc: `docs/admin-manual-order-customization-safety-gate-runtime-qa-1.md`.
+
+### 2026-09-06 — ADMIN-MANUAL-ORDER-CUSTOMIZATION-SAFETY-GATE-1
+
+- **Admin / Dashboard** Safety-gated manual order to simple products only: UI disables products that would open the public customization modal; server recalculates eligibility before `create_order`; reused `productNeedsCustomizationModal` + tenant flag; no picker, no scroll fix, no RPC/SQL/public changes. Doc: `docs/admin-manual-order-customization-safety-gate-1.md`.
+
+### 2026-09-05 — ADMIN-MANUAL-ORDER-MODAL-MOBILE-SCROLL-AND-CUSTOMIZATION-AUDIT-1
+
+- **Admin / Dashboard** Audited manual order modal nested scroll owners (products/summary/workstation ≤899) and customization parity gap (legacy `{product_id,quantity}` vs public snapshot/upsell RPC path); recommended safety gate before single-scroll polish; no runtime/CSS/DB/RPC changes. Doc: `docs/admin-manual-order-modal-mobile-scroll-and-customization-audit-1.md`.
+
+### 2026-09-05 — ADMIN-MOBILE-FOOTER-SINGLE-LINE-FOLLOWUP-1
+
+- **Admin / Shell** Refined mobile AdminFooter (≤640px) from stacked compact copy to a single horizontal close bar (`© {year} OrderOps` left / `Panel protegido · v1.0` right); CSS-only; desktop copy/layout preserved. Doc: `docs/admin-mobile-footer-single-line-followup-1.md`.
+
+### 2026-09-05 — ADMIN-MOBILE-FOOTER-COMPACT-POLISH-1
+
+- **Admin / Shell** Compacted mobile AdminFooter (≤640px) to `© {year} OrderOps` + `Panel protegido · v1.0`; hid long desktop tagline on mobile only; preserved desktop copy/layout; dynamic year; drawer/toolbar/dashboard/public/globals untouched. Doc: `docs/admin-mobile-footer-compact-polish-1.md`.
+
+### 2026-09-05 — ADMIN-TAP-HIGHLIGHT-POLISH-1
+
+- **Admin / Shell** Neutralized native Android/Chrome tap highlight on admin interactive controls via `html:has(.admin-shell)` in `admin-shell.css` (covers body portals; admin-wide scoped, no-op on desktop); preserved focus-visible/outlines; public catalog and drawer width/backdrop/motion untouched. Doc: `docs/admin-tap-highlight-polish-1.md`.
+
+### 2026-09-05 — ADMIN-MOBILE-DRAWER-MOTION-POLISH-1
+
+- **Admin / Shell** Added premium open/close motion to admin mobile drawer (sheet `translate3d` from/to the right + overlay opacity fade; delayed unmount `DRAWER_CLOSE_MS`); preserved approved width/scrim/`blur(2px)`, Escape/focus/scroll-lock, reduced-motion; desktop sidebar + AdminShell untouched. Doc: `docs/admin-mobile-drawer-motion-polish-1.md`.
+
+### 2026-09-05 — ADMIN-MOBILE-DRAWER-BACKDROP-FOCUS-POLISH-1
+
+- **Admin / Shell** Strengthened admin mobile drawer backdrop/scrim (portal-scoped light `rgba(15,23,42,0.48)` / dark `rgba(2,6,23,0.64)` + documented `blur(2px)` after opacity-max QA); removed heavy `blur(8px)`; fixed overlay token resolution on sibling overlay; preserved approved compact width, nav/theme/logout, desktop sidebar and AdminShell. Doc: `docs/admin-mobile-drawer-backdrop-focus-polish-1.md`.
+
+### 2026-09-05 — ADMIN-MOBILE-DRAWER-WIDTH-DENSITY-POLISH-1
+
+- **Admin / Shell** Compacted admin mobile drawer width from `min(88vw, 360px)` (tablet override `88vw`/`420px`) to `min(78vw, 340px)` (tablet 768–899 `min(78vw, 360px)`); preserved portal/overlay/close/nav/theme/logout and 44px row targets; desktop sidebar + AdminShell layout + dashboard toolbar/Kanban/metrics untouched. Doc: `docs/admin-mobile-drawer-width-density-polish-1.md`.
+
+### 2026-09-05 — ADMIN-DASHBOARD-MOBILE-ORDERS-TOOLBAR-DENSITY-POLISH-1
+
+- **Admin / Dashboard** Mobile-only (≤768px) density polish for “Pedidos en curso” toolbar: session status + Cerrar/Abrir on one row, + Pedido + refresh on the next; desktop/tablet ≥769 unchanged via `display: contents` wrappers; search/tabs/session/manual/sync behaviors preserved; Kanban/metrics/order_code/realtime untouched. Doc: `docs/admin-dashboard-mobile-orders-toolbar-density-polish-1.md`.
+
+### 2026-09-05 — ADMIN-DASHBOARD-MOBILE-ORDERS-FINAL-VISUAL-DEBT-AUDIT-1
+
+- **Admin / Dashboard** Audited final mobile admin/orders visual debts before Products: drawer width (`min(88vw, 360px)`), dashboard orders toolbar wrap density, manual order modal nested scrolls + missing customization support vs current catalog model, and mobile AdminFooter compactness; recommended polish sequence toolbar → drawer → footer, then deeper manual-order audit before any D3 implementation; no runtime/CSS/DB/RPC changes. Doc: `docs/admin-dashboard-mobile-orders-final-visual-debt-audit-1.md`.
+
 ### 2026-08-29 — PUBLIC-CATALOG-SUCCESS-ORDER-REF-VISUAL-HIERARCHY-1
 
 - **Public / Catalog** Polished the public success page order reference hierarchy (`/b/[slug]/success?order_id=<uuid>`) so the 6-character `order_code` is displayed centered, larger (`1.35rem`, bold, `0.1em` letter spacing), and without the `#` prefix; preserved internal UUID success query identity, public WhatsApp business copy, admin `#ORDER_CODE` conventions, order_code schema/RPC, checkout flow, dashboard/admin and global CSS boundaries. Doc: `docs/public-catalog-success-order-ref-visual-hierarchy-1.md`.

@@ -66,6 +66,14 @@
   white-space: nowrap;
 }
 
+.metaDesktop {
+  display: inline;
+}
+
+.metaMobile {
+  display: none;
+}
+
 .links {
   display: flex;
   gap: var(--space-sm);
@@ -83,25 +91,56 @@
 }
 
 @media (max-width: 640px) {
+  /* Single-line close bar: brand left, meta right. */
   .inner {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: var(--space-xs);
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    gap: 0.75rem;
   }
 
   .brandLine,
   .metaLine {
     font-size: 0.6875rem;
-    line-height: 1.45;
+    line-height: 1.35;
+  }
+
+  .brandLine {
+    flex: 0 1 auto;
+    flex-wrap: nowrap;
+    gap: 0;
+    min-width: 0;
+  }
+
+  .brand,
+  .metaMobile {
+    white-space: nowrap;
+  }
+
+  /* D4 compact: hide long desktop tagline on mobile. */
+  .separator,
+  .tagline {
+    display: none;
   }
 
   .trailing {
+    flex: 0 1 auto;
     margin-left: 0;
-    justify-content: flex-start;
-    width: 100%;
+    justify-content: flex-end;
+    width: auto;
+    min-width: 0;
   }
 
   .metaLine {
-    white-space: normal;
+    white-space: nowrap;
+  }
+
+  .metaDesktop {
+    display: none;
+  }
+
+  .metaMobile {
+    display: inline;
   }
 }
