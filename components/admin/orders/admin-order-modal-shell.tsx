@@ -1,6 +1,6 @@
 "use client";
 
-import type { ReactNode } from "react";
+import type { ReactNode, RefObject } from "react";
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import styles from "./admin-order-modal.module.css";
@@ -12,6 +12,19 @@ type AdminOrderModalShellProps = {
   headerLeading?: ReactNode;
   headerMeta?: ReactNode;
   variant?: "default" | "workstation";
+  /**
+   * Opt-in hook points. Every one of these defaults to the shell's previous
+   * behaviour, so consumers that do not pass them are unaffected:
+   * - dialogRef lets a consumer contain focus against the real dialog node
+   *   instead of querying the document.
+   * - closeLabel/overlayLabel let a consumer give its own accurate accessible
+   *   names, so the two close controls stop sharing one generic name.
+   * - closeClassName lets a consumer add a feature-local touch target.
+   */
+  dialogRef?: RefObject<HTMLDivElement | null>;
+  closeLabel?: string;
+  overlayLabel?: string;
+  closeClassName?: string;
   children: ReactNode;
 };
 
@@ -22,6 +35,10 @@ export default function AdminOrderModalShell({
   headerLeading,
   headerMeta,
   variant = "default",
+  dialogRef,
+  closeLabel = "Cerrar detalle del pedido",
+  overlayLabel = "Cerrar detalle del pedido",
+  closeClassName,
   children
 }: AdminOrderModalShellProps) {
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -75,11 +92,12 @@ export default function AdminOrderModalShell({
       role="dialog"
       aria-modal="true"
       aria-label={title}
+      ref={dialogRef}
     >
       <button
         type="button"
         className={styles["admin-order-modal-shell__overlay"]}
-        aria-label="Cerrar detalle del pedido"
+        aria-label={overlayLabel}
         onClick={onClose}
       />
 
@@ -112,11 +130,12 @@ export default function AdminOrderModalShell({
                 styles["admin-order-modal-shell__close"],
                 variant === "workstation"
                   ? styles["admin-order-modal-shell__close--quiet"]
-                  : null
+                  : null,
+                closeClassName ?? null
               ]
                 .filter(Boolean)
                 .join(" ")}
-              aria-label="Cerrar detalle del pedido"
+              aria-label={closeLabel}
               onClick={onClose}
               ref={closeButtonRef}
             >

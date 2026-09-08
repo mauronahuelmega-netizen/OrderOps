@@ -1,9 +1,39 @@
+/*
+ * Same three-level material scale the compose view uses, redeclared here so the
+ * configurator is self-sufficient and never silently depends on the parent
+ * module's variables. Level 1 = group cards, level 2 = option rows.
+ */
 .panel {
+  --mo-surface-section: var(--bg-surface);
+  --mo-surface-row: color-mix(in srgb, var(--bg-surface-soft) 58%, var(--bg-surface));
+  --mo-surface-row-hover: color-mix(in srgb, var(--bg-surface-soft) 88%, var(--bg-surface));
+  --mo-surface-recessed: color-mix(in srgb, var(--bg-surface-soft) 92%, var(--bg-surface));
+  --mo-border-section: color-mix(in srgb, var(--text-muted) 20%, transparent);
+  --mo-border-row: color-mix(in srgb, var(--text-muted) 15%, transparent);
+  --mo-border-row-hover: color-mix(in srgb, var(--text-muted) 34%, transparent);
+  --mo-shadow-section:
+    0 1px 2px color-mix(in srgb, black 4%, transparent),
+    0 6px 16px color-mix(in srgb, black 4%, transparent);
+  --mo-shadow-raised: 0 1px 2px color-mix(in srgb, black 10%, transparent);
+  --mo-selected-border: color-mix(in srgb, var(--accent-primary) 42%, var(--border-subtle));
+  --mo-selected-surface: color-mix(in srgb, var(--accent-soft) 52%, var(--bg-surface));
+  --mo-text-aux: color-mix(in srgb, var(--text-secondary) 80%, var(--text-tertiary));
   display: grid;
   gap: 14px;
   min-width: 0;
   overflow: visible;
   color: var(--text-primary);
+}
+
+/* Admin dark is driven by data-dashboard-theme, never prefers-color-scheme. */
+:global(html[data-dashboard-theme="dark"]) .panel {
+  --mo-border-section: color-mix(in srgb, white 13%, transparent);
+  --mo-border-row: color-mix(in srgb, white 10%, transparent);
+  --mo-border-row-hover: color-mix(in srgb, white 24%, transparent);
+  --mo-shadow-section:
+    0 1px 2px color-mix(in srgb, black 45%, transparent),
+    0 8px 20px color-mix(in srgb, black 30%, transparent);
+  --mo-shadow-raised: 0 1px 3px color-mix(in srgb, black 55%, transparent);
 }
 
 .panel[data-disabled="true"] {
@@ -17,39 +47,50 @@
   min-width: 0;
 }
 
-.title {
+/*
+ * Demoted product identity. The modal header carries "Configurar {product}", so
+ * this row stays secondary in weight and only re-states the product as an anchor
+ * plus the base price the operator needs while choosing options.
+ */
+.identity {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 12px;
   margin: 0;
-  font-size: 1rem;
-  font-weight: 650;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-  color: var(--text-primary);
-}
-
-.subcopy {
-  margin: 0;
+  min-width: 0;
   font-size: 0.8rem;
-  line-height: 1.4;
-  color: var(--text-secondary);
+  font-weight: 600;
+  line-height: 1.35;
 }
 
+.identityName {
+  min-width: 0;
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+}
+
+/* P2-7: the base price is real information, not metadata. */
 .basePrice {
-  margin: 2px 0 0;
   font-size: 0.76rem;
+  font-weight: 600;
   line-height: 1.35;
-  color: var(--text-tertiary);
+  color: var(--mo-text-aux);
   font-variant-numeric: tabular-nums;
 }
 
+/* Level 1 section card, matching the compose sections. */
 .quantitySection {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
   padding: 10px 12px;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 90%, transparent);
+  border: 1px solid var(--mo-border-section);
   border-radius: 12px;
-  background: color-mix(in srgb, var(--bg-surface-soft) 42%, var(--bg-surface));
+  background: var(--mo-surface-section);
+  box-shadow: var(--mo-shadow-section);
 }
 
 .quantityLabelRow {
@@ -66,7 +107,7 @@
 
 .quantityHint {
   font-size: 0.68rem;
-  color: var(--text-tertiary);
+  color: var(--mo-text-aux);
 }
 
 .stepper {
@@ -80,22 +121,25 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
-  height: 30px;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 88%, transparent);
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  padding: 0;
+  border: 1px solid var(--mo-border-row-hover);
   border-radius: 999px;
-  background: var(--bg-surface);
+  background: var(--mo-surface-section);
   color: var(--text-primary);
   font-size: 1rem;
   line-height: 1;
   cursor: pointer;
+  box-shadow: var(--mo-shadow-raised);
   transition:
     border-color 120ms ease,
     background-color 120ms ease;
 }
 
 .stepperButton:hover:not(:disabled) {
-  border-color: color-mix(in srgb, var(--accent-primary) 35%, var(--border-subtle));
+  border-color: var(--mo-selected-border);
   background: color-mix(in srgb, var(--accent-soft) 55%, var(--bg-surface));
 }
 
@@ -124,10 +168,10 @@
   gap: 8px;
   min-width: 0;
   padding: 12px;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 90%, transparent);
+  border: 1px solid var(--mo-border-section);
   border-radius: 12px;
-  background: var(--bg-surface);
-  box-shadow: var(--shadow-sm);
+  background: var(--mo-surface-section);
+  box-shadow: var(--mo-shadow-section);
 }
 
 .groupHeader {
@@ -152,15 +196,25 @@
   align-items: center;
   max-width: 55%;
   padding: 0.16rem 0.48rem;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 88%, transparent);
+  border: 1px solid var(--mo-border-row);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--bg-surface-soft) 55%, var(--bg-surface));
+  background: var(--mo-surface-row);
   color: var(--text-secondary);
   font-size: 0.66rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   line-height: 1.25;
   text-align: right;
+}
+
+/*
+ * Quiet cue marking which group still blocks the CTA. Intentionally carries no
+ * copy of its own: the reason itself is stated once, above the CTA.
+ */
+.groupBadge[data-missing="true"] {
+  border-color: color-mix(in srgb, var(--color-cancelled) 42%, var(--border-subtle));
+  background: color-mix(in srgb, var(--color-cancelled) 12%, var(--bg-surface));
+  color: var(--text-cancelled-strong);
 }
 
 .groupDescription {
@@ -187,9 +241,9 @@
   width: 100%;
   min-width: 0;
   padding: 10px 12px;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 90%, transparent);
+  border: 1px solid var(--mo-border-row);
   border-radius: 10px;
-  background: color-mix(in srgb, var(--bg-surface-soft) 28%, var(--bg-surface));
+  background: var(--mo-surface-row);
   color: var(--text-primary);
   text-align: left;
   cursor: pointer;
@@ -200,7 +254,7 @@
 }
 
 .optionButton:hover:not(:disabled) {
-  border-color: color-mix(in srgb, var(--accent-primary) 28%, var(--border-subtle));
+  border-color: color-mix(in srgb, var(--accent-primary) 28%, var(--mo-border-row));
   background: color-mix(in srgb, var(--accent-soft) 35%, var(--bg-surface));
 }
 
@@ -214,6 +268,19 @@
 .optionButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/*
+ * Keyboard focus for the local configurator controls (options, upsell choices,
+ * quantity toggles, steppers). A single outline ring is used instead of a
+ * box-shadow so it never stacks with the pressed inset shadow: selected + focused
+ * stays distinguishable, and pointer input does not leave a persistent ring.
+ */
+.optionButton:focus-visible,
+.qtyOptionToggle:focus-visible,
+.stepperButton:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--focus) 60%, transparent);
+  outline-offset: 2px;
 }
 
 .optionCopy {
@@ -247,14 +314,14 @@
   display: grid;
   gap: 8px;
   padding: 10px 12px;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 90%, transparent);
+  border: 1px solid var(--mo-border-row);
   border-radius: 10px;
-  background: color-mix(in srgb, var(--bg-surface-soft) 28%, var(--bg-surface));
+  background: var(--mo-surface-row);
 }
 
 .qtyOptionCardSelected {
-  border-color: color-mix(in srgb, var(--accent-primary) 45%, var(--border-subtle));
-  background: color-mix(in srgb, var(--accent-soft) 48%, var(--bg-surface));
+  border-color: var(--mo-selected-border);
+  background: var(--mo-selected-surface);
 }
 
 .qtyOptionTop {
@@ -281,9 +348,7 @@
   cursor: not-allowed;
 }
 
-.blockedMessage,
-.groupIssue,
-.validationMessage {
+.blockedMessage {
   margin: 0;
   font-size: 0.76rem;
   line-height: 1.4;

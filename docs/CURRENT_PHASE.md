@@ -2,7 +2,364 @@
 
 ## Estado actual
 
-**ADMIN-DASHBOARD-MOBILE-ORDERS-COMMIT-PUSH-DEPLOY-1 — PASS WITH ACCEPTED PROD AUTH SMOKE DEBT — PACKAGE COMMITTED, PUSHED AND DEPLOYED (2026-09-07)**
+**ADMIN-MANUAL-ORDER-MODAL-VERIFY-RECONCILIATION-1 — PASS — MANUAL ORDER MODAL VERIFY SUITE RECONCILED (2026-09-08)**
+
+Doc: `docs/admin-manual-order-modal-verify-reconciliation-1.md`
+
+P0: **0** · P1: **0**
+P2-QA1: **CLOSED** — reconciliadas **7** assertions stale (no 5): las 2 extra (`breakpoint` L538 `tabIndex` file-wide, `form-validation` L438 `querySelector`) estaban **enmascaradas** porque cada verify aborta en su primera falla; ambas dentro de los 5 archivos ya autorizados y con las mismas dos causas raíz (focus containment certificado + microcopy aprobado)
+Relevant verifies: **15/15 PASS** (targeted 5/5 PASS, 0 fallas nuevas)
+Runtime: **UNCHANGED** — hash del diff de runtime idéntico al inicio de fase (`9BA3B67C…F5D6`, 5 archivos, 1061/216)
+CSS: **UNCHANGED** · Visual/UX block: **FROZEN**
+Guards preservados: P1-3 scroll por ref (única query DOM = `container.querySelectorAll` en el helper de focusables, `deepEqual`), focus trap dialog-local, sin mutación de tabindex ni tabindex positivo, single-scroll, condición del orphan-upsell + terminología `pedido`, gate de safety `!isManualOrderAvailable → openConfigure`, ausencia de copy device-specific
+P2-QA2: **ACCEPTED NON-BLOCKING PRODUCT DEBT**
+P3-QA1 / P3-QA2: **DOCUMENTED**
+tsc: **PASS** · diff: **PASS**
+build: **NOT RUN** — runtime sin cambios, build ya PASS en Final QA
+lint: **NOT RUN** — deuda de tooling conocida ya certificada
+Sin browser QA, sin órdenes, sin mutaciones, nada staged. `ORDEROPS_LIVING_MEMORY.md` y forensic audit: **sin tocar** (ya reconciliados en Final QA)
+
+Next: **ADMIN-MANUAL-ORDER-MODAL-COMMIT-PUSH-DEPLOY-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-MODAL-FINAL-VISUAL-QA-1 — PASS WITH ACCEPTED NON-BLOCKING DEBT — MANUAL ORDER MODAL VISUAL/UX BLOCK CLOSED (2026-09-08)
+
+Doc: `docs/admin-manual-order-modal-final-visual-qa-1.md`
+
+P0: **0** · P1: **0**
+P2: **2 aceptados no bloqueantes** — (P2-QA1) 5 assertions stale en verifies históricos, deuda sólo de tests; (P2-QA2) un ticket cargado se descarta al cerrar sin confirmación, agravado porque el overlay del shell es el primer tab stop
+P3: **2 documentados** — (P3-QA1) `Requiere personalización` vs vocabulario "Configurar"; (P3-QA2) `Opcional · máx. 5` y `Opcional · máx. 5 opciones` visibles a la vez
+All modal P1: **CLOSED** (P1-1, P1-2, P1-3, P1-4 verificados en runtime)
+Visual hierarchy: **FROZEN** · Ticket hierarchy: **FROZEN** · Surface materiality: **FROZEN** · Accessibility interaction: **FROZEN** · Microcopy: **FROZEN** · Single-scroll: **FROZEN** · Validation: **FROZEN**
+Pricing / domain / payload / server / RPC / DB: **UNCHANGED**
+Runtime tocado en esta fase de QA: **NINGUNO** (diff idéntico al preflight; `HEAD` `3e418bb`, nada staged)
+Cobertura: widths **360/390/412/719/899/900/1023/1024/1440** en light + dark vía el toggle real (`html[data-dashboard-theme]`, nunca `prefers-color-scheme`)
+P1-4 (900–1023): **GATE PASS** — grid intermedio `135.98px 44px` intacto en 900 light, 900 dark y 1023 dark; cero colisiones, cero overflow, add 44×44
+P1-3: **VERIFICADO** — compose 338 → configurador entra en 0 → `Volver` restaura 338 exacto
+P1-2: **PASS 6/6** — A/B disabled, C enabled, D exige dirección, E enabled, F vuelve a Retiro con el valor tipeado preservado
+Single-scroll: **1 owner** (`manual-order-modal__body`) en ≤899; en 900+ los dos panes del workstation scrollean por diseño
+Touch targets: **todos ≥44** medidos a 360 (add, ticket −/+, `Quitar` 60×44, stepper configurador, segmented 88×44, search, close)
+Keyboard (900 light): 20 focusables, **0 `tabindex` positivo**, Tab y Shift+Tab envuelven con `preventDefault`, Tab intermedio no interceptado, foco nunca sale del diálogo, Escape cierra, return focus vuelve al opener
+Contraste: **10.79:1 – 16.94:1** en dark; ningún texto informativo ilegible (P2-7 confirmado mejorado)
+Verifies: **10 PASS / 5 FAIL**, los 5 clasificados **B (assertion stale)** — cero clase A, cero clase C; **ninguno editado**
+Static: tsc **PASS** · diff-check **PASS** · build **PASS** · lint **FAIL con la deuda de tooling conocida e idéntica** (ESLint 9.39.4, circular JSON del plugin React)
+Producción autenticada: **UNAVAILABLE** (redirige a `/admin/login`; no se pidieron ni adivinaron credenciales)
+Orders created: **0** (7 códigos idénticos al baseline) · Status mutations: **0** · WhatsApp sends: **0**
+Living memory y forensic audit: **RECONCILIADOS** en esta fase
+
+Next: **ADMIN-MANUAL-ORDER-MODAL-VERIFY-RECONCILIATION-1** (cerrar P2-QA1) y luego **ADMIN-MANUAL-ORDER-MODAL-COMMIT-PUSH-DEPLOY-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-MODAL-MICROCOPY-CONSISTENCY-POLISH-1 — PASS — MANUAL ORDER MICROCOPY CONSISTENT (2026-09-08)
+
+Status: **PASS** — sólo copy estático propiedad de OrderOps
+
+Doc: `docs/admin-manual-order-modal-microcopy-consistency-polish-1.md`
+
+Alcance real: **1 archivo runtime, 6 strings** (`manual-order-modal.tsx`) · CSS: **NINGUNO** · `manual-order-customization-panel.tsx`: **sin cambios** (su copy ya cumplía)
+Touch-specific wording: **REMOVED** — `Tocá + para configurar opciones antes de agregar.` → `Configurá las opciones antes de agregarlo.` (era la única línea que nombraba un gesto y un glifo)
+Jerga interna: **REMOVED** — `Usá el catálogo hasta habilitar el selector manual.` → `Todavía no se puede agregar a un pedido manual.`
+Terminología **Pedido**: **CONSISTENT** — `Ticket en construcción` → `Resumen del pedido` · `Revisá el ticket.` → `Revisá el pedido.` ("Ticket" ya no aparece en copy visible; sobrevive sólo en identificadores y clases CSS)
+Empty ticket: `Pedido vacío` → `Todavía no agregaste productos` · `Agregá productos desde el catálogo para armar el pedido.` → `Agregá productos para armar el pedido.`
+Configurator subtitle: **CONCISE** — `Elegí las opciones del pedido tomado en el local.` → `Elegí las opciones para este producto.` (más corto y sin presuponer canal)
+Accessible labels: **GRAMMATICALLY CORRECT** — `Cerrar ${shellTitle.toLowerCase()}` ("Cerrar configurar milanesa") → `Cerrar configuración de ${producto}`
+Labels de cierre compose/overlay: **SIN CAMBIOS** (decisión A) — `Cerrar nuevo pedido manual` + `Salir del pedido manual` siguen siendo gramaticales y **distintos entre sí**; unificarlos habría duplicado el nombre accesible de dos controles, el defecto que cerró la fase anterior. **Cero verify surgery**
+Deferidos con causa: `Requiere personalización` (el texto real es `MANUAL_ORDER_CUSTOMIZATION_UNAVAILABLE_REASON` en `lib/orders/manual-order-customization-eligibility.ts`, fijado por su safety verify; el literal del modal es sólo el fallback del `??`) · `Opcional · máx. N opciones` (lo genera `formatQuantityGroupMeta` en `selection-v2.ts`, **compartido con el checkout público**)
+CTA compose (`Agregá productos` / `Completá los datos obligatorios` / `Crear pedido · $ X` / `Creando pedido...`) y CTA configurador (`Completá las opciones` / `Agregar · $ X` / `Volver`): **VERBATIM**, precedencia incluida
+Contenido del negocio (producto, categoría, grupos, descripciones, opciones, notas, cliente) y `Adicional` (`UPSELL_ASSOCIATED_LABEL`, compartido): **INTACTO**
+Interaction / validation / `canSubmit` / `requiredFormReady` / `configureDraftValid` / pricing / ticket helpers / snapshots / payload / actions / server / RPC / DB / dashboard / workspace / public catalog: **UNCHANGED**
+`globals.css` / `theme-tokens.css` / `Button`-`Input`-`Card` / shell: **UNCHANGED**
+P1-1 / P1-2 / P1-3 / P1-4: **CLOSED** · tap targets >=44: **PRESERVED** · focus containment y return focus: **PRESERVED** · single-scroll: **FROZEN** · ticket hierarchy y materiality: **PRESERVED** · CTA/footer: **PRESERVED**
+Verify nuevo: `admin-manual-order-modal-microcopy-consistency` **PASS** — chico y basado en intención (no snapshot de texto): prohíbe wording device-specific y jerga técnica en copy visible, fija ambos contratos de CTA con precedencia, exige `pedido` sobre `ticket`, y re-fija condiciones funcionales e invariantes de foco
+Static checks: tsc **PASS** · diff-check **PASS** · verifies históricos / build / lint / browser QA: **NO EJECUTADOS** (por instrucción)
+Sin browser smoke: 5 de 6 strings son más cortos; el único más largo vive en un `display: grid` de alto automático sin `nowrap` ni `line-clamp`, y ningún string nuevo entra en un botón ni en el header
+Orders created: **0** · Status mutations: **0** · WhatsApp sends: **0**
+`ORDEROPS_LIVING_MEMORY.md` y `docs/admin-dashboard-forensic-living-audit.md`: **NO ACTUALIZADOS** (se reconcilian en FINAL-VISUAL-QA)
+
+Next phase: **ADMIN-MANUAL-ORDER-MODAL-FINAL-VISUAL-QA-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-MODAL-ACCESSIBILITY-INTERACTION-POLISH-1 — PASS — MODAL ACCESSIBILITY & INTERACTION POLISHED (2026-09-08)
+
+Status: **PASS** — tap targets y focus containment cerrados; sin cambios de lógica ni dominio
+
+Doc: `docs/admin-manual-order-modal-accessibility-interaction-polish-1.md`
+
+Tap targets: **CLOSED** — medidos en runtime a 390: add `44×44`, ticket stepper `44×44`, `Quitar` `44` alto, stepper configurador `44×44`, segmented `44×88` (ambas), search `44` alto, close `44×44`. Glifos y texto **sin cambio de tamaño** (fijado por el verify)
+Densidad: **PRESERVADA** — product row conserva `min-height: 52px`; padding vertical 8→6px y `row-gap` 2px sólo en `@media (max-width: 639px)`, donde price y add se apilan. Alturas medidas a 390: **76–78px** (antes ~74–76px)
+Focus containment: **CLOSED** — listener de `keydown` sobre el nodo `[role="dialog"]` real vía `dialogRef`; sin listener global, sin query del documento, sin mutar `tabindex`, sin sentinels, sin timers. Lista de focusables recalculada por pulsación → el CTA disabled y la subvista no montada quedan fuera solos
+Wrap verificado por evento real: Tab desde el último → `preventDefault` + primero · Shift+Tab desde el primero → `preventDefault` + último · el foco **nunca** sale del diálogo
+Initial focus: **PRESERVED** (el del shell, botón de cerrar) — sin autofocus nuevo, sin auto-scroll
+Return focus: **IMPLEMENTED** — el opener se captura en un *layout effect* porque el shell mueve el foco en un passive effect y los passive effects corren hijo→padre; verificado: trigger enfocado → abrir → Escape → el foco vuelve a `Crear nuevo pedido manual`
+Escape: **UNCHANGED** (sigue siendo del shell) — verificado cerrando el modal
+Close semantics: **FIXED** — el shell nombraba `Cerrar detalle del pedido` en **overlay y botón a la vez**; ahora el modal pasa `closeLabel="Cerrar nuevo pedido manual"` (o `Cerrar configurar {producto}`) y `overlayLabel="Salir del pedido manual"`. Defaults del shell preservan los nombres previos
+Focus-visible: **COMPLETED** en compose — agregado a `__quantity-button` y al segmented vía `:has(input:focus-visible)`; ya existía en add, `Quitar` y search. Sin `:focus` genérico y sin `outline: none` sin reemplazo. Selected (familia accent) y focused (`--focus`) siguen distinguibles
+Tab order: **VISUAL** — sin `tabindex` positivo: overlay → cerrar → nombre → teléfono → Retiro/Delivery → buscar → acciones de producto → stepper/`Quitar` → notas → Cancelar
+Shell del modal: **EXTENDIDO SIN BREAKING CHANGE** — 4 props opcionales con default (`dialogRef`, `closeLabel`, `overlayLabel`, `closeClassName`); `admin-order-workspace-modal.tsx` no pasa ninguna y queda intacto (fijado por el verify)
+P1-1 / P1-2 / P1-3 / P1-4: **CLOSED** → los 4 P1 del modal siguen cerrados
+Single-scroll: **FROZEN** — la contención es sólo de teclado; siguen siendo 2 los `overflow-y: auto`, sin `scrollIntoView`, sin scroll de window, sin scroller nuevo
+Validación / pricing / ticket domain / payload / `createManualOrderAction` / `create_order` RPC / DB / public catalog / dashboard frozen surfaces: **UNCHANGED**
+`app/globals.css` / `app/theme-tokens.css` / `Button`-`Input`-`Card` compartidos / CSS del shell: **UNCHANGED** · tokens globales nuevos: **NINGUNO**
+Archivos runtime modificados: **4** (`manual-order-modal.tsx`, `manual-order-modal.module.css`, `manual-order-customization-panel.module.css`, `admin-order-modal-shell.tsx`)
+Runtime smoke: **390 (targets) + 900 (teclado)** · Orders created: **0** · Status mutations: **0** · WhatsApp sends: **0**
+Static checks: tsc **PASS** · diff-check **PASS** · build **NO EJECUTADO** (por instrucción) · lint **NO EJECUTADO** (por instrucción)
+Verifies: nuevo `admin-manual-order-modal-accessibility-interaction-polish` **PASS** + 3 del set autorizado **PASS** (4/4)
+Excepción de scope autorizada: **2 assertions stale** actualizadas conservando intención protectora (verify del ticket: stepper `28×28` → `>=44px`; verify del configurador: prohibición global de `useLayoutEffect` → guard dirigido de que la entrada de scroll sigue siendo `useEffect` plano y ningún layout effect toca `scrollTop`)
+Nota de método: `browser_press_key` no reproduce Tab de forma fiable en este entorno (devolvía siempre el close); la evidencia válida vino de despachar `keydown` real y leer `defaultPrevented` + `document.activeElement`
+Deuda restante: microcopy consistency · QA en producción con auth real · final visual QA · el overlay del shell sigue siendo un `button` full-screen y por eso encabeza el tab order (se dejó así para no cambiar el shell para el otro consumer)
+`ORDEROPS_LIVING_MEMORY.md` y `docs/admin-dashboard-forensic-living-audit.md`: **NO ACTUALIZADOS** en esta microfase (se reconcilian en FINAL-VISUAL-QA / checkpoint)
+
+Next phase: **ADMIN-MANUAL-ORDER-MODAL-MICROCOPY-CONSISTENCY-POLISH-1** o, si no queda deuda de microcopy, **ADMIN-MANUAL-ORDER-MODAL-FINAL-VISUAL-QA-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-MODAL-SURFACE-MATERIALITY-POLISH-1 — PASS — MODAL SURFACE MATERIALITY POLISHED (2026-09-08)
+
+Status: **PASS** — P2-1, P2-3, P2-4 y P2-16 cerrados; P2-7 mejorado localmente; sólo presentación
+
+Doc: `docs/admin-manual-order-modal-surface-materiality-polish-1.md`
+
+P2-1 affordance inversion de product rows: **CLOSED** (causa raíz: `border: 1px solid transparent` en `__product-row` — las simples quedaban pegadas al panel y las configurables parecían más interactivas sólo porque su `:hover` sí pintaba borde; ahora todas comparten base level 2 y la configurable añade sólo `--mo-accent-hint-*`)
+P2-3 dos lenguajes de acento: **CLOSED LOCALLY** (el configurador ya usaba `--accent-primary`/`--accent-soft` y compose usaba `--focus` `#6366f1` para lo mismo; compose se alineó a la familia accent-primary y `--focus` quedó reservado a `:focus-visible`, fijado por el verify bloque a bloque)
+P2-4 materialidades distintas compose/configurator: **CLOSED** (`.group` y `.quantitySection` pasaron a la misma familia level 1 que las section cards de compose, reemplazando `--shadow-sm` por `--mo-shadow-section`; `.optionButton`/`.qtyOptionCard` pasaron a level 2)
+P2-7 `--text-tertiary` tenue en light: **IMPROVED LOCALLY** (`--mo-text-aux` = `color-mix(--text-secondary 80%, --text-tertiary)` sólo en `__product-blocked-hint`, `__summary-group-label`, `.basePrice`, `.quantityHint`; nombre de producto sigue primary y categoría sigue secondary — sin reemplazo indiscriminado)
+P2-16 inputs/segmented/rows planos: **CLOSED** (causa raíz: `--border-subtle` es sólo `rgba(255,255,255,0.08)` en dark y los inputs compartían `background: var(--bg-surface)` con su propia section card)
+Escala material feature-local: **3 NIVELES** (`--mo-surface-section`/`--mo-border-section`/`--mo-shadow-section` para level 1; `--mo-surface-row`/`--mo-border-row` para level 2) declarada sobre `.manual-order-modal__form` y **redeclarada** sobre `.panel` para que el configurador sea autosuficiente
+Fórmula cross-theme: **UNA SOLA** (las rows se mezclan siempre hacia `--bg-surface-soft`, más oscuro que la section en light y más claro en dark) · medido dark: section `rgb(23,24,29)` vs row `srgb(0.111,0.115,0.134)`, hairline `0.08 → 0.1`
+Segmented Retiro/Delivery: **TRACK RECESSED + ACTIVO LEVANTADO** con borde accent-tinted, `font-weight: 600` y `--mo-shadow-raised`; **tamaños sin cambio** (el borde de 1px se compensa `6px 12px → 5px 11px`; medido: ambas opciones `32 × 88px`)
+Inputs: **RECESSED** contra la section card (light: input `srgb(0.968,0.977,0.986)` sobre section `rgb(255,255,255)`) — un campo completo ya no se lee como focused; tratamiento de focus intacto
+Empty ticket: **POLISHED** (superficie level 2 + dashed border a 24% en dark en lugar de un outline invisible; sin ilustración, sin lógica, sin cambio de copy)
+Tokens globales nuevos: **NINGUNO** · `prefers-color-scheme`: **NINGUNO** (override dark vía `:global(html[data-dashboard-theme="dark"])`)
+Excepción documentada: `__header-badge` conserva mezclas literales porque el shell lo renderiza como `headerMeta`, fuera de `.manual-order-modal__form`, y no puede ver las variables locales
+Ticket hierarchy: **PRESERVED** (root, grupos, `×N`, columnas de precio, micro-superficie `Adicional`, arreglo stepper/`Quitar`, jerarquía del total) — sólo micro-ajustes de superficie
+CTA/footer: **PRESERVED** (disabled scoped `opacity: 1` + `not-allowed`, azul enabled, monto sin wrap, fade y sombra) — dominante sólo enabled
+P1-1: **CLOSED** · P1-2: **CLOSED** · P1-3: **CLOSED** · P1-4: **CLOSED** → **los 4 P1 del modal siguen cerrados**
+Single-scroll: **FROZEN** (único owner medido `manual-order-modal__body`; siguen siendo 2 los `overflow-y: auto`; sin `position: fixed` nuevo)
+Tap targets: **SIN TOCAR** (stepper 28×28, add 34×34, stepper configurador 30×30, segmented 32px, search 38px) — fijados por el verify para `ADMIN-MANUAL-ORDER-MODAL-ACCESSIBILITY-INTERACTION-POLISH-1`
+Runtime smoke: **390 light + 390 dark**, estados A/B/C — jerarquía visible, inner rows distinguibles de cards, dark sin aplastarse en gris uniforme
+900px: **NO EJECUTADO** (P1-4 no se vio roto; el cambio en la product row es sólo de color y el verify fija el bloque `@media (min-width: 900px) and (max-width: 1023px)` y el grid base)
+Validación / pricing / ticket domain / payload / `createManualOrderAction` / `create_order` RPC / DB schema-migrations / public checkout-catalog / dashboard frozen surfaces: **UNCHANGED**
+`app/globals.css` / `app/theme-tokens.css` / `Button`-`Input`-`Card` compartidos / shell del modal: **UNCHANGED** (la escala `--mo-*` no se filtró a los tokens globales)
+Archivos runtime modificados: **2** (`manual-order-modal.module.css`, `manual-order-customization-panel.module.css`) · TSX: **NONE**
+Orders created: **0** (códigos idénticos al baseline: 3EMZ8G, G96QN4, 8DBT8G, TJK9R5, 3ZYV8A, ACWXPE, 9E8Y45) · Status mutations: **0** · WhatsApp sends: **0**
+Static checks: tsc **PASS** · diff-check **PASS** · build **NO EJECUTADO** (por instrucción) · lint **NO EJECUTADO** (por instrucción)
+Verifies: nuevo `admin-manual-order-modal-surface-materiality-polish` **PASS** + 3 del set autorizado **PASS** (4/4)
+
+Next phase: **ADMIN-MANUAL-ORDER-MODAL-ACCESSIBILITY-INTERACTION-POLISH-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-MODAL-TICKET-SUMMARY-HIERARCHY-POLISH-1 — PASS — TICKET SUMMARY HIERARCHY POLISHED (2026-09-07)
+
+Status: **PASS** — P2-9, P2-10, P2-6 y P3-1 cerrados; sólo presentación
+
+Doc: `docs/admin-manual-order-modal-ticket-summary-hierarchy-polish-1.md`
+
+P2-9 configured summary plano/denso: **CLOSED** (selecciones agrupadas por grupo con label propio + una fila por opción; antes: párrafo continuo)
+P2-10 `Adicional` débil: **CLOSED** (micro-superficie anidada `__summary-upsells` con indent, borde izquierdo, background sutil y label único)
+P2-6 jerarquía de controles: **CLOSED** (stepper agrupado por proximidad `gap` 6→4px; `Quitar` fuera de `__quantity-controls`, al borde opuesto vía `space-between`)
+P3-1 cantidades de extras: **CLOSED** (`×N` explícito cuando `option.quantity > 1` → `Cheddar ×4 +$ 2.000,00`)
+Source model: **`customizationSnapshot` (CustomizationSnapshotV2) YA ESTRUCTURADO** — `group_name`, `option_name`, `quantity` y **`total_price_delta`** (el dominio ya calculó `priceDelta × quantity`)
+`displaySummary` parsing: **NINGUNO** (sin `split`, sin regex sobre `"Papas:"`, sin parseo de comas ni de `(+$...)`; se conserva como fallback íntegro para líneas sin snapshot)
+Fórmula nueva de pricing: **NINGUNA** (el delta mostrado es `total_price_delta` tal cual; el modal no multiplica deltas ni recomputa `lineTotal`)
+Helper nuevo: **`getManualTicketSummaryGroups`** — proyección de presentación pura y local (filtra grupos vacíos, ordena por `sort_order`)
+Parent hierarchy: **POLISHED** (`{qty} × {nombre}` 0.86rem/600 vs opciones 0.76rem/400; subtotal `nowrap` + tabular-nums; precio del `Adicional` NO plegado en el subtotal del padre)
+Columna de precio: **DEDICADA** (`grid-template-columns: minmax(0, 1fr) auto` en opciones y children → nombre puede envolver sin colisionar)
+Quantity/remove behavior: **UNCHANGED** (handlers, `aria-label`s, `disabled`, min/max y cascade del dominio intactos)
+Tap targets: **SIN TOCAR** (stepper 28×28; rediseño diferido a `ADMIN-MANUAL-ORDER-MODAL-ACCESSIBILITY-INTERACTION-POLISH-1`, fijado por el verify)
+Runtime QA: **LOCAL AUTHENTICATED** — 390 light, 390 dark, 412 dark, 900 light; casos A–H PASS; caso de estrés con 4 grupos, 7 filas de opción, `Cheddar ×4`, `Bacon ×4` y `Adicional`
+Geometría medida: hScroll **0** · overlap texto/precio **0** (gap constante 10px, `sameLineOverlap: false`) · clipping **0** · controles sin colisión · footer sticky sin tapar el ticket
+Dark real: verificado vía toggle admin (`html[data-dashboard-theme="dark"]`, body `rgb(9,10,13)`) — **no** vía `prefers-color-scheme`, que la app ignora
+Cantidad raíz 1→2: **ESTABLE** (`2 × Doble Smash` `$ 41.000,00`; child `×2` `$ 6.000,00`; total `$ 50.000,00`; grupos idénticos)
+P1-1: **CLOSED** · P1-2: **CLOSED** · P1-3: **CLOSED** · P1-4: **CLOSED** (overlap medido 0 en las 4 product rows a 900 light) → **los 4 P1 del modal siguen cerrados**
+Single-scroll: **FROZEN** (a ≤899 único owner `manual-order-modal__body`; `__summary-scroll` neutralizado, `nestedScrollable: false`; a 900 se preserva el pane workstation de 220px; ninguna clase nueva introduce `overflow`/`max-height`/`fixed`/`sticky`)
+Pricing / ticket domain / payload / `createManualOrderAction` / `create_order` RPC / DB schema-migrations / public checkout-catalog / dashboard frozen surfaces: **UNCHANGED**
+CSS global / theme tokens / Button compartido / shell del modal / panel del configurador: **UNCHANGED**
+Tokens semánticos nuevos: **NINGUNO** (se reutilizan `--text-tertiary`, `--text-secondary`, `--text-primary`, `--bg-surface-soft`, `--border-subtle`)
+Archivos runtime modificados: **2** (`manual-order-modal.tsx`, `manual-order-modal.module.css`)
+Orders created: **0** · Status mutations: **0** · WhatsApp sends: **0** (CTA primario nunca clickeado; `disabled` con `Completá los datos obligatorios` como red de seguridad)
+Static checks: tsc **PASS** · diff-check **PASS** · build **NO EJECUTADO** (por instrucción) · lint **NO EJECUTADO** (por instrucción)
+Verifies: nuevo `admin-manual-order-modal-ticket-summary-hierarchy-polish` **PASS** + 5 del set autorizado **PASS** (6/6)
+
+Next phase: **ADMIN-MANUAL-ORDER-MODAL-SURFACE-MATERIALITY-POLISH-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-MODAL-FORM-VALIDATION-UX-DECISION-1 — PASS — P1-2 CLOSED (CTA READINESS ALINEADO CON `validateForm`) (2026-09-07)
+
+Status: **PASS** — P1-2 cerrado sin agregar ni endurecer ninguna regla de validación
+
+Doc: `docs/admin-manual-order-modal-form-validation-ux-decision-1.md`
+
+P1-2 form validation UX: **CLOSED** (ticket válido + cliente vacío → CTA `Completá los datos obligatorios` **disabled**; antes: habilitado con monto)
+Product decision: **OPTION A — GATE CTA BY EXISTING REQUIRED FORM RULES** (sin reglas nuevas)
+Single source of truth: **`getManualOrderRequiredFieldErrors`** — helper puro y local en `manual-order-modal.tsx`, consumido por `requiredFormReady` (readiness del CTA) **y** por `validateForm` (errores al enviar); imposible que divergan
+`canSubmit`: **`canCreateOrder && !isSubmitting && products.length > 0 && hasSelectedItems && ticketSubmitReady && requiredFormReady`** — único término añadido: `requiredFormReady`
+Guards preservados: sesión/permiso, catálogo cargado, ticket no vacío, readiness por línea, bloqueo durante envío, `submitLockRef`, `validateForm()` como autoridad final
+CTA copy: **TRES ESTADOS** (`Agregá productos` → `Completá los datos obligatorios` → `Crear pedido · $ X`; `Creando pedido...` al enviar), derivados de los mismos booleanos que el `disabled`
+Reglas nuevas / endurecidas: **NINGUNA** (teléfono sigue `!phone.trim()`, sin regex/longitud/formato/normalización; `customerName` sin endurecer)
+Delivery conditional: **CORRECTO** (dirección exigida en una sola rama `deliveryMethod === "delivery"`; Retiro no exige campos exclusivos de Delivery; cambiar método **no borra** lo tipeado — verificado)
+Field errors: **UNCHANGED** (se publican al enviar; escribir sólo limpia el error del campo; 0 errores en pristine; sin texto rojo prematuro, sin resumen, sin auto-scroll a errores)
+Mezcla compose/configurador: **NINGUNA** (`configureDraftValid` no lee `requiredFormReady` y viceversa; verificado con compose listo + configurador inválido)
+Runtime QA: **LOCAL AUTHENTICATED** — FULL en 390 light y 390 dark; smoke en 900 light; casos A–H PASS
+CTA/footer polish previo: **PRESERVED** (disabled scoped `opacity: 1` + `not-allowed`, sin `pointer-events: none`, monto sin wrap, footer sticky con sombra/fade)
+P1-3 configurator context/scroll: **PRESERVED** (entrada en `scrollTop: 0`; `Volver` restaura 281 → 0 → 281)
+P1-4 900–1023: **PRESERVED** (900 light, overlap = 0, sin hScroll)
+Single-scroll: **FROZEN** (único owner `manual-order-modal__body` a ≤899)
+P1-1: **CLOSED** · P1-2: **CLOSED (esta fase)** · P1-3: **CLOSED** · P1-4: **CLOSED** → **los 4 P1 del modal cerrados**
+Pricing / ticket payload / `createManualOrderAction` / `create_order` RPC / DB schema-migrations / public checkout-catalog / dashboard frozen surfaces: **UNCHANGED**
+CSS global / theme tokens / Button compartido / shell del modal: **UNCHANGED**
+Archivos runtime modificados: **1** (`components/admin/orders/manual-order-modal.tsx`) · CSS: **NONE**
+Excepción de scope autorizada: **3 verifies previos** actualizados sólo para retirar las assertions stale "P1-2 must remain deferred / customer field validity must stay out of `canSubmit`" y reemplazarlas por guards P1-2-aware de readiness
+Orders created: **0** · Status mutations: **0** · WhatsApp sends: **0**
+Static checks: tsc **PASS** · diff-check **PASS** · build **NO EJECUTADO** (por instrucción) · lint **NO EJECUTADO** (por instrucción)
+Verifies: nuevo `admin-manual-order-modal-form-validation-ux-decision` **PASS** + 5 del set autorizado **PASS** (6/6)
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-MODAL-CONFIGURATOR-CONTEXT-POLISH-1 — PASS — CONFIGURATOR CONTEXT AND ENTRY FLOW POLISHED (2026-09-07)
+
+Status: **PASS** — P1-3 cerrado; P2-2, P2-8, P2-11 y P2-14 cerrados; sin cambios de validación/dominio/servidor
+
+Doc: `docs/admin-manual-order-modal-configurator-context-polish-1.md`
+
+P1-3 configurator context/scroll: **CLOSED** (compose 402 → configure **0** medido en el owner real)
+Root cause: **SUBVISTAS COMPARTEN EL SCROLL OWNER** (`compose`/`configure` intercambian contenido dentro del mismo `manual-order-modal__body`; el elemento scrollable no se desmonta y conservaba `scrollTop`)
+Fix: **OPTION A (event-adjacent síncrono)** — reset en `openConfigure` antes del cambio de estado + `useEffect` keyed sólo a la identidad de subvista (`viewKey` incluye `productId`)
+Scroll owner: **EL EXISTENTE `manual-order-modal__body` vía ref local** — sin `window.scrollTo`, sin document scrolling, sin `scrollIntoView`, sin `querySelector`, sin timeouts/rAF/observers, sin `useLayoutEffect`
+Compose scroll restoration: **IMPLEMENTED** (offset capturado en el mismo handler; `Volver` → 402 restaurado; `resetForm` limpia el ref)
+Configurator entry: **SIEMPRE TOP** (incluido reabrir otro producto)
+Contextual header: **POLISHED** (`Configurar {producto}` + subtítulo del subpaso vía props existentes del shell; compose sigue `Nuevo pedido`; badge `PEDIDO MANUAL` en ambas)
+Shared modal shell (`admin-order-modal-shell.tsx` / `admin-order-modal.module.css`): **UNCHANGED** (el contexto se resolvió con props)
+Duplicate heading: **DEMOTED** (h2 shell → h3 identidad compacta con precio base → h4 grupos; sin títulos de peso equivalente compitiendo)
+Required-block feedback: **VISIBLE / NON-DUPLICATED** (superficie canónica única en el área de acción sticky, junto a `Agregar`; `p.validationMessage` del preview y `p.groupIssue` por grupo eliminados; el grupo faltante conserva sólo un cue silencioso `data-missing`)
+Validity authority: **`configureDraftValid` SIN CAMBIOS** (el helper de motivo es proyección de sólo lectura de `validateCustomizationSelection`)
+Pristine/error timing: **FIXED (presentación únicamente)** — `hasConfigureInteraction` no alimenta validez, `disabled`, selección, pricing ni payload; el panel volvió a ser stateless + `key` por producto
+Focus-visible: **POLISHED LOCALLY** (`outline` + offset desde `--focus` en opciones, toggles de cantidad, steppers y Adicional; sin apilar sombras; focus trap sigue diferido)
+ARIA: `role="status"` polite + `aria-describedby` condicionado a que el nodo esté renderizado
+Runtime QA: **LOCAL AUTHENTICATED** — FULL en 390/412 light y dark; smoke en 899/900/1023/1024/1440; casos A–G PASS
+CTA/footer polish previo: **PRESERVED** · P1-4 900–1023: **PRESERVED** (900 light + 1023 dark, overlap = 0)
+Single-scroll: **FROZEN** (único owner `manual-order-modal__body` a ≤899; el reset opera sobre ese mismo owner)
+P1-1: **CLOSED** · P1-2: **OPEN / DEFERRED** (verificado sin cambios: `Crear pedido` habilitado con Nombre/Teléfono vacíos) · P1-3: **CLOSED** · P1-4: **CLOSED**
+`canSubmit` / `validateForm` / payload / `createManualOrderAction`: **UNCHANGED**
+create_order RPC · DB schema/migrations · public checkout/catalog · dashboard frozen surfaces: **UNCHANGED**
+Archivos runtime modificados: **4** (`manual-order-modal.tsx`, `manual-order-modal.module.css`, `manual-order-customization-panel.tsx`, `manual-order-customization-panel.module.css`)
+Excepción de scope autorizada: **2 verifies previos** actualizados sólo para retirar la assertion stale "P1-3 must remain deferred" y reemplazarla por un guard P1-3-aware de scroll sobre el body owner
+Orders created: **0** · Status mutations: **0** · WhatsApp sends: **0**
+Static checks: tsc **PASS** · diff-check **PASS** · build **PASS** · lint **deuda conocida** (circular JSON / ESLint 9)
+Verifies: nuevo `admin-manual-order-modal-configurator-context-polish` **PASS** + 14 regresiones **PASS** (15/15)
+Next phase: **ADMIN-MANUAL-ORDER-MODAL-FORM-VALIDATION-UX-DECISION-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-MODAL-BREAKPOINT-OVERFLOW-FIX-1 — PASS — WORKSTATION PRODUCT ROW OVERFLOW FIXED (2026-09-07)
+
+Status: **PASS** — P1-4 cerrado con CSS feature-scoped; sin cambios de arquitectura de breakpoints
+
+Doc: `docs/admin-manual-order-modal-breakpoint-overflow-fix-1.md`
+
+P1-4 900–1023 text↔price overlap: **CLOSED** (identidad 55.56px → 190px; overlap medido por intersección de rects = 0)
+Root cause: **DUAL-PANE + SHELL CAP + SHRINK SIN CONTENCIÓN** (workstation pide dual-pane en 900 mientras el shell sigue capado en 600px → columna de productos 248px → track de identidad ~56px con min-content 139px, desbordando por `overflow: visible`)
+Fix: **OPTION A + C** (`overflow-wrap: anywhere` en `__product-copy` + media query feature-local `900–1023` con `"copy copy" / "price add"`)
+Workstation breakpoint: **UNCHANGED** (`@media (min-width: 900px)`, `minmax(0, 1.45fr) minmax(300px, 0.85fr)`) — OPTION D rechazada
+Modal shell (`admin-order-modal.module.css`): **UNCHANGED** (cap 600px → 1200px en ≥1024)
+900–1023 product rows: **NO OVERLAP** (900/920/960/1023 light y dark)
+Precio: **ÍNTegro** (`white-space: nowrap`, `min-width: 4.75rem`, `font-size: 0.84rem` sin reducir)
+Botón de acción: **34×34 SIN SHRINK** (deuda de tap target P2 preexistente, no tocada)
+Scroll horizontal: **NINGUNO** en 360/390/412/719/899/900/920/960/1023/1024/1440
+Extreme content probe: **PASS** (nombre 43 chars + categoría 30 chars sin cortes → envuelve, no desborda; DOM-only, revertido)
+≤899 mobile layout: **PRESERVED** · ≥1024 desktop: **PRESERVED**
+Simple/configurable parity: **PRESERVED** (P2-1 affordance sigue diferido)
+CTA/footer polish previo: **PRESERVED** (`__footer`, `__submit-button`, `__submit-label` sin modificar)
+Single-scroll: **FROZEN** (único owner `manual-order-modal__body` a ≤899)
+P1-1: **CLOSED** · P1-2: **OPEN / DEFERRED** · P1-3: **OPEN / DEFERRED** · P1-4: **CLOSED**
+`canSubmit` / `validateForm` / payload / `createManualOrderAction`: **UNCHANGED**
+create_order RPC · DB schema/migrations · public checkout/catalog · dashboard frozen surfaces: **UNCHANGED**
+Archivo runtime modificado: **1** (`components/admin/orders/manual-order-modal.module.css`) · TSX: **NONE**
+Orders created: **0** · Status mutations: **0** · WhatsApp sends: **0**
+Static checks: tsc **PASS** · diff-check **PASS** · build **PASS** · lint **deuda conocida** (circular JSON / ESLint 9)
+Verifies: nuevo `admin-manual-order-modal-breakpoint-overflow-fix` **PASS** + 13 regresiones **PASS**
+Next phase: **ADMIN-MANUAL-ORDER-MODAL-CONFIGURATOR-CONTEXT-POLISH-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-MODAL-CTA-FOOTER-STATES-POLISH-1 — PASS — CTA/FOOTER STATES POLISHED (2026-09-07)
+
+Status: **PASS WITH ACCEPTED P3 COPY DEBT** — P1-1 cerrado; P2-12 y P2-15 cerrados; P3-8 parcial
+
+Doc: `docs/admin-manual-order-modal-cta-footer-states-polish-1.md`
+
+Manual order modal CTA disabled hierarchy: **FIXED / SCOPED** (`.manual-order-modal__footer .manual-order-modal__submit-button:disabled`, sin tocar `.ui-button:disabled`)
+Manual order modal enabled CTA: **PRESERVED** (`--accent-primary` `#2563EB` + label blanco, focus/active/loading intactos)
+Mobile CTA amount: **VISIBLE / CONSISTENT** (label único con monto en todos los anchos; labels width-gated eliminados)
+Sticky footer materiality: **POLISHED** (borde con tinte, sombra ascendente, fade decorativo de 18px `pointer-events: none`)
+Blocked CTA copy: **CONFIGURATOR CERRADO** (`Completá las opciones` desde `configureDraftValid`) · **COMPOSE DIFERIDO** (deuda P3 documentada)
+Single-scroll: **REMAINS FROZEN** (único scroll owner `manual-order-modal__body` verificado a 360/390/412/899)
+Runtime QA: **LOCAL AUTHENTICATED** (`http://localhost:3000`, tenant La Burguesía) — estados A–E + smoke 360/390/412/899/900/1440, light y dark
+P1-1: **CLOSED**
+P1-2: **OPEN / DEFERRED** → `FORM-VALIDATION-UX-DECISION-1` (verificado sin cambios: CTA habilitado con Nombre/Teléfono vacíos)
+P1-3: **OPEN / DEFERRED** → `CONFIGURATOR-CONTEXT-POLISH-1`
+P1-4: **OPEN / NEXT PHASE** → reproducido a 900px, sin tocar grid/breakpoints
+Global Button / globals.css / theme-tokens.css: **UNCHANGED**
+`canSubmit` / `validateForm` / payload / `createManualOrderAction`: **UNCHANGED**
+create_order RPC: **UNCHANGED**
+DB schema/migrations: **UNCHANGED**
+Public checkout/catalog: **UNCHANGED**
+Dashboard frozen surfaces: **PRESERVED**
+Orders created: **0** · Status mutations: **0** · WhatsApp sends: **0**
+Static checks: tsc **PASS** · diff-check **PASS** · build **PASS** · lint **deuda conocida** (circular JSON / ESLint 9)
+Next phase: **ADMIN-MANUAL-ORDER-MODAL-BREAKPOINT-OVERFLOW-FIX-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-MODAL-VISUAL-HIERARCHY-AUDIT-1 — AUDIT COMPLETE — READY FOR SCOPED VISUAL POLISH (2026-09-07)
+
+Status: **AUDIT COMPLETE WITH BLOCKING P1/P2 FINDINGS** — 0 P0, 4 P1, 18 P2, 11 P3; sin implementación
+
+Doc: `docs/admin-manual-order-modal-visual-hierarchy-audit-1.md`
+
+Manual order modal visual hierarchy: **AUDITED** (compose + configurator, light + dark)
+Manual order modal functionality: **REMAINS CLOSED / FROZEN**
+Manual order submit flow: **REMAINS VERIFIED** (`#TJK9R5`)
+Manual modal single-scroll: **REMAINS FROZEN** (verificado en runtime a 390/412/900: único scroll owner `manual-order-modal__body`)
+Runtime QA: **LOCAL AUTHENTICATED** (`http://localhost:3000`, tenant La Burguesía, HEAD `3e418bb`)
+Production authenticated QA: **NOT AVAILABLE** (`/admin/dashboard` → `/admin/login`) — deuda P2-18
+P1 abiertos: **P1-1** CTA disabled indistinguible del habilitado · **P1-2** `Crear pedido` habilitado con cliente/teléfono vacíos y errores fuera de viewport · **P1-3** configurator hereda scroll y pierde contexto/error · **P1-4** solape texto↔precio en 900–1023px
+create_order RPC: **UNCHANGED**
+DB schema/migrations: **UNCHANGED**
+Public checkout/catalog: **UNCHANGED**
+Dashboard frozen surfaces: **PRESERVED**
+Orders created: **0** · Status mutations: **0** · WhatsApp sends: **0**
+Implementación: **NONE** — no code / no CSS / no commit / no push / no deploy
+Next phase: **ADMIN-MANUAL-ORDER-MODAL-CTA-FOOTER-STATES-POLISH-1**
+Secuencia recomendada: CTA/footer states → **breakpoint overflow fix (nueva)** → configurator context → ticket summary hierarchy → surface materiality → final visual QA
+
+---
+
+## Previous — ADMIN-DASHBOARD-MOBILE-ORDERS-COMMIT-PUSH-DEPLOY-1 — PASS WITH ACCEPTED PROD AUTH SMOKE DEBT — PACKAGE COMMITTED, PUSHED AND DEPLOYED (2026-09-07)
 
 Status: **PASS WITH ACCEPTED PROD AUTH SMOKE DEBT** — commit `178d07c` pushed to `main`; Vercel prod Ready `dpl_8T1JKrzPhCsKhNYeo8xKTJUesgZn`; public smoke PASS; authenticated prod admin smoke not available
 

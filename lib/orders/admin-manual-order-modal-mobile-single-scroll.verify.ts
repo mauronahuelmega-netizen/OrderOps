@@ -92,11 +92,33 @@ assert.equal(modal.includes("Crear pedido"), true);
 assert.equal(modal.includes("Cancelar") || modal.includes("cancel"), true);
 
 assert.equal(modal.includes("Requiere personalización"), true);
+
+/*
+ * This used to accept either of two exact sentences, both replaced in
+ * ADMIN-MANUAL-ORDER-MODAL-MICROCOPY-CONSISTENCY-POLISH-1. The intent was that a
+ * blocked product explains itself in both branches, so pin the structure and the
+ * retired device-specific wording instead of the sentences.
+ */
+const blockedHintBlock = modal.match(/product-blocked-hint"\]\}>([\s\S]*?)<\/p>/);
+assert.ok(blockedHintBlock, "Blocked products must keep an explanatory hint");
 assert.equal(
-  modal.includes("Usá el catálogo hasta habilitar el selector manual.") ||
-    modal.includes("Tocá + para configurar opciones antes de agregar."),
-  true
+  blockedHintBlock[1].includes("canConfigure"),
+  true,
+  "The hint must still branch on whether the product can be configured"
 );
+const blockedHintStrings = [...blockedHintBlock[1].matchAll(/"([^"]+)"/g)].map((m) => m[1]);
+assert.equal(
+  blockedHintStrings.length,
+  2,
+  "Both the configurable and the manual-unavailable branch must carry copy"
+);
+for (const sentence of blockedHintStrings) {
+  assert.equal(
+    /Tocá|Hacé clic|Clickeá|\+/.test(sentence),
+    false,
+    `The hint must not name a gesture or a control: "${sentence}"`
+  );
+}
 assert.equal(modal.includes("isManualOrderAvailable"), true);
 assert.equal(
   modal.includes("openConfigure") ||

@@ -24,9 +24,14 @@
   display: inline-flex;
   align-items: center;
   padding: 0.18rem 0.5rem;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 88%, transparent);
+  /*
+   * Literal mixes on purpose: this badge is handed to the shared shell as
+   * headerMeta, so it renders outside .manual-order-modal__form and cannot see
+   * the feature-local material variables.
+   */
+  border: 1px solid color-mix(in srgb, var(--text-muted) 15%, transparent);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--bg-surface-soft) 55%, var(--bg-surface));
+  background: color-mix(in srgb, var(--bg-surface-soft) 58%, var(--bg-surface));
   color: var(--text-secondary);
   font-size: 0.68rem;
   font-weight: 600;
@@ -36,13 +41,72 @@
   white-space: nowrap;
 }
 
+/*
+ * Feature-local material scale. Three levels, nothing more:
+ *   level 0 — modal/content background (owned by the shared shell, untouched)
+ *   level 1 — section cards        (--mo-surface-section / --mo-border-section)
+ *   level 2 — inner rows/controls  (--mo-surface-row / --mo-border-row)
+ * Rows are always mixed toward --bg-surface-soft, which reads darker than the
+ * section in light and lighter in dark, so one formula separates both themes.
+ *
+ * Accent language: selected/active surfaces speak the accent-primary family —
+ * the same one the configurator already used — while --focus stays reserved for
+ * keyboard focus rings. One accent, one meaning.
+ */
+/*
+ * Feature-local touch target for the shell's close control, handed to the shell
+ * through its optional closeClassName. Kept here rather than in the shared shell
+ * CSS because the order workspace modal uses the same variant and must not move.
+ */
+.manual-order-modal__shell-close {
+  min-width: 44px;
+  min-height: 44px;
+}
+
 .manual-order-modal__form {
+  --mo-surface-section: var(--bg-surface);
+  --mo-surface-row: color-mix(in srgb, var(--bg-surface-soft) 58%, var(--bg-surface));
+  --mo-surface-row-hover: color-mix(in srgb, var(--bg-surface-soft) 88%, var(--bg-surface));
+  --mo-surface-recessed: color-mix(in srgb, var(--bg-surface-soft) 92%, var(--bg-surface));
+  --mo-border-section: color-mix(in srgb, var(--text-muted) 20%, transparent);
+  --mo-border-row: color-mix(in srgb, var(--text-muted) 15%, transparent);
+  --mo-border-row-hover: color-mix(in srgb, var(--text-muted) 34%, transparent);
+  --mo-shadow-section:
+    0 1px 2px color-mix(in srgb, black 4%, transparent),
+    0 6px 16px color-mix(in srgb, black 4%, transparent);
+  --mo-shadow-raised: 0 1px 2px color-mix(in srgb, black 10%, transparent);
+  --mo-selected-border: color-mix(in srgb, var(--accent-primary) 42%, var(--border-subtle));
+  --mo-selected-surface: color-mix(in srgb, var(--accent-soft) 52%, var(--bg-surface));
+  --mo-accent-hint-border: color-mix(in srgb, var(--accent-primary) 22%, var(--mo-border-row));
+  --mo-accent-hint-surface: color-mix(in srgb, var(--accent-soft) 24%, var(--bg-surface));
+  /*
+   * P2-7: auxiliary copy that carries real information sits between secondary
+   * and tertiary instead of on the too-faint tertiary token. Pure metadata
+   * keeps using --text-tertiary directly.
+   */
+  --mo-text-aux: color-mix(in srgb, var(--text-secondary) 80%, var(--text-tertiary));
   display: flex;
   flex-direction: column;
   flex: 1;
   min-height: 0;
   height: 100%;
   gap: 0;
+}
+
+/*
+ * Dark needs stronger hairlines: --border-subtle is only 8% white there, which
+ * disappears against the surfaces and was the main cause of the flat
+ * grey-on-grey feel (P2-16). Admin dark is driven by data-dashboard-theme, not
+ * prefers-color-scheme.
+ */
+:global(html[data-dashboard-theme="dark"]) .manual-order-modal__form {
+  --mo-border-section: color-mix(in srgb, white 13%, transparent);
+  --mo-border-row: color-mix(in srgb, white 10%, transparent);
+  --mo-border-row-hover: color-mix(in srgb, white 24%, transparent);
+  --mo-shadow-section:
+    0 1px 2px color-mix(in srgb, black 45%, transparent),
+    0 8px 20px color-mix(in srgb, black 30%, transparent);
+  --mo-shadow-raised: 0 1px 3px color-mix(in srgb, black 55%, transparent);
 }
 
 .manual-order-modal__body {
@@ -63,14 +127,16 @@
   color: var(--text-secondary);
 }
 
+/* Level 1 section card. */
 .manual-order-modal__customer-strip {
   display: grid;
   gap: 8px;
   flex-shrink: 0;
   padding: 10px 12px 12px;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 90%, transparent);
+  border: 1px solid var(--mo-border-section);
   border-radius: 12px;
-  background: color-mix(in srgb, var(--bg-surface-soft) 42%, var(--bg-surface));
+  background: var(--mo-surface-section);
+  box-shadow: var(--mo-shadow-section);
 }
 
 .manual-order-modal__customer-grid {
@@ -94,26 +160,33 @@
   color: var(--text-secondary);
 }
 
+/*
+ * Level 2 input surface: recessed against the section card with a perceptible
+ * hairline, so a filled field no longer reads as if it were focused. The focus
+ * treatment itself is left to the shared field styles.
+ */
 .manual-order-modal__customer-strip :global(.admin-field) input {
   min-height: 36px;
   padding: 7px 10px;
   font-size: 0.86rem;
-  border-color: color-mix(in srgb, var(--border-subtle) 92%, transparent);
-  background: var(--bg-surface);
+  border-color: var(--mo-border-row);
+  background: var(--mo-surface-row);
 }
 
 .manual-order-modal__delivery-segment {
   width: 100%;
 }
 
+/* Recessed track so the active option can read as lifted out of it. */
 .manual-order-modal__delivery-options {
   display: inline-flex;
   flex-wrap: wrap;
   gap: 0;
   padding: 3px;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 88%, transparent);
+  border: 1px solid var(--mo-border-row);
   border-radius: 10px;
-  background: color-mix(in srgb, var(--bg-surface-soft) 60%, var(--bg-surface));
+  background: var(--mo-surface-recessed);
+  box-shadow: inset 0 1px 2px color-mix(in srgb, black 5%, transparent);
 }
 
 .manual-order-modal__delivery-option {
@@ -121,7 +194,7 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  min-height: 32px;
+  min-height: 44px;
   min-width: 5.5rem;
   padding: 6px 12px;
   border: none;
@@ -137,10 +210,23 @@
     box-shadow 120ms ease;
 }
 
+/*
+ * The radio itself is visually hidden but stays in the tab order, so the
+ * keyboard ring has to be painted on the label that the operator actually sees.
+ */
+.manual-order-modal__delivery-option:has(input:focus-visible) {
+  outline: 2px solid color-mix(in srgb, var(--focus) 60%, transparent);
+  outline-offset: 2px;
+}
+
+/* Sizes untouched: only the surface/contrast of the active state changes. */
 .manual-order-modal__delivery-option:has(input:checked) {
-  background: var(--bg-surface);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 26%, var(--mo-border-row));
+  padding: 5px 11px;
+  background: var(--mo-surface-section);
   color: var(--text-primary);
-  box-shadow: 0 1px 2px color-mix(in srgb, black 8%, transparent);
+  font-weight: 600;
+  box-shadow: var(--mo-shadow-raised);
 }
 
 .manual-order-modal__delivery-option input {
@@ -185,23 +271,27 @@
   gap: 10px;
   min-height: 0;
   padding: 12px;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 92%, transparent);
+  border: 1px solid var(--mo-border-section);
   border-radius: 12px;
-  background: color-mix(in srgb, var(--bg-surface) 98%, var(--bg-surface-soft));
+  background: var(--mo-surface-section);
+  box-shadow: var(--mo-shadow-section);
 }
 
+/*
+ * Same section material as the other cards; the ticket keeps a slightly
+ * stronger border so it still reads as the outcome panel without becoming a
+ * different material language.
+ */
 .manual-order-modal__summary-panel {
   display: flex;
   flex-direction: column;
   gap: 10px;
   min-height: 0;
   padding: 12px;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 78%, var(--text-secondary));
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 14%, var(--mo-border-section));
   border-radius: 12px;
-  background: color-mix(in srgb, var(--bg-surface-soft) 58%, var(--bg-surface));
-  box-shadow:
-    0 1px 0 color-mix(in srgb, white 6%, transparent),
-    0 8px 24px color-mix(in srgb, black 6%, transparent);
+  background: var(--mo-surface-section);
+  box-shadow: var(--mo-shadow-section);
 }
 
 .manual-order-modal__panel-header,
@@ -269,11 +359,11 @@
 
 .manual-order-modal__search {
   width: 100%;
-  min-height: 38px;
+  min-height: 44px;
   padding: 8px 11px;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 88%, transparent);
+  border: 1px solid var(--mo-border-row);
   border-radius: 10px;
-  background: var(--bg-surface);
+  background: var(--mo-surface-row);
   color: var(--text-primary);
   font-size: 0.88rem;
 }
@@ -289,16 +379,26 @@
   gap: 5px;
 }
 
+/*
+ * P2-1: every product row now shares one level 2 material base — the border was
+ * transparent before, which left simple rows glued to the panel while
+ * configurable rows looked more interactive purely by accident. Border width is
+ * unchanged at 1px, so the 900–1023 row geometry is untouched.
+ */
 .manual-order-modal__product-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto auto;
   gap: 10px;
   align-items: center;
   min-height: 52px;
-  padding: 8px 10px;
-  border: 1px solid transparent;
+  /*
+   * Vertical padding trimmed 8→6px so the 44px add control lands inside the
+   * existing row rhythm instead of inflating every row by 8px.
+   */
+  padding: 6px 10px;
+  border: 1px solid var(--mo-border-row);
   border-radius: 10px;
-  background: color-mix(in srgb, var(--bg-surface) 92%, var(--bg-surface-soft));
+  background: var(--mo-surface-row);
   transition:
     border-color 120ms ease,
     background-color 120ms ease,
@@ -306,40 +406,53 @@
 }
 
 .manual-order-modal__product-row:hover {
-  border-color: color-mix(in srgb, var(--border-subtle) 88%, var(--text-secondary));
-  background: var(--bg-surface);
+  border-color: var(--mo-border-row-hover);
+  background: var(--mo-surface-row-hover);
 }
 
 .manual-order-modal__product-row--selected {
-  border-color: color-mix(in srgb, var(--focus) 28%, var(--border-subtle));
-  background: color-mix(in srgb, var(--focus) 6%, var(--bg-surface));
+  border-color: var(--mo-selected-border);
+  background: var(--mo-selected-surface);
 }
 
 .manual-order-modal__product-row--blocked {
   opacity: 0.78;
-  border-color: color-mix(in srgb, var(--border-subtle) 88%, transparent);
-  background: color-mix(in srgb, var(--bg-surface-soft) 40%, var(--bg-surface));
+  border-color: var(--mo-border-row);
+  background: var(--mo-surface-row);
 }
 
 .manual-order-modal__product-row--blocked:hover {
-  border-color: color-mix(in srgb, var(--border-subtle) 88%, transparent);
-  background: color-mix(in srgb, var(--bg-surface-soft) 40%, var(--bg-surface));
+  border-color: var(--mo-border-row);
+  background: var(--mo-surface-row);
   box-shadow: none;
 }
 
+/*
+ * Configurable rows keep the shared base and only add a quiet accent hint, so
+ * they communicate "needs one more step" without turning into a CTA.
+ */
 .manual-order-modal__product-row--configurable {
   opacity: 1;
+  border-color: var(--mo-accent-hint-border);
+  background: var(--mo-accent-hint-surface);
 }
 
 .manual-order-modal__product-row--configurable:hover {
-  border-color: color-mix(in srgb, var(--focus) 28%, var(--border-subtle));
-  background: color-mix(in srgb, var(--focus) 5%, var(--bg-surface));
+  border-color: var(--mo-selected-border);
+  background: color-mix(in srgb, var(--accent-soft) 40%, var(--bg-surface));
 }
 
 .manual-order-modal__product-copy {
   display: grid;
   gap: 2px;
   min-width: 0;
+  /*
+   * `min-width: 0` lets the identity track shrink below its min-content width,
+   * so without a break opportunity long single words (category, badge copy)
+   * used to paint over the price/action tracks. Wrapping keeps identity inside
+   * its own track at any column width.
+   */
+  overflow-wrap: anywhere;
 }
 
 .manual-order-modal__product-title-row {
@@ -363,7 +476,7 @@
   flex-shrink: 0;
   padding: 0.1rem 0.4rem;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--focus) 12%, var(--bg-surface));
+  background: color-mix(in srgb, var(--accent-soft) 70%, var(--bg-surface));
   color: var(--text-secondary);
   font-size: 0.62rem;
   font-weight: 650;
@@ -376,8 +489,8 @@
   flex-shrink: 0;
   padding: 0.1rem 0.4rem;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 88%, transparent);
-  background: color-mix(in srgb, var(--bg-surface-soft) 55%, var(--bg-surface));
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 24%, var(--mo-border-row));
+  background: color-mix(in srgb, var(--accent-soft) 34%, var(--bg-surface));
   color: var(--text-secondary);
   font-size: 0.62rem;
   font-weight: 650;
@@ -385,11 +498,12 @@
   line-height: 1.2;
 }
 
+/* P2-7: this hint states the required extra step, so it is real information. */
 .manual-order-modal__product-blocked-hint {
   margin: 0;
   font-size: 0.68rem;
   line-height: 1.3;
-  color: var(--text-tertiary);
+  color: var(--mo-text-aux);
 }
 
 .manual-order-modal__product-category {
@@ -410,21 +524,24 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* 44×44 touch target; the glyph keeps its original size. */
 .manual-order-modal__add-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
   padding: 0;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 82%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent-primary) 20%, var(--mo-border-row));
   border-radius: 999px;
-  background: color-mix(in srgb, var(--bg-surface-soft) 55%, var(--bg-surface));
+  background: var(--mo-surface-section);
   color: var(--text-primary);
   font-size: 1.15rem;
   font-weight: 500;
   line-height: 1;
   cursor: pointer;
+  box-shadow: var(--mo-shadow-raised);
   transition:
     border-color 120ms ease,
     background-color 120ms ease,
@@ -433,8 +550,8 @@
 }
 
 .manual-order-modal__add-button:hover:not(:disabled) {
-  border-color: color-mix(in srgb, var(--focus) 42%, var(--border-subtle));
-  background: color-mix(in srgb, var(--focus) 10%, var(--bg-surface));
+  border-color: var(--mo-selected-border);
+  background: color-mix(in srgb, var(--accent-soft) 45%, var(--bg-surface));
   box-shadow: 0 1px 4px color-mix(in srgb, black 8%, transparent);
 }
 
@@ -456,9 +573,9 @@
 .manual-order-modal__empty-products {
   margin: 0;
   padding: 16px 12px;
-  border: 1px dashed color-mix(in srgb, var(--border-subtle) 88%, transparent);
+  border: 1px dashed var(--mo-border-row-hover);
   border-radius: 12px;
-  background: color-mix(in srgb, var(--bg-surface-soft) 40%, var(--bg-surface));
+  background: var(--mo-surface-row);
   color: var(--text-secondary);
   font-size: 0.84rem;
   line-height: 1.45;
@@ -471,13 +588,14 @@
   justify-items: center;
 }
 
+/* Level 2 recessed placeholder instead of a near-invisible outline. */
 .manual-order-modal__ticket-empty {
   display: grid;
   gap: 6px;
   padding: 14px 12px;
-  border: 1px dashed color-mix(in srgb, var(--border-subtle) 82%, transparent);
+  border: 1px dashed var(--mo-border-row-hover);
   border-radius: 10px;
-  background: color-mix(in srgb, var(--bg-surface) 72%, transparent);
+  background: var(--mo-surface-row);
   text-align: center;
 }
 
@@ -502,9 +620,9 @@
 
 .manual-order-modal__summary-row {
   display: grid;
-  gap: 6px;
-  padding: 9px 10px;
-  border-bottom: 1px solid color-mix(in srgb, var(--border-subtle) 88%, transparent);
+  gap: 7px;
+  padding: 10px 10px 9px;
+  border-bottom: 1px solid var(--mo-border-row);
   background: transparent;
 }
 
@@ -536,6 +654,7 @@
   font-variant-numeric: tabular-nums;
 }
 
+/* Fallback rendering for lines without a customization snapshot. */
 .manual-order-modal__summary-chips {
   margin: 0;
   padding: 0;
@@ -551,32 +670,132 @@
   color: var(--text-secondary);
 }
 
+/*
+ * Configured selections read as scannable groups instead of one dense
+ * paragraph: a quiet group label, then one row per option with the name on the
+ * left and its delta right-aligned in its own column, so names can wrap without
+ * ever colliding with a price.
+ */
+.manual-order-modal__summary-groups {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.manual-order-modal__summary-group {
+  display: grid;
+  gap: 1px;
+}
+
+/* P2-7: group names are real information, not metadata. */
+.manual-order-modal__summary-group-label {
+  margin: 0;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.3;
+  color: var(--mo-text-aux);
+}
+
+.manual-order-modal__summary-options {
+  margin: 0;
+  padding: 0 0 0 8px;
+  list-style: none;
+  display: grid;
+  gap: 1px;
+}
+
+.manual-order-modal__summary-option {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: 10px;
+}
+
+.manual-order-modal__summary-option-name {
+  min-width: 0;
+  font-size: 0.76rem;
+  line-height: 1.35;
+  color: var(--text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.manual-order-modal__summary-option-qty {
+  margin-left: 4px;
+  font-weight: 650;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.manual-order-modal__summary-option-delta {
+  font-size: 0.74rem;
+  line-height: 1.35;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/*
+ * Adicional children: an indented micro-surface so the child reads as attached
+ * to this parent rather than as another internal customization group.
+ */
+.manual-order-modal__summary-upsells {
+  display: grid;
+  gap: 1px;
+  margin-top: 1px;
+  padding: 5px 7px 5px 8px;
+  border-left: 2px solid color-mix(in srgb, var(--accent-primary) 30%, var(--mo-border-row-hover));
+  border-radius: 0 8px 8px 0;
+  background: var(--mo-surface-row);
+}
+
 .manual-order-modal__summary-child {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 8px;
-  padding: 4px 0 2px 10px;
-  border-left: 2px solid color-mix(in srgb, var(--border-subtle) 80%, transparent);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: 10px;
 }
 
 .manual-order-modal__summary-child-line,
 .manual-order-modal__summary-child-total {
   margin: 0;
+  min-width: 0;
   font-size: 0.76rem;
   line-height: 1.35;
   color: var(--text-secondary);
+  overflow-wrap: anywhere;
 }
 
 .manual-order-modal__summary-child-total {
   white-space: nowrap;
+  overflow-wrap: normal;
   font-variant-numeric: tabular-nums;
 }
 
+/*
+ * Stepper stays one visual unit; `Quitar` is pushed to the opposite edge so it
+ * cannot read as the button after `+`. Sizes/handlers are untouched — tap-target
+ * work belongs to the accessibility phase.
+ */
+.manual-order-modal__summary-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+/* 44px high target while staying visually quiet — not destructive, not primary. */
 .manual-order-modal__remove-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
   margin-left: 4px;
-  padding: 4px 8px;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 88%, transparent);
+  padding: 4px 12px;
+  border: 1px solid var(--mo-border-row-hover);
   border-radius: 8px;
   background: transparent;
   color: var(--text-secondary);
@@ -606,33 +825,43 @@
   line-height: 1.4;
 }
 
+/* Tight gap keeps -/value/+ grouped by proximity as a single stepper. */
 .manual-order-modal__quantity-controls {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
 }
 
+/* 44×44 touch target; the glyph keeps its original size. */
 .manual-order-modal__quantity-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
-  border: 1px solid color-mix(in srgb, var(--border-subtle) 88%, transparent);
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  padding: 0;
+  border: 1px solid var(--mo-border-row-hover);
   border-radius: 999px;
-  background: var(--bg-surface);
+  background: var(--mo-surface-section);
   color: var(--text-primary);
   font-size: 0.92rem;
   line-height: 1;
   cursor: pointer;
+  box-shadow: var(--mo-shadow-raised);
   transition:
     border-color 120ms ease,
     background-color 120ms ease;
 }
 
+.manual-order-modal__quantity-button:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--focus) 60%, transparent);
+  outline-offset: 2px;
+}
+
 .manual-order-modal__quantity-button:hover:not(:disabled) {
-  border-color: color-mix(in srgb, var(--text-secondary) 28%, var(--border-subtle));
-  background: color-mix(in srgb, var(--bg-surface-soft) 50%, var(--bg-surface));
+  border-color: var(--mo-selected-border);
+  background: color-mix(in srgb, var(--accent-soft) 40%, var(--bg-surface));
 }
 
 .manual-order-modal__quantity-button:disabled {
@@ -663,8 +892,8 @@
   min-height: 52px;
   resize: vertical;
   font-size: 0.84rem;
-  border-color: color-mix(in srgb, var(--border-subtle) 92%, transparent);
-  background: var(--bg-surface);
+  border-color: var(--mo-border-row);
+  background: var(--mo-surface-row);
 }
 
 .manual-order-modal__total-block {
@@ -766,9 +995,36 @@
   align-items: center;
   gap: 10px;
   padding: 12px 0 0;
-  border-top: 1px solid color-mix(in srgb, var(--border-subtle) 92%, transparent);
-  background: color-mix(in srgb, var(--bg-surface) 96%, transparent);
-  backdrop-filter: blur(6px);
+  border-top: 1px solid color-mix(in srgb, var(--border-subtle) 68%, var(--text-secondary));
+  /*
+   * Kept translucent, but the material must not depend on the blur: the CSS
+   * pipeline strips backdrop-filter from this module, so separation is carried
+   * by the surface, border, upward shadow and the ::before scroll-edge fade.
+   */
+  background: color-mix(in srgb, var(--bg-surface) 97%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 -8px 18px -10px color-mix(in srgb, black 26%, transparent);
+}
+
+/*
+ * Decorative scroll-edge fade: softens the cut between the scrolling body and
+ * the footer material so the last row no longer reads as truncated content.
+ * Non-interactive and anchored above the footer; scroll ownership unchanged.
+ */
+.manual-order-modal__footer::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 18px;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--bg-surface) 88%, transparent),
+    transparent
+  );
 }
 
 .manual-order-modal__footer :global(.ui-button--secondary) {
@@ -784,23 +1040,51 @@
   white-space: nowrap;
 }
 
-.manual-order-modal__submit-label-desktop {
-  display: none;
+/*
+ * Feature-scoped disabled treatment for the modal primary action.
+ * The shared primitive only dims (`.ui-button:disabled { opacity: .6 }`), which
+ * leaves a blocked CTA reading as saturated accent primary. Scoped here — never
+ * in app/globals.css — because Button is shared by admin and public surfaces.
+ * Specificity is raised via the footer ancestor so this wins regardless of the
+ * global/module stylesheet insertion order. Native `disabled` semantics,
+ * focus-visible and the enabled state are untouched.
+ */
+.manual-order-modal__footer .manual-order-modal__submit-button:disabled {
+  opacity: 1;
+  background: color-mix(in srgb, var(--bg-surface-soft) 88%, var(--bg-surface));
+  border-color: color-mix(in srgb, var(--border-subtle) 72%, transparent);
+  color: var(--text-secondary);
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+}
+
+.manual-order-modal__submit-label {
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
 }
 
-.manual-order-modal__submit-label-mobile {
-  display: inline;
+/*
+ * Canonical configurator blocking reason, rendered inside the sticky action area
+ * so it cannot scroll away from the CTA it explains. Additive: the footer material,
+ * CTA colour system and button sizing rules are untouched. `order: -1` pulls it to
+ * the left of the row layout; the ≤899 block resets it so the column-reverse
+ * footer shows it directly above the primary action.
+ */
+.manual-order-modal__configure-note {
+  order: -1;
+  flex: 1 1 160px;
+  min-width: 0;
+  margin: 0 auto 0 0;
+  font-size: 0.76rem;
+  line-height: 1.35;
+  color: var(--text-cancelled-strong);
+  overflow-wrap: anywhere;
 }
 
-@media (min-width: 640px) {
-  .manual-order-modal__submit-label-desktop {
-    display: inline;
-  }
-
-  .manual-order-modal__submit-label-mobile {
-    display: none;
-  }
+/* Pristine draft: state the requirement as context, not as an error. */
+.manual-order-modal__configure-note[data-tone="quiet"] {
+  color: var(--text-secondary);
 }
 
 @media (min-width: 900px) {
@@ -816,6 +1100,39 @@
 
   .manual-order-modal__summary-scroll {
     max-height: min(32vh, 220px);
+  }
+}
+
+/*
+ * Intermediate workstation range: the dual-pane grid is already active while the
+ * modal is still capped, and the summary column sits on its 300px floor, so the
+ * products column lands around 248px and the three-track product row starves the
+ * identity track (~56px measured at 900px). Give identity the full row width and
+ * put price/action on their own line. Row geometry only — the workstation
+ * breakpoint, the panel grid and the modal shell are untouched.
+ */
+@media (min-width: 900px) and (max-width: 1023px) {
+  .manual-order-modal__product-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas:
+      "copy copy"
+      "price add";
+    row-gap: 6px;
+  }
+
+  .manual-order-modal__product-copy {
+    grid-area: copy;
+  }
+
+  .manual-order-modal__product-price {
+    grid-area: price;
+    justify-self: start;
+    text-align: left;
+  }
+
+  .manual-order-modal__add-button {
+    grid-area: add;
+    justify-self: end;
   }
 }
 
@@ -893,11 +1210,28 @@
     width: 100%;
   }
 
+  /*
+   * Column-reverse stacks last-in-DOM first, so the default order is dropped here
+   * to keep the blocking reason immediately above the primary action.
+   */
+  .manual-order-modal__configure-note {
+    order: 0;
+    flex: 0 0 auto;
+    width: 100%;
+    margin: 0;
+  }
+
   .manual-order-modal__product-row {
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
       "copy price"
       "copy add";
+    /*
+     * Price and add stack in the same column here, so the 10px row gap paid the
+     * add control's growth twice over. Tightening it keeps the small-mobile row
+     * at roughly its previous height.
+     */
+    row-gap: 2px;
   }
 
   .manual-order-modal__product-copy {

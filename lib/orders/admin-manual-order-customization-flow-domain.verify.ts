@@ -175,10 +175,25 @@ assert.equal(
 
 // Safety gate remains active in UI + eligibility
 assert.equal(modal.includes("Requiere personalización"), true);
+
+/*
+ * This is a domain/safety verify, so it should not pin presentation microcopy —
+ * the two sentences it used to accept were replaced in ADMIN-MANUAL-ORDER-MODAL-
+ * MICROCOPY-CONSISTENCY-POLISH-1. What actually matters here is the gate: a
+ * product the domain marks unavailable cannot quick-add as a bare line, and the
+ * operator is told why.
+ */
 assert.equal(
-  modal.includes("Usá el catálogo hasta habilitar el selector manual.") ||
-    modal.includes("Tocá + para configurar opciones antes de agregar."),
-  true
+  /if \(!product\.isManualOrderAvailable\) \{\s*\n\s*openConfigure\(productId\);\s*\n\s*return;/.test(
+    modal
+  ),
+  true,
+  "A customizable product must route to the configurator instead of quick-adding"
+);
+assert.equal(
+  modal.includes("product-blocked-hint"),
+  true,
+  "Blocked products must still explain why they cannot be added"
 );
 assert.equal(modal.includes("isManualOrderAvailable"), true);
 assert.equal(modal.includes("toManualOrderCreateOrderItems"), false);

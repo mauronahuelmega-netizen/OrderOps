@@ -1,10 +1,19 @@
 "use client";
 
-import { useCallback, useMemo, useRef, useState, useTransition } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  useTransition
+} from "react";
 import { createManualOrderAction } from "@/app/admin/(protected)/orders/actions";
 import AdminOrderModalShell from "@/components/admin/orders/admin-order-modal-shell";
 import ManualOrderCustomizationPanel, {
   createEmptyManualOrderCustomizationDraft,
+  getManualOrderCustomizationDraftBlockingReason,
   getManualOrderCustomizationDraftPreviewTotal,
   isManualOrderCustomizationDraftValid,
   type ManualOrderCustomizationDraft
@@ -35,12 +44,118 @@ type ManualOrderModalView =
   | { type: "compose" }
   | { type: "configure"; productId: string };
 
+// Stable, local id: the CTA only references it while the note is rendered.
+const CONFIGURE_BLOCKING_NOTE_ID = "manual-order-configure-blocking-note";
+
+// The opener has to be read before the shell moves focus to its close button.
+// The shell does that in a passive effect, and passive effects run child-first,
+// so only a layout effect in this parent still sees the dashboard trigger.
+const useOpenerCaptureEffect = typeof window === "undefined" ? useEffect : useLayoutEffect;
+
+const FOCUSABLE_SELECTOR = [
+  "button:not([disabled])",
+  "input:not([disabled])",
+  "textarea:not([disabled])",
+  "select:not([disabled])",
+  "a[href]",
+  '[tabindex]:not([tabindex="-1"])'
+].join(",");
+
+/**
+ * Focusables inside the modal dialog only. Nothing outside `container` is ever
+ * queried or mutated, so the dashboard behind the modal keeps its own tab order
+ * and no background node gets a temporary tabindex.
+ */
+function getManualOrderFocusableElements(container: HTMLElement): HTMLElement[] {
+  return Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+    (element) =>
+      !element.hasAttribute("disabled") &&
+      element.tabIndex !== -1 &&
+      // Drops unmounted/`display: none` nodes while keeping the visually hidden
+      // delivery radios, which are still real keyboard stops.
+      element.getClientRects().length > 0 &&
+      getComputedStyle(element).visibility !== "hidden"
+  );
+}
+
 type ManualOrderFieldErrors = {
   customerName?: string;
   phone?: string;
   address?: string;
   items?: string;
 };
+
+type ManualTicketSummaryGroup = {
+  groupId: string;
+  groupName: string;
+  options: Array<{
+    optionId: string;
+    optionName: string;
+    quantity: number;
+    totalPriceDelta: number;
+  }>;
+};
+
+/*
+ * Presentation projection of the snapshot the domain already built for the line.
+ * Every value is read as-is from CustomizationSnapshotV2 — group_name,
+ * option_name, option quantity and the option's own total_price_delta (already
+ * priceDelta × qty, computed upstream). No display string is parsed and no
+ * price is recomputed here: this only decides grouping and order for render.
+ */
+function getManualTicketSummaryGroups(
+  line: ManualOrderTicketLine
+): ManualTicketSummaryGroup[] {
+  const snapshot = line.customizationSnapshot;
+  if (!snapshot) {
+    return [];
+  }
+
+  return [...snapshot.groups]
+    .filter((group) => group.selected_options.length > 0)
+    .sort((left, right) => left.sort_order - right.sort_order)
+    .map((group) => ({
+      groupId: group.group_id,
+      groupName: group.group_name,
+      options: [...group.selected_options]
+        .sort((left, right) => left.sort_order - right.sort_order)
+        .map((option) => ({
+          optionId: option.option_id,
+          optionName: option.option_name,
+          quantity: option.quantity,
+          totalPriceDelta: option.total_price_delta
+        }))
+    }));
+}
+
+/*
+ * The required customer/delivery rules, exactly as validateForm has always
+ * defined them: name and phone non-empty, address non-empty only for delivery.
+ * Extracted so CTA readiness and submit-time errors read the SAME function and
+ * cannot drift. No rule is added, removed, reordered or hardened here.
+ */
+function getManualOrderRequiredFieldErrors(input: {
+  customerName: string;
+  phone: string;
+  deliveryMethod: DeliveryMethod;
+  address: string;
+}): ManualOrderFieldErrors {
+  const requiredErrors: ManualOrderFieldErrors = {};
+
+  if (!input.customerName.trim()) {
+    requiredErrors.customerName = "El nombre del cliente es obligatorio.";
+  }
+
+  if (!input.phone.trim()) {
+    requiredErrors.phone = "El teléfono es obligatorio.";
+  }
+
+  if (input.deliveryMethod === "delivery" && !input.address.trim()) {
+    requiredErrors.address = "La dirección es obligatoria para delivery.";
+  }
+
+  return requiredErrors;
+}
 
 export type ManualOrderModalProps = {
   isOpen: boolean;
@@ -88,8 +203,23 @@ export default function ManualOrderModal({
     useState<ManualOrderCustomizationDraft | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<ManualOrderFieldErrors>({});
+  /*
+   * Presentation-only: gates when the configurator blocking reason escalates from
+   * quiet context to an error tone, and when a still-missing group gets marked.
+   * It never feeds configureDraftValid, the disabled state, selection, pricing or
+   * the ticket payload.
+   */
+  const [hasConfigureInteraction, setHasConfigureInteraction] = useState(false);
   const [isSubmitting, startSubmitTransition] = useTransition();
   const submitLockRef = useRef(false);
+  // The modal body is the single scroll owner (≤899) and stays the only element
+  // this component scrolls: subview switches must never inherit compose offset.
+  const bodyRef = useRef<HTMLDivElement | null>(null);
+  const composeScrollTopRef = useRef(0);
+  // The real dialog node, handed over by the shell: focus containment is scoped
+  // to it so nothing outside the modal is ever queried.
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+  const openerRef = useRef<HTMLElement | null>(null);
 
   const productById = useMemo(
     () => new Map(products.map((product) => [product.id, product])),
@@ -151,12 +281,30 @@ export default function ManualOrderModal({
 
     return true;
   }, [ticketLines]);
+  /*
+   * Readiness of the fields validateForm already requires, evaluated live so the
+   * CTA stops claiming the order is ready while required data is missing (P1-2).
+   * Same rules, same source: it derives from getManualOrderRequiredFieldErrors.
+   */
+  const requiredFormReady = useMemo(
+    () =>
+      Object.keys(
+        getManualOrderRequiredFieldErrors({
+          customerName,
+          phone,
+          deliveryMethod,
+          address
+        })
+      ).length === 0,
+    [address, customerName, deliveryMethod, phone]
+  );
   const canSubmit =
     canCreateOrder &&
     !isSubmitting &&
     products.length > 0 &&
     hasSelectedItems &&
-    ticketSubmitReady;
+    ticketSubmitReady &&
+    requiredFormReady;
 
   const rootTicketLines = useMemo(
     () => ticketLines.filter((line) => line.kind !== "upsell"),
@@ -185,6 +333,110 @@ export default function ManualOrderModal({
       ? getManualOrderCustomizationDraftPreviewTotal(configureConfig, customizationDraft)
       : 0;
 
+  const configureBlockingReason =
+    configureConfig && customizationDraft
+      ? getManualOrderCustomizationDraftBlockingReason(configureConfig, customizationDraft)
+      : null;
+
+  // Identity of the current subview. Changing product re-enters the configurator,
+  // so the product id participates: reopening must also start at the top.
+  const viewKey =
+    view.type === "configure" ? `configure:${view.productId}` : "compose";
+
+  const shellTitle = configureProduct
+    ? `Configurar ${configureProduct.name}`
+    : "Nuevo pedido";
+  const shellSubtitle = configureProduct
+    ? "Elegí las opciones para este producto."
+    : "Cargá un pedido tomado manualmente.";
+
+  // Subview scroll entry. Only `manual-order-modal__body` is ever scrolled here:
+  // no window/document scrolling, no scrollIntoView, no second scroll owner.
+  // Entering the configurator always lands on its own top (product identity,
+  // base price, quantity and first required group); returning to compose restores
+  // the offset captured when the configurator was opened.
+  useEffect(() => {
+    const body = bodyRef.current;
+    if (!body) {
+      return;
+    }
+
+    body.scrollTop = viewKey === "compose" ? composeScrollTopRef.current : 0;
+  }, [viewKey]);
+
+  // Remember whatever opened the modal so closing can hand focus straight back.
+  useOpenerCaptureEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const active = document.activeElement;
+    openerRef.current = active instanceof HTMLElement ? active : null;
+  }, [isOpen]);
+
+  // Return focus on close. The shell owns Escape and the initial focus; it does
+  // not own return focus, so there is no second focus jump to compete with.
+  useEffect(() => {
+    if (isOpen) {
+      return;
+    }
+
+    const opener = openerRef.current;
+    openerRef.current = null;
+
+    if (opener?.isConnected) {
+      opener.focus();
+    }
+  }, [isOpen]);
+
+  /*
+   * Keyboard containment. The listener lives on the dialog node itself, so it
+   * only ever sees keystrokes that already happened inside the modal: no window
+   * or document listener, no background node is inspected or mutated, and the
+   * live focusable list is recomputed per keystroke so disabled CTAs and the
+   * unmounted compose/configure subview drop out on their own.
+   */
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!isOpen || !dialog) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Tab" || event.altKey || event.ctrlKey || event.metaKey) {
+        return;
+      }
+
+      const focusables = getManualOrderFocusableElements(dialog);
+      if (focusables.length === 0) {
+        return;
+      }
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+      const activeIsInside = active instanceof HTMLElement && dialog.contains(active);
+
+      if (event.shiftKey) {
+        if (!activeIsInside || active === first) {
+          event.preventDefault();
+          last.focus();
+        }
+        return;
+      }
+
+      if (!activeIsInside || active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    dialog.addEventListener("keydown", handleKeyDown);
+    return () => {
+      dialog.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, view.type]);
+
   const resetForm = useCallback(() => {
     setCustomerName(INITIAL_FORM_STATE.customerName);
     setPhone(INITIAL_FORM_STATE.phone);
@@ -195,8 +447,10 @@ export default function ManualOrderModal({
     setTicketLines([]);
     setView({ type: "compose" });
     setCustomizationDraft(null);
+    setHasConfigureInteraction(false);
     setErrorMessage(null);
     setFieldErrors({});
+    composeScrollTopRef.current = 0;
   }, []);
 
   const handleClose = useCallback(() => {
@@ -215,12 +469,27 @@ export default function ManualOrderModal({
       return;
     }
 
+    // Captured before the subview swaps so `Volver` can come back to the product
+    // the operator was looking at, and reset in the same event so the browser
+    // never paints the configurator at the inherited compose offset.
+    composeScrollTopRef.current = bodyRef.current?.scrollTop ?? 0;
+    if (bodyRef.current) {
+      bodyRef.current.scrollTop = 0;
+    }
+
     setErrorMessage(null);
+    setHasConfigureInteraction(false);
     setCustomizationDraft(createEmptyManualOrderCustomizationDraft(productId));
     setView({ type: "configure", productId });
   };
 
+  const handleConfigureDraftChange = (nextDraft: ManualOrderCustomizationDraft) => {
+    setHasConfigureInteraction(true);
+    setCustomizationDraft(nextDraft);
+  };
+
   const cancelConfigure = () => {
+    setHasConfigureInteraction(false);
     setCustomizationDraft(null);
     setView({ type: "compose" });
   };
@@ -263,6 +532,7 @@ export default function ManualOrderModal({
 
     setTicketLines((current) => mergeManualConfiguredSelection(current, bundle));
     setFieldErrors((currentErrors) => ({ ...currentErrors, items: undefined }));
+    setHasConfigureInteraction(false);
     setCustomizationDraft(null);
     setView({ type: "compose" });
   };
@@ -307,19 +577,13 @@ export default function ManualOrderModal({
   };
 
   const validateForm = () => {
-    const nextFieldErrors: ManualOrderFieldErrors = {};
-
-    if (!customerName.trim()) {
-      nextFieldErrors.customerName = "El nombre del cliente es obligatorio.";
-    }
-
-    if (!phone.trim()) {
-      nextFieldErrors.phone = "El teléfono es obligatorio.";
-    }
-
-    if (deliveryMethod === "delivery" && !address.trim()) {
-      nextFieldErrors.address = "La dirección es obligatoria para delivery.";
-    }
+    // Same required-field rules as before, now read from the shared helper.
+    const nextFieldErrors: ManualOrderFieldErrors = getManualOrderRequiredFieldErrors({
+      customerName,
+      phone,
+      deliveryMethod,
+      address
+    });
 
     if (ticketLines.length === 0) {
       nextFieldErrors.items = "Agregá al menos un producto.";
@@ -345,7 +609,7 @@ export default function ManualOrderModal({
         );
         if (!parent || parent.kind !== "customized") {
           nextFieldErrors.items =
-            "Hay un adicional sin producto principal. Revisá el ticket.";
+            "Hay un adicional sin producto principal. Revisá el pedido.";
           break;
         }
       }
@@ -431,14 +695,20 @@ export default function ManualOrderModal({
     <AdminOrderModalShell
       isOpen={isOpen}
       onClose={handleClose}
-      title="Nuevo pedido"
+      title={shellTitle}
       variant="workstation"
+      dialogRef={dialogRef}
+      closeLabel={
+        configureProduct
+          ? `Cerrar configuración de ${configureProduct.name}`
+          : "Cerrar nuevo pedido manual"
+      }
+      overlayLabel="Salir del pedido manual"
+      closeClassName={styles["manual-order-modal__shell-close"]}
       headerLeading={
         <div className={styles["manual-order-modal__header-copy"]}>
-          <h2>Nuevo pedido</h2>
-          <p className={styles["manual-order-modal__subtitle"]}>
-            Cargá un pedido tomado manualmente.
-          </p>
+          <h2>{shellTitle}</h2>
+          <p className={styles["manual-order-modal__subtitle"]}>{shellSubtitle}</p>
         </div>
       }
       headerMeta={
@@ -451,7 +721,7 @@ export default function ManualOrderModal({
         noValidate
         aria-busy={isSubmitting}
       >
-        <div className={styles["manual-order-modal__body"]}>
+        <div className={styles["manual-order-modal__body"]} ref={bodyRef}>
           {!canCreateOrder ? (
             <p
               className={`${styles["manual-order-modal__alert"]} ${styles["manual-order-modal__alert--info"]}`}
@@ -489,10 +759,12 @@ export default function ManualOrderModal({
 
           {view.type === "configure" && configureProduct && configureConfig && customizationDraft ? (
             <ManualOrderCustomizationPanel
+              key={configureProduct.id}
               productName={configureProduct.name}
               config={configureConfig}
               draft={customizationDraft}
-              onDraftChange={setCustomizationDraft}
+              onDraftChange={handleConfigureDraftChange}
+              hasInteracted={hasConfigureInteraction}
               disabled={isSubmitting}
             />
           ) : (
@@ -714,8 +986,8 @@ export default function ManualOrderModal({
                                 {needsConfiguration ? (
                                   <p className={styles["manual-order-modal__product-blocked-hint"]}>
                                     {canConfigure
-                                      ? "Tocá + para configurar opciones antes de agregar."
-                                      : "Usá el catálogo hasta habilitar el selector manual."}
+                                      ? "Configurá las opciones antes de agregarlo."
+                                      : "Todavía no se puede agregar a un pedido manual."}
                                   </p>
                                 ) : null}
                               </div>
@@ -753,7 +1025,7 @@ export default function ManualOrderModal({
                   <div className={styles["manual-order-modal__ticket-header"]}>
                     <h3 className={styles["manual-order-modal__section-title"]}>Pedido</h3>
                     <p className={styles["manual-order-modal__ticket-subtitle"]}>
-                      Ticket en construcción
+                      Resumen del pedido
                     </p>
                   </div>
 
@@ -761,10 +1033,10 @@ export default function ManualOrderModal({
                     {!hasSelectedItems ? (
                       <div className={styles["manual-order-modal__ticket-empty"]}>
                         <p className={styles["manual-order-modal__ticket-empty-title"]}>
-                          Pedido vacío
+                          Todavía no agregaste productos
                         </p>
                         <p className={styles["manual-order-modal__ticket-empty-copy"]}>
-                          Agregá productos desde el catálogo para armar el pedido.
+                          Agregá productos para armar el pedido.
                         </p>
                       </div>
                     ) : (
@@ -775,6 +1047,8 @@ export default function ManualOrderModal({
                               child.kind === "upsell" &&
                               child.parentClientLineId === line.clientLineId
                           );
+
+                          const summaryGroups = getManualTicketSummaryGroups(line);
 
                           return (
                             <div
@@ -789,52 +1063,145 @@ export default function ManualOrderModal({
                                   {formatCurrency(line.lineTotal)}
                                 </p>
                               </div>
-                              {line.displaySummary.length > 0 ? (
+                              {summaryGroups.length > 0 ? (
+                                <ul className={styles["manual-order-modal__summary-groups"]}>
+                                  {summaryGroups.map((group) => (
+                                    <li
+                                      key={group.groupId}
+                                      className={styles["manual-order-modal__summary-group"]}
+                                    >
+                                      <p
+                                        className={
+                                          styles["manual-order-modal__summary-group-label"]
+                                        }
+                                      >
+                                        {group.groupName}
+                                      </p>
+                                      <ul
+                                        className={styles["manual-order-modal__summary-options"]}
+                                      >
+                                        {group.options.map((option) => (
+                                          <li
+                                            key={option.optionId}
+                                            className={
+                                              styles["manual-order-modal__summary-option"]
+                                            }
+                                          >
+                                            <span
+                                              className={
+                                                styles["manual-order-modal__summary-option-name"]
+                                              }
+                                            >
+                                              {option.optionName}
+                                              {option.quantity > 1 ? (
+                                                <span
+                                                  className={
+                                                    styles[
+                                                      "manual-order-modal__summary-option-qty"
+                                                    ]
+                                                  }
+                                                >
+                                                  ×{option.quantity}
+                                                </span>
+                                              ) : null}
+                                            </span>
+                                            {option.totalPriceDelta > 0 ? (
+                                              <span
+                                                className={
+                                                  styles[
+                                                    "manual-order-modal__summary-option-delta"
+                                                  ]
+                                                }
+                                              >
+                                                +{formatCurrency(option.totalPriceDelta)}
+                                              </span>
+                                            ) : null}
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : line.displaySummary.length > 0 ? (
+                                /* Legacy/degraded lines without a snapshot keep the
+                                   previous rendering: the string is shown whole, never
+                                   parsed to rebuild groups. */
                                 <ul className={styles["manual-order-modal__summary-chips"]}>
                                   {line.displaySummary.map((entry) => (
                                     <li key={entry}>{entry}</li>
                                   ))}
                                 </ul>
                               ) : null}
-                              {children.map((child) => (
+                              {children.length > 0 ? (
                                 <div
-                                  key={child.clientLineId}
-                                  className={styles["manual-order-modal__summary-child"]}
+                                  className={styles["manual-order-modal__summary-upsells"]}
+                                  aria-label={UPSELL_ASSOCIATED_LABEL}
                                 >
-                                  <p className={styles["manual-order-modal__summary-child-line"]}>
-                                    {UPSELL_ASSOCIATED_LABEL}: {child.productName} ×{child.quantity}
+                                  <p
+                                    className={
+                                      styles["manual-order-modal__summary-group-label"]
+                                    }
+                                  >
+                                    {UPSELL_ASSOCIATED_LABEL}
                                   </p>
-                                  <p className={styles["manual-order-modal__summary-child-total"]}>
-                                    {formatCurrency(child.lineTotal)}
-                                  </p>
+                                  {children.map((child) => (
+                                    <div
+                                      key={child.clientLineId}
+                                      className={styles["manual-order-modal__summary-child"]}
+                                    >
+                                      <span
+                                        className={
+                                          styles["manual-order-modal__summary-child-line"]
+                                        }
+                                      >
+                                        {child.productName}
+                                        <span
+                                          className={
+                                            styles["manual-order-modal__summary-option-qty"]
+                                          }
+                                        >
+                                          ×{child.quantity}
+                                        </span>
+                                      </span>
+                                      <span
+                                        className={
+                                          styles["manual-order-modal__summary-child-total"]
+                                        }
+                                      >
+                                        {formatCurrency(child.lineTotal)}
+                                      </span>
+                                    </div>
+                                  ))}
                                 </div>
-                              ))}
-                              <div className={styles["manual-order-modal__quantity-controls"]}>
-                                <button
-                                  type="button"
-                                  className={styles["manual-order-modal__quantity-button"]}
-                                  aria-label={`Quitar uno de ${line.productName}`}
-                                  onClick={() =>
-                                    updateLineQuantity(line.clientLineId, line.quantity - 1)
-                                  }
-                                  disabled={isSubmitting}
-                                >
-                                  -
-                                </button>
-                                <span className={styles["manual-order-modal__quantity-value"]}>
-                                  {line.quantity}
-                                </span>
-                                <button
-                                  type="button"
-                                  className={styles["manual-order-modal__quantity-button"]}
-                                  aria-label={`Agregar uno de ${line.productName}`}
-                                  onClick={() =>
-                                    updateLineQuantity(line.clientLineId, line.quantity + 1)
-                                  }
-                                  disabled={isSubmitting}
-                                >
-                                  +
-                                </button>
+                              ) : null}
+                              <div className={styles["manual-order-modal__summary-actions"]}>
+                                <div className={styles["manual-order-modal__quantity-controls"]}>
+                                  <button
+                                    type="button"
+                                    className={styles["manual-order-modal__quantity-button"]}
+                                    aria-label={`Quitar uno de ${line.productName}`}
+                                    onClick={() =>
+                                      updateLineQuantity(line.clientLineId, line.quantity - 1)
+                                    }
+                                    disabled={isSubmitting}
+                                  >
+                                    -
+                                  </button>
+                                  <span className={styles["manual-order-modal__quantity-value"]}>
+                                    {line.quantity}
+                                  </span>
+                                  <button
+                                    type="button"
+                                    className={styles["manual-order-modal__quantity-button"]}
+                                    aria-label={`Agregar uno de ${line.productName}`}
+                                    onClick={() =>
+                                      updateLineQuantity(line.clientLineId, line.quantity + 1)
+                                    }
+                                    disabled={isSubmitting}
+                                  >
+                                    +
+                                  </button>
+                                </div>
                                 <button
                                   type="button"
                                   className={styles["manual-order-modal__remove-button"]}
@@ -913,9 +1280,36 @@ export default function ManualOrderModal({
                 className={styles["manual-order-modal__submit-button"]}
                 onClick={confirmConfigure}
                 disabled={isSubmitting || !configureDraftValid}
+                aria-describedby={
+                  configureBlockingReason ? CONFIGURE_BLOCKING_NOTE_ID : undefined
+                }
               >
-                Agregar · {formatCurrency(configurePreviewTotal)}
+                {configureDraftValid ? (
+                  <span className={styles["manual-order-modal__submit-label"]}>
+                    Agregar · {formatCurrency(configurePreviewTotal)}
+                  </span>
+                ) : (
+                  "Completá las opciones"
+                )}
               </Button>
+              {/*
+                Canonical blocking-feedback surface. It lives in the sticky action
+                area so the reason stays next to `Agregar` at any scroll position,
+                and it is the only place this sentence is rendered. Last in DOM
+                because the footer is column-reverse ≤899: that puts it directly
+                above the CTA on mobile, while `order` pulls it left on the row
+                layout.
+              */}
+              {configureBlockingReason ? (
+                <p
+                  id={CONFIGURE_BLOCKING_NOTE_ID}
+                  className={styles["manual-order-modal__configure-note"]}
+                  data-tone={hasConfigureInteraction ? "error" : "quiet"}
+                  role="status"
+                >
+                  {configureBlockingReason}
+                </p>
+              ) : null}
             </>
           ) : (
             <>
@@ -935,17 +1329,14 @@ export default function ManualOrderModal({
               >
                 {isSubmitting ? (
                   "Creando pedido..."
-                ) : hasSelectedItems ? (
-                  <>
-                    <span className={styles["manual-order-modal__submit-label-desktop"]}>
-                      Crear pedido · {formatCurrency(previewTotal)}
-                    </span>
-                    <span className={styles["manual-order-modal__submit-label-mobile"]}>
-                      Crear pedido
-                    </span>
-                  </>
+                ) : !hasSelectedItems ? (
+                  "Agregá productos"
+                ) : !requiredFormReady ? (
+                  "Completá los datos obligatorios"
                 ) : (
-                  "Crear pedido"
+                  <span className={styles["manual-order-modal__submit-label"]}>
+                    Crear pedido · {formatCurrency(previewTotal)}
+                  </span>
                 )}
               </Button>
             </>

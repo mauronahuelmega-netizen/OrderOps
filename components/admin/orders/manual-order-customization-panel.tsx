@@ -40,6 +40,13 @@ export type ManualOrderCustomizationPanelProps = {
   config: ManualOrderProductCustomizationConfig;
   draft: ManualOrderCustomizationDraft;
   onDraftChange: (draft: ManualOrderCustomizationDraft) => void;
+  /*
+   * Presentation-only. Decides WHEN a still-missing required group is marked, so a
+   * pristine draft is not flagged before the operator has done anything. It never
+   * participates in validity: that stays owned by validateCustomizationSelection /
+   * isManualOrderCustomizationDraftValid.
+   */
+  hasInteracted?: boolean;
   disabled?: boolean;
 };
 
@@ -68,6 +75,27 @@ export function isManualOrderCustomizationDraftValid(
     return false;
   }
   return isSelectionStrictlyWithinLimits(config.groups, draft.selection);
+}
+
+/**
+ * First missing-requirement message for the current draft, or null when nothing is
+ * missing. This is a read-only projection of the existing validation output so the
+ * modal can render the blocking reason next to the CTA it blocks; it introduces no
+ * rule of its own and is not the validity authority.
+ */
+export function getManualOrderCustomizationDraftBlockingReason(
+  config: ManualOrderProductCustomizationConfig,
+  draft: ManualOrderCustomizationDraft
+): string | null {
+  const validation = validateCustomizationSelection(
+    config.groups,
+    selectionV2ToLegacyOptionIds(draft.selection),
+    draft.selection
+  );
+  if (validation.valid) {
+    return null;
+  }
+  return validation.issues[0]?.message ?? null;
 }
 
 export function getManualOrderCustomizationDraftPreviewTotal(
@@ -120,6 +148,7 @@ export default function ManualOrderCustomizationPanel({
   config,
   draft,
   onDraftChange,
+  hasInteracted = false,
   disabled = false
 }: ManualOrderCustomizationPanelProps) {
   const selectedOptionsByGroupId = selectionV2ToLegacyOptionIds(draft.selection);
@@ -132,7 +161,6 @@ export default function ManualOrderCustomizationPanel({
   const parentQty = clampParentQuantity(draft.quantity);
   const upsellProducts = config.upsellGroup?.products ?? [];
   const showUpsell = upsellProducts.length > 0;
-  const firstIssue = validation.issues[0]?.message ?? null;
 
   function updateSelection(next: CustomizationSelectionStateV2) {
     onDraftChange(patchDraft(draft, { selection: next }));
@@ -156,14 +184,19 @@ export default function ManualOrderCustomizationPanel({
 
   return (
     <div className={styles.panel} data-disabled={disabled ? "true" : undefined}>
+      {/*
+        Compact identity block. The modal header owns the substep title
+        ("Configurar {product}"), so this is deliberately demoted: it anchors the
+        heading outline between the shell h2 and the group h4s and carries the base
+        price, without repeating an equal-weight duplicate of the header.
+      */}
       <header className={styles.header}>
-        <h3 className={styles.title}>Configurar {productName}</h3>
-        <p className={styles.subcopy}>
-          Elegí las opciones del pedido tomado en el local.
-        </p>
-        <p className={styles.basePrice}>
-          Precio base {formatPublicCatalogCurrency(config.productPrice)}
-        </p>
+        <h3 className={styles.identity}>
+          <span className={styles.identityName}>{productName}</span>
+          <span className={styles.basePrice}>
+            Precio base {formatPublicCatalogCurrency(config.productPrice)}
+          </span>
+        </h3>
       </header>
 
       <section className={styles.quantitySection} aria-label="Cantidad del producto">
@@ -207,6 +240,7 @@ export default function ManualOrderCustomizationPanel({
               validation.issues.find((item) => item.groupId === group.id)?.message ??
               null
             }
+            showMissingCue={hasInteracted}
             disabled={disabled}
             onSelectionChange={updateSelection}
           />
@@ -260,11 +294,6 @@ export default function ManualOrderCustomizationPanel({
             {formatPublicCatalogCurrency(previewTotal)}
           </span>
         </div>
-        {!validation.valid && firstIssue ? (
-          <p className={styles.validationMessage} role="status">
-            {firstIssue}
-          </p>
-        ) : null}
       </div>
     </div>
   );
@@ -275,6 +304,7 @@ type GroupSectionProps = {
   groups: PublicCustomizationGroup[];
   selection: CustomizationSelectionStateV2;
   issue: string | null;
+  showMissingCue: boolean;
   disabled: boolean;
   onSelectionChange: (selection: CustomizationSelectionStateV2) => void;
 };
@@ -284,6 +314,7 @@ function GroupSection({
   groups,
   selection,
   issue,
+  showMissingCue,
   disabled,
   onSelectionChange
 }: GroupSectionProps) {
@@ -308,7 +339,17 @@ function GroupSection({
     <section className={styles.group}>
       <div className={styles.groupHeader}>
         <h4 className={styles.groupTitle}>{group.name}</h4>
-        <span className={styles.groupBadge}>{meta}</span>
+        {/*
+          Quiet local cue only: the full missing-requirement sentence lives once,
+          next to the CTA. This just marks which group still needs attention, and
+          only after the operator has interacted.
+        */}
+        <span
+          className={styles.groupBadge}
+          data-missing={issue && showMissingCue ? "true" : undefined}
+        >
+          {meta}
+        </span>
       </div>
       {group.description ? (
         <p className={styles.groupDescription}>{group.description}</p>
@@ -397,11 +438,6 @@ function GroupSection({
         </ul>
       )}
 
-      {issue ? (
-        <p className={styles.groupIssue} role="alert">
-          {issue}
-        </p>
-      ) : null}
     </section>
   );
 }
