@@ -783,6 +783,9 @@ Implemented: snapshot-derived structured preparation hierarchy (V2 qty-aware, V1
 ## Living Audit Changelog
 
 ```text
+2026-09-08 — MANUAL ORDER MODAL VISUAL/UX POLISH PACKAGE DEPLOYED (ADMIN-MANUAL-ORDER-MODAL-COMMIT-PUSH-DEPLOY-1)
+- deployed @ 13abcc08c8ae7093c359e9e6fdf7dfe7f9bce7e1 (feat(admin): polish manual order modal, 29 files); production Ready via Vercel Git integration dpl_6YqdcSPSpR6J4cjNtdsSZwPQiL5w on https://orderops.vercel.app; verify suite 15/15; runtime frozen (diff fingerprint 9BA3B67C…F5D6 re-matched before staging); accepted debt unchanged (P2-QA2, P3-QA1, P3-QA2, authenticated production QA still unavailable).
+
 2026-09-08 — MANUAL ORDER MODAL VISUAL/UX BLOCK CLOSED (checkpoint ADMIN-MANUAL-ORDER-MODAL-FINAL-VISUAL-QA-1)
 - closed the whole manual order modal polish block as PASS WITH ACCEPTED NON-BLOCKING DEBT: P0 0, P1 0, two accepted P2 and two documented P3, certified across widths 360/390/412/719/899/900/1023/1024/1440 in light and dark with the real admin toggle (html[data-dashboard-theme], never prefers-color-scheme), with zero runtime/CSS/verify edits during the QA phase (diff stat identical to preflight, HEAD 3e418bb, nothing staged) and zero orders created;
 - all four P1 verified closed in runtime: CTA/footer never covers content, the CTA cannot enable without required fields, the configurator never inherits compose scroll (measured 338 -> 0 -> 338 exact restore), and product rows stay contained between 900 and 1023 (grid 135.98px 44px, price nowrap, add 44x44, zero collisions, zero row overflow);

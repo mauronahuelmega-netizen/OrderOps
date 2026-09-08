@@ -2,7 +2,28 @@
 
 ## Estado actual
 
-**ADMIN-MANUAL-ORDER-MODAL-VERIFY-RECONCILIATION-1 — PASS — MANUAL ORDER MODAL VERIFY SUITE RECONCILED (2026-09-08)**
+**ADMIN-MANUAL-ORDER-MODAL-COMMIT-PUSH-DEPLOY-1 — PASS — MANUAL ORDER MODAL POLISH PACKAGE DEPLOYED (2026-09-08)**
+
+Doc: `docs/admin-manual-order-modal-commit-push-deploy-1.md`
+
+Release commit: **`13abcc08c8ae7093c359e9e6fdf7dfe7f9bce7e1`** — `feat(admin): polish manual order modal` (29 files, +9778/−224)
+origin/main: **`13abcc08c8ae7093c359e9e6fdf7dfe7f9bce7e1`** (HEAD == origin/main, push non-force `3e418bb..13abcc0`)
+Vercel: **READY** — `dpl_6YqdcSPSpR6J4cjNtdsSZwPQiL5w`, Git integration, source commit confirmado `13abcc0`
+Producción: **https://orderops.vercel.app** — HEALTHY (root 200, catálogo 200, `/admin/login` 200, `/admin/dashboard` 307)
+Relevant verifies: **15/15 PASS** · tsc: **PASS** · build: **PASS** · lint: **KNOWN TOOLING DEBT ONLY** (ESLint 9 circular JSON)
+Runtime: **DEPLOYED** — fingerprint `9BA3B67C…F5D6` MATCH exacto antes de stagear (5 archivos, 1061/216); no se modificó nada durante el release
+P0: **0** · P1: **0**
+P2-QA1: **CLOSED** · P2-QA2: **ACCEPTED NON-BLOCKING** · P3-QA1 / P3-QA2: **DOCUMENTED**
+Manual order modal: **DEPLOYED / FROZEN**
+Production authenticated modal smoke: **UNAVAILABLE** (redirige a `/admin/login`; deuda aceptada)
+DB / RPC / migrations: **UNCHANGED** · Orders created during release: **0** · status mutations: **0** · WhatsApp sends: **0**
+Staged post-release: **none** · remanente dirty: sólo `tsconfig.tsbuildinfo` (generated noise excluido)
+
+Next: **ADMIN-PRODUCTS-MOBILE-VISUAL-DEBT-AUDIT-1**
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-MODAL-VERIFY-RECONCILIATION-1 — PASS — MANUAL ORDER MODAL VERIFY SUITE RECONCILED (2026-09-08)
 
 Doc: `docs/admin-manual-order-modal-verify-reconciliation-1.md`
 
