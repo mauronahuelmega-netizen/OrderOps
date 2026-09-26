@@ -420,6 +420,8 @@ begin
     'order_id', v_order_deposit,
     'agreed_total', 100,
     'financial_status', 'open',
+    'settled_at', null,
+    'settled_by', null,
     'paid_net', 100,
     'committed', 100,
     'remaining', 0
