@@ -10,7 +10,7 @@ import { buildOrderDisplayRef } from "@/lib/orders/display-ref";
 import {
   buildOrderRelativeTimeLabel,
   formatAdminDeliveryMethod,
-  formatAdminOrderCurrency,
+  formatAdminOrderTechnicalTotal,
   formatAdminOrderDate
 } from "@/lib/orders/presenter";
 import type { OrderRiskAssessment } from "@/lib/orders/risk-detection";
@@ -225,7 +225,7 @@ function OrderCardComponent({
         {showAssignmentMeta ? <p className={assignmentClassName}>{assignmentLabel}</p> : null}
 
         <div className={styles.actionRow}>
-          <span className={styles.total}>{formatAdminOrderCurrency(order.total_price)}</span>
+          <span className={styles.total}>{formatAdminOrderTechnicalTotal(order.total_price)}</span>
           <div className={styles.actionRowControls}>
             <OrderCardQuickActions
               variant="compact"

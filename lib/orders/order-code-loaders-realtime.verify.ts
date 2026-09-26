@@ -28,6 +28,7 @@ function buildMockDashboardItem(
     delivery_date: overrides.delivery_date ?? "2026-08-28",
     delivery_time: overrides.delivery_time ?? null,
     delivery_method: overrides.delivery_method ?? "delivery",
+    composition_status: overrides.composition_status ?? "itemized",
     address: overrides.address ?? "Calle Falsa 123",
     status: overrides.status ?? "pending",
     total_price: overrides.total_price ?? 5000,
@@ -90,6 +91,16 @@ const patchedWithoutCode = patchDashboardOrderFromRealtime(orderWithCode, {
 });
 assert.equal(patchedWithoutCode.order_code, "K7M4Q9");
 assert.equal(patchedWithoutCode.status, "ready");
+
+const patchedWithoutTotalField = patchDashboardOrderFromRealtime(orderWithCode, {
+  status: "preparing"
+});
+assert.equal(patchedWithoutTotalField.total_price, 5000);
+
+const patchedWithExplicitNullTotal = patchDashboardOrderFromRealtime(orderWithCode, {
+  total_price: null
+});
+assert.equal(patchedWithExplicitNullTotal.total_price, null);
 
 // Case 6 — Workspace realtime patch updates and preserves order_code
 const workspaceBase: AdminOrderWorkspaceData = {

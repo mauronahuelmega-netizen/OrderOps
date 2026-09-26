@@ -514,7 +514,7 @@ function resolveKitchenStatus(saturation: SaturationIndexResult, activeCount: nu
 }
 
 function formatAverageTicketKpi(commercial: AdminOrdersAnalytics) {
-  if (commercial.validOrdersCount === 0) {
+  if (commercial.pricedOrdersCount === 0) {
     return { value: "Sin datos", tone: "neutral" as const };
   }
 

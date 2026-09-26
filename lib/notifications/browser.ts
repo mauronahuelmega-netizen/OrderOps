@@ -9,7 +9,7 @@ type NewOrderNotificationOrder = {
   delivery_method: "delivery" | "pickup";
   id: string;
   item_count: number;
-  total_price: number;
+  total_price: number | null;
 };
 
 export type BrowserNotificationPayload = {

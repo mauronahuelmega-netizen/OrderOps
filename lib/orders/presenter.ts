@@ -68,6 +68,12 @@ export function formatAdminOrderCurrency(value: number) {
   }).format(value);
 }
 
+export function formatAdminOrderTechnicalTotal(value: number | null) {
+  return value === null
+    ? "Total técnico no disponible"
+    : formatAdminOrderCurrency(value);
+}
+
 export function formatAdminDeliveryMethod(method: OrderDeliveryMethod) {
   return method === "delivery" ? "Delivery" : "Retiro";
 }

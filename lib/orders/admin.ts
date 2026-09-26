@@ -36,9 +36,10 @@ export type AdminOrderListItem = {
   delivery_date: string;
   delivery_time: string | null;
   delivery_method: "delivery" | "pickup";
+  composition_status: "itemized" | "legacy_unknown";
   address: string | null;
   status: "pending" | "preparing" | "ready" | "completed" | "cancelled";
-  total_price: number;
+  total_price: number | null;
   notes: string | null;
   assigned_to: string | null;
   assigned_at: string | null;
@@ -102,6 +103,7 @@ export async function getAdminOrders(businessId: string): Promise<AdminOrderDash
         delivery_date,
         delivery_time,
         delivery_method,
+        composition_status,
         address,
         status,
         total_price,
@@ -175,6 +177,7 @@ export async function getAdminDashboardOrderById(
         delivery_date,
         delivery_time,
         delivery_method,
+        composition_status,
         address,
         status,
         total_price,
@@ -242,6 +245,7 @@ export async function getAdminOrderById(
         delivery_date,
         delivery_time,
         delivery_method,
+        composition_status,
         address,
         status,
         total_price,
@@ -443,6 +447,7 @@ function buildAdminOrderDashboardItem(
     delivery_date: order.delivery_date,
     delivery_time: order.delivery_time ?? null,
     delivery_method: order.delivery_method,
+    composition_status: order.composition_status,
     address: order.address,
     status: order.status,
     total_price: order.total_price,

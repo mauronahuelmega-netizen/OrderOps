@@ -20,6 +20,33 @@ export type ProfileRole =
   | "operator"
   | "viewer"
   | "super_admin";
+export type OrderCompositionStatus = "itemized" | "legacy_unknown";
+export type OrderFinancialStatus = "open" | "settled" | "cancelled";
+export type FinanceAccountKind = "mercado_pago" | "naranja_x" | "cash" | "other";
+export type FinanceFundType =
+  | "business_operating"
+  | "business_capital"
+  | "family"
+  | "committed"
+  | "protected_reserve";
+export type FinanceAreaHint = "business" | "family";
+export type FinanceCategoryArea = "business" | "family";
+export type FinanceCategoryKind = "income" | "expense" | "transfer";
+export type FinanceOperationType =
+  | "income"
+  | "expense"
+  | "transfer"
+  | "adjustment"
+  | "opening_balance"
+  | "deposit"
+  | "historical_deposit"
+  | "order_payment"
+  | "release_deposit"
+  | "void"
+  | "correction";
+export type FinanceTransactionStatus = "posted" | "voided";
+export type FinanceEntryDirection = "in" | "out";
+export type FinanceReconciliationStatus = "open" | "closed";
 
 export type Database = {
   __InternalSupabase: {
@@ -32,6 +59,7 @@ export type Database = {
           business_id: string;
           created_at: string;
           delivery_mode_active: boolean;
+          finance_enabled: boolean;
           inactive_working_days: number[];
           kitchen_mode_active: boolean;
           on_demand_mode_active: boolean;
@@ -41,12 +69,14 @@ export type Database = {
           scheduled_max_days_in_advance: number;
           scheduled_min_lead_time_hours: number;
           scheduled_mode_active: boolean;
+          timezone: string | null;
           updated_at: string;
         };
         Insert: {
           business_id: string;
           created_at?: string;
           delivery_mode_active?: boolean;
+          finance_enabled?: boolean;
           inactive_working_days?: number[];
           kitchen_mode_active?: boolean;
           on_demand_mode_active?: boolean;
@@ -56,12 +86,14 @@ export type Database = {
           scheduled_max_days_in_advance?: number;
           scheduled_min_lead_time_hours?: number;
           scheduled_mode_active?: boolean;
+          timezone?: string | null;
           updated_at?: string;
         };
         Update: {
           business_id?: string;
           created_at?: string;
           delivery_mode_active?: boolean;
+          finance_enabled?: boolean;
           inactive_working_days?: number[];
           kitchen_mode_active?: boolean;
           on_demand_mode_active?: boolean;
@@ -71,6 +103,7 @@ export type Database = {
           scheduled_max_days_in_advance?: number;
           scheduled_min_lead_time_hours?: number;
           scheduled_mode_active?: boolean;
+          timezone?: string | null;
           updated_at?: string;
         };
         Relationships: [
@@ -82,6 +115,411 @@ export type Database = {
             referencedColumns: ["id"];
           },
         ];
+      };
+      business_finance_settings: {
+        Row: {
+          business_id: string;
+          protection_account_id: string | null;
+          default_operating_fund_id: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          business_id: string;
+          protection_account_id?: string | null;
+          default_operating_fund_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          business_id?: string;
+          protection_account_id?: string | null;
+          default_operating_fund_id?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      finance_accounts: {
+        Row: {
+          id: string;
+          business_id: string;
+          name: string;
+          kind: FinanceAccountKind;
+          active: boolean;
+          sort_order: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          business_id: string;
+          name: string;
+          kind?: FinanceAccountKind;
+          active?: boolean;
+          sort_order?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          business_id?: string;
+          name?: string;
+          kind?: FinanceAccountKind;
+          active?: boolean;
+          sort_order?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      finance_audit_events: {
+        Row: {
+          id: string;
+          business_id: string;
+          actor_id: string | null;
+          event_type: string;
+          entity_type: string;
+          entity_id: string | null;
+          payload: Json;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          business_id: string;
+          actor_id?: string | null;
+          event_type: string;
+          entity_type: string;
+          entity_id?: string | null;
+          payload?: Json;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          business_id?: string;
+          actor_id?: string | null;
+          event_type?: string;
+          entity_type?: string;
+          entity_id?: string | null;
+          payload?: Json;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      finance_categories: {
+        Row: {
+          id: string;
+          business_id: string;
+          name: string;
+          area: FinanceCategoryArea;
+          kind: FinanceCategoryKind;
+          active: boolean;
+          sort_order: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          business_id: string;
+          name: string;
+          area: FinanceCategoryArea;
+          kind: FinanceCategoryKind;
+          active?: boolean;
+          sort_order?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          business_id?: string;
+          name?: string;
+          area?: FinanceCategoryArea;
+          kind?: FinanceCategoryKind;
+          active?: boolean;
+          sort_order?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      finance_funds: {
+        Row: {
+          id: string;
+          business_id: string;
+          account_id: string;
+          name: string;
+          fund_type: FinanceFundType;
+          area_hint: FinanceAreaHint;
+          order_id: string | null;
+          active: boolean;
+          requires_strong_confirmation: boolean;
+          sort_order: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          business_id: string;
+          account_id: string;
+          name: string;
+          fund_type: FinanceFundType;
+          area_hint: FinanceAreaHint;
+          order_id?: string | null;
+          active?: boolean;
+          requires_strong_confirmation?: boolean;
+          sort_order?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          business_id?: string;
+          account_id?: string;
+          name?: string;
+          fund_type?: FinanceFundType;
+          area_hint?: FinanceAreaHint;
+          order_id?: string | null;
+          active?: boolean;
+          requires_strong_confirmation?: boolean;
+          sort_order?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      finance_operations: {
+        Row: {
+          id: string;
+          business_id: string;
+          operation_type: FinanceOperationType;
+          client_request_id: string;
+          request_hash: string;
+          note: string | null;
+          created_by: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          business_id: string;
+          operation_type: FinanceOperationType;
+          client_request_id: string;
+          request_hash: string;
+          note?: string | null;
+          created_by: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          business_id?: string;
+          operation_type?: FinanceOperationType;
+          client_request_id?: string;
+          request_hash?: string;
+          note?: string | null;
+          created_by?: string;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      finance_reconciliations: {
+        Row: {
+          id: string;
+          business_id: string;
+          account_id: string;
+          status: FinanceReconciliationStatus;
+          statement_balance: number;
+          system_balance: number | null;
+          note: string | null;
+          opened_by: string;
+          closed_by: string | null;
+          opened_at: string;
+          closed_at: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          business_id: string;
+          account_id: string;
+          status?: FinanceReconciliationStatus;
+          statement_balance?: number;
+          system_balance?: number | null;
+          note?: string | null;
+          opened_by: string;
+          closed_by?: string | null;
+          opened_at?: string;
+          closed_at?: string | null;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          business_id?: string;
+          account_id?: string;
+          status?: FinanceReconciliationStatus;
+          statement_balance?: number;
+          system_balance?: number | null;
+          note?: string | null;
+          opened_by?: string;
+          closed_by?: string | null;
+          opened_at?: string;
+          closed_at?: string | null;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      finance_reconciliation_entries: {
+        Row: {
+          id: string;
+          business_id: string;
+          reconciliation_id: string;
+          transaction_id: string;
+          entry_id: string;
+        };
+        Insert: {
+          id?: string;
+          business_id: string;
+          reconciliation_id: string;
+          transaction_id: string;
+          entry_id: string;
+        };
+        Update: {
+          id?: string;
+          business_id?: string;
+          reconciliation_id?: string;
+          transaction_id?: string;
+          entry_id?: string;
+        };
+        Relationships: [];
+      };
+      finance_reconciliation_fund_snapshots: {
+        Row: {
+          id: string;
+          business_id: string;
+          reconciliation_id: string;
+          fund_id: string;
+          balance: number;
+        };
+        Insert: {
+          id?: string;
+          business_id: string;
+          reconciliation_id: string;
+          fund_id: string;
+          balance: number;
+        };
+        Update: {
+          id?: string;
+          business_id?: string;
+          reconciliation_id?: string;
+          fund_id?: string;
+          balance?: number;
+        };
+        Relationships: [];
+      };
+      finance_transactions: {
+        Row: {
+          id: string;
+          business_id: string;
+          operation_id: string;
+          status: FinanceTransactionStatus;
+          area: FinanceCategoryArea | null;
+          category_id: string | null;
+          order_id: string | null;
+          occurred_at: string;
+          note: string | null;
+          created_by: string;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          business_id: string;
+          operation_id: string;
+          status?: FinanceTransactionStatus;
+          area?: FinanceCategoryArea | null;
+          category_id?: string | null;
+          order_id?: string | null;
+          occurred_at?: string;
+          note?: string | null;
+          created_by: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          business_id?: string;
+          operation_id?: string;
+          status?: FinanceTransactionStatus;
+          area?: FinanceCategoryArea | null;
+          category_id?: string | null;
+          order_id?: string | null;
+          occurred_at?: string;
+          note?: string | null;
+          created_by?: string;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
+      finance_transaction_entries: {
+        Row: {
+          id: string;
+          business_id: string;
+          transaction_id: string;
+          fund_id: string;
+          direction: FinanceEntryDirection;
+          amount: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          business_id: string;
+          transaction_id: string;
+          fund_id: string;
+          direction: FinanceEntryDirection;
+          amount: number;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          business_id?: string;
+          transaction_id?: string;
+          fund_id?: string;
+          direction?: FinanceEntryDirection;
+          amount?: number;
+          created_at?: string;
+        };
+        Relationships: [];
+      };
+      order_financials: {
+        Row: {
+          order_id: string;
+          business_id: string;
+          agreed_total: number | null;
+          financial_status: OrderFinancialStatus;
+          settled_at: string | null;
+          settled_by: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          order_id: string;
+          business_id: string;
+          agreed_total?: number | null;
+          financial_status?: OrderFinancialStatus;
+          settled_at?: string | null;
+          settled_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          order_id?: string;
+          business_id?: string;
+          agreed_total?: number | null;
+          financial_status?: OrderFinancialStatus;
+          settled_at?: string | null;
+          settled_by?: string | null;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
       };
       businesses: {
         Row: {
@@ -449,6 +887,7 @@ export type Database = {
           assigned_at: string | null;
           assigned_to: string | null;
           business_id: string;
+          composition_status: OrderCompositionStatus;
           created_at: string;
           customer_name: string;
           delivery_date: string;
@@ -459,13 +898,14 @@ export type Database = {
           order_code: string;
           phone: string;
           status: OrderStatus;
-          total_price: number;
+          total_price: number | null;
         };
         Insert: {
           address?: string | null;
           assigned_at?: string | null;
           assigned_to?: string | null;
           business_id: string;
+          composition_status?: OrderCompositionStatus;
           created_at?: string;
           customer_name: string;
           delivery_date: string;
@@ -476,13 +916,14 @@ export type Database = {
           order_code?: string;
           phone: string;
           status?: OrderStatus;
-          total_price: number;
+          total_price: number | null;
         };
         Update: {
           address?: string | null;
           assigned_at?: string | null;
           assigned_to?: string | null;
           business_id?: string;
+          composition_status?: OrderCompositionStatus;
           created_at?: string;
           customer_name?: string;
           delivery_date?: string;
@@ -493,7 +934,7 @@ export type Database = {
           order_code?: string;
           phone?: string;
           status?: OrderStatus;
-          total_price?: number;
+          total_price?: number | null;
         };
         Relationships: [
           {
@@ -1002,6 +1443,17 @@ export type Database = {
     };
     Enums: {
       delivery_method: DeliveryMethod;
+      finance_account_kind: FinanceAccountKind;
+      finance_area_hint: FinanceAreaHint;
+      finance_category_area: FinanceCategoryArea;
+      finance_category_kind: FinanceCategoryKind;
+      finance_entry_direction: FinanceEntryDirection;
+      finance_fund_type: FinanceFundType;
+      finance_operation_type: FinanceOperationType;
+      finance_reconciliation_status: FinanceReconciliationStatus;
+      finance_transaction_status: FinanceTransactionStatus;
+      order_composition_status: OrderCompositionStatus;
+      order_financial_status: OrderFinancialStatus;
       order_status: OrderStatus;
       profile_role: ProfileRole;
     };

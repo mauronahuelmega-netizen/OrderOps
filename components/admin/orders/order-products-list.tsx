@@ -3,13 +3,13 @@
 import { useMemo } from "react";
 import type { AdminOrderItem } from "@/lib/orders/admin";
 import OrderPreparationItems from "@/components/admin/orders/order-preparation-items";
-import { formatAdminOrderCurrency } from "@/lib/orders/presenter";
+import { formatAdminOrderTechnicalTotal } from "@/lib/orders/presenter";
 import { buildOrderPreparationItems } from "@/lib/product-customization/order-preparation";
 import styles from "./order-items.module.css";
 
 type OrderProductsListProps = {
   items: AdminOrderItem[];
-  totalPrice: number;
+  totalPrice: number | null;
   compact?: boolean;
   dense?: boolean;
   showTotal?: boolean;
@@ -42,7 +42,7 @@ export default function OrderProductsList({
       {showTotal ? (
         <div className={styles["admin-total-row"]}>
           <span>Total</span>
-          <strong>{formatAdminOrderCurrency(totalPrice)}</strong>
+          <strong>{formatAdminOrderTechnicalTotal(totalPrice)}</strong>
         </div>
       ) : null}
     </div>

@@ -10,6 +10,7 @@ import {
 } from "@/lib/orders/presenter";
 import type { AdminOrderWorkspaceData } from "@/lib/orders/workspace";
 import type { Tables } from "@/types/database";
+import { hasRealtimeField, mergeRealtimeField } from "@/lib/orders/realtime-fields";
 
 export type AdminOrderRealtimeRow = Tables<"orders">;
 
@@ -30,9 +31,10 @@ export function patchDashboardOrderFromRealtime(
     phone: row.phone ?? order.phone,
     delivery_date: row.delivery_date ?? order.delivery_date,
     delivery_method: row.delivery_method ?? order.delivery_method,
+    composition_status: row.composition_status ?? order.composition_status,
     address: row.address ?? order.address,
     status: row.status ?? order.status,
-    total_price: row.total_price ?? order.total_price,
+    total_price: mergeRealtimeField(row, "total_price", order.total_price),
     notes: row.notes ?? order.notes,
     ...nextAssignment
   };
@@ -75,9 +77,10 @@ export function patchWorkspaceOrderFromRealtime(
     phone: row.phone ?? order.phone,
     delivery_date: row.delivery_date ?? order.delivery_date,
     delivery_method: row.delivery_method ?? order.delivery_method,
+    composition_status: row.composition_status ?? order.composition_status,
     address: row.address ?? order.address,
     status: row.status ?? order.status,
-    total_price: row.total_price ?? order.total_price,
+    total_price: mergeRealtimeField(row, "total_price", order.total_price),
     notes: row.notes ?? order.notes
   };
 }
@@ -92,11 +95,4 @@ export function isOrderRealtimePayloadForBusiness(
   const businessValue = payload.new?.business_id ?? payload.old?.business_id;
 
   return businessValue === businessId;
-}
-
-function hasRealtimeField<Key extends keyof AdminOrderRealtimeRow>(
-  row: Partial<AdminOrderRealtimeRow>,
-  key: Key
-) {
-  return Object.prototype.hasOwnProperty.call(row, key);
 }

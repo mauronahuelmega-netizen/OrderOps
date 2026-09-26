@@ -7,7 +7,7 @@
  * - Case 3: Legacy items without item_kind / parent_order_item_id count as root products
  * - Case 4: Cancelled orders excluded from top product calculation
  * - Case 5: Revenue includes upsell/additional revenue via order total_price
- * - Case 6: Average ticket divides by non-cancelled order count
+ * - Case 6: Average ticket divides by non-cancelled orders with known technical totals
  * - Case 7: Ready waiting formula counts all ready orders
  * - Case 8: View model label contracts ("Producto más pedido" & "Listos para entrega/retiro")
  *
@@ -55,9 +55,12 @@ function mockOrder(
     delivery_date: overrides.delivery_date ?? "2026-08-28",
     delivery_time: overrides.delivery_time ?? null,
     delivery_method: overrides.delivery_method ?? "delivery",
+    composition_status: overrides.composition_status ?? "itemized",
     address: overrides.address ?? "Calle Falsa 123",
     status: overrides.status ?? "pending",
-    total_price: overrides.total_price ?? 5000,
+    total_price: Object.prototype.hasOwnProperty.call(overrides, "total_price")
+      ? overrides.total_price ?? null
+      : 5000,
     notes: overrides.notes ?? null,
     assigned_to: overrides.assigned_to ?? null,
     assigned_at: overrides.assigned_at ?? null,
@@ -214,6 +217,22 @@ const orderRev2 = mockOrder({
 });
 const avgTicket = getAverageTicket([orderWithTotalAndUpsells, orderRev2, cancelledOrder]);
 assert.equal(avgTicket, 10000, "(15000 + 5000) / 2 valid orders = 10000");
+
+const unknownTechnicalTotal = mockOrder({
+  id: "legacy-unknown-total",
+  composition_status: "legacy_unknown",
+  total_price: null
+});
+const analyticsWithUnknown = buildAdminOrdersAnalytics([
+  orderWithTotalAndUpsells,
+  orderRev2,
+  unknownTechnicalTotal
+]);
+assert.equal(analyticsWithUnknown.revenue, 20000, "unknown total must not be coerced to zero");
+assert.equal(analyticsWithUnknown.averageTicket, 10000, "unknown total must be excluded from average denominator");
+assert.equal(analyticsWithUnknown.validOrdersCount, 3);
+assert.equal(analyticsWithUnknown.pricedOrdersCount, 2);
+assert.equal(analyticsWithUnknown.unknownTechnicalTotalOrders, 1);
 
 // ============================================================================
 // Case 7 — Ready waiting formula unchanged (counts all ready orders)

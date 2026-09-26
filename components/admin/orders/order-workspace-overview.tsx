@@ -7,7 +7,7 @@ import Badge from "@/components/ui/Badge";
 import {
   buildOrderOperationalSummary,
   formatAdminDeliveryMethod,
-  formatAdminOrderCurrency,
+  formatAdminOrderTechnicalTotal,
   formatAdminOrderDate,
   formatAdminPhoneDisplay
 } from "@/lib/orders/presenter";
@@ -110,7 +110,7 @@ export default function OrderWorkspaceOverview({
           <Badge status={order.status} />
           <div className={styles["admin-order-workspace-overview__status-total"]}>
             <span>Total</span>
-            <strong>{formatAdminOrderCurrency(order.total_price)}</strong>
+            <strong>{formatAdminOrderTechnicalTotal(order.total_price)}</strong>
             {!isPage ? (
               <Link
                 href={detailHref ?? `/admin/orders/${order.id}`}
