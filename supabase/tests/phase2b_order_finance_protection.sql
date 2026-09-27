@@ -423,8 +423,10 @@ begin
     'settled_at', null,
     'settled_by', null,
     'paid_net', 100,
+    'released', 0,
     'committed', 100,
-    'remaining', 0
+    'remaining', 0,
+    'protection_variance', 0
   ) then
     raise exception 'order financial summary is not exact';
   end if;
