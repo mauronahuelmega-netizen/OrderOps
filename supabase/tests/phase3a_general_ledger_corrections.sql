@@ -527,20 +527,22 @@ begin
   select id into v_recon_entry from public.finance_transaction_entries where transaction_id = v_recon_tx;
 
   insert into public.finance_reconciliations (
-    id, business_id, account_id, status, statement_balance, opened_by
+    id, business_id, account_id, status, statement_balance, cutoff_at, opened_by
   ) values (
     v_recon_open, v_business, '82000000-0000-4000-8000-000000000001',
-    'open', 0, '86000000-0000-4000-8000-000000000001'
+    'open', 0, now() + interval '2 days',
+    '86000000-0000-4000-8000-000000000001'
   );
   insert into public.finance_reconciliation_entries (
     business_id, reconciliation_id, transaction_id, entry_id
   ) values (v_business, v_recon_open, v_recon_tx, v_recon_entry);
 
   insert into public.finance_reconciliations (
-    id, business_id, account_id, status, statement_balance, opened_by
+    id, business_id, account_id, status, statement_balance, cutoff_at, opened_by
   ) values (
-    v_recon_second, v_business, '82000000-0000-4000-8000-000000000001',
-    'open', 0, '86000000-0000-4000-8000-000000000001'
+    v_recon_second, v_business, '82000000-0000-4000-8000-000000000002',
+    'open', 0, now() + interval '2 days',
+    '86000000-0000-4000-8000-000000000001'
   );
   begin
     insert into public.finance_reconciliation_entries (
@@ -557,14 +559,14 @@ begin
     )), '84000000-0000-4000-8000-000000000001', 'business', 'closed period', now()
   );
   insert into public.finance_reconciliations (
-    id, business_id, account_id, status, statement_balance,
-    opened_by, closed_by, opened_at, closed_at
+    id, business_id, account_id, status, statement_balance, system_balance,
+    opened_by, closed_by, opened_at, cutoff_at, closed_at
   ) values (
     v_recon_closed, v_business, '82000000-0000-4000-8000-000000000001',
-    'closed', 0,
+    'closed', 0, 0,
     '86000000-0000-4000-8000-000000000001',
     '86000000-0000-4000-8000-000000000001',
-    now() - interval '1 day', now() + interval '1 day'
+    now() - interval '1 day', now() + interval '1 day', now() + interval '1 day'
   );
 end;
 $$;
