@@ -72,6 +72,7 @@ Condición contextual entre paréntesis.
 | Tarea | CRUD | no | asignadas | sí | no | no | sí | no |
 | Reclamación | crear | no | `active`, sobre comercio que registra | sí en nombre de un promotor activo | no | no | sí | no |
 | Atribución | confirmar | no | no | no | no | no | sí | no |
+| Disputa | abrir | no | no | sí (`crm.write`) | no | no | sí | no |
 | Disputa | decidir | no | no | no | no | no | sí | no |
 | Promotor | leer ficha ajena | no | no | sí | datos de pago sí, pipeline no | no | sí | no |
 | Promotor | activar | no | no | no | no | no | sí | no |
@@ -169,5 +170,8 @@ Casos mínimos, alineados a E2E-08 y a la sección 36 de la spec:
 - Anon llama RPC de pago → denegado.
 - Sesión de promotor tras `separated` no crea claim.
 - Reintento del mismo `idempotency_key` de pago no suma dos veces.
+- Segunda `open_dispute` sobre oportunidad con disputa `open` → `dispute_open_exists` sin `dispute_id` (no elude `read_dispute`).
+
+BLK-CRM-02: unicidad de disputa abierta por `opportunity_id` (índice parcial). No cambia grants de wrappers públicos.
 
 Cada caso es un criterio de aceptación de la fase que introduce la operación. PHASE-06 los corre juntos otra vez.

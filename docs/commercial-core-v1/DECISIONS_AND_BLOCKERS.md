@@ -71,12 +71,14 @@ Las decisiones de ingeniería de la sección 1 están cerradas para implementar.
 
 ### BLK-CRM-02 Unicidad de disputas abiertas por oportunidad
 
+Estado: resuelto el 2026-10-09 por decisión humana. El historial de abajo se conserva.
+
 - Contexto: auditoría post PHASE-03 (AUD-P03-05). El contrato exige expediente con partes involucradas, historial y estados terminales, y admite múltiples disputas históricas. No define si pueden coexistir dos filas `attribution_disputes.status = 'open'` sobre la misma oportunidad, ni si un reintento concurrente debe ser idempotente o denegado.
 - Decisión necesaria: (a) como máximo una disputa `open` por `opportunity_id`; (b) varias `open` permitidas si las partes o el motivo difieren; (c) varias `open` siempre permitidas, con deduplicación solo de partes dentro del mismo expediente.
-- Recomendación técnica: no inventar (a) ni (b). La corrección post-auditoría valida partes vinculadas (claim/atribución/claim del comercio de la oportunidad), rechaza oportunidad `archived_at`, y deja la unicidad de abiertas pendiente de esta decisión.
-- Riesgo de elegir mal: bloquear un segundo conflicto legítimo concurrente, o permitir expedientes duplicados que diluyan la decisión.
-- Fases: corrección post-auditoría PHASE-03; no reabre P03-T05 como tarea.
-- No se puede cerrar la unicidad en SQL hasta respuesta humana.
+- Recomendación técnica histórica: no inventar (a) ni (b) hasta respuesta humana.
+- Resolución: alternativa (a). Máximo una disputa `open` por `opportunity_id`; múltiples disputas históricas no `open` permitidas. El predicado de unicidad usa únicamente `status = 'open'`; `retained` no se considera disputa abierta según este contrato. Unicidad por oportunidad, no por promotor/claim/motivo. Varias partes en el mismo expediente abierto. Tras un estado terminal (`decided`/`closed`), puede abrirse otra. Sin reapertura silenciosa ni alteración de historial. Concurrencia cubierta por índice único parcial.
+- Implementación escrita: migración `20261009140600_commercial_blk_crm_02_one_open_dispute.sql` (pendiente de aplicación local cuando el gate pase). Índice `attribution_disputes_one_open_per_opportunity_idx`. RPC `open_dispute` → `dispute_open_exists` sin devolver `dispute_id`.
+- Fases: corrección post-auditoría PHASE-03; no reabre P03-T05 como tarea ni inicia PHASE-04.
 
 ### BLK-SEC-01 Misma persona, dos mundos
 
@@ -147,4 +149,6 @@ Hasta ese momento el estado es el de `PROGRESS.md`.
 
 2026-10-08: corrección posterior a la auditoría de PHASE-02. La IP del rate limit es `x-vercel-forwarded-for` solo si `VERCEL=1`. El repositorio despliega en Vercel directo y no documenta un proxy inverso. Vercel documenta ese encabezado como el valor de plataforma y la sobreescritura de `X-Forwarded-For` contra suplantación. No se acepta `x-forwarded-for`. Sin runtime Vercel, sin sal o sin una sola IP en ese encabezado, la solicitud nueva se rechaza. `public.submit_demo_request` queda en `service_role` porque el hash lo calcula el servidor. Los otros wrappers públicos quedan en `authenticated`. `/commercial` redirige a `/commercial/opportunities` después del gate existente. PHASE-03 no se inicia.
 
-2026-10-09: corrección post-auditoría PHASE-03. `BLK-CRM-02` queda abierto: no se inventa unicidad de disputas `open` por oportunidad. El formulario público `/demo` no captura identificador fiscal; se conserva `fiscal=null` en `find_or_prepare_business` y no se agregan campos CUIT. Storage `commercial-documents` permanece deny-by-default sin policies de objeto. PHASE-04 no se inicia.
+2026-10-09: corrección post-auditoría PHASE-03. En ese momento `BLK-CRM-02` quedó abierto. El formulario público `/demo` no captura identificador fiscal; se conserva `fiscal=null` en `find_or_prepare_business` y no se agregan campos CUIT. Storage `commercial-documents` permanece deny-by-default sin policies de objeto. PHASE-04 no se inicia.
+
+2026-10-09: decisión humana. `BLK-CRM-02` queda resuelto: máximo una disputa `status = 'open'` por `opportunity_id`; múltiples expedientes históricos no abiertos permitidos. No se reabre una disputa cerrada ni se altera su historial. La implementación escrita usa el índice único parcial `attribution_disputes_one_open_per_opportunity_idx` y el código `dispute_open_exists`. Migración `20261009140600` creada; aplicación local y PASS SQL pendientes del gate. PHASE-04 no se inicia.

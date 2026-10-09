@@ -2066,6 +2066,10 @@ Al registrar un cambio, incluir:
 - Archivos: catálogo público, checkout público y documentación del roadmap residual.
 - Breaking: no — sin DB, migraciones, RPC, contratos de pedido ni cambios de paquetes.
 
+### 2026-10-09 — Commercial Core BLK-CRM-02 — Una disputa open por oportunidad
+- **[DB/Docs]** Decisión humana: máximo una `attribution_disputes.status = 'open'` por `opportunity_id`; múltiples históricas no abiertas permitidas. Migración aditiva no aplicada `20261009140600_commercial_blk_crm_02_one_open_dispute.sql`: índice único parcial `attribution_disputes_one_open_per_opportunity_idx`; `open_dispute` devuelve `dispute_open_exists` sin `dispute_id`; detiene si ya hay duplicados open incompatibles. Test `phase03_blk_crm_02.sql`. Gate local falló → `SQL_RUNTIME_VALIDATION: NOT_EXECUTED`. Sin PHASE-04. Sin commit/push en esta pasada de implementación.
+- Breaking: no para pedidos ni caja del comercio.
+
 ### 2026-10-09 — Commercial Core PHASE-03 — Corrección post-auditoría (AUD-P03)
 - **[DB/Docs]** Pasada acotada sobre hallazgos de auditoría independiente. Migración aditiva no aplicada `20261009120000_commercial_phase03_audit_hardening.sql`: revoke `EXECUTE` de `promoter_has_substantive_activity` a roles cliente; `create_claim` / `confirm_attribution` manejan colisión solo de los unique indexes previstos; `open_dispute` exige partes vinculadas y oportunidad no archivada (unicidad de abiertas → `BLK-CRM-02`); `evidence_path` validado a prefijos DATA_MODEL; Storage sin policies nuevas. Docs: SECURITY_MATRIX, DATA_MODEL, DECISIONS, PHASE-03 T01 (separación solo `separate_promoter`), PROGRESS. Demo sin fiscal → `fiscal=null`. Gate local falló → `SQL_RUNTIME_VALIDATION: NOT_EXECUTED`. Publicación en la rama de integración no implica PASS SQL. Sin PHASE-04.
 - Archivos: `supabase/migrations/20261009120000_commercial_phase03_audit_hardening.sql`, `supabase/tests/commercial/phase03_audit_hardening.sql`, `phase03_verification.sql` (paths), docs commercial-core-v1 citados.

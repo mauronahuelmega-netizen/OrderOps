@@ -312,6 +312,9 @@ Confirmación automática V1, única: `demo_submissions` con `promoter_ref` que 
 - `id`, `opportunity_id not null`, `status text check (status in ('open','retained','decided','closed'))`
 - `opened_by`, `assigned_to`, `decision text`, `decision_reason text`, `economic_effect text`, `decided_at`
 - Participantes en `dispute_events` o tabla `dispute_parties (dispute_id, promoter_id, role)`.
+- Unique parcial (BLK-CRM-02): `attribution_disputes_one_open_per_opportunity_idx` sobre `(opportunity_id) where status = 'open'`. Según el contrato vigente, solo `status = 'open'` cuenta como disputa abierta para esa unicidad; `retained` no se considera disputa abierta a esos efectos. Una oportunidad admite como máximo un expediente `open`; puede conservar varios `decided`/`closed`/`retained` (no abiertos) históricos.
+- Apertura: `open_dispute` registra las partes del array en `dispute_parties` en el mismo alta. No hay RPC V1 para agregar participantes a un expediente ya abierto; si hace falta, requiere ampliación aprobada.
+- Cierre: `decide_dispute` pasa `open`/`retained` → `decided`, conserva parties/events/decisión; no reabre ni borra historial. Tras `decided`, puede abrirse otro expediente nuevo.
 
 Retención: las comisiones impagas de esa oportunidad pueden pasar a `held`. No se retienen las demás comisiones del promotor.
 

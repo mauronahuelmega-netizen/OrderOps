@@ -365,15 +365,15 @@ begin
     raise exception 'archived opportunity dispute returned %', v_archived;
   end if;
 
-  -- Open uniqueness not invented: a second open dispute on the same opportunity is still allowed
-  -- until BLK-CRM-02 is decided. Documented expectation, not a uniqueness assertion.
+  -- BLK-CRM-02: a second open dispute on the same opportunity is rejected.
   v_open := commercial.open_dispute(
     '67676767-6767-4767-8767-676767676741',
     array['67676767-6767-4767-8767-676767676721']::uuid[],
-    'segundo expediente abierto permitido por contrato pendiente'
+    'segundo expediente abierto'
   );
-  if v_open->>'ok' is distinct from 'true' then
-    raise exception 'second open dispute unexpectedly failed %', v_open;
+  if v_open->>'commercial_error_code' is distinct from 'dispute_open_exists'
+    or v_open ? 'dispute_id' then
+    raise exception 'second open dispute returned %', v_open;
   end if;
 end;
 $$;

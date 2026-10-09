@@ -10,7 +10,7 @@
 
 Contratos: estados `registered | pending_verification | active | suspended | separated`. Claims `provisional | expired | rejected | confirmed | superseded`. Atribución única `confirmed` por oportunidad. ENG-08, ENG-09, ENG-14. CC-02 a CC-07, CC-11, CC-12, CC-28, CC-29, CC-30.
 
-Errores: `promoter_not_active`, `verification_incomplete`, `claim_expired`, `extension_not_substantive`, `attribution_exists`, `cannot_self_confirm`, `dispute_scope`.
+Errores: `promoter_not_active`, `verification_incomplete`, `claim_expired`, `extension_not_substantive`, `attribution_exists`, `cannot_self_confirm`, `dispute_scope`, `dispute_open_exists`.
 
 ## P03-T01 Cuenta promotor y estados
 
@@ -104,4 +104,8 @@ Al crear `opportunity_attributions`, agregar el test de fusión de P02-T06: fusi
 
 ## Corrección post-auditoría (2026-10-09)
 
-PHASE-03 permanece cerrada históricamente. Hallazgos AUD-P03-01..07: migración correctiva aditiva `20261009120000_commercial_phase03_audit_hardening.sql` y test `supabase/tests/commercial/phase03_audit_hardening.sql`. Unicidad de disputas abiertas pendiente en `BLK-CRM-02`. Formulario `/demo` no captura fiscal; `find_or_prepare_business(..., null, ...)` conserva `fiscal_id` null (AUD-P03-06). Storage `commercial-documents` sigue deny-by-default sin policies de objeto. Runtime SQL de esta corrección: pendiente cuando el gate local pase.
+PHASE-03 permanece cerrada históricamente. Hallazgos AUD-P03-01..07: migración correctiva aditiva `20261009120000_commercial_phase03_audit_hardening.sql` y test `supabase/tests/commercial/phase03_audit_hardening.sql`. Formulario `/demo` no captura fiscal; `find_or_prepare_business(..., null, ...)` conserva `fiscal_id` null (AUD-P03-06). Storage `commercial-documents` sigue deny-by-default sin policies de objeto. Runtime SQL de esta corrección: pendiente cuando el gate local pase.
+
+## BLK-CRM-02 (2026-10-09)
+
+Decisión humana: máximo una disputa `open` por `opportunity_id`; múltiples históricas no abiertas permitidas. Implementación escrita en `20261009140600_commercial_blk_crm_02_one_open_dispute.sql` + test `phase03_blk_crm_02.sql`. Índice `attribution_disputes_one_open_per_opportunity_idx`. `open_dispute` responde `dispute_open_exists` sin filtrar el `dispute_id` existente. Migración no aplicada / SQL runtime pendiente del gate local. No reabre P03-T05 ni inicia PHASE-04.

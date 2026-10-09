@@ -61,9 +61,11 @@ Ninguno en PHASE-01.
 
 ## Bloqueos vigentes
 
-Siguen abiertos en [DECISIONS_AND_BLOCKERS.md](DECISIONS_AND_BLOCKERS.md): `BLK-ECO-01`, `BLK-ECO-02`, `BLK-ECO-03`, `BLK-CRM-01`, `BLK-CRM-02`, `BLK-SEC-01`, `BLK-SEC-02`, `BLK-PRIV-01`, `BLK-LEG-01`.
+Siguen abiertos en [DECISIONS_AND_BLOCKERS.md](DECISIONS_AND_BLOCKERS.md): `BLK-ECO-01`, `BLK-ECO-02`, `BLK-ECO-03`, `BLK-CRM-01`, `BLK-SEC-01`, `BLK-SEC-02`, `BLK-PRIV-01`, `BLK-LEG-01`.
 
-`BLK-ENV-01`: en esta sesión Cloud Agent el gate `node scripts/commercial-core/assert-local-supabase.mjs` falló (`supabase status failed`; sin API/DB local). No se ejecutó `supabase migration up --local`, ni `db push`, ni `db reset`, ni conexión remota. La migración correctiva `20261009120000` queda creada y no aplicada. Cada migración futura vuelve a ejecutar el gate.
+`BLK-CRM-02`: resuelto por decisión humana el 2026-10-09 (máximo una disputa `open` por oportunidad). Implementación escrita en `20261009140600`; aplicación local y PASS SQL pendientes.
+
+`BLK-ENV-01`: en esta sesión Cloud Agent el gate `node scripts/commercial-core/assert-local-supabase.mjs` falló (`supabase status failed`; sin API/DB local). No se ejecutó `supabase migration up --local`, ni `db push`, ni `db reset`, ni conexión remota. Las migraciones correctivas `20261009120000` y `20261009140600` quedan creadas y no aplicadas. Cada migración futura vuelve a ejecutar el gate.
 
 `BLK-DOC-01`: resuelto el 2026-10-08. `product_code` es el código funcional de Commercial Core V1 y queda `in_progress`. El historial está en la sección 2 y la decisión en la sección 4 de [DECISIONS_AND_BLOCKERS.md](DECISIONS_AND_BLOCKERS.md).
 
@@ -95,9 +97,11 @@ Se persistió el plan. No se eligió base comisionable, ni pago parcial, ni plaz
 
 2026-10-09: corrección post-auditoría PHASE-03 (AUD-P03-01..07). No reabre P03-T01..T07 ni inicia P04-T01. Base `3893010e1dc8339e0b0ccd174d604678ba42a89f` en `cursor/commercial-core-v1-integration`. Gate local falló; `SQL_RUNTIME_VALIDATION: NOT_EXECUTED`. Migración aditiva `20261009120000_commercial_phase03_audit_hardening.sql` creada y no aplicada (revoke helper; race handlers de claim/atribución por constraint name; `open_dispute` con partes vinculadas y oportunidad no archivada; validación de `evidence_path`; sin policies Storage); test `phase03_audit_hardening.sql`; paths de `phase03_verification.sql` alineados a DATA_MODEL; docs (SECURITY_MATRIX, DATA_MODEL, DECISIONS/`BLK-CRM-02`, PHASE-03 T01, PROGRESS, LIVING_MEMORY). AUD-P03-05 unicidad de disputas abiertas → `BLK-CRM-02`. AUD-P03-06: formulario demo sin fiscal → `fiscal=null` conservado; sin CUIT nuevo. AUD-P03-07: documentación de separación solo vía `separate_promoter`; guardia `20261009021459` intacta. Publicar el código no declara PASS SQL ni cierra hallazgos en runtime.
 
+2026-10-09: implementación quirúrgica de `BLK-CRM-02` tras decisión humana. Política: máximo una disputa `open` por `opportunity_id`; `retained` no cuenta como abierta; históricas no abiertas permitidas. Migración aditiva `20261009140600_commercial_blk_crm_02_one_open_dispute.sql` (índice `attribution_disputes_one_open_per_opportunity_idx`; `open_dispute` → `dispute_open_exists` sin filtrar id). Test `phase03_blk_crm_02.sql` (casos A–G). Ajuste de expectativa en `phase03_audit_hardening.sql`. Gate local falló; `SQL_RUNTIME_VALIDATION: NOT_EXECUTED`; `CONCURRENCY_RUNTIME_VALIDATION: NOT_EXECUTED`. Publicar el código no declara PASS SQL. PHASE-04 no se inicia.
+
 ## Próxima tarea segura
 
-Validar en runtime local la migración `20261009120000` y `phase03_audit_hardening.sql` cuando el gate pase. Luego P04-T01 en una sesión posterior. Esta sesión no empieza PHASE-04.
+Validar en runtime local las migraciones `20261009120000` y `20261009140600` con `phase03_audit_hardening.sql` y `phase03_blk_crm_02.sql` cuando el gate pase. Luego P04-T01 en una sesión posterior. Esta sesión no empieza PHASE-04.
 
 ## Recuperación
 
