@@ -132,7 +132,7 @@ Lead = este registro (CC-01). No es un formulario.
 - `trade_category text`
 - `normalized_phone text` (E.164 o null)
 - `email text`
-- `fiscal_id text` (CUIT si existe y es lícito guardarlo)
+- `fiscal_id text` (CUIT si existe y es lícito guardarlo). El formulario público `/demo` no captura fiscal en V1; `submit_demo_request` llama `find_or_prepare_business` con fiscal `null`, así que el alta web deja `fiscal_id` null. ENG-07 sigue impidiendo match `high` ante fiscal contradictorio cuando ambos valores existen.
 - `brand_name text`
 - `branch_label text`
 - `initial_channel text not null check (initial_channel in ('organic','promoter','campaign','internal'))`
@@ -549,7 +549,7 @@ receipts/{payment_id}/{file}
 disputes/{dispute_id}/{file}
 ```
 
-Sin política pública de lectura. URLs firmadas de corta vida generadas en servidor tras autorizar.
+Sin política pública de lectura. En V1 el bucket existe con `public = false` y sin policies de objeto: deny-by-default. `submit_promoter_evidence` acepta `evidence_path` solo si coincide con `contracts/{promoter_id}/{file}` o `verifications/{promoter_id}/{file}` (un segmento de archivo, sin `..`, sin `//`, sin path absoluto). Upload/download directo desde cliente y URLs firmadas quedan pendientes de una fase que autorice el flujo de archivos.
 
 ## 8. RLS (resumen)
 

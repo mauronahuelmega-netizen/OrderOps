@@ -17,7 +17,7 @@ Errores: `promoter_not_active`, `verification_incomplete`, `claim_expired`, `ext
 - Descripción: tablas `promoters` y RPC de alta preliminar.
 - Archivos: migración `commercial_phase03_promoters.sql`, rollback, `lib/commercial/promoters/status.ts`, verify de transiciones.
 - Depende de: P02-T06.
-- Cambios: alta crea `auth` user local + `platform_accounts.kind=promoter` + fila `registered` + `public_code`. Transiciones legales: registered → pending_verification → active; active → suspended; active o suspended → separated. No hay camino a `active` en esta tarea (lo abre T02). Trigger ENG-11.
+- Cambios: alta crea `auth` user local + `platform_accounts.kind=promoter` + fila `registered` + `public_code`. Transiciones legales vía `transition_promoter_status`: registered → pending_verification; active → suspended. La llegada a `separated` es exclusiva de `separate_promoter` (guardia `20261009021459`; ver P03-T06). No hay camino a `active` en esta tarea (lo abre T02). Trigger ENG-11.
 - Restricciones: no usar el enum de `profiles`. No marcar `active` a mano en la UI.
 - Tests: usuario con `profiles.business_id` no puede ser promotor. Estado `registered` no pasa la función `assertCanOperate`.
 - Aceptación: el código público es único.
@@ -101,3 +101,7 @@ Errores: `promoter_not_active`, `verification_incomplete`, `claim_expired`, `ext
 E2E-02, E2E-06 (sin dinero) y el aislamiento entre promotores pasan. `next_task` = P04-T01.
 
 Al crear `opportunity_attributions`, agregar el test de fusión de P02-T06: fusionar comercios no cambia `promoter_id` de la atribución.
+
+## Corrección post-auditoría (2026-10-09)
+
+PHASE-03 permanece cerrada históricamente. Hallazgos AUD-P03-01..07: migración correctiva aditiva `20261009120000_commercial_phase03_audit_hardening.sql` y test `supabase/tests/commercial/phase03_audit_hardening.sql`. Unicidad de disputas abiertas pendiente en `BLK-CRM-02`. Formulario `/demo` no captura fiscal; `find_or_prepare_business(..., null, ...)` conserva `fiscal_id` null (AUD-P03-06). Storage `commercial-documents` sigue deny-by-default sin policies de objeto. Runtime SQL de esta corrección: pendiente cuando el gate local pase.

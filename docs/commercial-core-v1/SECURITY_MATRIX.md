@@ -138,7 +138,9 @@ Miembro del comercio: RPC `respond_onboarding_grant(grant_id, decision)` comprue
 
 Catálogo: no se agrega al promotor una policy `products_insert` genérica. Las escrituras de onboarding pasan por server actions que usan el cliente servidor del usuario y una RPC `commercial.assert_catalog_grant(business_id, field_set)` antes del update. Además, la action rechaza el campo precio para ese principal. Test de regresión: un owner sigue actualizando precio con el camino actual.
 
-Documentos: storage policy del bucket `commercial-documents` sin `public`. `select` solo si una función SQL autoriza el prefijo del path para ese `auth.uid()`.
+Documentos: bucket `commercial-documents` con `public = false`. En V1 post-auditoría PHASE-03 el Storage queda deny-by-default: no hay policies de `storage.objects` que habiliten upload/download directo desde clientes `anon`/`authenticated`. No hay lectura pública. Los paths se validan en RPC (`submit_promoter_evidence`) contra los prefijos de [DATA_MODEL.md](DATA_MODEL.md) (`contracts/{promoter_id}/{file}`, `verifications/{promoter_id}/{file}`). La generación de URLs firmadas y el flujo de subida/descarga directa desde cliente quedan fuera de alcance hasta una fase que lo autorice. No se almacenan documentos sensibles en rutas públicas.
+
+Helper interno `commercial.promoter_has_substantive_activity`: sin `EXECUTE` para `PUBLIC`, `anon`, `authenticated` ni `service_role`. Solo lo invocan funciones `SECURITY DEFINER` del esquema `commercial`.
 
 CBU: columna excluida de los `select` anchos del panel. Lectura por RPC `read_own_bank` o `read_bank_for_payment` que audita el acceso de un interno.
 

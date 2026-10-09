@@ -37,7 +37,14 @@ begin
   perform commercial.transition_promoter_status(v_ana_id, 'pending_verification');
 
   foreach v_kind in array array['identity', 'cuit', 'contract'] loop
-    v_evidence := commercial.submit_promoter_evidence(v_ana_id, v_kind, 'commercial-documents/fixture/' || v_kind);
+    v_evidence := commercial.submit_promoter_evidence(
+      v_ana_id,
+      v_kind,
+      case
+        when v_kind = 'contract' then 'contracts/' || v_ana_id::text || '/fixture-' || v_kind
+        else 'verifications/' || v_ana_id::text || '/fixture-' || v_kind
+      end
+    );
     if v_kind <> 'contract' then
       v_review := commercial.review_verification((v_evidence->>'evidence_id')::uuid, 'verified', 'documento ficticio');
       if v_review->>'ok' is distinct from 'true' then
@@ -51,7 +58,9 @@ begin
     raise exception 'activation without monotributo returned %', v_active;
   end if;
 
-  v_evidence := commercial.submit_promoter_evidence(v_ana_id, 'monotributo', 'commercial-documents/fixture/monotributo');
+  v_evidence := commercial.submit_promoter_evidence(
+    v_ana_id, 'monotributo', 'verifications/' || v_ana_id::text || '/fixture-monotributo'
+  );
   perform commercial.review_verification((v_evidence->>'evidence_id')::uuid, 'verified', 'documento ficticio, no consulta fiscal');
   v_active := commercial.activate_promoter(v_ana_id);
   if v_active->>'status' is distinct from 'active' then

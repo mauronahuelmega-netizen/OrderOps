@@ -2066,6 +2066,11 @@ Al registrar un cambio, incluir:
 - Archivos: catálogo público, checkout público y documentación del roadmap residual.
 - Breaking: no — sin DB, migraciones, RPC, contratos de pedido ni cambios de paquetes.
 
+### 2026-10-09 — Commercial Core PHASE-03 — Corrección post-auditoría (AUD-P03)
+- **[DB/Docs]** Pasada acotada sobre hallazgos de auditoría independiente. Migración aditiva no aplicada `20261009120000_commercial_phase03_audit_hardening.sql`: revoke `EXECUTE` de `promoter_has_substantive_activity` a roles cliente; `create_claim` / `confirm_attribution` manejan colisión solo de los unique indexes previstos; `open_dispute` exige partes vinculadas y oportunidad no archivada (unicidad de abiertas → `BLK-CRM-02`); `evidence_path` validado a prefijos DATA_MODEL; Storage sin policies nuevas. Docs: SECURITY_MATRIX, DATA_MODEL, DECISIONS, PHASE-03 T01 (separación solo `separate_promoter`), PROGRESS. Demo sin fiscal → `fiscal=null`. Gate local falló → `SQL_RUNTIME_VALIDATION: NOT_EXECUTED`. Publicación en la rama de integración no implica PASS SQL. Sin PHASE-04.
+- Archivos: `supabase/migrations/20261009120000_commercial_phase03_audit_hardening.sql`, `supabase/tests/commercial/phase03_audit_hardening.sql`, `phase03_verification.sql` (paths), docs commercial-core-v1 citados.
+- Breaking: no para pedidos ni caja del comercio.
+
 ### 2026-10-09 — Commercial Core integration branch — types + rollback PHASE-03
 - **[Types/Docs]** Rama `cursor/commercial-core-v1-integration`: tipado `Database["commercial"]` completado con tablas PHASE-03 (`promoters`, claims, attributions, disputes, separations, protections) y RPCs públicas faltantes. Rollback `commercial_phase03_down.sql` documentado en orden inverso con limitaciones explícitas (bucket storage, audit/outbox, vacía `20261009020527`).
 - Breaking: no. Sin commit de PHASE-04.

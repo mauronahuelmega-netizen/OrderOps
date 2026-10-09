@@ -69,6 +69,15 @@ Las decisiones de ingeniería de la sección 1 están cerradas para implementar.
 - Fases: P03-T03, P03-T06.
 - Se puede seguir con (a) porque no fija un número de negocio nuevo; si el usuario rechaza (a), la tarea de extensión queda blocked.
 
+### BLK-CRM-02 Unicidad de disputas abiertas por oportunidad
+
+- Contexto: auditoría post PHASE-03 (AUD-P03-05). El contrato exige expediente con partes involucradas, historial y estados terminales, y admite múltiples disputas históricas. No define si pueden coexistir dos filas `attribution_disputes.status = 'open'` sobre la misma oportunidad, ni si un reintento concurrente debe ser idempotente o denegado.
+- Decisión necesaria: (a) como máximo una disputa `open` por `opportunity_id`; (b) varias `open` permitidas si las partes o el motivo difieren; (c) varias `open` siempre permitidas, con deduplicación solo de partes dentro del mismo expediente.
+- Recomendación técnica: no inventar (a) ni (b). La corrección post-auditoría valida partes vinculadas (claim/atribución/claim del comercio de la oportunidad), rechaza oportunidad `archived_at`, y deja la unicidad de abiertas pendiente de esta decisión.
+- Riesgo de elegir mal: bloquear un segundo conflicto legítimo concurrente, o permitir expedientes duplicados que diluyan la decisión.
+- Fases: corrección post-auditoría PHASE-03; no reabre P03-T05 como tarea.
+- No se puede cerrar la unicidad en SQL hasta respuesta humana.
+
 ### BLK-SEC-01 Misma persona, dos mundos
 
 - Contexto: ¿un humano puede ser comercial interno y promotor, o dueño de un comercio y promotor?
@@ -137,3 +146,5 @@ Hasta ese momento el estado es el de `PROGRESS.md`.
 2026-10-08: `product_code` representa exclusivamente el estado de implementación del código funcional de Commercial Core V1. No representa el código del sistema de pedidos ni del producto principal OrderOps. Se conserva el nombre. `BLK-DOC-01` queda resuelto. El valor en `PROGRESS.md` pasa a `in_progress`. PHASE-01 permanece cerrada y P02-T01 no se inicia.
 
 2026-10-08: corrección posterior a la auditoría de PHASE-02. La IP del rate limit es `x-vercel-forwarded-for` solo si `VERCEL=1`. El repositorio despliega en Vercel directo y no documenta un proxy inverso. Vercel documenta ese encabezado como el valor de plataforma y la sobreescritura de `X-Forwarded-For` contra suplantación. No se acepta `x-forwarded-for`. Sin runtime Vercel, sin sal o sin una sola IP en ese encabezado, la solicitud nueva se rechaza. `public.submit_demo_request` queda en `service_role` porque el hash lo calcula el servidor. Los otros wrappers públicos quedan en `authenticated`. `/commercial` redirige a `/commercial/opportunities` después del gate existente. PHASE-03 no se inicia.
+
+2026-10-09: corrección post-auditoría PHASE-03. `BLK-CRM-02` queda abierto: no se inventa unicidad de disputas `open` por oportunidad. El formulario público `/demo` no captura identificador fiscal; se conserva `fiscal=null` en `find_or_prepare_business` y no se agregan campos CUIT. Storage `commercial-documents` permanece deny-by-default sin policies de objeto. PHASE-04 no se inicia.
