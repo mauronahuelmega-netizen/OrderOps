@@ -2067,7 +2067,7 @@ Al registrar un cambio, incluir:
 - Breaking: no — sin DB, migraciones, RPC, contratos de pedido ni cambios de paquetes.
 
 ### 2026-10-09 — Commercial Core BLK-CRM-02 — Una disputa open por oportunidad
-- **[DB/Docs]** Decisión humana: máximo una `attribution_disputes.status = 'open'` por `opportunity_id`; múltiples históricas no abiertas permitidas. Migración aditiva no aplicada `20261009140600_commercial_blk_crm_02_one_open_dispute.sql`: índice único parcial `attribution_disputes_one_open_per_opportunity_idx`; `open_dispute` devuelve `dispute_open_exists` sin `dispute_id`; detiene si ya hay duplicados open incompatibles. Test `phase03_blk_crm_02.sql`. Gate local falló → `SQL_RUNTIME_VALIDATION: NOT_EXECUTED`. Sin PHASE-04. Sin commit/push en esta pasada de implementación.
+- **[DB/Docs]** Decisión humana: máximo una `attribution_disputes.status = 'open'` por `opportunity_id`; `retained` no cuenta como abierta; múltiples históricas no abiertas permitidas. Migración aditiva no aplicada `20261009140600_commercial_blk_crm_02_one_open_dispute.sql`: índice único parcial `attribution_disputes_one_open_per_opportunity_idx`; `open_dispute` devuelve `dispute_open_exists` sin `dispute_id`; detiene si ya hay duplicados open incompatibles. Test `phase03_blk_crm_02.sql`. Gate local falló → `SQL_RUNTIME_VALIDATION: NOT_EXECUTED` / `CONCURRENCY_RUNTIME_VALIDATION: NOT_EXECUTED`. Publicación en la rama de integración no implica PASS SQL. Sin PHASE-04.
 - Breaking: no para pedidos ni caja del comercio.
 
 ### 2026-10-09 — Commercial Core PHASE-03 — Corrección post-auditoría (AUD-P03)
