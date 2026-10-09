@@ -2066,6 +2066,40 @@ Al registrar un cambio, incluir:
 - Archivos: catálogo público, checkout público y documentación del roadmap residual.
 - Breaking: no — sin DB, migraciones, RPC, contratos de pedido ni cambios de paquetes.
 
+### 2026-10-09 — Commercial Core integration branch — types + rollback PHASE-03
+- **[Types/Docs]** Rama `cursor/commercial-core-v1-integration`: tipado `Database["commercial"]` completado con tablas PHASE-03 (`promoters`, claims, attributions, disputes, separations, protections) y RPCs públicas faltantes. Rollback `commercial_phase03_down.sql` documentado en orden inverso con limitaciones explícitas (bucket storage, audit/outbox, vacía `20261009020527`).
+- Breaking: no. Sin commit de PHASE-04.
+
+### 2026-10-08 — Commercial Core PHASE-03 — Promotores y atribución
+- **[DB]** Cuentas de promotor, verificación local, claims de 30 días, atribución única, disputas, desvinculación con protección de 90 días y panel `/promoter`. Sin comisiones, liquidaciones ni pagos.
+- Archivos: `supabase/migrations/20261009015312_commercial_phase03_promoters.sql` y las migraciones `20261009015652`, `20261009015854`, `20261009020007`, `20261009020204`, `20261009020422`, `20261009020618`, `20261009020811`, `20261009021459`. `20261009020527` quedó vacía y registrada. `20261009021459` deja `separated` solo en `separate_promoter`.
+- Breaking: no para pedidos ni caja del comercio.
+
+### 2026-10-08 — Commercial Core PHASE-02 — Corrección de auditoría
+- **[DB]** El alta de demo exige hash de IP. El wrapper público no devuelve ids y solo lo ejecuta `service_role`. El resto de wrappers públicos queda en `authenticated`. `/commercial` redirige al tablero existente.
+- Archivos: `supabase/migrations/20261009013318_commercial_phase02_audit_fix.sql`, `app/demo/actions.ts`, `app/commercial/page.tsx`, `lib/commercial/crm/demo-ip.ts`
+- Breaking: no para pedidos ni caja del comercio. El formulario local sin runtime Vercel rechaza el envío.
+
+### 2026-10-08 — Commercial Core PHASE-02 — Captación local
+- **[DB]** Deduplicación, pipeline, formulario de demo, lectura del tablero comercial y fusión manual en el esquema `commercial`. Sin claims, comisiones ni promotores activos. Soporte no lee CRM.
+- Archivos: `supabase/migrations/20261009004940_commercial_phase02_dedup.sql`, `20261009005251_commercial_phase02_pipeline.sql`, `20261009005428_commercial_phase02_demo.sql`, `20261009005634_commercial_phase02_board.sql`, `20261009005806_commercial_phase02_merge.sql`
+- Breaking: no para pedidos ni caja del comercio.
+
+### 2026-10-08 — Commercial Core P02-T01 — CRM tables local
+- **[DB]** Esquema `commercial`: comercios, contactos, interacciones, submissions, oportunidades, eventos de etapa, tareas y fusiones. Sin RPC de fusión, sin dedup y sin atribuciones. Soporte no lee esas filas.
+- Archivos: `supabase/migrations/20261009003119_commercial_phase02_crm.sql`
+- Breaking: no para pedidos ni caja del comercio.
+
+### 2026-10-08 — Commercial Core P01-T04 — Transactional outbox local
+- **[DB]** `commercial.enqueue` inserta el evento en la transacción del llamador, en estado `pending`, sin correo ni worker. `authenticated` no puede ejecutarlo. Una falla revierte la fila.
+- Archivos: `supabase/migrations/20261008233833_commercial_phase01_outbox.sql`, `lib/commercial/notifications/outbox.ts`
+- Breaking: no para pedidos ni caja del comercio.
+
+### 2026-10-08 — Commercial Core P01-T02 — Platform schema local
+- **[DB]** Esquema `commercial` en la base local de OrderOps: cuentas de plataforma, roles internos, auditoría append-only, outbox, notificaciones, privacidad y programa Founder v1 inmutable. RLS activa y escrituras de tabla revocadas para `anon` y `authenticated`. No toca `profiles.role`, pedidos ni caja del comercio. Rollback escrito y no ejecutado.
+- Archivos: `supabase/migrations/20261008215314_commercial_phase01_foundations.sql`, `supabase/rollbacks/commercial_phase01_down.sql`, `types/database.ts`
+- Breaking: no para el comercio — el esquema no está en la API pública de `config.toml`.
+
 ### 2026-08-02 — Public Catalog Residual Roadmap Deploy 1 Closure
 - **[Ops]** Commit `3bd26ff` publicado en `main`; Vercel production `dpl_DPv6mEwxE6UsaS5pMec3TZME35V2` Ready y alias `https://orderops.vercel.app` smokeado con catálogo/checkout HTTP 200.
 - QA aceptada: Android/Chrome físico, interacción MEDIUM/LARGE, screen reader y activación real de Maps (key/billing/APIs/restricciones) pendientes.
