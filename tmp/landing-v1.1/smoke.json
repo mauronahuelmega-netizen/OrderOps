@@ -1,0 +1,26 @@
+[
+  {
+    "route": "/",
+    "status": 200,
+    "location": null,
+    "hasForm": false
+  },
+  {
+    "route": "/admin/login",
+    "status": 200,
+    "location": null,
+    "hasForm": true
+  },
+  {
+    "route": "/admin/dashboard",
+    "status": 307,
+    "location": "/admin/login",
+    "hasForm": false
+  },
+  {
+    "route": "/admin/login?error=invalid_credentials",
+    "status": 200,
+    "location": null,
+    "hasForm": true
+  }
+]

@@ -20,6 +20,7 @@ type NotificationPreferencesActionInput = {
 export async function updateNotificationPreferencesAction(
   input: NotificationPreferencesActionInput
 ) {
+  const adminContext = await requireAdminContext();
   try {
     const notificationPreferencesPatch = {
       ...(typeof input.newOrderBrowserNotificationsEnabled === "boolean"
@@ -49,8 +50,6 @@ export async function updateNotificationPreferencesAction(
         error: "No pudimos interpretar la preferencia que queres guardar."
       };
     }
-
-    const adminContext = await requireAdminContext();
 
     if (!adminContext.permissions.canManageNotifications) {
       return {
@@ -95,6 +94,7 @@ export async function updateNotificationPreferencesAction(
 }
 
 export async function savePushSubscriptionAction(input: unknown) {
+  const adminContext = await requireAdminContext();
   try {
     const subscription = readSerializablePushSubscription(input);
 
@@ -103,8 +103,6 @@ export async function savePushSubscriptionAction(input: unknown) {
         error: "No pudimos interpretar la suscripcion de este dispositivo."
       };
     }
-
-    const adminContext = await requireAdminContext();
 
     if (!adminContext.permissions.canManageNotifications) {
       return {
@@ -152,14 +150,13 @@ export async function savePushSubscriptionAction(input: unknown) {
 }
 
 export async function revokePushSubscriptionAction(endpoint: string) {
+  const adminContext = await requireAdminContext();
   try {
     if (typeof endpoint !== "string" || endpoint.trim().length === 0) {
       return {
         error: "No pudimos identificar la suscripcion que queres desactivar."
       };
     }
-
-    const adminContext = await requireAdminContext();
 
     if (!adminContext.permissions.canManageNotifications) {
       return {

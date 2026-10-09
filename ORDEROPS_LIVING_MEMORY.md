@@ -1,4 +1,4 @@
-﻿# OrderOps â€” Living Memory (Cerebro Inmutable)
+# OrderOps â€” Living Memory (Cerebro Inmutable)
 
 > **PropÃ³sito:** Este archivo es la memoria viva y autoritativa del proyecto. Cualquier refactorizaciÃ³n importante, cambio de esquema, nueva ruta, mÃ³dulo o patrÃ³n arquitectÃ³nico **debe registrarse aquÃ­** para preservar el contexto histÃ³rico entre sesiones de desarrollo y agentes IA.
 >
@@ -474,6 +474,181 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 ## 3. Registro de Cambios ArquitectÃ³nicos (Changelog)
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
+
+### 2026-09-19 — ADMIN-PRODUCTS-FILTER-MENU-HARD-VISUAL-CLOSEOUT-1 — Filter menu visual closeout
+Products compact filter family visually closed. Category trailing order action clarified (primary text, not muted), menu edge/rhythm polished, cross-filter one-tap handoff certified 6/6. No functional/DB changes. Final Category Order E2E remains pending. Release paused.
+
+### 2026-09-19 — ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-FILTER-HANDOFF-AND-REORDER-SIMPLIFICATION-1 — Filter handoff + Category unity + move-only reorder
+Owner real-device QA simplified Category Order: Category filtering now uses the compact menu family (with separated Ordenar categorías); Order is a dedicated modal; drag/grip removed in favor of Subir/Bajar with reflow motion; filter switching fixed to one-tap handoff via toolbar-owned `openFilter`. DB/Save contract unchanged. Final E2E still pending. Release paused.
+
+### 2026-09-17 — ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-MOTION-AND-FILTER-UNITY-POLISH-1 — Filter family + reorder motion
+Owner approved filter-family supersession: Stock/Estado moved from native selects to simple custom menus; URL/server semantics unchanged. Category reorder gained subtle pressed/reflow/settle motion (FLIP/WAAPI). Final E2E Save/restore still pending. Release paused.
+
+### 2026-09-17 — ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-PRE-FINAL-QA-VISUAL-POLISH-1 — Order dialog visual affordance polished
+Category Order runtime remains functionally unchanged. Pre-Final-QA visual polish closed Order dialog grip/move/Save disabled·active hierarchy (feature-local CSS). Real Save/restore certification still pending Final QA. Release paused.
+
+### 2026-09-17 — ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-IMPLEMENTATION-1 — Runtime filter+order implemented
+Category-order runtime implemented in local source. DB contract unchanged/live. Category filter custom dialog (Filter/Order), local draft, grip+keyboard reorder, `saveCategoryDisplayOrderAction` → one RPC. Real end-to-end Save/restore certification pending FINAL-QA-1. Release paused.
+
+### 2026-09-17 — ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-APPLY-DOCUMENTATION-RECONCILIATION-1 — Docs reconciled after DB APPLY
+Category-order DB live/certified. Living Audit §17 stale “AUTHORED / NOT APPLIED” / Next DB-APPLY-1 reconciled to DB LIVE/CERTIFIED · Runtime UI NOT IMPLEMENTED · Next IMPLEMENTATION-1. No DB/runtime/business mutations. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-17 — ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-APPLY-1 — Category-order DB LIVE / certified
+Final Category-order DB migration live/certified on OrderOps. APPLY #1/#2 correctly blocked before mutation (position authority; append lock authority). Applied once via MCP: local `20260917210150_categories_public_catalog_order.sql` SHA `47dd3e195d77385f0201490c57cd7b016fc373597435ddc94cb2567123d0f314` → remote `20260917212712`/`categories_public_catalog_order`. Backfill preserved visible order. Append DEFINER auth-before-lock + position UPDATE(name)-only + atomic reorder RPC validated. Historical #1/#2 remote history 0. Runtime Category-order UI still pending. Next: IMPLEMENTATION-1. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-17 — ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-AUTHOR-APPEND-LOCK-AUTHORITY-FIX-1 — Append lock authority closed
+Second APPLY correctly stopped before mutation. Final standalone migration `20260917210150_categories_public_catalog_order.sql` SHA `47dd3e195d77385f0201490c57cd7b016fc373597435ddc94cb2567123d0f314`: append SECURITY DEFINER with auth.uid/profile role+tenant checks before businesses FOR UPDATE; businesses RLS/grants unchanged; position privilege fix preserved. Superseded #1/#2 removed from active chain. Remote unchanged. Next: DB-APPLY-1. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-17 — ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-APPLY-1 — BLOCKED: append lock authority
+Second APPLY attempt correctly stopped before mutation. Corrected migration SHA `18ef6307…` still unapplied. INVOKER append trigger `businesses FOR UPDATE` fails UPDATE RLS for non-admin manageProducts roles (`businesses_update_own_business` is admin-only). Remote delta 0. Next: DB-AUTHOR-APPEND-LOCK-AUTHORITY-FIX-1. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-17 — ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-AUTHOR-POSITION-AUTHORITY-FIX-1 — Position write authority closed
+First DB APPLY correctly blocked before mutation. Original unapplied migration `20260917182047…` SHA `4bb35bec…` superseded. Corrected complete migration `20260917202554_categories_public_catalog_order.sql` SHA `18ef63079eca6afaf6b5d44013df13e0742f7810cd597f590236002aaf4dd8cf` (authenticated UPDATE(name) only; position via DEFINER RPC). Remote unchanged. Next: DB-APPLY-1 rerun. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-17 — ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-APPLY-1 — BLOCKED: position authority bypass
+Pre-apply gates otherwise PASS (SHA `4bb35bec…`, ambiguity 0, backfill delta 0). Stopped before remote apply: authenticated manageProducts would retain raw UPDATE on `categories.position` outside canonical RPC. Remote delta 0. Next: DB-AUTHOR-POSITION-AUTHORITY-FIX-1. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-17 — ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-AUTHOR-1 — Category-order DB contract authored
+Migration `20260917182047_categories_public_catalog_order.sql` frozen SHA `4bb35bec9da5981d0c58a1f9658cf8408d09b2286d44a2ec27ed1f90e0ece9e8`. Activates `categories.position` (backfill, NOT NULL, DEFERRABLE unique, BEFORE INSERT append, DEFINER RPC, manageProducts RLS). Not applied. Runtime not implemented. Next: DB-APPLY. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-17 — ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-CONTRACT-DECISION-1 — Category public-catalog ordering V1 contract decided
+Proven current order = `position ASC NULLS LAST, name ASC`. Reuse `categories.position`; backfill preserves that order; new categories append; Products Category filter entry; Category-only native-select exception; Filter/Order modes; atomic RPC Save. No runtime/DB change. Next: DB-AUTHOR. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-17 — ADMIN-PRODUCTS-PRODUCT-REMOVAL-LIFECYCLE-DOCUMENTATION-RECONCILIATION-1 — Living Audit CURRENT reconciled
+Product Lifecycle remains CLOSED / certified. Living Audit current-state contradictions reconciled (historical evidence labeled, not erased). No runtime/DB/data changes. Next = Category public-catalog ordering contract decision. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-17 — ADMIN-PRODUCTS-PRODUCT-REMOVAL-LIFECYCLE-FINAL-QA-1 — Product lifecycle V1 CERTIFIED end-to-end
+Product lifecycle V1 certified end-to-end. Archive/Restore/Permanent Delete closed. Disposable QA residue 0. DB/runtime frozen (SHA `5f19d269…`, RPC `81f2046…`). Next pre-release feature: Category public-catalog manual ordering decision. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-16 — ADMIN-PRODUCTS-PRODUCT-REMOVAL-LIFECYCLE-PRE-FINAL-QA-VISUAL-COPY-POLISH-1 — Lifecycle action hierarchy + confirmation copy polished
+Lifecycle pre-Final-QA visual/copy polish PASS. Actions compacted to single row with Lucide Archive/Trash2/RotateCcw + short labels. Confirmation copy simplified. Archive neutral vs Delete destructive. Redundant lifecycle top divider removed. No functional/data/DB changes. Final QA next. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-16 — ADMIN-PRODUCTS-PRODUCT-REMOVAL-LIFECYCLE-IMPLEMENTATION-1 — Product lifecycle application runtime IMPLEMENTED / FINAL QA REQUIRED
+DB LIVE / VALIDATED / UNCHANGED (migration SHA `5f19d269…`; RPC fingerprint `81f2046…`). App source: Archive/Restore/Permanent Delete actions + Archivados filter + catalog existence includes archived + archived read-only UI/guards + post-RPC image cleanup (shared-ref includes archived) + public/manual/customization filtering. Create/Unified Edit/Advanced preserved. Builder target eligibility only. Raw products DELETE absent. Runtime browser disposable QA deferred to FINAL-QA-1. Persistent merchant delta 0. UNDEPLOYED. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-16 — ADMIN-PRODUCTS-PRODUCT-REMOVAL-LIFECYCLE-DB-APPLY-1 — Product lifecycle DB LIVE / permanent delete RPC validated
+Applied frozen `products_removal_lifecycle` once to OrderOps (`20260916195024_…`; SHA `5f19d269…` unchanged). `archived_at`+CHECK+public archive RLS+raw DELETE deny+`delete_product_permanently` SECURITY DEFINER live. Runtime QA (rollback fixtures): archive/restore/SKU reserve/raw vs RPC contrast/active+archived delete/history preserve/idempotency/real RPC rollback/mixed-order cancel restock PASS. Storage 0. Runtime UI/actions ABSENT. Next: IMPLEMENTATION-1. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-16 — ADMIN-PRODUCTS-PRODUCT-REMOVAL-LIFECYCLE-DB-AUTHOR-1 — Final lifecycle migration AUTHORED / NOT APPLIED
+Replaced unapplied archive-only `20260916180000` with `products_removal_lifecycle.sql` (SHA256 `5f19d269…`): `archived_at` + CHECK + public archive exclusion + drop raw DELETE policy + `delete_product_permanently(uuid)` SECURITY DEFINER (tenant/manageProducts, FOR UPDATE, scoped cleanup of assignments/upsells/stock_movements; overrides CASCADE; order_items SET NULL; image_url handoff only). Restock change NOT REQUIRED. Archive/Restore RPC NOT REQUIRED. Remote apply 0. Runtime 0. Next: LIFECYCLE-DB-APPLY-1. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-16 — ADMIN-PRODUCTS-PRODUCT-REMOVAL-CONTRACT-CORRECTION-1 — Removal contract CORRECTED (archive+restore+permanent delete)
+Owner clarification superseded archive-only V1 before apply. New V1 = Archive/Restore + immediate Permanent Delete. Historical orders preserved; product stock ledger + product-owned ops state deleted; SKU free after delete; image post-commit; auto-clean assignments/upsell refs; raw DELETE denied; transactional domain RPC required. Unapplied `20260916180000` DO NOT APPLY / reauthor in LIFECYCLE-DB-AUTHOR-1. Runtime/DB 0. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-16 — ADMIN-PRODUCTS-PRODUCT-REMOVAL-ARCHIVE-DB-AUTHOR-1 — Archive lifecycle migration AUTHORED / NOT APPLIED
+Authored `20260916180000_products_archive_lifecycle.sql` (SHA256 `55f187f5…`): `archived_at`, CHECK archived⇒unavailable, public SELECT excludes archived, drop authenticated DELETE policy, active-list partial index. SKU/FKs/stock trigger/Storage/customizations/RPC untouched. Remote apply 0. Runtime 0. **Later: SUPERSEDED BEFORE APPLY by CONTRACT-CORRECTION-1.** Next was DB-APPLY-1 (do not follow). COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-16 — ADMIN-PRODUCTS-PRODUCT-REMOVAL-CONTRACT-DECISION-1 — Product removal V1 contract DECIDED
+Decision-only. V1 = soft archive + restore (`archived_at`); availability stays separate merchandising axis; hard delete deferred (stock_movements/upsell RESTRICT; cancel restock JOINs products; polymorphic assignment orphans). SKU reserved across archive; images kept; public archived forbidden; DELETE RLS must be restricted in future migration. Runtime/UI/SQL apply 0. **Later: SUPERSEDED BY CONTRACT-CORRECTION-1 (owner clarification).** COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-16 — ADMIN-PRODUCTS-EDIT-ADVANCED-ACCORDION-MOTION-POLISH-1 — Advanced accordion motion CLOSED / FINAL FROZEN
+Motion-only freeze exception after premium visual closeout PASS. Edit draft: CSS grid 0fr↔1fr reveal for Advanced + groups; single chevron rotate; collapsed `inert`+aria-hidden; reduced-motion instant. Static baseline unchanged. Immediate/builder unmount unchanged. No domain/draft/save/DB. Business mutations 0. Advanced FINAL CLOSED / FROZEN (STATIC + MOTION). Next: product removal decision or release sequencing. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-16 — ADMIN-PRODUCTS-EDIT-ADVANCED-PREMIUM-VISUAL-CLOSEOUT-1 — Edit Advanced final visual CLOSED / FROZEN
+Premium closeout: continuous expanded group header (Eye integrated); Eye enabled/disabled contrast; AA metadata; empty-valid structural shell; long-content 360 PASS. Functional unified draft unchanged. Business mutations 0. Remaining Advanced visual debt NONE. Shared disabled CTA = separate optional follow-up. Next: product removal decision or release sequencing. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-16 — ADMIN-PRODUCTS-EDIT-ADVANCED-LOADING-STATE-FOOTER-RHYTHM-POLISH-1 — Advanced loading shell + footer rhythm PASS
+Advanced loading: disabled structural shell (`Avanzado…`) from first paint; detached visible loading copy removed. Loading→ready shift none. Footer: Edit redundant `4.75rem` pad → `1.5rem`; short-content whitespace = natural flex space. Functional unified draft unchanged. Business mutations 0. Owner final visual acceptance next. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-16 — ADMIN-PRODUCTS-EDIT-ADVANCED-VISUAL-HIERARCHY-HARD-QA-FIX-1 — Owner hard-QA hierarchy closed
+Edit Advanced: parent-hidden disables child Eyes (draft only, no cascade); one-card group + inset flat options; ghost visibility. Functional unified draft untouched. Live 360/390/412 PASS. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-16 — ADMIN-PRODUCTS-EDIT-ADVANCED-VISUAL-HIERARCHY-POLISH-1 — Advanced visual hierarchy closed
+Edit Advanced presentation polished to 3-level hierarchy (Advanced > Group > Option) under Edit-scoped `editHierarchy`. Functional unified draft / Final QA untouched. Flat option list + `Oculta` chip + ghost Eye. No DB/data mutation. Owner live visual review next. COMMIT/PUSH/DEPLOY paused.
+
+### 2026-09-15 — ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-FINAL-QA-1 — Unified editor certified end-to-end
+
+- **Architecture / Admin Products:** Final QA PASS on disposable fixture `FINAL-QA Unified Draft`. Real Save proved base+override in one `saveProductEditDraftAction` → RPC; reopen + restore; KEEP image unchanged; pre-Save Eye writes 0; net business delta 0 after fixture deletion. Verifies 27/27, tsc/build PASS. No runtime source fixes. No schema/RPC changes. Release paused. Doc: `docs/admin-products-edit-unified-draft-save-final-qa-1.md`.
+
+### 2026-09-15 — ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-IMPLEMENTATION-1 — Unified editor runtime implemented
+
+- **Architecture / Admin Products:** Wired application to live `save_product_edit_draft`. EditProductForm owns one unified draft (base + image intent + hidden group/option ids). Eye/EyeOff are local draft only inside Edit; panel dual-mode keeps builder immediate persistence. Category normal Edit is read-only persisted context (Create unchanged). Sticky Guardar spans Advanced; release-lip Edit wiring superseded. `saveProductEditDraftAction` is the sole normal-Edit writer. DB/RLS/migration untouched (SHA `42b2e206…16631`). Non-mutating browser QA: 0 business mutations. Next: **FINAL-QA-1**. Release paused. Doc: `docs/admin-products-edit-unified-draft-save-implementation-1.md`.
+
+### 2026-09-15 — ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-CONTRACT-DB-APPLY-1 — Unified Edit RPC LIVE / VALIDATED
+
+- **Architecture / Admin Products / DB:** Resumed DB-APPLY after legacy-cleanup PASS. Live `save_product_edit_draft` SECURITY INVOKER certified: role matrix (owner/admin/manager ALLOW; operator/viewer/anon/foreign DENY; super_admin ALLOW), late-failure atomicity (override INSERT then SKU unique abort → full rollback), SKU/stock/image/array contracts PASS. History reconciled via MCP apply assert-only entry `20260915215741_products_edit_unified_draft_save_rpc` (no function replay). Fingerprint unchanged. App still legacy mixed persistence. Next: **IMPLEMENTATION-1**. Doc: `docs/admin-products-edit-unified-draft-save-contract-db-apply-1.md`.
+### 2026-09-15 — ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-LEGACY-OVERRIDE-CLEANUP-1 — Legacy true override canonicalized
+
+- **Architecture / Admin Products / DB:** Deleted exactly one semantically redundant `is_enabled=true` override (`d08a0a85-4013-4e70-ba5c-c1d90fcac059`) on QA product `QA RLS OFF Burger` / group `QA RLS OFF Extras` after rollback-proven equivalence (true ≡ absence = VISIBLE via product assignment). Not true→false. False override rows 2 unchanged. RPC/migration/history/RLS/schema untouched. DB-APPLY still incomplete — resume from legacy-census gate. Doc: `docs/admin-products-edit-unified-draft-legacy-override-cleanup-1.md`.
+### 2026-09-15 — ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-CONTRACT-DB-APPLY-1 — BLOCK legacy is_enabled=true
+
+- **Architecture / Admin Products / DB:** Owner had manually applied `save_product_edit_draft` via SQL Editor. Cursor did **not** replay SQL. Live RPC proven: SECURITY INVOKER (`prosecdef=false`), empty `search_path`, ACL authenticated-only EXECUTE, body matches authored migration. Migration history still ABSENT (repair deferred). Hard stop: live `product_customization_overrides` contains **1** `is_enabled=true` group row on QA product `QA RLS OFF Burger` — not deleted/normalized. Role/atomicity matrices not run. Next: resolve legacy true overrides, then re-open DB-APPLY. Doc: `docs/admin-products-edit-unified-draft-save-contract-db-apply-1.md`.
+### 2026-09-15 — ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-CONTRACT-DB-AUTHOR-1 — Unified Edit Save RPC authored (not applied)
+
+- **Architecture / Admin Products / DB:** Authored `public.save_product_edit_draft` migration `20260915180000_products_edit_unified_draft_save_rpc.sql` (SHA256 `42b2e206635d0fe3a13ffff7972e8149ae86c909829641a30ca001e500a16631`). **SECURITY INVOKER** (not DEFINER): products mutative RLS already role-gates manageProducts; override RLS tenant-scoped; function provides transaction boundary — atomicity is not DEFINER. Category not RPC-mutable; canonical hidden group/option uuid[] reconciled with product UPDATE in one txn; image KEEP/REPLACE/REMOVE reference only; Storage external. RLS/SKU/stock trigger untouched. Remote apply **0**. Runtime wiring **0**. Next: **ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-CONTRACT-DB-APPLY-1**. Doc: `docs/admin-products-edit-unified-draft-save-contract-db-author-1.md`.
+### 2026-09-15 — ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-CONTRACT-DECISION-1 — Unified Edit draft contract approved
+
+- **Architecture / Admin Products:** Decision-only. Target = ONE Edit draft (base fields + image intent + group/option overrides); Eye/EyeOff local-only pre-Save; Save owns whole editor; Edit `category_id` application-level read-only (Create unchanged; future MOVE CATEGORY deferred); product+overrides atomicity requires hardened SECURITY DEFINER Postgres RPC (migration). Accordion presentation preserved. Legacy mixed persistence/dirty/sticky/category-editable contracts approved to supersede — **not yet implemented**. Runtime edits **0**. Next: **ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-CONTRACT-DB-AUTHOR-1**. Doc: `docs/admin-products-edit-unified-draft-save-contract-decision-1.md`.
+
+### 2026-09-15 — ADMIN-PRODUCTS-EDIT-CUSTOMIZATION-PROGRESSIVE-DISCLOSURE-ACCORDION-1 — Advanced progressive disclosure closed
+
+- **UI / Admin Products:** `ProductCustomizationOverridesPanel` progressive disclosure — top-level **Avanzado** collapsed by default; exception count while closed when >0; group accordion (one open); options nested under group; Eye/EyeOff visibility on existing override actions. Flat Secciones/Opciones presentation **superseded**. Domain / dirty / sticky release / Create / Edit base **unchanged**. **Customization UI FINAL CLOSED / FROZEN**. Products release **PAUSED**. Next: **PRODUCT REMOVAL DECISION PHASE**. Doc: `docs/admin-products-edit-customization-progressive-disclosure-accordion-1.md`.
+
+### 2026-09-15 — ADMIN-PRODUCTS-EDIT-CUSTOMIZATION-OVERRIDES-MOBILE-DENSITY-POLISH-1 — Customization overrides mobile density closed
+
+- **UI / Admin Products:** `ProductCustomizationOverridesPanel` mobile density polish — compact intro/summary, dense section/option rows (~141→~109px @412), 44px actions, short mobile labels + full `aria-label`, counts from existing arrays only. Dirty snapshot / flyout release / Edit base / Create / customization persistence **unchanged**. **Customization mobile density CLOSED / FROZEN**. Products release **PAUSED**. Next: **PRODUCT REMOVAL DECISION PHASE**. Doc: `docs/admin-products-edit-customization-overrides-mobile-density-polish-1.md`.
+
+### 2026-09-15 — ADMIN-PRODUCTS-EDIT-STICKY-FOOTER-RELEASE-STATE-POLISH-1 — Edit sticky footer release remnant closed
+
+- **UI / Admin Products:** Edit sticky footer release remnant — CASE A: exiting blue “Guardar cambios” CTA clipped at flyout `.body` top under header seam. Fix: Edit-only `.headerReleaseClip::after` 32px opaque lip + `.bodyReleaseClip` padding (Create flyout header unchanged). Sticky/full-bleed/dirty/customization internals preserved. **EDIT BASE FORM FINAL CLOSED / FROZEN**. Products release **PAUSED**. Next: **EDIT-CUSTOMIZATION-OVERRIDES-MOBILE-DENSITY-POLISH-1**. Doc: `docs/admin-products-edit-sticky-footer-release-state-polish-1.md`.
+
+### 2026-09-15 — ADMIN-PRODUCTS-EDIT-SIMPLE-MOBILE-VISUAL-UX-PARITY-1 — Edit simple mobile visual parity closed
+
+- **UI / Admin Products:** Edit base-form mobile visual/UX parity with frozen Create — required legend/markers (Stock actual), compact Disponible/track_stock (no Activo/Inactivo), mobile full-bleed footer + full-width CTA, dirty-state frozen, customization panel internals unchanged. Create source unchanged. Products release **PAUSED**. Next: **EDIT-CUSTOMIZATION-OVERRIDES-MOBILE-DENSITY-POLISH-1**. Doc: `docs/admin-products-edit-simple-mobile-visual-ux-parity-1.md`.
+
+### 2026-09-15 — ADMIN-PRODUCTS-EDIT-DIRTY-STATE-UX-CONTRACT-1 — Edit dirty / unsaved-changes closed
+
+- **UI / Admin Products:** Edit base-form dirty tracking (current vs persisted baseline). Pristine Save disabled; dirty close confirmation (`¿Descartar cambios?`); image KEEP/REMOVE/REPLACE in snapshot; customization overrides excluded; Save success still `closeFlyout`. **PROD-P3-18 CLOSED**. Create remains FROZEN. Products release **PAUSED**. Next: **EDIT-SIMPLE-MOBILE-VISUAL-UX-PARITY-1**. Doc: `docs/admin-products-edit-dirty-state-ux-contract-1.md`.
+
+### 2026-09-14 — ADMIN-PRODUCTS-CREATE-REQUIRED-MARKER-SPACING-POLISH-1 — Create marker spacing unified
+
+- **UI / Admin Products:** Categoría `*` was flush because `.admin-field span { margin: 0 }` overrode `.requiredMark` margin. Spacing owner moved to `.fieldLabelInline` `inline-flex` + `column-gap: 0.15em`. Affordance/validation/Edit unchanged. Create mobile **FINAL CLOSED / FROZEN**; Create owner polish **COMPLETE**. Products release remains **PAUSED**. Next: **OWNER REVIEW → Edit simple mobile visual QA**. Doc: `docs/admin-products-create-required-marker-spacing-polish-1.md`.
+
+### 2026-09-14 — ADMIN-PRODUCTS-CREATE-REQUIRED-FIELD-AFFORDANCE-1 — Create required-field affordance closed
+
+- **UI / Admin Products:** Create visual required markers (`*` aria-hidden) on Nombre / Categoría / Precio / Stock inicial + legend `* Campos obligatorios`. Native `required` remains authority; validation / Save / stock / footer / Edit unchanged. Create mobile **FINAL CLOSED / FROZEN**. Products release remains **PAUSED**. Next: **OWNER REVIEW → Edit simple mobile visual QA**. Doc: `docs/admin-products-create-required-field-affordance-1.md`.
+
+### 2026-09-14 — ADMIN-PRODUCTS-CREATE-MOBILE-STICKY-FOOTER-END-STATE-POLISH-1 — Create footer END-state closed
+
+- **UI / Admin Products:** Sticky footer MID vs END regression — CASE B: `.createForm.shell` trailing `padding-bottom: 0.875rem` only visible at max scroll (`footerToBodyBottom` 14→0). Safe-area/dvh/sticky preserved. Create mobile **FROZEN AGAIN**. Products release remains **PAUSED**. Next: **OWNER REVIEW → Edit simple mobile visual QA**. Doc: `docs/admin-products-create-mobile-sticky-footer-end-state-polish-1.md`.
+
+### 2026-09-13 — ADMIN-PRODUCTS-CREATE-MOBILE-FINAL-VISUAL-QA-1 — Create mobile FROZEN
+
+- **UI / Admin Products:** Final Create mobile hard visual QA PASS. Artificial bottom spacer (empty `.feedback` 5.25rem) removed; empty feedback collapses; end gap 128→36px. Create mobile **FROZEN / production-ready**. Products release remains **PAUSED**. Doc: `docs/admin-products-create-mobile-final-visual-qa-1.md`.
+
+### 2026-09-13 — ADMIN-PRODUCTS-CREATE-STOCK-DEFAULT-UX-CONTRACT-1 — Create stock default / UX closed
+
+- **UI / Admin Products:** Create `track_stock` default **ON** (initial + post-success reset); label **Stock inicial**; compact helper + calm zero-stock info; Activo/Inactivo removed from Create; switch ring `:focus-visible`; Create mobile footer full-bleed with inset full-width Save. Edit persisted stock / “Stock actual” unchanged. Server/DB authority unchanged. Products release remains **PAUSED**. Doc: `docs/admin-products-create-stock-default-ux-contract-1.md`.
+
+### 2026-09-13 — ADMIN-PRODUCTS-CREATE-MOBILE-VIEWPORT-VISUAL-POLISH-1 — Create mobile viewport closed
+
+- **UI / Admin Products:** Create flyout mobile viewport fix — `.panel` `100vh` + **`100dvh`**; sticky footer safe-area; Create-only full-width Save; density + dropzone “Agregar imagen”. Stock initial/reset later closed in CREATE-STOCK-DEFAULT phase. Edit shared-shell regression PASS. Products release remains **PAUSED**. Doc: `docs/admin-products-create-mobile-viewport-visual-polish-1.md`.
+
+### 2026-09-12 — ADMIN-PRODUCTS-MOBILE-MAIN-SURFACE-HARD-VISUAL-POLISH-1 — mobile main surface closed
+
+- **UI / Admin Products:** Mobile main `/admin/products` density polish — 3-col secondary actions; **Abrir catálogo** opens real `/b/{slug}/catalogo` (new tab); desktop **Vista previa** preserved; 3-col native filter row; toolbar summary + “Por categorías” hidden on mobile; copy-link `aria-live` status. Forms/flyout/customizations untouched. Products release remains **PAUSED** for owner Create/Edit mobile visual QA (not immediate COMMIT-PUSH-DEPLOY). Doc: `docs/admin-products-mobile-main-surface-hard-visual-polish-1.md`.
+
+### 2026-09-11 — ADMIN-PRODUCTS-CLIENT-IMAGE-OPTIMIZATION-800-FIRST-SELECTION-1 — selection closed
+
+- **Runtime microfix:** Candidate selection now **largest valid dimension first**. Preferred ≤90 KiB still attempted per dimension; if only ≤150 exists, keep **highest-quality** outlier and **do not** shrink to chase ≤90. Constant `PRODUCT_IMAGE_OUTLIER_MAX_BYTES` + pure `selectLargestDimensionFirstCandidate`. Photographic reprobe (`image_1f4daa9.jpg`): all 800/720 >150 → **640×640 · 146.56 KiB · q.70** (legitimate). Phone JPEG QA: **ACCEPTED NON-BLOCKING DEBT** (does not block release). Doc: `docs/admin-products-client-image-optimization-800-first-selection-1.md`. Next: **ADMIN-PRODUCTS-COMMIT-PUSH-DEPLOY-1**.
+
+### 2026-09-11 — ADMIN-PRODUCTS-CLIENT-IMAGE-OPTIMIZATION-BYTE-BUDGET-DECISION-1 — contract decided
+
+- **Docs-only:** Two-level byte budget — preferred **≤90 KiB**; quality-preserving outlier **>90 and ≤150 KiB**; hard miss **>150 KiB**. Floors frozen (640px / q≥0.60). Prior 135.43 KiB @640 reclassified accepted outlier. Optimizer/verify already compatible (return `bestOverall`, no hard reject). Dual-quality deferred. Real phone JPEG QA later accepted as non-blocking debt (see 800-FIRST). Doc: `docs/admin-products-client-image-optimization-byte-budget-decision-1.md`.
+
+### 2026-09-11 — ADMIN-PRODUCTS-CLIENT-IMAGE-OPTIMIZATION-REAL-ASSET-QA-1 — BYTE BUDGET BLOCKED
+
+- **QA only:** System-Chrome measurement of crop→`optimizeProductImage` on TEMP fixtures. Synthetic 10.3 MiB JPEG stress PASS (34.54 KiB). Real architectural photo 1.317 MiB → **135.43 KiB WebP @ 640×640** after full fallback — **BYTE BUDGET MISS** (visual ACCEPTABLE). Heavy PNG PASS. Runtime edits **0**. Real camera 3–10 MiB phone fixture still unavailable. Doc: `docs/admin-products-client-image-optimization-real-asset-qa-1.md`. Next: `ADMIN-PRODUCTS-CLIENT-IMAGE-OPTIMIZATION-BYTE-BUDGET-DECISION-1` (release blocked).
+
+### 2026-09-11 — ADMIN-PRODUCTS-VERIFY-CORPUS-RECONCILIATION-1 — 12/12 PASS
+
+- **Test-only:** Reconciled the two Final QA stale Product verifies (`image-lifecycle` → optimized staged File; `mobile-card-image-aspect-ratio` → square/cover with stretch allowed). Mutation probes FAIL→restore PASS. Full Products verify corpus **12/12 PASS**. Runtime/CSS permanent edits **0**. Doc: `docs/admin-products-verify-corpus-reconciliation-1.md`. Next: `ADMIN-PRODUCTS-COMMIT-PUSH-DEPLOY-1`.
+
+### 2026-09-11 — ADMIN-PRODUCTS-FINAL-FUNCTIONAL-VISUAL-QA-1 — package ready for release
+
+- **QA / Admin Products (docs-only this phase):** Final integrated functional/visual/responsive/a11y/technical QA of the local undeployed Products package. Result: **PASS WITH ACCEPTED NON-BLOCKING DEBT**. Products **P0=0 / P1=0 / release-blocking P2=0**. Frozen contracts reconfirmed (search/filter, single collection tree 899 cards / 900 table, flyout a11y, image lifecycle discard, availability error feedback). Public catalog read-only smoke PASS. Verifies **10/12** (2 stale → later closed by VERIFY-CORPUS-RECONCILIATION-1). tsc/build PASS; lint = known ESLint circular tooling debt. Data safety: 0 product/image/order mutations; 0 runtime source edits.
+- **Accepted debt:** Image Delivery Reconciliation **BLOCKED / ACCEPTED INFRA**; historical orphans deferred; real JPEG 3–10 MB + HEIC real-device QA debt; verify corpus later reconciled to **12/12**.
+- **Next:** `ADMIN-PRODUCTS-COMMIT-PUSH-DEPLOY-1`. Doc: `docs/admin-products-final-functional-visual-qa-1.md`. Living audit reconciled.
 
 ### 2026-09-08 — RELEASE: modal de pedido manual DEPLOYED
 
@@ -2065,6 +2240,36 @@ Al registrar un cambio, incluir:
 - **[UI]** Release en progreso para búsqueda local de catálogos grandes, validación AR de teléfono y autocomplete de dirección con fallback manual.
 - Archivos: catálogo público, checkout público y documentación del roadmap residual.
 - Breaking: no — sin DB, migraciones, RPC, contratos de pedido ni cambios de paquetes.
+
+### 2026-10-08 — Commercial Core PHASE-03 — Promotores y atribución
+- **[DB]** Cuentas de promotor, verificación local, claims de 30 días, atribución única, disputas, desvinculación con protección de 90 días y panel `/promoter`. Sin comisiones, liquidaciones ni pagos.
+- Archivos: `supabase/migrations/20261009015312_commercial_phase03_promoters.sql` y las migraciones `20261009015652`, `20261009015854`, `20261009020007`, `20261009020204`, `20261009020422`, `20261009020618`, `20261009020811`, `20261009021459`. `20261009020527` quedó vacía y registrada. `20261009021459` deja `separated` solo en `separate_promoter`.
+- Breaking: no para pedidos ni caja del comercio.
+
+### 2026-10-08 — Commercial Core PHASE-02 — Corrección de auditoría
+- **[DB]** El alta de demo exige hash de IP. El wrapper público no devuelve ids y solo lo ejecuta `service_role`. El resto de wrappers públicos queda en `authenticated`. `/commercial` redirige al tablero existente.
+- Archivos: `supabase/migrations/20261009013318_commercial_phase02_audit_fix.sql`, `app/demo/actions.ts`, `app/commercial/page.tsx`, `lib/commercial/crm/demo-ip.ts`
+- Breaking: no para pedidos ni caja del comercio. El formulario local sin runtime Vercel rechaza el envío.
+
+### 2026-10-08 — Commercial Core PHASE-02 — Captación local
+- **[DB]** Deduplicación, pipeline, formulario de demo, lectura del tablero comercial y fusión manual en el esquema `commercial`. Sin claims, comisiones ni promotores activos. Soporte no lee CRM.
+- Archivos: `supabase/migrations/20261009004940_commercial_phase02_dedup.sql`, `20261009005251_commercial_phase02_pipeline.sql`, `20261009005428_commercial_phase02_demo.sql`, `20261009005634_commercial_phase02_board.sql`, `20261009005806_commercial_phase02_merge.sql`
+- Breaking: no para pedidos ni caja del comercio.
+
+### 2026-10-08 — Commercial Core P02-T01 — CRM tables local
+- **[DB]** Esquema `commercial`: comercios, contactos, interacciones, submissions, oportunidades, eventos de etapa, tareas y fusiones. Sin RPC de fusión, sin dedup y sin atribuciones. Soporte no lee esas filas.
+- Archivos: `supabase/migrations/20261009003119_commercial_phase02_crm.sql`
+- Breaking: no para pedidos ni caja del comercio.
+
+### 2026-10-08 — Commercial Core P01-T04 — Transactional outbox local
+- **[DB]** `commercial.enqueue` inserta el evento en la transacción del llamador, en estado `pending`, sin correo ni worker. `authenticated` no puede ejecutarlo. Una falla revierte la fila.
+- Archivos: `supabase/migrations/20261008233833_commercial_phase01_outbox.sql`, `lib/commercial/notifications/outbox.ts`
+- Breaking: no para pedidos ni caja del comercio.
+
+### 2026-10-08 — Commercial Core P01-T02 — Platform schema local
+- **[DB]** Esquema `commercial` en la base local de OrderOps: cuentas de plataforma, roles internos, auditoría append-only, outbox, notificaciones, privacidad y programa Founder v1 inmutable. RLS activa y escrituras de tabla revocadas para `anon` y `authenticated`. No toca `profiles.role`, pedidos ni caja del comercio. Rollback escrito y no ejecutado.
+- Archivos: `supabase/migrations/20261008215314_commercial_phase01_foundations.sql`, `supabase/rollbacks/commercial_phase01_down.sql`, `types/database.ts`
+- Breaking: no para el comercio — el esquema no está en la API pública de `config.toml`.
 
 ### 2026-08-02 — Public Catalog Residual Roadmap Deploy 1 Closure
 - **[Ops]** Commit `3bd26ff` publicado en `main`; Vercel production `dpl_DPv6mEwxE6UsaS5pMec3TZME35V2` Ready y alias `https://orderops.vercel.app` smokeado con catálogo/checkout HTTP 200.

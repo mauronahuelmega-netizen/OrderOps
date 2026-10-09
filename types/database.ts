@@ -1032,6 +1032,7 @@ export type Database = {
       };
       products: {
         Row: {
+          archived_at: string | null;
           business_id: string;
           category_id: string;
           created_at: string;
@@ -1046,6 +1047,7 @@ export type Database = {
           track_stock: boolean;
         };
         Insert: {
+          archived_at?: string | null;
           business_id: string;
           category_id: string;
           created_at?: string;
@@ -1060,6 +1062,7 @@ export type Database = {
           track_stock?: boolean;
         };
         Update: {
+          archived_at?: string | null;
           business_id?: string;
           category_id?: string;
           created_at?: string;
@@ -1413,6 +1416,54 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      commercial_session: { Args: Record<string, never>; Returns: Json };
+      create_claim: {
+        Args: { p_commercial_business_id: string; p_opportunity_id: string | null };
+        Returns: Json;
+      };
+      promoter_add_note: { Args: { p_body: string; p_opportunity_id: string }; Returns: Json };
+      promoter_overview: { Args: Record<string, never>; Returns: Json };
+      promoter_session: { Args: Record<string, never>; Returns: Json };
+      promoter_transition_opportunity: {
+        Args: { p_opportunity_id: string; p_reason: string | null; p_to_stage: string };
+        Returns: Json;
+      };
+      promoter_upsert_task: {
+        Args: {
+          p_due_at: string | null;
+          p_opportunity_id: string;
+          p_status: string;
+          p_task_id: string | null;
+          p_title: string;
+        };
+        Returns: Json;
+      };
+      read_own_bank: { Args: Record<string, never>; Returns: Json };
+      register_promoter_business: {
+        Args: { p_trade_category: string; p_trade_name: string; p_whatsapp: string };
+        Returns: Json;
+      };
+      list_open_opportunities: { Args: Record<string, never>; Returns: Json };
+      merge_commercial_businesses: {
+        Args: { p_absorbed_id: string; p_reason: string; p_survivor_id: string };
+        Returns: Json;
+      };
+      opportunity_detail: { Args: { p_opportunity_id: string }; Returns: Json };
+      submit_demo_request: {
+        Args: {
+          p_campaign_ref: string | null;
+          p_contact_name: string;
+          p_email: string | null;
+          p_idempotency_key: string;
+          p_ip_hash: string | null;
+          p_needs: string | null;
+          p_promoter_ref: string | null;
+          p_trade_category: string;
+          p_trade_name: string;
+          p_whatsapp: string;
+        };
+        Returns: Json;
+      };
       create_order: {
         Args: {
           p_address?: string | null;
@@ -1426,12 +1477,34 @@ export type Database = {
         };
         Returns: string;
       };
+      save_category_display_order: {
+        Args: {
+          p_ordered_category_ids: string[];
+        };
+        Returns: undefined;
+      };
       set_business_on_demand_status: {
         Args: {
           p_active: boolean;
           p_business_id: string;
         };
         Returns: undefined;
+      };
+      transition_opportunity: {
+        Args: { p_opportunity_id: string; p_reason: string | null; p_to_stage: string };
+        Returns: Json;
+      };
+      upsert_task: {
+        Args: {
+          p_cancel_reason: string | null;
+          p_due_at: string | null;
+          p_opportunity_id: string;
+          p_priority: string | null;
+          p_status: string;
+          p_task_id: string | null;
+          p_title: string;
+        };
+        Returns: Json;
       };
       transition_order_status: {
         Args: {
@@ -1456,6 +1529,856 @@ export type Database = {
       order_financial_status: OrderFinancialStatus;
       order_status: OrderStatus;
       profile_role: ProfileRole;
+    };
+    CompositeTypes: {
+      [_ in never]: never;
+    };
+  };
+  commercial: {
+    Tables: {
+      audit_events: {
+        Row: {
+          action: string;
+          actor_account_id: string | null;
+          actor_kind: string;
+          after: Json | null;
+          before: Json | null;
+          correlation_id: string;
+          created_at: string;
+          entity_id: string;
+          entity_schema: string;
+          entity_table: string;
+          id: string;
+          reason: string | null;
+        };
+        Insert: {
+          action: string;
+          actor_account_id?: string | null;
+          actor_kind: string;
+          after?: Json | null;
+          before?: Json | null;
+          correlation_id: string;
+          created_at?: string;
+          entity_id: string;
+          entity_schema: string;
+          entity_table: string;
+          id?: string;
+          reason?: string | null;
+        };
+        Update: {
+          action?: string;
+          actor_account_id?: string | null;
+          actor_kind?: string;
+          after?: Json | null;
+          before?: Json | null;
+          correlation_id?: string;
+          created_at?: string;
+          entity_id?: string;
+          entity_schema?: string;
+          entity_table?: string;
+          id?: string;
+          reason?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "audit_events_actor_account_id_fkey";
+            columns: ["actor_account_id"];
+            isOneToOne: false;
+            referencedRelation: "platform_accounts";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      commercial_businesses: {
+        Row: {
+          archived_at: string | null;
+          branch_label: string | null;
+          brand_name: string | null;
+          created_at: string;
+          display_name: string;
+          email: string | null;
+          fiscal_id: string | null;
+          id: string;
+          initial_channel: string;
+          initial_promoter_id: string | null;
+          linked_business_id: string | null;
+          merged_into_id: string | null;
+          normalized_name: string;
+          normalized_phone: string | null;
+          trade_category: string | null;
+        };
+        Insert: {
+          archived_at?: string | null;
+          branch_label?: string | null;
+          brand_name?: string | null;
+          created_at?: string;
+          display_name: string;
+          email?: string | null;
+          fiscal_id?: string | null;
+          id?: string;
+          initial_channel: string;
+          initial_promoter_id?: string | null;
+          linked_business_id?: string | null;
+          merged_into_id?: string | null;
+          normalized_name: string;
+          normalized_phone?: string | null;
+          trade_category?: string | null;
+        };
+        Update: {
+          archived_at?: string | null;
+          branch_label?: string | null;
+          brand_name?: string | null;
+          created_at?: string;
+          display_name?: string;
+          email?: string | null;
+          fiscal_id?: string | null;
+          id?: string;
+          initial_channel?: string;
+          initial_promoter_id?: string | null;
+          linked_business_id?: string | null;
+          merged_into_id?: string | null;
+          normalized_name?: string;
+          normalized_phone?: string | null;
+          trade_category?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "commercial_businesses_linked_business_id_fkey";
+            columns: ["linked_business_id"];
+            isOneToOne: false;
+            referencedRelation: "businesses";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "commercial_businesses_merged_into_id_fkey";
+            columns: ["merged_into_id"];
+            isOneToOne: false;
+            referencedRelation: "commercial_businesses";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      commercial_contacts: {
+        Row: {
+          commercial_business_id: string;
+          created_at: string;
+          email: string | null;
+          full_name: string;
+          id: string;
+          normalized_phone: string | null;
+          role_label: string | null;
+        };
+        Insert: {
+          commercial_business_id: string;
+          created_at?: string;
+          email?: string | null;
+          full_name: string;
+          id?: string;
+          normalized_phone?: string | null;
+          role_label?: string | null;
+        };
+        Update: {
+          commercial_business_id?: string;
+          created_at?: string;
+          email?: string | null;
+          full_name?: string;
+          id?: string;
+          normalized_phone?: string | null;
+          role_label?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "commercial_contacts_commercial_business_id_fkey";
+            columns: ["commercial_business_id"];
+            isOneToOne: false;
+            referencedRelation: "commercial_businesses";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      commercial_interactions: {
+        Row: {
+          actor_account_id: string | null;
+          body: string | null;
+          channel: string;
+          commercial_business_id: string;
+          created_at: string;
+          id: string;
+          kind: string;
+          occurred_at: string;
+          opportunity_id: string | null;
+          origin: string;
+        };
+        Insert: {
+          actor_account_id?: string | null;
+          body?: string | null;
+          channel: string;
+          commercial_business_id: string;
+          created_at?: string;
+          id?: string;
+          kind: string;
+          occurred_at: string;
+          opportunity_id?: string | null;
+          origin: string;
+        };
+        Update: {
+          actor_account_id?: string | null;
+          body?: string | null;
+          channel?: string;
+          commercial_business_id?: string;
+          created_at?: string;
+          id?: string;
+          kind?: string;
+          occurred_at?: string;
+          opportunity_id?: string | null;
+          origin?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "commercial_interactions_actor_account_id_fkey";
+            columns: ["actor_account_id"];
+            isOneToOne: false;
+            referencedRelation: "platform_accounts";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "commercial_interactions_commercial_business_id_fkey";
+            columns: ["commercial_business_id"];
+            isOneToOne: false;
+            referencedRelation: "commercial_businesses";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "commercial_interactions_opportunity_id_fkey";
+            columns: ["opportunity_id"];
+            isOneToOne: false;
+            referencedRelation: "commercial_opportunities";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      commercial_merges: {
+        Row: {
+          absorbed_id: string;
+          actor_account_id: string | null;
+          created_at: string;
+          id: string;
+          reason: string;
+          survivor_id: string;
+        };
+        Insert: {
+          absorbed_id: string;
+          actor_account_id?: string | null;
+          created_at?: string;
+          id?: string;
+          reason: string;
+          survivor_id: string;
+        };
+        Update: {
+          absorbed_id?: string;
+          actor_account_id?: string | null;
+          created_at?: string;
+          id?: string;
+          reason?: string;
+          survivor_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "commercial_merges_absorbed_id_fkey";
+            columns: ["absorbed_id"];
+            isOneToOne: false;
+            referencedRelation: "commercial_businesses";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "commercial_merges_actor_account_id_fkey";
+            columns: ["actor_account_id"];
+            isOneToOne: false;
+            referencedRelation: "platform_accounts";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "commercial_merges_survivor_id_fkey";
+            columns: ["survivor_id"];
+            isOneToOne: false;
+            referencedRelation: "commercial_businesses";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      commercial_opportunities: {
+        Row: {
+          archived_at: string | null;
+          commercial_business_id: string;
+          created_at: string;
+          id: string;
+          lost_at: string | null;
+          lost_reason: string | null;
+          owner_account_id: string | null;
+          stage: string;
+          won_at: string | null;
+          won_business_id: string | null;
+          won_by_account_id: string | null;
+        };
+        Insert: {
+          archived_at?: string | null;
+          commercial_business_id: string;
+          created_at?: string;
+          id?: string;
+          lost_at?: string | null;
+          lost_reason?: string | null;
+          owner_account_id?: string | null;
+          stage: string;
+          won_at?: string | null;
+          won_business_id?: string | null;
+          won_by_account_id?: string | null;
+        };
+        Update: {
+          archived_at?: string | null;
+          commercial_business_id?: string;
+          created_at?: string;
+          id?: string;
+          lost_at?: string | null;
+          lost_reason?: string | null;
+          owner_account_id?: string | null;
+          stage?: string;
+          won_at?: string | null;
+          won_business_id?: string | null;
+          won_by_account_id?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "commercial_opportunities_commercial_business_id_fkey";
+            columns: ["commercial_business_id"];
+            isOneToOne: false;
+            referencedRelation: "commercial_businesses";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "commercial_opportunities_owner_account_id_fkey";
+            columns: ["owner_account_id"];
+            isOneToOne: false;
+            referencedRelation: "platform_accounts";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "commercial_opportunities_won_business_id_fkey";
+            columns: ["won_business_id"];
+            isOneToOne: false;
+            referencedRelation: "businesses";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "commercial_opportunities_won_by_account_id_fkey";
+            columns: ["won_by_account_id"];
+            isOneToOne: false;
+            referencedRelation: "platform_accounts";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      commercial_programs: {
+        Row: {
+          code: string;
+          effective_from: string;
+          id: string;
+          max_recurring_slots: number;
+          monthly_price_cents: number;
+          recurring_bps: number;
+          retired_at: string | null;
+          setup_commission_cents: number;
+          setup_price_cents: number;
+          version: number;
+        };
+        Insert: {
+          code: string;
+          effective_from: string;
+          id?: string;
+          max_recurring_slots: number;
+          monthly_price_cents: number;
+          recurring_bps: number;
+          retired_at?: string | null;
+          setup_commission_cents: number;
+          setup_price_cents: number;
+          version: number;
+        };
+        Update: {
+          code?: string;
+          effective_from?: string;
+          id?: string;
+          max_recurring_slots?: number;
+          monthly_price_cents?: number;
+          recurring_bps?: number;
+          retired_at?: string | null;
+          setup_commission_cents?: number;
+          setup_price_cents?: number;
+          version?: number;
+        };
+        Relationships: [];
+      };
+      commercial_tasks: {
+        Row: {
+          assignee_account_id: string | null;
+          cancel_reason: string | null;
+          completed_at: string | null;
+          created_at: string;
+          created_by: string | null;
+          description: string | null;
+          due_at: string | null;
+          id: string;
+          kind: string | null;
+          opportunity_id: string;
+          priority: string | null;
+          status: string;
+          title: string;
+        };
+        Insert: {
+          assignee_account_id?: string | null;
+          cancel_reason?: string | null;
+          completed_at?: string | null;
+          created_at?: string;
+          created_by?: string | null;
+          description?: string | null;
+          due_at?: string | null;
+          id?: string;
+          kind?: string | null;
+          opportunity_id: string;
+          priority?: string | null;
+          status: string;
+          title: string;
+        };
+        Update: {
+          assignee_account_id?: string | null;
+          cancel_reason?: string | null;
+          completed_at?: string | null;
+          created_at?: string;
+          created_by?: string | null;
+          description?: string | null;
+          due_at?: string | null;
+          id?: string;
+          kind?: string | null;
+          opportunity_id?: string;
+          priority?: string | null;
+          status?: string;
+          title?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "commercial_tasks_assignee_account_id_fkey";
+            columns: ["assignee_account_id"];
+            isOneToOne: false;
+            referencedRelation: "platform_accounts";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "commercial_tasks_created_by_fkey";
+            columns: ["created_by"];
+            isOneToOne: false;
+            referencedRelation: "platform_accounts";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "commercial_tasks_opportunity_id_fkey";
+            columns: ["opportunity_id"];
+            isOneToOne: false;
+            referencedRelation: "commercial_opportunities";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      demo_submissions: {
+        Row: {
+          campaign_ref: string | null;
+          contact_name: string;
+          created_at: string;
+          email: string | null;
+          id: string;
+          idempotency_key: string;
+          needs: string | null;
+          promoter_ref: string | null;
+          resolved_business_id: string | null;
+          resolved_opportunity_id: string | null;
+          source_channel: string;
+          trade_category: string;
+          trade_name: string;
+          whatsapp: string;
+        };
+        Insert: {
+          campaign_ref?: string | null;
+          contact_name: string;
+          created_at?: string;
+          email?: string | null;
+          id?: string;
+          idempotency_key: string;
+          needs?: string | null;
+          promoter_ref?: string | null;
+          resolved_business_id?: string | null;
+          resolved_opportunity_id?: string | null;
+          source_channel: string;
+          trade_category: string;
+          trade_name: string;
+          whatsapp: string;
+        };
+        Update: {
+          campaign_ref?: string | null;
+          contact_name?: string;
+          created_at?: string;
+          email?: string | null;
+          id?: string;
+          idempotency_key?: string;
+          needs?: string | null;
+          promoter_ref?: string | null;
+          resolved_business_id?: string | null;
+          resolved_opportunity_id?: string | null;
+          source_channel?: string;
+          trade_category?: string;
+          trade_name?: string;
+          whatsapp?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "demo_submissions_resolved_business_id_fkey";
+            columns: ["resolved_business_id"];
+            isOneToOne: false;
+            referencedRelation: "commercial_businesses";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "demo_submissions_resolved_opportunity_id_fkey";
+            columns: ["resolved_opportunity_id"];
+            isOneToOne: false;
+            referencedRelation: "commercial_opportunities";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      internal_role_assignments: {
+        Row: {
+          account_id: string;
+          created_at: string;
+          granted_by: string | null;
+          id: string;
+          revoked_at: string | null;
+          role: string;
+        };
+        Insert: {
+          account_id: string;
+          created_at?: string;
+          granted_by?: string | null;
+          id?: string;
+          revoked_at?: string | null;
+          role: string;
+        };
+        Update: {
+          account_id?: string;
+          created_at?: string;
+          granted_by?: string | null;
+          id?: string;
+          revoked_at?: string | null;
+          role?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "internal_role_assignments_account_id_fkey";
+            columns: ["account_id"];
+            isOneToOne: false;
+            referencedRelation: "platform_accounts";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "internal_role_assignments_granted_by_fkey";
+            columns: ["granted_by"];
+            isOneToOne: false;
+            referencedRelation: "platform_accounts";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      notification_deliveries: {
+        Row: {
+          attempt_count: number;
+          channel: string;
+          destination: string;
+          id: string;
+          last_error: string | null;
+          outbox_event_id: string;
+          status: string;
+        };
+        Insert: {
+          attempt_count?: number;
+          channel: string;
+          destination: string;
+          id?: string;
+          last_error?: string | null;
+          outbox_event_id: string;
+          status: string;
+        };
+        Update: {
+          attempt_count?: number;
+          channel?: string;
+          destination?: string;
+          id?: string;
+          last_error?: string | null;
+          outbox_event_id?: string;
+          status?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "notification_deliveries_outbox_event_id_fkey";
+            columns: ["outbox_event_id"];
+            isOneToOne: false;
+            referencedRelation: "outbox_events";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      notifications: {
+        Row: {
+          body: string;
+          created_at: string;
+          event_name: string;
+          id: string;
+          outbox_event_id: string;
+          read_at: string | null;
+          recipient_account_id: string;
+          title: string;
+        };
+        Insert: {
+          body: string;
+          created_at?: string;
+          event_name: string;
+          id?: string;
+          outbox_event_id: string;
+          read_at?: string | null;
+          recipient_account_id: string;
+          title: string;
+        };
+        Update: {
+          body?: string;
+          created_at?: string;
+          event_name?: string;
+          id?: string;
+          outbox_event_id?: string;
+          read_at?: string | null;
+          recipient_account_id?: string;
+          title?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "notifications_outbox_event_id_fkey";
+            columns: ["outbox_event_id"];
+            isOneToOne: false;
+            referencedRelation: "outbox_events";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "notifications_recipient_account_id_fkey";
+            columns: ["recipient_account_id"];
+            isOneToOne: false;
+            referencedRelation: "platform_accounts";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      opportunity_stage_events: {
+        Row: {
+          actor_account_id: string | null;
+          created_at: string;
+          from_stage: string | null;
+          id: string;
+          opportunity_id: string;
+          reason: string | null;
+          to_stage: string;
+        };
+        Insert: {
+          actor_account_id?: string | null;
+          created_at?: string;
+          from_stage?: string | null;
+          id?: string;
+          opportunity_id: string;
+          reason?: string | null;
+          to_stage: string;
+        };
+        Update: {
+          actor_account_id?: string | null;
+          created_at?: string;
+          from_stage?: string | null;
+          id?: string;
+          opportunity_id?: string;
+          reason?: string | null;
+          to_stage?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "opportunity_stage_events_actor_account_id_fkey";
+            columns: ["actor_account_id"];
+            isOneToOne: false;
+            referencedRelation: "platform_accounts";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "opportunity_stage_events_opportunity_id_fkey";
+            columns: ["opportunity_id"];
+            isOneToOne: false;
+            referencedRelation: "commercial_opportunities";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      outbox_events: {
+        Row: {
+          attempts: number;
+          available_at: string;
+          correlation_id: string;
+          event_name: string;
+          id: string;
+          locked_at: string | null;
+          occurred_at: string;
+          payload: Json;
+          status: string;
+        };
+        Insert: {
+          attempts?: number;
+          available_at: string;
+          correlation_id: string;
+          event_name: string;
+          id?: string;
+          locked_at?: string | null;
+          occurred_at: string;
+          payload: Json;
+          status: string;
+        };
+        Update: {
+          attempts?: number;
+          available_at?: string;
+          correlation_id?: string;
+          event_name?: string;
+          id?: string;
+          locked_at?: string | null;
+          occurred_at?: string;
+          payload?: Json;
+          status?: string;
+        };
+        Relationships: [];
+      };
+      platform_accounts: {
+        Row: {
+          created_at: string;
+          disabled_at: string | null;
+          id: string;
+          kind: string;
+          user_id: string;
+        };
+        Insert: {
+          created_at?: string;
+          disabled_at?: string | null;
+          id?: string;
+          kind: string;
+          user_id: string;
+        };
+        Update: {
+          created_at?: string;
+          disabled_at?: string | null;
+          id?: string;
+          kind?: string;
+          user_id?: string;
+        };
+        Relationships: [];
+      };
+      privacy_requests: {
+        Row: {
+          created_at: string;
+          id: string;
+          opened_by: string | null;
+          request_kind: string;
+          resolution_notes: string | null;
+          resolved_by: string | null;
+          status: string;
+          subject_kind: string | null;
+          subject_ref: string | null;
+        };
+        Insert: {
+          created_at?: string;
+          id?: string;
+          opened_by?: string | null;
+          request_kind: string;
+          resolution_notes?: string | null;
+          resolved_by?: string | null;
+          status: string;
+          subject_kind?: string | null;
+          subject_ref?: string | null;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          opened_by?: string | null;
+          request_kind?: string;
+          resolution_notes?: string | null;
+          resolved_by?: string | null;
+          status?: string;
+          subject_kind?: string | null;
+          subject_ref?: string | null;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "privacy_requests_opened_by_fkey";
+            columns: ["opened_by"];
+            isOneToOne: false;
+            referencedRelation: "platform_accounts";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "privacy_requests_resolved_by_fkey";
+            columns: ["resolved_by"];
+            isOneToOne: false;
+            referencedRelation: "platform_accounts";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+    };
+    Views: {
+      [_ in never]: never;
+    };
+    Functions: {
+      current_account_id: { Args: never; Returns: string };
+      enqueue: {
+        Args: { p_correlation_id: string; p_event_name: string; p_payload: Json };
+        Returns: string;
+      };
+      find_or_prepare_business: {
+        Args: { p_channel: string; p_display_name: string; p_fiscal_id: string; p_phone: string };
+        Returns: Json;
+      };
+      grant_internal_role: {
+        Args: { p_account_id: string; p_role: string };
+        Returns: Json;
+      };
+      has_internal_role: { Args: { p_role: string }; Returns: boolean };
+      has_permission: { Args: { p_code: string }; Returns: boolean };
+      transition_opportunity: {
+        Args: { p_opportunity_id: string; p_reason: string; p_to_stage: string };
+        Returns: Json;
+      };
+      upsert_task: {
+        Args: {
+          p_cancel_reason: string;
+          p_due_at: string;
+          p_opportunity_id: string;
+          p_priority: string;
+          p_status: string;
+          p_task_id: string;
+          p_title: string;
+        };
+        Returns: Json;
+      };
+      revoke_internal_role: {
+        Args: { p_account_id: string; p_role: string };
+        Returns: Json;
+      };
+    };
+    Enums: {
+      [_ in never]: never;
     };
     CompositeTypes: {
       [_ in never]: never;

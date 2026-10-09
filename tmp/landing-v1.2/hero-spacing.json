@@ -1,0 +1,42 @@
+[
+  {
+    "caption": 1159.1875,
+    "client": 345,
+    "phone": 1193.287841796875,
+    "photoWidth": 179.266357421875,
+    "scroll": 345,
+    "width": 360
+  },
+  {
+    "caption": 1108.1875,
+    "client": 375,
+    "phone": 1154.453857421875,
+    "photoWidth": 193.05712890625,
+    "scroll": 375,
+    "width": 390
+  },
+  {
+    "caption": 699,
+    "client": 753,
+    "phone": 691.741455078125,
+    "photoWidth": 190.96066284179688,
+    "scroll": 753,
+    "width": 768
+  },
+  {
+    "caption": 748,
+    "client": 1009,
+    "phone": 796.38037109375,
+    "photoWidth": 212.11672973632812,
+    "scroll": 1009,
+    "width": 1024
+  },
+  {
+    "caption": 768,
+    "client": 1425,
+    "phone": 797.370849609375,
+    "photoWidth": 234.09771728515625,
+    "scroll": 1425,
+    "width": 1440
+  }
+]

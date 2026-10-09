@@ -39,11 +39,18 @@ export default function ProductsHeaderActions({ businessSlug }: ProductsHeaderAc
     }
   }, [publicCatalogPath]);
 
+  const copyLiveMessage =
+    copyStatus === "copied"
+      ? "Link del catálogo público copiado"
+      : copyStatus === "error"
+        ? "No se pudo copiar el link del catálogo público"
+        : "";
+
   return (
     <div className={styles.actions}>
       <Button
         type="button"
-        className="admin-primary-button"
+        className={`admin-primary-button ${styles.primaryAction}`}
         disabled={categoriesCount === 0}
         onClick={() => (isProductOpen ? closeFlyout() : openCreateProduct())}
         variant="primary"
@@ -53,38 +60,80 @@ export default function ProductsHeaderActions({ businessSlug }: ProductsHeaderAc
 
       <Button
         href="/admin/products/customizations"
-        className="admin-ghost-link"
+        className={`admin-ghost-link ${styles.secondaryAction}`}
         variant="ghost"
+        aria-label="Opcionales y extras"
       >
-        Opcionales y extras
+        <span className={styles.labelDesktop}>Opcionales y extras</span>
+        <span className={styles.labelMobile}>Opcionales</span>
       </Button>
 
+      {/* Desktop: admin preview shell. Hidden on <900 (display:none → out of a11y/tab). */}
       <Button
         href="/admin/products/preview"
-        className="admin-ghost-link"
+        className={`admin-ghost-link ${styles.secondaryAction} ${styles.previewDesktop}`}
         variant="ghost"
       >
         Vista previa del catálogo
       </Button>
 
+      {/* Mobile: real public catalog. Hidden on >=900. */}
+      {publicCatalogPath ? (
+        <Button
+          href={publicCatalogPath}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`admin-ghost-link ${styles.secondaryAction} ${styles.catalogMobile}`}
+          variant="ghost"
+          aria-label="Abrir catálogo público"
+        >
+          Abrir catálogo
+        </Button>
+      ) : (
+        <Button
+          type="button"
+          className={`admin-ghost-link ${styles.secondaryAction} ${styles.catalogMobile}`}
+          variant="ghost"
+          disabled
+          aria-label="Abrir catálogo público no disponible: falta dirección pública"
+        >
+          Abrir catálogo
+        </Button>
+      )}
+
       <Button
         type="button"
-        className="admin-ghost-link"
+        className={`admin-ghost-link ${styles.secondaryAction} ${styles.copyAction}`}
         variant="ghost"
         disabled={!publicCatalogPath}
         aria-label={
           publicCatalogPath
-            ? "Copiar link catálogo público"
+            ? "Copiar link del catálogo público"
             : "Copiar link catálogo público no disponible: falta dirección pública"
         }
         onClick={handleCopyPublicLink}
       >
-        {copyStatus === "copied"
-          ? "Link copiado"
-          : copyStatus === "error"
-            ? "No se pudo copiar"
-            : "Copiar link catálogo público"}
+        {copyStatus === "copied" ? (
+          <>
+            <span className={styles.labelDesktop}>Link copiado</span>
+            <span className={styles.labelMobile}>Copiado</span>
+          </>
+        ) : copyStatus === "error" ? (
+          <>
+            <span className={styles.labelDesktop}>No se pudo copiar</span>
+            <span className={styles.labelMobile}>Error</span>
+          </>
+        ) : (
+          <>
+            <span className={styles.labelDesktop}>Copiar link catálogo público</span>
+            <span className={styles.labelMobile}>Copiar link</span>
+          </>
+        )}
       </Button>
+
+      <span className={styles.copyStatus} role="status" aria-live="polite">
+        {copyLiveMessage}
+      </span>
     </div>
   );
 }

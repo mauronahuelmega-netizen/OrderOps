@@ -47,7 +47,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="es-AR"
       className={`${inter.variable} ${plusJakartaSans.variable}`}
       suppressHydrationWarning
     >

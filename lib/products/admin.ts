@@ -3,36 +3,27 @@ import "server-only";
 import { resolveManualOrderProductEligibilityMap } from "@/lib/orders/manual-order-customization-safety";
 import type { ManualOrderProductOption } from "@/lib/orders/manual-order-types";
 import { getPublicProductCustomizationConfig } from "@/lib/product-customization/public";
+import {
+  type AdminProduct,
+  type AdminProductListItem,
+  isProductArchived
+} from "@/lib/products/admin-product-types";
+import { buildAdminProductsSearchFilter } from "@/lib/products/products-list-contracts";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
-export type { ManualOrderProductOption };
+export type { ManualOrderProductOption, AdminProduct, AdminProductListItem };
+export { isProductArchived };
 
 export const ADMIN_PRODUCTS_PAGE_SIZE = 24;
-
-export type AdminProductListItem = {
-  id: string;
-  name: string;
-  price: number;
-  category_id: string;
-  image_url: string | null;
-  is_available: boolean;
-  sku: string | null;
-  stock: number;
-};
-
-export type AdminProduct = AdminProductListItem & {
-  description: string | null;
-  created_at: string;
-  track_stock: boolean;
-  categories: {
-    name: string;
-  } | null;
-};
 
 export type AdminProductsPageResult = {
   products: AdminProductListItem[];
   page: number;
   limit: number;
+  /**
+   * Rows matching the active filters (`q`/`categoryId`/`stock`/`status`) — the filtered
+   * result size. Never a catalog-existence signal; use `getAdminProductsCatalogCount`.
+   */
   totalCount: number;
   totalPages: number;
 };
@@ -95,11 +86,16 @@ export async function getAdminProducts(
   const supabase = await createSupabaseServerClient();
   let query = supabase
     .from("products")
-    .select("id, name, price, category_id, image_url, is_available, sku, stock", { count: "exact" })
+    .select(
+      "id, name, price, category_id, image_url, is_available, sku, stock, track_stock, archived_at",
+      {
+        count: "exact"
+      }
+    )
     .eq("business_id", businessId);
 
   if (q) {
-    query = query.or(`name.ilike.%${q}%,sku.ilike.%${q}%`);
+    query = query.or(buildAdminProductsSearchFilter(q));
   }
 
   if (categoryId) {
@@ -114,10 +110,18 @@ export async function getAdminProducts(
     query = query.gt("stock", 0);
   }
 
-  if (status === "active") {
-    query = query.eq("is_available", true);
-  } else if (status === "inactive") {
-    query = query.eq("is_available", false);
+  // Lifecycle axis (orthogonal to merchandising availability):
+  // - default / active / inactive → non-archived only
+  // - archived → archived only
+  if (status === "archived") {
+    query = query.not("archived_at", "is", null);
+  } else {
+    query = query.is("archived_at", null);
+    if (status === "active") {
+      query = query.eq("is_available", true);
+    } else if (status === "inactive") {
+      query = query.eq("is_available", false);
+    }
   }
 
   const { data, error, count } = await query
@@ -140,6 +144,47 @@ export async function getAdminProducts(
   };
 }
 
+/**
+ * Total products owned by the tenant, ignoring list filters INCLUDING archived rows.
+ * Catalog existence signal for first-run Create auto-open (must include archived).
+ *
+ * Count-only (`head: true`) — no rows are transferred.
+ */
+export async function getAdminProductsCatalogCount(businessId: string): Promise<number> {
+  const supabase = await createSupabaseServerClient();
+  const { count, error } = await supabase
+    .from("products")
+    .select("id", { count: "exact", head: true })
+    .eq("business_id", businessId);
+
+  if (error) {
+    throw new Error(`Failed to load catalog product count: ${error.message}`);
+  }
+
+  return count ?? 0;
+}
+
+/**
+ * Non-archived products owned by the tenant (ignores availability / search filters).
+ * Distinguishes "only archived remain" from true first-run empty.
+ */
+export async function getAdminProductsActiveLifecycleCount(
+  businessId: string
+): Promise<number> {
+  const supabase = await createSupabaseServerClient();
+  const { count, error } = await supabase
+    .from("products")
+    .select("id", { count: "exact", head: true })
+    .eq("business_id", businessId)
+    .is("archived_at", null);
+
+  if (error) {
+    throw new Error(`Failed to load active-lifecycle product count: ${error.message}`);
+  }
+
+  return count ?? 0;
+}
+
 export async function getManualOrderProductOptions(
   businessId: string
 ): Promise<ManualOrderProductOption[]> {
@@ -159,6 +204,7 @@ export async function getManualOrderProductOptions(
     )
     .eq("business_id", businessId)
     .eq("is_available", true)
+    .is("archived_at", null)
     .order("name", { ascending: true });
 
   if (error) {
@@ -234,6 +280,7 @@ export async function getAdminProductById(
         sku,
         stock,
         track_stock,
+        archived_at,
         created_at,
         categories (
           name
@@ -263,6 +310,7 @@ export async function getAdminProductById(
     sku: data.sku,
     stock: data.stock,
     track_stock: data.track_stock,
+    archived_at: data.archived_at ?? null,
     created_at: data.created_at,
     categories: normalizeCategoryRelation(data.categories)
   };

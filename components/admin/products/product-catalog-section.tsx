@@ -1,6 +1,9 @@
 import ProductCatalogViews from "@/components/admin/products/product-catalog-views";
 import ProductCatalogEmptyState from "@/components/admin/products/product-catalog-empty-state";
-import { getAdminProducts } from "@/lib/products/admin";
+import {
+  getAdminProducts,
+  getAdminProductsActiveLifecycleCount
+} from "@/lib/products/admin";
 import type { AdminCategory } from "@/lib/categories/admin";
 
 type ProductCatalogSectionProps = {
@@ -22,16 +25,27 @@ export default async function ProductCatalogSection({
   stock,
   status
 }: ProductCatalogSectionProps) {
-  const productsPage = await getAdminProducts(businessId, {
-    page,
-    q,
-    categoryId,
-    stock,
-    status
-  });
+  const [productsPage, activeLifecycleCount] = await Promise.all([
+    getAdminProducts(businessId, {
+      page,
+      q,
+      categoryId,
+      stock,
+      status
+    }),
+    getAdminProductsActiveLifecycleCount(businessId)
+  ]);
 
   if (productsPage.products.length === 0) {
-    return <ProductCatalogEmptyState />;
+    return (
+      <ProductCatalogEmptyState
+        activeLifecycleCount={activeLifecycleCount}
+        status={status}
+        q={q}
+        categoryId={categoryId}
+        stock={stock}
+      />
+    );
   }
 
   return (

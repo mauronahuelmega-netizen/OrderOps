@@ -99,8 +99,8 @@ export async function updateScheduledSettings(
     return inactiveDays;
   }
 
+  const adminContext = await requireAdminPermission("managePublicSettings");
   try {
-    const adminContext = await requireAdminPermission("managePublicSettings");
     const supabase = await createSupabaseServerClient();
 
     const { data: currentSettings, error: loadError } = await supabase

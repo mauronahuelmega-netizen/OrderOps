@@ -76,7 +76,7 @@ export async function validateCheckoutCartForCreateOrder(params: {
 
     const { data: product, error } = await supabase
       .from("products")
-      .select("id, name, price, is_available, business_id")
+      .select("id, name, price, is_available, archived_at, business_id")
       .eq("id", productId)
       .eq("business_id", params.businessId)
       .maybeSingle();
@@ -85,7 +85,7 @@ export async function validateCheckoutCartForCreateOrder(params: {
       return { ok: false, error: "No pudimos crear el pedido. Intentá nuevamente." };
     }
 
-    if (!product || !product.is_available) {
+    if (!product || !product.is_available || product.archived_at != null) {
       return { ok: false, error: "El producto ya no está disponible." };
     }
 

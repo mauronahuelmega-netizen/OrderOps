@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { useProductsManagement } from "@/components/admin/products/products-management-provider";
 import ProductFormSkeleton from "@/components/admin/products/product-form-skeleton";
-import Button from "@/components/ui/Button";
 import formStyles from "@/components/admin/products/product-form.module.css";
 import { useScrollLock } from "@/hooks/use-scroll-lock";
 import styles from "./flyout-panel.module.css";
@@ -23,6 +22,40 @@ const EditProductForm = dynamic(
   () => import("@/components/admin/products/edit-product-form"),
   { ssr: false }
 );
+
+const FOCUSABLE_SELECTOR = [
+  "button:not([disabled])",
+  "a[href]",
+  "input:not([disabled]):not([type='hidden'])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  '[tabindex]:not([tabindex="-1"])'
+].join(",");
+
+function getFlyoutFocusableElements(container: HTMLElement) {
+  return Array.from(container.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)).filter(
+    (element) =>
+      !element.hasAttribute("disabled") &&
+      element.getAttribute("aria-hidden") !== "true" &&
+      element.tabIndex !== -1 &&
+      element.getClientRects().length > 0
+  );
+}
+
+function isImageCropModalOpen() {
+  return Boolean(document.getElementById("image-crop-modal-title"));
+}
+
+function getOpenEditProductConfirmDialog() {
+  const openConfirm = document.querySelector(
+    'dialog[data-edit-product-confirm="true"][open]'
+  );
+  return openConfirm instanceof HTMLDialogElement ? openConfirm : null;
+}
+
+function isEditProductConfirmOpen() {
+  return Boolean(getOpenEditProductConfirmDialog());
+}
 
 function resolveFlyoutTitle(
   flyoutMode: ReturnType<typeof useProductsManagement>["flyoutMode"],
@@ -71,11 +104,14 @@ export default function FlyoutPanel() {
     selectedProduct,
     isLoadingSelectedProduct,
     selectedProductError,
-    closeFlyout
+    closeFlyout,
+    requestCloseFlyout
   } = useProductsManagement();
 
   const isOpen = flyoutMode !== null;
   const [isPanelVisible, setIsPanelVisible] = useState(false);
+  const dialogRef = useRef<HTMLElement | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
 
   useScrollLock(isOpen);
 
@@ -92,6 +128,77 @@ export default function FlyoutPanel() {
     return () => cancelAnimationFrame(frame);
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen || !isPanelVisible) {
+      return;
+    }
+
+    closeButtonRef.current?.focus();
+  }, [isOpen, isPanelVisible, flyoutMode]);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!isOpen || !dialog) {
+      return undefined;
+    }
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        if (isImageCropModalOpen()) {
+          return;
+        }
+
+        if (isEditProductConfirmOpen()) {
+          event.preventDefault();
+          event.stopPropagation();
+          getOpenEditProductConfirmDialog()?.close();
+          return;
+        }
+
+        event.preventDefault();
+        requestCloseFlyout();
+        return;
+      }
+
+      if (event.key !== "Tab" || event.altKey || event.ctrlKey || event.metaKey) {
+        return;
+      }
+
+      if (isImageCropModalOpen() || isEditProductConfirmOpen()) {
+        return;
+      }
+
+      const focusables = getFlyoutFocusableElements(dialog);
+      if (focusables.length === 0) {
+        event.preventDefault();
+        return;
+      }
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      const active = document.activeElement;
+      const activeIsInside = active instanceof HTMLElement && dialog.contains(active);
+
+      if (event.shiftKey) {
+        if (!activeIsInside || active === first) {
+          event.preventDefault();
+          last.focus();
+        }
+        return;
+      }
+
+      if (!activeIsInside || active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    dialog.addEventListener("keydown", handleKeyDown);
+    return () => {
+      dialog.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, requestCloseFlyout]);
+
   if (!isOpen) {
     return null;
   }
@@ -100,11 +207,24 @@ export default function FlyoutPanel() {
     ? `${styles.panel} ${styles.panelOpen}`
     : styles.panel;
 
+  function handleBackdropClick() {
+    if (isImageCropModalOpen() || isEditProductConfirmOpen()) {
+      return;
+    }
+
+    requestCloseFlyout();
+  }
+
   return (
     <>
-      <div className={styles.backdrop} onClick={closeFlyout} aria-hidden="false" />
+      <div
+        className={styles.backdrop}
+        onClick={handleBackdropClick}
+        aria-hidden="true"
+      />
 
       <section
+        ref={dialogRef}
         className={panelClassName}
         role="dialog"
         aria-modal="true"
@@ -118,14 +238,14 @@ export default function FlyoutPanel() {
             </h2>
           </div>
 
-          <Button
+          <button
+            ref={closeButtonRef}
             type="button"
-            className="admin-secondary-link admin-secondary-link--compact"
-            onClick={closeFlyout}
-            variant="secondary"
+            className={`ui-button ui-button--secondary admin-secondary-link admin-secondary-link--compact ${styles.closeButton}`}
+            onClick={requestCloseFlyout}
           >
             Cerrar
-          </Button>
+          </button>
         </header>
 
         <div className={styles.body}>
@@ -155,6 +275,7 @@ export default function FlyoutPanel() {
 
               {selectedProduct ? (
                 <EditProductForm
+                  key={selectedProduct.id}
                   businessId={businessId}
                   categories={categories}
                   product={selectedProduct}

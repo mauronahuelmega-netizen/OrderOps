@@ -1,0 +1,17 @@
+{
+  "animations": [
+    "none",
+    "none",
+    "none",
+    "none",
+    "none",
+    "none"
+  ],
+  "demoDisabled": true,
+  "headline": "Dejá de tomar\npedidos.\nEmpezá a\nrecibirlos.",
+  "initialLive": "Pendiente: El pedido ya está registrado, con sus productos y datos reunidos.",
+  "overflow": true,
+  "scripts": 0,
+  "sections": 10,
+  "method": "production HTML with scripts removed; reduced-motion media forced in QA server; browser/OS flags not toggled"
+}

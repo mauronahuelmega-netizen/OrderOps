@@ -1,0 +1,77 @@
+{
+  "anchors": [
+    {
+      "hash": "#producto",
+      "headerBottom": 65,
+      "menuOpen": false,
+      "top": 99.609375
+    },
+    {
+      "hash": "#como-funciona",
+      "headerBottom": 65,
+      "menuOpen": false,
+      "top": 100.1875
+    },
+    {
+      "hash": "#precios",
+      "headerBottom": 65,
+      "menuOpen": false,
+      "top": 100.265625
+    },
+    {
+      "hash": "#faq",
+      "headerBottom": 65,
+      "menuOpen": false,
+      "top": 99.609375
+    }
+  ],
+  "native": {
+    "assets": [
+      {
+        "complete": true,
+        "src": "/marketing/burger.svg",
+        "width": 360
+      },
+      {
+        "complete": true,
+        "src": "/marketing/burger.svg",
+        "width": 360
+      },
+      {
+        "complete": true,
+        "src": "/marketing/burger.svg",
+        "width": 360
+      },
+      {
+        "complete": true,
+        "src": "/marketing/lemonade.svg",
+        "width": 64
+      }
+    ],
+    "details": [
+      {
+        "open": true,
+        "summary": "Papas ObligatorioMedianas"
+      },
+      {
+        "open": true,
+        "summary": "Extras y salsas Bacon · Mayonesa"
+      },
+      {
+        "open": true,
+        "summary": "¿Sumás algo más? Limonada agregada"
+      }
+    ],
+    "faqOpen": 7,
+    "pageOverflow": true,
+    "prices": [
+      "$13.500",
+      "$13.500",
+      "$950",
+      "$1.500",
+      "$1.000",
+      "$2.500",
+      "$17.950"
+    ]
+  }
+}

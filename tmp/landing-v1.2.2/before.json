@@ -1,0 +1,502 @@
+[
+  {
+    "width": 360,
+    "step": 0,
+    "accordionY": 5927.359375,
+    "boardHeight": 0,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 5794.359375,
+    "descriptionY": 5852.359375,
+    "footerY": 5726.578125,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 683.3125,
+    "referenceY": 6001.359375,
+    "stage": "pending"
+  },
+  {
+    "width": 360,
+    "step": 1,
+    "accordionY": 5927.359375,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "3",
+      "1",
+      "0"
+    ],
+    "ctaY": 5794.359375,
+    "descriptionY": 5852.359375,
+    "footerY": 5726.578125,
+    "label": "Marcar listo",
+    "overflow": false,
+    "panelHeight": 683.3125,
+    "referenceY": 6001.359375,
+    "stage": "preparing"
+  },
+  {
+    "width": 360,
+    "step": 2,
+    "accordionY": 5927.359375,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "2",
+      "2",
+      "0"
+    ],
+    "ctaY": 5794.359375,
+    "descriptionY": 5852.359375,
+    "footerY": 5726.578125,
+    "label": "Completar",
+    "overflow": false,
+    "panelHeight": 683.3125,
+    "referenceY": 6001.359375,
+    "stage": "ready"
+  },
+  {
+    "width": 360,
+    "step": 3,
+    "accordionY": 5927.359375,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "2",
+      "1",
+      "1"
+    ],
+    "ctaY": 5794.359375,
+    "descriptionY": 5852.359375,
+    "footerY": 5726.578125,
+    "label": "Volver a empezar",
+    "overflow": false,
+    "panelHeight": 683.3125,
+    "referenceY": 6001.359375,
+    "stage": "completed"
+  },
+  {
+    "width": 360,
+    "step": 4,
+    "accordionY": 5927.359375,
+    "boardHeight": 0,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 5794.359375,
+    "descriptionY": 5852.359375,
+    "footerY": 5726.578125,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 683.3125,
+    "referenceY": 6001.359375,
+    "stage": "pending"
+  },
+  {
+    "width": 390,
+    "step": 0,
+    "accordionY": 5832.578125,
+    "boardHeight": 0,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 5699.578125,
+    "descriptionY": 5757.578125,
+    "footerY": 5631.796875,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 741.3125,
+    "referenceY": 5906.578125,
+    "stage": "pending"
+  },
+  {
+    "width": 390,
+    "step": 1,
+    "accordionY": 5832.578125,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "3",
+      "1",
+      "0"
+    ],
+    "ctaY": 5699.578125,
+    "descriptionY": 5757.578125,
+    "footerY": 5631.796875,
+    "label": "Marcar listo",
+    "overflow": false,
+    "panelHeight": 741.3125,
+    "referenceY": 5906.578125,
+    "stage": "preparing"
+  },
+  {
+    "width": 390,
+    "step": 2,
+    "accordionY": 5832.578125,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "2",
+      "2",
+      "0"
+    ],
+    "ctaY": 5699.578125,
+    "descriptionY": 5757.578125,
+    "footerY": 5631.796875,
+    "label": "Completar",
+    "overflow": false,
+    "panelHeight": 741.3125,
+    "referenceY": 5906.578125,
+    "stage": "ready"
+  },
+  {
+    "width": 390,
+    "step": 3,
+    "accordionY": 5832.578125,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "2",
+      "1",
+      "1"
+    ],
+    "ctaY": 5699.578125,
+    "descriptionY": 5757.578125,
+    "footerY": 5631.796875,
+    "label": "Volver a empezar",
+    "overflow": false,
+    "panelHeight": 741.3125,
+    "referenceY": 5906.578125,
+    "stage": "completed"
+  },
+  {
+    "width": 390,
+    "step": 4,
+    "accordionY": 5832.578125,
+    "boardHeight": 0,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 5699.578125,
+    "descriptionY": 5757.578125,
+    "footerY": 5631.796875,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 741.3125,
+    "referenceY": 5906.578125,
+    "stage": "pending"
+  },
+  {
+    "width": 768,
+    "step": 0,
+    "accordionY": 4194.8125,
+    "boardHeight": 0,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 4039.8125,
+    "descriptionY": 4101.8125,
+    "footerY": 4018.8125,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 555.15625,
+    "referenceY": 4282.8125,
+    "stage": "pending"
+  },
+  {
+    "width": 768,
+    "step": 1,
+    "accordionY": 4194.8125,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "3",
+      "1",
+      "0"
+    ],
+    "ctaY": 4039.8125,
+    "descriptionY": 4101.8125,
+    "footerY": 4018.8125,
+    "label": "Marcar listo",
+    "overflow": false,
+    "panelHeight": 555.15625,
+    "referenceY": 4282.8125,
+    "stage": "preparing"
+  },
+  {
+    "width": 768,
+    "step": 2,
+    "accordionY": 4194.8125,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "2",
+      "2",
+      "0"
+    ],
+    "ctaY": 4039.8125,
+    "descriptionY": 4101.8125,
+    "footerY": 4018.8125,
+    "label": "Completar",
+    "overflow": false,
+    "panelHeight": 555.15625,
+    "referenceY": 4282.8125,
+    "stage": "ready"
+  },
+  {
+    "width": 768,
+    "step": 3,
+    "accordionY": 4194.8125,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "2",
+      "1",
+      "1"
+    ],
+    "ctaY": 4039.8125,
+    "descriptionY": 4101.8125,
+    "footerY": 4018.8125,
+    "label": "Volver a empezar",
+    "overflow": false,
+    "panelHeight": 555.15625,
+    "referenceY": 4282.8125,
+    "stage": "completed"
+  },
+  {
+    "width": 768,
+    "step": 4,
+    "accordionY": 4194.8125,
+    "boardHeight": 0,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 4039.8125,
+    "descriptionY": 4101.8125,
+    "footerY": 4018.8125,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 555.15625,
+    "referenceY": 4282.8125,
+    "stage": "pending"
+  },
+  {
+    "width": 1024,
+    "step": 0,
+    "accordionY": 4222.40625,
+    "boardHeight": 289.15625,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 4075.40625,
+    "descriptionY": 4137.40625,
+    "footerY": 4054.40625,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 507.15625,
+    "referenceY": 4310.40625,
+    "stage": "pending"
+  },
+  {
+    "width": 1024,
+    "step": 1,
+    "accordionY": 4440.78125,
+    "boardHeight": 507.53125,
+    "counts": [
+      "0",
+      "3",
+      "1",
+      "0"
+    ],
+    "ctaY": 4293.78125,
+    "descriptionY": 4355.78125,
+    "footerY": 4272.78125,
+    "label": "Marcar listo",
+    "overflow": false,
+    "panelHeight": 725.53125,
+    "referenceY": 4528.78125,
+    "stage": "preparing"
+  },
+  {
+    "width": 1024,
+    "step": 2,
+    "accordionY": 4331.59375,
+    "boardHeight": 398.34375,
+    "counts": [
+      "0",
+      "2",
+      "2",
+      "0"
+    ],
+    "ctaY": 4184.59375,
+    "descriptionY": 4246.59375,
+    "footerY": 4163.59375,
+    "label": "Completar",
+    "overflow": false,
+    "panelHeight": 616.34375,
+    "referenceY": 4419.59375,
+    "stage": "ready"
+  },
+  {
+    "width": 1024,
+    "step": 3,
+    "accordionY": 4222.40625,
+    "boardHeight": 289.15625,
+    "counts": [
+      "0",
+      "2",
+      "1",
+      "1"
+    ],
+    "ctaY": 4075.40625,
+    "descriptionY": 4137.40625,
+    "footerY": 4054.40625,
+    "label": "Volver a empezar",
+    "overflow": false,
+    "panelHeight": 507.15625,
+    "referenceY": 4310.40625,
+    "stage": "completed"
+  },
+  {
+    "width": 1024,
+    "step": 4,
+    "accordionY": 4222.40625,
+    "boardHeight": 289.15625,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 4075.40625,
+    "descriptionY": 4137.40625,
+    "footerY": 4054.40625,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 507.15625,
+    "referenceY": 4310.40625,
+    "stage": "pending"
+  },
+  {
+    "width": 1440,
+    "step": 0,
+    "accordionY": 3939.40625,
+    "boardHeight": 289.15625,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 3784.40625,
+    "descriptionY": 3846.40625,
+    "footerY": 3763.40625,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 523.15625,
+    "referenceY": 4027.40625,
+    "stage": "pending"
+  },
+  {
+    "width": 1440,
+    "step": 1,
+    "accordionY": 4157.78125,
+    "boardHeight": 507.53125,
+    "counts": [
+      "0",
+      "3",
+      "1",
+      "0"
+    ],
+    "ctaY": 4002.78125,
+    "descriptionY": 4064.78125,
+    "footerY": 3981.78125,
+    "label": "Marcar listo",
+    "overflow": false,
+    "panelHeight": 741.53125,
+    "referenceY": 4245.78125,
+    "stage": "preparing"
+  },
+  {
+    "width": 1440,
+    "step": 2,
+    "accordionY": 4048.59375,
+    "boardHeight": 398.34375,
+    "counts": [
+      "0",
+      "2",
+      "2",
+      "0"
+    ],
+    "ctaY": 3893.59375,
+    "descriptionY": 3955.59375,
+    "footerY": 3872.59375,
+    "label": "Completar",
+    "overflow": false,
+    "panelHeight": 632.34375,
+    "referenceY": 4136.59375,
+    "stage": "ready"
+  },
+  {
+    "width": 1440,
+    "step": 3,
+    "accordionY": 3939.40625,
+    "boardHeight": 289.15625,
+    "counts": [
+      "0",
+      "2",
+      "1",
+      "1"
+    ],
+    "ctaY": 3784.40625,
+    "descriptionY": 3846.40625,
+    "footerY": 3763.40625,
+    "label": "Volver a empezar",
+    "overflow": false,
+    "panelHeight": 523.15625,
+    "referenceY": 4027.40625,
+    "stage": "completed"
+  },
+  {
+    "width": 1440,
+    "step": 4,
+    "accordionY": 3939.40625,
+    "boardHeight": 289.15625,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 3784.40625,
+    "descriptionY": 3846.40625,
+    "footerY": 3763.40625,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 523.15625,
+    "referenceY": 4027.40625,
+    "stage": "pending"
+  }
+]

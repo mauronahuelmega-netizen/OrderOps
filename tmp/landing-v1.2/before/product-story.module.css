@@ -1,0 +1,45 @@
+.story { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 45px; border: 1px solid var(--marketing-border); border-radius: 18px; background: var(--marketing-paper); overflow: hidden; }
+.product { padding: 30px 35px; border-right: 1px solid var(--marketing-border); }
+.productImage { background: var(--marketing-food-cream); border-radius: 12px; height: 280px; position: relative; display: grid; place-items: center; overflow: hidden; }
+.productImage img { width: 100%; max-width: 380px; height: auto; transition: transform .3s; }
+.productImage:hover img { transform: rotate(-3deg) scale(1.04); }
+.productImage > span { position: absolute; left: 18px; top: 17px; font-size: 8px; font-weight: 600; letter-spacing: 1px; color: var(--marketing-food-rust); }
+.productTitle { display: flex; align-items: center; justify-content: space-between; margin-top: 22px; gap: 12px; }
+.productTitle > strong { font-family: var(--font-display),sans-serif; font-size: 24px; letter-spacing: -.8px; }
+.productTitle > span { font-size: 15px; font-weight: 600; }
+.product > p { font-size: 11px; color: var(--marketing-muted); margin-top: 9px; line-height: 1.8; }
+.brandNote { margin-top: 28px; padding-top: 18px; border-top: 1px solid var(--marketing-border); display: flex; align-items: center; gap: 10px; font-size: 9px; color: var(--marketing-muted); }
+.brandNote > span { background: var(--marketing-food-rust); color: var(--marketing-food-cream); border-radius: 50%; width: 26px; height: 26px; display: grid; place-items: center; font-weight: 750; font-size: 15px; letter-spacing: -1px; }
+.options { padding: 33px 35px; }
+.optionsHeading > span { color: var(--marketing-muted); font-size: 8px; letter-spacing: 1.1px; font-weight: 550; }
+.optionsHeading h3 { font-size: 22px; letter-spacing: -.7px; margin-top: 13px; }
+.optionsHeading p { font-size: 11px; color: var(--marketing-muted); margin-top: 9px; }
+.optionGroup { margin-top: 13px; background: var(--marketing-white); border: 1px solid var(--marketing-border); border-radius: 8px; }
+.optionGroup:first-of-type { margin-top: 26px; }
+.optionGroup summary { display: flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 600; padding: 15px; min-height: 48px; list-style: none; cursor: pointer; }
+.optionGroup summary::-webkit-details-marker { display: none; }
+.optionGroup summary > span { color: var(--marketing-food-rust); background: var(--marketing-food-cream); font-size: 8px; padding: 4px 6px; border-radius: 4px; }
+.optionGroup summary > svg { margin-left: auto; color: var(--marketing-muted); transition: transform .18s; }
+.optionGroup[open] summary > svg { transform: rotate(45deg); }
+.optionRows { padding: 0 12px 12px; display: grid; gap: 5px; }
+.optionRows > div { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 10px; padding: 10px; border-radius: 5px; }
+.optionRows > div > span { display: flex; align-items: center; gap: 7px; color: var(--marketing-muted); }
+.optionRows .selected { background: var(--marketing-blue-soft); color: var(--marketing-blue); }
+.optionRows .selected > span { color: var(--marketing-blue); }
+.selected strong { font-size: 10px; }
+.upsell { display: flex; gap: 12px; align-items: center; padding: 0 15px 15px; }
+.upsell img { background: var(--marketing-food-cream); border-radius: 5px; width: 48px; height: 59px; }
+.upsell > div { flex: 1; }
+.upsell strong { font-size: 11px; }
+.upsell span { display: block; font-size: 9px; color: var(--marketing-muted); margin-top: 4px; line-height: 1.5; }
+.total { display: flex; justify-content: space-between; align-items: center; gap: 16px; margin-top: 25px; border-top: 1px solid var(--marketing-border); padding-top: 18px; }
+.total > span { font-size: 9px; color: var(--marketing-muted); }
+.total > strong { display: flex; align-items: center; gap: 12px; font-size: 17px; }
+.total svg { color: var(--marketing-blue); }
+@media (max-width: 1023px) { .product,.options { padding: 24px; } .productImage { height: 240px; } .optionsHeading h3 { font-size: 19px; } .productTitle > strong { font-size: 21px; } .total { flex-wrap: wrap; gap: 8px; } }
+@media (max-width: 767px) { .story { grid-template-columns: 1fr; margin-top: 30px; border-radius: 13px; } .product { border-right: 0; border-bottom: 1px solid var(--marketing-border); padding: 20px; } .productImage { height: 215px; } .productImage img { width: 285px; } .productTitle { margin-top: 17px; } .brandNote { margin-top: 19px; } .options { padding: 23px 20px; } .optionsHeading h3 { font-size: 22px; } .optionRows > div { font-size: 11px; } .total { flex-wrap: nowrap; } .total > span { max-width: 150px; line-height: 1.6; } }
+
+/* LANDING-V1.1 editorial refinements */
+.productImage img{transition:none}.productImage:hover img{transform:none}.optionGroup summary{flex-wrap:wrap;gap:7px}.optionGroup summary>small{font-size:11px;color:var(--marketing-muted);font-weight:400}.orderNote{display:flex;justify-content:space-between;gap:12px;margin-top:16px;font-size:12px;line-height:1.6}.orderNote>span{color:var(--marketing-muted)}.orderNote>strong{font-weight:500}.complementGroup{margin-top:22px;background:var(--marketing-food-cream);border-color:#ded2c1}.complementGroup summary>small{font-size:10px}.total>span{font-size:12px}
+@media(max-width:767px){.productImage{height:160px}.productImage img{width:230px}.optionsHeading h3{font-size:22px}.optionGroup summary{font-size:12px}.optionsHeading p{font-size:12px}.upsell span{font-size:11px}.brandNote{margin-top:15px}}
+.complementGroup summary > small, .complementGroup .upsell span { color: var(--marketing-ink); }

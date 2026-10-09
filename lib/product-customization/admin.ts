@@ -101,15 +101,22 @@ export async function getCatalogProductsForCustomizationAdmin(
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("products")
-    .select("id, name, category_id, price, is_available")
+    .select("id, name, category_id, price, is_available, archived_at")
     .eq("business_id", businessId)
+    .is("archived_at", null)
     .order("name", { ascending: true });
 
   if (error) {
     throw new Error("No pudimos cargar los productos del catálogo.");
   }
 
-  return (data ?? []) as AdminCatalogProductOption[];
+  return (data ?? []).map((row) => ({
+    id: row.id,
+    name: row.name,
+    category_id: row.category_id,
+    price: row.price,
+    is_available: row.is_available
+  })) as AdminCatalogProductOption[];
 }
 
 export async function getCustomizationAssignmentsForAdmin(

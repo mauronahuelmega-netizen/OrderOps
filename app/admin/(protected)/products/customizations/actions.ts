@@ -106,8 +106,8 @@ export async function createCustomizationGroupAction(
     return { error: parsed.error };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const supabase = await createSupabaseServerClient();
     const { data, error } = await supabase
       .from("customization_groups")
@@ -159,8 +159,8 @@ export async function updateCustomizationGroupAction(
     return { error: parsed.error };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertGroupOwnership(groupId, adminContext.businessId);
     if ("error" in ownership) {
       return { error: ownership.error };
@@ -220,8 +220,8 @@ export async function toggleCustomizationGroupAvailabilityAction(
     return { error: "Falta identificar el grupo." };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertGroupOwnership(groupId, adminContext.businessId);
     if ("error" in ownership) {
       return { error: ownership.error };
@@ -262,8 +262,8 @@ export async function createCustomizationOptionAction(
     return { error: "Falta identificar el grupo." };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertGroupOwnership(groupId, adminContext.businessId);
     if ("error" in ownership) {
       return { error: ownership.error };
@@ -322,8 +322,8 @@ export async function updateCustomizationOptionAction(
     return { error: "Falta identificar la opción." };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertOptionOwnership(optionId, adminContext.businessId);
     if ("error" in ownership) {
       return { error: ownership.error };
@@ -386,8 +386,8 @@ export async function toggleCustomizationOptionAvailabilityAction(
     return { error: "Falta identificar la opción." };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertOptionOwnership(optionId, adminContext.businessId);
     if ("error" in ownership) {
       return { error: ownership.error };
@@ -439,11 +439,16 @@ async function assertCategoryOwnership(categoryId: string, businessId: string) {
   return { ok: true as const, supabase };
 }
 
-async function assertProductOwnership(productId: string, businessId: string) {
+async function assertProductOwnership(
+  productId: string,
+  businessId: string,
+  options?: { requireNonArchived?: boolean }
+) {
+  const requireNonArchived = options?.requireNonArchived ?? true;
   const supabase = await createSupabaseServerClient();
   const { data, error } = await supabase
     .from("products")
-    .select("id, category_id")
+    .select("id, category_id, archived_at")
     .eq("id", productId)
     .eq("business_id", businessId)
     .maybeSingle();
@@ -456,19 +461,26 @@ async function assertProductOwnership(productId: string, businessId: string) {
     return { error: "El producto no existe o no pertenece a tu negocio." } as const;
   }
 
+  if (requireNonArchived && data.archived_at != null) {
+    return {
+      error: "El producto está archivado. Restáuralo para usarlo como destino."
+    } as const;
+  }
+
   return { ok: true as const, supabase, product: data };
 }
 
 async function assertTargetOwnership(
   targetType: "category" | "product",
   targetId: string,
-  businessId: string
+  businessId: string,
+  options?: { requireNonArchived?: boolean }
 ) {
   if (targetType === "category") {
     return assertCategoryOwnership(targetId, businessId);
   }
 
-  return assertProductOwnership(targetId, businessId);
+  return assertProductOwnership(targetId, businessId, options);
 }
 
 async function assertAssignmentOwnership(assignmentId: string, businessId: string) {
@@ -564,8 +576,8 @@ export async function createCustomizationGroupAssignmentAction(
     return { error: parsed.error };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const groupOwnership = await assertGroupOwnership(
       parsed.groupId,
       adminContext.businessId
@@ -653,8 +665,8 @@ export async function updateCustomizationGroupAssignmentAction(
   const hasEnabled = isEnabledRaw !== null;
   const isEnabled = getBooleanToggle(formData, "is_enabled");
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertAssignmentOwnership(
       assignmentId,
       adminContext.businessId
@@ -701,8 +713,8 @@ export async function toggleCustomizationGroupAssignmentAction(
     return { error: "Falta identificar la asignación." };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertAssignmentOwnership(
       assignmentId,
       adminContext.businessId
@@ -749,8 +761,8 @@ export async function removeCustomizationGroupAssignmentAction(
     return { error: "Falta identificar la asignación." };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertAssignmentOwnership(
       assignmentId,
       adminContext.businessId
@@ -781,10 +793,12 @@ export async function removeCustomizationGroupAssignmentAction(
       }
     }
 
+    // Cleanup of an existing relation may target an archived product; do not block remove.
     const targetOwnership = await assertTargetOwnership(
       ownership.assignment.target_type,
       ownership.assignment.target_id,
-      adminContext.businessId
+      adminContext.businessId,
+      { requireNonArchived: false }
     );
     if ("error" in targetOwnership) {
       return { error: targetOwnership.error };
@@ -830,8 +844,8 @@ export async function disableProductCustomizationGroupOverrideAction(
     return { error: "Faltan producto o grupo." };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const productOwnership = await assertProductOwnership(
       productId,
       adminContext.businessId
@@ -916,8 +930,8 @@ export async function restoreProductCustomizationGroupOverrideAction(
     return { error: "Faltan producto o grupo." };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const productOwnership = await assertProductOwnership(
       productId,
       adminContext.businessId
@@ -963,8 +977,8 @@ export async function disableProductCustomizationOptionOverrideAction(
     return { error: "Faltan producto, grupo u opción." };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const productOwnership = await assertProductOwnership(
       productId,
       adminContext.businessId
@@ -1056,8 +1070,8 @@ export async function restoreProductCustomizationOptionOverrideAction(
     return { error: "Faltan producto u opción." };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const productOwnership = await assertProductOwnership(
       productId,
       adminContext.businessId
@@ -1103,8 +1117,8 @@ export async function createUpsellGroupAction(
     return { error: parsed.error };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const targetOwnership = await assertTargetOwnership(
       parsed.targetType,
       parsed.targetId,
@@ -1185,8 +1199,8 @@ export async function updateUpsellGroupAction(
     return { error: parsed.error };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertUpsellGroupOwnership(
       upsellGroupId,
       adminContext.businessId
@@ -1195,18 +1209,20 @@ export async function updateUpsellGroupAction(
       return { error: ownership.error };
     }
 
+    const targetChanged =
+      ownership.upsellGroup.target_type !== parsed.targetType ||
+      ownership.upsellGroup.target_id !== parsed.targetId;
+
+    // Keep existing archived targets editable for metadata; reject only NEW archived targets.
     const targetOwnership = await assertTargetOwnership(
       parsed.targetType,
       parsed.targetId,
-      adminContext.businessId
+      adminContext.businessId,
+      { requireNonArchived: targetChanged }
     );
     if ("error" in targetOwnership) {
       return { error: targetOwnership.error };
     }
-
-    const targetChanged =
-      ownership.upsellGroup.target_type !== parsed.targetType ||
-      ownership.upsellGroup.target_id !== parsed.targetId;
 
     if (targetChanged) {
       const { data: conflict } = await ownership.supabase
@@ -1270,8 +1286,8 @@ export async function toggleUpsellGroupAction(
     return { error: "Falta identificar el grupo de plus." };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertUpsellGroupOwnership(
       upsellGroupId,
       adminContext.businessId
@@ -1316,8 +1332,8 @@ export async function addUpsellGroupItemAction(
     return { error: parsed.error };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const groupOwnership = await assertUpsellGroupOwnership(
       parsed.upsellGroupId,
       adminContext.businessId
@@ -1409,8 +1425,8 @@ export async function updateUpsellGroupItemAction(
   const hasAvailable = isAvailableRaw !== null;
   const isAvailable = getBooleanToggle(formData, "is_available");
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertUpsellItemOwnership(itemId, adminContext.businessId);
     if ("error" in ownership) {
       return { error: ownership.error };
@@ -1454,8 +1470,8 @@ export async function toggleUpsellGroupItemAction(
     return { error: "Falta identificar el producto sugerido." };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertUpsellItemOwnership(itemId, adminContext.businessId);
     if ("error" in ownership) {
       return { error: ownership.error };
@@ -1500,8 +1516,8 @@ export async function loadProductCustomizationInheritanceAction(
     return { ok: false, error: "Falta identificar el producto." };
   }
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const data = await getProductCustomizationInheritanceForAdmin(
       adminContext.businessId,
       trimmed
@@ -1535,8 +1551,8 @@ export async function reorderCustomizationGroupsAction(
 
   const { orderedIds } = parsed;
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const supabase = await createSupabaseServerClient();
 
     const { data: existing, error: loadError } = await supabase
@@ -1595,8 +1611,8 @@ export async function reorderCustomizationOptionsAction(
 
   const { orderedIds } = parsed;
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const groupOwnership = await assertGroupOwnership(groupId, adminContext.businessId);
     if ("error" in groupOwnership) {
       return { error: groupOwnership.error };
@@ -1673,8 +1689,8 @@ export async function reorderCustomizationAssignmentsAction(
   const { orderedIds } = parsed;
   const targetType = targetTypeRaw;
 
+  const adminContext = await requireAdminPermission("manageProducts");
   try {
-    const adminContext = await requireAdminPermission("manageProducts");
     const supabase = await createSupabaseServerClient();
 
     if (targetType === "category") {

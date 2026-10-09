@@ -1,0 +1,32 @@
+.journey { display:grid;  grid-template-columns:repeat(3,minmax(0,1fr));  gap:42px;  margin-top:36px;  }
+.journey article { position:relative;  display:flex;  flex-direction:column;  min-width:0;  }
+.head { display:flex;  justify-content:space-between;  color:var(--marketing-blue);  align-items:center;  }
+.head>span { font-size:11px;  color:var(--marketing-muted);  }
+.journey h3 { font-size:17px;  letter-spacing:-.4px;  margin-top:17px;  }
+.journey p { color:var(--marketing-muted);  font-size:13px;  line-height:1.7;  margin-top:10px;  margin-bottom:22px;  }
+.fragment { background:var(--marketing-paper);  border:1px solid var(--marketing-border);  border-radius:10px;  padding:20px;  min-height:154px;  margin-top:auto;  display:flex;  flex-direction:column;  gap:10px;  }
+.fragment strong { font-size:15px;  }
+.fragment>span { display:flex;  align-items:center;  gap:6px;  font-size:12px;  }
+.fragment small { color:var(--marketing-muted);  font-size:11px;  line-height:1.5;  }
+.fragment svg { color:var(--marketing-blue);  }
+.registered { background:var(--marketing-blue-soft);  border-color:#cbd8fb;  }
+.registered>strong { color:var(--marketing-blue-strong);  font-size:23px;  }
+.connector { position:absolute;  right:-31px;  bottom:66px;  color:var(--marketing-blue);  }
+.lane { font-size:12px;  display:flex;  align-items:center;  gap:8px;  padding-bottom:12px;  border-bottom:1px solid var(--marketing-border);  }
+.lane>span { width:6px;  height:6px;  border-radius:50%;  background:var(--marketing-pending);  }
+.lane b { margin-left:auto;  }
+
+@media(max-width:1023px){.journey{gap:22px}
+.fragment{padding:14px}
+.journey h3{font-size:15px}
+.connector{right:-20px; width:17px}
+}
+
+@media(max-width:767px){.journey{grid-template-columns:1fr; gap:27px; margin-top:28px; padding-left:21px; border-left:1px solid var(--marketing-border)}
+.head{justify-content:start; gap:12px}
+.head>span{margin-left:auto}
+.journey h3{font-size:18px}
+.journey p{margin-bottom:14px}
+.fragment{min-height:0; padding:16px; gap:8px}
+.connector{left:-31px; right:auto; bottom:-23px; transform:rotate(90deg); background:var(--marketing-white)}
+}

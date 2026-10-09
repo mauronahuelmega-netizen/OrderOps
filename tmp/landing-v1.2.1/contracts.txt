@@ -1,0 +1,71 @@
+PASS: commercial configuration, safe missing/invalid values, distinct contact intents
+PASS components/marketing/marketing-config.verify.ts
+order-display-ref.verify.ts: PASS
+PASS lib/orders/order-display-ref.verify.ts
+public.verify.ts: PASS
+PASS lib/whatsapp/public.verify.ts
+admin-contextual-default.verify.ts: PASS
+PASS lib/whatsapp/admin-contextual-default.verify.ts
+admin-structured-content.verify.ts: PASS
+--- AFTER WHATSAPP SUMMARY ---
+Hola Mauro
+
+Te compartimos el resumen de tu pedido #7DC3:
+
+*2× BBQ Bacon*
+- Papas: Papas grandes
+- Salsas: Big Mac / BBQ
+- Agregados extra: Bacon ×4 c/u / Cheddar ×4 c/u
+- Adicional: Coca Cola 500ml ×2
+
+*1× Doble Smash*
+- Papas: Papas grandes
+
+Indicaciones: Sin cebolla
+
+Modalidad: Delivery
+Dirección: Núñez N°3050, Glew
+--- AFTER PLAIN TEXT ---
+Pedido #7DC3
+Cliente: Mauro Ramirez
+
+2× BBQ Bacon
+- Papas: Papas grandes
+- Salsas: Big Mac / BBQ
+- Agregados extra: Bacon ×4 c/u / Cheddar ×4 c/u
+- Adicional: Coca Cola 500ml ×2
+
+1× Doble Smash
+- Papas: Papas grandes
+
+Indicaciones: Sin cebolla
+
+Modalidad: Delivery
+Dirección: Núñez N°3050, Glew
+PASS lib/whatsapp/admin-structured-content.verify.ts
+
+✓ merge created / merged / replaced / failures
+
+✓ edit signature conflict does not mutate
+
+✓ attach / idempotency / parent validation
+
+✓ attach signature conflict
+
+✓ quantity / count / total
+
+✓ edit preservation
+
+✓ remove hierarchy
+
+✓ child builder equivalence
+
+✓ hypothetical signature helper
+
+✓ EDIT-QTY — replaced preserves root and child quantity
+
+ALL_PASS post-add-upsell-contract.verify.ts
+
+PASS lib/cart/post-add-upsell-contract.verify.ts
+order-preparation.verify.ts — all assertions passed
+PASS lib/product-customization/order-preparation.verify.ts

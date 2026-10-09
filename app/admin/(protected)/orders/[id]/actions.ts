@@ -131,8 +131,8 @@ export async function updateOrderStatusAction(
     return { error: "Estado invalido." };
   }
 
+  const adminContext = await requireAdminPermission("updateOrders");
   try {
-    const adminContext = await requireAdminPermission("updateOrders");
     const supabase = await createSupabaseServerClient();
 
     const { data: currentOrder, error: currentOrderError } = await supabase
@@ -323,9 +323,8 @@ export async function updateOrderAssignmentAction(
     return { error: "Accion invalida." };
   }
 
+  const adminContext = await requireAdminPermission("updateOrders");
   try {
-    const adminContext = await requireAdminPermission("updateOrders");
-
     const orderAssignmentEnabled = await isOrderAssignmentEnabled(adminContext.businessId);
 
     if (!orderAssignmentEnabled) {

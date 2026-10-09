@@ -1,0 +1,735 @@
+[
+  {
+    "width": 360,
+    "bodyText": 5961,
+    "client": 345,
+    "contextVisible": 1,
+    "cta": [
+      {
+        "disabled": false,
+        "h": 0,
+        "w": 0
+      },
+      {
+        "disabled": true,
+        "h": 44,
+        "w": 111.796875
+      }
+    ],
+    "header": "sticky",
+    "headingSizes": [
+      {
+        "id": "hero-title",
+        "size": "45px"
+      },
+      {
+        "id": "steps-title",
+        "size": "30px"
+      },
+      {
+        "id": "problem-title",
+        "size": "34px"
+      },
+      {
+        "id": "product-title",
+        "size": "34px"
+      },
+      {
+        "id": "operation-title",
+        "size": "34px"
+      },
+      {
+        "id": "communication-title",
+        "size": "34px"
+      },
+      {
+        "id": "benefits-title",
+        "size": "40px"
+      },
+      {
+        "id": "pricing-title",
+        "size": "38px"
+      },
+      {
+        "id": "faq-title",
+        "size": "30px"
+      },
+      {
+        "id": "demo-title",
+        "size": "40px"
+      }
+    ],
+    "scroll": 345,
+    "sections": 10,
+    "summaryTargets": [
+      44,
+      48,
+      48,
+      48,
+      51,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50
+    ],
+    "states": [
+      {
+        "action": "Preparar",
+        "columns": [
+          1,
+          2,
+          1,
+          0
+        ],
+        "live": "Pendiente: El pedido ya está registrado, con sus productos y datos reunidos.",
+        "stage": "pending",
+        "summary": [
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "action": "Marcar listo",
+        "columns": [
+          0,
+          3,
+          1,
+          0
+        ],
+        "live": "Preparando: El negocio cambia el estado cuando empieza a preparar el pedido.",
+        "stage": "preparing",
+        "summary": [
+          0,
+          3,
+          1,
+          0
+        ]
+      },
+      {
+        "action": "Completar",
+        "columns": [
+          0,
+          2,
+          2,
+          0
+        ],
+        "live": "Listo: Todo listo para retirar o entregar. Podés avisarle al cliente por WhatsApp.",
+        "stage": "ready",
+        "summary": [
+          0,
+          2,
+          2,
+          0
+        ]
+      },
+      {
+        "action": "Volver a empezar",
+        "columns": [
+          0,
+          2,
+          1,
+          1
+        ],
+        "live": "Completado: El negocio marca el pedido como completado y cierra su recorrido.",
+        "stage": "completed",
+        "summary": [
+          0,
+          2,
+          1,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "width": 390,
+    "bodyText": 5996,
+    "client": 375,
+    "contextVisible": 2,
+    "cta": [
+      {
+        "disabled": false,
+        "h": 0,
+        "w": 0
+      },
+      {
+        "disabled": true,
+        "h": 44,
+        "w": 111.796875
+      }
+    ],
+    "header": "sticky",
+    "headingSizes": [
+      {
+        "id": "hero-title",
+        "size": "45px"
+      },
+      {
+        "id": "steps-title",
+        "size": "30px"
+      },
+      {
+        "id": "problem-title",
+        "size": "34px"
+      },
+      {
+        "id": "product-title",
+        "size": "34px"
+      },
+      {
+        "id": "operation-title",
+        "size": "34px"
+      },
+      {
+        "id": "communication-title",
+        "size": "34px"
+      },
+      {
+        "id": "benefits-title",
+        "size": "40px"
+      },
+      {
+        "id": "pricing-title",
+        "size": "38px"
+      },
+      {
+        "id": "faq-title",
+        "size": "30px"
+      },
+      {
+        "id": "demo-title",
+        "size": "40px"
+      }
+    ],
+    "scroll": 375,
+    "sections": 10,
+    "summaryTargets": [
+      44,
+      48,
+      48,
+      48,
+      51,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50
+    ],
+    "states": [
+      {
+        "action": "Preparar",
+        "columns": [
+          1,
+          2,
+          1,
+          0
+        ],
+        "live": "Pendiente: El pedido ya está registrado, con sus productos y datos reunidos.",
+        "stage": "pending",
+        "summary": [
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "action": "Marcar listo",
+        "columns": [
+          0,
+          3,
+          1,
+          0
+        ],
+        "live": "Preparando: El negocio cambia el estado cuando empieza a preparar el pedido.",
+        "stage": "preparing",
+        "summary": [
+          0,
+          3,
+          1,
+          0
+        ]
+      },
+      {
+        "action": "Completar",
+        "columns": [
+          0,
+          2,
+          2,
+          0
+        ],
+        "live": "Listo: Todo listo para retirar o entregar. Podés avisarle al cliente por WhatsApp.",
+        "stage": "ready",
+        "summary": [
+          0,
+          2,
+          2,
+          0
+        ]
+      },
+      {
+        "action": "Volver a empezar",
+        "columns": [
+          0,
+          2,
+          1,
+          1
+        ],
+        "live": "Completado: El negocio marca el pedido como completado y cierra su recorrido.",
+        "stage": "completed",
+        "summary": [
+          0,
+          2,
+          1,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "width": 768,
+    "bodyText": 6324,
+    "client": 753,
+    "contextVisible": 3,
+    "cta": [
+      {
+        "disabled": false,
+        "h": 0,
+        "w": 0
+      },
+      {
+        "disabled": true,
+        "h": 44,
+        "w": 139.203125
+      }
+    ],
+    "header": "sticky",
+    "headingSizes": [
+      {
+        "id": "hero-title",
+        "size": "42px"
+      },
+      {
+        "id": "steps-title",
+        "size": "32px"
+      },
+      {
+        "id": "problem-title",
+        "size": "36px"
+      },
+      {
+        "id": "product-title",
+        "size": "36px"
+      },
+      {
+        "id": "operation-title",
+        "size": "36px"
+      },
+      {
+        "id": "communication-title",
+        "size": "36px"
+      },
+      {
+        "id": "benefits-title",
+        "size": "40px"
+      },
+      {
+        "id": "pricing-title",
+        "size": "40px"
+      },
+      {
+        "id": "faq-title",
+        "size": "32px"
+      },
+      {
+        "id": "demo-title",
+        "size": "40px"
+      }
+    ],
+    "scroll": 753,
+    "sections": 10,
+    "summaryTargets": [
+      44,
+      48,
+      48,
+      48,
+      53,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50
+    ],
+    "states": [
+      {
+        "action": "Preparar",
+        "columns": [
+          1,
+          2,
+          1,
+          0
+        ],
+        "live": "Pendiente: El pedido ya está registrado, con sus productos y datos reunidos.",
+        "stage": "pending",
+        "summary": [
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "action": "Marcar listo",
+        "columns": [
+          0,
+          3,
+          1,
+          0
+        ],
+        "live": "Preparando: El negocio cambia el estado cuando empieza a preparar el pedido.",
+        "stage": "preparing",
+        "summary": [
+          0,
+          3,
+          1,
+          0
+        ]
+      },
+      {
+        "action": "Completar",
+        "columns": [
+          0,
+          2,
+          2,
+          0
+        ],
+        "live": "Listo: Todo listo para retirar o entregar. Podés avisarle al cliente por WhatsApp.",
+        "stage": "ready",
+        "summary": [
+          0,
+          2,
+          2,
+          0
+        ]
+      },
+      {
+        "action": "Volver a empezar",
+        "columns": [
+          0,
+          2,
+          1,
+          1
+        ],
+        "live": "Completado: El negocio marca el pedido como completado y cierra su recorrido.",
+        "stage": "completed",
+        "summary": [
+          0,
+          2,
+          1,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "width": 1024,
+    "bodyText": 6416,
+    "client": 1009,
+    "contextVisible": 0,
+    "cta": [
+      {
+        "disabled": false,
+        "h": 44,
+        "w": 95.46875
+      },
+      {
+        "disabled": true,
+        "h": 44,
+        "w": 139.203125
+      }
+    ],
+    "header": "sticky",
+    "headingSizes": [
+      {
+        "id": "hero-title",
+        "size": "57px"
+      },
+      {
+        "id": "steps-title",
+        "size": "34px"
+      },
+      {
+        "id": "problem-title",
+        "size": "40px"
+      },
+      {
+        "id": "product-title",
+        "size": "40px"
+      },
+      {
+        "id": "operation-title",
+        "size": "40px"
+      },
+      {
+        "id": "communication-title",
+        "size": "40px"
+      },
+      {
+        "id": "benefits-title",
+        "size": "48px"
+      },
+      {
+        "id": "pricing-title",
+        "size": "46px"
+      },
+      {
+        "id": "faq-title",
+        "size": "34px"
+      },
+      {
+        "id": "demo-title",
+        "size": "52px"
+      }
+    ],
+    "scroll": 1009,
+    "sections": 10,
+    "summaryTargets": [
+      48,
+      48,
+      48,
+      53,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50
+    ],
+    "states": [
+      {
+        "action": "Preparar",
+        "columns": [
+          1,
+          2,
+          1,
+          0
+        ],
+        "live": "Pendiente: El pedido ya está registrado, con sus productos y datos reunidos.",
+        "stage": "pending",
+        "summary": [
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "action": "Marcar listo",
+        "columns": [
+          0,
+          3,
+          1,
+          0
+        ],
+        "live": "Preparando: El negocio cambia el estado cuando empieza a preparar el pedido.",
+        "stage": "preparing",
+        "summary": [
+          0,
+          3,
+          1,
+          0
+        ]
+      },
+      {
+        "action": "Completar",
+        "columns": [
+          0,
+          2,
+          2,
+          0
+        ],
+        "live": "Listo: Todo listo para retirar o entregar. Podés avisarle al cliente por WhatsApp.",
+        "stage": "ready",
+        "summary": [
+          0,
+          2,
+          2,
+          0
+        ]
+      },
+      {
+        "action": "Volver a empezar",
+        "columns": [
+          0,
+          2,
+          1,
+          1
+        ],
+        "live": "Completado: El negocio marca el pedido como completado y cierra su recorrido.",
+        "stage": "completed",
+        "summary": [
+          0,
+          2,
+          1,
+          1
+        ]
+      }
+    ]
+  },
+  {
+    "width": 1440,
+    "bodyText": 6416,
+    "client": 1425,
+    "contextVisible": 0,
+    "cta": [
+      {
+        "disabled": false,
+        "h": 44,
+        "w": 95.46875
+      },
+      {
+        "disabled": true,
+        "h": 44,
+        "w": 139.203125
+      }
+    ],
+    "header": "sticky",
+    "headingSizes": [
+      {
+        "id": "hero-title",
+        "size": "70.56px"
+      },
+      {
+        "id": "steps-title",
+        "size": "36px"
+      },
+      {
+        "id": "problem-title",
+        "size": "48px"
+      },
+      {
+        "id": "product-title",
+        "size": "48px"
+      },
+      {
+        "id": "operation-title",
+        "size": "48px"
+      },
+      {
+        "id": "communication-title",
+        "size": "48px"
+      },
+      {
+        "id": "benefits-title",
+        "size": "60px"
+      },
+      {
+        "id": "pricing-title",
+        "size": "56px"
+      },
+      {
+        "id": "faq-title",
+        "size": "36px"
+      },
+      {
+        "id": "demo-title",
+        "size": "64px"
+      }
+    ],
+    "scroll": 1425,
+    "sections": 10,
+    "summaryTargets": [
+      48,
+      48,
+      48,
+      53,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50,
+      50
+    ],
+    "states": [
+      {
+        "action": "Preparar",
+        "columns": [
+          1,
+          2,
+          1,
+          0
+        ],
+        "live": "Pendiente: El pedido ya está registrado, con sus productos y datos reunidos.",
+        "stage": "pending",
+        "summary": [
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "action": "Marcar listo",
+        "columns": [
+          0,
+          3,
+          1,
+          0
+        ],
+        "live": "Preparando: El negocio cambia el estado cuando empieza a preparar el pedido.",
+        "stage": "preparing",
+        "summary": [
+          0,
+          3,
+          1,
+          0
+        ]
+      },
+      {
+        "action": "Completar",
+        "columns": [
+          0,
+          2,
+          2,
+          0
+        ],
+        "live": "Listo: Todo listo para retirar o entregar. Podés avisarle al cliente por WhatsApp.",
+        "stage": "ready",
+        "summary": [
+          0,
+          2,
+          2,
+          0
+        ]
+      },
+      {
+        "action": "Volver a empezar",
+        "columns": [
+          0,
+          2,
+          1,
+          1
+        ],
+        "live": "Completado: El negocio marca el pedido como completado y cierra su recorrido.",
+        "stage": "completed",
+        "summary": [
+          0,
+          2,
+          1,
+          1
+        ]
+      }
+    ]
+  }
+]

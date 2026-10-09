@@ -1,0 +1,245 @@
+.root {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.rootWide {
+  /* Category may need more room for names + trailing action. */
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  overflow: hidden;
+  background-image: none !important;
+}
+
+.triggerLabel {
+  display: block;
+  min-width: 0;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chevron {
+  flex: 0 0 auto;
+  width: 0.875rem;
+  height: 0.875rem;
+  color: var(--text-tertiary);
+  transition: transform 140ms ease-out;
+  contain: paint layout;
+}
+
+.triggerOpen .chevron {
+  transform: rotate(180deg);
+  color: var(--text-secondary);
+}
+
+.menuShell {
+  position: absolute;
+  top: calc(100% + 0.25rem);
+  left: 0;
+  z-index: 40;
+  min-width: 100%;
+  width: max-content;
+  max-width: min(16rem, calc(100vw - 1rem));
+  margin: 0;
+  padding: 0.25rem;
+  /* 1px semantic border + microscopic contact against white catalog cards */
+  border: 1px solid color-mix(in srgb, var(--border-subtle) 82%, var(--text-primary) 18%);
+  border-radius: var(--radius-md);
+  background-color: var(--bg-surface);
+  box-shadow: var(--shadow-sm), var(--shadow-floating);
+  box-sizing: border-box;
+  transform-origin: top center;
+}
+
+.menuWide {
+  min-width: max(100%, 15rem);
+  max-width: min(18.75rem, calc(100vw - 0.75rem));
+}
+
+.menuAlignEnd {
+  left: auto;
+  right: 0;
+}
+
+.menuOpen {
+  animation: menuIn 140ms ease-out both;
+}
+
+.menuClosing {
+  animation: menuOut 110ms ease-in both;
+  pointer-events: none;
+}
+
+.menuList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.optionItem {
+  margin: 0;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  border-radius: calc(var(--radius-md) - 2px);
+  background: transparent;
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.optionLabel {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.option:hover {
+  background-color: var(--bg-surface-hover);
+}
+
+.option:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary) 45%, transparent);
+  outline-offset: -1px;
+}
+
+.optionSelected {
+  background-color: color-mix(in srgb, var(--accent-soft, var(--bg-surface-hover)) 72%, transparent);
+  box-shadow: inset 3px 0 0 color-mix(in srgb, var(--accent-primary) 70%, transparent);
+  font-weight: 600;
+}
+
+.optionSelected:hover {
+  background-color: color-mix(in srgb, var(--accent-soft, var(--bg-surface-hover)) 88%, transparent);
+}
+
+.trailingRegion {
+  /* Separator + tight rhythm — not a footer-sized empty band */
+  margin-top: 0.125rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.trailingAction {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.75rem;
+  border: 0;
+  border-radius: calc(var(--radius-md) - 2px);
+  background: transparent;
+  /* Available secondary action — same text family as options, not muted/disabled */
+  color: var(--text-primary);
+  font: inherit;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.25;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 120ms ease,
+    color 120ms ease;
+}
+
+.trailingAction:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-surface-hover);
+}
+
+.trailingAction:active {
+  background-color: color-mix(in srgb, var(--bg-surface-hover) 88%, var(--text-primary) 4%);
+}
+
+.trailingAction:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary) 45%, transparent);
+  outline-offset: -1px;
+}
+
+@keyframes menuIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes menuOut {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(3px) scale(0.99);
+  }
+}
+
+@media (max-width: 899px) {
+  .chevron {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  .option,
+  .trailingAction {
+    min-height: 2.75rem;
+    padding: 0.5rem 0.625rem;
+    font-size: 0.75rem;
+  }
+
+  .menuShell {
+    max-width: min(14rem, calc(100vw - 0.75rem));
+  }
+
+  .menuWide {
+    min-width: max(100%, 14rem);
+    max-width: min(18rem, calc(100vw - 0.75rem));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron {
+    transition: none;
+  }
+
+  .menuOpen,
+  .menuClosing {
+    animation: none;
+  }
+
+  .option,
+  .trailingAction {
+    transition: none;
+  }
+}

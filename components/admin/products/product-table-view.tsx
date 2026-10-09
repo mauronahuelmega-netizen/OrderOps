@@ -1,14 +1,14 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { MoreHorizontal } from "lucide-react";
 import ProductAvailabilityToggle from "@/components/admin/products/product-availability-toggle";
 import ProductEmptyStateActions from "@/components/admin/products/product-empty-state-actions";
-import ProductPagination from "@/components/admin/products/product-pagination";
 import { useProductsManagement } from "@/components/admin/products/products-management-provider";
 import type { AdminCategory } from "@/lib/categories/admin";
-import type { AdminProductListItem } from "@/lib/products/admin";
+import type { AdminProductListItem } from "@/lib/products/admin-product-types";
+import { isProductArchived } from "@/lib/products/admin-product-types";
 import {
   getSupabaseImageLoader,
   toSupabaseObjectPublicUrl
@@ -87,7 +87,7 @@ export default function ProductTableView({
   pagination
 }: ProductTableViewProps) {
   const { openEditProduct } = useProductsManagement();
-  const { page, limit, totalCount, totalPages } = pagination;
+  const { totalCount } = pagination;
 
   const categoryNameById = new Map(categories.map((category) => [category.id, category.name]));
 
@@ -121,17 +121,6 @@ export default function ProductTableView({
         <div className={`admin-empty-state ${styles.emptyStateInner}`}>
           <h2>No hay productos en esta página</h2>
           <p>Volvé a la primera página del catálogo.</p>
-        </div>
-        <div className={styles.paginationWrap}>
-          <Suspense fallback={null}>
-            <ProductPagination
-              className={styles.paginationEmbedded}
-              page={page}
-              totalPages={totalPages}
-              totalCount={totalCount}
-              limit={limit}
-            />
-          </Suspense>
         </div>
       </div>
     );
@@ -169,6 +158,7 @@ export default function ProductTableView({
           <tbody>
             {products.map((product) => {
               const categoryName = categoryNameById.get(product.category_id) ?? "-";
+              const archived = isProductArchived(product);
 
               return (
                 <tr key={product.id} className={styles.row}>
@@ -188,17 +178,27 @@ export default function ProductTableView({
                   <td className={`${styles.stockCell} ${styles.alignRight}`}>{product.stock}</td>
                   <td className={styles.statusCell}>
                     <div className={styles.statusCellInner}>
-                      <ProductAvailabilityToggle
-                        productId={product.id}
-                        initialIsAvailable={product.is_available}
-                      />
+                      {archived ? (
+                        <span className={styles.archivedState}>Archivado</span>
+                      ) : (
+                        <ProductAvailabilityToggle
+                          productId={product.id}
+                          productName={product.name}
+                          initialIsAvailable={product.is_available}
+                          disableEnable={product.track_stock && product.stock <= 0}
+                        />
+                      )}
                     </div>
                   </td>
                   <td className={styles.actionsCell}>
                     <button
                       type="button"
                       className={styles.kebabButton}
-                      aria-label={`Acciones para ${product.name}`}
+                      aria-label={
+                        archived
+                          ? `Ver detalle de ${product.name}`
+                          : `Acciones para ${product.name}`
+                      }
                       onClick={() => openEditProduct(product.id, product.name)}
                     >
                       <MoreHorizontal size={18} strokeWidth={1.75} aria-hidden="true" />
@@ -209,18 +209,6 @@ export default function ProductTableView({
             })}
           </tbody>
         </table>
-      </div>
-
-      <div className={styles.paginationWrap}>
-        <Suspense fallback={null}>
-          <ProductPagination
-            className={styles.paginationEmbedded}
-            page={page}
-            totalPages={totalPages}
-            totalCount={totalCount}
-            limit={limit}
-          />
-        </Suspense>
       </div>
     </div>
   );

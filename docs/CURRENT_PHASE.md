@@ -2,22 +2,4032 @@
 
 ## Estado actual
 
-**ADMIN-MANUAL-ORDER-MODAL-COMMIT-PUSH-DEPLOY-1 — PASS — MANUAL ORDER MODAL POLISH PACKAGE DEPLOYED (2026-09-08)**
+**ADMIN-PRODUCTS-FILTER-MENU-HARD-VISUAL-CLOSEOUT-1
+— PASS —
+PRODUCT FILTER MENU VISUAL CLOSEOUT COMPLETE /
+ONE-TAP HANDOFF CERTIFIED /
+FILTER FAMILY FROZEN /
+CATEGORY ORDER FINAL QA NEXT — (2026-09-19)**
+
+Doc: `docs/admin-products-filter-menu-hard-visual-closeout-1.md`
+
+Previous simplification phase:
+**PASS / PRESERVED**
+
+Filter architecture:
+**FROZEN**
+
+Category:
+**COMPACT MENU**
+
+Stock:
+**COMPACT MENU**
+
+Estado:
+**COMPACT MENU**
+
+Trigger geometry:
+**FROZEN**
+
+Menu geometry:
+**FROZEN**
+
+Selected state:
+**FROZEN**
+
+Category menu width:
+**FROZEN**
+
+Stock/Estado widths:
+**FROZEN**
+
+Ordenar categorías:
+**ACTIONABLE / CLEAR / NOT DISABLED-LOOKING**
+
+Trailing action:
+**TEXT ONLY**
+
+Trailing action height:
+**44–48px / TOUCH SAFE**
+
+Separator:
+**PRESERVED**
+
+Popup edge definition:
+**POLISHED**
+
+Menu motion:
+**UNCHANGED**
+
+Handoff:
+**6/6 ONE-TAP PASS**
+
+Category→Order:
+**ONE-TAP PASS**
+
+Search first tap:
+**PASS**
+
+Rapid handoff:
+**PASS**
+
+Reduced motion:
+**PASS** (no wait-for-exit dependency)
+
+Filter URL semantics:
+**UNCHANGED**
+
+Category Order runtime:
+**UNCHANGED**
+
+Real Category Save:
+**0**
+
+DB/RLS/RPC:
+**UNCHANGED**
+
+Business mutations:
+**0**
+
+Storage:
+**0**
+
+360 / 390 / 412 / short / 768 / 899 / 900 / 1024:
+**PASS** (412+899/900 hard-measured; others CSS-contract)
+
+Light / Dark:
+**PASS**
+
+overflowX:
+**0**
+
+focused verify:
+**PASS**
+
+probes:
+**PASS**
+
+tsc:
+**PASS**
+
+build:
+**PASS**
+
+diff:
+**PASS**
+
+Next:
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-FINAL-QA-1**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Previous
+
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-FILTER-HANDOFF-AND-REORDER-SIMPLIFICATION-1
+— PASS —
+PRODUCT FILTER HANDOFF +
+CATEGORY FILTER UNITY CLOSED /
+REORDER INPUT SIMPLIFIED TO MOVE CONTROLS /
+ATOMIC SAVE CONTRACT PRESERVED /
+FINAL QA NEXT — (2026-09-19)**
+
+Doc: `docs/admin-categories-public-catalog-order-filter-handoff-and-reorder-simplification-1.md`
+
+Previous Motion/Filter Unity:
+**PASS / HISTORICALLY PRESERVED / INTERACTION PARTIALLY SUPERSEDED**
+
+DB:
+**LIVE / CERTIFIED / UNCHANGED**
+
+Filter URL semantics:
+**UNCHANGED**
+
+Category filter:
+**COMPACT MENU**
+
+Stock:
+**COMPACT MENU**
+
+Estado:
+**COMPACT MENU**
+
+Logical filter-open owner:
+**SINGLE / TOOLBAR**
+
+Cross-filter handoff:
+**ONE TAP**
+
+Sequential wait-for-close:
+**NONE**
+
+Category filter backdrop:
+**NONE**
+
+Category menu:
+**Todas + categories + separated Ordenar categorías**
+
+Category Order:
+**DEDICATED ORDER-ONLY DIALOG**
+
+Historical shared Filter+Order dialog:
+**SUPERSEDED**
+
+Grip:
+**REMOVED**
+
+Pointer drag reorder:
+**REMOVED**
+
+Historical drag contract:
+**SUPERSEDED**
+
+Subir/Bajar:
+**CANONICAL REORDER INPUT**
+
+Reflow motion:
+**PRESERVED / MOVE-CONTROL DRIVEN**
+
+Helper:
+**Usá las flechas para definir el orden del catálogo.**
+
+Cancel:
+**DISCARD + CLOSE**
+
+Escape:
+**DISCARD + CLOSE**
+
+Draft:
+**LOCAL / UNCHANGED**
+
+Dirty:
+**SEMANTIC / UNCHANGED**
+
+Save:
+**ONE ACTION → ONE RPC / UNCHANGED**
+
+Real Save this phase:
+**0**
+
+DB/RLS/RPC:
+**UNCHANGED**
+
+Business mutations:
+**0**
+
+Storage:
+**0**
+
+focused verify:
+**PASS**
+
+probes:
+**PASS**
+
+tsc:
+**PASS**
+
+build:
+**PASS**
+
+diff:
+**PASS**
+
+Next:
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-FINAL-QA-1**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Previous
+
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-MOTION-AND-FILTER-UNITY-POLISH-1 — PASS — CATEGORY REORDER MOTION + PRODUCTS FILTER FAMILY UNIFIED / FILTER SEMANTICS PRESERVED / FINAL QA NEXT — (2026-09-17)**
+
+Doc: `docs/admin-categories-public-catalog-order-motion-and-filter-unity-polish-1.md`
+
+Previous visual polish:
+**PASS / PRESERVED**
+
+Category DB:
+**LIVE / CERTIFIED / UNCHANGED**
+
+Category functional runtime:
+**IMPLEMENTED / UNCHANGED**
+
+Category trigger:
+**CUSTOM / PRESERVED**
+
+Stock:
+**CUSTOM SIMPLE FILTER MENU / IMPLEMENTED**
+
+Estado:
+**CUSTOM SIMPLE FILTER MENU / IMPLEMENTED**
+
+Historical native Stock/Estado presentation freeze:
+**SUPERSEDED BY OWNER AUTHORIZATION**
+
+Stock / Estado semantics:
+**UNCHANGED**
+
+Filter URL authority:
+**PRESERVED**
+
+Client-side product filtering:
+**NONE**
+
+Simple menu:
+**NO DIALOG / NO FOOTER / NO SAVE**
+
+Menu motion:
+**PREMIUM / SUBTLE**
+
+Category reorder pressed / dragging / FLIP reflow / settle / keyboard motion:
+**IMPLEMENTED** *(drag/grip later SUPERSEDED by FILTER-HANDOFF-AND-REORDER-SIMPLIFICATION-1)*
+
+Reduced motion:
+**PASS**
+
+Real Category Save:
+**0**
+
+Action / RPC / DB / RLS delta:
+**0**
+
+Business / Storage mutations:
+**0**
+
+tsc / build / diff / focused verify / probes:
+**PASS**
+
+Next:
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-FINAL-QA-1** *(superseded next by FILTER-HANDOFF phase)*
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Previous
+
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-PRE-FINAL-QA-VISUAL-POLISH-1 — PASS — CATEGORY ORDER DIALOG VISUAL HIERARCHY + INTERACTION AFFORDANCE POLISHED / FUNCTIONAL CONTRACT UNCHANGED / FINAL QA NEXT — (2026-09-17)**
+
+Doc: `docs/admin-categories-public-catalog-order-pre-final-qa-visual-polish-1.md`
+
+Implementation:
+**PASS / PRESERVED**
+
+DB:
+**LIVE / CERTIFIED / UNCHANGED**
+
+Toolbar Category trigger:
+**PRESERVED**
+
+Filter mode:
+**PRESERVED / PASS**
+
+Order mode:
+**VISUALLY POLISHED**
+
+Grip:
+**PREMIUM / DISCOVERABLE / ≥44** (icon 18px)
+
+Move controls:
+**POLISHED / ≥44 / KEYBOARD PRESERVED** (icon 18px)
+
+Pristine Save:
+**SEMANTICALLY DISABLED / VISUALLY CLEAR**
+
+Dirty Save:
+**ACTIVE PRIMARY / CLEAR**
+
+Revert:
+**DISABLED AGAIN**
+
+Drag state:
+**POLISHED**
+
+Focus-visible:
+**PASS**
+
+Rows:
+**≥48** (measured ~55)
+
+Light:
+**PASS**
+
+Dark:
+**PASS**
+
+360 / 390 / 412 / 899 / short / desktop:
+**PASS**
+
+Horizontal overflow:
+**0**
+
+Functional contract delta:
+**0**
+
+Action / RPC delta:
+**0**
+
+DB / RLS delta:
+**0**
+
+Business mutations:
+**0**
+
+Storage mutations:
+**0**
+
+Focused verify / probes:
+**PASS**
+
+tsc / build / diff:
+**PASS**
+
+Next:
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-FINAL-QA-1**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Previous
+
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-IMPLEMENTATION-1 — PASS — CATEGORY FILTER + ORDER RUNTIME IMPLEMENTED / ATOMIC SAVE WIRED / FINAL QA REQUIRED — (2026-09-17)**
+
+Doc: `docs/admin-categories-public-catalog-order-implementation-1.md`
+
+DB:
+**LIVE / CERTIFIED / UNCHANGED**
+
+Migration:
+`20260917210150_categories_public_catalog_order.sql`
+
+SHA:
+`47dd3e195d77385f0201490c57cd7b016fc373597435ddc94cb2567123d0f314`
+
+Append fingerprint:
+`7b240c4c66b10d8b97ac46dea4ceef57a3ab013c4975e47236af9b1395ab5514`
+
+RPC fingerprint:
+`e82ba8ce34d263743aa7e2ad4ad09336a70ae5e592d0ed24bb12e68346cff8a3`
+
+Category filter:
+**CUSTOM DIALOG / IMPLEMENTED**
+
+Stock:
+**NATIVE SELECT / PRESERVED**
+
+Estado:
+**NATIVE SELECT / PRESERVED**
+
+Dialog:
+**ONE NATIVE DIALOG / FILTER + ORDER**
+
+Order rows:
+**ALL TENANT CATEGORIES**
+
+Pointer:
+**GRIP ONLY** (Pointer Events)
+
+Touch:
+**SUPPORTED**
+
+Keyboard:
+**SUBIR / BAJAR**
+
+Draft:
+**LOCAL**
+
+Dirty:
+**SEMANTIC ID SEQUENCE**
+
+Autosave:
+**NO**
+
+Save:
+**EXPLICIT**
+
+Action:
+`saveCategoryDisplayOrderAction`
+
+Action authority:
+**manageProducts**
+
+Client business_id:
+**NONE**
+
+Client numeric positions:
+**NONE**
+
+RPC:
+`save_category_display_order(uuid[])`
+
+RPC calls per Save:
+**1**
+
+Raw position update:
+**0**
+
+Cancel:
+**DISCARD / 0 WRITES**
+
+Escape Order:
+**DISCARD → FILTER / 0 WRITES**
+
+Success copy:
+**Orden de categorías guardado.**
+
+Stale-set:
+**SAFE ERROR / DRAFT PRESERVED**
+
+Cache:
+admin products + admin categories + public catalog
+
+Root "/" invalidation:
+**NONE**
+
+Create category position payload:
+**ABSENT**
+
+/admin/categories DnD:
+**NOT IMPLEMENTED / OUT OF SCOPE**
+
+Product order:
+**UNCHANGED**
+
+Runtime source:
+**IMPLEMENTED**
+
+DB/RLS/RPC:
+**UNCHANGED**
+
+Business mutations during implementation:
+**0**
+
+Focused verify / probes:
+**PASS**
+
+Related verifies:
+**PASS**
+
+tsc / build / diff:
+**PASS**
+
+Next:
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-FINAL-QA-1**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Predecessor (historical)
+
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-APPLY-DOCUMENTATION-RECONCILIATION-1 — PASS — CATEGORY ORDER DB DOCUMENTATION RECONCILED / LIVE CONTRACT PRESERVED / RUNTIME IMPLEMENTATION NEXT — (2026-09-17)**
+
+Doc: `docs/admin-categories-public-catalog-order-db-apply-documentation-reconciliation-1.md`
+
+DB APPLY:
+**PASS / PRESERVED**
+
+Final migration:
+`20260917210150_categories_public_catalog_order.sql`
+
+SHA:
+`47dd3e195d77385f0201490c57cd7b016fc373597435ddc94cb2567123d0f314`
+
+Remote:
+`20260917212712` / `categories_public_catalog_order`
+
+DB / RLS / RPC:
+**UNCHANGED**
+
+Runtime:
+**UNCHANGED** (Category Order UI **NOT IMPLEMENTED**)
+
+Business mutations:
+**0**
+
+Documentation-only:
+**YES** — reconciled Living Audit §17 stale “AUTHORED / NOT APPLIED” + wrong Next DB-APPLY-1
+
+Next:
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-IMPLEMENTATION-1**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Predecessor (historical)
+
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-APPLY-1 — PASS — CATEGORY ORDER DB LIVE / FINAL AUTHORITY MODEL + ATOMIC REORDER CERTIFIED / RUNTIME IMPLEMENTATION REQUIRED — (2026-09-17)**
+
+Doc: `docs/admin-categories-public-catalog-order-db-apply-1.md`
+
+Decision:
+**PASS / PRESERVED**
+
+APPLY #1:
+**BLOCKED CORRECTLY / POSITION_AUTHORITY_BYPASS**
+
+APPLY #2:
+**BLOCKED CORRECTLY / APPEND_LOCK_AUTHORITY_FAIL**
+
+APPLY #3:
+**PASS**
+
+Historical migration #1:
+**REMOTE HISTORY 0**
+
+Historical migration #2:
+**REMOTE HISTORY 0**
+
+Applied migration:
+`20260917210150_categories_public_catalog_order.sql`
+
+SHA pre/post:
+`47dd3e195d77385f0201490c57cd7b016fc373597435ddc94cb2567123d0f314`
+
+Remote history:
+`20260917212712` / `categories_public_catalog_order`
+
+Migration apply count:
+**1**
+
+Collateral migrations:
+**0**
+
+Backfill ambiguity:
+**0**
+
+Backfill sequence delta:
+**0**
+
+Visible category order delta:
+**0**
+
+`categories.position`:
+**NOT NULL / LIVE**
+
+positions:
+**CONTIGUOUS**
+
+unique:
+**DEFERRABLE / LIVE**
+
+Append:
+**SECURITY DEFINER / LIVE**
+
+Append fingerprint:
+`7b240c4c66b10d8b97ac46dea4ceef57a3ab013c4975e47236af9b1395ab5514`
+
+Append auth:
+**UID → PROFILE → ROLE → TENANT → LOCK**
+
+Businesses RLS/grants:
+**UNCHANGED**
+
+Old Create without position:
+**PASS**
+
+Client INSERT position:
+**OVERRIDDEN**
+
+authenticated table UPDATE:
+**DENY**
+
+authenticated UPDATE(name):
+**ALLOW**
+
+authenticated UPDATE(position):
+**DENY**
+
+anon UPDATE:
+**DENY**
+
+Reorder RPC:
+**LIVE / VALIDATED**
+
+RPC fingerprint:
+`e82ba8ce34d263743aa7e2ad4ad09336a70ae5e592d0ed24bb12e68346cff8a3`
+
+RPC no-op / swap / stale set:
+**PASS**
+
+RPC duplicate/null/foreign:
+**DENY / VALIDATED**
+
+super_admin semantics:
+**PROVEN CONSISTENT** (contract/source `business_id NULL`; live 1/null)
+
+super_admin reorder:
+**RUNTIME PASS**
+
+Category RLS:
+**MANAGE-PRODUCTS ROLE ENFORCEMENT LIVE**
+
+owner/admin:
+**ALLOW** (runtime)
+
+manager:
+**CONTRACT PASS** (no live identity)
+
+super_admin:
+**ALLOW** (runtime)
+
+operator/viewer/foreign/anon:
+**DENY**
+
+Public catalog:
+**ORDER UNCHANGED**
+
+Product order:
+**UNCHANGED**
+
+Intended persistent business delta:
+**CATEGORIES.POSITION NORMALIZATION ONLY**
+
+QA residue:
+**0**
+
+Products/orders/Storage collateral:
+**0**
+
+Runtime Category Order UI:
+**NOT IMPLEMENTED**
+
+Runtime feature source delta:
+**0**
+
+focused verify / tsc / diff:
+**PASS**
+
+Next:
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-IMPLEMENTATION-1**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Predecessor (historical)
+
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-AUTHOR-APPEND-LOCK-AUTHORITY-FIX-1 — PASS — CATEGORY APPEND LOCK AUTHORITY CLOSED / FINAL CORRECTED DB MIGRATION AUTHORED / REMOTE APPLY REQUIRED — (2026-09-17)**
+
+Doc: `docs/admin-categories-public-catalog-order-db-author-append-lock-authority-fix-1.md`
+
+Final migration authored (then applied in APPLY #3):
+`20260917210150_categories_public_catalog_order.sql`
+
+SHA:
+`47dd3e195d77385f0201490c57cd7b016fc373597435ddc94cb2567123d0f314`
+
+---
+
+## Predecessor (historical)
+
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-APPLY-1 — BLOCKED — CATEGORY_ORDER_DB_APPLY_APPEND_LOCK_AUTHORITY_FAIL — (2026-09-17)**
+
+Doc: `docs/admin-categories-public-catalog-order-db-apply-1.md`
+
+Attempt history:
+1. BLOCKED — POSITION_AUTHORITY_BYPASS (correct stop; remote delta 0)
+2. BLOCKED — APPEND_LOCK_AUTHORITY_FAIL (correct stop; remote delta 0)
+
+Decision:
+**PASS / PRESERVED**
+
+Corrected migration:
+`20260917202554_categories_public_catalog_order.sql`
+
+Corrected SHA:
+`18ef63079eca6afaf6b5d44013df13e0742f7810cd597f590236002aaf4dd8cf` (pre=post; not applied)
+
+Superseded migration remote history:
+**0**
+
+Pre-apply gates PASSED:
+- target / chain / SHA / history / schema / ambiguity 0 / backfill delta 0
+- position authority closed in corrected SQL
+
+Pre-apply gate FAILED:
+**APPEND LOCK AUTHORITY**
+
+Evidence:
+- append trigger = SECURITY INVOKER + `businesses … FOR UPDATE`
+- PostgreSQL requires UPDATE privilege for FOR UPDATE (**authenticated has it**)
+- RLS also applies UPDATE policies on FOR UPDATE
+- `businesses_update_own_business` allows **`role = 'admin'` only**
+- owner / manager / super_admin (manageProducts Category creators) **cannot** lock businesses → Create would break
+
+Apply:
+**NOT EXECUTED**
+
+Remote delta:
+**0**
+
+Runtime Category order UI:
+**NOT IMPLEMENTED**
+
+Runtime source delta:
+**0**
+
+Business mutations:
+**0**
+
+Next:
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-AUTHOR-APPEND-LOCK-AUTHORITY-FIX-1**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Predecessor (historical)
+
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-AUTHOR-POSITION-AUTHORITY-FIX-1 — PASS — CATEGORY POSITION WRITE AUTHORITY CLOSED / CORRECTED DB MIGRATION AUTHORED / REMOTE APPLY REQUIRED — (2026-09-17)**
+
+Doc: `docs/admin-categories-public-catalog-order-db-author-position-authority-fix-1.md`
+
+Blocked APPLY:
+**PRESERVED / CORRECTLY STOPPED** (`CATEGORY_ORDER_DB_APPLY_POSITION_AUTHORITY_BYPASS`)
+
+Previous migration:
+**SUPERSEDED BEFORE APPLY**
+
+Previous migration:
+`20260917182047_categories_public_catalog_order.sql`
+
+Previous SHA:
+`4bb35bec9da5981d0c58a1f9658cf8408d09b2286d44a2ec27ed1f90e0ece9e8`
+
+Previous remote history:
+**0**
+
+Corrected migration:
+`supabase/migrations/20260917202554_categories_public_catalog_order.sql`
+
+Corrected SHA:
+`18ef63079eca6afaf6b5d44013df13e0742f7810cd597f590236002aaf4dd8cf`
+
+Active category-order migrations:
+**1**
+
+Position model:
+**categories.position**
+
+Authenticated table-wide UPDATE:
+**REVOKED IN CORRECTED CONTRACT**
+
+Authenticated UPDATE(name):
+**GRANTED**
+
+Authenticated UPDATE(position):
+**DENIED**
+
+Authenticated UPDATE(business_id/id/created_at):
+**DENIED**
+
+Anon UPDATE:
+**DENIED**
+
+Insert:
+**PRESERVED**
+
+Delete:
+**PRESERVED SUBJECT TO RLS**
+
+Category rename:
+**PRESERVED**
+
+Create without position:
+**PRESERVED**
+
+Append trigger:
+**PRESERVED**
+
+RPC:
+**save_category_display_order(uuid[])** — PRESERVED / CANONICAL NUMERIC UPDATE WRITER
+
+RPC SECURITY:
+**DEFINER / HARDENED**
+
+RLS manageProducts:
+**PRESERVED**
+
+Backfill ambiguity:
+**0**
+
+Backfill simulated delta:
+**0**
+
+Remote apply:
+**NO**
+
+Remote delta:
+**0**
+
+Business mutations:
+**0**
+
+Runtime UI:
+**NOT IMPLEMENTED**
+
+Runtime source delta:
+**0**
+
+focused verify:
+**PASS**
+
+mutation probes:
+**PASS**
+
+tsc:
+**PASS**
+
+diff:
+**PASS**
+
+Next:
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-APPLY-1**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Predecessor (historical)
+
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-APPLY-1 — BLOCKED — CATEGORY_ORDER_DB_APPLY_POSITION_AUTHORITY_BYPASS — (2026-09-17)**
+
+Doc: `docs/admin-categories-public-catalog-order-db-apply-1.md`
+
+Decision:
+**PASS / PRESERVED**
+
+DB Author:
+**PASS / NOT APPLIED** (apply stopped at pre-apply gate)
+
+Migration:
+`20260917182047_categories_public_catalog_order.sql`
+
+Local SHA:
+`4bb35bec9da5981d0c58a1f9658cf8408d09b2286d44a2ec27ed1f90e0ece9e8` (pre=post; file frozen)
+
+Remote history:
+**unchanged — migration NOT APPLIED**
+
+Collateral migrations:
+**0**
+
+Pre-apply gates that PASSED:
+- target OrderOps `pkrsedmwxekbhlohhqds`
+- migration SHA exact
+- history absent
+- schema baseline match
+- ambiguity groups **0**
+- backfill sequence delta **0**
+- no object collision
+
+Pre-apply gate that FAILED:
+**POSITION AUTHORITY BYPASS**
+
+Evidence:
+- live: `authenticated` has column UPDATE on `categories.position`
+- authored migration: role-gates row UPDATE but does **not** revoke/guard numeric `position`
+- post-apply manageProducts client could raw `UPDATE … SET position = …` outside RPC
+
+Apply:
+**NOT EXECUTED**
+
+Remote delta:
+**0**
+
+Runtime Category ordering UI:
+**NOT IMPLEMENTED**
+
+Runtime source delta:
+**0**
+
+Business mutations:
+**0**
+
+Next:
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-AUTHOR-POSITION-AUTHORITY-FIX-1**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Predecessor (historical)
+
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-AUTHOR-1 — PASS — CATEGORY ORDER DB CONTRACT AUTHORED / REMOTE APPLY REQUIRED — (2026-09-17)**
+
+Doc: `docs/admin-categories-public-catalog-order-db-author-1.md`
+
+Decision:
+**PASS / PRESERVED**
+
+Existing field:
+**categories.position**
+
+Current order:
+**PROVEN** (`position ASC NULLS LAST, name ASC`)
+
+Ambiguous current order keys:
+**0**
+
+Backfill simulation delta:
+**0**
+
+Backfill:
+**AUTHORED / PRESERVES CURRENT ORDER**
+
+Position:
+**BACKFILL → NOT NULL**
+
+Position semantics:
+**CONTIGUOUS 0..n-1**
+
+Unique:
+**(business_id, position)** DEFERRABLE INITIALLY IMMEDIATE
+
+Swap safety:
+**DEFERRABLE / PROVEN IN AUTHOR VERIFY**
+
+New category append:
+**DB-SIDE / BEFORE INSERT / CONCURRENCY-SAFE** (`tr_categories_assign_append_position`)
+
+Old deployed Create compatibility:
+**PRESERVED**
+
+RPC:
+**save_category_display_order(uuid[])**
+
+RPC security:
+**SECURITY DEFINER / HARDENED** (`search_path = ''`)
+
+RPC tenant:
+**SERVER-DERIVED**
+
+RPC set:
+**EXACT TENANT SET**
+
+RPC writes:
+**ATOMIC**
+
+RLS categories:
+**MANAGE-PRODUCTS ROLE ENFORCEMENT AUTHORED**
+
+operator/viewer:
+**TARGET DENY AFTER APPLY**
+
+Migration:
+`supabase/migrations/20260917182047_categories_public_catalog_order.sql`
+
+SHA256:
+`4bb35bec9da5981d0c58a1f9658cf8408d09b2286d44a2ec27ed1f90e0ece9e8`
+
+Remote apply:
+**NO**
+
+Runtime application:
+**NOT IMPLEMENTED**
+
+Runtime source delta:
+**0**
+
+Business mutations:
+**0**
+
+tsc:
+**PASS**
+
+focused verify:
+**PASS**
+
+mutation probes:
+**PASS**
+
+diff:
+**PASS**
+
+Next:
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-APPLY-1**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Predecessor (historical)
+
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-CONTRACT-DECISION-1 — PASS — PUBLIC CATEGORY ORDERING V1 CONTRACT APPROVED / IMPLEMENTATION NOT STARTED — (2026-09-17)**
+
+Doc: `docs/admin-categories-public-catalog-order-contract-decision-1.md`
+
+Current public order (PROVEN):
+`categories.position ASC NULLS LAST, name ASC` (not pure alphabetical; not first-product)
+
+Persistence:
+**EXISTING `categories.position`** (activate writes; no new column)
+
+Backfill:
+**PRESERVES CURRENT VISIBLE ORDER** (rank by current ORDER BY → contiguous 0..n-1)
+
+New category:
+**APPEND**
+
+Admin entry:
+**PRODUCTS CATEGORY FILTER**
+
+Native filter exception:
+**CATEGORY ONLY / APPROVED** (Stock + Estado remain native `<select>`)
+
+Filter / Order modes:
+**ONE dialog · TWO explicit modes**
+
+Drag:
+**GripVertical** (grip-only)
+
+Keyboard:
+**Move up/down** (parity; no pointer-only)
+
+Desktop / Mobile:
+**Native `<dialog>`** (shared)
+
+Draft / Save:
+**LOCAL draft · EXPLICIT · ATOMIC RPC**
+
+Public / Admin / Create:
+**USE merchant category order**
+
+Product ordering:
+**UNCHANGED / OUT OF SCOPE**
+
+Category CRUD / navigation:
+**UNCHANGED**
+
+Schema / runtime this phase:
+**UNCHANGED**
+
+Business mutations:
+**0**
+
+Next:
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-DB-AUTHOR-1**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Predecessor (historical)
+
+**ADMIN-PRODUCTS-PRODUCT-REMOVAL-LIFECYCLE-DOCUMENTATION-RECONCILIATION-1 — PASS — PRODUCTS LIVING AUDIT RECONCILED TO CERTIFIED LIFECYCLE / RUNTIME UNCHANGED — (2026-09-17)**
+
+Doc: `docs/admin-products-product-removal-lifecycle-documentation-reconciliation-1.md`
+
+Lifecycle Final QA:
+**PASS / PRESERVED**
+
+Product Lifecycle:
+**CLOSED**
+
+Living Audit:
+**CURRENT-STATE CONTRADICTIONS RECONCILED**
+
+Historical evidence:
+**PRESERVED / LABELED**
+
+Runtime source edits:
+**0**
+
+DB / RLS / RPC / Storage:
+**UNCHANGED**
+
+Business mutations:
+**0**
+
+QA replay:
+**NOT RUN / NOT REQUIRED**
+
+git diff --check:
+**PASS** (docs phase)
+
+Next:
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-CONTRACT-DECISION-1**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Predecessor (historical)
+
+**ADMIN-PRODUCTS-PRODUCT-REMOVAL-LIFECYCLE-FINAL-QA-1 — PASS — PRODUCT LIFECYCLE CERTIFIED END-TO-END / ARCHIVE + RESTORE + PERMANENT DELETE CLOSED — (2026-09-17)**
+
+Doc: `docs/admin-products-product-removal-lifecycle-final-qa-1.md`
+
+Lifecycle DB:
+**LIVE / VALIDATED / UNCHANGED**
+
+Application:
+**CERTIFIED**
+
+Visual/copy polish:
+**CERTIFIED**
+
+Archive / Archived recovery / Archived read-only / Restore:
+**E2E PASS**
+
+Permanent Delete active / archived:
+**E2E PASS**
+
+Dirty lifecycle / Archived server guards:
+**E2E PASS**
+
+Public / Manual order / Customization targeting:
+**PASS**
+
+Historical orders:
+**PRESERVED** (DB-APPLY baseline; fresh disposable order not re-run)
+
+Image single-owner / shared active / shared archived:
+**PASS**
+
+Storage failure semantics:
+**SOURCE CONTRACT PASS** (runtime injection not performed)
+
+Raw table Delete:
+**ABSENT / DENIED**
+
+RPC:
+**CANONICAL / UNCHANGED** (`81f2046de539d43db38aa583574d5486`)
+
+Migration SHA:
+**UNCHANGED** (`5f19d2697f79d2bf17a3388d619a42bc31e32690313362a1cf26400c32628d57`)
+
+Responsive 360 / 390 / 412 / 899 / 900 / desktop + short viewport:
+**PASS**
+
+Light / Dark / Keyboard / Focus / Escape / Network duplicate safety:
+**PASS**
+
+Create / Unified Edit / Advanced / Builder:
+**UNCHANGED**
+
+QA fixture residue / QA Storage residue / Existing merchant mutations:
+**0**
+
+Schema / RLS / RPC / Migration history changes:
+**0**
+
+P0 / P1 / release-blocking P2:
+**0**
+
+tsc / build / diff:
+**PASS**
+
+Next:
+**ADMIN-CATEGORIES-PUBLIC-CATALOG-ORDER-CONTRACT-DECISION-1**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED** — Products package **LOCAL / UNDEPLOYED**
+
+---
+
+## Predecessor (historical)
+
+**ADMIN-PRODUCTS-PRODUCT-REMOVAL-LIFECYCLE-PRE-FINAL-QA-VISUAL-COPY-POLISH-1 — PASS — LIFECYCLE ACTION HIERARCHY + CONFIRMATION COPY POLISHED / FUNCTIONAL CONTRACT UNCHANGED — (2026-09-16)**
+
+Doc: `docs/admin-products-product-removal-lifecycle-pre-final-qa-visual-copy-polish-1.md`
+
+---
+
+## Predecessor (historical)
+
+**ADMIN-PRODUCTS-PRODUCT-REMOVAL-LIFECYCLE-IMPLEMENTATION-1 — PASS — PRODUCT LIFECYCLE APPLICATION RUNTIME IMPLEMENTED / FINAL QA REQUIRED — (2026-09-16)**
+
+Doc: `docs/admin-products-product-removal-lifecycle-implementation-1.md`
+
+DB lifecycle:
+**LIVE / VALIDATED / UNCHANGED**
+
+Migration SHA:
+`5f19d2697f79d2bf17a3388d619a42bc31e32690313362a1cf26400c32628d57`
+
+RPC fingerprint:
+**UNCHANGED** (`81f2046de539d43db38aa583574d5486`)
+
+Application:
+
+- Default archived filtering: **IMPLEMENTED**
+- Archivados filter: **IMPLEMENTED**
+- Catalog existence includes archived: **IMPLEMENTED**
+- Archive / Restore / Permanent Delete: **IMPLEMENTED**
+- Archived read-only: **IMPLEMENTED**
+- Dirty draft lifecycle guard: **IMPLEMENTED**
+- Direct products DELETE: **ABSENT**
+- RPC delete: **CANONICAL**
+- Post-commit image cleanup: **IMPLEMENTED**
+- Shared-reference guard incl. archived: **IMPLEMENTED**
+- Storage failure: **NO DB RESURRECTION**
+- Public / manual / customization filters: **IMPLEMENTED**
+- Create / Unified Edit / Advanced: **PRESERVED**
+- Builder: **PRESERVED** except target eligibility
+
+Runtime QA:
+**SOURCE + VERIFY PASS** — disposable browser matrix **DEFERRED → FINAL-QA-1**
+
+Persistent business delta:
+**0**
+
+Schema/RLS/RPC/history mutations:
+**0**
+
+tsc / build / focused verify / related verifies / diff:
+**PASS**
+
+Next:
+**ADMIN-PRODUCTS-PRODUCT-REMOVAL-LIFECYCLE-FINAL-QA-1** (after visual polish)
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Predecessor (historical)
+
+**ADMIN-PRODUCTS-PRODUCT-REMOVAL-LIFECYCLE-DB-APPLY-1 — PASS — PRODUCT LIFECYCLE DB LIVE / PERMANENT DELETE RPC VALIDATED — (2026-09-16)**
+
+Doc: `docs/admin-products-product-removal-lifecycle-db-apply-1.md`
+
+Corrected Product Removal contract:
+**PASS**
+
+V1:
+**ARCHIVE + RESTORE + PERMANENT DELETE**
+
+Migration:
+`20260916180000_products_removal_lifecycle.sql`
+
+Frozen SHA:
+`5f19d2697f79d2bf17a3388d619a42bc31e32690313362a1cf26400c32628d57`
+
+Remote apply:
+**YES**
+
+Remote history:
+`20260916195024_products_removal_lifecycle`
+
+Collateral migrations:
+**0**
+
+archived_at:
+**LIVE**
+
+archive⇒unavailable:
+**LIVE / VALIDATED**
+
+active-list index:
+**LIVE**
+
+public archived:
+**DENIED**
+
+admin archived:
+**READABLE**
+
+raw authenticated DELETE:
+**DENIED / RUNTIME PROVEN**
+
+RPC:
+`public.delete_product_permanently(uuid)`
+
+SECURITY DEFINER:
+**LIVE / VALIDATED**
+
+search_path:
+**HARDENED** (`''`)
+
+PUBLIC:
+**DENY**
+
+anon:
+**DENY**
+
+authenticated:
+**EXECUTE + INTERNAL AUTHORITY**
+
+owner/admin/manager:
+**RUNTIME ALLOW** (RPC)
+
+operator/viewer:
+**RUNTIME DENY**
+
+foreign tenant:
+**DENY / NON-LEAK**
+
+row lock:
+**LIVE**
+
+active permanent delete:
+**PASS**
+
+archived permanent delete:
+**PASS**
+
+historical orders:
+**PRESERVED**
+
+order_items:
+**PRESERVED / product_id NULL**
+
+snapshots:
+**UNCHANGED**
+
+stock movements target:
+**REMOVED**
+
+customization overrides:
+**REMOVED**
+
+product assignments:
+**REMOVED**
+
+upsell relations:
+**RECONCILED**
+
+shared definitions:
+**PRESERVED**
+
+category:
+**PRESERVED**
+
+SKU archived:
+**RESERVED / RUNTIME**
+
+SKU deleted:
+**FREE / RUNTIME**
+
+image:
+**HANDOFF PASS / STORAGE UNTOUCHED**
+
+duplicate delete:
+**SAFE**
+
+RPC rollback:
+**PROVEN**
+
+cancel after delete:
+**PASS**
+
+deleted-product restock:
+**0**
+
+surviving-product restock:
+**PASS** (mixed-order)
+
+persistent QA business delta:
+**0**
+
+Storage mutations:
+**0**
+
+migration file pre/post SHA:
+**IDENTICAL**
+
+runtime implementation:
+**NOT STARTED**
+
+Next:
+**ADMIN-PRODUCTS-PRODUCT-REMOVAL-LIFECYCLE-IMPLEMENTATION-1**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Prior phase (superseded — preserved)
+
+**ADMIN-PRODUCTS-PRODUCT-REMOVAL-ARCHIVE-DB-AUTHOR-1 — HISTORICAL TECHNICAL PASS / SUPERSEDED BEFORE APPLY — (2026-09-16)**
+
+Doc: `docs/admin-products-product-removal-archive-db-author-1.md`
+
+Migration path:
+`supabase/migrations/20260916180000_products_archive_lifecycle.sql`
+
+SHA256:
+`55f187f5b4362723ba1e4e3659a90769cc75d57ea61b615f79d2505e89db88bb`
+
+Remote apply:
+**0 — DO NOT APPLY STANDALONE**
+
+Reason superseded:
+archive foundation only; corrected contract requires transactional permanent-delete RPC + relation cleanup.
+
+---
+
+## Prior phase (superseded — preserved)
+
+**ADMIN-PRODUCTS-PRODUCT-REMOVAL-CONTRACT-DECISION-1 — HISTORICAL PASS / SUPERSEDED BY OWNER CLARIFICATION — (2026-09-16)**
+
+Doc: `docs/admin-products-product-removal-contract-decision-1.md`
+
+Product removal (old selected):
+**SOFT ARCHIVE + RESTORE** (hard delete deferred — **SUPERSEDED**)
+
+Forensic evidence:
+**PRESERVED**
+
+---
+
+## Prior phase (preserved)
+
+**ADMIN-PRODUCTS-EDIT-ADVANCED-ACCORDION-MOTION-POLISH-1 — PASS — ADVANCED ACCORDION MOTION CLOSED / FINAL FROZEN — (2026-09-16)**
+
+Doc: `docs/admin-products-edit-advanced-accordion-motion-polish-1.md`
+
+Previous Premium Visual Closeout:
+**PASS / STATIC BASELINE PRESERVED**
+
+Freeze exception:
+**MOTION ONLY**
+
+Static visual design:
+**UNCHANGED / PIXEL-EQUIVALENT AT REST**
+
+Advanced open motion:
+**PASS**
+
+Advanced close motion:
+**PASS**
+
+Group open motion:
+**PASS**
+
+Group close motion:
+**PASS**
+
+Chevron:
+**SYNCHRONIZED**
+
+Per-option stagger:
+**NONE**
+
+Reduced motion:
+**PASS / INSTANT**
+
+Closed hidden content:
+**NOT ACTIONABLE**
+
+Keyboard:
+**PASS**
+
+One-group-open:
+**PRESERVED**
+
+Rapid toggle:
+**PASS**
+
+Parent-hidden semantics:
+**UNCHANGED**
+
+Draft / Dirty / Save / Loading / Empty / Sticky / Footer / Create / Builder:
+**UNCHANGED**
+
+Network mutations:
+**0**
+
+Business mutations:
+**0**
+
+DB/RPC/RLS:
+**UNCHANGED**
+
+360 / 390 / 390 short / 412 / desktop / light / dark / prefers-reduced-motion:
+**PASS**
+
+Focused verify / Related verifies / Mutation probes / tsc / build / diff:
+**PASS**
+
+P0 / P1 / release-blocking P2 introduced:
+**0**
+
+Advanced remaining motion/visual debt:
+**NONE**
+
+Global disabled primary CTA token:
+**SEPARATE OPTIONAL DESIGN-SYSTEM FOLLOW-UP**
+
+Next:
+**PRODUCT REMOVAL DECISION** or **RELEASE SEQUENCING**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Prior phase (preserved)
+
+**ADMIN-PRODUCTS-EDIT-ADVANCED-PREMIUM-VISUAL-CLOSEOUT-1 — PASS — EDIT ADVANCED FINAL VISUAL CLOSED / FROZEN — (2026-09-16)**
+
+Doc: `docs/admin-products-edit-advanced-premium-visual-closeout-1.md`
+
+Functional unified editor:
+**CERTIFIED / UNCHANGED**
+
+Advanced loading:
+**FINAL**
+
+Advanced empty-valid:
+**STABLE STRUCTURAL SHELL** (`Sin ajustes`)
+
+Advanced / Groups / Options:
+**LEVEL 1–3 / FINAL**
+
+Expanded group header:
+**CONTINUOUS SURFACE** (Eye seam 0)
+
+Active / disabled Eye:
+**CLEARLY DISTINCT / LEGIBLE**
+
+Text contrast:
+**AA INFORMATIONAL**
+
+Long-content 360:
+**PASS**
+
+Loading→ready / loading→empty:
+**0 SHIFT**
+
+Sticky / Footer:
+**UNCHANGED / PASS**
+
+360 / 390 / 390 short / 412 / 899 / 961+ / desktop / light / dark:
+**PASS**
+
+Create / Builder / DB/RPC/RLS:
+**UNCHANGED**
+
+Business mutations:
+**0**
+
+Focused + related verifies / probes / tsc / build / diff:
+**PASS**
+
+lint:
+**NOT RUN — KNOWN TOOLING DEBT**
+
+P0 / P1 / release-blocking P2:
+**0**
+
+Remaining Advanced visual debt:
+**NONE**
+
+Global disabled primary CTA token:
+**SEPARATE OPTIONAL DESIGN-SYSTEM FOLLOW-UP**
+
+Next:
+**PRODUCT REMOVAL DECISION** or **RELEASE SEQUENCING**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Previous (historical)
+
+**ADMIN-PRODUCTS-EDIT-ADVANCED-LOADING-STATE-FOOTER-RHYTHM-POLISH-1 — PASS — ADVANCED LOADING SHELL / FOOTER RHYTHM CLOSED — (2026-09-16)**
+
+Doc: `docs/admin-products-edit-advanced-loading-state-footer-rhythm-polish-1.md`
+
+Unified functional contract:
+**UNCHANGED / CERTIFIED**
+
+Advanced loading:
+**VISIBLE STRUCTURAL SHELL** (`Avanzado…`, disabled)
+
+Detached loading copy:
+**REMOVED** (SR-only status retained)
+
+Loading → ready layout shift:
+**NONE** (dx=dy=dw=dh=0 @ 412)
+
+Advanced hierarchy / parent-hidden:
+**UNCHANGED**
+
+Footer ownership:
+**UNCHANGED / WHOLE EDITOR**
+
+Footer rhythm:
+**REDUNDANT CLEARANCE REMOVED** (`4.75rem` → `1.5rem`) + **NATURAL FLEX SPACE CONFIRMED** on short content
+
+Bottom reachability:
+**PASS** (~36px collapsed)
+
+360 / 390 / 390 short / 412 / desktop / light / dark:
+**PASS**
+
+Create / Builder / DB/RPC/RLS:
+**UNCHANGED**
+
+Business mutations:
+**0**
+
+Focused + related verifies / mutation probes / tsc / build / diff:
+**PASS**
+
+lint:
+**NOT RUN — KNOWN TOOLING DEBT**
+
+P0 / P1 / release-blocking P2:
+**0**
+
+Next:
+**OWNER FINAL VISUAL ACCEPTANCE**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Previous (historical)
+
+**ADMIN-PRODUCTS-EDIT-ADVANCED-VISUAL-HIERARCHY-HARD-QA-FIX-1 — PASS — ADVANCED GROUP/OPTION HIERARCHY OWNER-QA CLOSED — (2026-09-16)**
+
+Doc: `docs/admin-products-edit-advanced-visual-hierarchy-hard-qa-fix-1.md`
+
+Functional Unified Editor:
+**UNCHANGED / CERTIFIED** (FINAL-QA-1)
+
+Advanced:
+**LEVEL 1**
+
+Groups:
+**LEVEL 2 / SINGLE CARD OWNER**
+
+Options:
+**LEVEL 3 / FLAT NESTED LIST** (+ measured inset ~16px)
+
+Parent hidden:
+**CHILD CONTROLS DISABLED**
+
+Child draft state:
+**PRESERVED** (no cascade)
+
+Parent restore:
+**CHILD STATE RESTORED EXACTLY**
+
+Exception count:
+**EXPLICIT OVERRIDES ONLY**
+
+Eye/EyeOff:
+**GHOST / SECONDARY / >=44**
+
+Hidden state:
+**CHIP + ICON**
+
+Pre-Save writes:
+**0**
+
+Dirty / Save / Sticky / Create / Builder / DB:
+**UNCHANGED**
+
+Live QA:
+360 / 390 / 412 / 899 / desktop / light / dark — **PASS**
+
+Focused verify:
+**PASS**
+
+Related verifies:
+**PASS**
+
+Mutation probes:
+**PASS** (FAIL→restore)
+
+tsc / build / diff:
+**PASS**
+
+lint:
+**NOT RUN — KNOWN TOOLING DEBT**
+
+P0 / P1 / release-blocking P2:
+**0**
+
+Next:
+**OWNER FINAL VISUAL ACCEPTANCE**
+→ PRODUCT REMOVAL DECISION or RELEASE SEQUENCING
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Previous (historical)
+
+**ADMIN-PRODUCTS-EDIT-ADVANCED-VISUAL-HIERARCHY-POLISH-1 — IMPLEMENTATION PASS / OWNER HARD QA FOLLOW-UP — (2026-09-16)**
+
+Doc: `docs/admin-products-edit-advanced-visual-hierarchy-polish-1.md`
+
+Visual implementation:
+**PASS** (section Advanced, summary, chips, Edit-scoped `.editHierarchy`)
+
+Owner hard visual review:
+**FOLLOW-UP REQUIRED** → superseded visually by HARD-QA-FIX-1
+
+Functional contract:
+**UNCHANGED / FINAL-QA-1 REMAINS PASS**
+
+---
+
+## Previous (historical)
+
+**ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-FINAL-QA-1 — PASS — UNIFIED EDITOR CERTIFIED END-TO-END — (2026-09-15)**
+
+Doc: `docs/admin-products-edit-unified-draft-save-final-qa-1.md`
+
+DB RPC:
+**LIVE / VALIDATED**
+
+Application:
+**UNIFIED EDIT CERTIFIED**
+
+Real Save:
+**PASS** on disposable QA fixture
+
+Base + customization in one Save:
+**PASS**
+
+Reopen persisted state:
+**PASS**
+
+Restore:
+**PASS** / NET BUSINESS DELTA **0** (fixture deleted)
+
+Category:
+EDIT read-only / unchanged through Save
+
+Eye/EyeOff:
+LOCAL BEFORE SAVE
+
+Pre-Save customization writes:
+**0**
+
+Dirty:
+**UNIFIED**
+
+Discard:
+**UNIFIED**
+
+Sticky:
+WHOLE EDITOR PASS
+
+Create:
+PASS / unchanged
+
+Builder:
+PASS / immediate mode preserved
+
+Image:
+KEEP runtime PASS · REMOVE/REPLACE verify PASS
+
+Products verify corpus:
+**27/27 PASS**
+
+tsc:
+**PASS**
+
+build:
+**PASS**
+
+P0 / P1 / release-blocking P2 introduced:
+**0**
+
+Runtime source fixes this phase:
+**0**
+
+Next:
+OWNER REVIEW / PRODUCT REMOVAL DECISION OR RELEASE SEQUENCING
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Previous (historical)
+
+**ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-IMPLEMENTATION-1 — PASS — UNIFIED EDITOR RUNTIME IMPLEMENTED — (2026-09-15)**
+
+Doc: `docs/admin-products-edit-unified-draft-save-implementation-1.md`
+
+DB RPC:
+**LIVE / VALIDATED** (`public.save_product_edit_draft`, SECURITY INVOKER)
+
+Application runtime:
+**UNIFIED EDIT DRAFT ACTIVE IN SOURCE**
+
+Persistence:
+**ONE EDITOR = ONE DRAFT = ONE SAVE**
+
+Category:
+CREATE editable · EDIT read-only persisted context
+
+Customization Eye/EyeOff:
+**LOCAL DRAFT ONLY**
+
+Pre-Save customization writes:
+**0**
+
+Dirty:
+base + image + group overrides + option overrides
+
+Accordion:
+presentation preserved
+
+Exception count:
+**CURRENT DRAFT**
+
+Save:
+single unified RPC path (`saveProductEditDraftAction`)
+
+DB atomicity:
+provided by certified RPC
+
+Image:
+existing lifecycle / compensation preserved
+
+Discard:
+whole unified draft
+
+Sticky footer:
+whole editor / spans Advanced
+
+Create:
+**UNCHANGED**
+
+Customization builder:
+**UNCHANGED**
+
+DB/RLS/migration:
+**UNCHANGED** (SHA `42b2e206…16631`)
+
+Persistent QA business mutations:
+**0**
+
+Next:
+**ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-FINAL-QA-1**
+
+COMMIT/PUSH/DEPLOY:
+**PAUSED**
+
+---
+
+## Previous (historical)
+
+**ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-CONTRACT-DB-APPLY-1 — PASS — UNIFIED EDIT RPC LIVE / VALIDATED — (2026-09-15)**
+
+Doc: `docs/admin-products-edit-unified-draft-save-contract-db-apply-1.md`
+
+Owner manual schema apply:
+**YES — Supabase SQL Editor**
+
+Cursor migration SQL replay:
+**0**
+
+Target:
+OrderOps / `pkrsedmwxekbhlohhqds`
+
+RPC:
+`public.save_product_edit_draft`
+
+Security:
+**SECURITY INVOKER** / prosecdef false
+
+ACL:
+PUBLIC DENY · anon DENY · authenticated ALLOW
+
+Legacy true overrides:
+**0**
+
+Role matrix:
+owner ALLOW · admin ALLOW · manager ALLOW · operator DENY · viewer DENY · super_admin ALLOW · foreign DENY · anon DENY
+
+Customization validation:
+valid group/option PASS · invalid DENY · cross-tenant DENY
+
+Category:
+persisted context / immutable through RPC
+
+Atomicity:
+**LIVE VALIDATED** (late-failure SKU unique after override INSERT)
+
+SKU / Stock / Image / Arrays:
+**PASS**
+
+Migration:
+`supabase/migrations/20260915180000_products_edit_unified_draft_save_rpc.sql`
+
+Migration SHA:
+`42b2e206635d0fe3a13ffff7972e8149ae86c909829641a30ca001e500a16631`
+
+Migration history:
+**RECONCILED** (`20260915215741_products_edit_unified_draft_save_rpc`)
+
+History collateral:
+**0**
+
+Live function fingerprint:
+`6d31d3050a938022242eae9348c52697c46b8528b4f7b3afd08f5f3ff422079a`
+
+Persistent QA business mutations:
+**0**
+
+Application runtime:
+**STILL LEGACY MIXED PERSISTENCE**
+
+Unified editor:
+**NOT YET IMPLEMENTED**
+
+Next:
+**ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-IMPLEMENTATION-1**
+
+`ADMIN-PRODUCTS-COMMIT-PUSH-DEPLOY-1`:
+**PAUSED**
+
+---
+
+## Prior phase snapshot (preserved)
+## Prior phase snapshot (preserved)
+## Prior phase snapshot (preserved)
+## Prior phase snapshot (preserved)
+
+**ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-CONTRACT-DECISION-1 — PASS — UNIFIED EDIT DRAFT CONTRACT APPROVED — (2026-09-15)**
+
+Doc: `docs/admin-products-edit-unified-draft-save-contract-decision-1.md`
+
+Note: Decision phase approved ONE EDITOR = ONE DRAFT = ONE SAVE. Security mode corrected in DB-AUTHOR to SECURITY INVOKER (atomicity ≠ DEFINER). Runtime remains legacy mixed persistence until apply + implementation.
+
+Next (at decision close):
+**ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-CONTRACT-DB-AUTHOR-1**
+
+---
+
+## Prior phase snapshot (preserved)
+
+**ADMIN-PRODUCTS-EDIT-CUSTOMIZATION-PROGRESSIVE-DISCLOSURE-ACCORDION-1 — PASS — ADVANCED CUSTOMIZATION PROGRESSIVE DISCLOSURE CLOSED — (2026-09-15)**
+
+Doc: `docs/admin-products-edit-customization-progressive-disclosure-accordion-1.md`
+
+Owner:
+**ProductCustomizationOverridesPanel**
+
+Customization UI:
+**FINAL CLOSED / FROZEN (presentation)**
+
+Note:
+**Persistence ownership approved to change under unified draft decision — presentation preserved.**
+
+---
+
+## Prior phase snapshot (preserved)
+
+**ADMIN-PRODUCTS-EDIT-CUSTOMIZATION-OVERRIDES-MOBILE-DENSITY-POLISH-1 — PASS — CUSTOMIZATION MOBILE DENSITY CLOSED / FROZEN — (2026-09-15)**
+
+Doc: `docs/admin-products-edit-customization-overrides-mobile-density-polish-1.md`
+
+Scope:
+**ProductCustomizationOverridesPanel + feature-local CSS only**
+
+Density (412):
+**section/option ~141px → ~109px; action 44px; overflow-x 0**
+
+Note:
+**Presentation superseded by progressive disclosure accordion (domain unchanged).**
+
+---
+
+## Prior phase snapshot (preserved)
+
+**ADMIN-PRODUCTS-EDIT-STICKY-FOOTER-RELEASE-STATE-POLISH-1 — PASS — EDIT BASE FORM FINAL CLOSED / FROZEN — (2026-09-15)**
+
+Doc: `docs/admin-products-edit-sticky-footer-release-state-polish-1.md`
+
+Release remnant under header:
+**0 (pixel-proven)**
+
+Fix owner:
+**Edit-only `.headerReleaseClip::after` lip 32px + `.bodyReleaseClip` pad**
+
+Note:
+**Historically correct under base-only Save; approved for supersession when unified sticky spans Advanced.**
+
+---
+
+## Prior phase snapshot (preserved)
+
+**ADMIN-PRODUCTS-EDIT-SIMPLE-MOBILE-VISUAL-UX-PARITY-1 — PASS — EDIT BASE FORM MOBILE VISUAL / UX PARITY CLOSED — (2026-09-15)**
+
+Doc: `docs/admin-products-edit-simple-mobile-visual-ux-parity-1.md`
+
+Create reference:
+**FROZEN / PRESERVED**
+
+Edit header:
+**PASS**
+
+Image block:
+**PASS / LIFECYCLE UNCHANGED**
+
+Required legend:
+`* Campos obligatorios`
+
+Required:
+**Nombre · Categoría · Precio · Stock actual**
+
+Optional:
+**Imagen · Descripción · SKU · Disponible · track_stock**
+
+Required semantics:
+**UNCHANGED**
+
+Form rhythm:
+**POLISHED**
+
+Disponible:
+**COMPACT ROW**
+
+Track stock:
+**COMPACT ROW**
+
+Activo/Inactivo duplicate copy:
+**REMOVED FROM EDIT BASE FORM**
+
+Stock helper:
+**COMPACT / DOMAIN-ACCURATE**
+
+Stock label:
+**Stock actual / PRESERVED**
+
+Dirty initial Save:
+**DISABLED**
+
+Dirty valid:
+**ENABLED**
+
+Dirty invalid:
+**DISABLED**
+
+Change→revert:
+**PRISTINE**
+
+Pristine submit:
+**BLOCKED**
+
+Dirty close:
+**CONFIRM DISCARD**
+
+Image KEEP/REMOVE/REPLACE:
+**PRESERVED**
+
+Pre-submit Storage:
+**0**
+
+Edit mobile footer:
+**FULL BLEED**
+
+CTA:
+**INSET / FULL WIDTH**
+
+CTA target:
+**>=44 (preferred 48)**
+
+MID:
+**PASS**
+
+BASE-FORM END:
+**PASS / NO TRAILING STRIP**
+
+Customization boundary:
+**FOOTER RELEASES BEFORE PANEL**
+
+ProductCustomizationOverridesPanel:
+**UNCHANGED**
+
+360:
+**PASS**
+
+390 light:
+**PASS**
+
+390 dark:
+**PASS**
+
+412:
+**PASS**
+
+899:
+**PASS**
+
+Desktop >=961:
+**PASS**
+
+Short viewport:
+**PASS**
+
+Horizontal overflow:
+**0**
+
+Pointer focus:
+**PASS**
+
+Keyboard focus-visible:
+**PASS**
+
+Flyout focus/Escape:
+**PASS**
+
+Create regression:
+**PASS / FROZEN**
+
+Products updated:
+**0**
+
+Storage mutations:
+**0**
+
+Customization mutations:
+**0**
+
+Orders:
+**0**
+
+DB/RLS/migrations:
+**UNCHANGED**
+
+Actions/domain:
+**UNCHANGED**
+
+Focused verify:
+**PASS**
+
+Related verifies:
+**PASS**
+
+Mutation probes:
+**FAIL → RESTORED PASS**
+
+tsc:
+**PASS**
+
+diff:
+**PASS**
+
+build:
+**NOT RUN**
+
+lint:
+**NOT RUN — KNOWN TOOLING DEBT**
+
+Next:
+**ADMIN-PRODUCTS-EDIT-CUSTOMIZATION-OVERRIDES-MOBILE-DENSITY-POLISH-1**
+
+Then:
+**PRODUCT REMOVAL DECISION PHASE**
+
+ADMIN-PRODUCTS-COMMIT-PUSH-DEPLOY-1:
+**PAUSED**
+
+---
+
+### Prior — ADMIN-PRODUCTS-EDIT-DIRTY-STATE-UX-CONTRACT-1 — PASS — (2026-09-15)
+
+Doc: `docs/admin-products-edit-dirty-state-ux-contract-1.md`
+
+Dirty owner:
+**`edit-product-form.tsx` currentSnapshot vs baselineSnapshot**
+
+Baseline:
+**PERSISTED EDITABLE PRODUCT SNAPSHOT**
+
+Dirty semantics:
+**CURRENT != BASELINE**
+
+Change → revert:
+**PRISTINE**
+
+Initial Save:
+**DISABLED**
+
+Dirty + valid:
+**ENABLED**
+
+Dirty + invalid:
+**DISABLED**
+
+Pending:
+**DISABLED**
+
+Pristine submit:
+**BLOCKED CLIENT-SIDE**
+
+Close pristine:
+**IMMEDIATE**
+
+Close dirty:
+**CONFIRM DISCARD**
+
+Escape pristine:
+**CLOSE**
+
+Escape dirty:
+**CONFIRM DISCARD**
+
+Confirmation Escape:
+**CANCEL DISCARD / RETURN TO EDIT**
+
+Seguir editando:
+**PRESERVES LOCAL CHANGES**
+
+Descartar cambios:
+**LOCAL DISCARD ONLY**
+
+Image KEEP:
+**PRISTINE**
+
+Image REMOVE:
+**DIRTY**
+
+Image REPLACE:
+**DIRTY**
+
+Storage before Save:
+**0**
+
+Save success:
+**closeFlyout (immediate; no discard prompt)**
+
+Save failure:
+**DIRTY PRESERVED**
+
+Customization overrides:
+**OUTSIDE BASE DIRTY SNAPSHOT**
+
+window.confirm:
+**NOT USED** (feature-local `<dialog>`)
+
+360:
+**PASS**
+
+390:
+**PASS**
+
+412:
+**PASS**
+
+Light:
+**PASS**
+
+Dark:
+**PASS**
+
+Horizontal overflow:
+**0**
+
+Focus trap:
+**PASS**
+
+Escape ownership:
+**PASS**
+
+Products updated:
+**0**
+
+Storage mutations:
+**0**
+
+Orders:
+**0**
+
+DB/RLS/migrations:
+**UNCHANGED**
+
+Actions/domain:
+**UNCHANGED**
+
+Focused verify:
+**PASS**
+
+Mutation probes:
+**FAIL → RESTORED PASS** (A canSave · B close guard · C imageIntent)
+
+tsc:
+**PASS**
+
+diff:
+**PASS**
+
+Build:
+**NOT RUN**
+
+Lint:
+**NOT RUN — KNOWN TOOLING DEBT**
+
+PROD-P3-18:
+**CLOSED**
+
+Next:
+**ADMIN-PRODUCTS-EDIT-SIMPLE-MOBILE-VISUAL-UX-PARITY-1**
+
+Then:
+**ADMIN-PRODUCTS-EDIT-CUSTOMIZATION-OVERRIDES-MOBILE-DENSITY-POLISH-1**
+
+Product removal:
+**SEPARATE DECISION PHASE LATER**
+
+ADMIN-PRODUCTS-COMMIT-PUSH-DEPLOY-1:
+**PAUSED**
+
+---
+
+### Prior — ADMIN-PRODUCTS-CREATE-REQUIRED-MARKER-SPACING-POLISH-1 — PASS — (2026-09-14)
+
+Doc: `docs/admin-products-create-required-marker-spacing-polish-1.md`
+
+Owner finding:
+**Categoría `*` flush; Nombre / Precio / Stock spaced**
+
+Root cause:
+`.admin-field span { margin: 0 }` (admin-surfaces) overrode `.requiredMark { margin-inline-start: 0.15em }` on Categoría only
+
+Spacing owner:
+**`.fieldLabelInline` `display: inline-flex` + `column-gap: 0.15em`**
+
+Mark margin as spacing:
+**REMOVED** (defeated by admin-field)
+
+RequiredMark markup:
+**compact `*` (no whitespace padding)**
+
+Affordance / required / legend / Input API:
+**UNCHANGED**
+
+Validation / Save / stock / footer / dvh:
+**UNCHANGED**
+
+Edit:
+**UNCHANGED**
+
+360:
+**PASS** (gaps ~2.27–2.30px · overflow 0)
+
+390 dark:
+**PASS**
+
+412 light:
+**PASS**
+
+Focused spacing verify:
+**PASS**
+
+Mutation (remove column-gap):
+**FAIL → RESTORED PASS**
+
+required-field-affordance verify:
+**PASS**
+
+tsc:
+**PASS**
+
+diff:
+**PASS**
+
+Build:
+**NOT RUN**
+
+Lint:
+**NOT RUN — KNOWN TOOLING DEBT**
+
+CREATE MOBILE:
+**FINAL CLOSED / FROZEN**
+
+CREATE OWNER POLISH:
+**COMPLETE**
+
+Next:
+**OWNER REVIEW → EDIT SIMPLE MOBILE VISUAL QA**
+
+ADMIN-PRODUCTS-COMMIT-PUSH-DEPLOY-1:
+**STILL PAUSED**
+
+---
+
+### Prior — ADMIN-PRODUCTS-CREATE-REQUIRED-FIELD-AFFORDANCE-1 — PASS — (2026-09-14)
+
+Doc: `docs/admin-products-create-required-field-affordance-1.md`
+
+Required field contract:
+**CONFIRMED FROM CURRENT SOURCE**
+
+Required markers:
+**Nombre · Categoría · Precio · Stock inicial**
+
+Optional unmarked:
+**Imagen · Descripción · SKU · Controlar stock automáticamente**
+
+Legend:
+`* Campos obligatorios`
+
+Marker semantics:
+**VISUAL ONLY / aria-hidden**
+
+Native `required`:
+**PRESERVED**
+
+Validation behavior:
+**UNCHANGED**
+
+Save enablement:
+**UNCHANGED**
+
+Server validation:
+**UNCHANGED**
+
+Stock contract:
+**UNCHANGED**
+
+Viewport:
+**UNCHANGED**
+
+Sticky footer MID/END:
+**PRESERVED**
+
+Safe-area:
+**PRESERVED**
+
+Pointer focus:
+**PRESERVED**
+
+360:
+**PASS**
+
+390:
+**PASS**
+
+412:
+**PASS**
+
+Light:
+**PASS**
+
+Dark:
+**PASS**
+
+Horizontal overflow:
+**0**
+
+Create submits:
+**0**
+
+Products created:
+**0**
+
+Storage mutations:
+**0**
+
+DB/RLS/migrations:
+**UNCHANGED**
+
+Edit:
+**UNCHANGED**
+
+Focused verify:
+**PASS**
+
+Related verifies:
+**PASS**
+
+Mutation probes:
+**FAIL → RESTORED PASS** (A missing Precio · B false SKU · C aria-hidden)
+
+tsc:
+**PASS**
+
+diff:
+**PASS**
+
+Build:
+**NOT RUN**
+
+Lint:
+**NOT RUN — KNOWN TOOLING DEBT**
+
+CREATE MOBILE:
+**FINAL CLOSED / FROZEN**
+
+NO MORE CREATE OWNER POLISH PLANNED
+
+Next:
+**OWNER REVIEW → EDIT SIMPLE MOBILE VISUAL QA**
+
+ADMIN-PRODUCTS-COMMIT-PUSH-DEPLOY-1:
+**STILL PAUSED**
+
+---
+
+### Prior — ADMIN-PRODUCTS-CREATE-MOBILE-STICKY-FOOTER-END-STATE-POLISH-1 — PASS — (2026-09-14)
+
+Doc: `docs/admin-products-create-mobile-sticky-footer-end-state-polish-1.md`
+
+Trigger:
+**OWNER REAL / DEVTOOLS VISUAL EVIDENCE**
+
+Primary viewport:
+**412 × ~915**
+
+Root cause:
+`.createForm.shell` `padding-bottom: 0.875rem` (14px) painted after sticky footer at END only
+
+Classification:
+**CASE B**
+
+MID footer geometry:
+**STABLE**
+
+END footer geometry:
+**STABLE**
+
+Extra trailing footer surface:
+**REMOVED** (`footerToBodyBottom` 14 → 0)
+
+Footer:
+**STICKY / FULL BLEED**
+
+CTA:
+**INSET / FULL WIDTH**
+
+MID vs END CTA height:
+**STABLE** (48)
+
+MID vs END footer internal spacing:
+**STABLE** (cta→footer bottom 12)
+
+Safe-area:
+**PRESERVED**
+
+100dvh:
+**PRESERVED**
+
+Single scroll:
+**PRESERVED**
+
+Browser-chrome short viewport regression:
+**PASS**
+
+360:
+**PASS**
+
+390 short:
+**PASS** (dark MID+END)
+
+412:
+**PASS** (light MID+END)
+
+Light:
+**PASS**
+
+Dark:
+**PASS**
+
+Horizontal overflow:
+**0**
+
+Stock contract:
+**FROZEN / UNCHANGED**
+
+Create validation:
+**UNCHANGED**
+
+Pointer focus:
+**PRESERVED**
+
+Keyboard focus-visible:
+**PRESERVED**
+
+Edit:
+**READ-ONLY GUARD PASS**
+
+Products created:
+**0**
+
+Products updated:
+**0**
+
+Storage mutations:
+**0**
+
+Orders:
+**0**
+
+DB/RLS/migrations:
+**UNCHANGED**
+
+Runtime source edits:
+`product-form.module.css`
+
+Focused verify:
+**PASS**
+
+Related verifies:
+**PASS**
+
+Mutation probe:
+**FAIL → RESTORED PASS**
+
+tsc:
+**PASS**
+
+diff:
+**PASS**
+
+Build:
+**NOT RUN**
+
+Lint:
+**NOT RUN — KNOWN TOOLING DEBT**
+
+Create remaining release-blocking debt:
+**NONE**
+
+Create:
+**FROZEN AGAIN**
+
+Next:
+**OWNER REVIEW → EDIT SIMPLE MOBILE VISUAL QA**
+
+Then:
+**EDIT PERSONALIZABLE MOBILE VISUAL QA**
+
+ADMIN-PRODUCTS-COMMIT-PUSH-DEPLOY-1:
+**STILL PAUSED**
+
+---
+
+**ADMIN-PRODUCTS-CREATE-MOBILE-FINAL-VISUAL-QA-1 — PASS — CREATE MOBILE VISUAL / UX SURFACE FROZEN — (2026-09-13)**
+
+Doc: `docs/admin-products-create-mobile-final-visual-qa-1.md`
+
+Create mobile:
+**PRODUCTION-READY / FROZEN** (footer end-state polish applied above)
+
+Header:
+**PASS**
+
+Dropzone:
+**PASS**
+
+Fields:
+**PASS**
+
+Stock initial:
+**0**
+
+Track stock default:
+**ON**
+
+Track stock reset:
+**ON**
+
+Zero-stock info:
+**PASS**
+
+Pointer focus:
+**PASS**
+
+Keyboard focus-visible:
+**PASS**
+
+Bottom whitespace:
+**ARTIFICIAL spacer REMOVED** (128px → 36px); tall-viewport remainder accepted as natural
+
+Footer:
+**FULL BLEED**
+
+CTA:
+**INSET / FULL-WIDTH**
+
+Short viewport:
+**PASS**
+
+Browser-chrome regression:
+**PASS**
+
+100dvh:
+**PRESERVED**
+
+safe-area:
+**PRESERVED**
+
+single scroll:
+**PRESERVED**
+
+360:
+**PASS**
+
+390 short:
+**PASS** (light + dark)
+
+390 normal:
+**PASS**
+
+412:
+**PASS**
+
+Light:
+**PASS**
+
+Dark:
+**PASS**
+
+Horizontal overflow:
+**0**
+
+Touch:
+**>=44**
+
+Initial focus / Tab / Escape:
+**PASS**
+
+Create business mutations:
+**0**
+
+Storage mutations:
+**0**
+
+DB/RLS/migrations:
+**UNCHANGED**
+
+Edit:
+**READ-ONLY GUARD PASS**
+
+Runtime source edits:
+`product-form.module.css` only
+
+Focused verify:
+**PASS**
+
+Related verifies:
+**PASS**
+
+Mutation probe A:
+**FAIL → RESTORED PASS**
+
+tsc:
+**PASS**
+
+diff:
+**PASS**
+
+Build:
+**NOT RUN**
+
+Lint:
+**NOT RUN — KNOWN TOOLING DEBT**
+
+Create remaining release-blocking debt:
+**NONE**
+
+Create:
+**FROZEN**
+
+Next (historical):
+footer end-state polish (now PASS above)
+
+ADMIN-PRODUCTS-COMMIT-PUSH-DEPLOY-1:
+**STILL PAUSED**
+
+---
+
+**ADMIN-PRODUCTS-CREATE-STOCK-DEFAULT-UX-CONTRACT-1 — PASS — CREATE STOCK DEFAULT / UX CONTRACT CLOSED — (2026-09-13)**
+
+Doc: `docs/admin-products-create-stock-default-ux-contract-1.md`
+
+Create track_stock initial:
+**ON**
+
+Create track_stock success reset:
+**ON**
+
+User can disable tracking:
+**YES**
+
+Stock label:
+**STOCK INICIAL** (Create only)
+
+Initial stock:
+**0**
+
+Tracked + stock 0:
+**VALID** → created unavailable by existing domain contract
+
+Stock 0 validation error:
+**NO**
+
+Create Disponible switch:
+**NOT INTRODUCED**
+
+Zero-stock consequence:
+**CONTEXTUAL INFO** (`toggleInfo`)
+
+Generic stock helper:
+**COMPACT**
+
+Standalone Activo/Inactivo text:
+**REMOVED FROM CREATE**
+
+Pointer/touch switch focus:
+**NO PERSISTENT KEYBOARD RING**
+
+Keyboard focus-visible:
+**PASS** (CSS `:has(input:focus-visible)` + Create hit-area)
+
+Footer background:
+**FULL BLEED MOBILE** (Create)
+
+CTA:
+**INSET / FULL-WIDTH**
+
+dvh:
+**PRESERVED**
+
+safe-area:
+**PRESERVED**
+
+single scroll:
+**PRESERVED**
+
+360 runtime:
+**PASS**
+
+390 runtime:
+**PASS** (light + dark)
+
+412 runtime:
+**PASS**
+
+Horizontal overflow:
+**0**
+
+Light:
+**PASS**
+
+Dark:
+**PASS**
+
+Edit stock persisted state:
+**UNCHANGED**
+
+Edit "Stock actual":
+**PRESERVED**
+
+Server stock/availability authority:
+**UNCHANGED**
+
+Actions:
+**UNCHANGED**
+
+DB/RLS/migrations:
+**UNCHANGED**
+
+Products created:
+**0**
+
+Products updated:
+**0**
+
+Storage mutations:
+**0**
+
+Orders:
+**0**
+
+Focused verify:
+**PASS**
+
+Related verifies:
+**PASS**
+
+Mutation probes:
+**FAIL → RESTORED PASS** (A/B/C/D)
+
+tsc:
+**PASS**
+
+diff:
+**PASS**
+
+Commit/push/deploy:
+**NONE**
+
+Next (historical):
+**ADMIN-PRODUCTS-CREATE-MOBILE-FINAL-VISUAL-QA-1** (now PASS)
+
+Then:
+owner review → Edit simple mobile phase
+
+Release:
+**STILL PAUSED**
+
+---
+
+**ADMIN-PRODUCTS-CREATE-MOBILE-VIEWPORT-VISUAL-POLISH-1 — PASS — CREATE MOBILE VIEWPORT / VISUAL SURFACE CLOSED — (2026-09-13)**
+
+Doc: `docs/admin-products-create-mobile-viewport-visual-polish-1.md`
+
+Trigger:
+**REAL ANDROID BROWSER-CHROME FOOTER OCCLUSION**
+
+Root cause:
+**CASE A — `.panel` sized with static `100vh` only**
+
+Mobile viewport sizing:
+**DYNAMIC / `100vh` fallback + `100dvh`**
+
+Static 100vh-only dependency:
+**REMOVED** (dvh override present)
+
+Flyout breakpoint:
+**961 PRESERVED**
+
+Scroll owners:
+**1** (`.body`)
+
+Sticky footer:
+**PASS**
+
+Safe-area bottom:
+**PASS**
+
+Create CTA mobile:
+**FULL WIDTH** (≥48px)
+
+Create CTA visible in short viewport:
+**PASS** (600/640)
+
+Create CTA visible in normal viewport:
+**PASS**
+
+Body/footer occlusion (scrolled bottom):
+**0**
+
+360/390/412 overflow:
+**0**
+
+Dropzone:
+**POLISHED / BEHAVIOR FROZEN**
+
+Form vertical rhythm:
+**POLISHED (Create mobile)**
+
+Header / image lifecycle / stock defaults:
+**FROZEN / UNCHANGED** (stock defaults closed in CREATE-STOCK-DEFAULT phase above)
+
+Create submits:
+**0**
+
+Edit shared-shell guard:
+**PASS**
+
+Focus / Escape:
+**PASS REGRESSION**
+
+Focused verify / mutations / tsc / diff:
+**PASS**
+
+Commit/push/deploy:
+**NONE**
+
+Next (historical):
+**ADMIN-PRODUCTS-CREATE-STOCK-DEFAULT-UX-CONTRACT-1** (now PASS)
+
+Then:
+**ADMIN-PRODUCTS-CREATE-MOBILE-FINAL-VISUAL-QA-1**
+
+Release:
+**STILL PAUSED**
+
+---
+
+## Previous — ADMIN-PRODUCTS-MOBILE-MAIN-SURFACE-HARD-VISUAL-POLISH-1 — PASS — MOBILE MAIN PRODUCTS SURFACE CLOSED — (2026-09-12)
+
+Doc: `docs/admin-products-mobile-main-surface-hard-visual-polish-1.md`
+
+Scope:
+**MAIN /admin/products ONLY**
+
+Mobile actions:
+**[Opcionales] [Abrir catálogo] [Copiar link]**
+
+Mobile Abrir catálogo:
+**PUBLIC REAL ROUTE** (`buildPublicCatalogPath` → `/b/{slug}/catalogo`)
+
+Preview query:
+**NOT USED ON MOBILE**
+
+Desktop Vista previa:
+**PRESERVED** (`/admin/products/preview`)
+
+Public catalog new tab:
+**PASS**
+
+Search:
+**FULL WIDTH / PRESERVED** (≥44 · 300ms debounce)
+
+Mobile filters:
+**3-COLUMN COMPACT NATIVE SELECT ROW**
+
+Native select semantics:
+**PRESERVED**
+
+Filter URL contract:
+**PRESERVED**
+
+Filter page reset:
+**PRESERVED**
+
+Summary duplication:
+**REMOVED ON MOBILE**
+
+Por categorías redundancy:
+**HIDDEN ON MOBILE**
+
+Horizontal overflow:
+**0** (360/390/412/899/900)
+
+Touch targets:
+**≥44**
+
+Light:
+**PASS**
+
+Dark:
+**PASS**
+
+360 / 390 / 412 / 899 / 900:
+**PASS**
+
+Copy link visible feedback:
+**PASS**
+
+Copy link accessible announcement:
+**PASS** (`role="status"` `aria-live="polite"`)
+
+ProductCard architecture:
+**FROZEN**
+
+Forms / flyout / customizations:
+**UNCHANGED**
+
+Product mutations:
+**0**
+
+Storage mutations:
+**0**
+
+Orders:
+**0**
+
+Focused verify:
+**PASS**
+
+Mutation probes:
+**FAIL → RESTORED PASS**
+
+tsc / diff:
+**PASS**
+
+DB/RLS/migrations:
+**UNCHANGED**
+
+Commit/push/deploy:
+**NONE**
+
+Next (historical):
+**WAIT FOR OWNER DETAIL ON CREATE / EDIT SIMPLE / EDIT PERSONALIZABLE MOBILE VISUAL QA**
+
+ADMIN-PRODUCTS-COMMIT-PUSH-DEPLOY-1:
+**STILL PAUSED**
+
+---
+
+## Previous — ADMIN-PRODUCTS-CLIENT-IMAGE-OPTIMIZATION-800-FIRST-SELECTION-1 — PASS — 800-FIRST QUALITY-PRESERVING SELECTION CLOSED — (2026-09-11)
+
+Doc: `docs/admin-products-client-image-optimization-800-first-selection-1.md`
+
+Preferred target:
+**≤90 KiB**
+
+Quality-preserving ceiling:
+**≤150 KiB**
+
+Selection priority:
+**LARGEST VALID DIMENSION FIRST**
+
+800 outlier ≤150:
+**PREFERRED OVER 720/640**
+
+Dimension fallback:
+**ONLY WHEN CURRENT DIMENSION HAS NO ≤150 CANDIDATE**
+
+Highest-quality acceptable outlier:
+**SELECTED**
+
+Quality floor:
+**0.60 / UNCHANGED**
+
+Dimension floor:
+**640 / UNCHANGED**
+
+WebP:
+**UNCHANGED**
+
+Pica:
+**UNCHANGED**
+
+No-upscale:
+**PRESERVED**
+
+Image lifecycle:
+**FROZEN / PASS**
+
+Pre-submit Storage:
+**0 / PRESERVED**
+
+Optimizer verify:
+**PASS**
+
+Lifecycle verify:
+**PASS**
+
+Mutation probes:
+**FAIL → RESTORED PASS** (A/B/C)
+
+tsc:
+**PASS**
+
+diff:
+**PASS**
+
+Runtime source files changed:
+**1** (`lib/products/product-image-optimization.ts`) + focused verify
+
+Forms:
+**UNCHANGED**
+
+DB/RLS/migrations:
+**UNCHANGED**
+
+Storage policies:
+**UNCHANGED**
+
+Products verify corpus:
+**12/12 PREVIOUSLY PASS**
+
+Real phone camera QA:
+**DEFERRED / ACCEPTED NON-BLOCKING QA DEBT**
+
+HEIC:
+**ACCEPTED QA DEBT**
+
+Image Delivery:
+**BLOCKED / ACCEPTED INFRA**
+
+Historical orphan cleanup:
+**DEFERRED**
+
+ESLint:
+**KNOWN TOOLING DEBT**
+
+Products P0:
+**0**
+
+Products P1:
+**0**
+
+Release-blocking P2:
+**0**
+
+Products package:
+**READY FOR RELEASE** (later paused for owner mobile visual block)
+
+Next (historical):
+**ADMIN-PRODUCTS-COMMIT-PUSH-DEPLOY-1** — superseded pause by mobile main-surface polish owner gate
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-CLIENT-IMAGE-OPTIMIZATION-REAL-ASSET-QA-2 — REAL PHONE FIXTURE UNAVAILABLE — (2026-09-11)
+
+Doc: `docs/admin-products-client-image-optimization-real-asset-qa-2.md`
+
+Owner-supplied files: ExampleFile synthetic banners (`xx_2.jpg` 5.05 MiB · `10mb-example-jpg.jpg` 10.31 MiB)
+Hard gate: **FAILED** — synthetic ExampleFile explicitly forbidden
+Genuine phone JPEG processed: **0**
+Optimizer exercised: **NO**
+Runtime source edits: **0**
+Real camera JPEG 3–10 MiB debt: later owner-accepted as non-blocking (see 800-FIRST phase)
+Byte-budget contract: **IN FORCE** (≤90 preferred / ≤150 outlier / >150 miss)
+HEIC: **ACCEPTED QA DEBT**
+Image Delivery: **BLOCKED / ACCEPTED INFRA**
+Products P0: **0**
+Products P1: **0**
+Historical note: at execution time package was marked not release-ready pending phone fixture; **superseded** by 800-FIRST owner decision + PASS.
+
+---
+
+## Previous — ADMIN-PRODUCTS-CLIENT-IMAGE-OPTIMIZATION-BYTE-BUDGET-DECISION-1 — PASS — BYTE BUDGET CONTRACT DECIDED — (2026-09-11)
+
+Doc: `docs/admin-products-client-image-optimization-byte-budget-decision-1.md`
+
+Previous Real-Asset QA: **BLOCKED UNDER OLD ≤90 KiB HARD GATE**
+Preferred target: **≤90 KiB**
+Quality-preserving outlier band: **>90 KiB to ≤150 KiB**
+Hard byte-budget miss: **>150 KiB**
+Current fallback floor: **640px**
+Current quality floor: **~0.60**
+Further degradation: **NOT AUTHORIZED**
+Real photographic QA result: **135.43 KiB @640 → ACCEPTED QUALITY-PRESERVING OUTLIER UNDER NEW CONTRACT**
+Visual quality: **ACCEPTABLE / GOOD**
+Optimizer source: **UNCHANGED**
+Lifecycle: **FROZEN**
+Pre-submit Storage: **0**
+DB/RLS: **UNCHANGED**
+Dual-quality architecture: **DEFERRED / NOT INTRODUCED**
+Image Delivery Reconciliation: **BLOCKED / ACCEPTED INFRA**
+Real camera JPEG 3–10 MiB QA: **STILL OPEN**
+HEIC real-device: **ACCEPTED QA DEBT**
+Products verify corpus: **12/12 PASS**
+Products P0: **0**
+Products P1: **0**
+
+Next: **ADMIN-PRODUCTS-CLIENT-IMAGE-OPTIMIZATION-REAL-ASSET-QA-2**
+
+Then, if PASS: **ADMIN-PRODUCTS-COMMIT-PUSH-DEPLOY-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-CLIENT-IMAGE-OPTIMIZATION-REAL-ASSET-QA-1 — REAL-ASSET QA BLOCKED — BYTE BUDGET MICROFIX/DECISION REQUIRED — (2026-09-11)
+
+Doc: `docs/admin-products-client-image-optimization-real-asset-qa-1.md`
+
+Real camera JPEG 3–10 MB QA debt: **NOT CLOSED**
+Primary real photographic JPEG: **1024×1024 · 1.317 MiB → 135.43 KiB WebP @ 640×640**
+JPEG final: image/webp · ≤800 · visual **ACCEPTABLE/GOOD**
+JPEG byte target ≤90 KiB: **FAIL — BYTE BUDGET MISS** (fallback 800→640 engaged) — *historical hard-gate interpretation*
+Heavy synthetic JPEG (ExampleFile, NOT camera): 11384×4221 · 10.308 MiB → 34.54 KiB @ 800×800 · PASS stress only
+Heavy PNG: 1082×12637 · 7.246 MiB → 36.86 KiB @ 800×800 · PASS
+Pre-submit Storage uploads: **0**
+Committed Storage uploads: **0**
+Product / DB mutations: **0**
+Image lifecycle: **FROZEN / PASS**
+Optimizer: **FROZEN** (no code changes)
+Products verify corpus: **12/12 PASS / NOT RE-RUN FULL**
+Targeted optimizer verify: **PASS**
+Targeted lifecycle verify: **PASS**
+diff: **PASS**
+Runtime source edits this phase: **0**
+HEIC real-device: **ACCEPTED QA DEBT / DEFERRED**
+Image Delivery Reconciliation: **BLOCKED / ACCEPTED INFRA**
+Historical orphan cleanup: **DEFERRED**
+ESLint: **KNOWN TOOLING DEBT**
+Products P0: **0**
+Products P1: **0**
+Release-blocking finding: **BYTE BUDGET MISS on real photographic asset** *(superseded by owner decision)*
+
+Products package: **NOT RELEASE-READY until byte-budget decision/microfix** *(then phone QA)*
+
+Next (then): **ADMIN-PRODUCTS-CLIENT-IMAGE-OPTIMIZATION-BYTE-BUDGET-DECISION-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-VERIFY-CORPUS-RECONCILIATION-1 — PASS — PRODUCTS VERIFY CORPUS RECONCILED — (2026-09-11)
+
+Doc: `docs/admin-products-verify-corpus-reconciliation-1.md`
+
+Final QA: **PASS WITH ACCEPTED NON-BLOCKING DEBT**
+Products P0: **0**
+Products P1: **0**
+Release-blocking P2: **0**
+
+Verify corpus before: **10/12 PASS**
+Verify corpus after: **12/12 PASS**
+
+Image lifecycle verify: **RECONCILED TO OPTIMIZED STAGED FILE CONTRACT**
+Card aspect-ratio verify: **RECONCILED TO CURRENT SQUARE / COVER SCALE CONTRACT**
+
+Mutation probe lifecycle: **FAIL → RESTORED PASS**
+Mutation probe aspect: **FAIL → RESTORED PASS**
+
+Runtime source permanent edits: **0**
+Runtime CSS permanent edits: **0**
+DB/RLS/migrations: **UNCHANGED**
+Image lifecycle: **FROZEN**
+Image optimization: **FROZEN**
+Collection: **FROZEN**
+
+tsc: **PASS**
+diff: **PASS**
+build: **NOT RUN — FINAL QA PASS / RUNTIME UNCHANGED**
+lint: **NOT RUN — KNOWN TOOLING DEBT**
+Browser QA: **NOT RUN — FINAL QA ALREADY PASS**
+
+Remaining accepted debt:
+
+- Image Delivery Reconciliation — **BLOCKED / ACCEPTED INFRA**
+- Historical orphan cleanup — **DEFERRED**
+- Real camera JPEG 3–10 MB QA — **ACCEPTED QA DEBT**
+- HEIC real-device QA — **ACCEPTED QA DEBT**
+- ESLint circular-config tooling debt
+- residual non-blocking P3 polish
+
+Verify corpus debt: **CLOSED**
+Products package: **READY FOR RELEASE** (superseded: real-asset QA later blocked on byte budget)
+
+Next (then): **ADMIN-PRODUCTS-CLIENT-IMAGE-OPTIMIZATION-REAL-ASSET-QA-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-FINAL-FUNCTIONAL-VISUAL-QA-1 — PASS WITH ACCEPTED NON-BLOCKING DEBT — PRODUCTS PACKAGE READY FOR RELEASE — (2026-09-11)
+
+Doc: `docs/admin-products-final-functional-visual-qa-1.md`
+
+Products P0: **0**
+Products P1: **0**
+Release-blocking P2: **0**
+
+Search/filter: **PASS**
+Responsive collection: **PASS**
+390: **PASS**
+899: **PASS** (cards / no table)
+900: **PASS** (table / no cards)
+1440: **PASS**
+Light: **PASS**
+Dark: **PASS**
+Create flyout: **PASS / NO SUBMIT**
+Edit flyout: **PASS / NO BUSINESS MUTATION**
+Availability feedback: **PASS**
+Image lifecycle: **PASS / FROZEN** (staged remove discard nondestructive)
+Client image optimization: **PASS** (source + verifies; real 3–10 MB camera fixture **ACCEPTED QA DEBT**)
+Real camera JPEG: **ACCEPTED QA DEBT**
+HEIC real-device: **ACCEPTED QA DEBT**
+Pre-submit Storage writes: **0**
+Historical image cleanup: **DEFERRED / NOT EXECUTED**
+Image Delivery Reconciliation: **BLOCKED / ACCEPTED INFRA DEBT**
+Public catalog read-only smoke: **PASS**
+Accessibility: **PASS**
+Products verifies: **10/12 PASS** (2 stale asserts → verify corpus reconciliation debt)
+tsc: **PASS**
+build: **PASS**
+lint: **KNOWN ESLINT TOOLING DEBT ONLY**
+diff: **PASS**
+Product mutations during Final QA: **0**
+Committed image mutations: **0**
+Orders: **0**
+Runtime source edits this phase: **0**
+Living Products audit: **RECONCILED**
+ORDEROPS_LIVING_MEMORY: **RECONCILED**
+
+Next (then): **ADMIN-PRODUCTS-VERIFY-CORPUS-RECONCILIATION-1** → **ADMIN-PRODUCTS-COMMIT-PUSH-DEPLOY-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-AVAILABILITY-TOGGLE-ERROR-FEEDBACK-1 — PASS — (2026-09-10)
+
+Doc: `docs/admin-products-availability-toggle-error-feedback-1.md`
+
+PROD-P3-16: **CLOSED**
+Availability domain contract: **FROZEN / UNCHANGED**
+setProductAvailabilityAction: **SERVER AUTHORITY PRESERVED**
+Tracked stock zero activation: **DENIED + USER-VISIBLE FEEDBACK**
+Pending: **SINGLE IN-FLIGHT / DUPLICATE-SAFE**
+Failure: **PREVIOUS CONFIRMED STATE PRESERVED**
+Domain error: **VISIBLE / SAFE**
+Unexpected error: **GENERIC SAFE FEEDBACK**
+Raw backend error: **NOT EXPOSED**
+Success: **QUIET / ERROR CLEARED**
+Mobile cards: **PASS** (shared owner)
+Desktop table: **PASS** (shared owner)
+Accessibility: **ERROR ANNOUNCED + CONTROL ASSOCIATED**
+Product mutations during QA: **0**
+Domain denial runtime: **NOT RUN — NO SAFE NON-MUTATING FIXTURE**
+DB: **UNCHANGED**
+RLS: **UNCHANGED**
+Stock trigger: **UNCHANGED**
+SKU: **FROZEN**
+Image lifecycle: **FROZEN**
+Client image optimization: **FROZEN**
+Public catalog: **UNCHANGED**
+Collection architecture: **FROZEN**
+Targeted verify: **PASS**
+Mutation probes: **FAIL → RESTORED PASS**
+tsc: **PASS**
+diff: **PASS**
+Products P0: **0**
+Products P1: **0**
+
+Next (then): **ADMIN-PRODUCTS-FINAL-FUNCTIONAL-VISUAL-QA-1** (Image Delivery Reconciliation remains BLOCKED)
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-CLIENT-IMAGE-OPTIMIZATION-1 — PASS WITH HEIC REAL-DEVICE QA DEBT — (2026-09-10)
+
+Doc: `docs/admin-products-client-image-optimization-1.md`
+
+Owner roadmap insertion: **AUTHORIZED BEFORE PROD-P3-16**
+Image lifecycle: **FROZEN / PRESERVED**
+Storage DELETE policy: **LIVE / UNCHANGED**
+Client optimization: **IMPLEMENTED IN SOURCE**
+Resize: **PICA**
+HEIC: **LAZY DECODER (`heic-to` LGPL-3.0)**
+Final format: **WEBP**
+Primary max dimension: **800px**
+Initial quality: **0.80**
+Normal target: **<=90 KiB**
+40 KiB: **NOT A MINIMUM / NO PADDING**
+Metadata: **RE-ENCODED / EXIF-GPS NOT PRESERVED**
+Create: **SHARED OPTIMIZER**
+Edit: **SHARED OPTIMIZER**
+Crop: **PRESERVED**
+Pre-submit Storage uploads: **0**
+Optimization: **OUTSIDE SKU RETRY**
+Upload: **SAVE-TIME ONLY**
+Canonical path: **businessId/productId/*.webp**
+New tmp-product writes: **0**
+KEEP: **NO OPTIMIZATION / NO UPLOAD**
+REMOVE: **NO OPTIMIZATION / NO UPLOAD**
+REPLACE: **OPTIMIZE ONCE / UPLOAD ONCE**
+DB/RLS: **UNCHANGED**
+Storage policies: **UNCHANGED**
+Image delivery/transforms: **UNCHANGED**
+Runtime QA: landscape **3052 B @ 800×600**; portrait **3176 B @ 533×800**; invalid **DENIED**; Storage hits **0**
+HEIC runtime: **REAL-DEVICE QA DEBT**
+Targeted verify: **PASS**
+tsc: **PASS**
+diff: **PASS**
+New lifecycle source: **LOCAL / UNDEPLOYED**
+Production runtime: **LEGACY UNTIL RELEASE**
+Products P0: **0**
+Products P1: **0**
+
+Next: **ADMIN-PRODUCTS-AVAILABILITY-TOGGLE-ERROR-FEEDBACK-1** (PROD-P3-16)
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-IMAGE-LIFECYCLE-DB-APPLY-1 — PASS — (2026-09-10)
+
+Doc: `docs/admin-products-image-lifecycle-db-apply-1.md`
+
+PROD-P3-14: **CLOSED**
+PROD-P3-15: **CLOSED FOR FORWARD LIFECYCLE**
+Storage DELETE policy: **LIVE**
+Migration: `20260910022504_product_images_delete_lifecycle.sql` **APPLIED + VALIDATED**
+Remote history: `20260910040100_product_images_delete_lifecycle`
+Migration hash: `83A48B1BFEDD98F9BC2469D6E33AC9E145E5B3ED2FEFE5D55C6533E40DAFC789` (pre = post)
+Policy: `product_images_delete_own_business` DELETE on `product-images`
+Tenant enforcement: **PASS**
+Role enforcement: **PASS**
+Operator/viewer: **DENY**
+Foreign tenant: **DENY**
+Anonymous: **DENY**
+KEEP: **PASS**
+REPLACE: **PASS**
+FAILED REPLACE CLEANUP: **PASS**
+SHARED REFERENCE GUARD: **PASS**
+REMOVE: **PASS**
+Replace ordering: **NEW UPLOAD → DB NEW REF → OLD CLEANUP**
+Remove ordering: **DB NULL → OLD CLEANUP**
+Pre-submit uploads: **0**
+New tmp-product writes: **0**
+Probe products: **0 REMAINING**
+Probe storage objects: **0 REMAINING**
+Product count: **20 → 20 SAME**
+Existing product mutations: **0**
+Existing image mutations: **0**
+Historical orphan cleanup: **DEFERRED / NOT EXECUTED**
+Image delivery/transforms: **UNCHANGED / SEPARATE BLOCKED DEBT**
+New lifecycle source: **LOCAL / UNDEPLOYED**
+Production runtime: **LEGACY UNTIL RELEASE**
+RLS products: **UNCHANGED**
+Stock: **UNCHANGED**
+SKU: **UNCHANGED**
+Collection/flyout: **FROZEN**
+Targeted verify: **PASS**
+diff: **PASS**
+Products P0: **0**
+Products P1: **0**
+
+Next: **ADMIN-PRODUCTS-AVAILABILITY-TOGGLE-ERROR-FEEDBACK-1** (PROD-P3-16)
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-IMAGE-LIFECYCLE-1 — PASS WITH DB APPLY + MUTATION QA REQUIRED — (2026-09-10)
+
+Doc: `docs/admin-products-image-lifecycle-1.md`
+
+PROD-P3-14: **IMPLEMENTED IN SOURCE**
+PROD-P3-15: **FORWARD LIFECYCLE IMPLEMENTED / STORAGE DELETE POLICY APPLY REQUIRED**
+Storage DELETE policy: `20260910022504_product_images_delete_lifecycle.sql` **AUTHORED / NOT APPLIED** (closed by DB-APPLY phase above)
+
+---
+
+## Previous — ADMIN-PRODUCTS-SKU-DATA-INTEGRITY-DB-APPLY-1 — PASS — (2026-09-09)
+
+Doc: `docs/admin-products-sku-data-integrity-db-apply-1.md`
+
+PROD-P3-12: **CLOSED AT DATA-INTEGRITY LAYER**
+SKU DB invariant: **LIVE**
+Migration: `20260910010123_products_sku_unique_integrity.sql` **APPLIED + VALIDATED**
+Remote history: `20260910014445_products_sku_unique_integrity`
+Migration hash: `8A493BC4BD1D196DD5F962518B922C4653AEE8FF798EECD256C196CB0DF2F10E` (pre = post)
+Unique scope: **business_id + sku**
+Predicate: **sku IS NOT NULL**
+Same-business duplicate: **DENIED**
+Cross-business same SKU: **ALLOWED**
+Multiple NULL: **ALLOWED**
+Case semantics: **EXACT / PRESERVED**
+Fresh duplicate census: **0**
+DB matrix: **PASS 5/5**
+Probe rows: **0**
+Existing SKU mutations: **0**
+Product persistent mutations: **0**
+Legacy producer compatibility: **PASS / CURRENT NEXT CANDIDATE COLLISIONS 0**
+Duplicate category-prefix groups: **0**
+DB concurrency authority: **LIVE**
+New generator source: **LOCAL / UNDEPLOYED**
+3-attempt auto collision retry: **LOCAL / UNDEPLOYED**
+Manual/Edit duplicate domain errors: **LOCAL / UNDEPLOYED**
+RLS: **UNCHANGED**
+Stock/availability: **UNCHANGED**
+UI/CSS/flyout/collection: **UNCHANGED**
+Targeted verify: **PASS**
+diff: **PASS**
+Products P0: **0**
+Products P1: **0**
+
+Next: **PROD-P3-14 / PROD-P3-15 image lifecycle** (no named IMAGE-LIFECYCLE phase in living-audit roadmap; `ADMIN-PRODUCTS-IMAGE-DELIVERY-RECONCILIATION-1` remains blocked on transform tokens)
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-SKU-DATA-INTEGRITY-1 — PASS WITH DB APPLY REQUIRED — (2026-09-09)
+
+Doc: `docs/admin-products-sku-data-integrity-1.md`
+
+SKU debt: **PROD-P3-12 — IMPLEMENTED / REMOTE DB APPLY REQUIRED**
+Current SKU format: **PRESERVED** (`PREFIX-NNN`)
+SKU nullable: **yes**
+Same-business exact duplicates census: **0**
+Case-fold duplicate census: **0** (informational)
+Generation: **COUNT+1 REMOVED**
+Next candidate: **MAX EXISTING AUTO-SEQUENCE + 1**
+Concurrency: **DB UNIQUE AUTHORITY + BOUNDED INSERT RETRY (3)**
+Manual SKU behavior: **preserved; duplicate → domain error**
+Edit SKU behavior: **preserved; duplicate → domain error**
+Migration: `20260910010123_products_sku_unique_integrity.sql` **AUTHORED / NOT APPLIED**
+Unique scope: **business_id + sku**
+Null SKU: **MULTIPLE ALLOWED**
+Data backfill: **NONE**
+Existing SKU mutations: **0**
+Product mutations: **0**
+CSS/UI: **UNCHANGED**
+RLS: **UNCHANGED**
+Stock/availability: **UNCHANGED**
+Targeted verify: **PASS**
+tsc: **PASS**
+diff: **PASS**
+Products P0: **0**
+Products P1: **0**
+
+Next: **ADMIN-PRODUCTS-SKU-DATA-INTEGRITY-DB-APPLY-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-FLYOUT-FORM-INTERACTION-POLISH-1 — PASS — (2026-09-09)
+
+Doc: `docs/admin-products-flyout-form-interaction-polish-1.md`
+
+PROD-P2-3: **CLOSED**
+PROD-P2-4: **CLOSED**
+PROD-P2-5: **CLOSED**
+
+Flyout: **ACCESSIBLE MODAL INTERACTION**
+Initial focus: **INSIDE / CLOSE BUTTON**
+Tab containment: **PASS**
+Shift+Tab containment: **PASS**
+Escape: **CLOSES**
+Return focus: **PASS FOR MANUAL OPENERS**
+Auto-open no-opener: **SAFE / NO RESTORE REQUIRED**
+Sticky footer: **OPAQUE + NON-OCCLUDING**
+Create bottom: **PASS**
+Edit bottom: **PASS**
+Flyout/form targets: **>=44px**
+390 Create: **PASS**
+390 Edit: **PASS**
+Desktop: **PASS**
+Validation/domain: **UNCHANGED**
+Create/Edit success semantics: **UNCHANGED**
+Dirty tracking: **NOT INTRODUCED**
+Collection/images: **FROZEN / UNCHANGED**
+Image crop/upload semantics: **UNCHANGED**
+Product mutations: **0**
+DB/RPC/migrations: **UNCHANGED**
+Targeted verify: **PASS**
+tsc: **PASS**
+diff: **PASS**
+Products P0: **0**
+Products P1: **0**
+
+Next: **ADMIN-PRODUCTS-SKU-DATA-INTEGRITY-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-CARD-IMAGE-SCALE-POLISH-1 — READY FOR HUMAN VISUAL ACCEPTANCE (2026-09-09)
+
+Doc: `docs/admin-products-card-image-scale-polish-1.md`
+
+Mobile: height-derived 1:1 · ~117×117 @390 · ~116 @899
+Desktop: 60×60 · row 71→69 · ~87% row occupancy
+Collection/images: **FROZEN for flyout phase**
+Next was: **ADMIN-PRODUCTS-FLYOUT-FORM-INTERACTION-POLISH-1**
+
+---
+
+## Previous — ADMIN-PRODUCTS-MOBILE-CARD-IMAGE-ASPECT-RATIO-FIX-1 — PASS (2026-09-09)
+
+Doc: `docs/admin-products-mobile-card-image-aspect-ratio-fix-1.md`
+
+Mobile ProductCard image: **SQUARE 1:1**
+Object fit: **COVER**
+Crop presentation: **PRESERVED**
+390: **PASS** (72×72 measured)
+899: **PASS / TWO-COLUMN PRESERVED** (80×80 measured)
+900: **DESKTOP TABLE UNCHANGED** (0 cards / 1 table)
+Image pipeline: **UNCHANGED**
+Uploads/crop/storage/transforms: **UNCHANGED**
+Mobile operational fields: **PRESERVED**
+Availability/card interactions: **PRESERVED**
+Collection architecture: **FROZEN / SINGLE ACTIVE TREE**
+Breakpoints: **UNCHANGED**
+Pagination: **UNCHANGED**
+Product mutations: **0**
+DB/RPC/migrations: **UNCHANGED**
+Targeted verify: **PASS** · tsc: **PASS** · diff: **PASS**
+Products P0: **0** · Products P1: **0**
+
+Next: **ADMIN-PRODUCTS-FLYOUT-FORM-INTERACTION-POLISH-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-MOBILE-OPERATIONAL-UX-POLISH-1 — PASS WITH DEFERRED REMAINDER (2026-09-09)
+
+Doc: `docs/admin-products-mobile-operational-ux-polish-1.md`
+
+`PROD-P2-7`: **CLOSED**
+Mobile operational parity: **SKU AT-A-GLANCE** · **STOCK AT-A-GLANCE** · **INLINE AVAILABILITY**
+Pagination: **REMAINS CLOSED / SHARED**
+
+`PROD-P2-3`: **COLLECTION PORTION CLOSED / FLYOUT-FORM REMAINDER**
+`PROD-P2-6`: **CLOSED** (measured ≥4.5:1 on audited collection selectors)
+`PROD-P2-8`: **CLOSED** (feature-local header ~150→~97px @390; targets ≥44)
+
+Mobile touch targets: **≥44px** for all in-scope collection/toolbar/header/availability controls
+Light informative contrast: **~7.73:1** (`--text-secondary` on white) for `Gestionar` / `Por categorías` / category counts
+390: **PASS** · 899: **PASS / TWO-COLUMN PRESERVED**
+Collection architecture: **FROZEN / SINGLE ACTIVE TREE**
+Breakpoints: **`<720` 1 col · `720–899` 2 col · `>=900` table**
+Pagination owner: **UNCHANGED**
+Product mutations (QA): **0** · DB/RPC/migrations: **UNCHANGED**
+Products P0: **0** · Products P1: **0**
+
+Next: **ADMIN-PRODUCTS-FLYOUT-FORM-INTERACTION-POLISH-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-COLLECTION-RESPONSIVE-ARCHITECTURE-1 — PASS (2026-09-09)
+
+Doc: `docs/admin-products-collection-responsive-architecture-1.md`
+
+`PROD-P2-2`: **CLOSED** · `PROD-P2-7`: **PAGINATION CLOSED** (stock/SKU/inline availability still deferred) · `PROD-P3-1`: **CLOSED** · `PROD-P3-2`: **COLLECTION BREAKPOINT CLOSED** (flyout 961 / toolbar 768/1024 unchanged)
+
+Collection architecture: **SINGLE ACTIVE TREE** — `useProductsDesktopCollection` (`useSyncExternalStore` + `(min-width: 900px)`); SSR snapshot mobile `false`; no `window.innerWidth`; no `suppressHydrationWarning`; CSS dual-mount `.desktopOnly`/`.mobileOnly` removed
+Mobile: **`<900` cards** · Desktop: **`>=900` table** · Grid: **`<720` 1 col · `720–899` 2 cols**
+Pagination: **SHARED / SINGLE OWNER** in `product-catalog-views` (stripped from table + grid); URL/`ADMIN_PRODUCTS_PAGE_SIZE` unchanged
+SSR: mobile deterministic fallback · Hydration: **PASS / NO MISMATCH**
+Runtime smoke: 390 cards/no table/1col · 899 cards/no table/2col · 900 table/no cards · resize 900↔899 **PASS** (URL intact, no dual tree)
+Targeted verify: **PASS** · tsc: **PASS** · diff: **PASS** · Resize data fetch: **NONE BY SOURCE**
+DB/RPC/migrations: **UNCHANGED** · Data mutations: **0** · Provider/actions: untouched
+
+Products P0: **0** · Products P1: **0**
+
+Next: **ADMIN-PRODUCTS-MOBILE-OPERATIONAL-UX-POLISH-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-ACTION-REDIRECT-PASSTHROUGH-FIX-1 — PASS (2026-09-09)
+
+Doc: `docs/admin-action-redirect-passthrough-fix-1.md`
+
+`PROD-P2-9`: **CLOSED**
+
+Root cause: auth/permission `redirect()` caught by Server Action `try/catch` → `getActionErrorMessage` → literal `NEXT_REDIRECT`
+Fix: redirect-capable admin guards execute **outside** the application-error try/catch
+Affected action files: **8** (41 actions) — categories, dashboard, orders/[id], products, products/customizations, settings/notifications, settings/operations, settings/public
+Already correct: `team/actions.ts` · Outliers: **none**
+Permissions: **UNCHANGED** · Application/domain error normalization: **PRESERVED** · `NEXT_REDIRECT` visible error: **ELIMINATED BY STRUCTURE**
+No `NEXT_REDIRECT` parsing · no `unstable_rethrow` · no `next/dist/*` · auth helpers untouched
+Targeted verify: **PASS** · Behavior: synthetic errors PASS + auth redirect **SOURCE-DETERMINISTIC PASS** · tsc: **PASS** · diff: **PASS**
+Runtime/CSS: UNCHANGED except action control-flow structure · DB/RPC/migrations: **UNCHANGED** · Data mutations: **0**
+
+Products P0: **0** · Products P1: **0**
+
+Next: **ADMIN-PRODUCTS-COLLECTION-RESPONSIVE-ARCHITECTURE-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-STOCK-AVAILABILITY-CONTRACT-DB-APPLY-1 — PASS (2026-09-09)
+
+Doc: `docs/admin-products-stock-availability-contract-db-apply-1.md`
+
+`PROD-P1-4`: **CLOSED** · `PROD-P2-10`: **CLOSED** · `PROD-P3-13`: **CLOSED IN SOURCE / DEPLOY PENDING**
+
+Products P0: **0** · Products P1: **0**
+
+Migration: `20260909154400_products_stock_availability_contract.sql` → **APPLIED + VALIDATED**. Remote history: `20260909190021_products_stock_availability_contract` (exactamente una vez). Hash pre=post `73536671…890A29` — inmutable. Target: `pkrsedmwxekbhlohhqds` / OrderOps (`.env.local` = `get_project_url`). Single-migration API; **no** `db push`; **0** collateral
+Remote trigger: **track_stock-aware** — `BEFORE INSERT OR UPDATE OF stock, track_stock, is_available`; `IF track_stock=true AND stock<=0 THEN is_available=false`; sin auto-reactivación
+Contract: untracked stock0 → availability preservada · tracked stock0 → unavailable · restock → no auto-reactivate · manual unavailable → preserved · enable track_stock at zero → unavailable
+DB matrix: **PASS 9/9** (`BEGIN…ROLLBACK`) · probe rows after rollback: **0**
+Historical backfill: **NONE** · counts pre=post (untracked0 avail 1 / unavail 16 · tracked0 avail 0 / unavail 0 · products 20) · Public available count: **4 UNCHANGED**
+Persistent QA product mutations: **0** · RLS: UNCHANGED · create_order / ledger / restock: UNCHANGED / FROZEN
+Runtime/CSS this phase: **UNCHANGED** · App source improvements (helper/copy/inline error): **LOCAL / UNDEPLOYED**
+Targeted verify: **PASS** · diff: **PASS**
+
+Remaining Products P1: **NONE**
+
+Next: **ADMIN-ACTION-REDIRECT-PASSTHROUGH-FIX-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-STOCK-AVAILABILITY-CONTRACT-FIX-1 — PASS WITH DB APPLY REQUIRED (2026-09-09)
+
+Doc: `docs/admin-products-stock-availability-contract-fix-1.md`
+Migration: `supabase/migrations/20260909154400_products_stock_availability_contract.sql`
+
+`PROD-P1-4`: **IMPLEMENTED / APPLY REQUIRED** · `PROD-P2-10`: **IMPLEMENTED** · `PROD-P3-13`: **CLOSED**
+
+Contract: `track_stock=false` → stock **no** controla availability · `track_stock=true + stock<=0` → unavailable · restock → **sin** auto-reactivación · unavailable manual se conserva
+Trigger: `auto_suspend_out_of_stock_product` + `tr_auto_suspend_out_of_stock` — evento `BEFORE INSERT OR UPDATE OF stock, track_stock, is_available`; fuerza `is_available=false` sólo si tracked y stock≤0; **nunca** setea true. Incluye `is_available` en el evento para que el toggle inline no pueda dejar tracked+0 disponible
+App: helper `resolveEffectiveProductAvailability` en create (requested true) y edit (requested form) · `setProductAvailabilityAction` pre-check ahora lee `stock, track_stock` y deniega enable con error de dominio si tracked+0
+Copy Create+Edit: copy stale “se implementará en una fase posterior” / “solo prepara…” eliminado; copy preciso de descuento automático + sin auto-reactivación al reponer
+Migration: **AUTHORED / NOT APPLIED** — gate `AUTORIZO_PRODUCTS_STOCK_AVAILABILITY_DB_APPLY` **ABSENT** → STOP antes de remote write. Sin backfill. RLS `20260909040000` inmutable. `create_order` / ledger / restock: **UNTOUCHED**
+Targeted verify: **PASS** (`lib/products/admin-products-stock-availability-contract.verify.ts`) · tsc: **PASS** · diff: **PASS** · DB matrix: **NOT RUN**
+Persistent data mutations: **0** · Historical inactive rows: **NO AUTOMATIC BACKFILL**
+Runtime/CSS fuera de scope: **UNCHANGED** (sólo actions + create/edit forms + migration + verify + docs)
+
+P0: **0** · Remaining Products P1: `PROD-P1-4` APPLY
+
+Next: **ADMIN-PRODUCTS-STOCK-AVAILABILITY-CONTRACT-DB-APPLY-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-RLS-ROLE-ENFORCEMENT-DB-APPLY-1 — PASS (2026-09-09)
+
+Doc: `docs/admin-products-rls-role-enforcement-db-apply-1.md`
+
+`PROD-P1-2`: **CLOSED** — enforcement aplicada y probada en la DB viva, no sólo autorada.
+
+Migration: `20260909040000_products_manage_role_rls.sql` → **APPLIED + VALIDATED**. Remote history: `20260909070121_products_manage_role_rls` (nombre coincide; el timestamp lo asigna la herramienta de apply, patrón preexistente del repo: los 7 registros remotos previos también difieren del filename local). Hash del archivo **idéntico** antes/después del apply (`A4225056…3516321`) — migration aplicada = inmutable
+Target probado: project ref **`pkrsedmwxekbhlohhqds`** (`OrderOps`, ACTIVE_HEALTHY). `.env.local` y `get_project_url` coinciden. El segundo proyecto de la cuenta (`MauroDev`, INACTIVE) **no** se tocó; el ref se pasó explícito en cada call. CLI sin linked target en el workspace
+Apply mechanism: **migration API** (`apply_migration`, ejecuta sólo el SQL pasado y registra history). **`supabase db push` se descartó por inseguro**: remote history tiene 7 entradas vs ~30+ migrations locales → habría intentado un lote colateral (condición de STOP). Sin manual-SQL silencioso. **No collateral synchronization**
+Products mutation RLS: **ROLE-GATED REMOTELY** — INSERT/UPDATE/DELETE exigen `(business_id AND role) OR super_admin`; UPDATE con **USING + WITH CHECK**
+Product image mutation RLS: **ROLE-GATED REMOTELY** — bucket + carpeta tenant + shape + gate de rol; UPDATE con USING + WITH CHECK
+Introspección `pg_policies`: 8 policies, `'operator'`/`'viewer'` en **0** allow-lists mutativas · Reads **UNCHANGED** (`products_select_own_business`, `products_select_available_public`, `product_images_public_read`) · Storage DELETE: **ABSENT / DEFERRED** (PROD-P3-15, count 0)
+Runtime role matrix: **PASS** — ejecutada como `current_user = authenticated` con `request.jwt.claims.sub` real, dentro de `BEGIN … ROLLBACK`. **No** service_role (bypasearía RLS y no probaría nada). Roles sin principal real (`owner`/`manager`/`viewer`) se ejercieron toggleando el rol del perfil de prueba dentro de la misma transacción revertida
+**Antes → después** (own tenant): `operator` **ALLOW → DENY** · `viewer` **ALLOW → DENY** (UPDATE/INSERT/DELETE y storage INSERT) · `owner`/`admin`/`manager`: ALLOW (sin cambio) · foreign tenant: DENY · anonymous mutation: DENY · `super_admin`: ALLOW preservado. El run pre-apply es la prueba de que el agujero era **real y explotable**
+Reads post-apply confirmados abiertos: `operator` y `viewer` ven los 18 productos de su tenant; `anon` ve los 4 disponibles del catálogo público
+Persistent business-data mutations: **0** — rol del perfil de prueba restaurado a `operator`, profiles 5, auth users 5, filas `RLS-PROBE` 0, objetos probe 0, `product-images` 48, businesses 4. Única mutación persistente: **policy definitions + 1 fila de migration history**
+Targeted verify: **PASS** (pre y post apply) · Remote policy introspection: **PASS** · diff: **PASS** · Runtime/CSS/actions/trigger/`create_order`/schema: **UNCHANGED** · Sin tsc/build/lint/browser
+SYSTEM-WIDE RLS HARDENING (orders, order_items, categories, businesses, profiles, otras storage policies): **STILL FOLLOW-UP / OUT OF SCOPE**
+
+P0: **0** · Remaining Products P1: **`PROD-P1-4`** (trigger stock-0 auto-suspend ignora `track_stock`; create default `stock=0` → producto nace invisible)
+
+Next: **ADMIN-PRODUCTS-STOCK-AVAILABILITY-CONTRACT-FIX-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-RLS-ROLE-ENFORCEMENT-1 — PASS WITH DB APPLY REQUIRED (2026-09-09)
+
+Doc: `docs/admin-products-rls-role-enforcement-1.md`
+Migration: `supabase/migrations/20260909040000_products_manage_role_rls.sql`
+
+`PROD-P1-2`: **IMPLEMENTED LOCALLY · REMOTE DB STILL OPEN** — la migration existe como archivo; **no** se aplicó a ninguna DB. No se declara CLOSED.
+
+Products mutation RLS: **ROLE-GATED** — INSERT/UPDATE/DELETE pasan de `business_id OR super_admin` a `(business_id AND role) OR super_admin`. UPDATE conserva **USING + WITH CHECK** (no se puede mover un producto a otro tenant)
+Product image mutation RLS: **ROLE-GATED** — `product_images_insert/update_own_business` mantienen bucket + carpeta tenant + shape de path, y suman el gate de rol. **Sin** rama super_admin (hoy ya falla la carpeta por `business_id NULL`; se preserva)
+Role model **probado desde schema**, no asumido: `profiles.role` es **text + CHECK** (`profiles_role_valid`), no enum → `admin|owner|manager|operator|viewer|super_admin`. `canManageProducts` = owner||manager, y `normalizeBusinessAdminRole` pliega `super_admin|admin|owner`→owner ⇒ allow-list tenant-scoped `('owner','admin','manager')` + rama super_admin existente. `operator`/`viewer`: **0 apariciones** en el SQL
+Tenant isolation: **PRESERVED** (tenant y rol van **AND**, nunca OR) · Reads: **NO endurecidos** — `products_select_own_business`, `products_select_available_public` y `product_images_public_read` intactos (el hallazgo era mutar, no leer) · Storage DELETE: **no agregado** (PROD-P3-15)
+Application `manageProducts`: **UNCHANGED / FROZEN** — sin checks redundantes en app; esto es defense-in-depth en DB
+Targeted verify: **PASS** (`lib/products/admin-products-rls-role-enforcement.verify.ts`, parser de statements/clauses con balance de paréntesis; la allow-list SQL se compara contra `canManageProducts()` importado, así no pueden divergir). **Mutation-tested**: agregar `'operator'` → FAIL · quitar `WITH CHECK` del UPDATE → FAIL · restaurado → PASS
+Local DB role matrix: **NOT RUN — SAFE LOCAL DB UNAVAILABLE** (`.env.local` apunta a un proyecto remoto `*.supabase.co` y el daemon de Docker no corre). **No** se usó producción como sustituto
+Remote DB apply: **NOT AUTHORIZED / NOT RUN** · Runtime TSX/CSS: **UNCHANGED** · `actions.ts` / `context.ts` / `permissions.ts`: **UNCHANGED** · trigger / `create_order` / schema / FKs: **UNTOUCHED** · migrations históricas: **sin modificar** · Data mutations: **0**
+SYSTEM-WIDE RLS HARDENING (orders/categories comparten el patrón tenant-only): **FOLLOW-UP / OUT OF SCOPE**
+Sin tsc (sólo SQL + verify nuevo) · diff: **PASS**
+
+P0: **0** · Remaining P1: `PROD-P1-2` (apply pendiente) · `PROD-P1-4` (trigger stock-0 auto-suspend)
+
+Next: **ADMIN-PRODUCTS-RLS-ROLE-ENFORCEMENT-DB-APPLY-1** (aplicar + validar matriz owner/manager allow, operator/viewer deny, foreign tenant deny), luego `ADMIN-PRODUCTS-STOCK-AVAILABILITY-CONTRACT-FIX-1`
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-SEARCH-EMPTY-STATE-RESILIENCE-FIX-1 — PASS (2026-09-09)
+
+Doc: `docs/admin-products-search-empty-state-resilience-fix-1.md`
+
+`PROD-P1-3`: **CLOSED** · `PROD-P1-1`: **CLOSED** · `PROD-P3-9`: **CLOSED** · `PROD-P3-4`: **CLOSED (semántica del toolbar) / DEFERRED (duplicación de summaries + métricas page-scoped del catalog header)**
+
+Search punctuation: **RESILIENT** — el valor va **entre comillas dobles** en el `or()` de PostgREST (`name.ilike."%a,b%",sku.ilike."%a,b%"`), con `"` y `\` escapados; nada se borra ni se reescribe. `?q=a,b` pasó de romper la página a **HTTP 200**. Probado también `Pizza (grande)`, `producto "especial"`, `producto\test`, `combo: familiar`, `combo 2.0` → 200. Significado preservado: `Coca Cola` matchea, `Coca, Cola` **no** (un fix que borrara puntuación habría matcheado)
+Catalog empty vs filtered empty: **SEPARATED** — `catalogTotalCount` (total del tenant, **sin filtros**, query count-only `head:true` scoped por `business_id`) vs `filteredTotalCount` (`AdminProductsPageResult.totalCount`, sólo para collection + paginación). `resolveEmptyCatalogFlyoutMode({ categoriesCount, catalogTotalCount })` **no recibe** el filtered count → un filtro sin resultados no puede autoabrir Create Product. Eliminado el probe `getAdminProducts({ limit: 1 })` filtrado (ya no se trae una fila para saber si existe catálogo)
+Clear filters: **UN solo owner** — `ProductsToolbar` (ya gateado por `hasActiveFilters`, necesariamente true en filtered-empty); `ProductCatalogEmptyState` suelta su botón duplicado y apunta a ese control. Desvío documentado respecto de la preferencia del brief: suprimir el del toolbar exigía empujar estado del server sibling suspendido al cliente — el mismo patrón que causó `PROD-P1-1`. Sin CSS, sin tercer owner
+Runtime smoke: **PASS** (1 sesión, 1 viewport 384, 0 mutaciones) — `combo` 6 resultados · `a,b` sin crash · `zzzznoresults` 0 resultados + empty state + `dialogs:0` + `aria-modal:0` + sin create form + **exactamente 1** `Limpiar filtros` · click clear → URL limpia, 18 filas, flyout cerrado
+Targeted verify: **PASS** (`lib/products/admin-products-search-empty-state-resilience.verify.ts`) · tsc: **PASS** · diff: **PASS**
+Runtime scope: **6 files** — `lib/products/products-list-contracts.ts` (nuevo, puro, sin `server-only` para que el verify lo importe), `lib/products/admin.ts`, `app/admin/(protected)/products/page.tsx`, `products-management-provider.tsx`, `products-toolbar.tsx`, `product-catalog-empty-state.tsx`
+CSS: **NONE** · DB/RPC/migrations/trigger/RLS: **UNCHANGED** · Product mutations: **0** · `CATALOG EMPTY` validado por resolver puro + contrato de source (no se vació ningún tenant)
+Preservado: `name` OR `sku`, ILIKE, debounce 300ms, URL-driven filtering, pagination reset, `.eq("business_id", businessId)`, `ADMIN_PRODUCTS_PAGE_SIZE`, ordering, category loader · en el provider: `+ Nuevo producto` manual, edit state, `selectedProduct`, close, create-category, create/edit-success
+Docs: sólo el doc de fase + este bloque. `docs/products-living-audit.md`, `ORDEROPS_LIVING_MEMORY.md` y `docs/admin-dashboard-forensic-living-audit.md` **sin tocar** (se reconcilian en FINAL QA)
+
+P0: **0** · Remaining P1: `PROD-P1-2` (RLS sin rol) · `PROD-P1-4` (trigger stock-0 auto-suspend)
+
+Next: **ADMIN-PRODUCTS-RLS-ROLE-ENFORCEMENT-1** (`PROD-P1-2`)
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-LIVING-AUDIT-1 — LIVING AUDIT ESTABLISHED (2026-09-08)
+
+Source of truth: `docs/products-living-audit.md`
+
+`/admin/products`: **ARCHITECTURE + FUNCTIONAL UX + VISUAL UX AUDITED**
+
+P0: **0** · P1: **4** · P2: **10** · P3: **18**
+
+Desktop: **AUDITED** · Mobile: **AUDITED** · Create/Edit: **AUDITED READ-ONLY** · Search/filter: **AUDITED** · Availability/stock: **AUDITED** · Images: **AUDITED** · A11y: **AUDITED** · Performance: **AUDITED** · Tenant/security: **AUDITED SOURCE-LEVEL**
+Los conteos suben respecto del audit previo (P1:1 P2:8 P3:11) porque esta fase añadió las capas **server action / loader / RLS / trigger / storage** que el audit visual no cubría. **Ningún hallazgo previo se cerró.**
+**P1 nuevos**: `PROD-P1-2` RLS de `products` (y del bucket) filtra por `business_id` pero **no por rol** → operator/viewer pueden insert/update/**delete** vía PostgREST saltando `manageProducts` (sin exposición cross-tenant) · `PROD-P1-3` una búsqueda con **coma** (`?q=a,b`) rompe la página entera (`getAdminProducts` interpola `q` crudo en el `or()` de PostgREST) · `PROD-P1-4` el trigger `tr_auto_suspend_out_of_stock` fuerza `is_available=false` con `stock<=0` **ignorando `track_stock`**, y create default `stock=0` → **todo producto creado con el stock por defecto nace invisible** (live: 16 productos stock-0 inactivos, 14/18 `Inactivos`)
+**P2 nuevos**: `PROD-P2-9` `redirect()` lanza `Error('NEXT_REDIRECT')` y el `catch` compartido lo convierte en mensaje visible (10 action files) · `PROD-P2-10` guardar cualquier edición de un producto con stock 0 re-suspende silenciosamente su disponibilidad
+**Correcciones probadas**: `PROD-P2-2` el dual mount duplica **DOM** (447 nodos ocultos de 930) pero **no imágenes** (lazy + `display:none` → 0 cargadas) ni es riesgo a11y/teclado · `PROD-P2-7` mobile **sí** puede editar (card = `div[role=button]` con `aria-label`, `onKeyDown`, 311×74); la brecha real es stock/SKU a simple vista, toggle inline y **paginación** · `PROD-P2-1` es deuda de infra **preexistente y bloqueada** por autorización de billing (`PUBLIC-CATALOG-IMAGE-TRANSFORMS-INFRA-1-MODE-B`, 2026-07-29), no un bug de Products
+Contratos fijados: sin **delete** en ningún lado · sin dirty state ni Cancel en edit · create **no cierra** el flyout, edit sí · `category_id` NOT NULL + `ON DELETE RESTRICT` (no hay productos sin categoría) · sin `updated_at` ni columna de orden · SKU sin índice único · imagen no se puede **quitar**, solo reemplazar
+Runtime changes: **NONE** · CSS: **NONE** · Data mutations: **NONE** · DB/RPC/migrations: **UNCHANGED** (solo SELECT read-only para verificar schema/trigger)
+Docs: nuevo `docs/products-living-audit.md` · `docs/admin-dashboard-forensic-living-audit.md` corregido (puntero + dual mount 900px) · `ORDEROPS_LIVING_MEMORY.md` **sin tocar**
+
+Next: **ADMIN-PRODUCTS-SEARCH-FILTER-SANITIZATION-FIX-1** (`PROD-P1-3`), luego `ADMIN-PRODUCTS-EMPTY-STATE-FLYOUT-AUTOOPEN-FIX-1` (`PROD-P1-1`)
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-PRODUCTS-MOBILE-VISUAL-DEBT-AUDIT-1 — AUDIT COMPLETE (2026-09-08)
+
+Doc: `docs/admin-products-mobile-visual-debt-audit-1.md`
+
+P0: **0** · P1: **1** · P2: **8** · P3: **11**
+
+`/admin/products`: **AUDITED** · Mobile: **AUDITED** (360 / 390 / 412-class / 719 / 899 / 1024 / 1440) · Light/dark: **AUDITED** (toggle real `html[data-dashboard-theme]`, restaurado a light) · Create/edit: **AUDITED READ-ONLY** · Console: **AUDITED**
+Ownership: mobile = card grid (`product-grid-server` → `product-card`), desktop ≥900 = `<table>` (`product-table-view`); switch en `product-catalog-views` con **dual mount** (ambos montados, uno oculto por CSS)
+Breakpoints reales Products: 479/480 · 640 · 720 · 767/768 · banda 768–899 · **900** (tabla↔grid) · **961** (flyout) · 1024 · 1440
+**P1-1**: una búsqueda/filtro sin resultados **auto-abre el flyout "Nuevo producto"** tapando el empty state correcto — causa probada: `page.tsx` calcula `totalCount` con `filterOptions` aplicados y `resolveEmptyCatalogFlyoutMode()` lo interpreta como catálogo vacío
+P2 destacados: imágenes sirven el **original completo** (transform endpoint **403** → fallback `unoptimized`; **2.2 MB** para un slot de 71×72, overscale 10.8×, 23 round-trips fallidos de 530–900 ms) · dual mount duplica DOM (**38 `<img>` para 18 productos**) · **8 de 9** targets táctiles mobile <44px (solo el burger 44×44 cumple) · footer sticky del form **sin superficie** (tapa el label `SKU` en create y edit) · flyout con `aria-modal` pero **sin focus management** (Escape no cierra, sin foco inicial, 9–11 tabbables afuera) · contraste **light** de texto terciario **2.56:1** · mobile sin stock/SKU/**toggle de disponibilidad**
+Next Image quality: **CONFIRMED** — warning server-side de Next 16.2.9 (`images.qualities` ausente → default `[75]`; 3 callsites en 80, uno del **catálogo público**; `warnOnce` = 1 por src único). **Inerte**: con transforms en 403 las imágenes van por la ruta `unoptimized` y `quality` no se aplica → **P3**, no es el problema de imágenes prioritario
+Store session hydration: **NOT REPRODUCED en Products → CASE A** — owner fuera de Products (`admin-dashboard-orders.tsx` + `dashboard/actions.ts`), gateado por `NODE_ENV === "development"`, non-redirecting por diseño; **3/3 ciclos de focus** sin logs, sin requests, sin redirect, UI intacta
+Otro hallazgo con owner externo: error de hidratación intermitente en `app/admin/(protected)/layout.tsx (28:7) @ ProtectedAdminLayout` (visto una vez, no reproducido) — **no** es deuda de Products
+Console en carga estable: **0 errores / 0 warnings** en browser · Scroll 390: **1 solo owner** (document), sin scroll anidado ni horizontal, último item completo, footer usable
+Runtime changes: **NONE** · CSS: **NONE** · Data mutations: **NONE** (0 productos creados/editados/borrados, 0 availability, 0 uploads, 0 crops) · DB/RPC/migrations: **UNCHANGED**
+Sin tsc/build/lint/verify (no hubo cambios de runtime). `ORDEROPS_LIVING_MEMORY.md` y forensic audit: **sin tocar** (audit-only). Screenshots fuera del repo.
+Dirty preexistente preservado: `docs/admin-manual-order-modal-commit-push-deploy-1.md`, `tsconfig.tsbuildinfo`
+
+Next: **ADMIN-PRODUCTS-EMPTY-STATE-FLYOUT-AUTOOPEN-FIX-1**
+
+No commit. No push. No deploy.
+
+---
+
+## Previous — ADMIN-MANUAL-ORDER-MODAL-COMMIT-PUSH-DEPLOY-1 — PASS — MANUAL ORDER MODAL POLISH PACKAGE DEPLOYED (2026-09-08)
 
 Doc: `docs/admin-manual-order-modal-commit-push-deploy-1.md`
 
-Release commit: **`13abcc08c8ae7093c359e9e6fdf7dfe7f9bce7e1`** — `feat(admin): polish manual order modal` (29 files, +9778/−224)
-origin/main: **`13abcc08c8ae7093c359e9e6fdf7dfe7f9bce7e1`** (HEAD == origin/main, push non-force `3e418bb..13abcc0`)
-Vercel: **READY** — `dpl_6YqdcSPSpR6J4cjNtdsSZwPQiL5w`, Git integration, source commit confirmado `13abcc0`
+Package commit: **`13abcc08c8ae7093c359e9e6fdf7dfe7f9bce7e1`** — `feat(admin): polish manual order modal` (29 files, +9778/−224). Es **el** commit funcional del modal.
+Evidence commit: **`c9af635e27ad86e0731eea0a90b16b9b628d5aa6`** — `docs(admin): record manual order modal deploy and smoke evidence` (docs-only)
+HEAD / origin/main: **`c9af635e27ad86e0731eea0a90b16b9b628d5aa6`** (HEAD == origin/main, divergence `0 0`; pushes non-force `3e418bb..13abcc0` y `13abcc0..c9af635`)
+Package deployment: **`dpl_6YqdcSPSpR6J4cjNtdsSZwPQiL5w`** — source `13abcc0`, **READY** (Git integration, source commit confirmado)
+Current production deployment: **`dpl_FVAi6XWbCscbtUBh139ygtLYug81`** — source `c9af635`, **READY**; el alias apunta a este deployment
 Producción: **https://orderops.vercel.app** — HEALTHY (root 200, catálogo 200, `/admin/login` 200, `/admin/dashboard` 307)
+Clarificación: el evidence commit es **docs-only**, así que el runtime productivo actual es idéntico al paquete certificado en `13abcc0`
 Relevant verifies: **15/15 PASS** · tsc: **PASS** · build: **PASS** · lint: **KNOWN TOOLING DEBT ONLY** (ESLint 9 circular JSON)
-Runtime: **DEPLOYED** — fingerprint `9BA3B67C…F5D6` MATCH exacto antes de stagear (5 archivos, 1061/216); no se modificó nada durante el release
+Runtime: **DEPLOYED / FROZEN** — fingerprint `9BA3B67C…F5D6` MATCH exacto antes de stagear (5 archivos, 1061/216); no se modificó nada durante el release
 P0: **0** · P1: **0**
 P2-QA1: **CLOSED** · P2-QA2: **ACCEPTED NON-BLOCKING** · P3-QA1 / P3-QA2: **DOCUMENTED**
 Manual order modal: **DEPLOYED / FROZEN**
 Production authenticated modal smoke: **UNAVAILABLE** (redirige a `/admin/login`; deuda aceptada)
 DB / RPC / migrations: **UNCHANGED** · Orders created during release: **0** · status mutations: **0** · WhatsApp sends: **0**
-Staged post-release: **none** · remanente dirty: sólo `tsconfig.tsbuildinfo` (generated noise excluido)
+Staged post-release: **none** · remanente dirty: `tsconfig.tsbuildinfo` (generated noise excluido) + esta reconciliación documental (`CURRENT_PHASE.md` y el doc de release), deliberadamente **sin commitear** para no disparar otro deployment docs-only; viajan con el próximo paquete normal
 
 Next: **ADMIN-PRODUCTS-MOBILE-VISUAL-DEBT-AUDIT-1**
 

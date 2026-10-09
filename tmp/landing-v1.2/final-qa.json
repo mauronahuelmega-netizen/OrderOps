@@ -1,0 +1,67 @@
+[
+  {
+    "assetsLoaded": false,
+    "client": 345,
+    "headerTarget": 44,
+    "noticeFabOverlap": false,
+    "noticePlusOverlap": false,
+    "phoneClearOfCaption": true,
+    "plusFabOverlap": false,
+    "scroll": 345,
+    "width": 360,
+    "firstHeaderLocationElementHeight": 0,
+    "assetMeasurementNote": "Raw measure includes lazy image inside closed complementary disclosure. All four images were checked after expansion in native-qa.json."
+  },
+  {
+    "assetsLoaded": false,
+    "client": 375,
+    "headerTarget": 44,
+    "noticeFabOverlap": false,
+    "noticePlusOverlap": false,
+    "phoneClearOfCaption": true,
+    "plusFabOverlap": false,
+    "scroll": 375,
+    "width": 390,
+    "firstHeaderLocationElementHeight": 0,
+    "assetMeasurementNote": "Raw measure includes lazy image inside closed complementary disclosure. All four images were checked after expansion in native-qa.json."
+  },
+  {
+    "assetsLoaded": false,
+    "client": 753,
+    "headerTarget": 44,
+    "noticeFabOverlap": false,
+    "noticePlusOverlap": true,
+    "phoneClearOfCaption": true,
+    "plusFabOverlap": false,
+    "scroll": 753,
+    "width": 768,
+    "firstHeaderLocationElementHeight": 0,
+    "assetMeasurementNote": "Raw measure includes lazy image inside closed complementary disclosure. All four images were checked after expansion in native-qa.json."
+  },
+  {
+    "assetsLoaded": false,
+    "client": 1009,
+    "headerTarget": 44,
+    "noticeFabOverlap": false,
+    "noticePlusOverlap": false,
+    "phoneClearOfCaption": true,
+    "plusFabOverlap": false,
+    "scroll": 1009,
+    "width": 1024,
+    "firstHeaderLocationElementHeight": 44,
+    "assetMeasurementNote": "Raw measure includes lazy image inside closed complementary disclosure. All four images were checked after expansion in native-qa.json."
+  },
+  {
+    "assetsLoaded": false,
+    "client": 1425,
+    "headerTarget": 44,
+    "noticeFabOverlap": false,
+    "noticePlusOverlap": true,
+    "phoneClearOfCaption": true,
+    "plusFabOverlap": false,
+    "scroll": 1425,
+    "width": 1440,
+    "firstHeaderLocationElementHeight": 44,
+    "assetMeasurementNote": "Raw measure includes lazy image inside closed complementary disclosure. All four images were checked after expansion in native-qa.json."
+  }
+]

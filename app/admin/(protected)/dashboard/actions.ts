@@ -46,9 +46,8 @@ function revalidateStoreSessionPaths(businessSlug: string | null) {
 export async function toggleBusinessStatus(
   active: boolean
 ): Promise<ToggleBusinessStatusResult> {
+  const adminContext = await requireAdminPermission("managePublicSettings");
   try {
-    const adminContext = await requireAdminPermission("managePublicSettings");
-
     let onDemandModeActive = false;
 
     if (active) {
@@ -149,8 +148,8 @@ export async function getActiveStoreSessionAction(): Promise<StoreSessionActionR
 }
 
 export async function openStoreSessionAction(): Promise<StoreSessionActionResult> {
+  const adminContext = await requireAdminPermission("managePublicSettings");
   try {
-    const adminContext = await requireAdminPermission("managePublicSettings");
     const session = await openStoreSession({
       businessId: adminContext.businessId,
       actorUserId: adminContext.user.id
@@ -173,8 +172,8 @@ export async function closeStoreSessionAction(
     return { error: "Falta identificar la sesion activa." };
   }
 
+  const adminContext = await requireAdminPermission("managePublicSettings");
   try {
-    const adminContext = await requireAdminPermission("managePublicSettings");
     const session = await closeStoreSession({
       businessId: adminContext.businessId,
       sessionId,

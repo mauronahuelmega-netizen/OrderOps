@@ -1,0 +1,98 @@
+.heroFigure { margin: 0; min-width: 0; }
+.heroStage { height: 585px; position: relative; isolation: isolate; }
+.orbit { position: absolute; width: 470px; height: 470px; border: 1px solid var(--marketing-dark-border); border-radius: 50%; top: 35px; left: 50px; z-index: -1; }
+.orbit::after { content: ""; position: absolute; inset: 45px; border: 1px solid var(--marketing-dark-border); border-radius: inherit; }
+.dashboardPosition { position: absolute; left: 14px; top: 115px; width: 635px; transform: perspective(1300px) rotateY(-9deg) rotateZ(2deg); transform-origin: left center; }
+.dashboard { display: flex; border: 1px solid var(--marketing-ui-border); border-radius: 11px; background: var(--marketing-ui-canvas); color: var(--marketing-ink); box-shadow: 0 30px 90px var(--marketing-shadow-dark); overflow: hidden; font-size: 9px; }
+.sidebar { width: 49px; flex-shrink: 0; background: var(--marketing-white); border-right: 1px solid var(--marketing-ui-border); display: flex; flex-direction: column; gap: 23px; align-items: center; padding: 23px 0 14px; color: var(--marketing-muted); }
+.sidebar > svg:first-child { color: var(--marketing-blue); }
+.sidebar > span { font-size: 19px; }
+.sidebarActive { width: 31px; height: 31px; display: grid; place-items: center; color: var(--marketing-blue); background: var(--marketing-blue-soft); border-radius: 6px; }
+.sidebar .avatar { margin-top: auto; width: 23px; height: 23px; border-radius: 50%; background: var(--marketing-ui-canvas); font-size: 10px; display: grid; place-items: center; }
+.dashboardMain { flex: 1; min-width: 0; }
+.dashboardTop { background: var(--marketing-white); border-bottom: 1px solid var(--marketing-ui-border); height: 41px; padding: 0 18px; display: flex; align-items: center; justify-content: space-between; color: var(--marketing-muted); }
+.dashboardTop > span { display: flex; align-items: center; gap: 5px; }
+.storeDot { width: 5px; height: 5px; background: var(--marketing-ready); border-radius: 50%; }
+.dashboardHeading { padding: 23px 19px 15px; display: flex; justify-content: space-between; align-items: center; }
+.dashboardEyebrow { font-size: 6px; letter-spacing: 1.1px; color: var(--marketing-muted); }
+.dashboardHeading h3 { font-size: 24px; letter-spacing: -.7px; margin-top: 4px; }
+.newOrder { background: var(--marketing-ink); color: var(--marketing-white); padding: 8px 10px; font-size: 7px; border-radius: 5px; }
+.dashboardSummary { display: flex; gap: 25px; margin: 0 19px 22px; color: var(--marketing-muted); border-bottom: 1px solid var(--marketing-ui-border); padding-bottom: 16px; }
+.dashboardSummary > span { display: flex; align-items: center; gap: 7px; font-size: 8px; }
+.dashboardSummary strong { font-size: 21px; letter-spacing: -.7px; color: var(--marketing-ink); }
+.board { padding: 0 13px 15px; display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 9px; }
+.lane { background: var(--marketing-ui-lane); padding: 8px; border-radius: 7px; min-height: 223px; }
+.laneHeading { display: flex; align-items: center; gap: 5px; font-size: 8px; font-weight: 600; padding: 3px 0 11px; }
+.laneHeading > span { margin-left: auto; color: var(--marketing-muted); }
+.pendingDot,.preparingDot,.readyDot { width: 5px; height: 5px; border-radius: 50%; background: var(--marketing-pending); }
+.preparingDot { background: var(--marketing-preparing); }
+.readyDot { background: var(--marketing-ready); }
+.ticket { background: var(--marketing-white); padding: 15px; border: 1px solid var(--marketing-ui-border); border-top: 3px solid var(--marketing-pending); border-radius: 8px; box-shadow: 0 4px 14px var(--marketing-shadow-light); color: var(--marketing-ink); }
+.ticketHead { display: flex; justify-content: space-between; gap: 9px; align-items: center; }
+.orderRef { font-size: 12px; font-weight: 700; letter-spacing: -.2px; }
+.pending { border-radius: 4px; color: var(--marketing-pending-text); background: var(--marketing-pending-soft); padding: 4px 6px; font-size: 8px; }
+.customer { font-size: 13px; display: block; margin-top: 16px; }
+.customer > span { color: var(--marketing-muted); font-size: 10px; font-weight: 400; }
+.ticketProducts { font-size: 11px; line-height: 1.85; margin-top: 13px !important; }
+.ticketProducts > span { font-size: 9px; color: var(--marketing-muted); }
+.ticketFoot { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 9px; padding-top: 13px; margin-top: 13px; border-top: 1px solid var(--marketing-ui-border); }
+.ticketFoot > strong { font-size: 13px; }
+.ticketFoot > span { display: flex; align-items: center; gap: 4px; color: var(--marketing-muted); font-size: 7px; }
+.board .ticket { padding: 10px 8px; }
+.board .orderRef { font-size: 9px; }
+.board .pending { font-size: 6px; padding: 3px 4px; }
+.board .customer { font-size: 10px; margin-top: 11px; }
+.board .customer > span { font-size: 7px; }
+.board .ticketProducts { font-size: 8px; margin-top: 8px !important; }
+.board .ticketProducts > span { font-size: 6px; }
+.board .ticketFoot { padding-top: 8px; margin-top: 8px; }
+.board .ticketFoot > strong { font-size: 10px; }
+.board .ticketFoot > span { font-size: 6px; }
+.lanePlaceholder { font-size: 7px; color: var(--marketing-muted); padding: 13px 3px; text-align: center; line-height: 1.6; }
+.ghostOrder { background: var(--marketing-white); padding: 10px; border: 1px solid var(--marketing-ui-border); border-radius: 6px; margin-bottom: 8px; }
+.ghostOrder strong { font-size: 8px; }
+.ghostOrder p { margin-top: 9px !important; font-size: 8px; }
+.ghostOrder > span { font-size: 7px; display: block; margin-top: 8px; color: var(--marketing-muted); }
+.ghostOrder > small { display: flex; justify-content: space-between; margin-top: 11px; font-size: 9px; font-weight: 600; }
+.dashboardBottom { padding: 12px 19px; display: flex; justify-content: space-between; color: var(--marketing-muted); font-size: 6px; border-top: 1px solid var(--marketing-ui-border); }
+.phonePosition { position: absolute; width: 251px; top: 0; left: -5px; transform: rotate(-6deg); z-index: 2; animation: phoneArrival .7s both; }
+.phone { border: 6px solid var(--marketing-phone-edge); background: var(--marketing-white); border-radius: 35px; padding: 0 0 7px; box-shadow: 0 28px 65px var(--marketing-shadow-dark); color: var(--marketing-ink); overflow: hidden; }
+.phoneTop { height: 33px; padding: 0 14px; display: flex; align-items: center; justify-content: space-between; font-size: 9px; font-weight: 650; }
+.phoneIsland { background: var(--marketing-ink); width: 73px; height: 19px; border-radius: 13px; }
+.catalogHead { padding: 12px; display: flex; align-items: center; gap: 8px; }
+.restaurantMark { font-size: 19px; background: var(--marketing-food-rust); color: var(--marketing-food-cream); font-weight: 750; border-radius: 50%; width: 32px; height: 32px; display: grid; place-items: center; letter-spacing: -1px; }
+.catalogHead > div { flex: 1; }
+.catalogHead strong { font-size: 10px; display: block; }
+.catalogHead div > span { font-size: 6px; color: var(--marketing-muted); display: block; margin-top: 3px; }
+.catalogCover { position: relative; background: var(--marketing-food-rust); height: 108px; overflow: hidden; display: flex; align-items: center; }
+.catalogCover > span { position: relative; z-index: 1; color: var(--marketing-food-cream); font-size: 22px; font-weight: 900; letter-spacing: -1px; line-height: .94; padding-left: 13px; width: 110px; transform: rotate(-4deg); }
+.catalogCover > img { position: absolute; right: -60px; width: 220px; height: auto; transform: rotate(10deg); }
+.catalogBody { padding: 14px 12px 0; }
+.catalogWelcome { font-size: 12px; font-weight: 650; letter-spacing: -.35px; }
+.catalogCategories { display: flex; gap: 5px; margin-top: 12px; font-size: 6px; align-items: center; }
+.catalogCategories > span { padding: 6px; border: 1px solid var(--marketing-ui-border); border-radius: 12px; white-space: nowrap; }
+.catalogCategories > span:first-child { color: var(--marketing-food-cream); background: var(--marketing-food-rust); border-color: var(--marketing-food-rust); }
+.productPhoto { margin-top: 13px; border-radius: 9px; height: 121px; background: var(--marketing-food-cream); position: relative; overflow: hidden; }
+.productPhoto > img { width: 100%; height: 142px; object-fit: contain; margin-top: -6px; }
+.productPhoto > span { position: absolute; left: 8px; top: 8px; font-size: 6px; background: var(--marketing-white); color: var(--marketing-food-rust); border-radius: 5px; padding: 4px 6px; }
+.productHeading { display: flex; gap: 5px; align-items: center; justify-content: space-between; padding-top: 11px; }
+.productHeading strong { font-size: 13px; }
+.productHeading p { font-size: 6px; color: var(--marketing-muted); margin-top: 4px !important; }
+.addIcon { width: 26px; height: 26px; border-radius: 8px; background: var(--marketing-food-rust); color: var(--marketing-white); display: grid; place-items: center; }
+.productPrice { font-size: 11px; display: block; margin-top: 8px; }
+.catalogBar { background: var(--marketing-food-rust); color: var(--marketing-white); display: flex; align-items: center; justify-content: space-between; padding: 12px 8px; margin-top: 14px; border-radius: 7px 7px 17px 17px; }
+.catalogBar > span,.catalogBar > strong { display: flex; align-items: center; gap: 4px; font-size: 8px; }
+.catalogBar small { font-size: 6px; padding: 2px 4px; background: var(--marketing-food-rust-light); border-radius: 3px; }
+.arrival { position: absolute; top: 470px; left: 155px; z-index: 3; padding: 14px 18px; background: var(--marketing-white); color: var(--marketing-ink); display: flex; align-items: center; gap: 10px; border: 1px solid var(--marketing-ui-border); border-radius: 9px; box-shadow: 0 12px 32px var(--marketing-shadow-dark); transform: rotate(-2deg); animation: arrival .6s .5s both; }
+.arrivalCheck { display: grid; place-items: center; background: var(--marketing-ready-soft); color: var(--marketing-ready); width: 31px; height: 31px; border-radius: 50%; }
+.arrival strong { display: block; font-size: 10px; }
+.arrival div > span { display: block; font-size: 8px; margin-top: 4px; color: var(--marketing-muted); }
+.figureCaption { display: flex; align-items: center; gap: 8px; color: var(--marketing-dark-muted); font-size: 9px; padding: 0 0 13px 12px; }
+.captionLine { width: 20px; height: 1px; background: var(--marketing-blue-light); }
+.exampleNote { font-size: 7px; margin-left: auto; }
+@keyframes phoneArrival { from { opacity: .4; transform: translateY(12px) rotate(-6deg); } to { opacity: 1; transform: rotate(-6deg); } }
+@keyframes arrival { from { opacity: 0; transform: translateY(9px) rotate(-2deg); } to { opacity: 1; transform: rotate(-2deg); } }
+@media (max-width: 1199px) { .heroStage { height: 565px; } .dashboardPosition { width: 565px; left: 5px; top: 122px; } .phonePosition { width: 231px; left: 0; top: 20px; } .arrival { top: 454px; left: 100px; } .orbit { width: 410px; height: 410px; left: 10px; } }
+@media (max-width: 1023px) { .heroStage { height: 500px; } .dashboardPosition { width: 520px; left: 0; top: 113px; transform: perspective(1300px) rotateY(-9deg) rotateZ(2deg) scale(.85); } .phonePosition { width: 218px; left: 0; top: 12px; transform: rotate(-4deg); animation: none; } .phone { border-width: 5px; border-radius: 31px; } .catalogWelcome { font-size: 10px; } .productPhoto { height: 105px; } .catalogCategories { gap: 3px; font-size: 5px; } .arrival { top: 407px; left: 65px; padding: 12px; } .orbit { width: 350px; height: 350px; left: 0; top: 50px; } .figureCaption { font-size: 8px; padding-left: 0; } .exampleNote { font-size: 6px; } }
+@media (max-width: 767px) { .heroFigure { margin-top: 40px !important; } .heroStage { height: 470px; max-width: 430px; margin-inline: auto; } .phonePosition { width: 218px; left: 13px; top: 6px; transform: rotate(-5deg); } .dashboardPosition { width: 235px; top: 103px; left: auto; right: -12px; transform: rotate(4deg); transform-origin: center; } .dashboard { min-height: 246px; } .sidebar,.dashboardTop,.dashboardSummary,.board > .lane:nth-child(n+2),.newOrder,.dashboardBottom { display: none; } .dashboardHeading { padding: 20px 12px 14px; } .dashboardHeading h3 { font-size: 19px; } .dashboardEyebrow { font-size: 6px; } .board { display: block; padding: 0 10px 12px; } .lane { padding: 8px; min-height: 195px; } .board .ticket { padding: 12px 10px; } .board .orderRef { font-size: 11px; } .board .pending { font-size: 7px; } .board .customer { font-size: 12px; } .board .ticketProducts { font-size: 10px; } .board .ticketProducts > span { font-size: 7px; } .board .ticketFoot > strong { font-size: 12px; } .laneHeading { font-size: 9px; } .arrival { top: 406px; left: auto; right: 0; max-width: 230px; } .arrival strong { font-size: 10px; } .arrival div > span { font-size: 8px; } .orbit { width: 320px; height: 320px; left: 0; top: 51px; } .figureCaption { margin-top: 8px; flex-wrap: wrap; font-size: 8px; } .exampleNote { font-size: 7px; } }
+@media (max-width: 389px) { .phonePosition { left: 3px; width: 205px; } .dashboardPosition { width: 217px; right: -12px; top: 115px; } .heroStage { height: 460px; } .catalogCategories { font-size: 5px; } .catalogCover { height: 96px; } .catalogCover > span { font-size: 20px; } .catalogCover > img { width: 195px; right: -57px; } .arrival { top: 397px; } }

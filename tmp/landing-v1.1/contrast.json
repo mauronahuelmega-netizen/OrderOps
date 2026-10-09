@@ -1,0 +1,13 @@
+{
+  "count": 189,
+  "failures": [
+    {
+      "ratio": 4.48,
+      "text": "Limonada agregada"
+    },
+    {
+      "ratio": 4.48,
+      "text": "Un adicional para completar el pedido."
+    }
+  ]
+}

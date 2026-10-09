@@ -4,11 +4,15 @@
  * Never import Node `crypto` from client components.
  */
 export function createClientSafeId(prefix = "id"): string {
+  return `${prefix}-${createClientSafeUuid()}`;
+}
+
+export function createClientSafeUuid(): string {
   const cryptoObject =
     typeof globalThis !== "undefined" ? globalThis.crypto : undefined;
 
   if (cryptoObject && typeof cryptoObject.randomUUID === "function") {
-    return `${prefix}-${cryptoObject.randomUUID()}`;
+    return cryptoObject.randomUUID();
   }
 
   if (cryptoObject && typeof cryptoObject.getRandomValues === "function") {
@@ -20,17 +24,16 @@ export function createClientSafeId(prefix = "id"): string {
     const hex = Array.from(bytes, (byte) =>
       byte.toString(16).padStart(2, "0")
     ).join("");
-    const uuid = [
+    return [
       hex.slice(0, 8),
       hex.slice(8, 12),
       hex.slice(12, 16),
       hex.slice(16, 20),
       hex.slice(20)
     ].join("-");
-    return `${prefix}-${uuid}`;
   }
 
   const timestamp = Date.now().toString(36);
   const random = Math.random().toString(36).slice(2, 10);
-  return `${prefix}-${timestamp}-${random}`;
+  return `00000000-0000-4000-8000-${timestamp}${random}`.slice(0, 36);
 }

@@ -1,0 +1,136 @@
+[
+  {
+    "width": 360,
+    "states": [
+      {
+        "buttonHeight": 46,
+        "counts": [
+          1,
+          2,
+          1,
+          0
+        ],
+        "description": "Pendiente: El pedido ya está registrado, con sus productos y datos reunidos.",
+        "descriptionHeight": 42,
+        "overflow": false,
+        "secondaryCount": 1,
+        "stage": "pending"
+      },
+      {
+        "buttonHeight": 46,
+        "counts": [
+          0,
+          3,
+          1,
+          0
+        ],
+        "description": "Preparando: El negocio cambia el estado cuando empieza a preparar el pedido.",
+        "descriptionHeight": 42,
+        "overflow": false,
+        "secondaryCount": 1,
+        "stage": "preparing"
+      },
+      {
+        "buttonHeight": 46,
+        "counts": [
+          0,
+          2,
+          2,
+          0
+        ],
+        "description": "Listo: Todo listo para retirar o entregar. Podés avisarle al cliente por WhatsApp.",
+        "descriptionHeight": 42,
+        "overflow": false,
+        "secondaryCount": 1,
+        "stage": "ready"
+      },
+      {
+        "buttonHeight": 46,
+        "counts": [
+          0,
+          2,
+          1,
+          1
+        ],
+        "description": "Completado: El negocio marca el pedido como completado y cierra su recorrido.",
+        "descriptionHeight": 42,
+        "overflow": false,
+        "secondaryCount": 1,
+        "stage": "completed"
+      }
+    ],
+    "detail": {
+      "open": true,
+      "overflow": false,
+      "summaryHeight": 48,
+      "text": "Ver los detalles del pedido\n#J3E54J\nCLIENTE\nAlex\nENTREGA\n\nRetiro en el local\n\nTeléfono registrado: 11 •••• ••••\n\nIndicaciones: Sin cebolla.\nPRODUCTOS Y PERSONALIZACIONES\n1 × BBQ Bacon\n$15.450\nPapas\nMedianas\nExtras\nBacon extra\nSalsa\nMayonesa\nADICIONAL\n1 × Limonada\n$2.500\nTotal\n$17.950"
+    }
+  },
+  {
+    "width": 390,
+    "states": [
+      {
+        "buttonHeight": 46,
+        "counts": [
+          1,
+          2,
+          1,
+          0
+        ],
+        "description": "Pendiente: El pedido ya está registrado, con sus productos y datos reunidos.",
+        "descriptionHeight": 42,
+        "overflow": false,
+        "secondaryCount": 2,
+        "stage": "pending"
+      },
+      {
+        "buttonHeight": 46,
+        "counts": [
+          0,
+          3,
+          1,
+          0
+        ],
+        "description": "Preparando: El negocio cambia el estado cuando empieza a preparar el pedido.",
+        "descriptionHeight": 42,
+        "overflow": false,
+        "secondaryCount": 2,
+        "stage": "preparing"
+      },
+      {
+        "buttonHeight": 46,
+        "counts": [
+          0,
+          2,
+          2,
+          0
+        ],
+        "description": "Listo: Todo listo para retirar o entregar. Podés avisarle al cliente por WhatsApp.",
+        "descriptionHeight": 42,
+        "overflow": false,
+        "secondaryCount": 2,
+        "stage": "ready"
+      },
+      {
+        "buttonHeight": 46,
+        "counts": [
+          0,
+          2,
+          1,
+          1
+        ],
+        "description": "Completado: El negocio marca el pedido como completado y cierra su recorrido.",
+        "descriptionHeight": 42,
+        "overflow": false,
+        "secondaryCount": 2,
+        "stage": "completed"
+      }
+    ],
+    "detail": {
+      "open": true,
+      "overflow": false,
+      "summaryHeight": 48,
+      "text": "Ver los detalles del pedido\n#J3E54J\nCLIENTE\nAlex\nENTREGA\n\nRetiro en el local\n\nTeléfono registrado: 11 •••• ••••\n\nIndicaciones: Sin cebolla.\nPRODUCTOS Y PERSONALIZACIONES\n1 × BBQ Bacon\n$15.450\nPapas\nMedianas\nExtras\nBacon extra\nSalsa\nMayonesa\nADICIONAL\n1 × Limonada\n$2.500\nTotal\n$17.950"
+    }
+  }
+]

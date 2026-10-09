@@ -1,0 +1,12 @@
+{
+  "before": {
+    "client": 1440,
+    "width": 1440
+  },
+  "after": {
+    "client": 1440,
+    "width": 1440
+  },
+  "certified200Percent": false,
+  "reflow720Passed": true
+}

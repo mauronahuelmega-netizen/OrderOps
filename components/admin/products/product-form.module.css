@@ -26,7 +26,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 40px;
+  min-height: 2.75rem;
   margin-top: 1.5rem;
   padding: 0 0.5rem;
 }
@@ -43,8 +43,32 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 40px;
+  min-height: 2.75rem;
   gap: 1rem;
+}
+
+/* Form-local 44×44 hit area; keep the switch track visually centered (collection toggle CSS untouched). */
+.toggleStackHeader :global(label),
+.toggleContainer :global(label) {
+  box-sizing: border-box;
+  width: 2.75rem !important;
+  height: 2.75rem !important;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+}
+
+.toggleStackHeader :global(label) > span:last-of-type,
+.toggleContainer :global(label) > span:last-of-type {
+  top: 10px;
+  bottom: 10px;
+  height: auto;
+}
+
+.toggleStackHeader :global(label):has(input:focus-visible),
+.toggleContainer :global(label):has(input:focus-visible) {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+  border-radius: 999px;
 }
 
 .toggleLabel {
@@ -54,6 +78,13 @@
 }
 
 .toggleHelper {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--type-caption-size);
+  line-height: 1.4;
+}
+
+.toggleInfo {
   margin: 0;
   color: var(--text-secondary);
   font-size: var(--type-caption-size);
@@ -102,6 +133,7 @@
 .field select,
 .textarea {
   width: 100%;
+  min-height: 2.75rem;
   box-sizing: border-box;
 }
 
@@ -122,7 +154,8 @@
 .shell :global(input[type="number"]),
 .shell :global(select),
 .iconButton {
-  height: 42px !important;
+  height: 2.75rem !important;
+  min-height: 2.75rem;
   box-sizing: border-box;
 }
 
@@ -199,8 +232,10 @@
   background-color: var(--bg-surface);
   border: 1px solid var(--border-subtle);
   color: var(--text-secondary);
-  width: 32px;
-  height: 32px;
+  width: 2.75rem;
+  height: 2.75rem;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -209,7 +244,6 @@
   z-index: 2;
   pointer-events: auto;
   cursor: pointer;
-  outline: none;
   padding: 0;
   transition: color 0.2s, transform 0.2s;
 }
@@ -219,6 +253,11 @@
   transform: scale(1.05);
 }
 
+.editImageBadge:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  outline-offset: 2px;
+}
+
 .editImageBadge:disabled {
   opacity: 0.5;
   cursor: not-allowed;
@@ -226,6 +265,40 @@
 
 .imageDropzone:hover .editImageBadge:not(:disabled) {
   color: var(--brand-primary, var(--accent-primary));
+}
+
+.removeImageButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  margin: 0.5rem auto 0;
+  padding: 0.5rem 0.875rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.removeImageButton:hover:not(:disabled) {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+  background: var(--bg-surface-hover);
+}
+
+.removeImageButton:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  outline-offset: 2px;
+}
+
+.removeImageButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .imageDropzone {
@@ -272,6 +345,29 @@
   padding: 0 0.75rem;
 }
 
+.imageDropzoneTextMobile {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.imageDropzonePrimary {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.imageDropzoneFormats {
+  display: block;
+  color: var(--text-tertiary);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
 .imageDropzoneHasImage::after {
   content: "Cambiar foto";
   position: absolute;
@@ -308,7 +404,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
+  width: 2.75rem;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
   flex-shrink: 0;
   background-color: var(--bg-surface);
   border: 1px solid var(--border-subtle);
@@ -322,6 +420,11 @@
   background-color: var(--bg-surface-hover);
   color: var(--brand-primary, var(--accent-primary));
   border-color: var(--brand-primary, var(--accent-primary));
+}
+
+.iconButton:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  outline-offset: 2px;
 }
 
 .iconButton:disabled {
@@ -403,6 +506,212 @@
   color: var(--text-primary);
 }
 
+.discardDialog {
+  width: min(100% - 2rem, 360px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-floating);
+  color: var(--text-primary);
+}
+
+.discardDialog::backdrop {
+  background: color-mix(in srgb, var(--text-primary) 32%, transparent);
+}
+
+.discardDialogBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.25rem;
+}
+
+.discardDialogTitle {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 650;
+  color: var(--text-primary);
+}
+
+.discardDialogCopy {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.discardDialogActions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+}
+
+.discardDialogStay,
+.discardDialogConfirm {
+  min-height: 44px;
+  width: 100%;
+  border-radius: 10px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.discardDialogStay {
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+.discardDialogConfirm {
+  border: 1px solid color-mix(in srgb, var(--color-cancelled) 45%, var(--border-subtle));
+  background: color-mix(in srgb, var(--color-cancelled) 12%, var(--bg-surface));
+  color: var(--text-primary);
+}
+
+.discardDialogStay:focus-visible,
+.discardDialogConfirm:focus-visible {
+  outline: 2px solid var(--text-secondary);
+  outline-offset: 2px;
+}
+
+.archivedBanner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0 0 1rem;
+  padding: 0.75rem 0.875rem;
+  border: 1px solid color-mix(in srgb, var(--color-cancelled) 28%, var(--border-subtle));
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--color-cancelled) 8%, var(--bg-surface));
+}
+
+.archivedBannerTitle {
+  font-size: 0.92rem;
+  font-weight: 650;
+  color: var(--text-primary);
+}
+
+.archivedBannerCopy {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  color: var(--text-secondary);
+}
+
+.imageDropzoneReadOnly {
+  cursor: default;
+  pointer-events: none;
+}
+
+.lifecycleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 1.35rem;
+  padding-top: 0;
+  /* Advanced disclosure already owns the single Advanced→lifecycle boundary. */
+  border-top: none;
+}
+
+.lifecycleTitle {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 650;
+  color: var(--text-primary);
+}
+
+.lifecycleActions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  width: 100%;
+  max-width: 28rem;
+}
+
+.lifecycleArchiveButton,
+.lifecycleRestoreButton,
+.lifecycleDeleteButton,
+.lifecycleDangerButton,
+.lifecycleArchiveConfirm {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  min-height: 44px;
+  width: 100%;
+  padding: 0 0.75rem;
+  border-radius: 10px;
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.lifecycleArchiveButton {
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+}
+
+.lifecycleArchiveButton:hover:not(:disabled) {
+  background: var(--bg-surface-hover);
+}
+
+.lifecycleRestoreButton {
+  border: 1px solid color-mix(in srgb, var(--accent-primary, var(--color-primary)) 35%, var(--border-subtle));
+  background: color-mix(in srgb, var(--accent-primary, var(--color-primary)) 10%, var(--bg-surface));
+  color: var(--text-primary);
+}
+
+.lifecycleRestoreButton:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent-primary, var(--color-primary)) 16%, var(--bg-surface));
+}
+
+.lifecycleDeleteButton,
+.lifecycleDangerButton {
+  border: 1px solid color-mix(in srgb, var(--color-cancelled) 50%, var(--border-subtle));
+  background: color-mix(in srgb, var(--color-cancelled) 10%, var(--bg-surface));
+  color: var(--color-cancelled);
+}
+
+.lifecycleDeleteButton:hover:not(:disabled),
+.lifecycleDangerButton:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--color-cancelled) 16%, var(--bg-surface));
+}
+
+.lifecycleArchiveConfirm {
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.lifecycleArchiveConfirm:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--bg-surface-hover) 70%, var(--text-primary) 8%);
+}
+
+.lifecycleArchiveButton:disabled,
+.lifecycleRestoreButton:disabled,
+.lifecycleDeleteButton:disabled,
+.lifecycleDangerButton:disabled,
+.lifecycleArchiveConfirm:disabled {
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.lifecycleArchiveButton:focus-visible,
+.lifecycleRestoreButton:focus-visible,
+.lifecycleDeleteButton:focus-visible,
+.lifecycleDangerButton:focus-visible,
+.lifecycleArchiveConfirm:focus-visible {
+  outline: 2px solid var(--text-secondary);
+  outline-offset: 2px;
+}
+
 .actions {
   margin-top: 1rem;
   background: transparent;
@@ -411,15 +720,291 @@
 .actionsSticky {
   position: sticky;
   bottom: 0;
-  padding-top: 8px;
-  padding-bottom: 4px;
-  background: linear-gradient(to top, var(--bg-surface) 72%, transparent);
+  z-index: 2;
+  margin-top: 1rem;
+  padding: 12px 0 max(12px, env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  box-shadow: 0 -8px 20px color-mix(in srgb, var(--text-primary) 8%, transparent);
+}
+
+.actionsSticky :global(.admin-primary-button),
+.actions :global(.admin-primary-button) {
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+}
+
+.actionsSticky :global(.admin-primary-button):focus-visible,
+.actions :global(.admin-primary-button):focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  outline-offset: 2px;
 }
 
 .formRoot {
   display: grid;
   gap: 16px;
   padding: 0 16px 16px;
+}
+
+/* Clear sticky CTA so last Advanced option remains reachable.
+ * Sticky footer remains in normal flow; large 4.75rem spacer created
+ * redundant empty band on short/collapsed Advanced. Keep modest clearance
+ * (~24px) + sticky margin-top (~16px) ≈ 40px breathing — within 24–40px target.
+ * Create already uses 0 on nth-last-child(2); Edit aligns closer without
+ * eliminating reachability clearance entirely.
+ */
+.editForm:has(.actionsSticky) > :nth-last-child(2) {
+  padding-bottom: 1.5rem;
+}
+
+/* Shared formRoot sticky clearance — Edit uses formRoot+editForm.
+ * Keep in sync with editForm rule above (not additive; same cascade target).
+ */
+.formRoot:has(.actionsSticky) > :nth-last-child(2) {
+  padding-bottom: 1.5rem;
+}
+
+/*
+ * Create: sticky footer is an in-flow sibling after empty `.feedback`.
+ * Do NOT reserve a large footer-compensation spacer on that empty node —
+ * it reads as a missing chunk of UI between stock info and Guardar.
+ * Intentional breathing comes from form gap + sticky margin-top (~24–32px).
+ */
+.createForm:has(.actionsSticky) > :nth-last-child(2) {
+  padding-bottom: 0;
+}
+
+.createForm {
+  min-width: 0;
+}
+
+.requiredLegend {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--type-caption-size);
+  line-height: 1.4;
+}
+
+/* Gap owns required-marker spacing — immune to `.admin-field span { margin: 0 }`. */
+.fieldLabelInline {
+  display: inline-flex;
+  align-items: baseline;
+  column-gap: 0.15em;
+  white-space: nowrap;
+}
+
+.fieldLabelInline > .requiredMark {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: inherit;
+  font-weight: 600;
+}
+
+/* Sticky footer is the last in-flow child — trailing shell padding only shows at END. */
+.createForm.shell:has(.actionsSticky) {
+  padding-bottom: 0;
+}
+
+.createActions :global(.admin-primary-button:disabled) {
+  opacity: 0.62;
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+  cursor: not-allowed;
+}
+
+.createStockBlock {
+  gap: 0.625rem;
+}
+
+.createToggleHost :global(.statusLabel) {
+  display: none;
+}
+
+/* Keep the visually-hidden checkbox keyboard-focusable inside the 44×44 label. */
+.createToggleHost :global(label) {
+  position: relative;
+}
+
+.createToggleHost :global(input) {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.editForm {
+  min-width: 0;
+}
+
+/* Sticky footer is last in-flow child of Edit form — Advanced sits above it. */
+.editForm.shell:has(.actionsSticky) {
+  padding-bottom: 0;
+}
+
+.editForm .feedback:empty {
+  display: none;
+}
+
+.editActions :global(.admin-primary-button:disabled) {
+  opacity: 0.62;
+  color: var(--text-primary);
+  border-color: var(--border-subtle);
+  cursor: not-allowed;
+}
+
+.editOperationalSection {
+  gap: 0.625rem;
+}
+
+.editToggleHost :global(.statusLabel) {
+  display: none;
+}
+
+.editToggleHost :global(label) {
+  position: relative;
+}
+
+.editToggleHost :global(input) {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* SUPERSEDED: Advanced used to live outside the Edit form after sticky release. */
+.editAfterForm {
+  margin-top: 1.5rem;
+  padding-top: 0.25rem;
+}
+
+.categoryReadOnlyValue {
+  margin: 0;
+  min-height: 2.75rem;
+  display: flex;
+  align-items: center;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  font-size: 0.9375rem;
+  line-height: 1.35;
+}
+
+/* Create mobile / full-screen flyout band (<961, matches flyout shell). */
+@media (max-width: 960px) {
+  .createForm.shell {
+    --create-shell-inline: 0.875rem;
+    /* Bottom padding must be 0: it paints AFTER the sticky footer and only
+       becomes visible at scroll end, enlarging the footer surface visually. */
+    padding: 0.75rem var(--create-shell-inline) 0;
+  }
+
+  .createForm .formSection {
+    gap: 1.125rem;
+  }
+
+  .createForm .grid2,
+  .createForm .grid3 {
+    gap: 1.125rem;
+  }
+
+  .createForm .divider {
+    margin: 1.25rem 0;
+  }
+
+  .createForm .toggleStack {
+    margin-top: 1rem;
+    padding: 0;
+  }
+
+  .createForm .toggleContainer {
+    margin-top: 1rem;
+  }
+
+  .createForm .imageDropzone {
+    width: min(200px, 68vw);
+  }
+
+  .createForm .imageDropzoneTextDesktop {
+    display: none;
+  }
+
+  .createForm .imageDropzoneTextMobile {
+    display: flex;
+  }
+
+  .createForm .createActions.actionsSticky {
+    margin-top: 1.25rem;
+    margin-inline: calc(-1 * var(--create-shell-inline));
+    padding: 10px var(--create-shell-inline) max(12px, env(safe-area-inset-bottom, 0px));
+    width: auto;
+    box-sizing: border-box;
+  }
+
+  .createForm .createActions.actionsSticky :global(.admin-primary-button) {
+    width: 100%;
+    min-height: 3rem;
+    min-width: 0;
+    justify-content: center;
+  }
+
+  /* Edit mobile — sibling of Create visual system; sticky releases with base form. */
+  .editForm.shell {
+    --edit-shell-inline: 0.875rem;
+    padding: 0.75rem var(--edit-shell-inline) 0;
+  }
+
+  .editForm .formSection {
+    gap: 1.125rem;
+  }
+
+  .editForm .grid2,
+  .editForm .grid3 {
+    gap: 1.125rem;
+  }
+
+  .editForm .divider {
+    margin: 1.25rem 0;
+  }
+
+  .editForm .toggleStack {
+    margin-top: 1rem;
+    padding: 0;
+  }
+
+  .editForm .imageDropzone {
+    width: min(200px, 68vw);
+  }
+
+  .editForm .imageDropzoneTextDesktop {
+    display: none;
+  }
+
+  .editForm .imageDropzoneTextMobile {
+    display: flex;
+  }
+
+  .editForm .editActions.actionsSticky {
+    margin-top: 1.25rem;
+    margin-inline: calc(-1 * var(--edit-shell-inline));
+    padding: 10px var(--edit-shell-inline) max(12px, env(safe-area-inset-bottom, 0px));
+    width: auto;
+    box-sizing: border-box;
+  }
+
+  .editForm .editActions.actionsSticky :global(.admin-primary-button) {
+    width: 100%;
+    min-height: 3rem;
+    min-width: 0;
+    justify-content: center;
+  }
 }
 
 .formShell {
@@ -450,6 +1035,11 @@
 .feedback {
   display: grid;
   gap: 0.5rem;
+}
+
+/* Create: empty feedback must not reserve a grid track between stock and sticky CTA. */
+.createForm .feedback:empty {
+  display: none;
 }
 
 .shell {

@@ -1,17 +1,9 @@
-.desktopOnly {
-  display: none;
+.collection {
+  display: grid;
+  gap: 0;
+  width: 100%;
 }
 
-.mobileOnly {
-  display: block;
-}
-
-@media (min-width: 900px) {
-  .desktopOnly {
-    display: block;
-  }
-
-  .mobileOnly {
-    display: none;
-  }
+.paginationWrap {
+  margin-top: var(--space-sm);
 }

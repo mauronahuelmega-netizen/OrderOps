@@ -36,10 +36,6 @@
   gap: var(--space-xs);
   min-width: 0;
   width: 100%;
-  padding: var(--space-xs);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  background-color: color-mix(in srgb, var(--bg-surface) 72%, var(--bg-canvas));
   box-sizing: border-box;
 }
 
@@ -60,12 +56,13 @@
   color: var(--text-tertiary);
   pointer-events: none;
   transform: translateY(-50%);
+  contain: paint layout;
 }
 
 .search,
 .filterSelect {
   min-width: 0;
-  min-height: 2.25rem;
+  min-height: 2.75rem;
   box-sizing: border-box;
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
@@ -99,12 +96,10 @@
   appearance: none;
   flex: 1 1 auto;
   min-width: 8.5rem;
-  padding: 0.5rem 2rem 0.5rem 0.75rem;
+  padding: 0.5rem 0.75rem;
   cursor: pointer;
-  background-repeat: no-repeat;
-  background-position: right 0.625rem center;
-  background-size: 0.875rem 0.875rem;
-  background-image: var(--icon-chevron-down);
+  /* Chevron is rendered as an inline icon for unified open rotation across Category/Stock/Estado. */
+  background-image: none;
 }
 
 .filterSelect:hover {
@@ -115,8 +110,14 @@
 .filterSelectActive {
   border-color: color-mix(in srgb, var(--accent-primary) 42%, var(--border-subtle));
   color: var(--text-primary);
+  font-weight: 600;
   background-color: color-mix(in srgb, var(--bg-surface-hover) 88%, var(--accent-soft, transparent));
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent-primary) 18%, transparent);
+}
+
+.categoryTrigger {
+  /* Match native filter select chrome as a compact dialog trigger (not a primary CTA). */
+  font: inherit;
 }
 
 .search:focus-visible,
@@ -127,7 +128,8 @@
 
 .clearFilters {
   flex: 0 0 auto;
-  min-height: 2rem;
+  min-height: 2.75rem;
+  min-width: 2.75rem;
   padding: 0 0.75rem;
   border: 1px solid transparent;
   border-radius: var(--radius-sm);
@@ -161,18 +163,86 @@
 
 .toolbarSkeletonSearch {
   width: 100%;
-  height: 2.25rem;
+  height: 2.75rem;
   border-radius: var(--radius-md);
 }
 
 .toolbarSkeletonFilter {
   flex: 1 1 calc(33.333% - var(--space-xs));
   min-width: 7.5rem;
-  height: 2.25rem;
+  height: 2.75rem;
   border-radius: var(--radius-md);
 }
 
-@media (min-width: 768px) {
+/* Mobile main surface <900: hide duplicate summary; compact 3-col native filters */
+@media (max-width: 899px) {
+  .toolbar {
+    gap: 8px;
+    padding-bottom: var(--space-sm);
+  }
+
+  .summary {
+    display: none;
+  }
+
+  .toolbarSkeletonSummary {
+    display: none;
+  }
+
+  .controlsRow {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .searchWrapper {
+    width: 100%;
+    max-width: none;
+  }
+
+  .search {
+    min-height: 2.75rem;
+    box-shadow: none;
+  }
+
+  .filtersCluster {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 6px;
+    width: 100%;
+    padding: 0;
+    border: none;
+    background: transparent;
+  }
+
+  .filterSelect {
+    width: 100%;
+    min-width: 0;
+    flex: none;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.5rem;
+    font-size: 0.75rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .clearFilters {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-height: 2.75rem;
+    justify-self: stretch;
+    text-align: center;
+  }
+
+  .toolbarSkeletonFilter {
+    min-width: 0;
+    flex: none;
+    width: 100%;
+  }
+}
+
+@media (min-width: 900px) {
   .controlsRow {
     flex-direction: row;
     flex-wrap: wrap;
@@ -187,121 +257,15 @@
 
   .filtersCluster {
     flex: 1 1 20rem;
+    flex-wrap: nowrap;
+    padding: var(--space-xs);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-md);
+    background-color: color-mix(in srgb, var(--bg-surface) 72%, var(--bg-canvas));
   }
 
   .filterSelect {
     flex: 0 1 auto;
-    min-width: 9rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .filtersCluster {
-    flex-wrap: nowrap;
-  }
-
-  .filterSelect {
     min-width: 8.75rem;
-  }
-}
-
-@media (max-width: 767px) {
-  .toolbar {
-    gap: 6px;
-    padding-bottom: var(--space-sm);
-  }
-
-  .summary {
-    font-size: 0.8125rem;
-  }
-
-  .controlsRow {
-    gap: 6px;
-  }
-
-  .filtersCluster {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 6px;
-    padding: 6px;
-    border-color: color-mix(in srgb, var(--border-subtle) 75%, transparent);
-    background-color: color-mix(in srgb, var(--bg-surface) 55%, var(--bg-canvas));
-  }
-
-  .filterSelect,
-  .clearFilters {
-    width: 100%;
-  }
-
-  .search {
-    min-height: 2.375rem;
-    box-shadow: none;
-  }
-}
-
-@media (min-width: 480px) and (max-width: 767px) {
-  .filtersCluster {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .filtersCluster .filterSelect:first-of-type {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 899px) {
-  .toolbar {
-    gap: var(--space-xs);
-    padding-bottom: var(--space-sm);
-  }
-
-  .controlsRow {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--space-sm);
-  }
-
-  .searchWrapper {
-    flex: none;
-    width: 100%;
-    max-width: none;
-  }
-
-  .search {
-    box-shadow: none;
-  }
-
-  .filtersCluster {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    flex: none;
-    width: 100%;
-    padding: 6px 8px;
-    gap: 8px;
-    border-color: color-mix(in srgb, var(--border-subtle) 80%, transparent);
-    background-color: color-mix(in srgb, var(--bg-surface) 65%, var(--bg-canvas));
-  }
-
-  .filterSelect {
-    width: 100%;
-    min-width: 0;
-    flex: none;
-    padding: 0.5rem 1.75rem 0.5rem 0.625rem;
-    font-size: 0.8125rem;
-    background-position: right 0.5rem center;
-    background-size: 0.8125rem 0.8125rem;
-  }
-
-  .clearFilters {
-    grid-column: 1 / -1;
-    width: 100%;
-    justify-self: stretch;
-    text-align: center;
-  }
-}
-
-@media (max-width: 479px) {
-  .toolbarSkeletonFilter {
-    flex-basis: 100%;
   }
 }

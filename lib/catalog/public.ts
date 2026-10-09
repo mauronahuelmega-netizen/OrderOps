@@ -48,6 +48,7 @@ export async function loadPublicCatalogByBusinessId(businessId: string): Promise
         .select("id, category_id, name, description, price, image_url")
         .eq("business_id", businessId)
         .eq("is_available", true)
+        .is("archived_at", null)
         .order("name", { ascending: true })
     ]);
 

@@ -1,0 +1,400 @@
+[
+  {
+    "width": 360,
+    "sections": [
+      {
+        "id": "hero-title",
+        "heightBefore": 1245.1875,
+        "heightAfter": 1245.1875,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "steps-title",
+        "heightBefore": 1031.21875,
+        "heightAfter": 1031.21875,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "problem-title",
+        "heightBefore": 1285.390625,
+        "heightAfter": 1215.390625,
+        "delta": -70,
+        "geometryIdentical": false
+      },
+      {
+        "id": "product-title",
+        "heightBefore": 1384.515625,
+        "heightAfter": 1384.515625,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "operation-title",
+        "heightBefore": 1325.640625,
+        "heightAfter": 1173.640625,
+        "delta": -152,
+        "geometryIdentical": false
+      },
+      {
+        "id": "communication-title",
+        "heightBefore": 1000.328125,
+        "heightAfter": 1000.328125,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "benefits-title",
+        "heightBefore": 1150.953125,
+        "heightAfter": 1055.953125,
+        "delta": -95,
+        "geometryIdentical": false
+      },
+      {
+        "id": "pricing-title",
+        "heightBefore": 642.28125,
+        "heightAfter": 642.28125,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "faq-title",
+        "heightBefore": 620.453125,
+        "heightAfter": 620.453125,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "demo-title",
+        "heightBefore": 578.53125,
+        "heightAfter": 578.53125,
+        "delta": 0,
+        "geometryIdentical": true
+      }
+    ],
+    "ctasUnchanged": true
+  },
+  {
+    "width": 390,
+    "sections": [
+      {
+        "id": "hero-title",
+        "heightBefore": 1199.1875,
+        "heightAfter": 1199.1875,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "steps-title",
+        "heightBefore": 1009.125,
+        "heightAfter": 1009.125,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "problem-title",
+        "heightBefore": 1222.296875,
+        "heightAfter": 1152.296875,
+        "delta": -70,
+        "geometryIdentical": false
+      },
+      {
+        "id": "product-title",
+        "heightBefore": 1362.921875,
+        "heightAfter": 1362.921875,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "operation-title",
+        "heightBefore": 1389.640625,
+        "heightAfter": 1231.640625,
+        "delta": -158,
+        "geometryIdentical": false
+      },
+      {
+        "id": "communication-title",
+        "heightBefore": 948.140625,
+        "heightAfter": 948.140625,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "benefits-title",
+        "heightBefore": 1150.953125,
+        "heightAfter": 1055.953125,
+        "delta": -95,
+        "geometryIdentical": false
+      },
+      {
+        "id": "pricing-title",
+        "heightBefore": 599.34375,
+        "heightAfter": 599.34375,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "faq-title",
+        "heightBefore": 620.453125,
+        "heightAfter": 620.453125,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "demo-title",
+        "heightBefore": 553.34375,
+        "heightAfter": 553.34375,
+        "delta": 0,
+        "geometryIdentical": true
+      }
+    ],
+    "ctasUnchanged": true
+  },
+  {
+    "width": 768,
+    "sections": [
+      {
+        "id": "hero-title",
+        "heightBefore": 762,
+        "heightAfter": 762,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "steps-title",
+        "heightBefore": 624.78125,
+        "heightAfter": 624.78125,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "problem-title",
+        "heightBefore": 904.625,
+        "heightAfter": 904.625,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "product-title",
+        "heightBefore": 972.71875,
+        "heightAfter": 972.71875,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "operation-title",
+        "heightBefore": 1065.6875,
+        "heightAfter": 1065.6875,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "communication-title",
+        "heightBefore": 694.40625,
+        "heightAfter": 694.40625,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "benefits-title",
+        "heightBefore": 713.359375,
+        "heightAfter": 713.359375,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "pricing-title",
+        "heightBefore": 467.34375,
+        "heightAfter": 467.34375,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "faq-title",
+        "heightBefore": 470,
+        "heightAfter": 470,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "demo-title",
+        "heightBefore": 470.5625,
+        "heightAfter": 470.5625,
+        "delta": 0,
+        "geometryIdentical": true
+      }
+    ],
+    "ctasUnchanged": true,
+    "pixelDiff": {
+      "differentPixels": 0,
+      "maxDifference": 0,
+      "width": 753,
+      "height": 7463
+    }
+  },
+  {
+    "width": 1024,
+    "sections": [
+      {
+        "id": "hero-title",
+        "heightBefore": 853,
+        "heightAfter": 853,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "steps-title",
+        "heightBefore": 630.28125,
+        "heightAfter": 630.28125,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "problem-title",
+        "heightBefore": 889.65625,
+        "heightAfter": 889.65625,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "product-title",
+        "heightBefore": 948.75,
+        "heightAfter": 948.75,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "operation-title",
+        "heightBefore": 1026.71875,
+        "heightAfter": 1026.71875,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "communication-title",
+        "heightBefore": 614.59375,
+        "heightAfter": 614.59375,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "benefits-title",
+        "heightBefore": 736.453125,
+        "heightAfter": 736.453125,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "pricing-title",
+        "heightBefore": 462.390625,
+        "heightAfter": 462.390625,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "faq-title",
+        "heightBefore": 470,
+        "heightAfter": 470,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "demo-title",
+        "heightBefore": 497.6875,
+        "heightAfter": 497.6875,
+        "delta": 0,
+        "geometryIdentical": true
+      }
+    ],
+    "ctasUnchanged": true,
+    "pixelDiff": {
+      "differentPixels": 0,
+      "maxDifference": 0,
+      "width": 1009,
+      "height": 7395
+    }
+  },
+  {
+    "width": 1440,
+    "sections": [
+      {
+        "id": "hero-title",
+        "heightBefore": 853,
+        "heightAfter": 853,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "steps-title",
+        "heightBefore": 612.71875,
+        "heightAfter": 612.71875,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "problem-title",
+        "heightBefore": 572.03125,
+        "heightAfter": 572.03125,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "product-title",
+        "heightBefore": 966.84375,
+        "heightAfter": 966.84375,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "operation-title",
+        "heightBefore": 1060.8125,
+        "heightAfter": 1060.8125,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "communication-title",
+        "heightBefore": 614.59375,
+        "heightAfter": 614.59375,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "benefits-title",
+        "heightBefore": 768.578125,
+        "heightAfter": 768.578125,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "pricing-title",
+        "heightBefore": 522.390625,
+        "heightAfter": 522.390625,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "faq-title",
+        "heightBefore": 470,
+        "heightAfter": 470,
+        "delta": 0,
+        "geometryIdentical": true
+      },
+      {
+        "id": "demo-title",
+        "heightBefore": 524.8125,
+        "heightAfter": 524.8125,
+        "delta": 0,
+        "geometryIdentical": true
+      }
+    ],
+    "ctasUnchanged": true,
+    "pixelDiff": {
+      "differentPixels": 0,
+      "maxDifference": 0,
+      "width": 1425,
+      "height": 7231
+    }
+  }
+]

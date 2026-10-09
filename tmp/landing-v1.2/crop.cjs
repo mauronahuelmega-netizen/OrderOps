@@ -1,0 +1,2 @@
+const fs=require('fs'),sharp=require('sharp');(async()=>{const p='tmp/landing-v1.2/';for(const width of [360,768,1024]){const l=JSON.parse(fs.readFileSync(p+width+'-layout.json'));const m=await sharp(p+width+'-full.png').metadata();for(const s of l.sections)await sharp(p+width+'-full.png').extract({left:0,top:Math.round(s.top),width:Math.min(l.width,m.width),height:Math.min(Math.ceil(s.height)+40,m.height-Math.round(s.top))}).toFile(p+width+'-'+s.id+'.png')}})();
+

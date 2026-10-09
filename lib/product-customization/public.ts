@@ -24,6 +24,7 @@ type ProductRow = {
   price: number;
   image_url: string | null;
   is_available: boolean;
+  archived_at: string | null;
 };
 
 type AssignmentRow = {
@@ -268,7 +269,7 @@ async function loadPublicCustomizationCorpus(
   } else {
     const { data: products, error: productsError } = await supabase
       .from("products")
-      .select("id, category_id, name, description, price, image_url, is_available")
+      .select("id, category_id, name, description, price, image_url, is_available, archived_at")
       .eq("business_id", businessId)
       .in("id", productIds);
 
@@ -410,7 +411,7 @@ async function loadPublicCustomizationCorpus(
 
   for (const suggestedProductId of suggestedProductIds) {
     const preloaded = preloadedById.get(suggestedProductId);
-    if (preloaded?.is_available) {
+    if (preloaded?.is_available && preloaded.archived_at == null) {
       suggestedById.set(suggestedProductId, {
         id: preloaded.id,
         name: preloaded.name,
@@ -432,6 +433,7 @@ async function loadPublicCustomizationCorpus(
       .select("id, name, price, image_url, is_available")
       .eq("business_id", businessId)
       .eq("is_available", true)
+      .is("archived_at", null)
       .in("id", missingSuggestedIds);
 
     if (suggestedError) {
@@ -640,7 +642,8 @@ export async function loadPublicCustomizationSummariesForCatalogProducts(params:
     description: product.description,
     price: product.price,
     image_url: product.image_url,
-    is_available: true
+    is_available: true,
+    archived_at: null
   }));
 
   return loadPublicCustomizationSummariesForProducts({
@@ -670,7 +673,8 @@ export async function getPublicProductCustomizationConfig(params: {
 
   const corpus = await loadPublicCustomizationCorpus(params.businessId, [productId]);
   const product = corpus.productRows.find(
-    (row) => row.id === productId && row.is_available
+    (row) =>
+      row.id === productId && row.is_available && row.archived_at == null
   );
 
   if (!product) {

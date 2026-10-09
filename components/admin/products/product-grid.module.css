@@ -34,7 +34,7 @@
 
 .catalogSubtitle {
   margin: 0;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 1.25;
@@ -51,6 +51,35 @@
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 1.35;
+}
+
+/* Mobile: category headings already convey grouping — hide redundant subtitle */
+@media (max-width: 899px) {
+  .catalogCard {
+    gap: 6px;
+  }
+
+  .catalogHeader {
+    padding: var(--space-xs) var(--space-sm) 0;
+  }
+
+  .catalogSubtitle {
+    display: none;
+  }
+
+  .metrics {
+    padding: 0 var(--space-sm) var(--space-xs);
+    gap: 0.25rem 0.4rem;
+  }
+
+  .categoryGroups {
+    gap: var(--space-sm);
+    padding: var(--space-xs) var(--space-sm) var(--space-sm);
+  }
+
+  .categorySection {
+    gap: 6px;
+  }
 }
 
 .metricsDot {
@@ -88,7 +117,7 @@
 }
 
 .categoryCount {
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: 0.6875rem;
   font-weight: 600;
   line-height: 1.25;
@@ -118,7 +147,8 @@
   padding: var(--space-lg) var(--space-md);
 }
 
-@media (min-width: 480px) {
+/* Collection grid contract: 1 col <720, 2 cols 720–899. Table owns >=900. */
+@media (min-width: 720px) {
   .cardGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
@@ -154,11 +184,6 @@
 
   .categoryCount {
     font-size: 0.6875rem;
-  }
-
-  .cardGrid {
-    grid-template-columns: 1fr;
-    gap: 8px;
   }
 
   .paginationWrap {

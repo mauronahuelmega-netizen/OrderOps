@@ -1,0 +1,20 @@
+{
+  "changed": [
+    "components/marketing/contact-preview.module.css",
+    "components/marketing/contact-preview.tsx",
+    "components/marketing/marketing-content.ts",
+    "components/marketing/marketing-landing.module.css",
+    "components/marketing/marketing-landing.tsx",
+    "components/marketing/order-detail-preview.module.css",
+    "components/marketing/order-detail-preview.tsx",
+    "components/marketing/order-flow-demo.module.css",
+    "components/marketing/order-flow-demo.tsx",
+    "components/marketing/product-preview.module.css",
+    "components/marketing/product-preview.tsx",
+    "components/marketing/product-story.module.css",
+    "components/marketing/product-story.tsx"
+  ],
+  "unrelated": [],
+  "headUnchanged": true,
+  "indexUnchanged": true
+}

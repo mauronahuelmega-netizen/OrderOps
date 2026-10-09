@@ -1,0 +1,12 @@
+[
+  {
+    "route": "/admin/login",
+    "status": 200,
+    "location": null
+  },
+  {
+    "route": "/admin/dashboard",
+    "status": 307,
+    "location": "/admin/login"
+  }
+]

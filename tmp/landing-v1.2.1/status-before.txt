@@ -1,0 +1,197 @@
+ M .env.example
+ M ORDEROPS_LIVING_MEMORY.md
+ M app/admin/(protected)/categories/actions.ts
+ M app/admin/(protected)/dashboard/actions.ts
+ M app/admin/(protected)/orders/[id]/actions.ts
+ M app/admin/(protected)/products/actions.ts
+ M app/admin/(protected)/products/customizations/actions.ts
+ M app/admin/(protected)/products/page.tsx
+ M app/admin/(protected)/settings/notifications/actions.ts
+ M app/admin/(protected)/settings/operations/actions.ts
+ M app/admin/(protected)/settings/public/actions.ts
+ M app/layout.tsx
+ M app/page.tsx
+ M app/theme-tokens.css
+ M components/admin/product-customization/product-customization-admin.module.css
+ M components/admin/product-customization/product-customization-overrides-panel.tsx
+ M components/admin/products/create-product-form.tsx
+ M components/admin/products/edit-product-form.tsx
+ M components/admin/products/flyout-panel.module.css
+ M components/admin/products/flyout-panel.tsx
+ M components/admin/products/image-crop-modal.module.css
+ M components/admin/products/image-crop-modal.tsx
+ M components/admin/products/product-availability-toggle.module.css
+ M components/admin/products/product-availability-toggle.tsx
+ M components/admin/products/product-card.module.css
+ M components/admin/products/product-card.tsx
+ M components/admin/products/product-catalog-empty-state.tsx
+ M components/admin/products/product-catalog-section.tsx
+ M components/admin/products/product-catalog-views.module.css
+ M components/admin/products/product-catalog-views.tsx
+ M components/admin/products/product-form.module.css
+ M components/admin/products/product-grid-server.tsx
+ M components/admin/products/product-grid.module.css
+ M components/admin/products/product-table-view.module.css
+ M components/admin/products/product-table-view.tsx
+ M components/admin/products/products-header-actions.module.css
+ M components/admin/products/products-header-actions.tsx
+ M components/admin/products/products-management-provider.tsx
+ M components/admin/products/products-toolbar.module.css
+ M components/admin/products/products-toolbar.tsx
+ M components/ui/Input.tsx
+ M docs/CURRENT_PHASE.md
+ M docs/admin-dashboard-forensic-living-audit.md
+ M docs/admin-manual-order-modal-commit-push-deploy-1.md
+ M lib/catalog/public.ts
+ M lib/client/safe-random-id.ts
+ M lib/product-customization/admin.ts
+ M lib/product-customization/order-validation.ts
+ M lib/product-customization/public.ts
+ M lib/products/admin.ts
+ M package-lock.json
+ M package.json
+ M tsconfig.tsbuildinfo
+ M types/database.ts
+?? app/sitemap.ts
+?? components/admin/products/category-order-dialog.module.css
+?? components/admin/products/category-order-dialog.tsx
+?? components/admin/products/compact-products-filter-menu.module.css
+?? components/admin/products/compact-products-filter-menu.tsx
+?? components/admin/products/use-products-desktop-collection.ts
+?? components/marketing/
+?? docs/admin-action-redirect-passthrough-fix-1.md
+?? docs/admin-categories-public-catalog-order-contract-decision-1.md
+?? docs/admin-categories-public-catalog-order-db-apply-1.md
+?? docs/admin-categories-public-catalog-order-db-apply-documentation-reconciliation-1.md
+?? docs/admin-categories-public-catalog-order-db-author-1.md
+?? docs/admin-categories-public-catalog-order-db-author-append-lock-authority-fix-1.md
+?? docs/admin-categories-public-catalog-order-db-author-position-authority-fix-1.md
+?? docs/admin-categories-public-catalog-order-filter-handoff-and-reorder-simplification-1.md
+?? docs/admin-categories-public-catalog-order-implementation-1.md
+?? docs/admin-categories-public-catalog-order-motion-and-filter-unity-polish-1.md
+?? docs/admin-categories-public-catalog-order-pre-final-qa-visual-polish-1.md
+?? docs/admin-products-availability-toggle-error-feedback-1.md
+?? docs/admin-products-card-image-scale-polish-1.md
+?? docs/admin-products-client-image-optimization-1.md
+?? docs/admin-products-client-image-optimization-800-first-selection-1.md
+?? docs/admin-products-client-image-optimization-byte-budget-decision-1.md
+?? docs/admin-products-client-image-optimization-real-asset-qa-1.md
+?? docs/admin-products-client-image-optimization-real-asset-qa-2.md
+?? docs/admin-products-collection-responsive-architecture-1.md
+?? docs/admin-products-create-mobile-final-visual-qa-1.md
+?? docs/admin-products-create-mobile-sticky-footer-end-state-polish-1.md
+?? docs/admin-products-create-mobile-viewport-visual-polish-1.md
+?? docs/admin-products-create-required-field-affordance-1.md
+?? docs/admin-products-create-required-marker-spacing-polish-1.md
+?? docs/admin-products-create-stock-default-ux-contract-1.md
+?? docs/admin-products-edit-advanced-accordion-motion-polish-1.md
+?? docs/admin-products-edit-advanced-loading-state-footer-rhythm-polish-1.md
+?? docs/admin-products-edit-advanced-premium-visual-closeout-1.md
+?? docs/admin-products-edit-advanced-visual-hierarchy-hard-qa-fix-1.md
+?? docs/admin-products-edit-advanced-visual-hierarchy-polish-1.md
+?? docs/admin-products-edit-customization-overrides-mobile-density-polish-1.md
+?? docs/admin-products-edit-customization-progressive-disclosure-accordion-1.md
+?? docs/admin-products-edit-dirty-state-ux-contract-1.md
+?? docs/admin-products-edit-simple-mobile-visual-ux-parity-1.md
+?? docs/admin-products-edit-sticky-footer-release-state-polish-1.md
+?? docs/admin-products-edit-unified-draft-legacy-override-cleanup-1.md
+?? docs/admin-products-edit-unified-draft-save-contract-db-apply-1.md
+?? docs/admin-products-edit-unified-draft-save-contract-db-author-1.md
+?? docs/admin-products-edit-unified-draft-save-contract-decision-1.md
+?? docs/admin-products-edit-unified-draft-save-final-qa-1.md
+?? docs/admin-products-edit-unified-draft-save-implementation-1.md
+?? docs/admin-products-filter-menu-hard-visual-closeout-1.md
+?? docs/admin-products-final-functional-visual-qa-1.md
+?? docs/admin-products-flyout-form-interaction-polish-1.md
+?? docs/admin-products-image-lifecycle-1.md
+?? docs/admin-products-image-lifecycle-db-apply-1.md
+?? docs/admin-products-mobile-card-image-aspect-ratio-fix-1.md
+?? docs/admin-products-mobile-main-surface-hard-visual-polish-1.md
+?? docs/admin-products-mobile-operational-ux-polish-1.md
+?? docs/admin-products-mobile-visual-debt-audit-1.md
+?? docs/admin-products-product-removal-archive-db-author-1.md
+?? docs/admin-products-product-removal-contract-correction-1.md
+?? docs/admin-products-product-removal-contract-decision-1.md
+?? docs/admin-products-product-removal-lifecycle-db-apply-1.md
+?? docs/admin-products-product-removal-lifecycle-db-author-1.md
+?? docs/admin-products-product-removal-lifecycle-documentation-reconciliation-1.md
+?? docs/admin-products-product-removal-lifecycle-final-qa-1.md
+?? docs/admin-products-product-removal-lifecycle-implementation-1.md
+?? docs/admin-products-product-removal-lifecycle-pre-final-qa-visual-copy-polish-1.md
+?? docs/admin-products-rls-role-enforcement-1.md
+?? docs/admin-products-rls-role-enforcement-db-apply-1.md
+?? docs/admin-products-search-empty-state-resilience-fix-1.md
+?? docs/admin-products-sku-data-integrity-1.md
+?? docs/admin-products-sku-data-integrity-db-apply-1.md
+?? docs/admin-products-stock-availability-contract-db-apply-1.md
+?? docs/admin-products-stock-availability-contract-fix-1.md
+?? docs/admin-products-verify-corpus-reconciliation-1.md
+?? docs/landing-v1-implementation-report.md
+?? docs/landing-v1.1-implementation-report.md
+?? docs/landing-v1.2-implementation-report.md
+?? docs/products-living-audit.md
+?? lib/admin/admin-action-redirect-passthrough.verify.ts
+?? lib/categories/admin-categories-public-catalog-order-db-author.verify.ts
+?? lib/categories/admin-categories-public-catalog-order-filter-handoff-reorder-simplification.verify.ts
+?? lib/categories/admin-categories-public-catalog-order-implementation.verify.ts
+?? lib/categories/admin-categories-public-catalog-order-motion-filter-unity-polish.verify.ts
+?? lib/categories/admin-categories-public-catalog-order-pre-final-qa-visual-polish.verify.ts
+?? lib/categories/category-order-draft.ts
+?? lib/categories/category-order-reflow-motion.ts
+?? lib/products/admin-product-types.ts
+?? lib/products/admin-products-availability-toggle-error-feedback.verify.ts
+?? lib/products/admin-products-card-image-scale-polish.verify.ts
+?? lib/products/admin-products-client-image-optimization.verify.ts
+?? lib/products/admin-products-collection-responsive-architecture.verify.ts
+?? lib/products/admin-products-create-mobile-final-visual-qa.verify.ts
+?? lib/products/admin-products-create-mobile-sticky-footer-end-state-polish.verify.ts
+?? lib/products/admin-products-create-mobile-viewport-visual-polish.verify.ts
+?? lib/products/admin-products-create-required-field-affordance.verify.ts
+?? lib/products/admin-products-create-required-marker-spacing-polish.verify.ts
+?? lib/products/admin-products-create-stock-default-ux-contract.verify.ts
+?? lib/products/admin-products-edit-advanced-accordion-motion-polish.verify.ts
+?? lib/products/admin-products-edit-advanced-loading-state-footer-rhythm-polish.verify.ts
+?? lib/products/admin-products-edit-advanced-premium-visual-closeout.verify.ts
+?? lib/products/admin-products-edit-advanced-visual-hierarchy-hard-qa-fix.verify.ts
+?? lib/products/admin-products-edit-advanced-visual-hierarchy-polish.verify.ts
+?? lib/products/admin-products-edit-customization-overrides-mobile-density-polish.verify.ts
+?? lib/products/admin-products-edit-customization-progressive-disclosure-accordion.verify.ts
+?? lib/products/admin-products-edit-dirty-state-ux-contract.verify.ts
+?? lib/products/admin-products-edit-simple-mobile-visual-ux-parity.verify.ts
+?? lib/products/admin-products-edit-sticky-footer-release-state-polish.verify.ts
+?? lib/products/admin-products-edit-unified-draft-save-contract-db-apply.verify.ts
+?? lib/products/admin-products-edit-unified-draft-save-contract-db-author.verify.ts
+?? lib/products/admin-products-edit-unified-draft-save-implementation.verify.ts
+?? lib/products/admin-products-filter-menu-hard-visual-closeout.verify.ts
+?? lib/products/admin-products-flyout-form-interaction-polish.verify.ts
+?? lib/products/admin-products-image-lifecycle.verify.ts
+?? lib/products/admin-products-mobile-card-image-aspect-ratio-fix.verify.ts
+?? lib/products/admin-products-mobile-main-surface-hard-visual-polish.verify.ts
+?? lib/products/admin-products-mobile-operational-ux-polish.verify.ts
+?? lib/products/admin-products-product-removal-archive-db-author.verify.ts
+?? lib/products/admin-products-product-removal-lifecycle-db-author.verify.ts
+?? lib/products/admin-products-product-removal-lifecycle-implementation.verify.ts
+?? lib/products/admin-products-product-removal-lifecycle-visual-copy-polish.verify.ts
+?? lib/products/admin-products-rls-role-enforcement.verify.ts
+?? lib/products/admin-products-search-empty-state-resilience.verify.ts
+?? lib/products/admin-products-sku-data-integrity.verify.ts
+?? lib/products/admin-products-stock-availability-contract.verify.ts
+?? lib/products/edit-unified-draft.ts
+?? lib/products/product-image-optimization.ts
+?? lib/products/product-image-storage.ts
+?? lib/products/product-sku.ts
+?? lib/products/products-list-contracts.ts
+?? lib/products/products-stock-availability-contract.ts
+?? public/marketing/
+?? scripts/landing-v1/
+?? supabase/migrations/20260909040000_products_manage_role_rls.sql
+?? supabase/migrations/20260909154400_products_stock_availability_contract.sql
+?? supabase/migrations/20260910010123_products_sku_unique_integrity.sql
+?? supabase/migrations/20260910022504_product_images_delete_lifecycle.sql
+?? supabase/migrations/20260915180000_products_edit_unified_draft_save_rpc.sql
+?? supabase/migrations/20260916180000_products_removal_lifecycle.sql
+?? supabase/migrations/20260917210150_categories_public_catalog_order.sql
+?? supabase/snippets/
+?? tmp/landing-v1.1/
+?? tmp/landing-v1.2/
+?? tmp/landing-v1/

@@ -1,0 +1,20 @@
+{
+  "result": [
+    {
+      "phoneState": "absent",
+      "navigable": false,
+      "distinctIntents": false
+    },
+    {
+      "phoneState": "invalid",
+      "navigable": false,
+      "distinctIntents": false
+    },
+    {
+      "phoneState": "synthetic-valid",
+      "navigable": true,
+      "distinctIntents": true
+    }
+  ],
+  "sitemap": "absent=empty; configured=one commercial root; process-only fixtures, no navigation"
+}

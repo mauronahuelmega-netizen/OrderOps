@@ -54,10 +54,14 @@ FINAL QA / VERIFY RECONCILIATION**; se desplegó el mismo paquete que fue certif
 | Branch | `main` |
 | HEAD antes del release | `3e418bb056f7cd5eabe0e79a6218ec7b825a8684` |
 | Remote drift en preflight | **NONE** (`origin/main...HEAD` = `0 0`) |
-| Release commit | `13abcc08c8ae7093c359e9e6fdf7dfe7f9bce7e1` — `feat(admin): polish manual order modal` |
-| Diff del commit | 29 files, +9778 / −224 |
-| Push | `3e418bb..13abcc0  main -> main`, non-force |
-| `origin/main` post-push | `13abcc08c8ae7093c359e9e6fdf7dfe7f9bce7e1` (**HEAD == origin/main**) |
+| Package commit | `13abcc08c8ae7093c359e9e6fdf7dfe7f9bce7e1` — `feat(admin): polish manual order modal`. **El** commit funcional del modal |
+| Diff del package commit | 29 files, +9778 / −224 |
+| Primer push | `3e418bb..13abcc0  main -> main`, non-force |
+| Evidence commit | `c9af635e27ad86e0731eea0a90b16b9b628d5aa6` — `docs(admin): record manual order modal deploy and smoke evidence`, **docs-only** (4 files) |
+| Segundo push | `13abcc0..c9af635  main -> main`, non-force |
+| Final HEAD | `c9af635e27ad86e0731eea0a90b16b9b628d5aa6` |
+| Final `origin/main` | `c9af635e27ad86e0731eea0a90b16b9b628d5aa6` (**HEAD == origin/main**) |
+| Divergence `origin/main...HEAD` | **0 0** |
 
 `origin/main` se re-verificó estable (`3e418bb`) inmediatamente antes del push. Sin
 `pull`/`merge`/`rebase`/`reset`/`stash`/`clean`, sin force-push, sin amend.
@@ -66,15 +70,19 @@ FINAL QA / VERIFY RECONCILIATION**; se desplegó el mismo paquete que fue certif
 
 | Field | Value |
 | ----- | ----- |
-| Provider | Vercel **Git integration** (disparado por el push; no se corrió `vercel --prod`) |
-| Deployment id | `dpl_6YqdcSPSpR6J4cjNtdsSZwPQiL5w` |
-| Deployment URL | `https://order-os0wvf4tv-mauro-s-projects-f82304ad.vercel.app` |
-| Status | **● Ready** · target production · build 46s |
-| Created | 2026-09-08 13:27:09 GMT-0300 |
-| Source commit | `13abcc08c8ae7093c359e9e6fdf7dfe7f9bce7e1` — confirmado por `vercel ls --prod --meta githubCommitSha=13abcc0…`, que devuelve exactamente este deployment |
-| Production alias | `https://orderops.vercel.app` (+ `order-ops-git-main-…`) |
+| Provider | Vercel **Git integration** (disparado por los pushes; no se corrió `vercel --prod`) |
+| **Package deployment** | `dpl_6YqdcSPSpR6J4cjNtdsSZwPQiL5w` · source `13abcc08c8ae7093c359e9e6fdf7dfe7f9bce7e1` · **● Ready** |
+| Package deployment URL | `https://order-os0wvf4tv-mauro-s-projects-f82304ad.vercel.app` (target production, build 46s, creado 2026-09-08 13:27:09 GMT-0300) |
+| Source commit confirmado | `vercel ls --prod --meta githubCommitSha=13abcc0…` devuelve exactamente ese deployment |
+| **Evidence deployment** | `dpl_FVAi6XWbCscbtUBh139ygtLYug81` · source `c9af635e27ad86e0731eea0a90b16b9b628d5aa6` · **● Ready** |
+| Evidence deployment URL | `https://order-65xtf8kb7-mauro-s-projects-f82304ad.vercel.app` (target production, build 45s, creado 2026-09-08 13:34:39 GMT-0300) |
+| Current production alias | `https://orderops.vercel.app` (+ `order-ops-git-main-…`) |
+| El alias apunta a | `dpl_FVAi6XWbCscbtUBh139ygtLYug81` |
 
-Un solo deployment productivo; sin duplicados.
+El package commit generó su deployment productivo y el evidence commit docs-only generó un segundo
+deployment automático; ambos **Ready**, con runtime funcional idéntico. El segundo deployment fue
+generado automáticamente por el evidence commit docs-only y no contiene cambios de runtime respecto
+del paquete certificado.
 
 ## Production smoke
 
@@ -117,8 +125,16 @@ force-push: **NO** · amend de commits publicados: **NO**.
 
 ## Post-release git state
 
-Staged: **none**. `HEAD == origin/main`. Único remanente dirty: `tsconfig.tsbuildinfo`
-(generated noise preexistente, excluido deliberadamente y no reseteado).
+Staged: **none**. `HEAD` = `origin/main` = `c9af635e27ad86e0731eea0a90b16b9b628d5aa6`
+(**HEAD == origin/main: YES**, divergence `0 0`). Remanente dirty inmediatamente post-release:
+`tsconfig.tsbuildinfo` (generated noise preexistente, excluido deliberadamente y no reseteado).
+
+Reconciliación documental posterior (docs-only, **sin commit/push/deploy**): este doc y
+`docs/CURRENT_PHASE.md` se corrigieron localmente para reflejar el evidence commit y el deployment
+actualmente live. Quedan dirty a propósito — un tercer commit docs-only dispararía otro deployment
+y volvería a mover el "current deployment", así que viajan con el próximo paquete normal.
+`ORDEROPS_LIVING_MEMORY.md` y el forensic living audit **no se tocaron**: registran correctamente el
+package deploy @ `13abcc0`.
 
 ## Gate
 

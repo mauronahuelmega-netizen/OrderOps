@@ -6,9 +6,19 @@ import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";
 import ImageCropModal from "@/components/admin/products/image-crop-modal";
 import { createCategoryAction } from "@/app/admin/(protected)/categories/actions";
-import { createProductAction } from "@/app/admin/(protected)/products/actions";
+import {
+  cleanupPendingProductImageAction,
+  createProductAction
+} from "@/app/admin/(protected)/products/actions";
 import type { AdminCategory } from "@/lib/categories/admin";
-import { createClientSafeId } from "@/lib/client/safe-random-id";
+import { createClientSafeId, createClientSafeUuid } from "@/lib/client/safe-random-id";
+import {
+  isSupportedProductImageInput,
+  optimizeProductImage,
+  prepareProductImageForCrop,
+  ProductImageOptimizationError
+} from "@/lib/products/product-image-optimization";
+import { buildProductImageObjectPath } from "@/lib/products/product-image-storage";
 import { createSupabaseBrowserClient } from "@/lib/supabase/client";
 import toggleStyles from "./product-availability-toggle.module.css";
 import styles from "./product-form.module.css";
@@ -48,6 +58,23 @@ function ScissorsIcon() {
   );
 }
 
+/** Visual-only required affordance; native `required` remains semantic authority. */
+function RequiredMark() {
+  return (
+    <span className={styles.requiredMark} aria-hidden="true">*</span>
+  );
+}
+
+/** Label text + mark; spacing owned by `.fieldLabelInline` column-gap (not margin/whitespace). */
+function requiredFieldLabel(text: string) {
+  return (
+    <span className={styles.fieldLabelInline}>
+      {text}
+      <RequiredMark />
+    </span>
+  );
+}
+
 export default function CreateProductForm({
   businessId,
   categories,
@@ -57,33 +84,99 @@ export default function CreateProductForm({
   const formRef = useRef<HTMLFormElement>(null);
   const categoryDialogRef = useRef<HTMLDialogElement>(null);
   const previewUrlRef = useRef<string | null>(null);
-  const [state, formAction, isPending] = useActionState(createProductAction, initialState);
-  const [imageUrl, setImageUrl] = useState("");
+  const pendingImageFileRef = useRef<File | null>(null);
+  const cropPreviewRevokeRef = useRef<(() => void) | null>(null);
+  const draftProductIdRef = useRef(createClientSafeUuid());
+  const [state, dispatchFormAction, isPending] = useActionState(
+    createProductFormAction as (
+      prevState: ActionState,
+      formData: FormData
+    ) => Promise<ActionState>,
+    initialState
+  );
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [imageError, setImageError] = useState<string | null>(null);
   const [isUploadingImage, setIsUploadingImage] = useState(false);
+  const [isProcessingImage, setIsProcessingImage] = useState(false);
   const [newCategoryName, setNewCategoryName] = useState("");
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
   const [isValid, setIsValid] = useState(false);
   const [categoryError, setCategoryError] = useState<string | null>(null);
   const [isSavingCategory, setIsSavingCategory] = useState(false);
   const [pendingImageSrc, setPendingImageSrc] = useState<string | null>(null);
-  const [trackStock, setTrackStock] = useState(false);
+  const [trackStock, setTrackStock] = useState(true);
   const [stockValue, setStockValue] = useState(0);
+
+  async function createProductFormAction(prevState: ActionState, formData: FormData) {
+    const productId = draftProductIdRef.current;
+    formData.set("product_id", productId);
+
+    let uploadedPath: string | null = null;
+
+    try {
+      if (pendingImageFileRef.current) {
+        setIsUploadingImage(true);
+        setImageError(null);
+
+        const file = pendingImageFileRef.current;
+        const fileExt = getFileExtension(file.name);
+        const fileName = `${createClientSafeId("product-image")}.${fileExt}`;
+        const filePath = buildProductImageObjectPath({
+          businessId,
+          productId,
+          fileName
+        });
+
+        const supabase = createSupabaseBrowserClient();
+        const { error: uploadError } = await supabase.storage
+          .from("product-images")
+          .upload(filePath, file, {
+            contentType: file.type || undefined,
+            upsert: false
+          });
+
+        if (uploadError) {
+          return {
+            error: uploadError.message || "No pudimos subir la imagen."
+          };
+        }
+
+        uploadedPath = filePath;
+        formData.set("image_intent", "replace");
+        formData.set("image_path", filePath);
+      } else {
+        formData.set("image_intent", "none");
+        formData.delete("image_path");
+      }
+
+      const result = await createProductAction(prevState, formData);
+
+      if (!result.success && uploadedPath) {
+        await cleanupPendingProductImageAction(uploadedPath);
+      }
+
+      return result;
+    } finally {
+      setIsUploadingImage(false);
+    }
+  }
 
   useEffect(() => {
     return () => {
       if (previewUrlRef.current) {
         URL.revokeObjectURL(previewUrlRef.current);
       }
+      cropPreviewRevokeRef.current?.();
+      cropPreviewRevokeRef.current = null;
     };
   }, []);
 
   useEffect(() => {
     if (state.success) {
       formRef.current?.reset();
-      setImageUrl("");
       setImageError(null);
+      pendingImageFileRef.current = null;
+      draftProductIdRef.current = createClientSafeUuid();
       if (previewUrlRef.current) {
         URL.revokeObjectURL(previewUrlRef.current);
         previewUrlRef.current = null;
@@ -93,7 +186,9 @@ export default function CreateProductForm({
       setNewCategoryName("");
       setIsValid(false);
       setPendingImageSrc(null);
-      setTrackStock(false);
+      cropPreviewRevokeRef.current?.();
+      cropPreviewRevokeRef.current = null;
+      setTrackStock(true);
       setStockValue(0);
       router.refresh();
     }
@@ -120,81 +215,76 @@ export default function CreateProductForm({
     setPreviewUrl(objectUrl);
   }
 
-  function queueImageForCrop(file: File) {
-    if (!file.type.startsWith("image/")) {
+  function clearCropPreview() {
+    cropPreviewRevokeRef.current?.();
+    cropPreviewRevokeRef.current = null;
+    setPendingImageSrc(null);
+  }
+
+  async function queueImageForCrop(file: File) {
+    if (!isSupportedProductImageInput(file)) {
       setImageError("Seleccioná un archivo de imagen válido.");
       return;
     }
 
     setImageError(null);
+    setIsProcessingImage(true);
 
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (typeof reader.result === "string") {
-        setPendingImageSrc(reader.result);
+    try {
+      clearCropPreview();
+      const prepared = await prepareProductImageForCrop(file);
+      if (prepared.revoke) {
+        cropPreviewRevokeRef.current = prepared.revoke;
       }
-    };
-    reader.onerror = () => {
-      setImageError("No pudimos leer la imagen seleccionada.");
-    };
-    reader.readAsDataURL(file);
+      setPendingImageSrc(prepared.previewSrc);
+    } catch (error) {
+      const message =
+        error instanceof ProductImageOptimizationError
+          ? error.message
+          : "No pudimos procesar la imagen. Probá con otra foto.";
+      setImageError(message);
+    } finally {
+      setIsProcessingImage(false);
+    }
   }
 
   async function handleCroppedImage(croppedFile: File) {
-    setPendingImageSrc(null);
-    await processImageFile(croppedFile);
-  }
-
-  function handleCancelCrop() {
-    setPendingImageSrc(null);
-  }
-
-  async function processImageFile(file: File) {
-    setLocalPreview(file);
-    setIsUploadingImage(true);
+    clearCropPreview();
+    setIsProcessingImage(true);
     setImageError(null);
 
     try {
-      const supabase = createSupabaseBrowserClient();
-      const productId = createClientSafeId("tmp-product");
-      const fileExt = getFileExtension(file.name);
-      const filePath = `${businessId}/${productId}/${createClientSafeId("product-image")}.${fileExt}`;
-
-      const { error: uploadError } = await supabase.storage
-        .from("product-images")
-        .upload(filePath, file, {
-          contentType: file.type || undefined,
-          upsert: true
-        });
-
-      if (uploadError) {
-        setImageUrl("");
-        setImageError(uploadError.message || "No pudimos subir la imagen.");
-        clearPreviewUrl();
-        return;
-      }
-
-      const {
-        data: { publicUrl }
-      } = supabase.storage.from("product-images").getPublicUrl(filePath);
-
-      setImageUrl(publicUrl);
+      const optimized = await optimizeProductImage(croppedFile);
+      setLocalPreview(optimized);
+      pendingImageFileRef.current = optimized;
+    } catch (error) {
+      pendingImageFileRef.current = null;
+      clearPreviewUrl();
+      const message =
+        error instanceof ProductImageOptimizationError
+          ? error.message
+          : "No pudimos procesar la imagen. Probá con otra foto.";
+      setImageError(message);
     } finally {
-      setIsUploadingImage(false);
+      setIsProcessingImage(false);
     }
+  }
+
+  function handleCancelCrop() {
+    clearCropPreview();
   }
 
   async function handleImageChange(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0];
 
     if (!file) {
-      setImageUrl("");
+      pendingImageFileRef.current = null;
       setImageError(null);
       clearPreviewUrl();
       return;
     }
 
-    queueImageForCrop(file);
+    await queueImageForCrop(file);
     event.target.value = "";
   }
 
@@ -206,17 +296,17 @@ export default function CreateProductForm({
     event.preventDefault();
   }
 
-  function handleImageDrop(event: React.DragEvent<HTMLLabelElement>) {
+  async function handleImageDrop(event: React.DragEvent<HTMLLabelElement>) {
     event.preventDefault();
 
-    if (isPending || isUploadingImage || pendingImageSrc) {
+    if (isPending || isUploadingImage || isProcessingImage || pendingImageSrc) {
       return;
     }
 
     const file = event.dataTransfer.files?.[0];
 
     if (file) {
-      queueImageForCrop(file);
+      await queueImageForCrop(file);
     }
   }
 
@@ -263,13 +353,13 @@ export default function CreateProductForm({
     categoryDialogRef.current?.close();
   }
 
-  const dropzoneImageSrc = previewUrl ?? (imageUrl || null);
+  const dropzoneImageSrc = previewUrl;
 
   function handleRecropClick(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     event.stopPropagation();
 
-    if (!dropzoneImageSrc || isPending || isUploadingImage || pendingImageSrc) {
+    if (!dropzoneImageSrc || isPending || isUploadingImage || isProcessingImage || pendingImageSrc) {
       return;
     }
 
@@ -291,12 +381,12 @@ export default function CreateProductForm({
 
       <form
         ref={formRef}
-        action={formAction}
+        action={dispatchFormAction}
         onChange={(event) => setIsValid(event.currentTarget.checkValidity())}
         className={
           embedded
-            ? `admin-embedded-form ${styles.formShell} ${styles.shell}`
-            : `admin-form-card ${styles.formShell}`
+            ? `admin-embedded-form ${styles.formShell} ${styles.shell} ${styles.createForm}`
+            : `admin-form-card ${styles.formShell} ${styles.createForm}`
         }
       >
         {!embedded ? (
@@ -310,17 +400,22 @@ export default function CreateProductForm({
           <div className={styles.imageUploadSection}>
             <span className="sr-only">Imagen</span>
             <label
-              className={`${styles.imageDropzone} ${dropzoneImageSrc ? styles.imageDropzoneHasImage : ""} ${isUploadingImage ? styles.imageDropzoneBusy : ""}`}
+              className={`${styles.imageDropzone} ${dropzoneImageSrc ? styles.imageDropzoneHasImage : ""} ${isUploadingImage || isProcessingImage ? styles.imageDropzoneBusy : ""}`}
+              aria-label="Agregar imagen de producto"
               onDragOver={handleImageDragOver}
               onDragEnter={handleImageDragEnter}
-              onDrop={handleImageDrop}
+              onDrop={(event) => {
+                void handleImageDrop(event);
+              }}
             >
               <input
                 type="file"
-                accept="image/*"
+                accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.heic,.heif"
                 className="sr-only"
-                disabled={isPending || isUploadingImage || Boolean(pendingImageSrc)}
-                onChange={handleImageChange}
+                disabled={isPending || isUploadingImage || isProcessingImage || Boolean(pendingImageSrc)}
+                onChange={(event) => {
+                  void handleImageChange(event);
+                }}
               />
               {dropzoneImageSrc ? (
                 <>
@@ -330,7 +425,7 @@ export default function CreateProductForm({
                     className={styles.editImageBadge}
                     title="Haga clic para recortar"
                     aria-label="Haga clic para recortar"
-                    disabled={isPending || isUploadingImage || Boolean(pendingImageSrc)}
+                    disabled={isPending || isUploadingImage || isProcessingImage || Boolean(pendingImageSrc)}
                     onClick={handleRecropClick}
                     onMouseDown={(event) => {
                       event.preventDefault();
@@ -343,20 +438,43 @@ export default function CreateProductForm({
               ) : (
                 <>
                   <PlusIcon />
-                  <span className={styles.imageDropzoneText}>Arrastrá tu imagen o hacé clic</span>
+                  <span className={`${styles.imageDropzoneText} ${styles.imageDropzoneTextDesktop}`}>
+                    Arrastrá tu imagen o hacé clic
+                  </span>
+                  <span className={`${styles.imageDropzoneText} ${styles.imageDropzoneTextMobile}`}>
+                    <span className={styles.imageDropzonePrimary}>Agregar imagen</span>
+                    <span className={styles.imageDropzoneFormats}>JPG, PNG o HEIC</span>
+                  </span>
                 </>
               )}
             </label>
-            {isUploadingImage ? <span className={styles.imageHint}>Subiendo imagen...</span> : null}
+            {isProcessingImage ? (
+              <span className={styles.imageHint}>Optimizando imagen…</span>
+            ) : isUploadingImage ? (
+              <span className={styles.imageHint}>Subiendo imagen...</span>
+            ) : null}
           </div>
 
+          <p className={styles.requiredLegend}>
+            <span aria-hidden="true">*</span> Campos obligatorios
+          </p>
+
           <div className={styles.grid2}>
-            <Input name="name" type="text" label="Nombre" disabled={isPending} required />
+            <Input
+              name="name"
+              type="text"
+              label={requiredFieldLabel("Nombre")}
+              disabled={isPending}
+              required
+            />
 
             <div className={`admin-field ${styles.field}`}>
-              <span>Categoría</span>
+              <label className="ui-label" htmlFor="create-product-category">
+                {requiredFieldLabel("Categoría")}
+              </label>
               <div className={styles.categoryWrapper}>
                 <select
+                  id="create-product-category"
                   name="category_id"
                   className={styles.select}
                   value={selectedCategoryId}
@@ -404,7 +522,7 @@ export default function CreateProductForm({
           <div className={styles.grid3}>
             <div className={`ui-field ${styles.field}`}>
               <label className="ui-label" htmlFor="create-product-price">
-                Precio
+                {requiredFieldLabel("Precio")}
               </label>
               <div className={styles.currencyInputWrapper}>
                 <span className={styles.currencySymbol}>$</span>
@@ -454,11 +572,12 @@ export default function CreateProductForm({
             </div>
 
             <Input
+              id="create-product-stock"
               name="stock"
               type="number"
               min="0"
               step="1"
-              label="Stock actual"
+              label={requiredFieldLabel("Stock inicial")}
               value={String(stockValue)}
               onChange={(event) => {
                 const next = Number.parseInt(event.target.value, 10);
@@ -466,13 +585,18 @@ export default function CreateProductForm({
               }}
               disabled={isPending}
               required
+              aria-describedby={
+                trackStock && stockValue <= 0 ? "create-stock-zero-info" : undefined
+              }
             />
           </div>
 
-          <div className={styles.toggleStack}>
+          <div className={`${styles.toggleStack} ${styles.createStockBlock}`}>
             <div className={styles.toggleStackHeader}>
-              <span className={styles.toggleLabel}>Controlar stock automáticamente</span>
-              <div className={toggleStyles.toggleHost}>
+              <span className={styles.toggleLabel} id="create-track-stock-label">
+                Controlar stock automáticamente
+              </span>
+              <div className={`${toggleStyles.toggleHost} ${styles.createToggleHost}`}>
                 <label className={toggleStyles.switch}>
                   <input
                     name="track_stock"
@@ -480,29 +604,24 @@ export default function CreateProductForm({
                     checked={trackStock}
                     onChange={(event) => setTrackStock(event.target.checked)}
                     disabled={isPending}
-                    aria-label="Controlar stock automáticamente"
+                    aria-labelledby="create-track-stock-label"
+                    aria-describedby="create-track-stock-helper"
                   />
                   <span className={toggleStyles.slider} />
                 </label>
-                <span className={toggleStyles.statusLabel} aria-hidden="true">
-                  {trackStock ? "Activo" : "Inactivo"}
-                </span>
               </div>
             </div>
-            <p className={styles.toggleHelper}>
-              Si está activo, este producto quedará preparado para descontar stock automáticamente en
-              pedidos. El descuento automático se implementará en una fase posterior.
+            <p id="create-track-stock-helper" className={styles.toggleHelper}>
+              Descontamos el stock con cada pedido. Al llegar a 0, el producto deja de estar
+              disponible.
             </p>
             {trackStock && stockValue <= 0 ? (
-              <p className={styles.toggleWarning} role="status">
-                Este producto tiene stock 0. Cuando el control automático esté activo, no debería
-                venderse sin unidades disponibles.
+              <p id="create-stock-zero-info" className={styles.toggleInfo}>
+                Con stock 0, el producto se creará como no disponible.
               </p>
             ) : null}
           </div>
         </div>
-
-        <input type="hidden" name="image_url" value={imageUrl} />
 
         <div className={styles.feedback}>
           {imageError ? <p className="admin-feedback admin-feedback--error">{imageError}</p> : null}
@@ -512,11 +631,13 @@ export default function CreateProductForm({
           ) : null}
         </div>
 
-        <div className={`${styles.actions} ${embedded ? styles.actionsSticky : ""}`}>
+        <div
+          className={`${styles.actions} ${embedded ? styles.actionsSticky : ""} ${styles.createActions}`}
+        >
           <Button
             type="submit"
             className="admin-primary-button"
-            disabled={!isValid || isPending || isUploadingImage || isSavingCategory}
+            disabled={!isValid || isPending || isUploadingImage || isProcessingImage || isSavingCategory}
             variant="primary"
           >
             {isPending ? "Guardando..." : "Guardar producto"}

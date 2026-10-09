@@ -10,7 +10,7 @@ import ProductsToolbar from "@/components/admin/products/products-toolbar";
 import { ProductsManagementProvider } from "@/components/admin/products/products-management-provider";
 import { requireAdminPermission } from "@/lib/admin/context";
 import { getAdminCategories } from "@/lib/categories/admin";
-import { getAdminProducts, parseAdminProductsPageParam } from "@/lib/products/admin";
+import { getAdminProductsCatalogCount, parseAdminProductsPageParam } from "@/lib/products/admin";
 
 type AdminProductsPageProps = {
   searchParams: Promise<{
@@ -33,9 +33,11 @@ export default async function AdminProductsPage({ searchParams }: AdminProductsP
   const filterOptions = { q, categoryId, stock, status };
   const catalogKey = [page, q, categoryId, stock, status].join("-");
 
-  const [categories, productsSummary] = await Promise.all([
+  // Unfiltered on purpose: catalog existence must not depend on the active filters.
+  // The filtered count belongs to ProductCatalogSection's own query.
+  const [categories, catalogTotalCount] = await Promise.all([
     getAdminCategories(adminContext.businessId),
-    getAdminProducts(adminContext.businessId, { page: 1, limit: 1, ...filterOptions })
+    getAdminProductsCatalogCount(adminContext.businessId)
   ]);
 
   return (
@@ -43,7 +45,7 @@ export default async function AdminProductsPage({ searchParams }: AdminProductsP
       initialData={{
         businessId: adminContext.businessId,
         categories,
-        totalCount: productsSummary.totalCount
+        catalogTotalCount
       }}
     >
       <AdminPageLayout size="operational">

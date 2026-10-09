@@ -1,0 +1,22 @@
+.contact { border: 1px solid var(--marketing-border); border-radius: 14px; background: var(--marketing-white); padding: 27px; box-shadow: 0 20px 60px var(--marketing-shadow-light); transform: rotate(-1deg); }
+.header { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-bottom: 20px; border-bottom: 1px solid var(--marketing-border); }
+.header > span { display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 550; }
+.header svg { color: var(--marketing-blue); }
+.header > strong { font-size: 10px; color: var(--marketing-muted); }
+.selector { margin-top: 23px; }
+.selector > span { display: block; font-size: 9px; color: var(--marketing-muted); margin-bottom: 9px; }
+.selector > strong { display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--marketing-border); border-radius: 6px; padding: 12px; font-size: 12px; font-weight: 500; }
+.message { margin-top: 16px; border: 1px solid var(--marketing-chat-border); border-radius: 8px; background: var(--marketing-chat-reply); padding: 21px; }
+.message p { font-size: 13px; line-height: 1.8; }
+.message p + p { margin-top: 14px; }
+.message > span { display: block; font-size: 9px; color: var(--marketing-muted); margin-top: 20px; }
+.openWhatsapp { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--marketing-ink); color: var(--marketing-white); padding: 13px; border-radius: 6px; font-size: 12px; margin-top: 16px; }
+.utilities { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 9px; padding-top: 21px; }
+.utilities > span { display: flex; align-items: center; gap: 6px; font-size: 8px; color: var(--marketing-muted); }
+.note { font-size: 9px; line-height: 1.8; color: var(--marketing-muted); margin-top: 18px !important; }
+@media (max-width: 1023px) { .contact { padding: 22px; } .header { flex-wrap: wrap; } .header > span { font-size: 11px; } .utilities { justify-content: start; gap: 12px; } }
+@media (max-width: 767px) { .contact { padding: 23px 20px; transform: none; } .header { flex-wrap: nowrap; } .header > span { font-size: 11px; } .message p { font-size: 12px; } .utilities { justify-content: space-between; } }
+
+/* LANDING-V1.1 editorial refinements */
+.summaryAction{display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;padding-top:15px;color:var(--marketing-muted)}.utilities{border-top:1px solid var(--marketing-border);margin-top:18px;padding-top:16px;justify-content:start;gap:22px}.utilities>span{font-size:12px}.note{font-size:12px}.selector>span{font-size:12px}.message>span{font-size:12px}
+@media(max-width:767px){.utilities{justify-content:start}.header>strong{font-size:12px}}

@@ -1,0 +1,17 @@
+{
+  "baselineFiles": 1406,
+  "changed": [
+    "components/marketing/contact-preview.module.css",
+    "components/marketing/contact-preview.tsx",
+    "components/marketing/marketing-journey.module.css",
+    "components/marketing/marketing-landing.module.css",
+    "components/marketing/marketing-landing.tsx",
+    "components/marketing/order-flow-demo.module.css",
+    "components/marketing/order-flow-demo.tsx",
+    "components/marketing/product-preview.module.css",
+    "components/marketing/product-story.module.css"
+  ],
+  "missing": [],
+  "headPreserved": true,
+  "indexPreserved": true
+}

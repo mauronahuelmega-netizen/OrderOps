@@ -1,0 +1,38 @@
+.flow { margin-top: 36px; }
+.transfer { display: flex; justify-content: center; align-items: center; gap: 26px; color: var(--marketing-dark-muted); font-size: 11px; margin-bottom: 31px; }
+.transfer > span { display: flex; align-items: center; gap: 8px; }
+.transfer .reference { color: var(--marketing-blue-light); border: 1px solid var(--marketing-dark-border); background: var(--marketing-night-raised); padding: 9px 17px; border-radius: 5px; letter-spacing: .5px; animation: referenceArrival .65s both; }
+.board { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 12px; background: var(--marketing-night-raised); border: 1px solid var(--marketing-dark-border); border-radius: 13px; padding: 17px; }
+.lane { min-height: 237px; background: var(--marketing-night); border: 1px solid var(--marketing-dark-border); border-radius: 8px; padding: 14px; }
+.activeLane { border-color: var(--marketing-blue-light); }
+.laneTitle { display: flex; align-items: center; gap: 8px; font-size: 11px; }
+.laneTitle > span:last-child { margin-left: auto; color: var(--marketing-dark-muted); font-size: 9px; }
+.dot { background: var(--marketing-pending-light); width: 6px; height: 6px; border-radius: 50%; }
+.lane[data-stage="preparing"] .dot { background: var(--marketing-preparing-light); }
+.lane[data-stage="ready"] .dot { background: var(--marketing-ready-light); }
+.lane[data-stage="completed"] .dot { background: var(--marketing-blue-light); }
+.orderCard,.mobileCard { margin-top: 15px; background: var(--marketing-white); color: var(--marketing-ink); border-radius: 7px; padding: 15px; border-top: 3px solid var(--marketing-blue); animation: cardArrival .24s both; }
+.cardHead { display: flex; justify-content: space-between; gap: 8px; align-items: center; }
+.cardHead strong { font-size: 10px; }
+.cardHead > span { font-size: 8px; color: var(--marketing-blue); background: var(--marketing-blue-soft); border-radius: 4px; padding: 4px 5px; }
+.orderCard h3,.mobileCard h3 { font-size: 12px; margin-top: 16px; }
+.orderCard h3 > span { font-size: 9px; color: var(--marketing-muted); font-weight: 400; }
+.orderCard p,.mobileCard p { margin-top: 12px; font-size: 10px; line-height: 1.9; }
+.orderCard p > span { color: var(--marketing-muted); font-size: 8px; }
+.cardFoot { padding-top: 11px; margin-top: 12px; border-top: 1px solid var(--marketing-border); display: flex; justify-content: space-between; align-items: center; }
+.cardFoot strong { font-size: 13px; }
+.cardFoot svg { color: var(--marketing-muted); }
+.emptyLane { margin-top: 18px; display: grid; gap: 10px; }
+.emptyLane > span { height: 70px; border: 1px dashed var(--marketing-dark-border); border-radius: 6px; }
+.stageControls { display: grid; grid-template-columns: repeat(4,1fr); margin-top: 21px; gap: 11px; }
+.stageControls button { display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 10px 5px; background: transparent; border: 1px solid var(--marketing-dark-border); border-radius: 6px; color: var(--marketing-dark-muted); font: inherit; font-size: 11px; cursor: pointer; transition: background .18s,border-color .18s; }
+.stageControls button > span { font-size: 8px; }
+.stageControls button:disabled { cursor: default; }
+.stageControls button[aria-pressed="true"] { color: var(--marketing-white); border-color: var(--marketing-blue-light); background: var(--marketing-blue-halo); }
+.stageDescription { text-align: center; color: var(--marketing-dark-muted); font-size: 11px; line-height: 1.8; margin-top: 18px !important; min-height: 40px; }
+.manualNote { text-align: center; font-size: 9px; color: var(--marketing-dark-muted); margin-top: 2px !important; line-height: 1.7; }
+.mobileCard { display: none; }
+@keyframes referenceArrival { from { opacity: .3; transform: translateX(-18px); } to { opacity: 1; transform: none; } }
+@keyframes cardArrival { from { opacity: .5; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+@media (max-width: 1023px) { .board { gap: 7px; padding: 10px; } .lane { padding: 10px; } .laneTitle { font-size: 9px; gap: 5px; } .orderCard { padding: 10px; } .cardHead { flex-wrap: wrap; } .orderCard p { font-size: 9px; } .stageControls button { font-size: 10px; gap: 6px; } }
+@media (max-width: 767px) { .flow { margin-top: 30px; } .transfer { gap: 10px; font-size: 9px; flex-wrap: wrap; margin-bottom: 23px; } .transfer > span { gap: 5px; } .transfer .reference { padding: 8px 9px; font-size: 9px; } .transfer > svg { width: 17px; } .board { display: none; } .mobileCard { display: block; padding: 20px; margin-top: 0; } .mobileCard h3 { font-size: 15px; } .mobileCard p { font-size: 12px; } .mobileCard .cardHead strong { font-size: 14px; } .mobileCard .cardHead > span { font-size: 10px; } .mobileCard .cardFoot strong { font-size: 16px; } .stageControls { grid-template-columns: 1fr 1fr; gap: 9px; margin-top: 15px; } .stageControls button { font-size: 12px; min-height: 47px; justify-content: start; padding-inline: 12px; } .stageControls button > span { font-size: 9px; } .stageDescription { font-size: 11px; min-height: 58px; } }

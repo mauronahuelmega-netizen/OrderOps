@@ -1,0 +1,2 @@
+const fs=require('fs'),sharp=require('sharp');(async()=>{const base='tmp/landing-v1.2.1/',rows=JSON.parse(fs.readFileSync(base+'before-image-layout.json'));for(const row of rows){const file=base+'before-'+row.width+'.png',meta=await sharp(file).metadata();for(const s of row.sections)await sharp(file).extract({left:0,top:Math.round(s.top),width:meta.width,height:Math.min(Math.floor(s.height),meta.height-Math.round(s.top))}).toFile(base+'before-'+row.width+'-'+s.id+'.png')}})();
+

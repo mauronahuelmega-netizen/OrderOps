@@ -335,6 +335,13 @@ Realtime: event → optional optimistic patch → defensive hydrate (`/summary`)
 
 Visual polish: prefer product modules. Avoid `admin-surfaces` / `ui/Button` unless intentional global change.
 
+**Products detailed source of truth: `docs/products-living-audit.md`** (reconciled
+2026-09-11 — Final QA). Products collection: **single active responsive tree** —
+`<900` cards (`ProductGridServer`), `≥900` table (`ProductTableView`); breakpoint
+certified in `ADMIN-PRODUCTS-COLLECTION-RESPONSIVE-ARCHITECTURE-1` + Final QA.
+Package status: **READY FOR `ADMIN-PRODUCTS-COMMIT-PUSH-DEPLOY-1`** with accepted
+Image Delivery infra debt. Not "SAME DOM + CSS responsive"; not dual-mount.
+
 ---
 
 ## Categories architecture
@@ -506,7 +513,8 @@ Focus traps / scroll locks are **per implementation** — visual polish must pre
 | ----- | -------- |
 | Shell | desktop sidebar + mobile topbar/drawer |
 | Dashboard | **SEPARATE MOBILE RENDERER** for overview (dual mount, CSS ≤768) — same DOM tree, not separate route |
-| Products / customizations / settings | **SAME DOM + CSS responsive** |
+| Products | **SINGLE ACTIVE TREE** — cards `<900` / table `≥900` (no dual-mount). See `docs/products-living-audit.md` + Final QA 2026-09-11 |
+| Customizations / settings | **SAME DOM + CSS responsive** |
 | Preview | iframe = public mobile catalog; parent shell operational |
 
 Observed dashboard breakpoints (orders CSS): ~389, 479, 720, 768, 1024, 1200, 1440.

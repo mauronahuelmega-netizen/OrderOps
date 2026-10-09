@@ -1,0 +1,36 @@
+{
+  "unrelatedChanges": [],
+  "headUnchanged": true,
+  "indexUnchanged": true,
+  "rootPrerendered": true,
+  "http": [
+    {
+      "route": "/",
+      "status": 200,
+      "redirect": null,
+      "loginForm": false,
+      "credentialErrorCopy": false
+    },
+    {
+      "route": "/admin/login",
+      "status": 200,
+      "redirect": null,
+      "loginForm": true,
+      "credentialErrorCopy": false
+    },
+    {
+      "route": "/admin/dashboard",
+      "status": 307,
+      "redirect": "/admin/login",
+      "loginForm": false,
+      "credentialErrorCopy": false
+    },
+    {
+      "route": "/admin/login?error=invalid_credentials",
+      "status": 200,
+      "redirect": null,
+      "loginForm": true,
+      "credentialErrorCopy": true
+    }
+  ]
+}

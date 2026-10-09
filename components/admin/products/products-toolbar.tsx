@@ -5,10 +5,29 @@ import { Search } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Button from "@/components/ui/Button";
 import { Skeleton } from "@/components/ui/skeleton";
+import CategoryOrderDialog from "@/components/admin/products/category-order-dialog";
+import CompactProductsFilterMenu from "@/components/admin/products/compact-products-filter-menu";
 import { useProductsManagement } from "@/components/admin/products/products-management-provider";
 import styles from "./products-toolbar.module.css";
 
 const FILTER_KEYS = ["q", "categoryId", "stock", "status"] as const;
+
+const STOCK_OPTIONS = [
+  { value: "", label: "Stock" },
+  { value: "out", label: "Agotados" },
+  { value: "low", label: "Bajo stock" },
+  { value: "in", label: "Con stock" }
+] as const;
+
+const STATUS_OPTIONS = [
+  { value: "", label: "Estado" },
+  { value: "active", label: "Disponibles" },
+  { value: "inactive", label: "No disponibles" },
+  { value: "archived", label: "Archivados" }
+] as const;
+
+/** Single logical open owner for Category / Stock / Estado compact menus. */
+type OpenProductFilter = "category" | "stock" | "status" | null;
 
 export function ProductsToolbarSkeleton() {
   return (
@@ -31,8 +50,10 @@ export default function ProductsToolbar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const [, startTransition] = useTransition();
-  const { categories, totalCount } = useProductsManagement();
+  const { categories, catalogTotalCount } = useProductsManagement();
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [openFilter, setOpenFilter] = useState<OpenProductFilter>(null);
+  const [orderDialogOpen, setOrderDialogOpen] = useState(false);
 
   const [searchValue, setSearchValue] = useState(() => searchParams.get("q") ?? "");
 
@@ -47,6 +68,11 @@ export default function ProductsToolbar() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    // URL navigation closes logical compact menus; presence exits locally.
+    setOpenFilter(null);
+  }, [searchParams]);
 
   const pushParams = useCallback(
     (mutate: (params: URLSearchParams) => void) => {
@@ -95,10 +121,24 @@ export default function ProductsToolbar() {
   };
 
   const handleClearFilters = () => {
+    setOpenFilter(null);
     startTransition(() => {
       router.push(pathname);
     });
   };
+
+  const requestOpenFilter = useCallback((key: Exclude<OpenProductFilter, null>) => {
+    setOpenFilter(key);
+  }, []);
+
+  const requestCloseFilter = useCallback((key: Exclude<OpenProductFilter, null>) => {
+    setOpenFilter((current) => (current === key ? null : current));
+  }, []);
+
+  const openOrderDialog = useCallback(() => {
+    setOpenFilter(null);
+    setOrderDialogOpen(true);
+  }, []);
 
   const hasActiveFilters = FILTER_KEYS.some((key) => {
     const value = searchParams.get(key);
@@ -109,11 +149,21 @@ export default function ProductsToolbar() {
   const stock = searchParams.get("stock") ?? "";
   const status = searchParams.get("status") ?? "";
 
+  const categoryOptions = [
+    { value: "", label: "Todas" },
+    ...categories.map((category) => ({
+      value: category.id,
+      label: category.name
+    }))
+  ];
+
+  const canOrder = categories.length >= 2;
+
   return (
     <div className={styles.toolbar}>
       <p className={styles.summary}>
-        {totalCount} {totalCount === 1 ? "producto" : "productos"} · {categories.length}{" "}
-        {categories.length === 1 ? "categoría" : "categorías"}
+        {catalogTotalCount} {catalogTotalCount === 1 ? "producto" : "productos"} ·{" "}
+        {categories.length} {categories.length === 1 ? "categoría" : "categorías"}
       </p>
 
       <div className={styles.controlsRow}>
@@ -129,43 +179,63 @@ export default function ProductsToolbar() {
           />
         </div>
 
-        <div className={styles.filtersCluster}>
-          <select
-            className={`${styles.filterSelect} ${categoryId ? styles.filterSelectActive : ""}`}
-            aria-label="Filtrar por categoría"
+        <div className={styles.filtersCluster} data-products-filter-cluster="">
+          <CompactProductsFilterMenu
+            filterKey="category"
+            ariaLabel={
+              categoryId
+                ? `Filtrar por categoría: ${
+                    categories.find((category) => category.id === categoryId)?.name ??
+                    "Categorías"
+                  }`
+                : "Filtrar por categoría"
+            }
+            options={categoryOptions}
             value={categoryId}
-            onChange={(event) => handleFilterChange("categoryId", event.target.value)}
-          >
-            <option value="">Todas las categorías</option>
-            {categories.map((category) => (
-              <option key={category.id} value={category.id}>
-                {category.name}
-              </option>
-            ))}
-          </select>
+            onChange={(next) => handleFilterChange("categoryId", next)}
+            triggerClassName={`${styles.filterSelect} ${styles.categoryTrigger}`}
+            triggerActiveClassName={styles.filterSelectActive}
+            open={openFilter === "category"}
+            onRequestOpen={() => requestOpenFilter("category")}
+            onRequestClose={() => requestCloseFilter("category")}
+            emptyTriggerLabel="Categorías"
+            menuWide
+            trailingAction={
+              canOrder
+                ? {
+                    label: "Ordenar categorías",
+                    onSelect: openOrderDialog
+                  }
+                : undefined
+            }
+          />
 
-          <select
-            className={`${styles.filterSelect} ${stock ? styles.filterSelectActive : ""}`}
-            aria-label="Filtrar por stock"
+          <CompactProductsFilterMenu
+            filterKey="stock"
+            ariaLabel="Filtrar por stock"
+            options={[...STOCK_OPTIONS]}
             value={stock}
-            onChange={(event) => handleFilterChange("stock", event.target.value)}
-          >
-            <option value="">Stock: Todos</option>
-            <option value="out">Agotados (0)</option>
-            <option value="low">Bajo stock (1-5)</option>
-            <option value="in">Con stock (&gt;0)</option>
-          </select>
+            onChange={(next) => handleFilterChange("stock", next)}
+            triggerClassName={styles.filterSelect}
+            triggerActiveClassName={styles.filterSelectActive}
+            open={openFilter === "stock"}
+            onRequestOpen={() => requestOpenFilter("stock")}
+            onRequestClose={() => requestCloseFilter("stock")}
+          />
 
-          <select
-            className={`${styles.filterSelect} ${status ? styles.filterSelectActive : ""}`}
-            aria-label="Filtrar por estado"
+          <CompactProductsFilterMenu
+            filterKey="status"
+            ariaLabel="Filtrar por estado"
+            options={[...STATUS_OPTIONS]}
             value={status}
-            onChange={(event) => handleFilterChange("status", event.target.value)}
-          >
-            <option value="">Estado: Todos</option>
-            <option value="active">Activos</option>
-            <option value="inactive">Inactivos</option>
-          </select>
+            onChange={(next) => handleFilterChange("status", next)}
+            triggerClassName={styles.filterSelect}
+            triggerActiveClassName={styles.filterSelectActive}
+            open={openFilter === "status"}
+            onRequestOpen={() => requestOpenFilter("status")}
+            onRequestClose={() => requestCloseFilter("status")}
+            menuAlign="end"
+          />
 
           {hasActiveFilters ? (
             <Button
@@ -179,6 +249,12 @@ export default function ProductsToolbar() {
           ) : null}
         </div>
       </div>
+
+      <CategoryOrderDialog
+        categories={categories}
+        open={orderDialogOpen}
+        onClose={() => setOrderDialogOpen(false)}
+      />
     </div>
   );
 }

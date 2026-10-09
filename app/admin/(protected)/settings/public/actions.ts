@@ -27,8 +27,8 @@ export async function updatePublicBusinessSettingsAction(
     return { error: "Ingresa un color en formato #RRGGBB." };
   }
 
+  const adminContext = await requireAdminPermission("managePublicSettings");
   try {
-    const adminContext = await requireAdminPermission("managePublicSettings");
     const supabase = await createSupabaseServerClient();
 
     const { data: currentBusiness, error: currentBusinessError } = await supabase
@@ -110,8 +110,8 @@ export async function updateCatalogHeroSettingsAction(
   const catalogHeroBadge = getOptionalTrimmedString(formData.get("catalog_hero_badge"));
   const catalogHeroMicrocopy = getOptionalTrimmedString(formData.get("catalog_hero_microcopy"));
 
+  const adminContext = await requireAdminPermission("managePublicSettings");
   try {
-    const adminContext = await requireAdminPermission("managePublicSettings");
     const supabase = await createSupabaseServerClient();
 
     const { error: updateError } = await supabase

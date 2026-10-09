@@ -1,8 +1,8 @@
 import { useId } from "react";
-import type { InputHTMLAttributes } from "react";
+import type { InputHTMLAttributes, ReactNode } from "react";
 
 export type InputProps = InputHTMLAttributes<HTMLInputElement> & {
-  label?: string;
+  label?: ReactNode;
   error?: string;
   helperText?: string;
 };

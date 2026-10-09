@@ -61,25 +61,17 @@
   font-weight: 500;
 }
 
-.zoomSlider {
-  width: 100%;
-  accent-color: var(--brand-primary, var(--accent-primary));
-}
-
-.actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 0.5rem;
-}
-
 .cancelButton,
 .applyButton {
+  min-height: 2.75rem;
+  min-width: 2.75rem;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   font: inherit;
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 .cancelButton {
@@ -92,6 +84,24 @@
   border: 1px solid var(--border-strong);
   background: var(--bg-surface);
   color: var(--text-primary);
+}
+
+.cancelButton:focus-visible,
+.applyButton:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  outline-offset: 2px;
+}
+
+.zoomSlider {
+  width: 100%;
+  min-height: 2.75rem;
+  accent-color: var(--brand-primary, var(--accent-primary));
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
 }
 
 .applyButton:disabled,

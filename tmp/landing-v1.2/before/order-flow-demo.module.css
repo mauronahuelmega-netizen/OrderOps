@@ -1,0 +1,56 @@
+.flow{margin-top:36px}
+.overview{display:flex; justify-content:space-between; gap:16px; color:var(--marketing-dark-muted); font-size:12px; margin-bottom:20px}
+.overview strong{font-weight:500}
+.stageSummary{list-style:none; padding:0; margin:0 0 18px; display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px}
+.stageSummary li{display:flex; align-items:center; gap:9px; padding:12px; border:1px solid var(--marketing-dark-border); border-radius:7px; font-size:12px}
+.stageSummary li>span{color:var(--marketing-dark-muted); font-size:10px}
+.stageSummary strong{font-weight:500}
+.stageSummary b{margin-left:auto; color:var(--marketing-dark-muted)}
+.stageSummary [aria-current]{border-color:var(--marketing-blue-light); background:var(--marketing-blue-halo)}
+.board{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; background:var(--marketing-night-raised); border:1px solid var(--marketing-dark-border); border-radius:13px; padding:17px}
+.lane{min-height:285px; background:var(--marketing-night); border:1px solid var(--marketing-dark-border); border-top:2px solid var(--marketing-pending-light); border-radius:8px; padding:12px}
+.lane[data-stage="preparing"]{border-top-color:var(--marketing-preparing-light)}
+.lane[data-stage="ready"]{border-top-color:var(--marketing-ready-light)}
+.lane[data-stage="completed"]{border-top-color:var(--marketing-dark-muted)}
+.activeLane{outline:1px solid var(--marketing-blue-light)}
+.laneTitle{display:flex; justify-content:space-between; gap:10px; font-size:12px; padding-bottom:14px}
+.laneTitle>span{color:var(--marketing-dark-muted)}
+.arrival{animation:cardArrival .18s both}
+.contextCard{background:var(--marketing-night-raised); border:1px solid var(--marketing-dark-border); border-radius:7px; padding:13px; margin-top:12px; display:grid; gap:10px}
+.contextCard strong,.contextCard b{font-size:12px; font-weight:550}
+.contextCard span,.empty{color:var(--marketing-dark-muted); font-size:11px; line-height:1.6}
+.empty{padding-block:20px}
+.focusedBoard{display:none}
+.interaction{display:flex; justify-content:space-between; align-items:center; gap:20px; margin-top:22px}
+.interaction p{font-size:12px; line-height:1.7; color:var(--marketing-dark-muted)}
+.interaction p>span{display:block; color:var(--marketing-white)}
+.interaction button{display:flex; align-items:center; justify-content:center; gap:13px; min-height:46px; padding:12px 19px; background:var(--marketing-blue); color:var(--marketing-white); border:1px solid var(--marketing-blue); border-radius:7px; font:inherit; font-size:13px; font-weight:600; cursor:pointer}
+.interaction button:disabled{background:var(--marketing-blue-disabled); border-color:var(--marketing-blue-disabled); cursor:default}
+.stageDescription{font-size:12px; color:var(--marketing-dark-muted); line-height:1.7; margin-top:16px!important; min-height:42px}
+.manualNote{font-size:12px; line-height:1.7; color:var(--marketing-dark-muted); margin-top:12px!important}
+
+@keyframes cardArrival{from{opacity:.6; transform:translateY(4px)}
+to{opacity:1; transform:none}
+}
+
+@media(max-width:1199px) and (min-width:1024px){.board{padding:10px; gap:8px}
+.lane{padding:9px}
+}
+
+@media(max-width:1023px){.board{display:none}
+.focusedBoard{display:block; padding:20px; border:1px solid var(--marketing-dark-border); border-radius:12px; background:var(--marketing-night-raised)}
+.contextRow{display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; margin-top:17px; padding-top:17px; border-top:1px solid var(--marketing-dark-border); font-size:12px}
+.contextRow>span{grid-row:span 2; color:var(--marketing-dark-muted)}
+.contextRow small{font-size:12px; color:var(--marketing-dark-muted)}
+}
+
+@media(max-width:767px){.overview{flex-direction:column; gap:7px}
+.stageSummary{grid-template-columns:1fr 1fr; gap:8px}
+.stageSummary li{gap:6px; padding:11px 9px}
+.focusedBoard{padding:15px}
+.interaction{align-items:stretch; flex-direction:column; gap:13px}
+.interaction button{align-self:start}
+.stageDescription{min-height:62px}
+.contextRow{grid-template-columns:1fr}
+.contextRow>span{grid-row:auto}
+}

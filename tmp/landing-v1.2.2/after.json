@@ -1,0 +1,727 @@
+[
+  {
+    "width": 360,
+    "step": 0,
+    "accordionY": 5927.359375,
+    "boardHeight": 0,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 5794.359375,
+    "descriptionY": 5852.359375,
+    "footerY": 5726.578125,
+    "instructionY": 5743.578125,
+    "internalScroll": false,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 683.3125,
+    "protagonistStage": "pending",
+    "referenceY": 6001.359375,
+    "regionOverflow": "visible",
+    "stage": "pending",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamPreparando · Delivery#N8R3W6 · DaniPreparando · Retiro#P5T2X8 · CrisListo · Retiro",
+      "#K7M4Q9 · SamPreparando · Delivery"
+    ]
+  },
+  {
+    "width": 360,
+    "step": 1,
+    "accordionY": 5927.359375,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "3",
+      "1",
+      "0"
+    ],
+    "ctaY": 5794.359375,
+    "descriptionY": 5852.359375,
+    "footerY": 5726.578125,
+    "instructionY": 5743.578125,
+    "internalScroll": false,
+    "label": "Marcar listo",
+    "overflow": false,
+    "panelHeight": 683.3125,
+    "protagonistStage": "preparing",
+    "referenceY": 6001.359375,
+    "regionOverflow": "visible",
+    "stage": "preparing",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamPreparando · Delivery#N8R3W6 · DaniPreparando · Retiro#P5T2X8 · CrisListo · Retiro",
+      "#K7M4Q9 · SamPreparando · Delivery"
+    ]
+  },
+  {
+    "width": 360,
+    "step": 2,
+    "accordionY": 5927.359375,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "2",
+      "2",
+      "0"
+    ],
+    "ctaY": 5794.359375,
+    "descriptionY": 5852.359375,
+    "footerY": 5726.578125,
+    "instructionY": 5743.578125,
+    "internalScroll": false,
+    "label": "Completar",
+    "overflow": false,
+    "panelHeight": 683.3125,
+    "protagonistStage": "ready",
+    "referenceY": 6001.359375,
+    "regionOverflow": "visible",
+    "stage": "ready",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamPreparando · Delivery#N8R3W6 · DaniPreparando · Retiro#P5T2X8 · CrisListo · Retiro",
+      "#K7M4Q9 · SamPreparando · Delivery"
+    ]
+  },
+  {
+    "width": 360,
+    "step": 3,
+    "accordionY": 5927.359375,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "2",
+      "1",
+      "1"
+    ],
+    "ctaY": 5794.359375,
+    "descriptionY": 5852.359375,
+    "footerY": 5726.578125,
+    "instructionY": 5743.578125,
+    "internalScroll": false,
+    "label": "Volver a empezar",
+    "overflow": false,
+    "panelHeight": 683.3125,
+    "protagonistStage": "completed",
+    "referenceY": 6001.359375,
+    "regionOverflow": "visible",
+    "stage": "completed",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamPreparando · Delivery#N8R3W6 · DaniPreparando · Retiro#P5T2X8 · CrisListo · Retiro",
+      "#K7M4Q9 · SamPreparando · Delivery"
+    ]
+  },
+  {
+    "width": 360,
+    "step": 4,
+    "accordionY": 5927.359375,
+    "boardHeight": 0,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 5794.359375,
+    "descriptionY": 5852.359375,
+    "footerY": 5726.578125,
+    "instructionY": 5743.578125,
+    "internalScroll": false,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 683.3125,
+    "protagonistStage": "pending",
+    "referenceY": 6001.359375,
+    "regionOverflow": "visible",
+    "stage": "pending",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamPreparando · Delivery#N8R3W6 · DaniPreparando · Retiro#P5T2X8 · CrisListo · Retiro",
+      "#K7M4Q9 · SamPreparando · Delivery"
+    ]
+  },
+  {
+    "width": 390,
+    "step": 0,
+    "accordionY": 5832.578125,
+    "boardHeight": 0,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 5699.578125,
+    "descriptionY": 5757.578125,
+    "footerY": 5631.796875,
+    "instructionY": 5648.796875,
+    "internalScroll": false,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 741.3125,
+    "protagonistStage": "pending",
+    "referenceY": 5906.578125,
+    "regionOverflow": "visible",
+    "stage": "pending",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamPreparando · Delivery#N8R3W6 · DaniPreparando · Retiro#P5T2X8 · CrisListo · Retiro",
+      "#K7M4Q9 · SamPreparando · Delivery",
+      "#N8R3W6 · DaniPreparando · Retiro"
+    ]
+  },
+  {
+    "width": 390,
+    "step": 1,
+    "accordionY": 5832.578125,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "3",
+      "1",
+      "0"
+    ],
+    "ctaY": 5699.578125,
+    "descriptionY": 5757.578125,
+    "footerY": 5631.796875,
+    "instructionY": 5648.796875,
+    "internalScroll": false,
+    "label": "Marcar listo",
+    "overflow": false,
+    "panelHeight": 741.3125,
+    "protagonistStage": "preparing",
+    "referenceY": 5906.578125,
+    "regionOverflow": "visible",
+    "stage": "preparing",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamPreparando · Delivery#N8R3W6 · DaniPreparando · Retiro#P5T2X8 · CrisListo · Retiro",
+      "#K7M4Q9 · SamPreparando · Delivery",
+      "#N8R3W6 · DaniPreparando · Retiro"
+    ]
+  },
+  {
+    "width": 390,
+    "step": 2,
+    "accordionY": 5832.578125,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "2",
+      "2",
+      "0"
+    ],
+    "ctaY": 5699.578125,
+    "descriptionY": 5757.578125,
+    "footerY": 5631.796875,
+    "instructionY": 5648.796875,
+    "internalScroll": false,
+    "label": "Completar",
+    "overflow": false,
+    "panelHeight": 741.3125,
+    "protagonistStage": "ready",
+    "referenceY": 5906.578125,
+    "regionOverflow": "visible",
+    "stage": "ready",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamPreparando · Delivery#N8R3W6 · DaniPreparando · Retiro#P5T2X8 · CrisListo · Retiro",
+      "#K7M4Q9 · SamPreparando · Delivery",
+      "#N8R3W6 · DaniPreparando · Retiro"
+    ]
+  },
+  {
+    "width": 390,
+    "step": 3,
+    "accordionY": 5832.578125,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "2",
+      "1",
+      "1"
+    ],
+    "ctaY": 5699.578125,
+    "descriptionY": 5757.578125,
+    "footerY": 5631.796875,
+    "instructionY": 5648.796875,
+    "internalScroll": false,
+    "label": "Volver a empezar",
+    "overflow": false,
+    "panelHeight": 741.3125,
+    "protagonistStage": "completed",
+    "referenceY": 5906.578125,
+    "regionOverflow": "visible",
+    "stage": "completed",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamPreparando · Delivery#N8R3W6 · DaniPreparando · Retiro#P5T2X8 · CrisListo · Retiro",
+      "#K7M4Q9 · SamPreparando · Delivery",
+      "#N8R3W6 · DaniPreparando · Retiro"
+    ]
+  },
+  {
+    "width": 390,
+    "step": 4,
+    "accordionY": 5832.578125,
+    "boardHeight": 0,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 5699.578125,
+    "descriptionY": 5757.578125,
+    "footerY": 5631.796875,
+    "instructionY": 5648.796875,
+    "internalScroll": false,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 741.3125,
+    "protagonistStage": "pending",
+    "referenceY": 5906.578125,
+    "regionOverflow": "visible",
+    "stage": "pending",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamPreparando · Delivery#N8R3W6 · DaniPreparando · Retiro#P5T2X8 · CrisListo · Retiro",
+      "#K7M4Q9 · SamPreparando · Delivery",
+      "#N8R3W6 · DaniPreparando · Retiro"
+    ]
+  },
+  {
+    "width": 768,
+    "step": 0,
+    "accordionY": 4194.8125,
+    "boardHeight": 0,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 4039.8125,
+    "descriptionY": 4101.8125,
+    "footerY": 4018.8125,
+    "instructionY": 4042.421875,
+    "internalScroll": false,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 555.15625,
+    "protagonistStage": "pending",
+    "referenceY": 4282.8125,
+    "regionOverflow": "visible",
+    "stage": "pending",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamPreparando · Delivery#N8R3W6 · DaniPreparando · Retiro#P5T2X8 · CrisListo · Retiro",
+      "#K7M4Q9 · SamPreparando · Delivery",
+      "#N8R3W6 · DaniPreparando · Retiro",
+      "#P5T2X8 · CrisListo · Retiro"
+    ]
+  },
+  {
+    "width": 768,
+    "step": 1,
+    "accordionY": 4194.8125,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "3",
+      "1",
+      "0"
+    ],
+    "ctaY": 4039.8125,
+    "descriptionY": 4101.8125,
+    "footerY": 4018.8125,
+    "instructionY": 4042.421875,
+    "internalScroll": false,
+    "label": "Marcar listo",
+    "overflow": false,
+    "panelHeight": 555.15625,
+    "protagonistStage": "preparing",
+    "referenceY": 4282.8125,
+    "regionOverflow": "visible",
+    "stage": "preparing",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamPreparando · Delivery#N8R3W6 · DaniPreparando · Retiro#P5T2X8 · CrisListo · Retiro",
+      "#K7M4Q9 · SamPreparando · Delivery",
+      "#N8R3W6 · DaniPreparando · Retiro",
+      "#P5T2X8 · CrisListo · Retiro"
+    ]
+  },
+  {
+    "width": 768,
+    "step": 2,
+    "accordionY": 4194.8125,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "2",
+      "2",
+      "0"
+    ],
+    "ctaY": 4039.8125,
+    "descriptionY": 4101.8125,
+    "footerY": 4018.8125,
+    "instructionY": 4042.421875,
+    "internalScroll": false,
+    "label": "Completar",
+    "overflow": false,
+    "panelHeight": 555.15625,
+    "protagonistStage": "ready",
+    "referenceY": 4282.8125,
+    "regionOverflow": "visible",
+    "stage": "ready",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamPreparando · Delivery#N8R3W6 · DaniPreparando · Retiro#P5T2X8 · CrisListo · Retiro",
+      "#K7M4Q9 · SamPreparando · Delivery",
+      "#N8R3W6 · DaniPreparando · Retiro",
+      "#P5T2X8 · CrisListo · Retiro"
+    ]
+  },
+  {
+    "width": 768,
+    "step": 3,
+    "accordionY": 4194.8125,
+    "boardHeight": 0,
+    "counts": [
+      "0",
+      "2",
+      "1",
+      "1"
+    ],
+    "ctaY": 4039.8125,
+    "descriptionY": 4101.8125,
+    "footerY": 4018.8125,
+    "instructionY": 4042.421875,
+    "internalScroll": false,
+    "label": "Volver a empezar",
+    "overflow": false,
+    "panelHeight": 555.15625,
+    "protagonistStage": "completed",
+    "referenceY": 4282.8125,
+    "regionOverflow": "visible",
+    "stage": "completed",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamPreparando · Delivery#N8R3W6 · DaniPreparando · Retiro#P5T2X8 · CrisListo · Retiro",
+      "#K7M4Q9 · SamPreparando · Delivery",
+      "#N8R3W6 · DaniPreparando · Retiro",
+      "#P5T2X8 · CrisListo · Retiro"
+    ]
+  },
+  {
+    "width": 768,
+    "step": 4,
+    "accordionY": 4194.8125,
+    "boardHeight": 0,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 4039.8125,
+    "descriptionY": 4101.8125,
+    "footerY": 4018.8125,
+    "instructionY": 4042.421875,
+    "internalScroll": false,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 555.15625,
+    "protagonistStage": "pending",
+    "referenceY": 4282.8125,
+    "regionOverflow": "visible",
+    "stage": "pending",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamPreparando · Delivery#N8R3W6 · DaniPreparando · Retiro#P5T2X8 · CrisListo · Retiro",
+      "#K7M4Q9 · SamPreparando · Delivery",
+      "#N8R3W6 · DaniPreparando · Retiro",
+      "#P5T2X8 · CrisListo · Retiro"
+    ]
+  },
+  {
+    "width": 1024,
+    "step": 0,
+    "accordionY": 4441.25,
+    "boardHeight": 508,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 4294.25,
+    "descriptionY": 4356.25,
+    "footerY": 4273.25,
+    "instructionY": 4296.859375,
+    "internalScroll": false,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 726,
+    "protagonistStage": "pending",
+    "referenceY": 4529.25,
+    "regionOverflow": "visible",
+    "stage": "pending",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamDelivery · 2 × Clásica$24.000",
+      "#N8R3W6 · DaniRetiro · 1 × Doble cheddar$14.000",
+      "#P5T2X8 · CrisRetiro · 1 × Veggie$12.500"
+    ]
+  },
+  {
+    "width": 1024,
+    "step": 1,
+    "accordionY": 4441.25,
+    "boardHeight": 508,
+    "counts": [
+      "0",
+      "3",
+      "1",
+      "0"
+    ],
+    "ctaY": 4294.25,
+    "descriptionY": 4356.25,
+    "footerY": 4273.25,
+    "instructionY": 4296.859375,
+    "internalScroll": false,
+    "label": "Marcar listo",
+    "overflow": false,
+    "panelHeight": 726,
+    "protagonistStage": "preparing",
+    "referenceY": 4529.25,
+    "regionOverflow": "visible",
+    "stage": "preparing",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamDelivery · 2 × Clásica$24.000",
+      "#N8R3W6 · DaniRetiro · 1 × Doble cheddar$14.000",
+      "#P5T2X8 · CrisRetiro · 1 × Veggie$12.500"
+    ]
+  },
+  {
+    "width": 1024,
+    "step": 2,
+    "accordionY": 4441.25,
+    "boardHeight": 508,
+    "counts": [
+      "0",
+      "2",
+      "2",
+      "0"
+    ],
+    "ctaY": 4294.25,
+    "descriptionY": 4356.25,
+    "footerY": 4273.25,
+    "instructionY": 4296.859375,
+    "internalScroll": false,
+    "label": "Completar",
+    "overflow": false,
+    "panelHeight": 726,
+    "protagonistStage": "ready",
+    "referenceY": 4529.25,
+    "regionOverflow": "visible",
+    "stage": "ready",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamDelivery · 2 × Clásica$24.000",
+      "#N8R3W6 · DaniRetiro · 1 × Doble cheddar$14.000",
+      "#P5T2X8 · CrisRetiro · 1 × Veggie$12.500"
+    ]
+  },
+  {
+    "width": 1024,
+    "step": 3,
+    "accordionY": 4441.25,
+    "boardHeight": 508,
+    "counts": [
+      "0",
+      "2",
+      "1",
+      "1"
+    ],
+    "ctaY": 4294.25,
+    "descriptionY": 4356.25,
+    "footerY": 4273.25,
+    "instructionY": 4296.859375,
+    "internalScroll": false,
+    "label": "Volver a empezar",
+    "overflow": false,
+    "panelHeight": 726,
+    "protagonistStage": "completed",
+    "referenceY": 4529.25,
+    "regionOverflow": "visible",
+    "stage": "completed",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamDelivery · 2 × Clásica$24.000",
+      "#N8R3W6 · DaniRetiro · 1 × Doble cheddar$14.000",
+      "#P5T2X8 · CrisRetiro · 1 × Veggie$12.500"
+    ]
+  },
+  {
+    "width": 1024,
+    "step": 4,
+    "accordionY": 4441.25,
+    "boardHeight": 508,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 4294.25,
+    "descriptionY": 4356.25,
+    "footerY": 4273.25,
+    "instructionY": 4296.859375,
+    "internalScroll": false,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 726,
+    "protagonistStage": "pending",
+    "referenceY": 4529.25,
+    "regionOverflow": "visible",
+    "stage": "pending",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamDelivery · 2 × Clásica$24.000",
+      "#N8R3W6 · DaniRetiro · 1 × Doble cheddar$14.000",
+      "#P5T2X8 · CrisRetiro · 1 × Veggie$12.500"
+    ]
+  },
+  {
+    "width": 1440,
+    "step": 0,
+    "accordionY": 4158.25,
+    "boardHeight": 508,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 4003.25,
+    "descriptionY": 4065.25,
+    "footerY": 3982.25,
+    "instructionY": 4005.859375,
+    "internalScroll": false,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 742,
+    "protagonistStage": "pending",
+    "referenceY": 4246.25,
+    "regionOverflow": "visible",
+    "stage": "pending",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamDelivery · 2 × Clásica$24.000",
+      "#N8R3W6 · DaniRetiro · 1 × Doble cheddar$14.000",
+      "#P5T2X8 · CrisRetiro · 1 × Veggie$12.500"
+    ]
+  },
+  {
+    "width": 1440,
+    "step": 1,
+    "accordionY": 4158.25,
+    "boardHeight": 508,
+    "counts": [
+      "0",
+      "3",
+      "1",
+      "0"
+    ],
+    "ctaY": 4003.25,
+    "descriptionY": 4065.25,
+    "footerY": 3982.25,
+    "instructionY": 4005.859375,
+    "internalScroll": false,
+    "label": "Marcar listo",
+    "overflow": false,
+    "panelHeight": 742,
+    "protagonistStage": "preparing",
+    "referenceY": 4246.25,
+    "regionOverflow": "visible",
+    "stage": "preparing",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamDelivery · 2 × Clásica$24.000",
+      "#N8R3W6 · DaniRetiro · 1 × Doble cheddar$14.000",
+      "#P5T2X8 · CrisRetiro · 1 × Veggie$12.500"
+    ]
+  },
+  {
+    "width": 1440,
+    "step": 2,
+    "accordionY": 4158.25,
+    "boardHeight": 508,
+    "counts": [
+      "0",
+      "2",
+      "2",
+      "0"
+    ],
+    "ctaY": 4003.25,
+    "descriptionY": 4065.25,
+    "footerY": 3982.25,
+    "instructionY": 4005.859375,
+    "internalScroll": false,
+    "label": "Completar",
+    "overflow": false,
+    "panelHeight": 742,
+    "protagonistStage": "ready",
+    "referenceY": 4246.25,
+    "regionOverflow": "visible",
+    "stage": "ready",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamDelivery · 2 × Clásica$24.000",
+      "#N8R3W6 · DaniRetiro · 1 × Doble cheddar$14.000",
+      "#P5T2X8 · CrisRetiro · 1 × Veggie$12.500"
+    ]
+  },
+  {
+    "width": 1440,
+    "step": 3,
+    "accordionY": 4158.25,
+    "boardHeight": 508,
+    "counts": [
+      "0",
+      "2",
+      "1",
+      "1"
+    ],
+    "ctaY": 4003.25,
+    "descriptionY": 4065.25,
+    "footerY": 3982.25,
+    "instructionY": 4005.859375,
+    "internalScroll": false,
+    "label": "Volver a empezar",
+    "overflow": false,
+    "panelHeight": 742,
+    "protagonistStage": "completed",
+    "referenceY": 4246.25,
+    "regionOverflow": "visible",
+    "stage": "completed",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamDelivery · 2 × Clásica$24.000",
+      "#N8R3W6 · DaniRetiro · 1 × Doble cheddar$14.000",
+      "#P5T2X8 · CrisRetiro · 1 × Veggie$12.500"
+    ]
+  },
+  {
+    "width": 1440,
+    "step": 4,
+    "accordionY": 4158.25,
+    "boardHeight": 508,
+    "counts": [
+      "1",
+      "2",
+      "1",
+      "0"
+    ],
+    "ctaY": 4003.25,
+    "descriptionY": 4065.25,
+    "footerY": 3982.25,
+    "instructionY": 4005.859375,
+    "internalScroll": false,
+    "label": "Preparar",
+    "overflow": false,
+    "panelHeight": 742,
+    "protagonistStage": "pending",
+    "referenceY": 4246.25,
+    "regionOverflow": "visible",
+    "stage": "pending",
+    "visibleSecondary": [
+      "#K7M4Q9 · SamDelivery · 2 × Clásica$24.000",
+      "#N8R3W6 · DaniRetiro · 1 × Doble cheddar$14.000",
+      "#P5T2X8 · CrisRetiro · 1 × Veggie$12.500"
+    ]
+  }
+]

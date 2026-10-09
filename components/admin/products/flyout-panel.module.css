@@ -12,8 +12,11 @@
   display: flex;
   flex-direction: column;
   width: min(560px, 100vw);
+  /* Fallback, then dynamic viewport for mobile browser chrome. */
   height: 100vh;
   max-height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
   border: 1px solid var(--border-subtle);
   border-top: none;
   border-right: none;
@@ -41,6 +44,43 @@
   border-bottom: 1px solid var(--border-subtle);
   background: var(--bg-surface);
   flex-shrink: 0;
+}
+
+/*
+ * SUPERSEDED (ADMIN-PRODUCTS-EDIT-UNIFIED-DRAFT-SAVE-IMPLEMENTATION-1):
+ * Edit sticky Save now spans the whole editor (Advanced above footer).
+ * Release-lip classes are no longer applied from flyout-panel.tsx.
+ * Kept inert for historical CSS grep evidence; safe to delete in a cleanup phase.
+ */
+.headerReleaseClip {
+  position: relative;
+  z-index: 5;
+  border-bottom: none;
+}
+
+.headerReleaseClip::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 32px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  pointer-events: none;
+  z-index: 6;
+  contain: paint layout;
+}
+
+.closeButton {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  box-sizing: border-box;
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent-primary) 40%, transparent);
+  outline-offset: 2px;
 }
 
 .headerCopy {
@@ -72,11 +112,20 @@
   min-height: 0;
 }
 
+.bodyReleaseClip {
+  position: relative;
+  z-index: 1;
+  /* Clear the Edit header release lip on first paint. */
+  padding-top: 32px;
+}
+
 @media (min-width: 961px) {
   .panel {
     top: var(--space-lg);
     height: calc(100vh - var(--space-2xl));
     max-height: calc(100vh - var(--space-2xl));
+    height: calc(100dvh - var(--space-2xl));
+    max-height: calc(100dvh - var(--space-2xl));
     width: min(560px, 44vw);
     border: 1px solid var(--border-subtle);
     border-radius: 8px;

@@ -1,6 +1,7 @@
 .card {
   display: grid;
-  grid-template-columns: 4.5rem minmax(0, 1fr);
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: stretch;
   gap: 0;
   overflow: hidden;
   width: 100%;
@@ -27,11 +28,22 @@
   outline-offset: 2px;
 }
 
+/*
+  Height-derived square: stretch to the content-driven row height,
+  then aspect-ratio sets inline size. max-* caps pathological text wrap.
+*/
 .media {
   position: relative;
-  width: 4.5rem;
-  min-height: 4.5rem;
   align-self: stretch;
+  box-sizing: border-box;
+  height: 100%;
+  width: auto;
+  max-width: 7.5rem;
+  max-height: 7.5rem;
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+  min-width: 0;
+  min-height: 0;
 }
 
 .badge {
@@ -48,10 +60,10 @@
 }
 
 .imageShell {
-  position: relative;
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  min-height: 4.5rem;
   overflow: hidden;
   background-color: var(--bg-surface-hover);
   border-right: 1px solid color-mix(in srgb, var(--border-subtle) 85%, transparent);
@@ -62,11 +74,13 @@
 }
 
 .placeholder {
+  position: absolute;
+  inset: 0;
   display: grid;
   place-items: center;
   width: 100%;
-  min-height: 4.5rem;
-  color: var(--text-muted);
+  height: 100%;
+  color: var(--text-secondary);
   font-size: 0.625rem;
   font-weight: 650;
   line-height: 1.1;
@@ -78,9 +92,15 @@
 .content {
   display: grid;
   align-content: center;
-  gap: 4px;
+  gap: 6px;
   min-width: 0;
   padding: 8px 10px 8px 8px;
+}
+
+.copy {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
 }
 
 .copy h3 {
@@ -99,6 +119,30 @@
   display: none;
 }
 
+.metaLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.35rem;
+  margin: 0;
+  min-width: 0;
+  color: var(--text-secondary);
+  font-size: 0.6875rem;
+  font-weight: 550;
+  line-height: 1.3;
+}
+
+.sku,
+.stock {
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.metaSep {
+  color: var(--text-tertiary);
+}
+
 .price {
   display: block;
   font-size: 0.8125rem;
@@ -110,35 +154,34 @@
 
 .footer {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
+  gap: 4px 8px;
+  min-width: 0;
+}
+
+.availability {
+  min-width: 0;
+  max-width: 100%;
+}
+
+.archivedState {
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
 }
 
 .linkHint {
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-size: 0.6875rem;
   font-weight: 600;
   line-height: 1.2;
 }
 
 @media (min-width: 480px) {
-  .card {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-  }
-
-  .media {
-    width: 100%;
-    min-height: 0;
-  }
-
-  .imageShell,
-  .placeholder {
-    min-height: 5.5rem;
-    border-right: none;
-    border-bottom: 1px solid color-mix(in srgb, var(--border-subtle) 85%, transparent);
-  }
-
+  /* Keep side-by-side square thumb; do not stack a full-width portrait frame. */
   .content {
     padding: 8px 10px 10px;
   }
@@ -152,11 +195,12 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 899px) {
+/* Two-column collection band: keep side-by-side identity + ops without overflow */
+@media (min-width: 720px) and (max-width: 899px) {
   .card {
-    grid-template-columns: 6rem minmax(0, 1fr);
+    grid-template-columns: auto minmax(0, 1fr);
     grid-template-rows: unset;
-    min-height: 6rem;
+    min-height: 0;
   }
 
   .interactive:hover {
@@ -165,64 +209,59 @@
   }
 
   .media {
-    width: 6rem;
-    min-height: 6rem;
+    align-self: stretch;
+    height: 100%;
+    width: auto;
+    max-width: 7.5rem;
+    max-height: 7.5rem;
+    aspect-ratio: 1 / 1;
+    min-height: 0;
   }
 
   .imageShell,
   .placeholder {
-    min-height: 6rem;
-    height: 100%;
     border-right: 1px solid color-mix(in srgb, var(--border-subtle) 85%, transparent);
     border-bottom: none;
   }
 
   .content {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-rows: auto auto;
-    align-content: center;
-    gap: 4px 12px;
-    padding: 10px 12px;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    padding: 8px 10px;
+    min-width: 0;
   }
 
   .copy {
-    display: contents;
+    display: grid;
+    gap: 2px;
+    min-width: 0;
   }
 
   .copy h3 {
-    grid-column: 1 / -1;
-    font-size: 0.875rem;
-    -webkit-line-clamp: 1;
+    font-size: 0.8125rem;
+    -webkit-line-clamp: 2;
+  }
+
+  .metaLine {
+    font-size: 0.625rem;
   }
 
   .price {
-    grid-column: 1;
     font-size: 0.8125rem;
   }
 
   .footer {
-    grid-column: 2;
-    grid-row: 2;
-    align-self: end;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
 
   .linkHint {
-    font-size: 0.6875rem;
+    font-size: 0.625rem;
   }
 }
 
 @media (min-width: 900px) {
-  .card {
-    grid-template-columns: 1fr;
-  }
-
-  .imageShell,
-  .placeholder {
-    min-height: 7rem;
-  }
-
+  /* Collection uses table at >=900; keep inert card styles non-stretching if ever mounted. */
   .interactive:hover {
     box-shadow: var(--shadow-sm);
     transform: none;
