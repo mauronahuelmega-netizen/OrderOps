@@ -354,8 +354,8 @@ begin
     raise exception 'unlinked party returned %', v_bad;
   end if;
 
-  insert into commercial.commercial_opportunities (id, commercial_business_id, stage, archived_at)
-  values (v_arch_opp, '67676767-6767-4767-8767-676767676731', 'lost', now());
+  insert into commercial.commercial_opportunities (id, commercial_business_id, stage, lost_reason, archived_at)
+  values (v_arch_opp, '67676767-6767-4767-8767-676767676731', 'lost', 'sin interes', now());
   v_archived := commercial.open_dispute(
     v_arch_opp,
     array['67676767-6767-4767-8767-676767676721']::uuid[],
