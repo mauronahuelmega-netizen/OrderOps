@@ -1,20 +1,20 @@
 # Progress — Commercial Core V1
 
 ```yaml
-updated_at: 2026-10-09
+updated_at: 2026-10-10
 implementation_authorized: yes
 current_phase: PHASE-03
 current_task: none
 product_code: in_progress
 phase_01: closed
 phase_02: closed
-phase_03: closed_historically
-phase_03_formal_close: pending_traceability
-phase_03_post_audit: runtime_validated_ledger_unregistered
+phase_03: closed_local
+phase_03_formal_close: closed_local
+phase_03_post_audit: runtime_validated_ledger_registered
 next_task: none
 ```
 
-El paquete documental de `docs/commercial-core-v1/` se escribió en esta fecha. P03-T01 a P03-T07 están hechas. La corrección post-auditoría y `BLK-CRM-02` quedaron validadas en local el 2026-10-09. El cierre formal de PHASE-03 sigue pendiente de trazabilidad: las dos correcciones están aplicadas y no registradas, y la base local contiene 44 versiones que esta rama no tiene. PHASE-04 no está iniciada ni autorizada.
+El paquete documental de `docs/commercial-core-v1/` se escribió en esta fecha. P03-T01 a P03-T07 están hechas. El 2026-10-10 PHASE-03 queda cerrada en alcance local: corrección post-auditoría y `BLK-CRM-02` validadas, y `20261009120000` y `20261009140600` registradas en `schema_migrations` (110 filas). `BLK-LEDGER-01` sigue abierto: 44 versiones históricas de otras ramas no están en este repositorio. Esta rama y esta base no son origen de `db push`. Producción no fue validada. El smoke de navegador del formulario y del panel de promotor sigue pendiente. PHASE-04 no está iniciada ni autorizada.
 
 ## Tareas
 
@@ -64,11 +64,11 @@ Ninguno en PHASE-01.
 
 Siguen abiertos en [DECISIONS_AND_BLOCKERS.md](DECISIONS_AND_BLOCKERS.md): `BLK-ECO-01`, `BLK-ECO-02`, `BLK-ECO-03`, `BLK-CRM-01`, `BLK-SEC-01`, `BLK-SEC-02`, `BLK-PRIV-01`, `BLK-LEG-01`.
 
-`BLK-CRM-02`: resuelto y validado en local el 2026-10-09. `20261009140600` está aplicada en `supabase_db_OrderOps` y no tiene fila en `schema_migrations`. El índice `attribution_disputes_one_open_per_opportunity_idx` existe. La carrera BLK-CRM-02 del harness terminó PASS.
+`BLK-CRM-02`: resuelto y validado en local el 2026-10-09. `20261009140600` está aplicada y registrada una vez en `schema_migrations`. El índice `attribution_disputes_one_open_per_opportunity_idx` existe. La carrera BLK-CRM-02 del harness terminó PASS.
 
-`BLK-LEDGER-01`: abierto. `schema_migrations` tiene 108 filas. Esta rama tiene 66 archivos de migración. Faltan en la rama 44 versiones ya aplicadas en la base local: 37 de finanzas, M2 y M3 presentes en `main` local y ausentes de `origin/main`, y 7 de catálogo presentes solo en las ramas cloud-agent `cursor/cloud-agent-1791514230963-191bx` y `cursor/cloud-agent-1791515001926-p4cht` (esta última también en origin). No se incorporan a esta rama. Esta rama y esta base no son origen de `db push`.
+`BLK-LEDGER-01`: abierto como dependencia de integración general, no como tarea de PHASE-03. `schema_migrations` tiene 110 filas. Esta rama tiene 66 archivos de migración. Faltan en la rama 44 versiones ya aplicadas en la base local: 37 de finanzas, M2 y M3 presentes en `main` local y ausentes de `origin/main`, y 7 de catálogo presentes solo en las ramas cloud-agent `cursor/cloud-agent-1791514230963-191bx` y `cursor/cloud-agent-1791515001926-p4cht` (esta última también en origin). No se incorporan a esta rama. Esta rama y esta base no son origen de `db push`.
 
-`BLK-ENV-01`: el gate falló en la sesión Cloud Agent del 2026-10-09 y esa evidencia histórica se conserva abajo. En la máquina local el gate pasó después. `20261009120000` y `20261009140600` están aplicadas y sin registrar. Cada migración futura vuelve a ejecutar el gate. No se ejecutó `migration repair`.
+`BLK-ENV-01`: el gate falló en la sesión Cloud Agent del 2026-10-09 y esa evidencia histórica se conserva abajo. En la máquina local el gate pasó después. `20261009120000` y `20261009140600` están aplicadas y registradas. Cada migración futura vuelve a ejecutar el gate. El puerto publicado de Docker Desktop sigue sin completar el protocolo; el registro de esas dos versiones se hizo por socket, no con `migration repair`.
 
 `BLK-DOC-01`: resuelto el 2026-10-08. `product_code` es el código funcional de Commercial Core V1 y queda `in_progress`. El historial está en la sección 2 y la decisión en la sección 4 de [DECISIONS_AND_BLOCKERS.md](DECISIONS_AND_BLOCKERS.md).
 
@@ -102,11 +102,13 @@ Se persistió el plan. No se eligió base comisionable, ni pago parcial, ni plaz
 
 2026-10-09: implementación quirúrgica de `BLK-CRM-02` tras decisión humana. En esa sesión el gate falló y el SQL no se ejecutó. Ese estado quedó superado el mismo día; la entrada siguiente es la vigente.
 
-2026-10-09: validación local de la corrección post-auditoría. No reabre P03-T01..T07 y no inicia P04-T01. En `supabase_db_OrderOps`, los 19 tests SQL de Commercial Core terminaron PASS. Las 21 migraciones comerciales se reprodujeron en un PostgreSQL 17 descartable. Las tres carreras reales terminaron PASS en `orderops_concurrency_discard_637eda1b`: AUD-P03-01, AUD-P03-02 y BLK-CRM-02, exit 0, con limpieza exit 0. `verify-cleanup` exit 0: `retained_audit_events=1`, `retained_actor_accounts=1`, `retained_actor_users=1`. `CONCURRENCY_HARNESS_TEARDOWN: PASS`. TypeScript y `verify-all` PASS. Las filas 1 a 3 de `results.jsonl` son intentos anteriores fallidos o de otro contenedor. Las filas 4 a 6 son la ejecución aprobada. Mecanismo: [CONCURRENCY_HARNESS.md](CONCURRENCY_HARNESS.md). Logs: `%LOCALAPPDATA%\OrderOps\logs\concurrency-h2\20261009-222200-h2-fresh-run-01.txt`, `20261009-223000-h2-verify-fix-01.txt`, `20261009-223400-h2-cleanup-01.txt` y `20261009-223400-h2-cleanup-01-evidence.txt`. `20261009120000` y `20261009140600` están aplicadas en la base local y no registradas. Decisión provisional: no traer las 44 versiones ajenas a esta rama y no ejecutar todavía `migration repair`. Producción no fue validada. PHASE-04 no se inicia.
+2026-10-09: validación local de la corrección post-auditoría. No reabre P03-T01..T07 y no inicia P04-T01. En `supabase_db_OrderOps`, los 19 tests SQL de Commercial Core terminaron PASS. Las 21 migraciones comerciales se reprodujeron en un PostgreSQL 17 descartable. Las tres carreras reales terminaron PASS en `orderops_concurrency_discard_637eda1b`: AUD-P03-01, AUD-P03-02 y BLK-CRM-02, exit 0, con limpieza exit 0. `verify-cleanup` exit 0: `retained_audit_events=1`, `retained_actor_accounts=1`, `retained_actor_users=1`. `CONCURRENCY_HARNESS_TEARDOWN: PASS`. TypeScript y `verify-all` PASS. Las filas 1 a 3 de `results.jsonl` son intentos anteriores fallidos o de otro contenedor. Las filas 4 a 6 son la ejecución aprobada. Mecanismo: [CONCURRENCY_HARNESS.md](CONCURRENCY_HARNESS.md). Logs: `%LOCALAPPDATA%\OrderOps\logs\concurrency-h2\20261009-222200-h2-fresh-run-01.txt`, `20261009-223000-h2-verify-fix-01.txt`, `20261009-223400-h2-cleanup-01.txt` y `20261009-223400-h2-cleanup-01-evidence.txt`. `20261009120000` y `20261009140600` quedaron aplicadas en la base local y, en esa sesión, sin registrar. Decisión provisional: no traer las 44 versiones ajenas a esta rama. Producción no fue validada. PHASE-04 no se inicia. El registro posterior está en la entrada del 2026-10-10.
+
+2026-10-10: cierre local de PHASE-03. P03-T01 a P03-T07 siguen `done` con la evidencia de esta tabla. Gate `node scripts/commercial-core/assert-local-supabase.mjs` exit 0. `schema_migrations` pasó de 108 a 110 filas por una transacción de socket que insertó solo `20261009120000` (`commercial_phase03_audit_hardening`, 10 sentencias) y `20261009140600` (`commercial_blk_crm_02_one_open_dispute`, 5 sentencias), sin reejecutar su SQL. Cada una quedó una vez. Las 108 filas anteriores conservan el MD5 `7c4a48f74cd54246be2f2b9f34113d03`. Las 44 divergencias siguen presentes. `BLK-CRM-02` queda resuelto. `BLK-LEDGER-01` queda abierto. No hay `db push`. Producción no fue validada. El formulario `/demo` y el panel `/promoter` con sesión de promotor no se recorrieron en el navegador. PHASE-04 no se inicia.
 
 ## Próxima tarea segura
 
-No hay tarea de producto autorizada. El siguiente paso, si se autoriza, es el registro local de `20261009120000` y `20261009140600` sin reejecutar su SQL y sin alterar las 44 versiones ajenas. P04-T01 no empieza en esta sesión.
+No hay tarea de producto autorizada. P04-T01 no empieza. `BLK-LEDGER-01` queda para una decisión de integración, fuera de este cierre local.
 
 ## Recuperación
 
