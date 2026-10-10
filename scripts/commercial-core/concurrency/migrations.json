@@ -1,0 +1,23 @@
+[
+  "20261008215314_commercial_phase01_foundations.sql",
+  "20261008233833_commercial_phase01_outbox.sql",
+  "20261009003119_commercial_phase02_crm.sql",
+  "20261009004940_commercial_phase02_dedup.sql",
+  "20261009005251_commercial_phase02_pipeline.sql",
+  "20261009005428_commercial_phase02_demo.sql",
+  "20261009005634_commercial_phase02_board.sql",
+  "20261009005806_commercial_phase02_merge.sql",
+  "20261009013318_commercial_phase02_audit_fix.sql",
+  "20261009015312_commercial_phase03_promoters.sql",
+  "20261009015652_commercial_phase03_verification.sql",
+  "20261009015854_commercial_phase03_verification_grants.sql",
+  "20261009020007_commercial_phase03_claims.sql",
+  "20261009020204_commercial_phase03_attribution.sql",
+  "20261009020422_commercial_phase03_disputes.sql",
+  "20261009020527_commercial_phase03_separation.sql",
+  "20261009020618_commercial_phase03_separation_body.sql",
+  "20261009020811_commercial_phase03_panel.sql",
+  "20261009021459_commercial_phase03_separation_guard.sql",
+  "20261009120000_commercial_phase03_audit_hardening.sql",
+  "20261009140600_commercial_blk_crm_02_one_open_dispute.sql"
+]
