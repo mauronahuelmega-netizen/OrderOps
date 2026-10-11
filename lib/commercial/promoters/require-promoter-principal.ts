@@ -2,6 +2,11 @@ import "server-only";
 
 import { forbidden, redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import {
+  decidePromoterAccess,
+  PROMOTER_LOGIN_PATH,
+  type PromoterAccessDecision
+} from "@/lib/commercial/promoters/promoter-access";
 
 export type PromoterSession = {
   ok?: boolean;
@@ -17,9 +22,13 @@ export async function requirePromoterPrincipal(): Promise<PromoterSession> {
   const {
     data: { user }
   } = await supabase.auth.getUser();
-  if (!user) redirect("/admin/login");
-  const { data } = await supabase.rpc("promoter_session");
+  const { data } = user ? await supabase.rpc("promoter_session") : { data: null };
   const session = (data ?? null) as PromoterSession | null;
-  if (!session || session.ok !== true) forbidden();
+  const decision: PromoterAccessDecision = decidePromoterAccess({
+    hasUser: Boolean(user),
+    sessionOk: session?.ok === true
+  });
+  if (decision === "login") redirect(PROMOTER_LOGIN_PATH);
+  if (decision === "forbidden" || !session) forbidden();
   return session;
 }

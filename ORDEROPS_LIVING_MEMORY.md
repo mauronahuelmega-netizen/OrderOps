@@ -475,6 +475,14 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-10 — Relay local temporal hacia Kong
+
+- **[Local/Infra]** Docker Desktop acepta TCP en los puertos publicados y corta el protocolo antes de HTTP o Postgres. Kong de OrderOps sigue respondiendo dentro de su red. Mientras eso dure, un proceso local fuera del repositorio escucha solo en 127.0.0.1:55422 y copia cada pedido HTTP hacia el contenedor supabase_kong_OrderOps. No cambia credenciales, RLS ni Auth. Se revierte al detener ese proceso y volver a levantar Next sin NEXT_PUBLIC_SUPABASE_URL forzado. Majo no se toca.
+
+### 2026-10-10 — Portal de promotores: login propio
+
+- **[Commercial/Auth]** `/promoter` sin sesion redirige a `/promoter/login`. Antes caia en `/admin/login` porque `requirePromoterPrincipal` lo tenia fijo. El panel queda en `app/promoter/(panel)` y exige `promoter_session` en el servidor. Un usuario autenticado que no es promotor recibe 403. No hay alta publica ni recuperacion de contrasena. `/admin/login` no cambia.
+
 ### 2026-09-08 — RELEASE: modal de pedido manual DEPLOYED
 
 - **[Release]** El bloque de pulido visual/UX del modal de pedido manual está **en producción**. Release commit `13abcc08c8ae7093c359e9e6fdf7dfe7f9bce7e1` (`feat(admin): polish manual order modal`, 29 archivos: 5 runtime + 10 verifies + 14 docs) pusheado non-force a `origin/main`; deploy vía Vercel Git integration `dpl_6YqdcSPSpR6J4cjNtdsSZwPQiL5w` → **Ready** en `https://orderops.vercel.app`. Verify suite **15/15 PASS**, tsc/build PASS, lint sólo con la deuda de tooling conocida. Runtime **frozen**: el fingerprint del diff (`9BA3B67C…F5D6`, 5 archivos, 1061/216) se re-verificó idéntico antes de stagear, así que lo desplegado es exactamente lo certificado. Doc: `docs/admin-manual-order-modal-commit-push-deploy-1.md`. Deuda aceptada sin cambios (P2-QA2 descarte sin confirmación + overlay primer tab stop, P3-QA1, P3-QA2, QA autenticada en producción todavía **unavailable**). Sin DB/migraciones/RPC, 0 pedidos creados, 0 mutaciones de status, 0 WhatsApp. Siguiente bloque: `/admin/products` (`ADMIN-PRODUCTS-MOBILE-VISUAL-DEBT-AUDIT-1`).
