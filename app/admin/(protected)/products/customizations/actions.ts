@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { getActionErrorMessage, logActionFailure } from "@/lib/admin/action-errors";
 import { requireAdminPermission } from "@/lib/admin/context";
+import { promoterCatalogGate, promoterCatalogRejectedMessage } from "@/lib/commercial/onboarding/catalog-action";
 import { revalidatePublicCatalogCache } from "@/lib/catalog/public-cache-tags";
 import {
   getProductCustomizationInheritanceForAdmin,
@@ -107,6 +108,12 @@ export async function createCustomizationGroupAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const supabase = await createSupabaseServerClient();
     const { data, error } = await supabase
@@ -160,6 +167,12 @@ export async function updateCustomizationGroupAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertGroupOwnership(groupId, adminContext.businessId);
     if ("error" in ownership) {
@@ -221,6 +234,12 @@ export async function toggleCustomizationGroupAvailabilityAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertGroupOwnership(groupId, adminContext.businessId);
     if ("error" in ownership) {
@@ -263,6 +282,12 @@ export async function createCustomizationOptionAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertGroupOwnership(groupId, adminContext.businessId);
     if ("error" in ownership) {
@@ -323,6 +348,12 @@ export async function updateCustomizationOptionAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertOptionOwnership(optionId, adminContext.businessId);
     if ("error" in ownership) {
@@ -387,6 +418,12 @@ export async function toggleCustomizationOptionAvailabilityAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertOptionOwnership(optionId, adminContext.businessId);
     if ("error" in ownership) {
@@ -565,6 +602,12 @@ export async function createCustomizationGroupAssignmentAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const groupOwnership = await assertGroupOwnership(
       parsed.groupId,
@@ -654,6 +697,12 @@ export async function updateCustomizationGroupAssignmentAction(
   const isEnabled = getBooleanToggle(formData, "is_enabled");
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertAssignmentOwnership(
       assignmentId,
@@ -702,6 +751,12 @@ export async function toggleCustomizationGroupAssignmentAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertAssignmentOwnership(
       assignmentId,
@@ -750,6 +805,12 @@ export async function removeCustomizationGroupAssignmentAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertAssignmentOwnership(
       assignmentId,
@@ -831,6 +892,12 @@ export async function disableProductCustomizationGroupOverrideAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const productOwnership = await assertProductOwnership(
       productId,
@@ -917,6 +984,12 @@ export async function restoreProductCustomizationGroupOverrideAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const productOwnership = await assertProductOwnership(
       productId,
@@ -964,6 +1037,12 @@ export async function disableProductCustomizationOptionOverrideAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const productOwnership = await assertProductOwnership(
       productId,
@@ -1057,6 +1136,12 @@ export async function restoreProductCustomizationOptionOverrideAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const productOwnership = await assertProductOwnership(
       productId,
@@ -1104,6 +1189,12 @@ export async function createUpsellGroupAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const targetOwnership = await assertTargetOwnership(
       parsed.targetType,
@@ -1186,6 +1277,12 @@ export async function updateUpsellGroupAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertUpsellGroupOwnership(
       upsellGroupId,
@@ -1271,6 +1368,12 @@ export async function toggleUpsellGroupAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertUpsellGroupOwnership(
       upsellGroupId,
@@ -1317,6 +1420,12 @@ export async function addUpsellGroupItemAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const groupOwnership = await assertUpsellGroupOwnership(
       parsed.upsellGroupId,
@@ -1410,6 +1519,12 @@ export async function updateUpsellGroupItemAction(
   const isAvailable = getBooleanToggle(formData, "is_available");
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertUpsellItemOwnership(itemId, adminContext.businessId);
     if ("error" in ownership) {
@@ -1455,6 +1570,12 @@ export async function toggleUpsellGroupItemAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const ownership = await assertUpsellItemOwnership(itemId, adminContext.businessId);
     if ("error" in ownership) {
@@ -1501,6 +1622,13 @@ export async function loadProductCustomizationInheritanceAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        ok: false,
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const data = await getProductCustomizationInheritanceForAdmin(
       adminContext.businessId,
@@ -1536,6 +1664,12 @@ export async function reorderCustomizationGroupsAction(
   const { orderedIds } = parsed;
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const supabase = await createSupabaseServerClient();
 
@@ -1596,6 +1730,12 @@ export async function reorderCustomizationOptionsAction(
   const { orderedIds } = parsed;
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const groupOwnership = await assertGroupOwnership(groupId, adminContext.businessId);
     if ("error" in groupOwnership) {
@@ -1674,6 +1814,12 @@ export async function reorderCustomizationAssignmentsAction(
   const targetType = targetTypeRaw;
 
   try {
+    const promoterGate = await promoterCatalogGate(["price_delta", "is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error: promoterGate.kind === "deny" ? promoterGate.error : promoterCatalogRejectedMessage
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const supabase = await createSupabaseServerClient();
 

@@ -3,9 +3,12 @@
 import { revalidatePath } from "next/cache";
 import { getActionErrorMessage, logActionFailure } from "@/lib/admin/action-errors";
 import { requireAdminPermission } from "@/lib/admin/context";
+import { promoterCatalogGate } from "@/lib/commercial/onboarding/catalog-action";
+import { presentCatalogFields } from "@/lib/commercial/onboarding/catalog-guard";
 import { revalidatePublicCatalogCache } from "@/lib/catalog/public-cache-tags";
 import { getAdminProductById, type AdminProduct } from "@/lib/products/admin";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import type { Json } from "@/types/database";
 
 type ActionState = {
   error?: string;
@@ -79,6 +82,17 @@ export async function createProductAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(
+      presentCatalogFields(formData, ["price", "stock", "track_stock", "sku", "is_available", "price_delta"])
+    );
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error:
+          promoterGate.kind === "deny"
+            ? promoterGate.error
+            : "No se puede crear un producto: el alta exige un precio y el promotor no puede fijarlo."
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const supabase = await createSupabaseServerClient();
 
@@ -142,6 +156,15 @@ export async function setProductAvailabilityAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["is_available"]);
+    if (promoterGate.kind === "deny" || promoterGate.kind === "promoter") {
+      return {
+        error:
+          promoterGate.kind === "deny"
+            ? promoterGate.error
+            : "No se puede cambiar la disponibilidad."
+      };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const supabase = await createSupabaseServerClient();
 
@@ -222,6 +245,22 @@ export async function updateProductAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(
+      presentCatalogFields(formData, ["price", "stock", "track_stock", "sku", "is_available", "price_delta"])
+    );
+    if (promoterGate.kind === "deny") {
+      return { error: promoterGate.error };
+    }
+    if (promoterGate.kind === "promoter") {
+      return applyPromoterCatalog({
+        kind: "product_update",
+        product_id: productId,
+        name,
+        description,
+        category_id: categoryId,
+        ...(typeof imageUrl === "string" ? { image_url: imageUrl } : {})
+      });
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const supabase = await createSupabaseServerClient();
 
@@ -380,6 +419,30 @@ async function resolveProductSkuForCreate(input: {
   const paddedNumber = String(nextNumber).padStart(3, "0");
 
   return { sku: `${prefix}-${paddedNumber}` };
+}
+
+async function applyPromoterCatalog(payload: Json): Promise<ActionState> {
+  const supabase = await createSupabaseServerClient();
+  const { data, error } = await supabase.rpc("promoter_apply_catalog", { p_payload: payload });
+  if (error) {
+    return { error: "No pudimos guardar el contenido." };
+  }
+  const result = data as { ok?: boolean; commercial_error_code?: string } | null;
+  if (!result?.ok) {
+    if (result?.commercial_error_code === "grant_expired") {
+      return { error: "La autorización de onboarding venció." };
+    }
+    if (result?.commercial_error_code === "grant_missing" || result?.commercial_error_code === "grant_not_client_approved") {
+      return { error: "No hay una autorización vigente para este negocio." };
+    }
+    if (result?.commercial_error_code === "grant_field_forbidden") {
+      return { error: "No se puede guardar: la operación incluye precio, stock, disponibilidad o SKU." };
+    }
+    return { error: "No pudimos guardar el contenido." };
+  }
+  revalidatePath("/admin/products");
+  revalidatePath("/admin/categories");
+  return { success: true };
 }
 
 async function validateCategoryOwnership(input: {

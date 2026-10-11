@@ -1043,6 +1043,7 @@ export type Database = {
         Returns: Json;
       };
       promoter_add_note: { Args: { p_body: string; p_opportunity_id: string }; Returns: Json };
+      promoter_apply_catalog: { Args: { p_payload: Json }; Returns: Json };
       promoter_overview: { Args: Record<string, never>; Returns: Json };
       promoter_session: { Args: Record<string, never>; Returns: Json };
       promoter_transition_opportunity: {

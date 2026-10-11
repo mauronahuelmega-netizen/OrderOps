@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { getActionErrorMessage, logActionFailure } from "@/lib/admin/action-errors";
 import { requireAdminPermission } from "@/lib/admin/context";
+import { promoterCatalogGate } from "@/lib/commercial/onboarding/catalog-action";
 import { revalidatePublicCatalogCache } from "@/lib/catalog/public-cache-tags";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
@@ -24,6 +25,23 @@ export async function createCategoryAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["name"]);
+    if (promoterGate.kind === "deny") {
+      return { error: promoterGate.error };
+    }
+    if (promoterGate.kind === "promoter") {
+      const supabase = await createSupabaseServerClient();
+      const { data, error } = await supabase.rpc("promoter_apply_catalog", {
+        p_payload: { kind: "category_create", name }
+      });
+      const result = data as { ok?: boolean } | null;
+      if (error || !result?.ok) {
+        return { error: "No pudimos crear la categoria." };
+      }
+      revalidatePath("/admin/categories");
+      revalidatePath("/admin/products");
+      return { success: true };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const supabase = await createSupabaseServerClient();
     const { data, error } = await supabase
@@ -72,6 +90,23 @@ export async function updateCategoryAction(
   }
 
   try {
+    const promoterGate = await promoterCatalogGate(["name"]);
+    if (promoterGate.kind === "deny") {
+      return { error: promoterGate.error };
+    }
+    if (promoterGate.kind === "promoter") {
+      const supabase = await createSupabaseServerClient();
+      const { data, error } = await supabase.rpc("promoter_apply_catalog", {
+        p_payload: { kind: "category_update", category_id: categoryId, name }
+      });
+      const result = data as { ok?: boolean } | null;
+      if (error || !result?.ok) {
+        return { error: "No pudimos actualizar la categoria." };
+      }
+      revalidatePath("/admin/categories");
+      revalidatePath("/admin/products");
+      return { success: true };
+    }
     const adminContext = await requireAdminPermission("manageProducts");
     const supabase = await createSupabaseServerClient();
 
