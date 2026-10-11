@@ -26,6 +26,7 @@ Las decisiones de ingeniería de la sección 1 están cerradas para implementar.
 | ENG-18 | Setup commission = monto fijo del snapshot, no 40 % de 290_000 | La spec fija ARS 120_000 |
 | ENG-19 | Recurrente nominal = `eligible_base_cents * bps / 10000` | 40 % de 55_000 = 22_000, que la propia spec tabula |
 | ENG-20 | Fecha prevista de pago = día 10 del mes siguiente o, si se usa como dato, el campo `due_on`. No dispara transferencia | CC-26 y CC-27 |
+| ENG-21 | Stock, disponibilidad, SKU y `price_delta` quedan prohibidos para el promotor en V1. Un POST que los mezcla con contenido se rechaza entero. El alta de producto también se rechaza, porque `products.price` es obligatorio y no se inventa un precio | PHASE-04 pide ser más estricto que dudar. No cambia el precio ni la RLS del dueño |
 
 ## 2. Bloqueos abiertos
 

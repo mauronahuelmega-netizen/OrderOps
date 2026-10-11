@@ -1,9 +1,9 @@
 # Progress — Commercial Core V1
 
 ```yaml
-updated_at: 2026-10-10
+updated_at: 2026-10-11
 implementation_authorized: yes
-current_phase: PHASE-03
+current_phase: PHASE-04
 current_task: none
 product_code: in_progress
 phase_01: closed
@@ -11,10 +11,12 @@ phase_02: closed
 phase_03: closed_local
 phase_03_formal_close: closed_local
 phase_03_post_audit: runtime_validated_ledger_registered
-next_task: none
+phase_04: closed_local
+next_task: P05-T01
+PHASE_04_STATUS: CLOSED_LOCAL
 ```
 
-El paquete documental de `docs/commercial-core-v1/` se escribió en esta fecha. P03-T01 a P03-T07 están hechas. El 2026-10-10 PHASE-03 queda cerrada en alcance local: corrección post-auditoría y `BLK-CRM-02` validadas, y `20261009120000` y `20261009140600` registradas en `schema_migrations` (110 filas). `BLK-LEDGER-01` sigue abierto: 44 versiones históricas de otras ramas no están en este repositorio. Esta rama y esta base no son origen de `db push`. Producción no fue validada. El smoke de navegador del formulario y del panel de promotor sigue pendiente. PHASE-04 no está iniciada ni autorizada.
+P04-T01 a P04-T04 quedaron hechas en local el 2026-10-11. `schema_migrations` tiene 117 filas. Las siete versiones nuevas de esta fase están registradas una vez: `20261011020000`, `20261011021000`, `20261011021100`, `20261011021200`, `20261011022000`, `20261011022100` y `20261011023000`. `BLK-LEDGER-01` sigue abierto: las 44 versiones históricas de otras ramas no se incorporaron. Esta rama y esta base no son origen de `db push`. PHASE-05 no está iniciada. No hay pantalla de onboarding ni editor de catálogo para el promotor.
 
 ## Tareas
 
@@ -37,10 +39,10 @@ El paquete documental de `docs/commercial-core-v1/` se escribió en esta fecha. 
 | P03-T05 | 03 | done | 2026-10-08. Gate exit 0. `supabase migration up --local` aplicó `20261009020422`. `phase03_disputes.sql` exit 0 (ROLLBACK): el promotor no decide; la parte lee el expediente sin listar comisiones; el otro promotor recibe `forbidden`; la decisión `none` no borra la atribución. |
 | P03-T06 | 03 | done | 2026-10-08. Gate exit 0. `supabase migration up --local` registró el archivo vacío `20261009020527` y aplicó el cuerpo en `20261009020618`. `e2e_06.sql` exit 0 (ROLLBACK): status `separated`, oportunidad reasignada, protección de 90 días solo con atribución confirmada e interacción previa, el claim provisional no protege, el contrato sigue, un claim nuevo es `promoter_not_active`. No hay comisiones. `20261009021459` impide que `transition_promoter_status` marque `separated`; ese estado solo sale de `separate_promoter`. `phase03_promoters.sql` reejecutado, exit 0. |
 | P03-T07 | 03 | done | 2026-10-08. Gate exit 0. `supabase migration up --local` aplicó `20261009020811`. `phase03_panel.sql` exit 0 (ROLLBACK): B no ve el claim ni el nombre de A; `registered` no registra comercio; `won` es `forbidden`. `phase03_merge_attribution.sql` exit 0: la fusión no cambia `promoter_id`. `npx tsx` vía `verify-all` incluye `promoter-panel.verify` y `promoter-status.verify`. El panel usa el cliente de sesión, no service role. |
-| P04-T01 | 04 | pending | — |
-| P04-T02 | 04 | pending | — |
-| P04-T03 | 04 | pending | — |
-| P04-T04 | 04 | pending | — |
+| P04-T01 | 04 | done | 2026-10-11. Gate exit 0 (`127.0.0.1:54321` / `127.0.0.1:54322`). `20261011020000` aplicada en `supabase_db_OrderOps`, ledger 111. `phase04_conversion.sql` exit 0 (ROLLBACK): promotor y comercial reciben `won_forbidden`, business nulo recibe `won_requires_business`, superadmin congela founder v1, la versión 2 del programa no cambia el snapshot y el UPDATE es `terms_immutable`. La función no menciona `promoter_commissions`. `verify-all` incluye `conversion-snapshot.verify`. |
+| P04-T02 | 04 | done | 2026-10-11. Gate exit 0. `20261011021000`, `20261011021100` y `20261011021200` aplicadas, ledger 114. `phase04_grants.sql` exit 0 (ROLLBACK): el promotor no aprueba el propio grant, el dueño de otro negocio tampoco, 31 días es `validation`, la extensión de `ends_at` es `grant_extension_forbidden`, la renovación es otra fila, la excepción sin motivo falla, revocar y completar cierran, y `separate_promoter` no deja grants abiertos. `e2e_06.sql` exit 0. |
+| P04-T03 | 04 | done | 2026-10-11. Gate exit 0. `20261011022000` y `20261011022100` aplicadas, ledger 116. `phase04_catalog.sql` exit 0 (ROLLBACK): el dueño deja el precio en 250, el promotor cambia la descripción, un payload con precio es `grant_field_forbidden` y no escribe, el UPDATE directo del promotor no cambia el precio, crea una categoría y un grant revocado no cambia la descripción. `catalog-guard.verify` exit 0. El dueño sigue pasando por `requireAdminPermission("manageProducts")`. `lib/admin/permissions.ts` no cambia el mapa. |
+| P04-T04 | 04 | done | 2026-10-11. Gate exit 0. `20261011023000` aplicada, ledger 117. `phase04_e2e10.sql` exit 0 (ROLLBACK): aprobación a 30 días, descripción persistida, precio rechazado, revocación bloquea, `ends_at` vencido bloquea aunque `status` siga `active`, y `expire_onboarding_grants` marca `expired` sin borrar la fila ni el evento. No existen `promoter_commissions`, `platform_collections` ni `service_subscriptions`. |
 | P05-T01 | 05 | pending | — |
 | P05-T02 | 05 | pending | — |
 | P05-T03 | 05 | pending | — |
@@ -66,7 +68,7 @@ Siguen abiertos en [DECISIONS_AND_BLOCKERS.md](DECISIONS_AND_BLOCKERS.md): `BLK-
 
 `BLK-CRM-02`: resuelto y validado en local el 2026-10-09. `20261009140600` está aplicada y registrada una vez en `schema_migrations`. El índice `attribution_disputes_one_open_per_opportunity_idx` existe. La carrera BLK-CRM-02 del harness terminó PASS.
 
-`BLK-LEDGER-01`: abierto como dependencia de integración general, no como tarea de PHASE-03. `schema_migrations` tiene 110 filas. Esta rama tiene 66 archivos de migración. Faltan en la rama 44 versiones ya aplicadas en la base local: 37 de finanzas, M2 y M3 presentes en `main` local y ausentes de `origin/main`, y 7 de catálogo presentes solo en las ramas cloud-agent `cursor/cloud-agent-1791514230963-191bx` y `cursor/cloud-agent-1791515001926-p4cht` (esta última también en origin). No se incorporan a esta rama. Esta rama y esta base no son origen de `db push`.
+`BLK-LEDGER-01`: abierto. `schema_migrations` tiene 117 filas después de PHASE-04. Las 44 versiones históricas de otras ramas siguen fuera de este repositorio. No se registraron ni se reconstruyeron. Esta rama y esta base no son origen de `db push`.
 
 `BLK-ENV-01`: el gate falló en la sesión Cloud Agent del 2026-10-09 y esa evidencia histórica se conserva abajo. En la máquina local el gate pasó después. `20261009120000` y `20261009140600` están aplicadas y registradas. Cada migración futura vuelve a ejecutar el gate. El puerto publicado de Docker Desktop sigue sin completar el protocolo; el registro de esas dos versiones se hizo por socket, no con `migration repair`.
 
@@ -106,9 +108,11 @@ Se persistió el plan. No se eligió base comisionable, ni pago parcial, ni plaz
 
 2026-10-10: cierre local de PHASE-03. P03-T01 a P03-T07 siguen `done` con la evidencia de esta tabla. Gate `node scripts/commercial-core/assert-local-supabase.mjs` exit 0. `schema_migrations` pasó de 108 a 110 filas por una transacción de socket que insertó solo `20261009120000` (`commercial_phase03_audit_hardening`, 10 sentencias) y `20261009140600` (`commercial_blk_crm_02_one_open_dispute`, 5 sentencias), sin reejecutar su SQL. Cada una quedó una vez. Las 108 filas anteriores conservan el MD5 `7c4a48f74cd54246be2f2b9f34113d03`. Las 44 divergencias siguen presentes. `BLK-CRM-02` queda resuelto. `BLK-LEDGER-01` queda abierto. No hay `db push`. Producción no fue validada. El formulario `/demo` y el panel `/promoter` con sesión de promotor no se recorrieron en el navegador. PHASE-04 no se inicia.
 
+2026-10-11: PHASE-04 cerrada en local. P04-T01 a P04-T04 están `done`. Gate exit 0 en cada escritura (`127.0.0.1:54321` / `127.0.0.1:54322`). Ledger 110 → 117, una fila por versión nueva. `phase04_conversion.sql`, `phase04_grants.sql`, `e2e_06.sql`, `phase04_catalog.sql` y `phase04_e2e10.sql` exit 0, todos con ROLLBACK. `verify-all` exit 0 (12 archivos). No hay comisiones ni cobranzas. `BLK-LEDGER-01` sigue abierto. PHASE-05 no se inicia.
+
 ## Próxima tarea segura
 
-No hay tarea de producto autorizada. P04-T01 no empieza. `BLK-LEDGER-01` queda para una decisión de integración, fuera de este cierre local.
+`next_task` es P05-T01. No está autorizada por este cierre. `BLK-LEDGER-01` sigue abierto.
 
 ## Recuperación
 

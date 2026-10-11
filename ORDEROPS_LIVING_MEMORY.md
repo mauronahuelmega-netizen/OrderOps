@@ -475,6 +475,13 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-11 — Commercial Core PHASE-04
+
+- **[Commercial/Conversión]** `win_opportunity` exige `opportunity.win`, un `public.businesses` existente y atribución confirmada, o protección vigente si el promotor está separado. Copia el programa a `conversion_terms` y encola `conversion.terms_frozen`. No crea comisiones, cobranzas ni suscripciones.
+- **[Commercial/Onboarding]** `onboarding_grants` y su historial. Aprueba el dueño o encargado del negocio, o un superadmin con motivo. Tope de 30 días. Renovar es otra fila. Revocar, completar y separar al promotor cierran la escritura. `expire_onboarding_grants` marca `expired` sin borrar filas. El reloj se consulta aunque el estado siga `active`.
+- **[Commercial/Catálogo]** El promotor escribe solo por `promoter_apply_catalog`: nombre, descripción, categoría, imagen y texto de opción. Precio, stock, disponibilidad, SKU y `price_delta` rechazan la operación entera. El dueño sigue en `requireAdminPermission("manageProducts")`. La RLS general de productos no se abrió. El trigger vivo de posición de categorías acepta además un grant vigente, sin cambiar las reglas de owner, manager, admin ni super_admin.
+- **[UI]** No hay pantalla de onboarding ni editor de catálogo para el promotor. El formulario actual de productos envía precio, así que esa pantalla rechaza al promotor.
+
 ### 2026-10-10 — Relay local temporal hacia Kong
 
 - **[Local/Infra]** Docker Desktop acepta TCP en los puertos publicados y corta el protocolo antes de HTTP o Postgres. Kong de OrderOps sigue respondiendo dentro de su red. Mientras eso dure, un proceso local fuera del repositorio escucha solo en 127.0.0.1:55422 y copia cada pedido HTTP hacia el contenedor supabase_kong_OrderOps. No cambia credenciales, RLS ni Auth. Se revierte al detener ese proceso y volver a levantar Next sin NEXT_PUBLIC_SUPABASE_URL forzado. Majo no se toca.
