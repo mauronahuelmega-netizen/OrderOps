@@ -475,6 +475,12 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-11 — Lecturas de onboarding y pantallas mínimas
+
+- **[Commercial/Onboarding]** Después del cierre local de PHASE-04. `promoter_onboarding_businesses`, `promoter_onboarding_products` y `business_onboarding_requests` solo leen. No cambian grants ni el catálogo. El promotor ve sus comercios convertidos y, con grant vigente, nombre y descripción de productos. El dueño ve las solicitudes de su negocio.
+- **[UI]** `/promoter/onboarding` y `/admin/onboarding`. El editor del promotor envía nombre y descripción. PHASE-04 sigue `CLOSED_LOCAL`. PHASE-05 no empieza. `BLK-LEDGER-01` sigue abierto.
+- **[Smoke]** PASS en el navegador el 2026-10-11. Aprobar, editar la descripción y revocar quedaron comprobados. El precio siguió en 180.00 y el guardado posterior respondió `grant_missing`. `allowedDevOrigins` suma `127.0.0.1` y `localhost` junto al origen LAN ya existente; la opción solo aplica al servidor de desarrollo.
+
 ### 2026-10-11 — Commercial Core PHASE-04
 
 - **[Commercial/Conversión]** `win_opportunity` exige `opportunity.win`, un `public.businesses` existente y atribución confirmada, o protección vigente si el promotor está separado. Copia el programa a `conversion_terms` y encola `conversion.terms_frozen`. No crea comisiones, cobranzas ni suscripciones.

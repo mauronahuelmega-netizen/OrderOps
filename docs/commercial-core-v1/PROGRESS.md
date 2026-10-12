@@ -16,7 +16,11 @@ next_task: P05-T01
 PHASE_04_STATUS: CLOSED_LOCAL
 ```
 
-P04-T01 a P04-T04 quedaron hechas en local el 2026-10-11. `schema_migrations` tiene 117 filas. Las siete versiones nuevas de esta fase están registradas una vez: `20261011020000`, `20261011021000`, `20261011021100`, `20261011021200`, `20261011022000`, `20261011022100` y `20261011023000`. `BLK-LEDGER-01` sigue abierto: las 44 versiones históricas de otras ramas no se incorporaron. Esta rama y esta base no son origen de `db push`. PHASE-05 no está iniciada. No hay pantalla de onboarding ni editor de catálogo para el promotor.
+P04-T01 a P04-T04 quedaron hechas en local el 2026-10-11. Ese cierre no se reabre. `PHASE_04_STATUS` sigue `CLOSED_LOCAL` y `next_task` sigue `P05-T01`. `BLK-LEDGER-01` sigue abierto.
+
+Después del cierre, la tarea PROMOTER-ONBOARDING-UI-V1 agregó lecturas de solo lectura en `20261011030000` y las pantallas mínimas de asistencia. `schema_migrations` pasa a 118 filas. Las siete versiones de PHASE-04 permanecen registradas una vez. PHASE-05 no está iniciada.
+
+El smoke del navegador quedó PASS el 2026-10-11: el dueño aprobó, el promotor cambió la descripción, el precio siguió en 180.00 y la revocación dejó el guardado posterior en `grant_missing`. `allowedDevOrigins` admite `127.0.0.1`, `localhost` y `192.168.100.28` solo en el servidor de desarrollo. PHASE-05 no está iniciada.
 
 ## Tareas
 

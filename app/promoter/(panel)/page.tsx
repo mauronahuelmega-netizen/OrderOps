@@ -21,7 +21,7 @@ export default async function PromoterHomePage() {
       <p>Oportunidades: {overview.opportunities?.length ?? 0}</p>
       <p>Reclamaciones: {overview.claims?.length ?? 0}</p>
       <p>Tareas: {overview.tasks?.length ?? 0}</p>
-      <p className={styles.muted}>Onboarding: disponible en una fase posterior.</p>
+      <p className={styles.muted}>Asistencia de onboarding: disponible en Asistencia.</p>
       <p className={styles.muted}>Comisiones: disponible en una fase posterior.</p>
       <p className={styles.muted}>Liquidaciones: disponible en una fase posterior.</p>
     </section>

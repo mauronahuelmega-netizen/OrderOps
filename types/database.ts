@@ -1044,6 +1044,23 @@ export type Database = {
       };
       promoter_add_note: { Args: { p_body: string; p_opportunity_id: string }; Returns: Json };
       promoter_apply_catalog: { Args: { p_payload: Json }; Returns: Json };
+      promoter_onboarding_businesses: { Args: Record<string, never>; Returns: Json };
+      promoter_onboarding_products: { Args: { p_business_id: string }; Returns: Json };
+      business_onboarding_requests: { Args: Record<string, never>; Returns: Json };
+      request_onboarding_grant: {
+        Args: { p_business_id: string; p_opportunity_id: string | null; p_promoter_id: string };
+        Returns: Json;
+      };
+      respond_onboarding_grant: {
+        Args: {
+          p_decision: string;
+          p_ends_at: string | null;
+          p_exception_reason: string | null;
+          p_grant_id: string;
+        };
+        Returns: Json;
+      };
+      revoke_onboarding_grant: { Args: { p_grant_id: string; p_reason: string }; Returns: Json };
       promoter_overview: { Args: Record<string, never>; Returns: Json };
       promoter_session: { Args: Record<string, never>; Returns: Json };
       promoter_transition_opportunity: {

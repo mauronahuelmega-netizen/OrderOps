@@ -32,6 +32,12 @@ export const adminNavItems: AdminNavItem[] = [
     requiredFeatureFlag: "kitchen_mode_active"
   },
   {
+    href: "/admin/onboarding",
+    label: "Asistencia",
+    matchPrefixes: ["/admin/onboarding"],
+    requiredPermission: "manageProducts"
+  },
+  {
     href: "/admin/products",
     label: "Productos",
     matchPrefixes: [

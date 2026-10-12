@@ -14,6 +14,7 @@ export default async function PromoterPanelLayout({ children }: { children: Reac
         <nav className={styles.nav} aria-label="Portal de promotores">
           <Link href="/promoter">Inicio</Link>
           <Link href="/promoter/businesses">Comercios</Link>
+          <Link href="/promoter/onboarding">Asistencia</Link>
           <Link href="/promoter/opportunities">Oportunidades</Link>
           <Link href="/promoter/claims">Reclamaciones</Link>
           <Link href="/promoter/tasks">Tareas</Link>

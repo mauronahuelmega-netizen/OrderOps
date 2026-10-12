@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   ClipboardList,
   CookingPot,
+  Handshake,
   Package,
   Settings,
   type LucideIcon
@@ -21,6 +22,7 @@ type AdminNavListProps = {
 const ADMIN_NAV_ICONS: Record<string, LucideIcon> = {
   "/admin/dashboard": ClipboardList,
   "/admin/kitchen": CookingPot,
+  "/admin/onboarding": Handshake,
   "/admin/products": Package,
   "/admin/settings": Settings
 };

@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // DEV-only: allow HMR /_next/* from LAN phone (restart `npm run dev` after change).
-  allowedDevOrigins: ["192.168.100.28"],
+  allowedDevOrigins: ["127.0.0.1", "localhost", "192.168.100.28"],
   async headers() {
     return [
       {
