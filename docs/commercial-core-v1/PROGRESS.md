@@ -1,7 +1,7 @@
 # Progress — Commercial Core V1
 
 ```yaml
-updated_at: 2026-10-11
+updated_at: 2026-10-12
 implementation_authorized: yes
 current_phase: PHASE-04
 current_task: none
@@ -16,7 +16,7 @@ next_task: P05-T01
 PHASE_04_STATUS: CLOSED_LOCAL
 ```
 
-P04-T01 a P04-T04 quedaron hechas en local el 2026-10-11. Ese cierre no se reabre. `PHASE_04_STATUS` sigue `CLOSED_LOCAL` y `next_task` sigue `P05-T01`. `BLK-LEDGER-01` sigue abierto.
+P04-T01 a P04-T04 quedaron hechas en local el 2026-10-11. Ese cierre no se reabre. `PHASE_04_STATUS` sigue `CLOSED_LOCAL` y `next_task` sigue `P05-T01`. `BLK-LEDGER-01` quedó `CLOSED_LOCAL` el 2026-10-12. PHASE-05 no está iniciada.
 
 Después del cierre, la tarea PROMOTER-ONBOARDING-UI-V1 agregó lecturas de solo lectura en `20261011030000` y las pantallas mínimas de asistencia. `schema_migrations` pasa a 118 filas. Las siete versiones de PHASE-04 permanecen registradas una vez. PHASE-05 no está iniciada.
 
@@ -72,7 +72,7 @@ Siguen abiertos en [DECISIONS_AND_BLOCKERS.md](DECISIONS_AND_BLOCKERS.md): `BLK-
 
 `BLK-CRM-02`: resuelto y validado en local el 2026-10-09. `20261009140600` está aplicada y registrada una vez en `schema_migrations`. El índice `attribution_disputes_one_open_per_opportunity_idx` existe. La carrera BLK-CRM-02 del harness terminó PASS.
 
-`BLK-LEDGER-01`: abierto. `schema_migrations` tiene 117 filas después de PHASE-04. Las 44 versiones históricas de otras ramas siguen fuera de este repositorio. No se registraron ni se reconstruyeron. Esta rama y esta base no son origen de `db push`.
+`BLK-LEDGER-01`: `CLOSED_LOCAL` el 2026-10-12. El commit `67b64c08a4c9b7628dbe0d27a1c05cea79765fc0` dejó las 118 migraciones en Git. La instalación aislada `orderops-ledger-rebuild`, en `C:\Users\Oasis Desktop\AppData\Local\OrderOps\ledger-rebuild-20261012`, aplicó las 118 sin fallos y reprodujo el esquema de aplicación (`public`, `commercial`, `private`, `migration_private`). La única diferencia de catálogo es CRLF/LF en `public.save_category_display_order(uuid[])`: misma firma, `SECURITY DEFINER` y el mismo MD5 del cuerpo sin espacios. Evidencia fuera del repositorio: `evidence/REPORT.md`, `evidence/main.txt`, `evidence/rebuild.txt` y `evidence/line-diffs.json`. No se ejecutaron las suites funcionales sobre esa base temporal. Producción no fue validada. La instalación temporal sigue encendida y su retiro queda para una tarea posterior. Esta base local no es origen de `db push`. PHASE-05 no se inicia.
 
 `BLK-ENV-01`: el gate falló en la sesión Cloud Agent del 2026-10-09 y esa evidencia histórica se conserva abajo. En la máquina local el gate pasó después. `20261009120000` y `20261009140600` están aplicadas y registradas. Cada migración futura vuelve a ejecutar el gate. El puerto publicado de Docker Desktop sigue sin completar el protocolo; el registro de esas dos versiones se hizo por socket, no con `migration repair`.
 
@@ -114,9 +114,11 @@ Se persistió el plan. No se eligió base comisionable, ni pago parcial, ni plaz
 
 2026-10-11: PHASE-04 cerrada en local. P04-T01 a P04-T04 están `done`. Gate exit 0 en cada escritura (`127.0.0.1:54321` / `127.0.0.1:54322`). Ledger 110 → 117, una fila por versión nueva. `phase04_conversion.sql`, `phase04_grants.sql`, `e2e_06.sql`, `phase04_catalog.sql` y `phase04_e2e10.sql` exit 0, todos con ROLLBACK. `verify-all` exit 0 (12 archivos). No hay comisiones ni cobranzas. `BLK-LEDGER-01` sigue abierto. PHASE-05 no se inicia.
 
+2026-10-12: `BLK-LEDGER-01` queda `CLOSED_LOCAL`. El commit de recuperación es `67b64c08a4c9b7628dbe0d27a1c05cea79765fc0`. La reconstrucción aislada `orderops-ledger-rebuild` terminó `BLK_LEDGER_REBUILD: PASS`: 118 archivos, 118 versiones aplicadas, ninguna migración fallida. La comparación cubrió relaciones, columnas, constraints, índices, funciones y `SECURITY DEFINER`, triggers, políticas RLS, grants, vistas, tipos, secuencias y la publicación realtime de los esquemas `public`, `commercial`, `private` y `migration_private`. La única delta es CRLF/LF en `public.save_category_display_order(uuid[])`, sin divergencia semántica. Evidencia en `%LOCALAPPDATA%\OrderOps\ledger-rebuild-20261012\evidence\`. No se repitió la reconstrucción ni se ejecutaron suites funcionales sobre la base temporal. Producción no fue validada. El entorno temporal sigue encendido. PHASE-04 sigue `CLOSED_LOCAL`. PHASE-05 no se inicia.
+
 ## Próxima tarea segura
 
-`next_task` es P05-T01. No está autorizada por este cierre. `BLK-LEDGER-01` sigue abierto.
+`next_task` es P05-T01. Este cierre no la autoriza. `BLK-LEDGER-01` queda `CLOSED_LOCAL`. PHASE-05 no se inicia.
 
 ## Recuperación
 

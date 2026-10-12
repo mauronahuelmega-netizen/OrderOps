@@ -475,6 +475,12 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-12 — BLK-LEDGER-01 cerrado en local
+
+- **[DB/Docs]** `BLK-LEDGER-01: CLOSED_LOCAL`. El repositorio contiene las 118 migraciones registradas. El commit de recuperación es `67b64c08a4c9b7628dbe0d27a1c05cea79765fc0`. La instalación aislada `orderops-ledger-rebuild` (`C:\Users\Oasis Desktop\AppData\Local\OrderOps\ledger-rebuild-20261012`) aplicó el historial completo sin fallos y reprodujo el esquema de aplicación. Resultado: `BLK_LEDGER_REBUILD: PASS`.
+- **[Comparación]** Esquemas `public`, `commercial`, `private` y `migration_private`: relaciones, columnas, constraints, índices, funciones, `SECURITY DEFINER`, triggers, políticas RLS, grants, vistas, tipos, secuencias y publicación realtime. La única diferencia es CRLF/LF en `public.save_category_display_order(uuid[])`. Firma, `SECURITY DEFINER` y el cuerpo sin espacios coinciden. No hay divergencia semántica observable.
+- **[Límites]** No se ejecutaron las suites funcionales sobre la base temporal. Producción no fue validada. La instalación temporal sigue encendida; su retiro queda para una tarea posterior. PHASE-04 sigue `CLOSED_LOCAL`. PHASE-05 no empieza. Evidencia: `evidence/REPORT.md`, `evidence/main.txt`, `evidence/rebuild.txt`, `evidence/line-diffs.json`.
+
 ### 2026-10-11 — Lecturas de onboarding y pantallas mínimas
 
 - **[Commercial/Onboarding]** Después del cierre local de PHASE-04. `promoter_onboarding_businesses`, `promoter_onboarding_products` y `business_onboarding_requests` solo leen. No cambian grants ni el catálogo. El promotor ve sus comercios convertidos y, con grant vigente, nombre y descripción de productos. El dueño ve las solicitudes de su negocio.
