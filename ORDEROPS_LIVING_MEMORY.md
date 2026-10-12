@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-12 — P05-T01 obligaciones y cobranzas
+
+- **[Commercial/Economía]** `platform_obligations` y `platform_collections`. Finanzas abre la obligación con el precio congelado de `conversion_terms` y registra la cobranza. El bruto igual al precio de lista queda `nominal`. El bruto distinto queda `blocked_pending_policy`, con base nula, y la obligación pasa a `satisfied`. Un `failed` no la satisface. No hay comisiones, slots, liquidaciones, facturas ni pagos. La reversa no entra por `record_collection`.
+- **[DB]** Migración `20261012030000_commercial_phase05_collections.sql` aplicada solo en `supabase_db_OrderOps`. Ledger 119. PHASE-04 sigue `CLOSED_LOCAL`. PHASE-05 queda `IN_PROGRESS`. P05-T01 `DONE_LOCAL`. `next_task` es P05-T02 y no está iniciada. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos.
+
 ### 2026-10-12 — BLK-LEDGER-01 cerrado en local
 
 - **[DB/Docs]** `BLK-LEDGER-01: CLOSED_LOCAL`. El repositorio contiene las 118 migraciones registradas. El commit de recuperación es `67b64c08a4c9b7628dbe0d27a1c05cea79765fc0`. La instalación aislada `orderops-ledger-rebuild` (`C:\Users\Oasis Desktop\AppData\Local\OrderOps\ledger-rebuild-20261012`) aplicó el historial completo sin fallos y reprodujo el esquema de aplicación. Resultado: `BLK_LEDGER_REBUILD: PASS`.

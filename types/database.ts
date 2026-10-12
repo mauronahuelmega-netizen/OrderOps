@@ -1047,6 +1047,20 @@ export type Database = {
       promoter_onboarding_businesses: { Args: Record<string, never>; Returns: Json };
       promoter_onboarding_products: { Args: { p_business_id: string }; Returns: Json };
       business_onboarding_requests: { Args: Record<string, never>; Returns: Json };
+      open_obligation: {
+        Args: { p_terms_id: string; p_kind: string; p_period_key: string | null };
+        Returns: Json;
+      };
+      record_collection: {
+        Args: {
+          p_obligation_id: string;
+          p_idempotency_key: string;
+          p_status: string;
+          p_gross_cents: number;
+          p_external_ref: string | null;
+        };
+        Returns: Json;
+      };
       request_onboarding_grant: {
         Args: { p_business_id: string; p_opportunity_id: string | null; p_promoter_id: string };
         Returns: Json;
@@ -1883,6 +1897,130 @@ export type Database = {
         };
         Relationships: [];
       };
+      platform_collections: {
+        Row: {
+          created_at: string;
+          eligible_base_cents: number | null;
+          external_ref: string | null;
+          failed_at: string | null;
+          gross_cents: number;
+          id: string;
+          idempotency_key: string;
+          obligation_id: string;
+          policy_status: string;
+          posted_at: string | null;
+          recorded_by: string;
+          reversal_of_id: string | null;
+          reversed_at: string | null;
+          status: string;
+        };
+        Insert: {
+          created_at?: string;
+          eligible_base_cents?: number | null;
+          external_ref?: string | null;
+          failed_at?: string | null;
+          gross_cents: number;
+          id?: string;
+          idempotency_key: string;
+          obligation_id: string;
+          policy_status: string;
+          posted_at?: string | null;
+          recorded_by: string;
+          reversal_of_id?: string | null;
+          reversed_at?: string | null;
+          status: string;
+        };
+        Update: {
+          created_at?: string;
+          eligible_base_cents?: number | null;
+          external_ref?: string | null;
+          failed_at?: string | null;
+          gross_cents?: number;
+          id?: string;
+          idempotency_key?: string;
+          obligation_id?: string;
+          policy_status?: string;
+          posted_at?: string | null;
+          recorded_by?: string;
+          reversal_of_id?: string | null;
+          reversed_at?: string | null;
+          status?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "platform_collections_obligation_id_fkey";
+            columns: ["obligation_id"];
+            isOneToOne: false;
+            referencedRelation: "platform_obligations";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "platform_collections_recorded_by_fkey";
+            columns: ["recorded_by"];
+            isOneToOne: false;
+            referencedRelation: "platform_accounts";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "platform_collections_reversal_of_id_fkey";
+            columns: ["reversal_of_id"];
+            isOneToOne: false;
+            referencedRelation: "platform_collections";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
+      platform_obligations: {
+        Row: {
+          conversion_terms_id: string;
+          created_at: string;
+          id: string;
+          kind: string;
+          list_price_cents: number;
+          period_key: string | null;
+          status: string;
+          updated_at: string;
+          won_business_id: string;
+        };
+        Insert: {
+          conversion_terms_id: string;
+          created_at?: string;
+          id?: string;
+          kind: string;
+          list_price_cents: number;
+          period_key?: string | null;
+          status?: string;
+          updated_at?: string;
+          won_business_id: string;
+        };
+        Update: {
+          conversion_terms_id?: string;
+          created_at?: string;
+          id?: string;
+          kind?: string;
+          list_price_cents?: number;
+          period_key?: string | null;
+          status?: string;
+          updated_at?: string;
+          won_business_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "platform_obligations_conversion_terms_id_fkey";
+            columns: ["conversion_terms_id"];
+            isOneToOne: false;
+            referencedRelation: "conversion_terms";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "platform_obligations_won_business_id_fkey";
+            columns: ["won_business_id"];
+            isOneToOne: false;
+            referencedRelation: "businesses";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       platform_accounts: {
         Row: {
           created_at: string;
@@ -2586,6 +2724,20 @@ export type Database = {
       };
       open_dispute: {
         Args: { p_opportunity_id: string; p_promoter_ids: string[]; p_reason: string };
+        Returns: Json;
+      };
+      open_obligation: {
+        Args: { p_kind: string; p_period_key: string | null; p_terms_id: string };
+        Returns: Json;
+      };
+      record_collection: {
+        Args: {
+          p_external_ref: string | null;
+          p_gross_cents: number;
+          p_idempotency_key: string;
+          p_obligation_id: string;
+          p_status: string;
+        };
         Returns: Json;
       };
       promoter_add_note: { Args: { p_body: string; p_opportunity_id: string }; Returns: Json };

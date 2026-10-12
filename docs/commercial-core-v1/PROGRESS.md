@@ -3,7 +3,7 @@
 ```yaml
 updated_at: 2026-10-12
 implementation_authorized: yes
-current_phase: PHASE-04
+current_phase: PHASE-05
 current_task: none
 product_code: in_progress
 phase_01: closed
@@ -12,11 +12,13 @@ phase_03: closed_local
 phase_03_formal_close: closed_local
 phase_03_post_audit: runtime_validated_ledger_registered
 phase_04: closed_local
-next_task: P05-T01
+phase_05: in_progress
+next_task: P05-T02
 PHASE_04_STATUS: CLOSED_LOCAL
+PHASE_05_STATUS: IN_PROGRESS
 ```
 
-P04-T01 a P04-T04 quedaron hechas en local el 2026-10-11. Ese cierre no se reabre. `PHASE_04_STATUS` sigue `CLOSED_LOCAL` y `next_task` sigue `P05-T01`. `BLK-LEDGER-01` quedó `CLOSED_LOCAL` el 2026-10-12. PHASE-05 no está iniciada.
+P04-T01 a P04-T04 quedaron hechas en local el 2026-10-11. Ese cierre no se reabre. `PHASE_04_STATUS` sigue `CLOSED_LOCAL`. `BLK-LEDGER-01` quedó `CLOSED_LOCAL` el 2026-10-12. PHASE-05 está `IN_PROGRESS`: P05-T01 quedó `DONE_LOCAL` el 2026-10-12 y `next_task` es P05-T02. P05-T02 no está iniciada.
 
 Después del cierre, la tarea PROMOTER-ONBOARDING-UI-V1 agregó lecturas de solo lectura en `20261011030000` y las pantallas mínimas de asistencia. `schema_migrations` pasa a 118 filas. Las siete versiones de PHASE-04 permanecen registradas una vez. PHASE-05 no está iniciada.
 
@@ -47,7 +49,7 @@ El smoke del navegador quedó PASS el 2026-10-11: el dueño aprobó, el promotor
 | P04-T02 | 04 | done | 2026-10-11. Gate exit 0. `20261011021000`, `20261011021100` y `20261011021200` aplicadas, ledger 114. `phase04_grants.sql` exit 0 (ROLLBACK): el promotor no aprueba el propio grant, el dueño de otro negocio tampoco, 31 días es `validation`, la extensión de `ends_at` es `grant_extension_forbidden`, la renovación es otra fila, la excepción sin motivo falla, revocar y completar cierran, y `separate_promoter` no deja grants abiertos. `e2e_06.sql` exit 0. |
 | P04-T03 | 04 | done | 2026-10-11. Gate exit 0. `20261011022000` y `20261011022100` aplicadas, ledger 116. `phase04_catalog.sql` exit 0 (ROLLBACK): el dueño deja el precio en 250, el promotor cambia la descripción, un payload con precio es `grant_field_forbidden` y no escribe, el UPDATE directo del promotor no cambia el precio, crea una categoría y un grant revocado no cambia la descripción. `catalog-guard.verify` exit 0. El dueño sigue pasando por `requireAdminPermission("manageProducts")`. `lib/admin/permissions.ts` no cambia el mapa. |
 | P04-T04 | 04 | done | 2026-10-11. Gate exit 0. `20261011023000` aplicada, ledger 117. `phase04_e2e10.sql` exit 0 (ROLLBACK): aprobación a 30 días, descripción persistida, precio rechazado, revocación bloquea, `ends_at` vencido bloquea aunque `status` siga `active`, y `expire_onboarding_grants` marca `expired` sin borrar la fila ni el evento. No existen `promoter_commissions`, `platform_collections` ni `service_subscriptions`. |
-| P05-T01 | 05 | pending | — |
+| P05-T01 | 05 | done | 2026-10-12. `DONE_LOCAL`. Gate exit 0 (`127.0.0.1:54321` / `127.0.0.1:54322`). `supabase migration up --local` aplicó solo `20261012030000_commercial_phase05_collections.sql`. Ledger 118 → 119. `phase05_collections.sql` exit 0 con ROLLBACK. `phase04_conversion.sql` exit 0 con ROLLBACK. Carrera de dos sesiones: un `posted` nominal y el segundo `validation`, con el lock sostenido. `npx tsc --noEmit --pretty false --incremental false` exit 0. `verify-all` exit 0 (13 archivos). No hay comisiones, slots, liquidaciones, facturas ni pagos. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos. |
 | P05-T02 | 05 | pending | — |
 | P05-T03 | 05 | pending | — |
 | P05-T04 | 05 | pending | — |
@@ -116,9 +118,11 @@ Se persistió el plan. No se eligió base comisionable, ni pago parcial, ni plaz
 
 2026-10-12: `BLK-LEDGER-01` queda `CLOSED_LOCAL`. El commit de recuperación es `67b64c08a4c9b7628dbe0d27a1c05cea79765fc0`. La reconstrucción aislada `orderops-ledger-rebuild` terminó `BLK_LEDGER_REBUILD: PASS`: 118 archivos, 118 versiones aplicadas, ninguna migración fallida. La comparación cubrió relaciones, columnas, constraints, índices, funciones y `SECURITY DEFINER`, triggers, políticas RLS, grants, vistas, tipos, secuencias y la publicación realtime de los esquemas `public`, `commercial`, `private` y `migration_private`. La única delta es CRLF/LF en `public.save_category_display_order(uuid[])`, sin divergencia semántica. Evidencia en `%LOCALAPPDATA%\OrderOps\ledger-rebuild-20261012\evidence\`. No se repitió la reconstrucción ni se ejecutaron suites funcionales sobre la base temporal. Producción no fue validada. El entorno temporal sigue encendido. PHASE-04 sigue `CLOSED_LOCAL`. PHASE-05 no se inicia.
 
+2026-10-12: P05-T01 `DONE_LOCAL`. Respaldo previo `OrderOps-postgres-20261012T060017Z.dump`, SHA-256 `E8CBEE0A84136F5D46D178FA0354112E0007A5033A79F6FC86105AC83F63C48D`, sin restaurar. `node scripts/commercial-core/assert-local-supabase.mjs` exit 0. `npx supabase@2.120.0 migration up --local` aplicó solamente `20261012030000_commercial_phase05_collections.sql`. Ledger 119. `phase05_collections.sql` exit 0, ROLLBACK. `phase04_conversion.sql` exit 0, ROLLBACK. Dos sesiones reales sobre la misma obligación: la primera dejó `posted` nominal y la segunda, esperando el lock, respondió `validation`. El fixture de esa carrera se borró en una transacción que desactivó y volvió a activar `conversion_terms_immutable` y `audit_events_append_only`; ambos triggers quedaron habilitados. Obligaciones y cobranzas quedaron en 0. `businesses` sigue en 2. `npx tsc --noEmit --pretty false --incremental false` exit 0. `node scripts/commercial-core/verify-all.mjs` exit 0, 13 archivos. No hay comisión, slot, liquidación, factura ni pago. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos. P05-T02 no se inicia. Producción no fue validada. Rollback `supabase/rollbacks/commercial_phase05_down.sql` no se ejecutó.
+
 ## Próxima tarea segura
 
-`next_task` es P05-T01. Este cierre no la autoriza. `BLK-LEDGER-01` queda `CLOSED_LOCAL`. PHASE-05 no se inicia.
+`next_task` es P05-T02. Este cierre de P05-T01 no la autoriza. `PHASE_05_STATUS` es `IN_PROGRESS`. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos.
 
 ## Recuperación
 
