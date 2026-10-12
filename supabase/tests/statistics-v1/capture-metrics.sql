@@ -15,12 +15,13 @@ create temporary table statistics_fixture as
 select b.id business_id,p.id owner_id from public.businesses b join public.profiles p on p.business_id=b.id and p.role='owner' where b.slug='statistics-synthetic-a';
 select pg_temp.assert_true((select count(*)=1 from statistics_fixture),'exact synthetic business');
 grant select on statistics_fixture to authenticated;
+select set_config('request.jwt.claims',jsonb_build_object('sub',owner_id,'role','authenticated')::text,true) from statistics_fixture;
 insert into public.categories(id,business_id,name) select 'f2020000-0000-4000-8000-000000000001',business_id,'Synthetic historical category' from statistics_fixture;
 insert into public.products(id,business_id,category_id,name,price) select 'f2020000-0000-4000-8000-000000000002',business_id,'f2020000-0000-4000-8000-000000000001','Synthetic main',10 from statistics_fixture;
 insert into public.products(id,business_id,category_id,name,price) select 'f2020000-0000-4000-8000-000000000003',business_id,'f2020000-0000-4000-8000-000000000001','Synthetic upsell',3 from statistics_fixture;
 insert into public.store_sessions(id,business_id,opened_at) select 'f2020000-0000-4000-8000-000000000004',business_id,date_trunc('day',clock_timestamp() at time zone 'America/Argentina/Buenos_Aires') at time zone 'America/Argentina/Buenos_Aires'-interval '1 hour' from statistics_fixture;
-insert into public.orders(id,business_id,customer_name,phone,delivery_date,delivery_method,total_price,composition_status)
-select 'f2020000-0000-4000-8000-000000000005',business_id,'SYNTHETIC ONLY','0000000000',current_date,'pickup',23,'itemized' from statistics_fixture;
+insert into public.orders(id,business_id,customer_name,phone,delivery_date,delivery_method,total_price,composition_status,order_code)
+select 'f2020000-0000-4000-8000-000000000005',business_id,'SYNTHETIC ONLY','0000000000',current_date,'pickup',23,'itemized','STA222' from statistics_fixture;
 insert into public.order_items(id,order_id,product_id,product_name,quantity,unit_price)
 values('f2020000-0000-4000-8000-000000000006','f2020000-0000-4000-8000-000000000005','f2020000-0000-4000-8000-000000000002','Synthetic main',2,10);
 insert into public.order_items(id,order_id,product_id,product_name,quantity,unit_price,item_kind,parent_order_item_id)
@@ -42,7 +43,7 @@ select pg_temp.assert_true((public.statistics_v1_summary('today')->'metrics'->'s
 select pg_temp.assert_true((public.statistics_v1_summary('today')->'metrics'->'mainUnits'->>'value')::bigint=2,'main units only');
 reset role;
 savepoint rollback_cycle;
-update public.orders set status='in_progress' where id='f2020000-0000-4000-8000-000000000005';
+update public.orders set status='preparing' where id='f2020000-0000-4000-8000-000000000005';
 select pg_temp.assert_true(not exists(select 1 from public.order_statistics_completions where order_id='f2020000-0000-4000-8000-000000000005' and active),'reopening excludes');
 update public.orders set status='completed' where id='f2020000-0000-4000-8000-000000000005';
 select pg_temp.assert_true((select count(*)=2 and max(cycle)=2 from public.order_statistics_completions where order_id='f2020000-0000-4000-8000-000000000005'),'new completion new cycle');
@@ -50,7 +51,7 @@ rollback to rollback_cycle;
 select pg_temp.assert_true((select count(*)=1 and bool_and(active) from public.order_statistics_completions where order_id='f2020000-0000-4000-8000-000000000005'),'source and snapshot rollback together');
 update public.order_financials set agreed_total=20 where order_id='f2020000-0000-4000-8000-000000000005';
 select pg_temp.assert_true((select monetary_conflict and agreed_total=23 from public.order_statistics_completions where order_id='f2020000-0000-4000-8000-000000000005' and active),'agreement mutation explicit; immutable amount');
-update public.orders set status='in_progress' where id='f2020000-0000-4000-8000-000000000005';
+update public.orders set status='preparing' where id='f2020000-0000-4000-8000-000000000005';
 update public.orders set status='completed' where id='f2020000-0000-4000-8000-000000000005';
 select pg_temp.assert_true((select breakdown_source='unresolved' and products_net is null and delivery is null and agreed_total=20 from public.order_statistics_completions where order_id='f2020000-0000-4000-8000-000000000005' and active),'unexplained difference never silently allocated');
 select set_config('request.jwt.claims',jsonb_build_object('sub',owner_id,'role','authenticated')::text,true) from statistics_fixture;
@@ -65,8 +66,8 @@ select pg_temp.assert_true(not exists(select 1 from public.order_statistics_comp
 update public.store_sessions set status='closed',closed_at=clock_timestamp() where id='f2020000-0000-4000-8000-000000000004';
 update public.orders set status='completed' where id='f2020000-0000-4000-8000-000000000005';
 select pg_temp.assert_true((select date_kind='outside_session' and session_key is null and commercial_date=(completed_at at time zone timezone)::date from public.order_statistics_completions where order_id='f2020000-0000-4000-8000-000000000005' and active),'explicit outside-session fallback');
-insert into public.orders(business_id,customer_name,phone,delivery_date,delivery_method,total_price,status,composition_status)
-select business_id,'Synthetic historical unknown','0000000000',current_date,'pickup',0,'completed','legacy_unknown' from statistics_fixture;
+insert into public.orders(business_id,customer_name,phone,delivery_date,delivery_method,total_price,status,composition_status,order_code)
+select business_id,'Synthetic historical unknown','0000000000',current_date,'pickup',null,'completed','legacy_unknown','STH222' from statistics_fixture;
 select set_config('request.jwt.claims',jsonb_build_object('sub',owner_id,'role','authenticated')::text,true) from statistics_fixture;
 set local role authenticated;
 select pg_temp.assert_true((public.statistics_v1_summary('today')->'coverage'->>'historicalWithoutDate')::bigint=1,'no inferred backfill');

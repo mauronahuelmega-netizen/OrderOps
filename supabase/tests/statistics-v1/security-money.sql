@@ -22,7 +22,7 @@ do $$ declare b uuid;o uuid;s uuid;begin
   for b in select distinct business_id from statistics_role_cases loop
     s:=gen_random_uuid();o:=gen_random_uuid();
     insert into public.store_sessions(id,business_id,opened_at) values(s,b,clock_timestamp()-interval '1 hour');
-    insert into public.orders(id,business_id,customer_name,phone,delivery_date,delivery_method,total_price,composition_status) values(o,b,'SYNTHETIC RLS','0000000000',current_date,'pickup',23,'itemized');
+    insert into public.orders(id,business_id,customer_name,phone,delivery_date,delivery_method,total_price,composition_status,order_code) values(o,b,'SYNTHETIC RLS','0000000000',current_date,'pickup',23,'itemized','RSC222');
     insert into public.order_items(order_id,product_name,quantity,unit_price) values(o,'Synthetic unknown identity',1,23);
     insert into public.order_financials(order_id,business_id,agreed_total) values(o,b,23);
     update public.orders set status='completed' where id=o;

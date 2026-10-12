@@ -1,0 +1,44 @@
+-- Existing operational/financial RPCs invoked unchanged on synthetic data; all writes rolled back.
+begin;
+set local statement_timeout='45s';
+do $$ begin if current_setting('statistics.test_token',true) is distinct from (select token from statistics_test_environment.identity where singleton) then raise exception 'ISOLATED_TOKEN_REQUIRED';end if;end $$;
+create function pg_temp.assert_true(ok boolean,message text) returns void language plpgsql as $$ begin if ok is distinct from true then raise exception 'ASSERT: %',message;end if;end $$;
+create temporary table regression_context as select b.id business_id,p.id owner_id from public.businesses b join public.profiles p on p.business_id=b.id and p.role='owner' where b.slug='statistics-synthetic-a';
+select set_config('request.jwt.claims',jsonb_build_object('sub',owner_id,'role','authenticated')::text,true) from regression_context;
+update public.business_settings set on_demand_mode_active=true,scheduled_mode_active=false,finance_enabled=true where business_id=(select business_id from regression_context);
+insert into public.categories(id,business_id,name) select 'f2040000-0000-4000-8000-000000000001',business_id,'Synthetic RPC category' from regression_context;
+insert into public.products(id,business_id,category_id,name,price,track_stock,stock) select 'f2040000-0000-4000-8000-000000000002',business_id,'f2040000-0000-4000-8000-000000000001','Synthetic RPC product',10,true,10 from regression_context;
+create temporary table regression_order as select public.create_order(business_id,'SYNTHETIC RPC','0000000000',current_date,'pickup',null,null,'[{"product_id":"f2040000-0000-4000-8000-000000000002","quantity":2}]') id,business_id from regression_context;
+select pg_temp.assert_true((select stock=8 from public.products where id='f2040000-0000-4000-8000-000000000002'),'existing create_order stock decrement');
+select public.initialize_order_financials(business_id,id,'copy_total_price') from regression_order;
+select pg_temp.assert_true((select (public.initialize_order_financials(business_id,id,'copy_total_price')->>'idempotent')::boolean from regression_order),'financial initialization idempotence');
+select public.transition_order_status(id,'completed') from regression_order;
+select pg_temp.assert_true((select products_net=20 and agreed_total=20 and main_units=2 from public.order_statistics_completions where order_id=(select id from regression_order) and active),'real financial audit producer reconciles');
+select public.transition_order_status(id,'completed') from regression_order;
+select pg_temp.assert_true((select count(*)=1 from public.order_statistics_completions where order_id=(select id from regression_order)),'real status RPC idempotence');
+select public.transition_order_status(id,'preparing') from regression_order;
+select public.transition_order_status(id,'completed') from regression_order;
+select public.set_order_agreed_total(business_id,id,18) from regression_order;
+select pg_temp.assert_true((select monetary_conflict and agreed_total=20 from public.order_statistics_completions where order_id=(select id from regression_order) and active),'real financial setter flags without rewriting sales');
+select public.transition_order_status(id,'cancelled') from regression_order;
+select public.transition_order_status(id,'cancelled') from regression_order;
+select pg_temp.assert_true((select stock=8 from public.products where id='f2040000-0000-4000-8000-000000000002'),'completed cancellation preserves existing no-restock contract');
+select pg_temp.assert_true(not exists(select 1 from public.order_statistics_completions where order_id=(select id from regression_order) and active),'cancel excludes statistics');
+select pg_temp.assert_true((select count(*)=0 from public.stock_movements where order_id=(select id from regression_order) and movement_type='order_restock'),'completed cancellation creates no restock ledger');
+create temporary table pending_cancel_order as select public.create_order(business_id,'SYNTHETIC PENDING CANCEL','0000000000',current_date,'pickup',null,null,'[{"product_id":"f2040000-0000-4000-8000-000000000002","quantity":1}]') id from regression_context;
+select public.transition_order_status(id,'cancelled') from pending_cancel_order;
+select public.transition_order_status(id,'cancelled') from pending_cancel_order;
+select pg_temp.assert_true((select stock=8 from public.products where id='f2040000-0000-4000-8000-000000000002'),'pending cancel restocks exactly once');
+select pg_temp.assert_true((select count(*)=1 from public.stock_movements where order_id=(select id from pending_cancel_order) and movement_type='order_restock'),'pending restock ledger idempotent');
+do $$ declare preset text;r jsonb;begin
+  foreach preset in array array['today','yesterday','this_week','this_month','previous_month','last_7_days','last_30_days'] loop
+    r:=public.statistics_v1_summary(preset);
+    perform pg_temp.assert_true(r->>'status'='ready' and jsonb_array_length(r->'buckets')<=200,'all standard periods compile/execute');
+  end loop;
+  r:=public.statistics_v1_summary('custom',current_date-90,current_date-1);perform pg_temp.assert_true(r->'period'->>'granularity'='week','weekly branches');
+  r:=public.statistics_v1_summary('custom',current_date-400,current_date-1);perform pg_temp.assert_true(r->'period'->>'granularity'='month' and jsonb_array_length(r->'buckets')<=200,'monthly branches');
+end $$;
+update public.business_settings set finance_enabled=false,timezone=null where business_id=(select business_id from regression_context);
+select pg_temp.assert_true(public.statistics_v1_summary('today')->>'status'='configuration_required','missing timezone never guessed');
+set constraints statistics_v1_order_revision,statistics_v1_item_revision,statistics_v1_financial_revision,statistics_v1_session_revision immediate;
+rollback;
