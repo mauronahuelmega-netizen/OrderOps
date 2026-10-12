@@ -1,0 +1,113 @@
+{
+  "verifiedAt": "2026-10-12T22:10:02.538Z",
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "branch": "codex/estadisticas-v1",
+  "api": "127.0.0.1:56321",
+  "postgres": "127.0.0.1:56322",
+  "resources": {
+    "containerIds": [
+      "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+      "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+      "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+    ],
+    "volumeNames": [
+      "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+    ],
+    "networkId": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af"
+  },
+  "tokenMatches": true,
+  "baseMigrations": 119,
+  "statisticsVersions": [],
+  "knownRefsChecked": [
+    "refs/heads/codex/estadisticas-v1",
+    "refs/heads/cursor-handoff-public-catalog-ui-redesign",
+    "refs/heads/cursor/cloud-agent-1791514230963-191bx",
+    "refs/heads/cursor/cloud-agent-1791515001926-p4cht",
+    "refs/heads/cursor/cloud-agent-1791522067446-hhnd8",
+    "refs/heads/cursor/commercial-core-v1-integration",
+    "refs/heads/main",
+    "refs/heads/public-catalog-residual-roadmap",
+    "refs/remotes/origin/HEAD",
+    "refs/remotes/origin/cursor-handoff-public-catalog-ui-redesign",
+    "refs/remotes/origin/cursor/cloud-agent-1791515001926-p4cht",
+    "refs/remotes/origin/cursor/cloud-agent-1791522067446-hhnd8",
+    "refs/remotes/origin/cursor/commercial-core-v1-integration",
+    "refs/remotes/origin/main"
+  ],
+  "sessions": [
+    {
+      "application": "PostgREST 14.3",
+      "client": "172.21.0.5/32",
+      "state": "idle"
+    },
+    {
+      "application": "",
+      "client": "172.21.0.6/32",
+      "state": "idle"
+    },
+    {
+      "application": "psql",
+      "client": null,
+      "state": "active"
+    },
+    {
+      "application": "pg_net 0.19.5",
+      "client": null,
+      "state": null
+    },
+    {
+      "application": "pg_cron scheduler",
+      "client": null,
+      "state": null
+    }
+  ],
+  "writeTarget": "fixed exclusive Docker container; no remote credentials/configuration loaded",
+  "reviewBundle": {
+    "files": [
+      {
+        "path": "scripts/statistics-v1/review-bundle.mjs",
+        "sha256": "78f9f43c1d6c9a17d5a33cf3df57661b496f3af813b079400a0fecb308af2757"
+      },
+      {
+        "path": "scripts/statistics-v1/sql-approved-tests.mjs",
+        "sha256": "1da1dd84143e873fb9d2cb446e0b0bc065c2a3048a21933007508498c0e41c26"
+      },
+      {
+        "path": "scripts/statistics-v1/sql-static.verify.mjs",
+        "sha256": "9fde639b67c1690dbeafd54eb05112b3f256ae3c8623574f338e702b5139c1f1"
+      },
+      {
+        "path": "supabase/migrations/20261013001000_statistics_v1_structures.sql",
+        "sha256": "5b28bc586ac76f2bcf19df36ecd610d780d26e609d153e8343e5c7b0ecba8828"
+      },
+      {
+        "path": "supabase/migrations/20261013002000_statistics_v1_capture.sql",
+        "sha256": "58c3b995450dd84bcc4299453dc8a80c5c96e62b3b72fe4a46394ae05f9b0d19"
+      },
+      {
+        "path": "supabase/migrations/20261013003000_statistics_v1_reads_security.sql",
+        "sha256": "b42a4c961a5ae1ca6a7884af391b6faa36fe3e9e271ba0c570bb9bd3355a7678"
+      },
+      {
+        "path": "supabase/tests/statistics-v1/capture-metrics.sql",
+        "sha256": "fbb4fed4a640525cc1d62d6cb1d80eb5220c1ec30fa3385b580f873285c68c04"
+      },
+      {
+        "path": "supabase/tests/statistics-v1/concurrency-cleanup.sql",
+        "sha256": "9bfe49063bc7bf9372a033a7df6e529287a2695fba241c4e23b07a9046e908dc"
+      },
+      {
+        "path": "supabase/tests/statistics-v1/concurrency-fixture.sql",
+        "sha256": "a5dc0f804601594b82c856685908419420138238184180abea4bc9cfbf2d9aa5"
+      },
+      {
+        "path": "supabase/tests/statistics-v1/security-money.sql",
+        "sha256": "92c2bec0fe61c05ea9acb693f47d1b00ac13a265737d3a31c14e60da4f6f22e7"
+      }
+    ],
+    "bundleHash": "65b3d9499ce6ad60e3da40dd2b0278330d98ae7225c4aef926b0e7d379869f64"
+  }
+}

@@ -1,0 +1,1058 @@
+{
+  "verifiedAt": "2026-10-12T22:27:12.833Z",
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "branch": "codex/estadisticas-v1",
+  "api": "127.0.0.1:56321",
+  "postgres": "127.0.0.1:56322",
+  "resources": {
+    "containerIds": [
+      "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+      "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+      "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+    ],
+    "volumeNames": [
+      "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+    ],
+    "networkId": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af"
+  },
+  "tokenMatches": true,
+  "baseMigrations": 119,
+  "statisticsVersions": [
+    "20261013001000",
+    "20261013002000",
+    "20261013003000"
+  ],
+  "knownRefsChecked": [
+    "refs/heads/codex/estadisticas-v1",
+    "refs/heads/cursor-handoff-public-catalog-ui-redesign",
+    "refs/heads/cursor/cloud-agent-1791514230963-191bx",
+    "refs/heads/cursor/cloud-agent-1791515001926-p4cht",
+    "refs/heads/cursor/cloud-agent-1791522067446-hhnd8",
+    "refs/heads/cursor/commercial-core-v1-integration",
+    "refs/heads/main",
+    "refs/heads/public-catalog-residual-roadmap",
+    "refs/remotes/origin/HEAD",
+    "refs/remotes/origin/cursor-handoff-public-catalog-ui-redesign",
+    "refs/remotes/origin/cursor/cloud-agent-1791515001926-p4cht",
+    "refs/remotes/origin/cursor/cloud-agent-1791522067446-hhnd8",
+    "refs/remotes/origin/cursor/commercial-core-v1-integration",
+    "refs/remotes/origin/main"
+  ],
+  "sessions": [
+    {
+      "application": "PostgREST 14.3",
+      "client": "172.21.0.5/32",
+      "state": "idle"
+    },
+    {
+      "application": "",
+      "client": "172.21.0.6/32",
+      "state": "idle"
+    },
+    {
+      "application": "PostgREST 14.3",
+      "client": "172.21.0.5/32",
+      "state": "idle"
+    },
+    {
+      "application": "PostgREST 14.3",
+      "client": "172.21.0.5/32",
+      "state": "idle"
+    },
+    {
+      "application": "psql",
+      "client": null,
+      "state": "active"
+    },
+    {
+      "application": "pg_net 0.19.5",
+      "client": null,
+      "state": null
+    },
+    {
+      "application": "pg_cron scheduler",
+      "client": null,
+      "state": null
+    }
+  ],
+  "writeTarget": "fixed exclusive Docker container; no remote credentials/configuration loaded",
+  "reviewBundle": {
+    "files": [
+      {
+        "path": "scripts/statistics-v1/review-bundle.mjs",
+        "sha256": "78f9f43c1d6c9a17d5a33cf3df57661b496f3af813b079400a0fecb308af2757"
+      },
+      {
+        "path": "scripts/statistics-v1/sql-approved-tests.mjs",
+        "sha256": "96904735a290ea81f760ac89ec8ee6d8959d138cc5eaab355a9ec8cd884c7023"
+      },
+      {
+        "path": "scripts/statistics-v1/sql-static.verify.mjs",
+        "sha256": "9fde639b67c1690dbeafd54eb05112b3f256ae3c8623574f338e702b5139c1f1"
+      },
+      {
+        "path": "supabase/migrations/20261013001000_statistics_v1_structures.sql",
+        "sha256": "5b28bc586ac76f2bcf19df36ecd610d780d26e609d153e8343e5c7b0ecba8828"
+      },
+      {
+        "path": "supabase/migrations/20261013002000_statistics_v1_capture.sql",
+        "sha256": "58c3b995450dd84bcc4299453dc8a80c5c96e62b3b72fe4a46394ae05f9b0d19"
+      },
+      {
+        "path": "supabase/migrations/20261013003000_statistics_v1_reads_security.sql",
+        "sha256": "b42a4c961a5ae1ca6a7884af391b6faa36fe3e9e271ba0c570bb9bd3355a7678"
+      },
+      {
+        "path": "supabase/tests/statistics-v1/capture-metrics.sql",
+        "sha256": "919bbb503bc79d6452374f3407ef0360128b2c04f4d3c3385b013f80fd718cc0"
+      },
+      {
+        "path": "supabase/tests/statistics-v1/concurrency-cleanup.sql",
+        "sha256": "9bfe49063bc7bf9372a033a7df6e529287a2695fba241c4e23b07a9046e908dc"
+      },
+      {
+        "path": "supabase/tests/statistics-v1/concurrency-fixture.sql",
+        "sha256": "5f8c8afba6e38e5f8986d58c493910f9de0f774d63e2ccbd1ffe4cee0abe22d2"
+      },
+      {
+        "path": "supabase/tests/statistics-v1/regression.sql",
+        "sha256": "0e55435b04a5916686835fe0791f44a22c160585b9f4dbf16f9e3860863631c0"
+      },
+      {
+        "path": "supabase/tests/statistics-v1/security-money.sql",
+        "sha256": "e64e1831f7eb7bb20e167791af1b9888da998f8c3866896c7aee5196bda95b6d"
+      },
+      {
+        "path": "supabase/tests/statistics-v1/stock-concurrency-fixture.sql",
+        "sha256": "82122297257b7eea8d1bd9979fab4205dae9436e5fe249e77ab5d57bd05e6ae8"
+      },
+      {
+        "path": "supabase/tests/statistics-v1/stock-fixture-recovery.sql",
+        "sha256": "b9934b2732e9027b1dce6beaca2da5adc230f13756537132597857d5a425381e"
+      }
+    ],
+    "bundleHash": "4eda220b1e80ba93f1f1c7b7af6354b31470cbc0f3c03ae2e5cc06df5b316854"
+  },
+  "inventory": {
+    "functionBodyChecks": "on",
+    "migrationRecords": [
+      {
+        "version": "20261013001000",
+        "name": "statistics_v1_structures",
+        "sourceMd5": "606261017dd0ec9a0250110c5bf88d3b"
+      },
+      {
+        "version": "20261013002000",
+        "name": "statistics_v1_capture",
+        "sourceMd5": "54f696936af44194984caf4457653668"
+      },
+      {
+        "version": "20261013003000",
+        "name": "statistics_v1_reads_security",
+        "sourceMd5": "2e90976cd67d5d2bba0ac5bb4d0b7f12"
+      }
+    ],
+    "tables": [
+      {
+        "name": "business_statistics_state",
+        "rls": true
+      },
+      {
+        "name": "store_session_statistics_snapshots",
+        "rls": true
+      },
+      {
+        "name": "order_item_statistics_snapshots",
+        "rls": true
+      },
+      {
+        "name": "order_statistics_completions",
+        "rls": true
+      },
+      {
+        "name": "order_statistics_completion_items",
+        "rls": true
+      }
+    ],
+    "functions": [
+      {
+        "schema": "private",
+        "name": "statistics_agreement_changed",
+        "arguments": "",
+        "language": "plpgsql",
+        "securityDefiner": true,
+        "acl": "{postgres=X/postgres}"
+      },
+      {
+        "schema": "private",
+        "name": "statistics_allocate_products",
+        "arguments": "p_net numeric, p_lines jsonb",
+        "language": "plpgsql",
+        "securityDefiner": false,
+        "acl": "{postgres=X/postgres}"
+      },
+      {
+        "schema": "private",
+        "name": "statistics_bump",
+        "arguments": "p_business uuid",
+        "language": "sql",
+        "securityDefiner": true,
+        "acl": "{postgres=X/postgres}"
+      },
+      {
+        "schema": "private",
+        "name": "statistics_can_read",
+        "arguments": "p_business uuid",
+        "language": "sql",
+        "securityDefiner": true,
+        "acl": "{postgres=X/postgres,authenticated=X/postgres}"
+      },
+      {
+        "schema": "private",
+        "name": "statistics_item_changed",
+        "arguments": "",
+        "language": "plpgsql",
+        "securityDefiner": true,
+        "acl": "{postgres=X/postgres}"
+      },
+      {
+        "schema": "private",
+        "name": "statistics_local_cutoff",
+        "arguments": "p_date date, p_time time without time zone, p_timezone text",
+        "language": "sql",
+        "securityDefiner": false,
+        "acl": "{postgres=X/postgres,authenticated=X/postgres}"
+      },
+      {
+        "schema": "private",
+        "name": "statistics_metric",
+        "arguments": "p_value text, p_known bigint, p_unknown bigint, p_reasons text[]",
+        "language": "sql",
+        "securityDefiner": false,
+        "acl": "{postgres=X/postgres,authenticated=X/postgres}"
+      },
+      {
+        "schema": "private",
+        "name": "statistics_metrics",
+        "arguments": "p_rows jsonb, p_historical bigint",
+        "language": "sql",
+        "securityDefiner": false,
+        "acl": "{postgres=X/postgres,authenticated=X/postgres}"
+      },
+      {
+        "schema": "private",
+        "name": "statistics_order_changed",
+        "arguments": "",
+        "language": "plpgsql",
+        "securityDefiner": true,
+        "acl": "{postgres=X/postgres}"
+      },
+      {
+        "schema": "private",
+        "name": "statistics_revision_deferred",
+        "arguments": "",
+        "language": "plpgsql",
+        "securityDefiner": true,
+        "acl": "{postgres=X/postgres}"
+      },
+      {
+        "schema": "private",
+        "name": "statistics_session_changed",
+        "arguments": "",
+        "language": "plpgsql",
+        "securityDefiner": true,
+        "acl": "{postgres=X/postgres}"
+      },
+      {
+        "schema": "private",
+        "name": "statistics_source_digest",
+        "arguments": "p_items jsonb",
+        "language": "sql",
+        "securityDefiner": false,
+        "acl": "{postgres=X/postgres,authenticated=X/postgres}"
+      },
+      {
+        "schema": "private",
+        "name": "statistics_source_items",
+        "arguments": "p_order uuid, p_business uuid",
+        "language": "sql",
+        "securityDefiner": false,
+        "acl": "{postgres=X/postgres,authenticated=X/postgres}"
+      },
+      {
+        "schema": "public",
+        "name": "statistics_v1_summary",
+        "arguments": "p_period text, p_start_date date, p_end_date date, p_product_sort text, p_limit integer, p_cursor jsonb",
+        "language": "plpgsql",
+        "securityDefiner": false,
+        "acl": "{postgres=X/postgres,authenticated=X/postgres}"
+      }
+    ],
+    "triggers": [
+      "CREATE TRIGGER statistics_v1_item_capture AFTER INSERT OR DELETE OR UPDATE ON public.order_items FOR EACH ROW EXECUTE FUNCTION private.statistics_item_changed()",
+      "CREATE TRIGGER statistics_v1_session_capture AFTER INSERT OR UPDATE ON public.store_sessions FOR EACH ROW EXECUTE FUNCTION private.statistics_session_changed()",
+      "CREATE TRIGGER statistics_v1_agreement_capture AFTER INSERT OR DELETE OR UPDATE ON public.order_financials FOR EACH ROW EXECUTE FUNCTION private.statistics_agreement_changed()",
+      "CREATE TRIGGER statistics_v1_order_capture AFTER INSERT OR UPDATE OF status ON public.orders FOR EACH ROW EXECUTE FUNCTION private.statistics_order_changed()",
+      "CREATE CONSTRAINT TRIGGER statistics_v1_order_revision AFTER INSERT OR DELETE OR UPDATE ON public.orders DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION private.statistics_revision_deferred()",
+      "CREATE CONSTRAINT TRIGGER statistics_v1_item_revision AFTER INSERT OR DELETE OR UPDATE ON public.order_items DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION private.statistics_revision_deferred()",
+      "CREATE CONSTRAINT TRIGGER statistics_v1_financial_revision AFTER INSERT OR DELETE OR UPDATE ON public.order_financials DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION private.statistics_revision_deferred()",
+      "CREATE CONSTRAINT TRIGGER statistics_v1_session_revision AFTER INSERT OR DELETE OR UPDATE ON public.store_sessions DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION private.statistics_revision_deferred()"
+    ],
+    "policies": [
+      {
+        "schemaname": "public",
+        "tablename": "business_statistics_state",
+        "policyname": "statistics_state_read",
+        "permissive": "PERMISSIVE",
+        "roles": [
+          "authenticated"
+        ],
+        "cmd": "SELECT",
+        "qual": "private.statistics_can_read(business_id)",
+        "with_check": null
+      },
+      {
+        "schemaname": "public",
+        "tablename": "store_session_statistics_snapshots",
+        "policyname": "statistics_session_read",
+        "permissive": "PERMISSIVE",
+        "roles": [
+          "authenticated"
+        ],
+        "cmd": "SELECT",
+        "qual": "private.statistics_can_read(business_id)",
+        "with_check": null
+      },
+      {
+        "schemaname": "public",
+        "tablename": "order_item_statistics_snapshots",
+        "policyname": "statistics_identity_read",
+        "permissive": "PERMISSIVE",
+        "roles": [
+          "authenticated"
+        ],
+        "cmd": "SELECT",
+        "qual": "private.statistics_can_read(business_id)",
+        "with_check": null
+      },
+      {
+        "schemaname": "public",
+        "tablename": "order_statistics_completions",
+        "policyname": "statistics_completion_read",
+        "permissive": "PERMISSIVE",
+        "roles": [
+          "authenticated"
+        ],
+        "cmd": "SELECT",
+        "qual": "private.statistics_can_read(business_id)",
+        "with_check": null
+      },
+      {
+        "schemaname": "public",
+        "tablename": "order_statistics_completion_items",
+        "policyname": "statistics_completion_item_read",
+        "permissive": "PERMISSIVE",
+        "roles": [
+          "authenticated"
+        ],
+        "cmd": "SELECT",
+        "qual": "private.statistics_can_read(business_id)",
+        "with_check": null
+      }
+    ],
+    "views": [
+      {
+        "name": "statistics_v1_effective_facts",
+        "options": [
+          "security_invoker=true",
+          "security_barrier=true"
+        ],
+        "definition": " SELECT c.id,\n    c.business_id,\n    c.order_id,\n    c.cycle,\n    c.completed_at,\n    c.source_kind,\n    c.session_id,\n    c.session_key,\n    c.session_opened_at,\n    c.timezone,\n    c.commercial_date,\n    c.date_kind,\n    c.active,\n    c.invalidated_at,\n    c.invalidation_reason,\n    c.agreed_total,\n    c.products_net,\n    c.delivery,\n    c.breakdown_source,\n    c.agreement_evidence_id,\n    c.composition_status,\n    c.composition_digest,\n    c.gross_products,\n    c.main_units,\n    c.monetary_conflict,\n    c.composition_conflict,\n    c.date_conflict,\n    c.contract_version,\n    f.agreed_total AS current_agreement,\n    ((c.commercial_date IS NOT NULL) AND (c.timezone IS NOT NULL) AND (NOT c.date_conflict)) AS date_reliable,\n        CASE\n            WHEN ((NOT c.composition_conflict) AND (c.composition_digest = private.statistics_source_digest(private.statistics_source_items(c.order_id, c.business_id)))) THEN c.main_units\n            ELSE NULL::bigint\n        END AS effective_units,\n        CASE\n            WHEN ((NOT c.monetary_conflict) AND (NOT c.composition_conflict) AND (NOT (c.agreed_total IS DISTINCT FROM f.agreed_total)) AND (c.breakdown_source = 'copy_total_price'::text) AND (c.composition_digest = private.statistics_source_digest(private.statistics_source_items(c.order_id, c.business_id)))) THEN c.agreed_total\n            ELSE NULL::numeric\n        END AS effective_sales,\n    array_remove(ARRAY[\n        CASE\n            WHEN (c.agreed_total IS NULL) THEN 'missing_agreement'::text\n            ELSE NULL::text\n        END,\n        CASE\n            WHEN (c.breakdown_source = 'unresolved'::text) THEN 'unresolved_breakdown'::text\n            ELSE NULL::text\n        END,\n        CASE\n            WHEN (c.monetary_conflict OR (c.agreed_total IS DISTINCT FROM f.agreed_total)) THEN 'agreement_changed_after_completion'::text\n            ELSE NULL::text\n        END,\n        CASE\n            WHEN (c.composition_conflict OR (c.composition_digest <> private.statistics_source_digest(private.statistics_source_items(c.order_id, c.business_id)))) THEN 'source_conflict'::text\n            ELSE NULL::text\n        END,\n        CASE\n            WHEN (c.main_units IS NULL) THEN 'missing_composition'::text\n            ELSE NULL::text\n        END], NULL::text) AS reasons\n   FROM ((order_statistics_completions c\n     JOIN orders o ON (((o.id = c.order_id) AND (o.business_id = c.business_id) AND (o.status = 'completed'::text))))\n     LEFT JOIN order_financials f ON (((f.order_id = c.order_id) AND (f.business_id = c.business_id))))\n  WHERE (c.active AND private.statistics_can_read(c.business_id));"
+      }
+    ],
+    "indexes": [
+      "CREATE UNIQUE INDEX order_statistics_completions_pkey ON public.order_statistics_completions USING btree (id)",
+      "CREATE UNIQUE INDEX order_statistics_completions_order_id_cycle_key ON public.order_statistics_completions USING btree (order_id, cycle)",
+      "CREATE UNIQUE INDEX order_statistics_completions_id_business_id_key ON public.order_statistics_completions USING btree (id, business_id)",
+      "CREATE UNIQUE INDEX statistics_completion_active ON public.order_statistics_completions USING btree (order_id) WHERE active",
+      "CREATE INDEX statistics_completion_period ON public.order_statistics_completions USING btree (business_id, commercial_date, completed_at) WHERE active",
+      "CREATE UNIQUE INDEX order_statistics_completion_items_pkey ON public.order_statistics_completion_items USING btree (completion_id, line_key)",
+      "CREATE INDEX statistics_completion_product ON public.order_statistics_completion_items USING btree (business_id, product_identity)",
+      "CREATE UNIQUE INDEX business_statistics_state_pkey ON public.business_statistics_state USING btree (business_id)",
+      "CREATE UNIQUE INDEX store_session_statistics_snapshots_pkey ON public.store_session_statistics_snapshots USING btree (session_id)",
+      "CREATE UNIQUE INDEX store_session_statistics_snapshots_session_id_business_id_key ON public.store_session_statistics_snapshots USING btree (session_id, business_id)",
+      "CREATE UNIQUE INDEX order_item_statistics_snapshots_pkey ON public.order_item_statistics_snapshots USING btree (id)",
+      "CREATE UNIQUE INDEX order_item_statistics_snapshots_source_item_id_generation_key ON public.order_item_statistics_snapshots USING btree (source_item_id, generation)",
+      "CREATE UNIQUE INDEX statistics_item_active ON public.order_item_statistics_snapshots USING btree (source_item_id) WHERE active",
+      "CREATE INDEX statistics_item_order ON public.order_item_statistics_snapshots USING btree (business_id, order_id)"
+    ],
+    "constraints": [
+      {
+        "table": "business_statistics_state",
+        "definition": "FOREIGN KEY (business_id) REFERENCES businesses(id) ON DELETE CASCADE"
+      },
+      {
+        "table": "business_statistics_state",
+        "definition": "PRIMARY KEY (business_id)"
+      },
+      {
+        "table": "business_statistics_state",
+        "definition": "CHECK ((revision > 0))"
+      },
+      {
+        "table": "store_session_statistics_snapshots",
+        "definition": "FOREIGN KEY (business_id) REFERENCES businesses(id) ON DELETE CASCADE"
+      },
+      {
+        "table": "store_session_statistics_snapshots",
+        "definition": "CHECK (((source_quality <> 'exact'::text) OR ((timezone IS NOT NULL) AND (commercial_date IS NOT NULL))))"
+      },
+      {
+        "table": "store_session_statistics_snapshots",
+        "definition": "PRIMARY KEY (session_id)"
+      },
+      {
+        "table": "store_session_statistics_snapshots",
+        "definition": "UNIQUE (session_id, business_id)"
+      },
+      {
+        "table": "store_session_statistics_snapshots",
+        "definition": "FOREIGN KEY (session_id) REFERENCES store_sessions(id) ON DELETE CASCADE"
+      },
+      {
+        "table": "store_session_statistics_snapshots",
+        "definition": "CHECK ((source_quality = ANY (ARRAY['exact'::text, 'unavailable'::text, 'conflict'::text])))"
+      },
+      {
+        "table": "order_item_statistics_snapshots",
+        "definition": "CHECK ((generation > 0))"
+      },
+      {
+        "table": "order_item_statistics_snapshots",
+        "definition": "FOREIGN KEY (order_id, business_id) REFERENCES orders(id, business_id) ON DELETE CASCADE"
+      },
+      {
+        "table": "order_item_statistics_snapshots",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "table": "order_item_statistics_snapshots",
+        "definition": "FOREIGN KEY (source_item_id) REFERENCES order_items(id) ON DELETE CASCADE"
+      },
+      {
+        "table": "order_item_statistics_snapshots",
+        "definition": "UNIQUE (source_item_id, generation)"
+      },
+      {
+        "table": "order_item_statistics_snapshots",
+        "definition": "CHECK ((source_kind = ANY (ARRAY['line_insert'::text, 'identity_replacement'::text, 'identity_unknown'::text])))"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "CHECK (((agreed_total IS NULL) OR ((agreed_total > (0)::numeric) AND (agreed_total <> 'NaN'::numeric))))"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "CHECK ((breakdown_source = ANY (ARRAY['copy_total_price'::text, 'unresolved'::text, 'missing_agreement'::text])))"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "CHECK (((breakdown_source <> 'copy_total_price'::text) OR ((products_net IS NOT NULL) AND (delivery = (0)::numeric) AND (agreed_total = products_net))))"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "CHECK (((date_kind = 'missing_timezone'::text) OR ((timezone IS NOT NULL) AND (commercial_date IS NOT NULL))))"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "CHECK (((date_kind <> 'verified_session'::text) OR ((session_key IS NOT NULL) AND (session_opened_at IS NOT NULL))))"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "CHECK (((active AND (invalidated_at IS NULL)) OR ((NOT active) AND (invalidated_at IS NOT NULL))))"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "CHECK ((cycle > 0))"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "CHECK ((date_kind = ANY (ARRAY['verified_session'::text, 'outside_session'::text, 'missing_timezone'::text])))"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "CHECK (((delivery IS NULL) OR ((delivery >= (0)::numeric) AND (delivery <> 'NaN'::numeric))))"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "UNIQUE (id, business_id)"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "CHECK (((main_units IS NULL) OR (main_units >= 0)))"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "FOREIGN KEY (order_id, business_id) REFERENCES orders(id, business_id) ON DELETE CASCADE"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "UNIQUE (order_id, cycle)"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "PRIMARY KEY (id)"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "CHECK (((products_net IS NULL) OR ((products_net >= (0)::numeric) AND (products_net <> 'NaN'::numeric))))"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "FOREIGN KEY (session_id, business_id) REFERENCES store_session_statistics_snapshots(session_id, business_id) ON DELETE SET NULL (session_id)"
+      },
+      {
+        "table": "order_statistics_completions",
+        "definition": "CHECK ((source_kind = 'status_transition'::text))"
+      },
+      {
+        "table": "order_statistics_completion_items",
+        "definition": "FOREIGN KEY (completion_id, parent_line_key) REFERENCES order_statistics_completion_items(completion_id, line_key) DEFERRABLE INITIALLY DEFERRED"
+      },
+      {
+        "table": "order_statistics_completion_items",
+        "definition": "FOREIGN KEY (completion_id, business_id) REFERENCES order_statistics_completions(id, business_id) ON DELETE CASCADE"
+      },
+      {
+        "table": "order_statistics_completion_items",
+        "definition": "CHECK ((((item_kind = 'product'::text) AND (parent_line_key IS NULL)) OR ((item_kind = 'upsell'::text) AND (parent_line_key IS NOT NULL))))"
+      },
+      {
+        "table": "order_statistics_completion_items",
+        "definition": "CHECK (((gross >= (0)::numeric) AND (gross <> 'NaN'::numeric)))"
+      },
+      {
+        "table": "order_statistics_completion_items",
+        "definition": "CHECK ((item_kind = ANY (ARRAY['product'::text, 'upsell'::text])))"
+      },
+      {
+        "table": "order_statistics_completion_items",
+        "definition": "CHECK (((net_amount IS NULL) OR ((net_amount >= (0)::numeric) AND (net_amount <> 'NaN'::numeric))))"
+      },
+      {
+        "table": "order_statistics_completion_items",
+        "definition": "PRIMARY KEY (completion_id, line_key)"
+      },
+      {
+        "table": "order_statistics_completion_items",
+        "definition": "CHECK ((quantity > 0))"
+      },
+      {
+        "table": "order_statistics_completion_items",
+        "definition": "CHECK (((unit_price >= (0)::numeric) AND (unit_price <> 'NaN'::numeric)))"
+      }
+    ],
+    "grants": [
+      {
+        "grantor": "postgres",
+        "grantee": "authenticated",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "business_statistics_state",
+        "privilege_type": "SELECT",
+        "is_grantable": "NO",
+        "with_hierarchy": "YES"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "authenticated",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "store_session_statistics_snapshots",
+        "privilege_type": "SELECT",
+        "is_grantable": "NO",
+        "with_hierarchy": "YES"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "authenticated",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_item_statistics_snapshots",
+        "privilege_type": "SELECT",
+        "is_grantable": "NO",
+        "with_hierarchy": "YES"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "authenticated",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completions",
+        "privilege_type": "SELECT",
+        "is_grantable": "NO",
+        "with_hierarchy": "YES"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "authenticated",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completion_items",
+        "privilege_type": "SELECT",
+        "is_grantable": "NO",
+        "with_hierarchy": "YES"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "authenticated",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "statistics_v1_effective_facts",
+        "privilege_type": "SELECT",
+        "is_grantable": "NO",
+        "with_hierarchy": "YES"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "business_statistics_state",
+        "privilege_type": "INSERT",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "business_statistics_state",
+        "privilege_type": "SELECT",
+        "is_grantable": "YES",
+        "with_hierarchy": "YES"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "business_statistics_state",
+        "privilege_type": "UPDATE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "business_statistics_state",
+        "privilege_type": "DELETE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "business_statistics_state",
+        "privilege_type": "TRUNCATE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "business_statistics_state",
+        "privilege_type": "REFERENCES",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "business_statistics_state",
+        "privilege_type": "TRIGGER",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "store_session_statistics_snapshots",
+        "privilege_type": "INSERT",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "store_session_statistics_snapshots",
+        "privilege_type": "SELECT",
+        "is_grantable": "YES",
+        "with_hierarchy": "YES"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "store_session_statistics_snapshots",
+        "privilege_type": "UPDATE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "store_session_statistics_snapshots",
+        "privilege_type": "DELETE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "store_session_statistics_snapshots",
+        "privilege_type": "TRUNCATE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "store_session_statistics_snapshots",
+        "privilege_type": "REFERENCES",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "store_session_statistics_snapshots",
+        "privilege_type": "TRIGGER",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_item_statistics_snapshots",
+        "privilege_type": "INSERT",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_item_statistics_snapshots",
+        "privilege_type": "SELECT",
+        "is_grantable": "YES",
+        "with_hierarchy": "YES"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_item_statistics_snapshots",
+        "privilege_type": "UPDATE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_item_statistics_snapshots",
+        "privilege_type": "DELETE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_item_statistics_snapshots",
+        "privilege_type": "TRUNCATE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_item_statistics_snapshots",
+        "privilege_type": "REFERENCES",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_item_statistics_snapshots",
+        "privilege_type": "TRIGGER",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completions",
+        "privilege_type": "INSERT",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completions",
+        "privilege_type": "SELECT",
+        "is_grantable": "YES",
+        "with_hierarchy": "YES"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completions",
+        "privilege_type": "UPDATE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completions",
+        "privilege_type": "DELETE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completions",
+        "privilege_type": "TRUNCATE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completions",
+        "privilege_type": "REFERENCES",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completions",
+        "privilege_type": "TRIGGER",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completion_items",
+        "privilege_type": "INSERT",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completion_items",
+        "privilege_type": "SELECT",
+        "is_grantable": "YES",
+        "with_hierarchy": "YES"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completion_items",
+        "privilege_type": "UPDATE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completion_items",
+        "privilege_type": "DELETE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completion_items",
+        "privilege_type": "TRUNCATE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completion_items",
+        "privilege_type": "REFERENCES",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "order_statistics_completion_items",
+        "privilege_type": "TRIGGER",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "statistics_v1_effective_facts",
+        "privilege_type": "INSERT",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "statistics_v1_effective_facts",
+        "privilege_type": "SELECT",
+        "is_grantable": "YES",
+        "with_hierarchy": "YES"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "statistics_v1_effective_facts",
+        "privilege_type": "UPDATE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "statistics_v1_effective_facts",
+        "privilege_type": "DELETE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "statistics_v1_effective_facts",
+        "privilege_type": "TRUNCATE",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "statistics_v1_effective_facts",
+        "privilege_type": "REFERENCES",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      },
+      {
+        "grantor": "postgres",
+        "grantee": "postgres",
+        "table_catalog": "postgres",
+        "table_schema": "public",
+        "table_name": "statistics_v1_effective_facts",
+        "privilege_type": "TRIGGER",
+        "is_grantable": "YES",
+        "with_hierarchy": "NO"
+      }
+    ],
+    "orders": 0,
+    "products": 0,
+    "sessions": 0,
+    "stockMovements": 0,
+    "syntheticSettings": [
+      {
+        "slug": "statistics-synthetic-b",
+        "onDemand": true,
+        "scheduled": false
+      },
+      {
+        "slug": "statistics-synthetic-a",
+        "onDemand": true,
+        "scheduled": false
+      }
+    ],
+    "deadlocks": 0
+  }
+}

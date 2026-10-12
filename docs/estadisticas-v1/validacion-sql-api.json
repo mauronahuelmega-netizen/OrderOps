@@ -1,0 +1,69 @@
+{
+  "at": "2026-10-12T22:19:20.384Z",
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "api": "127.0.0.1:56321",
+  "roles": [
+    {
+      "business": "a",
+      "role": "owner",
+      "status": 200
+    },
+    {
+      "business": "a",
+      "role": "manager",
+      "status": 200
+    },
+    {
+      "business": "a",
+      "role": "admin",
+      "status": 200
+    },
+    {
+      "business": "a",
+      "role": "operator",
+      "status": 403
+    },
+    {
+      "business": "a",
+      "role": "viewer",
+      "status": 403
+    },
+    {
+      "business": "a",
+      "role": "super_admin",
+      "status": 403
+    },
+    {
+      "business": "b",
+      "role": "owner",
+      "status": 200
+    },
+    {
+      "business": "b",
+      "role": "manager",
+      "status": 200
+    },
+    {
+      "business": "b",
+      "role": "admin",
+      "status": 200
+    },
+    {
+      "business": "b",
+      "role": "operator",
+      "status": 403
+    },
+    {
+      "business": "b",
+      "role": "viewer",
+      "status": 403
+    },
+    {
+      "business": "b",
+      "role": "super_admin",
+      "status": 403
+    }
+  ],
+  "anonymousStatus": 401,
+  "noAuthSessionsWritten": true
+}

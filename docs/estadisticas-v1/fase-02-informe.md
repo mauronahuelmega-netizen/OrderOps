@@ -1,5 +1,7 @@
 # Fase 02 — captura, métricas y comparaciones: revisión previa a ejecutar SQL
 
+Estado histórico de preparación. La autorización posterior de ejecución SQL aislada y sus resultados se documentan en `validacion-sql-informe.md`; las restricciones y resultados de este documento describen el punto de control anterior.
+
 Fecha: 12/10/2026. Worktree **OrderOps-Estadisticas**, rama **codex/estadisticas-v1**. Base auditada `0e430b08342b638b02392927ed560ea5e0950403`. Cursor mantiene su rama `cursor/commercial-core-v1-integration`; su worktree no se modifica. B1–B6 permanecen vigentes.
 
 **Punto de control alcanzado: código propio, SQL y pruebas preparados. Ninguna migración de Estadísticas aplicada; ninguna prueba de escritura ejecutada. La captura/RLS/RPC no tienen todavía validación runtime. Fase 03 no iniciada.** Esta entrega no autoriza integrar, aplicar SQL, hacer merge/rebase/push ni desplegar.

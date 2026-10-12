@@ -5,7 +5,7 @@ Worktree exclusivo: OrderOps-Estadisticas; rama: codex/estadisticas-v1.
 
 ## Autoridad y estado
 
-El usuario aprobó la especificación funcional V1 y el plan definitivo, incluidas B1–B6, y aceptó la Fase 01 con sus limitaciones. Autorizó **preparación e implementación de código de Fase 02**, contratos propios, migraciones nuevas sin aplicar, funciones puras, fixtures, pruebas preparadas y verificaciones sin escrituras DB. **No autoriza aplicar SQL, pruebas de escritura, patches compartidos, Fase 03, merge, rebase, push ni deploy.** Los commits locales incluyen únicamente archivos propios. El punto de control y el diseño concretado se documentan en fase-02-informe.md; aprobar ese informe sigue siendo necesario antes de ejecutar migraciones.
+El usuario aprobó la especificación funcional V1 y el plan definitivo, incluidas B1–B6, y aceptó la Fase 01 con sus limitaciones. Autorizó la preparación de Fase02 y posteriormente **aplicar y validar sus tres migraciones exclusivamente en Supabase aislado**, incluidas pruebas sintéticas y correcciones de archivos propios. Resultados en validacion-sql-informe.md. **No autoriza integración, cambios de contratos compartidos, producción, Fase03, merge, rebase, push ni deploy.** Los commits locales incluyen únicamente archivos propios. fase-02-informe.md conserva el diseño y estado del punto de revisión previo; la nueva autorización no amplía el alcance funcional.
 
 Esta referencia incorpora las decisiones finales y reemplaza propuestas contradictorias del documento de auditoría inicial. Fuentes: especificación funcional adjunta, auditoría contrastada y decisiones expresas del usuario. No se agregan funciones excluidas.
 

@@ -1,0 +1,44 @@
+{
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "results": {
+    "unit": {
+      "status": "PASS",
+      "at": "2026-10-12T22:25:22.665Z",
+      "bundleHash": "4eda220b1e80ba93f1f1c7b7af6354b31470cbc0f3c03ae2e5cc06df5b316854",
+      "details": [
+        "capture-metrics.sql",
+        "security-money.sql",
+        "transactional test writes rolled back"
+      ]
+    },
+    "regression": {
+      "status": "PASS",
+      "at": "2026-10-12T22:25:34.976Z",
+      "bundleHash": "4eda220b1e80ba93f1f1c7b7af6354b31470cbc0f3c03ae2e5cc06df5b316854",
+      "details": [
+        "regression.sql",
+        "create_order/transition_order_status/initialize_order_financials/set_order_agreed_total",
+        "stock and financial idempotence",
+        "all presets/hour/day/week/month/missing timezone",
+        "writes rolled back"
+      ]
+    },
+    "concurrency": {
+      "status": "PASS",
+      "at": "2026-10-12T22:23:56.648Z",
+      "bundleHash": "4eda220b1e80ba93f1f1c7b7af6354b31470cbc0f3c03ae2e5cc06df5b316854",
+      "details": [
+        "two independent PostgreSQL connections",
+        "complete/complete:1 cycle",
+        "reopen/recomplete:2 cycles",
+        "agreement/completion:3 cycles",
+        "close/completion:4 cycles",
+        "exactly one active and unique cycles",
+        "real observed lock waits",
+        "real create_order vs transition_order_status stock schedule",
+        "final stock19 and exactly one restock ledger",
+        "isolated fixtures cleaned after sessions"
+      ]
+    }
+  }
+}

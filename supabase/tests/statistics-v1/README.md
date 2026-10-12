@@ -1,5 +1,7 @@
 # Estadísticas V1: pruebas preparadas, sin ejecutar SQL
 
+Actualización: el usuario autorizó posteriormente la validación aislada. Las suites unit/concurrency/regression y API ya se ejecutaron bajo esa autorización; resultados en docs/estadisticas-v1/validacion-sql-informe.md. El texto siguiente conserva las condiciones del punto de revisión original. No permite ejecutar sobre otra instancia ni iniciar Fase03.
+
 La autorización de Fase 02 permite preparar estas pruebas, NO ejecutarlas. El runner no contiene una vía para aplicar migraciones.
 
 ## Verificación permitida ahora
