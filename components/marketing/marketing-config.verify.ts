@@ -1,0 +1,25 @@
+import assert from "node:assert/strict";
+import { getMarketingContactUrl, normalizeMarketingOrigin, normalizeMarketingPhone } from "./marketing-config";
+
+assert.equal(normalizeMarketingOrigin(undefined), null);
+assert.equal(normalizeMarketingOrigin("javascript:alert(1)"), null);
+assert.equal(normalizeMarketingOrigin("http://example.test"), null);
+assert.equal(normalizeMarketingOrigin("https://user:secret@example.test"), null);
+assert.equal(normalizeMarketingOrigin("https://example.test/path"), null);
+assert.equal(normalizeMarketingOrigin("https://example.test?tracking=1"), null);
+assert.equal(normalizeMarketingOrigin(" https://example.test/ "), "https://example.test");
+assert.equal(normalizeMarketingPhone(undefined), null);
+assert.equal(normalizeMarketingPhone("0000000000"), null);
+assert.equal(normalizeMarketingPhone("123"), null);
+assert.equal(normalizeMarketingPhone("https://wa.me/123456789"), null);
+assert.equal(normalizeMarketingPhone("12345678<script>"), null);
+assert.equal(normalizeMarketingPhone("+54 (9) 11 5555-1234"), "5491155551234");
+assert.equal(getMarketingContactUrl("demo", null), null);
+assert.equal(getMarketingContactUrl("whatsapp", "bad"), null);
+const demo = new URL(getMarketingContactUrl("demo", "5491155551234")!);
+const inquiry = new URL(getMarketingContactUrl("whatsapp", "5491155551234")!);
+assert.equal(demo.origin, "https://wa.me");
+assert.equal(demo.pathname, inquiry.pathname);
+assert.equal(demo.searchParams.get("text"), "Hola, quiero solicitar una demo de OrderOps para mi negocio.");
+assert.equal(inquiry.searchParams.get("text"), "Hola, quiero consultar sobre OrderOps para mi negocio.");
+console.log("PASS: commercial configuration, safe missing/invalid values, distinct contact intents");

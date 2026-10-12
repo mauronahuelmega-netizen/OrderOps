@@ -1,3 +1,46 @@
+:root {
+  /* Marketing semantics: independent of tenant and dashboard theme preferences. */
+  --marketing-night: #10141d;
+  --marketing-night-raised: #191e29;
+  --marketing-white: #ffffff;
+  --marketing-paper: #f7f8fa;
+  --marketing-ink: #171c26;
+  --marketing-muted: #626b7b;
+  --marketing-dark-muted: #abb5c6;
+  --marketing-border: #dce1e9;
+  --marketing-dark-border: #303849;
+  --marketing-blue: #285ce8;
+  --marketing-blue-strong: #1746c2;
+  --marketing-blue-light: #7799ff;
+  --marketing-blue-pale: #e2eaff;
+  --marketing-blue-soft: #edf2ff;
+  --marketing-blue-disabled: #324a85;
+  --marketing-blue-border: #7594ed;
+  --marketing-blue-halo: #20304e;
+  --marketing-focus: #7395ff;
+  --marketing-ui-canvas: #f4f6f9;
+  --marketing-ui-lane: #e9edf3;
+  --marketing-ui-border: #dce2ea;
+  --marketing-phone-edge: #343943;
+  --marketing-pending: #d97706;
+  --marketing-pending-light: #fbbf24;
+  --marketing-pending-soft: #fff3d8;
+  --marketing-pending-text: #975306;
+  --marketing-preparing: #4f46e5;
+  --marketing-preparing-light: #a5b4fc;
+  --marketing-ready: #059669;
+  --marketing-ready-light: #34d399;
+  --marketing-ready-soft: #d8f4e9;
+  --marketing-food-rust: #9b3e2e;
+  --marketing-food-rust-light: #aa4c3b;
+  --marketing-food-cream: #f4e9d8;
+  --marketing-chat: #ecefea;
+  --marketing-chat-reply: #e6f1e9;
+  --marketing-chat-border: #d2e3d6;
+  --marketing-shadow-light: rgb(20 30 50 / .07);
+  --marketing-shadow-dark: rgb(0 0 0 / .35);
+}
+
 :root,
 html[data-dashboard-theme="light"] {
   color-scheme: light;
