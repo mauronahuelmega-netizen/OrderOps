@@ -1,6 +1,6 @@
 # Diseño de persistencia y RPC — revisión previa a Fase 02
 
-**Propuesta documental. No contiene una migración ejecutable. Ningún objeto analítico nuevo se aplica durante Fase 01.**
+**Diseño conceptual de Fase 01. La preparación autorizada de Fase 02 lo concreta en tres archivos SQL SIN APLICAR. Las precisiones de fase-02-informe.md y el conjunto de revisión prevalecen sobre esta propuesta inicial: generaciones de identidad, revisión diferida, lectura MVCC sin bloquear financials/items, proyección invoker y nulabilidad explícita. Ningún objeto analítico nuevo se aplica bajo la autorización actual.**
 
 ## Tablas propias propuestas
 
