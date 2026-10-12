@@ -1,0 +1,17 @@
+{
+  "version": "statistics.v1.phase02",
+  "syntheticOnly": true,
+  "execution": "Pure tests executed; SQL fixtures and concurrency schedules prepared, not executed",
+  "monetary": [
+    { "id": "proven_copy", "mainQuantity": 2, "mainUnitPrice": "10.00", "upsellQuantity": 1, "upsellPrice": "3.00", "agreedTotal": "23.00", "evidence": "copy_total_price", "expectedSales": "23.00", "expectedMainUnits": 2 },
+    { "id": "same_amount_no_evidence", "gross": "23.00", "agreedTotal": "23.00", "evidence": null, "expectedSales": null },
+    { "id": "unexplained_discount", "gross": "23.00", "agreedTotal": "20.00", "expectedSales": null, "expectedPending": "20.00" },
+    { "id": "explicit_discount_helper", "grossLines": ["10.00", "20.00"], "identifiedProductNet": "27.00", "expectedNet": ["9.00", "18.00"], "producerIntegrationApproved": false },
+    { "id": "explicit_shipping_contract_pending", "identifiedProductNet": "27.00", "identifiedShipping": "4.00", "agreedTotal": "31.00", "currentCaptureResult": "unresolved", "producerIntegrationApproved": false },
+    { "id": "rounding_residual", "grossLines": ["0.02", "0.02"], "identifiedProductNet": "0.03", "expectedNet": ["0.02", "0.01"] }
+  ],
+  "concurrency": ["complete_complete", "reopen_recomplete", "financial_update_completion", "session_close_completion"],
+  "runtimeStillPending": ["stock_create_cancel_real_rpc", "inverse_schedules_and_stress", "composite_foreign_keys", "catalog_deletion_and_identity_replacement", "session_deletion", "missing_or_changed_timezone", "stale_cursor", "multi_session_comparisons", "bucket_sum_and_current_hour", "migration_atomic_failure", "explain_performance"],
+  "roles": { "allowedOriginal": ["owner", "manager", "admin"], "deniedOriginal": ["operator", "viewer", "super_admin"] },
+  "unknown": "null plus quality/reasons, never coerced to zero"
+}

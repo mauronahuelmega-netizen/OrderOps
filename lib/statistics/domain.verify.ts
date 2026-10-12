@@ -1,0 +1,51 @@
+import assert from 'node:assert/strict';
+import { cents, decimal, allocateIdentifiedProductsNet } from './money';
+import { indicators } from './quality';
+import { delta, comparableSessions } from './comparisons';
+import { parseDate, resolvePeriod, localInstant, localDate, addDays } from './periods';
+
+assert.equal(cents('12345678901234567890.01'), BigInt('1234567890123456789001'));
+for (const bad of ['NaN', 'Infinity', '-1', '1e3', '1.001', '01.00', '', ' 1']) assert.throws(() => cents(bad));
+assert.deepEqual(allocateIdentifiedProductsNet('2700.00', [{ id: 'a', gross: '1000' }, { id: 'b', gross: '2000' }]), [{ id: 'a', net: '900.00' }, { id: 'b', net: '1800.00' }]);
+assert.deepEqual(allocateIdentifiedProductsNet('0.01', [{ id: 'b', gross: '1' }, { id: 'a', gross: '1' }]), [{ id: 'b', net: '0.00' }, { id: 'a', net: '0.01' }]);
+assert.throws(() => allocateIdentifiedProductsNet('1', [{ id: 'a', gross: '0' }]));
+assert.throws(() => allocateIdentifiedProductsNet('1', [{ id: 'a', gross: '1' }, { id: 'a', gross: '2' }]));
+// Independent conservation property, including discounts, surcharges and cent residues.
+for (let amount = 0; amount < 101; amount++) for (let base = 1; base < 12; base++) {
+  const allocation = allocateIdentifiedProductsNet(decimal(BigInt(amount)), [{ id: 'x', gross: decimal(BigInt(base)) }, { id: 'y', gross: '0.03' }, { id: 'z', gross: '0.00' }]);
+  assert.equal(allocation.reduce((sum, row) => sum + cents(row.net), BigInt(0)), BigInt(amount));
+  assert.equal(allocation[2].net, '0.00');
+}
+const exact = indicators([{ sales: '10', mainUnits: 2, reasons: [] }, { sales: '20', mainUnits: 3, reasons: [] }]);
+assert.equal(exact.sales.value, '30.00'); assert.equal(exact.averageTicket.value, '15.00'); assert.equal(exact.mainUnits.value, '5');
+const partial = indicators([{ sales: '10', mainUnits: 2, reasons: [] }, { sales: null, mainUnits: null, reasons: ['missing_agreement', 'missing_composition'] }]);
+assert.equal(partial.sales.quality, 'partial'); assert.equal(partial.averageTicket.value, null);
+assert.equal(indicators([{ sales: null, mainUnits: 1, reasons: ['missing_agreement'] }]).sales.value, null);
+assert.equal(indicators([], 1).sales.value, null); assert.equal(indicators([], 1).completedOrders.value, null);
+assert.equal(indicators([]).sales.value, '0.00'); assert.equal(indicators([]).averageTicket.value, null);
+assert.equal(delta(exact.sales, indicators([]).sales).reason, 'no_base');
+assert.equal(delta(exact.sales, partial.sales).reason, 'unavailable');
+assert.equal(delta(exact.sales, indicators([{ sales: '20', mainUnits: 1, reasons: [] }]).sales).percentage, '50.00');
+assert.equal(delta(indicators([{ sales: '10', mainUnits: 1, reasons: [] }]).sales, exact.sales).percentage, '-66.67');
+assert.equal(parseDate('2024-02-29'), '2024-02-29'); assert.throws(() => parseDate('2023-02-29')); assert.throws(() => parseDate('0000-01-01'));
+assert.equal(addDays('0001-01-01', 1), '0001-01-02');
+assert.equal(localDate('2026-10-12T01:00:00Z', 'America/Argentina/Buenos_Aires'), '2026-10-11');
+assert.equal(localInstant('2026-10-12', '00:00:00', 'America/Argentina/Buenos_Aires'), '2026-10-12T03:00:00.000Z');
+assert.throws(() => localInstant('2026-03-08', '02:30:00', 'America/New_York'), /Nonexistent/);
+assert.throws(() => localInstant('2026-11-01', '01:30:00', 'America/New_York'), /Ambiguous/);
+const context = { asOf: '2026-10-12T04:30:00Z', timezone: 'America/Argentina/Buenos_Aires', activeCommercialDate: '2026-10-11' };
+const today = resolvePeriod({ preset: 'today' }, context);
+assert.equal(today.startDate, '2026-10-11'); assert.equal(today.referenceDate, '2026-10-11');
+assert.equal(resolvePeriod({ preset: 'this_week' }, context).startDate, '2026-10-05');
+for (const preset of ['yesterday', 'this_month', 'previous_month', 'last_7_days', 'last_30_days'] as const) assert.ok(resolvePeriod({ preset }, context).comparable);
+assert.equal(resolvePeriod({ preset: 'this_month' }, { asOf: '2026-03-31T12:00:00Z', timezone: 'UTC' }).comparable, null);
+assert.throws(() => resolvePeriod({ preset: 'custom', startDate: '2026-10-12', endDate: '2026-10-11' }, context));
+assert.throws(() => resolvePeriod({ preset: 'custom', startDate: '2026-10-12', endDate: '2026-10-13' }, context));
+assert.throws(() => resolvePeriod({ preset: 'today' }, { ...context, timezone: '' }));
+assert.equal(resolvePeriod({ preset: 'custom', startDate: '0001-01-01', endDate: '0001-01-02' }, context).comparableReason, 'previous_interval_out_of_range');
+const pair = [{ id: 'now', commercialDate: '2026-10-11', openedAt: '2026-10-12T02:00:00Z', closedAt: null, verified: true }, { id: 'before', commercialDate: '2026-10-10', openedAt: '2026-10-11T01:00:00Z', closedAt: '2026-10-11T05:00:00Z', verified: true }];
+assert.equal(comparableSessions(today, pair).segments[0].previousUntil, '2026-10-11T03:30:00.000Z');
+assert.equal(comparableSessions(today, [{ ...pair[0] }, { ...pair[1], closedAt: '2026-10-11T02:00:00Z' }]).reason, 'previous_session_too_short');
+assert.equal(comparableSessions(today, [pair[0]]).reason, 'unmatched_sessions');
+assert.equal(comparableSessions(today, [{ ...pair[0], verified: false }, pair[1]]).reason, 'unverified_session');
+console.log('PASS: Statistics periods/DST/session equivalence, quality, comparisons and 1111 monetary conservation cases. No database writes.');
