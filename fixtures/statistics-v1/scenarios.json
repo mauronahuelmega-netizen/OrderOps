@@ -1,0 +1,20 @@
+{
+  "version": "statistics.v1.phase01",
+  "syntheticOnly": true,
+  "execution": "Design fixtures only; no Statistics schema or metrics executed in Phase 01",
+  "scenarios": [
+    { "id": "session_midnight", "sessionOpened": "2026-10-11T23:00:00-03:00", "completed": "2026-10-12T01:30:00-03:00", "commercialDate": "2026-10-11" },
+    { "id": "outside_session", "session": null, "completed": "2026-10-12T01:30:00-03:00", "commercialDate": "2026-10-12", "label": "Fuera de sesión verificada" },
+    { "id": "unknown_completion", "completed": null, "commercialDate": null, "expect": "excluded_with_historical_coverage_notice" },
+    { "id": "reopened", "statuses": ["completed", "preparing"], "expect": "no_active_completion" },
+    { "id": "recompleted", "statuses": ["completed", "preparing", "completed"], "expect": "one_active_latest_cycle" },
+    { "id": "cancelled", "statuses": ["completed", "cancelled"], "expect": "excluded" },
+    { "id": "unknown_agreement", "technicalTotal": "3000.00", "agreedTotal": null, "expect": "no_nominal_fallback" },
+    { "id": "unexplained_difference", "grossProducts": "3000.00", "agreedTotal": "2700.00", "adjustmentEvidence": null, "expect": "explicit_unattributed_difference" },
+    { "id": "identified_discount", "grossLines": ["1000.00", "2000.00"], "netProducts": "2700.00", "discountEvidence": "synthetic-confirmed", "expectedLines": ["900.00", "1800.00"] },
+    { "id": "upsell", "mainQuantity": 2, "upsellQuantity": 1, "modifierQuantity": 3, "expectedMainUnits": 2 },
+    { "id": "category_renamed", "soldCategory": "synthetic-original", "currentCategory": "synthetic-new", "expect": "original_category" },
+    { "id": "foreign_tenant", "principalBusiness": "synthetic-a", "requestedBusiness": "synthetic-b", "expect": "denied" },
+    { "id": "previous_short_session", "currentElapsedMinutes": 240, "previousDurationMinutes": 180, "expect": "no_equivalent_comparison" }
+  ]
+}
