@@ -1,0 +1,51 @@
+{
+  "verifiedAt": "2026-10-12T19:35:22.745Z",
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "baseCommit": "0e430b08342b638b02392927ed560ea5e0950403",
+  "baseMigrations": 119,
+  "statisticsMigrations": 0,
+  "apiPort": 56321,
+  "dbPort": 56322,
+  "resources": {
+    "containerIds": [
+      "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+      "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+      "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+    ],
+    "volumeNames": [
+      "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+    ],
+    "networkId": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af"
+  },
+  "markersMatch": true,
+  "exclusiveJwtSigning": "ES256",
+  "configHash": "1db8435f3bf6c7d792ee769ad580f5a1039180d397de60d068e3a0a06e37d254",
+  "migrationManifestHash": "a2562028f046890ed10c46363602e200ce3bea11f767e3493b0d1e9ed7edca56",
+  "counts": {
+    "businesses": 2,
+    "profiles": 12,
+    "orders": 0,
+    "migrations": 119,
+    "statistics_tables": 0
+  },
+  "authenticatedSyntheticRoles": [
+    "a:owner",
+    "a:manager",
+    "a:admin",
+    "a:operator",
+    "a:viewer",
+    "a:super_admin",
+    "b:owner",
+    "b:manager",
+    "b:admin",
+    "b:operator",
+    "b:viewer",
+    "b:super_admin"
+  ],
+  "crossTenantOwnerProfilesDenied": true,
+  "seedsEnabled": false,
+  "automaticMigrationsEnabled": false
+}
