@@ -120,8 +120,8 @@ begin
   if v_def ilike '%promoter_commission%' or v_def ilike '%platform_collections%' or v_def ilike '%service_subscriptions%' then
     raise exception 'win function mentions later money tables';
   end if;
-  if to_regclass('commercial.promoter_commissions') is not null then
-    raise exception 'commission table exists';
+  if exists (select 1 from commercial.promoter_commissions) then
+    raise exception 'win created a commission row';
   end if;
 end;
 $$;

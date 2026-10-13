@@ -269,7 +269,7 @@ begin
     raise exception 'collection audit count %', v_count;
   end if;
 
-  if to_regclass('commercial.promoter_commissions') is not null
+  if exists (select 1 from commercial.promoter_commissions)
     or to_regclass('commercial.founder_slots') is not null
     or to_regclass('commercial.promoter_settlements') is not null
     or to_regclass('commercial.promoter_invoices') is not null

@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-13 — P05-T02 devengo nominal
+
+- **[Commercial/Economía]** `promoter_commissions` y `accrue_commissions_for_collection`. El derecho nace solo cuando Finanzas invoca la RPC. Setup nominal copia `setup_commission_cents` (12_000_000). Recurrente es `eligible_base_cents * recurring_bps / 10000` (5_500_000 * 4000 / 10000 = 2_200_000). El estado inicial es `pending`, sin slot ni `available_at`. Una cobranza no nominal no inserta fila. `win_opportunity` y `record_collection` no devengan. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos.
+- **[DB]** Migración `20261013010000_commercial_phase05_commissions.sql` aplicada solo en `supabase_db_OrderOps`. Ledger 120. PHASE-05 sigue `IN_PROGRESS`. `next_task` es P05-T03.
+
 ### 2026-10-12 — P05-T01 obligaciones y cobranzas
 
 - **[Commercial/Economía]** `platform_obligations` y `platform_collections`. Finanzas abre la obligación con el precio congelado de `conversion_terms` y registra la cobranza. El bruto igual al precio de lista queda `nominal`. El bruto distinto queda `blocked_pending_policy`, con base nula, y la obligación pasa a `satisfied`. Un `failed` no la satisface. No hay comisiones, slots, liquidaciones, facturas ni pagos. La reversa no entra por `record_collection`.

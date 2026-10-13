@@ -1047,6 +1047,10 @@ export type Database = {
       promoter_onboarding_businesses: { Args: Record<string, never>; Returns: Json };
       promoter_onboarding_products: { Args: { p_business_id: string }; Returns: Json };
       business_onboarding_requests: { Args: Record<string, never>; Returns: Json };
+      accrue_commissions_for_collection: {
+        Args: { p_collection_id: string };
+        Returns: Json;
+      };
       open_obligation: {
         Args: { p_terms_id: string; p_kind: string; p_period_key: string | null };
         Returns: Json;
@@ -2021,6 +2025,76 @@ export type Database = {
           },
         ];
       };
+      promoter_commissions: {
+        Row: {
+          amount_cents: number;
+          available_at: string | null;
+          collection_id: string;
+          conversion_terms_id: string;
+          created_at: string;
+          id: string;
+          promoter_id: string;
+          release_exception_by: string | null;
+          release_exception_reason: string | null;
+          right_kind: string;
+          settlement_id: string | null;
+          slot: number | null;
+          status: string;
+        };
+        Insert: {
+          amount_cents: number;
+          available_at?: string | null;
+          collection_id: string;
+          conversion_terms_id: string;
+          created_at?: string;
+          id?: string;
+          promoter_id: string;
+          release_exception_by?: string | null;
+          release_exception_reason?: string | null;
+          right_kind: string;
+          settlement_id?: string | null;
+          slot?: number | null;
+          status?: string;
+        };
+        Update: {
+          amount_cents?: number;
+          available_at?: string | null;
+          collection_id?: string;
+          conversion_terms_id?: string;
+          created_at?: string;
+          id?: string;
+          promoter_id?: string;
+          release_exception_by?: string | null;
+          release_exception_reason?: string | null;
+          right_kind?: string;
+          settlement_id?: string | null;
+          slot?: number | null;
+          status?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "promoter_commissions_collection_id_fkey";
+            columns: ["collection_id"];
+            isOneToOne: false;
+            referencedRelation: "platform_collections";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "promoter_commissions_conversion_terms_id_fkey";
+            columns: ["conversion_terms_id"];
+            isOneToOne: false;
+            referencedRelation: "conversion_terms";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "promoter_commissions_promoter_id_fkey";
+            columns: ["promoter_id"];
+            isOneToOne: false;
+            referencedRelation: "promoters";
+            referencedColumns: ["id"];
+          },
+        ];
+      };
       platform_accounts: {
         Row: {
           created_at: string;
@@ -2724,6 +2798,10 @@ export type Database = {
       };
       open_dispute: {
         Args: { p_opportunity_id: string; p_promoter_ids: string[]; p_reason: string };
+        Returns: Json;
+      };
+      accrue_commissions_for_collection: {
+        Args: { p_collection_id: string };
         Returns: Json;
       };
       open_obligation: {
