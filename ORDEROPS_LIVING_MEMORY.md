@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-13 — P05-T03 ventana y liberación de setup
+
+- **[Commercial/Economía]** `refresh_commission_availability` fija `available_at` en `posted_at + 15 días`. La recurrente pasa a `available` al cumplirse la ventana aunque el onboarding no esté completo. El setup además exige un grant `completed` del mismo negocio y promotor, o `release_setup_commission` de superadmin con motivo. Una disputa `hold_unpaid_commissions` deja `held` solo las comisiones de esa oportunidad. No hay slots.
+- **[DB]** Migración `20261013020000_commercial_phase05_availability.sql` en `supabase_db_OrderOps`. Ledger 121. `next_task` es P05-T04.
+
 ### 2026-10-13 — P05-T02 devengo nominal
 
 - **[Commercial/Economía]** `promoter_commissions` y `accrue_commissions_for_collection`. El derecho nace solo cuando Finanzas invoca la RPC. Setup nominal copia `setup_commission_cents` (12_000_000). Recurrente es `eligible_base_cents * recurring_bps / 10000` (5_500_000 * 4000 / 10000 = 2_200_000). El estado inicial es `pending`, sin slot ni `available_at`. Una cobranza no nominal no inserta fila. `win_opportunity` y `record_collection` no devengan. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos.

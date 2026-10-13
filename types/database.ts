@@ -1051,6 +1051,11 @@ export type Database = {
         Args: { p_collection_id: string };
         Returns: Json;
       };
+      refresh_commission_availability: { Args: Record<string, never>; Returns: Json };
+      release_setup_commission: {
+        Args: { p_commission_id: string; p_reason: string };
+        Returns: Json;
+      };
       open_obligation: {
         Args: { p_terms_id: string; p_kind: string; p_period_key: string | null };
         Returns: Json;
@@ -2802,6 +2807,11 @@ export type Database = {
       };
       accrue_commissions_for_collection: {
         Args: { p_collection_id: string };
+        Returns: Json;
+      };
+      refresh_commission_availability: { Args: Record<string, never>; Returns: Json };
+      release_setup_commission: {
+        Args: { p_commission_id: string; p_reason: string };
         Returns: Json;
       };
       open_obligation: {

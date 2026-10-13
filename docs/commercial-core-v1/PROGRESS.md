@@ -13,12 +13,12 @@ phase_03_formal_close: closed_local
 phase_03_post_audit: runtime_validated_ledger_registered
 phase_04: closed_local
 phase_05: in_progress
-next_task: P05-T03
+next_task: P05-T04
 PHASE_04_STATUS: CLOSED_LOCAL
 PHASE_05_STATUS: IN_PROGRESS
 ```
 
-P04-T01 a P04-T04 quedaron hechas en local el 2026-10-11. Ese cierre no se reabre. `PHASE_04_STATUS` sigue `CLOSED_LOCAL`. `BLK-LEDGER-01` quedó `CLOSED_LOCAL` el 2026-10-12. PHASE-05 está `IN_PROGRESS`: P05-T01 quedó `DONE_LOCAL` el 2026-10-12. P05-T02 quedó `DONE_LOCAL` el 2026-10-13 y `next_task` es P05-T03.
+P04-T01 a P04-T04 quedaron hechas en local el 2026-10-11. Ese cierre no se reabre. `PHASE_04_STATUS` sigue `CLOSED_LOCAL`. `BLK-LEDGER-01` quedó `CLOSED_LOCAL` el 2026-10-12. PHASE-05 está `IN_PROGRESS`: P05-T01 quedó `DONE_LOCAL` el 2026-10-12. P05-T02 quedó `DONE_LOCAL` el 2026-10-13. P05-T03 quedó `DONE_LOCAL` el 2026-10-13 y `next_task` es P05-T04.
 
 Después del cierre, la tarea PROMOTER-ONBOARDING-UI-V1 agregó lecturas de solo lectura en `20261011030000` y las pantallas mínimas de asistencia. `schema_migrations` pasa a 118 filas. Las siete versiones de PHASE-04 permanecen registradas una vez. PHASE-05 no está iniciada.
 
@@ -51,7 +51,7 @@ El smoke del navegador quedó PASS el 2026-10-11: el dueño aprobó, el promotor
 | P04-T04 | 04 | done | 2026-10-11. Gate exit 0. `20261011023000` aplicada, ledger 117. `phase04_e2e10.sql` exit 0 (ROLLBACK): aprobación a 30 días, descripción persistida, precio rechazado, revocación bloquea, `ends_at` vencido bloquea aunque `status` siga `active`, y `expire_onboarding_grants` marca `expired` sin borrar la fila ni el evento. No existen `promoter_commissions`, `platform_collections` ni `service_subscriptions`. |
 | P05-T01 | 05 | done | 2026-10-12. `DONE_LOCAL`. Gate exit 0 (`127.0.0.1:54321` / `127.0.0.1:54322`). `supabase migration up --local` aplicó solo `20261012030000_commercial_phase05_collections.sql`. Ledger 118 → 119. `phase05_collections.sql` exit 0 con ROLLBACK. `phase04_conversion.sql` exit 0 con ROLLBACK. Carrera de dos sesiones: un `posted` nominal y el segundo `validation`, con el lock sostenido. `npx tsc --noEmit --pretty false --incremental false` exit 0. `verify-all` exit 0 (13 archivos). No hay comisiones, slots, liquidaciones, facturas ni pagos. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos. |
 | P05-T02 | 05 | done | 2026-10-13. `DONE_LOCAL`. Gate exit 0 (`127.0.0.1:54321` / `127.0.0.1:54322`). Respaldo `OrderOps-postgres-20261013T233500Z-pre-p05t02.dump`, SHA-256 `8F1B62B35E275BD16114F91AC017D56F3ABC8451FE3FA72D0FB0E9F3690339E6`, 1400848 bytes, `pg_restore -l` formato custom. `supabase migration up --local` aplicó solo `20261013010000`. Ledger 119 → 120. `phase05_commissions.sql` exit 0 con ROLLBACK: setup 12_000_000, recurrente 2_200_000, ambos `pending` sin slot, replay no duplica, insert directo choca con unique, bruto 5_000_000 y `failed` no insertan, `win_opportunity` y `record_collection` no crean filas, comercial recibe `forbidden`, anon no ejecuta. `phase05_collections.sql` y `phase04_conversion.sql` exit 0. `calculate.verify` exit 0. `verify-all` exit 0 (14 archivos). G-05 de disponibilidad y slot queda para P05-T03 y P05-T04. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos. |
-| P05-T03 | 05 | pending | — |
+| P05-T03 | 05 | done | 2026-10-13. `DONE_LOCAL`. Gate exit 0. Respaldo `OrderOps-postgres-20261013T235200Z-pre-p05t03.dump`, SHA-256 `F329C2E4FE6270EBE1FB2572898122142E4E9E3C23442238AF473DFF1F1F66EF`, 1413548 bytes. `20261013020000` aplicada. Ledger 120 → 121. `phase05_availability.sql` exit 0 con ROLLBACK: G-01 setup día 16 sin onboarding sigue `pending`; recurrente día 16 queda `available` sin slot; G-02 con grant `completed` pasa a `available`; G-03 día 10 sigue `pending`; finanzas no libera; G-04 superadmin libera; una disputa `hold_unpaid_commissions` deja `held` solo esa oportunidad. `availability.verify` exit 0. Slots no se asignan. |
 | P05-T04 | 05 | pending | — |
 | P05-T05 | 05 | pending | — |
 | P05-T06 | 05 | pending | — |
