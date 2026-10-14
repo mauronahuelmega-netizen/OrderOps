@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-14 — P05 P0 comisión anulada no se paga
+
+- **[Commercial/Economía]** Una reversa de un derecho impago, incluso si ya está en una liquidación, lo deja `voided`. Aprobar, aceptar la factura o registrar el pago se detiene con `settlement_has_voided_rights`. El trigger impide que `voided` vuelva a otro estado. El total de la liquidación no se recalcula. Una comisión ya `paid` sigue `paid` y genera el ajuste negativo. Queda pendiente la decisión humana sobre anular, rechazar o recalcular esa liquidación.
+- **[DB]** `20261014080100_commercial_phase05_voided_payment_guard.sql`. Ledger 130. `PHASE_05_STATUS` sigue `NEEDS_FIX`.
+
 ### 2026-10-14 — P05 P0 tope de doce derechos
 
 - **[Commercial/Economía]** `accrue_commissions_for_collection` rechaza una recurrente nueva cuando ya hay doce derechos vivos o cuando los números de slot están agotados y la obligación no tiene slot. Un trigger impide el insert directo. El derecho 13 no pasa a `available` ni entra en una liquidación. Los números anulados no se reciclan.

@@ -2,6 +2,9 @@
 -- Do not run if a later PHASE-05 migration exists beyond the drops below.
 -- This file is not executed.
 
+drop trigger if exists promoter_commissions_voided_immutable on commercial.promoter_commissions;
+drop function if exists commercial.prevent_voided_commission_reactivation();
+
 drop trigger if exists promoter_commissions_founder_cap on commercial.promoter_commissions;
 drop function if exists commercial.enforce_founder_recurring_cap();
 drop function if exists commercial.eligible_recurring_rank(uuid);
