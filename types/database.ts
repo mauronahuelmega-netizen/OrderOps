@@ -1075,6 +1075,7 @@ export type Database = {
         Args: { p_adjustment_ids: string[] | null; p_period_key: string; p_promoter_id: string };
         Returns: Json;
       };
+      replace_settlement: { Args: { p_reason: string; p_settlement_id: string }; Returns: Json };
       approve_settlement: { Args: { p_settlement_id: string }; Returns: Json };
       submit_invoice: {
         Args: { p_amount_cents: number; p_document_path: string; p_settlement_id: string };
@@ -2239,9 +2240,15 @@ export type Database = {
           created_at: string;
           due_on: string;
           id: string;
+          invalidated_at: string | null;
+          invalidated_by: string | null;
+          invalidation_reason: string | null;
           period_key: string;
           prepared_by: string;
           promoter_id: string;
+          reconciliation_reason: string | null;
+          reconciliation_required_at: string | null;
+          replaces_settlement_id: string | null;
           status: string;
           timezone: string;
           total_cents: number;
@@ -2252,9 +2259,15 @@ export type Database = {
           created_at?: string;
           due_on: string;
           id?: string;
+          invalidated_at?: string | null;
+          invalidated_by?: string | null;
+          invalidation_reason?: string | null;
           period_key: string;
           prepared_by: string;
           promoter_id: string;
+          reconciliation_reason?: string | null;
+          reconciliation_required_at?: string | null;
+          replaces_settlement_id?: string | null;
           status: string;
           timezone?: string;
           total_cents: number;
@@ -2265,9 +2278,15 @@ export type Database = {
           created_at?: string;
           due_on?: string;
           id?: string;
+          invalidated_at?: string | null;
+          invalidated_by?: string | null;
+          invalidation_reason?: string | null;
           period_key?: string;
           prepared_by?: string;
           promoter_id?: string;
+          reconciliation_reason?: string | null;
+          reconciliation_required_at?: string | null;
+          replaces_settlement_id?: string | null;
           status?: string;
           timezone?: string;
           total_cents?: number;
@@ -2279,6 +2298,7 @@ export type Database = {
           amount_cents: number;
           id: string;
           label: string;
+          lineage: string;
           settlement_id: string;
           source_id: string;
           source_kind: string;
@@ -2287,6 +2307,7 @@ export type Database = {
           amount_cents: number;
           id?: string;
           label: string;
+          lineage?: string;
           settlement_id: string;
           source_id: string;
           source_kind: string;
@@ -2295,6 +2316,7 @@ export type Database = {
           amount_cents?: number;
           id?: string;
           label?: string;
+          lineage?: string;
           settlement_id?: string;
           source_id?: string;
           source_kind?: string;
@@ -3079,6 +3101,7 @@ export type Database = {
         Args: { p_adjustment_ids: string[] | null; p_period_key: string; p_promoter_id: string };
         Returns: Json;
       };
+      replace_settlement: { Args: { p_reason: string; p_settlement_id: string }; Returns: Json };
       approve_settlement: { Args: { p_settlement_id: string }; Returns: Json };
       submit_invoice: {
         Args: { p_amount_cents: number; p_document_path: string; p_settlement_id: string };

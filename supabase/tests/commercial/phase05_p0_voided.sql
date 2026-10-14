@@ -82,12 +82,14 @@ begin
   perform public.reverse_collection(v_collection, 'draft');
   select total_cents into v_total from commercial.promoter_settlements where id = v_settlement;
   select coalesce(sum(amount_cents), 0) into v_items from commercial.settlement_items where settlement_id = v_settlement;
-  if v_total is distinct from v_items or (select status from commercial.promoter_commissions where collection_id = v_collection) is distinct from 'voided' then
+  if v_total is distinct from v_items
+     or (select status from commercial.promoter_commissions where collection_id = v_collection) is distinct from 'voided'
+     or (select status from commercial.promoter_settlements where id = v_settlement) is distinct from 'invalidated' then
     raise exception 'draft totals';
   end if;
   perform set_config('request.jwt.claim.sub', '98989898-9898-4989-8989-989898989803', true);
   v_result := public.approve_settlement(v_settlement);
-  if v_result->>'commercial_error_code' is distinct from 'settlement_has_voided_rights' then
+  if v_result->>'commercial_error_code' is distinct from 'settlement_invalidated' then
     raise exception 'draft approve %', v_result;
   end if;
 
@@ -101,14 +103,17 @@ begin
   perform public.approve_settlement(v_settlement);
   perform set_config('request.jwt.claim.sub', '98989898-9898-4989-8989-989898989801', true);
   perform public.reverse_collection(v_collection, 'approved');
+  if (select status from commercial.promoter_settlements where id = v_settlement) is distinct from 'invalidated'
+     or (select approved_by from commercial.promoter_settlements where id = v_settlement) is distinct from '98989898-9898-4989-8989-989898989813'::uuid then
+    raise exception 'approved history lost';
+  end if;
   perform set_config('request.jwt.claim.sub', '98989898-9898-4989-8989-989898989804', true);
   v_result := public.submit_invoice(v_settlement, 2200000, 'invoices/' || v_settlement::text || '/a.pdf');
-  perform set_config('request.jwt.claim.sub', '98989898-9898-4989-8989-989898989801', true);
-  v_result := public.review_invoice((v_result->>'invoice_id')::uuid, 'accepted', null);
-  if v_result->>'commercial_error_code' is distinct from 'settlement_has_voided_rights' or (select status from commercial.promoter_settlements where id = v_settlement) is distinct from 'approved' then
+  if v_result->>'ok' is distinct from 'false' or (select status from commercial.promoter_settlements where id = v_settlement) is distinct from 'invalidated' then
     raise exception 'approved invoice %', v_result;
   end if;
 
+  perform set_config('request.jwt.claim.sub', '98989898-9898-4989-8989-989898989801', true);
   v_open := public.open_obligation(v_terms, 'subscription', 'void:payable');
   v_collection := (public.record_collection((v_open->>'obligation_id')::uuid, 'void-payable', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_collection);
@@ -127,7 +132,7 @@ begin
   end if;
   perform public.reverse_collection(v_collection, 'payable');
   v_result := public.record_settlement_payment(v_settlement, 'void-pay', 2200000, 'recorded', 'ref', null);
-  if v_result->>'commercial_error_code' is distinct from 'settlement_has_voided_rights' or (select status from commercial.promoter_commissions where id = v_commission) is distinct from 'voided' or (select status from commercial.promoter_settlements where id = v_settlement) is distinct from 'payable' then
+  if v_result->>'commercial_error_code' is distinct from 'settlement_invalidated' or (select status from commercial.promoter_commissions where id = v_commission) is distinct from 'voided' or (select status from commercial.promoter_settlements where id = v_settlement) is distinct from 'invalidated' then
     raise exception 'payable payment %', v_result;
   end if;
 
@@ -146,7 +151,10 @@ begin
   perform public.record_settlement_payment(v_settlement, 'void-part', 1000000, 'recorded', 'parcial', null);
   perform public.reverse_collection(v_collection, 'partial');
   v_result := public.record_settlement_payment(v_settlement, 'void-rest', 1200000, 'recorded', 'resto', null);
-  if v_result->>'commercial_error_code' is distinct from 'settlement_has_voided_rights' or (select status from commercial.promoter_commissions where id = v_commission) is distinct from 'voided' or (select status from commercial.promoter_settlements where id = v_settlement) is distinct from 'partially_paid' then
+  if v_result->>'commercial_error_code' is distinct from 'reconciliation_required'
+     or (select status from commercial.promoter_commissions where id = v_commission) is distinct from 'voided'
+     or (select status from commercial.promoter_settlements where id = v_settlement) is distinct from 'reconciliation_required'
+     or (select amount_cents from commercial.settlement_payments where idempotency_key = 'void-part') is distinct from 1000000 then
     raise exception 'partial %', v_result;
   end if;
 

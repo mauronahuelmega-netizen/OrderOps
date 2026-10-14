@@ -2,6 +2,9 @@
 -- Do not run if a later PHASE-05 migration exists beyond the drops below.
 -- This file is not executed.
 
+drop function if exists public.replace_settlement(uuid, text);
+drop function if exists commercial.replace_settlement(uuid, text);
+
 drop trigger if exists promoter_commissions_voided_immutable on commercial.promoter_commissions;
 drop function if exists commercial.prevent_voided_commission_reactivation();
 

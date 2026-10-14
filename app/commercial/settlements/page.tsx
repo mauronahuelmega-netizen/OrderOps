@@ -8,6 +8,8 @@ type SettlementRow = {
   status: string;
   total_cents: number;
   due_on: string;
+  invalidation_reason: string | null;
+  reconciliation_reason: string | null;
 };
 
 type PaymentRow = {
@@ -23,7 +25,7 @@ export default async function CommercialSettlementsPage() {
   const { data } = await supabase
     .schema("commercial")
     .from("promoter_settlements")
-    .select("id, period_key, status, total_cents, due_on")
+    .select("id, period_key, status, total_cents, due_on, invalidation_reason, reconciliation_reason")
     .order("period_key", { ascending: false });
   const settlements = (data ?? []) as SettlementRow[];
   const paymentsResult = await supabase
@@ -44,6 +46,12 @@ export default async function CommercialSettlementsPage() {
             <p className={styles.meta}>
               {settlement.status} · {settlement.total_cents} centavos · vence {settlement.due_on}
             </p>
+            {settlement.invalidation_reason ? (
+              <p className={styles.meta}>Invalidada: {settlement.invalidation_reason}</p>
+            ) : null}
+            {settlement.reconciliation_reason ? (
+              <p className={styles.meta}>Conciliación manual: {settlement.reconciliation_reason}</p>
+            ) : null}
           </article>
         ))}
         <h2>Transferencias simuladas</h2>

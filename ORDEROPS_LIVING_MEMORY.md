@@ -475,6 +475,12 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-14 — CC-P05-REV-01 invalidación y reemplazo de liquidaciones
+
+- **[Commercial/Economía]** `CC-P05-REV-01 — Approved`. Si la reversa alcanza una liquidación sin pagos `recorded`, el estado pasa a `invalidated`: se conservan el total, los ítems como `historical`, la aprobación y las facturas, y los otros derechos `in_settlement` vuelven a `available`. `replace_settlement` crea un draft nuevo, con otro id, que referencia el antecedente y no hereda aprobación ni factura. Si hay un pago `recorded` y la suma no cubre el total, el estado pasa a `reconciliation_required`: no hay reemplazo, no hay más pagos y no hay RPC que levante el bloqueo. Si la liquidación está cubierta o la comisión ya está `paid`, no se invalida y se registra el ajuste negativo. La conciliación del saldo parcial queda sin contrato.
+- **[DB]** `20261014090000_commercial_phase05_settlement_replacement.sql` en `supabase_db_OrderOps`. Ledger 131. Índices únicos parciales: una liquidación no invalidada por promotor y período, un reemplazo activo por antecedente, y un ítem `active` por origen. `PHASE_05_STATUS` sigue `NEEDS_FIX`. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos.
+- **[UI]** `/commercial/settlements` muestra el motivo de invalidación o de conciliación manual. No hay acciones de preparación, reemplazo ni pago.
+
 ### 2026-10-14 — P05 P0 comisión anulada no se paga
 
 - **[Commercial/Economía]** Una reversa de un derecho impago, incluso si ya está en una liquidación, lo deja `voided`. Aprobar, aceptar la factura o registrar el pago se detiene con `settlement_has_voided_rights`. El trigger impide que `voided` vuelva a otro estado. El total de la liquidación no se recalcula. Una comisión ya `paid` sigue `paid` y genera el ajuste negativo. Queda pendiente la decisión humana sobre anular, rechazar o recalcular esa liquidación.
