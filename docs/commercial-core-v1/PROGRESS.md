@@ -12,13 +12,13 @@ phase_03: closed_local
 phase_03_formal_close: closed_local
 phase_03_post_audit: runtime_validated_ledger_registered
 phase_04: closed_local
-phase_05: ready_for_audit
+phase_05: needs_fix
 next_task: none
 PHASE_04_STATUS: CLOSED_LOCAL
-PHASE_05_STATUS: READY_FOR_AUDIT
+PHASE_05_STATUS: NEEDS_FIX
 ```
 
-P04-T01 a P04-T04 quedaron hechas en local el 2026-10-11. Ese cierre no se reabre. `PHASE_04_STATUS` sigue `CLOSED_LOCAL`. `BLK-LEDGER-01` quedó `CLOSED_LOCAL` el 2026-10-12. PHASE-05 está `IN_PROGRESS`: P05-T01 quedó `DONE_LOCAL` el 2026-10-12. P05-T02 quedó `DONE_LOCAL` el 2026-10-13. P05-T03 quedó `DONE_LOCAL` el 2026-10-13. P05-T04 quedó `DONE_LOCAL` el 2026-10-13. P05-T05 quedó `DONE_LOCAL` el 2026-10-13. P05-T06 quedó `DONE_LOCAL` el 2026-10-13. P05-T07 quedó `DONE_LOCAL` el 2026-10-13. P05-T08 quedó `DONE_LOCAL` el 2026-10-13. `PHASE_05_STATUS` queda `READY_FOR_AUDIT`. No es `CLOSED_LOCAL`. `next_task` no abre PHASE-06.
+P04-T01 a P04-T04 quedaron hechas en local el 2026-10-11. Ese cierre no se reabre. `PHASE_04_STATUS` sigue `CLOSED_LOCAL`. `BLK-LEDGER-01` quedó `CLOSED_LOCAL` el 2026-10-12. PHASE-05 está `IN_PROGRESS`: P05-T01 quedó `DONE_LOCAL` el 2026-10-12. P05-T02 quedó `DONE_LOCAL` el 2026-10-13. P05-T03 quedó `DONE_LOCAL` el 2026-10-13. P05-T04 quedó `DONE_LOCAL` el 2026-10-13. P05-T05 quedó `DONE_LOCAL` el 2026-10-13. P05-T06 quedó `DONE_LOCAL` el 2026-10-13. P05-T07 quedó `DONE_LOCAL` el 2026-10-13. P05-T08 quedó `DONE_LOCAL` el 2026-10-13. La auditoría del 2026-10-14 dejó PHASE-05 en `NEEDS_FIX`. El tope de doce derechos quedó corregido en `20261014080000` y verificado en la base principal. La reversa dentro de una liquidación sigue abierta hasta la guarda de pago.
 
 Después del cierre, la tarea PROMOTER-ONBOARDING-UI-V1 agregó lecturas de solo lectura en `20261011030000` y las pantallas mínimas de asistencia. `schema_migrations` pasa a 118 filas. Las siete versiones de PHASE-04 permanecen registradas una vez. PHASE-05 no está iniciada.
 

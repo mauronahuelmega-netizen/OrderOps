@@ -2,6 +2,10 @@
 -- Do not run if a later PHASE-05 migration exists beyond the drops below.
 -- This file is not executed.
 
+drop trigger if exists promoter_commissions_founder_cap on commercial.promoter_commissions;
+drop function if exists commercial.enforce_founder_recurring_cap();
+drop function if exists commercial.eligible_recurring_rank(uuid);
+
 drop function if exists public.record_settlement_payment(uuid, text, bigint, text, text, text);
 drop function if exists commercial.record_settlement_payment(uuid, text, bigint, text, text, text);
 drop table if exists commercial.settlement_payments;

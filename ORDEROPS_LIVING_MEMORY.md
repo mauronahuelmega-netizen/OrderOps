@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-14 — P05 P0 tope de doce derechos
+
+- **[Commercial/Economía]** `accrue_commissions_for_collection` rechaza una recurrente nueva cuando ya hay doce derechos vivos o cuando los números de slot están agotados y la obligación no tiene slot. Un trigger impide el insert directo. El derecho 13 no pasa a `available` ni entra en una liquidación. Los números anulados no se reciclan.
+- **[DB]** `20261014080000_commercial_phase05_twelve_cap.sql` en `supabase_db_OrderOps`. Ledger 129. PHASE-05 sigue `NEEDS_FIX`.
+
 ### 2026-10-13 — P05-T08 transferencia simulada
 
 - **[Commercial/Economía]** `record_settlement_payment` exige liquidación `payable` o `partially_paid`. El registrador no es el aprobador. Un `failed` no suma. La suma `recorded` no supera el total. Al completar, las comisiones incluidas pasan a `paid`. El CBU queda copiado en `destination_snapshot`. Se encola `payment.recorded`. No hay transferencia bancaria.
