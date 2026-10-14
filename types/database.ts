@@ -1076,6 +1076,14 @@ export type Database = {
         Returns: Json;
       };
       approve_settlement: { Args: { p_settlement_id: string }; Returns: Json };
+      submit_invoice: {
+        Args: { p_amount_cents: number; p_document_path: string; p_settlement_id: string };
+        Returns: Json;
+      };
+      review_invoice: {
+        Args: { p_decision: string; p_invoice_id: string; p_reason: string | null };
+        Returns: Json;
+      };
       open_obligation: {
         Args: { p_terms_id: string; p_kind: string; p_period_key: string | null };
         Returns: Json;
@@ -3016,6 +3024,14 @@ export type Database = {
         Returns: Json;
       };
       approve_settlement: { Args: { p_settlement_id: string }; Returns: Json };
+      submit_invoice: {
+        Args: { p_amount_cents: number; p_document_path: string; p_settlement_id: string };
+        Returns: Json;
+      };
+      review_invoice: {
+        Args: { p_decision: string; p_invoice_id: string; p_reason: string | null };
+        Returns: Json;
+      };
       open_obligation: {
         Args: { p_kind: string; p_period_key: string | null; p_terms_id: string };
         Returns: Json;

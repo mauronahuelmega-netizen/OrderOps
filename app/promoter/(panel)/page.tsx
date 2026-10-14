@@ -23,7 +23,7 @@ export default async function PromoterHomePage() {
       <p>Tareas: {overview.tasks?.length ?? 0}</p>
       <p className={styles.muted}>Asistencia de onboarding: disponible en Asistencia.</p>
       <p className={styles.muted}>Comisiones: disponible en una fase posterior.</p>
-      <p className={styles.muted}>Liquidaciones: disponible en una fase posterior.</p>
+      <p className={styles.muted}>Liquidaciones: una factura aceptada habilita el pago. No hay facturación fiscal.</p>
     </section>
   );
 }

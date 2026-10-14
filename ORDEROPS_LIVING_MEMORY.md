@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-13 — P05-T07 factura
+
+- **[Commercial/Economía]** El promotor `active` o `separated` presenta una factura de su liquidación `approved`. Solo un importe igual habilita `payable`. No hay validación AFIP.
+- **[DB]** `20261013060000_commercial_phase05_invoices.sql`. Ledger 127. `next_task` es P05-T08.
+
 ### 2026-10-13 — P05-T06 liquidación
 
 - **[Commercial/Economía]** Una liquidación por promotor y `YYYY-MM` de Argentina. Entran comisiones `available` cuyo `available_at` cae en el mes, y solo los ajustes que Finanzas indica. `due_on` es el día 10 del mes siguiente. Aprobar exige otra cuenta con `collection.write`.
