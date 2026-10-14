@@ -3,11 +3,13 @@ begin;
 
 do $$
 begin
-  if to_regclass('commercial.promoter_commissions') is not null then
-    raise exception 'phase 02 crm migration created commission tables';
+  if (select count(*) from commercial.promoter_commissions) <> 0 then
+    raise exception 'phase 02 crm created commission rows';
   end if;
 end;
 $$;
+
+select set_config('phase02.opportunity_baseline', (select count(*)::text from commercial.commercial_opportunities), false);
 
 do $$
 declare
@@ -117,7 +119,7 @@ declare
   v_seen int;
 begin
   select count(*) into v_seen from commercial.commercial_opportunities;
-  if v_seen <> 3 then
+  if v_seen <> current_setting('phase02.opportunity_baseline')::int + 3 then
     raise exception 'commercial saw % opportunities', v_seen;
   end if;
 

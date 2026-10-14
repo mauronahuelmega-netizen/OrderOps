@@ -380,8 +380,8 @@ begin
     raise exception 'case G historical decided missing';
   end if;
 
-  if to_regclass('commercial.promoter_commissions') is not null then
-    raise exception 'case G commissions table unexpectedly present';
+  if (select count(*) from commercial.promoter_commissions) <> 0 then
+    raise exception 'case G created commission rows';
   end if;
 end;
 $$;

@@ -31,10 +31,10 @@ declare
   v_rows int;
   v_events int;
 begin
-  if to_regclass('commercial.promoter_commissions') is not null
-    or to_regclass('commercial.platform_collections') is not null
-    or to_regclass('commercial.service_subscriptions') is not null then
-    raise exception 'phase 04 created an economy table';
+  if (select count(*) from commercial.promoter_commissions) <> 0
+    or (select count(*) from commercial.platform_collections) <> 0
+    or (select count(*) from commercial.service_subscriptions) <> 0 then
+    raise exception 'phase 04 created economy rows';
   end if;
 
   perform set_config('request.jwt.claim.sub', '98989898-9898-4989-8989-989898989803', true);

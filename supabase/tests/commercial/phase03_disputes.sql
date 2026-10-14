@@ -70,7 +70,7 @@ begin
   if v_status is distinct from 'confirmed' then
     raise exception 'decision deleted attribution history';
   end if;
-  if to_regclass('commercial.promoter_commissions') is not null then
+  if (select count(*) from commercial.promoter_commissions) <> 0 then
     raise exception 'dispute created commissions';
   end if;
 end;

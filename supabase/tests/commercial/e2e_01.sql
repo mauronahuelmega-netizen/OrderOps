@@ -78,8 +78,8 @@ begin
     raise exception 'sixth request returned %', v_limited;
   end if;
 
-  if to_regclass('commercial.promoter_commissions') is not null then
-    raise exception 'demo request created commission tables';
+  if (select count(*) from commercial.promoter_commissions) <> 0 then
+    raise exception 'demo request created commission rows';
   end if;
   if exists (
     select 1 from commercial.opportunity_attributions attribution

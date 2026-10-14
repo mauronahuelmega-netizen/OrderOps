@@ -81,7 +81,7 @@ begin
   if v_claim->>'commercial_error_code' is distinct from 'promoter_not_active' then
     raise exception 'separated claim returned %', v_claim;
   end if;
-  if to_regclass('commercial.promoter_commissions') is not null then
+  if (select count(*) from commercial.promoter_commissions) <> 0 then
     raise exception 'separation created commissions';
   end if;
 end;

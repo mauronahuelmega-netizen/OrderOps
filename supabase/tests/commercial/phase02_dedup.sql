@@ -52,7 +52,7 @@ begin
   end if;
 
   if position('attribution_claims' in pg_get_functiondef('commercial.find_or_prepare_business(text,text,text,text)'::regprocedure)) > 0
-    or to_regclass('commercial.promoter_commissions') is not null then
+    or (select count(*) from commercial.promoter_commissions) <> 0 then
     raise exception 'dedup created claims or commissions';
   end if;
 end;
