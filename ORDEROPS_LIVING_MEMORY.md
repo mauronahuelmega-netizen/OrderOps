@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-13 — P05-T08 transferencia simulada
+
+- **[Commercial/Economía]** `record_settlement_payment` exige liquidación `payable` o `partially_paid`. El registrador no es el aprobador. Un `failed` no suma. La suma `recorded` no supera el total. Al completar, las comisiones incluidas pasan a `paid`. El CBU queda copiado en `destination_snapshot`. Se encola `payment.recorded`. No hay transferencia bancaria.
+- **[DB]** `20261013070000_commercial_phase05_payments.sql`. Ledger 128. `PHASE_05_STATUS` queda `READY_FOR_AUDIT`.
+
 ### 2026-10-13 — P05-T07 factura
 
 - **[Commercial/Economía]** El promotor `active` o `separated` presenta una factura de su liquidación `approved`. Solo un importe igual habilita `payable`. No hay validación AFIP.

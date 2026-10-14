@@ -1084,6 +1084,17 @@ export type Database = {
         Args: { p_decision: string; p_invoice_id: string; p_reason: string | null };
         Returns: Json;
       };
+      record_settlement_payment: {
+        Args: {
+          p_amount_cents: number;
+          p_bank_reference: string | null;
+          p_idempotency_key: string;
+          p_receipt_path: string | null;
+          p_settlement_id: string;
+          p_status: string;
+        };
+        Returns: Json;
+      };
       open_obligation: {
         Args: { p_terms_id: string; p_kind: string; p_period_key: string | null };
         Returns: Json;
@@ -2290,6 +2301,51 @@ export type Database = {
         };
         Relationships: [];
       };
+      settlement_payments: {
+        Row: {
+          amount_cents: number;
+          bank_account_id: string | null;
+          bank_reference: string | null;
+          created_at: string;
+          destination_snapshot: Json;
+          id: string;
+          idempotency_key: string;
+          paid_at: string | null;
+          receipt_path: string | null;
+          recorded_by: string;
+          settlement_id: string;
+          status: string;
+        };
+        Insert: {
+          amount_cents: number;
+          bank_account_id?: string | null;
+          bank_reference?: string | null;
+          created_at?: string;
+          destination_snapshot: Json;
+          id?: string;
+          idempotency_key: string;
+          paid_at?: string | null;
+          receipt_path?: string | null;
+          recorded_by: string;
+          settlement_id: string;
+          status: string;
+        };
+        Update: {
+          amount_cents?: number;
+          bank_account_id?: string | null;
+          bank_reference?: string | null;
+          created_at?: string;
+          destination_snapshot?: Json;
+          id?: string;
+          idempotency_key?: string;
+          paid_at?: string | null;
+          receipt_path?: string | null;
+          recorded_by?: string;
+          settlement_id?: string;
+          status?: string;
+        };
+        Relationships: [];
+      };
       platform_accounts: {
         Row: {
           created_at: string;
@@ -3030,6 +3086,17 @@ export type Database = {
       };
       review_invoice: {
         Args: { p_decision: string; p_invoice_id: string; p_reason: string | null };
+        Returns: Json;
+      };
+      record_settlement_payment: {
+        Args: {
+          p_amount_cents: number;
+          p_bank_reference: string | null;
+          p_idempotency_key: string;
+          p_receipt_path: string | null;
+          p_settlement_id: string;
+          p_status: string;
+        };
         Returns: Json;
       };
       open_obligation: {

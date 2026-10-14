@@ -2,6 +2,10 @@
 -- Do not run if a later PHASE-05 migration exists beyond the drops below.
 -- This file is not executed.
 
+drop function if exists public.record_settlement_payment(uuid, text, bigint, text, text, text);
+drop function if exists commercial.record_settlement_payment(uuid, text, bigint, text, text, text);
+drop table if exists commercial.settlement_payments;
+
 drop function if exists public.review_invoice(uuid, text, text);
 drop function if exists public.submit_invoice(uuid, bigint, text);
 drop function if exists commercial.review_invoice(uuid, text, text);

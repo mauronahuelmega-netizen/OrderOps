@@ -12,13 +12,13 @@ phase_03: closed_local
 phase_03_formal_close: closed_local
 phase_03_post_audit: runtime_validated_ledger_registered
 phase_04: closed_local
-phase_05: in_progress
-next_task: P05-T08
+phase_05: ready_for_audit
+next_task: none
 PHASE_04_STATUS: CLOSED_LOCAL
-PHASE_05_STATUS: IN_PROGRESS
+PHASE_05_STATUS: READY_FOR_AUDIT
 ```
 
-P04-T01 a P04-T04 quedaron hechas en local el 2026-10-11. Ese cierre no se reabre. `PHASE_04_STATUS` sigue `CLOSED_LOCAL`. `BLK-LEDGER-01` quedó `CLOSED_LOCAL` el 2026-10-12. PHASE-05 está `IN_PROGRESS`: P05-T01 quedó `DONE_LOCAL` el 2026-10-12. P05-T02 quedó `DONE_LOCAL` el 2026-10-13. P05-T03 quedó `DONE_LOCAL` el 2026-10-13. P05-T04 quedó `DONE_LOCAL` el 2026-10-13. P05-T05 quedó `DONE_LOCAL` el 2026-10-13. P05-T06 quedó `DONE_LOCAL` el 2026-10-13. P05-T07 quedó `DONE_LOCAL` el 2026-10-13 y `next_task` es P05-T08.
+P04-T01 a P04-T04 quedaron hechas en local el 2026-10-11. Ese cierre no se reabre. `PHASE_04_STATUS` sigue `CLOSED_LOCAL`. `BLK-LEDGER-01` quedó `CLOSED_LOCAL` el 2026-10-12. PHASE-05 está `IN_PROGRESS`: P05-T01 quedó `DONE_LOCAL` el 2026-10-12. P05-T02 quedó `DONE_LOCAL` el 2026-10-13. P05-T03 quedó `DONE_LOCAL` el 2026-10-13. P05-T04 quedó `DONE_LOCAL` el 2026-10-13. P05-T05 quedó `DONE_LOCAL` el 2026-10-13. P05-T06 quedó `DONE_LOCAL` el 2026-10-13. P05-T07 quedó `DONE_LOCAL` el 2026-10-13. P05-T08 quedó `DONE_LOCAL` el 2026-10-13. `PHASE_05_STATUS` queda `READY_FOR_AUDIT`. No es `CLOSED_LOCAL`. `next_task` no abre PHASE-06.
 
 Después del cierre, la tarea PROMOTER-ONBOARDING-UI-V1 agregó lecturas de solo lectura en `20261011030000` y las pantallas mínimas de asistencia. `schema_migrations` pasa a 118 filas. Las siete versiones de PHASE-04 permanecen registradas una vez. PHASE-05 no está iniciada.
 
@@ -56,7 +56,7 @@ El smoke del navegador quedó PASS el 2026-10-11: el dueño aprobó, el promotor
 | P05-T05 | 05 | done | 2026-10-13. `DONE_LOCAL`. Respaldo previo `OrderOps-postgres-20261014T001500Z-pre-p05t05.dump`, SHA-256 `6C52E02E616662D82D67B0CA5B8202FC2952C5EF634F052C4071FEA390CA17F7`, 1442417 bytes, archivo 2026-10-14 00:03:24 UTC, TOC 1964. `20261013040000` aplicada. El check histórico exigía `status = posted` para una cobranza nominal, así que `20261013040100` lo amplía a `posted` o `reversed` sin editar la migración anterior. Respaldo de esa corrección `OrderOps-postgres-20261014T001800Z-pre-p05t05-policy.dump`, SHA-256 `0C5BD0CBF70A534C44352F8FEBA643C0ACF52C3E61D1BA72EEF4E947CB0933D4`, 1454958 bytes, TOC 1980. Ledger 122 → 124. `phase05_reversals.sql` exit 0 con ROLLBACK: G-10 y E2E-05 dejan la comisión `voided` con monto 2_200_000 y el slot 1 anulado; la siguiente mensualidad toma el slot 2; G-11 conserva la comisión `paid` y crea un ajuste `-2_200_000` `available`; `post_adjustment` no cambia `amount_cents`. Superadmin sin `collection.write` recibe `forbidden`. |
 | P05-T06 | 05 | done | 2026-10-13. `DONE_LOCAL`. Respaldo `OrderOps-postgres-20261014T002000Z-pre-p05t06.dump`, SHA-256 `B5E077DADBBE5782F642FF7341758EDAF3F7F1807FEF8765C4ACDD5F73F3D0B2`, 1455178 bytes, 2026-10-14 00:08:03 UTC, TOC 1980. `20261013050000` aplicada. El audit exige `correlation_id`, así que `20261013050100` reemplaza los writers. Respaldo `OrderOps-postgres-20261014T002200Z-pre-p05t06-audit.dump`, SHA-256 `408968334F99FF8FE66A7929686EFB3057678116176B1E5FCC790802562E6EC5`, 1473524 bytes, 2026-10-14 00:09:47 UTC, TOC 2006. Ledger 124 → 126. `phase05_settlements.sql` exit 0 con ROLLBACK: G-13 incluye 2_200_000 y un ajuste de -100, total 2_199_900, `due_on` 2026-10-10; la comisión del 2 de octubre y el ajuste no elegido quedan afuera; la segunda preparación devuelve el draft; el mismo actor no aprueba; superadmin sin permiso recibe `forbidden`; otro finance aprueba. UI de lectura en `/commercial/settlements`. |
 | P05-T07 | 05 | done | 2026-10-13. `DONE_LOCAL`. Respaldo `OrderOps-postgres-20261014T002500Z-pre-p05t07.dump`, SHA-256 `CB064BF1B1D62B2AED460729FE0F6F8F8593DCB66F8701D329419E55306A93C8`, 1473708 bytes, 2026-10-14 00:12:51 UTC, TOC 2006. `20261013060000` aplicada. Ledger 126 → 127. `phase05_invoices.sql` exit 0 con ROLLBACK: G-14 un importe distinto no se acepta y la liquidación sigue `approved`; el importe igual pasa a `accepted` y la liquidación a `payable`; el promotor no revisa; un promotor ajeno no carga; un promotor `separated` sí carga. Sin AFIP. |
-| P05-T08 | 05 | pending | — |
+| P05-T08 | 05 | done | 2026-10-13. `DONE_LOCAL`. Respaldo `OrderOps-postgres-20261014T003000Z-pre-p05t08.dump`, SHA-256 `E816BEB0F3C4A3ECDB98F2E19BE167316DD772B18DCBD5B61AAD071B4B5BD5DB`, 1486451 bytes, 2026-10-14 00:15:10 UTC, TOC 2023. `20261013070000` aplicada. Ledger 127 → 128. `phase05_payments.sql` exit 0 con ROLLBACK: no se paga una liquidación solo aprobada; el aprobador no registra el pago; un `failed` no cambia el estado y la misma clave no se reintenta como `recorded`; un pago parcial deja `partially_paid` y la comisión `in_settlement`; cambiar el CBU no reescribe `destination_snapshot`; el resto deja la liquidación y la comisión `paid`; la suma `recorded` es 2_200_000; `payment.recorded` entra al outbox. Nada sale a un banco. |
 | P06-T01 | 06 | pending | — |
 | P06-T02 | 06 | pending | — |
 | P06-T03 | 06 | pending | — |
