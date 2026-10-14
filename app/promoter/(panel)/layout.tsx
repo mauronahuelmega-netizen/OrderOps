@@ -18,6 +18,7 @@ export default async function PromoterPanelLayout({ children }: { children: Reac
           <Link href="/promoter/opportunities">Oportunidades</Link>
           <Link href="/promoter/claims">Reclamaciones</Link>
           <Link href="/promoter/tasks">Tareas</Link>
+          <Link href="/promoter/settlements">Liquidaciones</Link>
           <Link href="/promoter/profile">Perfil</Link>
         </nav>
         <form action={promoterLogoutAction}>
