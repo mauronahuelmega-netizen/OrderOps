@@ -475,6 +475,12 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-14 — Hallazgos restantes de PHASE-05
+
+- **[Commercial/Economía]** Una liquidación admite como máximo una factura `accepted`. Las rechazadas y las de un antecedente invalidado permanecen. Varias facturas `submitted` siguen permitidas porque esa convivencia no tiene contrato. Un ajuste de `-2_200_000` entra en un período posterior solo si Finanzas lo incluye y hay derechos positivos suficientes; un total negativo se rechaza y el ajuste queda `available`. No hay neteo automático.
+- **[DB]** `20261014100000_commercial_phase05_one_accepted_invoice.sql` y `20261014100100_commercial_phase05_error_catalog.sql` en `supabase_db_OrderOps`. Ledger 133. `PHASE_05_STATUS` sigue `NEEDS_FIX`. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos.
+- **[UI]** `/commercial/settlements` deja operar a Finanzas: preparar, aprobar, revisar documentación, pago simulado, reemplazo y consulta de invalidación o conciliación. Los importes se muestran en pesos. `/promoter/settlements` presenta la documentación de una liquidación propia mediante una ruta, sin subir un archivo y sin factura fiscal. El recorrido autenticado en navegador quedó `NOT_VERIFIED`.
+
 ### 2026-10-14 — CC-P05-REV-01 invalidación y reemplazo de liquidaciones
 
 - **[Commercial/Economía]** `CC-P05-REV-01 — Approved`. Si la reversa alcanza una liquidación sin pagos `recorded`, el estado pasa a `invalidated`: se conservan el total, los ítems como `historical`, la aprobación y las facturas, y los otros derechos `in_settlement` vuelven a `available`. `replace_settlement` crea un draft nuevo, con otro id, que referencia el antecedente y no hereda aprobación ni factura. Si hay un pago `recorded` y la suma no cubre el total, el estado pasa a `reconciliation_required`: no hay reemplazo, no hay más pagos y no hay RPC que levante el bloqueo. Si la liquidación está cubierta o la comisión ya está `paid`, no se invalida y se registra el ajuste negativo. La conciliación del saldo parcial queda sin contrato.
