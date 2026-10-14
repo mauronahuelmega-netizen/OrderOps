@@ -2293,6 +2293,45 @@ export type Database = {
         };
         Relationships: [];
       };
+      promoter_invoices: {
+        Row: {
+          amount_cents: number;
+          created_at: string;
+          document_path: string;
+          id: string;
+          promoter_id: string;
+          rejection_reason: string | null;
+          reviewed_at: string | null;
+          reviewed_by: string | null;
+          settlement_id: string;
+          status: string;
+        };
+        Insert: {
+          amount_cents: number;
+          created_at?: string;
+          document_path: string;
+          id?: string;
+          promoter_id: string;
+          rejection_reason?: string | null;
+          reviewed_at?: string | null;
+          reviewed_by?: string | null;
+          settlement_id: string;
+          status: string;
+        };
+        Update: {
+          amount_cents?: number;
+          created_at?: string;
+          document_path?: string;
+          id?: string;
+          promoter_id?: string;
+          rejection_reason?: string | null;
+          reviewed_at?: string | null;
+          reviewed_by?: string | null;
+          settlement_id?: string;
+          status?: string;
+        };
+        Relationships: [];
+      };
       settlement_items: {
         Row: {
           amount_cents: number;

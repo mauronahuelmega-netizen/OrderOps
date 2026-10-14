@@ -1,0 +1,59 @@
+.page {
+  min-height: 100vh;
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  padding: 1.5rem 1rem;
+}
+
+.list {
+  display: grid;
+  gap: 1rem;
+  max-width: 48rem;
+  margin: 0 auto;
+}
+
+.card {
+  display: grid;
+  gap: 0.75rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.875rem;
+  box-shadow: var(--shadow-card);
+  padding: 1rem;
+}
+
+.meta {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.form input,
+.form select,
+.form button {
+  min-height: 2.75rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.5rem;
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  padding: 0.5rem 0.75rem;
+}
+
+.form button {
+  background: var(--bg-surface-hover);
+  cursor: pointer;
+}
+
+.notice {
+  color: var(--text-primary);
+}
+
+@media (max-width: 40rem) {
+  .page {
+    padding: 1rem 0.75rem;
+  }
+}
