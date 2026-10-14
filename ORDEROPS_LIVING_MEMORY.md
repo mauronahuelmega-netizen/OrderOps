@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-13 — P05-T04 slots y reactivación
+
+- **[Commercial/Economía]** `founder_slots` y `service_subscriptions`. Una mensualidad nominal recibe el siguiente número, sin reciclar huecos, hasta 12. Un `failed` no ocupa número. La misma obligación reintentada conserva un solo slot. La mensualidad 13 no crea comisión recurrente. `end_service` guarda por separado la solicitud y la baja. `reactivate_service` continúa el mismo `conversion_terms` si no pasaron más de 180 días desde `ended_at`.
+- **[DB]** Migración `20261013030000_commercial_phase05_slots.sql` en `supabase_db_OrderOps`. Ledger 122. `next_task` es P05-T05.
+
 ### 2026-10-13 — P05-T03 ventana y liberación de setup
 
 - **[Commercial/Economía]** `refresh_commission_availability` fija `available_at` en `posted_at + 15 días`. La recurrente pasa a `available` al cumplirse la ventana aunque el onboarding no esté completo. El setup además exige un grant `completed` del mismo negocio y promotor, o `release_setup_commission` de superadmin con motivo. Una disputa `hold_unpaid_commissions` deja `held` solo las comisiones de esa oportunidad. No hay slots.

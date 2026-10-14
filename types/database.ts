@@ -1056,6 +1056,16 @@ export type Database = {
         Args: { p_commission_id: string; p_reason: string };
         Returns: Json;
       };
+      satisfy_subscription_collection: { Args: { p_collection_id: string }; Returns: Json };
+      end_service: {
+        Args: {
+          p_cancel_requested_at: string | null;
+          p_ended_at: string | null;
+          p_terms_id: string;
+        };
+        Returns: Json;
+      };
+      reactivate_service: { Args: { p_terms_id: string }; Returns: Json };
       open_obligation: {
         Args: { p_terms_id: string; p_kind: string; p_period_key: string | null };
         Returns: Json;
@@ -2100,6 +2110,66 @@ export type Database = {
           },
         ];
       };
+      founder_slots: {
+        Row: {
+          collection_id: string;
+          conversion_terms_id: string;
+          created_at: string;
+          obligation_id: string;
+          slot: number;
+          voided_at: string | null;
+        };
+        Insert: {
+          collection_id: string;
+          conversion_terms_id: string;
+          created_at?: string;
+          obligation_id: string;
+          slot: number;
+          voided_at?: string | null;
+        };
+        Update: {
+          collection_id?: string;
+          conversion_terms_id?: string;
+          created_at?: string;
+          obligation_id?: string;
+          slot?: number;
+          voided_at?: string | null;
+        };
+        Relationships: [];
+      };
+      service_subscriptions: {
+        Row: {
+          cancel_requested_at: string | null;
+          conversion_terms_id: string;
+          created_at: string;
+          ended_at: string | null;
+          id: string;
+          reactivated_at: string | null;
+          status: string;
+          won_business_id: string;
+        };
+        Insert: {
+          cancel_requested_at?: string | null;
+          conversion_terms_id: string;
+          created_at?: string;
+          ended_at?: string | null;
+          id?: string;
+          reactivated_at?: string | null;
+          status: string;
+          won_business_id: string;
+        };
+        Update: {
+          cancel_requested_at?: string | null;
+          conversion_terms_id?: string;
+          created_at?: string;
+          ended_at?: string | null;
+          id?: string;
+          reactivated_at?: string | null;
+          status?: string;
+          won_business_id?: string;
+        };
+        Relationships: [];
+      };
       platform_accounts: {
         Row: {
           created_at: string;
@@ -2814,6 +2884,16 @@ export type Database = {
         Args: { p_commission_id: string; p_reason: string };
         Returns: Json;
       };
+      satisfy_subscription_collection: { Args: { p_collection_id: string }; Returns: Json };
+      end_service: {
+        Args: {
+          p_cancel_requested_at: string | null;
+          p_ended_at: string | null;
+          p_terms_id: string;
+        };
+        Returns: Json;
+      };
+      reactivate_service: { Args: { p_terms_id: string }; Returns: Json };
       open_obligation: {
         Args: { p_kind: string; p_period_key: string | null; p_terms_id: string };
         Returns: Json;
