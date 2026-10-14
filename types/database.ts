@@ -1066,6 +1066,11 @@ export type Database = {
         Returns: Json;
       };
       reactivate_service: { Args: { p_terms_id: string }; Returns: Json };
+      reverse_collection: { Args: { p_collection_id: string; p_reason: string }; Returns: Json };
+      post_adjustment: {
+        Args: { p_amount_cents: number; p_commission_id: string; p_reason: string; p_source: string };
+        Returns: Json;
+      };
       open_obligation: {
         Args: { p_terms_id: string; p_kind: string; p_period_key: string | null };
         Returns: Json;
@@ -2170,6 +2175,39 @@ export type Database = {
         };
         Relationships: [];
       };
+      commission_adjustments: {
+        Row: {
+          amount_cents: number;
+          commission_id: string;
+          created_at: string;
+          created_by: string;
+          id: string;
+          reason: string;
+          source: string;
+          status: string;
+        };
+        Insert: {
+          amount_cents: number;
+          commission_id: string;
+          created_at?: string;
+          created_by: string;
+          id?: string;
+          reason: string;
+          source: string;
+          status: string;
+        };
+        Update: {
+          amount_cents?: number;
+          commission_id?: string;
+          created_at?: string;
+          created_by?: string;
+          id?: string;
+          reason?: string;
+          source?: string;
+          status?: string;
+        };
+        Relationships: [];
+      };
       platform_accounts: {
         Row: {
           created_at: string;
@@ -2894,6 +2932,11 @@ export type Database = {
         Returns: Json;
       };
       reactivate_service: { Args: { p_terms_id: string }; Returns: Json };
+      reverse_collection: { Args: { p_collection_id: string; p_reason: string }; Returns: Json };
+      post_adjustment: {
+        Args: { p_amount_cents: number; p_commission_id: string; p_reason: string; p_source: string };
+        Returns: Json;
+      };
       open_obligation: {
         Args: { p_kind: string; p_period_key: string | null; p_terms_id: string };
         Returns: Json;

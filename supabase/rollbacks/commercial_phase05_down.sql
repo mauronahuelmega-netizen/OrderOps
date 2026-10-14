@@ -2,6 +2,12 @@
 -- Do not run if a later PHASE-05 migration exists beyond the drops below.
 -- This file is not executed.
 
+drop function if exists public.post_adjustment(uuid, bigint, text, text);
+drop function if exists public.reverse_collection(uuid, text);
+drop function if exists commercial.post_adjustment(uuid, bigint, text, text);
+drop function if exists commercial.reverse_collection(uuid, text);
+drop table if exists commercial.commission_adjustments;
+
 drop function if exists public.reactivate_service(uuid);
 drop function if exists public.end_service(uuid, timestamptz, timestamptz);
 drop function if exists public.satisfy_subscription_collection(uuid);

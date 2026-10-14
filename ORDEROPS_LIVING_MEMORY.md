@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-13 — P05-T05 reversas
+
+- **[Commercial/Economía]** `reverse_collection` marca la cobranza `reversed` y no borra la comisión. Si no estaba `paid`, la comisión pasa a `voided` y el slot queda anulado sin reciclar el número. Si estaba `paid`, sigue `paid` y nace un ajuste negativo `available`. `post_adjustment` no toca el monto histórico. `BLK-ECO-03` sigue abierto: no hay neteo automático.
+- **[DB]** `20261013040000_commercial_phase05_reversals.sql` y `20261013040100_commercial_phase05_reversal_policy.sql`. Ledger 124. `next_task` es P05-T06.
+
 ### 2026-10-13 — P05-T04 slots y reactivación
 
 - **[Commercial/Economía]** `founder_slots` y `service_subscriptions`. Una mensualidad nominal recibe el siguiente número, sin reciclar huecos, hasta 12. Un `failed` no ocupa número. La misma obligación reintentada conserva un solo slot. La mensualidad 13 no crea comisión recurrente. `end_service` guarda por separado la solicitud y la baja. `reactivate_service` continúa el mismo `conversion_terms` si no pasaron más de 180 días desde `ended_at`.
