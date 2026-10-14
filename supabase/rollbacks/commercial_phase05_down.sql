@@ -2,6 +2,13 @@
 -- Do not run if a later PHASE-05 migration exists beyond the drops below.
 -- This file is not executed.
 
+drop function if exists public.approve_settlement(uuid);
+drop function if exists public.prepare_settlement(uuid, text, uuid[]);
+drop function if exists commercial.approve_settlement(uuid);
+drop function if exists commercial.prepare_settlement(uuid, text, uuid[]);
+drop table if exists commercial.settlement_items;
+drop table if exists commercial.promoter_settlements;
+
 drop function if exists public.post_adjustment(uuid, bigint, text, text);
 drop function if exists public.reverse_collection(uuid, text);
 drop function if exists commercial.post_adjustment(uuid, bigint, text, text);

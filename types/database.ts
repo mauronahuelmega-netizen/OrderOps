@@ -1071,6 +1071,11 @@ export type Database = {
         Args: { p_amount_cents: number; p_commission_id: string; p_reason: string; p_source: string };
         Returns: Json;
       };
+      prepare_settlement: {
+        Args: { p_adjustment_ids: string[] | null; p_period_key: string; p_promoter_id: string };
+        Returns: Json;
+      };
+      approve_settlement: { Args: { p_settlement_id: string }; Returns: Json };
       open_obligation: {
         Args: { p_terms_id: string; p_kind: string; p_period_key: string | null };
         Returns: Json;
@@ -2208,6 +2213,75 @@ export type Database = {
         };
         Relationships: [];
       };
+      promoter_settlements: {
+        Row: {
+          approved_at: string | null;
+          approved_by: string | null;
+          created_at: string;
+          due_on: string;
+          id: string;
+          period_key: string;
+          prepared_by: string;
+          promoter_id: string;
+          status: string;
+          timezone: string;
+          total_cents: number;
+        };
+        Insert: {
+          approved_at?: string | null;
+          approved_by?: string | null;
+          created_at?: string;
+          due_on: string;
+          id?: string;
+          period_key: string;
+          prepared_by: string;
+          promoter_id: string;
+          status: string;
+          timezone?: string;
+          total_cents: number;
+        };
+        Update: {
+          approved_at?: string | null;
+          approved_by?: string | null;
+          created_at?: string;
+          due_on?: string;
+          id?: string;
+          period_key?: string;
+          prepared_by?: string;
+          promoter_id?: string;
+          status?: string;
+          timezone?: string;
+          total_cents?: number;
+        };
+        Relationships: [];
+      };
+      settlement_items: {
+        Row: {
+          amount_cents: number;
+          id: string;
+          label: string;
+          settlement_id: string;
+          source_id: string;
+          source_kind: string;
+        };
+        Insert: {
+          amount_cents: number;
+          id?: string;
+          label: string;
+          settlement_id: string;
+          source_id: string;
+          source_kind: string;
+        };
+        Update: {
+          amount_cents?: number;
+          id?: string;
+          label?: string;
+          settlement_id?: string;
+          source_id?: string;
+          source_kind?: string;
+        };
+        Relationships: [];
+      };
       platform_accounts: {
         Row: {
           created_at: string;
@@ -2937,6 +3011,11 @@ export type Database = {
         Args: { p_amount_cents: number; p_commission_id: string; p_reason: string; p_source: string };
         Returns: Json;
       };
+      prepare_settlement: {
+        Args: { p_adjustment_ids: string[] | null; p_period_key: string; p_promoter_id: string };
+        Returns: Json;
+      };
+      approve_settlement: { Args: { p_settlement_id: string }; Returns: Json };
       open_obligation: {
         Args: { p_kind: string; p_period_key: string | null; p_terms_id: string };
         Returns: Json;

@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-13 — P05-T06 liquidación
+
+- **[Commercial/Economía]** Una liquidación por promotor y `YYYY-MM` de Argentina. Entran comisiones `available` cuyo `available_at` cae en el mes, y solo los ajustes que Finanzas indica. `due_on` es el día 10 del mes siguiente. Aprobar exige otra cuenta con `collection.write`.
+- **[DB]** `20261013050000_commercial_phase05_settlements.sql` y `20261013050100_commercial_phase05_settlement_audit.sql`. Ledger 126. `next_task` es P05-T07.
+
 ### 2026-10-13 — P05-T05 reversas
 
 - **[Commercial/Economía]** `reverse_collection` marca la cobranza `reversed` y no borra la comisión. Si no estaba `paid`, la comisión pasa a `voided` y el slot queda anulado sin reciclar el número. Si estaba `paid`, sigue `paid` y nace un ajuste negativo `available`. `post_adjustment` no toca el monto histórico. `BLK-ECO-03` sigue abierto: no hay neteo automático.
