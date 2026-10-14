@@ -57,7 +57,7 @@ begin
   perform set_config('request.jwt.claim.sub', '11111111-1111-4111-8111-111111111103', true);
   perform public.approve_settlement(v_settlement);
   v_result := public.record_settlement_payment(v_settlement, 'pay-early', 100, 'recorded', 'ref', null);
-  if v_result->>'commercial_error_code' is distinct from 'validation' then
+  if v_result->>'commercial_error_code' is distinct from 'invoice_required' then
     raise exception 'pay before invoice %', v_result;
   end if;
 
@@ -71,7 +71,7 @@ begin
 
   perform set_config('request.jwt.claim.sub', '11111111-1111-4111-8111-111111111103', true);
   v_result := public.record_settlement_payment(v_settlement, 'pay-sod', 100, 'recorded', 'ref', null);
-  if v_result->>'commercial_error_code' is distinct from 'sod_conflict' then
+  if v_result->>'commercial_error_code' is distinct from 'sod_violation' then
     raise exception 'approver pays %', v_result;
   end if;
 
@@ -81,8 +81,14 @@ begin
     raise exception 'failed changed settlement %', v_result;
   end if;
   v_result := public.record_settlement_payment(v_settlement, 'pay-fail', 2200000, 'recorded', 'retry', null);
-  if v_result->>'duplicate' is distinct from 'true' or v_result->>'status' is distinct from 'failed' then
+  if v_result->>'commercial_error_code' is distinct from 'idempotent_replay'
+     or (select status from commercial.settlement_payments where idempotency_key = 'pay-fail') is distinct from 'failed'
+     or (select count(*) from commercial.settlement_payments where idempotency_key = 'pay-fail') <> 1 then
     raise exception 'retry same key %', v_result;
+  end if;
+  v_result := public.record_settlement_payment(v_settlement, 'pay-fail', 2200000, 'failed', 'fallo', null);
+  if v_result->>'duplicate' is distinct from 'true' or v_result->>'ok' is distinct from 'true' then
+    raise exception 'compatible replay %', v_result;
   end if;
 
   v_result := public.record_settlement_payment(v_settlement, 'pay-partial', 1000000, 'recorded', 'parcial', 'receipts/local/parcial.pdf');
@@ -97,7 +103,7 @@ begin
   end if;
 
   v_result := public.record_settlement_payment(v_settlement, 'pay-over', 2000000, 'recorded', 'demas', null);
-  if v_result->>'commercial_error_code' is distinct from 'amount_exceeds_total' then
+  if v_result->>'commercial_error_code' is distinct from 'payment_exceeds_total' then
     raise exception 'overpay %', v_result;
   end if;
   v_result := public.record_settlement_payment(v_settlement, 'pay-rest', 1200000, 'recorded', 'resto', null);

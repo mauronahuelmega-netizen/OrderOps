@@ -114,7 +114,7 @@ begin
   end if;
   perform set_config('request.jwt.claim.sub', '97979797-9797-4979-7979-979797979801', true);
   v_result := public.approve_settlement(v_replacement);
-  if v_result->>'commercial_error_code' is distinct from 'sod_conflict' then
+  if v_result->>'commercial_error_code' is distinct from 'sod_violation' then
     raise exception 'P preparer approved %', v_result;
   end if;
   perform set_config('request.jwt.claim.sub', '97979797-9797-4979-7979-979797979803', true);

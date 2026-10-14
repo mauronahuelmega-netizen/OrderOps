@@ -86,7 +86,7 @@ begin
   end if;
 
   v_result := public.approve_settlement(v_settlement);
-  if v_result->>'commercial_error_code' is distinct from 'sod_conflict' then
+  if v_result->>'commercial_error_code' is distinct from 'sod_violation' then
     raise exception 'same approver %', v_result;
   end if;
 

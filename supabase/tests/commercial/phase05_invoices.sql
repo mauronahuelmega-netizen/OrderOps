@@ -79,7 +79,7 @@ begin
 
   perform set_config('request.jwt.claim.sub', '22222222-2222-4222-8222-222222222201', true);
   v_result := public.review_invoice(v_bad, 'accepted', null);
-  if v_result->>'commercial_error_code' is distinct from 'amount_mismatch' then
+  if v_result->>'commercial_error_code' is distinct from 'invoice_amount_mismatch' then
     raise exception 'accept mismatch %', v_result;
   end if;
   v_result := public.review_invoice(v_bad, 'rejected', 'importe distinto');
