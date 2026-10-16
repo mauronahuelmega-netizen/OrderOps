@@ -475,6 +475,13 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-16 — Commercial Core PHASE-06 — Consolidación en QA
+
+- **[Commercial]** El dispatcher reclama `outbox_events` con `FOR UPDATE SKIP LOCKED`, escribe la bandeja una sola vez y solo abre correo si el sink es Inbucket en `127.0.0.1:54324`. `archive_opportunity`, `open_privacy_request` y `resolve_privacy_request` archivan y anonimizan un contacto sin borrar comisiones. La pantalla `/super-admin/privacy` lista solicitudes y conserva el texto de `BLK-PRIV-01`.
+- **[DB]** `20261016165136_commercial_phase06_dispatch_privacy.sql` está aplicada solo en `orderops-phase06-qa` (`127.0.0.1:56722`), ledger 135. `supabase_db_OrderOps` sigue en 134, versión `20261016120000`. `PHASE_06_STATUS` es `IN_PROGRESS` y no está `CLOSED_LOCAL`.
+- **[Límites]** `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos. También siguen abiertas las limitaciones de PHASE-05: varias facturas `submitted`, `reconciliation_required`, el reemplazo de total cero y la política económica sin cambios.
+- Breaking: no para pedidos ni caja del comercio.
+
 ### 2026-10-16 — Commercial Core PHASE-05 — Cierre local
 
 - **[Docs]** `PHASE_05_STATUS: CLOSED_LOCAL` sobre el alcance nominal. P05-T01 a P05-T08 completadas. G-01 a G-17 verificados. E2E-03, E2E-04, E2E-05 y E2E-07 ejecutados. Remediaciones P0 completadas. `CC-P05-REV-01` aprobada e implementada. `PHASE05_FINAL_AUDIT: PASS_WITH_LIMITATIONS`. `PHASE05_UI_INTEGRATION: PASS_QA`. `PHASE05_LOCAL_INTEGRATION: PASS_LOCAL`. `PHASE05_CLOSURE_REVIEW: READY_TO_CLOSE`. El veredicto histórico `PHASE05_ACCEPTANCE_REMEDIATION: NEEDS_FIX` se conserva. Ledger local 134, última versión `20261016120000`, en `supabase_db_OrderOps`. La base principal conserva 2 negocios y 0 comisiones, liquidaciones, facturas y pagos. El cierre es local y no es productivo.

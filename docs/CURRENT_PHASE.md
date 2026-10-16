@@ -1,5 +1,7 @@
 # Current Phase
 
+Puntero Commercial Core, 2026-10-16: PHASE-01 a PHASE-05 están cerradas en local. PHASE-06 está `IN_PROGRESS` en el QA `orderops-phase06-qa` y no está integrada en `supabase_db_OrderOps`. Ver `docs/commercial-core-v1/PROGRESS.md` y `docs/commercial-core-v1/LOCAL_RUN.md`.
+
 ## Estado actual
 
 **ADMIN-MANUAL-ORDER-MODAL-COMMIT-PUSH-DEPLOY-1 — PASS — MANUAL ORDER MODAL POLISH PACKAGE DEPLOYED (2026-09-08)**

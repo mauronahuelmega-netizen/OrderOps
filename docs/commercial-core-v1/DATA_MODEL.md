@@ -104,6 +104,12 @@ Append-only. Sin políticas de UPDATE/DELETE para `authenticated`.
 - `resolved_by`
 - `resolution_notes text`
 
+### `notification_preferences`
+
+- `account_id uuid pk` → `platform_accounts`
+- `opt_out_noncritical boolean not null default false`
+- Los eventos `payment.*`, `dispute.*` y `security.*` no respetan el opt-out.
+
 ### `commercial_programs`
 
 - `id uuid pk`
@@ -140,6 +146,7 @@ Lead = este registro (CC-01). No es un formulario.
 - `linked_business_id uuid` null → `public.businesses` cuando ya se convirtió
 - `merged_into_id uuid` null → self
 - `archived_at timestamptz`
+- `fixture_tag text` null. Lo usa solo la semilla local de PHASE-06.
 - `created_at timestamptz not null`
 
 Índice `(normalized_phone)` donde el teléfono no es null y `merged_into_id` es null. No es unique: dos sucursales pueden compartir teléfono de marca y deben ir a revisión, no fundirse solas.
@@ -182,6 +189,10 @@ Lead = este registro (CC-01). No es un formulario.
 - `created_at`
 
 El formulario no crea atribución.
+
+### `demo_rate_buckets`
+
+- Contador local del tope público por teléfono o por hash de IP. No guarda la IP en claro.
 
 ### `commercial_opportunities`
 
@@ -393,6 +404,10 @@ Reactivación con `reactivated_at <= ended_at + 180 días` conserva `conversion_
 - `revoked_at`, `completed_at`
 
 Check: o hay `approved_by_profile_id` del comercio, o hay excepción de superadmin con motivo. No basta la atribución.
+
+### `onboarding_grant_events`
+
+- Historial append-only de cada grant: alta, revocación, vencimiento y cierre.
 
 Alcance fijo en código, no en columnas editables por el promotor: `product.name`, `product.description`, categorías (nombre y orden), imágenes de producto, texto descriptivo de variante. Fuera: `price`, stock operativo si implica disponibilidad de venta sensible según la action existente, pedidos, `business_settings`, team, finanzas.
 

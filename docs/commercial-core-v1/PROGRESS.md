@@ -3,7 +3,7 @@
 ```yaml
 updated_at: 2026-10-16
 implementation_authorized: yes
-current_phase: PHASE-05
+current_phase: PHASE-06
 current_task: none
 product_code: in_progress
 phase_01: closed
@@ -13,10 +13,11 @@ phase_03_formal_close: closed_local
 phase_03_post_audit: runtime_validated_ledger_registered
 phase_04: closed_local
 phase_05: closed_local
-next_task: P06-T01
+phase_06: in_progress
+next_task: none
 PHASE_04_STATUS: CLOSED_LOCAL
 PHASE_05_STATUS: CLOSED_LOCAL
-PHASE_06_STATUS: NOT_STARTED
+PHASE_06_STATUS: IN_PROGRESS
 ```
 
 P04-T01 a P04-T04 quedaron hechas en local el 2026-10-11. Ese cierre no se reabre. `PHASE_04_STATUS` sigue `CLOSED_LOCAL`. `BLK-LEDGER-01` quedó `CLOSED_LOCAL` el 2026-10-12. PHASE-05 está `IN_PROGRESS`: P05-T01 quedó `DONE_LOCAL` el 2026-10-12. P05-T02 quedó `DONE_LOCAL` el 2026-10-13. P05-T03 quedó `DONE_LOCAL` el 2026-10-13. P05-T04 quedó `DONE_LOCAL` el 2026-10-13. P05-T05 quedó `DONE_LOCAL` el 2026-10-13. P05-T06 quedó `DONE_LOCAL` el 2026-10-13. P05-T07 quedó `DONE_LOCAL` el 2026-10-13. P05-T08 quedó `DONE_LOCAL` el 2026-10-13. La auditoría del 2026-10-14 dejó PHASE-05 en `NEEDS_FIX`. El tope de doce quedó corregido en `20261014080000`. La guarda de `20261014080100` impide pagar o rehabilitar una comisión `voided`. `CC-P05-REV-01 — Approved` define el destino de esa liquidación: impaga se invalida y puede reemplazarse; con pago parcial queda `reconciliation_required`; pagada conserva el ajuste negativo. La remediación posterior deja como máximo una factura `accepted` por liquidación, alinea los códigos contractuales y abre la operación mínima de Finanzas y del promotor. La convivencia de varias facturas `submitted` no está contratada y no se bloquea. La conciliación de las parcialmente pagadas no tiene procedimiento. `PHASE05_REMAINING_REMEDIATION: READY_FOR_REAUDIT`. PHASE-05 sigue `NEEDS_FIX` y no pasa a `CLOSED_LOCAL`.
@@ -73,12 +74,12 @@ El smoke del navegador quedó PASS el 2026-10-11: el dueño aprobó, el promotor
 | P05-UI | 05 | pass_local | 2026-10-16. `PHASE05_LOCAL_INTEGRATION: PASS_LOCAL`. `20261016120000` aplicada en `supabase_db_OrderOps`. Ledger 134. `list_settlement_workspace` es `SECURITY INVOKER`. PostgREST sigue sin exponer `commercial` y reconoce la RPC en `public`. La principal no tiene liquidaciones: la lectura autenticada vacía no repite la prueba con registros de QA. PHASE-05 no está `CLOSED_LOCAL`. |
 | P05-CLOSE | 05 | closed_local | 2026-10-16. `PHASE05_FORMAL_CLOSURE: CLOSED_LOCAL`. La revisión `PHASE05_CLOSURE_REVIEW: READY_TO_CLOSE` cerró el alcance nominal. P05-T01 a P05-T08 completadas. G-01 a G-17 verificados. E2E-03, E2E-04, E2E-05 y E2E-07 ejecutados. P0 y `CC-P05-REV-01` completados. Auditoría `PASS_WITH_LIMITATIONS`, UI `PASS_QA`, integración `PASS_LOCAL`. Ledger 134. La principal conserva 2 negocios y 0 filas económicas. No es producción. `PHASE_06_STATUS: NOT_STARTED`. P06-T01 no está autorizada. Siguen abiertos `BLK-ECO-01`, `BLK-ECO-02`, `BLK-ECO-03`, varias `submitted`, la conciliación manual, el reemplazo de total cero, dos carreras PHASE-03 `NOT_VERIFIED` y la reconstrucción limpia de 134 no ejecutada. |
 | P05-REM | 05 | done | 2026-10-14. `PHASE05_REMAINING_REMEDIATION: READY_FOR_REAUDIT`. PHASE-05 sigue `NEEDS_FIX`. Respaldos `OrderOps-postgres-20261014T154043Z-pre-p05-invoices.dump`, SHA-256 `12A562DB9DCDBF756F6F16A092F2A1BFEDD5C524EA25399BA8F73DF48DBFAA5F`, 1525895 bytes; y `OrderOps-postgres-20261014T154302Z-pre-p05-errors.dump`, SHA-256 `1DAEAD04F345D136987E42412F419185D3C44D3F7F036EAFBC49533B3830DE46`, 1526998 bytes. `20261014100000` y `20261014100100`. Ledger 131 → 133. Una sola factura `accepted` por liquidación. Códigos `sod_violation`, `invoice_required`, `invoice_amount_mismatch`, `payment_exceeds_total` e `idempotent_replay` para una clave incompatible. El reintento compatible sigue `duplicate: true`. UI de Finanzas y presentación del promotor sin carga de archivo ni AFIP. E2E autenticada `NOT_VERIFIED`. Carreras en `orderops_p05_race_pg`, ya eliminado. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos. |
-| P06-T01 | 06 | pending | — |
-| P06-T02 | 06 | pending | — |
-| P06-T03 | 06 | pending | — |
-| P06-T04 | 06 | pending | — |
-| P06-T05 | 06 | pending | — |
-| P06-T06 | 06 | pending | — |
+| P06-T01 | 06 | pass_qa | 2026-10-16. QA `orderops-phase06-qa` en `127.0.0.1:56722`. `phase06_dispatch.sql` exit 0. El parser rechaza `smtp.gmail.com` antes de conectar. Dos corridas del dispatcher sobre un evento sintético: la primera entregó bandeja y correo; la segunda no reclamó filas. Mailpit de `127.0.0.1:54324` respondió 200 con el asunto del pago simulado. La principal sigue en 134. |
+| P06-T02 | 06 | pass_qa | 2026-10-16. `phase06_privacy.sql` exit 0 en el mismo QA. Archivo idempotente, la lista abierta no muestra la oportunidad, la auditoría conserva el evento y la supresión deja el contacto `anonimizado`. `authenticated` no puede borrar comisiones. `BLK-PRIV-01` sigue abierto. |
+| P06-T03 | 06 | pass_qa | 2026-10-16. `apply-commercial-fixture.mjs` dos veces sobre `supabase_db_orderops-phase06-qa` dejó 3 comercios. Rechaza la principal y un host no loopback. No se ejecutó en `supabase_db_OrderOps`. |
+| P06-T04 | 06 | pass_qa | 2026-10-16. Reconstrucción limpia de 135 migraciones en `orderops-phase06-qa`. Las suites comerciales de `supabase/tests/commercial` salieron 0, incluida `e2e_08.sql` tras fijar el rol de la sesión. G-01 a G-17 quedaron cubiertos por las suites PHASE-05 que salieron 0. E2E-09 concurrente de dos POST sigue sin intercalar sesiones. `verify-all` salió 0 con 18 archivos. `tsc --noEmit --incremental false` salió 0. No hay migración nueva en la principal. |
+| P06-T05 | 06 | pass_qa | 2026-10-16. `schema-names.verify.ts` nombró 43 tablas. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos. PHASE-06 no está `CLOSED_LOCAL`. |
+| P06-T06 | 06 | pass_qa | 2026-10-16. `docs/commercial-core-v1/LOCAL_RUN.md` registra los comandos corridos en esta sesión. |
 
 ## Errores abiertos
 
@@ -138,9 +139,11 @@ Se persistió el plan. No se eligió base comisionable, ni pago parcial, ni plaz
 
 2026-10-16: cierre local de PHASE-05. `PHASE_05_STATUS: CLOSED_LOCAL`. P05-T01 a P05-T08 completadas. G-01 a G-17 verificados. E2E-03, E2E-04, E2E-05 y E2E-07 ejecutados. Remediaciones P0 completadas. `CC-P05-REV-01` aprobada e implementada. `PHASE05_FINAL_AUDIT: PASS_WITH_LIMITATIONS`. `PHASE05_ACCEPTANCE_REMEDIATION: NEEDS_FIX` se conserva en la secuencia y quedó superado por `PHASE05_UI_INTEGRATION: PASS_QA` y `PHASE05_LOCAL_INTEGRATION: PASS_LOCAL`. `PHASE05_CLOSURE_REVIEW: READY_TO_CLOSE`. Ledger 134, última versión `20261016120000`. La base principal conserva 2 negocios y 0 comisiones, liquidaciones, facturas y pagos. El cierre es local, no productivo. Siguen abiertos y no resueltos: `BLK-ECO-01`, `BLK-ECO-02`, `BLK-ECO-03`, varias facturas `submitted`, la resolución manual de `reconciliation_required`, el reemplazo de total cero, las dos concurrencias históricas PHASE-03 `NOT_VERIFIED` y la reconstrucción limpia conjunta de 134 migraciones, no ejecutada. `PHASE_06_STATUS: NOT_STARTED`.
 
+2026-10-16: PHASE-06 quedó implementada y probada en `orderops-phase06-qa` (`127.0.0.1:56721` / `127.0.0.1:56722`), sin aplicarse en `supabase_db_OrderOps`. Ledger de QA 135, última `20261016165136`. Ledger principal 134. `PHASE_06_STATUS: IN_PROGRESS`. No es `CLOSED_LOCAL` ni V1 productiva. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos.
+
 ## Próxima tarea segura
 
-`next_task` es P06-T01. `PHASE_06_STATUS` es `NOT_STARTED`. Este cierre no la autoriza. `PHASE_05_STATUS` es `CLOSED_LOCAL`. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos.
+No hay una tarea nueva autorizada. `PHASE_06_STATUS` es `IN_PROGRESS` en QA aislado y no está `CLOSED_LOCAL`. La migración `20261016165136` no está en `supabase_db_OrderOps`. Integrarla exige una autorización aparte. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos.
 
 ## Recuperación
 
