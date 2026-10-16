@@ -475,10 +475,17 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-16 — Commercial Core PHASE-05 — Cierre local
+
+- **[Docs]** `PHASE_05_STATUS: CLOSED_LOCAL` sobre el alcance nominal. P05-T01 a P05-T08 completadas. G-01 a G-17 verificados. E2E-03, E2E-04, E2E-05 y E2E-07 ejecutados. Remediaciones P0 completadas. `CC-P05-REV-01` aprobada e implementada. `PHASE05_FINAL_AUDIT: PASS_WITH_LIMITATIONS`. `PHASE05_UI_INTEGRATION: PASS_QA`. `PHASE05_LOCAL_INTEGRATION: PASS_LOCAL`. `PHASE05_CLOSURE_REVIEW: READY_TO_CLOSE`. El veredicto histórico `PHASE05_ACCEPTANCE_REMEDIATION: NEEDS_FIX` se conserva. Ledger local 134, última versión `20261016120000`, en `supabase_db_OrderOps`. La base principal conserva 2 negocios y 0 comisiones, liquidaciones, facturas y pagos. El cierre es local y no es productivo.
+- **[Límites]** Siguen abiertos y no resueltos, sin impedir este cierre nominal: `BLK-ECO-01`, `BLK-ECO-02`, `BLK-ECO-03`, la política de varias facturas `submitted`, la resolución manual de `reconciliation_required`, el reemplazo de total cero, las dos concurrencias históricas de PHASE-03 `NOT_VERIFIED` y la reconstrucción limpia conjunta de las 134 migraciones, que no se ejecutó.
+- **[Roadmap]** `PHASE_06_STATUS: NOT_STARTED`. La próxima tarea es P06-T01 y no está autorizada.
+- Breaking: no para pedidos ni caja del comercio.
+
 ### 2026-10-16 — Lectura de liquidaciones sin exponer commercial
 
 - **[Commercial/Lectura]** Las pantallas de Finanzas y del promotor leen `public.list_settlement_workspace()`. La función es `SECURITY INVOKER`, no recibe `business_id` ni `promoter_id`, y devuelve solo los campos de la lista. La visibilidad sigue en las políticas SELECT de `commercial`. PostgREST no expone ese esquema. Un error de la RPC se muestra como fallo de carga; una lista vacía solo aparece si la consulta responde `ok`.
-- **[DB]** `20261016120000_commercial_phase05_settlement_reads.sql` está aplicada en el QA `orderops-phase05-accept`. No está en `supabase_db_OrderOps`. El ledger principal sigue en 133, versión `20261014100100`.
+- **[DB]** `20261016120000_commercial_phase05_settlement_reads.sql` está aplicada en `supabase_db_OrderOps`. Ledger 134. También está en el QA `orderops-phase05-accept`. `PHASE_05_STATUS` sigue `NEEDS_FIX` y no está `CLOSED_LOCAL`.
 - **[Auth]** `experimental.authInterrupts` habilita `forbidden()`. Un usuario autenticado sin permiso de Finanzas recibe HTTP 403 y la página `Acceso denegado`, sin datos de liquidaciones. Sin sesión, la ruta sigue redirigiendo a login.
 - **[UI]** PHASE-05 no está `CLOSED_LOCAL`. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos.
 
