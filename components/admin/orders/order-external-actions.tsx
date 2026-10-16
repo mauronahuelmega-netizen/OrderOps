@@ -61,9 +61,9 @@ export default function OrderExternalActions({
   const isWorkspacePresentation = presentation === "workspace";
   const whatsappTemplates = useMemo(() => getWhatsappTemplatesForOrder(order), [order]);
   // Keys depend only on status + delivery_method; avoid resetting on order object churn.
-  // eslint-disable-next-line react-hooks/exhaustive-deps -- semantic deps for selection contract
   const availableTemplateKeys = useMemo((): AdminOrderWhatsappTemplateKey[] => {
     return getWhatsappTemplatesForOrder(order).map((template) => template.key);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- semantic deps for selection contract
   }, [order.status, order.delivery_method]);
 
   const [selectedTemplate, setSelectedTemplate] = useState<AdminOrderWhatsappTemplateKey | "">(
