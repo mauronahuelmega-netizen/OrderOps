@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { Moon, Sun } from "lucide-react";
 
 type ThemeToggleProps = {
@@ -8,12 +8,24 @@ type ThemeToggleProps = {
   onToggle: () => void;
 };
 
-export default function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
-  const [mounted, setMounted] = useState(false);
+function subscribeToHydration() {
+  return () => {};
+}
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+function getClientMountedSnapshot() {
+  return true;
+}
+
+function getServerMountedSnapshot() {
+  return false;
+}
+
+export default function ThemeToggle({ theme, onToggle }: ThemeToggleProps) {
+  const mounted = useSyncExternalStore(
+    subscribeToHydration,
+    getClientMountedSnapshot,
+    getServerMountedSnapshot
+  );
 
   if (!mounted) {
     return <div className="catalog-theme-switch catalog-theme-switch--placeholder" aria-hidden="true" />;
