@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 const navItems = [
   { href: "/super-admin", label: "Crear cliente" },
   { href: "/super-admin/businesses", label: "Negocios" },
-  { href: "/super-admin/users", label: "Usuarios" }
+  { href: "/super-admin/users", label: "Usuarios" },
+  { href: "/super-admin/privacy", label: "Privacidad" }
 ];
 
 export default function SuperAdminNav() {
