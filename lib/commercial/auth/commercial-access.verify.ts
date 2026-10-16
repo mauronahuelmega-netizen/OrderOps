@@ -25,6 +25,12 @@ assert.equal(middleware.includes('"/promoter/:path*"'), true);
 assert.equal(gate.includes("requireAdminContext"), false);
 assert.equal(gate.includes("forbidden"), true);
 
+const nextConfig = readFileSync("next.config.ts", "utf8");
+assert.equal(nextConfig.includes("authInterrupts: true"), true);
+const supabaseConfig = readFileSync("supabase/config.toml", "utf8");
+const exposedSchemas = supabaseConfig.match(/^schemas = \[(.*)\]$/m);
+assert.equal(exposedSchemas?.[1].includes("commercial"), false);
+
 const board = readFileSync("app/commercial/opportunities/[id]/page.tsx", "utf8");
 assert.equal(board.includes("won"), false);
 assert.equal(board.includes("Confirmar atribución"), false);

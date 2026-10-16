@@ -475,6 +475,13 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-16 — Lectura de liquidaciones sin exponer commercial
+
+- **[Commercial/Lectura]** Las pantallas de Finanzas y del promotor leen `public.list_settlement_workspace()`. La función es `SECURITY INVOKER`, no recibe `business_id` ni `promoter_id`, y devuelve solo los campos de la lista. La visibilidad sigue en las políticas SELECT de `commercial`. PostgREST no expone ese esquema. Un error de la RPC se muestra como fallo de carga; una lista vacía solo aparece si la consulta responde `ok`.
+- **[DB]** `20261016120000_commercial_phase05_settlement_reads.sql` está aplicada en el QA `orderops-phase05-accept`. No está en `supabase_db_OrderOps`. El ledger principal sigue en 133, versión `20261014100100`.
+- **[Auth]** `experimental.authInterrupts` habilita `forbidden()`. Un usuario autenticado sin permiso de Finanzas recibe HTTP 403 y la página `Acceso denegado`, sin datos de liquidaciones. Sin sesión, la ruta sigue redirigiendo a login.
+- **[UI]** PHASE-05 no está `CLOSED_LOCAL`. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos.
+
 ### 2026-10-14 — Hallazgos restantes de PHASE-05
 
 - **[Commercial/Economía]** Una liquidación admite como máximo una factura `accepted`. Las rechazadas y las de un antecedente invalidado permanecen. Varias facturas `submitted` siguen permitidas porque esa convivencia no tiene contrato. Un ajuste de `-2_200_000` entra en un período posterior solo si Finanzas lo incluye y hay derechos positivos suficientes; un total negativo se rechaza y el ajuste queda `available`. No hay neteo automático.

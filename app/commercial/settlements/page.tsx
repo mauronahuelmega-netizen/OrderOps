@@ -1,5 +1,6 @@
 import { requireCommercialArea } from "@/lib/commercial/auth/require-commercial-principal";
 import { formatArsFromCents } from "@/lib/commercial/money";
+import { loadSettlementWorkspace } from "@/lib/commercial/settlements/load-workspace";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import {
   approveSettlement,
@@ -52,18 +53,11 @@ export default async function CommercialSettlementsPage({
   const session = await requireCommercialArea();
   const notice = (await searchParams).notice;
   const supabase = await createSupabaseServerClient();
-  const settlementsResult = await supabase
-    .schema("commercial")
-    .from("promoter_settlements")
-    .select("id, promoter_id, period_key, status, total_cents, due_on, prepared_by, approved_by, replaces_settlement_id, invalidation_reason, reconciliation_reason")
-    .order("period_key", { ascending: false });
-  const itemsResult = await supabase.schema("commercial").from("settlement_items").select("id, settlement_id, label, amount_cents, lineage");
-  const invoicesResult = await supabase.schema("commercial").from("promoter_invoices").select("id, settlement_id, status, amount_cents, rejection_reason");
-  const paymentsResult = await supabase.schema("commercial").from("settlement_payments").select("id, settlement_id, status, amount_cents, idempotency_key");
-  const settlements = (settlementsResult.data ?? []) as SettlementRow[];
-  const items = (itemsResult.data ?? []) as ItemRow[];
-  const invoices = (invoicesResult.data ?? []) as InvoiceRow[];
-  const payments = (paymentsResult.data ?? []) as PaymentRow[];
+  const loaded = await loadSettlementWorkspace(supabase);
+  const settlements = loaded.ok ? (loaded.workspace.settlements as SettlementRow[]) : [];
+  const items = loaded.ok ? (loaded.workspace.items as ItemRow[]) : [];
+  const invoices = loaded.ok ? (loaded.workspace.invoices as InvoiceRow[]) : [];
+  const payments = loaded.ok ? (loaded.workspace.payments as PaymentRow[]) : [];
   const roles = session.roles ?? [];
   const canOperate = roles.includes("finance");
 
@@ -71,7 +65,14 @@ export default async function CommercialSettlementsPage({
     <main className={styles.page}>
       <section className={styles.list}>
         <h1>Liquidaciones</h1>
-        {notice ? <p className={styles.notice}>{NOTICES[notice] ?? notice}</p> : null}
+        {loaded.ok && notice ? <p className={styles.notice}>{NOTICES[notice] ?? notice}</p> : null}
+        {!loaded.ok ? (
+          <p className={styles.notice}>
+            {notice === "ok"
+              ? "La operación se envió, pero no se pudo confirmar el listado."
+              : "No se pudieron cargar las liquidaciones."}
+          </p>
+        ) : null}
         {canOperate ? (
           <form className={styles.form} action={prepareSettlement}>
             <h2>Preparar</h2>
@@ -83,7 +84,7 @@ export default async function CommercialSettlementsPage({
         ) : (
           <p className={styles.meta}>Este rol consulta. Finanzas ejecuta la preparación, la revisión y el pago simulado.</p>
         )}
-        {settlements.length === 0 ? <p className={styles.meta}>No hay liquidaciones visibles.</p> : null}
+        {loaded.ok && settlements.length === 0 ? <p className={styles.meta}>No hay liquidaciones visibles.</p> : null}
         {settlements.map((settlement) => {
           const ownItems = items.filter((item) => item.settlement_id === settlement.id);
           const ownInvoices = invoices.filter((invoice) => invoice.settlement_id === settlement.id);

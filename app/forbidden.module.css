@@ -1,0 +1,19 @@
+.page {
+  min-height: 100vh;
+  display: grid;
+  align-content: center;
+  gap: 0.75rem;
+  padding: 2rem 1.25rem;
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+}
+
+.page h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.page p {
+  margin: 0;
+  color: var(--text-secondary);
+}

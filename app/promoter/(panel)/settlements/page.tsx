@@ -1,5 +1,6 @@
 import { requirePromoterPrincipal } from "@/lib/commercial/promoters/require-promoter-principal";
 import { formatArsFromCents } from "@/lib/commercial/money";
+import { loadSettlementWorkspace } from "@/lib/commercial/settlements/load-workspace";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { submitOwnInvoice } from "./actions";
 import styles from "@/components/promoter/promoter-settlements.module.css";
@@ -35,17 +36,9 @@ export default async function PromoterSettlementsPage({
   await requirePromoterPrincipal();
   const notice = (await searchParams).notice;
   const supabase = await createSupabaseServerClient();
-  const settlementsResult = await supabase
-    .schema("commercial")
-    .from("promoter_settlements")
-    .select("id, period_key, status, total_cents, due_on")
-    .order("period_key", { ascending: false });
-  const invoicesResult = await supabase
-    .schema("commercial")
-    .from("promoter_invoices")
-    .select("id, settlement_id, status, amount_cents, rejection_reason");
-  const settlements = (settlementsResult.data ?? []) as SettlementRow[];
-  const invoices = (invoicesResult.data ?? []) as InvoiceRow[];
+  const loaded = await loadSettlementWorkspace(supabase);
+  const settlements = loaded.ok ? (loaded.workspace.settlements as SettlementRow[]) : [];
+  const invoices = loaded.ok ? (loaded.workspace.invoices as InvoiceRow[]) : [];
 
   return (
     <section className={styles.page}>
@@ -53,8 +46,15 @@ export default async function PromoterSettlementsPage({
       <p className={styles.meta}>
         Una factura aceptada habilita la posibilidad de pago. Finanzas registra la transferencia simulada. No se emite una factura fiscal.
       </p>
-      {notice ? <p>{NOTICES[notice] ?? notice}</p> : null}
-      {settlements.length === 0 ? <p className={styles.meta}>No hay liquidaciones.</p> : null}
+      {loaded.ok && notice ? <p>{NOTICES[notice] ?? notice}</p> : null}
+      {!loaded.ok ? (
+        <p>
+          {notice === "ok"
+            ? "La documentación se envió, pero no se pudo confirmar el listado."
+            : "No se pudieron cargar las liquidaciones."}
+        </p>
+      ) : null}
+      {loaded.ok && settlements.length === 0 ? <p className={styles.meta}>No hay liquidaciones.</p> : null}
       {settlements.map((settlement) => {
         const ownInvoices = invoices.filter((invoice) => invoice.settlement_id === settlement.id);
         const accepted = ownInvoices.some((invoice) => invoice.status === "accepted");

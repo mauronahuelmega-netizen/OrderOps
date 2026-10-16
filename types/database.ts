@@ -1047,6 +1047,7 @@ export type Database = {
       promoter_onboarding_businesses: { Args: Record<string, never>; Returns: Json };
       promoter_onboarding_products: { Args: { p_business_id: string }; Returns: Json };
       business_onboarding_requests: { Args: Record<string, never>; Returns: Json };
+      list_settlement_workspace: { Args: Record<string, never>; Returns: Json };
       accrue_commissions_for_collection: {
         Args: { p_collection_id: string };
         Returns: Json;

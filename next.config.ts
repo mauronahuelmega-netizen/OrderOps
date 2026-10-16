@@ -1,6 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  experimental: {
+    authInterrupts: true
+  },
   // DEV-only: allow HMR /_next/* from LAN phone (restart `npm run dev` after change).
   allowedDevOrigins: ["127.0.0.1", "localhost", "192.168.100.28"],
   async headers() {
