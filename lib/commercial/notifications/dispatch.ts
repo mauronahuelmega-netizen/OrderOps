@@ -95,6 +95,7 @@ export async function dispatchClaimedEvents(input: {
 
     const sent = await deliverToInbucket({
       origin: sink.origin,
+      port: new URL(sink.origin).port,
       recipient,
       subject: template.title,
       body: template.body

@@ -26,19 +26,30 @@ assert.equal(
   }).ok,
   false
 );
+assert.equal(
+  resolveEmailSink({
+    COMMERCIAL_EMAIL_SINK: "inbucket",
+    COMMERCIAL_INBUCKET_HOST: "127.0.0.1",
+    COMMERCIAL_INBUCKET_PORT: "54324",
+    COMMERCIAL_QA_INBUCKET_PORT: "56724"
+  }).ok,
+  false
+);
 assert.deepEqual(
   resolveEmailSink({
     COMMERCIAL_EMAIL_SINK: "inbucket",
     COMMERCIAL_INBUCKET_HOST: "127.0.0.1",
-    COMMERCIAL_INBUCKET_PORT: "54324"
+    COMMERCIAL_INBUCKET_PORT: "56724",
+    COMMERCIAL_QA_INBUCKET_PORT: "56724"
   }),
-  { ok: true, mode: "inbucket", origin: "http://127.0.0.1:54324" }
+  { ok: true, mode: "inbucket", origin: "http://127.0.0.1:56724" }
 );
 
 const script = readFileSync("scripts/commercial-core/dispatch-outbox.mjs", "utf8");
 assert.match(script, /smtp\.gmail\.com/);
 assert.match(script, /non_loopback_sink/);
-assert.equal(script.includes("supabase_db_OrderOps"), false);
+assert.match(script, /foreign_project_sink/);
+assert.match(script, /supabase_inbucket_/);
 
 async function main(): Promise<void> {
   let inboxWrites = 0;

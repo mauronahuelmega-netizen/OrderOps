@@ -1,9 +1,9 @@
 export type EmailSinkDecision =
   | { ok: true; mode: "off" }
-  | { ok: true; mode: "inbucket"; origin: "http://127.0.0.1:54324" }
+  | { ok: true; mode: "inbucket"; origin: string }
   | { ok: false; reason: string };
 
-const LOOPBACK_ORIGIN = "http://127.0.0.1:54324";
+const FOREIGN_INBUCKET_PORTS = new Set(["54324", "56324", "56424"]);
 
 export function resolveEmailSink(env: Record<string, string | undefined>): EmailSinkDecision {
   const sink = env.COMMERCIAL_EMAIL_SINK?.trim() ?? "";
@@ -16,27 +16,40 @@ export function resolveEmailSink(env: Record<string, string | undefined>): Email
 
   const host = env.COMMERCIAL_INBUCKET_HOST?.trim() ?? "";
   const port = env.COMMERCIAL_INBUCKET_PORT?.trim() ?? "";
+  const qaPort = env.COMMERCIAL_QA_INBUCKET_PORT?.trim() ?? "";
   const configuredUrl = env.COMMERCIAL_INBUCKET_URL?.trim() ?? "";
-  if (host !== "127.0.0.1" || port !== "54324") {
+  if (host !== "127.0.0.1" || !/^[0-9]+$/.test(port) || port !== qaPort) {
     return { ok: false, reason: "non_loopback_sink" };
   }
-  if (configuredUrl.length > 0 && configuredUrl !== LOOPBACK_ORIGIN) {
+  if (FOREIGN_INBUCKET_PORTS.has(port)) {
+    return { ok: false, reason: "foreign_project_sink" };
+  }
+  const origin = `http://127.0.0.1:${port}`;
+  if (configuredUrl.length > 0 && configuredUrl !== origin) {
     return { ok: false, reason: "non_loopback_sink" };
   }
-  return { ok: true, mode: "inbucket", origin: LOOPBACK_ORIGIN };
+  return { ok: true, mode: "inbucket", origin };
+}
+
+export function isQaInbucketOrigin(origin: string, port: string): boolean {
+  return origin === `http://127.0.0.1:${port}` && !FOREIGN_INBUCKET_PORTS.has(port);
 }
 
 export async function deliverToInbucket(input: {
-  origin: "http://127.0.0.1:54324";
+  origin: string;
+  port: string;
   recipient: string;
   subject: string;
   body: string;
 }): Promise<{ ok: true } | { ok: false; error: string }> {
-  if (input.origin !== LOOPBACK_ORIGIN) {
-    return { ok: false, error: "non_loopback_sink" };
+  if (!isQaInbucketOrigin(input.origin, input.port)) {
+    return { ok: false, error: "foreign_project_sink" };
+  }
+  if (!input.recipient.endsWith("@127.0.0.1")) {
+    return { ok: false, error: "external_recipient" };
   }
   try {
-    const response = await fetch(`${LOOPBACK_ORIGIN}/api/v1/send`, {
+    const response = await fetch(`${input.origin}/api/v1/send`, {
       method: "POST",
       redirect: "error",
       headers: { "content-type": "application/json" },
