@@ -269,12 +269,39 @@ begin
     raise exception 'collection audit count %', v_count;
   end if;
 
-  if exists (select 1 from commercial.promoter_commissions)
-    or to_regclass('commercial.founder_slots') is not null
-    or to_regclass('commercial.promoter_settlements') is not null
-    or to_regclass('commercial.promoter_invoices') is not null
-    or to_regclass('commercial.settlement_payments') is not null then
-    raise exception 'later phase tables exist';
+  if exists (
+    select 1
+    from commercial.promoter_commissions commission
+    join commercial.platform_collections collection on collection.id = commission.collection_id
+    where collection.obligation_id in (v_setup, v_month_one, v_month_two, v_other)
+  ) or exists (
+    select 1 from commercial.founder_slots
+    where obligation_id in (v_setup, v_month_one, v_month_two, v_other)
+  ) or exists (
+    select 1
+    from commercial.settlement_items item
+    join commercial.promoter_commissions commission
+      on commission.id = item.source_id and item.source_kind = 'commission'
+    join commercial.platform_collections collection on collection.id = commission.collection_id
+    where collection.obligation_id in (v_setup, v_month_one, v_month_two, v_other)
+  ) or exists (
+    select 1
+    from commercial.promoter_invoices invoice
+    join commercial.settlement_items item on item.settlement_id = invoice.settlement_id
+    join commercial.promoter_commissions commission
+      on commission.id = item.source_id and item.source_kind = 'commission'
+    join commercial.platform_collections collection on collection.id = commission.collection_id
+    where collection.obligation_id in (v_setup, v_month_one, v_month_two, v_other)
+  ) or exists (
+    select 1
+    from commercial.settlement_payments payment
+    join commercial.settlement_items item on item.settlement_id = payment.settlement_id
+    join commercial.promoter_commissions commission
+      on commission.id = item.source_id and item.source_kind = 'commission'
+    join commercial.platform_collections collection on collection.id = commission.collection_id
+    where collection.obligation_id in (v_setup, v_month_one, v_month_two, v_other)
+  ) then
+    raise exception 'collection created an implicit later effect';
   end if;
 end;
 $$;

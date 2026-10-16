@@ -101,8 +101,27 @@ begin
     raise exception 'two promoter confirm % / %', v_first, v_second;
   end if;
 
-  select count(*) into v_commissions from pg_class where relname = 'promoter_commissions' and relnamespace = 'commercial'::regnamespace;
-  if v_commissions <> 0 then
+  if exists (
+    select 1 from commercial.promoter_commissions
+    where promoter_id in (
+      '64646464-6464-4464-8464-646464646421',
+      '64646464-6464-4464-8464-646464646422'
+    )
+  ) or exists (
+    select 1 from commercial.promoter_settlements
+    where promoter_id in (
+      '64646464-6464-4464-8464-646464646421',
+      '64646464-6464-4464-8464-646464646422'
+    )
+  ) or exists (
+    select 1
+    from commercial.founder_slots slot
+    join commercial.conversion_terms terms on terms.id = slot.conversion_terms_id
+    where terms.opportunity_id in (
+      (v_demo->>'opportunity_id')::uuid,
+      (v_organic->>'opportunity_id')::uuid
+    )
+  ) then
     raise exception 'attribution created commissions';
   end if;
 end;
