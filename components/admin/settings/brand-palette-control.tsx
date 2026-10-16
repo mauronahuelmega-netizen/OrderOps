@@ -59,7 +59,6 @@ export default function BrandPaletteControl({
         {showLegacyOption && legacyColor ? (
           <button
             type="button"
-            role="listitem"
             className={`${styles.swatchCard} ${isLegacySelected ? styles.swatchCardActive : ""}`}
             disabled={disabled}
             aria-pressed={isLegacySelected}
@@ -85,7 +84,6 @@ export default function BrandPaletteControl({
             <button
               key={entry.id}
               type="button"
-              role="listitem"
               className={`${styles.swatchCard} ${isActive ? styles.swatchCardActive : ""}`}
               disabled={disabled}
               aria-pressed={isActive}
