@@ -70,17 +70,15 @@ function mockOrder(
     order_events: overrides.order_events ?? [],
     relative_time_label: overrides.relative_time_label ?? "Hace 5 min",
     urgency_state: overrides.urgency_state ?? "normal",
-    operational_aging: (overrides.operational_aging ?? {
-      badge: "Dentro de término",
-      isDelayed: false,
-      minutesInStatus: 5
-    }) as any,
+    operational_aging: overrides.operational_aging ?? "normal",
     timeline_steps: overrides.timeline_steps ?? [],
-    customer_context: (overrides.customer_context ?? {
-      badge: "Cliente nuevo",
-      ordersCount: 1,
-      favoriteDeliveryMethod: "delivery"
-    }) as any
+    customer_context: overrides.customer_context ?? {
+      isNewCustomer: true,
+      totalOrders: 1,
+      previousOrderRelativeLabel: null,
+      preferredMethodLabel: "delivery",
+      signals: []
+    }
   };
 }
 

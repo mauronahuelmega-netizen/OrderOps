@@ -88,7 +88,7 @@ function verifySourceContracts() {
 }
 
 function verifyInlinePreparationDataIntegrity() {
-  const sampleItems: any[] = [
+  const sampleItems: AdminOrderItem[] = [
     {
       id: "item-1",
       product_id: "prod-burger",

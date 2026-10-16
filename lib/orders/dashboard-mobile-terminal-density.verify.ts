@@ -51,17 +51,15 @@ function buildMockOrder(
     order_events: [],
     relative_time_label: "hace 5m",
     urgency_state: "normal",
-    operational_aging: {
-      badge: "Dentro de término",
-      isDelayed: false,
-      minutesInStatus: 5
-    } as any,
+    operational_aging: "normal",
     timeline_steps: [],
     customer_context: {
-      badge: "Cliente recurrente",
-      ordersCount: 3,
-      favoriteDeliveryMethod: "delivery"
-    } as any
+      isNewCustomer: false,
+      totalOrders: 3,
+      previousOrderRelativeLabel: null,
+      preferredMethodLabel: "delivery",
+      signals: []
+    }
   };
 }
 
