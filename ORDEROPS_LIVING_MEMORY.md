@@ -475,6 +475,18 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-16 — Cloud — Integración gradual autorizada
+
+- **[DB]** En `pkrsedmwxekbhlohhqds` el ledger quedó en 137 versiones y termina en `20261016182000`. Se registraron las 52 versiones históricas sin reejecutar su SQL, se retiraron las 14 versiones remotas antiguas y se aplicaron `20260917210151` más las 84 migraciones en cuatro tandas. Siguen 4 negocios, 78 pedidos itemizados, 9 productos, 5 perfiles, 5 usuarios y 51 objetos de Storage. `20261009015652` creó el bucket privado vacío `commercial-documents`.
+- **[Límites]** `PHASE_06_STATUS` sigue `IN_PROGRESS`. No hubo commit, push de Git, deploy, dispatcher ni cierre de V1. PostgREST no se reconfiguró desde estas migraciones.
+- Breaking: no para los pedidos históricos. Las tablas financieras y económicas quedaron vacías.
+
+### 2026-10-16 — Cloud — Validación local de reconciliación
+
+- **[DB]** Quedó propuesta, sin aplicar en Cloud, `20260917210151_cloud_rls_search_path_alignment.sql`. Alinea las políticas de `order_events` y `business_settings` y fija `search_path=public` en `create_default_business_settings()`. Se probó solo en Postgres 17 desechable restaurado desde el respaldo de `pkrsedmwxekbhlohhqds`. El ledger remoto no se modificó.
+- **[Límites]** `db push` 2.120.0 no admite un rango de versiones. Una ejecución sobre el directorio completo aplica todas las pendientes. Las tandas se aislaron con un workdir que omite los archivos posteriores. Cloud sigue sin esta migración.
+- Breaking: no para pedidos ni caja del comercio.
+
 ### 2026-10-16 — Commercial Core PHASE-06 — Auditoría previa a integración
 
 - **[Commercial]** El dispatcher sigue reclamando el outbox con `FOR UPDATE SKIP LOCKED`. El sink de correo solo abre `http://127.0.0.1` cuando el puerto es `COMMERCIAL_QA_INBUCKET_PORT` y no es `54324`, `56324` ni `56424`. El script comprueba que ese puerto lo publica `supabase_inbucket_orderops-phase06-qa`. `54324` es el Mailpit de `supabase_db_OrderOps` y queda rechazado.
