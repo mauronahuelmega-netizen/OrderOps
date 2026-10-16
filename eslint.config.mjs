@@ -5,6 +5,12 @@ const eslintConfig = [
   ...nextCoreWebVitals,
   ...nextTypescript,
   {
+    files: ["**/*.cjs"],
+    rules: {
+      "@typescript-eslint/no-require-imports": "off"
+    }
+  },
+  {
     ignores: [
       ".next/**",
       "out/**",
@@ -12,8 +18,10 @@ const eslintConfig = [
       "dist/**",
       "node_modules/**",
       "next-env.d.ts",
-    ],
-  },
+      ".handoff-backups/**",
+      "tmp/**"
+    ]
+  }
 ];
 
 export default eslintConfig;
