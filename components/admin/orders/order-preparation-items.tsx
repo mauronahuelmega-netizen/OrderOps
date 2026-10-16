@@ -172,11 +172,11 @@ function LegacyModifiers({ modifiers }: { modifiers: string[] }) {
 }
 
 function PreparationAdicionalBlock({
-  children
+  additionals
 }: {
-  children: PreparationOrderItem[];
+  additionals: PreparationOrderItem[];
 }) {
-  if (children.length === 0) {
+  if (additionals.length === 0) {
     return null;
   }
 
@@ -184,7 +184,7 @@ function PreparationAdicionalBlock({
     <div className={styles.preparationAdicional}>
       <p className={styles.preparationAdicionalLabel}>Adicional</p>
       <ul className={styles.preparationAdicionalList}>
-        {children.map((child) => (
+        {additionals.map((child) => (
           <li key={child.id} className={styles.preparationAdicionalRow}>
             <span className={styles.preparationAdicionalName}>
               {child.name} ×{child.quantity}
@@ -285,7 +285,7 @@ function PreparationProductBlock({
           ) : null}
 
           {hasChildren ? (
-            <PreparationAdicionalBlock children={item.children} />
+            <PreparationAdicionalBlock additionals={item.children} />
           ) : null}
         </div>
       ) : showLegacyModifiers ? (
