@@ -80,6 +80,7 @@ El smoke del navegador quedó PASS el 2026-10-11: el dueño aprobó, el promotor
 | P06-T04 | 06 | pass_qa | 2026-10-16. Reconstrucción limpia de 135 migraciones en `orderops-phase06-qa`. Las suites comerciales de `supabase/tests/commercial` salieron 0, incluida `e2e_08.sql` tras fijar el rol de la sesión. G-01 a G-17 quedaron cubiertos por las suites PHASE-05 que salieron 0. E2E-09 concurrente de dos POST sigue sin intercalar sesiones. `verify-all` salió 0 con 18 archivos. `tsc --noEmit --incremental false` salió 0. No hay migración nueva en la principal. |
 | P06-T05 | 06 | pass_qa | 2026-10-16. `schema-names.verify.ts` nombró 43 tablas. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos. PHASE-06 no está `CLOSED_LOCAL`. |
 | P06-T06 | 06 | pass_qa | 2026-10-16. `docs/commercial-core-v1/LOCAL_RUN.md` registra los comandos corridos en esta sesión. |
+| P06-AUDIT | 06 | pass_qa | 2026-10-16. `PHASE06_PREINTEGRATION_AUDIT`. `54324` es el Mailpit principal y el dispatcher lo rechaza; el envío sintético quedó en `56724`. E2E-09 solapó dos `submit_demo_request` con `overlap_waiting` 2 y un solo lead. `/super-admin/privacy` se recorrió con `super_admin`. `20261016182000` cierra la carrera de dos solicitudes abiertas y está solo en el QA, ledger 136. La principal sigue en 134. PHASE-06 no está `CLOSED_LOCAL`. |
 
 ## Errores abiertos
 
@@ -141,9 +142,11 @@ Se persistió el plan. No se eligió base comisionable, ni pago parcial, ni plaz
 
 2026-10-16: PHASE-06 quedó implementada y probada en `orderops-phase06-qa` (`127.0.0.1:56721` / `127.0.0.1:56722`), sin aplicarse en `supabase_db_OrderOps`. Ledger de QA 135, última `20261016165136`. Ledger principal 134. `PHASE_06_STATUS: IN_PROGRESS`. No es `CLOSED_LOCAL` ni V1 productiva. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos.
 
+2026-10-16: auditoría previa a la integración. El sink ya no entrega en `54324`. E2E-09 demostró solapamiento. La UI de privacidad se ejecutó en el navegador contra el QA. `20261016182000` quedó aplicada solo en el QA; ledger de QA 136. La principal sigue en 134. `PHASE_06_STATUS: IN_PROGRESS`.
+
 ## Próxima tarea segura
 
-No hay una tarea nueva autorizada. `PHASE_06_STATUS` es `IN_PROGRESS` en QA aislado y no está `CLOSED_LOCAL`. La migración `20261016165136` no está en `supabase_db_OrderOps`. Integrarla exige una autorización aparte. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos.
+No hay una tarea nueva autorizada. `PHASE_06_STATUS` es `IN_PROGRESS` en QA aislado y no está `CLOSED_LOCAL`. Las migraciones `20261016165136` y `20261016182000` no están en `supabase_db_OrderOps`. Integrarlas exige una autorización aparte. `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos.
 
 ## Recuperación
 

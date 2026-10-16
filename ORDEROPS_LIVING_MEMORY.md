@@ -475,10 +475,16 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-16 — Commercial Core PHASE-06 — Auditoría previa a integración
+
+- **[Commercial]** El dispatcher sigue reclamando el outbox con `FOR UPDATE SKIP LOCKED`. El sink de correo solo abre `http://127.0.0.1` cuando el puerto es `COMMERCIAL_QA_INBUCKET_PORT` y no es `54324`, `56324` ni `56424`. El script comprueba que ese puerto lo publica `supabase_inbucket_orderops-phase06-qa`. `54324` es el Mailpit de `supabase_db_OrderOps` y queda rechazado.
+- **[DB]** `20261016182000_commercial_phase06_privacy_open_unique.sql` agrega el índice único parcial de una solicitud `open` por sujeto y tipo, y el RPC devuelve el id existente si pierde la carrera. Está aplicada solo en el QA. Ledger de QA 136. La principal sigue en 134, versión `20261016120000`. `PHASE_06_STATUS` sigue `IN_PROGRESS`.
+- **[UI]** `/super-admin/privacy` archiva, abre y anonimiza con sesión `super_admin`. Un error de carga no se muestra como lista vacía. `BLK-PRIV-01` sigue abierto.
+
 ### 2026-10-16 — Commercial Core PHASE-06 — Consolidación en QA
 
-- **[Commercial]** El dispatcher reclama `outbox_events` con `FOR UPDATE SKIP LOCKED`, escribe la bandeja una sola vez y solo abre correo si el sink es Inbucket en `127.0.0.1:54324`. `archive_opportunity`, `open_privacy_request` y `resolve_privacy_request` archivan y anonimizan un contacto sin borrar comisiones. La pantalla `/super-admin/privacy` lista solicitudes y conserva el texto de `BLK-PRIV-01`.
-- **[DB]** `20261016165136_commercial_phase06_dispatch_privacy.sql` está aplicada solo en `orderops-phase06-qa` (`127.0.0.1:56722`), ledger 135. `supabase_db_OrderOps` sigue en 134, versión `20261016120000`. `PHASE_06_STATUS` es `IN_PROGRESS` y no está `CLOSED_LOCAL`.
+- **[Commercial]** El dispatcher reclama `outbox_events` con `FOR UPDATE SKIP LOCKED`, escribe la bandeja una sola vez y solo abre correo si el sink es Inbucket en loopback. La primera corrida de QA entregó en `127.0.0.1:54324`, que es el Mailpit principal; la auditoría posterior lo rechaza. `archive_opportunity`, `open_privacy_request` y `resolve_privacy_request` archivan y anonimizan un contacto sin borrar comisiones. La pantalla `/super-admin/privacy` lista solicitudes y conserva el texto de `BLK-PRIV-01`.
+- **[DB]** `20261016165136_commercial_phase06_dispatch_privacy.sql` está aplicada solo en `orderops-phase06-qa` (`127.0.0.1:56722`). `supabase_db_OrderOps` sigue en 134, versión `20261016120000`. `PHASE_06_STATUS` es `IN_PROGRESS` y no está `CLOSED_LOCAL`.
 - **[Límites]** `BLK-ECO-01`, `BLK-ECO-02` y `BLK-ECO-03` siguen abiertos. También siguen abiertas las limitaciones de PHASE-05: varias facturas `submitted`, `reconciliation_required`, el reemplazo de total cero y la política económica sin cambios.
 - Breaking: no para pedidos ni caja del comercio.
 

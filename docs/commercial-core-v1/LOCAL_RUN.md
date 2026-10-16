@@ -18,7 +18,7 @@ QA aislado `orderops-phase06-qa`.
 - Contenedor `supabase_db_orderops-phase06-qa`
 - Directorio fuera del repo: `legacy-backups\OrderOps\phase06-qa-stack`
 
-El gate histórico `node scripts/commercial-core/assert-local-supabase.mjs` sigue apuntando a `127.0.0.1:54321` y `127.0.0.1:54322`. En esta sesión no se usó para escribir. Identidad comprobada: la principal tiene 134 migraciones y termina en `20261016120000`. El QA tiene 135 y termina en `20261016165136`.
+El gate histórico `node scripts/commercial-core/assert-local-supabase.mjs` sigue apuntando a `127.0.0.1:54321` y `127.0.0.1:54322`. En esta sesión no se usó para escribir. Identidad comprobada: la principal tiene 134 migraciones y termina en `20261016120000`. El QA tiene 136 y termina en `20261016182000`.
 
 ## Arranque del QA
 
@@ -34,7 +34,11 @@ Pendiente de validar en otra máquina: repetir el arranque si ese directorio ya 
 
 ## Inbucket
 
-El catcher contratado es `http://127.0.0.1:54324`, el Mailpit del stack principal. No se escribe la base principal para usarlo. Un POST a `/api/v1/send` respondió 200. El dispatcher, con `COMMERCIAL_EMAIL_SINK=inbucket`, `COMMERCIAL_INBUCKET_HOST=127.0.0.1` y `COMMERCIAL_INBUCKET_PORT=54324`, entregó un aviso sintético a `fixture.local@127.0.0.1`.
+`127.0.0.1:54324` es `supabase_inbucket_OrderOps`, el Mailpit de la base principal. `127.0.0.1:56724` es `supabase_inbucket_orderops-phase06-qa`. El dispatcher corre en el host: `127.0.0.1` es el host, no la red de otro contenedor.
+
+El sink solo acepta `COMMERCIAL_INBUCKET_HOST=127.0.0.1` y `COMMERCIAL_INBUCKET_PORT` igual a `COMMERCIAL_QA_INBUCKET_PORT`. Rechaza `54324`, `56324` y `56424` antes de conectar. También exige que `docker port` del inbucket hermano publique ese puerto. Un destinatario que no termina en `@127.0.0.1` sale con `external_recipient`.
+
+La corrida de auditoría entregó un aviso sintético solo en `http://127.0.0.1:56724`. El total de `54324` no cambió.
 
 `smtp.gmail.com` hace salir a `dispatch-outbox.mjs` con `non_loopback_sink` antes de abrir una conexión.
 
@@ -45,7 +49,8 @@ Variables usadas:
 ```text
 COMMERCIAL_EMAIL_SINK=inbucket
 COMMERCIAL_INBUCKET_HOST=127.0.0.1
-COMMERCIAL_INBUCKET_PORT=54324
+COMMERCIAL_INBUCKET_PORT=56724
+COMMERCIAL_QA_INBUCKET_PORT=56724
 COMMERCIAL_DISPATCH_DATABASE_URL=postgresql://postgres:postgres@127.0.0.1:56722/postgres
 COMMERCIAL_QA_DB_CONTAINER=supabase_db_orderops-phase06-qa
 node scripts/commercial-core/dispatch-outbox.mjs
@@ -83,7 +88,7 @@ Los tres salieron 0. `schema-names.verify.ts` nombró 43 tablas.
 
 - No se aplicó `20261016165136` en `supabase_db_OrderOps`.
 - La semilla rechaza ese contenedor y el puerto publicado 54322.
-- El dispatcher rechaza un host de correo que no sea `127.0.0.1:54324`.
+- El dispatcher rechaza un sink que no sea el Mailpit del QA en `127.0.0.1:56724`.
 
 ## Errores
 
@@ -98,7 +103,6 @@ Si el dispatcher falla a mitad de un evento, el outbox vuelve a `pending` con ba
 
 ## Pendiente
 
-- Integrar `20261016165136` en la base principal. No está autorizado.
-- Recorrer `/super-admin/privacy` con una sesión de navegador. La página existe y no se abrió en esta sesión.
-- E2E-09 con dos POST simultáneos. Las pruebas secuenciales de deduplicación salieron 0.
-- `node scripts/commercial-core/verify-all.mjs` salió 0 con 18 archivos.
+- Integrar `20261016165136` y `20261016182000` en la base principal. No está autorizado.
+- `PHASE_06_STATUS` sigue `IN_PROGRESS`. No es `CLOSED_LOCAL`.
+- `BLK-ECO-01`, `BLK-ECO-02`, `BLK-ECO-03` y `BLK-PRIV-01` siguen abiertos.
