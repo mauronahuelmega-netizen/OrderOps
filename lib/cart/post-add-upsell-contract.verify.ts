@@ -576,7 +576,7 @@ section("EDIT-QTY — replaced preserves root and child quantity");
       buildBurger({ quantity: 2 }).parent,
       []
     );
-    let items = attachUpsellChildToParent({
+    const items = attachUpsellChildToParent({
       items: created.items,
       parentCartLineId: created.parentCartLineId,
       suggestedProduct: coca

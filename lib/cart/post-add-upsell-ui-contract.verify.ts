@@ -4,6 +4,8 @@
  */
 
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
 import {
   attachUpsellChildToParent,
   buildCartLinesFromCustomizationSelection,
@@ -255,7 +257,9 @@ section("U1-08 — unavailable excluded (pre-filtered from suggested list)");
 
 section("U1-09 — already attached excluded");
 {
-  let { items, parentCartLineId } = createParent();
+  const created = createParent();
+  let items = created.items;
+  const parentCartLineId = created.parentCartLineId;
   const attached = attachUpsellChildToParent({
     items,
     parentCartLineId,
@@ -349,7 +353,9 @@ section("U1-12 — max 3");
 
 section("U1-13 — attach one");
 {
-  let { items, parentCartLineId } = createParent();
+  const created = createParent();
+  let items = created.items;
+  const parentCartLineId = created.parentCartLineId;
   const beforeCount = getCartItemCount(items);
   const beforeTotal = getCartItemsTotal(items);
   const result = attachUpsellChildToParent({
@@ -376,7 +382,9 @@ section("U1-13 — attach one");
 
 section("U1-14 — sequential attach");
 {
-  let { items, parentCartLineId } = createParent();
+  const created = createParent();
+  let items = created.items;
+  const parentCartLineId = created.parentCartLineId;
   const first = attachUpsellChildToParent({
     items,
     parentCartLineId,
@@ -405,7 +413,9 @@ section("U1-14 — sequential attach");
 
 section("U1-15 — already attached idempotent");
 {
-  let { items, parentCartLineId } = createParent();
+  const created = createParent();
+  let items = created.items;
+  const parentCartLineId = created.parentCartLineId;
   items = attachUpsellChildToParent({
     items,
     parentCartLineId,
@@ -471,7 +481,7 @@ section("U1-17 — parent missing no mutation");
 
 section("U1-18 — quantity scaling");
 {
-  let { items, parentCartLineId } = createParent({ quantity: 3 });
+  const { items, parentCartLineId } = createParent({ quantity: 3 });
   const result = attachUpsellChildToParent({
     items,
     parentCartLineId,
@@ -492,7 +502,9 @@ section("U1-18 — quantity scaling");
 
 section("U1-19 — edit preservation");
 {
-  let { items, parentCartLineId } = createParent();
+  const created = createParent();
+  let items = created.items;
+  const parentCartLineId = created.parentCartLineId;
   items = attachUpsellChildToParent({
     items,
     parentCartLineId,
@@ -533,8 +545,6 @@ section("U1-19 — edit preservation");
 
 section("U1-20 — no placement contract");
 {
-  const fs = require("node:fs") as typeof import("node:fs");
-  const path = require("node:path") as typeof import("node:path");
   const source = fs.readFileSync(
     path.join(__dirname, "post-add-upsell.ts"),
     "utf8"
