@@ -32,7 +32,7 @@ Herramienta: `cloudflared`, apuntando solo al listener de un puerto. No se insta
 cloudflared tunnel --url http://127.0.0.1:3210 --no-autoupdate
 ```
 
-El listener, cuando se autorice, escucha en `127.0.0.1:3210` y solo en la ruta de arriba. Cualquier otro path responde 404. El comando sin `--listen` no abre el puerto:
+El listener, cuando se autorice, escucha en `127.0.0.1:3210` y solo en la ruta de arriba. Cualquier otro path responde 404. Si el cuerpo supera 4096 bytes, responde `body_too_large` y corta la lectura. El comando sin `--listen` no abre el puerto:
 
 ```text
 npx tsx scripts/commercial-core/talo-sandbox-webhook-listener.ts

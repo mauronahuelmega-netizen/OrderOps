@@ -1,5 +1,6 @@
-import { createServer } from "node:http";
+import { createServer, type ServerResponse } from "node:http";
 
+import { TALO_CUSTOMER_WEBHOOK_MAX_BYTES } from "@/lib/commercial/payments/talo-customer-webhook";
 import {
   createSandboxWebhookState,
   handleTaloSandboxCustomerWebhook,
@@ -9,6 +10,16 @@ import {
   TALO_SANDBOX_WEBHOOK_PORT,
   taloSandboxWebhookResponse
 } from "@/lib/commercial/payments/talo-sandbox-webhook-route";
+
+function rejectOversized(outgoing: ServerResponse): void {
+  outgoing.writeHead(400, { "content-type": "application/json; charset=utf-8" });
+  outgoing.end(JSON.stringify({
+    accepted: false,
+    disposition: "rejected",
+    reason: "body_too_large",
+    economicRecognition: false
+  }));
+}
 
 function main(): void {
   if (!process.argv.includes("--listen")) {
@@ -26,11 +37,32 @@ function main(): void {
       outgoing.end();
       return;
     }
+    const declaredLength = Number(incoming.headers["content-length"]);
+    if (Number.isFinite(declaredLength) && declaredLength > TALO_CUSTOMER_WEBHOOK_MAX_BYTES) {
+      rejectOversized(outgoing);
+      incoming.resume();
+      return;
+    }
     const chunks: Buffer[] = [];
+    let received = 0;
+    let oversized = false;
     incoming.on("data", (chunk: Buffer) => {
+      if (oversized) {
+        return;
+      }
+      received += chunk.length;
+      if (received > TALO_CUSTOMER_WEBHOOK_MAX_BYTES) {
+        oversized = true;
+        rejectOversized(outgoing);
+        incoming.destroy();
+        return;
+      }
       chunks.push(chunk);
     });
     incoming.on("end", () => {
+      if (oversized) {
+        return;
+      }
       const request = new Request(`http://127.0.0.1${TALO_SANDBOX_WEBHOOK_PATH}`, {
         method: "POST",
         headers: Object.fromEntries(Object.entries(incoming.headers).flatMap(([name, value]) => {

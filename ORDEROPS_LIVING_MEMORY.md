@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-17 — Commercial Core — Límite de cuerpo del listener Talo
+
+- **[Commercial]** El listener de `127.0.0.1:3210` corta un cuerpo mayor a 4096 bytes antes de pasarlo al receptor. Sigue sin reconocer pagos.
+- Breaking: no.
+
 ### 2026-10-17 — Commercial Core — Receptor HTTPS de prueba Talo
 
 - **[Commercial]** La ruta `POST /api/commercial/talo/sandbox-customer-webhook` reutiliza `receiveTaloCustomerWebhook` y responde 404 fuera del listener de sandbox. No abre túnel, no crea el cliente `orderops-qa-webhook-burger` y no reconoce pagos. Informe: `docs/commercial-core-v1/T06B_WEBHOOK_HTTPS_PREP.md`.
