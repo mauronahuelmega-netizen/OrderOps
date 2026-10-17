@@ -42,6 +42,9 @@ async function main(): Promise<void> {
   if (missing) {
     console.log(`missing: ${missing}`);
   }
+  if (report.status === "PASS") {
+    console.log(`customer_count: ${report.customerCount}`);
+  }
   if (report.status === "NOT_VERIFIED") {
     console.log(`http_status: ${report.httpStatus ?? "none"}`);
   }

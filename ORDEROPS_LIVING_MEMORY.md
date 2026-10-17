@@ -477,7 +477,7 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 ### 2026-10-17 — Commercial Core — Conexión Talo Sandbox
 
-- **[Commercial]** `connectTaloSandbox` usa `talo-pay` solo con `environment: "sandbox"` y lee `TALO_CLIENT_ID`, `TALO_CLIENT_SECRET` y `TALO_USER_ID` desde el servidor. La sonda consulta la cuenta y no crea clientes ni CVU. Informe: `docs/commercial-core-v1/T06A_TALO_CONNECTION.md`.
+- **[Commercial]** `connectTaloSandbox` autentica contra `https://sandbox-api.talo.com.ar` y consulta `GET /customers/?user_id=`. El 403 de la cuenta de partner no se interpreta como ausencia de `alias_prefix`. No crea clientes ni CVU. Informe: `docs/commercial-core-v1/T06A_TALO_CONNECTION.md`.
 - Breaking: no.
 
 ### 2026-10-17 — Commercial Core — Preparación sandbox T06-A

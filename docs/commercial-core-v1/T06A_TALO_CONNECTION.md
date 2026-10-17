@@ -20,7 +20,7 @@ No uses el chat, `.env.example` ni una variable `NEXT_PUBLIC_*`. El SDK oficial 
 
 `POST https://sandbox-api.talo.com.ar/users/{user_id}/tokens` con `client_id` y `client_secret`. El token va en `Authorization: Bearer`. El cliente se crea con `environment: "sandbox"`. El código no acepta `baseUrl` ni `production`.
 
-La prueba de conectividad es `GET /users/{user_id}/account` a través de `talo.partners.getAccount`. No crea clientes, CVU ni pagos. No imprime el token ni el prefijo.
+La prueba de conectividad pide el token y consulta `GET /customers/?user_id=`. No crea clientes, CVU ni pagos. No imprime el token ni el prefijo. `GET /users/{user_id}/account` es un endpoint de partner. Con esta credencial directa responde 403. Ese 403 no dice si `alias_prefix` está configurado: el prefijo queda `NOT_VERIFIED`.
 
 Comando: `npx tsx scripts/commercial-core/talo-sandbox-connection.ts`.
 
@@ -30,8 +30,8 @@ Disponible en sandbox como `POST /customers/`. Antes hace falta `alias_prefix` e
 
 ## Resultado de esta ejecución
 
-`COMMERCIAL_V1_T06A_TALO_CONNECTION: BLOCKED`
+`COMMERCIAL_V1_T06A_TALO_CONNECTION: PASS`
 
-`.env.local` no tiene `TALO_CLIENT_ID`, `TALO_CLIENT_SECRET` ni `TALO_USER_ID`. La autenticación no se ejecutó. `alias_prefix` queda `NOT_VERIFIED`.
+La autenticación en sandbox quedó comprobada. El listado de clientes respondió y hay 0 clientes. `alias_prefix` sigue `NOT_VERIFIED`. El 403 de `GET /users/{user_id}/account` no demuestra que el prefijo falte ni que exista.
 
-Para probar el CVU persistente, después de un PASS de esta conexión, falta confirmar que `alias_prefix` está configurado y recién entonces crear un cliente de prueba. Eso no forma parte de este lote.
+Un CVU persistente sigue exigiendo, según la documentación de Customers API, un `alias_prefix` configurado. Esta ejecución no lo leyó y no creó clientes ni CVU.
