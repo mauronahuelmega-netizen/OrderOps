@@ -1,3 +1,4 @@
+import { appendFileSync } from "node:fs";
 import { createServer, type ServerResponse } from "node:http";
 
 import { TALO_CUSTOMER_WEBHOOK_MAX_BYTES } from "@/lib/commercial/payments/talo-customer-webhook";
@@ -8,7 +9,8 @@ import {
   TALO_SANDBOX_WEBHOOK_HOST,
   TALO_SANDBOX_WEBHOOK_PATH,
   TALO_SANDBOX_WEBHOOK_PORT,
-  taloSandboxWebhookResponse
+  taloSandboxWebhookResponse,
+  type TaloSandboxWebhookHandling
 } from "@/lib/commercial/payments/talo-sandbox-webhook-route";
 
 function rejectOversized(outgoing: ServerResponse): void {
@@ -19,6 +21,29 @@ function rejectOversized(outgoing: ServerResponse): void {
     reason: "body_too_large",
     economicRecognition: false
   }));
+}
+
+function recordHandling(handling: TaloSandboxWebhookHandling): void {
+  const file = process.env.COMMERCIAL_TALO_WEBHOOK_DIAGNOSTIC_LOG;
+  if (!file) {
+    return;
+  }
+  const result = handling.result;
+  const transfer = result?.status === "observed" ? result.transfer : null;
+  const line = {
+    at: new Date().toISOString(),
+    disposition: handling.disposition,
+    reason: handling.reason ?? null,
+    httpStatus: handling.httpStatus,
+    economicRecognition: false,
+    customerId: result?.status === "duplicate" ? result.customerId : transfer?.customerId ?? null,
+    transactionId: result?.status === "duplicate" ? result.transactionId : transfer?.transactionId ?? null,
+    grossAmountCents: transfer?.grossAmountCents ?? null,
+    netAmountCents: transfer?.netAmountCents ?? null,
+    processingDifferenceCents: transfer?.processingDifferenceCents ?? null,
+    transactionStatus: transfer?.transactionStatus ?? null
+  };
+  appendFileSync(file, `${JSON.stringify(line)}\n`);
 }
 
 function main(): void {
@@ -81,6 +106,7 @@ function main(): void {
         rateLimit: state.rateLimit,
         readTransaction: (customerId, transactionId) => readTaloSandboxCustomerTransaction(process.env, customerId, transactionId)
       }).then((handling) => {
+        recordHandling(handling);
         const response = taloSandboxWebhookResponse(handling);
         void response.arrayBuffer().then((body) => {
           outgoing.writeHead(response.status, Object.fromEntries(response.headers.entries()));

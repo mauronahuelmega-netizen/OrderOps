@@ -216,6 +216,39 @@ async function main(): Promise<void> {
   assert.equal(calls.length, 2);
   assert.equal(calls.every((url) => url.startsWith(`${TALO_SANDBOX_API_ORIGIN}/`)), true);
 
+  const merged = await readTaloSandboxCustomerTransaction(readyEnv, taloSandboxWebhookCustomerId, "tx-net", async (url) => {
+    const target = String(url);
+    if (target.endsWith("/tokens")) {
+      return Response.json({ data: { token: "sandbox-token" } });
+    }
+    if (target.includes("/customers/")) {
+      return Response.json({
+        data: {
+          id: "tx-net",
+          customer_id: taloSandboxWebhookCustomerId,
+          amount: "54000.00",
+          currency: "ARS",
+          transaction_status: "PROCESSED",
+          creation_timestamp: "2026-10-17T19:00:00.000Z"
+        }
+      });
+    }
+    return Response.json({
+      data: {
+        transactions: [{
+          id: "tx-net",
+          customer_id: taloSandboxWebhookCustomerId,
+          gross_amount: "55000",
+          amount: "54000.00"
+        }]
+      }
+    });
+  });
+  const mergedData = (merged.body as { data: { gross_amount: string; amount: string } }).data;
+  assert.equal(merged.ok, true);
+  assert.equal(mergedData.gross_amount, "55000");
+  assert.equal(mergedData.amount, "54000.00");
+
   console.log("talo-sandbox-webhook-route.verify: ok");
 }
 

@@ -173,10 +173,69 @@ export async function readTaloSandboxCustomerTransaction(
         signal: AbortSignal.timeout(5000)
       }
     );
-    return { ok: readResponse.ok, httpStatus: readResponse.status, body: await readResponse.json() };
+    const detail = await readResponse.json();
+    if (!readResponse.ok || hasGrossAmount(detail)) {
+      return { ok: readResponse.ok, httpStatus: readResponse.status, body: detail };
+    }
+    const listResponse = await fetchImpl(
+      `${TALO_SANDBOX_API_ORIGIN}/transactions/?user_id=${encodeURIComponent(env.TALO_USER_ID ?? "")}&limit=100`,
+      {
+        headers: { authorization: `Bearer ${token}`, accept: "application/json" },
+        signal: AbortSignal.timeout(5000)
+      }
+    );
+    if (!listResponse.ok) {
+      return { ok: true, httpStatus: readResponse.status, body: detail };
+    }
+    return { ok: true, httpStatus: readResponse.status, body: withListedGross(detail, await listResponse.json(), customerId, transactionId) };
   } catch {
     return { ok: false, httpStatus: 0, body: null };
   }
+}
+
+function hasGrossAmount(body: unknown): boolean {
+  const data = recordOf(recordOf(body)?.data) ?? recordOf(body);
+  return data !== null && data.gross_amount !== undefined && data.gross_amount !== null;
+}
+
+function withListedGross(detail: unknown, list: unknown, customerId: string, transactionId: string): unknown {
+  const transactions = recordOf(recordOf(list)?.data)?.transactions;
+  if (!Array.isArray(transactions)) {
+    return detail;
+  }
+  const matches = transactions.filter((item) => {
+    const record = recordOf(item);
+    if (!record || record.gross_amount === undefined || record.gross_amount === null) {
+      return false;
+    }
+    const id = typeof record.id === "string" ? record.id : "";
+    const alternateId = typeof record.transaction_id === "string" ? record.transaction_id : "";
+    const sameTransaction = id === transactionId || alternateId === transactionId;
+    const listedCustomer = typeof record.customer_id === "string" ? record.customer_id : null;
+    return sameTransaction && (listedCustomer === null || listedCustomer === customerId);
+  });
+  if (matches.length !== 1) {
+    return detail;
+  }
+  const gross = recordOf(matches[0])?.gross_amount;
+  const copy = structuredClone(detail);
+  const data = recordOf(recordOf(copy)?.data);
+  if (data) {
+    data.gross_amount = gross;
+    return copy;
+  }
+  const root = recordOf(copy);
+  if (root) {
+    root.gross_amount = gross;
+  }
+  return copy;
+}
+
+function recordOf(value: unknown): Record<string, unknown> | null {
+  if (!value || typeof value !== "object" || Array.isArray(value)) {
+    return null;
+  }
+  return value as Record<string, unknown>;
 }
 
 function confirmationFailure(httpStatus: number | undefined): string {

@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-17 — Commercial Core — Webhook real de Talo Sandbox
+
+- **[Commercial]** Un cliente ficticio `orderops-qa-webhook-burger` recibió un faucet de ARS 55.000. Talo entregó el aviso al listener y la confirmación autenticada separó bruto, neto y diferencia. No reconoce un pago. Informe: `docs/commercial-core-v1/T06B_WH02_TALO_WEBHOOK.md`.
+- Breaking: no.
+
 ### 2026-10-17 — Commercial Core — Límite de cuerpo del listener Talo
 
 - **[Commercial]** El listener de `127.0.0.1:3210` corta un cuerpo mayor a 4096 bytes antes de pasarlo al receptor. Sigue sin reconocer pagos.
