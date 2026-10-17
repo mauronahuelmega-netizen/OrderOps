@@ -222,6 +222,8 @@ function withListedGross(detail: unknown, list: unknown, customerId: string, tra
   const data = recordOf(recordOf(copy)?.data);
   if (data) {
     data.gross_amount = gross;
+    data.gross_source = "list";
+    data.net_source = "detail";
     return copy;
   }
   const root = recordOf(copy);

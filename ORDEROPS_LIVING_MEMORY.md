@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-17 — Commercial Core — Recibos de proveedor sin imputar
+
+- **[Commercial]** `provider_customer_links` y `provider_receipts` guardan el cliente Talo y la acreditación verificada. No llaman a `record_collection`. Migración `20261017220000`, aplicada solo en el QA `orderops-phase06-qa`. Informe: `docs/commercial-core-v1/T08A_PROVIDER_RECEIPTS.md`.
+- Breaking: no.
+
 ### 2026-10-17 — Commercial Core — Webhook real de Talo Sandbox
 
 - **[Commercial]** Un cliente ficticio `orderops-qa-webhook-burger` recibió un faucet de ARS 55.000. Talo entregó el aviso al listener y la confirmación autenticada separó bruto, neto y diferencia. No reconoce un pago. Informe: `docs/commercial-core-v1/T06B_WH02_TALO_WEBHOOK.md`.

@@ -20,6 +20,8 @@ export type TaloObservedTransfer = {
   grossAmountCents: number;
   netAmountCents: number;
   processingDifferenceCents: number;
+  grossSource: "detail" | "list";
+  netSource: "detail" | "list";
   transactionStatus: string;
   observedAt: string;
   economicRecognition: false;
@@ -28,7 +30,14 @@ export type TaloObservedTransfer = {
 export type TaloCustomerWebhookResult =
   | { status: "rejected"; reason: string }
   | { status: "duplicate"; customerId: string; transactionId: string; economicRecognition: false }
-  | { status: "unconfirmed"; reason: string; httpStatus?: number; economicRecognition: false }
+  | {
+      status: "unconfirmed";
+      reason: string;
+      httpStatus?: number;
+      customerId: string;
+      transactionId: string;
+      economicRecognition: false;
+    }
   | { status: "observed"; transfer: TaloObservedTransfer; signaturePresent: boolean };
 
 type ReceiveInput = {
@@ -154,18 +163,25 @@ function transferFromRead(
   read: TaloTransactionRead,
   customerId: string,
   transactionId: string
-): { status: "observed"; transfer: TaloObservedTransfer } | { status: "unconfirmed"; reason: string; httpStatus?: number; economicRecognition: false } {
+): { status: "observed"; transfer: TaloObservedTransfer } | Extract<TaloCustomerWebhookResult, { status: "unconfirmed" }> {
   if (!read.ok) {
-    return { status: "unconfirmed", reason: "transaction_read_failed", httpStatus: read.httpStatus, economicRecognition: false };
+    return {
+      status: "unconfirmed",
+      reason: "transaction_read_failed",
+      httpStatus: read.httpStatus,
+      customerId,
+      transactionId,
+      economicRecognition: false
+    };
   }
   const body = asRecord(read.body);
   const data = asRecord(body?.data) ?? body;
   if (!data) {
-    return { status: "unconfirmed", reason: "transaction_body_rejected", economicRecognition: false };
+    return { status: "unconfirmed", reason: "transaction_body_rejected", customerId, transactionId, economicRecognition: false };
   }
   const readCustomer = typeof data.customer_id === "string" ? data.customer_id : null;
   if (readCustomer !== null && readCustomer !== customerId) {
-    return { status: "unconfirmed", reason: "transaction_customer_mismatch", economicRecognition: false };
+    return { status: "unconfirmed", reason: "transaction_customer_mismatch", customerId, transactionId, economicRecognition: false };
   }
   const readTransaction = typeof data.transaction_id === "string" ? data.transaction_id : null;
   const readId = typeof data.id === "string" ? data.id : null;
@@ -173,18 +189,18 @@ function transferFromRead(
     (readTransaction !== null && readTransaction !== transactionId && readId !== transactionId) ||
     (readId !== null && readId !== transactionId && readTransaction !== transactionId)
   ) {
-    return { status: "unconfirmed", reason: "transaction_id_mismatch", economicRecognition: false };
+    return { status: "unconfirmed", reason: "transaction_id_mismatch", customerId, transactionId, economicRecognition: false };
   }
   if (data.currency !== "ARS") {
-    return { status: "unconfirmed", reason: "currency_rejected", economicRecognition: false };
+    return { status: "unconfirmed", reason: "currency_rejected", customerId, transactionId, economicRecognition: false };
   }
   const grossAmountCents = toCents(data.gross_amount);
   const netAmountCents = toCents(data.amount);
   if (grossAmountCents === null || netAmountCents === null) {
-    return { status: "unconfirmed", reason: "amounts_incomplete", economicRecognition: false };
+    return { status: "unconfirmed", reason: "amounts_incomplete", customerId, transactionId, economicRecognition: false };
   }
   if (grossAmountCents < netAmountCents) {
-    return { status: "unconfirmed", reason: "processing_difference_negative", economicRecognition: false };
+    return { status: "unconfirmed", reason: "processing_difference_negative", customerId, transactionId, economicRecognition: false };
   }
   const transactionStatus = typeof data.transaction_status === "string"
     ? data.transaction_status
@@ -197,7 +213,7 @@ function transferFromRead(
       ? data.payment_date
       : "";
   if (transactionStatus.length === 0 || observedAt.length === 0) {
-    return { status: "unconfirmed", reason: "transaction_fields_missing", economicRecognition: false };
+    return { status: "unconfirmed", reason: "transaction_fields_missing", customerId, transactionId, economicRecognition: false };
   }
   return {
     status: "observed",
@@ -208,6 +224,8 @@ function transferFromRead(
       grossAmountCents,
       netAmountCents,
       processingDifferenceCents: grossAmountCents - netAmountCents,
+      grossSource: data.gross_source === "list" ? "list" : "detail",
+      netSource: data.net_source === "list" ? "list" : "detail",
       transactionStatus,
       observedAt,
       economicRecognition: false

@@ -2038,6 +2038,105 @@ export type Database = {
           },
         ];
       };
+      provider_customer_links: {
+        Row: {
+          alias: string;
+          created_at: string;
+          cvu: string;
+          environment: string;
+          external_customer_id: string;
+          id: string;
+          provider: string;
+          won_business_id: string;
+        };
+        Insert: {
+          alias: string;
+          created_at?: string;
+          cvu: string;
+          environment: string;
+          external_customer_id: string;
+          id?: string;
+          provider: string;
+          won_business_id: string;
+        };
+        Update: {
+          alias?: string;
+          created_at?: string;
+          cvu?: string;
+          environment?: string;
+          external_customer_id?: string;
+          id?: string;
+          provider?: string;
+          won_business_id?: string;
+        };
+        Relationships: [];
+      };
+      provider_receipts: {
+        Row: {
+          confirmed_at: string | null;
+          created_at: string;
+          currency: string | null;
+          environment: string;
+          external_customer_id: string;
+          external_transaction_id: string;
+          gross_amount_cents: number | null;
+          gross_source: string | null;
+          id: string;
+          link_id: string;
+          net_amount_cents: number | null;
+          net_source: string | null;
+          observed_at: string | null;
+          processing_difference_cents: number | null;
+          provider: string;
+          provider_status: string | null;
+          review_reason: string | null;
+          status: string;
+          updated_at: string;
+        };
+        Insert: {
+          confirmed_at?: string | null;
+          created_at?: string;
+          currency?: string | null;
+          environment: string;
+          external_customer_id: string;
+          external_transaction_id: string;
+          gross_amount_cents?: number | null;
+          gross_source?: string | null;
+          id?: string;
+          link_id: string;
+          net_amount_cents?: number | null;
+          net_source?: string | null;
+          observed_at?: string | null;
+          processing_difference_cents?: number | null;
+          provider: string;
+          provider_status?: string | null;
+          review_reason?: string | null;
+          status: string;
+          updated_at?: string;
+        };
+        Update: {
+          confirmed_at?: string | null;
+          created_at?: string;
+          currency?: string | null;
+          environment?: string;
+          external_customer_id?: string;
+          external_transaction_id?: string;
+          gross_amount_cents?: number | null;
+          gross_source?: string | null;
+          id?: string;
+          link_id?: string;
+          net_amount_cents?: number | null;
+          net_source?: string | null;
+          observed_at?: string | null;
+          processing_difference_cents?: number | null;
+          provider?: string;
+          provider_status?: string | null;
+          review_reason?: string | null;
+          status?: string;
+          updated_at?: string;
+        };
+        Relationships: [];
+      };
       platform_obligations: {
         Row: {
           conversion_terms_id: string;
@@ -3214,6 +3313,54 @@ export type Database = {
       };
       record_founder_service_start: {
         Args: { p_started_on: string; p_terms_id: string };
+        Returns: Json;
+      };
+      link_provider_customer: {
+        Args: {
+          p_alias: string;
+          p_business_id: string;
+          p_cvu: string;
+          p_environment: string;
+          p_external_customer_id: string;
+          p_provider: string;
+        };
+        Returns: Json;
+      };
+      note_provider_receipt: {
+        Args: {
+          p_business_id: string;
+          p_environment: string;
+          p_external_customer_id: string;
+          p_external_transaction_id: string;
+          p_provider: string;
+        };
+        Returns: Json;
+      };
+      confirm_provider_receipt: {
+        Args: {
+          p_business_id: string;
+          p_currency: string;
+          p_environment: string;
+          p_external_customer_id: string;
+          p_external_transaction_id: string;
+          p_gross_amount_cents: number;
+          p_gross_source: string;
+          p_net_amount_cents: number;
+          p_net_source: string;
+          p_observed_at: string;
+          p_provider: string;
+          p_provider_status: string;
+        };
+        Returns: Json;
+      };
+      defer_provider_receipt: {
+        Args: {
+          p_business_id: string;
+          p_environment: string;
+          p_external_customer_id: string;
+          p_external_transaction_id: string;
+          p_provider: string;
+        };
         Returns: Json;
       };
       record_collection: {

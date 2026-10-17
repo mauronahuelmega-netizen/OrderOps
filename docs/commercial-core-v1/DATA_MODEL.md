@@ -467,6 +467,31 @@ Regla de aplicación del caso nominal, también en SQL al insertar:
 
 Esa regla no decide IVA ni parciales. Los deja bloqueados (`BLK-ECO-01`, `BLK-ECO-02`).
 
+### `provider_customer_links`
+
+Vincula un negocio de OrderOps con un cliente externo. No abre una obligación.
+
+- `won_business_id not null`
+- `provider text check (provider = 'talo')`
+- `environment text check (environment in ('sandbox','production'))`
+- `external_customer_id text not null`
+- `cvu text not null`
+- `alias text not null`
+- unique `(provider, environment, external_customer_id)`
+- unique `(won_business_id, provider, environment)`
+
+### `provider_receipts`
+
+Acreditación externa todavía no imputada. No referencia `platform_collections` ni `platform_obligations`.
+
+- `link_id not null`
+- `provider`, `environment`, `external_customer_id`, `external_transaction_id`
+- unique `(provider, environment, external_customer_id, external_transaction_id)`
+- `status text check (status in ('received','pending_review','confirmed'))`
+- `gross_amount_cents`, `net_amount_cents`, `processing_difference_cents`
+- `gross_source` y `net_source` en `detail` o `list`
+- `confirmed` exige moneda ARS, ambos importes, diferencia igual al bruto menos el neto, y `confirmed_at`
+
 ### `founder_slots`
 
 - `conversion_terms_id not null`
