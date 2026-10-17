@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-17 — Commercial Core — CVU de prueba Talo
+
+- **[Commercial]** Un cliente ficticio de sandbox, `orderops-qa-burger-house`, conserva un CVU en el listado de Customers API. Una segunda ejecución no crea otro. `GET /customers/{id}` responde 404 y no se usa como prueba de ausencia. Informe: `docs/commercial-core-v1/T06A_TALO_PERSISTENT_CVU.md`.
+- Breaking: no.
+
 ### 2026-10-17 — Commercial Core — Conexión Talo Sandbox
 
 - **[Commercial]** `connectTaloSandbox` autentica contra `https://sandbox-api.talo.com.ar` y consulta `GET /customers/?user_id=`. El 403 de la cuenta de partner no se interpreta como ausencia de `alias_prefix`. No crea clientes ni CVU. Informe: `docs/commercial-core-v1/T06A_TALO_CONNECTION.md`.
