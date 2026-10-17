@@ -583,6 +583,8 @@ CC-18 a CC-24
 
 El Commercial Core V1 incorporará el programa comercial Founder con las condiciones económicas aprobadas.
 
+Los importes de esta sección siguen vigentes. Los medios de pago y el primer mes incluido se leen en la Revisión 2 de `ORDEROPS_COMMERCIAL_CORE_PROMOTORES_V1_DECISIONES_CIERRE.md`. En este documento, «cobro efectivo» significa cobranza concretada, no pago en efectivo. Founder V1 no admite efectivo ni un precio distinto por tarjeta o transferencia.
+
 ## Programa Founder — Condiciones confirmadas
 
 Implementación inicial

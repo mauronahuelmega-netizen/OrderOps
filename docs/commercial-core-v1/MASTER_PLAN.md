@@ -4,7 +4,9 @@ Fecha de este paquete: 2026-10-08.
 
 Estado: planificación persistida. Ninguna fase de producto está implementada.
 
-Punto de entrada para una sesión nueva de Cursor. Leer este archivo, después [EXECUTION_RULES.md](EXECUTION_RULES.md), después [PROGRESS.md](PROGRESS.md), después el `PHASE-0N.md` de la tarea vigente.
+Punto de entrada para una sesión nueva de Cursor. Leer este archivo, después [VIGENTE.md](VIGENTE.md), después [EXECUTION_RULES.md](EXECUTION_RULES.md), después [PROGRESS.md](PROGRESS.md), después el `PHASE-0N.md` de la tarea vigente.
+
+Este plan, fechado el 8 de octubre de 2026, es el paquete original. No es la política de precios vigente.
 
 ## Objetivo
 
@@ -33,7 +35,7 @@ Si una frase de este paquete contradice la especificación funcional en una regl
 
 | Documento | Uso |
 | --- | --- |
-| [REPOSITORY_AUDIT.md](REPOSITORY_AUDIT.md) | Inventario verificado, reutilización, riesgos |
+| [VIGENTE.md](VIGENTE.md) | Qué documento manda hoy |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | Límites de dominio, eventos, integraciones |
 | [DATA_MODEL.md](DATA_MODEL.md) | Tablas, claves, estados, invariantes de base |
 | [SECURITY_MATRIX.md](SECURITY_MATRIX.md) | Actor, recurso, operación, condición, RLS |
