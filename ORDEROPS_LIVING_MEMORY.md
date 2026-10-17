@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-17 — Commercial Core — Receptor HTTPS de prueba Talo
+
+- **[Commercial]** La ruta `POST /api/commercial/talo/sandbox-customer-webhook` reutiliza `receiveTaloCustomerWebhook` y responde 404 fuera del listener de sandbox. No abre túnel, no crea el cliente `orderops-qa-webhook-burger` y no reconoce pagos. Informe: `docs/commercial-core-v1/T06B_WEBHOOK_HTTPS_PREP.md`.
+- Breaking: no.
+
 ### 2026-10-17 — Commercial Core — Preparación del webhook Talo
 
 - **[Commercial]** `receiveTaloCustomerWebhook` valida el aviso de Customers API y confirma con una lectura inyectada. Separa bruto, neto y diferencia. No monta una ruta pública ni reconoce un pago. `webhook_url` sigue documentada solo en el alta. Informe: `docs/commercial-core-v1/T06B_TALO_WEBHOOK_PREP.md`.

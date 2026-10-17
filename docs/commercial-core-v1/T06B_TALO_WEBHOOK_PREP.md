@@ -26,7 +26,7 @@ Un aviso ya observado con la misma pareja de identificadores responde duplicado 
 
 1. Autorización explícita para crear un segundo cliente ficticio con `webhook_url` en el alta.
 2. Revisión de seguridad y un túnel HTTPS temporal hacia el receptor local. La base de `COMMERCIAL_PAYMENT_WEBHOOK_BASE_URL` debe ser HTTPS, sin usuario, query ni fragmento. El túnel no apunta a Supabase ni al puerto de la base.
-3. Montar el receptor recién después de esa revisión. Hoy no hay ruta en `app/api`.
+3. El montaje local y el túnel propuesto están en [T06B_WEBHOOK_HTTPS_PREP.md](T06B_WEBHOOK_HTTPS_PREP.md). La ruta responde 404 hasta habilitar el listener de prueba.
 4. Un almacén durable de avisos ya observados. La memoria de esta preparación no sobrevive un reinicio.
 5. La firma `X-Talo-Signature`, cuando Talo la publique. Hasta entonces, el GET autenticado sigue siendo la confirmación.
 6. No ejecutar faucet ni otra transferencia para forzar el aviso. El webhook no alcanza para dar un pago por acreditado.
