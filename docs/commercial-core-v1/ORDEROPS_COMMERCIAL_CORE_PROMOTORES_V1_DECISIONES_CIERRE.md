@@ -1,5 +1,5 @@
 # ORDEROPS — Commercial Core + Panel de Promotores V1
-## Especificación funcional de decisiones de cierre · CC-C01 a CC-C16 y CC-C18
+## Especificación funcional de decisiones de cierre · CC-C01 a CC-C16, CC-C18 y CC-C19
 
 **Revisión:** 2 · 17 de octubre de 2026. Sustituye el precio diferenciado de la revisión 1.  
 **Estado documental:** DECISIONES DE PRODUCTO APROBADAS · **IMPLEMENTACIÓN POR CONTRASTAR CON CÓDIGO**  
@@ -46,6 +46,7 @@ La auditoría previa reportó **43/48 unidades ponderadas (90%) de implementaci�
 | CC-C15 | **A** · Fecha de facturación fija después de pago tardío | Sin reinicio de calendario ni prorrateos automáticos |
 | CC-C16 | **A** · Pago exacto imputable automáticamente; diferencias a conciliación | Movimiento acreditado inequívoco, exacto e idempotente; anomalías manuales |
 | CC-C18 | **A** · Primer mes incluido en la activación | No se cobra ARS 55.000 al empezar. La primera mensualidad es el período siguiente. No genera comisión recurrente ni consume slot |
+| CC-C19 | **Posterior al cierre de Etapa 1** · Último día disponible | El aniversario original se conserva. Si ese día no existe, el vencimiento es el último día del mes. No hay deriva acumulativa |
 
 ---
 
@@ -192,6 +193,18 @@ La opción A de la revisión 1, con abono de ARS 65.000 y efectivo a ARS 55.000,
 - Ejemplo aprobado, sin regla general de fin de mes: si el servicio inicia el **10 de noviembre**, la primera mensualidad corresponde al período que inicia el **10 de diciembre**.
 - El motor actual guarda `period_key` como texto que envía quien abre la obligación. No calcula esa fecha. T02 tiene que usar la fecha de inicio de servicio como ancla de este ejemplo. No se define aquí qué pasa si el inicio cae un 31.
 
+### CC-C19 · Último día disponible del mes
+
+Corrección posterior al cierre de Etapa 1. No reabre T01–T05 ni cambia el veredicto `COMMERCIAL_V1_STAGE1_T05: PASS`.
+
+- El aniversario es el día de `commercial.founder_service_starts.service_started_on`.
+- El mes destino es el mes de ese inicio más el offset pedido. No se parte del vencimiento ya ajustado.
+- El día de vencimiento es el mínimo entre el día de aniversario y la cantidad de días del mes destino.
+- Si el día existe, se usa. Si no existe, se usa el último día de ese mes. Un año bisiesto conserva el 29 de febrero.
+- Un pago tardío no mueve el vencimiento ni la identidad del período.
+- El offset 0 sigue siendo el período incluido y no crea una mensualidad exigible.
+- Una fecha que no coincide con ese cálculo sigue rechazada. No se reescriben obligaciones ya abiertas.
+
 ---
 
 ## 3. Alcance comprometido de V1 y alcance V1.X
@@ -292,5 +305,6 @@ La opción A de la revisión 1, con abono de ARS 65.000 y efectivo a ARS 55.000,
 - **Se incorpora explícitamente al alcance V1 comercial:** cobro recurrente con Mobbex, CVU persistente Talo por negocio, elección de medio, recuperación segura de tarjetas fallidas, mensualidades canónicas, tolerancia de siete días, suspensión/reactivación y tratamiento de transferencias anómalas.
 - **No implica** que los proveedores hayan sido contratados, que la interfaz esté construida ni que la solución sea apta para producción.
 - **Revisión 2, 17 de octubre de 2026:** un solo precio Founder. Activación ARS 290.000, abono ARS 55.000, primer mes incluido, Mobbex y Talo, sin efectivo. La revisión 1, con ARS 65.000 y efectivo a ARS 55.000, queda sustituida y no es política vigente. Las comisiones y las doce cobranzas no cambian. Los adaptadores de pago no están construidos.
+- **CC-C19, 17 de octubre de 2026:** corrección posterior a la Etapa 1. El vencimiento usa el día de aniversario o, si no existe, el último día del mes. El cálculo sale del inicio y del offset. No reabre T01–T05.
 
 **Fin del contrato.**

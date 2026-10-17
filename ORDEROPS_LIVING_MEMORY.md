@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-17 — Commercial Core — CC-C19 fin de mes
+
+- **[Commercial]** `founder_period_on` devuelve el día de aniversario o el último día del mes destino. El offset se calcula desde `service_started_on`, sin arrastrar un vencimiento ya recortado. Migración `20261017170000`, aplicada solo en QA. No reabre T01–T05.
+- Breaking: un inicio en día 29, 30 o 31 ya puede abrir la mensualidad recortada. Una fecha distinta de ese cálculo sigue rechazada.
+
 ### 2026-10-17 — Commercial Core — Cierre de Etapa 1
 
 - **[Commercial]** La Etapa 1 queda cerrada en QA local. El primer mes incluido, el calendario anclado y la imputación por obligación ya tienen suites SQL con `ROLLBACK`. Mobbex, Talo, la gracia y los días 29 a 31 siguen fuera. Informe: `docs/commercial-core-v1/STAGE1_CLOSURE_REPORT.md`.

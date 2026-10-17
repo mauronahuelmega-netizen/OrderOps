@@ -94,3 +94,7 @@ Precondiciones antes de T06, sin pedir credenciales en este informe:
 - Los cuatro bloqueos económicos y de privacidad citados arriba, separados de la prueba técnica.
 
 Recomendación: no iniciar T06. Etapa 1 está cerrada. La preparación de Etapa 2 puede reunir accesos de sandbox, pero el calendario de fin de mes y los bloqueos legales no son solo una credencial externa.
+
+## Nota posterior
+
+CC-C19, del 17 de octubre de 2026, es una corrección posterior a este cierre. Define el último día disponible cuando el aniversario no existe. No reabre T01–T05 y no cambia el veredicto `COMMERCIAL_V1_STAGE1_T05: PASS`. El bloqueo de los días 29, 30 y 31 que figura arriba es el estado al cerrar la etapa.

@@ -6,7 +6,7 @@ Fecha: 17 de octubre de 2026.
 
 | Tema | Documento |
 | --- | --- |
-| Decisiones de cierre CC-C01 a CC-C16 y CC-C18, Revisión 2 | [ORDEROPS_COMMERCIAL_CORE_PROMOTORES_V1_DECISIONES_CIERRE.md](ORDEROPS_COMMERCIAL_CORE_PROMOTORES_V1_DECISIONES_CIERRE.md) |
+| Decisiones de cierre CC-C01 a CC-C16, CC-C18 y CC-C19 | [ORDEROPS_COMMERCIAL_CORE_PROMOTORES_V1_DECISIONES_CIERRE.md](ORDEROPS_COMMERCIAL_CORE_PROMOTORES_V1_DECISIONES_CIERRE.md) |
 | Importes, doce cobranzas, aprobación, liquidación y pago de comisiones | [FUNCTIONAL_SPEC.md](FUNCTIONAL_SPEC.md), secciones 18 y 19 |
 | Paquete de planificación del 8 de octubre de 2026 | [MASTER_PLAN.md](MASTER_PLAN.md). Histórico de secuencia. No fija el precio vigente |
 | Cierre de la Etapa 1, 17 de octubre de 2026 | [STAGE1_CLOSURE_REPORT.md](STAGE1_CLOSURE_REPORT.md) |
@@ -21,4 +21,6 @@ La revisión 1, con abono de ARS 65.000 y efectivo a ARS 55.000, está sustituid
 
 ## Qué no está verificado
 
-Los adaptadores de Mobbex y Talo no están construidos. Este índice no afirma que el motor rechace efectivo ni que un proveedor haya cobrado. Un inicio de servicio en día 29, 30 o 31 no tiene regla: `ensure_founder_monthly` responde `month_length_unspecified` y no inventa otra fecha.
+Los adaptadores de Mobbex y Talo no están construidos. Este índice no afirma que el motor rechace efectivo ni que un proveedor haya cobrado.
+
+CC-C19 fija el fin de mes. El vencimiento conserva el día de `service_started_on`. Si ese día no existe en el mes destino, se usa el último día disponible. El cálculo sale del inicio y del offset pedido: no arrastra el ajuste de un vencimiento anterior y un pago tardío no corre la fecha. Un 29 de febrero se conserva en un año bisiesto.
