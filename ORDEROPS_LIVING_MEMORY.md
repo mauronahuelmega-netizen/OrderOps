@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-17 — Commercial Core — Preparación del webhook Talo
+
+- **[Commercial]** `receiveTaloCustomerWebhook` valida el aviso de Customers API y confirma con una lectura inyectada. Separa bruto, neto y diferencia. No monta una ruta pública ni reconoce un pago. `webhook_url` sigue documentada solo en el alta. Informe: `docs/commercial-core-v1/T06B_TALO_WEBHOOK_PREP.md`.
+- Breaking: no.
+
 ### 2026-10-17 — Commercial Core — Transferencia ficticia Talo
 
 - **[Commercial]** Un faucet de sandbox acreditó ARS 290.000 brutos al cliente `orderops-qa-burger-house`. La sonda no lo repite si esa transacción ya existe. No escribe obligaciones. Informe: `docs/commercial-core-v1/T06B_TALO_TRANSFER.md`.
