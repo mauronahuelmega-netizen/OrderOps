@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-17 — Commercial Core — Preparación sandbox T06-A
+
+- **[Commercial]** Lectura server-side de credenciales Mobbex y Talo en `lib/commercial/payments/sandbox-env.ts`. Rechaza modo test apagado, el origen productivo de Talo y un webhook que no sea HTTPS. No hay adaptador ni cambio del motor. Informe: `docs/commercial-core-v1/T06A_SANDBOX_PREP.md`.
+- Breaking: no.
+
 ### 2026-10-17 — Commercial Core — CC-C19 fin de mes
 
 - **[Commercial]** `founder_period_on` devuelve el día de aniversario o el último día del mes destino. El offset se calcula desde `service_started_on`, sin arrastrar un vencimiento ya recortado. Migración `20261017170000`, aplicada solo en QA. No reabre T01–T05.
