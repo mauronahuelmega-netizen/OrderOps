@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-17 — Commercial Core — Transferencia ficticia Talo
+
+- **[Commercial]** Un faucet de sandbox acreditó ARS 290.000 brutos al cliente `orderops-qa-burger-house`. La sonda no lo repite si esa transacción ya existe. No escribe obligaciones. Informe: `docs/commercial-core-v1/T06B_TALO_TRANSFER.md`.
+- Breaking: no.
+
 ### 2026-10-17 — Commercial Core — CVU de prueba Talo
 
 - **[Commercial]** Un cliente ficticio de sandbox, `orderops-qa-burger-house`, conserva un CVU en el listado de Customers API. Una segunda ejecución no crea otro. `GET /customers/{id}` responde 404 y no se usa como prueba de ausencia. Informe: `docs/commercial-core-v1/T06A_TALO_PERSISTENT_CVU.md`.

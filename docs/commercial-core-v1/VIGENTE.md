@@ -21,6 +21,6 @@ La revisión 1, con abono de ARS 65.000 y efectivo a ARS 55.000, está sustituid
 
 ## Qué no está verificado
 
-Los adaptadores de Mobbex y Talo no están construidos. Este índice no afirma que el motor rechace efectivo ni que un proveedor haya cobrado. La preparación de sandbox está en [T06A_SANDBOX_PREP.md](T06A_SANDBOX_PREP.md). La conexión Talo está en [T06A_TALO_CONNECTION.md](T06A_TALO_CONNECTION.md) y espera las tres variables del SDK en `.env.local`.
+Los adaptadores de Mobbex y Talo no están construidos. Este índice no afirma que el motor rechace efectivo ni que un proveedor haya cobrado. La preparación de sandbox está en [T06A_SANDBOX_PREP.md](T06A_SANDBOX_PREP.md). La conexión Talo está en [T06A_TALO_CONNECTION.md](T06A_TALO_CONNECTION.md) y espera las tres variables del SDK en `.env.local`. El CVU de prueba y la transferencia ficticia de ARS 290.000 están en [T06A_TALO_PERSISTENT_CVU.md](T06A_TALO_PERSISTENT_CVU.md) y [T06B_TALO_TRANSFER.md](T06B_TALO_TRANSFER.md). No hay adaptador de cobro.
 
 CC-C19 fija el fin de mes. El vencimiento conserva el día de `service_started_on`. Si ese día no existe en el mes destino, se usa el último día disponible. El cálculo sale del inicio y del offset pedido: no arrastra el ajuste de un vencimiento anterior y un pago tardío no corre la fecha. Un 29 de febrero se conserva en un año bisiesto.

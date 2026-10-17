@@ -20,4 +20,4 @@ La alta devolvió CVU y alias. Dos ejecuciones posteriores no crearon otro clien
 
 ## Transferencia simulada
 
-Sigue pendiente. La documentación ofrece `POST /cvu/{cvu}/faucet` y un webhook con `transactionId`. Esta prueba no simuló una transferencia ni configuró `webhook_url`.
+La transferencia ficticia posterior está en [T06B_TALO_TRANSFER.md](T06B_TALO_TRANSFER.md). Esta prueba no la simuló ni configuró `webhook_url`.
