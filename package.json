@@ -19,6 +19,7 @@
     "react-dom": "^19.2.7",
     "react-easy-crop": "^6.0.1",
     "sharp": "^0.34.5",
+    "talo-pay": "^1.2.0",
     "web-push": "^3.6.7"
   },
   "devDependencies": {
@@ -28,7 +29,7 @@
     "@types/react-dom": "^19.0.5",
     "eslint": "^9.39.4",
     "eslint-config-next": "^16.2.9",
-    "typescript": "^5.8.3",
-    "tsx": "^4.23.15"
+    "tsx": "^4.23.15",
+    "typescript": "^5.8.3"
   }
 }

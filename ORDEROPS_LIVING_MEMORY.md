@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-17 — Commercial Core — Conexión Talo Sandbox
+
+- **[Commercial]** `connectTaloSandbox` usa `talo-pay` solo con `environment: "sandbox"` y lee `TALO_CLIENT_ID`, `TALO_CLIENT_SECRET` y `TALO_USER_ID` desde el servidor. La sonda consulta la cuenta y no crea clientes ni CVU. Informe: `docs/commercial-core-v1/T06A_TALO_CONNECTION.md`.
+- Breaking: no.
+
 ### 2026-10-17 — Commercial Core — Preparación sandbox T06-A
 
 - **[Commercial]** Lectura server-side de credenciales Mobbex y Talo en `lib/commercial/payments/sandbox-env.ts`. Rechaza modo test apagado, el origen productivo de Talo y un webhook que no sea HTTPS. No hay adaptador ni cambio del motor. Informe: `docs/commercial-core-v1/T06A_SANDBOX_PREP.md`.
