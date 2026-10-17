@@ -77,9 +77,21 @@ if (firstMonthly.ok === true && firstMonthly.periodKey === "2026-12-10") {
   record("C", "FAIL", "La primera mensualidad no cae en el período siguiente.");
 }
 
-const monthEnd = decideFounderSubscriptionPeriod("2026-01-31", "2026-02-28");
-if (monthEnd.ok || monthEnd.code !== "month_length_unspecified" || founderPeriodOn("2026-01-31", 1) !== null) {
-  record("C-month-end", "FAIL", "Una fecha de fin de mes recibió una política que el contrato no define.");
+const monthEnd = decideFounderSubscriptionPeriod("2027-01-31", "2027-02-28");
+if (
+  !monthEnd.ok ||
+  founderPeriodOn("2027-01-31", 1) !== "2027-02-28" ||
+  founderPeriodOn("2027-01-31", 2) !== "2027-03-31" ||
+  founderPeriodOn("2028-02-29", 12) !== "2029-02-28" ||
+  founderPeriodOn("2028-02-29", 13) !== "2029-03-29"
+) {
+  record("CC-C19", "FAIL", "El aniversario de fin de mes no conserva el día original ni el último día disponible.");
+} else {
+  record(
+    "CC-C19",
+    "PASS",
+    "El vencimiento usa el día original o el último día del mes, calculado desde el inicio y el offset."
+  );
 }
 
 const schedule = founderMonthlyDueDates("2026-11-10", 3);

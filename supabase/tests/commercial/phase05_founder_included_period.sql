@@ -115,7 +115,7 @@ begin
   end if;
 
   v_result := public.open_obligation(v_terms, 'subscription', '2026-11-30');
-  if v_result->>'commercial_error_code' is distinct from 'month_length_unspecified' then
+  if v_result->>'commercial_error_code' is distinct from 'validation' then
     raise exception 'month end %', v_result;
   end if;
   v_result := public.open_obligation(v_terms, 'subscription', 'month-1');

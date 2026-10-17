@@ -1,6 +1,6 @@
 export type FounderPeriodDecision =
   | { ok: true; periodKey: string }
-  | { ok: false; code: "included_period" | "month_length_unspecified" | "validation" };
+  | { ok: false; code: "included_period" | "validation" };
 
 function utcDate(year: number, monthIndex: number, day: number): Date {
   return new Date(Date.UTC(year, monthIndex, day));
@@ -36,11 +36,11 @@ export function founderPeriodOn(serviceStartedOn: string, offset: number): strin
   if (!started || !Number.isInteger(offset) || offset < 0) {
     return null;
   }
-  const next = utcDate(started.year, started.month - 1 + offset, started.day);
-  if (next.getUTCDate() !== started.day) {
-    return null;
-  }
-  return formatUtc(next);
+  const monthCursor = utcDate(started.year, started.month - 1 + offset, 1);
+  const year = monthCursor.getUTCFullYear();
+  const monthIndex = monthCursor.getUTCMonth();
+  const daysInMonth = utcDate(year, monthIndex + 1, 0).getUTCDate();
+  return formatUtc(utcDate(year, monthIndex, Math.min(started.day, daysInMonth)));
 }
 
 export function founderMonthlyDueDates(serviceStartedOn: string, count: number): string[] {
@@ -66,9 +66,6 @@ export function decideFounderSubscriptionPeriod(
   }
   if (periodKey.trim() === serviceStartedOn) {
     return { ok: false, code: "included_period" };
-  }
-  if (period.day !== started.day) {
-    return { ok: false, code: "month_length_unspecified" };
   }
   const months = (period.year - started.year) * 12 + (period.month - started.month);
   if (months < 1 || founderPeriodOn(serviceStartedOn, months) !== periodKey.trim()) {

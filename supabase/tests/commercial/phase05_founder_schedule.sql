@@ -160,13 +160,13 @@ begin
   perform set_config('request.jwt.claim.sub', '18181818-1818-4181-8181-181818181801', true);
   perform public.record_founder_service_start(v_edge, date '2026-01-31');
   v_result := public.ensure_founder_monthly(v_edge, 1);
-  if v_result->>'commercial_error_code' is distinct from 'month_length_unspecified' then
+  if v_result->>'period_key' is distinct from '2026-02-28'
+     or (v_result->>'list_price_cents')::bigint is distinct from 5500000 then
     raise exception 'G month end %', v_result;
   end if;
-  select count(*) into v_count from commercial.platform_obligations
-  where conversion_terms_id = v_edge and kind = 'subscription';
-  if v_count <> 0 then
-    raise exception 'G created a shifted date';
+  v_result := public.ensure_founder_monthly(v_edge, 2);
+  if v_result->>'period_key' is distinct from '2026-03-31' then
+    raise exception 'G anniversary was not restored %', v_result;
   end if;
 end;
 $$;

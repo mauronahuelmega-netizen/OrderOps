@@ -47,5 +47,6 @@
   "20261016165136_commercial_phase06_dispatch_privacy.sql",
   "20261016182000_commercial_phase06_privacy_open_unique.sql",
   "20261017120000_commercial_founder_included_period.sql",
-  "20261017143000_commercial_founder_monthly_schedule.sql"
+  "20261017143000_commercial_founder_monthly_schedule.sql",
+  "20261017170000_commercial_founder_month_length.sql"
 ]
