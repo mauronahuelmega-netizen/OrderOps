@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-17 — Commercial Core — Cierre de Etapa 1
+
+- **[Commercial]** La Etapa 1 queda cerrada en QA local. El primer mes incluido, el calendario anclado y la imputación por obligación ya tienen suites SQL con `ROLLBACK`. Mobbex, Talo, la gracia y los días 29 a 31 siguen fuera. Informe: `docs/commercial-core-v1/STAGE1_CLOSURE_REPORT.md`.
+- Breaking: no. No hubo migración nueva en este cierre.
+
 ### 2026-10-17 — Commercial Core — Calendario mensual Founder
 
 - **[Commercial]** `ensure_founder_monthly` abre el aniversario `service_started_on` más N meses. El índice `platform_obligations_business_period_idx` deja una sola mensualidad por negocio y período. Un pago tardío no corre el vencimiento siguiente. Los días 29, 30 y 31 siguen sin política. Migración `20261017143000`, aplicada solo en QA.
