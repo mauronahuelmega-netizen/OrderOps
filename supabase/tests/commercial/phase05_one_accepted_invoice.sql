@@ -45,7 +45,8 @@ declare
 begin
   v_terms := (commercial.win_opportunity('86868686-8686-4868-8868-868686868651', '86868686-8686-4868-8868-868686868631', null)->>'conversion_terms_id')::uuid;
   perform set_config('request.jwt.claim.sub', '86868686-8686-4868-8868-868686868601', true);
-  v_open := public.open_obligation(v_terms, 'subscription', 'inv:one');
+  perform public.record_founder_service_start(v_terms, date '2019-01-10');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-02-10');
   v_collection := (public.record_collection((v_open->>'obligation_id')::uuid, 'inv-one', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_collection);
   update commercial.promoter_commissions set status = 'available', available_at = '2026-08-16 15:00:00+00' where collection_id = v_collection;

@@ -1111,6 +1111,10 @@ export type Database = {
         Args: { p_terms_id: string; p_kind: string; p_period_key: string | null };
         Returns: Json;
       };
+      record_founder_service_start: {
+        Args: { p_started_on: string; p_terms_id: string };
+        Returns: Json;
+      };
       record_collection: {
         Args: {
           p_obligation_id: string;
@@ -2178,6 +2182,30 @@ export type Database = {
         };
         Relationships: [];
       };
+      founder_service_starts: {
+        Row: {
+          conversion_terms_id: string;
+          recorded_at: string;
+          recorded_by: string | null;
+          service_started_on: string;
+          won_business_id: string;
+        };
+        Insert: {
+          conversion_terms_id: string;
+          recorded_at?: string;
+          recorded_by?: string | null;
+          service_started_on: string;
+          won_business_id: string;
+        };
+        Update: {
+          conversion_terms_id?: string;
+          recorded_at?: string;
+          recorded_by?: string | null;
+          service_started_on?: string;
+          won_business_id?: string;
+        };
+        Relationships: [];
+      };
       service_subscriptions: {
         Row: {
           cancel_requested_at: string | null;
@@ -3174,6 +3202,10 @@ export type Database = {
       };
       open_obligation: {
         Args: { p_kind: string; p_period_key: string | null; p_terms_id: string };
+        Returns: Json;
+      };
+      record_founder_service_start: {
+        Args: { p_started_on: string; p_terms_id: string };
         Returns: Json;
       };
       record_collection: {

@@ -47,7 +47,8 @@ begin
   v_terms := (commercial.win_opportunity('33333333-3333-4333-8333-333333333351', '33333333-3333-4333-8333-333333333331', null)->>'conversion_terms_id')::uuid;
   perform set_config('request.jwt.claim.sub', '33333333-3333-4333-8333-333333333301', true);
 
-  v_open := public.open_obligation(v_terms, 'subscription', 'set:inside');
+  perform public.record_founder_service_start(v_terms, date '2019-01-10');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-02-10');
   v_result := public.record_collection((v_open->>'obligation_id')::uuid, 'set-inside', 'posted', 5500000, null);
   perform public.accrue_commissions_for_collection((v_result->>'collection_id')::uuid);
   v_inside := (select id from commercial.promoter_commissions where collection_id = (v_result->>'collection_id')::uuid);
@@ -55,7 +56,7 @@ begin
   set status = 'available', available_at = '2026-09-16 15:00:00+00'
   where id = v_inside;
 
-  v_open := public.open_obligation(v_terms, 'subscription', 'set:outside');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-03-10');
   v_result := public.record_collection((v_open->>'obligation_id')::uuid, 'set-outside', 'posted', 5500000, null);
   perform public.accrue_commissions_for_collection((v_result->>'collection_id')::uuid);
   v_outside := (select id from commercial.promoter_commissions where collection_id = (v_result->>'collection_id')::uuid);

@@ -114,7 +114,8 @@ begin
       null;
   end;
 
-  v_result := public.open_obligation(v_terms, 'subscription', 'sub:one');
+  perform public.record_founder_service_start(v_terms, date '2019-01-10');
+  v_result := public.open_obligation(v_terms, 'subscription', '2019-02-10');
   v_month := (v_result->>'obligation_id')::uuid;
   v_result := public.record_collection(v_month, 'accrual-month', 'posted', 5500000, 'month-ref');
   v_result := public.accrue_commissions_for_collection((v_result->>'collection_id')::uuid);
@@ -125,7 +126,7 @@ begin
     raise exception 'recurring received a slot in T02';
   end if;
 
-  v_result := public.open_obligation(v_terms, 'subscription', 'sub:blocked');
+  v_result := public.open_obligation(v_terms, 'subscription', '2019-03-10');
   v_blocked := (v_result->>'obligation_id')::uuid;
   v_result := public.record_collection(v_blocked, 'accrual-blocked', 'posted', 5000000, 'blocked-ref');
   if v_result->>'policy_status' is distinct from 'blocked_pending_policy' then
@@ -136,7 +137,7 @@ begin
     raise exception 'blocked accrue returned %', v_result;
   end if;
 
-  v_result := public.open_obligation(v_terms, 'subscription', 'sub:failed');
+  v_result := public.open_obligation(v_terms, 'subscription', '2019-04-10');
   v_failed := (v_result->>'obligation_id')::uuid;
   v_result := public.record_collection(v_failed, 'accrual-failed', 'failed', 5500000, 'failed-ref');
   v_result := public.accrue_commissions_for_collection((v_result->>'collection_id')::uuid);

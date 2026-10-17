@@ -51,7 +51,8 @@ declare
 begin
   v_terms := (commercial.win_opportunity('22222222-2222-4222-8222-222222222251', '22222222-2222-4222-8222-222222222231', null)->>'conversion_terms_id')::uuid;
   perform set_config('request.jwt.claim.sub', '22222222-2222-4222-8222-222222222201', true);
-  v_open := public.open_obligation(v_terms, 'subscription', 'inv:1');
+  perform public.record_founder_service_start(v_terms, date '2019-01-10');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-02-10');
   v_result := public.record_collection((v_open->>'obligation_id')::uuid, 'inv-1', 'posted', 5500000, null);
   perform public.accrue_commissions_for_collection((v_result->>'collection_id')::uuid);
   v_commission := (select id from commercial.promoter_commissions where collection_id = (v_result->>'collection_id')::uuid);
@@ -102,7 +103,8 @@ begin
   perform set_config('request.jwt.claim.sub', '22222222-2222-4222-8222-222222222202', true);
   v_terms := (commercial.win_opportunity('22222222-2222-4222-8222-222222222252', '22222222-2222-4222-8222-222222222232', null)->>'conversion_terms_id')::uuid;
   perform set_config('request.jwt.claim.sub', '22222222-2222-4222-8222-222222222201', true);
-  v_open := public.open_obligation(v_terms, 'subscription', 'inv:sep');
+  perform public.record_founder_service_start(v_terms, date '2019-01-10');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-02-10');
   v_result := public.record_collection((v_open->>'obligation_id')::uuid, 'inv-sep', 'posted', 5500000, null);
   perform public.accrue_commissions_for_collection((v_result->>'collection_id')::uuid);
   update commercial.promoter_commissions

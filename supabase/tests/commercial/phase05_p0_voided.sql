@@ -48,7 +48,8 @@ begin
   v_terms := (commercial.win_opportunity('98989898-9898-4989-8989-989898989851', '98989898-9898-4989-8989-989898989831', null)->>'conversion_terms_id')::uuid;
   perform set_config('request.jwt.claim.sub', '98989898-9898-4989-8989-989898989801', true);
 
-  v_open := public.open_obligation(v_terms, 'subscription', 'void:pending');
+  perform public.record_founder_service_start(v_terms, date '2019-01-10');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-02-10');
   v_collection := (public.record_collection((v_open->>'obligation_id')::uuid, 'void-pending', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_collection);
   perform public.reverse_collection(v_collection, 'pending');
@@ -56,7 +57,7 @@ begin
     raise exception 'pending not voided';
   end if;
 
-  v_open := public.open_obligation(v_terms, 'subscription', 'void:available');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-03-10');
   v_collection := (public.record_collection((v_open->>'obligation_id')::uuid, 'void-available', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_collection);
   update commercial.promoter_commissions set status = 'available', available_at = '2026-02-16 15:00:00+00' where collection_id = v_collection;
@@ -65,7 +66,7 @@ begin
     raise exception 'available not voided';
   end if;
 
-  v_open := public.open_obligation(v_terms, 'subscription', 'void:held');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-04-10');
   v_collection := (public.record_collection((v_open->>'obligation_id')::uuid, 'void-held', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_collection);
   update commercial.promoter_commissions set status = 'held' where collection_id = v_collection;
@@ -74,7 +75,7 @@ begin
     raise exception 'held not voided';
   end if;
 
-  v_open := public.open_obligation(v_terms, 'subscription', 'void:draft');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-05-10');
   v_collection := (public.record_collection((v_open->>'obligation_id')::uuid, 'void-draft', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_collection);
   update commercial.promoter_commissions set status = 'available', available_at = '2026-03-16 15:00:00+00' where collection_id = v_collection;
@@ -94,7 +95,7 @@ begin
   end if;
 
   perform set_config('request.jwt.claim.sub', '98989898-9898-4989-8989-989898989801', true);
-  v_open := public.open_obligation(v_terms, 'subscription', 'void:approved');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-06-10');
   v_collection := (public.record_collection((v_open->>'obligation_id')::uuid, 'void-approved', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_collection);
   update commercial.promoter_commissions set status = 'available', available_at = '2026-04-16 15:00:00+00' where collection_id = v_collection;
@@ -114,7 +115,7 @@ begin
   end if;
 
   perform set_config('request.jwt.claim.sub', '98989898-9898-4989-8989-989898989801', true);
-  v_open := public.open_obligation(v_terms, 'subscription', 'void:payable');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-07-10');
   v_collection := (public.record_collection((v_open->>'obligation_id')::uuid, 'void-payable', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_collection);
   v_commission := (select id from commercial.promoter_commissions where collection_id = v_collection);
@@ -136,7 +137,7 @@ begin
     raise exception 'payable payment %', v_result;
   end if;
 
-  v_open := public.open_obligation(v_terms, 'subscription', 'void:partial');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-08-10');
   v_collection := (public.record_collection((v_open->>'obligation_id')::uuid, 'void-partial', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_collection);
   v_commission := (select id from commercial.promoter_commissions where collection_id = v_collection);
@@ -158,7 +159,7 @@ begin
     raise exception 'partial %', v_result;
   end if;
 
-  v_open := public.open_obligation(v_terms, 'subscription', 'void:paid');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-09-10');
   v_collection := (public.record_collection((v_open->>'obligation_id')::uuid, 'void-paid', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_collection);
   v_commission := (select id from commercial.promoter_commissions where collection_id = v_collection);

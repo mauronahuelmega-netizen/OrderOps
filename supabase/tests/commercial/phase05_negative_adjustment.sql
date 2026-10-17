@@ -47,7 +47,8 @@ declare
 begin
   v_terms := (commercial.win_opportunity('75757575-7575-4757-8757-757575757551', '75757575-7575-4757-8757-757575757531', null)->>'conversion_terms_id')::uuid;
   perform set_config('request.jwt.claim.sub', '75757575-7575-4757-8757-757575757501', true);
-  v_open := public.open_obligation(v_terms, 'subscription', 'neg:paid');
+  perform public.record_founder_service_start(v_terms, date '2019-01-10');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-02-10');
   v_paid := (public.record_collection((v_open->>'obligation_id')::uuid, 'neg-paid', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_paid);
   update commercial.promoter_commissions set status = 'available', available_at = '2026-05-16 15:00:00+00' where collection_id = v_paid;
@@ -78,7 +79,7 @@ begin
     raise exception 'negative-only prepare consumed the adjustment';
   end if;
 
-  v_open := public.open_obligation(v_terms, 'subscription', 'neg:next');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-03-10');
   v_next := (public.record_collection((v_open->>'obligation_id')::uuid, 'neg-next', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_next);
   update commercial.promoter_commissions set status = 'available', available_at = '2026-06-16 15:00:00+00' where collection_id = v_next;

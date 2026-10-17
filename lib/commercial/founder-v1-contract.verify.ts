@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
 import { nominalCommissionCents } from "@/lib/commercial/commissions/calculate";
+import { decideFounderSubscriptionPeriod, founderPeriodOn } from "@/lib/commercial/founder-period";
 
 type Status = "PASS" | "EXPECTED_RED" | "FAIL" | "BLOCKED" | "NOT_VERIFIED";
 
@@ -18,10 +19,6 @@ const supersededMonthlyCents = BigInt(6500000);
 const setupCommissionCents = BigInt(12000000);
 const recurringCommissionCents = BigInt(2200000);
 
-const closure = readFileSync(
-  "docs/commercial-core-v1/ORDEROPS_COMMERCIAL_CORE_PROMOTORES_V1_DECISIONES_CIERRE.md",
-  "utf8"
-);
 const collections = readFileSync(
   "supabase/migrations/20261012030000_commercial_phase05_collections.sql",
   "utf8"
@@ -34,6 +31,10 @@ const phase01 = readFileSync(
   "supabase/migrations/20261008215314_commercial_phase01_foundations.sql",
   "utf8"
 );
+const includedPeriod = readFileSync(
+  "supabase/migrations/20261017120000_commercial_founder_included_period.sql",
+  "utf8"
+);
 
 const setupCommission = nominalCommissionCents("setup", activationCents, founder);
 const recurringCommission = nominalCommissionCents("recurring", monthlyCents, founder);
@@ -44,36 +45,37 @@ if (setupCommission === setupCommissionCents && phase01.includes("29000000")) {
   record("A", "FAIL", "El importe de activación o la comisión de alta no coinciden con el contrato.");
 }
 
-const includedMonthEnforced =
-  collections.includes("included_service_period") || collections.includes("primer mes incluido");
-if (includedMonthEnforced) {
-  record("B", "FAIL", "Apareció una marca de mes incluido que esta prueba no esperaba en el motor actual.");
-} else if (slots.includes("v_obligation.kind is distinct from 'subscription'")) {
-  record(
-    "B",
-    "EXPECTED_RED",
-    "La activación no consume slot. El motor todavía permite abrir una mensualidad en el mismo período y no impide cobrar ARS 55.000 extra al inicio."
-  );
-} else {
-  record("B", "FAIL", "No se pudo confirmar ni el hueco ni la exclusión de slot en la activación.");
-}
-
-const calendarInEngine =
-  collections.includes("2026-12-10") || collections.includes("interval '1 month'");
-if (calendarInEngine) {
-  record("C", "FAIL", "El motor ya calcula una fecha que esta prueba trata como no implementada.");
-} else if (
-  closure.includes("10 de noviembre") &&
-  closure.includes("10 de diciembre") &&
-  closure.includes("period_key")
+const includedDecision = decideFounderSubscriptionPeriod("2026-11-10", "2026-11-10");
+const firstMonthly = decideFounderSubscriptionPeriod("2026-11-10", "2026-12-10");
+if (
+  includedDecision.ok === false &&
+  includedDecision.code === "included_period" &&
+  founderPeriodOn("2026-11-10", 1) === "2026-12-10" &&
+  includedPeriod.includes("included_period") &&
+  includedPeriod.includes("service_start_required")
 ) {
   record(
-    "C",
-    "EXPECTED_RED",
-    "El ejemplo aprobado dice inicio el 10 de noviembre y primera mensualidad el 10 de diciembre. open_obligation no calcula esa fecha: period_key lo envía el llamador."
+    "B",
+    "PASS",
+    "El período 2026-11-10 queda incluido. No es una mensualidad exigible y no avanza el calendario recurrente."
   );
 } else {
-  record("C", "BLOCKED", "El documento de cierre no fija el ejemplo de calendario.");
+  record("B", "FAIL", "El primer período incluido sigue pudiendo tratarse como mensualidad.");
+}
+
+if (firstMonthly.ok === true && firstMonthly.periodKey === "2026-12-10") {
+  record(
+    "C",
+    "PASS",
+    "Con inicio 2026-11-10, la primera mensualidad es el período 2026-12-10."
+  );
+} else {
+  record("C", "FAIL", "La primera mensualidad no cae en el período siguiente.");
+}
+
+const monthEnd = decideFounderSubscriptionPeriod("2026-01-31", "2026-02-28");
+if (monthEnd.ok || monthEnd.code !== "month_length_unspecified") {
+  record("C-month-end", "FAIL", "Una fecha de fin de mes recibió una política que el contrato no define.");
 }
 
 if (

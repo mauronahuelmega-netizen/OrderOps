@@ -112,19 +112,23 @@ begin
     raise exception 'repeated setup returned %', v_result;
   end if;
 
-  v_result := public.open_obligation((v_a->>'conversion_terms_id')::uuid, 'subscription', ' month-1 ');
+  v_result := public.record_founder_service_start((v_a->>'conversion_terms_id')::uuid, date '2026-01-10');
+  if v_result->>'ok' is distinct from 'true' then
+    raise exception 'service start returned %', v_result;
+  end if;
+  v_result := public.open_obligation((v_a->>'conversion_terms_id')::uuid, 'subscription', ' 2026-02-10 ');
   if v_result->>'duplicate' is distinct from 'false'
     or (v_result->>'list_price_cents')::bigint <> 5500000
-    or v_result->>'period_key' is distinct from 'month-1' then
+    or v_result->>'period_key' is distinct from '2026-02-10' then
     raise exception 'subscription open returned %', v_result;
   end if;
   v_month_one := (v_result->>'obligation_id')::uuid;
-  v_result := public.open_obligation((v_a->>'conversion_terms_id')::uuid, 'subscription', 'month-1');
+  v_result := public.open_obligation((v_a->>'conversion_terms_id')::uuid, 'subscription', '2026-02-10');
   if (v_result->>'obligation_id')::uuid is distinct from v_month_one
     or v_result->>'duplicate' is distinct from 'true' then
     raise exception 'repeated period returned %', v_result;
   end if;
-  v_result := public.open_obligation((v_a->>'conversion_terms_id')::uuid, 'subscription', 'month-2');
+  v_result := public.open_obligation((v_a->>'conversion_terms_id')::uuid, 'subscription', '2026-03-10');
   v_month_two := (v_result->>'obligation_id')::uuid;
   if v_month_two is not distinct from v_month_one then
     raise exception 'distinct periods collapsed';

@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-17 — Commercial Core — Primer período Founder incluido
+
+- **[Commercial]** `founder_service_starts.service_started_on` es la fecha de inicio del servicio. `open_obligation` rechaza la mensualidad de esa fecha y acepta el aniversario siguiente cuando el día se conserva. La migración `20261017120000` no está aplicada en la base principal ni en Cloud.
+- Breaking: una mensualidad nueva exige esa fecha y un `period_key` calendario. Las obligaciones ya guardadas no se reescriben.
+
 ### 2026-10-16 — Cloud — Integración gradual autorizada
 
 - **[DB]** En `pkrsedmwxekbhlohhqds` el ledger quedó en 137 versiones y termina en `20261016182000`. Se registraron las 52 versiones históricas sin reejecutar su SQL, se retiraron las 14 versiones remotas antiguas y se aplicaron `20260917210151` más las 84 migraciones en cuatro tandas. Siguen 4 negocios, 78 pedidos itemizados, 9 productos, 5 perfiles, 5 usuarios y 51 objetos de Storage. `20261009015652` creó el bucket privado vacío `commercial-documents`.

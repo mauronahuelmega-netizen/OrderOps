@@ -55,10 +55,11 @@ begin
   perform set_config('request.jwt.claim.sub', '97979797-9797-4979-7979-979797979801', true);
 
   -- A. Draft reversal invalidates and a replacement keeps only the live right.
-  v_open := public.open_obligation(v_terms, 'subscription', 'rev:a1');
+  perform public.record_founder_service_start(v_terms, date '2019-01-10');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-02-10');
   v_voided := (public.record_collection((v_open->>'obligation_id')::uuid, 'rev-a1', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_voided);
-  v_open := public.open_obligation(v_terms, 'subscription', 'rev:a2');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-03-10');
   v_kept := (public.record_collection((v_open->>'obligation_id')::uuid, 'rev-a2', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_kept);
   update commercial.promoter_commissions
@@ -126,10 +127,10 @@ begin
 
   -- B. Approved reversal keeps the historical approval and requires a new one.
   perform set_config('request.jwt.claim.sub', '97979797-9797-4979-7979-979797979801', true);
-  v_open := public.open_obligation(v_terms, 'subscription', 'rev:b1');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-04-10');
   v_voided := (public.record_collection((v_open->>'obligation_id')::uuid, 'rev-b1', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_voided);
-  v_open := public.open_obligation(v_terms, 'subscription', 'rev:b2');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-05-10');
   v_kept := (public.record_collection((v_open->>'obligation_id')::uuid, 'rev-b2', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_kept);
   update commercial.promoter_commissions
@@ -165,10 +166,10 @@ begin
 
   -- C and K. Payable reversal keeps the old invoice and does not make the replacement payable.
   perform set_config('request.jwt.claim.sub', '97979797-9797-4979-7979-979797979801', true);
-  v_open := public.open_obligation(v_terms, 'subscription', 'rev:c1');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-06-10');
   v_voided := (public.record_collection((v_open->>'obligation_id')::uuid, 'rev-c1', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_voided);
-  v_open := public.open_obligation(v_terms, 'subscription', 'rev:c2');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-07-10');
   v_kept := (public.record_collection((v_open->>'obligation_id')::uuid, 'rev-c2', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_kept);
   update commercial.promoter_commissions
@@ -222,7 +223,7 @@ begin
   end if;
 
   -- D and M. A successful partial payment freezes the settlement.
-  v_open := public.open_obligation(v_terms, 'subscription', 'rev:d1');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-08-10');
   v_voided := (public.record_collection((v_open->>'obligation_id')::uuid, 'rev-d1', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_voided);
   update commercial.promoter_commissions
@@ -260,7 +261,7 @@ begin
 
   -- E. Fully paid reversal keeps the settlement and one negative adjustment.
   perform set_config('request.jwt.claim.sub', '97979797-9797-4979-7979-979797979801', true);
-  v_open := public.open_obligation(v_terms, 'subscription', 'rev:e1');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-09-10');
   v_voided := (public.record_collection((v_open->>'obligation_id')::uuid, 'rev-e1', 'posted', 5500000, null)->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_voided);
   update commercial.promoter_commissions

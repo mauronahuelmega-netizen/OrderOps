@@ -57,7 +57,8 @@ begin
     raise exception 'G-01 returned % / %', v_status, v_slot;
   end if;
 
-  v_result := public.open_obligation(v_terms, 'subscription', 'sub:window');
+  perform public.record_founder_service_start(v_terms, date '2019-01-10');
+  v_result := public.open_obligation(v_terms, 'subscription', '2019-02-10');
   v_result := public.record_collection((v_result->>'obligation_id')::uuid, 'window-month-a', 'posted', 5500000, null);
   v_month := (v_result->>'collection_id')::uuid;
   perform public.accrue_commissions_for_collection(v_month);

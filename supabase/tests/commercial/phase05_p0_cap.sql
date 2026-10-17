@@ -49,8 +49,9 @@ begin
   v_terms := (commercial.win_opportunity('99999999-9999-4999-8999-999999999951', '99999999-9999-4999-8999-999999999931', null)->>'conversion_terms_id')::uuid;
   perform set_config('request.jwt.claim.sub', '99999999-9999-4999-8999-999999999901', true);
 
+  perform public.record_founder_service_start(v_terms, date '2019-01-10');
   for v_i in 1..13 loop
-    v_open := public.open_obligation(v_terms, 'subscription', 'cap:' || v_i::text);
+    v_open := public.open_obligation(v_terms, 'subscription', to_char(date '2019-01-10' + make_interval(months => v_i), 'YYYY-MM-DD'));
     v_result := public.record_collection((v_open->>'obligation_id')::uuid, 'cap-' || v_i::text, 'posted', 5500000, null);
     v_result := public.accrue_commissions_for_collection((v_result->>'collection_id')::uuid);
     if v_i <= 12 and v_result->>'accrued' is distinct from 'true' then

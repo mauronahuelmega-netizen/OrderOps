@@ -390,6 +390,18 @@ Estado del servicio del cliente para cancelación y reactivación (CC-31). No es
 
 Reactivación con `reactivated_at <= ended_at + 180 días` conserva `conversion_terms` y el contador. Después, no se reabre el contador; hace falta una oportunidad nueva. La RPC no copia términos viejos pasado ese plazo.
 
+### `founder_service_starts`
+
+Fecha explícita de inicio del servicio Founder. No es `won_at`, ni la fecha del cobro, ni la creación del negocio.
+
+- `conversion_terms_id uuid primary key`
+- `won_business_id uuid not null`
+- `service_started_on date not null`
+- `recorded_at`
+- `recorded_by`
+
+El período incluido es esa fecha. La primera mensualidad es el mismo día del mes siguiente cuando el día se conserva. Si el día no se conserva, la obligación no se abre.
+
 ### `onboarding_grants`
 
 - `id`

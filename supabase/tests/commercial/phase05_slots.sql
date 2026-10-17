@@ -60,7 +60,8 @@ begin
   v_terms := (v_win->>'conversion_terms_id')::uuid;
   perform set_config('request.jwt.claim.sub', '55555555-5555-4555-8555-555555555501', true);
 
-  v_open := public.open_obligation(v_terms, 'subscription', 'sub:failed');
+  perform public.record_founder_service_start(v_terms, date '2019-01-10');
+  v_open := public.open_obligation(v_terms, 'subscription', '2019-02-10');
   v_result := public.record_collection((v_open->>'obligation_id')::uuid, 'slots-failed', 'failed', 5500000, null);
   v_result := public.accrue_commissions_for_collection((v_result->>'collection_id')::uuid);
   if v_result->>'commercial_error_code' is distinct from 'policy_blocked' then
@@ -87,7 +88,7 @@ begin
   end if;
 
   for v_i in 2..12 loop
-    v_open := public.open_obligation(v_terms, 'subscription', 'sub:' || v_i::text);
+    v_open := public.open_obligation(v_terms, 'subscription', to_char(date '2019-01-10' + make_interval(months => v_i), 'YYYY-MM-DD'));
     v_result := public.record_collection((v_open->>'obligation_id')::uuid, 'slots-' || v_i::text, 'posted', 5500000, null);
     perform public.accrue_commissions_for_collection((v_result->>'collection_id')::uuid);
     v_result := public.satisfy_subscription_collection((v_result->>'collection_id')::uuid);
@@ -96,7 +97,7 @@ begin
     end if;
   end loop;
 
-  v_open := public.open_obligation(v_terms, 'subscription', 'sub:13');
+  v_open := public.open_obligation(v_terms, 'subscription', to_char(date '2019-01-10' + make_interval(months => 13), 'YYYY-MM-DD'));
   v_result := public.record_collection((v_open->>'obligation_id')::uuid, 'slots-13', 'posted', 5500000, null);
   v_result := public.accrue_commissions_for_collection((v_result->>'collection_id')::uuid);
   if v_result->>'commercial_error_code' is distinct from 'slot_exhausted' then
@@ -124,8 +125,9 @@ begin
   v_win := commercial.win_opportunity('55555555-5555-4555-8555-555555555552', '55555555-5555-4555-8555-555555555532', null);
   v_other := (v_win->>'conversion_terms_id')::uuid;
   perform set_config('request.jwt.claim.sub', '55555555-5555-4555-8555-555555555501', true);
+  perform public.record_founder_service_start(v_other, date '2018-01-10');
   for v_i in 1..5 loop
-    v_open := public.open_obligation(v_other, 'subscription', 'other:' || v_i::text);
+    v_open := public.open_obligation(v_other, 'subscription', to_char(date '2018-01-10' + make_interval(months => v_i), 'YYYY-MM-DD'));
     v_result := public.record_collection((v_open->>'obligation_id')::uuid, 'other-' || v_i::text, 'posted', 5500000, null);
     perform public.accrue_commissions_for_collection((v_result->>'collection_id')::uuid);
     perform public.satisfy_subscription_collection((v_result->>'collection_id')::uuid);
@@ -138,7 +140,7 @@ begin
   if v_result->>'ok' is distinct from 'true' or v_result->>'conversion_terms_id' is distinct from v_other::text then
     raise exception 'E2E-07 early %', v_result;
   end if;
-  v_open := public.open_obligation(v_other, 'subscription', 'other:6');
+  v_open := public.open_obligation(v_other, 'subscription', to_char(date '2018-01-10' + make_interval(months => 6), 'YYYY-MM-DD'));
   v_result := public.record_collection((v_open->>'obligation_id')::uuid, 'other-6', 'posted', 5500000, null);
   perform public.accrue_commissions_for_collection((v_result->>'collection_id')::uuid);
   v_result := public.satisfy_subscription_collection((v_result->>'collection_id')::uuid);
