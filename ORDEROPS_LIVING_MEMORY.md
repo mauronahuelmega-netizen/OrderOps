@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-17 — Commercial Core — Calendario mensual Founder
+
+- **[Commercial]** `ensure_founder_monthly` abre el aniversario `service_started_on` más N meses. El índice `platform_obligations_business_period_idx` deja una sola mensualidad por negocio y período. Un pago tardío no corre el vencimiento siguiente. Los días 29, 30 y 31 siguen sin política. Migración `20261017143000`, aplicada solo en QA.
+- Breaking: dos contratos del mismo negocio no pueden abrir la misma mensualidad.
+
 ### 2026-10-17 — Commercial Core — Primer período Founder incluido
 
 - **[Commercial]** `founder_service_starts.service_started_on` es la fecha de inicio del servicio. `open_obligation` rechaza la mensualidad de esa fecha y acepta el aniversario siguiente cuando el día se conserva. La migración `20261017120000` no está aplicada en la base principal ni en Cloud.

@@ -43,6 +43,18 @@ export function founderPeriodOn(serviceStartedOn: string, offset: number): strin
   return formatUtc(next);
 }
 
+export function founderMonthlyDueDates(serviceStartedOn: string, count: number): string[] {
+  const dates: string[] = [];
+  for (let offset = 1; offset <= count; offset += 1) {
+    const due = founderPeriodOn(serviceStartedOn, offset);
+    if (!due) {
+      break;
+    }
+    dates.push(due);
+  }
+  return dates;
+}
+
 export function decideFounderSubscriptionPeriod(
   serviceStartedOn: string,
   periodKey: string

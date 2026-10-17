@@ -2,7 +2,11 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
 import { nominalCommissionCents } from "@/lib/commercial/commissions/calculate";
-import { decideFounderSubscriptionPeriod, founderPeriodOn } from "@/lib/commercial/founder-period";
+import {
+  decideFounderSubscriptionPeriod,
+  founderMonthlyDueDates,
+  founderPeriodOn,
+} from "@/lib/commercial/founder-period";
 
 type Status = "PASS" | "EXPECTED_RED" | "FAIL" | "BLOCKED" | "NOT_VERIFIED";
 
@@ -74,8 +78,19 @@ if (firstMonthly.ok === true && firstMonthly.periodKey === "2026-12-10") {
 }
 
 const monthEnd = decideFounderSubscriptionPeriod("2026-01-31", "2026-02-28");
-if (monthEnd.ok || monthEnd.code !== "month_length_unspecified") {
+if (monthEnd.ok || monthEnd.code !== "month_length_unspecified" || founderPeriodOn("2026-01-31", 1) !== null) {
   record("C-month-end", "FAIL", "Una fecha de fin de mes recibió una política que el contrato no define.");
+}
+
+const schedule = founderMonthlyDueDates("2026-11-10", 3);
+if (
+  schedule[0] === "2026-12-10" &&
+  schedule[1] === "2027-01-10" &&
+  schedule[2] === "2027-02-10"
+) {
+  record("T03-A", "PASS", "Inicio 2026-11-10: vencimientos 2026-12-10, 2027-01-10 y 2027-02-10.");
+} else {
+  record("T03-A", "FAIL", "El calendario anclado no produjo los tres vencimientos exigidos.");
 }
 
 if (

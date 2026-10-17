@@ -14,7 +14,7 @@ Fecha: 17 de octubre de 2026.
 
 ## Founder V1, Revisión 2
 
-Un plan. Activación ARS 290.000. Abono ARS 55.000. Mismo precio en Mobbex y en Talo Pay. Sin efectivo. La activación incluye el primer período de servicio. La primera mensualidad es el período siguiente. El inicio se registra en `founder_service_starts.service_started_on`; no se infiere de la conversión ni del cobro. Comisión de alta ARS 120.000. Comisión recurrente ARS 22.000 por cobranza elegible, hasta doce. El período incluido no genera comisión recurrente ni consume un puesto.
+Un plan. Activación ARS 290.000. Abono ARS 55.000. Mismo precio en Mobbex y en Talo Pay. Sin efectivo. La activación incluye el primer período de servicio. La primera mensualidad es el período siguiente. El inicio se registra en `founder_service_starts.service_started_on`; no se infiere de la conversión ni del cobro. Los vencimientos siguientes salen de esa fecha. Un pago tardío no los corre. Comisión de alta ARS 120.000. Comisión recurrente ARS 22.000 por cobranza elegible, hasta doce. El período incluido no genera comisión recurrente ni consume un puesto.
 
 La revisión 1, con abono de ARS 65.000 y efectivo a ARS 55.000, está sustituida dentro del documento de cierre. No se borra el registro de que existió.
 

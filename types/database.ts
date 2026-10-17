@@ -1107,6 +1107,10 @@ export type Database = {
         };
         Returns: Json;
       };
+      ensure_founder_monthly: {
+        Args: { p_offset: number; p_terms_id: string };
+        Returns: Json;
+      };
       open_obligation: {
         Args: { p_terms_id: string; p_kind: string; p_period_key: string | null };
         Returns: Json;
@@ -3198,6 +3202,10 @@ export type Database = {
           p_settlement_id: string;
           p_status: string;
         };
+        Returns: Json;
+      };
+      ensure_founder_monthly: {
+        Args: { p_offset: number; p_terms_id: string };
         Returns: Json;
       };
       open_obligation: {

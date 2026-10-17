@@ -400,7 +400,7 @@ Fecha explícita de inicio del servicio Founder. No es `won_at`, ni la fecha del
 - `recorded_at`
 - `recorded_by`
 
-El período incluido es esa fecha. La primera mensualidad es el mismo día del mes siguiente cuando el día se conserva. Si el día no se conserva, la obligación no se abre.
+El período incluido es esa fecha. La primera mensualidad es el mismo día del mes siguiente cuando el día se conserva. Si el día no se conserva, la obligación no se abre. `ensure_founder_monthly` calcula ese aniversario a partir del inicio. El pago tardío no mueve el vencimiento siguiente. Una mensualidad de un negocio queda única por `period_key`.
 
 ### `onboarding_grants`
 
