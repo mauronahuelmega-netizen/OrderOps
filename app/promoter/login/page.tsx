@@ -2,18 +2,19 @@ import { redirect } from "next/navigation";
 import { promoterLoginAction } from "@/app/promoter/login/actions";
 import { PromoterLoginSubmit } from "@/app/promoter/login/submit-button";
 import styles from "@/app/promoter/login/promoter-login.module.css";
-import { PROMOTER_HOME_PATH } from "@/lib/commercial/promoters/promoter-access";
+import { PROMOTER_HOME_PATH, safePromoterNext } from "@/lib/commercial/promoters/promoter-access";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type PromoterLoginPageProps = {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; next?: string }>;
 };
 
 const errorMessages: Record<string, string> = {
   missing_credentials: "Ingresá tu correo y tu contraseña.",
   invalid_credentials: "No pudimos validar el correo o la contraseña.",
   auth_unavailable: "El servicio de acceso no está disponible en este momento. Intentá de nuevo en unos minutos.",
-  not_promoter: "Esta cuenta no tiene acceso al portal de promotores."
+  not_promoter: "Esta cuenta no tiene acceso al portal de promotores.",
+  session: "Tu sesión venció. Volvé a ingresar para continuar."
 };
 
 export default async function PromoterLoginPage({ searchParams }: PromoterLoginPageProps) {
@@ -27,7 +28,7 @@ export default async function PromoterLoginPage({ searchParams }: PromoterLoginP
   if (user) {
     const { data } = await supabase.rpc("promoter_session");
     const session = (data ?? null) as { ok?: boolean } | null;
-    if (session?.ok === true) redirect(PROMOTER_HOME_PATH);
+    if (session?.ok === true) redirect(safePromoterNext(params.next) || PROMOTER_HOME_PATH);
     signedInWithoutPromoter = true;
   }
 
@@ -65,6 +66,7 @@ export default async function PromoterLoginPage({ searchParams }: PromoterLoginP
               required
             />
           </label>
+          <input type="hidden" name="next" value={safePromoterNext(params.next)} />
           <PromoterLoginSubmit />
         </form>
 

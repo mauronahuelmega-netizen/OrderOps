@@ -82,9 +82,11 @@ export default async function CommercialSettlementsPage({
             <button type="submit">Preparar liquidación</button>
           </form>
         ) : (
-          <p className={styles.meta}>Este rol consulta. Finanzas ejecuta la preparación, la revisión y el pago simulado.</p>
+          <p className={styles.meta}>
+            Este rol no consulta ni opera liquidaciones. Solo Finanzas ve estos registros y ejecuta la preparación, la revisión y el pago simulado.
+          </p>
         )}
-        {loaded.ok && settlements.length === 0 ? <p className={styles.meta}>No hay liquidaciones visibles.</p> : null}
+        {canOperate && loaded.ok && settlements.length === 0 ? <p className={styles.meta}>No hay liquidaciones visibles.</p> : null}
         {settlements.map((settlement) => {
           const ownItems = items.filter((item) => item.settlement_id === settlement.id);
           const ownInvoices = invoices.filter((invoice) => invoice.settlement_id === settlement.id);

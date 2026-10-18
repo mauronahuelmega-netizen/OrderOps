@@ -1,19 +1,130 @@
-.shell {
-  display: grid;
-  gap: 1.5rem;
-  padding: 1.5rem;
+.shell,
+.frame,
+.frameCollapsed {
+  min-height: 100vh;
   background: var(--bg-canvas);
   color: var(--text-primary);
 }
 
-.nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+.frame,
+.frameCollapsed {
+  display: grid;
+  grid-template-columns: 16rem minmax(0, 1fr);
 }
 
-.nav a {
+.frameCollapsed {
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+}
+
+.sidebar,
+.sidebarOpen {
+  display: grid;
+  align-content: start;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  background: var(--bg-surface);
+  border-right: 1px solid var(--border-subtle);
+}
+
+.main {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  padding: 1.25rem;
+}
+
+.identity {
+  margin: 0;
+  font-weight: 650;
+}
+
+.nav,
+.subnav {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.nav a,
+.subnav a {
   color: var(--text-secondary);
+  text-decoration: none;
+  border-radius: 0.5rem;
+  padding: 0.45rem 0.6rem;
+}
+
+.navActive {
+  color: var(--text-primary);
+  background: var(--accent-soft);
+}
+
+.menuButton,
+.collapseButton,
+.backdrop {
+  font: inherit;
+}
+
+.menuButton,
+.backdrop {
+  display: none;
+}
+
+.collapseButton,
+.form button,
+.card button {
+  min-height: 2.5rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.5rem;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  padding: 0.4rem 0.75rem;
+}
+
+.card button[type="submit"]:not(:disabled) {
+  background: var(--accent-primary);
+  color: var(--bg-canvas);
+  border-color: transparent;
+}
+
+@media (max-width: 800px) {
+  .frame,
+  .frameCollapsed {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .sidebarOpen {
+    position: fixed;
+    z-index: 2;
+    inset: 0 auto 0 0;
+    width: min(18rem, 86vw);
+    overflow: auto;
+    box-shadow: var(--shadow-floating);
+  }
+
+  .menuButton,
+  .backdrop {
+    display: block;
+  }
+
+  .menuButton {
+    justify-self: start;
+    margin: 0.75rem 0 0 0.75rem;
+  }
+
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    border: 0;
+    background: color-mix(in srgb, var(--bg-canvas) 35%, transparent);
+  }
+
+  .collapseButton {
+    display: none;
+  }
 }
 
 .card {
@@ -30,6 +141,13 @@
   color: var(--text-secondary);
 }
 
+.row {
+  display: grid;
+  gap: 0.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
 .form {
   display: grid;
   gap: 0.75rem;
@@ -40,4 +158,35 @@
 .form select,
 .form button {
   font: inherit;
+}
+
+.form input,
+.form textarea,
+.form select {
+  min-height: 2.5rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.5rem;
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+  padding: 0.45rem 0.7rem;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: end;
+}
+
+.list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pre {
+  white-space: pre-wrap;
+  margin: 0;
 }

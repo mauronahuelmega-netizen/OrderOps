@@ -14,9 +14,14 @@ assert.equal(actions.includes("won"), false);
 
 const opportunities = readFileSync("app/promoter/(panel)/opportunities/page.tsx", "utf8");
 assert.equal(opportunities.includes("won"), false);
+assert.equal(opportunities.includes("labelOpportunityStage"), true);
 assert.equal(opportunities.includes("Confirmar atribución"), false);
 assert.equal(readFileSync("lib/commercial/promoters/verification-copy.ts", "utf8").includes("no consulta fiscal"), true);
 assert.equal(readFileSync("app/promoter/(panel)/profile/page.tsx", "utf8").includes("VERIFICATION_NOTICE"), true);
-assert.equal(readFileSync("app/promoter/(panel)/page.tsx", "utf8").includes("disponible en una fase posterior"), true);
+const home = readFileSync("app/promoter/(panel)/page.tsx", "utf8");
+assert.equal(home.includes("Las comisiones individuales no se listan en esta lectura."), true);
+assert.equal(home.includes("disponible en una fase posterior"), false);
+assert.equal(readFileSync("components/commercial/commercial-area-nav.tsx", "utf8").includes('roles.includes("finance")'), true);
+assert.equal(readFileSync("app/commercial/settlements/page.tsx", "utf8").includes("Este rol no consulta ni opera liquidaciones."), true);
 
 console.log("promoter-panel.verify: ok");

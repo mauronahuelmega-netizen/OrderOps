@@ -1,3 +1,4 @@
+import { labelPromoterStatus } from "@/lib/commercial/promoters/portfolio-summary";
 import { requirePromoterPrincipal } from "@/lib/commercial/promoters/require-promoter-principal";
 import { VERIFICATION_NOTICE } from "@/lib/commercial/promoters/verification-copy";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
@@ -11,8 +12,9 @@ export default async function PromoterProfilePage() {
   return (
     <section className={styles.card}>
       <h1>Perfil</h1>
-      <p>Estado: {session.status}</p>
-      <p>Código: {session.public_code}</p>
+      <p>Estado: {labelPromoterStatus(session.status)}</p>
+      <p>Código de promotor: {session.public_code}</p>
+      <p className={styles.muted}>Esta pantalla no ofrece campos editables: el backend no expone una acción de actualización para estos datos.</p>
       <p>{VERIFICATION_NOTICE}</p>
       <h2>CBU propio</h2>
       <ul>

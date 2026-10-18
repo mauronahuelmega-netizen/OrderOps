@@ -31,7 +31,10 @@ export default async function PromoterOnboardingPage() {
         <p className={styles.muted}>Tu cuenta no puede operar solicitudes de asistencia.</p>
       ) : null}
       {businesses.length === 0 ? (
-        <p className={styles.card}>No tenés comercios convertidos para solicitar asistencia.</p>
+        <div className={styles.card}>
+          <p>No hay acompañamientos disponibles actualmente.</p>
+          <p><Link href="/promoter/businesses">Cartera</Link> · <Link href="/promoter/opportunities">Oportunidades</Link></p>
+        </div>
       ) : (
         <ul className={styles.list}>
           {businesses.map((business) => {

@@ -21,6 +21,20 @@ type InvoiceRow = {
   rejection_reason: string | null;
 };
 
+type ItemRow = {
+  id: string;
+  settlement_id: string;
+  label: string;
+  amount_cents: number;
+};
+
+type PaymentRow = {
+  id: string;
+  settlement_id: string;
+  status: string;
+  amount_cents: number;
+};
+
 const NOTICES: Record<string, string> = {
   ok: "La documentación quedó presentada.",
   forbidden: "No se puede presentar esta documentación.",
@@ -39,10 +53,13 @@ export default async function PromoterSettlementsPage({
   const loaded = await loadSettlementWorkspace(supabase);
   const settlements = loaded.ok ? (loaded.workspace.settlements as SettlementRow[]) : [];
   const invoices = loaded.ok ? (loaded.workspace.invoices as InvoiceRow[]) : [];
+  const items = loaded.ok ? (loaded.workspace.items as ItemRow[]) : [];
+  const payments = loaded.ok ? (loaded.workspace.payments as PaymentRow[]) : [];
 
   return (
     <section className={styles.page}>
-      <h1>Liquidaciones</h1>
+      <h1>Ingresos</h1>
+      <p className={styles.meta}>Las comisiones individuales no se listan en esta lectura. Esta pantalla no aprueba, reversa, concilia ni ejecuta pagos.</p>
       <p className={styles.meta}>
         Una factura aceptada habilita la posibilidad de pago. Finanzas registra la transferencia simulada. No se emite una factura fiscal.
       </p>
@@ -57,6 +74,8 @@ export default async function PromoterSettlementsPage({
       {loaded.ok && settlements.length === 0 ? <p className={styles.meta}>No hay liquidaciones.</p> : null}
       {settlements.map((settlement) => {
         const ownInvoices = invoices.filter((invoice) => invoice.settlement_id === settlement.id);
+        const ownItems = items.filter((item) => item.settlement_id === settlement.id);
+        const ownPayments = payments.filter((payment) => payment.settlement_id === settlement.id);
         const accepted = ownInvoices.some((invoice) => invoice.status === "accepted");
         return (
           <article key={settlement.id} className={styles.card}>
@@ -66,6 +85,14 @@ export default async function PromoterSettlementsPage({
             <p className={styles.meta}>
               {formatArsFromCents(settlement.total_cents)} · vence {settlement.due_on}
             </p>
+            {ownItems.length === 0 ? <p className={styles.meta}>Esta liquidación no trae ítems en la lectura.</p> : null}
+            {ownItems.map((item) => (
+              <p key={item.id} className={styles.meta}>{item.label} · {formatArsFromCents(item.amount_cents)}</p>
+            ))}
+            {ownPayments.length === 0 ? <p className={styles.meta}>No hay un pago externo registrado en esta lectura. OrderOps no afirma una transferencia.</p> : null}
+            {ownPayments.map((payment) => (
+              <p key={payment.id} className={styles.meta}>Pago externo {payment.status} · {formatArsFromCents(payment.amount_cents)}</p>
+            ))}
             {accepted ? <p className={styles.meta}>La factura aceptada habilita la posibilidad de pago.</p> : null}
             {ownInvoices.map((invoice) => (
               <p key={invoice.id} className={styles.meta}>
