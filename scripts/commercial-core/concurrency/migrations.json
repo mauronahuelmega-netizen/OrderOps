@@ -50,5 +50,6 @@
   "20261017143000_commercial_founder_monthly_schedule.sql",
   "20261017170000_commercial_founder_month_length.sql",
   "20261017220000_commercial_provider_receipts.sql",
-  "20261017233000_commercial_impute_provider_receipt.sql"
+  "20261017233000_commercial_impute_provider_receipt.sql",
+  "20261018003000_commercial_mobbex_payment_intents.sql"
 ]

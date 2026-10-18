@@ -467,6 +467,33 @@ Regla de aplicación del caso nominal, también en SQL al insertar:
 
 Esa regla no decide IVA ni parciales. Los deja bloqueados (`BLK-ECO-01`, `BLK-ECO-02`).
 
+### `provider_payment_intents`
+
+Intento de Mobbex en sandbox. No es un cliente Talo, no es un recibo y no es una cobranza.
+
+- `provider = mobbex`
+- `environment = sandbox`
+- `purpose`: `setup_checkout` o `subscription`
+- `commercial_reference` única por negocio, entorno y propósito
+- `checkout_id` y `subscription_id` en columnas distintas, con índices únicos parciales separados
+- `expected_amount_cents` y `currency = ARS`
+- `status`: `reserved`, `created` o `response_ambiguous`
+- `created` exige el identificador de su propósito y deja el otro vacío
+- sin referencia a recibos, cobranzas u obligaciones
+
+### `provider_payment_events`
+
+Evento sintético sin verificar. No cambia el estado del intento.
+
+- `intent_id` opcional
+- `event_key` con forma `synthetic:<delivery>:<nombre-logico>`
+- la misma clave es una repetición; otro nombre o otra entrega es otro evento
+- `source = synthetic`
+- `delivery`: `browser_return` o `webhook_body`
+- `status = pending_unverified`
+- único `(intent_id, source, event_key)` cuando hay intento
+- único `(source, event_key)` cuando `intent_id` es nulo
+
 ### `provider_customer_links`
 
 Vincula un negocio de OrderOps con un cliente externo. No abre una obligación.

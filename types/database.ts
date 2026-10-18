@@ -1129,6 +1129,35 @@ export type Database = {
         Returns: Json;
       };
       impute_provider_receipt: { Args: { p_receipt_id: string }; Returns: Json };
+      reserve_provider_payment_intent: {
+        Args: {
+          p_business_id: string;
+          p_purpose: string;
+          p_commercial_reference: string;
+          p_expected_amount_cents: number;
+          p_currency: string;
+        };
+        Returns: Json;
+      };
+      complete_provider_payment_intent: {
+        Args: {
+          p_intent_id: string;
+          p_outcome: string;
+          p_checkout_id: string | null;
+          p_subscription_id: string | null;
+        };
+        Returns: Json;
+      };
+      record_provider_payment_event: {
+        Args: {
+          p_business_id: string;
+          p_purpose: string | null;
+          p_commercial_reference: string | null;
+          p_event_key: string;
+          p_delivery: string;
+        };
+        Returns: Json;
+      };
       record_collection: {
         Args: {
           p_obligation_id: string;
@@ -2047,6 +2076,84 @@ export type Database = {
             referencedColumns: ["id"];
           },
         ];
+      };
+      provider_payment_events: {
+        Row: {
+          created_at: string;
+          delivery: string;
+          event_key: string;
+          id: string;
+          intent_id: string | null;
+          source: string;
+          status: string;
+        };
+        Insert: {
+          created_at?: string;
+          delivery: string;
+          event_key: string;
+          id?: string;
+          intent_id?: string | null;
+          source?: string;
+          status?: string;
+        };
+        Update: {
+          created_at?: string;
+          delivery?: string;
+          event_key?: string;
+          id?: string;
+          intent_id?: string | null;
+          source?: string;
+          status?: string;
+        };
+        Relationships: [];
+      };
+      provider_payment_intents: {
+        Row: {
+          checkout_id: string | null;
+          commercial_reference: string;
+          created_at: string;
+          currency: string;
+          environment: string;
+          expected_amount_cents: number;
+          id: string;
+          provider: string;
+          purpose: string;
+          status: string;
+          subscription_id: string | null;
+          updated_at: string;
+          won_business_id: string;
+        };
+        Insert: {
+          checkout_id?: string | null;
+          commercial_reference: string;
+          created_at?: string;
+          currency: string;
+          environment?: string;
+          expected_amount_cents: number;
+          id?: string;
+          provider?: string;
+          purpose: string;
+          status: string;
+          subscription_id?: string | null;
+          updated_at?: string;
+          won_business_id: string;
+        };
+        Update: {
+          checkout_id?: string | null;
+          commercial_reference?: string;
+          created_at?: string;
+          currency?: string;
+          environment?: string;
+          expected_amount_cents?: number;
+          id?: string;
+          provider?: string;
+          purpose?: string;
+          status?: string;
+          subscription_id?: string | null;
+          updated_at?: string;
+          won_business_id?: string;
+        };
+        Relationships: [];
       };
       provider_customer_links: {
         Row: {
@@ -3443,6 +3550,35 @@ export type Database = {
         Returns: Json;
       };
       impute_provider_receipt: { Args: { p_receipt_id: string }; Returns: Json };
+      reserve_provider_payment_intent: {
+        Args: {
+          p_business_id: string;
+          p_purpose: string;
+          p_commercial_reference: string;
+          p_expected_amount_cents: number;
+          p_currency: string;
+        };
+        Returns: Json;
+      };
+      complete_provider_payment_intent: {
+        Args: {
+          p_intent_id: string;
+          p_outcome: string;
+          p_checkout_id: string | null;
+          p_subscription_id: string | null;
+        };
+        Returns: Json;
+      };
+      record_provider_payment_event: {
+        Args: {
+          p_business_id: string;
+          p_purpose: string | null;
+          p_commercial_reference: string | null;
+          p_event_key: string;
+          p_delivery: string;
+        };
+        Returns: Json;
+      };
       record_collection: {
         Args: {
           p_external_ref: string | null;
