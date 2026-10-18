@@ -482,15 +482,27 @@ Vincula un negocio de OrderOps con un cliente externo. No abre una obligación.
 
 ### `provider_receipts`
 
-Acreditación externa todavía no imputada. No referencia `platform_collections` ni `platform_obligations`.
+Acreditación externa. La imputación de una activación queda en el recibo; no abre comisiones ni slots.
 
 - `link_id not null`
 - `provider`, `environment`, `external_customer_id`, `external_transaction_id`
 - unique `(provider, environment, external_customer_id, external_transaction_id)`
-- `status text check (status in ('received','pending_review','confirmed'))`
+- `status text check (status in ('received','pending_review','confirmed','imputed','reconciliation_required'))`
 - `gross_amount_cents`, `net_amount_cents`, `processing_difference_cents`
 - `gross_source` y `net_source` en `detail` o `list`
 - `confirmed` exige moneda ARS, ambos importes, diferencia igual al bruto menos el neto, y `confirmed_at`
+- `collection_id` único y solo presente cuando el estado es `imputed`
+- `obligation_id` no es único: conserva la historia si más adelante existe otra cobranza
+
+### `provider_receipt_evidence`
+
+Atestación manual de Finanzas. No es una consulta automática a Talo ni una validación de `X-Talo-Signature`. Las dos marcas `provider_api_verified` y `webhook_signature_verified` quedan forzadas en falso.
+
+- `receipt_id` único
+- `kind = operator_attestation`
+- `movement_consultation`: el operador dejó constancia de haber consultado el movimiento
+- `obligation_id` y `talo_authorization`: el operador autoriza Talo para esa obligación
+- copia de bruto, neto, diferencia, moneda y `provider_status` tomada del recibo
 
 ### `founder_slots`
 

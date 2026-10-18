@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-17 — Commercial Core — Imputación de recibos de activación
+
+- **[Commercial]** `attest_provider_receipt` guarda la consulta manual del movimiento y la autorización de Talo para una obligación. `impute_provider_receipt` llama a `record_collection` solo para una activación abierta de importe exacto. No imputa mensualidades, no reabre reversas y no genera comisiones ni slots. Migración `20261017233000`, aplicada solo en el QA `orderops-phase06-qa`. Informe: `docs/commercial-core-v1/T08B_IMPUTE_PROVIDER_RECEIPT.md`.
+- Breaking: no.
+
 ### 2026-10-17 — Commercial Core — Recibos de proveedor sin imputar
 
 - **[Commercial]** `provider_customer_links` y `provider_receipts` guardan el cliente Talo y la acreditación verificada. No llaman a `record_collection`. Migración `20261017220000`, aplicada solo en el QA `orderops-phase06-qa`. Informe: `docs/commercial-core-v1/T08A_PROVIDER_RECEIPTS.md`.

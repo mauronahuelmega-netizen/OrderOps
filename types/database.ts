@@ -1119,6 +1119,16 @@ export type Database = {
         Args: { p_started_on: string; p_terms_id: string };
         Returns: Json;
       };
+      attest_provider_receipt: {
+        Args: {
+          p_movement_consultation: string;
+          p_obligation_id: string;
+          p_receipt_id: string;
+          p_talo_authorization: string;
+        };
+        Returns: Json;
+      };
+      impute_provider_receipt: { Args: { p_receipt_id: string }; Returns: Json };
       record_collection: {
         Args: {
           p_obligation_id: string;
@@ -2092,6 +2102,8 @@ export type Database = {
           review_reason: string | null;
           status: string;
           updated_at: string;
+          collection_id: string | null;
+          obligation_id: string | null;
         };
         Insert: {
           confirmed_at?: string | null;
@@ -2113,6 +2125,8 @@ export type Database = {
           review_reason?: string | null;
           status: string;
           updated_at?: string;
+          collection_id?: string | null;
+          obligation_id?: string | null;
         };
         Update: {
           confirmed_at?: string | null;
@@ -2134,6 +2148,62 @@ export type Database = {
           review_reason?: string | null;
           status?: string;
           updated_at?: string;
+          collection_id?: string | null;
+          obligation_id?: string | null;
+        };
+        Relationships: [];
+      };
+      provider_receipt_evidence: {
+        Row: {
+          actor_account_id: string;
+          attested_at: string;
+          currency: string;
+          gross_amount_cents: number;
+          id: string;
+          kind: string;
+          movement_consultation: string;
+          net_amount_cents: number;
+          obligation_id: string;
+          processing_difference_cents: number;
+          provider_api_verified: boolean;
+          provider_status: string;
+          receipt_id: string;
+          talo_authorization: string;
+          webhook_signature_verified: boolean;
+        };
+        Insert: {
+          actor_account_id: string;
+          attested_at?: string;
+          currency: string;
+          gross_amount_cents: number;
+          id?: string;
+          kind: string;
+          movement_consultation: string;
+          net_amount_cents: number;
+          obligation_id: string;
+          processing_difference_cents: number;
+          provider_api_verified?: boolean;
+          provider_status: string;
+          receipt_id: string;
+          talo_authorization: string;
+          webhook_signature_verified?: boolean;
+        };
+        Update: {
+          actor_account_id?: string;
+          attested_at?: string;
+          currency?: string;
+          gross_amount_cents?: number;
+          id?: string;
+          kind?: string;
+          movement_consultation?: string;
+          net_amount_cents?: number;
+          obligation_id?: string;
+          processing_difference_cents?: number;
+          provider_api_verified?: boolean;
+          provider_status?: string;
+          receipt_id?: string;
+          talo_authorization?: string;
+          webhook_signature_verified?: boolean;
         };
         Relationships: [];
       };
@@ -3363,6 +3433,16 @@ export type Database = {
         };
         Returns: Json;
       };
+      attest_provider_receipt: {
+        Args: {
+          p_movement_consultation: string;
+          p_obligation_id: string;
+          p_receipt_id: string;
+          p_talo_authorization: string;
+        };
+        Returns: Json;
+      };
+      impute_provider_receipt: { Args: { p_receipt_id: string }; Returns: Json };
       record_collection: {
         Args: {
           p_external_ref: string | null;
