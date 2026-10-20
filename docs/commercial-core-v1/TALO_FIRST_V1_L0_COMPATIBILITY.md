@@ -37,7 +37,7 @@ El contrato original `ORDEROPS_TALO_FIRST_V1_CONTRATO_FUNCIONAL.md` **no fue loc
   - Si los destinos difieren entre ambos instantes, o falta la fecha del proveedor, el recibo va a conciliación.
 - **DT-08 reducido:** los avisos se calculan en el momento a partir del estado comercial. No hay tabla de avisos, ni `business_notice_reads`, ni centro de notificaciones, ni email.
 - **DT-09 mínimo:** Finanzas registra comprobantes emitidos externamente, guardados en un bucket privado por tenant. Owner y Manager los descargan mediante una URL firmada de corta duración.
-- **Inicio de servicio:** si no existe `founder_service_starts`, la imputación automática de la activación lo registra con la fecha BA de la acreditación verificada. Finanzas puede seguir registrándolo antes con la función existente.
+- **Inicio de servicio:** se conserva el contrato de Etapa 1 (`20261017120000`): `service_started_on` se registra explícitamente y no es un timestamp de pago. El sistema no lo registra. Con la activación cobrada y sin inicio registrado, el negocio queda `active` en el período incluido como "inicio pendiente"; Billing y la cola de Finanzas lo muestran hasta que Finanzas lo registre.
 
 ## 3. Protección de tenants existentes (H6, P1.3)
 
