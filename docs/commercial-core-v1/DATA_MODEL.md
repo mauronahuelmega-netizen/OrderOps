@@ -531,6 +531,17 @@ Atestación manual de Finanzas. No es una consulta automática a Talo ni una val
 - `obligation_id` y `talo_authorization`: el operador autoriza Talo para esa obligación
 - copia de bruto, neto, diferencia, moneda y `provider_status` tomada del recibo
 
+### `provider_webhook_inbox`
+
+Aviso de Talo pendiente de lectura autenticada (Talo First V1, L2). No confirma ni imputa dinero. Solo `service_role` escribe, mediante las funciones `public.system_*`.
+
+- `link_id not null`; el cliente debe tener vínculo, si no el aviso no se guarda
+- unique `(provider, environment, external_customer_id, external_transaction_id)`; los avisos repetidos suben `notice_count`
+- `status in ('pending','processing','retry','processed','dead')`; `processed` exige `processed_at`, `processing` exige `locked_at`
+- `attempts`, `next_attempt_at`, `last_error` (≤200), `receipt_id`, `signature_present`
+- reintento exponencial con tope de 60 minutos; `dead` desde el intento 12; `processing` de más de 5 minutos se recupera
+- RLS: lectura solo con `collection.write`
+
 ### `founder_slots`
 
 - `conversion_terms_id not null`

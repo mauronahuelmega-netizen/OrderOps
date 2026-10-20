@@ -973,6 +973,46 @@ export type Database = {
     };
     Functions: {
       commercial_session: { Args: Record<string, never>; Returns: Json };
+      system_link_provider_customer: {
+        Args: {
+          p_alias: string | null;
+          p_business_id: string;
+          p_cvu: string | null;
+          p_environment: string;
+          p_external_customer_id: string;
+          p_provider: string;
+        };
+        Returns: Json;
+      };
+      system_provider_customer_link: {
+        Args: { p_business_id: string; p_environment: string; p_provider: string };
+        Returns: Json;
+      };
+      system_enqueue_provider_webhook: {
+        Args: {
+          p_environment: string;
+          p_external_customer_id: string;
+          p_external_transaction_id: string;
+          p_provider: string;
+          p_signature_present: boolean;
+        };
+        Returns: Json;
+      };
+      system_claim_provider_webhooks: {
+        Args: { p_limit: number };
+        Returns: {
+          attempts: number;
+          environment: string;
+          external_customer_id: string;
+          external_transaction_id: string;
+          inbox_id: string;
+          won_business_id: string;
+        }[];
+      };
+      system_defer_provider_webhook: {
+        Args: { p_error: string; p_inbox_id: string };
+        Returns: Json;
+      };
       create_claim: {
         Args: { p_commercial_business_id: string; p_opportunity_id: string | null };
         Returns: Json;

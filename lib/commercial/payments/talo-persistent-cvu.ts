@@ -25,14 +25,14 @@ export type TaloPersistentCvuReport =
     }
   | { status: "PARTIAL"; reason: string; httpStatus: number | null };
 
-type BankIdentity = { cvu: string; alias: string };
+export type BankIdentity = { cvu: string; alias: string };
 
 function filled(env: EnvSource, name: (typeof requiredNames)[number]): boolean {
   const value = env[name];
   return typeof value === "string" && value.trim().length > 0;
 }
 
-async function readJson(response: Response): Promise<unknown> {
+export async function readJson(response: Response): Promise<unknown> {
   try {
     return await response.json();
   } catch {
@@ -40,7 +40,7 @@ async function readJson(response: Response): Promise<unknown> {
   }
 }
 
-function tokenFrom(body: unknown): string | null {
+export function tokenFrom(body: unknown): string | null {
   if (!body || typeof body !== "object") {
     return null;
   }
@@ -54,11 +54,11 @@ function tokenFrom(body: unknown): string | null {
   return null;
 }
 
-function prefixMissing(body: unknown): boolean {
+export function prefixMissing(body: unknown): boolean {
   return JSON.stringify(body ?? "").includes("user.alias.prefix.not.set");
 }
 
-function bankIdentity(body: unknown): BankIdentity | null {
+export function bankIdentity(body: unknown): BankIdentity | null {
   if (!body || typeof body !== "object") {
     return null;
   }
@@ -79,7 +79,7 @@ function bankIdentity(body: unknown): BankIdentity | null {
   return { cvu: bank.cvu, alias: bank.alias };
 }
 
-function listedCustomer(body: unknown, customerId: string): BankIdentity | null {
+export function listedCustomer(body: unknown, customerId: string): BankIdentity | null {
   if (!body || typeof body !== "object" || !("data" in body)) {
     return null;
   }
@@ -100,7 +100,7 @@ function listedCustomer(body: unknown, customerId: string): BankIdentity | null 
   return bankIdentity({ data: matches[0] });
 }
 
-function listedCount(body: unknown, customerId: string): number {
+export function listedCount(body: unknown, customerId: string): number {
   if (!body || typeof body !== "object" || !("data" in body)) {
     return 0;
   }

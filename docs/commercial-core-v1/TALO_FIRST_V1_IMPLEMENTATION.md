@@ -16,3 +16,16 @@ Migración `20261020100000_commercial_system_actor.sql`.
 - `commercial.system_enter/system_exit`: cambian la identidad transaccional; sin grants.
 - Wrappers `public.system_*`: `SECURITY DEFINER`, `search_path` fijo, `execute` solo para `service_role`. Primero: `system_link_provider_customer`.
 - Prueba `phase10_system_actor.sql`: PASS (cuenta única, sin login, superficie de permisos, anon/authenticated denegados, identidad restaurada, idempotencia, sello de auditoría).
+
+## L2 — Cliente/CVU por negocio y bandeja de avisos
+
+Migración `20261020110000_commercial_provider_webhook_inbox.sql`: tabla `commercial.provider_webhook_inbox` y wrappers `system_enqueue_provider_webhook`, `system_claim_provider_webhooks` (`FOR UPDATE SKIP LOCKED`), `system_defer_provider_webhook` y `system_provider_customer_link`, solo `service_role`.
+
+- `lib/commercial/payments/talo-runtime.ts`: `COMMERCIAL_TALO_ENABLED` + `COMMERCIAL_TALO_ENVIRONMENT`. `production` devuelve `production_not_authorized`; solo el origen sandbox. `webhook_url` solo desde `COMMERCIAL_PAYMENT_WEBHOOK_BASE_URL` HTTPS sin ruta.
+- `talo-webhook-inbox.ts` + `app/api/commercial/talo/webhook/route.ts`: valida el aviso y lo encola. 200 encolado o duplicado; 202 cliente desconocido sin persistir; 400 malformado; 429 límite; 404 apagado; 503 base no disponible. Nunca reconoce dinero.
+- `talo-provisioning.ts` + `talo-provisioning-store.ts`: `customer_id = orderops-<won_business_id>`. Reusa el vínculo existente sin red; si se perdió, recupera el cliente existente sin crear otro; rechaza duplicados en Talo; no crea clientes sin `webhook_url` estable (Talo solo la documenta en el alta).
+- `talo-customer-webhook.ts`: expone `readTaloWebhookNotice` (sin cliente fijo) y `transferFromRead`. El flujo sandbox previo no cambia.
+
+Pruebas: `phase10_webhook_inbox.sql` PASS en QA; `talo-webhook-inbox.verify.ts` y `talo-provisioning.verify.ts` PASS con fetch y RPC falsos; `verify-all` 29/29; `tsc --noEmit` sin errores.
+
+NOT_VERIFIED: alta real en sandbox de un cliente por negocio (sin URL HTTPS estable no se crea); ruta HTTP montada en Next contra QA; formato de alias aceptado por Talo; `X-Talo-Signature`.

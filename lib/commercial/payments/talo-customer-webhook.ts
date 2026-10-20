@@ -98,16 +98,23 @@ export function toTaloCustomerWebhookResponse(result: TaloCustomerWebhookResult)
   });
 }
 
-type AcceptedNotice = {
+export type AcceptedNotice = {
   status: "accepted";
   customerId: string;
   transactionId: string;
   signaturePresent: boolean;
 };
 
+// Syntactic validation only; the customer is checked against the durable link by the caller.
+export function readTaloWebhookNotice(
+  request: Request
+): Promise<AcceptedNotice | { status: "rejected"; reason: string }> {
+  return readNotice(request, null);
+}
+
 async function readNotice(
   request: Request,
-  expectedCustomerId: string
+  expectedCustomerId: string | null
 ): Promise<AcceptedNotice | { status: "rejected"; reason: string }> {
   if (request.method !== "POST") {
     return { status: "rejected", reason: "method_not_allowed" };
@@ -144,7 +151,7 @@ async function readNotice(
   if (!isEventId(record.transactionId) || !isEventId(record.customerId)) {
     return { status: "rejected", reason: "identifier_rejected" };
   }
-  if (expectedCustomerId.length === 0 || record.customerId !== expectedCustomerId) {
+  if (expectedCustomerId !== null && (expectedCustomerId.length === 0 || record.customerId !== expectedCustomerId)) {
     return { status: "rejected", reason: "customer_not_expected" };
   }
   return {
@@ -159,7 +166,7 @@ function isEventId(value: unknown): value is string {
   return typeof value === "string" && customerEventIdPattern.test(value);
 }
 
-function transferFromRead(
+export function transferFromRead(
   read: TaloTransactionRead,
   customerId: string,
   transactionId: string
