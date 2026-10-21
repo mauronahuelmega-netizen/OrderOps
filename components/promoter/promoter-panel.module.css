@@ -1,0 +1,43 @@
+.shell {
+  display: grid;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  background: var(--bg-canvas);
+  color: var(--text-primary);
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.nav a {
+  color: var(--text-secondary);
+}
+
+.card {
+  display: grid;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-card);
+}
+
+.muted {
+  color: var(--text-secondary);
+}
+
+.form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.form input,
+.form textarea,
+.form select,
+.form button {
+  font: inherit;
+}
