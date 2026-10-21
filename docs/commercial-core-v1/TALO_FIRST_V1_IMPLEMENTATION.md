@@ -70,3 +70,28 @@ Pruebas: `phase10_service_access.sql` PASS, con estos casos:
 - términos dobles, sin términos, excepción y revocación; grants.
 
 Pendiente detectado: una cobranza revertida deja la obligación `satisfied`. Para volver a cobrar ese período hace falta reabrirla. Se resuelve en L7, por Finanzas y sin borrar historia.
+
+## L5/L6 — Mensualidad automática y momento del devengo
+
+Migración `20261020140000_commercial_subscription_imputation.sql`. Reemplaza `commercial.impute_provider_read_receipt` (sin cambiar la rama de activación) y no toca `renewal_intents` ni puente.
+
+- Destinos en el instante t (`subscription_destinations`):
+  - el período actual n ≥ 1 si no está cubierto;
+  - el siguiente, si t ≥ inicio − 10 días y no está cubierto.
+- Se calculan a la fecha del proveedor y a la verificación. Con un solo destino, igual en ambos momentos, se imputa. Si no, la cobranza va a conciliación con uno de estos motivos: `eligibility_changed`, `no_eligible_period`, `ambiguous_period`, `amount_mismatch`, `service_start_required`, `period_not_open` o `activation_not_covered`.
+- `impute_subscription_period` (compartida con la imputación manual de L7):
+  - abre el período con `open_obligation` y registra la cobranza nominal;
+  - si el período ya empezó, asigna slot, crea el derecho y lo deja disponible en `posted_at` + 15 días;
+  - si no empezó, crea `deferred_accruals` con vencimiento en el inicio del período.
+- `system_process_due_accruals`: devenga a la fecha, con disponibilidad = máx(inicio, `posted_at`) + 15 días. Cancela si la cobranza fue revertida antes. El worker `/api/commercial/talo/worker` la invoca después de las lecturas.
+
+Pruebas: `phase10_subscription_imputation.sql` PASS, con estos casos:
+- pago en gracia, imputado y devengado al instante, con reactivación;
+- pago en T−10, con devengo diferido, sin slot ni derecho anticipado y período prepago cubierto;
+- reversión antes del devengo, que lo cancela; worker idempotente;
+- DT-04 con fecha previa a la ventana;
+- dos destinos, ninguno, sin inicio, importe distinto y doble pago del mismo período;
+- 13 meses dan 12 derechos y 12 slots, con el mes 13 cubierto; el período incluido no consume slot;
+- grants.
+
+Regresión PASS: `phase10_*` (L3 ajustado: la segunda transferencia de ARS 290.000 queda en `amount_mismatch`), `phase05_p0_cap`, `p0_voided`, `slots`, `availability`, `reversals`, `commissions`, `founder_schedule`, `founder_month_length`, `rev01` y `phase08_impute_provider_receipt`.

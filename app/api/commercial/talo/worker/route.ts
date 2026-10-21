@@ -55,5 +55,10 @@ export async function POST(request: Request): Promise<Response> {
       }
     }
   });
-  return Response.json({ ...summary, economicRecognitionByNotice: false });
+  const { data: accruals, error: accrualError } = await client.rpc("system_process_due_accruals", { p_limit: 50 });
+  return Response.json({
+    ...summary,
+    accruals: accrualError ? { ok: false } : accruals,
+    economicRecognitionByNotice: false
+  });
 }

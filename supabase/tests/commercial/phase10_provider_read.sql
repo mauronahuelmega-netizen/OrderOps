@@ -141,10 +141,10 @@ begin
   select count(*) into v_count from commercial.platform_collections where obligation_id = v_receipt.obligation_id;
   if v_count <> 1 then raise exception 'collections after replay %', v_count; end if;
 
-  -- A second activation-sized transfer after activation is not imputed automatically in L3.
+  -- A second activation-sized transfer after activation is never a second activation.
   v_inbox := pg_temp.claimed('p10r-a', 'tx-a2');
   v := public.system_record_provider_read(v_inbox, 'PROCESSED', 'ARS', 29000000, 28649100, 'list', 'detail', v_ts, pg_temp.digest());
-  if v->>'status' is distinct from 'reconciliation_required' or v->>'review_reason' is distinct from 'subscription_not_automated' then
+  if v->>'status' is distinct from 'reconciliation_required' or v->>'review_reason' is distinct from 'amount_mismatch' then
     raise exception 'second transfer %', v;
   end if;
 

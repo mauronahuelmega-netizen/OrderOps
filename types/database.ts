@@ -1013,6 +1013,7 @@ export type Database = {
         Args: { p_error: string; p_inbox_id: string };
         Returns: Json;
       };
+      system_process_due_accruals: { Args: { p_limit: number }; Returns: Json };
       system_record_provider_read: {
         Args: {
           p_currency: string;

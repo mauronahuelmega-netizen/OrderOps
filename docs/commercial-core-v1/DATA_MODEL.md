@@ -559,6 +559,15 @@ Excepción expresa de acceso para tenants legacy autorizados (Talo First V1, L4,
 - `business_id` PK, `reason` (8–300), `granted_by`, `granted_at`, `revoked_at`/`revoked_by` juntos
 - Sin escritura desde clientes; lectura con `collection.write`
 
+### `deferred_accruals`
+
+Mensualidad cobrada antes del inicio de su período (Talo First V1, L6). El derecho recurrente y el slot se crean al inicio del período, no al cobrar.
+
+- `collection_id` único, `conversion_terms_id`, `period_on`, `due_at` = 00:00 BA del período
+- `status in ('pending','done','cancelled')`; `processed_at` solo fuera de `pending`; `outcome` ≤ 80
+- `cancelled` si la cobranza ya no está `posted` al vencer (reversión previa al devengo)
+- Procesa `public.system_process_due_accruals` (solo `service_role`); disponibilidad = máx(inicio del período, `posted_at`) + 15 días
+
 ### `founder_slots`
 
 - `conversion_terms_id not null`
