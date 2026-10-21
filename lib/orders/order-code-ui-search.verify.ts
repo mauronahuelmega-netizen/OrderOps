@@ -24,6 +24,7 @@ function buildMockSearchOrder(
     delivery_date: overrides.delivery_date ?? "2026-08-28",
     delivery_time: overrides.delivery_time ?? null,
     delivery_method: overrides.delivery_method ?? "delivery",
+    composition_status: overrides.composition_status ?? "itemized",
     address: overrides.address ?? "Calle Falsa 123",
     status: overrides.status ?? "pending",
     total_price: overrides.total_price ?? 5000,

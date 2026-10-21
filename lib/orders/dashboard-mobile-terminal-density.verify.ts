@@ -36,6 +36,7 @@ function buildMockOrder(
     delivery_date: "2026-08-28",
     delivery_time: null,
     delivery_method: "delivery",
+    composition_status: "itemized",
     address: "Av. Corrientes 1234",
     status,
     total_price: 15000,

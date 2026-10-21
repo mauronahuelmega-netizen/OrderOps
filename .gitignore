@@ -1,4 +1,4 @@
-# Dependencies
+﻿# Dependencies
 node_modules
 
 # Next.js
@@ -17,6 +17,9 @@ out
 ORDEROPS_DEMO_ACCESS.private.md
 *.private.md
 tmp/
+
+# M3 raw snapshots, private reports, crosswalks and staging artifacts (may contain PII)
+.migration-m3-private/
 
 # Logs
 npm-debug.log*
