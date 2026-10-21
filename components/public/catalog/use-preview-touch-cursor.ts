@@ -28,6 +28,9 @@ export function usePreviewTouchCursor({
       return;
     }
 
+    // Local CSS-module class so cursor-hide rules stay pure under webpack.
+    surface.classList.add(styles.previewCursorSurface);
+
     const cursor = doc.createElement("div");
     cursor.className = styles.previewTouchCursor;
     cursor.setAttribute("aria-hidden", "true");
@@ -107,6 +110,7 @@ export function usePreviewTouchCursor({
       surface.removeEventListener("pointercancel", onPointerUp);
       surface.removeEventListener("pointerleave", onPointerLeave);
       delete surface.dataset.previewTouchCursorActive;
+      surface.classList.remove(styles.previewCursorSurface);
       cursor.remove();
     };
   }, [enabled, targetRef]);

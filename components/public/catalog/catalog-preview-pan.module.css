@@ -24,9 +24,10 @@
   -webkit-user-select: auto;
 }
 
-/* Scoped to preview gesture only — cleared on idle / unmount. */
-:global(html[data-preview-pan-state="candidate"]),
-:global(html[data-preview-pan-state="active"]) {
+/* Document cursor while a pan gesture is active.
+   Local class is applied to <html> by use-preview-pointer-pan-scroll (webpack pure). */
+.panDocument[data-preview-pan-state="candidate"],
+.panDocument[data-preview-pan-state="active"] {
   cursor: grabbing;
   user-select: none;
   -webkit-user-select: none;

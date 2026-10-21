@@ -1,5 +1,10 @@
 /* Cursor + scrollbar polish for catalog preview (mouse/desktop only). */
 
+/* Local anchor required by CSS Modules (webpack pure selectors). */
+.previewCursorSurface {
+  /* class marker only — behavior comes from data attributes below */
+}
+
 .previewTouchCursor {
   position: fixed;
   top: 0;
@@ -36,36 +41,32 @@
 }
 
 /* Hide native cursor only while the touch cursor is active over the surface. */
-:global(main[data-preview-pan-enabled="true"][data-preview-touch-cursor-active="true"]),
-:global(
-  main[data-preview-pan-enabled="true"][data-preview-touch-cursor-active="true"]
-    :is(h1, h2, h3, h4, p, span, img, small, strong, em)
-) {
+.previewCursorSurface[data-preview-pan-enabled="true"][data-preview-touch-cursor-active="true"],
+.previewCursorSurface[data-preview-pan-enabled="true"][data-preview-touch-cursor-active="true"]
+  :is(h1, h2, h3, h4, p, span, img, small, strong, em) {
   cursor: none;
 }
 
-:global(
-  main[data-preview-pan-enabled="true"][data-preview-touch-cursor-active="true"]
-    :is(button, a, input, textarea, select, label, summary, [role="button"], [role="link"])
-) {
+.previewCursorSurface[data-preview-pan-enabled="true"][data-preview-touch-cursor-active="true"]
+  :is(button, a, input, textarea, select, label, summary, [role="button"], [role="link"]) {
   cursor: pointer;
 }
 
-/* Subtle document scrollbar while preview pan is enabled (not global permanent). */
-:global(html[data-preview-pan-enabled="true"]) {
+/* Subtle scrollbar on the preview surface while pan is enabled. */
+.previewCursorSurface[data-preview-pan-enabled="true"] {
   scrollbar-width: thin;
   scrollbar-color: color-mix(in srgb, var(--text-tertiary) 55%, transparent) transparent;
 }
 
-:global(html[data-preview-pan-enabled="true"]::-webkit-scrollbar) {
+.previewCursorSurface[data-preview-pan-enabled="true"]::-webkit-scrollbar {
   width: 6px;
 }
 
-:global(html[data-preview-pan-enabled="true"]::-webkit-scrollbar-track) {
+.previewCursorSurface[data-preview-pan-enabled="true"]::-webkit-scrollbar-track {
   background: transparent;
 }
 
-:global(html[data-preview-pan-enabled="true"]::-webkit-scrollbar-thumb) {
+.previewCursorSurface[data-preview-pan-enabled="true"]::-webkit-scrollbar-thumb {
   border-radius: 999px;
   background: color-mix(in srgb, var(--text-tertiary) 45%, transparent);
 }

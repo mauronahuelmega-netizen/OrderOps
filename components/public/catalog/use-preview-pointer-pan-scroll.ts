@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type RefObject } from "react";
+import panStyles from "./catalog-preview-pan.module.css";
 
 const PAN_THRESHOLD_PX = 8;
 const SAMPLE_WINDOW_MS = 100;
@@ -107,6 +108,8 @@ export function usePreviewPointerPanScroll({
     }
 
     html.dataset.previewPanEnabled = "true";
+    // Local CSS-module class so document cursor rules stay pure under webpack.
+    html.classList.add(panStyles.panDocument);
 
     let momentumRafId: number | null = null;
     let momentumVelocity = 0;
@@ -387,6 +390,7 @@ export function usePreviewPointerPanScroll({
       surface.removeEventListener("lostpointercapture", onLostPointerCapture);
       delete surface.dataset.previewPanEnabled;
       delete html.dataset.previewPanEnabled;
+      html.classList.remove(panStyles.panDocument);
       resetGesture();
     };
   }, [enabled, targetRef]);
