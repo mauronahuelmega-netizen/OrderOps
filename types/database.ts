@@ -1014,6 +1014,16 @@ export type Database = {
         Returns: Json;
       };
       system_process_due_accruals: { Args: { p_limit: number }; Returns: Json };
+      finance_impute_receipt: {
+        Args: { p_note: string; p_period_on: string | null; p_receipt_id: string; p_terms_id: string };
+        Returns: Json;
+      };
+      finance_close_receipt: {
+        Args: { p_kind: string; p_note: string; p_receipt_id: string; p_reference: string | null };
+        Returns: Json;
+      };
+      finance_reopen_obligation: { Args: { p_note: string; p_obligation_id: string }; Returns: Json };
+      finance_retry_webhook: { Args: { p_inbox_id: string }; Returns: Json };
       system_record_provider_read: {
         Args: {
           p_currency: string;

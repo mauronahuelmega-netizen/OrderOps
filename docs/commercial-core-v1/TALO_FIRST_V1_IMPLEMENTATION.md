@@ -95,3 +95,28 @@ Pruebas: `phase10_subscription_imputation.sql` PASS, con estos casos:
 - grants.
 
 Regresión PASS: `phase10_*` (L3 ajustado: la segunda transferencia de ARS 290.000 queda en `amount_mismatch`), `phase05_p0_cap`, `p0_voided`, `slots`, `availability`, `reversals`, `commissions`, `founder_schedule`, `founder_month_length`, `rev01` y `phase08_impute_provider_receipt`.
+
+## L7 — Conciliación manual de Finanzas
+
+Migración `20261020150000_commercial_finance_reconciliation.sql`. Todas exigen `collection.write` (finance o superadmin); no se agregaron permisos.
+
+- `finance_impute_receipt(recibo, términos, período | null, nota)` toma recibos `reconciliation_required` con evidencia `provider_read`:
+  - con `null` imputa la activación;
+  - con fecha imputa ese período, que debe ser actual o siguiente, alineado al aniversario y sin cubrir. Los vencidos no se cobran;
+  - usa la misma ruta que L5/L6 (slot, devengo inmediato o diferido) y, si algo falla, no deja efectos.
+- `finance_close_receipt(recibo, 'refunded' | 'dismissed', nota, referencia)`:
+  - registra una devolución hecha fuera, con referencia obligatoria, o un descarte;
+  - sobre un recibo imputado, `reverse_collection` anula derecho y slot impagos, o genera ajuste negativo si ya estaba pagado. No hay neteo automático.
+- `finance_reopen_obligation`: reabre un período cuya única cobranza fue revertida, para que pueda cobrarse de nuevo. La cobranza revertida queda.
+- `finance_retry_webhook`: vuelve a encolar un aviso `dead`.
+
+Prueba `phase10_finance_reconciliation.sql`: PASS, con estos casos:
+- promotor, soporte y anónimo rechazados;
+- período incluido, desalineado o de otro negocio rechazados sin efectos;
+- imputación manual del período actual, que restaura el acceso; doble resolución rechazada;
+- importe distinto no imputable, devolución sin referencia rechazada, con referencia aceptada; doble cierre rechazado;
+- descarte;
+- devolución de un recibo imputado: cobranza `reversed`, derecho `voided`, slot anulado, dos filas de historia, acceso perdido;
+- reapertura y nuevo cobro del mismo período, con dos cobranzas en la obligación;
+- reintento de un aviso muerto;
+- grants.

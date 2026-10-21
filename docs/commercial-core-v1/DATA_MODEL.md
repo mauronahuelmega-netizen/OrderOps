@@ -568,6 +568,16 @@ Mensualidad cobrada antes del inicio de su período (Talo First V1, L6). El dere
 - `cancelled` si la cobranza ya no está `posted` al vencer (reversión previa al devengo)
 - Procesa `public.system_process_due_accruals` (solo `service_role`); disponibilidad = máx(inicio del período, `posted_at`) + 15 días
 
+### `receipt_resolutions`
+
+Resolución manual de Finanzas sobre un recibo (Talo First V1, L7). Solo se agregan filas; no se borra ni reescribe.
+
+- `kind in ('imputed_manually','refunded','refunded_after_imputation','dismissed')`
+- único `(receipt_id, kind)` y a lo sumo un cierre (`kind <> 'imputed_manually'`) por recibo
+- `note` (8–500); `external_reference` obligatoria en devoluciones (la devolución se hace fuera de OrderOps)
+- `collection_id` de la cobranza imputada o revertida
+- Escriben `public.finance_impute_receipt`, `finance_close_receipt`; `finance_reopen_obligation` y `finance_retry_webhook` completan la conciliación
+
 ### `founder_slots`
 
 - `conversion_terms_id not null`
