@@ -21,7 +21,7 @@ import type { AdminOrderTimelineEvent } from "@/lib/orders/events.shared";
 import {
   buildAdminOrderHeaderDescription,
   buildOrderRelativeTimeLabel,
-  formatAdminOrderCurrency
+  formatAdminOrderTechnicalTotal
 } from "@/lib/orders/presenter";
 import { buildOrderDisplayRef } from "@/lib/orders/display-ref";
 import {
@@ -127,7 +127,7 @@ export default function OrderDetailPageClient({
       <Badge status={order.status} />
       <div className={pageStyles["admin-order-page-header-total"]}>
         <span>Total</span>
-        <strong>{formatAdminOrderCurrency(order.total_price)}</strong>
+        <strong>{formatAdminOrderTechnicalTotal(order.total_price)}</strong>
       </div>
       <Link className="admin-secondary-link" href={dashboardHref} scroll={false}>
         Volver al dashboard

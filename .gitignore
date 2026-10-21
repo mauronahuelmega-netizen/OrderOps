@@ -13,6 +13,9 @@ out
 .env.local
 .env.*.local
 
+# M3 raw snapshots, private reports, crosswalks and staging artifacts (may contain PII)
+.migration-m3-private/
+
 # Logs
 npm-debug.log*
 yarn-debug.log*

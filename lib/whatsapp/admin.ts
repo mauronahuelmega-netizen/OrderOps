@@ -32,7 +32,7 @@ type AdminOrderWhatsappShape = {
   address: string | null;
   status: AdminOrderWhatsappStatus;
   /** Retained for call-site compatibility; unused in customer contact message bodies. */
-  total_price: number;
+  total_price: number | null;
   notes?: string | null;
   item_summary?: string | null;
   order_items?: AdminOrderWhatsappItem[] | null;

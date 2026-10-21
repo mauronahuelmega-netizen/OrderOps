@@ -13,6 +13,8 @@ export type AdminOrdersAnalytics = {
   revenue: number;
   averageTicket: number;
   validOrdersCount: number;
+  pricedOrdersCount: number;
+  unknownTechnicalTotalOrders: number;
   ordersByStatus: Record<AdminOrderStatus, number>;
   ordersByDeliveryMethod: Record<AdminOrderDeliveryMethod, number>;
   topProduct: {
@@ -443,12 +445,18 @@ export function getActiveOrdersCount(orders: AdminOrderDashboardItem[]) {
 
 export function getTotalRevenue(orders: AdminOrderDashboardItem[]) {
   return orders
-    .filter((order) => order.status !== "cancelled")
+    .filter(
+      (order): order is AdminOrderDashboardItem & { total_price: number } =>
+        order.status !== "cancelled" && order.total_price !== null
+    )
     .reduce((total, order) => total + order.total_price, 0);
 }
 
 export function getAverageTicket(orders: AdminOrderDashboardItem[]) {
-  const validOrders = orders.filter((order) => order.status !== "cancelled");
+  const validOrders = orders.filter(
+    (order): order is AdminOrderDashboardItem & { total_price: number } =>
+      order.status !== "cancelled" && order.total_price !== null
+  );
 
   if (validOrders.length === 0) {
     return 0;
@@ -490,6 +498,10 @@ export function buildAdminOrdersAnalytics(orders: AdminOrderDashboardItem[]): Ad
   const ordersByDeliveryMethod = getOrdersByDeliveryMethod(orders);
   const revenue = getTotalRevenue(orders);
   const validOrdersCount = orders.filter((order) => order.status !== "cancelled").length;
+  const pricedOrdersCount = orders.filter(
+    (order) => order.status !== "cancelled" && order.total_price !== null
+  ).length;
+  const unknownTechnicalTotalOrders = validOrdersCount - pricedOrdersCount;
   const topProduct = getTopProducts(orders)[0] ?? null;
 
   return {
@@ -498,8 +510,10 @@ export function buildAdminOrdersAnalytics(orders: AdminOrderDashboardItem[]): Ad
     completedOrders: getCompletedOrdersCount(orders),
     cancelledOrders: ordersByStatus.cancelled,
     revenue,
-    averageTicket: validOrdersCount > 0 ? revenue / validOrdersCount : 0,
+    averageTicket: pricedOrdersCount > 0 ? revenue / pricedOrdersCount : 0,
     validOrdersCount,
+    pricedOrdersCount,
+    unknownTechnicalTotalOrders,
     ordersByStatus,
     ordersByDeliveryMethod,
     topProduct
