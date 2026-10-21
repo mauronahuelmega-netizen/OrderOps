@@ -11,9 +11,9 @@ Se alcanzó la estructura de **tres ramas permanentes locales**:
 
 | Rama | Rol | HEAD (2026-10-21) |
 |------|-----|-------------------|
-| `main` | Integración estable (finanzas M1–M3 + núcleo/catálogo) | `27cbb85` |
-| `commercial` | Commercial Core + Promotores + Talo First + Billing | `7c3d97e` |
-| `estadisticas` | Estadísticas V1 (phases 01–04 preservadas) | `5cbd161` |
+| `main` | Integración estable (finanzas M1–M3 + núcleo/catálogo) | `e998d92` |
+| `commercial` | Commercial Core + Promotores + Talo First + Billing | `3121a90` |
+| `estadisticas` | Estadísticas V1 (phases 01–04 preservadas) | `1e0029c` |
 
 Worktrees activos del mismo repositorio:
 
@@ -31,11 +31,11 @@ Worktrees activos del mismo repositorio:
 ## B. Inventario final
 
 ```
-OrderOps               27cbb85 [main]          ahead origin/main +12 (NOT_VERIFIED remote freshness)
-OrderOps-Estadisticas  5cbd161 [estadisticas]  local-only (no upstream)
-OrderOps-talo-first    7c3d97e [commercial]    local-only (no upstream)
+OrderOps               e998d92 [main]          ahead origin/main +13 (NOT_VERIFIED remote freshness)
+OrderOps-Estadisticas  1e0029c [estadisticas]  local-only (no upstream)
+OrderOps-talo-first    3121a90 [commercial]    local-only (no upstream)
 ```
-Pre-docs finance-sync tips: commercial `577ae32`, estadisticas `d5e4ccf`, main pre-docs `5f5e78d`.
+Hitos intermedios: main pre-docs `5f5e78d`; finance-sync commercial `577ae32` / estadisticas `d5e4ccf`.
 
 Stashes conservados (no dropeados): cloud-agent moves + consolidation generated-file stashes.  
 Worktree residual `public-catalog-residual-roadmap`: **pruned** (directorio ausente). Rama `public-catalog-residual-roadmap` **conservada**.
