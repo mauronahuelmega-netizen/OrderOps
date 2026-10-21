@@ -1,55 +1,30 @@
 import "server-only";
 
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { listAuthorizedAreas } from "@/lib/auth/list-authorized-areas";
+import { loginPathWith } from "@/lib/auth/login-path";
+import { resolveLoginDestination } from "@/lib/auth/resolve-login-destination";
 import type { Database } from "@/types/database";
 
-type CommercialSession = {
-  ok?: boolean;
-  kind?: string;
-  roles?: string[];
-};
-
 /**
- * Destination after /admin/login for authenticated users.
- * Business admins → dashboard; platform commercial roles → commercial area.
+ * Destination after login for authenticated users.
+ * Delegates to universal area resolution (admin, promoter, commercial, finance, superadmin).
  */
 export async function resolvePostLoginPath(
   supabase: SupabaseClient<Database, "public">,
-  userId: string
+  userId: string,
+  next?: string | null
 ): Promise<string> {
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("business_id")
-    .eq("id", userId)
-    .maybeSingle();
+  const areas = await listAuthorizedAreas(supabase, userId);
+  const destination = resolveLoginDestination({ areas, next });
 
-  if (profile?.business_id) {
-    return "/admin/dashboard";
+  if (destination.kind === "redirect") {
+    return destination.href;
   }
 
-  const { data } = await supabase.rpc("commercial_session");
-  const session = (data ?? null) as CommercialSession | null;
-  const roles = Array.isArray(session?.roles) ? session.roles : [];
-  const internal =
-    session?.ok === true && session.kind === "internal" && roles.length > 0;
-
-  if (!internal) {
-    return "/admin/login?error=invalid_credentials";
+  if (destination.kind === "choose") {
+    return loginPathWith({ choose: true, next: next ?? null });
   }
 
-  if (roles.includes("superadmin")) {
-    return "/super-admin";
-  }
-
-  const financeOnly =
-    roles.includes("finance") && !roles.includes("commercial") && !roles.includes("superadmin");
-  if (financeOnly) {
-    return "/commercial/billing";
-  }
-
-  if (roles.includes("commercial") || roles.includes("finance")) {
-    return "/commercial/opportunities";
-  }
-
-  return "/admin/login?error=invalid_credentials";
+  return loginPathWith({ error: "no_access" });
 }
