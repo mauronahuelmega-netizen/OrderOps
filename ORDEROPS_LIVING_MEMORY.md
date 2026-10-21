@@ -1,4 +1,4 @@
-﻿# OrderOps â€” Living Memory (Cerebro Inmutable)
+# OrderOps â€” Living Memory (Cerebro Inmutable)
 
 > **PropÃ³sito:** Este archivo es la memoria viva y autoritativa del proyecto. Cualquier refactorizaciÃ³n importante, cambio de esquema, nueva ruta, mÃ³dulo o patrÃ³n arquitectÃ³nico **debe registrarse aquÃ­** para preservar el contexto histÃ³rico entre sesiones de desarrollo y agentes IA.
 >
@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-21 — Consolidación Git: tres ramas permanentes (local)
+
+- **[Repo/Git]** Reorganización local (sin push): ramas permanentes `main`, `commercial`, `estadisticas`.
+- Informe: `docs/audits/git-consolidation-report-2026-10-21.md`. Política: `docs/development/agent-worktree-policy.md`.
+- Worktree commercial actual: `OrderOps-talo-first` (rename a `OrderOps-Commercial` pendiente).
 ### 2026-10-12 — P05-T01 obligaciones y cobranzas
 
 - **[Commercial/Economía]** `platform_obligations` y `platform_collections`. Finanzas abre la obligación con el precio congelado de `conversion_terms` y registra la cobranza. El bruto igual al precio de lista queda `nominal`. El bruto distinto queda `blocked_pending_policy`, con base nula, y la obligación pasa a `satisfied`. Un `failed` no la satisface. No hay comisiones, slots, liquidaciones, facturas ni pagos. La reversa no entra por `record_collection`.
