@@ -1,12 +1,10 @@
 import "server-only";
 
-import { cookies, headers } from "next/headers";
 import { forbidden, redirect } from "next/navigation";
+import { buildLoginRedirect } from "@/lib/auth/build-login-redirect";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import {
   decidePromoterAccess,
-  PROMOTER_LOGIN_PATH,
-  safePromoterNext,
   type PromoterAccessDecision
 } from "@/lib/commercial/promoters/promoter-access";
 
@@ -30,17 +28,7 @@ export async function requirePromoterPrincipal(): Promise<PromoterSession> {
     hasUser: Boolean(user),
     sessionOk: session?.ok === true
   });
-  if (decision === "login") redirect(await promoterLoginRedirect());
+  if (decision === "login") redirect(await buildLoginRedirect());
   if (decision === "forbidden" || !session) forbidden();
   return session;
-}
-
-async function promoterLoginRedirect(): Promise<string> {
-  const headerList = await headers();
-  const cookieStore = await cookies();
-  const next = safePromoterNext(headerList.get("x-orderops-path"));
-  const expired = cookieStore.getAll().some((cookie) => cookie.name.startsWith("sb-") && cookie.name.includes("auth-token"));
-  const params = new URLSearchParams({ next });
-  if (expired) params.set("error", "session");
-  return `${PROMOTER_LOGIN_PATH}?${params.toString()}`;
 }

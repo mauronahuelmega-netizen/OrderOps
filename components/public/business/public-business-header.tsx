@@ -339,7 +339,7 @@ export default function PublicBusinessHeader({
                 <div className="public-business-header__separator" />
 
                 <Link
-                  href="/admin/login"
+                  href="/login"
                   className="public-business-header__link public-business-header__link--secondary public-business-header__link--with-icon"
                 >
                   <LockKeyhole className="public-business-header__link-icon" aria-hidden="true" focusable="false" />

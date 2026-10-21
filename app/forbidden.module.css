@@ -17,3 +17,19 @@
   margin: 0;
   color: var(--text-secondary);
 }
+
+.page a {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.page button {
+  min-height: 44px;
+  margin-top: 0.5rem;
+  padding: 0 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  cursor: pointer;
+}

@@ -8,6 +8,7 @@ import {
   normalizeBusinessAdminRole,
   type AdminPermission
 } from "@/lib/admin/permissions";
+import { buildLoginRedirect } from "@/lib/auth/build-login-redirect";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import {
   isNewOrderHighlightEnabled,
@@ -100,7 +101,7 @@ export async function requireAdminContext(): Promise<AdminContext> {
   const adminContext = await getAdminContext();
 
   if (!adminContext) {
-    redirect("/admin/login");
+    redirect(await buildLoginRedirect());
   }
 
   return adminContext;

@@ -1,6 +1,7 @@
-import { redirect } from "next/navigation";
+import { forbidden, redirect } from "next/navigation";
 import "server-only";
 
+import { buildLoginRedirect } from "@/lib/auth/build-login-redirect";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type SuperAdminContext = {
@@ -47,10 +48,18 @@ export async function getSuperAdminContext(): Promise<SuperAdminContext | null> 
 }
 
 export async function requireSuperAdmin() {
-  const context = await getSuperAdminContext();
+  const supabase = await createSupabaseServerClient();
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
 
+  if (!user) {
+    redirect(await buildLoginRedirect());
+  }
+
+  const context = await getSuperAdminContext();
   if (!context) {
-    redirect("/admin");
+    forbidden();
   }
 
   return context;

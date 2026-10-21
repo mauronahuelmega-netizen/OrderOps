@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     data: { user }
   } = await supabase.auth.getUser();
   if (!user) {
-    return seeOther("/admin/login");
+    return seeOther("/login");
   }
   const { data: sessionData } = await supabase.rpc("commercial_session");
   const session = (sessionData ?? null) as RpcResult | null;

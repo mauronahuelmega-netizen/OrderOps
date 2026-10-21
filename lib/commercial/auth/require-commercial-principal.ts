@@ -1,6 +1,7 @@
 import "server-only";
 
 import { forbidden, redirect } from "next/navigation";
+import { buildLoginRedirect } from "@/lib/auth/build-login-redirect";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type CommercialSession = {
@@ -14,7 +15,7 @@ export async function requireCommercialPrincipal(): Promise<CommercialSession> {
   const {
     data: { user }
   } = await supabase.auth.getUser();
-  if (!user) redirect("/admin/login");
+  if (!user) redirect(await buildLoginRedirect());
 
   const { data } = await supabase.rpc("commercial_session");
   const session = (data ?? null) as CommercialSession | null;
@@ -29,7 +30,7 @@ export async function requireCommercialArea(): Promise<CommercialSession> {
   const {
     data: { user }
   } = await supabase.auth.getUser();
-  if (!user) redirect("/admin/login");
+  if (!user) redirect(await buildLoginRedirect());
 
   const { data } = await supabase.rpc("commercial_session");
   const session = (data ?? null) as CommercialSession | null;

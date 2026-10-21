@@ -16,7 +16,7 @@ export default function MarketingHeader() {
       <MarketingBrand />
       <nav className={styles.desktopNav} aria-label="Navegación principal">{links.map(link => <a key={link.href} href={link.href}>{link.label}</a>)}</nav>
       <div className={styles.headerActions}>
-        <Link href="/admin/login" className={styles.login} data-marketing-event="login_click" data-location="header">Iniciar sesión <ArrowUpRight size={14} aria-hidden="true" /></Link>
+        <Link href="/login" className={styles.login} data-marketing-event="login_click" data-location="header">Iniciar sesión <ArrowUpRight size={14} aria-hidden="true" /></Link>
         <MarketingAction compact location="header" />
         <MobileNavigation links={links} />
       </div>
