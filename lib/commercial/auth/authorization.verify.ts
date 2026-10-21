@@ -37,12 +37,18 @@ assert.equal(hasAdminPermission("viewer", "manageProducts"), false);
 assert.equal(hasAdminPermission("operator", "manageNotifications"), true);
 assert.equal(hasAdminPermission("operator", "manageTeam"), false);
 assert.equal(hasAdminPermission("manager", "manageTeam"), false);
+assert.equal(hasAdminPermission("owner", "viewBilling"), true);
+assert.equal(hasAdminPermission("admin", "viewBilling"), true);
+assert.equal(hasAdminPermission("manager", "viewBilling"), true);
+assert.equal(hasAdminPermission("operator", "viewBilling"), false);
+assert.equal(hasAdminPermission("viewer", "viewBilling"), false);
 assert.deepEqual(Object.keys(getAdminPermissions("owner")).sort(), [
   "canManageNotifications",
   "canManageProducts",
   "canManagePublicSettings",
   "canManageTeam",
   "canUpdateOrders",
+  "canViewBilling",
   "canViewOrders"
 ]);
 

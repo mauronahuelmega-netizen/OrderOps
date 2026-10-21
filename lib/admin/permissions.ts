@@ -6,7 +6,8 @@ export type AdminPermission =
   | "manageNotifications"
   | "manageTeam"
   | "manageProducts"
-  | "managePublicSettings";
+  | "managePublicSettings"
+  | "viewBilling";
 
 export type BusinessAdminRole = "owner" | "manager" | "operator" | "viewer";
 
@@ -66,6 +67,10 @@ export function canManagePublicSettings(role: ProfileRole) {
   return isOwner(role) || isManager(role);
 }
 
+export function canViewBilling(role: ProfileRole) {
+  return isOwner(role) || isManager(role);
+}
+
 export function hasAdminPermission(role: ProfileRole, permission: AdminPermission) {
   switch (permission) {
     case "viewOrders":
@@ -80,6 +85,8 @@ export function hasAdminPermission(role: ProfileRole, permission: AdminPermissio
       return canManageProducts(role);
     case "managePublicSettings":
       return canManagePublicSettings(role);
+    case "viewBilling":
+      return canViewBilling(role);
   }
 }
 
@@ -90,6 +97,7 @@ export function getAdminPermissions(role: ProfileRole) {
     canManageNotifications: canManageNotifications(role),
     canManageTeam: canManageTeam(role),
     canManageProducts: canManageProducts(role),
-    canManagePublicSettings: canManagePublicSettings(role)
+    canManagePublicSettings: canManagePublicSettings(role),
+    canViewBilling: canViewBilling(role)
   };
 }

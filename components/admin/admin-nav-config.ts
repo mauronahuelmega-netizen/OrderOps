@@ -48,6 +48,12 @@ export const adminNavItems: AdminNavItem[] = [
     requiredPermission: "manageProducts"
   },
   {
+    href: "/admin/billing",
+    label: "Facturación",
+    matchPrefixes: ["/admin/billing"],
+    requiredPermission: "viewBilling"
+  },
+  {
     href: "/admin/settings",
     label: "Configuración",
     matchPrefixes: ["/admin/settings", "/admin/team"],

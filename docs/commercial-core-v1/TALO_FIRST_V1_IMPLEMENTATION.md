@@ -149,3 +149,44 @@ Prueba `phase10_service_gate.sql`: PASS, con estos casos:
 Regresión: `phase05_*`, `phase08_*` y `phase10_*` (27 archivos) PASS; `tsc` PASS; `verify-all` PASS (30 archivos).
 
 NOT_VERIFIED: `create_order` de punta a punta con el bloqueo vigente (el trigger cubre todo insert, pero la prueba inserta directo) y el mensaje en la interfaz del navegador.
+
+## L9 — Facturación del negocio y operaciones mínimas de Finanzas
+
+Migraciones `20261020170000_commercial_business_billing.sql` y `20261020180000_commercial_finance_billing_workspace.sql`.
+
+- `public.business_billing_summary(environment)` resuelve el negocio desde `profiles` y nunca desde un parámetro.
+  - Owner, admin legacy y manager reciben: estado de `business_service_access`, CVU y alias del negocio, las últimas 24 transferencias (sin el motivo interno de revisión), el historial de períodos con sus cobranzas y los comprobantes vigentes.
+  - Operator y viewer reciben solo `restricted` y si se pueden crear pedidos.
+  - Una cuenta sin negocio recibe `no_business`.
+- Comprobantes fiscales: tabla `business_fiscal_documents`, bucket privado y registro o anulación por Finanzas. La descarga se valida en SQL y después el servidor firma una URL de 60 segundos con `service_role`.
+- `/admin/billing` muestra el menú Facturación con el permiso `viewBilling` (owner/manager). La página responde a todos los roles, pero operator y viewer ven el aviso genérico. Sigue accesible durante la suspensión, porque el bloqueo de L8 solo afecta inserts de pedidos.
+- Avisos calculados en `lib/commercial/billing/billing-summary.ts`:
+  - T−10 (ventana abierta y período siguiente sin pagar);
+  - T−3;
+  - gracia, con la fecha de fin;
+  - suspensión;
+  - activación pendiente;
+  - revisión;
+  - inicio de servicio pendiente;
+  - pago recibido (7 días);
+  - reversa (30 días).
+- `/commercial/billing` es la pantalla interna de Finanzas. Lee con `public.finance_billing_workspace()` (`collection.write`) y escribe solo con las RPC existentes:
+  - imputar o cerrar transferencias en revisión (L7);
+  - devolver una transferencia imputada;
+  - reabrir un período revertido;
+  - reintentar un aviso muerto;
+  - registrar el inicio de servicio (`record_founder_service_start`);
+  - cargar y anular comprobantes.
+  - La carga entra por el route handler `/commercial/billing/documents`, porque un PDF supera el límite de 1 MB de las server actions. Exige el rol `finance` antes de usar `service_role`, valida PDF (firma `%PDF-`, hasta 5 MB) y, si el registro SQL falla, borra el archivo.
+
+Pruebas:
+- `phase10_business_billing.sql`: PASS, con estos casos:
+  - owner y manager ven el detalle, operator y viewer solo el aviso, owner B no ve datos de A, Finanzas y promotor no tienen negocio y un entorno inválido se rechaza;
+  - superadmin, promotor, owner y soporte no registran comprobantes;
+  - path de otra carpeta, con `..` o con otra extensión rechazado;
+  - cobranza de otro negocio rechazada y número duplicado rechazado;
+  - descarga solo para owner y manager del negocio, comprobante anulado oculto y sin path;
+  - sin lectura ni escritura directa de la tabla;
+  - espacio de Finanzas cerrado a otros roles, con la lista de inicios pendientes;
+  - grants y bucket privado.
+- `billing-summary.verify.ts` y `fiscal-upload.verify.ts`: PASS.

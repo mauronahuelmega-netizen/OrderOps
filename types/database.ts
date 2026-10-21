@@ -1042,6 +1042,22 @@ export type Database = {
         Args: { p_business_id: string; p_reason: string; p_active: boolean };
         Returns: Json;
       };
+      business_billing_summary: { Args: { p_environment: string }; Returns: Json };
+      business_fiscal_document_path: { Args: { p_document_id: string }; Returns: Json };
+      finance_register_fiscal_document: {
+        Args: {
+          p_business_id: string;
+          p_kind: string;
+          p_document_number: string;
+          p_issued_on: string;
+          p_amount_cents: number;
+          p_collection_id: string | null;
+          p_storage_path: string;
+        };
+        Returns: Json;
+      };
+      finance_void_fiscal_document: { Args: { p_document_id: string; p_reason: string }; Returns: Json };
+      finance_billing_workspace: { Args: Record<string, never>; Returns: Json };
       system_record_provider_read: {
         Args: {
           p_currency: string;

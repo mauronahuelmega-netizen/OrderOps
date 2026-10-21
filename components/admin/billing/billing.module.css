@@ -1,0 +1,146 @@
+.page {
+  display: grid;
+  gap: 1rem;
+  max-width: 56rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+  color: var(--text-primary);
+}
+
+.header {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 650;
+}
+
+.header p,
+.meta {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.card {
+  display: grid;
+  gap: 0.75rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 0.875rem;
+  box-shadow: var(--shadow-card);
+  padding: 1rem 1.25rem;
+}
+
+.card h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.notices {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.notice {
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-subtle);
+  padding: 0.75rem 1rem;
+  font-size: 0.9375rem;
+}
+
+.critical {
+  background: var(--bg-cancelled-subtle);
+  color: var(--text-cancelled-strong);
+}
+
+.warning {
+  background: var(--bg-pending-subtle);
+  color: var(--text-pending-strong);
+}
+
+.info {
+  background: var(--bg-delivery-subtle);
+  color: var(--text-delivery-strong);
+}
+
+.success {
+  background: var(--bg-ready-subtle);
+  color: var(--text-ready-strong);
+}
+
+.facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.facts div {
+  display: grid;
+  gap: 0.125rem;
+}
+
+.facts dt {
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.facts dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+.destination {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  user-select: all;
+  word-break: break-all;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.table th,
+.table td {
+  text-align: left;
+  padding: 0.5rem 0.25rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.table th {
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.link {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.steps {
+  margin: 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.25rem;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 40rem) {
+  .page {
+    padding: 1rem 0.75rem 2rem;
+  }
+
+  .table {
+    font-size: 0.8125rem;
+  }
+}

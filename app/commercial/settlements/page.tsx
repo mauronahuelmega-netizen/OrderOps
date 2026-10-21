@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { requireCommercialArea } from "@/lib/commercial/auth/require-commercial-principal";
 import { formatArsFromCents } from "@/lib/commercial/money";
 import { loadSettlementWorkspace } from "@/lib/commercial/settlements/load-workspace";
@@ -65,6 +66,9 @@ export default async function CommercialSettlementsPage({
     <main className={styles.page}>
       <section className={styles.list}>
         <h1>Liquidaciones</h1>
+        <p className={styles.meta}>
+          <Link href="/commercial/billing">Cobranzas de suscripción</Link>
+        </p>
         {loaded.ok && notice ? <p className={styles.notice}>{NOTICES[notice] ?? notice}</p> : null}
         {!loaded.ok ? (
           <p className={styles.notice}>

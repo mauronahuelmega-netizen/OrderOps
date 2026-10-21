@@ -587,6 +587,17 @@ Fila única que activa el bloqueo de pedidos nuevos por acceso al servicio (Talo
 - Trigger `orders_service_access_gate` (BEFORE INSERT en `public.orders`): con el bloqueo vigente, rechaza con `service_access_blocked` (DETAIL = estado) si `commercial.business_service_access` devuelve `allows_orders` distinto de true. Los pedidos ya aceptados siguen su ciclo (no hay trigger de UPDATE de estado)
 - Trigger `orders_client_update_guard`: `authenticated`/`anon` solo pueden cambiar `assigned_to`/`assigned_at` por UPDATE directo
 
+### `business_fiscal_documents`
+
+Comprobantes fiscales emitidos fuera de OrderOps y registrados por Finanzas (Talo First V1, L9, DT-09). OrderOps no emite facturas.
+
+- `kind in ('invoice','credit_note','receipt')`, `document_number` (1–60), `issued_on`, `amount_cents > 0`, `currency = 'ARS'`
+- `collection_id` opcional; si viene, tiene que ser una cobranza del mismo negocio
+- `storage_path` único con formato `fiscal/{business_id}/{segmento}.pdf` (check), en el bucket privado `commercial-business-documents`, que no tiene policies de objeto
+- unique `(business_id, kind, document_number)`; anular (`voided_*` con motivo) no borra la fila
+- Escriben `public.finance_register_fiscal_document` y `finance_void_fiscal_document` (`collection.write`). Lectura directa solo con `collection.write`
+- El negocio (owner/admin/manager) lo ve por `public.business_billing_summary`. La descarga pasa por `public.business_fiscal_document_path`, que valida el negocio y el rol; después el servidor firma una URL de 60 segundos
+
 ### `founder_slots`
 
 - `conversion_terms_id not null`
