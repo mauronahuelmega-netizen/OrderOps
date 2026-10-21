@@ -1013,6 +1013,20 @@ export type Database = {
         Args: { p_error: string; p_inbox_id: string };
         Returns: Json;
       };
+      system_record_provider_read: {
+        Args: {
+          p_currency: string;
+          p_gross_amount_cents: number;
+          p_gross_source: string;
+          p_inbox_id: string;
+          p_net_amount_cents: number;
+          p_net_source: string;
+          p_provider_status: string;
+          p_provider_timestamp: string;
+          p_response_digest: string;
+        };
+        Returns: Json;
+      };
       create_claim: {
         Args: { p_commercial_business_id: string; p_opportunity_id: string | null };
         Returns: Json;

@@ -28,4 +28,18 @@ Migración `20261020110000_commercial_provider_webhook_inbox.sql`: tabla `commer
 
 Pruebas: `phase10_webhook_inbox.sql` PASS en QA; `talo-webhook-inbox.verify.ts` y `talo-provisioning.verify.ts` PASS con fetch y RPC falsos; `verify-all` 29/29; `tsc --noEmit` sin errores.
 
-NOT_VERIFIED: alta real en sandbox de un cliente por negocio (sin URL HTTPS estable no se crea); ruta HTTP montada en Next contra QA; formato de alias aceptado por Talo; `X-Talo-Signature`.
+NOT_VERIFIED (L2): alta real en sandbox de un cliente por negocio (sin URL HTTPS estable no se crea); ruta HTTP montada en Next contra QA; formato de alias aceptado por Talo; `X-Talo-Signature`.
+
+## L3 — Lectura autenticada, evidencia e imputación de la activación
+
+Migración `20261020120000_commercial_provider_read_imputation.sql`.
+
+- `commercial.provider_read_evidence`: evidencia `provider_read` (API verificada, firma no verificada), con digest SHA-256 de la respuesta.
+- `public.system_record_provider_read` (solo `service_role`), atómica: exige fila `processing`; estado distinto de `PROCESSED`, sin fecha, moneda distinta de ARS o importes incompletos vuelven a reintento sin crear recibo. Si no: actor system, `confirm_provider_receipt` con `observed_at` = fecha del proveedor, evidencia, imputación y bandeja `processed`.
+- `commercial.impute_provider_read_receipt`: un solo `conversion_terms` por negocio (si no, `terms_missing`/`terms_ambiguous`). Activación sin cobrar y bruto = ARS 290.000: abre la obligación setup si falta, `record_collection` nominal con clave `provider-receipt:<id>` y devenga la comisión de alta ARS 120.000 en `pending` (regla propia de disponibilidad). No asigna slot ni crea derecho recurrente. Importe distinto: `amount_mismatch`. Con la activación ya cobrada: `subscription_not_automated` hasta L5.
+- No modifica `impute_provider_receipt` (flujo de atestación manual).
+- Worker: `lib/commercial/payments/talo-receipt-worker.ts` y `POST /api/commercial/talo/worker` con `Authorization: Bearer COMMERCIAL_WORKER_SECRET` (≥32 caracteres; si falta, 404). La fecha del proveedor debe traer zona explícita.
+
+Pruebas: `phase10_provider_read.sql` PASS (reintentos sin recibo, imputación atómica, `recorded_by` system, auditoría `actor_kind = system`, sin slot, repetición sin doble cobro, conciliación por términos ambiguos o ausentes e importe, grants). Control negativo del arnés: un `raise` devuelve FAIL. Regresión PASS: `phase08_provider_receipts`, `phase08_impute_provider_receipt`, `phase10_system_actor`, `phase10_webhook_inbox`, `phase05_collections`, `phase05_slots`, `e2e_08`. `talo-receipt-worker.verify.ts` PASS; `tsc` sin errores.
+
+NOT_VERIFIED (L3): lectura real contra la API sandbox desde el worker; programación periódica del worker (requiere despliegue, no autorizado).

@@ -542,6 +542,16 @@ Aviso de Talo pendiente de lectura autenticada (Talo First V1, L2). No confirma 
 - reintento exponencial con tope de 60 minutos; `dead` desde el intento 12; `processing` de más de 5 minutos se recupera
 - RLS: lectura solo con `collection.write`
 
+### `provider_read_evidence`
+
+Lectura autenticada del movimiento en la API de Talo con credenciales de OrderOps (Talo First V1, L3). No valida `X-Talo-Signature`.
+
+- `receipt_id` único, `inbox_id` único
+- `kind = provider_read`; `provider_api_verified` forzado en verdadero, `webhook_signature_verified` forzado en falso
+- estado, moneda ARS, bruto, neto, fuentes, `provider_timestamp` con zona explícita
+- `response_digest`: SHA-256 de la respuesta; el cuerpo no se guarda
+- Solo `public.system_record_provider_read` escribe. Confirma, guarda evidencia, imputa la activación y devenga la comisión de alta en una transacción.
+
 ### `founder_slots`
 
 - `conversion_terms_id not null`
