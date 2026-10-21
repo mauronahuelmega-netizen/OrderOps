@@ -9,8 +9,13 @@ const BUCKET = "commercial-business-documents";
 
 type RpcResult = { ok?: boolean; commercial_error_code?: string; roles?: string[]; kind?: string };
 
-function back(request: Request, notice: string) {
-  return NextResponse.redirect(new URL(`/commercial/billing?notice=${encodeURIComponent(notice)}`, request.url), 303);
+// Relative Location: request.url may carry an internal host that differs from the browser origin.
+function seeOther(location: string) {
+  return new NextResponse(null, { status: 303, headers: { Location: location } });
+}
+
+function back(notice: string) {
+  return seeOther(`/commercial/billing?notice=${encodeURIComponent(notice)}`);
 }
 
 // Route handler instead of a server action: fiscal PDFs exceed the 1 MB server action body limit.
@@ -20,12 +25,12 @@ export async function POST(request: Request) {
     data: { user }
   } = await supabase.auth.getUser();
   if (!user) {
-    return NextResponse.redirect(new URL("/admin/login", request.url), 303);
+    return seeOther("/admin/login");
   }
   const { data: sessionData } = await supabase.rpc("commercial_session");
   const session = (sessionData ?? null) as RpcResult | null;
   if (session?.ok !== true || session.kind !== "internal" || !(session.roles ?? []).includes("finance")) {
-    return back(request, "forbidden");
+    return back("forbidden");
   }
 
   const formData = await request.formData();
@@ -44,7 +49,7 @@ export async function POST(request: Request) {
     randomBytes(6).toString("hex")
   );
   if (!parsed.ok) {
-    return back(request, parsed.code);
+    return back(parsed.code);
   }
   const { input } = parsed;
 
@@ -54,7 +59,7 @@ export async function POST(request: Request) {
     upsert: false
   });
   if (uploadError) {
-    return back(request, "upload_failed");
+    return back("upload_failed");
   }
 
   const { data, error } = await supabase.rpc("finance_register_fiscal_document", {
@@ -69,7 +74,7 @@ export async function POST(request: Request) {
   const result = (data ?? null) as RpcResult | null;
   if (error || result?.ok !== true) {
     await storage.remove([input.storagePath]);
-    return back(request, result?.commercial_error_code ?? "error");
+    return back(result?.commercial_error_code ?? "error");
   }
-  return back(request, "ok");
+  return back("ok");
 }

@@ -190,7 +190,8 @@ export function computeBillingNotices(
     (collection) =>
       collection.status === "posted" && collection.nominal && withinDays(collection.posted_at, now, PAYMENT_NOTICE_DAYS)
   );
-  if (paid.length > 0) {
+  // A past payment must not read as "all good" while the current period is still unpaid.
+  if (paid.length > 0 && access.state !== "suspended" && access.state !== "grace") {
     notices.push({ kind: "payment_received", tone: "success" });
   }
   return notices;

@@ -148,7 +148,7 @@ Prueba `phase10_service_gate.sql`: PASS, con estos casos:
 
 Regresión: `phase05_*`, `phase08_*` y `phase10_*` (27 archivos) PASS; `tsc` PASS; `verify-all` PASS (30 archivos).
 
-NOT_VERIFIED: `create_order` de punta a punta con el bloqueo vigente (el trigger cubre todo insert, pero la prueba inserta directo) y el mensaje en la interfaz del navegador.
+NOT_VERIFIED en L8: `create_order` de punta a punta con el bloqueo vigente y el mensaje en el navegador. Se cubrió en L10.
 
 ## L9 — Facturación del negocio y operaciones mínimas de Finanzas
 
@@ -190,3 +190,42 @@ Pruebas:
   - espacio de Finanzas cerrado a otros roles, con la lista de inicios pendientes;
   - grants y bucket privado.
 - `billing-summary.verify.ts` y `fiscal-upload.verify.ts`: PASS.
+
+## L10 — Pruebas integrales en QA
+
+Fixture `supabase/seed/talo_first_l10_browser_fixture.sql`: solo QA, se niega a correr dos veces, ids `80808080-8080-4080-8080-*`. Crea tres negocios con sesión abierta: A activo, B suspendido con un pedido previo y D con inicio pendiente. También crea owner, operator, Finanzas, superadmin y promotor. Las transferencias entran por `system_record_provider_read`, el mismo camino del worker. Recorrido en el navegador con `next dev --webpack` sobre el QA local.
+
+Correcciones de este lote:
+- `mapCreateOrderRpcError` (admin) no leía el mensaje de `PostgrestError`, así que todo error de `create_order` mostraba el texto genérico. Ahora muestra el de suspensión.
+- El aviso «Recibimos tu pago» ya no aparece en suspensión ni en gracia.
+- El route handler de carga redirige con `Location` relativo. Con `request.url` el host interno podía no coincidir con el del navegador.
+- Finanzas ve el tipo de comprobante en castellano.
+
+PASS (ejecutado):
+- Owner A: Facturación con estado, CVU/alias, transferencias, historial y descarga. La descarga redirige a una URL firmada del bucket privado y devuelve un PDF real. La URL pública devuelve 400. Un id inexistente o inválido da 404.
+- Operator A: sin menú Facturación y solo el aviso genérico.
+- Owner B: estado suspendido, sin datos de A, 404 al pedir el comprobante de A y `forbidden` al intentar cargar.
+- Owner D: después del inicio y la imputación, activo desde 26/09/2026 con el período 26/10/2026 pagado.
+- Finanzas en `/commercial/billing`:
+  - devolución con referencia;
+  - registro del inicio Founder;
+  - imputación manual al período;
+  - carga de PDF; un duplicado da `duplicate` y un archivo que no es PDF da `file_invalid`, sin objetos huérfanos;
+  - anulación (el comprobante desaparece para el negocio).
+  - Todo queda auditado.
+- Bloqueo encendido en QA. Se exentaron los dos negocios QA legacy y `set_service_gate` rechazó un preflight incorrecto antes de aceptar el correcto. Resultados:
+  - Admin B: el pedido manual se rechaza con el mensaje de suspensión.
+  - `PRVB22`, anterior al bloqueo, se terminó (preparando → listo → completado).
+  - Admin A creó un pedido.
+  - `create_order` con el cliente de servicio del checkout: B devuelve `service_access_blocked` y A crea el pedido.
+  - Después se apagó el bloqueo y se revocaron las exenciones.
+- Webhook y worker: 404 sin integración habilitada, sin secreto y con un secreto falso.
+- `tsc`, `verify-all` (32 archivos) y 50 de 55 suites SQL.
+
+FAIL por estado del QA (no por código): `phase01_rls`, `phase02_board` y `phase03_claims` suponen un QA vacío. `phase04_e2e10` y `phase05_collections` cuentan filas globales de economía, que ahora incluyen las del fixture.
+
+NOT_VERIFIED:
+- Checkout público en el navegador: `components/public/catalog/catalog-preview-mobile-feel.module.css` no compila con webpack (selector `:global` no puro, preexistente). Turbopack no arranca sobre la junction de `node_modules` del worktree.
+- Webhook → worker → lectura en Talo por HTTP: no hay credenciales sandbox configuradas y el origen está fijado al sandbox real.
+- Talo sandbox de punta a punta: no hay URL HTTPS autorizada.
+- Renovación automática, crédito tardío, reversa con comisión y tope de 12 slots: solo cubiertos por las suites SQL e integración de L5–L7, no en el navegador.

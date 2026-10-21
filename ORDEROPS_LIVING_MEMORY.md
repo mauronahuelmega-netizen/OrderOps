@@ -475,6 +475,16 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-21 — Commercial Core — Talo First V1 (L1–L10, solo worktree y QA)
+
+- **[Commercial]** Rama local `cursor/commercial-talo-first-v1`, sin push. Migraciones `20261020*` aplicadas solo en el QA `orderops-phase06-qa`; ninguna en producción. Detalle por lote en `docs/commercial-core-v1/TALO_FIRST_V1_IMPLEMENTATION.md`.
+- **[Tenancy/Pedidos]** Trigger `orders_service_access_gate` (before insert en `public.orders`): si `commercial.service_gate_config.enforced_from` está vigente, `create_order` falla con `service_access_blocked` para negocios sin `allows_orders`. Los pedidos existentes se pueden terminar. Apagado por defecto; se enciende solo con `set_service_gate` (superadmin, prospectivo y con preflight). Exenciones legacy: `service_access_exemptions`.
+- **[Pedidos]** Admin mapea `service_access_blocked` a `SERVICE_SUSPENDED`; checkout público lo muestra como local cerrado sin revelar facturación. `mapCreateOrderRpcError` del admin ahora lee `message` de `PostgrestError` (objeto plano): antes todos los errores de `create_order` caían en el mensaje genérico.
+- **[Rutas]** `/admin/billing` (permiso nuevo `viewBilling`: owner/manager) y `/admin/billing/documents/[id]` (URL firmada de 60 s tras validar en SQL). Interna: `/commercial/billing` (Finanzas, `collection.write`) y `POST /commercial/billing/documents` (carga de PDF).
+- **[Storage]** Bucket privado `commercial-business-documents`; tabla `commercial.business_fiscal_documents`.
+- **[CSS]** `components/admin/billing/billing.module.css` con tokens semánticos; sin cambios en CSS globales.
+- Breaking: no (el bloqueo queda apagado hasta activación humana).
+
 ### 2026-10-17 — Commercial Core — Intentos sintéticos de Mobbex
 
 - **[Commercial]** `provider_payment_intents` y `provider_payment_events` guardan un checkout o una suscripción de Mobbex en sandbox y un evento sintético `pending_unverified`. No confirman un cobro, no crean recibos ni cobranzas y no modifican T08. Migración `20261018003000`, aplicada solo en el QA `orderops-phase06-qa`. Informe: `docs/commercial-core-v1/T09_MOBBEX_PAYMENT_INTENTS.md`.

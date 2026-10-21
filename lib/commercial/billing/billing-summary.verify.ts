@@ -64,6 +64,11 @@ assert.deepEqual(kinds({ state: "active", allows_orders: true, start_pending: tr
 // Payment and reversal notices come from the collection history.
 assert.deepEqual(kinds(active("2026-11-25", false), [subscription({ posted_at: "2026-10-18T12:00:00Z" })]), ["payment_received"]);
 assert.deepEqual(kinds(active("2026-11-25", false), [subscription({ posted_at: "2026-10-01T12:00:00Z" })]), []);
+assert.deepEqual(kinds({ state: "suspended", allows_orders: false }, [subscription({ posted_at: "2026-10-18T12:00:00Z" })]), ["suspended"]);
+assert.deepEqual(
+  kinds({ state: "grace", allows_orders: true, grace_ends_at: "2026-10-23T03:00:00Z" }, [subscription({ posted_at: "2026-10-18T12:00:00Z" })]),
+  ["grace"]
+);
 assert.deepEqual(
   kinds(active("2026-11-25", false), [subscription({ posted_at: "2026-10-18T12:00:00Z", nominal: false })]),
   []

@@ -69,6 +69,12 @@ const REVIEW_REASONS: Record<string, string> = {
   ambiguous_period: "Período ambiguo"
 };
 
+const DOCUMENT_KINDS: Record<string, string> = {
+  invoice: "Factura",
+  credit_note: "Nota de crédito",
+  receipt: "Recibo"
+};
+
 function money(cents: number | null): string {
   return typeof cents === "number" ? formatArsFromCents(cents) : "—";
 }
@@ -227,7 +233,7 @@ export default async function CommercialBillingPage({ searchParams }: { searchPa
               {(workspace.fiscal_documents ?? []).map((document) => (
                 <div key={document.id} className={styles.form}>
                   <p className={styles.meta}>
-                    {document.business_name} · {document.kind} {document.document_number} · {document.issued_on} ·{" "}
+                    {document.business_name} · {DOCUMENT_KINDS[document.kind] ?? document.kind} {document.document_number} · {document.issued_on} ·{" "}
                     {formatArsFromCents(document.amount_cents)}
                     {document.voided_at ? " · anulado" : ""}
                   </p>

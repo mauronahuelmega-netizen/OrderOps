@@ -248,7 +248,13 @@ function mapCreateOrderRpcError(error: unknown): {
   code: OrderCreationErrorCode;
   error: string;
 } {
-  const message = error instanceof Error ? error.message : String(error);
+  // PostgrestError reaches the server action as a plain object, not an Error instance.
+  const message =
+    error instanceof Error
+      ? error.message
+      : typeof error === "object" && error !== null && typeof (error as { message?: unknown }).message === "string"
+        ? (error as { message: string }).message
+        : String(error);
   const normalizedMessage = message.toLowerCase();
 
   if (normalizedMessage.includes("service_access_blocked")) {
