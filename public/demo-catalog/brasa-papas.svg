@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Papas fritas ilustradas">
+  <rect width="800" height="600" fill="#1c1917"/>
+  <path d="M250 520h300l-40-250H290z" fill="#e11d48"/>
+  <rect x="300" y="160" width="28" height="200" rx="10" transform="rotate(-12 314 260)" fill="#fbbf24"/>
+  <rect x="350" y="140" width="28" height="220" rx="10" transform="rotate(8 364 250)" fill="#f59e0b"/>
+  <rect x="400" y="130" width="28" height="230" rx="10" transform="rotate(-6 414 245)" fill="#fbbf24"/>
+  <rect x="450" y="150" width="28" height="210" rx="10" transform="rotate(10 464 255)" fill="#d97706"/>
+  <rect x="330" y="170" width="24" height="180" rx="10" transform="rotate(4 342 260)" fill="#f59e0b"/>
+</svg>

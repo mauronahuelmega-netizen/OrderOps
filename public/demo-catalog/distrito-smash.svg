@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Smash burger ilustrada">
+  <rect width="800" height="600" fill="#18181b"/>
+  <ellipse cx="400" cy="460" rx="200" ry="22" fill="#09090b"/>
+  <path d="M210 270c16-90 130-140 190-140s174 50 190 140H210z" fill="#f59e0b"/>
+  <rect x="205" y="270" width="390" height="22" rx="8" fill="#16a34a"/>
+  <rect x="215" y="292" width="370" height="18" rx="7" fill="#f8fafc"/>
+  <rect x="208" y="312" width="384" height="42" rx="12" fill="#44403c"/>
+  <path d="M220 360h360c8 32-16 56-180 56S212 392 220 360z" fill="#b45309"/>
+</svg>

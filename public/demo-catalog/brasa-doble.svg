@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Hamburguesa doble ilustrada">
+  <rect width="800" height="600" fill="#1c1917"/>
+  <ellipse cx="400" cy="500" rx="230" ry="26" fill="#0c0a09"/>
+  <path d="M180 210c24-120 150-175 220-175s196 55 220 175H180z" fill="#ea580c"/>
+  <rect x="175" y="210" width="450" height="24" rx="10" fill="#4d7c0f"/>
+  <rect x="188" y="234" width="424" height="54" rx="16" fill="#7c2d12"/>
+  <rect x="190" y="292" width="420" height="18" rx="8" fill="#facc15"/>
+  <rect x="188" y="314" width="424" height="54" rx="16" fill="#7c2d12"/>
+  <rect x="200" y="372" width="400" height="20" rx="8" fill="#dc2626"/>
+  <path d="M190 400h420c12 46-24 78-210 78S178 446 190 400z" fill="#b45309"/>
+</svg>

@@ -13,6 +13,11 @@ out
 .env.local
 .env.*.local
 
+# Demo / QA secrets (never commit)
+ORDEROPS_DEMO_ACCESS.private.md
+*.private.md
+tmp/
+
 # Logs
 npm-debug.log*
 yarn-debug.log*
