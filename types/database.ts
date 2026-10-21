@@ -1024,6 +1024,24 @@ export type Database = {
       };
       finance_reopen_obligation: { Args: { p_note: string; p_obligation_id: string }; Returns: Json };
       finance_retry_webhook: { Args: { p_inbox_id: string }; Returns: Json };
+      service_gate_preflight: {
+        Args: { p_at: string };
+        Returns: {
+          business_id: string;
+          business_name: string;
+          slug: string;
+          state: string;
+          orders_last_30_days: number;
+        }[];
+      };
+      set_service_gate: {
+        Args: { p_enforced_from: string | null; p_expected_blocked: number };
+        Returns: Json;
+      };
+      set_service_access_exemption: {
+        Args: { p_business_id: string; p_reason: string; p_active: boolean };
+        Returns: Json;
+      };
       system_record_provider_read: {
         Args: {
           p_currency: string;

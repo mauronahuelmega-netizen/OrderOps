@@ -11,6 +11,7 @@ export type OrderCreationErrorCode =
   | "VALIDATION_ERROR"
   | "PRODUCT_UNAVAILABLE"
   | "ORDER_CREATE_FAILED"
+  | "SERVICE_SUSPENDED"
   | "UNKNOWN";
 
 export type ActiveSessionMutationGuardResult =

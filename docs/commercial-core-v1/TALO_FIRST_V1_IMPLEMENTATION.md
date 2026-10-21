@@ -98,7 +98,7 @@ Regresión PASS: `phase10_*` (L3 ajustado: la segunda transferencia de ARS 290.0
 
 ## L7 — Conciliación manual de Finanzas
 
-Migración `20261020150000_commercial_finance_reconciliation.sql`. Todas exigen `collection.write` (finance o superadmin); no se agregaron permisos.
+Migración `20261020150000_commercial_finance_reconciliation.sql`. Todas exigen `collection.write` (rol `finance`); no se agregaron permisos.
 
 - `finance_impute_receipt(recibo, términos, período | null, nota)` toma recibos `reconciliation_required` con evidencia `provider_read`:
   - con `null` imputa la activación;
@@ -120,3 +120,32 @@ Prueba `phase10_finance_reconciliation.sql`: PASS, con estos casos:
 - reapertura y nuevo cobro del mismo período, con dos cobranzas en la obligación;
 - reintento de un aviso muerto;
 - grants.
+
+## L8 — Bloqueo de pedidos nuevos (H6, DT-06, DT-07)
+
+Migración `20261020160000_commercial_service_gate.sql`.
+
+- `service_gate_config` (fila única). Con `enforced_from` null, el bloqueo queda apagado, que es el valor por defecto. La migración no cambia ningún comportamiento existente.
+- Trigger BEFORE INSERT en `public.orders`. Con el bloqueo vigente, si `business_service_access` no permite pedidos, rechaza con `service_access_blocked` (P0001, DETAIL = estado). Cubre `create_order` y cualquier otro insert, incluida la importación M3. Por eso los tenants legacy necesitan una excepción expresa antes de activar el bloqueo.
+- DT-07: solo bloquea inserts. Un negocio suspendido puede terminar los pedidos ya aceptados (`transition_order_status`) y reasignarlos.
+- DT-06: el trigger `orders_client_update_guard` impide que `authenticated` o `anon` cambien por UPDATE directo cualquier columna salvo `assigned_to`/`assigned_at`. El estado pasa por `transition_order_status` y los totales por `create_order`.
+- Activación, solo con `program.write`:
+  - `service_gate_preflight(at)` lista los negocios con su estado y sus pedidos de los últimos 30 días;
+  - `set_service_gate(enforced_from, expected_blocked)` exige una fecha futura (`not_prospective`) y que el conteo de bloqueados coincida con el preflight (`preflight_mismatch`). Con null, desactiva el bloqueo;
+  - `set_service_access_exemption(business, reason, active)` otorga o revoca la excepción legacy. Todo queda auditado.
+- App: el pedido manual del admin muestra `SERVICE_SUSPENDED`, con un mensaje que indica que los pedidos aceptados se pueden terminar y que el responsable puede revisar Facturación. El checkout público muestra el mismo mensaje de local cerrado y no revela el estado de facturación al cliente.
+
+Prueba `phase10_service_gate.sql`: PASS, con estos casos:
+- bloqueo apagado por defecto;
+- Finanzas y promotor rechazados;
+- `not_prospective` y `preflight_mismatch`;
+- excepción otorgada y revocada;
+- con el bloqueo vigente: activo y exento permiten, suspendido y sin términos bloquean;
+- suspendido que termina y reasigna pedidos aceptados;
+- UPDATE directo de total, estado o negocio denegado;
+- desactivación;
+- grants.
+
+Regresión: `phase05_*`, `phase08_*` y `phase10_*` (27 archivos) PASS; `tsc` PASS; `verify-all` PASS (30 archivos).
+
+NOT_VERIFIED: `create_order` de punta a punta con el bloqueo vigente (el trigger cubre todo insert, pero la prueba inserta directo) y el mensaje en la interfaz del navegador.

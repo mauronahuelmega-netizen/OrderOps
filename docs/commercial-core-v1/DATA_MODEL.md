@@ -578,6 +578,15 @@ Resolución manual de Finanzas sobre un recibo (Talo First V1, L7). Solo se agre
 - `collection_id` de la cobranza imputada o revertida
 - Escriben `public.finance_impute_receipt`, `finance_close_receipt`; `finance_reopen_obligation` y `finance_retry_webhook` completan la conciliación
 
+### `service_gate_config`
+
+Fila única que activa el bloqueo de pedidos nuevos por acceso al servicio (Talo First V1, L8, H6).
+
+- `id boolean` PK con `check (id)`; `enforced_from timestamptz` null = bloqueo apagado
+- Lo cambia solo `public.set_service_gate` (`program.write`), que exige fecha futura y que el conteo de bloqueados del preflight coincida
+- Trigger `orders_service_access_gate` (BEFORE INSERT en `public.orders`): con el bloqueo vigente, rechaza con `service_access_blocked` (DETAIL = estado) si `commercial.business_service_access` devuelve `allows_orders` distinto de true. Los pedidos ya aceptados siguen su ciclo (no hay trigger de UPDATE de estado)
+- Trigger `orders_client_update_guard`: `authenticated`/`anon` solo pueden cambiar `assigned_to`/`assigned_at` por UPDATE directo
+
 ### `founder_slots`
 
 - `conversion_terms_id not null`

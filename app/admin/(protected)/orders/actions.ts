@@ -251,6 +251,14 @@ function mapCreateOrderRpcError(error: unknown): {
   const message = error instanceof Error ? error.message : String(error);
   const normalizedMessage = message.toLowerCase();
 
+  if (normalizedMessage.includes("service_access_blocked")) {
+    return {
+      code: "SERVICE_SUSPENDED",
+      error:
+        "El servicio de OrderOps no permite crear pedidos nuevos en este momento. Los pedidos ya aceptados se pueden terminar. El responsable del negocio puede revisarlo en Facturaci\u00f3n."
+    };
+  }
+
   if (normalizedMessage.includes("on_demand_mode is not active")) {
     return {
       code: "NO_ACTIVE_SESSION",

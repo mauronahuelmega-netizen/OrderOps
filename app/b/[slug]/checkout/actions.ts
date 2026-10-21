@@ -194,7 +194,8 @@ export async function createPublicCheckoutOrderAction(
 }
 
 function mapCreateOrderRpcError(message: string): string {
-  if (message.includes("on_demand_mode is not active")) {
+  // Billing state is not disclosed to customers.
+  if (message.includes("service_access_blocked") || message.includes("on_demand_mode is not active")) {
     return ORDERS_CLOSED_MESSAGE;
   }
 
