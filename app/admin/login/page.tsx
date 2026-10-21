@@ -3,6 +3,8 @@ import { loginAction } from "@/app/admin/login/actions";
 import styles from "./admin-login.module.css";
 import { getAdminContext } from "@/lib/admin/context";
 import { getAdminSupportWhatsappUrl } from "@/lib/admin/support";
+import { resolvePostLoginPath } from "@/lib/commercial/auth/resolve-post-login-path";
+import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 type AdminLoginPageProps = {
   searchParams: Promise<{
@@ -18,13 +20,24 @@ const errorMessages: Record<string, string> = {
 export default async function AdminLoginPage({
   searchParams
 }: AdminLoginPageProps) {
-  const [adminContext, params] = await Promise.all([
+  const [adminContext, params, supabase] = await Promise.all([
     getAdminContext(),
-    searchParams
+    searchParams,
+    createSupabaseServerClient()
   ]);
 
   if (adminContext) {
     redirect("/admin/dashboard");
+  }
+
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
+  if (user) {
+    const next = await resolvePostLoginPath(supabase, user.id);
+    if (!next.startsWith("/admin/login")) {
+      redirect(next);
+    }
   }
 
   const errorMessage = params.error ? errorMessages[params.error] : null;
@@ -34,7 +47,9 @@ export default async function AdminLoginPage({
     <main className={styles["admin-login-page"]}>
       <section className={styles["admin-login-card"]}>
         <div className={styles["admin-login-copy"]}>
-          <p className="catalog-eyebrow">OrderOps</p>
+          <p className={styles.brand} suppressHydrationWarning>
+            ORDEROPS
+          </p>
           <h1>Panel de administración</h1>
           <p>Gestioná pedidos y catálogo de tu negocio.</p>
         </div>

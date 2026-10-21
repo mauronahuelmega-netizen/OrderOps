@@ -4,8 +4,8 @@ import { redirect } from "next/navigation";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import {
   classifyAuthFailure,
-  PROMOTER_HOME_PATH,
-  PROMOTER_LOGIN_PATH
+  PROMOTER_LOGIN_PATH,
+  safePromoterNext
 } from "@/lib/commercial/promoters/promoter-access";
 
 function loginError(
@@ -30,7 +30,8 @@ export async function promoterLoginAction(formData: FormData) {
   const session = (data ?? null) as { ok?: boolean } | null;
   if (session?.ok !== true) loginError("not_promoter");
 
-  redirect(PROMOTER_HOME_PATH);
+  const nextValue = formData.get("next");
+  redirect(safePromoterNext(typeof nextValue === "string" ? nextValue : null));
 }
 
 export async function promoterLogoutAction() {

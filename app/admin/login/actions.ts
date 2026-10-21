@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { resolvePostLoginPath } from "@/lib/commercial/auth/resolve-post-login-path";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export async function loginAction(formData: FormData) {
@@ -15,14 +16,14 @@ export async function loginAction(formData: FormData) {
   }
 
   const supabase = await createSupabaseServerClient();
-  const { error } = await supabase.auth.signInWithPassword({
+  const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password
   });
 
-  if (error) {
+  if (error || !data.user) {
     redirect("/admin/login?error=invalid_credentials");
   }
 
-  redirect("/admin/dashboard");
+  redirect(await resolvePostLoginPath(supabase, data.user.id));
 }

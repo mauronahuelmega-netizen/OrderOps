@@ -29,7 +29,6 @@
   color: var(--text-tertiary);
   font-size: 0.85rem;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
 }
 
 .copy h1 {
