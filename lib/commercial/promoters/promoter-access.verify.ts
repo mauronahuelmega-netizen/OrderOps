@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
+import { LOGIN_PATH } from "@/lib/auth/login-path";
 import {
   classifyAuthFailure,
   decidePromoterAccess,
@@ -25,31 +26,25 @@ assert.equal(safePromoterNext("/admin/dashboard"), PROMOTER_HOME_PATH);
 
 const gate = readFileSync("lib/commercial/promoters/require-promoter-principal.ts", "utf8");
 assert.equal(gate.includes('redirect("/admin/login")'), false);
-assert.equal(gate.includes("PROMOTER_LOGIN_PATH"), true);
+assert.equal(gate.includes("buildLoginRedirect"), true);
 assert.equal(gate.includes("profiles"), false);
 assert.equal(gate.includes("forbidden"), true);
 
 const login = readFileSync("app/promoter/login/actions.ts", "utf8");
-assert.equal(login.includes("classifyAuthFailure"), true);
-assert.equal(login.includes("signInWithPassword"), true);
-assert.equal(login.includes("promoter_session"), true);
-assert.equal(login.includes("searchParams"), false);
-assert.equal(login.includes("safePromoterNext"), true);
-assert.equal(login.includes("signOut"), true);
-assert.equal(login.includes(`redirect(PROMOTER_LOGIN_PATH)`), true);
+assert.equal(login.includes("universalLoginAction"), true);
+assert.equal(login.includes("universalLogoutAction"), true);
 
 const adminLogin = readFileSync("app/admin/login/actions.ts", "utf8");
-assert.equal(adminLogin.includes('redirect("/admin/dashboard")'), true);
-assert.equal(adminLogin.includes('redirect("/admin/login?error=missing_credentials")'), true);
-assert.equal(adminLogin.includes("/promoter"), false);
+assert.equal(adminLogin.includes("universalLoginAction"), true);
 
 const adminLogout = readFileSync("app/admin/actions.ts", "utf8");
-assert.equal(adminLogout.includes('redirect("/admin/login")'), true);
+assert.equal(adminLogout.includes("universalLogoutAction"), true);
 
 const middleware = readFileSync("middleware.ts", "utf8");
 assert.equal(middleware.includes('"/promoter"'), true);
 assert.equal(middleware.includes('"/promoter/:path*"'), true);
 assert.equal(middleware.includes('"/admin/:path*"'), true);
+assert.equal(middleware.includes('"/login"'), true);
 
 const panel = readFileSync("app/promoter/(panel)/layout.tsx", "utf8");
 assert.equal(panel.includes("requirePromoterPrincipal"), true);
@@ -57,7 +52,11 @@ assert.equal(panel.includes("PromoterShell"), true);
 const shell = readFileSync("components/promoter/promoter-shell.tsx", "utf8");
 assert.equal(shell.includes("promoterLogoutAction"), true);
 
-assert.equal(PROMOTER_LOGIN_PATH, "/promoter/login");
+assert.equal(PROMOTER_LOGIN_PATH, LOGIN_PATH);
+assert.equal(PROMOTER_LOGIN_PATH, "/login");
 assert.equal(PROMOTER_HOME_PATH, "/promoter");
+
+const legacyPromoterPage = readFileSync("app/promoter/login/page.tsx", "utf8");
+assert.equal(legacyPromoterPage.includes("loginPathWith"), true);
 
 console.log("promoter-access.verify: ok");

@@ -475,6 +475,16 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-21 — Auth: login universal `/login` (rama commercial)
+
+- **[Auth]** Entrada única en `/login` para admin de negocio, promotor, comercial, finanzas y superadmin. Resolución de áreas en servidor vía `listAuthorizedAreas` + hechos de `profiles`, `commercial_session` y `promoter_session` (sin guards que redirijan/`forbidden()` al enumerar).
+- **[Auth]** `next` interno sanitizado y autorizado por área; destinos externos/maliciosos o sin permiso se ignoran. Multi-área → selector; una área → redirect; sin área → rechazo controlado + sign-out.
+- **[Compat]** `/admin/login` y `/promoter/login` redirigen a `/login`. Logout unificado a `/login`. Guards (`requireAdminContext`, commercial, promoter, superadmin) usan `buildLoginRedirect`.
+- **[Middleware]** Matcher ampliado con `/login` y `/super-admin` para refresh de sesión y `x-orderops-path`.
+- **[Reglas]** Sin cambios de precios, comisiones, billing, suspensión ni RLS. Finanzas no implica superadmin. `/admin/billing` sigue accesible con sesión admin (suspensión no bloquea facturación).
+- Archivos clave: `app/login/*`, `lib/auth/*`, `lib/commercial/auth/resolve-post-login-path.ts`. Verify: `lib/commercial/auth/universal-login.verify.ts`.
+- Breaking: bookmarks a `/admin/login` y `/promoter/login` siguen válidos (redirect).
+
 ### 2026-10-21 — Consolidación Git: tres ramas permanentes (local)
 
 - **[Repo/Git]** Reorganización local (sin push): ramas permanentes `main`, `commercial`, `estadisticas`.
