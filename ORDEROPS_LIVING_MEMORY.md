@@ -1,4 +1,4 @@
-﻿# OrderOps â€” Living Memory (Cerebro Inmutable)
+# OrderOps â€” Living Memory (Cerebro Inmutable)
 
 > **PropÃ³sito:** Este archivo es la memoria viva y autoritativa del proyecto. Cualquier refactorizaciÃ³n importante, cambio de esquema, nueva ruta, mÃ³dulo o patrÃ³n arquitectÃ³nico **debe registrarse aquÃ­** para preservar el contexto histÃ³rico entre sesiones de desarrollo y agentes IA.
 >
@@ -475,6 +475,11 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-21 — Consolidación Git: tres ramas permanentes (local)
+
+- **[Repo/Git]** Reorganización local (sin push): ramas permanentes `main`, `commercial`, `estadisticas`.
+- Informe: `docs/audits/git-consolidation-report-2026-10-21.md`. Política: `docs/development/agent-worktree-policy.md`.
+- Worktree commercial actual: `OrderOps-talo-first` (rename a `OrderOps-Commercial` pendiente).
 ### 2026-10-21 — Commercial Core — Talo First V1 (L1–L10, solo worktree y QA)
 
 - **[Commercial]** Rama local `cursor/commercial-talo-first-v1`, sin push. Migraciones `20261020*` aplicadas solo en el QA `orderops-phase06-qa`; ninguna en producción. Detalle por lote en `docs/commercial-core-v1/TALO_FIRST_V1_IMPLEMENTATION.md`.
