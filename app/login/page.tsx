@@ -43,11 +43,9 @@ export default async function UniversalLoginPage({ searchParams }: LoginPageProp
     } else if (destination.kind === "redirect" && !forceChoose) {
       redirect(destination.href);
     } else {
+      // Multi-area destination, or explicit ?choose=1 (account switcher / area picker).
       if (areas.length === 0) {
         showNoAccess = true;
-      } else if (areas.length === 1) {
-        // forceChoose with a single workspace: enter it (no fake multi-area UI)
-        redirect(areas[0].href);
       } else {
         chooseAreas = areas;
       }
@@ -65,10 +63,18 @@ export default async function UniversalLoginPage({ searchParams }: LoginPageProp
       <section className={styles.card}>
         <div className={styles.copy}>
           <p className={styles.brand}>ORDEROPS</p>
-          <h1>{chooseAreas ? "Elegí un área" : "Iniciar sesión"}</h1>
+          <h1>
+            {chooseAreas
+              ? chooseAreas.length > 1
+                ? "Elegí un área"
+                : "Tu espacio"
+              : "Iniciar sesión"}
+          </h1>
           <p>
             {chooseAreas
-              ? "Tu cuenta tiene acceso a más de un espacio. Seleccioná adónde querés ingresar."
+              ? chooseAreas.length > 1
+                ? "Tu cuenta tiene acceso a más de un espacio. Seleccioná adónde querés ingresar."
+                : "Podés ingresar a tu espacio o usar otra cuenta."
               : "Accedé al espacio que tengas autorizado con tu email y contraseña."}
           </p>
         </div>

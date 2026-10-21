@@ -50,5 +50,7 @@ assert.equal(nav.includes("/commercial/opportunities"), true);
 assert.equal(nav.includes("/commercial/settlements"), true);
 assert.equal(nav.includes("/commercial/billing"), true);
 assert.equal(nav.includes('roles.includes("finance")'), true);
+assert.equal(nav.includes("universalLogoutAction"), true);
+assert.equal(nav.includes("Cerrar sesión"), true);
 
 console.log("commercial-access.verify: ok");

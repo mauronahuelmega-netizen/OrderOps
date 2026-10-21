@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { universalLogoutAction } from "@/app/login/actions";
 import styles from "./commercial-area-nav.module.css";
 
 export function CommercialAreaNav({ roles }: { roles: string[] }) {
@@ -14,6 +15,9 @@ export function CommercialAreaNav({ roles }: { roles: string[] }) {
       {canReadBoard ? <Link href="/commercial/opportunities">Oportunidades</Link> : null}
       {canOpenSettlements ? <Link href="/commercial/settlements">Liquidaciones</Link> : null}
       {canOperateBilling ? <Link href="/commercial/billing">Cobranzas</Link> : null}
+      <form action={universalLogoutAction} className={styles.logout}>
+        <button type="submit">Cerrar sesión</button>
+      </form>
     </nav>
   );
 }

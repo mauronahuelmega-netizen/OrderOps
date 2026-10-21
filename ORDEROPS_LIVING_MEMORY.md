@@ -475,6 +475,10 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-21 — Auth: logout en Gestión Comercial + switcher
+
+- **[Auth/Commercial]** Nav de `/commercial` incluye cierre de sesión (`universalLogoutAction`). `/login?choose=1` vuelve a mostrar el selector (aunque haya un solo espacio) para permitir “Usar otra cuenta”. QA final browser 8/8: `docs/auth/universal-login-final-qa-2026-10-21.md`.
+
 ### 2026-10-21 — Auth: Gestión Comercial unificada (login + `/commercial`)
 
 - **[Auth/Commercial]** Comercial y Finanzas comparten un único área de login (`Gestión Comercial` → `/commercial`) con el mismo layout/nav. Los módulos visibles siguen los roles (`commercialScopes`: `board` / `finance`). Superadmin de plataforma sigue siendo área aparte (`/super-admin`); Gestión Comercial solo si tiene rol interno comercial/finance/superadmin.
