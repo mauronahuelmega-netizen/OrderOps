@@ -475,6 +475,15 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-21 — Consolidación Git: tres ramas permanentes (local)
+
+- **[Repo/Git]** Reorganización local (sin push): ramas permanentes `main`, `commercial`, `estadisticas`.
+- Worktrees: `OrderOps`→`main` @ `5f5e78d`; `OrderOps-Estadisticas`→`estadisticas` @ `d5e4ccf`; `OrderOps-talo-first`→`commercial` @ `577ae32` (rename a `OrderOps-Commercial` pendiente por Permission denied).
+- Preservados WIP de panel B, auth post-login, demo simulation y statistics p03–p04 con backups en `legacy-backups/OrderOps/git-consolidation-20261021/` + tags `backup/pre-consolidation-*` / `backup/post-preservation-*`.
+- `commercial` y `estadisticas` sincronizados desde `main` (finance M1–M3). **No** se promovió el tip comercial completo a `main`.
+- Política agentes: `docs/development/agent-worktree-policy.md`. Informe: `docs/audits/git-consolidation-report-2026-10-21.md`.
+- Ramas históricas (`cursor/*`, `codex/estadisticas-v1`, cloud-agent, backups) **conservadas**; no borrar.
+
 ### 2026-09-08 — RELEASE: modal de pedido manual DEPLOYED
 
 - **[Release]** El bloque de pulido visual/UX del modal de pedido manual está **en producción**. Release commit `13abcc08c8ae7093c359e9e6fdf7dfe7f9bce7e1` (`feat(admin): polish manual order modal`, 29 archivos: 5 runtime + 10 verifies + 14 docs) pusheado non-force a `origin/main`; deploy vía Vercel Git integration `dpl_6YqdcSPSpR6J4cjNtdsSZwPQiL5w` → **Ready** en `https://orderops.vercel.app`. Verify suite **15/15 PASS**, tsc/build PASS, lint sólo con la deuda de tooling conocida. Runtime **frozen**: el fingerprint del diff (`9BA3B67C…F5D6`, 5 archivos, 1061/216) se re-verificó idéntico antes de stagear, así que lo desplegado es exactamente lo certificado. Doc: `docs/admin-manual-order-modal-commit-push-deploy-1.md`. Deuda aceptada sin cambios (P2-QA2 descarte sin confirmación + overlay primer tab stop, P3-QA1, P3-QA2, QA autenticada en producción todavía **unavailable**). Sin DB/migraciones/RPC, 0 pedidos creados, 0 mutaciones de status, 0 WhatsApp. Siguiente bloque: `/admin/products` (`ADMIN-PRODUCTS-MOBILE-VISUAL-DEBT-AUDIT-1`).
