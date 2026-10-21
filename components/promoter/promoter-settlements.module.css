@@ -1,20 +1,39 @@
-.page {
-  display: grid;
-  gap: 1rem;
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tabs a {
+  min-height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--promoter-border);
+  border-radius: 0.5rem;
+  background: var(--promoter-surface);
+  color: var(--promoter-text-muted);
+  text-decoration: none;
+}
+
+.tabs a[aria-current="page"] {
+  background: var(--promoter-blue);
+  color: var(--promoter-bg);
+  border-color: transparent;
 }
 
 .card {
   display: grid;
   gap: 0.75rem;
   padding: 1rem;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
+  background: var(--promoter-surface);
+  border: 1px solid var(--promoter-border);
   border-radius: 0.875rem;
-  box-shadow: var(--shadow-card);
+  box-shadow: none;
 }
 
 .meta {
-  color: var(--text-secondary);
+  color: var(--promoter-text-muted);
   font-size: 0.875rem;
 }
 
@@ -26,9 +45,9 @@
 .form input,
 .form button {
   min-height: 2.75rem;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid var(--promoter-border);
   border-radius: 0.5rem;
-  background: var(--bg-canvas);
-  color: var(--text-primary);
+  background: var(--promoter-bg);
+  color: var(--promoter-text);
   padding: 0.5rem 0.75rem;
 }

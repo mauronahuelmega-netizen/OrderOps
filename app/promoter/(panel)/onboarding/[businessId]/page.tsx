@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { requirePromoterPrincipal } from "@/lib/commercial/promoters/require-promoter-principal";
 import type { OnboardingBusinessView, OnboardingProductView } from "@/lib/commercial/onboarding/read-model";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import styles from "@/components/commercial/onboarding-ui.module.css";
+import styles from "@/components/promoter/promoter-onboarding.module.css";
 import { PromoterProductEditor } from "./editor-form";
 
 export default async function PromoterOnboardingEditorPage({

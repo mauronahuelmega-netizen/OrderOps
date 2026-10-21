@@ -1289,6 +1289,7 @@ export type Database = {
       };
       promoter_upsert_task: {
         Args: {
+          p_cancel_reason?: string | null;
           p_due_at: string | null;
           p_opportunity_id: string;
           p_status: string;
@@ -1298,11 +1299,14 @@ export type Database = {
         Returns: Json;
       };
       read_own_bank: { Args: Record<string, never>; Returns: Json };
+      read_own_welcome_preference: { Args: Record<string, never>; Returns: Json };
       register_promoter_business: {
         Args: { p_trade_category: string; p_trade_name: string; p_whatsapp: string };
         Returns: Json;
       };
       list_open_opportunities: { Args: Record<string, never>; Returns: Json };
+      list_own_commission_groups: { Args: Record<string, never>; Returns: Json };
+      list_own_opportunity_notes: { Args: { p_opportunity_id: string }; Returns: Json };
       merge_commercial_businesses: {
         Args: { p_absorbed_id: string; p_reason: string; p_survivor_id: string };
         Returns: Json;
@@ -1343,6 +1347,7 @@ export type Database = {
         };
         Returns: undefined;
       };
+      set_own_welcome_dismissed: { Args: { p_dismissed: boolean }; Returns: Json };
       transition_opportunity: {
         Args: { p_opportunity_id: string; p_reason: string | null; p_to_stage: string };
         Returns: Json;
@@ -3702,6 +3707,7 @@ export type Database = {
       };
       promoter_upsert_task: {
         Args: {
+          p_cancel_reason?: string | null;
           p_due_at: string;
           p_opportunity_id: string;
           p_status: string;
@@ -3712,6 +3718,10 @@ export type Database = {
       };
       read_dispute: { Args: { p_dispute_id: string }; Returns: Json };
       read_own_bank: { Args: never; Returns: Json };
+      read_own_welcome_preference: { Args: never; Returns: Json };
+      list_own_commission_groups: { Args: never; Returns: Json };
+      list_own_opportunity_notes: { Args: { p_opportunity_id: string }; Returns: Json };
+      set_own_welcome_dismissed: { Args: { p_dismissed: boolean }; Returns: Json };
       register_promoter: {
         Args: { p_cuit: string; p_email: string; p_legal_name: string };
         Returns: Json;

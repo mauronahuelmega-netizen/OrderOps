@@ -1,33 +1,571 @@
-.shell {
+.frame {
+  --promoter-bg: #161719;
+  --promoter-sidebar: #1b1c1f;
+  --promoter-surface: #242629;
+  --promoter-surface-hover: #303238;
+  --promoter-elevated: #2b2d31;
+  --promoter-border: #393c42;
+  --promoter-text: #e9ebee;
+  --promoter-text-muted: #a9adb5;
+  --promoter-blue: #8095eb;
+  --promoter-violet: #aa9ce0;
+  --promoter-success: #7dcea0;
+  --promoter-warning: #e2b15a;
+  --promoter-danger: #e07a7a;
+  --promoter-success-bg: color-mix(in srgb, var(--promoter-success) 16%, var(--promoter-surface));
+  --promoter-warning-bg: color-mix(in srgb, var(--promoter-warning) 16%, var(--promoter-surface));
+  --promoter-danger-bg: color-mix(in srgb, var(--promoter-danger) 16%, var(--promoter-surface));
+  --promoter-scrollbar: #5a5e66;
+  --promoter-scrollbar-hover: #6e737c;
+  height: 100dvh;
+  max-height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
   display: grid;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  background: var(--bg-canvas);
-  color: var(--text-primary);
+  grid-template-columns: 15.5rem minmax(0, 1fr);
+  background: var(--promoter-bg);
+  color: var(--promoter-text);
+}
+
+.sidebar,
+.sidebarOpen {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  align-content: start;
+  gap: 0.75rem;
+  min-width: 0;
+  min-height: 0;
+  padding: 1rem 0.75rem;
+  overflow: visible;
+  background: var(--promoter-sidebar);
+  border-right: 1px solid var(--promoter-border);
+}
+
+.workspace {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  overflow: visible;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 3.25rem;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid var(--promoter-border);
+  background: var(--promoter-bg);
+}
+
+.main {
+  display: grid;
+  align-content: start;
+  gap: 1rem;
+  min-width: 0;
+  min-height: 0;
+  margin-right: 0.45rem;
+  padding: 1.25rem 0.55rem 1.25rem 1.25rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--promoter-scrollbar) transparent;
+}
+
+.main::-webkit-scrollbar {
+  width: 6px;
+}
+
+.main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background: var(--promoter-scrollbar);
+  border-radius: 999px;
+}
+
+.main::-webkit-scrollbar-thumb:hover {
+  background: var(--promoter-scrollbar-hover);
+}
+
+.main a:not([class]) {
+  color: var(--promoter-blue);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.15rem 0.35rem 0.75rem;
+  border-bottom: 1px solid var(--promoter-border);
+}
+
+.brandMark {
+  display: grid;
+  gap: 0.12rem;
+  min-width: 0;
+}
+
+.identity {
+  margin: 0;
+  color: var(--promoter-text);
+  font-size: 0.95rem;
+  font-weight: 650;
+  letter-spacing: 0.01em;
+}
+
+.brandSub {
+  margin: 0;
+  color: var(--promoter-text-muted);
+  font-size: 0.62rem;
+  font-weight: 560;
+  letter-spacing: 0.08em;
+}
+
+.drawerClose {
+  width: 2.25rem;
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  justify-content: center;
+  padding: 0;
+  border: 1px solid transparent;
+  color: var(--promoter-text-muted);
+}
+
+.nav,
+.subnav,
+.group {
+  display: grid;
+  gap: 0.35rem;
+  min-width: 0;
 }
 
 .nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
+  flex-direction: column;
+  align-content: start;
+  min-height: 0;
+  overflow: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--promoter-scrollbar) transparent;
 }
 
-.nav a {
-  color: var(--text-secondary);
+.navPrimary,
+.navUtility {
+  display: grid;
+  gap: 0.25rem;
+  align-content: start;
+}
+
+.navUtility {
+  margin-top: auto;
+  padding-top: 0.7rem;
+  border-top: 1px solid var(--promoter-border);
+}
+
+.group {
+  position: relative;
+}
+
+.groupRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: center;
+}
+
+.nav > a,
+.groupButton {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.25rem minmax(0, 1fr);
+  column-gap: 0.7rem;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+  min-width: 0;
+}
+
+.groupButton {
+  grid-template-columns: 1.25rem minmax(0, 1fr) 1.25rem;
+}
+
+.nav > a .icon,
+.groupButton .icon,
+.chevronIcon {
+  width: 1.25rem;
+  height: 1.25rem;
+  justify-self: center;
+}
+
+.groupButton[aria-expanded="true"] .chevronIcon {
+  transform: rotate(180deg);
+}
+
+.subnav {
+  position: relative;
+  margin-top: 0.15rem;
+  padding-left: calc(0.6rem + 1.25rem + 0.7rem);
+}
+
+.nav a,
+.subnav a,
+.groupButton,
+.accountMenu a,
+.accountMenu button {
+  color: var(--promoter-text-muted);
+  text-decoration: none;
+  border-radius: 0.5rem;
+}
+
+.frame a,
+.frame button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.nav a,
+.groupButton,
+.accountButton,
+.menuButton,
+.drawerClose {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--promoter-text-muted);
+  padding: 0.4rem 0.6rem;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+}
+
+.nav > a,
+.groupButton {
+  display: grid;
+  justify-content: start;
+}
+
+.subnav a.subLink {
+  display: grid;
+  grid-template-columns: 1rem minmax(0, 1fr);
+  column-gap: 0.55rem;
+  align-items: center;
+  min-height: 2.5rem;
+  padding: 0.4rem 0.6rem 0.4rem 0.875rem;
+  font-size: 0.875rem;
+  font-weight: 450;
+}
+
+.subIcon {
+  width: 1rem;
+  height: 1rem;
+  min-width: 1rem;
+  min-height: 1rem;
+  max-width: none;
+  flex: 0 0 1rem;
+  justify-self: center;
+}
+
+.brand .drawerClose {
+  width: 2.25rem;
+  min-width: 2.25rem;
+  min-height: 2.25rem;
+  justify-content: center;
+  padding: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .drawerClose:hover,
+  .nav a:hover,
+  .subnav a:hover,
+  .groupButton:hover,
+  .accountMenu a:hover,
+  .accountMenu button:hover {
+    background: var(--promoter-surface-hover);
+    color: var(--promoter-text);
+  }
+
+  .drawerClose:hover {
+    border-color: var(--promoter-border);
+  }
+}
+
+.nav a:active,
+.subnav a:active,
+.groupButton:active,
+.drawerClose:active,
+.menuButton:active,
+.accountButton:active {
+  background: var(--promoter-surface-hover);
+  color: var(--promoter-text);
+}
+
+.nav a.navCurrent,
+.subnav a.navCurrent {
+  color: var(--promoter-text);
+  background: color-mix(in srgb, var(--promoter-blue) 18%, transparent);
+  box-shadow: inset 2px 0 0 var(--promoter-blue);
+}
+
+.icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  min-width: 1.25rem;
+  min-height: 1.25rem;
+  max-width: none;
+  flex: 0 0 1.25rem;
+  contain: layout style paint;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.accountMenu {
+  display: grid;
+  gap: 0.35rem;
+  width: min(17.5rem, calc(100vw - 1.5rem));
+  min-width: min(16rem, calc(100vw - 1.5rem));
+  padding: 0.5rem;
+  border: 1px solid var(--promoter-border);
+  border-radius: 0.875rem;
+  background: var(--promoter-elevated);
+  box-shadow: 0 8px 24px color-mix(in srgb, #000 28%, transparent);
+}
+
+.accountMenu a,
+.accountMenu button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.4rem 0.75rem;
+  text-align: center;
+}
+
+.accountMenu form {
+  display: grid;
+  margin: 0;
+}
+
+.accountActionIcon {
+  width: 1rem;
+  height: 1rem;
+  min-width: 1rem;
+  max-width: none;
+  flex: 0 0 1rem;
+}
+
+.menuButton,
+.drawerClose,
+.backdrop {
+  font: inherit;
+}
+
+.menuButton,
+.backdrop,
+.drawerClose {
+  display: none;
+}
+
+.crumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  min-width: 0;
+  color: var(--promoter-text-muted);
+  font-size: 0.875rem;
+}
+
+.crumb {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.crumb:last-child {
+  color: var(--promoter-text);
+  font-weight: 560;
+}
+
+.account {
+  position: relative;
+  margin-left: auto;
+}
+
+.accountButton {
+  border: 1px solid var(--promoter-border);
+  background: var(--promoter-surface);
+  color: var(--promoter-text);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  flex: 0 0 1.6rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--promoter-violet) 28%, var(--promoter-surface));
+  color: var(--promoter-text);
+  font-size: 0.75rem;
+}
+
+.accountChevron {
+  width: 1rem;
+  height: 1rem;
+  min-width: 1rem;
+  max-width: none;
+  margin-left: 0.1rem;
+  color: var(--promoter-text-muted);
+}
+
+.accountButton[aria-expanded="true"] .accountChevron {
+  transform: rotate(180deg);
+}
+
+.accountIdentity {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.45rem 0.35rem 0.75rem;
+  margin-bottom: 0.15rem;
+  border-bottom: 1px solid var(--promoter-border);
+}
+
+.accountIdentity .avatar {
+  width: 2.625rem;
+  height: 2.625rem;
+  flex-basis: 2.625rem;
+  font-size: 0.85rem;
+}
+
+.accountCopy {
+  display: grid;
+  gap: 0.12rem;
+  min-width: 0;
+}
+
+.accountTitle {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: var(--promoter-text);
+  font-size: 0.92rem;
+  font-weight: 640;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.accountStatus {
+  margin: 0;
+  color: var(--promoter-text-muted);
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+.accountStatus[data-tone="active"] {
+  color: var(--promoter-success);
+}
+
+.accountStatus[data-tone="pending"] {
+  color: var(--promoter-warning);
+}
+
+.accountStatus[data-tone="restricted"] {
+  color: var(--promoter-danger);
+}
+
+.accountMenu {
+  position: absolute;
+  z-index: 5;
+  top: calc(100% + 0.4rem);
+  right: 0;
+}
+
+.accountMenu button,
+.form button,
+.card button {
+  min-height: 2.5rem;
+  border: 1px solid var(--promoter-border);
+  border-radius: 0.5rem;
+  background: var(--promoter-surface);
+  color: var(--promoter-text);
+  padding: 0.4rem 0.75rem;
+  font: inherit;
+}
+
+.card button[type="submit"]:not(:disabled),
+.form button[type="submit"]:not(:disabled) {
+  background: var(--promoter-blue);
+  color: #11151b;
+  border-color: transparent;
+}
+
+.accountMenu .accountProfile {
+  border: 1px solid color-mix(in srgb, var(--promoter-blue) 42%, var(--promoter-border));
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--promoter-blue) 12%, var(--promoter-surface));
+  color: var(--promoter-text);
+}
+
+.accountMenu .accountLogout {
+  border: 1px solid var(--promoter-border);
+  border-radius: 0.5rem;
+  background: var(--promoter-surface);
+  color: var(--promoter-text);
+}
+
+.frame a:focus:not(:focus-visible),
+.frame button:focus:not(:focus-visible),
+.frame summary:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.frame a:focus-visible,
+.frame button:focus-visible,
+.frame summary:focus-visible {
+  outline: 2px solid var(--promoter-blue);
+  outline-offset: 2px;
 }
 
 .card {
   display: grid;
   gap: 0.75rem;
   padding: 1rem;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: 0.75rem;
-  box-shadow: var(--shadow-card);
+  background: var(--promoter-surface);
+  border: 1px solid var(--promoter-border);
+  border-radius: 0.875rem;
 }
 
 .muted {
-  color: var(--text-secondary);
+  color: var(--promoter-text-muted);
+}
+
+.row {
+  display: grid;
+  gap: 0.25rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--promoter-border);
 }
 
 .form {
@@ -40,4 +578,159 @@
 .form select,
 .form button {
   font: inherit;
+}
+
+.form input,
+.form textarea,
+.form select {
+  min-height: 2.5rem;
+  border: 1px solid var(--promoter-border);
+  border-radius: 0.5rem;
+  background: var(--promoter-bg);
+  color: var(--promoter-text);
+  padding: 0.45rem 0.7rem;
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: end;
+}
+
+.list {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.pre {
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+@media (max-width: 800px) {
+  .frame {
+    height: auto;
+    max-height: none;
+    min-height: 100dvh;
+    overflow: visible;
+    grid-template-columns: 1fr;
+  }
+
+  .workspace,
+  .main,
+  .nav {
+    height: auto;
+    margin-right: 0;
+    overflow: visible;
+  }
+
+  .main {
+    padding: 1.25rem;
+  }
+
+  .sidebar,
+  .sidebarOpen {
+    grid-template-rows: auto;
+    align-content: start;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .sidebarOpen {
+    position: fixed;
+    z-index: 3;
+    inset: 0 auto 0 0;
+    width: min(18rem, 86vw);
+    overflow: auto;
+  }
+
+  .menuButton,
+  .backdrop,
+  .drawerClose {
+    display: inline-flex;
+  }
+
+  .drawerClose {
+    justify-self: start;
+  }
+
+  .menuButton {
+    border: 1px solid var(--promoter-border);
+    background: var(--promoter-surface);
+    color: var(--promoter-text);
+  }
+
+  .drawerClose {
+    border-color: var(--promoter-border);
+  }
+
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    border: 0;
+    background: color-mix(in srgb, #000 46%, transparent);
+  }
+
+  .nav > a,
+  .groupButton,
+  .subnav a {
+    min-height: 2.75rem;
+  }
+
+  .accountName,
+  .accountChevron,
+  .crumb:not(:last-child),
+  .crumbSep {
+    display: none;
+  }
+
+  .list > li {
+    display: grid;
+    gap: 0.45rem;
+    padding: 0.85rem;
+    border: 1px solid var(--promoter-border);
+    border-radius: 0.75rem;
+    background: var(--promoter-surface);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame * {
+    transition: none;
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .nav a,
+  .subnav a,
+  .sidebar,
+  .sidebarOpen,
+  .accountMenu,
+  .chevronIcon,
+  .accountButton,
+  .menuButton {
+    transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease, transform 160ms ease;
+  }
+
+  .sidebarOpen {
+    animation: promoterDrawerIn 180ms ease;
+  }
+}
+
+@keyframes promoterDrawerIn {
+  from {
+    transform: translateX(-10px);
+  }
+
+  to {
+    transform: none;
+  }
 }

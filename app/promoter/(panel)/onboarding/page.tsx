@@ -6,7 +6,7 @@ import {
   type OnboardingBusinessView
 } from "@/lib/commercial/onboarding/read-model";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import styles from "@/components/commercial/onboarding-ui.module.css";
+import styles from "@/components/promoter/promoter-onboarding.module.css";
 import { RequestAssistanceForm } from "./request-form";
 
 export default async function PromoterOnboardingPage() {
@@ -24,14 +24,16 @@ export default async function PromoterOnboardingPage() {
           Pedí autorización para editar el contenido de un comercio ya convertido. El comercio aprueba el acceso.
         </p>
       </header>
-      {error || !result?.ok ? (
-        <p className={styles.error} role="alert">No pudimos cargar tus comercios.</p>
-      ) : null}
       {session.can_operate !== true ? (
         <p className={styles.muted}>Tu cuenta no puede operar solicitudes de asistencia.</p>
       ) : null}
-      {businesses.length === 0 ? (
-        <p className={styles.card}>No tenés comercios convertidos para solicitar asistencia.</p>
+      {error || result?.ok !== true ? (
+        <p className={styles.error} role="alert">No pudimos cargar tus comercios.</p>
+      ) : businesses.length === 0 ? (
+        <div className={styles.card}>
+          <p>No hay acompañamientos disponibles actualmente.</p>
+          <p><Link href="/promoter/businesses">Cartera</Link> · <Link href="/promoter/opportunities">Oportunidades</Link></p>
+        </div>
       ) : (
         <ul className={styles.list}>
           {businesses.map((business) => {

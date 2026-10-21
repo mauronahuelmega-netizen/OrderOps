@@ -1,0 +1,492 @@
+.page {
+  display: grid;
+  gap: 1.75rem;
+  color: var(--promoter-text);
+}
+
+.header {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 1.65rem;
+  font-weight: 630;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  min-height: 1.2em;
+}
+
+.greetingPending {
+  visibility: hidden;
+}
+
+.greetingReady {
+  visibility: visible;
+}
+
+.date {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin: 0;
+  color: var(--promoter-text-muted);
+  font-size: 0.8125rem;
+}
+
+.section {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.prioritiesSection {
+  padding-top: 0.35rem;
+  border-top: 1px solid color-mix(in srgb, var(--promoter-border) 55%, transparent);
+}
+
+.section h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 630;
+  letter-spacing: -0.015em;
+  color: var(--promoter-text);
+}
+
+.sectionHead {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.85rem;
+}
+
+.sectionTitleGroup {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.lead,
+.section p {
+  margin: 0;
+  color: var(--promoter-text-muted);
+  font-size: 0.85rem;
+  line-height: 1.35;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.cardTasks {
+  grid-column: 1 / -1;
+}
+
+.card {
+  display: grid;
+  align-content: start;
+  gap: 0.35rem;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--promoter-border);
+  border-radius: 0.8rem;
+  background: var(--promoter-surface);
+  color: inherit;
+  text-decoration: none;
+  min-width: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.metricTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.metricTitle {
+  color: var(--promoter-text-muted);
+  font-size: 0.8125rem;
+  font-weight: 530;
+  line-height: 1.25;
+}
+
+.metricBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 0.5rem;
+  flex-shrink: 0;
+}
+
+.badgeViolet {
+  color: var(--promoter-violet);
+  background: color-mix(in srgb, var(--promoter-violet) 15%, var(--promoter-surface));
+}
+
+.badgeBlue {
+  color: var(--promoter-blue);
+  background: color-mix(in srgb, var(--promoter-blue) 15%, var(--promoter-surface));
+}
+
+.badgeAmber {
+  color: var(--promoter-warning);
+  background: var(--promoter-warning-bg);
+}
+
+.badgeNeutral {
+  color: var(--promoter-blue);
+  background: color-mix(in srgb, var(--promoter-blue) 12%, var(--promoter-surface));
+}
+
+.card strong {
+  font-size: 1.9rem;
+  font-weight: 660;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--promoter-text);
+}
+
+.card .lead {
+  font-size: 0.78rem;
+  line-height: 1.3;
+  color: var(--promoter-text-muted);
+}
+
+.priorities {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.priorityMain,
+.priorityStack {
+  display: grid;
+  gap: 0.75rem;
+  align-content: start;
+  min-width: 0;
+}
+
+.block {
+  display: grid;
+  align-content: start;
+  gap: 0.55rem;
+  padding: 0.95rem 1.05rem;
+  border: 1px solid var(--promoter-border);
+  border-radius: 0.8rem;
+  background: var(--promoter-surface);
+  color: inherit;
+  min-width: 0;
+}
+
+.block h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 610;
+  color: var(--promoter-text);
+}
+
+.blockHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.blockEmpty {
+  gap: 0.2rem;
+  padding: 0.6rem 0.85rem;
+  background: color-mix(in srgb, var(--promoter-surface) 50%, transparent);
+  border-color: color-mix(in srgb, var(--promoter-border) 70%, transparent);
+}
+
+.blockEmpty h3 {
+  font-size: 0.85rem;
+  font-weight: 560;
+  color: var(--promoter-text-muted);
+}
+
+.emptyText {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--promoter-text-muted);
+}
+
+.agenda {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+  color: var(--promoter-blue);
+  font-size: 0.85rem;
+  font-weight: 560;
+  text-decoration: none;
+  padding: 0.2rem 0;
+}
+
+.agenda:hover {
+  color: var(--promoter-violet);
+}
+
+.overdue {
+  border-color: color-mix(in srgb, var(--promoter-warning) 55%, var(--promoter-border));
+}
+
+.taskList {
+  display: grid;
+  gap: 0.5rem;
+  margin: 0.1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.task {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid color-mix(in srgb, var(--promoter-border) 55%, transparent);
+  border-radius: 0.65rem;
+  color: inherit;
+  text-decoration: none;
+  background: color-mix(in srgb, var(--promoter-bg) 68%, transparent);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.taskPrimary {
+  display: grid;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.task strong {
+  font-size: 0.925rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--promoter-text);
+  overflow-wrap: anywhere;
+}
+
+.taskBusiness {
+  font-size: 0.8125rem;
+  line-height: 1.3;
+  color: var(--promoter-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.taskWhen {
+  font-size: 0.78rem;
+  line-height: 1.3;
+  color: var(--promoter-text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.links {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border: 1px solid var(--promoter-border);
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, var(--promoter-surface) 75%, var(--promoter-bg));
+  overflow: hidden;
+}
+
+.linkCard {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  min-height: 2.85rem;
+  padding: 0.55rem 0.9rem;
+  color: inherit;
+  text-decoration: none;
+  background: transparent;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.linkCard + .linkCard {
+  border-top: 1px solid color-mix(in srgb, var(--promoter-border) 75%, transparent);
+}
+
+.navItemMain {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 0;
+}
+
+.navIconWrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 0.45rem;
+  flex-shrink: 0;
+}
+
+.navIconBlue {
+  color: var(--promoter-blue);
+  background: color-mix(in srgb, var(--promoter-blue) 14%, var(--promoter-surface));
+}
+
+.navIconViolet {
+  color: var(--promoter-violet);
+  background: color-mix(in srgb, var(--promoter-violet) 14%, var(--promoter-surface));
+}
+
+.navLabel {
+  color: var(--promoter-text);
+  font-size: 0.875rem;
+  font-weight: 560;
+  line-height: 1.25;
+}
+
+.affordance {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex-shrink: 0;
+  color: var(--promoter-text-muted);
+  contain: layout style paint;
+}
+
+.linkCard:hover .affordance,
+.linkCard:focus-visible .affordance {
+  color: var(--promoter-blue);
+}
+
+.linkCard:focus-visible {
+  background: var(--promoter-surface-hover);
+  outline: 2px solid var(--promoter-blue);
+  outline-offset: -2px;
+}
+
+.icon {
+  width: 0.95rem;
+  height: 0.95rem;
+  flex-shrink: 0;
+  contain: layout style paint;
+}
+
+@media (hover: hover) {
+  .card:hover,
+  .task:hover {
+    border-color: var(--promoter-blue);
+    background: var(--promoter-surface-hover);
+  }
+
+  .linkCard:hover {
+    background: var(--promoter-surface-hover);
+  }
+}
+
+.page a:focus-visible,
+.page button:focus-visible,
+.page summary:focus-visible {
+  outline: 2px solid var(--promoter-blue);
+  outline-offset: 2px;
+}
+
+@media (min-width: 960px) {
+  .page {
+    gap: 1.85rem;
+  }
+
+  .metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.85rem;
+  }
+
+  .cardTasks {
+    grid-column: auto;
+  }
+
+  .priorities {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    gap: 0.85rem;
+  }
+
+  .task {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 0.85rem;
+  }
+
+  .taskWhen {
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .linkCard {
+    min-height: 2.75rem;
+    padding: 0.6rem 1rem;
+  }
+
+  .linkCard + .linkCard {
+    border-top: none;
+    border-left: 1px solid color-mix(in srgb, var(--promoter-border) 75%, transparent);
+  }
+}
+
+@media (max-width: 800px) {
+  .page {
+    gap: 1.25rem;
+  }
+
+  .header h1 {
+    font-size: 1.4rem;
+  }
+
+  .section {
+    gap: 0.7rem;
+  }
+
+  .section h2 {
+    font-size: 1.1rem;
+  }
+
+  .card {
+    padding: 0.7rem 0.75rem;
+    gap: 0.25rem;
+  }
+
+  .card strong {
+    font-size: 1.6rem;
+  }
+
+  .metricBadge {
+    width: 1.65rem;
+    height: 1.65rem;
+  }
+
+  .metricLeadOptional {
+    display: none;
+  }
+
+  .block {
+    padding: 0.8rem 0.85rem;
+  }
+
+  .sectionHead {
+    align-items: baseline;
+  }
+}
+
+.card,
+.linkCard,
+.task,
+.agenda {
+  transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page * {
+    transition: none;
+  }
+}

@@ -11,7 +11,7 @@ export async function submitOwnInvoice(formData: FormData) {
   const amount = arsInputToCents(String(formData.get("amount") ?? ""));
   const fileName = String(formData.get("fileName") ?? "").trim();
   if (amount === null || !/^[A-Za-z0-9._-]+$/.test(fileName)) {
-    redirect("/promoter/settlements?notice=validation");
+    redirect("/promoter/settlements?vista=liquidaciones&notice=validation");
   }
   const supabase = await createSupabaseServerClient();
   const { data } = await supabase.rpc("submit_invoice", {
@@ -21,5 +21,5 @@ export async function submitOwnInvoice(formData: FormData) {
   });
   const result = (data ?? null) as { ok?: boolean; commercial_error_code?: string } | null;
   const notice = result?.ok === true ? "ok" : (result?.commercial_error_code ?? "error");
-  redirect(`/promoter/settlements?notice=${encodeURIComponent(notice)}`);
+  redirect(`/promoter/settlements?vista=liquidaciones&notice=${encodeURIComponent(notice)}`);
 }

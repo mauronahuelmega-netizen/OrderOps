@@ -1,0 +1,121 @@
+.guide {
+  display: grid;
+  gap: 0.45rem;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--promoter-border);
+  border-radius: 0.8rem;
+  background: var(--promoter-surface);
+  color: var(--promoter-text);
+}
+
+.completed {
+  gap: 0.35rem;
+  padding: 0.65rem 0.95rem;
+  border-color: color-mix(in srgb, var(--promoter-border) 65%, transparent);
+  background: color-mix(in srgb, var(--promoter-surface) 45%, transparent);
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.titleGroup {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.checkIcon {
+  width: 1rem;
+  height: 1rem;
+  flex-shrink: 0;
+  color: var(--promoter-success);
+  contain: layout style paint;
+}
+
+.guide h2 {
+  margin: 0;
+  font-size: 0.925rem;
+  font-weight: 600;
+}
+
+.completed h2 {
+  font-size: 0.85rem;
+  font-weight: 580;
+  color: var(--promoter-text);
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.12rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 550;
+  color: var(--promoter-success);
+  background: var(--promoter-success-bg);
+}
+
+.note {
+  margin: 0;
+  color: var(--promoter-text-muted);
+  font-size: 0.8125rem;
+}
+
+.guide summary {
+  cursor: pointer;
+  color: var(--promoter-text-muted);
+  font-size: 0.8125rem;
+}
+
+.guide button {
+  width: auto;
+  min-height: 2.15rem;
+  border: 1px solid var(--promoter-border);
+  border-radius: 0.5rem;
+  background: transparent;
+  color: var(--promoter-text);
+  padding: 0.25rem 0.65rem;
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.completed button {
+  color: var(--promoter-text-muted);
+  border-color: color-mix(in srgb, var(--promoter-border) 75%, transparent);
+}
+
+@media (hover: hover) {
+  .guide button:hover {
+    border-color: var(--promoter-blue);
+    background: var(--promoter-surface-hover);
+    color: var(--promoter-text);
+  }
+}
+
+@media (max-width: 800px) {
+  .guide {
+    padding: 0.7rem 0.8rem;
+  }
+
+  .guide button {
+    min-height: 2.5rem;
+  }
+}
+
+.guide ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.1rem;
+  font-size: 0.8125rem;
+  color: var(--promoter-text-muted);
+}

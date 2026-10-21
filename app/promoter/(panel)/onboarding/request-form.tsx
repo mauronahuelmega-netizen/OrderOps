@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { requestOnboardingAction } from "./actions";
-import styles from "@/components/commercial/onboarding-ui.module.css";
+import styles from "@/components/promoter/promoter-onboarding.module.css";
 
 export function RequestAssistanceForm({ businessId }: { businessId: string }) {
   const [state, action, pending] = useActionState(requestOnboardingAction, {});
