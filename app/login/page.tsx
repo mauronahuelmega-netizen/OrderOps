@@ -43,10 +43,13 @@ export default async function UniversalLoginPage({ searchParams }: LoginPageProp
     } else if (destination.kind === "redirect" && !forceChoose) {
       redirect(destination.href);
     } else {
-      chooseAreas = areas;
-      if (chooseAreas.length === 0) {
+      if (areas.length === 0) {
         showNoAccess = true;
-        chooseAreas = null;
+      } else if (areas.length === 1) {
+        // forceChoose with a single workspace: enter it (no fake multi-area UI)
+        redirect(areas[0].href);
+      } else {
+        chooseAreas = areas;
       }
     }
   }

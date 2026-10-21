@@ -475,6 +475,12 @@ Archivos: `lib/supabase/image-loader.ts`, `next.config.ts` (`loader: "custom"`).
 
 > Formato bitÃ¡cora: `YYYY-MM-DD â€” [Ãrea] DescripciÃ³n`. Registrar de mÃ¡s antiguo a mÃ¡s reciente.
 
+### 2026-10-21 — Auth: Gestión Comercial unificada (login + `/commercial`)
+
+- **[Auth/Commercial]** Comercial y Finanzas comparten un único área de login (`Gestión Comercial` → `/commercial`) con el mismo layout/nav. Los módulos visibles siguen los roles (`commercialScopes`: `board` / `finance`). Superadmin de plataforma sigue siendo área aparte (`/super-admin`); Gestión Comercial solo si tiene rol interno comercial/finance/superadmin.
+- **[Auth]** `next` a `/commercial/opportunities*` exige scope `board`; resto de `/commercial/*` con área commercial. Sin privilegios nuevos; guards/RPC/SoD intactos.
+- Breaking: el selector ya no lista “Finanzas” como área separada.
+
 ### 2026-10-21 — Auth: login universal `/login` (rama commercial)
 
 - **[Auth]** Entrada única en `/login` para admin de negocio, promotor, comercial, finanzas y superadmin. Resolución de áreas en servidor vía `listAuthorizedAreas` + hechos de `profiles`, `commercial_session` y `promoter_session` (sin guards que redirijan/`forbidden()` al enumerar).

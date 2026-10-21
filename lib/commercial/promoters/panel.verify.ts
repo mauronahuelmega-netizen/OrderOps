@@ -28,7 +28,8 @@ assert.equal(home.includes("HomeGreeting"), true);
 assert.equal(home.includes("groupOpenTasks") || home.includes("pendingTaskCounts"), true);
 assert.equal(home.includes("Las comisiones individuales no se listan en esta lectura."), false);
 assert.equal(home.includes("disponible en una fase posterior"), false);
-assert.equal(readFileSync("app/commercial/page.tsx", "utf8").includes('roles.includes("finance")'), true);
+assert.equal(readFileSync("app/commercial/page.tsx", "utf8").includes("canReadBoard"), true);
+assert.equal(readFileSync("app/commercial/page.tsx", "utf8").includes("/commercial/settlements"), true);
 assert.equal(readFileSync("app/commercial/settlements/page.tsx", "utf8").includes("Este rol consulta. Finanzas ejecuta"), true);
 
 const shell = readFileSync("components/promoter/promoter-shell.tsx", "utf8");

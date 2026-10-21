@@ -52,8 +52,16 @@ const EXPECT = {
   "demo.sofia@local.test": { ids: ["admin"], href: "/admin/dashboard" },
   "demo.diego@local.test": { ids: ["admin"], href: "/admin/dashboard" },
   "demo.camila@local.test": { ids: ["admin"], href: "/admin/dashboard" },
-  "demo.lucia@local.test": { ids: ["commercial"], href: "/commercial/opportunities" },
-  "demo.nicolas@local.test": { ids: ["finance"], href: "/commercial/settlements" },
+  "demo.lucia@local.test": {
+    ids: ["commercial"],
+    href: "/commercial",
+    commercialScopes: ["board"]
+  },
+  "demo.nicolas@local.test": {
+    ids: ["commercial"],
+    href: "/commercial",
+    commercialScopes: ["finance"]
+  },
   "demo.tomas@local.test": { ids: ["promoter"], href: "/promoter" },
   "demo.martin@local.test": { ids: ["commercial", "superadmin"], href: "choose-or-super" }
 };
@@ -119,18 +127,28 @@ for (const account of parseDemoAccounts()) {
     status = "FAIL";
     reason = `dest=${destination.kind}:${destination.href ?? "-"} expected=${expected.href}`;
   } else if (JSON.stringify(ids) !== JSON.stringify([...expected.ids].sort())) {
-    // allow supersets only for martin; others must match
     status = "FAIL";
     reason = `ids=${ids.join(",")} expected=${expected.ids.join(",")}`;
   }
 
-  // next authorization smoke for finance
-  if (account.email.includes("nicolas")) {
-    const bad = authorizeNextForAreas("/super-admin", areas);
-    const good = authorizeNextForAreas("/commercial/billing", areas);
-    if (bad !== null || good !== "/commercial/billing") {
+  if (status === "PASS" && expected.commercialScopes) {
+    const commercial = areas.find((area) => area.id === "commercial");
+    const scopes = [...(commercial?.commercialScopes ?? [])].sort();
+    const expectedScopes = [...expected.commercialScopes].sort();
+    if (JSON.stringify(scopes) !== JSON.stringify(expectedScopes)) {
       status = "FAIL";
-      reason = `next-authz bad=${bad} good=${good}`;
+      reason = `scopes=${scopes.join(",")} expected=${expectedScopes.join(",")}`;
+    }
+  }
+
+  // next authorization smoke for finance-only workspace
+  if (account.email.includes("nicolas")) {
+    const badSuper = authorizeNextForAreas("/super-admin", areas);
+    const badBoard = authorizeNextForAreas("/commercial/opportunities", areas);
+    const good = authorizeNextForAreas("/commercial/billing", areas);
+    if (badSuper !== null || badBoard !== null || good !== "/commercial/billing") {
+      status = "FAIL";
+      reason = `next-authz badSuper=${badSuper} badBoard=${badBoard} good=${good}`;
     }
   }
 

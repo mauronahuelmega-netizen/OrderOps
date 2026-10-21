@@ -12,3 +12,8 @@
   color: var(--text-secondary);
   text-decoration: none;
 }
+
+.brand {
+  color: var(--text-primary);
+  font-weight: 700;
+}

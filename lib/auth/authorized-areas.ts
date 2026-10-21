@@ -1,9 +1,14 @@
-export type AppAreaId = "admin" | "promoter" | "commercial" | "finance" | "superadmin";
+export type AppAreaId = "admin" | "promoter" | "commercial" | "superadmin";
+
+/** Scopes inside the shared `/commercial` workspace (not separate login areas). */
+export type CommercialWorkspaceScope = "board" | "finance";
 
 export type AuthorizedArea = {
   id: AppAreaId;
   label: string;
   href: string;
+  /** Set when id === "commercial": which modules the user may deep-link into. */
+  commercialScopes?: readonly CommercialWorkspaceScope[];
 };
 
 export type AccessFacts = {
@@ -17,9 +22,9 @@ export type AccessFacts = {
  * Enumerate authorized app areas from already-resolved access facts.
  * Pure: never calls guards that redirect or throw forbidden().
  *
- * Finance roles never imply superadmin. Commercial internal role "superadmin"
- * grants the commercial board area; the platform shell `/super-admin` requires
- * profiles.role === "super_admin".
+ * Comercial and Finanzas share one login area (`commercial` → `/commercial`).
+ * Module visibility stays role-scoped via `commercialScopes` and route guards.
+ * Finance never implies platform superadmin (`profiles.role === "super_admin"`).
  */
 export function areasFromAccessFacts(facts: AccessFacts): AuthorizedArea[] {
   const areas: AuthorizedArea[] = [];
@@ -41,21 +46,17 @@ export function areasFromAccessFacts(facts: AccessFacts): AuthorizedArea[] {
     });
   }
 
-  const hasCommercialBoard =
-    roles.includes("commercial") || roles.includes("superadmin");
-  if (hasCommercialBoard) {
+  const hasBoard = roles.includes("commercial") || roles.includes("superadmin");
+  const hasFinance = roles.includes("finance");
+  if (hasBoard || hasFinance) {
+    const commercialScopes: CommercialWorkspaceScope[] = [];
+    if (hasBoard) commercialScopes.push("board");
+    if (hasFinance) commercialScopes.push("finance");
     areas.push({
       id: "commercial",
-      label: "Área Comercial",
-      href: "/commercial/opportunities"
-    });
-  }
-
-  if (roles.includes("finance")) {
-    areas.push({
-      id: "finance",
-      label: "Finanzas",
-      href: "/commercial/settlements"
+      label: "Gestión Comercial",
+      href: "/commercial",
+      commercialScopes
     });
   }
 
@@ -68,4 +69,11 @@ export function areasFromAccessFacts(facts: AccessFacts): AuthorizedArea[] {
   }
 
   return areas;
+}
+
+export function commercialAreaHasScope(
+  area: AuthorizedArea | undefined,
+  scope: CommercialWorkspaceScope
+): boolean {
+  return Boolean(area?.id === "commercial" && area.commercialScopes?.includes(scope));
 }

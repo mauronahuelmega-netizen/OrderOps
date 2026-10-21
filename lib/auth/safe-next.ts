@@ -1,4 +1,8 @@
-import type { AppAreaId, AuthorizedArea } from "@/lib/auth/authorized-areas";
+import {
+  commercialAreaHasScope,
+  type AppAreaId,
+  type AuthorizedArea
+} from "@/lib/auth/authorized-areas";
 
 const LOGIN_ALIASES = new Set(["/login", "/admin/login", "/promoter/login"]);
 
@@ -40,17 +44,23 @@ function areaIdsAllowingPath(path: string): AppAreaId[] {
   if (path.startsWith("/super-admin")) {
     return ["superadmin"];
   }
-  if (path.startsWith("/commercial/opportunities")) {
-    return ["commercial"];
-  }
   if (path.startsWith("/commercial")) {
-    return ["commercial", "finance"];
+    return ["commercial"];
   }
   return [];
 }
 
 /** True when the path belongs to at least one of the caller's authorized areas. */
 export function isPathAuthorizedForAreas(path: string, areas: readonly AuthorizedArea[]): boolean {
+  if (path.startsWith("/commercial/opportunities")) {
+    const commercial = areas.find((area) => area.id === "commercial");
+    return commercialAreaHasScope(commercial, "board");
+  }
+
+  if (path.startsWith("/commercial")) {
+    return areas.some((area) => area.id === "commercial");
+  }
+
   const allowed = new Set(areas.map((area) => area.id));
   return areaIdsAllowingPath(path).some((id) => allowed.has(id));
 }

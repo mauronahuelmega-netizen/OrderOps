@@ -44,24 +44,49 @@ const financeOnly = areasFromAccessFacts({
 });
 assert.deepEqual(
   financeOnly.map((a) => a.id),
-  ["finance"]
+  ["commercial"],
+  "finance shares the commercial workspace area"
 );
+assert.deepEqual(financeOnly[0]?.commercialScopes, ["finance"]);
 assert.equal(
   financeOnly.some((a) => a.id === "superadmin"),
   false,
   "finance must not receive superadmin"
 );
 assert.equal(
-  financeOnly.some((a) => a.id === "commercial"),
+  financeOnly[0]?.commercialScopes?.includes("board"),
   false,
-  "finance-only must not receive commercial board"
+  "finance-only must not receive board scope"
 );
 assert.deepEqual(resolveLoginDestination({ areas: financeOnly }), {
   kind: "redirect",
-  href: "/commercial/settlements"
+  href: "/commercial"
 });
 
-// --- Multiple areas ---
+const commercialOnly = areasFromAccessFacts({
+  hasBusinessAdmin: false,
+  isProfileSuperAdmin: false,
+  commercialRoles: ["commercial"],
+  isPromoter: false
+});
+assert.deepEqual(commercialOnly.map((a) => a.id), ["commercial"]);
+assert.deepEqual(commercialOnly[0]?.commercialScopes, ["board"]);
+assert.deepEqual(resolveLoginDestination({ areas: commercialOnly }), {
+  kind: "redirect",
+  href: "/commercial"
+});
+
+const bothCommercialFinance = areasFromAccessFacts({
+  hasBusinessAdmin: false,
+  isProfileSuperAdmin: false,
+  commercialRoles: ["commercial", "finance"],
+  isPromoter: false
+});
+assert.deepEqual(bothCommercialFinance.map((a) => a.id), ["commercial"]);
+assert.deepEqual(bothCommercialFinance[0]?.commercialScopes, ["board", "finance"]);
+assert.equal(resolveLoginDestination({ areas: bothCommercialFinance }).kind, "redirect");
+
+// --- Multiple areas (distinct workspaces) ---
 const multi = areasFromAccessFacts({
   hasBusinessAdmin: true,
   isProfileSuperAdmin: false,
@@ -70,7 +95,7 @@ const multi = areasFromAccessFacts({
 });
 assert.deepEqual(
   multi.map((a) => a.id).sort(),
-  ["admin", "commercial", "finance", "promoter"]
+  ["admin", "commercial", "promoter"]
 );
 assert.equal(resolveLoginDestination({ areas: multi }).kind, "choose");
 
@@ -112,8 +137,10 @@ assert.equal(authorizeNextForAreas("/commercial/opportunities", financeOnly), nu
 assert.equal(isPathAuthorizedForAreas("/commercial/opportunities", financeOnly), false);
 assert.deepEqual(resolveLoginDestination({ areas: financeOnly, next: "/super-admin" }), {
   kind: "redirect",
-  href: "/commercial/settlements"
+  href: "/commercial"
 });
+assert.equal(authorizeNextForAreas("/commercial/billing", commercialOnly), "/commercial/billing");
+assert.equal(authorizeNextForAreas("/commercial/opportunities", bothCommercialFinance), "/commercial/opportunities");
 
 // --- Superadmin isolation ---
 const platformSuper = areasFromAccessFacts({

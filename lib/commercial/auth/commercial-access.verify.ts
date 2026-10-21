@@ -7,8 +7,11 @@ assert.equal(middleware.includes('"/commercial"'), true);
 const gate = readFileSync("lib/commercial/auth/require-commercial-principal.ts", "utf8");
 const index = readFileSync("app/commercial/page.tsx", "utf8");
 assert.equal(index.includes("requireCommercialArea"), true);
-assert.equal(index.includes('roles.includes("finance") && !roles.includes("commercial") && !roles.includes("superadmin")'), true);
-assert.equal(index.includes('redirect(financeOnly ? "/commercial/settlements" : "/commercial/opportunities")'), true);
+assert.equal(index.includes("canReadBoard"), true);
+assert.equal(
+  index.includes('redirect(canReadBoard ? "/commercial/opportunities" : "/commercial/settlements")'),
+  true
+);
 const principal = gate.slice(0, gate.indexOf("export async function requireCommercialArea"));
 assert.equal(principal.includes('roles.includes("commercial") || roles.includes("superadmin")'), true);
 assert.equal(principal.includes('roles.includes("finance")'), false);
@@ -40,5 +43,12 @@ assert.equal(board.includes("Confirmar atribución"), false);
 
 const documents = readFileSync("app/commercial/billing/documents/route.ts", "utf8");
 assert.equal(documents.includes('seeOther("/login")'), true);
+
+const nav = readFileSync("components/commercial/commercial-area-nav.tsx", "utf8");
+assert.equal(nav.includes("Gestión Comercial"), true);
+assert.equal(nav.includes("/commercial/opportunities"), true);
+assert.equal(nav.includes("/commercial/settlements"), true);
+assert.equal(nav.includes("/commercial/billing"), true);
+assert.equal(nav.includes('roles.includes("finance")'), true);
 
 console.log("commercial-access.verify: ok");
