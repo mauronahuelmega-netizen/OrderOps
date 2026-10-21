@@ -552,6 +552,13 @@ Lectura autenticada del movimiento en la API de Talo con credenciales de OrderOp
 - `response_digest`: SHA-256 de la respuesta; el cuerpo no se guarda
 - Solo `public.system_record_provider_read` escribe. Confirma, guarda evidencia, imputa la activación y devenga la comisión de alta en una transacción.
 
+### `service_access_exemptions`
+
+Excepción expresa de acceso para tenants legacy autorizados (Talo First V1, L4, H6). Una fila activa (`revoked_at is null`) hace que `commercial.business_service_access` devuelva `exempt`.
+
+- `business_id` PK, `reason` (8–300), `granted_by`, `granted_at`, `revoked_at`/`revoked_by` juntos
+- Sin escritura desde clientes; lectura con `collection.write`
+
 ### `founder_slots`
 
 - `conversion_terms_id not null`

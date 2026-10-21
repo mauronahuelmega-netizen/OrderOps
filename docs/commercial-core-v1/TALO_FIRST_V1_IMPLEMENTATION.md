@@ -43,3 +43,30 @@ Migración `20261020120000_commercial_provider_read_imputation.sql`.
 Pruebas: `phase10_provider_read.sql` PASS (reintentos sin recibo, imputación atómica, `recorded_by` system, auditoría `actor_kind = system`, sin slot, repetición sin doble cobro, conciliación por términos ambiguos o ausentes e importe, grants). Control negativo del arnés: un `raise` devuelve FAIL. Regresión PASS: `phase08_provider_receipts`, `phase08_impute_provider_receipt`, `phase10_system_actor`, `phase10_webhook_inbox`, `phase05_collections`, `phase05_slots`, `e2e_08`. `talo-receipt-worker.verify.ts` PASS; `tsc` sin errores.
 
 NOT_VERIFIED (L3): lectura real contra la API sandbox desde el worker; programación periódica del worker (requiere despliegue, no autorizado).
+
+## L4 — Calendario y acceso por negocio
+
+Migración `20261020130000_commercial_service_access.sql`.
+
+- `ba_date`/`ba_start`: día y medianoche de America/Argentina/Buenos_Aires.
+- `founder_period_index(inicio, día)`: mayor n con `founder_period_on(inicio, n) <= día` (aniversario fijo desde el inicio, con día ajustado a fin de mes).
+- `founder_period_covered`: cobranza `posted` y `nominal`; período 0 = activación. Revertidas o `blocked_pending_policy` no cubren.
+- `business_service_access(negocio, instante)` (sin grants), con estos estados:
+  - `exempt` y `no_terms` (bloquea);
+  - `review_required` (más de un término; bloquea);
+  - `pending_activation` (bloquea);
+  - `active`, incluido el caso "inicio pendiente";
+  - `grace`: período anterior cubierto y antes de inicio+7 días 00:00 BA;
+  - `suspended` (bloquea).
+
+  Devuelve período actual, próximo aniversario, apertura de renovación (T−10) y fin de gracia. Los meses impagos vencen sin deuda.
+- `service_access_exemptions`: excepciones legacy expresas.
+
+Pruebas: `phase10_service_access.sql` PASS, con estos casos:
+- 31/1→28/2, 30/3 y 31/3; bisiesto 29/2; cambio de año; 30/8→28/2;
+- medianoche BA = 03:00Z; gracia hasta 23 00:00 BA;
+- reactivación por pago, dos impagos sin gracia;
+- cobranza no nominal y cobranza revertida sin cobertura e historia conservada;
+- términos dobles, sin términos, excepción y revocación; grants.
+
+Pendiente detectado: una cobranza revertida deja la obligación `satisfied`. Para volver a cobrar ese período hace falta reabrirla. Se resuelve en L7, por Finanzas y sin borrar historia.
