@@ -1,0 +1,156 @@
+{
+  "at": "2026-10-14T04:53:25.404Z",
+  "verdict": "MIXED_EVIDENCE",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "branch": "codex/estadisticas-v1",
+  "preflight": "PASS",
+  "normalQueries": 18,
+  "normalQueriesPerReaderCohort": 3,
+  "warmups": 6,
+  "instrumentedProfiles": 12,
+  "halt": null,
+  "noP95": true,
+  "sqlTimeoutSeconds": 15,
+  "lockTimeoutSeconds": 3,
+  "completeJSONEquality": true,
+  "catalogPreservation": true,
+  "filePreservation": true,
+  "ddl": 0,
+  "commits": 0,
+  "cNotInstalled": true,
+  "publicOriginalActive": true,
+  "sourceHashes": {
+    "AB": "fd88de8c0ec3f4a87d8a6782650d63cf4779d8170033a4c5b4f37edbd489faf9",
+    "D1": "9e8b793df40de1aeb6ecbb71c1ce4e828c717498e62340341d8784726ee78070",
+    "C": "7d05e3987695f8bfc0e2477d74a38566269c7b6992682e58dbc4c34032f49bb6"
+  },
+  "privateLogs": [
+    {
+      "path": "C:\\Users\\Oasis Desktop\\Desktop\\Full Stack Developer\\Projects\\OrderOps-Estadisticas\\supabase\\statistics-v1-test\\.runtime/p03-f4c-50.local.log",
+      "sha256": "f8a8045a4be6a2497acbd05b041abe96432668f3294acbe3e79836008a23b13f",
+      "privateOnly": true
+    },
+    {
+      "path": "C:\\Users\\Oasis Desktop\\Desktop\\Full Stack Developer\\Projects\\OrderOps-Estadisticas\\supabase\\statistics-v1-test\\.runtime/p03-f4c-100.local.log",
+      "sha256": "74e629dabb9c62bf0d0eba78bd64406e6173cc7698443dd16d8377ed98c5ed31",
+      "privateOnly": true
+    }
+  ],
+  "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+  "observerCorrection": "observer-refresh.proposed.patch prepared only; no automatic repeat of measured queries",
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/cpu-psi-correlation.json",
+      "sha256": "02b16596a3ba5586d71159d9773ecc0cbe5d14e4f8e4c455ea3121b3cceecdf0"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/diagnosis.md",
+      "sha256": "93ec8bfe4ea8ea1ecb9837a34e40047be60f76b8644c1b213e4fe3ffe8a001fd"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/file-baseline.json",
+      "sha256": "d73f94f6d4b9c4a92d1745bc93379c1c3d3330df8d190827cd1ba3b7b544eb5b"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/informe.md",
+      "sha256": "5977e71159051b9b0e67cf288ed24a900e20a2c914d8d9fce929dce3b83cb9f7"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/internal-plans/comparison.json",
+      "sha256": "ff371e54b4e2717b3073e98454912a778d7ac1a44e0b96b73e698ef728080872"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/internal-plans/f4c-100-profile-AB-1.json",
+      "sha256": "127757a6f27cd91b1dba01a8b66ae466ec950e0219f5c9f2db1c8569aba2a860"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/internal-plans/f4c-100-profile-AB-2.json",
+      "sha256": "8837c619e8057a92b5fb3e38a9b0fd38c2f43a5840bf77ffc4534ad404d78557"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/internal-plans/f4c-100-profile-D1-1.json",
+      "sha256": "1e205ae62b677924b28f1668254a6e59c952546154991fcdf21591e9b6aa9a5f"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/internal-plans/f4c-100-profile-D1-2.json",
+      "sha256": "eb638e5d759ebb3c0daa962dddf9d09310d8979e649df48341988dcd19831708"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/internal-plans/f4c-100-profile-original-1.json",
+      "sha256": "78b6655b2aebce70db80c4c1c2085ed710bb241e8fd09b717b097d1eb1a4209c"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/internal-plans/f4c-100-profile-original-2.json",
+      "sha256": "e1fa553243c445468eb8a3508a92c039905bf57f0318ddb7bbea5ee65618f50f"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/internal-plans/f4c-50-profile-AB-1.json",
+      "sha256": "b8c24b65c99d3e587a0566968d9a0f88b602a29316179e4313183fef150a5634"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/internal-plans/f4c-50-profile-AB-2.json",
+      "sha256": "38113b995b2daeb7c21fc6376e8bb5ace88909e7669dce108ed9503d35cc4fa2"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/internal-plans/f4c-50-profile-D1-1.json",
+      "sha256": "5dda593ebf0c2eed12b988d396c810724e2ef0b016d44e4d02892802aa8b86c3"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/internal-plans/f4c-50-profile-D1-2.json",
+      "sha256": "fa0988a494e851386bd13ccc414245189d8b109946adc4892d3bf6bdf8f4c7df"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/internal-plans/f4c-50-profile-original-1.json",
+      "sha256": "a4c32c61f0cf53e4bb04dbd63814ba4fb0cf9c9f19945bacd53085c414ad55c1"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/internal-plans/f4c-50-profile-original-2.json",
+      "sha256": "b049f14b63b20fe2aa0488dfa19d97b5c68bbe92691d8fa516e8e3070bfd037c"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/internal-plans/plan-differences.json",
+      "sha256": "aa0fd494a6de6f13452b48ffa3ade4f52d25b9ddb8885b9f10e03c9f368ec8a4"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/logical-work-analysis.md",
+      "sha256": "26a487933598733e28d69bc91fd0b5859d9e821588f615f9f3364ee7fd94f793"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/observer-refresh.proposed.patch",
+      "sha256": "1618143c7cc4573846b95fbc87cd6705d643cbc429b59ecf0375d63ef4d7f405"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/preflight.json",
+      "sha256": "2fd4f2aeecfce2d9f6052c97c3cbfe88ac53ae56b5624866bf80a05d6a22f8c6"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/preservation.json",
+      "sha256": "c4134903bbd28e9aa4ee4a64438943ed0e0d3f732f772262145344de6c096fa2"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/recommendation.md",
+      "sha256": "a39624e3a80a860c128b195d9ee719cd8832934e034c766ca75169a38b4f0a33"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/response-shapes.json",
+      "sha256": "79d994c172a96c8eac5d2f0e522bf494bf3e30f92f5c3f37a32f28128174714b"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/sample-summary.md",
+      "sha256": "be9ea62c82d70e71a483587302de3f2b4f8c46c79b3f4efc027246762dcf8719"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4c/synchronized-measurements.json",
+      "sha256": "dc9472315618e47ae770e3a3a33540c8ee73c5fcc19a37f09c35a9838a988671"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f4c-run.mjs",
+      "sha256": "552fa9760d91a4d5ad3015633c0d1a7a2f4a96debc31bde5bb9944bd869db062"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f4c-report.mjs",
+      "sha256": "8e4f5c283decc5416dc2bef96e8de48a6972e1e9bbd172084bb528d609367dd5"
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

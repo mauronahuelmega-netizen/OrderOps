@@ -1,0 +1,98 @@
+diff --git a/lib/admin/permissions.ts b/lib/admin/permissions.ts
+index f1ba98d..8cb865f 100644
+--- a/lib/admin/permissions.ts
++++ b/lib/admin/permissions.ts
+@@ -1,6 +1,7 @@
+ import type { ProfileRole } from "@/types/database";
+ 
+ export type AdminPermission =
++  | "viewStatistics"
+   | "viewOrders"
+   | "updateOrders"
+   | "manageNotifications"
+@@ -41,6 +42,10 @@ export function isViewer(role: ProfileRole) {
+   return normalizeBusinessAdminRole(role) === "viewer";
+ }
+ 
++export function canViewStatistics(role: ProfileRole) {
++  return role === "owner" || role === "manager" || role === "admin";
++}
++
+ export function canViewOrders(role: ProfileRole) {
+   void role;
+   return true;
+@@ -68,6 +73,8 @@ export function canManagePublicSettings(role: ProfileRole) {
+ 
+ export function hasAdminPermission(role: ProfileRole, permission: AdminPermission) {
+   switch (permission) {
++    case "viewStatistics":
++      return canViewStatistics(role);
+     case "viewOrders":
+       return canViewOrders(role);
+     case "updateOrders":
+diff --git a/components/admin/admin-nav-config.ts b/components/admin/admin-nav-config.ts
+index b8b1531..8a7095d 100644
+--- a/components/admin/admin-nav-config.ts
++++ b/components/admin/admin-nav-config.ts
+@@ -14,6 +14,7 @@ export type AdminNavItem = {
+   label: string;
+   matchPrefixes: string[];
+   requiredPermission?: AdminPermission;
++  releasePending?: boolean;
+   requiredFeatureFlag?: AdminNavFeatureFlag;
+ };
+ 
+@@ -47,6 +48,13 @@ export const adminNavItems: AdminNavItem[] = [
+     ],
+     requiredPermission: "manageProducts"
+   },
++  {
++    href: "/admin/statistics",
++    label: "Estadísticas",
++    matchPrefixes: ["/admin/statistics"],
++    requiredPermission: "viewStatistics",
++    releasePending: true
++  },
+   {
+     href: "/admin/settings",
+     label: "Configuración",
+@@ -63,7 +71,7 @@ export function isAdminNavItemActive(pathname: string, item: AdminNavItem) {
+ 
+ export function getAdminNavItemsForRole(role: ProfileRole) {
+   return adminNavItems.filter(
+-    (item) => !item.requiredPermission || hasAdminPermission(role, item.requiredPermission)
++    (item) => !item.releasePending && (!item.requiredPermission || hasAdminPermission(role, item.requiredPermission))
+   );
+ }
+ 
+@@ -72,6 +80,10 @@ export function isAdminNavItemFeatureEnabled(
+   settings: Database["public"]["Tables"]["business_settings"]["Row"] | null,
+   loading: boolean
+ ) {
++  if (item.releasePending) {
++    return false;
++  }
++
+   if (!item.requiredFeatureFlag) {
+     return true;
+   }
+diff --git a/components/admin/layout/admin-nav-list.tsx b/components/admin/layout/admin-nav-list.tsx
+index ceb7ed3..aa5d9e9 100644
+--- a/components/admin/layout/admin-nav-list.tsx
++++ b/components/admin/layout/admin-nav-list.tsx
+@@ -3,6 +3,7 @@
+ import Link from "next/link";
+ import { usePathname } from "next/navigation";
+ import {
++  BarChart3,
+   ClipboardList,
+   CookingPot,
+   Handshake,
+@@ -24,6 +25,7 @@ const ADMIN_NAV_ICONS: Record<string, LucideIcon> = {
+   "/admin/kitchen": CookingPot,
+   "/admin/onboarding": Handshake,
+   "/admin/products": Package,
++  "/admin/statistics": BarChart3,
+   "/admin/settings": Settings
+ };
+ 

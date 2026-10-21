@@ -1,0 +1,109 @@
+{
+  "at": "2026-10-14T02:38:02.717Z",
+  "verdict": "INCONCLUSIVE",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "branch": "codex/estadisticas-v1",
+  "preflight": "PASS",
+  "publicOriginalActive": true,
+  "cNotInstalled": true,
+  "livePreservation": "live-preservation.json",
+  "preservation": "preservation.json",
+  "auditorCorrection": "Initial guard erroneously expected statistics_v1_summary_base; replaced with complete catalog equality to approved original wrapper calling statistics_v1_series_response. No SQL changed.",
+  "databaseWrites": 0,
+  "ddl": 0,
+  "commits": 0,
+  "serviceChanges": 0,
+  "sources": [
+    {
+      "path": "docs/estadisticas-v1/p03-f3c/benchmarks.json",
+      "sha256": "25834b373504e54d26e0f83f262e9b4fbb53c90fbb284a8edfca04d3ce19ed5c"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4a/stability-benchmarks.json",
+      "sha256": "1d68e43b5dd71df5526476bcbb06b05c836f6c1df97b734557f309a57486eed9"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4a/resource-profile.json",
+      "sha256": "0d46265a922778713db7f42c437d61787c87fdf80ed42549f014a8e24407f6cc"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4a/http-results.json",
+      "sha256": "ac639c16709a9911b71b68e1e1d5f0954cd76d80d0fb6461aee2c02bbecb9499"
+    }
+  ],
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/benchmark-reliability.md",
+      "sha256": "ae03984830d1d0b1119b8298ce1753b9caea5aa4dacf368db5e8142e4367d5a4"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/current-resource-samples.json",
+      "sha256": "5d3dffc5766ca9fe3211d7bde00e8a10508374d07300f01c9259d77b4b0dd0ea"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/docker-wsl-analysis.md",
+      "sha256": "36ea5354e5132d2e3ac45527846a76e1287ad062241e3cabb0729eb8df50f5be"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/environment-baseline.json",
+      "sha256": "f58c70180035a5533c0eb2c5af51f3ca4c3acc465fb13b14299fcd4623c786ba"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/file-baseline.json",
+      "sha256": "94ed0d6f73accc0c1ce948e2c92c1ae3c5861a44c6ae59551d9fd16469b8ac41"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/informe.md",
+      "sha256": "908a9cde8fc530c78df29e36f330c12dd3b54111e4d34e4c1a6b13f04f9ed1da"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/latency-table.md",
+      "sha256": "56ff22bc8c92e1d441c0f8f2944d02b2e862152efb48b76688d9153ea3d5f0c2"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/latency-variability-analysis.md",
+      "sha256": "476f837801e9a1064e7e431a29fe223d48d95451cc65de6a33cfffaa343fceff"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/live-preservation.json",
+      "sha256": "dc443c4dcdca218f7558ecdcd2191f6372cf02e6fce136f5d84443fa45dd0601"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/measurement-results.json",
+      "sha256": "b868453e18a2916d081f19cf2b69a13f4e6acc56a24889682fcc4bd68ce224ca"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/plan-comparison.json",
+      "sha256": "f4d29ffb94ddcd02fd337005ab72dfcb2d935de284d0cf3fca86857f2436ce36"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/postgres-configuration.md",
+      "sha256": "3b3e104940ca0f704d56627c1b0f39dc36557f0f5e13834589d6c340d321485d"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/preflight.json",
+      "sha256": "fdb4beee738092e1cf56b65a9b4ea77161778efc8afc9956c040ddcb69ddb910"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/preservation.json",
+      "sha256": "b4d40fbb95c5d98b564c257848bbce1c308020b9ed51f1075b56ac63f6c26047"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/recommendation.md",
+      "sha256": "583fc104b48f25bb7ca8ee515600566a493df999c7f2f9fb7da4540916f6febb"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f4b/resource-correlation.json",
+      "sha256": "349b677c3949d6e7379cd73b022a54e1aeb9daa2631e98ab524f26896e75f21f"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f4b-audit.mjs",
+      "sha256": "76c137d9254c2f10395242b2b660775184ae2e8d04ceca72514e6927a866a70e"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f4b-report.mjs",
+      "sha256": "6bbc3cf0c587489267a07819248e30e5e7488acc249bf49d2e252219462b6a0a"
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

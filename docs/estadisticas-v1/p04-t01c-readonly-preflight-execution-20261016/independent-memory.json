@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-16T17:52:08.4028807Z",
+  "method": "Independent CIM Win32_OperatingSystem memory-only observation",
+  "freePhysicalMemoryKiB": 864012,
+  "freeGiB": 0.8239860534667969,
+  "minimumKiB": 4194304,
+  "conditionSatisfied": false,
+  "observations": 1,
+  "helperInvoked": false
+}

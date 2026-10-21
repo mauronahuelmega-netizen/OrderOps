@@ -1,0 +1,170 @@
+{
+  "at": "2026-10-14T14:41:00.717Z",
+  "records": [
+    {
+      "attempt": "attempt-02/",
+      "test": "period.today",
+      "periodFields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "differences": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "scope": "Same statement/snapshot, reconciled synthetic subset only; different response contracts retained in full source records"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "period.yesterday",
+      "periodFields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "differences": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "scope": "Same statement/snapshot, reconciled synthetic subset only; different response contracts retained in full source records"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "period.this_week",
+      "periodFields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "differences": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "scope": "Same statement/snapshot, reconciled synthetic subset only; different response contracts retained in full source records"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "period.this_month",
+      "periodFields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "differences": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "scope": "Same statement/snapshot, reconciled synthetic subset only; different response contracts retained in full source records"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "period.previous_month",
+      "periodFields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "differences": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "scope": "Same statement/snapshot, reconciled synthetic subset only; different response contracts retained in full source records"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "period.last_7_days",
+      "periodFields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "differences": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "scope": "Same statement/snapshot, reconciled synthetic subset only; different response contracts retained in full source records"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "period.last_30_days",
+      "periodFields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "differences": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "scope": "Same statement/snapshot, reconciled synthetic subset only; different response contracts retained in full source records"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "period.custom",
+      "periodFields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "differences": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "scope": "Same statement/snapshot, reconciled synthetic subset only; different response contracts retained in full source records"
+    },
+    {
+      "attempt": "attempt-05-final",
+      "test": "time.night_session.fresh_statement",
+      "periodFields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "differences": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "scope": "Same statement/snapshot, reconciled synthetic subset only; different response contracts retained in full source records"
+    }
+  ],
+  "allExecutedSharedFieldsEqual": true,
+  "fullJsonPreserved": true,
+  "noClaimCompleteJsonEqualityAcrossDifferentContracts": true
+}

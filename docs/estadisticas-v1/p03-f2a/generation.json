@@ -1,0 +1,11 @@
+{
+  "migration": "supabase/migrations/20261013005000_statistics_v1_read_core_candidate.sql",
+  "sha256": "fd88de8c0ec3f4a87d8a6782650d63cf4779d8170033a4c5b4f37edbd489faf9",
+  "names": [
+    "statistics_v1_read_core_candidate",
+    "statistics_v1_summary_base_candidate",
+    "statistics_v1_summary_candidate"
+  ],
+  "versionCollision": false,
+  "securityDelta": "Explicit NULL-role denial; original SQL NOT IN is UNKNOWN for NULL. No database execution. Review required."
+}

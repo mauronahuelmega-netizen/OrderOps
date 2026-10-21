@@ -1,0 +1,6 @@
+{
+  "result": "FAIL",
+  "error": "ERROR:  STATISTICS_INVALID_CURSOR\nCONTEXT:  PL/pgSQL function statistics_v1_summary_base(text,date,date,text,integer,jsonb) line 18 at RAISE\nPL/pgSQL function statistics_v1_series_response(text,date,date,text,integer,jsonb) line 18 at assignment\nSQL function \"statistics_v1_summary\" statement 1\nSQL statement \"select public.statistics_v1_summary(period,sd,ed,sort,1,cur),private.statistics_v1_summary_candidate(period,sd,ed,sort,1,cur)\"\nPL/pgSQL function inline_code_block line 18 at SQL statement\n",
+  "output": "SET\nBEGIN\nSET\nSET\nDO\n{\"sub\": \"a9eea14b-6c1c-4631-9a0e-4c6c62efe501\", \"role\": \"authenticated\"}\nINSERT 0 10\nINSERT 0 10\nINSERT 0 10\nINSERT 0 10\nUPDATE 10\nSET CONSTRAINTS\nDO\nUPDATE 1\nINSERT 0 2\nUPDATE 10\nSET CONSTRAINTS\n{a9eea14b-6c1c-4631-9a0e-4c6c62efe501,6d1a696a-d974-4ad6-809d-a5715f90d816,4f81b68b-fc92-4865-88a8-bd59372b45f8,2969d3a4-4fcf-46b9-8724-ef965e364fb4,bc03a29d-699f-48c7-bf53-21624019cdc6,1235168b-bcab-4053-93d3-0cd44e53ade0,bb729a71-be76-4ff7-a7f6-0edd33361097,1ef472c5-3f84-4118-b486-ff2796f1992c,a63714a3-afc5-490c-b114-8abc68d45621,f316cdb5-07a3-4cb1-bf4e-5433d73ec511,ecfc0c1d-069b-43ec-80e7-569bbb78dbaf,3693c4d3-c66c-4bd6-9faa-0e777c8e0279}\na9eea14b-6c1c-4631-9a0e-4c6c62efe501\nSET\n",
+  "cleanupVerified": true
+}

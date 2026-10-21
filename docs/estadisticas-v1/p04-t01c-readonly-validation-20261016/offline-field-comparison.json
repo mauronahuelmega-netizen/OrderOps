@@ -1,0 +1,251 @@
+{
+  "at": "2026-10-16T16:00:45.074Z",
+  "sqlQueriesExecuted": 0,
+  "rows": [
+    {
+      "block": "catalog",
+      "key": "functions",
+      "equal": true,
+      "referenceHash": "8b4546419eabdc35c3614ebefc9f91565b52e11b462da792a188b237505c560c",
+      "observedHash": "8b4546419eabdc35c3614ebefc9f91565b52e11b462da792a188b237505c560c"
+    },
+    {
+      "block": "catalog",
+      "key": "policies",
+      "equal": true,
+      "referenceHash": "a184f0c3111c3eb1d8162cb8b77429c4ece5ebbc78ce02e771fd70712cba4172",
+      "observedHash": "a184f0c3111c3eb1d8162cb8b77429c4ece5ebbc78ce02e771fd70712cba4172"
+    },
+    {
+      "block": "catalog",
+      "key": "indexes",
+      "equal": true,
+      "referenceHash": "c690a240449a1a8e00081bc0d9bd2f12947cfc72c142242a60fa343db9d5a5e8",
+      "observedHash": "c690a240449a1a8e00081bc0d9bd2f12947cfc72c142242a60fa343db9d5a5e8"
+    },
+    {
+      "block": "catalog",
+      "key": "constraints",
+      "equal": true,
+      "referenceHash": "9a9f04b9d34934d9f9c01c51a400a4464a71f7c5f57f71524485d951571b22b3",
+      "observedHash": "9a9f04b9d34934d9f9c01c51a400a4464a71f7c5f57f71524485d951571b22b3"
+    },
+    {
+      "block": "catalog",
+      "key": "counts",
+      "equal": true,
+      "referenceHash": "a41db9774c81360475d2429d30a2e27c42949fe96247aab4094033628acb27a3",
+      "observedHash": "a41db9774c81360475d2429d30a2e27c42949fe96247aab4094033628acb27a3"
+    },
+    {
+      "block": "catalog",
+      "key": "profileFingerprint",
+      "equal": true,
+      "referenceHash": "a87587460ff539508534badc8d7eb6780c6f2f18938fb13e877c9d1c63393b04",
+      "observedHash": "a87587460ff539508534badc8d7eb6780c6f2f18938fb13e877c9d1c63393b04"
+    },
+    {
+      "block": "catalog",
+      "key": "ledger",
+      "equal": true,
+      "referenceHash": "04b2f5a5c37c57bc74dc23648a815f7097f990cedd62b16deacca0180e3e0085",
+      "observedHash": "04b2f5a5c37c57bc74dc23648a815f7097f990cedd62b16deacca0180e3e0085"
+    },
+    {
+      "block": "data",
+      "key": "businesses",
+      "equal": true,
+      "referenceHash": "8e2177142156f885c9d08d62cdc9af3013bf857153524778537d71a137e1bf13",
+      "observedHash": "8e2177142156f885c9d08d62cdc9af3013bf857153524778537d71a137e1bf13"
+    },
+    {
+      "block": "data",
+      "key": "profiles",
+      "equal": true,
+      "referenceHash": "26d7c9207d6a929735496757ce0189322d395628456684a39cafd586e8f53e23",
+      "observedHash": "26d7c9207d6a929735496757ce0189322d395628456684a39cafd586e8f53e23"
+    },
+    {
+      "block": "data",
+      "key": "business_settings",
+      "equal": true,
+      "referenceHash": "d96fdc243e7687e6cc785338d50b5186e7cc0648bd254bcd33b466b358a9701b",
+      "observedHash": "d96fdc243e7687e6cc785338d50b5186e7cc0648bd254bcd33b466b358a9701b"
+    },
+    {
+      "block": "data",
+      "key": "orders",
+      "equal": true,
+      "referenceHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0",
+      "observedHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0"
+    },
+    {
+      "block": "data",
+      "key": "order_items",
+      "equal": true,
+      "referenceHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0",
+      "observedHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0"
+    },
+    {
+      "block": "data",
+      "key": "order_financials",
+      "equal": true,
+      "referenceHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0",
+      "observedHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0"
+    },
+    {
+      "block": "data",
+      "key": "finance_audit_events",
+      "equal": true,
+      "referenceHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0",
+      "observedHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0"
+    },
+    {
+      "block": "data",
+      "key": "store_sessions",
+      "equal": true,
+      "referenceHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0",
+      "observedHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0"
+    },
+    {
+      "block": "data",
+      "key": "store_session_statistics_snapshots",
+      "equal": true,
+      "referenceHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0",
+      "observedHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0"
+    },
+    {
+      "block": "data",
+      "key": "business_statistics_state",
+      "equal": true,
+      "referenceHash": "f24e90ccea14b3515ec99cefc0740730ecd3574764dc7885800e5facf83f9b60",
+      "observedHash": "f24e90ccea14b3515ec99cefc0740730ecd3574764dc7885800e5facf83f9b60"
+    },
+    {
+      "block": "data",
+      "key": "order_item_statistics_snapshots",
+      "equal": true,
+      "referenceHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0",
+      "observedHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0"
+    },
+    {
+      "block": "data",
+      "key": "order_statistics_completions",
+      "equal": true,
+      "referenceHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0",
+      "observedHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0"
+    },
+    {
+      "block": "data",
+      "key": "order_statistics_completion_items",
+      "equal": true,
+      "referenceHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0",
+      "observedHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0"
+    },
+    {
+      "block": "data",
+      "key": "products",
+      "equal": true,
+      "referenceHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0",
+      "observedHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0"
+    },
+    {
+      "block": "data",
+      "key": "categories",
+      "equal": true,
+      "referenceHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0",
+      "observedHash": "fe312bfc7e74b6efaf847290a7e2550b3f4708b0e95965020e2876757fe787d0"
+    },
+    {
+      "block": "extra",
+      "key": "settings",
+      "equal": true,
+      "referenceHash": "89cff8adf2b4520ddda56a0d2b13f46d771c4b40494c28910f36e6fc059a5e06",
+      "observedHash": "89cff8adf2b4520ddda56a0d2b13f46d771c4b40494c28910f36e6fc059a5e06"
+    },
+    {
+      "block": "extra",
+      "key": "state",
+      "equal": true,
+      "referenceHash": "4f6c11dc57a1ca2475e1ffb05ac62ed4483c7229005eb89b1c3e7b687a2ef148",
+      "observedHash": "4f6c11dc57a1ca2475e1ffb05ac62ed4483c7229005eb89b1c3e7b687a2ef148"
+    },
+    {
+      "block": "extra",
+      "key": "products",
+      "equal": true,
+      "referenceHash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "observedHash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "block": "extra",
+      "key": "categories",
+      "equal": true,
+      "referenceHash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "observedHash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "block": "extra",
+      "key": "stock",
+      "equal": true,
+      "referenceHash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+      "observedHash": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9"
+    },
+    {
+      "block": "extra",
+      "key": "triggers",
+      "equal": false,
+      "referenceHash": "f55ec4fdd4726cc9c2ae14fb01f3347792d0d7bde4d590cdfa5e30b1a5455468",
+      "observedHash": "f7bff0f11606f721a6d685addd474bae73a30959cc52cfcc6ed9746b977345d3"
+    },
+    {
+      "block": "privileges",
+      "key": "functions",
+      "equal": true,
+      "referenceHash": "398710c3b4231239a869ffe44d0490e41bd0b45cebbc9ab2175a709076b8d0f0",
+      "observedHash": "398710c3b4231239a869ffe44d0490e41bd0b45cebbc9ab2175a709076b8d0f0"
+    },
+    {
+      "block": "privileges",
+      "key": "newConfigAbsent",
+      "equal": true,
+      "referenceHash": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+      "observedHash": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b"
+    },
+    {
+      "block": "privileges",
+      "key": "schemaUsage",
+      "equal": true,
+      "referenceHash": "5f04448c67dd47198a674d4dfda81166a5e631291ac25bca02c09e3ea96dc3c5",
+      "observedHash": "5f04448c67dd47198a674d4dfda81166a5e631291ac25bca02c09e3ea96dc3c5"
+    },
+    {
+      "block": "privileges",
+      "key": "originalSummary",
+      "equal": true,
+      "referenceHash": "ae5627aa8378dac4248e0175fd30c9507f1a3ee2548147737e88a84602f5fbf4",
+      "observedHash": "ae5627aa8378dac4248e0175fd30c9507f1a3ee2548147737e88a84602f5fbf4"
+    },
+    {
+      "block": "privileges",
+      "key": "roleFlags",
+      "equal": true,
+      "referenceHash": "4e848456051eaeaf6b0496dcb5dd5951304d69434f8bcb6e881b0622f834fab3",
+      "observedHash": "4e848456051eaeaf6b0496dcb5dd5951304d69434f8bcb6e881b0622f834fab3"
+    },
+    {
+      "block": "privileges",
+      "key": "sourceRls",
+      "equal": true,
+      "referenceHash": "90ab8df044b395e447b8b125579276c73bc241a7dec69af23af32013e003c1cf",
+      "observedHash": "90ab8df044b395e447b8b125579276c73bc241a7dec69af23af32013e003c1cf"
+    },
+    {
+      "block": "privileges",
+      "key": "readOnly",
+      "equal": true,
+      "referenceHash": "990c23868b965814b117cf9a6c4dfe45452eadc2171e1f981865ebfc84f10724",
+      "observedHash": "990c23868b965814b117cf9a6c4dfe45452eadc2171e1f981865ebfc84f10724"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "status": "PROPOSAL_NOT_EXECUTED",
+  "name": "orderops-statistics-recovery-20261016-a",
+  "label": "20261016-a",
+  "image": "sha256:4255b662ba3d774105cb34f623e410a3d7a860b68408ac6810f7e7e4b9781d5a",
+  "memoryBytes": 2147483648,
+  "nanoCpus": 750000000,
+  "pids": 128,
+  "tmpfsQaBytes": 1073741824,
+  "tmpfsImagePgdataBytes": 1048576,
+  "network": "none",
+  "publishedPorts": [],
+  "persistentVolumes": [],
+  "hostBinds": [],
+  "user": "postgres",
+  "rootfsReadOnly": true,
+  "privileged": false,
+  "restartPolicy": "no",
+  "autoRemove": false,
+  "cleanupAuthorized": false,
+  "testExecutionAuthorized": false,
+  "sourceResourcesModified": false
+}

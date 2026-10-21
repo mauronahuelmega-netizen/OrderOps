@@ -1,0 +1,13 @@
+// Pure in-memory decryption/validation. No key acquisition, file access, process, logging or transport.
+import assert from 'node:assert/strict';import {createDecipheriv} from 'node:crypto';
+import {PROJECT,validatePayload} from '../p04-t01c-loopback-harness-20261016/policy.mjs';import {sha,archiveMetadata,verifyArchive} from './filesystem.mjs';
+export function unseal(bytes,key,pins){assert.equal(pins.projectId,PROJECT);assert.equal(sha(bytes),pins.bundle.sha256);const e=JSON.parse(bytes);assert.equal(e.format,'AES-256-GCM+DPAPI-CurrentUser.v1');assert.equal(e.projectId,PROJECT);assert.equal(e.runId,pins.runId);assert.equal(key.length,32);const iv=Buffer.from(e.iv,'base64'),tag=Buffer.from(e.tag,'base64');assert.equal(iv.length,12);assert.equal(tag.length,16);const d=createDecipheriv('aes-256-gcm',key,iv);d.setAAD(Buffer.from(PROJECT+':'+e.runId));d.setAuthTag(tag);return JSON.parse(Buffer.concat([d.update(Buffer.from(e.ciphertext,'base64')),d.final()]));}
+export function validateContents(data,pins){
+ assert.equal(data.projectId,PROJECT);assert.equal(data.runId,pins.runId);assert.equal(data.targets.length,2);assert.deepEqual(data.targets.map(x=>x.kind).sort(),['db','kong']);const report=[];
+ for(const t of data.targets){const p=pins.targets.find(x=>x.kind===t.kind);const c=t.originalInspect;assert.equal(c.Id,p.id);assert.equal(c.Name,p.name);assert.equal(c.Image,p.image);assert.equal(sha(Buffer.from(JSON.stringify(c.Config))),p.configHash);assert.equal(sha(Buffer.from(JSON.stringify(c.HostConfig))),p.hostHash);assert.equal(sha(Buffer.from(JSON.stringify(t.payload))),p.payloadSha256);validatePayload(c,t.kind,t.payload);assert.equal(c.NetworkSettings.Networks[pins.networkName].NetworkID,pins.networkId);
+  const expected=pins.layerInventory.filter(x=>x.kind===t.kind&&x.disposition==='PRESERVE_ARCHIVE');assert.equal(t.archives.length,expected.length);assert.equal(new Set(t.archives.map(x=>x.path)).size,expected.length);
+  for(const a of t.archives){const e=expected.find(x=>x.path===a.path);assert.ok(e);const tar=Buffer.from(a.tarBase64,'base64');assert.equal(sha(tar),a.sha256);assert.equal(a.sha256,e.archiveSha256);const meta=archiveMetadata(tar);verifyArchive(a.path,tar,{uid:e.uid,gid:e.gid,mode:parseInt(e.mode,8),mtime:meta.mtime,contentHash:e.contentSha256});}
+  report.push({kind:t.kind,oldId:c.Id,image:c.Image,payloadSha256:p.payloadSha256,archivesValidated:t.archives.length,allConfigExceptApprovedHostIpAndImageReferenceIdentical:true,allArchiveChecksumsMetadataAndHashesValid:true});
+ }
+ return {result:'PASS_OFFLINE_PRIVATE_BUNDLE',targets:report,plaintextWritten:false,sql:0,engineRequests:0};
+}

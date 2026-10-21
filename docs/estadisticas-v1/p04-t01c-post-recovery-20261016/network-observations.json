@@ -1,0 +1,81 @@
+{
+  "at": "2026-10-16T05:11:22.6209486Z",
+  "changes": 0,
+  "remoteProbes": 0,
+  "profiles": [
+    {
+      "Name": "Domain",
+      "Enabled": 1,
+      "DefaultInboundAction": 4,
+      "DefaultOutboundAction": 2,
+      "AllowInboundRules": 1,
+      "AllowLocalFirewallRules": 1,
+      "AllowLocalIPsecRules": 1,
+      "PolicyStoreSourceType": null
+    },
+    {
+      "Name": "Private",
+      "Enabled": 1,
+      "DefaultInboundAction": 4,
+      "DefaultOutboundAction": 2,
+      "AllowInboundRules": 1,
+      "AllowLocalFirewallRules": 1,
+      "AllowLocalIPsecRules": 1,
+      "PolicyStoreSourceType": null
+    },
+    {
+      "Name": "Public",
+      "Enabled": 1,
+      "DefaultInboundAction": 4,
+      "DefaultOutboundAction": 2,
+      "AllowInboundRules": 1,
+      "AllowLocalFirewallRules": 1,
+      "AllowLocalIPsecRules": 1,
+      "PolicyStoreSourceType": null
+    }
+  ],
+  "activeConnections": [
+    {
+      "InterfaceAlias": "Wi-Fi 3",
+      "NetworkCategory": 0,
+      "IPv4Connectivity": 4,
+      "IPv6Connectivity": 1
+    }
+  ],
+  "listeners": [
+    {
+      "LocalAddress": "::1",
+      "LocalPort": 56322,
+      "OwningProcess": 14052
+    },
+    {
+      "LocalAddress": "::",
+      "LocalPort": 56322,
+      "OwningProcess": 9504
+    },
+    {
+      "LocalAddress": "::1",
+      "LocalPort": 56321,
+      "OwningProcess": 14052
+    },
+    {
+      "LocalAddress": "::",
+      "LocalPort": 56321,
+      "OwningProcess": 9504
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 56322,
+      "OwningProcess": 14052
+    },
+    {
+      "LocalAddress": "127.0.0.1",
+      "LocalPort": 56321,
+      "OwningProcess": 14052
+    }
+  ],
+  "ruleError": "Acceso denegado. ",
+  "portProxy": [
+    ""
+  ]
+}

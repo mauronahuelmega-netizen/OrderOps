@@ -1,0 +1,62 @@
+{
+  "businesses": {
+    "count": 2,
+    "hash": "bf1688263316984009b3c48e55867bb7"
+  },
+  "profiles": {
+    "count": 12,
+    "hash": "dd8513abb8b865d2f1add6d8053bed52"
+  },
+  "business_settings": {
+    "count": 2,
+    "hash": "e39a51aa166a43ae22b00f3aa9a7aec6"
+  },
+  "orders": {
+    "count": 0,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "order_items": {
+    "count": 0,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "order_financials": {
+    "count": 0,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "finance_audit_events": {
+    "count": 0,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "store_sessions": {
+    "count": 0,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "store_session_statistics_snapshots": {
+    "count": 0,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "business_statistics_state": {
+    "count": 1,
+    "hash": "c1df8c4e5ecaeb6c4241453443327116"
+  },
+  "order_item_statistics_snapshots": {
+    "count": 0,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "order_statistics_completions": {
+    "count": 0,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "order_statistics_completion_items": {
+    "count": 0,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "products": {
+    "count": 0,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "categories": {
+    "count": 0,
+    "hash": "d41d8cd98f00b204e9800998ecf8427e"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "result": "PASS",
+  "mode": "Existing synthetic fixtures only; candidate SQL NOT executed",
+  "pairs": 1,
+  "foreignTenantRejected": true
+}

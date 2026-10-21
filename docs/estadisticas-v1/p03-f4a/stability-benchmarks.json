@@ -1,0 +1,1655 @@
+{
+  "result": "STABILITY_NOT_ESTABLISHED",
+  "gates": {
+    "threeIndependentConnectionBatches": true,
+    "twentyPerReaderBatch": true,
+    "maxD1P95RatioAcrossBatches": 2,
+    "maxD1CV": 0.5,
+    "query15s": true,
+    "lock3s": true
+  },
+  "cohorts": [
+    {
+      "batch": 1,
+      "orders": 50,
+      "scaling": false,
+      "status": "PASS",
+      "error": null,
+      "method": "psql real SELECT timing, includes PostgreSQL execution/serialization/local Unix wire; no EXPLAIN/function instrumentation in normal samples",
+      "readers": {
+        "original": {
+          "n": 20,
+          "p50": 698.18,
+          "p95": 838.787,
+          "min": 587.244,
+          "max": 1222.602,
+          "mean": 715.7441499999999,
+          "stddev": 138.8020451024678,
+          "cv": 0.19392690125719897,
+          "rawMs": [
+            1222.602,
+            698.18,
+            778.984,
+            595.273,
+            838.787,
+            779.824,
+            779.304,
+            613.003,
+            735.66,
+            596.946,
+            616.252,
+            626.968,
+            760.327,
+            720.928,
+            730.766,
+            690.722,
+            587.244,
+            729.54,
+            598.101,
+            615.472
+          ]
+        },
+        "AB": {
+          "n": 20,
+          "p50": 232.171,
+          "p95": 293.766,
+          "min": 207.152,
+          "max": 319.887,
+          "mean": 243.1301,
+          "stddev": 30.198795707610596,
+          "cv": 0.12420837941337003,
+          "rawMs": [
+            269.177,
+            293.766,
+            225.073,
+            319.887,
+            247.419,
+            261.731,
+            265.813,
+            224.713,
+            231.282,
+            234.457,
+            207.152,
+            282.962,
+            207.406,
+            250.522,
+            208.238,
+            220.477,
+            232.171,
+            229.571,
+            240.72,
+            210.065
+          ]
+        },
+        "D1": {
+          "n": 20,
+          "p50": 158.031,
+          "p95": 229.598,
+          "min": 146.79,
+          "max": 257.943,
+          "mean": 173.08,
+          "stddev": 30.15630312886511,
+          "cv": 0.17423332059663224,
+          "rawMs": [
+            257.943,
+            151.768,
+            148.732,
+            229.598,
+            156.447,
+            211.039,
+            177.151,
+            173.176,
+            205.368,
+            147.359,
+            179.6,
+            156.053,
+            147.313,
+            169.105,
+            160.567,
+            149.929,
+            146.79,
+            185.55,
+            158.031,
+            150.081
+          ]
+        }
+      },
+      "warmups": {
+        "original": 983.781,
+        "AB": 243.81,
+        "D1": 189.078
+      },
+      "plans": [
+        {
+          "reader": "original",
+          "plan": [
+            {
+              "Plan": {
+                "Node Type": "Result",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.26,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 660.719,
+                "Actual Total Time": 660.72,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 12268,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Settings": {
+                "effective_cache_size": "128MB",
+                "search_path": "\"\\$user\", public, extensions"
+              },
+              "Planning": {
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Planning Time": 0.022,
+              "Triggers": [],
+              "Execution Time": 660.74
+            }
+          ]
+        },
+        {
+          "reader": "AB",
+          "plan": [
+            {
+              "Plan": {
+                "Node Type": "Result",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.26,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 245.182,
+                "Actual Total Time": 245.183,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 4243,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Settings": {
+                "effective_cache_size": "128MB",
+                "search_path": "\"\\$user\", public, extensions"
+              },
+              "Planning": {
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Planning Time": 0.044,
+              "Triggers": [],
+              "Execution Time": 245.207
+            }
+          ]
+        },
+        {
+          "reader": "D1",
+          "plan": [
+            {
+              "Plan": {
+                "Node Type": "Result",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.26,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 154.433,
+                "Actual Total Time": 154.434,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 4243,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Settings": {
+                "effective_cache_size": "128MB",
+                "search_path": "\"\\$user\", public, extensions"
+              },
+              "Planning": {
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Planning Time": 0.023,
+              "Triggers": [],
+              "Execution Time": 154.474
+            }
+          ]
+        }
+      ],
+      "resourceBefore": {
+        "at": "2026-10-14T01:11:08.483Z",
+        "dbStats": {
+          "BlockIO": "114MB / 57.4MB",
+          "CPUPerc": "0.00%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "123.6MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.8MB / 10.6MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourceAfter": {
+        "at": "2026-10-14T01:11:52.359Z",
+        "dbStats": {
+          "BlockIO": "114MB / 57.8MB",
+          "CPUPerc": "0.02%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "123.6MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.8MB / 10.6MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "rollback": true
+    },
+    {
+      "batch": 1,
+      "orders": 100,
+      "scaling": false,
+      "status": "PASS",
+      "error": null,
+      "method": "psql real SELECT timing, includes PostgreSQL execution/serialization/local Unix wire; no EXPLAIN/function instrumentation in normal samples",
+      "readers": {
+        "original": {
+          "n": 20,
+          "p50": 1333.493,
+          "p95": 1744.053,
+          "min": 1144.506,
+          "max": 2043.088,
+          "mean": 1373.9342000000001,
+          "stddev": 222.03005130670937,
+          "cv": 0.16160166280649346,
+          "rawMs": [
+            1165.973,
+            1348.699,
+            1495.668,
+            1335.369,
+            1370.209,
+            1154.562,
+            1300.486,
+            1333.493,
+            1325.552,
+            1438.339,
+            2043.088,
+            1287.084,
+            1353.155,
+            1144.506,
+            1151.476,
+            1238.124,
+            1744.053,
+            1705.899,
+            1172.471,
+            1370.478
+          ]
+        },
+        "AB": {
+          "n": 20,
+          "p50": 400.194,
+          "p95": 532.943,
+          "min": 357.431,
+          "max": 538.79,
+          "mean": 419.93514999999996,
+          "stddev": 51.46764033572454,
+          "cv": 0.12256092478975514,
+          "rawMs": [
+            532.943,
+            456.864,
+            441.936,
+            444.819,
+            389.127,
+            410.208,
+            538.79,
+            363.854,
+            394.266,
+            362.101,
+            467.817,
+            463.675,
+            400.194,
+            367.733,
+            357.431,
+            387.382,
+            426.196,
+            376.276,
+            386.985,
+            430.106
+          ]
+        },
+        "D1": {
+          "n": 20,
+          "p50": 327.388,
+          "p95": 476.775,
+          "min": 293.485,
+          "max": 544.91,
+          "mean": 350.3504,
+          "stddev": 61.74386674836618,
+          "cv": 0.17623461182966021,
+          "rawMs": [
+            381.383,
+            361.818,
+            361.85,
+            327.388,
+            476.775,
+            308.61,
+            335.123,
+            379.767,
+            338.296,
+            293.485,
+            320.611,
+            373.252,
+            298.045,
+            324.238,
+            303.05,
+            544.91,
+            308.963,
+            370.98,
+            301.276,
+            297.188
+          ]
+        }
+      },
+      "warmups": {
+        "original": 2196.398,
+        "AB": 382.549,
+        "D1": 329.476
+      },
+      "plans": [
+        {
+          "reader": "original",
+          "plan": [
+            {
+              "Plan": {
+                "Node Type": "Result",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.26,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 1226.51,
+                "Actual Total Time": 1226.511,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 33686,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Settings": {
+                "effective_cache_size": "128MB",
+                "search_path": "\"\\$user\", public, extensions"
+              },
+              "Planning": {
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Planning Time": 0.024,
+              "Triggers": [],
+              "Execution Time": 1226.53
+            }
+          ]
+        },
+        {
+          "reader": "AB",
+          "plan": [
+            {
+              "Plan": {
+                "Node Type": "Result",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.26,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 434.086,
+                "Actual Total Time": 434.087,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 14067,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Settings": {
+                "effective_cache_size": "128MB",
+                "search_path": "\"\\$user\", public, extensions"
+              },
+              "Planning": {
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Planning Time": 0.024,
+              "Triggers": [],
+              "Execution Time": 434.113
+            }
+          ]
+        },
+        {
+          "reader": "D1",
+          "plan": [
+            {
+              "Plan": {
+                "Node Type": "Result",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.26,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 353.772,
+                "Actual Total Time": 353.773,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 14067,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Settings": {
+                "effective_cache_size": "128MB",
+                "search_path": "\"\\$user\", public, extensions"
+              },
+              "Planning": {
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Planning Time": 0.024,
+              "Triggers": [],
+              "Execution Time": 353.797
+            }
+          ]
+        }
+      ],
+      "resourceBefore": {
+        "at": "2026-10-14T01:12:05.963Z",
+        "dbStats": {
+          "BlockIO": "114MB / 58.1MB",
+          "CPUPerc": "0.00%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "123.6MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.8MB / 10.6MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourceAfter": {
+        "at": "2026-10-14T01:13:14.415Z",
+        "dbStats": {
+          "BlockIO": "114MB / 58.9MB",
+          "CPUPerc": "0.02%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "123.6MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.8MB / 10.6MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "rollback": true
+    },
+    {
+      "batch": 2,
+      "orders": 100,
+      "scaling": false,
+      "status": "PASS",
+      "error": null,
+      "method": "psql real SELECT timing, includes PostgreSQL execution/serialization/local Unix wire; no EXPLAIN/function instrumentation in normal samples",
+      "readers": {
+        "original": {
+          "n": 20,
+          "p50": 1220.011,
+          "p95": 2549.766,
+          "min": 1126.141,
+          "max": 3869.315,
+          "mean": 1493.6485,
+          "stddev": 653.0372980981638,
+          "cv": 0.43720948944692395,
+          "rawMs": [
+            3869.315,
+            2549.766,
+            1220.011,
+            1304.97,
+            1511.022,
+            1145.194,
+            1231.176,
+            1126.682,
+            1526.118,
+            1160.725,
+            1209.329,
+            1126.141,
+            1250.457,
+            1229.197,
+            1181.195,
+            1126.17,
+            1530.252,
+            2178.36,
+            1209.104,
+            1187.786
+          ]
+        },
+        "AB": {
+          "n": 20,
+          "p50": 406.675,
+          "p95": 742.235,
+          "min": 358.271,
+          "max": 872.754,
+          "mean": 467.41370000000006,
+          "stddev": 144.77189220946863,
+          "cv": 0.3097296724710222,
+          "rawMs": [
+            493.038,
+            742.235,
+            423.04,
+            441.93,
+            359.92,
+            420.916,
+            371.157,
+            421.712,
+            380.395,
+            406.675,
+            358.271,
+            375.951,
+            388.742,
+            740.032,
+            380.074,
+            377.143,
+            582.02,
+            872.754,
+            441.727,
+            370.542
+          ]
+        },
+        "D1": {
+          "n": 20,
+          "p50": 361.615,
+          "p95": 606.202,
+          "min": 295.397,
+          "max": 1384.104,
+          "mean": 428.39624999999995,
+          "stddev": 232.49294181498823,
+          "cv": 0.5427053617182416,
+          "rawMs": [
+            1384.104,
+            403.285,
+            305.712,
+            363.558,
+            302.827,
+            348.933,
+            313.672,
+            370.825,
+            361.615,
+            393.662,
+            313.125,
+            443.87,
+            295.397,
+            451.395,
+            319.67,
+            334.66,
+            522.585,
+            606.202,
+            327.368,
+            405.46
+          ]
+        }
+      },
+      "warmups": {
+        "original": 1704.511,
+        "AB": 907.2,
+        "D1": 1254.469
+      },
+      "plans": [
+        {
+          "reader": "original",
+          "plan": [
+            {
+              "Plan": {
+                "Node Type": "Result",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.26,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 1125.884,
+                "Actual Total Time": 1125.885,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 33686,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Settings": {
+                "effective_cache_size": "128MB",
+                "search_path": "\"\\$user\", public, extensions"
+              },
+              "Planning": {
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Planning Time": 0.023,
+              "Triggers": [],
+              "Execution Time": 1125.911
+            }
+          ]
+        },
+        {
+          "reader": "AB",
+          "plan": [
+            {
+              "Plan": {
+                "Node Type": "Result",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.26,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 356.175,
+                "Actual Total Time": 356.175,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 14067,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Settings": {
+                "effective_cache_size": "128MB",
+                "search_path": "\"\\$user\", public, extensions"
+              },
+              "Planning": {
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Planning Time": 0.048,
+              "Triggers": [],
+              "Execution Time": 356.212
+            }
+          ]
+        },
+        {
+          "reader": "D1",
+          "plan": [
+            {
+              "Plan": {
+                "Node Type": "Result",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.26,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 303.783,
+                "Actual Total Time": 303.783,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 14067,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Settings": {
+                "effective_cache_size": "128MB",
+                "search_path": "\"\\$user\", public, extensions"
+              },
+              "Planning": {
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Planning Time": 0.021,
+              "Triggers": [],
+              "Execution Time": 303.812
+            }
+          ]
+        }
+      ],
+      "resourceBefore": {
+        "at": "2026-10-14T01:13:56.641Z",
+        "dbStats": {
+          "BlockIO": "114MB / 59.6MB",
+          "CPUPerc": "0.02%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "123.6MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.8MB / 10.6MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourceAfter": {
+        "at": "2026-10-14T01:15:18.721Z",
+        "dbStats": {
+          "BlockIO": "114MB / 60.7MB",
+          "CPUPerc": "0.02%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "123.7MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.8MB / 10.6MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "rollback": true
+    },
+    {
+      "batch": 2,
+      "orders": 50,
+      "scaling": false,
+      "status": "PASS",
+      "error": null,
+      "method": "psql real SELECT timing, includes PostgreSQL execution/serialization/local Unix wire; no EXPLAIN/function instrumentation in normal samples",
+      "readers": {
+        "original": {
+          "n": 20,
+          "p50": 717.757,
+          "p95": 1442.042,
+          "min": 580.948,
+          "max": 1467.55,
+          "mean": 860.6686,
+          "stddev": 287.06604755359,
+          "cv": 0.33353842298137754,
+          "rawMs": [
+            911.867,
+            1268.951,
+            794.459,
+            761.129,
+            717.338,
+            639.937,
+            626.418,
+            622.946,
+            789.914,
+            612.763,
+            717.757,
+            580.948,
+            589.094,
+            659.734,
+            689.225,
+            1124.276,
+            890.786,
+            1467.55,
+            1306.238,
+            1442.042
+          ]
+        },
+        "AB": {
+          "n": 20,
+          "p50": 237.05,
+          "p95": 525.033,
+          "min": 178.742,
+          "max": 614.303,
+          "mean": 288.69264999999996,
+          "stddev": 123.62345400176903,
+          "cv": 0.4282182244742603,
+          "rawMs": [
+            469.732,
+            219.045,
+            525.033,
+            237.793,
+            180.378,
+            187.482,
+            208.801,
+            178.742,
+            236.064,
+            244.974,
+            197.786,
+            184.07,
+            181.404,
+            237.05,
+            242.64,
+            346.797,
+            614.303,
+            412.468,
+            333.516,
+            335.775
+          ]
+        },
+        "D1": {
+          "n": 20,
+          "p50": 144.341,
+          "p95": 335.459,
+          "min": 116.939,
+          "max": 367.267,
+          "mean": 187.44844999999995,
+          "stddev": 76.65719284481725,
+          "cv": 0.40895079604455126,
+          "rawMs": [
+            133.499,
+            150.109,
+            206.405,
+            217.327,
+            128.368,
+            117.646,
+            131.636,
+            116.939,
+            140.44,
+            172.178,
+            122.004,
+            133.247,
+            118.231,
+            208.863,
+            144.341,
+            213.879,
+            367.267,
+            335.459,
+            280.911,
+            310.22
+          ]
+        }
+      },
+      "warmups": {
+        "original": 987.867,
+        "AB": 404.313,
+        "D1": 184.97
+      },
+      "plans": [
+        {
+          "reader": "original",
+          "plan": [
+            {
+              "Plan": {
+                "Node Type": "Result",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.26,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 1545.216,
+                "Actual Total Time": 1545.217,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 111112,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Settings": {
+                "effective_cache_size": "128MB",
+                "search_path": "\"\\$user\", public, extensions"
+              },
+              "Planning": {
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Planning Time": 0.023,
+              "Triggers": [],
+              "Execution Time": 1545.237
+            }
+          ]
+        },
+        {
+          "reader": "AB",
+          "plan": [
+            {
+              "Plan": {
+                "Node Type": "Result",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.26,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 333.295,
+                "Actual Total Time": 333.296,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 19878,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Settings": {
+                "effective_cache_size": "128MB",
+                "search_path": "\"\\$user\", public, extensions"
+              },
+              "Planning": {
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Planning Time": 0.022,
+              "Triggers": [],
+              "Execution Time": 333.318
+            }
+          ]
+        },
+        {
+          "reader": "D1",
+          "plan": [
+            {
+              "Plan": {
+                "Node Type": "Result",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.26,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 270.397,
+                "Actual Total Time": 270.398,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 19878,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Settings": {
+                "effective_cache_size": "128MB",
+                "search_path": "\"\\$user\", public, extensions"
+              },
+              "Planning": {
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Planning Time": 0.023,
+              "Triggers": [],
+              "Execution Time": 270.418
+            }
+          ]
+        }
+      ],
+      "resourceBefore": {
+        "at": "2026-10-14T01:15:31.935Z",
+        "dbStats": {
+          "BlockIO": "114MB / 60.7MB",
+          "CPUPerc": "0.00%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "123.7MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.81MB / 10.6MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourceAfter": {
+        "at": "2026-10-14T01:16:21.318Z",
+        "dbStats": {
+          "BlockIO": "114MB / 61.1MB",
+          "CPUPerc": "0.02%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "123.7MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.81MB / 10.6MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "rollback": true
+    },
+    {
+      "batch": 3,
+      "orders": 50,
+      "scaling": false,
+      "status": "PASS",
+      "error": null,
+      "method": "psql real SELECT timing, includes PostgreSQL execution/serialization/local Unix wire; no EXPLAIN/function instrumentation in normal samples",
+      "readers": {
+        "original": {
+          "n": 20,
+          "p50": 1532.799,
+          "p95": 1828.525,
+          "min": 1312.234,
+          "max": 3822.296,
+          "mean": 1612.4524999999999,
+          "stddev": 523.0508343939908,
+          "cv": 0.32438216592054087,
+          "rawMs": [
+            1345.078,
+            1568.793,
+            1533.726,
+            1422.98,
+            1345.111,
+            1312.234,
+            3822.296,
+            1828.525,
+            1542.137,
+            1487.53,
+            1676.779,
+            1425.495,
+            1348.481,
+            1587.188,
+            1398.718,
+            1589.243,
+            1331.303,
+            1532.799,
+            1583.166,
+            1567.468
+          ]
+        },
+        "AB": {
+          "n": 20,
+          "p50": 364.837,
+          "p95": 808.249,
+          "min": 337.53,
+          "max": 1626.903,
+          "mean": 457.53090000000003,
+          "stddev": 286.29013715510706,
+          "cv": 0.6257285292755245,
+          "rawMs": [
+            364.627,
+            350.255,
+            341.241,
+            378.997,
+            471.518,
+            441.576,
+            1626.903,
+            808.249,
+            346.006,
+            358.781,
+            372.82,
+            364.837,
+            374.519,
+            358.68,
+            382.492,
+            354.328,
+            390.524,
+            340.996,
+            337.53,
+            385.739
+          ]
+        },
+        "D1": {
+          "n": 20,
+          "p50": 298.803,
+          "p95": 442.549,
+          "min": 270.616,
+          "max": 1123.682,
+          "mean": 356.9032,
+          "stddev": 183.47041065921232,
+          "cv": 0.5140621060814594,
+          "rawMs": [
+            307.534,
+            298.803,
+            360.702,
+            294.028,
+            292.006,
+            272.767,
+            1123.682,
+            442.549,
+            303.273,
+            270.616,
+            302.998,
+            414.591,
+            433.969,
+            272.555,
+            281.118,
+            275.37,
+            279.933,
+            319.549,
+            304.255,
+            287.766
+          ]
+        }
+      },
+      "warmups": {
+        "original": 1500.148,
+        "AB": 353.994,
+        "D1": 319.931
+      },
+      "plans": [
+        {
+          "reader": "original",
+          "plan": [
+            {
+              "Plan": {
+                "Node Type": "Result",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.26,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 1387.643,
+                "Actual Total Time": 1387.643,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 110486,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Settings": {
+                "effective_cache_size": "128MB",
+                "search_path": "\"\\$user\", public, extensions"
+              },
+              "Planning": {
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Planning Time": 0.022,
+              "Triggers": [],
+              "Execution Time": 1387.663
+            }
+          ]
+        },
+        {
+          "reader": "AB",
+          "plan": [
+            {
+              "Plan": {
+                "Node Type": "Result",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.26,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 336.223,
+                "Actual Total Time": 336.224,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 19556,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Settings": {
+                "effective_cache_size": "128MB",
+                "search_path": "\"\\$user\", public, extensions"
+              },
+              "Planning": {
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Planning Time": 0.021,
+              "Triggers": [],
+              "Execution Time": 336.245
+            }
+          ]
+        },
+        {
+          "reader": "D1",
+          "plan": [
+            {
+              "Plan": {
+                "Node Type": "Result",
+                "Parallel Aware": false,
+                "Async Capable": false,
+                "Startup Cost": 0,
+                "Total Cost": 0.26,
+                "Plan Rows": 1,
+                "Plan Width": 32,
+                "Actual Startup Time": 271.328,
+                "Actual Total Time": 271.329,
+                "Actual Rows": 1,
+                "Actual Loops": 1,
+                "Shared Hit Blocks": 19556,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Settings": {
+                "effective_cache_size": "128MB",
+                "search_path": "\"\\$user\", public, extensions"
+              },
+              "Planning": {
+                "Shared Hit Blocks": 0,
+                "Shared Read Blocks": 0,
+                "Shared Dirtied Blocks": 0,
+                "Shared Written Blocks": 0,
+                "Local Hit Blocks": 0,
+                "Local Read Blocks": 0,
+                "Local Dirtied Blocks": 0,
+                "Local Written Blocks": 0,
+                "Temp Read Blocks": 0,
+                "Temp Written Blocks": 0
+              },
+              "Planning Time": 0.023,
+              "Triggers": [],
+              "Execution Time": 271.385
+            }
+          ]
+        }
+      ],
+      "resourceBefore": {
+        "at": "2026-10-14T01:16:35.008Z",
+        "dbStats": {
+          "BlockIO": "114MB / 61.2MB",
+          "CPUPerc": "0.03%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "123.9MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.81MB / 10.6MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourceAfter": {
+        "at": "2026-10-14T01:17:47.787Z",
+        "dbStats": {
+          "BlockIO": "114MB / 61.5MB",
+          "CPUPerc": "0.06%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "123.7MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.81MB / 10.6MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "rollback": true
+    },
+    {
+      "batch": 3,
+      "orders": 100,
+      "scaling": false,
+      "status": "INCOMPLETE_LATENCY_GATE",
+      "error": null,
+      "method": "psql real SELECT timing, includes PostgreSQL execution/serialization/local Unix wire; no EXPLAIN/function instrumentation in normal samples",
+      "readers": {
+        "original": {
+          "n": 18,
+          "p50": 1281.774,
+          "p95": 9570.334,
+          "min": 1206.841,
+          "max": 9570.334,
+          "mean": 1892.3830555555553,
+          "stddev": 1945.239161691935,
+          "cv": 1.0279309762266193,
+          "rawMs": [
+            1281.774,
+            1206.841,
+            1293.347,
+            1288.162,
+            1366.648,
+            1261.074,
+            1210.114,
+            1223.444,
+            1301.546,
+            1271.611,
+            1223.643,
+            1264.577,
+            1234.56,
+            1396.238,
+            1322.01,
+            1623.403,
+            3723.569,
+            9570.334
+          ]
+        },
+        "AB": {
+          "n": 17,
+          "p50": 401.551,
+          "p95": 1174.525,
+          "min": 354.444,
+          "max": 1174.525,
+          "mean": 447.34694117647064,
+          "stddev": 185.03034166525566,
+          "cv": 0.41361709365587096,
+          "rawMs": [
+            466.502,
+            423.163,
+            412.488,
+            479.958,
+            401.976,
+            359.8,
+            392.363,
+            374.384,
+            386.7,
+            418.967,
+            354.444,
+            401.551,
+            364.436,
+            376.169,
+            378.787,
+            438.685,
+            1174.525
+          ]
+        },
+        "D1": {
+          "n": 18,
+          "p50": 326.742,
+          "p95": 1836.498,
+          "min": 294.082,
+          "max": 1836.498,
+          "mean": 520.0460555555555,
+          "stddev": 427.647651210728,
+          "cv": 0.8223264971289513,
+          "rawMs": [
+            376.626,
+            325.809,
+            451.303,
+            377.065,
+            305.052,
+            301.11,
+            400.267,
+            319.291,
+            322.182,
+            326.742,
+            355.414,
+            313.246,
+            342.971,
+            294.082,
+            310.519,
+            1451.905,
+            1836.498,
+            950.747
+          ]
+        }
+      },
+      "warmups": {
+        "original": 1410.321,
+        "AB": 453.271,
+        "D1": 355.759
+      },
+      "plans": [],
+      "resourceBefore": {
+        "at": "2026-10-14T01:18:01.565Z",
+        "dbStats": {
+          "BlockIO": "114MB / 61.7MB",
+          "CPUPerc": "0.01%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "123.7MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.81MB / 10.6MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourceAfter": {
+        "at": "2026-10-14T01:19:21.858Z",
+        "dbStats": {
+          "BlockIO": "114MB / 63MB",
+          "CPUPerc": "0.02%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "123.7MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.81MB / 10.6MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "rollback": true
+    }
+  ],
+  "stability": [
+    {
+      "orders": 50,
+      "complete": true,
+      "p95Ratio": 1.9274950130227613,
+      "maxCV": 0.5140621060814594
+    },
+    {
+      "orders": 100,
+      "complete": false,
+      "p95Ratio": 3.8519175711813753,
+      "maxCV": 0.8223264971289513
+    }
+  ],
+  "halt": "original_QUERY_AT_LEAST_5000MS"
+}

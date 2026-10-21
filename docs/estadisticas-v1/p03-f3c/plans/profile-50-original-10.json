@@ -1,0 +1,86 @@
+{
+  "durationMs": 10.681,
+  "plan": {
+    "Query Text": "\n  select md5(coalesce(jsonb_agg(jsonb_build_object('id',x->'line_key','parent',x->'parent_line_key','kind',x->'item_kind','quantity',x->'quantity','price',x->'unit_price','identity',x->'product_identity') order by x->>'line_key'),'[]'::jsonb)::text)\n  from jsonb_array_elements(p_items) x;\n",
+    "Query Parameters": "$1 = '[{\"gross\": 10.00, \"line_key\": \"b40c517e-928d-4188-9186-f69c519b9167\", \"quantity\": 1, \"item_kind\": \"product\", \"unit_price\": 10.00, \"product_name\": \"Synthetic diagnostic main\", \"source_valid\": true, \"category_name\": null, \"parent_line_key\": null, \"product_identity\": null, \"category_identity\": null}]'",
+    "Plan": {
+      "Node Type": "Aggregate",
+      "Strategy": "Plain",
+      "Partial Mode": "Simple",
+      "Parallel Aware": false,
+      "Async Capable": false,
+      "Startup Cost": 6.83,
+      "Total Cost": 6.84,
+      "Plan Rows": 1,
+      "Plan Width": 32,
+      "Actual Rows": 1,
+      "Actual Loops": 1,
+      "Shared Hit Blocks": 0,
+      "Shared Read Blocks": 0,
+      "Shared Dirtied Blocks": 0,
+      "Shared Written Blocks": 0,
+      "Local Hit Blocks": 0,
+      "Local Read Blocks": 0,
+      "Local Dirtied Blocks": 0,
+      "Local Written Blocks": 0,
+      "Temp Read Blocks": 0,
+      "Temp Written Blocks": 0,
+      "Plans": [
+        {
+          "Node Type": "Sort",
+          "Parent Relationship": "Outer",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Startup Cost": 4.32,
+          "Total Cost": 4.57,
+          "Plan Rows": 100,
+          "Plan Width": 32,
+          "Actual Rows": 1,
+          "Actual Loops": 1,
+          "Sort Key": [
+            "((value ->> 'line_key'::text))"
+          ],
+          "Sort Method": "quicksort",
+          "Sort Space Used": 25,
+          "Sort Space Type": "Memory",
+          "Shared Hit Blocks": 0,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0,
+          "Plans": [
+            {
+              "Node Type": "Function Scan",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Function Name": "jsonb_array_elements",
+              "Alias": "x",
+              "Startup Cost": 0,
+              "Total Cost": 1,
+              "Plan Rows": 100,
+              "Plan Width": 32,
+              "Actual Rows": 1,
+              "Actual Loops": 1,
+              "Shared Hit Blocks": 0,
+              "Shared Read Blocks": 0,
+              "Shared Dirtied Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Dirtied Blocks": 0,
+              "Local Written Blocks": 0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

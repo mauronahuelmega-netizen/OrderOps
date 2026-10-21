@@ -1,0 +1,43 @@
+{
+  "at": "2026-10-16T13:33:32.464Z",
+  "results": [
+    {
+      "kind": "db",
+      "exit": 0,
+      "paths": [
+        "/etc/postgresql-custom/pgsodium_root.key",
+        "/etc/postgresql.schema.sql",
+        "/tmp/orderops-estadisticas-recovered.dump",
+        "/etc/postgresql/postgresql.conf"
+      ],
+      "capabilities": [],
+      "noCapabilitiesReported": true,
+      "extendedPosixAcl": "NOT_AVAILABLE",
+      "otherXattrs": "NOT_AVAILABLE"
+    },
+    {
+      "kind": "kong",
+      "exit": 0,
+      "paths": [
+        "/home/kong/custom_nginx.template",
+        "/home/kong/kong.yml",
+        "/home/kong/localhost.crt",
+        "/home/kong/localhost.key",
+        "/usr/local/kong/.kong_env",
+        "/usr/local/kong/nginx-kong-stream.conf",
+        "/usr/local/kong/nginx-kong.conf",
+        "/usr/local/kong/nginx.conf",
+        "/usr/local/kong/ssl/admin-kong-default-ecdsa.crt",
+        "/usr/local/kong/ssl/admin-kong-default-ecdsa.key",
+        "/usr/local/kong/ssl/admin-kong-default.crt",
+        "/usr/local/kong/ssl/admin-kong-default.key",
+        "/usr/local/kong/ssl/ffdhe2048.pem"
+      ],
+      "capabilities": [],
+      "noCapabilitiesReported": true,
+      "extendedPosixAcl": "NOT_AVAILABLE",
+      "otherXattrs": "NOT_AVAILABLE"
+    }
+  ],
+  "readOnly": true
+}

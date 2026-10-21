@@ -1,0 +1,6 @@
+{
+  "at": "2026-10-14T12:13:31.377Z",
+  "result": "PASS",
+  "assertions": 25,
+  "scope": "Offline synthetic shape/null/precision/denominator/category/multi-tenant rejection; no candidate SQL executed"
+}

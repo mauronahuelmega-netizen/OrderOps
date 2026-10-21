@@ -1,0 +1,8 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';import {spawnSync} from 'node:child_process';
+const run=(bin,args)=>{const r=spawnSync(bin,args,{encoding:'utf8',timeout:60000});assert.equal(r.status,0);return r.stdout;};
+const identity=JSON.parse(run(process.execPath,['scripts/statistics-v1/assert-isolated-target.mjs']));assert.equal(identity.projectId,'orderops-statistics-v1-test-74718de66a41');
+const out=run('docker',['exec',`supabase_db_${identity.projectId}`,'psql','-X','-U','postgres','-d','postgres','-At','-v','ON_ERROR_STOP=1','-c',"BEGIN READ ONLY; SELECT json_agg(json_build_object('version',version,'md5',md5(statements[1])) ORDER BY version) FROM supabase_migrations.schema_migrations WHERE version IN ('20261013001000','20261013002000','20261013003000','20261013004000'); COMMIT;"]);
+const entries=JSON.parse(out.split(/\r?\n/).find(l=>l.startsWith('[')));assert.equal(entries.length,4);
+const files=fs.readdirSync('supabase/migrations').filter(p=>p.startsWith('20261013')&&p.endsWith('.sql'));
+const hashes=files.map(name=>{const data=fs.readFileSync('supabase/migrations/'+name);const md5=crypto.createHash('md5').update(data).digest('hex');const entry=entries.find(e=>e.version===name.split('_')[0]);assert.equal(entry?.md5,md5,`Ledger mismatch ${name}`);return {name,sha256:crypto.createHash('sha256').update(data).digest('hex'),ledgerMd5:entry.md5};});
+fs.writeFileSync('docs/estadisticas-v1/p03-f1/ledger.json',JSON.stringify({at:new Date().toISOString(),result:'PASS',identity,entries:hashes,readOnly:true},null,2));console.log('PASS exact installed ledger for all four owned migrations');

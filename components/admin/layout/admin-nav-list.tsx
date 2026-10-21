@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
+  BarChart3,
   ClipboardList,
   CookingPot,
   Handshake,
@@ -24,6 +25,7 @@ const ADMIN_NAV_ICONS: Record<string, LucideIcon> = {
   "/admin/kitchen": CookingPot,
   "/admin/onboarding": Handshake,
   "/admin/products": Package,
+  "/admin/statistics": BarChart3,
   "/admin/settings": Settings
 };
 

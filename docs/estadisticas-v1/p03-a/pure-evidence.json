@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-13T12:38:49.465Z",
+  "result": "PASS_PURE",
+  "assertions": 268,
+  "fixtures": 5,
+  "transport": "mock only",
+  "databaseConnections": 0,
+  "scope": "Production decoder, temporal arithmetic, DST, quality and precision. SQL planner runtime is not emulated or claimed."
+}

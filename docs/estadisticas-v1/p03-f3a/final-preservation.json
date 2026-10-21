@@ -1,0 +1,92 @@
+{
+  "at": "2026-10-13T23:31:02.374Z",
+  "isolation": {
+    "at": "2026-10-13T23:30:59.995Z",
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "resources": {
+      "containerIds": [
+        "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+      ],
+      "volumeNames": [
+        "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "networkId": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af"
+    },
+    "containers": [
+      {
+        "name": "/supabase_storage_orderops-statistics-v1-test-74718de66a41",
+        "id": "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_rest_orderops-statistics-v1-test-74718de66a41",
+        "id": "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "health": "no-healthcheck",
+        "running": true
+      },
+      {
+        "name": "/supabase_auth_orderops-statistics-v1-test-74718de66a41",
+        "id": "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_kong_orderops-statistics-v1-test-74718de66a41",
+        "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "health": "healthy",
+        "running": true
+      }
+    ],
+    "api": "127.0.0.1:56321",
+    "db": "127.0.0.1:56322"
+  },
+  "catalogUnchanged": true,
+  "preexistingFileCount": 2161,
+  "preexistingFileHashesUnchanged": true,
+  "counts": {
+    "orders": 0,
+    "items": 0,
+    "financials": 0,
+    "audit": 0,
+    "sessions": 0,
+    "sessionSnapshots": 0,
+    "completions": 0,
+    "completionItems": 0,
+    "identitySnapshots": 0
+  },
+  "deadlocks": 0,
+  "ledgerCount": 124,
+  "candidateSha256": "fd88de8c0ec3f4a87d8a6782650d63cf4779d8170033a4c5b4f37edbd489faf9",
+  "publicOriginalActive": true,
+  "policiesAndACLUnchanged": true,
+  "resources": {
+    "at": "2026-10-13T23:31:02.377Z",
+    "dbStats": {
+      "BlockIO": "114MB / 48.6MB",
+      "CPUPerc": "0.00%",
+      "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "ID": "592f44984962",
+      "MemPerc": "1.56%",
+      "MemUsage": "123.4MiB / 7.702GiB",
+      "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "NetIO": "3.74MB / 10.4MB",
+      "PIDs": "12"
+    },
+    "dockerCapacity": {
+      "cpus": 4,
+      "memoryBytes": 8269664256
+    }
+  }
+}

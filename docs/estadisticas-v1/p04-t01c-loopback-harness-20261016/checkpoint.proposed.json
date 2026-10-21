@@ -1,0 +1,29 @@
+{
+  "status": "PROPOSED_NOT_APPLIED",
+  "runId": "2026-10-16T13-30-25-733Z-ae781e38",
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "privateBundleSha256": "f988c43bbc968bc95c0194b511afef28efe0154611ec827a9b93072bd1539508",
+  "oldManifestSha256": "4b426930d04911dbafc543470fa1b73f566e211a84ad32712d233ddb9b801266",
+  "transition": [
+    {
+      "kind": "db",
+      "oldId": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "newId": null,
+      "payloadSha256": "8ae80d0a2a32ff16da6ae10edc869e9f01b435d6ae336a06c1c04664d77f1a60"
+    },
+    {
+      "kind": "kong",
+      "oldId": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "newId": null,
+      "payloadSha256": "8c1bdda35730b04c3aa01318670754157792a4ac770f8c683d899285d3d930f6"
+    }
+  ],
+  "historicalManifestUnmodified": true,
+  "identityContinuity": false,
+  "requiresExplicitIdReplacementAuthorization": true,
+  "sqlConsistency": "NOT_TESTED",
+  "lan": "NOT_TESTED",
+  "ipv4": "NOT_TESTED",
+  "ipv6": "NOT_TESTED",
+  "closedOnFailure": true
+}

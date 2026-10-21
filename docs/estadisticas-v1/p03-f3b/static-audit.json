@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-13T23:40:20.072Z",
+  "result": "PASS",
+  "candidateSha256": "9e8b793df40de1aeb6ecbb71c1ce4e828c717498e62340341d8784726ee78070",
+  "referenceSha256": "fd88de8c0ec3f4a87d8a6782650d63cf4779d8170033a4c5b4f37edbd489faf9",
+  "completeFunctionTextReversibleEquality": true,
+  "onlyChanges": [
+    "private function name",
+    "point_metrics CTE MATERIALIZED"
+  ],
+  "sqlOuterASTParse": "PASS (does not compile PL/pgSQL body)",
+  "bodyBytes": 26974,
+  "noDatabaseCalls": true,
+  "newFunctions": [
+    "private.statistics_v1_summary_d1_candidate(text,date,date,text,integer,jsonb)"
+  ],
+  "newACLOnly": true,
+  "unchangedPublicRouting": true,
+  "unchangedCore": true,
+  "baselinePreserved": 2252
+}

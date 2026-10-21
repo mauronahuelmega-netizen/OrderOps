@@ -1,0 +1,457 @@
+{
+  "at": "2026-10-14T14:41:00.716Z",
+  "records": [
+    {
+      "attempt": "attempt-01/",
+      "test": "role.owner.a.public.statistics_v1_products",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-01/",
+      "test": "role.owner.a.private.statistics_v1_products_reader",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-01/",
+      "test": "role.manager.a.public.statistics_v1_products",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-01/",
+      "test": "role.manager.a.private.statistics_v1_products_reader",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-01/",
+      "test": "role.admin.a.public.statistics_v1_products",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-01/",
+      "test": "role.admin.a.private.statistics_v1_products_reader",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-01/",
+      "test": "role.owner.b.public.statistics_v1_products",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-01/",
+      "test": "role.owner.b.private.statistics_v1_products_reader",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-01/",
+      "test": "role.manager.b.public.statistics_v1_products",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-01/",
+      "test": "role.manager.b.private.statistics_v1_products_reader",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-01/",
+      "test": "role.admin.b.public.statistics_v1_products",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-01/",
+      "test": "role.admin.b.private.statistics_v1_products_reader",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-01/",
+      "test": "compile.empty_response",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "role.owner.a.public.statistics_v1_products",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "role.owner.a.private.statistics_v1_products_reader",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "role.manager.a.public.statistics_v1_products",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "role.manager.a.private.statistics_v1_products_reader",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "role.admin.a.public.statistics_v1_products",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "role.admin.a.private.statistics_v1_products_reader",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "role.owner.b.public.statistics_v1_products",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "role.owner.b.private.statistics_v1_products_reader",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "role.manager.b.public.statistics_v1_products",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "role.manager.b.private.statistics_v1_products_reader",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "role.admin.b.public.statistics_v1_products",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "role.admin.b.private.statistics_v1_products_reader",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "compile.empty_response",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "period.today",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "period.yesterday",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "period.this_week",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "period.this_month",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "period.previous_month",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "period.last_7_days",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "period.last_30_days",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "period.custom",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "exact.money_units_homonyms",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "tenant.b",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "pagination.cursor_ties",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "risk.SQL05.session_settings",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "financial.partial_adjustment",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "risk.SQL07.nonfinite_source",
+      "result": "REJECTED",
+      "error": "Error: STATISTICS_PRODUCTS_INVALID_RESPONSE",
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "history.rename_delete",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "history.no_captured_lines",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "history.no_reliable_date",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "history.no_category_vs_unknown",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "upsell.only_category_zero_units",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "time.microseconds_asof",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "time.dst_stored_commercial_date",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-02/",
+      "test": "cursor.revision_invalidation",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-03/",
+      "test": "compile.empty_response",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-03/",
+      "test": "states.reopen_cancel_recomplete",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-03/",
+      "test": "time.night_session",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-03/",
+      "test": "cursor.revision_invalidation",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-04/",
+      "test": "compile.empty_response",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-04/",
+      "test": "states.reopen_cancel_recomplete",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-04/",
+      "test": "time.night_session",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-04/",
+      "test": "cursor.revision_invalidation",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-05-final",
+      "test": "compile.empty_response",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-05-final",
+      "test": "states.reopen",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-05-final",
+      "test": "states.cancel",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-05-final",
+      "test": "states.recomplete",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-05-final",
+      "test": "time.night_session.fresh_statement",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-05-final",
+      "test": "ranking.amount",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-05-final",
+      "test": "risk.SQL05.datestyle_only",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    },
+    {
+      "attempt": "attempt-05-final",
+      "test": "cursor.revision_invalidation",
+      "result": "PASS",
+      "error": null,
+      "source": "Unmodified captured PostgreSQL JSON"
+    }
+  ],
+  "accepted": 63,
+  "rejected": 1,
+  "decoderSourceUnchanged": true,
+  "rejectionExpectedDefect": "SQL07 pendingAgreedTotal NaN"
+}

@@ -1,0 +1,117 @@
+{
+  "at": "2026-10-16T16:00:57.303Z",
+  "verdict": "BLOCKED",
+  "phaseP04T01C": "BLOCKED",
+  "project": "orderops-statistics-v1-test-74718de66a41",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "approvedHashes": {
+    "readonly-verification.proposed.mjs": "76c4653891367e1c55d3d3b51af841f3ae0a5b980490ee5912e4e7ac65588dad",
+    "verification.proposed.psql": "485cf660d8230a868b4051aecce8418da9cc30d799aaec6a001f5eb0e4309a15",
+    "readonly-query-manifest.json": "85fefde4aa8256a4f42bfa38b5cd0a8b8819b8919bc77f8643ed3823adcfd294"
+  },
+  "startedUtc": "2026-10-16T15:56:45.640Z",
+  "endedUtc": "2026-10-16T15:56:51.802Z",
+  "invocations": 1,
+  "targetContainer": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+  "connection": "Unix socket in original pinned DB via fixed local Docker pipe",
+  "identityMarker": "Passed before data; no token persisted",
+  "ledger": 124,
+  "readOnly": "on",
+  "isolation": "repeatable read",
+  "rollback": {
+    "observed": true,
+    "sqlExitCode": 0,
+    "states": [],
+    "proof": "Approved template emits ROLLBACK_COMPLETED only after explicit ROLLBACK; runner recorded it"
+  },
+  "differences": {
+    "field": "extra.triggers",
+    "referenceTriggers": 52,
+    "observedTriggers": 52,
+    "differentEntries": 13,
+    "description": "moddatetime becomes extensions.moddatetime in deparsed text; not normalized or accepted as equality"
+  },
+  "offlineOtherFieldsEqual": true,
+  "systemIdentifier": "Unsafe JSON numeric integer; not approved as exact cluster identity",
+  "blocksRemaining": [
+    "Exact trigger identity/representation unresolved",
+    "Kong hidden metadata preservation",
+    "Independent restore demonstration",
+    "Loopback and intervention/wire/replay validation"
+  ],
+  "sqlAfterAuthorizedRun": 0,
+  "referenceUpdates": 0,
+  "containerMutations": 0,
+  "networkChanges": 0,
+  "restores": 0,
+  "qaInstallations": 0,
+  "commits": 0,
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/analysis-summary.json",
+      "sha256": "afa85997ef73b38761e7c2c039b8087125b7830e1f02e9f7b7946d6eb6c60fc8",
+      "bytes": 768
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/analyze-captured-results.mjs",
+      "sha256": "ecbcb8ecb6be874ba91020a0625773aaa9fae4e9b7b5a9168b0252cd27efaec9",
+      "bytes": 3205
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/authorization-pins.json",
+      "sha256": "43cd3c2b005f4790b3e325683d5fee482bc5ec6ef4449c69d0dff9c22c95bd7b",
+      "bytes": 526
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/execution-envelope.json",
+      "sha256": "d8120146348c79e0c6b72f9d681a6d34c925dadeb56ae9deaa52f7aec4e9a7e7",
+      "bytes": 1100
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/file-baseline.json",
+      "sha256": "53295f444189d9b5f76628362b785f87fd4ce0f1e40b24babe9d2b57a454e391",
+      "bytes": 504097
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/finalize-evidence.mjs",
+      "sha256": "76572a3832e3ba7bbc719b41a2f55296513eaf79d2f686d057fe630bae894a01",
+      "bytes": 6127
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/informe.md",
+      "sha256": "1df4dbcdb8af9e43c4a72ecc0b304e5c940cfc27325aece5dca0ec756f2d4a07",
+      "bytes": 8915
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/offline-field-comparison.json",
+      "sha256": "7f6d8eae4c31709e0c01fdaafeaacb045d63fe3aa943cb42e451ec30c5826c23",
+      "bytes": 9498
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/preservation.json",
+      "sha256": "907a4338876bff02385fd8f74ae9b6bc2d778b3af0d0b4609456841050364f25",
+      "bytes": 1109
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/run-once-envelope.mjs",
+      "sha256": "e8b03d265f7ab2c1ce3989723d0221a6965fd11ecd69aeb82944da28bb8dcbd9",
+      "bytes": 2263
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/trigger-differences.json",
+      "sha256": "d72124a51c88a23ac9d0997ab4b06614ef9388aaf5ec039d2333a28daf0c0789",
+      "bytes": 8492
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/validation-results.json",
+      "sha256": "7a1ba1dd43fa69d0f722ee7bfba40dcb000c6f49884327d12d7139b7e36540d7",
+      "bytes": 1001
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/sql-readonly-observed.json",
+      "sha256": "ac9d460069cbec22480110d1651e0f2ff6bcbd57f55e7f99504d7967ce8bf23b",
+      "bytes": 299581
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

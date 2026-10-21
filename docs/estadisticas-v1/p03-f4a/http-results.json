@@ -1,0 +1,762 @@
+{
+  "result": "PASS_WITH_LIMITATIONS",
+  "liveIdentity": {
+    "at": "2026-10-14T01:25:27.976Z",
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "resources": {
+      "containerIds": [
+        "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+      ],
+      "volumeNames": [
+        "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "networkId": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af"
+    },
+    "containers": [
+      {
+        "name": "/supabase_storage_orderops-statistics-v1-test-74718de66a41",
+        "id": "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_rest_orderops-statistics-v1-test-74718de66a41",
+        "id": "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "health": "no-healthcheck",
+        "running": true
+      },
+      {
+        "name": "/supabase_auth_orderops-statistics-v1-test-74718de66a41",
+        "id": "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_kong_orderops-statistics-v1-test-74718de66a41",
+        "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "health": "healthy",
+        "running": true
+      }
+    ],
+    "api": "127.0.0.1:56321",
+    "db": "127.0.0.1:56322"
+  },
+  "cases": [
+    {
+      "role": "owner",
+      "authStatus": 200,
+      "rpcStatus": 200,
+      "forgedMetadataIgnored": true
+    },
+    {
+      "role": "manager",
+      "authStatus": 200,
+      "rpcStatus": 200,
+      "forgedMetadataIgnored": true
+    },
+    {
+      "role": "admin",
+      "authStatus": 200,
+      "rpcStatus": 200,
+      "forgedMetadataIgnored": true
+    },
+    {
+      "role": "operator",
+      "authStatus": 200,
+      "rpcStatus": 403,
+      "forgedMetadataIgnored": true
+    },
+    {
+      "role": "viewer",
+      "authStatus": 200,
+      "rpcStatus": 403,
+      "forgedMetadataIgnored": true
+    },
+    {
+      "role": "super_admin",
+      "authStatus": 200,
+      "rpcStatus": 403,
+      "forgedMetadataIgnored": true
+    }
+  ],
+  "samples": [
+    {
+      "business": "a",
+      "warmup": true,
+      "authVerifyHttpMs": 127.88650000000052,
+      "rpcHttpMs": 271.39919999999984,
+      "rpcHeadersMs": 270.20650000000023,
+      "rpcBodyMs": 0.6635999999998603,
+      "jsonParseMs": 0.5217999999986205,
+      "decoderMs": 15.434199999999691,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 57.46309999999721,
+      "rpcHttpMs": 158.23659999999654,
+      "rpcHeadersMs": 156.8435999999965,
+      "rpcBodyMs": 0.7187999999987369,
+      "jsonParseMs": 0.6653000000005704,
+      "decoderMs": 15.440699999999197,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 75.88100000000122,
+      "rpcHttpMs": 159.8591000000015,
+      "rpcHeadersMs": 158.67239999999947,
+      "rpcBodyMs": 0.6670000000012806,
+      "jsonParseMs": 0.5129000000015367,
+      "decoderMs": 15.334900000001653,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 56.4458999999988,
+      "rpcHttpMs": 149.29139999999825,
+      "rpcHeadersMs": 148.0485000000008,
+      "rpcBodyMs": 0.7122999999992317,
+      "jsonParseMs": 0.5230000000010477,
+      "decoderMs": 14.759799999999814,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 54.4471999999987,
+      "rpcHttpMs": 138.35239999999976,
+      "rpcHeadersMs": 137.20160000000033,
+      "rpcBodyMs": 0.5748999999996158,
+      "jsonParseMs": 0.5681999999978871,
+      "decoderMs": 15.97780000000057,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 127.16899999999805,
+      "rpcHttpMs": 359.1947,
+      "rpcHeadersMs": 358.05089999999836,
+      "rpcBodyMs": 0.6220000000030268,
+      "jsonParseMs": 0.5139999999992142,
+      "decoderMs": 14.38379999999961,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 339.8008000000009,
+      "rpcHttpMs": 135.05079999999725,
+      "rpcHeadersMs": 133.98859999999695,
+      "rpcBodyMs": 0.5355999999992491,
+      "jsonParseMs": 0.5199999999967986,
+      "decoderMs": 14.349300000001676,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 59.28030000000217,
+      "rpcHttpMs": 138.70220000000336,
+      "rpcHeadersMs": 137.63709999999992,
+      "rpcBodyMs": 0.5122000000010303,
+      "jsonParseMs": 0.5458999999973457,
+      "decoderMs": 14.381900000000314,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 60.196499999998196,
+      "rpcHttpMs": 135.04200000000128,
+      "rpcHeadersMs": 133.7538999999997,
+      "rpcBodyMs": 0.6316999999980908,
+      "jsonParseMs": 0.6463000000003376,
+      "decoderMs": 15.725499999996828,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 72.44750000000204,
+      "rpcHttpMs": 145.02079999999842,
+      "rpcHeadersMs": 143.94900000000052,
+      "rpcBodyMs": 0.5548999999991793,
+      "jsonParseMs": 0.5104000000028464,
+      "decoderMs": 14.404399999999441,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 56.958300000002055,
+      "rpcHttpMs": 133.90120000000024,
+      "rpcHeadersMs": 132.78280000000086,
+      "rpcBodyMs": 0.6055999999989581,
+      "jsonParseMs": 0.5056000000004133,
+      "decoderMs": 14.591700000000856,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 59.324000000000524,
+      "rpcHttpMs": 133.16200000000026,
+      "rpcHeadersMs": 132.02929999999833,
+      "rpcBodyMs": 0.6087999999981548,
+      "jsonParseMs": 0.5168999999987136,
+      "decoderMs": 18.451499999999214,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 94.56820000000153,
+      "rpcHttpMs": 236.5083999999988,
+      "rpcHeadersMs": 235.3748999999989,
+      "rpcBodyMs": 0.6113000000004831,
+      "jsonParseMs": 0.5148000000008324,
+      "decoderMs": 15.220499999999447,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 90.79490000000078,
+      "rpcHttpMs": 159.81600000000253,
+      "rpcHeadersMs": 158.76810000000114,
+      "rpcBodyMs": 0.5226999999977124,
+      "jsonParseMs": 0.5174999999981083,
+      "decoderMs": 14.915499999999156,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 54.97139999999854,
+      "rpcHttpMs": 203.77000000000044,
+      "rpcHeadersMs": 202.59479999999894,
+      "rpcBodyMs": 0.6373999999996158,
+      "jsonParseMs": 0.5275999999976193,
+      "decoderMs": 15.022800000002462,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 68.58100000000195,
+      "rpcHttpMs": 141.09669999999824,
+      "rpcHeadersMs": 140.0147999999972,
+      "rpcBodyMs": 0.5240000000012515,
+      "jsonParseMs": 0.5454000000027008,
+      "decoderMs": 14.636700000002747,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 59.05289999999877,
+      "rpcHttpMs": 165.22609999999986,
+      "rpcHeadersMs": 164.14380000000165,
+      "rpcBodyMs": 0.5524000000004889,
+      "jsonParseMs": 0.5217999999986205,
+      "decoderMs": 17.655800000000454,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 57.6237000000001,
+      "rpcHttpMs": 134.45490000000063,
+      "rpcHeadersMs": 133.4347000000016,
+      "rpcBodyMs": 0.5168000000012398,
+      "jsonParseMs": 0.49729999999908614,
+      "decoderMs": 15.268899999999121,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 54.825700000001234,
+      "rpcHttpMs": 148.71840000000157,
+      "rpcHeadersMs": 147.74299999999857,
+      "rpcBodyMs": 0.4488999999994121,
+      "jsonParseMs": 0.5202000000026601,
+      "decoderMs": 14.956399999999121,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 60.28759999999966,
+      "rpcHttpMs": 137.59280000000217,
+      "rpcHeadersMs": 136.4861000000019,
+      "rpcBodyMs": 0.5684999999975844,
+      "jsonParseMs": 0.5309999999990396,
+      "decoderMs": 14.552199999998265,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "a",
+      "warmup": false,
+      "authVerifyHttpMs": 61.2609999999986,
+      "rpcHttpMs": 133.04219999999987,
+      "rpcHeadersMs": 131.98779999999897,
+      "rpcBodyMs": 0.5318999999981315,
+      "jsonParseMs": 0.5159999999996217,
+      "decoderMs": 14.14600000000064,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": true,
+      "authVerifyHttpMs": 63.410100000000966,
+      "rpcHttpMs": 172.82060000000274,
+      "rpcHeadersMs": 171.8610000000008,
+      "rpcBodyMs": 0.45349999999962165,
+      "jsonParseMs": 0.49989999999888823,
+      "decoderMs": 13.342100000001665,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 54.19800000000032,
+      "rpcHttpMs": 126.1756000000023,
+      "rpcHeadersMs": 125.25090000000273,
+      "rpcBodyMs": 0.4206999999987602,
+      "jsonParseMs": 0.49829999999928987,
+      "decoderMs": 13.179299999999785,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 55.69340000000011,
+      "rpcHttpMs": 123.68289999999979,
+      "rpcHeadersMs": 122.58129999999801,
+      "rpcBodyMs": 0.5120000000024447,
+      "jsonParseMs": 0.5812999999980093,
+      "decoderMs": 13.843000000000757,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 52.96529999999984,
+      "rpcHttpMs": 146.4327000000012,
+      "rpcHeadersMs": 145.44680000000153,
+      "rpcBodyMs": 0.45049999999901047,
+      "jsonParseMs": 0.5280999999995402,
+      "decoderMs": 15.560900000000402,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 104.3760000000002,
+      "rpcHttpMs": 182.96069999999963,
+      "rpcHeadersMs": 181.89700000000084,
+      "rpcBodyMs": 0.5387999999984459,
+      "jsonParseMs": 0.5184000000008382,
+      "decoderMs": 14.503600000000006,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 66.62959999999657,
+      "rpcHttpMs": 145.08410000000003,
+      "rpcHeadersMs": 144.00250000000233,
+      "rpcBodyMs": 0.552399999996851,
+      "jsonParseMs": 0.5228000000024622,
+      "decoderMs": 13.917800000002899,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 61.821100000001024,
+      "rpcHttpMs": 140.4459999999999,
+      "rpcHeadersMs": 139.40410000000338,
+      "rpcBodyMs": 0.5178000000014435,
+      "jsonParseMs": 0.5170999999972992,
+      "decoderMs": 14.491500000000087,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 61.94800000000032,
+      "rpcHttpMs": 146.67499999999927,
+      "rpcHeadersMs": 145.50790000000052,
+      "rpcBodyMs": 0.5868000000009488,
+      "jsonParseMs": 0.5686999999998079,
+      "decoderMs": 14.727499999997235,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 98.48730000000069,
+      "rpcHttpMs": 142.3786,
+      "rpcHeadersMs": 141.2592999999979,
+      "rpcBodyMs": 0.5900999999976193,
+      "jsonParseMs": 0.5217999999986205,
+      "decoderMs": 14.764400000000023,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 74.99669999999969,
+      "rpcHttpMs": 178.70699999999852,
+      "rpcHeadersMs": 177.7625999999982,
+      "rpcBodyMs": 0.4192000000002736,
+      "jsonParseMs": 0.5184000000008382,
+      "decoderMs": 14.226400000003196,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 56.429800000001705,
+      "rpcHttpMs": 131.71639999999752,
+      "rpcHeadersMs": 130.7046999999984,
+      "rpcBodyMs": 0.5095000000001164,
+      "jsonParseMs": 0.4955000000009022,
+      "decoderMs": 15.399300000000949,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 64.803100000001,
+      "rpcHttpMs": 124.25220000000263,
+      "rpcHeadersMs": 123.18800000000192,
+      "rpcBodyMs": 0.5262000000002445,
+      "jsonParseMs": 0.5315000000009604,
+      "decoderMs": 14.23399999999674,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 58.94670000000042,
+      "rpcHttpMs": 132.75179999999818,
+      "rpcHeadersMs": 131.70089999999982,
+      "rpcBodyMs": 0.475800000000163,
+      "jsonParseMs": 0.5689000000020314,
+      "decoderMs": 14.178800000001502,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 51.03719999999885,
+      "rpcHttpMs": 128.00179999999818,
+      "rpcHeadersMs": 126.82179999999789,
+      "rpcBodyMs": 0.613100000002305,
+      "jsonParseMs": 0.558999999997468,
+      "decoderMs": 14.628300000000309,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 54.017500000001746,
+      "rpcHttpMs": 168.78780000000188,
+      "rpcHeadersMs": 167.6841999999997,
+      "rpcBodyMs": 0.5858999999982188,
+      "jsonParseMs": 0.5109000000011292,
+      "decoderMs": 13.552400000000489,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 53.329900000000634,
+      "rpcHttpMs": 130.47360000000117,
+      "rpcHeadersMs": 129.50890000000072,
+      "rpcBodyMs": 0.44840000000112923,
+      "jsonParseMs": 0.5101999999969848,
+      "decoderMs": 14.178499999998166,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 59.449100000001636,
+      "rpcHttpMs": 335.65639999999985,
+      "rpcHeadersMs": 334.6587999999974,
+      "rpcBodyMs": 0.4680000000007567,
+      "jsonParseMs": 0.5221000000019558,
+      "decoderMs": 13.850399999999354,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 157.72399999999834,
+      "rpcHttpMs": 320.4480000000003,
+      "rpcHeadersMs": 319.26950000000215,
+      "rpcBodyMs": 0.5937000000012631,
+      "jsonParseMs": 0.5751999999993131,
+      "decoderMs": 16.771700000001147,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 131.41630000000077,
+      "rpcHttpMs": 372.34019999999873,
+      "rpcHeadersMs": 370.9972999999991,
+      "rpcBodyMs": 0.5967999999993481,
+      "jsonParseMs": 0.7341999999989639,
+      "decoderMs": 14.702499999999418,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 86.46169999999984,
+      "rpcHttpMs": 201.27609999999913,
+      "rpcHeadersMs": 199.91879999999946,
+      "rpcBodyMs": 0.7770999999993364,
+      "jsonParseMs": 0.5692000000017288,
+      "decoderMs": 14.631100000002334,
+      "orders": "0_committed_fixture_rows"
+    },
+    {
+      "business": "b",
+      "warmup": false,
+      "authVerifyHttpMs": 61.4932000000008,
+      "rpcHttpMs": 139.44900000000052,
+      "rpcHeadersMs": 138.4376000000011,
+      "rpcBodyMs": 0.419000000001688,
+      "jsonParseMs": 0.584500000000844,
+      "decoderMs": 13.382800000003044,
+      "orders": "0_committed_fixture_rows"
+    }
+  ],
+  "privateSamples": [
+    {
+      "warmup": true,
+      "authHttpMs": 54.41029999999955,
+      "sqlPsqlWireMs": 130.183,
+      "privateBridgeWallMs": 177.6922999999988,
+      "decoderMs": 15.624100000000908,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 61.59810000000289,
+      "sqlPsqlWireMs": 83.19,
+      "privateBridgeWallMs": 124.17529999999897,
+      "decoderMs": 13.725200000000768,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 53.757400000002235,
+      "sqlPsqlWireMs": 83.275,
+      "privateBridgeWallMs": 105.22659999999814,
+      "decoderMs": 13.958300000002055,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 51.51590000000215,
+      "sqlPsqlWireMs": 88.345,
+      "privateBridgeWallMs": 121.10570000000007,
+      "decoderMs": 13.979199999997945,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 72.28449999999793,
+      "sqlPsqlWireMs": 101.059,
+      "privateBridgeWallMs": 126.59579999999914,
+      "decoderMs": 13.700700000001234,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 51.66519999999946,
+      "sqlPsqlWireMs": 97.219,
+      "privateBridgeWallMs": 124.24019999999655,
+      "decoderMs": 13.297500000000582,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 57.63669999999911,
+      "sqlPsqlWireMs": 72.171,
+      "privateBridgeWallMs": 116.27829999999813,
+      "decoderMs": 13.140999999999622,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 64.5676999999996,
+      "sqlPsqlWireMs": 77.968,
+      "privateBridgeWallMs": 107.2976000000017,
+      "decoderMs": 18.927999999999884,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 50.4265000000014,
+      "sqlPsqlWireMs": 69.005,
+      "privateBridgeWallMs": 98.050900000002,
+      "decoderMs": 15.132399999998597,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 52.900399999998626,
+      "sqlPsqlWireMs": 68.952,
+      "privateBridgeWallMs": 105.00019999999859,
+      "decoderMs": 12.783699999999953,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 51.71589999999924,
+      "sqlPsqlWireMs": 71.673,
+      "privateBridgeWallMs": 106.66240000000107,
+      "decoderMs": 13.569800000001123,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 51.33680000000095,
+      "sqlPsqlWireMs": 69.311,
+      "privateBridgeWallMs": 104.91740000000209,
+      "decoderMs": 13.120999999999185,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 62.350500000000466,
+      "sqlPsqlWireMs": 120.418,
+      "privateBridgeWallMs": 160.0630999999994,
+      "decoderMs": 14.900800000003073,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 102.37219999999797,
+      "sqlPsqlWireMs": 74.834,
+      "privateBridgeWallMs": 113.32519999999931,
+      "decoderMs": 12.35989999999947,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 53.46440000000075,
+      "sqlPsqlWireMs": 68.034,
+      "privateBridgeWallMs": 83.44639999999708,
+      "decoderMs": 13.231599999999162,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 51.442699999999604,
+      "sqlPsqlWireMs": 68.219,
+      "privateBridgeWallMs": 109.38959999999861,
+      "decoderMs": 12.757900000000518,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 53.42959999999948,
+      "sqlPsqlWireMs": 70.403,
+      "privateBridgeWallMs": 103.77439999999842,
+      "decoderMs": 13.492899999997462,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 53.317699999999604,
+      "sqlPsqlWireMs": 68.259,
+      "privateBridgeWallMs": 98.15179999999964,
+      "decoderMs": 15.502300000000105,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 52.09769999999844,
+      "sqlPsqlWireMs": 69.895,
+      "privateBridgeWallMs": 111.699099999998,
+      "decoderMs": 16.489400000002206,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 65.02239999999802,
+      "sqlPsqlWireMs": 69.287,
+      "privateBridgeWallMs": 118.83569999999963,
+      "decoderMs": 16.113600000000588,
+      "orders": 5
+    },
+    {
+      "warmup": false,
+      "authHttpMs": 63.082800000000134,
+      "sqlPsqlWireMs": 69.763,
+      "privateBridgeWallMs": 107.70160000000033,
+      "decoderMs": 16.85450000000128,
+      "orders": 5
+    }
+  ],
+  "privateHarness": "Client-local only: live Auth HTTP getUser verifies signed identity before authenticated direct D1 SQL; no HTTP D1 endpoint/service/route created.",
+  "credentials": "Exclusive ES256 isolated signing key, authenticated synthetic sub; anon API key only; no service role. Stateless tokens avoid changing existing Auth users/sessions/refresh records.",
+  "expired": {
+    "authStatus": 403,
+    "rpcStatus": 401,
+    "privateBridge": "Denied by live auth; no SQL invocation for expired/absent credentials"
+  },
+  "anonymousStatus": 401,
+  "authRecordsFingerprintPreserved": true,
+  "limits": [
+    "Public HTTP tests see empty committed database; fixtures uncommitted and not shared across HTTP connections.",
+    "RPC HTTP wall includes proxy/JWT validation/server SQL/network; cannot attribute exact pure transport by subtracting unpaired PostgreSQL measurements.",
+    "Private D1 client bridge is NOT an HTTP RPC endpoint or application transport SLA.",
+    "No Auth-issued login/revocation/cookie lifecycle: only authentic signature/expiry validation of stateless synthetic tokens."
+  ],
+  "summaries": {
+    "publicEmptyA": {
+      "n": 20,
+      "p50": 141.09669999999824,
+      "p95": 236.5083999999988,
+      "max": 359.1947
+    },
+    "publicEmptyB": {
+      "n": 20,
+      "p50": 142.3786,
+      "p95": 335.65639999999985,
+      "max": 372.34019999999873
+    },
+    "privateHarnessN5": {
+      "n": 20,
+      "p50": 70.403,
+      "p95": 101.059,
+      "max": 120.418
+    }
+  }
+}

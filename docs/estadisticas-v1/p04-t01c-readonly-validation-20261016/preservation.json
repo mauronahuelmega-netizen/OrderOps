@@ -1,0 +1,29 @@
+{
+  "at": "2026-10-16T16:00:57.303Z",
+  "result": "PASS_FILE_PRESERVATION",
+  "baselineFiles": 3086,
+  "allBaselineHashesUnchanged": true,
+  "ignoredRecordedArtifactsUnchanged": 10,
+  "approvedRunnerTemplateManifestHashesUnchanged": true,
+  "privateAndHistoricalSQLReferencesUnchanged": true,
+  "nativeAdapterUnchanged": true,
+  "onlyAuthorizedNewPaths": true,
+  "newResultInPriorDirectory": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/sql-readonly-observed.json",
+  "newResultPreviouslyAbsent": true,
+  "trackedStatus": [
+    "M ORDEROPS_LIVING_MEMORY.md",
+    " M components/admin/admin-nav-config.ts",
+    " M components/admin/layout/admin-nav-list.tsx",
+    " M docs/estadisticas-v1/fase-01-evidencia.json",
+    " M lib/admin/permissions.ts",
+    " M next-env.d.ts"
+  ],
+  "sourceReferencesRewritten": false,
+  "commits": 0,
+  "queriesAfterAuthorizedRunner": 0,
+  "lifecycleDockerOperations": 0,
+  "networkChanges": 0,
+  "ddlOrDml": 0,
+  "sqlRollbackObserved": true,
+  "physicalPostgresBytes": "NOT_COMPARED; normal database background activity is outside this content-level verification"
+}

@@ -1,0 +1,3020 @@
+{
+  "at": "2026-10-14T16:02:25.049Z",
+  "result": "PASS_EXECUTED_CASES",
+  "records": [
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T16:00:38.094054+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "8",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 7,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "90.00",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 8,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [
+            {
+              "key": "product:cf154be7-9a03-3f4f-6a62-23f49478ee07",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "2",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "20.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "cf154be7-9a03-3f4f-6a62-23f49478ee07",
+              "position": 1,
+              "unitShare": "25.00",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "22.22",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:23d3d8c9-f873-e51c-e4fb-2d1a8fb762fc",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "23d3d8c9-f873-e51c-e4fb-2d1a8fb762fc",
+              "position": 2,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:3148baf4-c095-c924-6a8d-6efdb9405e70",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "3148baf4-c095-c924-6a8d-6efdb9405e70",
+              "position": 3,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:377b097b-c544-a410-87ec-999a9c28fa68",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "377b097b-c544-a410-87ec-999a9c28fa68",
+              "position": 4,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:46f2360d-3922-6d2c-c22c-16a9b567886b",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "46f2360d-3922-6d2c-c22c-16a9b567886b",
+              "position": 5,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            }
+          ],
+          "nextCursor": {
+            "asOf": "2026-10-14T16:00:38.094054+00:00",
+            "offset": 5,
+            "revision": "156",
+            "requestKey": "2bbbf2cb1a97e45460a33c6ab7101280"
+          },
+          "totalProducts": 7
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 8,
+          "eligibleOrders": 7,
+          "outsideSession": 7,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "156",
+        "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+        "categories": [
+          {
+            "key": "category:a238cad2-b951-fac0-2613-d43754e47d70",
+            "kind": "verified",
+            "label": "Synthetic historical A",
+            "units": {
+              "value": "8",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 7,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "revenue": {
+              "value": "90.00",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 8,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "identity": "a238cad2-b951-fac0-2613-d43754e47d70",
+            "unitShare": "100.00",
+            "revenueShare": "100.00"
+          }
+        ],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": "8",
+          "revenue": "90.00",
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.owner.a.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T16:00:38.202162+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "8",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 7,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "90.00",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 8,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [
+            {
+              "key": "product:cf154be7-9a03-3f4f-6a62-23f49478ee07",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "2",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "20.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "cf154be7-9a03-3f4f-6a62-23f49478ee07",
+              "position": 1,
+              "unitShare": "25.00",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "22.22",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:23d3d8c9-f873-e51c-e4fb-2d1a8fb762fc",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "23d3d8c9-f873-e51c-e4fb-2d1a8fb762fc",
+              "position": 2,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:3148baf4-c095-c924-6a8d-6efdb9405e70",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "3148baf4-c095-c924-6a8d-6efdb9405e70",
+              "position": 3,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:377b097b-c544-a410-87ec-999a9c28fa68",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "377b097b-c544-a410-87ec-999a9c28fa68",
+              "position": 4,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:46f2360d-3922-6d2c-c22c-16a9b567886b",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "46f2360d-3922-6d2c-c22c-16a9b567886b",
+              "position": 5,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            }
+          ],
+          "nextCursor": {
+            "asOf": "2026-10-14T16:00:38.202162+00:00",
+            "offset": 5,
+            "revision": "156",
+            "requestKey": "63ca4220eb84ea471aa04e968e5899f0"
+          },
+          "totalProducts": 7
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 8,
+          "eligibleOrders": 7,
+          "outsideSession": 7,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "156",
+        "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+        "categories": [
+          {
+            "key": "category:a238cad2-b951-fac0-2613-d43754e47d70",
+            "kind": "verified",
+            "label": "Synthetic historical A",
+            "units": {
+              "value": "8",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 7,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "revenue": {
+              "value": "90.00",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 8,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "identity": "a238cad2-b951-fac0-2613-d43754e47d70",
+            "unitShare": "100.00",
+            "revenueShare": "100.00"
+          }
+        ],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": "8",
+          "revenue": "90.00",
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.owner.a.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T16:00:38.248487+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "8",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 7,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "90.00",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 8,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [
+            {
+              "key": "product:cf154be7-9a03-3f4f-6a62-23f49478ee07",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "2",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "20.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "cf154be7-9a03-3f4f-6a62-23f49478ee07",
+              "position": 1,
+              "unitShare": "25.00",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "22.22",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:23d3d8c9-f873-e51c-e4fb-2d1a8fb762fc",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "23d3d8c9-f873-e51c-e4fb-2d1a8fb762fc",
+              "position": 2,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:3148baf4-c095-c924-6a8d-6efdb9405e70",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "3148baf4-c095-c924-6a8d-6efdb9405e70",
+              "position": 3,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:377b097b-c544-a410-87ec-999a9c28fa68",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "377b097b-c544-a410-87ec-999a9c28fa68",
+              "position": 4,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:46f2360d-3922-6d2c-c22c-16a9b567886b",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "46f2360d-3922-6d2c-c22c-16a9b567886b",
+              "position": 5,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            }
+          ],
+          "nextCursor": {
+            "asOf": "2026-10-14T16:00:38.248487+00:00",
+            "offset": 5,
+            "revision": "156",
+            "requestKey": "98e63f002c03378dd02efb43ebcdbc8b"
+          },
+          "totalProducts": 7
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 8,
+          "eligibleOrders": 7,
+          "outsideSession": 7,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "156",
+        "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+        "categories": [
+          {
+            "key": "category:a238cad2-b951-fac0-2613-d43754e47d70",
+            "kind": "verified",
+            "label": "Synthetic historical A",
+            "units": {
+              "value": "8",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 7,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "revenue": {
+              "value": "90.00",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 8,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "identity": "a238cad2-b951-fac0-2613-d43754e47d70",
+            "unitShare": "100.00",
+            "revenueShare": "100.00"
+          }
+        ],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": "8",
+          "revenue": "90.00",
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.manager.a.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T16:00:38.301918+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "8",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 7,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "90.00",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 8,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [
+            {
+              "key": "product:cf154be7-9a03-3f4f-6a62-23f49478ee07",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "2",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "20.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "cf154be7-9a03-3f4f-6a62-23f49478ee07",
+              "position": 1,
+              "unitShare": "25.00",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "22.22",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:23d3d8c9-f873-e51c-e4fb-2d1a8fb762fc",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "23d3d8c9-f873-e51c-e4fb-2d1a8fb762fc",
+              "position": 2,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:3148baf4-c095-c924-6a8d-6efdb9405e70",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "3148baf4-c095-c924-6a8d-6efdb9405e70",
+              "position": 3,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:377b097b-c544-a410-87ec-999a9c28fa68",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "377b097b-c544-a410-87ec-999a9c28fa68",
+              "position": 4,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:46f2360d-3922-6d2c-c22c-16a9b567886b",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "46f2360d-3922-6d2c-c22c-16a9b567886b",
+              "position": 5,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            }
+          ],
+          "nextCursor": {
+            "asOf": "2026-10-14T16:00:38.301918+00:00",
+            "offset": 5,
+            "revision": "156",
+            "requestKey": "b9c19cdaa53b8563c1d2907becd63f4b"
+          },
+          "totalProducts": 7
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 8,
+          "eligibleOrders": 7,
+          "outsideSession": 7,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "156",
+        "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+        "categories": [
+          {
+            "key": "category:a238cad2-b951-fac0-2613-d43754e47d70",
+            "kind": "verified",
+            "label": "Synthetic historical A",
+            "units": {
+              "value": "8",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 7,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "revenue": {
+              "value": "90.00",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 8,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "identity": "a238cad2-b951-fac0-2613-d43754e47d70",
+            "unitShare": "100.00",
+            "revenueShare": "100.00"
+          }
+        ],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": "8",
+          "revenue": "90.00",
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.manager.a.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T16:00:38.354095+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "8",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 7,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "90.00",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 8,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [
+            {
+              "key": "product:cf154be7-9a03-3f4f-6a62-23f49478ee07",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "2",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "20.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "cf154be7-9a03-3f4f-6a62-23f49478ee07",
+              "position": 1,
+              "unitShare": "25.00",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "22.22",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:23d3d8c9-f873-e51c-e4fb-2d1a8fb762fc",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "23d3d8c9-f873-e51c-e4fb-2d1a8fb762fc",
+              "position": 2,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:3148baf4-c095-c924-6a8d-6efdb9405e70",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "3148baf4-c095-c924-6a8d-6efdb9405e70",
+              "position": 3,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:377b097b-c544-a410-87ec-999a9c28fa68",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "377b097b-c544-a410-87ec-999a9c28fa68",
+              "position": 4,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:46f2360d-3922-6d2c-c22c-16a9b567886b",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "46f2360d-3922-6d2c-c22c-16a9b567886b",
+              "position": 5,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            }
+          ],
+          "nextCursor": {
+            "asOf": "2026-10-14T16:00:38.354095+00:00",
+            "offset": 5,
+            "revision": "156",
+            "requestKey": "f995b4b5b3d9f14054a2a4aa2be68cc7"
+          },
+          "totalProducts": 7
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 8,
+          "eligibleOrders": 7,
+          "outsideSession": 7,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "156",
+        "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+        "categories": [
+          {
+            "key": "category:a238cad2-b951-fac0-2613-d43754e47d70",
+            "kind": "verified",
+            "label": "Synthetic historical A",
+            "units": {
+              "value": "8",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 7,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "revenue": {
+              "value": "90.00",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 8,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "identity": "a238cad2-b951-fac0-2613-d43754e47d70",
+            "unitShare": "100.00",
+            "revenueShare": "100.00"
+          }
+        ],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": "8",
+          "revenue": "90.00",
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.admin.a.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T16:00:38.406852+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "8",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 7,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "90.00",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 8,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [
+            {
+              "key": "product:cf154be7-9a03-3f4f-6a62-23f49478ee07",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "2",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "20.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "cf154be7-9a03-3f4f-6a62-23f49478ee07",
+              "position": 1,
+              "unitShare": "25.00",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "22.22",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:23d3d8c9-f873-e51c-e4fb-2d1a8fb762fc",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "23d3d8c9-f873-e51c-e4fb-2d1a8fb762fc",
+              "position": 2,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:3148baf4-c095-c924-6a8d-6efdb9405e70",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "3148baf4-c095-c924-6a8d-6efdb9405e70",
+              "position": 3,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:377b097b-c544-a410-87ec-999a9c28fa68",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "377b097b-c544-a410-87ec-999a9c28fa68",
+              "position": 4,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:46f2360d-3922-6d2c-c22c-16a9b567886b",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "46f2360d-3922-6d2c-c22c-16a9b567886b",
+              "position": 5,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            }
+          ],
+          "nextCursor": {
+            "asOf": "2026-10-14T16:00:38.406852+00:00",
+            "offset": 5,
+            "revision": "156",
+            "requestKey": "f662162803f3b19500766fffc1854213"
+          },
+          "totalProducts": 7
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 8,
+          "eligibleOrders": 7,
+          "outsideSession": 7,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "156",
+        "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+        "categories": [
+          {
+            "key": "category:a238cad2-b951-fac0-2613-d43754e47d70",
+            "kind": "verified",
+            "label": "Synthetic historical A",
+            "units": {
+              "value": "8",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 7,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "revenue": {
+              "value": "90.00",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 8,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "identity": "a238cad2-b951-fac0-2613-d43754e47d70",
+            "unitShare": "100.00",
+            "revenueShare": "100.00"
+          }
+        ],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": "8",
+          "revenue": "90.00",
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.admin.a.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "role.operator.a.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.operator.a.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.viewer.a.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.viewer.a.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.super_admin.a.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.super_admin.a.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T16:00:38.469403+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "1",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 1,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "99.00",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 1,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [
+            {
+              "key": "product:ab6a3d33-2e4f-ceb7-ff31-3b66c3f9f236",
+              "label": "Foreign synthetic",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "99.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "ab6a3d33-2e4f-ceb7-ff31-3b66c3f9f236",
+              "position": 1,
+              "unitShare": "100.00",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "8bca0105-d5f6-471e-f8f9-eb991b63e5eb"
+                }
+              ],
+              "revenueShare": "100.00",
+              "catalogStatus": "historical"
+            }
+          ],
+          "nextCursor": null,
+          "totalProducts": 1
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 1,
+          "eligibleOrders": 1,
+          "outsideSession": 1,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "4",
+        "businessId": "ea72a875-7511-4c1d-9d2c-c3f899b94bea",
+        "categories": [
+          {
+            "key": "category:8bca0105-d5f6-471e-f8f9-eb991b63e5eb",
+            "kind": "verified",
+            "label": "Synthetic historical B",
+            "units": {
+              "value": "1",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 1,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "revenue": {
+              "value": "99.00",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 1,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "identity": "8bca0105-d5f6-471e-f8f9-eb991b63e5eb",
+            "unitShare": "100.00",
+            "revenueShare": "100.00"
+          }
+        ],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": "1",
+          "revenue": "99.00",
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.owner.b.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T16:00:38.497507+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "1",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 1,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "99.00",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 1,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [
+            {
+              "key": "product:ab6a3d33-2e4f-ceb7-ff31-3b66c3f9f236",
+              "label": "Foreign synthetic",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "99.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "ab6a3d33-2e4f-ceb7-ff31-3b66c3f9f236",
+              "position": 1,
+              "unitShare": "100.00",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "8bca0105-d5f6-471e-f8f9-eb991b63e5eb"
+                }
+              ],
+              "revenueShare": "100.00",
+              "catalogStatus": "historical"
+            }
+          ],
+          "nextCursor": null,
+          "totalProducts": 1
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 1,
+          "eligibleOrders": 1,
+          "outsideSession": 1,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "4",
+        "businessId": "ea72a875-7511-4c1d-9d2c-c3f899b94bea",
+        "categories": [
+          {
+            "key": "category:8bca0105-d5f6-471e-f8f9-eb991b63e5eb",
+            "kind": "verified",
+            "label": "Synthetic historical B",
+            "units": {
+              "value": "1",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 1,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "revenue": {
+              "value": "99.00",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 1,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "identity": "8bca0105-d5f6-471e-f8f9-eb991b63e5eb",
+            "unitShare": "100.00",
+            "revenueShare": "100.00"
+          }
+        ],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": "1",
+          "revenue": "99.00",
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.owner.b.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T16:00:38.524732+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "1",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 1,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "99.00",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 1,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [
+            {
+              "key": "product:ab6a3d33-2e4f-ceb7-ff31-3b66c3f9f236",
+              "label": "Foreign synthetic",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "99.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "ab6a3d33-2e4f-ceb7-ff31-3b66c3f9f236",
+              "position": 1,
+              "unitShare": "100.00",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "8bca0105-d5f6-471e-f8f9-eb991b63e5eb"
+                }
+              ],
+              "revenueShare": "100.00",
+              "catalogStatus": "historical"
+            }
+          ],
+          "nextCursor": null,
+          "totalProducts": 1
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 1,
+          "eligibleOrders": 1,
+          "outsideSession": 1,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "4",
+        "businessId": "ea72a875-7511-4c1d-9d2c-c3f899b94bea",
+        "categories": [
+          {
+            "key": "category:8bca0105-d5f6-471e-f8f9-eb991b63e5eb",
+            "kind": "verified",
+            "label": "Synthetic historical B",
+            "units": {
+              "value": "1",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 1,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "revenue": {
+              "value": "99.00",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 1,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "identity": "8bca0105-d5f6-471e-f8f9-eb991b63e5eb",
+            "unitShare": "100.00",
+            "revenueShare": "100.00"
+          }
+        ],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": "1",
+          "revenue": "99.00",
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.manager.b.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T16:00:38.558816+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "1",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 1,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "99.00",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 1,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [
+            {
+              "key": "product:ab6a3d33-2e4f-ceb7-ff31-3b66c3f9f236",
+              "label": "Foreign synthetic",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "99.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "ab6a3d33-2e4f-ceb7-ff31-3b66c3f9f236",
+              "position": 1,
+              "unitShare": "100.00",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "8bca0105-d5f6-471e-f8f9-eb991b63e5eb"
+                }
+              ],
+              "revenueShare": "100.00",
+              "catalogStatus": "historical"
+            }
+          ],
+          "nextCursor": null,
+          "totalProducts": 1
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 1,
+          "eligibleOrders": 1,
+          "outsideSession": 1,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "4",
+        "businessId": "ea72a875-7511-4c1d-9d2c-c3f899b94bea",
+        "categories": [
+          {
+            "key": "category:8bca0105-d5f6-471e-f8f9-eb991b63e5eb",
+            "kind": "verified",
+            "label": "Synthetic historical B",
+            "units": {
+              "value": "1",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 1,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "revenue": {
+              "value": "99.00",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 1,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "identity": "8bca0105-d5f6-471e-f8f9-eb991b63e5eb",
+            "unitShare": "100.00",
+            "revenueShare": "100.00"
+          }
+        ],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": "1",
+          "revenue": "99.00",
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.manager.b.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T16:00:38.587736+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "1",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 1,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "99.00",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 1,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [
+            {
+              "key": "product:ab6a3d33-2e4f-ceb7-ff31-3b66c3f9f236",
+              "label": "Foreign synthetic",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "99.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "ab6a3d33-2e4f-ceb7-ff31-3b66c3f9f236",
+              "position": 1,
+              "unitShare": "100.00",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "8bca0105-d5f6-471e-f8f9-eb991b63e5eb"
+                }
+              ],
+              "revenueShare": "100.00",
+              "catalogStatus": "historical"
+            }
+          ],
+          "nextCursor": null,
+          "totalProducts": 1
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 1,
+          "eligibleOrders": 1,
+          "outsideSession": 1,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "4",
+        "businessId": "ea72a875-7511-4c1d-9d2c-c3f899b94bea",
+        "categories": [
+          {
+            "key": "category:8bca0105-d5f6-471e-f8f9-eb991b63e5eb",
+            "kind": "verified",
+            "label": "Synthetic historical B",
+            "units": {
+              "value": "1",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 1,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "revenue": {
+              "value": "99.00",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 1,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "identity": "8bca0105-d5f6-471e-f8f9-eb991b63e5eb",
+            "unitShare": "100.00",
+            "revenueShare": "100.00"
+          }
+        ],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": "1",
+          "revenue": "99.00",
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.admin.b.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T16:00:38.622132+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "1",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 1,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "99.00",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 1,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [
+            {
+              "key": "product:ab6a3d33-2e4f-ceb7-ff31-3b66c3f9f236",
+              "label": "Foreign synthetic",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "99.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "ab6a3d33-2e4f-ceb7-ff31-3b66c3f9f236",
+              "position": 1,
+              "unitShare": "100.00",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "8bca0105-d5f6-471e-f8f9-eb991b63e5eb"
+                }
+              ],
+              "revenueShare": "100.00",
+              "catalogStatus": "historical"
+            }
+          ],
+          "nextCursor": null,
+          "totalProducts": 1
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 1,
+          "eligibleOrders": 1,
+          "outsideSession": 1,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "4",
+        "businessId": "ea72a875-7511-4c1d-9d2c-c3f899b94bea",
+        "categories": [
+          {
+            "key": "category:8bca0105-d5f6-471e-f8f9-eb991b63e5eb",
+            "kind": "verified",
+            "label": "Synthetic historical B",
+            "units": {
+              "value": "1",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 1,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "revenue": {
+              "value": "99.00",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 1,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "identity": "8bca0105-d5f6-471e-f8f9-eb991b63e5eb",
+            "unitShare": "100.00",
+            "revenueShare": "100.00"
+          }
+        ],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": "1",
+          "revenue": "99.00",
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.admin.b.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "role.operator.b.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.operator.b.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.viewer.b.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.viewer.b.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.super_admin.b.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.super_admin.b.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "deny.no_session.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "deny.no_session.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "deny.missing_profile.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "deny.missing_profile.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "constraints.null_unknown_roles",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "deny.absent_business",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": {
+        "value": null,
+        "quality": "unavailable",
+        "reasons": [
+          "unverified_lines"
+        ],
+        "knownCount": 0,
+        "unknownCount": 1,
+        "missingCapturedOrders": 0
+      },
+      "test": "pure_helper.no_data",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.cross_tenant_sources",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "cursor.foreign",
+      "status": "PASS",
+      "summary": {
+        "period": {
+          "asOf": "2026-10-14T16:00:41.277827+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "8",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 7,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "90.00",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 8,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [
+            {
+              "key": "product:cf154be7-9a03-3f4f-6a62-23f49478ee07",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "2",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "20.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "cf154be7-9a03-3f4f-6a62-23f49478ee07",
+              "position": 1,
+              "unitShare": "25.00",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "22.22",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:23d3d8c9-f873-e51c-e4fb-2d1a8fb762fc",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "23d3d8c9-f873-e51c-e4fb-2d1a8fb762fc",
+              "position": 2,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:3148baf4-c095-c924-6a8d-6efdb9405e70",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "3148baf4-c095-c924-6a8d-6efdb9405e70",
+              "position": 3,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:377b097b-c544-a410-87ec-999a9c28fa68",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "377b097b-c544-a410-87ec-999a9c28fa68",
+              "position": 4,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            },
+            {
+              "key": "product:46f2360d-3922-6d2c-c22c-16a9b567886b",
+              "label": "Synthetic homonym",
+              "units": {
+                "value": "1",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "revenue": {
+                "value": "10.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 1,
+                "unknownCount": 0,
+                "missingCapturedOrders": 0
+              },
+              "identity": "46f2360d-3922-6d2c-c22c-16a9b567886b",
+              "position": 5,
+              "unitShare": "12.50",
+              "categories": [
+                {
+                  "kind": "verified",
+                  "identity": "a238cad2-b951-fac0-2613-d43754e47d70"
+                }
+              ],
+              "revenueShare": "11.11",
+              "catalogStatus": "historical"
+            }
+          ],
+          "nextCursor": {
+            "asOf": "2026-10-14T16:00:41.277827+00:00",
+            "offset": 5,
+            "revision": "156",
+            "requestKey": "cf0c8768284062bb70998876091a3da7"
+          },
+          "totalProducts": 7
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 8,
+          "eligibleOrders": 7,
+          "outsideSession": 7,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "156",
+        "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+        "categories": [
+          {
+            "key": "category:a238cad2-b951-fac0-2613-d43754e47d70",
+            "kind": "verified",
+            "label": "Synthetic historical A",
+            "units": {
+              "value": "8",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 7,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "revenue": {
+              "value": "90.00",
+              "quality": "exact",
+              "reasons": [],
+              "knownCount": 8,
+              "unknownCount": 0,
+              "missingCapturedOrders": 0
+            },
+            "identity": "a238cad2-b951-fac0-2613-d43754e47d70",
+            "unitShare": "100.00",
+            "revenueShare": "100.00"
+          }
+        ],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": "8",
+          "revenue": "90.00",
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "observedSqlstate": "22023"
+    },
+    {
+      "data": null,
+      "test": "rls.direct_analytics.owner.a",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_profile.owner.a",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_analytics.manager.a",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_profile.manager.a",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_analytics.admin.a",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_profile.admin.a",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_analytics.operator.a",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_analytics.viewer.a",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_analytics.super_admin.a",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_analytics.owner.b",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_profile.owner.b",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_analytics.manager.b",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_profile.manager.b",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_analytics.admin.b",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_profile.admin.b",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_analytics.operator.b",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_analytics.viewer.b",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "rls.direct_analytics.super_admin.b",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    }
+  ],
+  "nullUnknownProfiles": "Insertion rejected by actual constraints; no schema weakened",
+  "httpAuthentication": "NOT_EXECUTED",
+  "directCandidateAccessFromOtherConnection": "Cannot see uncommitted function; see mvcc-observer.json"
+}

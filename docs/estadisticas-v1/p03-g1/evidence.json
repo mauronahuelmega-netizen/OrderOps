@@ -1,0 +1,226 @@
+{
+  "at": "2026-10-14T12:20:40.340Z",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "branch": "codex/estadisticas-v1",
+  "cursorCommittedRef": "0f3c272f2d0099c51e1ab1634201ee936db057a9",
+  "cursorWorktree": "NOT_ACCESSED",
+  "verdicts": {
+    "P03_G1": "PASS_WITH_LIMITATIONS",
+    "P04_T01A": "READY_FOR_SQL_REVIEW"
+  },
+  "tests": {
+    "gate": {
+      "at": "2026-10-14T12:13:30.318Z",
+      "result": "PASS",
+      "assertions": 90,
+      "scope": "Offline policy + principal/transport + actual HTTP server wrappers/route/page via SSR injection. No live QA/DB."
+    },
+    "summaryRegression": {
+      "result": "PASS",
+      "assertions": 142,
+      "transport": "mock authenticated adapter; one RPC",
+      "databaseConnections": 0,
+      "scope": "URL, exact presenter, deterministic reading, authorization, decoding, races, dedupe, scope invalidation, error states"
+    },
+    "decoder": {
+      "at": "2026-10-14T12:13:31.377Z",
+      "result": "PASS",
+      "assertions": 25,
+      "scope": "Offline synthetic shape/null/precision/denominator/category/multi-tenant rejection; no candidate SQL executed"
+    },
+    "typecheck": "PASS --noEmit --incremental false",
+    "lint": "PASS owned G1/T01A files; no --fix",
+    "sqlStatic": "PASS parser, not PL/pgSQL compilation",
+    "liveQa": "NOT_EXECUTED",
+    "sql": "NOT_EXECUTED"
+  },
+  "preservation": {
+    "at": "2026-10-14T12:13:28.305Z",
+    "unchangedFiles": 2700,
+    "hashesUnchanged": true,
+    "authorizedOwnedChanges": [
+      "lib/statistics/summary-route-server.ts",
+      "lib/statistics/summary-server.ts",
+      "lib/statistics/summary-transport.ts",
+      "app/admin/(protected)/statistics/page.tsx",
+      "app/admin/(protected)/statistics/query/route.ts"
+    ],
+    "originalBytesVerifiedByReverseDiff": true,
+    "sharedAdminFilesUnchanged": true,
+    "dbConnections": 0,
+    "ddl": 0,
+    "commits": 0
+  },
+  "olderIgnoredLogsUnchanged": true,
+  "oldDecisionDocumentsUnchanged": true,
+  "sqlCandidateSha256": "99a5d3e9dd879bb11b92abebc377a5cbdc7ebc08d75b9eed8280f88e4f5e2f23",
+  "noPublicRpcChanges": true,
+  "noGrantsRlsApplied": true,
+  "noDatabaseConnections": true,
+  "noClientPublicationConfigSet": true,
+  "noServicesStarted": true,
+  "noCommits": true,
+  "inventory": [
+    {
+      "path": "lib/statistics/statistics-publication-policy.ts",
+      "sha256": "494c4bcd1f5d6a3aa092ae14e2de74946532d0acfb7a03295084aba671daf1ee"
+    },
+    {
+      "path": "lib/statistics/statistics-publication-server.ts",
+      "sha256": "2fe9c0b143020c9c0c34bc332c0fb85e9465c7bc1ba9c7012fbd10c0508b7f47"
+    },
+    {
+      "path": "lib/statistics/summary-server.ts",
+      "sha256": "e3b9f76307d198a3fa9b5241ac706a84843b3f4f35a788516ea8af77bf80cecd"
+    },
+    {
+      "path": "lib/statistics/summary-route-server.ts",
+      "sha256": "b7093ac983326c1911a2b65f0bc9a5c8ca3323457b538984312ae462b33c71bc"
+    },
+    {
+      "path": "lib/statistics/summary-transport.ts",
+      "sha256": "ad3ef8f387ffc10864fac33094bb60f4bd9b35ccca621ec94e993906ab124cf7"
+    },
+    {
+      "path": "lib/statistics/products-contracts.ts",
+      "sha256": "675f62c50e0c3ac1c696e1bdb8d62b235f5f34227882a3dbdba345ba2d5267f4"
+    },
+    {
+      "path": "lib/statistics/products-read.ts",
+      "sha256": "2dc443a63f66270b55a9ea78d6610117fc103389ee3524d4035562c69a3ec2b2"
+    },
+    {
+      "path": "lib/statistics/products.verify.ts",
+      "sha256": "276950834c90ad9788857909f68766a9b01b86149ab7116570f730ae2d784796"
+    },
+    {
+      "path": "lib/statistics/p03-g1.verify.ts",
+      "sha256": "7fd5e46f0985d1067094b3d693983605d8298c5d5eba558da4c0094b122886ab"
+    },
+    {
+      "path": "lib/statistics/p03-g1-summary-regression.verify.ts",
+      "sha256": "c34229ce67bb74e0579e58a2ef4b26f0b09c55ec5b234b40a1d8d5c3d25e28d8"
+    },
+    {
+      "path": "app/admin/(protected)/statistics/page.tsx",
+      "sha256": "85deedd1dd87746f2c0208fa7e6bb8c23362d6efec592fb56f7bc5407f1dd574"
+    },
+    {
+      "path": "app/admin/(protected)/statistics/query/route.ts",
+      "sha256": "f3340d0667346b2205c90e0ba838f806d4555ab6634a9a5e977900dbdfc73076"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/ACCESS_SURFACES.md",
+      "sha256": "e3716ea276ab1e47cb64f24b59a749dbfb52abae5f9f2d8033e8402dd0514323"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/after/app/admin/(protected)/statistics/page.tsx.txt",
+      "sha256": "85deedd1dd87746f2c0208fa7e6bb8c23362d6efec592fb56f7bc5407f1dd574"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/after/app/admin/(protected)/statistics/query/route.ts.txt",
+      "sha256": "f3340d0667346b2205c90e0ba838f806d4555ab6634a9a5e977900dbdfc73076"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/after/lib/statistics/summary-route-server.ts.txt",
+      "sha256": "b7093ac983326c1911a2b65f0bc9a5c8ca3323457b538984312ae462b33c71bc"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/after/lib/statistics/summary-server.ts.txt",
+      "sha256": "e3b9f76307d198a3fa9b5241ac706a84843b3f4f35a788516ea8af77bf80cecd"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/after/lib/statistics/summary-transport.ts.txt",
+      "sha256": "ad3ef8f387ffc10864fac33094bb60f4bd9b35ccca621ec94e993906ab124cf7"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/before/app/admin/(protected)/statistics/page.tsx.txt",
+      "sha256": "9ac79f39e52582e5b3cab2df571f3854362a25e440fd11484835c5c9fea3b0d5"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/before/app/admin/(protected)/statistics/query/route.ts.txt",
+      "sha256": "f036b28372ab40a26a921e18c7cf63c272b30465284cafd3b1ce0faedc6e565f"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/before/lib/statistics/summary-route-server.ts.txt",
+      "sha256": "2a469647e3988932ca11420137cbbf1e0b7dd4a9dd0dce6b7ac382b7da3cfd9f"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/before/lib/statistics/summary-server.ts.txt",
+      "sha256": "936262cc606dca722aa15ed645df0b943fd2e3d1f5fed24e16b077d4be6a9ec1"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/before/lib/statistics/summary-transport.ts.txt",
+      "sha256": "e40a462ed4660393f572c468558128509ed8e25bd4fd1ad73de812128953517c"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/eslint.config.mjs",
+      "sha256": "f0d7c30a1cd12ba719ac72d89964d7549ee2cd2a56dc2ec9b25fc1d357605c33"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/evidence.mjs",
+      "sha256": "be7c6d39fc0a002b44a89d755d732ff634763b936c688a016f3245bc54d7714a"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/implementation.diff",
+      "sha256": "4fee36211e30e234d5b39a503bed7720e3175ea5023ed078d8b03cd0f8599f0e"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/informe.md",
+      "sha256": "1985b028307909b9cf8b10d6ae3cb8c0387a89b57c11e87da591485566557c56"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/prepare.mjs",
+      "sha256": "ded93dd780cc68e0b2d93e06c59bf3cf9f07127ac3ecd08dfb4ebf2b23f8751d"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/preservation.json",
+      "sha256": "274314a558a3b97f2030585636bd2228e7fdb7feef1b64dfc18f9f9f3965a08f"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/regression/examples.json",
+      "sha256": "cf1991796b09ae7f6ee5e8d84bf0bc872973e2275930fc5eb5309d5dec58ff37"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/regression/pure-evidence.json",
+      "sha256": "afc6d68ed4290bd6f5ed3921555282c938debee2427a3fa4e5ab367f0809e065"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-g1/tests.json",
+      "sha256": "80c868d1b846d37640187664f6eb606c39bbd47824ab4498b23dbc7ac2e5f8bd"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/candidate-products.sql",
+      "sha256": "99a5d3e9dd879bb11b92abebc377a5cbdc7ebc08d75b9eed8280f88e4f5e2f23"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/CONTRACT.md",
+      "sha256": "03e3145153a44fba3feb3b3a87846594579980b0a423bea4f57e08d3b34e8199"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/decoder-tests.json",
+      "sha256": "13633a172708c7e32750c64e77d0663ee9a6bda8d8a292d5d200e9d1901dcab1"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/empty-reference.sql",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/functions.diff",
+      "sha256": "f7b87bcfd55a7d748978cde021d71ae2222b2bd3eb6fac1b10f777448a087965"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/NEXT_AUTHORIZATION.md",
+      "sha256": "c2d8d394c5c76f919b219ef542df62c1fce9e20770619d4d594b12d0472defab"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/SECURITY_MATRIX.md",
+      "sha256": "89efd2280e33c838580bcf21d6ab2dd6639e7670cf62f2cc01bcd63e1c27ae43"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/static-audit.json",
+      "sha256": "4770298406c3da6aaba3fe6f4fa69d66c668af1ec22f2413d1b994e795eb6fff"
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

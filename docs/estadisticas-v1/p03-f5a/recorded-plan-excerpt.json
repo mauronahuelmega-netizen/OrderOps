@@ -1,0 +1,44 @@
+{
+  "source": "docs/estadisticas-v1/p03-f4a/profile/volume-50.json",
+  "sha256": "727831936b077999b394178b7f9b6de15ea79f8752b20a7b06ac487d8c53f9b0",
+  "instrumented": true,
+  "newMeasurement": false,
+  "reader": "D1",
+  "orders": 50,
+  "nestedPlan": 15,
+  "durationMs": 83.017,
+  "scans": [
+    {
+      "Node Type": "Seq Scan",
+      "Relation Name": "order_statistics_completion_items",
+      "Actual Rows": 50,
+      "Actual Loops": 50,
+      "Filter": "statistics_can_read(business_id)",
+      "Shared Hit Blocks": 5050
+    },
+    {
+      "Node Type": "Seq Scan",
+      "Relation Name": "order_statistics_completion_items",
+      "Actual Rows": 0,
+      "Actual Loops": 0,
+      "Filter": "((product_identity IS NOT NULL) AND statistics_can_read(business_id))",
+      "Shared Hit Blocks": 0
+    },
+    {
+      "Node Type": "Seq Scan",
+      "Relation Name": "order_statistics_completion_items",
+      "Actual Rows": 0,
+      "Actual Loops": 0,
+      "Filter": "((product_identity = products_1.product_identity) AND (item_kind = 'product'::text) AND statistics_can_read(business_id))",
+      "Shared Hit Blocks": 0
+    },
+    {
+      "Node Type": "Seq Scan",
+      "Relation Name": "order_statistics_completion_items",
+      "Actual Rows": 0,
+      "Actual Loops": 0,
+      "Filter": "((product_identity = products_1.product_identity) AND (item_kind = 'product'::text) AND statistics_can_read(business_id))",
+      "Shared Hit Blocks": 0
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-13T19:31:07.903Z",
+  "result": "PASS",
+  "results": [
+    {
+      "business": "a",
+      "role": "owner",
+      "authIssuedSession": true,
+      "sessionId": "3eae29b9-13e6-458c-8bfa-2a025e596568",
+      "ssrCookies": [
+        "sb-127-auth-token"
+      ],
+      "rpcStatus": 200,
+      "tenantVerified": true,
+      "visibleKpis": 4
+    },
+    {
+      "business": "b",
+      "role": "manager",
+      "authIssuedSession": true,
+      "sessionId": "630c2496-8b6e-4e02-906e-1d50b5a7564a",
+      "ssrCookies": [
+        "sb-127-auth-token"
+      ],
+      "rpcStatus": 200,
+      "tenantVerified": true,
+      "visibleKpis": 4
+    }
+  ],
+  "before": {
+    "verified": true,
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "containers": 5,
+    "volumes": [
+      "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+    ],
+    "baseMigrations": 119,
+    "startedAt": "2026-10-12T19:27:13.000Z"
+  },
+  "after": {
+    "verified": true,
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "containers": 5,
+    "volumes": [
+      "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+    ],
+    "baseMigrations": 119,
+    "startedAt": "2026-10-12T19:27:13.000Z"
+  },
+  "phaseBaselineAt": "2026-10-13T19:24:22.723Z",
+  "sessionsBefore": {
+    "count": 24,
+    "fingerprint": "895cb57682c6924906450dee054dcdbf",
+    "first": "2026-10-12T19:35:16.683477+00:00",
+    "last": "2026-10-12T21:34:50.495144+00:00",
+    "afterPhaseBaseline": 0
+  },
+  "sessionsAfter": {
+    "count": 24,
+    "fingerprint": "895cb57682c6924906450dee054dcdbf",
+    "first": "2026-10-12T19:35:16.683477+00:00",
+    "last": "2026-10-12T21:34:50.495144+00:00",
+    "afterPhaseBaseline": 0
+  },
+  "cleanup": "Each owned Auth-issued synthetic session locally signed out in finally; all preexisting sessions retained with identical row fingerprint; browser cookies cleared; anonymous endpoint 401 verified. No orders, schema changes or SQL mutations."
+}

@@ -1,0 +1,24 @@
+// Preparation only: creates reviewable SQL/template manifest, never invokes Docker/psql.
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+const d='docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/';const source='docs/estadisticas-v1/p04-t01c/';const hash=b=>createHash('sha256').update(b).digest('hex');
+const queries=[];for(const [name,file,reference]of [['catalog','catalog-select.sql','catalog-after.json'],['data','data-select.sql','data-after.json'],['extra','extra-select.sql','extra-after.json'],['privileges','privilege-audit.sql','privileges-after.json']]){
+ const raw=fs.readFileSync(source+file,'utf8');let sql=raw.trim();
+ if(name==='privileges'){assert.ok(sql.startsWith("BEGIN READ ONLY;SET LOCAL statement_timeout='15s';SET LOCAL lock_timeout='3s';"));assert.ok(sql.endsWith('ROLLBACK;'));sql=sql.slice("BEGIN READ ONLY;SET LOCAL statement_timeout='15s';SET LOCAL lock_timeout='3s';".length,-'ROLLBACK;'.length).trim();}
+ assert.ok(sql.startsWith('SELECT json_build_object('));assert.ok(sql.endsWith(';'));assert.ok(!/\b(?:INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|TRUNCATE|COMMIT|COPY|CALL|DO|pg_sleep|set_config|dblink)\b/i.test(sql));
+ assert.ok(fs.existsSync(source+reference),reference);
+ queries.push({name,sql,sourcePath:source+file,sourceSha256:hash(raw),derivedSha256:hash(sql),referencePath:source+reference,referenceSha256:hash(fs.readFileSync(source+reference)),comparisonKeys:name==='catalog'?['functions','policies','indexes','constraints','counts','profileFingerprint','ledger']:name==='privileges'?['functions','newConfigAbsent','schemaUsage','originalSummary','roleFlags','sourceRls','readOnly']:null});
+}
+queries.push({name:'metadata',sql:`SELECT json_build_object('database',current_database(),'user',current_user,'serverVersion',current_setting('server_version'),'serverVersionNum',current_setting('server_version_num'),'serverAddress',inet_server_addr(),'serverPort',inet_server_port(),'readOnly',current_setting('transaction_read_only'),'isolation',current_setting('transaction_isolation'),'timezone',current_setting('TimeZone'),'dateStyle',current_setting('DateStyle'),'control',(SELECT row_to_json(s) FROM pg_catalog.pg_control_system() s),'sourceRls',(SELECT json_agg(json_build_object('schema',n.nspname,'table',c.relname,'rls',c.relrowsecurity,'forceRls',c.relforcerowsecurity,'owner',pg_get_userbyid(c.relowner),'acl',c.relacl::text) ORDER BY n.nspname,c.relname) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relname IN ('profiles','businesses','business_settings','orders','order_items','order_financials','finance_audit_events','store_sessions','store_session_statistics_snapshots','business_statistics_state','order_item_statistics_snapshots','order_statistics_completions','order_statistics_completion_items','products','categories','statistics_v1_effective_facts')));`,comparisonKeys:null});
+const errorGate="\n\\if :ERROR\nROLLBACK;\n\\quit 3\n\\endif\n";
+const identity=`SELECT ((current_database()='postgres') AND (current_user='postgres') AND count(*)=1 AND coalesce(bool_and(token=:'expected_token'),false)) AS trusted_identity FROM statistics_test_environment.identity WHERE singleton`;
+const identityGate=identity+'\n\\gset'+errorGate+'\\if :trusted_identity\n\\else\nROLLBACK;\n\\quit 4\n\\endif\n';
+const ledgerGate="SELECT count(*)=124 AS trusted_ledger FROM supabase_migrations.schema_migrations\n\\gset"+errorGate+'\\if :trusted_ledger\n\\else\nROLLBACK;\n\\quit 5\n\\endif\n';
+const sql=String.raw`\set ON_ERROR_STOP off
+\set VERBOSITY sqlstate
+\pset format unaligned
+\pset tuples_only on
+BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY;
+`+errorGate+"SET LOCAL statement_timeout='15s';"+errorGate+"SET LOCAL lock_timeout='3s';"+errorGate+"SET LOCAL TIME ZONE 'UTC';"+errorGate+"SET LOCAL DateStyle='ISO, YMD';"+errorGate+"SET LOCAL search_path=pg_catalog,public;"+errorGate+identityGate+ledgerGate+queries.map(q=>"\\echo RESULT_"+q.name+'\n'+q.sql+errorGate).join('\n')+'ROLLBACK;\n'+errorGate;
+fs.writeFileSync(d+'verification.proposed.psql',sql);
+fs.writeFileSync(d+'readonly-query-manifest.json',JSON.stringify({at:new Date().toISOString(),status:'PREPARED_NOT_EXECUTED',project:'orderops-statistics-v1-test-74718de66a41',queryFileSha256:hash(sql),identityGate:'Server-side equality to private token, exact database/user, exactly one marker; token substituted in memory only',ledgerGate:124,queries,sideEffectingFunctionsInvoked:false,transaction:'REPEATABLE READ READ ONLY + ROLLBACK',timeout:'15s statement / 3s lock',referencePolicy:'Strict equality; differences never update references automatically'},null,2)+'\n');
+console.log(JSON.stringify({result:'PREPARED_ONLY',queries:queries.length,sha256:hash(sql),sqlConnections:0}));

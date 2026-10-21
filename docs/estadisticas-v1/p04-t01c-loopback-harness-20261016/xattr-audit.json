@@ -1,0 +1,339 @@
+{
+  "at": "2026-10-16T13:38:07.930Z",
+  "result": "PASS_VISIBLE_ATTRIBUTES_ABSENT",
+  "results": [
+    {
+      "kind": "db",
+      "rows": [
+        {
+          "path": "/etc/postgresql-custom/pgsodium_root.key",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/etc/postgresql.schema.sql",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/tmp/orderops-estadisticas-recovered.dump",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/etc",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/etc/postgresql",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/etc/postgresql-custom",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/etc/postgresql/postgresql.conf",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/run",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/run/postgresql",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/tmp",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/var",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/var/lib",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/var/lib/postgresql",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        }
+      ],
+      "allEnumerated": true,
+      "allZero": true,
+      "attributeValuesRead": false,
+      "limitations": "Kernel listxattr visibility for container-root current capabilities; not a forensic proof about hidden unsupported namespaces"
+    },
+    {
+      "kind": "kong",
+      "rows": [
+        {
+          "path": "/home/kong/custom_nginx.template",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/home/kong/kong.yml",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/home/kong/localhost.crt",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/home/kong/localhost.key",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/.kong_env",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/client_body_temp",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/fastcgi_temp",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/logs",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/nginx-kong-stream.conf",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/nginx-kong.conf",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/nginx.conf",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/pids",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/proxy_temp",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/scgi_temp",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/ssl",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/ssl/admin-kong-default-ecdsa.crt",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/ssl/admin-kong-default-ecdsa.key",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/ssl/admin-kong-default.crt",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/ssl/admin-kong-default.key",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/ssl/ffdhe2048.pem",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong/uwsgi_temp",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 0,
+          "returnedBytes": 0,
+          "sizeChanged": false,
+          "status": "OK"
+        },
+        {
+          "path": "/home",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 46,
+          "returnedBytes": 0,
+          "sizeChanged": true,
+          "status": "OK"
+        },
+        {
+          "path": "/home/kong",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 23,
+          "returnedBytes": 0,
+          "sizeChanged": true,
+          "status": "OK"
+        },
+        {
+          "path": "/usr",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 46,
+          "returnedBytes": 0,
+          "sizeChanged": true,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 46,
+          "returnedBytes": 0,
+          "sizeChanged": true,
+          "status": "OK"
+        },
+        {
+          "path": "/usr/local/kong",
+          "count": 0,
+          "posixAclPresent": false,
+          "advertisedBytes": 23,
+          "returnedBytes": 0,
+          "sizeChanged": true,
+          "status": "OK"
+        }
+      ],
+      "allEnumerated": true,
+      "allZero": true,
+      "attributeValuesRead": false,
+      "limitations": "Kernel listxattr visibility for container-root current capabilities; not a forensic proof about hidden unsupported namespaces"
+    }
+  ],
+  "sql": 0,
+  "containerFilesWritten": 0,
+  "packagesInstalled": 0
+}

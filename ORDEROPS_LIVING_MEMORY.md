@@ -2153,3 +2153,12 @@ Al registrar un cambio, incluir:
 - **[Ops]** Commit `3bd26ff` publicado en `main`; Vercel production `dpl_DPv6mEwxE6UsaS5pMec3TZME35V2` Ready y alias `https://orderops.vercel.app` smokeado con catálogo/checkout HTTP 200.
 - QA aceptada: Android/Chrome físico, interacción MEDIUM/LARGE, screen reader y activación real de Maps (key/billing/APIs/restricciones) pendientes.
 - Breaking: no — sin DB, migraciones, RLS, RPC, paquetes ni pedidos reales; rollback no ejecutado.
+
+
+### 2026-10-14 — Estadísticas: deuda de rendimiento y descubrimiento Phase04
+
+El propietario aceptó P03-F.4C MIXED_EVIDENCE y suspendió la optimización avanzada. La RPC pública original continúa como referencia activa en el último catálogo aislado; A+B y D1 siguen privados no adoptados. C permanece diseñado y no instalado (SHA-256 7d05e3987695f8bfc0e2477d74a38566269c7b6992682e58dbc4c34032f49bb6). F.5B no autorizada; deuda y metas p95 se retoman solo con permiso y staging representativo sintético, nunca producción como laboratorio.
+
+Phase03 no se declara cerrada: menú oculto no sustituye gate server de publicación default-closed; faltan E2E persistido no vacío, build production aislado, refresh/expiry y accesibilidad completa, además de integración efectiva con Cursor. Productos Phase04 cuenta con descubrimiento/plan, no implementación autorizada. P-V01–P-V10 vinculantes y opción A ratificada: sin Evolución del producto, series/comparaciones individuales, consultas dedicadas ni espacio vacío reservado. Brechas en unidades/provenance de categorías, denominadores y atribución financiera; no repartir descuentos ni agrupar por nombre.
+
+Referencias propias: docs/estadisticas-v1/PERFORMANCE_DEBT.md, FUNCTIONAL_READINESS.md, PHASE04_DATA_CONTRACT_AUDIT.md, PHASE04_IMPLEMENTATION_PLAN.md y PROGRESS.md. Auditoría documental offline y cambios de memoria solo append; sin SQL, datos reales, adopción, integración ni commits. Veredicto actual BLOCKED para cierre/implementación íntegra; esperar autorización. Phase05 no iniciada.

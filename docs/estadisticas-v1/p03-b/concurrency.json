@@ -1,0 +1,22 @@
+{
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "results": {
+    "concurrency": {
+      "status": "PASS",
+      "at": "2026-10-13T13:20:59.997Z",
+      "bundleHash": "2152970fbc81c576e88614682965c4f38091044c3995eaa3fc6687ca9cd02c99",
+      "details": [
+        "two independent PostgreSQL connections",
+        "complete/complete:1 cycle",
+        "reopen/recomplete:2 cycles",
+        "agreement/completion:3 cycles",
+        "close/completion:4 cycles",
+        "exactly one active and unique cycles",
+        "real observed lock waits",
+        "real create_order vs transition_order_status stock schedule",
+        "final stock19 and exactly one restock ledger",
+        "isolated fixtures cleaned after sessions"
+      ]
+    }
+  }
+}

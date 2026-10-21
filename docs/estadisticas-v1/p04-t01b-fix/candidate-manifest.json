@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-14T15:51:46.469Z",
+  "immutableSource": "docs/estadisticas-v1/p04-t01a-1/candidate-products-reviewed.sql",
+  "immutableSourceSha256": "a66ce3ea73bf4a4421c60b77376914f232b4470d41df7d661ee38142c4a29ba8",
+  "candidate": "docs/estadisticas-v1/p04-t01b-fix/candidate-products-fixed.sql",
+  "candidateSha256": "57395a7920d95cf63c1b67fb8191e40272a26aeb445a4abe7bec4d822b99c2c1",
+  "originalKeyExpression": "v_key:=md5(v_business::text||p_period||v_start::text||v_end::text||p_product_sort||v_revision||v_timezone||v_now::text);",
+  "canonicalKeyExpression": "v_key:=md5(v_business::text||p_period||to_char(v_start::timestamp,'YYYY-MM-DD')||to_char(v_end::timestamp,'YYYY-MM-DD')||p_product_sort||v_revision||v_timezone||to_char(v_now at time zone 'UTC','YYYY-MM-DD\"T\"HH24:MI:SS.US\"Z\"'));",
+  "originalPendingExpression": "select round(sum(current_agreement),2)::text from facts where effective_sales is null",
+  "nonfinitePendingExpression": "select case when bool_or(current_agreement::text in ('NaN','Infinity','-Infinity')) then null else round(sum(current_agreement),2)::text end from facts where effective_sales is null",
+  "onlyChanges": [
+    "SQL-05 requestKey serialization",
+    "SQL-07 pendingAgreedTotal projection"
+  ],
+  "decoderChanged": false
+}

@@ -1,0 +1,226 @@
+{
+  "at": "2026-10-16T13:42:37.065Z",
+  "phase": "P04-T01C_FINAL_LOOPBACK_PREPARATION",
+  "verdict": "BLOCKED",
+  "preparation": "DRY_RUN_AND_OFFLINE_TESTS_COMPLETED",
+  "activeIdReplacementApproved": false,
+  "executionAuthorized": false,
+  "mutationsExecutable": false,
+  "dryRun": {
+    "result": "PASS_DRY_RUN_ONLY",
+    "runId": "2026-10-16T13-30-25-733Z-ae781e38",
+    "diffEntries": 47,
+    "capturedFiles": 17,
+    "archiveBytes": 1556480,
+    "payloads": [
+      {
+        "kind": "db",
+        "oldId": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "payloadSha256": "8ae80d0a2a32ff16da6ae10edc869e9f01b435d6ae336a06c1c04664d77f1a60",
+        "image": "sha256:4255b662ba3d774105cb34f623e410a3d7a860b68408ac6810f7e7e4b9781d5a"
+      },
+      {
+        "kind": "kong",
+        "oldId": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "payloadSha256": "8c1bdda35730b04c3aa01318670754157792a4ac770f8c683d899285d3d930f6",
+        "image": "sha256:1b53405d8680a09d6f44494b7990bf7da2ea43f84a258c59717d4539abf09f6d"
+      }
+    ],
+    "privateBundle": {
+      "path": "supabase/statistics-v1-test/.runtime/loopback-bundles/2026-10-16T13-30-25-733Z-ae781e38/sealed.json",
+      "sha256": "f988c43bbc968bc95c0194b511afef28efe0154611ec827a9b93072bd1539508",
+      "format": "AES-256-GCM+DPAPI-CurrentUser.v1",
+      "plaintextWritten": false,
+      "dpapiRoundtrip": true,
+      "archiveBytes": 1556480
+    }
+  },
+  "adversarialTests": 46,
+  "replay": "STATIC_ONLY; literal overwrites match; DB append contains comments/blanks, byte hash change expected",
+  "attributes": "No visible attrs/ACL returned on 39 paths; no capabilities reported on 17 files; visibility/size-change caveat retained",
+  "checkpoint": "PROPOSED_NOT_APPLIED; new IDs null; historical references unchanged",
+  "futureExecutor": "Not enabled; exact declarative request plan prepared, stopped recapture adapter and mutation release require subsequent review",
+  "remainingGates": [
+    "Explicit active ID replacement/detach/window authorization",
+    "Reviewed and enabled execution/stopped-recapture adapter; no automatic lifecycle",
+    "Fresh dry-run, private unseal and recovery backup validation",
+    "Stopped immutable layer checkpoint and verified restoration before start",
+    "Network localhost/LAN IPv4/IPv6 verification",
+    "Separately authorized READ ONLY logical consistency checks"
+  ],
+  "attempts": {
+    "dryRunFailures": [
+      "failure-1792156969317.json",
+      "failure-1792157019689.json",
+      "failure-1792157107525.json"
+    ],
+    "xattrInitialResultsPreserved": true,
+    "restrictedDpapiAttemptFailedWithoutLeak": true
+  },
+  "preservation": "preservation.json",
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/adversarial-results.json",
+      "sha256": "f76689c332948253d05bd77747f0c2e7a1bbea392cf2959ceac7830c64975d10",
+      "bytes": 3612,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/adversarial.verify.mjs",
+      "sha256": "c982d4bf7ead6b7969c049b5b936f5374afd5a90333eba1d1413ec1deb690067",
+      "bytes": 7572,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/capability-audit.json",
+      "sha256": "019bc990dfb01688c35e063948b62c8c8a6accfd671315057fcad4027badc96f",
+      "bytes": 1292,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/checkpoint.proposed.json",
+      "sha256": "91a1b306b43ef32ce19f89d5dc6d9ad3329a5464e9eebcf3bae74eb4565b0708",
+      "bytes": 1065,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/dry-run-2026-10-16T13-30-25-733Z-ae781e38.json",
+      "sha256": "90c55bae9de4e7f869b56a3c8901dfcef748cd3a381ab11fd8beaa24891d1fb8",
+      "bytes": 23984,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/dry-run-first-success.json",
+      "sha256": "067ae3cbc1637db2cf3965e5bfa6c0d4e6a771268f9f7e1d34f1716c472483f7",
+      "bytes": 23984,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/dry-run.json",
+      "sha256": "90c55bae9de4e7f869b56a3c8901dfcef748cd3a381ab11fd8beaa24891d1fb8",
+      "bytes": 23984,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/extended-metadata-availability.json",
+      "sha256": "730e16fc3845cf12342fc36e69a08e1136e0c6b527556c85a2516e1f12975d5d",
+      "bytes": 519,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/failure-1792156969317.json",
+      "sha256": "66464f71fce3695a21ddbfbbafeac3f63044c712b2f9bd7c6b5cb10734ac6ea0",
+      "bytes": 185,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/failure-1792157019689.json",
+      "sha256": "dd53e3feeeec37889ca954cc434e499faf4ecf802d3cf89409b72cdac26e7268",
+      "bytes": 218,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/failure-1792157107525.json",
+      "sha256": "5bc0ab92806183a5c249a2c3b7a4723de7ea52bba343142d9e93564fe1f54ff6",
+      "bytes": 198,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/file-baseline.json",
+      "sha256": "c4e30ab43248648c09a74c25417a2f1d45d5cf1d4b1bd57ada15ee02ac87d6e2",
+      "bytes": 482744,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/finalize-evidence.mjs",
+      "sha256": "03c85900790d23ef174975e07fa7dce46210c4453a59a1f6cca5bf810826d768",
+      "bytes": 5320,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/harness.mjs",
+      "sha256": "1aa9369e78c818950a4b1c89dba392849a1aa905863612872f7aa1a64ecc6eb6",
+      "bytes": 10607,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/informe.md",
+      "sha256": "c7c1c49b85fa3d6b33313fd5888b0b8db86848d93b2b1059b065cb1f0576acdf",
+      "bytes": 8319,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/intervention-and-rollback.md",
+      "sha256": "3a336b3d5c2bd4a2e133ad3321b0a2b352cf9a7d1e4e0db00f18aa5da9976ccf",
+      "bytes": 10051,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/layers-and-replay.md",
+      "sha256": "d49bb3d14b89f887b60d71a312ba112ba37ea9313dc87569eadffe7365456025",
+      "bytes": 5428,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/policy.mjs",
+      "sha256": "72fe520f9d212aea0e75c5c7c036e24478827f9eaa578f03a32568ac0df5ac41",
+      "bytes": 8922,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/prepare-request-plan.mjs",
+      "sha256": "c19bc9514ed3e080557ac19743f930a4f146a282091f50fa292db1588bc031fb",
+      "bytes": 4686,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/preservation.json",
+      "sha256": "adb7e978ed27fe65c28429170afc844cc3d9f150e2508bcf4f5c9e532abc5ce0",
+      "bytes": 800,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/replay-analysis.json",
+      "sha256": "d2e6147a73669079c6e560f28496153548462e0fa74e06de3517265958b78347",
+      "bytes": 4532,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/replay-audit.mjs",
+      "sha256": "ce72c42cac5e0b99123f6de9ca0176b1af73cbb43fc3fccc657a5e7eb0036014",
+      "bytes": 4917,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/request-plan.proposed.json",
+      "sha256": "4582cf1a7ec012c5b0f7b49f8da5cda44dcac88491357ec88937ee0620ee16e8",
+      "bytes": 8183,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/xattr-audit-first-attempt.json",
+      "sha256": "1f9a786b053f6d38e055bd0ea30646a154eb9e062764d346b0c700cd77f70efe",
+      "bytes": 6016,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/xattr-audit-second-attempt.json",
+      "sha256": "db63e8856d383431d69ea7920bc1f1146de613e45953121f39cffed81d60d1f4",
+      "bytes": 6016,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/xattr-audit.json",
+      "sha256": "1e156462dc3b90419c04d59977a7b83c0d7c4408c9796b510110de634a897429",
+      "bytes": 9025,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/xattrs-readonly.mjs",
+      "sha256": "f6ef70a6fba45cb0c71e2c892a5cb14f35aa2e5b492e2ce301d6c4be435ea266",
+      "bytes": 3206,
+      "kind": "created"
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

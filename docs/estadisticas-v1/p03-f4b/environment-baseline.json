@@ -1,0 +1,1415 @@
+{
+  "at": "2026-10-14T02:27:29.689Z",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "branch": "codex/estadisticas-v1",
+  "preflight": "PASS",
+  "infrastructure": {
+    "at": "2026-10-14T02:26:10.625Z",
+    "operations": [
+      {
+        "name": "docker-version",
+        "at": "2026-10-14T02:26:24.881Z",
+        "status": "PASS",
+        "value": {
+          "Client": {
+            "Version": "29.1.3",
+            "ApiVersion": "1.52",
+            "DefaultAPIVersion": "1.52",
+            "GitCommit": "f52814d",
+            "GoVersion": "go1.25.5",
+            "Os": "windows",
+            "Arch": "amd64",
+            "BuildTime": "Fri Dec 12 14:51:52 2025",
+            "Context": "desktop-linux"
+          },
+          "Server": {
+            "Platform": {
+              "Name": "Docker Desktop 4.56.0 (214940)"
+            },
+            "Version": "29.1.3",
+            "ApiVersion": "1.52",
+            "MinAPIVersion": "1.44",
+            "Os": "linux",
+            "Arch": "amd64",
+            "Components": [
+              {
+                "Name": "Engine",
+                "Version": "29.1.3",
+                "Details": {
+                  "ApiVersion": "1.52",
+                  "Arch": "amd64",
+                  "BuildTime": "Fri Dec 12 14:49:51 2025",
+                  "Experimental": "false",
+                  "GitCommit": "fbf3ed2",
+                  "GoVersion": "go1.25.5",
+                  "KernelVersion": "6.18.54.1-microsoft-standard-WSL2",
+                  "MinAPIVersion": "1.44",
+                  "Os": "linux"
+                }
+              },
+              {
+                "Name": "containerd",
+                "Version": "v2.2.1",
+                "Details": {
+                  "GitCommit": "dea7da592f5d1d2b7755e3a161be07f43fad8f75"
+                }
+              },
+              {
+                "Name": "runc",
+                "Version": "1.3.4",
+                "Details": {
+                  "GitCommit": "v1.3.4-0-gd6d73eb8"
+                }
+              },
+              {
+                "Name": "docker-init",
+                "Version": "0.19.0",
+                "Details": {
+                  "GitCommit": "de40ad0"
+                }
+              }
+            ],
+            "GitCommit": "fbf3ed2",
+            "GoVersion": "go1.25.5",
+            "KernelVersion": "6.18.54.1-microsoft-standard-WSL2",
+            "BuildTime": "2025-12-12T14:49:51.000000000+00:00"
+          }
+        }
+      },
+      {
+        "name": "docker-engine",
+        "at": "2026-10-14T02:26:25.452Z",
+        "status": "PASS",
+        "value": {
+          "serverVersion": "29.1.3",
+          "operatingSystem": "Docker Desktop (containerized)",
+          "kernel": "6.18.54.1-microsoft-standard-WSL2",
+          "cpus": 4,
+          "memoryBytes": 8269664256,
+          "storageDriver": "overlayfs",
+          "cgroupVersion": "2",
+          "dockerRootDir": "/var/lib/docker",
+          "containers": 41,
+          "running": 26
+        }
+      },
+      {
+        "name": "postgres-container-limits-storage",
+        "at": "2026-10-14T02:26:25.559Z",
+        "status": "PASS",
+        "value": {
+          "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+          "image": "public.ecr.aws/supabase/postgres:17.6.1.071",
+          "state": {
+            "running": true,
+            "health": "healthy",
+            "oomKilled": false,
+            "startedAt": "2026-10-13T13:07:49.678739017Z",
+            "restarts": 0
+          },
+          "limits": {
+            "memory": 0,
+            "memorySwap": 0,
+            "nanoCpus": 0,
+            "cpuQuota": 0,
+            "cpuPeriod": 0,
+            "cpusetCpus": "",
+            "blkioWeight": 0
+          },
+          "mounts": [
+            {
+              "type": "volume",
+              "name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+              "source": "/var/lib/docker/volumes/supabase_db_orderops-statistics-v1-test-74718de66a41/_data",
+              "destination": "/var/lib/postgresql/data",
+              "driver": "local",
+              "rw": true
+            }
+          ]
+        }
+      },
+      {
+        "name": "owned-volumes",
+        "at": "2026-10-14T02:26:25.660Z",
+        "status": "PASS",
+        "value": [
+          {
+            "name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+            "driver": "local",
+            "mountpoint": "/var/lib/docker/volumes/supabase_db_orderops-statistics-v1-test-74718de66a41/_data",
+            "labels": {
+              "com.docker.compose.project": "orderops-statistics-v1-test-74718de66a41",
+              "com.supabase.cli.project": "orderops-statistics-v1-test-74718de66a41"
+            },
+            "options": null
+          },
+          {
+            "name": "supabase_storage_orderops-statistics-v1-test-74718de66a41",
+            "driver": "local",
+            "mountpoint": "/var/lib/docker/volumes/supabase_storage_orderops-statistics-v1-test-74718de66a41/_data",
+            "labels": {
+              "com.docker.compose.project": "orderops-statistics-v1-test-74718de66a41",
+              "com.supabase.cli.project": "orderops-statistics-v1-test-74718de66a41"
+            },
+            "options": null
+          }
+        ]
+      },
+      {
+        "name": "wsl-version",
+        "at": "2026-10-14T02:26:25.751Z",
+        "status": "PASS",
+        "value": "Versi�n de WSL: 3.0.3.0\r\nVersi�n de kernel: 6.18.54.1-1\r\nVersi�n de WSLg: 1.0.79\r\nVersi�n de MSRDC: 1.2.7391\r\nVersi�n de Direct3D: 1.611.1-81528511\r\nVersi�n de DXCore: 10.0.26100.1-240331-1435.ge-release\r\nVersi�n de Windows: 10.0.19045.7417\r\n"
+      },
+      {
+        "name": "wsl-distributions-status",
+        "at": "2026-10-14T02:26:25.932Z",
+        "status": "PASS",
+        "value": " NAME              STATE           VERSION\r\n* Ubuntu            Running         2\r\n  docker-desktop    Running         2\r\n"
+      },
+      {
+        "name": "host-capacity",
+        "at": "2026-10-14T02:26:30.839Z",
+        "status": "PASS",
+        "value": {
+          "LogicalProcessors": 4,
+          "TotalVisibleMemoryKiB": 16659772,
+          "FreePhysicalMemoryKiB": 4414792,
+          "TotalVirtualMemoryKiB": 30817932,
+          "FreeVirtualMemoryKiB": 5853284,
+          "LastBootUpTime": "/Date(1791346673468)/"
+        }
+      },
+      {
+        "name": "docker-desktop-settings-selected",
+        "at": "2026-10-14T02:26:30.840Z",
+        "status": "PASS",
+        "value": {
+          "path": "C:\\Users\\Oasis Desktop\\AppData\\Roaming\\Docker\\settings-store.json",
+          "sha256": "34c92a3a968f63de3f7d6e6d53c1724475ad29f9cafc961b2ca29129a9a4198c",
+          "selected": {}
+        }
+      },
+      {
+        "name": "wslconfig",
+        "at": "2026-10-14T02:26:30.840Z",
+        "status": "PASS",
+        "value": {
+          "present": false
+        }
+      },
+      {
+        "name": "container-linux-storage",
+        "at": "2026-10-14T02:26:31.312Z",
+        "status": "PASS",
+        "value": "Filesystem     Type  1K-blocks     Used Available Use% Mounted on\n/dev/sde       ext4 1055762868 34025500 968033896   4% /var/lib/postgresql/data\n2073 3806 8:64 /data/docker/volumes/supabase_db_orderops-statistics-v1-test-74718de66a41/_data /var/lib/postgresql/data rw,relatime master:30 - ext4 /dev/sde rw\nMemTotal:        8075844 kB\nMemFree:           96296 kB\nMemAvailable:    3764288 kB\nBuffers:          605284 kB\nCached:          3435456 kB\nSwapCached:           40 kB\nActive:          1799748 kB\nInactive:        5414036 kB\nActive(anon):      77104 kB\nInactive(anon):  3526980 kB\nActive(file):    1722644 kB\nInactive(file):  1887056 kB\nUnevictable:          24 kB\nMlocked:              24 kB\nSwapTotal:       2097152 kB\nSwapFree:        2096688 kB\nDirty:               120 kB\nWriteback:             0 kB\nAnonPages:       3173368 kB\nMapped:          1318504 kB\nShmem:            431076 kB\nKReclaimable:     254680 kB\nSlab:             354328 kB\nSReclaimable:     254680 kB\nSUnreclaim:        99648 kB\nKernelStack:       16632 kB\nPageTables:        60976 kB\nSecPageTables:         0 kB\nNFS_Unstable:          0 kB\nBounce:                0 kB\nWritebackTmp:          0 kB\nCommitLimit:     6135072 kB\nCommitted_AS:    9187500 kB\nVmallocTotal:   34359738367 kB\nVmallocUsed:       46424 kB\nVmallocChunk:          0 kB\nPercpu:             3072 kB\nHardwareCorrupted:     0 kB\nAnonHugePages:      4096 kB\nShmemHugePages:        0 kB\nShmemPmdMapped:        0 kB\nFileHugePages:     26624 kB\nFilePmdMapped:         0 kB\nBalloon:               0 kB\nHugePages_Total:       0\nHugePages_Free:        0\nHugePages_Rsvd:        0\nHugePages_Surp:        0\nHugepagesize:       2048 kB\nHugetlb:               0 kB\nDirectMap4k:       66560 kB\nDirectMap2M:    16650240 kB\nFilename\t\t\t\tType\t\tSize\t\tUsed\t\tPriority\n/dev/sdc                                partition\t2097152\t\t464\t\t-2\nmax\n198393856\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\nmax 100000\nusage_usec 1854242267\nuser_usec 1632185364\nsystem_usec 222056902\nnice_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0\n8:32 rbytes=0 wbytes=8192 rios=0 wios=2 dbytes=0 dios=0\n8:64 rbytes=114741248 wbytes=65032192 rios=4728 wios=8682 dbytes=0 dios=0\nsome avg10=14.93 avg60=11.45 avg300=10.19 total=4586921139\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\nsome avg10=0.00 avg60=0.00 avg300=0.00 total=7943603\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=6692573\nsome avg10=1.91 avg60=1.77 avg300=0.83 total=394286033\nfull avg10=1.02 avg60=1.09 avg300=0.47 total=247166812"
+      },
+      {
+        "name": "postgres-settings",
+        "at": "2026-10-14T02:26:31.598Z",
+        "status": "PASS",
+        "value": [
+          {
+            "name": "default_statistics_target",
+            "setting": "100",
+            "unit": null,
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "effective_cache_size",
+            "setting": "16384",
+            "unit": "8kB",
+            "source": "configuration file",
+            "pendingRestart": false
+          },
+          {
+            "name": "hash_mem_multiplier",
+            "setting": "2",
+            "unit": null,
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "jit",
+            "setting": "on",
+            "unit": null,
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "jit_above_cost",
+            "setting": "100000",
+            "unit": null,
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "jit_inline_above_cost",
+            "setting": "500000",
+            "unit": null,
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "jit_optimize_above_cost",
+            "setting": "500000",
+            "unit": null,
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "jit_provider",
+            "setting": "llvmjit",
+            "unit": null,
+            "source": "configuration file",
+            "pendingRestart": false
+          },
+          {
+            "name": "lock_timeout",
+            "setting": "0",
+            "unit": "ms",
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "maintenance_work_mem",
+            "setting": "65536",
+            "unit": "kB",
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "max_parallel_workers",
+            "setting": "8",
+            "unit": null,
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "max_parallel_workers_per_gather",
+            "setting": "2",
+            "unit": null,
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "max_worker_processes",
+            "setting": "8",
+            "unit": null,
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "plan_cache_mode",
+            "setting": "auto",
+            "unit": null,
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "random_page_cost",
+            "setting": "4",
+            "unit": null,
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "seq_page_cost",
+            "setting": "1",
+            "unit": null,
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "server_version",
+            "setting": "17.6",
+            "unit": null,
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "shared_buffers",
+            "setting": "16384",
+            "unit": "8kB",
+            "source": "configuration file",
+            "pendingRestart": false
+          },
+          {
+            "name": "shared_preload_libraries",
+            "setting": "pg_stat_statements, pgaudit, plpgsql, plpgsql_check, pg_cron, pg_net, pgsodium, auto_explain, pg_tle, plan_filter, supabase_vault",
+            "unit": null,
+            "source": "configuration file",
+            "pendingRestart": false
+          },
+          {
+            "name": "statement_timeout",
+            "setting": "0",
+            "unit": "ms",
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "track_functions",
+            "setting": "none",
+            "unit": null,
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "track_io_timing",
+            "setting": "off",
+            "unit": null,
+            "source": "default",
+            "pendingRestart": false
+          },
+          {
+            "name": "work_mem",
+            "setting": "4096",
+            "unit": "kB",
+            "source": "default",
+            "pendingRestart": false
+          }
+        ]
+      },
+      {
+        "name": "postgres-io-waits",
+        "at": "2026-10-14T02:26:31.796Z",
+        "status": "PASS",
+        "value": {
+          "database": {
+            "datid": "5",
+            "datname": "postgres",
+            "numbackends": 5,
+            "xact_commit": 13784,
+            "xact_rollback": 79,
+            "blks_read": 1116,
+            "blks_hit": 37859532,
+            "tup_returned": 177123543,
+            "tup_fetched": 61401331,
+            "tup_inserted": 26744,
+            "tup_updated": 18493,
+            "tup_deleted": 113,
+            "conflicts": 0,
+            "temp_files": 0,
+            "temp_bytes": 0,
+            "deadlocks": 0,
+            "checksum_failures": null,
+            "checksum_last_failure": null,
+            "blk_read_time": 0,
+            "blk_write_time": 0,
+            "session_time": 66657676.459,
+            "active_time": 1592920.539,
+            "idle_in_transaction_time": 41020.186,
+            "sessions": 6645,
+            "sessions_abandoned": 0,
+            "sessions_fatal": 0,
+            "sessions_killed": 0,
+            "stats_reset": null
+          },
+          "io": [
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "bulkread",
+              "extends": null,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": null,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "client backend",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "bulkwrite",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "client backend",
+              "writeback_time": 0
+            },
+            {
+              "hits": 37873900,
+              "reads": 1139,
+              "fsyncs": 0,
+              "object": "relation",
+              "reuses": null,
+              "writes": 0,
+              "context": "normal",
+              "extends": 1074,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": 0,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "client backend",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "vacuum",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "client backend",
+              "writeback_time": 0
+            },
+            {
+              "hits": 233,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "temp relation",
+              "reuses": null,
+              "writes": 0,
+              "context": "normal",
+              "extends": 37,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": null,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "client backend",
+              "writeback_time": null
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "bulkread",
+              "extends": null,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": null,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "autovacuum launcher",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": 0,
+              "object": "relation",
+              "reuses": null,
+              "writes": 0,
+              "context": "normal",
+              "extends": null,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": 0,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": null,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "autovacuum launcher",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "bulkread",
+              "extends": null,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": null,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "autovacuum worker",
+              "writeback_time": 0
+            },
+            {
+              "hits": 158305,
+              "reads": 4,
+              "fsyncs": 0,
+              "object": "relation",
+              "reuses": null,
+              "writes": 0,
+              "context": "normal",
+              "extends": 245,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": 0,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "autovacuum worker",
+              "writeback_time": 0
+            },
+            {
+              "hits": 6100,
+              "reads": 2,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "vacuum",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "autovacuum worker",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "bulkread",
+              "extends": null,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": null,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "background worker",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "bulkwrite",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "background worker",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": 0,
+              "object": "relation",
+              "reuses": null,
+              "writes": 0,
+              "context": "normal",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": 0,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "background worker",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "vacuum",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "background worker",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "temp relation",
+              "reuses": null,
+              "writes": 0,
+              "context": "normal",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": null,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "background worker",
+              "writeback_time": null
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "bulkread",
+              "extends": null,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": null,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "walsender",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "bulkwrite",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "walsender",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": 0,
+              "object": "relation",
+              "reuses": null,
+              "writes": 0,
+              "context": "normal",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": 0,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "walsender",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "vacuum",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "walsender",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "temp relation",
+              "reuses": null,
+              "writes": 0,
+              "context": "normal",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": null,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "walsender",
+              "writeback_time": null
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "bulkread",
+              "extends": null,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": null,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "slotsync worker",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "bulkwrite",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "slotsync worker",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": 0,
+              "object": "relation",
+              "reuses": null,
+              "writes": 0,
+              "context": "normal",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": 0,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "slotsync worker",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "vacuum",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "slotsync worker",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "temp relation",
+              "reuses": null,
+              "writes": 0,
+              "context": "normal",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": null,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "slotsync worker",
+              "writeback_time": null
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "bulkread",
+              "extends": null,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": null,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "standalone backend",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "bulkwrite",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "standalone backend",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": 0,
+              "object": "relation",
+              "reuses": null,
+              "writes": 0,
+              "context": "normal",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": 0,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "standalone backend",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "vacuum",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "standalone backend",
+              "writeback_time": 0
+            },
+            {
+              "hits": null,
+              "reads": null,
+              "fsyncs": 0,
+              "object": "relation",
+              "reuses": null,
+              "writes": 0,
+              "context": "normal",
+              "extends": null,
+              "op_bytes": 8192,
+              "evictions": null,
+              "read_time": null,
+              "fsync_time": 0,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": null,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "background writer",
+              "writeback_time": 0
+            },
+            {
+              "hits": null,
+              "reads": null,
+              "fsyncs": 1949,
+              "object": "relation",
+              "reuses": null,
+              "writes": 2790,
+              "context": "normal",
+              "extends": null,
+              "op_bytes": 8192,
+              "evictions": null,
+              "read_time": null,
+              "fsync_time": 0,
+              "write_time": 0,
+              "writebacks": 2790,
+              "extend_time": null,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "checkpointer",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "bulkread",
+              "extends": null,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": null,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "startup",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "bulkwrite",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "startup",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": 0,
+              "object": "relation",
+              "reuses": null,
+              "writes": 0,
+              "context": "normal",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": 0,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "startup",
+              "writeback_time": 0
+            },
+            {
+              "hits": 0,
+              "reads": 0,
+              "fsyncs": null,
+              "object": "relation",
+              "reuses": 0,
+              "writes": 0,
+              "context": "vacuum",
+              "extends": 0,
+              "op_bytes": 8192,
+              "evictions": 0,
+              "read_time": 0,
+              "fsync_time": null,
+              "write_time": 0,
+              "writebacks": 0,
+              "extend_time": 0,
+              "stats_reset": "2026-10-13T13:08:20.266789+00:00",
+              "backend_type": "startup",
+              "writeback_time": 0
+            }
+          ],
+          "waits": [
+            {
+              "state": "active",
+              "waitType": null,
+              "wait": null,
+              "count": 1
+            },
+            {
+              "state": "idle",
+              "waitType": "Client",
+              "wait": "ClientRead",
+              "count": 2
+            },
+            {
+              "state": null,
+              "waitType": "Extension",
+              "wait": "Extension",
+              "count": 2
+            }
+          ]
+        }
+      },
+      {
+        "name": "host-performance-0",
+        "at": "2026-10-14T02:26:49.777Z",
+        "status": "PASS",
+        "value": {
+          "ProcessorPercent": null,
+          "ProcessorQueue": null,
+          "AvailableMiB": null,
+          "PagesPerSec": null,
+          "DiskBytesPerSec": null,
+          "DiskQueueLength": null,
+          "TopProcessesCumulativeCPU": [
+            {
+              "Name": "Cursor",
+              "Id": 18104,
+              "CPU": 7484.796875,
+              "WorkingSet64": 627744768
+            },
+            {
+              "Name": "com.docker.backend",
+              "Id": 5412,
+              "CPU": 4039.171875,
+              "WorkingSet64": 166928384
+            },
+            {
+              "Name": "Docker Desktop",
+              "Id": 1440,
+              "CPU": 3267.9375,
+              "WorkingSet64": 165072896
+            },
+            {
+              "Name": "Cursor",
+              "Id": 13320,
+              "CPU": 2616.21875,
+              "WorkingSet64": 214134784
+            },
+            {
+              "Name": "ChatGPT",
+              "Id": 7668,
+              "CPU": 1862.59375,
+              "WorkingSet64": 752779264
+            },
+            {
+              "Name": "ChatGPT",
+              "Id": 20108,
+              "CPU": 1833.3125,
+              "WorkingSet64": 304209920
+            },
+            {
+              "Name": "msedge",
+              "Id": 21484,
+              "CPU": 1758.75,
+              "WorkingSet64": 249290752
+            },
+            {
+              "Name": "Cursor",
+              "Id": 21720,
+              "CPU": 1572.171875,
+              "WorkingSet64": 170754048
+            },
+            {
+              "Name": "Cursor",
+              "Id": 3496,
+              "CPU": 1570.296875,
+              "WorkingSet64": 206196736
+            },
+            {
+              "Name": "Cursor",
+              "Id": 15392,
+              "CPU": 1218.796875,
+              "WorkingSet64": 472440832
+            },
+            {
+              "Name": "codex",
+              "Id": 17176,
+              "CPU": 835.75,
+              "WorkingSet64": 235806720
+            },
+            {
+              "Name": "msedge",
+              "Id": 9648,
+              "CPU": 755.1875,
+              "WorkingSet64": 9887744
+            }
+          ]
+        }
+      },
+      {
+        "name": "container-pressure-0",
+        "at": "2026-10-14T02:26:50.010Z",
+        "status": "PASS",
+        "value": "usage_usec 1854532798\nuser_usec 1632376658\nsystem_usec 222156140\nnice_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n8:32 rbytes=0 wbytes=8192 rios=0 wios=2 dbytes=0 dios=0\n8:64 rbytes=114741248 wbytes=65032192 rios=4728 wios=8682 dbytes=0 dios=0\nsome avg10=9.15 avg60=10.35 avg300=10.01 total=4588483646\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\nsome avg10=0.00 avg60=0.00 avg300=0.00 total=7943603\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=6692573\nsome avg10=1.07 avg60=1.59 avg300=0.85 total=394452014\nfull avg10=0.34 avg60=0.93 avg300=0.48 total=247224223"
+      },
+      {
+        "name": "host-performance-1",
+        "at": "2026-10-14T02:27:02.960Z",
+        "status": "PASS",
+        "value": {
+          "ProcessorPercent": null,
+          "ProcessorQueue": null,
+          "AvailableMiB": null,
+          "PagesPerSec": null,
+          "DiskBytesPerSec": null,
+          "DiskQueueLength": null,
+          "TopProcessesCumulativeCPU": [
+            {
+              "Name": "Cursor",
+              "Id": 18104,
+              "CPU": 7484.921875,
+              "WorkingSet64": 624410624
+            },
+            {
+              "Name": "com.docker.backend",
+              "Id": 5412,
+              "CPU": 4041.734375,
+              "WorkingSet64": 172421120
+            },
+            {
+              "Name": "Docker Desktop",
+              "Id": 1440,
+              "CPU": 3269.078125,
+              "WorkingSet64": 173346816
+            },
+            {
+              "Name": "Cursor",
+              "Id": 13320,
+              "CPU": 2616.296875,
+              "WorkingSet64": 214777856
+            },
+            {
+              "Name": "ChatGPT",
+              "Id": 7668,
+              "CPU": 1862.796875,
+              "WorkingSet64": 753401856
+            },
+            {
+              "Name": "ChatGPT",
+              "Id": 20108,
+              "CPU": 1833.375,
+              "WorkingSet64": 304148480
+            },
+            {
+              "Name": "msedge",
+              "Id": 21484,
+              "CPU": 1758.75,
+              "WorkingSet64": 249131008
+            },
+            {
+              "Name": "Cursor",
+              "Id": 21720,
+              "CPU": 1572.25,
+              "WorkingSet64": 171044864
+            },
+            {
+              "Name": "Cursor",
+              "Id": 3496,
+              "CPU": 1570.359375,
+              "WorkingSet64": 206200832
+            },
+            {
+              "Name": "Cursor",
+              "Id": 15392,
+              "CPU": 1218.875,
+              "WorkingSet64": 472440832
+            },
+            {
+              "Name": "codex",
+              "Id": 17176,
+              "CPU": 836,
+              "WorkingSet64": 235896832
+            },
+            {
+              "Name": "msedge",
+              "Id": 9648,
+              "CPU": 755.1875,
+              "WorkingSet64": 9887744
+            }
+          ]
+        }
+      },
+      {
+        "name": "container-pressure-1",
+        "at": "2026-10-14T02:27:03.131Z",
+        "status": "PASS",
+        "value": "usage_usec 1854618789\nuser_usec 1632427717\nsystem_usec 222191072\nnice_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n8:32 rbytes=0 wbytes=8192 rios=0 wios=2 dbytes=0 dios=0\n8:64 rbytes=114741248 wbytes=65036288 rios=4728 wios=8683 dbytes=0 dios=0\nsome avg10=9.09 avg60=9.96 avg300=9.93 total=4589482119\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\nsome avg10=0.00 avg60=0.00 avg300=0.00 total=7943603\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=6692573\nsome avg10=0.97 avg60=1.53 avg300=0.87 total=394644277\nfull avg10=0.50 avg60=0.90 avg300=0.49 total=247349290"
+      },
+      {
+        "name": "host-performance-2",
+        "at": "2026-10-14T02:27:16.564Z",
+        "status": "PASS",
+        "value": {
+          "ProcessorPercent": null,
+          "ProcessorQueue": null,
+          "AvailableMiB": null,
+          "PagesPerSec": null,
+          "DiskBytesPerSec": null,
+          "DiskQueueLength": null,
+          "TopProcessesCumulativeCPU": [
+            {
+              "Name": "Cursor",
+              "Id": 18104,
+              "CPU": 7484.953125,
+              "WorkingSet64": 629121024
+            },
+            {
+              "Name": "com.docker.backend",
+              "Id": 5412,
+              "CPU": 4042.328125,
+              "WorkingSet64": 166322176
+            },
+            {
+              "Name": "Docker Desktop",
+              "Id": 1440,
+              "CPU": 3271.5,
+              "WorkingSet64": 164147200
+            },
+            {
+              "Name": "Cursor",
+              "Id": 13320,
+              "CPU": 2616.46875,
+              "WorkingSet64": 214192128
+            },
+            {
+              "Name": "ChatGPT",
+              "Id": 7668,
+              "CPU": 1863.171875,
+              "WorkingSet64": 754049024
+            },
+            {
+              "Name": "ChatGPT",
+              "Id": 20108,
+              "CPU": 1833.40625,
+              "WorkingSet64": 303812608
+            },
+            {
+              "Name": "msedge",
+              "Id": 21484,
+              "CPU": 1759.140625,
+              "WorkingSet64": 261939200
+            },
+            {
+              "Name": "Cursor",
+              "Id": 21720,
+              "CPU": 1572.265625,
+              "WorkingSet64": 171294720
+            },
+            {
+              "Name": "Cursor",
+              "Id": 3496,
+              "CPU": 1570.5,
+              "WorkingSet64": 205561856
+            },
+            {
+              "Name": "Cursor",
+              "Id": 15392,
+              "CPU": 1218.96875,
+              "WorkingSet64": 472875008
+            },
+            {
+              "Name": "codex",
+              "Id": 17176,
+              "CPU": 836.234375,
+              "WorkingSet64": 235962368
+            },
+            {
+              "Name": "msedge",
+              "Id": 9648,
+              "CPU": 755.1875,
+              "WorkingSet64": 9887744
+            }
+          ]
+        }
+      },
+      {
+        "name": "container-pressure-2",
+        "at": "2026-10-14T02:27:16.740Z",
+        "status": "PASS",
+        "value": "usage_usec 1854731848\nuser_usec 1632481938\nsystem_usec 222249910\nnice_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n8:32 rbytes=0 wbytes=8192 rios=0 wios=2 dbytes=0 dios=0\n8:64 rbytes=114741248 wbytes=65036288 rios=4728 wios=8683 dbytes=0 dios=0\nsome avg10=16.51 avg60=11.59 avg300=10.29 total=4592051987\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\nsome avg10=0.00 avg60=0.00 avg300=0.00 total=7943603\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=6692573\nsome avg10=1.12 avg60=1.50 avg300=0.89 total=394892512\nfull avg10=0.55 avg60=0.86 avg300=0.50 total=247479621"
+      }
+    ]
+  }
+}

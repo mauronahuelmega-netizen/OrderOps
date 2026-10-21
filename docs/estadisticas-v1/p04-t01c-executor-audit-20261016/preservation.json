@@ -1,0 +1,22 @@
+{
+  "at": "2026-10-16T14:35:24.836Z",
+  "result": "PASS",
+  "baselineFiles": 3005,
+  "allBaselineHashesUnchanged": true,
+  "ignoredRecordedArtifactsUnchanged": 10,
+  "manifestConfigSigningAndBundleHashesUnchanged": true,
+  "newFilesOnlyWithin": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/",
+  "gitCommits": 0,
+  "sqlConnections": 0,
+  "authHttp": 0,
+  "dockerCommands": 0,
+  "engineCalls": 0,
+  "containerMutations": 0,
+  "networkChanges": 0,
+  "firewallChanges": 0,
+  "historicalReferencesUpdated": false,
+  "nativeAdapterStillLocked": true,
+  "dbCatalogDataFreshCheck": "NOT_EXECUTED_OFFLINE_SCOPE",
+  "originalFiveResourcesLive": "NOT_REQUERIED_OFFLINE_SCOPE",
+  "privateBundleHandling": "Read/decrypt/validate in memory only; no new secret files"
+}

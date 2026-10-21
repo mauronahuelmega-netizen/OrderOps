@@ -1,0 +1,14 @@
+# Fiabilidad y condiciones
+
+1. **Entorno estable para comparar SQL:** aislamiento sí; estabilidad estadística no establecida en F.4A y no revalidada bajo carga en F.4B. Diferencias de trabajo lógico obligan a controlar más que N. Puede usarse para comparaciones exploratorias pareadas, no certificación absoluta de p95.
+2. **Infraestructura con evidencia:** motor compartido4CPU, ausencia de cuota PG, PSI CPU e I/O ambiental; límites y memoria/OOM/cgroup observados. No hay evidencia suficiente de su impacto en las consultas históricas lentas. Trabajo lógico SQL sí varía entre planes recogidos.
+3. **Sin atribución:** outlier9.570ms, contribución de WindowsCPU/otros procesos, bloat/plan cache/JIT interno, disco VHDX y tasa de swap durante consultas.
+4. **Metas p95:** conservar100≤500ms,500≤1.000,1.000≤1.500,5.000≤3.000 como metas exploratorias locales. No rebajarlas porque el entorno sea compartido; no presentarlas como SLA. Se necesita estabilidad y varias tandas antes de decidir si cambiar metodología o infraestructura.
+5. **Producción representativa:** perfiles de datos/composición por pedido, cantidad de negocios y sesionamiento reales pero sintéticos; roles/RLS/transporte SSR efectivo; misma versión PG/extensions/settings relevantes, hardware/almacenamiento documentados, concurrencia pactada, suficientes repeticiones y ventanas, p95 con incertidumbre, latencia HTTP completa por capa y errores, snapshots/equivalencia por todos los contratos. Ambiente local compartido no sustituye esa validación.
+6. **Siguiente paso:** observabilidad breve antes de F.5B. C continúa preparada/sin instalar. Ni resultados favorables autorizan adopción pública.
+
+Método futuro: identidades verificadas antes y después, presupuesto conservador; original/A+B/D150/100; mismos inputs/asOf/snapshot/RLS; registrar start/end UTC y lector/query ID propios sin datos reales; warmups separados, orden contrabalanceado, observador de bajo costo independiente del camino cronometrado. Muestras normales separadas de EXPLAIN/nested/function instrumentation. Conservar outliers y abortos; no forzar ventanas favorables suspendiendo procesos.
+
+Registrar plan fingerprint interno cuando sea posible con instrumentación LOCAL ya disponible; estimaciones/costos/rows/loops, shared/temp buffers, relación física/tamaño y estadísticas antes/después, CPU/waits/PSI/I/O por intervalo. No VACUUM/ANALYZE/reset/clearcache ni settings persistentes sin autorización adicional. Controlar relación entre fixtures reversibles y huella física, documentando evolución en vez de ocultarla mediante limpieza.
+
+SQL15s, lock3s, entryCPU35%raw/mem40%, activeCPU35%normalizada y gate query≥5s de F.4A. Revalidar interpretación de CPU y gates existentes; no aumentar para PASS. Escalamiento omitido hasta superar estabilidad/equivalencia. Incompleto conserva estado incompleto.

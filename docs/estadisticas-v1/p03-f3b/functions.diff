@@ -1,0 +1,19 @@
+diff --git docs/estadisticas-v1/p03-f3b/reference-ab-function.sql docs/estadisticas-v1/p03-f3b/proposed-d1-function.sql
+index 0ca160e..e57fb59 100644
+--- docs/estadisticas-v1/p03-f3b/reference-ab-function.sql
++++ docs/estadisticas-v1/p03-f3b/proposed-d1-function.sql
+@@ -1,4 +1,4 @@
+-create function private.statistics_v1_summary_candidate(
++create function private.statistics_v1_summary_d1_candidate(
+   p_period text,p_start_date date default null,p_end_date date default null,
+   p_product_sort text default 'units',p_limit integer default 5,p_cursor jsonb default null
+ ) returns jsonb language plpgsql stable security invoker
+@@ -215,7 +215,7 @@ begin
+   ), groups as materialized (
+     select descriptor,side,jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',"mainUnits",'reasons',reasons) order by date,at,id) rows
+       from membership group by descriptor,side
+-  ), point_metrics as (
++  ), point_metrics as materialized (
+     select p.*,case when ca then private.statistics_metrics(coalesce(c.rows,'[]'::jsonb),v_historical) end cm,
+       case when pa then private.statistics_metrics(coalesce(b.rows,'[]'::jsonb),0) end pm
+     from plan p left join groups c on c.descriptor=p.descriptor and c.side='current'

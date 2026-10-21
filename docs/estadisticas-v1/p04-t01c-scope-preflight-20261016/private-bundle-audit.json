@@ -1,0 +1,42 @@
+{
+  "at": "2026-10-16T15:21:37.945Z",
+  "result": "PASS_OFFLINE_PRIVATE_BUNDLE",
+  "targets": [
+    {
+      "kind": "db",
+      "oldId": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "image": "sha256:4255b662ba3d774105cb34f623e410a3d7a860b68408ac6810f7e7e4b9781d5a",
+      "payloadSha256": "8ae80d0a2a32ff16da6ae10edc869e9f01b435d6ae336a06c1c04664d77f1a60",
+      "archivesValidated": 4,
+      "allConfigExceptApprovedHostIpAndImageReferenceIdentical": true,
+      "allArchiveChecksumsMetadataAndHashesValid": true
+    },
+    {
+      "kind": "kong",
+      "oldId": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "image": "sha256:1b53405d8680a09d6f44494b7990bf7da2ea43f84a258c59717d4539abf09f6d",
+      "payloadSha256": "8c1bdda35730b04c3aa01318670754157792a4ac770f8c683d899285d3d930f6",
+      "archivesValidated": 13,
+      "allConfigExceptApprovedHostIpAndImageReferenceIdentical": true,
+      "allArchiveChecksumsMetadataAndHashesValid": true
+    }
+  ],
+  "plaintextWritten": false,
+  "sql": 0,
+  "engineRequests": 0,
+  "bundleSha256": "f988c43bbc968bc95c0194b511afef28efe0154611ec827a9b93072bd1539508",
+  "qualifiedCandidateDescriptors": [
+    {
+      "kind": "db",
+      "payloadSha256": "8ae80d0a2a32ff16da6ae10edc869e9f01b435d6ae336a06c1c04664d77f1a60",
+      "nativeHardBarrierConfirmed": true
+    },
+    {
+      "kind": "kong",
+      "payloadSha256": "8c1bdda35730b04c3aa01318670754157792a4ac770f8c683d899285d3d930f6",
+      "nativeHardBarrierConfirmed": true
+    }
+  ],
+  "directoryMtimeWitness": "PENDING_FRESH_STOPPED_EXPORT; no timestamp fabricated",
+  "newExistingIdInventory": "Historical five only; fresh global negative-sharing inventory required before intervention"
+}

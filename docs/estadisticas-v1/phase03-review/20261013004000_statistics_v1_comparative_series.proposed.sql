@@ -1,0 +1,83 @@
+-- REVIEW DESIGN ONLY. Not an executable migration payload.
+-- Intentionally outside supabase/migrations. Do not apply with psql/db push/reset.
+-- Candidate version: 20261013004000; must recheck all branches before reservation.
+-- This guard makes accidental execution fail before any CREATE/ALTER/GRANT.
+do $$ begin
+  raise exception 'REVIEW_ONLY: SQL bodies require implementation authorization and separate review';
+end $$;
+
+-- Proposed transactional DDL envelope (commented until complete bodies reviewed):
+-- BEGIN;
+-- SET LOCAL lock_timeout = '3s';
+-- SET LOCAL statement_timeout = '60s';
+--
+-- 1. CREATE FUNCTION private.statistics_v1_summary_base(
+--   p_period text, p_start_date date DEFAULT NULL, p_end_date date DEFAULT NULL,
+--   p_product_sort text DEFAULT 'units', p_limit integer DEFAULT 5,
+--   p_cursor jsonb DEFAULT NULL
+-- ) RETURNS jsonb LANGUAGE plpgsql STABLE SECURITY INVOKER
+-- SET search_path=pg_catalog,public,private
+-- BODY: byte-identical extraction from the existing own statistics_v1_summary.
+-- Hash source/body before generation; no modification of historical migration.
+--
+-- 2. CREATE FUNCTION private.statistics_v1_series_plan(p_base jsonb)
+-- RETURNS TABLE(match_key text,basis text,current_interval jsonb,
+--   previous_interval jsonb,current_rows jsonb,previous_rows jsonb,
+--   alignment_available boolean,alignment_reason text)
+-- LANGUAGE plpgsql STABLE SECURITY INVOKER
+-- SET search_path=pg_catalog,public,private
+-- BODY: context/guard, materialized effective cohorts, verified pairs, outside
+-- lanes, sized windows, membership, groups, FULL JOIN match_key.
+-- Exact rules, boundaries, nulls and fallback: temporal-and-sql.md.
+-- Revalidate the request/cohorts and root gate; p_base is not trusted evidence.
+-- Reject tenant mismatch and malformed/future cutoffs. Do not use a tenant arg.
+--
+-- 3. CREATE FUNCTION private.statistics_v1_series_delta(
+--   p_current jsonb,p_previous jsonb,p_aligned boolean
+-- ) RETURNS jsonb LANGUAGE sql IMMUTABLE SECURITY INVOKER
+-- SET search_path=pg_catalog
+-- BODY: validate quality/value; numeric difference; nullable percentage at zero.
+-- No grants to anon/service_role; no money conversion to floating point.
+--
+-- 4. CREATE FUNCTION private.statistics_v1_series(p_base jsonb)
+-- RETURNS jsonb LANGUAGE plpgsql STABLE SECURITY INVOKER
+-- SET search_path=pg_catalog,public,private
+-- BODY: revalidated context -> plan -> statistics_metrics -> series_delta,
+-- max 200 unique points; revision/asOf match base; structured intervals.
+-- Missing/comparison-inadmissible previous stays NULL, never 0.
+--
+-- 5. CREATE OR REPLACE FUNCTION public.statistics_v1_summary(
+--   p_period text, p_start_date date DEFAULT NULL, p_end_date date DEFAULT NULL,
+--   p_product_sort text DEFAULT 'units', p_limit integer DEFAULT 5,
+--   p_cursor jsonb DEFAULT NULL
+-- ) RETURNS jsonb LANGUAGE plpgsql STABLE SECURITY INVOKER
+-- SET search_path=pg_catalog,public,private AS $wrapper$
+-- DECLARE base jsonb;
+-- BEGIN
+--   base := private.statistics_v1_summary_base(p_period,p_start_date,p_end_date,
+--      p_product_sort,p_limit,p_cursor);
+--   IF base->>'status' <> 'ready' THEN RETURN base; END IF;
+--   RETURN base || jsonb_build_object('series',private.statistics_v1_series(base));
+-- END;
+-- $wrapper$;
+--
+-- REVOKE ALL ON FUNCTION private.statistics_v1_summary_base(text,date,date,text,integer,jsonb),
+--   private.statistics_v1_series_plan(jsonb),
+--   private.statistics_v1_series_delta(jsonb,jsonb,boolean),
+--   private.statistics_v1_series(jsonb),
+--   public.statistics_v1_summary(text,date,date,text,integer,jsonb)
+-- FROM public,anon,authenticated,service_role;
+-- GRANT EXECUTE ON FUNCTION private.statistics_v1_summary_base(text,date,date,text,integer,jsonb),
+--   private.statistics_v1_series_plan(jsonb),
+--   private.statistics_v1_series_delta(jsonb,jsonb,boolean),
+--   private.statistics_v1_series(jsonb),
+--   public.statistics_v1_summary(text,date,date,text,integer,jsonb)
+-- TO authenticated;
+--
+-- Catalog assertions before COMMIT: one public signature; same defaults; invoker;
+-- all read functions STABLE; paths fixed; authenticated only; existing five RLS
+-- tables unchanged; no new triggers; no financial/operational function altered.
+-- COMMIT;
+
+-- No CREATE TABLE, ALTER TABLE, trigger, policy, backfill or data writes proposed.
+-- No SQL here was executed. Static parsing would not establish runtime validity.

@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-13T21:26:25.418Z",
+  "result": "PASS",
+  "uniqueSixCharacterCodes": 5000,
+  "fixturesNoDdl": true,
+  "syntaxScripts": [
+    "p03-f1-analyze.mjs",
+    "p03-f1-diagnose.mjs",
+    "p03-f1-evidence.mjs",
+    "p03-f1-ledger.mjs",
+    "p03-f1-prepare.mjs",
+    "p03-f1-profile-diagnose.mjs",
+    "p03-f1-profile-prepare.mjs",
+    "p03-f1-shapes-diagnose.mjs",
+    "p03-f1-shapes-prepare.mjs",
+    "p03-f1-static.verify.mjs"
+  ],
+  "connections": 0
+}

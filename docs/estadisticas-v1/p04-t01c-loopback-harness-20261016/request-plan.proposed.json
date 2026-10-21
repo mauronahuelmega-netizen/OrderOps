@@ -1,0 +1,197 @@
+{
+  "at": "2026-10-16T13:32:37.878Z",
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "network": "supabase_network_orderops-statistics-v1-test-74718de66a41",
+  "runId": "2026-10-16T13-30-25-733Z-ae781e38",
+  "mode": "DECLARATIVE_NOT_EXECUTABLE",
+  "steps": [
+    {
+      "id": "G0",
+      "operation": "OPERATOR_GATE",
+      "requires": [
+        "Explicit replacement-of-active-IDs authorization",
+        "Exact harness/payload/bundle hashes approved",
+        "Independent recovery backup validated",
+        "Fresh live dry-run and private unseal check",
+        "No other writer to DB volume; no concurrent lifecycle actor"
+      ],
+      "status": "NOT_AUTHORIZED"
+    },
+    {
+      "id": "stop_kong",
+      "operation": "ENGINE_REQUEST_PROPOSED",
+      "method": "POST",
+      "path": "/v1.52/containers/313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63/stop?t=60",
+      "body": null,
+      "requires": [
+        "G0"
+      ],
+      "verify": "Exited, same ID, never force kill automatically"
+    },
+    {
+      "id": "stop_db",
+      "operation": "ENGINE_REQUEST_PROPOSED",
+      "method": "POST",
+      "path": "/v1.52/containers/592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1/stop?t=60",
+      "body": null,
+      "requires": [
+        "G0"
+      ],
+      "verify": "Exited, same ID, never force kill automatically"
+    },
+    {
+      "id": "G1",
+      "operation": "STOPPED_CAPTURE_GATE",
+      "requires": [
+        "Both original containers exited"
+      ],
+      "algorithm": [
+        "docker diff exact old IDs; no volume traversal",
+        "Re-capture each PRESERVE_ARCHIVE leaf by docker cp OLD_ID:/exact/path -; works for stopped containers",
+        "Parse tar metadata, checksum/content hashes and compare live immutable capture; any unexplained delta stops",
+        "No docker exec/stat on stopped containers; use archive metadata/HEAD archive if further metadata needed",
+        "Retain complete new sealed checkpoint; do not overwrite live bundle"
+      ],
+      "status": "NOT_EXECUTED; live harness cannot certify stopped capture"
+    },
+    {
+      "id": "rename_db",
+      "operation": "ENGINE_REQUEST_PROPOSED",
+      "method": "POST",
+      "path": "/v1.52/containers/592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1/rename?name=supabase_db_orderops-statistics-v1-test-74718de66a41.pre-loopback-2026-10-16T13-30-25-733Z-ae781e38",
+      "body": null,
+      "verify": "Reserved name absent and exact old ID; original stays exited"
+    },
+    {
+      "id": "detach_db",
+      "operation": "ENGINE_REQUEST_PROPOSED",
+      "method": "POST",
+      "path": "/v1.52/networks/dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af/disconnect",
+      "body": {
+        "Container": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "Force": false
+      },
+      "verify": "Only old endpoint detached; network identity/config unchanged; prevents alias collisions"
+    },
+    {
+      "id": "create_db",
+      "operation": "ENGINE_REQUEST_PROPOSED",
+      "method": "POST",
+      "path": "/v1.52/containers/create?name=supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "bodyReference": "SEALED.targets[db].payload",
+      "bodySha256": "8ae80d0a2a32ff16da6ae10edc869e9f01b435d6ae336a06c1c04664d77f1a60",
+      "requires": [
+        "G1"
+      ],
+      "verify": "New ID recorded atomically; inspect payload equality before start; no image pull"
+    },
+    {
+      "id": "restore_db",
+      "operation": "ARCHIVE_RESTORE_PROPOSED",
+      "method": "PUT",
+      "path": "/v1.52/containers/${newId_db}/archive?path=${exact_parent_directory}&noOverwriteDirNonDir=true&copyUIDGID=true",
+      "bodyReference": "STOPPED_SEALED.targets[db].archives[*].tarBase64 decoded in memory",
+      "requires": [
+        "Exact directory mode/UID/GID metadata restored via reviewed directory-only tar entries",
+        "Every destination outside named volumes",
+        "No device, FIFO, socket, traversal or unresolved hard link"
+      ],
+      "verify": "GET archive each restored leaf before start; UID/GID/mode/content equality. No PID/socket/log restoration"
+    },
+    {
+      "id": "rename_kong",
+      "operation": "ENGINE_REQUEST_PROPOSED",
+      "method": "POST",
+      "path": "/v1.52/containers/313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63/rename?name=supabase_kong_orderops-statistics-v1-test-74718de66a41.pre-loopback-2026-10-16T13-30-25-733Z-ae781e38",
+      "body": null,
+      "verify": "Reserved name absent and exact old ID; original stays exited"
+    },
+    {
+      "id": "detach_kong",
+      "operation": "ENGINE_REQUEST_PROPOSED",
+      "method": "POST",
+      "path": "/v1.52/networks/dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af/disconnect",
+      "body": {
+        "Container": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "Force": false
+      },
+      "verify": "Only old endpoint detached; network identity/config unchanged; prevents alias collisions"
+    },
+    {
+      "id": "create_kong",
+      "operation": "ENGINE_REQUEST_PROPOSED",
+      "method": "POST",
+      "path": "/v1.52/containers/create?name=supabase_kong_orderops-statistics-v1-test-74718de66a41",
+      "bodyReference": "SEALED.targets[kong].payload",
+      "bodySha256": "8c1bdda35730b04c3aa01318670754157792a4ac770f8c683d899285d3d930f6",
+      "requires": [
+        "G1"
+      ],
+      "verify": "New ID recorded atomically; inspect payload equality before start; no image pull"
+    },
+    {
+      "id": "restore_kong",
+      "operation": "ARCHIVE_RESTORE_PROPOSED",
+      "method": "PUT",
+      "path": "/v1.52/containers/${newId_kong}/archive?path=${exact_parent_directory}&noOverwriteDirNonDir=true&copyUIDGID=true",
+      "bodyReference": "STOPPED_SEALED.targets[kong].archives[*].tarBase64 decoded in memory",
+      "requires": [
+        "Exact directory mode/UID/GID metadata restored via reviewed directory-only tar entries",
+        "Every destination outside named volumes",
+        "No device, FIFO, socket, traversal or unresolved hard link"
+      ],
+      "verify": "GET archive each restored leaf before start; UID/GID/mode/content equality. No PID/socket/log restoration"
+    },
+    {
+      "id": "start_db",
+      "operation": "ENGINE_REQUEST_PROPOSED",
+      "method": "POST",
+      "path": "/v1.52/containers/${newId_db}/start",
+      "body": null,
+      "requires": [
+        "G1",
+        "All restored archive hashes verified"
+      ],
+      "verify": "Health, exact image, retained originals exited; never start two PostgreSQL writers"
+    },
+    {
+      "id": "start_kong",
+      "operation": "ENGINE_REQUEST_PROPOSED",
+      "method": "POST",
+      "path": "/v1.52/containers/${newId_kong}/start",
+      "body": null,
+      "requires": [
+        "G1",
+        "All restored archive hashes verified",
+        "DB healthy"
+      ],
+      "verify": "Health, exact image, retained originals exited; never start two PostgreSQL writers"
+    },
+    {
+      "id": "G2",
+      "operation": "POSTCONDITION_GATE",
+      "requires": [
+        "old→new map verified against actual inspect",
+        "HostIp exactly 127.0.0.1 on two ports; no additional publications",
+        "Other three IDs/config hashes unchanged",
+        "Originals retained exited/detached",
+        "Localhost success + external LAN IPv4/IPv6 denial",
+        "Future separately authorized READ ONLY logical comparison"
+      ],
+      "status": "NOT_EXECUTED"
+    },
+    {
+      "id": "FAIL_CLOSED",
+      "operation": "ROLLBACK_PROPOSED",
+      "actions": [
+        "Stop replacement Kong then DB by recorded new IDs, no delete",
+        "Retain every container, network, volume and sealed checkpoint",
+        "Optionally rename replacements to .loopback-failed-RUN_ID and originals to original names only under explicit approval",
+        "Do not start wildcard originals automatically; restore aliases only if authorized fallback selected",
+        "Do not mount/run a second DB or restore data backups automatically"
+      ],
+      "status": "NO_EXECUTOR_ENABLED"
+    }
+  ],
+  "noAuthorizationImplied": true
+}

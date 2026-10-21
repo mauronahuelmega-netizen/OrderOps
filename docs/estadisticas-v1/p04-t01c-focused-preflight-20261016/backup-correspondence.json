@@ -1,0 +1,222 @@
+{
+  "at": "2026-10-16T15:50:56.034Z",
+  "referenceCatalog": "docs/estadisticas-v1/p04-t01c/catalog-after.json",
+  "tables": [
+    {
+      "schema": "public",
+      "object": "businesses",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "public",
+      "object": "profiles",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "public",
+      "object": "business_settings",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "public",
+      "object": "orders",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "public",
+      "object": "order_items",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "public",
+      "object": "order_financials",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "public",
+      "object": "finance_audit_events",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "public",
+      "object": "store_sessions",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "public",
+      "object": "store_session_statistics_snapshots",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "public",
+      "object": "business_statistics_state",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "public",
+      "object": "order_item_statistics_snapshots",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "public",
+      "object": "order_statistics_completions",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "public",
+      "object": "order_statistics_completion_items",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "public",
+      "object": "products",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "public",
+      "object": "categories",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "statistics_test_environment",
+      "object": "identity",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    },
+    {
+      "schema": "supabase_migrations",
+      "object": "schema_migrations",
+      "tableDefinitionInToc": true,
+      "tableDataEntryInToc": true
+    }
+  ],
+  "functions": [
+    {
+      "schema": "private",
+      "name": "statistics_agreement_changed",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_allocate_products",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_bump",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_can_read",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_item_changed",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_local_cutoff",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_metric",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_metrics",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_order_changed",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_revision_deferred",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_session_changed",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_source_digest",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_source_items",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_v1_read_core_candidate",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_v1_series_delta",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_v1_series_instant",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_v1_series_response",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_v1_summary_base",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_v1_summary_base_candidate",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_v1_summary_candidate",
+      "presentInToc": true
+    },
+    {
+      "schema": "private",
+      "name": "statistics_v1_summary_d1_candidate",
+      "presentInToc": true
+    },
+    {
+      "schema": "public",
+      "name": "statistics_v1_summary",
+      "presentInToc": true
+    }
+  ],
+  "scope": "Names/TOC existence only, not signatures, definitions, values or rowcounts; no SQL executed",
+  "currentContainerCopyHashEqualsBackup": true
+}

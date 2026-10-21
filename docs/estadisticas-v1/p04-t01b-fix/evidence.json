@@ -1,0 +1,365 @@
+{
+  "at": "2026-10-14T16:07:25.444Z",
+  "phase": "P04-T01B-FIX",
+  "verdict": "PASS_WITH_LIMITATIONS",
+  "branch": "codex/estadisticas-v1",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "sourceSha256": "a66ce3ea73bf4a4421c60b77376914f232b4470d41df7d661ee38142c4a29ba8",
+  "candidateSha256": "57395a7920d95cf63c1b67fb8191e40272a26aeb445a4abe7bec4d822b99c2c1",
+  "harnessSha256": "7555a8dab26783f079df8a21bd5682a7c45a4353c3f76058e17bf17ff2c77864",
+  "payloadSha256": "d4cc433c57be38bcf7ad239bda4b80f53062070479debf0ac3f5a4691b8c09fb",
+  "onlyApprovedExpressionsChanged": true,
+  "staticGate": "PASS",
+  "staticAssertions": 183,
+  "offlineDecoderAssertions": 25,
+  "preflight": "PASS",
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "api": "127.0.0.1:56321",
+  "db": "127.0.0.1:56322",
+  "ledger": 124,
+  "sqlTests": {
+    "expected": 91,
+    "recorded": 91,
+    "pass": 91,
+    "fail": 0,
+    "topLevelErrors": 0,
+    "regressionsFirst": 8
+  },
+  "decoder": {
+    "completeJsonAccepted": 54,
+    "rejected": 0,
+    "sourceUnchanged": true
+  },
+  "summaryDifferential": {
+    "executed": 9,
+    "result": "PASS",
+    "scope": "Shared period, exact monetary and units, not complete JSON equivalence between different contracts"
+  },
+  "securityCases": 51,
+  "mvcc": "PASS limited original-reader visibility during uncommitted fixture writes; no parallel candidate invocation",
+  "rollback": {
+    "at": "2026-10-14T16:00:43.283Z",
+    "explicitRollbackReached": true,
+    "newConnection": true,
+    "threeFunctionsAbsent": true,
+    "catalogIdentical": true,
+    "aclPoliciesFunctionsIdentical": true,
+    "ledgerIdentical": true,
+    "dataFingerprintsIdentical": true,
+    "extraIdentical": true,
+    "commitStatements": 0
+  },
+  "preservation": {
+    "files": 2862,
+    "allUnchanged": true,
+    "previous2772And90ArtifactsPreserved": true
+  },
+  "noPersistentInstall": true,
+  "noCommit": true,
+  "noPublication": true,
+  "noT02": true,
+  "noCandidateAdoption": true,
+  "noFrontendChange": true,
+  "noSharedContractChange": true,
+  "limits": {
+    "sqlTimeoutSeconds": 15,
+    "lockTimeoutSeconds": 3
+  },
+  "notExecuted": [
+    "Real Auth HTTP refresh/expiry",
+    "Persistent NULL or unknown profile role forbidden by unchanged schema",
+    "Exhaustive operational DST capture and every opening/closing boundary",
+    "Parallel candidate calls or concurrent committed financial changes",
+    "Maximum bigint as whole actual reader workload; pure helper max tested, real reader >int32 tested",
+    "More than 100 products and every shipping/discount/adjustment variant",
+    "Advanced benchmarks"
+  ],
+  "scriptsExecuted": [
+    "verify-static.mjs",
+    "prepare-harness.mjs",
+    "gate-harness.mjs",
+    "preflight.mjs via run-controlled",
+    "run-controlled.mjs",
+    "analyze-results.mjs",
+    "finalize-evidence.mjs"
+  ],
+  "referenceFilesNotExecuted": [
+    "run-harness.mjs",
+    "builder-core.txt",
+    "renderer-reference.txt",
+    "previous-tail-reference.txt"
+  ],
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/analyze-results.mjs",
+      "sha256": "463d017ab4741cc8a446728a785f34dcff105f6c755ecef3897791711c8b90cb",
+      "bytes": 4752,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/builder-core.txt",
+      "sha256": "619afc213f0f4063c826dbba2d12488d67b58b393a1d57e77fe4e213305312b4",
+      "bytes": 19835,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/candidate-manifest.json",
+      "sha256": "e02e2630cee61e6714763c895ca292adad1b28b6718772d5effc327b08b909a5",
+      "bytes": 1277,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/candidate-products-fixed.sql",
+      "sha256": "57395a7920d95cf63c1b67fb8191e40272a26aeb445a4abe7bec4d822b99c2c1",
+      "bytes": 15347,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/candidate-products.diff",
+      "sha256": "c6ebaba43ef51ddc353c0a5e630455fbc56386e00e9fb584376924635fb4dab1",
+      "bytes": 2752,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/catalog-after.json",
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "bytes": 260779,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/catalog-before.json",
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "bytes": 260779,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/catalog-select.sql",
+      "sha256": "b13c2fd8fe442b4cebc94b84b2db464e8476d6e2526b2ca2ba0af6f4fb053ba3",
+      "bytes": 2176,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/data-after.json",
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "bytes": 1415,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/data-before.json",
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "bytes": 1415,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/data-select.sql",
+      "sha256": "146d26738db1be302ad45eb19b9ddd5505993af1ca11d40c1f6ec148b74758e4",
+      "bytes": 2834,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/decoder-results.json",
+      "sha256": "7f17a0cd262d59283304cb1edbf337e390ead1273b3193f1af7059f025eb3fa8",
+      "bytes": 7002,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/decoder-tests.json",
+      "sha256": "ed42a03122dee29cc5f8f1eb389f07249b32cc47fec3bf7ac8d8ba0c37c95cc2",
+      "bytes": 203,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/extra-after.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "bytes": 15375,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/extra-before.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "bytes": 15375,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/extra-select.sql",
+      "sha256": "2d611bf55bbf1fe9deed472b3102ff7515b4df7a9e371fa83399069344006c72",
+      "bytes": 601,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/file-baseline.json",
+      "sha256": "e2f2dc51938c5c4ca7b103fb45345cbf844ab91ce9f52737fd0601458950ed36",
+      "bytes": 463128,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/finalize-evidence.mjs",
+      "sha256": "d01554042bc965351eacafad26e6e4f7fcd19ebdbe952caaf521eec2981c74dc",
+      "bytes": 7238,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/financial-history-matrix.json",
+      "sha256": "36c89e19b70776369ace8b75a9fc20af77f8b52d63b66de457c0a9ef435fd932",
+      "bytes": 123897,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/gate-harness.mjs",
+      "sha256": "29c0e56594049bda69a6a29f294e5cfafcf3aaa85aadc6f6fac307ef781e809f",
+      "bytes": 2651,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/harness-extensions.txt",
+      "sha256": "8a817ee26053b7c3fe8648ee2b0f1fb3b102dc743664b28b42a7f4fff1b1dd58",
+      "bytes": 6434,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/harness-manifest.json",
+      "sha256": "b2fb14dc90c93ac70364c7f797a553dfb8ddeea08a29b61328acc28e043859e6",
+      "bytes": 11532,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/harness-tail.txt",
+      "sha256": "68f8205db90cb7ba0b3fbc8b628b90ffed3014656bbc59c6e20a6c9f8a937e02",
+      "bytes": 5601,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/harness.sql",
+      "sha256": "7555a8dab26783f079df8a21bd5682a7c45a4353c3f76058e17bf17ff2c77864",
+      "bytes": 145148,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/informe.md",
+      "sha256": "313905a36df6911733a0691ba430c603220caa3f415665b99962b144414859e5",
+      "bytes": 11092,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/mvcc-observer.json",
+      "sha256": "07bb788c96b12899074300efe82a7a3a05d50a276a93c75133c6b0c9e3bc9437",
+      "bytes": 83247,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/preflight.json",
+      "sha256": "454ec8b05f97c03c3dc7f6712ec275cba265c23590a0b1c22ce64e0c23b30eae",
+      "bytes": 5456,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/preflight.mjs",
+      "sha256": "adaed7444ea0241068c74985fb27af666ea681e9f208a55fec486b325fb0b5d8",
+      "bytes": 9275,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/prepare-harness.mjs",
+      "sha256": "8a7dfdd3428eb6c57467537e0afb6dbecfe01a4adc7d2901c17d617dc2254ce0",
+      "bytes": 32785,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/preservation.json",
+      "sha256": "20242d45a55da3bcb9ef05d10fd3559ab7be5a15f087288ce2ed2b27abf8a8d6",
+      "bytes": 2587,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/previous-tail-reference.txt",
+      "sha256": "e0d6ab5ed834c7da499956e11f3717838e96585c7d3de24ae40605a6b18422f4",
+      "bytes": 4711,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/psql.stderr.log",
+      "sha256": "556521cd01bf8ff5ac26a7dbd13efcc3ba2a69b1f3d4ec18bd3539242fd5b163",
+      "bytes": 669845,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/psql.stdout.log",
+      "sha256": "ef1cdee18eac3f1513a390225f637f315b1b1d4a1ed0677ce745c5690098b748",
+      "bytes": 15705,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/regressions.json",
+      "sha256": "7c409ed1b2aa34713d8e1453b244b0d12676b4f270a15e3f1f4e9b6a93fb9d55",
+      "bytes": 825,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/renderer-reference.txt",
+      "sha256": "e6698a9e88feea50ca5fe0d93bc66a065698a52861b21fba79b568ba991994a6",
+      "bytes": 912,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/resources.json",
+      "sha256": "17d60bce17528835a4fba5d699e8ca7401ab6dcc4de4d2b3a8d5af273003f67a",
+      "bytes": 3227,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/rollback-verification.json",
+      "sha256": "eedea46752f71fee88bb708cc6ff23a50bdd2d1f4fad496d9f1881f004ef6130",
+      "bytes": 315,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/run-controlled.mjs",
+      "sha256": "0617ce0df66c98d76b3d2af273069d3caa35d5ea1ac2f00972beba2959dc0b59",
+      "bytes": 6400,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/run-harness.mjs",
+      "sha256": "500d992c455bf67d2db57660ae40c977896c51026d97945a9b49b08122402e60",
+      "bytes": 4211,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/security-matrix.json",
+      "sha256": "82ef3198dbce6790452a75e9a1c20c117c35f13812b5ac766cea466570059915",
+      "bytes": 92782,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/sql-results.json",
+      "sha256": "05480464131debea39da2f902797d56530ed9e26c35695157fcf31ced30ebd6f",
+      "bytes": 1289315,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/static-gate.json",
+      "sha256": "dc3191d24aa8ee7f4ad41a0749f1ebe80913307545af38441d61e5c99c68218b",
+      "bytes": 933,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/static-tests.json",
+      "sha256": "5442505fdbea4c0de3915609de84fae26aac9615756cdf740710f74e6a8bb938",
+      "bytes": 7296,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/summary-differential.json",
+      "sha256": "852f479fa0dfd75ec349a852f46d7274815c79e5ef3e68961e060cfcb89844cd",
+      "bytes": 3395,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/verify-static.mjs",
+      "sha256": "2af25ab63ef430100ce8c28028ce192179427fafaddcef2312347d4ba5b9c8ad",
+      "bytes": 11332,
+      "kind": "created"
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

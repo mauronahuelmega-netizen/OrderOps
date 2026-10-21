@@ -1,0 +1,804 @@
+{
+  "pairs": [
+    {
+      "orders": 50,
+      "reader": "original",
+      "sqlHash": "aa378e786da334c36cd6bed72829bb023dd5543e320968d80455ef95c3c2e3a5",
+      "queryText": "select count(*)                   from public.orders o where o.business_id=v_business and o.status='completed'\n    and not exists(select 1 from public.order_statistics_completions c where c.order_id=o.id and c.active and c.commercial_date is not null and c.timezone is not null and not c.date_conflict)",
+      "first": "internal-plans/f4c-50-profile-original-1.json",
+      "second": "internal-plans/f4c-50-profile-original-2.json",
+      "differences": [
+        {
+          "path": "root.2.0",
+          "key": "Filter",
+          "before": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid) AND (status = 'completed'::text))",
+          "after": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (business_id = $8) AND (status = 'completed'::text))"
+        }
+      ]
+    },
+    {
+      "orders": 50,
+      "reader": "original",
+      "sqlHash": "4d04ae98ef48645fb94e1149dd0e7b97cb1e02ee13e705419c80d2b0ab5c70d4",
+      "queryText": "with current_facts as materialized (\n    select * from public.statistics_v1_effective_facts where business_id=v_business and commercial_date between v_start and v_end and date_reliable and completed_at<=v_now),\n  previous_facts as materialized (\n    select f.* from public.statistics_v1_effective_facts f where v_compare and f.business_id=v_business and f.commercial_date between v_ps and v_pe and f.date_reliable and f.completed_at<=v_now\n      and (not v_partial or case when f.date_kind='outside_session' then f.commercial_date<v_pe or f.completed_at<=v_previous_cutoff\n        else exists(select 1 from jsonb_array_elements(v_segments) seg where (seg->>'previousSessionId')::uuid=f.session_key and f.completed_at<=(seg->>'previousUntil')::timestamptz) end)),\n  product_lines as (select i.*,f.effective_sales,f.effective_units,f.completed_at from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id),\n  products as (\n    select coalesce(product_identity::text,'line:'||line_key::text) group_key,product_identity,\n      (array_agg(product_name order by completed_at desc,completion_id,line_key))[1] label,\n      case when bool_or(item_kind='product' and effective_units is null) or v_historical>0 then null else sum(case when item_kind='product' and effective_units is not null then quantity else 0 end)::bigint end main_units,\n      bool_or(item_kind='product' and effective_units is not null) has_main,\n      sum(case when effective_sales is not null then net_amount end) net,\n      bool_or(effective_sales is null) partial from product_lines group by group_key,product_identity),\n  ranked as (select *,row_number() over(order by case when p_product_sort='units' then main_units else net end desc nulls last,group_key collate \"C\") position from products where p_product_sort='amount' or has_main),\n  categories as (\n    select category_identity,coalesce((array_agg(category_name order by completed_at desc,completion_id))[1],'Sin categoría histórica') label,sum(net_amount) amount\n    from product_lines where effective_sales is not null group by category_identity),\n  all_products as(select product_identity from products where product_identity is not null union\n    select i.product_identity from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity is not null)\n  select\n    coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from current_facts),'[]'::jsonb),\n    coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from previous_facts),'[]'::jsonb),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',product_identity,'label',label,'mainUnits',main_units,'netAmount',round(net,2)::text,'quality',case when partial then case when net is null then 'unavailable' else 'partial' end else 'exact' end) order by position) from ranked where position>v_offset and position<=v_offset+p_limit),'[]'::jsonb),\n    (select count(*) from ranked),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',category_identity,'label',label,'amount',round(amount,2)::text,'percentage',case when not exists(select 1 from current_facts where effective_sales is null) and v_historical=0 and (select sum(amount) from categories)>0 then round(amount*100/(select sum(amount) from categories),2)::text end) order by amount desc,label) from categories),'[]'::jsonb),\n    (select count(*) from current_facts where date_kind='outside_session'),\n    (select count(*) from current_facts where effective_sales is null),\n    (select sum(current_agreement) from current_facts where effective_sales is null),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',p.product_identity,'currentMainUnits',case when v_historical>0 or exists(select 1 from current_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end,'previousMainUnits',\n      case when not v_compare or exists(select 1 from previous_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end)) from all_products p),'[]'::jsonb)",
+      "first": "internal-plans/f4c-50-profile-original-1.json",
+      "second": "internal-plans/f4c-50-profile-original-2.json",
+      "differences": [
+        {
+          "path": "root.0.3.0",
+          "key": "Index Cond",
+          "before": "((business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid) AND (commercial_date >= '2026-10-14'::date) AND (commercial_date <= '2026-10-14'::date) AND (commercial_date IS NOT NULL) AND (completed_at <= '2026-10-14 04:42:36.372472+00'::timestamp with time zone))",
+          "after": "((business_id = $8) AND (commercial_date >= $14) AND (commercial_date <= $15) AND (commercial_date IS NOT NULL) AND (completed_at <= $11))"
+        },
+        {
+          "path": "root.0.3.1",
+          "key": "Filter",
+          "before": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid) AND (status = 'completed'::text))",
+          "after": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (business_id = $8) AND (status = 'completed'::text))"
+        },
+        {
+          "path": "root.0.4.0",
+          "key": "Filter",
+          "before": "(business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid)",
+          "after": "(business_id = $8)"
+        },
+        {
+          "path": "root.1",
+          "key": "Node Type",
+          "before": "Subquery Scan",
+          "after": "Result"
+        },
+        {
+          "path": "root.1",
+          "key": "Filter",
+          "before": "CASE WHEN (f_1.date_kind = 'outside_session'::text) THEN ((f_1.commercial_date < '2026-10-13'::date) OR (f_1.completed_at <= '2026-10-13 04:42:36.372472+00'::timestamp with time zone)) ELSE EXISTS(SubPlan 5) END",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1",
+          "key": "ChildCount",
+          "before": 2,
+          "after": 1
+        },
+        {
+          "path": "root.1.0",
+          "key": "Node Type",
+          "before": "Nested Loop",
+          "after": "Subquery Scan"
+        },
+        {
+          "path": "root.1.0",
+          "key": "Join Type",
+          "before": "Left",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0",
+          "key": "Filter",
+          "before": "NOT_PRESENT",
+          "after": "((NOT $19) OR CASE WHEN (f_1.date_kind = 'outside_session'::text) THEN ((f_1.commercial_date < $17) OR (f_1.completed_at <= $26)) ELSE EXISTS(SubPlan 5) END)"
+        },
+        {
+          "path": "root.1.0",
+          "key": "Join Filter",
+          "before": "(f_2.order_id = c_1.order_id)",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0",
+          "key": "ChildCount",
+          "before": 5,
+          "after": 2
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "Node Type",
+          "before": "Index Only Scan",
+          "after": "Nested Loop"
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "Relation Name",
+          "before": "profiles",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "Index Name",
+          "before": "profiles_id_business_id_key",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "Join Type",
+          "before": "NOT_PRESENT",
+          "after": "Left"
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "Filter",
+          "before": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "Index Cond",
+          "before": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "Join Filter",
+          "before": "NOT_PRESENT",
+          "after": "(f_2.order_id = c_1.order_id)"
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "ChildCount",
+          "before": 0,
+          "after": 5
+        },
+        {
+          "path": "root.1.0.1",
+          "key": "Node Type",
+          "before": "Index Scan",
+          "after": "Function Scan"
+        },
+        {
+          "path": "root.1.0.1",
+          "key": "Relation Name",
+          "before": "profiles",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0.1",
+          "key": "Index Name",
+          "before": "profiles_id_business_id_key",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0.1",
+          "key": "Filter",
+          "before": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+          "after": "((f_1.completed_at <= ((value ->> 'previousUntil'::text))::timestamp with time zone) AND (((value ->> 'previousSessionId'::text))::uuid = f_1.session_key))"
+        },
+        {
+          "path": "root.1.0.1",
+          "key": "Index Cond",
+          "before": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.4.0",
+          "key": "Sort Key",
+          "before": [
+            "((products.main_units)::numeric) DESC NULLS LAST",
+            "((products.group_key)::text) COLLATE \"C\""
+          ],
+          "after": [
+            "(CASE WHEN ($4 = 'units'::text) THEN (products.main_units)::numeric ELSE products.net END) DESC NULLS LAST",
+            "((products.group_key)::text) COLLATE \"C\""
+          ]
+        },
+        {
+          "path": "root.4.0.0",
+          "key": "Filter",
+          "before": "has_main",
+          "after": "(($4 = 'amount'::text) OR has_main)"
+        },
+        {
+          "path": "root.8.0.0",
+          "key": "Filter",
+          "before": "((\"position\" > 0) AND (\"position\" <= 5))",
+          "after": "((\"position\" > $25) AND (\"position\" <= ($25 + $5)))"
+        }
+      ]
+    },
+    {
+      "orders": 50,
+      "reader": "original",
+      "sqlHash": "9619f4ecb1126f738636fcd2cfea09df5aa197eb3228576da85fd458ed9c6117",
+      "queryText": "with facts as materialized(select * from public.statistics_v1_effective_facts where business_id=v_business and commercial_date=v_start and date_reliable and completed_at<=v_now),\n    bounds as(select\n      least(private.statistics_local_cutoff(v_start,'00:00:00',v_timezone),coalesce(min(completed_at),v_now)) lo,\n      greatest(least(v_now,private.statistics_local_cutoff(v_start+1,'00:00:00',v_timezone)),coalesce(max(completed_at),'-infinity'::timestamptz),\n        coalesce((select max(coalesce(s.closed_at,v_now)) from public.store_session_statistics_snapshots snap join public.store_sessions s on s.id=snap.session_id where snap.business_id=v_business and snap.commercial_date=v_start and snap.source_quality='exact'),'-infinity'::timestamptz)) hi from facts),\n    sizing as(select date_trunc('hour',lo) lo,date_trunc('hour',hi)+interval '1 hour' hi,greatest(1,ceil((extract(epoch from hi-lo)/3600+1)/199)::integer) step from bounds),\n    bins as(select t lo,t+make_interval(hours=>step) hi from sizing cross join lateral generate_series(lo,hi-interval '1 microsecond',make_interval(hours=>step)) t)\n    select coalesce(jsonb_agg(jsonb_build_object('label',to_char(b.lo at time zone v_timezone,'YYYY-MM-DD HH24:MI')||' · '||b.lo::text,'metrics',private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',f.effective_sales::text,'mainUnits',f.effective_units::text,'reasons',f.reasons)) from facts f where f.completed_at>=b.lo and f.completed_at<b.hi),'[]'::jsonb),v_historical)) order by b.lo),'[]'::jsonb)                from bins b",
+      "first": "internal-plans/f4c-50-profile-original-1.json",
+      "second": "internal-plans/f4c-50-profile-original-2.json",
+      "differences": [
+        {
+          "path": "root.0.3.0",
+          "key": "Index Cond",
+          "before": "((business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid) AND (commercial_date IS NOT NULL) AND (commercial_date = '2026-10-14'::date) AND (completed_at <= '2026-10-14 04:42:36.372472+00'::timestamp with time zone))",
+          "after": "((business_id = $8) AND (commercial_date IS NOT NULL) AND (commercial_date = $14) AND (completed_at <= $11))"
+        },
+        {
+          "path": "root.0.3.1",
+          "key": "Filter",
+          "before": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid) AND (status = 'completed'::text))",
+          "after": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (business_id = $8) AND (status = 'completed'::text))"
+        },
+        {
+          "path": "root.0.4.0",
+          "key": "Filter",
+          "before": "(business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid)",
+          "after": "(business_id = $8)"
+        },
+        {
+          "path": "root.1.0.0.0.2.0",
+          "key": "Filter",
+          "before": "((business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid) AND (commercial_date = '2026-10-14'::date) AND (source_quality = 'exact'::text) AND statistics_can_read(business_id))",
+          "after": "((business_id = $8) AND (commercial_date = $14) AND (source_quality = 'exact'::text) AND statistics_can_read(business_id))"
+        },
+        {
+          "path": "root.2.0",
+          "key": "Filter",
+          "before": "((completed_at >= t.t) AND (completed_at < (t.t + make_interval(0, 0, 0, 0, GREATEST(1, (ceil((((EXTRACT(epoch FROM ((GREATEST(LEAST('2026-10-14 04:42:36.372472+00'::timestamp with time zone, statistics_local_cutoff('2026-10-15'::date, '00:00:00'::time without time zone, 'America/Argentina/Buenos_Aires'::text)), COALESCE(max(facts.completed_at), '-infinity'::timestamp with time zone), COALESCE((InitPlan 8).col1, '-infinity'::timestamp with time zone))) - (LEAST(statistics_local_cutoff('2026-10-14'::date, '00:00:00'::time without time zone, 'America/Argentina/Buenos_Aires'::text), COALESCE(min(facts.completed_at), '2026-10-14 04:42:36.372472+00'::timestamp with time zone))))) / '3600'::numeric) + '1'::numeric) / '199'::numeric)))::integer), 0, '0'::double precision))))",
+          "after": "((completed_at >= t.t) AND (completed_at < (t.t + make_interval(0, 0, 0, 0, GREATEST(1, (ceil((((EXTRACT(epoch FROM ((GREATEST(LEAST($11, statistics_local_cutoff(($14 + 1), '00:00:00'::time without time zone, $10)), COALESCE(max(facts.completed_at), '-infinity'::timestamp with time zone), COALESCE((InitPlan 8).col1, '-infinity'::timestamp with time zone))) - (LEAST(statistics_local_cutoff($14, '00:00:00'::time without time zone, $10), COALESCE(min(facts.completed_at), $11))))) / '3600'::numeric) + '1'::numeric) / '199'::numeric)))::integer), 0, '0'::double precision))))"
+        }
+      ]
+    },
+    {
+      "orders": 50,
+      "reader": "original",
+      "sqlHash": "ef43a9a4b900f3454ac81dcadb8ffe56403047fe4acc22f7fd822aa40ba9461d",
+      "queryText": "with effective as materialized (\n    select f.* from public.statistics_v1_effective_facts f\n    where f.business_id=v_business and f.date_reliable and f.completed_at<=v_now\n      and (f.commercial_date between v_start and v_end or (v_compare and f.commercial_date between v_ps and v_pe))\n  ), selected as (\n    select 'current' side,f.* from effective f where f.commercial_date between v_start and v_end\n    union all\n    select 'previous' side,f.* from effective f where v_compare and f.commercial_date between v_ps and v_pe\n      and (not v_partial or case when f.date_kind='outside_session' then f.commercial_date<v_pe or f.completed_at<=v_previous_cut\n        else exists(select 1 from jsonb_array_elements(v_base#>'{comparison,segments}') seg\n          where (seg->>'previousSessionId')::uuid=f.session_key and f.completed_at<=(seg->>'previousUntil')::timestamptz) end)\n  )\n  select coalesce(jsonb_agg(jsonb_build_object('side',side,'id',id,'date',commercial_date,\n    'at',completed_at,'session',session_key,'kind',date_kind,'timezone',timezone,\n    'sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons) order by side,commercial_date,completed_at,id),'[]'::jsonb)\n                 from selected",
+      "first": "internal-plans/f4c-50-profile-original-1.json",
+      "second": "internal-plans/f4c-50-profile-original-2.json",
+      "differences": [
+        {
+          "path": "root.0.3.0",
+          "key": "Filter",
+          "before": "((timezone IS NOT NULL) AND (NOT date_conflict) AND (((commercial_date >= '2026-10-14'::date) AND (commercial_date <= '2026-10-14'::date)) OR ((commercial_date >= '2026-10-13'::date) AND (commercial_date <= '2026-10-13'::date))) AND statistics_can_read(business_id) AND statistics_can_read(business_id))",
+          "after": "((timezone IS NOT NULL) AND (NOT date_conflict) AND (((commercial_date >= $13) AND (commercial_date <= $14)) OR ($19 AND (commercial_date >= $15) AND (commercial_date <= $16))) AND statistics_can_read(business_id) AND statistics_can_read(business_id))"
+        },
+        {
+          "path": "root.0.3.0",
+          "key": "Index Cond",
+          "before": "((business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid) AND (commercial_date IS NOT NULL) AND (completed_at <= '2026-10-14 04:42:36.372472+00'::timestamp with time zone))",
+          "after": "((business_id = $9) AND (commercial_date IS NOT NULL) AND (completed_at <= $12))"
+        },
+        {
+          "path": "root.0.3.1",
+          "key": "Filter",
+          "before": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid) AND (status = 'completed'::text))",
+          "after": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (business_id = $9) AND (status = 'completed'::text))"
+        },
+        {
+          "path": "root.0.4.0",
+          "key": "Filter",
+          "before": "(business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid)",
+          "after": "(business_id = $9)"
+        },
+        {
+          "path": "root.1.0.0.0",
+          "key": "Filter",
+          "before": "((commercial_date >= '2026-10-14'::date) AND (commercial_date <= '2026-10-14'::date))",
+          "after": "((commercial_date >= $13) AND (commercial_date <= $14))"
+        },
+        {
+          "path": "root.1.0.1.0",
+          "key": "Node Type",
+          "before": "CTE Scan",
+          "after": "Result"
+        },
+        {
+          "path": "root.1.0.1.0",
+          "key": "Filter",
+          "before": "((commercial_date >= '2026-10-13'::date) AND (commercial_date <= '2026-10-13'::date) AND CASE WHEN (date_kind = 'outside_session'::text) THEN ((commercial_date < '2026-10-13'::date) OR (completed_at <= '2026-10-13 04:42:36.372472+00'::timestamp with time zone)) ELSE EXISTS(SubPlan 5) END)",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0.1.0.0",
+          "key": "Node Type",
+          "before": "Function Scan",
+          "after": "CTE Scan"
+        },
+        {
+          "path": "root.1.0.1.0.0",
+          "key": "Filter",
+          "before": "((f_1.completed_at <= ((value ->> 'previousUntil'::text))::timestamp with time zone) AND (((value ->> 'previousSessionId'::text))::uuid = f_1.session_key))",
+          "after": "((commercial_date >= $15) AND (commercial_date <= $16) AND ((NOT $20) OR CASE WHEN (date_kind = 'outside_session'::text) THEN ((commercial_date < $16) OR (completed_at <= $22)) ELSE EXISTS(SubPlan 5) END))"
+        },
+        {
+          "path": "root.1.0.1.0.0",
+          "key": "ChildCount",
+          "before": 0,
+          "after": 1
+        }
+      ]
+    },
+    {
+      "orders": 50,
+      "reader": "original",
+      "sqlHash": "a9691643e47bd4b2e3d887343fbbffb6254d5e71c2196af036338978a3984a6b",
+      "queryText": "with recursive\n  facts as materialized(select * from jsonb_to_recordset(v_facts) as z(side text,id uuid,date date,at timestamptz,session uuid,kind text,timezone text,sales text,\"mainUnits\" text,reasons jsonb)),\n  pairs as materialized(select * from jsonb_to_recordset(v_pairs) as z(aid uuid,bid uuid,ad date,bd date,alo timestamptz,ahi timestamptz,blo timestamptz,bhi timestamptz,atz text,btz text,av boolean,bv boolean,ac boolean,bc boolean,ordinal bigint)),\n  calendar_size as (\n    select case when v_days<=31 then 1 when v_days<=180 then 7 else greatest(1,ceil(((extract(year from v_end)-extract(year from v_start))*12+extract(month from v_end)-extract(month from v_start)+1)/199)::integer) end factor\n  ), calendar_bins as (\n    select v_start+n lo,least(v_end,v_start+n+factor-1) hi from calendar_size cross join lateral generate_series(0,case when v_mode='calendar' and v_days<=180 then v_days-1 else -1 end,factor) n where v_mode='calendar' and v_days<=180\n    union all\n    select greatest(v_start,t::date),least(v_end,(t+make_interval(months=>factor))::date-1)\n      from calendar_size cross join lateral generate_series(case when v_mode='calendar' and v_days>180 then date_trunc('month',v_start::timestamp) end,date_trunc('month',v_end::timestamp),make_interval(months=>factor)) t\n      where v_mode='calendar' and v_days>180\n  ), calendar_bounds as (\n    select lo,hi,case when v_compare then lo+v_shift end pl,case when v_compare then hi+v_shift end ph,\n      private.statistics_local_cutoff(lo,'00:00:00',v_tz) clo,\n      least(v_now,private.statistics_local_cutoff(hi+1,'00:00:00',v_tz)) chi,\n      case when v_compare then private.statistics_local_cutoff(lo+v_shift,'00:00:00',v_tz) end plo,\n      case when v_compare then case when v_partial and hi=v_end then v_previous_cut\n        else private.statistics_local_cutoff(hi+v_shift+1,'00:00:00',v_tz) end end phi\n    from calendar_bins\n  ), calendar_plan as (\n    select 'date:'||lo::text descriptor,'commercial_date'::text basis,\n      jsonb_build_object('kind','date_offset','days',coalesce(v_shift,0),'sessions',coalesce((select jsonb_agg(jsonb_build_object('currentSessionId',p.aid,'previousSessionId',p.bid,'ordinal',p.ordinal) order by p.ad,p.ordinal) from pairs p where p.ad between lo and hi and p.aid is not null and p.bid is not null),'[]'::jsonb)) mapping,\n      lo cdlo,hi cdhi,pl pdlo,ph pdhi,null::uuid csid,null::uuid psid,\n      clo,chi,plo,phi,(chi=v_now) ci,(v_partial and hi=v_end) pi,\n      true ca,v_compare pa,\n      case when not v_compare then 'root_comparison_unavailable'\n        when clo is null or chi is null or plo is null or phi is null then 'ambiguous_wall_time'\n        when private.statistics_v1_series_instant(clo) is null or private.statistics_v1_series_instant(chi) is null\n          or private.statistics_v1_series_instant(plo) is null or private.statistics_v1_series_instant(phi) is null then 'interval_out_of_range'\n        when chi<clo or phi<plo or chi-clo<>phi-plo or (chi=v_now) is distinct from (v_partial and hi=v_end) then 'duration_mismatch'\n        when exists(select 1 from facts f where (f.date between lo and hi or f.date between pl and ph)\n          and f.kind='outside_session' and f.timezone<>v_tz) then 'timezone_changed'\n        when exists(select 1 from facts f where (f.date between lo and hi or f.date between pl and ph)\n          and f.kind='verified_session' and not exists(select 1 from jsonb_array_elements(v_sessions) s\n            where s->>'id'=f.session::text and coalesce((s->>'valid')::boolean,false)\n              and f.at between (s->>'lo')::timestamptz and (s->>'hi')::timestamptz)) then 'unverified_session'\n        when exists(select 1 from pairs p where (p.ad between lo and hi or p.bd between pl and ph)\n          and (p.aid is null or p.bid is null or not coalesce(p.av and p.bv and p.bc,false))) then 'missing_counterpart'\n        when exists(select 1 from pairs p where p.ad between lo and hi and p.atz is distinct from p.btz) then 'timezone_changed'\n        when exists(select 1 from pairs p where p.ad between lo and hi and (p.ahi-p.alo is distinct from p.bhi-p.blo)) then 'duration_mismatch'\n        else null end reason\n    from calendar_bounds\n  ), session_bins as (\n    select p.*,n::numeric*3600*v_step elapsed_lo,(n+1)::numeric*3600*v_step elapsed_hi\n      from pairs p cross join lateral generate_series(0,case when v_mode='session' then greatest(1,div(greatest(coalesce(extract(epoch from p.ahi-p.alo),0),coalesce(extract(epoch from p.bhi-p.blo),0))*1000000+3600000000::numeric*v_step-1,3600000000::numeric*v_step)::integer)-1 else -1 end) n\n      where v_mode='session'\n  ), session_bounds as (\n    select *,aid is not null and elapsed_lo<extract(epoch from ahi-alo) ca,\n      bid is not null and elapsed_lo<extract(epoch from bhi-blo) pa,\n      alo+elapsed_lo*interval '1 second' clo,least(ahi,alo+elapsed_hi*interval '1 second') chi,\n      blo+elapsed_lo*interval '1 second' plo,least(bhi,blo+elapsed_hi*interval '1 second') phi\n    from session_bins\n  ), session_plan as (\n    select 'session:'||coalesce(ad,bd-v_shift)::text||':'||ordinal::text||':'||elapsed_lo::text descriptor,'session_elapsed'::text basis,\n      jsonb_build_object('kind','session_elapsed','ordinal',ordinal,'startSeconds',elapsed_lo::text,'endSeconds',elapsed_hi::text) mapping,\n      ad cdlo,ad cdhi,bd pdlo,bd pdhi,aid csid,bid psid,clo,chi,plo,phi,chi=ahi ci,phi=bhi pi,ca,pa,\n      case when not v_compare then 'root_comparison_unavailable' when not ca or not pa then 'missing_counterpart'\n        when atz is distinct from btz then 'timezone_changed' when chi-clo<>phi-plo or (chi=ahi) is distinct from (phi=bhi) then 'duration_mismatch' else null end reason\n    from session_bounds\n  ), outside_bins as (\n    select 'current' side,t lo,least(t+interval '1 hour',v_chi) hi,v_chi terminal from generate_series(v_clo,v_chi-interval '1 microsecond',interval '1 hour') t where v_mode='outside'\n    union all\n    select 'previous',t,least(t+interval '1 hour',v_phi),v_phi from generate_series(v_plo,v_phi-interval '1 microsecond',interval '1 hour') t where v_mode='outside' and v_compare\n  ), outside_keys as (\n    select *,to_char(lo at time zone v_tz,'HH24:MI:SS.US')||'/'||to_char(hi at time zone v_tz,'HH24:MI:SS.US') wall_key,\n      private.statistics_local_cutoff((lo at time zone v_tz)::date,(lo at time zone v_tz)::time,v_tz)=lo\n        and private.statistics_local_cutoff((hi at time zone v_tz)::date,(hi at time zone v_tz)::time,v_tz)=hi unique_wall\n    from outside_bins\n  ), outside_pairs as (\n    select a.lo clo,a.hi chi,b.lo plo,b.hi phi,a.terminal ct,b.terminal pt,\n      a.unique_wall au,b.unique_wall bu,coalesce(a.wall_key,b.wall_key) wall_key\n      from (select * from outside_keys where side='current') a full join (select * from outside_keys where side='previous') b\n        on a.wall_key=b.wall_key and a.unique_wall and b.unique_wall\n  ), outside_plan as (\n    select 'outside:'||wall_key||':'||to_char(coalesce(clo,plo) at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US') descriptor,'outside_session_wall'::text basis,\n      jsonb_build_object('kind','wall_clock','wallStart',to_char(coalesce(clo,plo) at time zone v_tz,'HH24:MI:SS.US'),\n        'wallEnd',to_char(coalesce(chi,phi) at time zone v_tz,'HH24:MI:SS.US'),'timezone',v_tz) mapping,\n      v_start cdlo,v_start cdhi,v_ps pdlo,v_ps pdhi,null::uuid csid,null::uuid psid,clo,chi,plo,phi,\n      chi=ct and ct=v_now ci,phi=pt and v_partial pi,clo is not null ca,plo is not null pa,\n      case when not v_compare then 'root_comparison_unavailable' when (clo is not null and not coalesce(au,false)) or (plo is not null and not coalesce(bu,false)) then 'ambiguous_wall_time'\n        when clo is null or plo is null then 'missing_counterpart' when chi-clo<>phi-plo or (chi=ct and ct=v_now) is distinct from (phi=pt and v_partial) then 'duration_mismatch' else null end reason\n    from outside_pairs\n  ), plan as materialized(\n    select * from calendar_plan union all select * from session_plan union all select * from outside_plan\n  ), membership as materialized (\n    select p.descriptor,f.* from plan p join facts f on\n      case when f.side='current' then p.ca and (\n        case when p.basis='commercial_date' then f.date between p.cdlo and p.cdhi\n          else f.date=p.cdlo and (case when p.basis='session_elapsed' then f.session=p.csid and f.kind='verified_session' else f.kind='outside_session' end)\n            and f.at>=p.clo and (f.at<p.chi or (p.ci and f.at=p.chi)) end)\n        else p.pa and (case when p.basis='commercial_date' then f.date between p.pdlo and p.pdhi\n          else f.date=p.pdlo and (case when p.basis='session_elapsed' then f.session=p.psid and f.kind='verified_session' else f.kind='outside_session' end)\n            and f.at>=p.plo and (f.at<p.phi or (p.pi and f.at=p.phi)) end) end\n  ), groups as materialized (\n    select descriptor,side,jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons) order by date,at,id) rows\n      from membership group by descriptor,side\n  ), point_metrics as (\n    select p.*,case when ca then private.statistics_metrics(coalesce(c.rows,'[]'::jsonb),v_historical) end cm,\n      case when pa then private.statistics_metrics(coalesce(b.rows,'[]'::jsonb),0) end pm\n    from plan p left join groups c on c.descriptor=p.descriptor and c.side='current'\n      left join groups b on b.descriptor=p.descriptor and b.side='previous'\n  ), intervals as (\n    select m.*,case when ca then\n      case when basis='commercial_date' then\n        coalesce((select jsonb_agg(slice order by slice->>'start',slice->>'sessionId',slice->>'timezone',slice->>'commercialDate') from (\n          select jsonb_build_object('sessionId',s.id,'timezone',s.tz,'commercialDate',s.d,'start',private.statistics_v1_series_instant(s.lo),'end',private.statistics_v1_series_instant(s.hi),'endInclusive',true) slice\n            from jsonb_to_recordset(v_sessions) s(id uuid,d date,lo timestamptz,hi timestamptz,tz text,valid boolean)\n            where s.d between cdlo and cdhi and s.valid and s.hi>=s.lo\n          union all select jsonb_build_object('sessionId',null,'timezone',z.tz,'commercialDate',cdlo,'endCommercialDate',cdhi,'start',private.statistics_v1_series_instant(z.lo),'end',private.statistics_v1_series_instant(z.hi),'endInclusive',z.hi=v_now) from (\n            select tz,private.statistics_local_cutoff(cdlo,'00:00:00',tz) lo,least(v_now,private.statistics_local_cutoff(cdhi+1,'00:00:00',tz)) hi\n              from (select distinct timezone tz from facts where side='current' and kind='outside_session' and date between cdlo and cdhi\n                union all select v_tz where not exists(select 1 from facts where side='current' and kind='outside_session' and date between cdlo and cdhi)) zones\n          ) z where private.statistics_v1_series_instant(z.lo) is not null and private.statistics_v1_series_instant(z.hi) is not null and z.hi>=z.lo\n        ) z),'[]'::jsonb)\n        else jsonb_build_array(jsonb_build_object('sessionId',csid,'timezone',coalesce((select s->>'tz' from jsonb_array_elements(v_sessions) s where s->>'id'=csid::text),v_tz),'commercialDate',cdlo,'start',private.statistics_v1_series_instant(clo),'end',private.statistics_v1_series_instant(chi),'endInclusive',ci)) end end cslices,\n      case when pa then case when basis='commercial_date' then\n        coalesce((select jsonb_agg(slice order by slice->>'start',slice->>'sessionId',slice->>'timezone',slice->>'commercialDate') from (\n          select jsonb_build_object('sessionId',p.bid,'timezone',p.btz,'commercialDate',p.bd,'start',private.statistics_v1_series_instant(p.blo),'end',private.statistics_v1_series_instant(p.bhi),'endInclusive',true) slice from pairs p\n            where p.bd between pdlo and pdhi and p.bv and p.bhi>=p.blo\n          union all select jsonb_build_object('sessionId',null,'timezone',z.tz,'commercialDate',pdlo,'endCommercialDate',pdhi,'start',private.statistics_v1_series_instant(z.lo),'end',private.statistics_v1_series_instant(z.hi),'endInclusive',pi and z.hi=v_previous_cut) from (\n            select tz,private.statistics_local_cutoff(pdlo,'00:00:00',tz) lo,\n              case when v_partial and pdhi=v_pe then least(v_previous_cut,private.statistics_local_cutoff(pdhi+1,'00:00:00',tz)) else private.statistics_local_cutoff(pdhi+1,'00:00:00',tz) end hi\n              from (select distinct timezone tz from facts where side='previous' and kind='outside_session' and date between pdlo and pdhi\n                union all select v_tz where not exists(select 1 from facts where side='previous' and kind='outside_session' and date between pdlo and pdhi)) zones\n          ) z where private.statistics_v1_series_instant(z.lo) is not null and private.statistics_v1_series_instant(z.hi) is not null and z.hi>=z.lo\n        ) z),'[]'::jsonb)\n        else jsonb_build_array(jsonb_build_object('sessionId',psid,'timezone',coalesce((select s->>'tz' from jsonb_array_elements(v_sessions) s where s->>'id'=psid::text),v_tz),'commercialDate',pdlo,'start',private.statistics_v1_series_instant(plo),'end',private.statistics_v1_series_instant(phi),'endInclusive',pi)) end end pslices\n    from point_metrics m\n  ), points as (\n    select descriptor,jsonb_build_object(\n      'key',md5(jsonb_build_array('statistics.series.v1',v_business,v_start,v_end,basis,descriptor,mapping,cslices->0->>'timezone',pslices->0->>'timezone')::text),\n      'label',coalesce(cdlo,pdlo-v_shift)::text||case when basis='commercial_date' and cdhi<>cdlo then ' / '||cdhi::text else '' end,\n      'basis',basis,'mapping',mapping,\n      'current',case when ca then jsonb_build_object('interval',jsonb_build_object('key',md5(jsonb_build_array('current',v_business,descriptor,cdlo,cdhi,csid,to_char(clo at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'),to_char(chi at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'))::text),\n        'startDate',cdlo,'endDate',cdhi,'slices',cslices,'observation',case when (basis='commercial_date' and v_partial and cdhi=v_end) or (basis<>'commercial_date' and chi=v_now and (csid is null or not coalesce((select (s->>'closed')::boolean from jsonb_array_elements(v_sessions) s where s->>'id'=csid::text),true))) then 'partial' else 'closed' end),'metrics',cm) end,\n      'previous',case when pa then jsonb_build_object('interval',jsonb_build_object('key',md5(jsonb_build_array('previous',v_business,descriptor,pdlo,pdhi,psid,to_char(plo at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'),to_char(phi at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'))::text),\n        'startDate',pdlo,'endDate',pdhi,'slices',pslices,'observation',case when (basis='commercial_date' and v_partial and pdhi=v_pe) or (basis<>'commercial_date' and pi and v_partial and (case when psid is not null then phi<(select (s->>'hi')::timestamptz from jsonb_array_elements(v_sessions) s where s->>'id'=psid::text) else phi<private.statistics_local_cutoff(pdhi+1,'00:00:00',v_tz) end)) then 'partial' else 'closed' end),'metrics',pm) end,\n      'alignment',jsonb_build_object('available',reason is null,'reason',reason),\n      'comparisons',(select jsonb_object_agg(k,private.statistics_v1_series_delta(cm->k,pm->k,reason is null,reason)) from unnest(array['sales','completedOrders','averageTicket','mainUnits']) k)\n    ) point,reason,coalesce(cdlo,pdlo-v_shift) sort_date,coalesce(clo,plo) sort_time\n    from intervals\n  ) select coalesce(jsonb_agg(point order by sort_date,sort_time nulls first,descriptor),'[]'::jsonb),\n      coalesce(bool_and(reason is null),false) and v_compare,\n      (array_agg(reason order by sort_date,sort_time nulls first,descriptor) filter(where reason is not null))[1],\n      (select count(*) from membership where side='current'),(select count(*) from membership where side='previous'),\n      private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons)) from facts where side='current'),'[]'::jsonb),v_historical),\n      case when v_compare then private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons)) from facts where side='previous'),'[]'::jsonb),0) end,\n    (select count(*) from facts f left join (select side,id,count(*) n from membership group by side,id) m using(side,id) where m.n is distinct from 1::bigint)\n                                                                                                    from points",
+      "first": "internal-plans/f4c-50-profile-original-1.json",
+      "second": "internal-plans/f4c-50-profile-original-2.json",
+      "differences": []
+    },
+    {
+      "orders": 50,
+      "reader": "original",
+      "sqlHash": "45dc5c38e7bf1ce4d9efcce98384521b958adae1db12fad4c963b1407b82979d",
+      "queryText": "\n  select private.statistics_v1_series_response(p_period,p_start_date,p_end_date,p_product_sort,p_limit,p_cursor);\n",
+      "first": "internal-plans/f4c-50-profile-original-1.json",
+      "second": "internal-plans/f4c-50-profile-original-2.json",
+      "differences": []
+    },
+    {
+      "orders": 50,
+      "reader": "original",
+      "sqlHash": "91a1497279f6ce510f7558d0e6b2161b22f42f920f960cc5b359dad7af55cfb5",
+      "queryText": "EXPLAIN(ANALYZE,BUFFERS,SETTINGS,FORMAT JSON) SELECT public.statistics_v1_summary('today',null,null,'units',5,'{\"asOf\":\"2026-10-14T04:42:36.372472+00:00\",\"offset\":0,\"revision\":\"327\",\"requestKey\":\"230e643158117d6274c5d4fc3ecdde02\"}'::jsonb);",
+      "first": "internal-plans/f4c-50-profile-original-1.json",
+      "second": "internal-plans/f4c-50-profile-original-2.json",
+      "differences": []
+    },
+    {
+      "orders": 50,
+      "reader": "AB",
+      "sqlHash": "aa378e786da334c36cd6bed72829bb023dd5543e320968d80455ef95c3c2e3a5",
+      "queryText": "select count(*)                   from public.orders o where o.business_id=v_business and o.status='completed'\n    and not exists(select 1 from public.order_statistics_completions c where c.order_id=o.id and c.active and c.commercial_date is not null and c.timezone is not null and not c.date_conflict)",
+      "first": "internal-plans/f4c-50-profile-AB-1.json",
+      "second": "internal-plans/f4c-50-profile-AB-2.json",
+      "differences": []
+    },
+    {
+      "orders": 50,
+      "reader": "AB",
+      "sqlHash": "6d40bf13000b83fbd24b5ced5b1d9aed91884569bbd696122e5f4506b1187f2d",
+      "queryText": "with eligible as materialized (\n    select c.*,f.agreed_total current_agreement\n    from public.order_statistics_completions c\n    join public.orders o on o.id=c.order_id and o.business_id=c.business_id and o.status='completed'\n    left join public.order_financials f on f.order_id=c.order_id and f.business_id=c.business_id\n    where c.active and c.business_id=v_business and private.statistics_can_read(c.business_id)\n      and c.commercial_date is not null and c.timezone is not null and not c.date_conflict and c.completed_at<=v_now\n      and (c.commercial_date between v_start and v_end or\n        (v_compare and c.commercial_date between v_ps and v_pe and\n          (not v_partial or case when c.date_kind='outside_session' then c.commercial_date<v_pe or c.completed_at<=v_previous_cutoff\n            else exists(select 1 from jsonb_array_elements(v_segments) seg where (seg->>'previousSessionId')::uuid=c.session_key and c.completed_at<=(seg->>'previousUntil')::timestamptz) end)))\n  ), digests as materialized (\n    select id,case when not composition_conflict then\n      private.statistics_source_digest(private.statistics_source_items(order_id,business_id)) end current_digest\n    from eligible\n  ), effective as materialized (\n    select c.*,\n  c.commercial_date is not null and c.timezone is not null and not c.date_conflict date_reliable,\n  case when not c.composition_conflict and c.composition_digest=d.current_digest then c.main_units end effective_units,\n  case when not c.monetary_conflict and not c.composition_conflict and c.agreed_total is not distinct from c.current_agreement\n    and c.breakdown_source='copy_total_price' and c.composition_digest=d.current_digest then c.agreed_total end effective_sales,\n  array_remove(array[\n    case when c.agreed_total is null then 'missing_agreement' end,\n    case when c.breakdown_source='unresolved' then 'unresolved_breakdown' end,\n    case when c.monetary_conflict or c.agreed_total is distinct from c.current_agreement then 'agreement_changed_after_completion' end,\n    case when c.composition_conflict or c.composition_digest<>d.current_digest then 'source_conflict' end,\n    case when c.main_units is null then 'missing_composition' end\n  ],null) reasons\n    from eligible c join digests d on d.id=c.id\n  ) select coalesce(jsonb_agg(to_jsonb(e)),'[]'::jsonb)                  from effective e",
+      "first": "internal-plans/f4c-50-profile-AB-1.json",
+      "second": "internal-plans/f4c-50-profile-AB-2.json",
+      "differences": []
+    },
+    {
+      "orders": 50,
+      "reader": "AB",
+      "sqlHash": "7a299dfe6aa6825cada082303f1b1984480fb94718f19a9e56e67c47a8286e59",
+      "queryText": "with current_facts as materialized (\n    select * from jsonb_populate_recordset(null::public.statistics_v1_effective_facts,v_effective) where business_id=v_business and commercial_date between v_start and v_end and date_reliable and completed_at<=v_now),\n  previous_facts as materialized (\n    select f.* from jsonb_populate_recordset(null::public.statistics_v1_effective_facts,v_effective) f where v_compare and f.business_id=v_business and f.commercial_date between v_ps and v_pe and f.date_reliable and f.completed_at<=v_now\n      and (not v_partial or case when f.date_kind='outside_session' then f.commercial_date<v_pe or f.completed_at<=v_previous_cutoff\n        else exists(select 1 from jsonb_array_elements(v_segments) seg where (seg->>'previousSessionId')::uuid=f.session_key and f.completed_at<=(seg->>'previousUntil')::timestamptz) end)),\n  product_lines as (select i.*,f.effective_sales,f.effective_units,f.completed_at from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id),\n  products as (\n    select coalesce(product_identity::text,'line:'||line_key::text) group_key,product_identity,\n      (array_agg(product_name order by completed_at desc,completion_id,line_key))[1] label,\n      case when bool_or(item_kind='product' and effective_units is null) or v_historical>0 then null else sum(case when item_kind='product' and effective_units is not null then quantity else 0 end)::bigint end main_units,\n      bool_or(item_kind='product' and effective_units is not null) has_main,\n      sum(case when effective_sales is not null then net_amount end) net,\n      bool_or(effective_sales is null) partial from product_lines group by group_key,product_identity),\n  ranked as (select *,row_number() over(order by case when p_product_sort='units' then main_units else net end desc nulls last,group_key collate \"C\") position from products where p_product_sort='amount' or has_main),\n  categories as (\n    select category_identity,coalesce((array_agg(category_name order by completed_at desc,completion_id))[1],'Sin categoría histórica') label,sum(net_amount) amount\n    from product_lines where effective_sales is not null group by category_identity),\n  all_products as(select product_identity from products where product_identity is not null union\n    select i.product_identity from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity is not null)\n  select\n    coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from current_facts),'[]'::jsonb),\n    coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from previous_facts),'[]'::jsonb),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',product_identity,'label',label,'mainUnits',main_units,'netAmount',round(net,2)::text,'quality',case when partial then case when net is null then 'unavailable' else 'partial' end else 'exact' end) order by position) from ranked where position>v_offset and position<=v_offset+p_limit),'[]'::jsonb),\n    (select count(*) from ranked),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',category_identity,'label',label,'amount',round(amount,2)::text,'percentage',case when not exists(select 1 from current_facts where effective_sales is null) and v_historical=0 and (select sum(amount) from categories)>0 then round(amount*100/(select sum(amount) from categories),2)::text end) order by amount desc,label) from categories),'[]'::jsonb),\n    (select count(*) from current_facts where date_kind='outside_session'),\n    (select count(*) from current_facts where effective_sales is null),\n    (select sum(current_agreement) from current_facts where effective_sales is null),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',p.product_identity,'currentMainUnits',case when v_historical>0 or exists(select 1 from current_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end,'previousMainUnits',\n      case when not v_compare or exists(select 1 from previous_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end)) from all_products p),'[]'::jsonb)",
+      "first": "internal-plans/f4c-50-profile-AB-1.json",
+      "second": "internal-plans/f4c-50-profile-AB-2.json",
+      "differences": []
+    },
+    {
+      "orders": 50,
+      "reader": "AB",
+      "sqlHash": "a9691643e47bd4b2e3d887343fbbffb6254d5e71c2196af036338978a3984a6b",
+      "queryText": "with recursive\n  facts as materialized(select * from jsonb_to_recordset(v_facts) as z(side text,id uuid,date date,at timestamptz,session uuid,kind text,timezone text,sales text,\"mainUnits\" text,reasons jsonb)),\n  pairs as materialized(select * from jsonb_to_recordset(v_pairs) as z(aid uuid,bid uuid,ad date,bd date,alo timestamptz,ahi timestamptz,blo timestamptz,bhi timestamptz,atz text,btz text,av boolean,bv boolean,ac boolean,bc boolean,ordinal bigint)),\n  calendar_size as (\n    select case when v_days<=31 then 1 when v_days<=180 then 7 else greatest(1,ceil(((extract(year from v_end)-extract(year from v_start))*12+extract(month from v_end)-extract(month from v_start)+1)/199)::integer) end factor\n  ), calendar_bins as (\n    select v_start+n lo,least(v_end,v_start+n+factor-1) hi from calendar_size cross join lateral generate_series(0,case when v_mode='calendar' and v_days<=180 then v_days-1 else -1 end,factor) n where v_mode='calendar' and v_days<=180\n    union all\n    select greatest(v_start,t::date),least(v_end,(t+make_interval(months=>factor))::date-1)\n      from calendar_size cross join lateral generate_series(case when v_mode='calendar' and v_days>180 then date_trunc('month',v_start::timestamp) end,date_trunc('month',v_end::timestamp),make_interval(months=>factor)) t\n      where v_mode='calendar' and v_days>180\n  ), calendar_bounds as (\n    select lo,hi,case when v_compare then lo+v_shift end pl,case when v_compare then hi+v_shift end ph,\n      private.statistics_local_cutoff(lo,'00:00:00',v_tz) clo,\n      least(v_now,private.statistics_local_cutoff(hi+1,'00:00:00',v_tz)) chi,\n      case when v_compare then private.statistics_local_cutoff(lo+v_shift,'00:00:00',v_tz) end plo,\n      case when v_compare then case when v_partial and hi=v_end then v_previous_cut\n        else private.statistics_local_cutoff(hi+v_shift+1,'00:00:00',v_tz) end end phi\n    from calendar_bins\n  ), calendar_plan as (\n    select 'date:'||lo::text descriptor,'commercial_date'::text basis,\n      jsonb_build_object('kind','date_offset','days',coalesce(v_shift,0),'sessions',coalesce((select jsonb_agg(jsonb_build_object('currentSessionId',p.aid,'previousSessionId',p.bid,'ordinal',p.ordinal) order by p.ad,p.ordinal) from pairs p where p.ad between lo and hi and p.aid is not null and p.bid is not null),'[]'::jsonb)) mapping,\n      lo cdlo,hi cdhi,pl pdlo,ph pdhi,null::uuid csid,null::uuid psid,\n      clo,chi,plo,phi,(chi=v_now) ci,(v_partial and hi=v_end) pi,\n      true ca,v_compare pa,\n      case when not v_compare then 'root_comparison_unavailable'\n        when clo is null or chi is null or plo is null or phi is null then 'ambiguous_wall_time'\n        when private.statistics_v1_series_instant(clo) is null or private.statistics_v1_series_instant(chi) is null\n          or private.statistics_v1_series_instant(plo) is null or private.statistics_v1_series_instant(phi) is null then 'interval_out_of_range'\n        when chi<clo or phi<plo or chi-clo<>phi-plo or (chi=v_now) is distinct from (v_partial and hi=v_end) then 'duration_mismatch'\n        when exists(select 1 from facts f where (f.date between lo and hi or f.date between pl and ph)\n          and f.kind='outside_session' and f.timezone<>v_tz) then 'timezone_changed'\n        when exists(select 1 from facts f where (f.date between lo and hi or f.date between pl and ph)\n          and f.kind='verified_session' and not exists(select 1 from jsonb_array_elements(v_sessions) s\n            where s->>'id'=f.session::text and coalesce((s->>'valid')::boolean,false)\n              and f.at between (s->>'lo')::timestamptz and (s->>'hi')::timestamptz)) then 'unverified_session'\n        when exists(select 1 from pairs p where (p.ad between lo and hi or p.bd between pl and ph)\n          and (p.aid is null or p.bid is null or not coalesce(p.av and p.bv and p.bc,false))) then 'missing_counterpart'\n        when exists(select 1 from pairs p where p.ad between lo and hi and p.atz is distinct from p.btz) then 'timezone_changed'\n        when exists(select 1 from pairs p where p.ad between lo and hi and (p.ahi-p.alo is distinct from p.bhi-p.blo)) then 'duration_mismatch'\n        else null end reason\n    from calendar_bounds\n  ), session_bins as (\n    select p.*,n::numeric*3600*v_step elapsed_lo,(n+1)::numeric*3600*v_step elapsed_hi\n      from pairs p cross join lateral generate_series(0,case when v_mode='session' then greatest(1,div(greatest(coalesce(extract(epoch from p.ahi-p.alo),0),coalesce(extract(epoch from p.bhi-p.blo),0))*1000000+3600000000::numeric*v_step-1,3600000000::numeric*v_step)::integer)-1 else -1 end) n\n      where v_mode='session'\n  ), session_bounds as (\n    select *,aid is not null and elapsed_lo<extract(epoch from ahi-alo) ca,\n      bid is not null and elapsed_lo<extract(epoch from bhi-blo) pa,\n      alo+elapsed_lo*interval '1 second' clo,least(ahi,alo+elapsed_hi*interval '1 second') chi,\n      blo+elapsed_lo*interval '1 second' plo,least(bhi,blo+elapsed_hi*interval '1 second') phi\n    from session_bins\n  ), session_plan as (\n    select 'session:'||coalesce(ad,bd-v_shift)::text||':'||ordinal::text||':'||elapsed_lo::text descriptor,'session_elapsed'::text basis,\n      jsonb_build_object('kind','session_elapsed','ordinal',ordinal,'startSeconds',elapsed_lo::text,'endSeconds',elapsed_hi::text) mapping,\n      ad cdlo,ad cdhi,bd pdlo,bd pdhi,aid csid,bid psid,clo,chi,plo,phi,chi=ahi ci,phi=bhi pi,ca,pa,\n      case when not v_compare then 'root_comparison_unavailable' when not ca or not pa then 'missing_counterpart'\n        when atz is distinct from btz then 'timezone_changed' when chi-clo<>phi-plo or (chi=ahi) is distinct from (phi=bhi) then 'duration_mismatch' else null end reason\n    from session_bounds\n  ), outside_bins as (\n    select 'current' side,t lo,least(t+interval '1 hour',v_chi) hi,v_chi terminal from generate_series(v_clo,v_chi-interval '1 microsecond',interval '1 hour') t where v_mode='outside'\n    union all\n    select 'previous',t,least(t+interval '1 hour',v_phi),v_phi from generate_series(v_plo,v_phi-interval '1 microsecond',interval '1 hour') t where v_mode='outside' and v_compare\n  ), outside_keys as (\n    select *,to_char(lo at time zone v_tz,'HH24:MI:SS.US')||'/'||to_char(hi at time zone v_tz,'HH24:MI:SS.US') wall_key,\n      private.statistics_local_cutoff((lo at time zone v_tz)::date,(lo at time zone v_tz)::time,v_tz)=lo\n        and private.statistics_local_cutoff((hi at time zone v_tz)::date,(hi at time zone v_tz)::time,v_tz)=hi unique_wall\n    from outside_bins\n  ), outside_pairs as (\n    select a.lo clo,a.hi chi,b.lo plo,b.hi phi,a.terminal ct,b.terminal pt,\n      a.unique_wall au,b.unique_wall bu,coalesce(a.wall_key,b.wall_key) wall_key\n      from (select * from outside_keys where side='current') a full join (select * from outside_keys where side='previous') b\n        on a.wall_key=b.wall_key and a.unique_wall and b.unique_wall\n  ), outside_plan as (\n    select 'outside:'||wall_key||':'||to_char(coalesce(clo,plo) at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US') descriptor,'outside_session_wall'::text basis,\n      jsonb_build_object('kind','wall_clock','wallStart',to_char(coalesce(clo,plo) at time zone v_tz,'HH24:MI:SS.US'),\n        'wallEnd',to_char(coalesce(chi,phi) at time zone v_tz,'HH24:MI:SS.US'),'timezone',v_tz) mapping,\n      v_start cdlo,v_start cdhi,v_ps pdlo,v_ps pdhi,null::uuid csid,null::uuid psid,clo,chi,plo,phi,\n      chi=ct and ct=v_now ci,phi=pt and v_partial pi,clo is not null ca,plo is not null pa,\n      case when not v_compare then 'root_comparison_unavailable' when (clo is not null and not coalesce(au,false)) or (plo is not null and not coalesce(bu,false)) then 'ambiguous_wall_time'\n        when clo is null or plo is null then 'missing_counterpart' when chi-clo<>phi-plo or (chi=ct and ct=v_now) is distinct from (phi=pt and v_partial) then 'duration_mismatch' else null end reason\n    from outside_pairs\n  ), plan as materialized(\n    select * from calendar_plan union all select * from session_plan union all select * from outside_plan\n  ), membership as materialized (\n    select p.descriptor,f.* from plan p join facts f on\n      case when f.side='current' then p.ca and (\n        case when p.basis='commercial_date' then f.date between p.cdlo and p.cdhi\n          else f.date=p.cdlo and (case when p.basis='session_elapsed' then f.session=p.csid and f.kind='verified_session' else f.kind='outside_session' end)\n            and f.at>=p.clo and (f.at<p.chi or (p.ci and f.at=p.chi)) end)\n        else p.pa and (case when p.basis='commercial_date' then f.date between p.pdlo and p.pdhi\n          else f.date=p.pdlo and (case when p.basis='session_elapsed' then f.session=p.psid and f.kind='verified_session' else f.kind='outside_session' end)\n            and f.at>=p.plo and (f.at<p.phi or (p.pi and f.at=p.phi)) end) end\n  ), groups as materialized (\n    select descriptor,side,jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons) order by date,at,id) rows\n      from membership group by descriptor,side\n  ), point_metrics as (\n    select p.*,case when ca then private.statistics_metrics(coalesce(c.rows,'[]'::jsonb),v_historical) end cm,\n      case when pa then private.statistics_metrics(coalesce(b.rows,'[]'::jsonb),0) end pm\n    from plan p left join groups c on c.descriptor=p.descriptor and c.side='current'\n      left join groups b on b.descriptor=p.descriptor and b.side='previous'\n  ), intervals as (\n    select m.*,case when ca then\n      case when basis='commercial_date' then\n        coalesce((select jsonb_agg(slice order by slice->>'start',slice->>'sessionId',slice->>'timezone',slice->>'commercialDate') from (\n          select jsonb_build_object('sessionId',s.id,'timezone',s.tz,'commercialDate',s.d,'start',private.statistics_v1_series_instant(s.lo),'end',private.statistics_v1_series_instant(s.hi),'endInclusive',true) slice\n            from jsonb_to_recordset(v_sessions) s(id uuid,d date,lo timestamptz,hi timestamptz,tz text,valid boolean)\n            where s.d between cdlo and cdhi and s.valid and s.hi>=s.lo\n          union all select jsonb_build_object('sessionId',null,'timezone',z.tz,'commercialDate',cdlo,'endCommercialDate',cdhi,'start',private.statistics_v1_series_instant(z.lo),'end',private.statistics_v1_series_instant(z.hi),'endInclusive',z.hi=v_now) from (\n            select tz,private.statistics_local_cutoff(cdlo,'00:00:00',tz) lo,least(v_now,private.statistics_local_cutoff(cdhi+1,'00:00:00',tz)) hi\n              from (select distinct timezone tz from facts where side='current' and kind='outside_session' and date between cdlo and cdhi\n                union all select v_tz where not exists(select 1 from facts where side='current' and kind='outside_session' and date between cdlo and cdhi)) zones\n          ) z where private.statistics_v1_series_instant(z.lo) is not null and private.statistics_v1_series_instant(z.hi) is not null and z.hi>=z.lo\n        ) z),'[]'::jsonb)\n        else jsonb_build_array(jsonb_build_object('sessionId',csid,'timezone',coalesce((select s->>'tz' from jsonb_array_elements(v_sessions) s where s->>'id'=csid::text),v_tz),'commercialDate',cdlo,'start',private.statistics_v1_series_instant(clo),'end',private.statistics_v1_series_instant(chi),'endInclusive',ci)) end end cslices,\n      case when pa then case when basis='commercial_date' then\n        coalesce((select jsonb_agg(slice order by slice->>'start',slice->>'sessionId',slice->>'timezone',slice->>'commercialDate') from (\n          select jsonb_build_object('sessionId',p.bid,'timezone',p.btz,'commercialDate',p.bd,'start',private.statistics_v1_series_instant(p.blo),'end',private.statistics_v1_series_instant(p.bhi),'endInclusive',true) slice from pairs p\n            where p.bd between pdlo and pdhi and p.bv and p.bhi>=p.blo\n          union all select jsonb_build_object('sessionId',null,'timezone',z.tz,'commercialDate',pdlo,'endCommercialDate',pdhi,'start',private.statistics_v1_series_instant(z.lo),'end',private.statistics_v1_series_instant(z.hi),'endInclusive',pi and z.hi=v_previous_cut) from (\n            select tz,private.statistics_local_cutoff(pdlo,'00:00:00',tz) lo,\n              case when v_partial and pdhi=v_pe then least(v_previous_cut,private.statistics_local_cutoff(pdhi+1,'00:00:00',tz)) else private.statistics_local_cutoff(pdhi+1,'00:00:00',tz) end hi\n              from (select distinct timezone tz from facts where side='previous' and kind='outside_session' and date between pdlo and pdhi\n                union all select v_tz where not exists(select 1 from facts where side='previous' and kind='outside_session' and date between pdlo and pdhi)) zones\n          ) z where private.statistics_v1_series_instant(z.lo) is not null and private.statistics_v1_series_instant(z.hi) is not null and z.hi>=z.lo\n        ) z),'[]'::jsonb)\n        else jsonb_build_array(jsonb_build_object('sessionId',psid,'timezone',coalesce((select s->>'tz' from jsonb_array_elements(v_sessions) s where s->>'id'=psid::text),v_tz),'commercialDate',pdlo,'start',private.statistics_v1_series_instant(plo),'end',private.statistics_v1_series_instant(phi),'endInclusive',pi)) end end pslices\n    from point_metrics m\n  ), points as (\n    select descriptor,jsonb_build_object(\n      'key',md5(jsonb_build_array('statistics.series.v1',v_business,v_start,v_end,basis,descriptor,mapping,cslices->0->>'timezone',pslices->0->>'timezone')::text),\n      'label',coalesce(cdlo,pdlo-v_shift)::text||case when basis='commercial_date' and cdhi<>cdlo then ' / '||cdhi::text else '' end,\n      'basis',basis,'mapping',mapping,\n      'current',case when ca then jsonb_build_object('interval',jsonb_build_object('key',md5(jsonb_build_array('current',v_business,descriptor,cdlo,cdhi,csid,to_char(clo at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'),to_char(chi at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'))::text),\n        'startDate',cdlo,'endDate',cdhi,'slices',cslices,'observation',case when (basis='commercial_date' and v_partial and cdhi=v_end) or (basis<>'commercial_date' and chi=v_now and (csid is null or not coalesce((select (s->>'closed')::boolean from jsonb_array_elements(v_sessions) s where s->>'id'=csid::text),true))) then 'partial' else 'closed' end),'metrics',cm) end,\n      'previous',case when pa then jsonb_build_object('interval',jsonb_build_object('key',md5(jsonb_build_array('previous',v_business,descriptor,pdlo,pdhi,psid,to_char(plo at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'),to_char(phi at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'))::text),\n        'startDate',pdlo,'endDate',pdhi,'slices',pslices,'observation',case when (basis='commercial_date' and v_partial and pdhi=v_pe) or (basis<>'commercial_date' and pi and v_partial and (case when psid is not null then phi<(select (s->>'hi')::timestamptz from jsonb_array_elements(v_sessions) s where s->>'id'=psid::text) else phi<private.statistics_local_cutoff(pdhi+1,'00:00:00',v_tz) end)) then 'partial' else 'closed' end),'metrics',pm) end,\n      'alignment',jsonb_build_object('available',reason is null,'reason',reason),\n      'comparisons',(select jsonb_object_agg(k,private.statistics_v1_series_delta(cm->k,pm->k,reason is null,reason)) from unnest(array['sales','completedOrders','averageTicket','mainUnits']) k)\n    ) point,reason,coalesce(cdlo,pdlo-v_shift) sort_date,coalesce(clo,plo) sort_time\n    from intervals\n  ) select coalesce(jsonb_agg(point order by sort_date,sort_time nulls first,descriptor),'[]'::jsonb),\n      coalesce(bool_and(reason is null),false) and v_compare,\n      (array_agg(reason order by sort_date,sort_time nulls first,descriptor) filter(where reason is not null))[1],\n      (select count(*) from membership where side='current'),(select count(*) from membership where side='previous'),\n      private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons)) from facts where side='current'),'[]'::jsonb),v_historical),\n      case when v_compare then private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons)) from facts where side='previous'),'[]'::jsonb),0) end,\n    (select count(*) from facts f left join (select side,id,count(*) n from membership group by side,id) m using(side,id) where m.n is distinct from 1::bigint)\n                                                                                                    from points",
+      "first": "internal-plans/f4c-50-profile-AB-1.json",
+      "second": "internal-plans/f4c-50-profile-AB-2.json",
+      "differences": []
+    },
+    {
+      "orders": 50,
+      "reader": "AB",
+      "sqlHash": "9e9585c623ff6a40455610e793db75182fa3ee185b7745940859baa2e1c00e45",
+      "queryText": "EXPLAIN(ANALYZE,BUFFERS,SETTINGS,FORMAT JSON) SELECT private.statistics_v1_summary_candidate('today',null,null,'units',5,'{\"asOf\":\"2026-10-14T04:42:36.372472+00:00\",\"offset\":0,\"revision\":\"327\",\"requestKey\":\"230e643158117d6274c5d4fc3ecdde02\"}'::jsonb);",
+      "first": "internal-plans/f4c-50-profile-AB-1.json",
+      "second": "internal-plans/f4c-50-profile-AB-2.json",
+      "differences": []
+    },
+    {
+      "orders": 50,
+      "reader": "D1",
+      "sqlHash": "aa378e786da334c36cd6bed72829bb023dd5543e320968d80455ef95c3c2e3a5",
+      "queryText": "select count(*)                   from public.orders o where o.business_id=v_business and o.status='completed'\n    and not exists(select 1 from public.order_statistics_completions c where c.order_id=o.id and c.active and c.commercial_date is not null and c.timezone is not null and not c.date_conflict)",
+      "first": "internal-plans/f4c-50-profile-D1-1.json",
+      "second": "internal-plans/f4c-50-profile-D1-2.json",
+      "differences": []
+    },
+    {
+      "orders": 50,
+      "reader": "D1",
+      "sqlHash": "6d40bf13000b83fbd24b5ced5b1d9aed91884569bbd696122e5f4506b1187f2d",
+      "queryText": "with eligible as materialized (\n    select c.*,f.agreed_total current_agreement\n    from public.order_statistics_completions c\n    join public.orders o on o.id=c.order_id and o.business_id=c.business_id and o.status='completed'\n    left join public.order_financials f on f.order_id=c.order_id and f.business_id=c.business_id\n    where c.active and c.business_id=v_business and private.statistics_can_read(c.business_id)\n      and c.commercial_date is not null and c.timezone is not null and not c.date_conflict and c.completed_at<=v_now\n      and (c.commercial_date between v_start and v_end or\n        (v_compare and c.commercial_date between v_ps and v_pe and\n          (not v_partial or case when c.date_kind='outside_session' then c.commercial_date<v_pe or c.completed_at<=v_previous_cutoff\n            else exists(select 1 from jsonb_array_elements(v_segments) seg where (seg->>'previousSessionId')::uuid=c.session_key and c.completed_at<=(seg->>'previousUntil')::timestamptz) end)))\n  ), digests as materialized (\n    select id,case when not composition_conflict then\n      private.statistics_source_digest(private.statistics_source_items(order_id,business_id)) end current_digest\n    from eligible\n  ), effective as materialized (\n    select c.*,\n  c.commercial_date is not null and c.timezone is not null and not c.date_conflict date_reliable,\n  case when not c.composition_conflict and c.composition_digest=d.current_digest then c.main_units end effective_units,\n  case when not c.monetary_conflict and not c.composition_conflict and c.agreed_total is not distinct from c.current_agreement\n    and c.breakdown_source='copy_total_price' and c.composition_digest=d.current_digest then c.agreed_total end effective_sales,\n  array_remove(array[\n    case when c.agreed_total is null then 'missing_agreement' end,\n    case when c.breakdown_source='unresolved' then 'unresolved_breakdown' end,\n    case when c.monetary_conflict or c.agreed_total is distinct from c.current_agreement then 'agreement_changed_after_completion' end,\n    case when c.composition_conflict or c.composition_digest<>d.current_digest then 'source_conflict' end,\n    case when c.main_units is null then 'missing_composition' end\n  ],null) reasons\n    from eligible c join digests d on d.id=c.id\n  ) select coalesce(jsonb_agg(to_jsonb(e)),'[]'::jsonb)                  from effective e",
+      "first": "internal-plans/f4c-50-profile-D1-1.json",
+      "second": "internal-plans/f4c-50-profile-D1-2.json",
+      "differences": []
+    },
+    {
+      "orders": 50,
+      "reader": "D1",
+      "sqlHash": "7a299dfe6aa6825cada082303f1b1984480fb94718f19a9e56e67c47a8286e59",
+      "queryText": "with current_facts as materialized (\n    select * from jsonb_populate_recordset(null::public.statistics_v1_effective_facts,v_effective) where business_id=v_business and commercial_date between v_start and v_end and date_reliable and completed_at<=v_now),\n  previous_facts as materialized (\n    select f.* from jsonb_populate_recordset(null::public.statistics_v1_effective_facts,v_effective) f where v_compare and f.business_id=v_business and f.commercial_date between v_ps and v_pe and f.date_reliable and f.completed_at<=v_now\n      and (not v_partial or case when f.date_kind='outside_session' then f.commercial_date<v_pe or f.completed_at<=v_previous_cutoff\n        else exists(select 1 from jsonb_array_elements(v_segments) seg where (seg->>'previousSessionId')::uuid=f.session_key and f.completed_at<=(seg->>'previousUntil')::timestamptz) end)),\n  product_lines as (select i.*,f.effective_sales,f.effective_units,f.completed_at from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id),\n  products as (\n    select coalesce(product_identity::text,'line:'||line_key::text) group_key,product_identity,\n      (array_agg(product_name order by completed_at desc,completion_id,line_key))[1] label,\n      case when bool_or(item_kind='product' and effective_units is null) or v_historical>0 then null else sum(case when item_kind='product' and effective_units is not null then quantity else 0 end)::bigint end main_units,\n      bool_or(item_kind='product' and effective_units is not null) has_main,\n      sum(case when effective_sales is not null then net_amount end) net,\n      bool_or(effective_sales is null) partial from product_lines group by group_key,product_identity),\n  ranked as (select *,row_number() over(order by case when p_product_sort='units' then main_units else net end desc nulls last,group_key collate \"C\") position from products where p_product_sort='amount' or has_main),\n  categories as (\n    select category_identity,coalesce((array_agg(category_name order by completed_at desc,completion_id))[1],'Sin categoría histórica') label,sum(net_amount) amount\n    from product_lines where effective_sales is not null group by category_identity),\n  all_products as(select product_identity from products where product_identity is not null union\n    select i.product_identity from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity is not null)\n  select\n    coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from current_facts),'[]'::jsonb),\n    coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from previous_facts),'[]'::jsonb),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',product_identity,'label',label,'mainUnits',main_units,'netAmount',round(net,2)::text,'quality',case when partial then case when net is null then 'unavailable' else 'partial' end else 'exact' end) order by position) from ranked where position>v_offset and position<=v_offset+p_limit),'[]'::jsonb),\n    (select count(*) from ranked),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',category_identity,'label',label,'amount',round(amount,2)::text,'percentage',case when not exists(select 1 from current_facts where effective_sales is null) and v_historical=0 and (select sum(amount) from categories)>0 then round(amount*100/(select sum(amount) from categories),2)::text end) order by amount desc,label) from categories),'[]'::jsonb),\n    (select count(*) from current_facts where date_kind='outside_session'),\n    (select count(*) from current_facts where effective_sales is null),\n    (select sum(current_agreement) from current_facts where effective_sales is null),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',p.product_identity,'currentMainUnits',case when v_historical>0 or exists(select 1 from current_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end,'previousMainUnits',\n      case when not v_compare or exists(select 1 from previous_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end)) from all_products p),'[]'::jsonb)",
+      "first": "internal-plans/f4c-50-profile-D1-1.json",
+      "second": "internal-plans/f4c-50-profile-D1-2.json",
+      "differences": []
+    },
+    {
+      "orders": 50,
+      "reader": "D1",
+      "sqlHash": "644b3c2f850d9d4ef4dfd247f8cdf7a3c9ca4bcff062bb3e13125f09f5088da5",
+      "queryText": "EXPLAIN(ANALYZE,BUFFERS,SETTINGS,FORMAT JSON) SELECT private.statistics_v1_summary_d1_candidate('today',null,null,'units',5,'{\"asOf\":\"2026-10-14T04:42:36.372472+00:00\",\"offset\":0,\"revision\":\"327\",\"requestKey\":\"230e643158117d6274c5d4fc3ecdde02\"}'::jsonb);",
+      "first": "internal-plans/f4c-50-profile-D1-1.json",
+      "second": "internal-plans/f4c-50-profile-D1-2.json",
+      "differences": []
+    },
+    {
+      "orders": 100,
+      "reader": "original",
+      "sqlHash": "4d04ae98ef48645fb94e1149dd0e7b97cb1e02ee13e705419c80d2b0ab5c70d4",
+      "queryText": "with current_facts as materialized (\n    select * from public.statistics_v1_effective_facts where business_id=v_business and commercial_date between v_start and v_end and date_reliable and completed_at<=v_now),\n  previous_facts as materialized (\n    select f.* from public.statistics_v1_effective_facts f where v_compare and f.business_id=v_business and f.commercial_date between v_ps and v_pe and f.date_reliable and f.completed_at<=v_now\n      and (not v_partial or case when f.date_kind='outside_session' then f.commercial_date<v_pe or f.completed_at<=v_previous_cutoff\n        else exists(select 1 from jsonb_array_elements(v_segments) seg where (seg->>'previousSessionId')::uuid=f.session_key and f.completed_at<=(seg->>'previousUntil')::timestamptz) end)),\n  product_lines as (select i.*,f.effective_sales,f.effective_units,f.completed_at from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id),\n  products as (\n    select coalesce(product_identity::text,'line:'||line_key::text) group_key,product_identity,\n      (array_agg(product_name order by completed_at desc,completion_id,line_key))[1] label,\n      case when bool_or(item_kind='product' and effective_units is null) or v_historical>0 then null else sum(case when item_kind='product' and effective_units is not null then quantity else 0 end)::bigint end main_units,\n      bool_or(item_kind='product' and effective_units is not null) has_main,\n      sum(case when effective_sales is not null then net_amount end) net,\n      bool_or(effective_sales is null) partial from product_lines group by group_key,product_identity),\n  ranked as (select *,row_number() over(order by case when p_product_sort='units' then main_units else net end desc nulls last,group_key collate \"C\") position from products where p_product_sort='amount' or has_main),\n  categories as (\n    select category_identity,coalesce((array_agg(category_name order by completed_at desc,completion_id))[1],'Sin categoría histórica') label,sum(net_amount) amount\n    from product_lines where effective_sales is not null group by category_identity),\n  all_products as(select product_identity from products where product_identity is not null union\n    select i.product_identity from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity is not null)\n  select\n    coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from current_facts),'[]'::jsonb),\n    coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from previous_facts),'[]'::jsonb),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',product_identity,'label',label,'mainUnits',main_units,'netAmount',round(net,2)::text,'quality',case when partial then case when net is null then 'unavailable' else 'partial' end else 'exact' end) order by position) from ranked where position>v_offset and position<=v_offset+p_limit),'[]'::jsonb),\n    (select count(*) from ranked),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',category_identity,'label',label,'amount',round(amount,2)::text,'percentage',case when not exists(select 1 from current_facts where effective_sales is null) and v_historical=0 and (select sum(amount) from categories)>0 then round(amount*100/(select sum(amount) from categories),2)::text end) order by amount desc,label) from categories),'[]'::jsonb),\n    (select count(*) from current_facts where date_kind='outside_session'),\n    (select count(*) from current_facts where effective_sales is null),\n    (select sum(current_agreement) from current_facts where effective_sales is null),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',p.product_identity,'currentMainUnits',case when v_historical>0 or exists(select 1 from current_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end,'previousMainUnits',\n      case when not v_compare or exists(select 1 from previous_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end)) from all_products p),'[]'::jsonb)",
+      "first": "internal-plans/f4c-100-profile-original-1.json",
+      "second": "internal-plans/f4c-100-profile-original-2.json",
+      "differences": [
+        {
+          "path": "root.0.3.0",
+          "key": "Index Cond",
+          "before": "((business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid) AND (commercial_date >= '2026-10-14'::date) AND (commercial_date <= '2026-10-14'::date) AND (commercial_date IS NOT NULL) AND (completed_at <= '2026-10-14 04:43:29.017895+00'::timestamp with time zone))",
+          "after": "((business_id = $8) AND (commercial_date >= $14) AND (commercial_date <= $15) AND (commercial_date IS NOT NULL) AND (completed_at <= $11))"
+        },
+        {
+          "path": "root.0.3.1",
+          "key": "Filter",
+          "before": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid) AND (status = 'completed'::text))",
+          "after": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (business_id = $8) AND (status = 'completed'::text))"
+        },
+        {
+          "path": "root.0.4.0",
+          "key": "Filter",
+          "before": "(business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid)",
+          "after": "(business_id = $8)"
+        },
+        {
+          "path": "root.1",
+          "key": "Node Type",
+          "before": "Subquery Scan",
+          "after": "Result"
+        },
+        {
+          "path": "root.1",
+          "key": "Filter",
+          "before": "CASE WHEN (f_1.date_kind = 'outside_session'::text) THEN ((f_1.commercial_date < '2026-10-13'::date) OR (f_1.completed_at <= '2026-10-13 04:43:29.017895+00'::timestamp with time zone)) ELSE EXISTS(SubPlan 5) END",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1",
+          "key": "ChildCount",
+          "before": 2,
+          "after": 1
+        },
+        {
+          "path": "root.1.0",
+          "key": "Node Type",
+          "before": "Nested Loop",
+          "after": "Subquery Scan"
+        },
+        {
+          "path": "root.1.0",
+          "key": "Join Type",
+          "before": "Left",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0",
+          "key": "Filter",
+          "before": "NOT_PRESENT",
+          "after": "((NOT $19) OR CASE WHEN (f_1.date_kind = 'outside_session'::text) THEN ((f_1.commercial_date < $17) OR (f_1.completed_at <= $26)) ELSE EXISTS(SubPlan 5) END)"
+        },
+        {
+          "path": "root.1.0",
+          "key": "Join Filter",
+          "before": "(f_2.order_id = c_1.order_id)",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0",
+          "key": "ChildCount",
+          "before": 5,
+          "after": 2
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "Node Type",
+          "before": "Index Only Scan",
+          "after": "Nested Loop"
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "Relation Name",
+          "before": "profiles",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "Index Name",
+          "before": "profiles_id_business_id_key",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "Join Type",
+          "before": "NOT_PRESENT",
+          "after": "Left"
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "Filter",
+          "before": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "Index Cond",
+          "before": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "Join Filter",
+          "before": "NOT_PRESENT",
+          "after": "(f_2.order_id = c_1.order_id)"
+        },
+        {
+          "path": "root.1.0.0",
+          "key": "ChildCount",
+          "before": 0,
+          "after": 5
+        },
+        {
+          "path": "root.1.0.1",
+          "key": "Node Type",
+          "before": "Index Scan",
+          "after": "Function Scan"
+        },
+        {
+          "path": "root.1.0.1",
+          "key": "Relation Name",
+          "before": "profiles",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0.1",
+          "key": "Index Name",
+          "before": "profiles_id_business_id_key",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0.1",
+          "key": "Filter",
+          "before": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+          "after": "((f_1.completed_at <= ((value ->> 'previousUntil'::text))::timestamp with time zone) AND (((value ->> 'previousSessionId'::text))::uuid = f_1.session_key))"
+        },
+        {
+          "path": "root.1.0.1",
+          "key": "Index Cond",
+          "before": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.4.0",
+          "key": "Sort Key",
+          "before": [
+            "((products.main_units)::numeric) DESC NULLS LAST",
+            "((products.group_key)::text) COLLATE \"C\""
+          ],
+          "after": [
+            "(CASE WHEN ($4 = 'units'::text) THEN (products.main_units)::numeric ELSE products.net END) DESC NULLS LAST",
+            "((products.group_key)::text) COLLATE \"C\""
+          ]
+        },
+        {
+          "path": "root.4.0.0",
+          "key": "Filter",
+          "before": "has_main",
+          "after": "(($4 = 'amount'::text) OR has_main)"
+        },
+        {
+          "path": "root.8.0.0",
+          "key": "Filter",
+          "before": "((\"position\" > 0) AND (\"position\" <= 5))",
+          "after": "((\"position\" > $25) AND (\"position\" <= ($25 + $5)))"
+        }
+      ]
+    },
+    {
+      "orders": 100,
+      "reader": "original",
+      "sqlHash": "9619f4ecb1126f738636fcd2cfea09df5aa197eb3228576da85fd458ed9c6117",
+      "queryText": "with facts as materialized(select * from public.statistics_v1_effective_facts where business_id=v_business and commercial_date=v_start and date_reliable and completed_at<=v_now),\n    bounds as(select\n      least(private.statistics_local_cutoff(v_start,'00:00:00',v_timezone),coalesce(min(completed_at),v_now)) lo,\n      greatest(least(v_now,private.statistics_local_cutoff(v_start+1,'00:00:00',v_timezone)),coalesce(max(completed_at),'-infinity'::timestamptz),\n        coalesce((select max(coalesce(s.closed_at,v_now)) from public.store_session_statistics_snapshots snap join public.store_sessions s on s.id=snap.session_id where snap.business_id=v_business and snap.commercial_date=v_start and snap.source_quality='exact'),'-infinity'::timestamptz)) hi from facts),\n    sizing as(select date_trunc('hour',lo) lo,date_trunc('hour',hi)+interval '1 hour' hi,greatest(1,ceil((extract(epoch from hi-lo)/3600+1)/199)::integer) step from bounds),\n    bins as(select t lo,t+make_interval(hours=>step) hi from sizing cross join lateral generate_series(lo,hi-interval '1 microsecond',make_interval(hours=>step)) t)\n    select coalesce(jsonb_agg(jsonb_build_object('label',to_char(b.lo at time zone v_timezone,'YYYY-MM-DD HH24:MI')||' · '||b.lo::text,'metrics',private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',f.effective_sales::text,'mainUnits',f.effective_units::text,'reasons',f.reasons)) from facts f where f.completed_at>=b.lo and f.completed_at<b.hi),'[]'::jsonb),v_historical)) order by b.lo),'[]'::jsonb)                from bins b",
+      "first": "internal-plans/f4c-100-profile-original-1.json",
+      "second": "internal-plans/f4c-100-profile-original-2.json",
+      "differences": [
+        {
+          "path": "root.0.3.0",
+          "key": "Index Cond",
+          "before": "((business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid) AND (commercial_date IS NOT NULL) AND (commercial_date = '2026-10-14'::date) AND (completed_at <= '2026-10-14 04:43:29.017895+00'::timestamp with time zone))",
+          "after": "((business_id = $8) AND (commercial_date IS NOT NULL) AND (commercial_date = $14) AND (completed_at <= $11))"
+        },
+        {
+          "path": "root.0.3.1",
+          "key": "Filter",
+          "before": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid) AND (status = 'completed'::text))",
+          "after": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (business_id = $8) AND (status = 'completed'::text))"
+        },
+        {
+          "path": "root.0.4.0",
+          "key": "Filter",
+          "before": "(business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid)",
+          "after": "(business_id = $8)"
+        },
+        {
+          "path": "root.1.0.0.0.2.0",
+          "key": "Filter",
+          "before": "((business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid) AND (commercial_date = '2026-10-14'::date) AND (source_quality = 'exact'::text) AND statistics_can_read(business_id))",
+          "after": "((business_id = $8) AND (commercial_date = $14) AND (source_quality = 'exact'::text) AND statistics_can_read(business_id))"
+        },
+        {
+          "path": "root.2.0",
+          "key": "Filter",
+          "before": "((completed_at >= t.t) AND (completed_at < (t.t + make_interval(0, 0, 0, 0, GREATEST(1, (ceil((((EXTRACT(epoch FROM ((GREATEST(LEAST('2026-10-14 04:43:29.017895+00'::timestamp with time zone, statistics_local_cutoff('2026-10-15'::date, '00:00:00'::time without time zone, 'America/Argentina/Buenos_Aires'::text)), COALESCE(max(facts.completed_at), '-infinity'::timestamp with time zone), COALESCE((InitPlan 8).col1, '-infinity'::timestamp with time zone))) - (LEAST(statistics_local_cutoff('2026-10-14'::date, '00:00:00'::time without time zone, 'America/Argentina/Buenos_Aires'::text), COALESCE(min(facts.completed_at), '2026-10-14 04:43:29.017895+00'::timestamp with time zone))))) / '3600'::numeric) + '1'::numeric) / '199'::numeric)))::integer), 0, '0'::double precision))))",
+          "after": "((completed_at >= t.t) AND (completed_at < (t.t + make_interval(0, 0, 0, 0, GREATEST(1, (ceil((((EXTRACT(epoch FROM ((GREATEST(LEAST($11, statistics_local_cutoff(($14 + 1), '00:00:00'::time without time zone, $10)), COALESCE(max(facts.completed_at), '-infinity'::timestamp with time zone), COALESCE((InitPlan 8).col1, '-infinity'::timestamp with time zone))) - (LEAST(statistics_local_cutoff($14, '00:00:00'::time without time zone, $10), COALESCE(min(facts.completed_at), $11))))) / '3600'::numeric) + '1'::numeric) / '199'::numeric)))::integer), 0, '0'::double precision))))"
+        }
+      ]
+    },
+    {
+      "orders": 100,
+      "reader": "original",
+      "sqlHash": "24f365b7e55e99ad966cf562f562f638a0eecccccb7e450acd69d18ff1cb2017",
+      "queryText": "\n  select coalesce(jsonb_agg(jsonb_build_object(\n    'line_key',i.id,'parent_line_key',i.parent_order_item_id,'item_kind',i.item_kind,\n    'quantity',i.quantity,'unit_price',i.unit_price,'gross',i.quantity*i.unit_price,\n    'product_identity',coalesce(s.product_identity,case when p.business_id=p_business then i.product_id end),\n    'product_name',coalesce(s.product_name,i.product_name),'category_identity',s.category_identity,'category_name',s.category_name,\n    'source_valid',(i.product_id is null or p.business_id=p_business) and\n      (i.parent_order_item_id is null or exists(select 1 from public.order_items parent where parent.id=i.parent_order_item_id and parent.order_id=p_order and parent.item_kind='product'))\n  ) order by i.id),'[]'::jsonb)\n  from public.order_items i join public.orders o on o.id=i.order_id and o.business_id=p_business\n  left join public.order_item_statistics_snapshots s on s.source_item_id=i.id and s.active and s.business_id=p_business\n  left join public.products p on p.id=i.product_id where i.order_id=p_order and (current_user='postgres' or private.statistics_can_read(p_business));\n",
+      "first": "internal-plans/f4c-100-profile-original-1.json",
+      "second": "internal-plans/f4c-100-profile-original-2.json",
+      "differences": []
+    },
+    {
+      "orders": 100,
+      "reader": "original",
+      "sqlHash": "ef43a9a4b900f3454ac81dcadb8ffe56403047fe4acc22f7fd822aa40ba9461d",
+      "queryText": "with effective as materialized (\n    select f.* from public.statistics_v1_effective_facts f\n    where f.business_id=v_business and f.date_reliable and f.completed_at<=v_now\n      and (f.commercial_date between v_start and v_end or (v_compare and f.commercial_date between v_ps and v_pe))\n  ), selected as (\n    select 'current' side,f.* from effective f where f.commercial_date between v_start and v_end\n    union all\n    select 'previous' side,f.* from effective f where v_compare and f.commercial_date between v_ps and v_pe\n      and (not v_partial or case when f.date_kind='outside_session' then f.commercial_date<v_pe or f.completed_at<=v_previous_cut\n        else exists(select 1 from jsonb_array_elements(v_base#>'{comparison,segments}') seg\n          where (seg->>'previousSessionId')::uuid=f.session_key and f.completed_at<=(seg->>'previousUntil')::timestamptz) end)\n  )\n  select coalesce(jsonb_agg(jsonb_build_object('side',side,'id',id,'date',commercial_date,\n    'at',completed_at,'session',session_key,'kind',date_kind,'timezone',timezone,\n    'sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons) order by side,commercial_date,completed_at,id),'[]'::jsonb)\n                 from selected",
+      "first": "internal-plans/f4c-100-profile-original-1.json",
+      "second": "internal-plans/f4c-100-profile-original-2.json",
+      "differences": [
+        {
+          "path": "root.0.3.0",
+          "key": "Filter",
+          "before": "((timezone IS NOT NULL) AND (NOT date_conflict) AND (((commercial_date >= '2026-10-14'::date) AND (commercial_date <= '2026-10-14'::date)) OR ((commercial_date >= '2026-10-13'::date) AND (commercial_date <= '2026-10-13'::date))) AND statistics_can_read(business_id) AND statistics_can_read(business_id))",
+          "after": "((timezone IS NOT NULL) AND (NOT date_conflict) AND (((commercial_date >= $13) AND (commercial_date <= $14)) OR ($19 AND (commercial_date >= $15) AND (commercial_date <= $16))) AND statistics_can_read(business_id) AND statistics_can_read(business_id))"
+        },
+        {
+          "path": "root.0.3.0",
+          "key": "Index Cond",
+          "before": "((business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid) AND (commercial_date IS NOT NULL) AND (completed_at <= '2026-10-14 04:43:29.017895+00'::timestamp with time zone))",
+          "after": "((business_id = $9) AND (commercial_date IS NOT NULL) AND (completed_at <= $12))"
+        },
+        {
+          "path": "root.0.3.1",
+          "key": "Filter",
+          "before": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid) AND (status = 'completed'::text))",
+          "after": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (business_id = $9) AND (status = 'completed'::text))"
+        },
+        {
+          "path": "root.0.4.0",
+          "key": "Filter",
+          "before": "(business_id = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'::uuid)",
+          "after": "(business_id = $9)"
+        },
+        {
+          "path": "root.1.0.0.0",
+          "key": "Filter",
+          "before": "((commercial_date >= '2026-10-14'::date) AND (commercial_date <= '2026-10-14'::date))",
+          "after": "((commercial_date >= $13) AND (commercial_date <= $14))"
+        },
+        {
+          "path": "root.1.0.1.0",
+          "key": "Node Type",
+          "before": "CTE Scan",
+          "after": "Result"
+        },
+        {
+          "path": "root.1.0.1.0",
+          "key": "Filter",
+          "before": "((commercial_date >= '2026-10-13'::date) AND (commercial_date <= '2026-10-13'::date) AND CASE WHEN (date_kind = 'outside_session'::text) THEN ((commercial_date < '2026-10-13'::date) OR (completed_at <= '2026-10-13 04:43:29.017895+00'::timestamp with time zone)) ELSE EXISTS(SubPlan 5) END)",
+          "after": "NOT_PRESENT"
+        },
+        {
+          "path": "root.1.0.1.0.0",
+          "key": "Node Type",
+          "before": "Function Scan",
+          "after": "CTE Scan"
+        },
+        {
+          "path": "root.1.0.1.0.0",
+          "key": "Filter",
+          "before": "((f_1.completed_at <= ((value ->> 'previousUntil'::text))::timestamp with time zone) AND (((value ->> 'previousSessionId'::text))::uuid = f_1.session_key))",
+          "after": "((commercial_date >= $15) AND (commercial_date <= $16) AND ((NOT $20) OR CASE WHEN (date_kind = 'outside_session'::text) THEN ((commercial_date < $16) OR (completed_at <= $22)) ELSE EXISTS(SubPlan 5) END))"
+        },
+        {
+          "path": "root.1.0.1.0.0",
+          "key": "ChildCount",
+          "before": 0,
+          "after": 1
+        }
+      ]
+    },
+    {
+      "orders": 100,
+      "reader": "original",
+      "sqlHash": "a9691643e47bd4b2e3d887343fbbffb6254d5e71c2196af036338978a3984a6b",
+      "queryText": "with recursive\n  facts as materialized(select * from jsonb_to_recordset(v_facts) as z(side text,id uuid,date date,at timestamptz,session uuid,kind text,timezone text,sales text,\"mainUnits\" text,reasons jsonb)),\n  pairs as materialized(select * from jsonb_to_recordset(v_pairs) as z(aid uuid,bid uuid,ad date,bd date,alo timestamptz,ahi timestamptz,blo timestamptz,bhi timestamptz,atz text,btz text,av boolean,bv boolean,ac boolean,bc boolean,ordinal bigint)),\n  calendar_size as (\n    select case when v_days<=31 then 1 when v_days<=180 then 7 else greatest(1,ceil(((extract(year from v_end)-extract(year from v_start))*12+extract(month from v_end)-extract(month from v_start)+1)/199)::integer) end factor\n  ), calendar_bins as (\n    select v_start+n lo,least(v_end,v_start+n+factor-1) hi from calendar_size cross join lateral generate_series(0,case when v_mode='calendar' and v_days<=180 then v_days-1 else -1 end,factor) n where v_mode='calendar' and v_days<=180\n    union all\n    select greatest(v_start,t::date),least(v_end,(t+make_interval(months=>factor))::date-1)\n      from calendar_size cross join lateral generate_series(case when v_mode='calendar' and v_days>180 then date_trunc('month',v_start::timestamp) end,date_trunc('month',v_end::timestamp),make_interval(months=>factor)) t\n      where v_mode='calendar' and v_days>180\n  ), calendar_bounds as (\n    select lo,hi,case when v_compare then lo+v_shift end pl,case when v_compare then hi+v_shift end ph,\n      private.statistics_local_cutoff(lo,'00:00:00',v_tz) clo,\n      least(v_now,private.statistics_local_cutoff(hi+1,'00:00:00',v_tz)) chi,\n      case when v_compare then private.statistics_local_cutoff(lo+v_shift,'00:00:00',v_tz) end plo,\n      case when v_compare then case when v_partial and hi=v_end then v_previous_cut\n        else private.statistics_local_cutoff(hi+v_shift+1,'00:00:00',v_tz) end end phi\n    from calendar_bins\n  ), calendar_plan as (\n    select 'date:'||lo::text descriptor,'commercial_date'::text basis,\n      jsonb_build_object('kind','date_offset','days',coalesce(v_shift,0),'sessions',coalesce((select jsonb_agg(jsonb_build_object('currentSessionId',p.aid,'previousSessionId',p.bid,'ordinal',p.ordinal) order by p.ad,p.ordinal) from pairs p where p.ad between lo and hi and p.aid is not null and p.bid is not null),'[]'::jsonb)) mapping,\n      lo cdlo,hi cdhi,pl pdlo,ph pdhi,null::uuid csid,null::uuid psid,\n      clo,chi,plo,phi,(chi=v_now) ci,(v_partial and hi=v_end) pi,\n      true ca,v_compare pa,\n      case when not v_compare then 'root_comparison_unavailable'\n        when clo is null or chi is null or plo is null or phi is null then 'ambiguous_wall_time'\n        when private.statistics_v1_series_instant(clo) is null or private.statistics_v1_series_instant(chi) is null\n          or private.statistics_v1_series_instant(plo) is null or private.statistics_v1_series_instant(phi) is null then 'interval_out_of_range'\n        when chi<clo or phi<plo or chi-clo<>phi-plo or (chi=v_now) is distinct from (v_partial and hi=v_end) then 'duration_mismatch'\n        when exists(select 1 from facts f where (f.date between lo and hi or f.date between pl and ph)\n          and f.kind='outside_session' and f.timezone<>v_tz) then 'timezone_changed'\n        when exists(select 1 from facts f where (f.date between lo and hi or f.date between pl and ph)\n          and f.kind='verified_session' and not exists(select 1 from jsonb_array_elements(v_sessions) s\n            where s->>'id'=f.session::text and coalesce((s->>'valid')::boolean,false)\n              and f.at between (s->>'lo')::timestamptz and (s->>'hi')::timestamptz)) then 'unverified_session'\n        when exists(select 1 from pairs p where (p.ad between lo and hi or p.bd between pl and ph)\n          and (p.aid is null or p.bid is null or not coalesce(p.av and p.bv and p.bc,false))) then 'missing_counterpart'\n        when exists(select 1 from pairs p where p.ad between lo and hi and p.atz is distinct from p.btz) then 'timezone_changed'\n        when exists(select 1 from pairs p where p.ad between lo and hi and (p.ahi-p.alo is distinct from p.bhi-p.blo)) then 'duration_mismatch'\n        else null end reason\n    from calendar_bounds\n  ), session_bins as (\n    select p.*,n::numeric*3600*v_step elapsed_lo,(n+1)::numeric*3600*v_step elapsed_hi\n      from pairs p cross join lateral generate_series(0,case when v_mode='session' then greatest(1,div(greatest(coalesce(extract(epoch from p.ahi-p.alo),0),coalesce(extract(epoch from p.bhi-p.blo),0))*1000000+3600000000::numeric*v_step-1,3600000000::numeric*v_step)::integer)-1 else -1 end) n\n      where v_mode='session'\n  ), session_bounds as (\n    select *,aid is not null and elapsed_lo<extract(epoch from ahi-alo) ca,\n      bid is not null and elapsed_lo<extract(epoch from bhi-blo) pa,\n      alo+elapsed_lo*interval '1 second' clo,least(ahi,alo+elapsed_hi*interval '1 second') chi,\n      blo+elapsed_lo*interval '1 second' plo,least(bhi,blo+elapsed_hi*interval '1 second') phi\n    from session_bins\n  ), session_plan as (\n    select 'session:'||coalesce(ad,bd-v_shift)::text||':'||ordinal::text||':'||elapsed_lo::text descriptor,'session_elapsed'::text basis,\n      jsonb_build_object('kind','session_elapsed','ordinal',ordinal,'startSeconds',elapsed_lo::text,'endSeconds',elapsed_hi::text) mapping,\n      ad cdlo,ad cdhi,bd pdlo,bd pdhi,aid csid,bid psid,clo,chi,plo,phi,chi=ahi ci,phi=bhi pi,ca,pa,\n      case when not v_compare then 'root_comparison_unavailable' when not ca or not pa then 'missing_counterpart'\n        when atz is distinct from btz then 'timezone_changed' when chi-clo<>phi-plo or (chi=ahi) is distinct from (phi=bhi) then 'duration_mismatch' else null end reason\n    from session_bounds\n  ), outside_bins as (\n    select 'current' side,t lo,least(t+interval '1 hour',v_chi) hi,v_chi terminal from generate_series(v_clo,v_chi-interval '1 microsecond',interval '1 hour') t where v_mode='outside'\n    union all\n    select 'previous',t,least(t+interval '1 hour',v_phi),v_phi from generate_series(v_plo,v_phi-interval '1 microsecond',interval '1 hour') t where v_mode='outside' and v_compare\n  ), outside_keys as (\n    select *,to_char(lo at time zone v_tz,'HH24:MI:SS.US')||'/'||to_char(hi at time zone v_tz,'HH24:MI:SS.US') wall_key,\n      private.statistics_local_cutoff((lo at time zone v_tz)::date,(lo at time zone v_tz)::time,v_tz)=lo\n        and private.statistics_local_cutoff((hi at time zone v_tz)::date,(hi at time zone v_tz)::time,v_tz)=hi unique_wall\n    from outside_bins\n  ), outside_pairs as (\n    select a.lo clo,a.hi chi,b.lo plo,b.hi phi,a.terminal ct,b.terminal pt,\n      a.unique_wall au,b.unique_wall bu,coalesce(a.wall_key,b.wall_key) wall_key\n      from (select * from outside_keys where side='current') a full join (select * from outside_keys where side='previous') b\n        on a.wall_key=b.wall_key and a.unique_wall and b.unique_wall\n  ), outside_plan as (\n    select 'outside:'||wall_key||':'||to_char(coalesce(clo,plo) at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US') descriptor,'outside_session_wall'::text basis,\n      jsonb_build_object('kind','wall_clock','wallStart',to_char(coalesce(clo,plo) at time zone v_tz,'HH24:MI:SS.US'),\n        'wallEnd',to_char(coalesce(chi,phi) at time zone v_tz,'HH24:MI:SS.US'),'timezone',v_tz) mapping,\n      v_start cdlo,v_start cdhi,v_ps pdlo,v_ps pdhi,null::uuid csid,null::uuid psid,clo,chi,plo,phi,\n      chi=ct and ct=v_now ci,phi=pt and v_partial pi,clo is not null ca,plo is not null pa,\n      case when not v_compare then 'root_comparison_unavailable' when (clo is not null and not coalesce(au,false)) or (plo is not null and not coalesce(bu,false)) then 'ambiguous_wall_time'\n        when clo is null or plo is null then 'missing_counterpart' when chi-clo<>phi-plo or (chi=ct and ct=v_now) is distinct from (phi=pt and v_partial) then 'duration_mismatch' else null end reason\n    from outside_pairs\n  ), plan as materialized(\n    select * from calendar_plan union all select * from session_plan union all select * from outside_plan\n  ), membership as materialized (\n    select p.descriptor,f.* from plan p join facts f on\n      case when f.side='current' then p.ca and (\n        case when p.basis='commercial_date' then f.date between p.cdlo and p.cdhi\n          else f.date=p.cdlo and (case when p.basis='session_elapsed' then f.session=p.csid and f.kind='verified_session' else f.kind='outside_session' end)\n            and f.at>=p.clo and (f.at<p.chi or (p.ci and f.at=p.chi)) end)\n        else p.pa and (case when p.basis='commercial_date' then f.date between p.pdlo and p.pdhi\n          else f.date=p.pdlo and (case when p.basis='session_elapsed' then f.session=p.psid and f.kind='verified_session' else f.kind='outside_session' end)\n            and f.at>=p.plo and (f.at<p.phi or (p.pi and f.at=p.phi)) end) end\n  ), groups as materialized (\n    select descriptor,side,jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons) order by date,at,id) rows\n      from membership group by descriptor,side\n  ), point_metrics as (\n    select p.*,case when ca then private.statistics_metrics(coalesce(c.rows,'[]'::jsonb),v_historical) end cm,\n      case when pa then private.statistics_metrics(coalesce(b.rows,'[]'::jsonb),0) end pm\n    from plan p left join groups c on c.descriptor=p.descriptor and c.side='current'\n      left join groups b on b.descriptor=p.descriptor and b.side='previous'\n  ), intervals as (\n    select m.*,case when ca then\n      case when basis='commercial_date' then\n        coalesce((select jsonb_agg(slice order by slice->>'start',slice->>'sessionId',slice->>'timezone',slice->>'commercialDate') from (\n          select jsonb_build_object('sessionId',s.id,'timezone',s.tz,'commercialDate',s.d,'start',private.statistics_v1_series_instant(s.lo),'end',private.statistics_v1_series_instant(s.hi),'endInclusive',true) slice\n            from jsonb_to_recordset(v_sessions) s(id uuid,d date,lo timestamptz,hi timestamptz,tz text,valid boolean)\n            where s.d between cdlo and cdhi and s.valid and s.hi>=s.lo\n          union all select jsonb_build_object('sessionId',null,'timezone',z.tz,'commercialDate',cdlo,'endCommercialDate',cdhi,'start',private.statistics_v1_series_instant(z.lo),'end',private.statistics_v1_series_instant(z.hi),'endInclusive',z.hi=v_now) from (\n            select tz,private.statistics_local_cutoff(cdlo,'00:00:00',tz) lo,least(v_now,private.statistics_local_cutoff(cdhi+1,'00:00:00',tz)) hi\n              from (select distinct timezone tz from facts where side='current' and kind='outside_session' and date between cdlo and cdhi\n                union all select v_tz where not exists(select 1 from facts where side='current' and kind='outside_session' and date between cdlo and cdhi)) zones\n          ) z where private.statistics_v1_series_instant(z.lo) is not null and private.statistics_v1_series_instant(z.hi) is not null and z.hi>=z.lo\n        ) z),'[]'::jsonb)\n        else jsonb_build_array(jsonb_build_object('sessionId',csid,'timezone',coalesce((select s->>'tz' from jsonb_array_elements(v_sessions) s where s->>'id'=csid::text),v_tz),'commercialDate',cdlo,'start',private.statistics_v1_series_instant(clo),'end',private.statistics_v1_series_instant(chi),'endInclusive',ci)) end end cslices,\n      case when pa then case when basis='commercial_date' then\n        coalesce((select jsonb_agg(slice order by slice->>'start',slice->>'sessionId',slice->>'timezone',slice->>'commercialDate') from (\n          select jsonb_build_object('sessionId',p.bid,'timezone',p.btz,'commercialDate',p.bd,'start',private.statistics_v1_series_instant(p.blo),'end',private.statistics_v1_series_instant(p.bhi),'endInclusive',true) slice from pairs p\n            where p.bd between pdlo and pdhi and p.bv and p.bhi>=p.blo\n          union all select jsonb_build_object('sessionId',null,'timezone',z.tz,'commercialDate',pdlo,'endCommercialDate',pdhi,'start',private.statistics_v1_series_instant(z.lo),'end',private.statistics_v1_series_instant(z.hi),'endInclusive',pi and z.hi=v_previous_cut) from (\n            select tz,private.statistics_local_cutoff(pdlo,'00:00:00',tz) lo,\n              case when v_partial and pdhi=v_pe then least(v_previous_cut,private.statistics_local_cutoff(pdhi+1,'00:00:00',tz)) else private.statistics_local_cutoff(pdhi+1,'00:00:00',tz) end hi\n              from (select distinct timezone tz from facts where side='previous' and kind='outside_session' and date between pdlo and pdhi\n                union all select v_tz where not exists(select 1 from facts where side='previous' and kind='outside_session' and date between pdlo and pdhi)) zones\n          ) z where private.statistics_v1_series_instant(z.lo) is not null and private.statistics_v1_series_instant(z.hi) is not null and z.hi>=z.lo\n        ) z),'[]'::jsonb)\n        else jsonb_build_array(jsonb_build_object('sessionId',psid,'timezone',coalesce((select s->>'tz' from jsonb_array_elements(v_sessions) s where s->>'id'=psid::text),v_tz),'commercialDate',pdlo,'start',private.statistics_v1_series_instant(plo),'end',private.statistics_v1_series_instant(phi),'endInclusive',pi)) end end pslices\n    from point_metrics m\n  ), points as (\n    select descriptor,jsonb_build_object(\n      'key',md5(jsonb_build_array('statistics.series.v1',v_business,v_start,v_end,basis,descriptor,mapping,cslices->0->>'timezone',pslices->0->>'timezone')::text),\n      'label',coalesce(cdlo,pdlo-v_shift)::text||case when basis='commercial_date' and cdhi<>cdlo then ' / '||cdhi::text else '' end,\n      'basis',basis,'mapping',mapping,\n      'current',case when ca then jsonb_build_object('interval',jsonb_build_object('key',md5(jsonb_build_array('current',v_business,descriptor,cdlo,cdhi,csid,to_char(clo at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'),to_char(chi at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'))::text),\n        'startDate',cdlo,'endDate',cdhi,'slices',cslices,'observation',case when (basis='commercial_date' and v_partial and cdhi=v_end) or (basis<>'commercial_date' and chi=v_now and (csid is null or not coalesce((select (s->>'closed')::boolean from jsonb_array_elements(v_sessions) s where s->>'id'=csid::text),true))) then 'partial' else 'closed' end),'metrics',cm) end,\n      'previous',case when pa then jsonb_build_object('interval',jsonb_build_object('key',md5(jsonb_build_array('previous',v_business,descriptor,pdlo,pdhi,psid,to_char(plo at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'),to_char(phi at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'))::text),\n        'startDate',pdlo,'endDate',pdhi,'slices',pslices,'observation',case when (basis='commercial_date' and v_partial and pdhi=v_pe) or (basis<>'commercial_date' and pi and v_partial and (case when psid is not null then phi<(select (s->>'hi')::timestamptz from jsonb_array_elements(v_sessions) s where s->>'id'=psid::text) else phi<private.statistics_local_cutoff(pdhi+1,'00:00:00',v_tz) end)) then 'partial' else 'closed' end),'metrics',pm) end,\n      'alignment',jsonb_build_object('available',reason is null,'reason',reason),\n      'comparisons',(select jsonb_object_agg(k,private.statistics_v1_series_delta(cm->k,pm->k,reason is null,reason)) from unnest(array['sales','completedOrders','averageTicket','mainUnits']) k)\n    ) point,reason,coalesce(cdlo,pdlo-v_shift) sort_date,coalesce(clo,plo) sort_time\n    from intervals\n  ) select coalesce(jsonb_agg(point order by sort_date,sort_time nulls first,descriptor),'[]'::jsonb),\n      coalesce(bool_and(reason is null),false) and v_compare,\n      (array_agg(reason order by sort_date,sort_time nulls first,descriptor) filter(where reason is not null))[1],\n      (select count(*) from membership where side='current'),(select count(*) from membership where side='previous'),\n      private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons)) from facts where side='current'),'[]'::jsonb),v_historical),\n      case when v_compare then private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons)) from facts where side='previous'),'[]'::jsonb),0) end,\n    (select count(*) from facts f left join (select side,id,count(*) n from membership group by side,id) m using(side,id) where m.n is distinct from 1::bigint)\n                                                                                                    from points",
+      "first": "internal-plans/f4c-100-profile-original-1.json",
+      "second": "internal-plans/f4c-100-profile-original-2.json",
+      "differences": []
+    },
+    {
+      "orders": 100,
+      "reader": "original",
+      "sqlHash": "45dc5c38e7bf1ce4d9efcce98384521b958adae1db12fad4c963b1407b82979d",
+      "queryText": "\n  select private.statistics_v1_series_response(p_period,p_start_date,p_end_date,p_product_sort,p_limit,p_cursor);\n",
+      "first": "internal-plans/f4c-100-profile-original-1.json",
+      "second": "internal-plans/f4c-100-profile-original-2.json",
+      "differences": []
+    },
+    {
+      "orders": 100,
+      "reader": "original",
+      "sqlHash": "866a82b463337e31c09b5c8d56e06d32bdca432be6933c787aacaeb497f6399b",
+      "queryText": "EXPLAIN(ANALYZE,BUFFERS,SETTINGS,FORMAT JSON) SELECT public.statistics_v1_summary('today',null,null,'units',5,'{\"asOf\":\"2026-10-14T04:43:29.017895+00:00\",\"offset\":0,\"revision\":\"527\",\"requestKey\":\"92fa487b57264f047c7ca0ce788ef138\"}'::jsonb);",
+      "first": "internal-plans/f4c-100-profile-original-1.json",
+      "second": "internal-plans/f4c-100-profile-original-2.json",
+      "differences": []
+    },
+    {
+      "orders": 100,
+      "reader": "AB",
+      "sqlHash": "6d40bf13000b83fbd24b5ced5b1d9aed91884569bbd696122e5f4506b1187f2d",
+      "queryText": "with eligible as materialized (\n    select c.*,f.agreed_total current_agreement\n    from public.order_statistics_completions c\n    join public.orders o on o.id=c.order_id and o.business_id=c.business_id and o.status='completed'\n    left join public.order_financials f on f.order_id=c.order_id and f.business_id=c.business_id\n    where c.active and c.business_id=v_business and private.statistics_can_read(c.business_id)\n      and c.commercial_date is not null and c.timezone is not null and not c.date_conflict and c.completed_at<=v_now\n      and (c.commercial_date between v_start and v_end or\n        (v_compare and c.commercial_date between v_ps and v_pe and\n          (not v_partial or case when c.date_kind='outside_session' then c.commercial_date<v_pe or c.completed_at<=v_previous_cutoff\n            else exists(select 1 from jsonb_array_elements(v_segments) seg where (seg->>'previousSessionId')::uuid=c.session_key and c.completed_at<=(seg->>'previousUntil')::timestamptz) end)))\n  ), digests as materialized (\n    select id,case when not composition_conflict then\n      private.statistics_source_digest(private.statistics_source_items(order_id,business_id)) end current_digest\n    from eligible\n  ), effective as materialized (\n    select c.*,\n  c.commercial_date is not null and c.timezone is not null and not c.date_conflict date_reliable,\n  case when not c.composition_conflict and c.composition_digest=d.current_digest then c.main_units end effective_units,\n  case when not c.monetary_conflict and not c.composition_conflict and c.agreed_total is not distinct from c.current_agreement\n    and c.breakdown_source='copy_total_price' and c.composition_digest=d.current_digest then c.agreed_total end effective_sales,\n  array_remove(array[\n    case when c.agreed_total is null then 'missing_agreement' end,\n    case when c.breakdown_source='unresolved' then 'unresolved_breakdown' end,\n    case when c.monetary_conflict or c.agreed_total is distinct from c.current_agreement then 'agreement_changed_after_completion' end,\n    case when c.composition_conflict or c.composition_digest<>d.current_digest then 'source_conflict' end,\n    case when c.main_units is null then 'missing_composition' end\n  ],null) reasons\n    from eligible c join digests d on d.id=c.id\n  ) select coalesce(jsonb_agg(to_jsonb(e)),'[]'::jsonb)                  from effective e",
+      "first": "internal-plans/f4c-100-profile-AB-1.json",
+      "second": "internal-plans/f4c-100-profile-AB-2.json",
+      "differences": []
+    },
+    {
+      "orders": 100,
+      "reader": "AB",
+      "sqlHash": "a9691643e47bd4b2e3d887343fbbffb6254d5e71c2196af036338978a3984a6b",
+      "queryText": "with recursive\n  facts as materialized(select * from jsonb_to_recordset(v_facts) as z(side text,id uuid,date date,at timestamptz,session uuid,kind text,timezone text,sales text,\"mainUnits\" text,reasons jsonb)),\n  pairs as materialized(select * from jsonb_to_recordset(v_pairs) as z(aid uuid,bid uuid,ad date,bd date,alo timestamptz,ahi timestamptz,blo timestamptz,bhi timestamptz,atz text,btz text,av boolean,bv boolean,ac boolean,bc boolean,ordinal bigint)),\n  calendar_size as (\n    select case when v_days<=31 then 1 when v_days<=180 then 7 else greatest(1,ceil(((extract(year from v_end)-extract(year from v_start))*12+extract(month from v_end)-extract(month from v_start)+1)/199)::integer) end factor\n  ), calendar_bins as (\n    select v_start+n lo,least(v_end,v_start+n+factor-1) hi from calendar_size cross join lateral generate_series(0,case when v_mode='calendar' and v_days<=180 then v_days-1 else -1 end,factor) n where v_mode='calendar' and v_days<=180\n    union all\n    select greatest(v_start,t::date),least(v_end,(t+make_interval(months=>factor))::date-1)\n      from calendar_size cross join lateral generate_series(case when v_mode='calendar' and v_days>180 then date_trunc('month',v_start::timestamp) end,date_trunc('month',v_end::timestamp),make_interval(months=>factor)) t\n      where v_mode='calendar' and v_days>180\n  ), calendar_bounds as (\n    select lo,hi,case when v_compare then lo+v_shift end pl,case when v_compare then hi+v_shift end ph,\n      private.statistics_local_cutoff(lo,'00:00:00',v_tz) clo,\n      least(v_now,private.statistics_local_cutoff(hi+1,'00:00:00',v_tz)) chi,\n      case when v_compare then private.statistics_local_cutoff(lo+v_shift,'00:00:00',v_tz) end plo,\n      case when v_compare then case when v_partial and hi=v_end then v_previous_cut\n        else private.statistics_local_cutoff(hi+v_shift+1,'00:00:00',v_tz) end end phi\n    from calendar_bins\n  ), calendar_plan as (\n    select 'date:'||lo::text descriptor,'commercial_date'::text basis,\n      jsonb_build_object('kind','date_offset','days',coalesce(v_shift,0),'sessions',coalesce((select jsonb_agg(jsonb_build_object('currentSessionId',p.aid,'previousSessionId',p.bid,'ordinal',p.ordinal) order by p.ad,p.ordinal) from pairs p where p.ad between lo and hi and p.aid is not null and p.bid is not null),'[]'::jsonb)) mapping,\n      lo cdlo,hi cdhi,pl pdlo,ph pdhi,null::uuid csid,null::uuid psid,\n      clo,chi,plo,phi,(chi=v_now) ci,(v_partial and hi=v_end) pi,\n      true ca,v_compare pa,\n      case when not v_compare then 'root_comparison_unavailable'\n        when clo is null or chi is null or plo is null or phi is null then 'ambiguous_wall_time'\n        when private.statistics_v1_series_instant(clo) is null or private.statistics_v1_series_instant(chi) is null\n          or private.statistics_v1_series_instant(plo) is null or private.statistics_v1_series_instant(phi) is null then 'interval_out_of_range'\n        when chi<clo or phi<plo or chi-clo<>phi-plo or (chi=v_now) is distinct from (v_partial and hi=v_end) then 'duration_mismatch'\n        when exists(select 1 from facts f where (f.date between lo and hi or f.date between pl and ph)\n          and f.kind='outside_session' and f.timezone<>v_tz) then 'timezone_changed'\n        when exists(select 1 from facts f where (f.date between lo and hi or f.date between pl and ph)\n          and f.kind='verified_session' and not exists(select 1 from jsonb_array_elements(v_sessions) s\n            where s->>'id'=f.session::text and coalesce((s->>'valid')::boolean,false)\n              and f.at between (s->>'lo')::timestamptz and (s->>'hi')::timestamptz)) then 'unverified_session'\n        when exists(select 1 from pairs p where (p.ad between lo and hi or p.bd between pl and ph)\n          and (p.aid is null or p.bid is null or not coalesce(p.av and p.bv and p.bc,false))) then 'missing_counterpart'\n        when exists(select 1 from pairs p where p.ad between lo and hi and p.atz is distinct from p.btz) then 'timezone_changed'\n        when exists(select 1 from pairs p where p.ad between lo and hi and (p.ahi-p.alo is distinct from p.bhi-p.blo)) then 'duration_mismatch'\n        else null end reason\n    from calendar_bounds\n  ), session_bins as (\n    select p.*,n::numeric*3600*v_step elapsed_lo,(n+1)::numeric*3600*v_step elapsed_hi\n      from pairs p cross join lateral generate_series(0,case when v_mode='session' then greatest(1,div(greatest(coalesce(extract(epoch from p.ahi-p.alo),0),coalesce(extract(epoch from p.bhi-p.blo),0))*1000000+3600000000::numeric*v_step-1,3600000000::numeric*v_step)::integer)-1 else -1 end) n\n      where v_mode='session'\n  ), session_bounds as (\n    select *,aid is not null and elapsed_lo<extract(epoch from ahi-alo) ca,\n      bid is not null and elapsed_lo<extract(epoch from bhi-blo) pa,\n      alo+elapsed_lo*interval '1 second' clo,least(ahi,alo+elapsed_hi*interval '1 second') chi,\n      blo+elapsed_lo*interval '1 second' plo,least(bhi,blo+elapsed_hi*interval '1 second') phi\n    from session_bins\n  ), session_plan as (\n    select 'session:'||coalesce(ad,bd-v_shift)::text||':'||ordinal::text||':'||elapsed_lo::text descriptor,'session_elapsed'::text basis,\n      jsonb_build_object('kind','session_elapsed','ordinal',ordinal,'startSeconds',elapsed_lo::text,'endSeconds',elapsed_hi::text) mapping,\n      ad cdlo,ad cdhi,bd pdlo,bd pdhi,aid csid,bid psid,clo,chi,plo,phi,chi=ahi ci,phi=bhi pi,ca,pa,\n      case when not v_compare then 'root_comparison_unavailable' when not ca or not pa then 'missing_counterpart'\n        when atz is distinct from btz then 'timezone_changed' when chi-clo<>phi-plo or (chi=ahi) is distinct from (phi=bhi) then 'duration_mismatch' else null end reason\n    from session_bounds\n  ), outside_bins as (\n    select 'current' side,t lo,least(t+interval '1 hour',v_chi) hi,v_chi terminal from generate_series(v_clo,v_chi-interval '1 microsecond',interval '1 hour') t where v_mode='outside'\n    union all\n    select 'previous',t,least(t+interval '1 hour',v_phi),v_phi from generate_series(v_plo,v_phi-interval '1 microsecond',interval '1 hour') t where v_mode='outside' and v_compare\n  ), outside_keys as (\n    select *,to_char(lo at time zone v_tz,'HH24:MI:SS.US')||'/'||to_char(hi at time zone v_tz,'HH24:MI:SS.US') wall_key,\n      private.statistics_local_cutoff((lo at time zone v_tz)::date,(lo at time zone v_tz)::time,v_tz)=lo\n        and private.statistics_local_cutoff((hi at time zone v_tz)::date,(hi at time zone v_tz)::time,v_tz)=hi unique_wall\n    from outside_bins\n  ), outside_pairs as (\n    select a.lo clo,a.hi chi,b.lo plo,b.hi phi,a.terminal ct,b.terminal pt,\n      a.unique_wall au,b.unique_wall bu,coalesce(a.wall_key,b.wall_key) wall_key\n      from (select * from outside_keys where side='current') a full join (select * from outside_keys where side='previous') b\n        on a.wall_key=b.wall_key and a.unique_wall and b.unique_wall\n  ), outside_plan as (\n    select 'outside:'||wall_key||':'||to_char(coalesce(clo,plo) at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US') descriptor,'outside_session_wall'::text basis,\n      jsonb_build_object('kind','wall_clock','wallStart',to_char(coalesce(clo,plo) at time zone v_tz,'HH24:MI:SS.US'),\n        'wallEnd',to_char(coalesce(chi,phi) at time zone v_tz,'HH24:MI:SS.US'),'timezone',v_tz) mapping,\n      v_start cdlo,v_start cdhi,v_ps pdlo,v_ps pdhi,null::uuid csid,null::uuid psid,clo,chi,plo,phi,\n      chi=ct and ct=v_now ci,phi=pt and v_partial pi,clo is not null ca,plo is not null pa,\n      case when not v_compare then 'root_comparison_unavailable' when (clo is not null and not coalesce(au,false)) or (plo is not null and not coalesce(bu,false)) then 'ambiguous_wall_time'\n        when clo is null or plo is null then 'missing_counterpart' when chi-clo<>phi-plo or (chi=ct and ct=v_now) is distinct from (phi=pt and v_partial) then 'duration_mismatch' else null end reason\n    from outside_pairs\n  ), plan as materialized(\n    select * from calendar_plan union all select * from session_plan union all select * from outside_plan\n  ), membership as materialized (\n    select p.descriptor,f.* from plan p join facts f on\n      case when f.side='current' then p.ca and (\n        case when p.basis='commercial_date' then f.date between p.cdlo and p.cdhi\n          else f.date=p.cdlo and (case when p.basis='session_elapsed' then f.session=p.csid and f.kind='verified_session' else f.kind='outside_session' end)\n            and f.at>=p.clo and (f.at<p.chi or (p.ci and f.at=p.chi)) end)\n        else p.pa and (case when p.basis='commercial_date' then f.date between p.pdlo and p.pdhi\n          else f.date=p.pdlo and (case when p.basis='session_elapsed' then f.session=p.psid and f.kind='verified_session' else f.kind='outside_session' end)\n            and f.at>=p.plo and (f.at<p.phi or (p.pi and f.at=p.phi)) end) end\n  ), groups as materialized (\n    select descriptor,side,jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons) order by date,at,id) rows\n      from membership group by descriptor,side\n  ), point_metrics as (\n    select p.*,case when ca then private.statistics_metrics(coalesce(c.rows,'[]'::jsonb),v_historical) end cm,\n      case when pa then private.statistics_metrics(coalesce(b.rows,'[]'::jsonb),0) end pm\n    from plan p left join groups c on c.descriptor=p.descriptor and c.side='current'\n      left join groups b on b.descriptor=p.descriptor and b.side='previous'\n  ), intervals as (\n    select m.*,case when ca then\n      case when basis='commercial_date' then\n        coalesce((select jsonb_agg(slice order by slice->>'start',slice->>'sessionId',slice->>'timezone',slice->>'commercialDate') from (\n          select jsonb_build_object('sessionId',s.id,'timezone',s.tz,'commercialDate',s.d,'start',private.statistics_v1_series_instant(s.lo),'end',private.statistics_v1_series_instant(s.hi),'endInclusive',true) slice\n            from jsonb_to_recordset(v_sessions) s(id uuid,d date,lo timestamptz,hi timestamptz,tz text,valid boolean)\n            where s.d between cdlo and cdhi and s.valid and s.hi>=s.lo\n          union all select jsonb_build_object('sessionId',null,'timezone',z.tz,'commercialDate',cdlo,'endCommercialDate',cdhi,'start',private.statistics_v1_series_instant(z.lo),'end',private.statistics_v1_series_instant(z.hi),'endInclusive',z.hi=v_now) from (\n            select tz,private.statistics_local_cutoff(cdlo,'00:00:00',tz) lo,least(v_now,private.statistics_local_cutoff(cdhi+1,'00:00:00',tz)) hi\n              from (select distinct timezone tz from facts where side='current' and kind='outside_session' and date between cdlo and cdhi\n                union all select v_tz where not exists(select 1 from facts where side='current' and kind='outside_session' and date between cdlo and cdhi)) zones\n          ) z where private.statistics_v1_series_instant(z.lo) is not null and private.statistics_v1_series_instant(z.hi) is not null and z.hi>=z.lo\n        ) z),'[]'::jsonb)\n        else jsonb_build_array(jsonb_build_object('sessionId',csid,'timezone',coalesce((select s->>'tz' from jsonb_array_elements(v_sessions) s where s->>'id'=csid::text),v_tz),'commercialDate',cdlo,'start',private.statistics_v1_series_instant(clo),'end',private.statistics_v1_series_instant(chi),'endInclusive',ci)) end end cslices,\n      case when pa then case when basis='commercial_date' then\n        coalesce((select jsonb_agg(slice order by slice->>'start',slice->>'sessionId',slice->>'timezone',slice->>'commercialDate') from (\n          select jsonb_build_object('sessionId',p.bid,'timezone',p.btz,'commercialDate',p.bd,'start',private.statistics_v1_series_instant(p.blo),'end',private.statistics_v1_series_instant(p.bhi),'endInclusive',true) slice from pairs p\n            where p.bd between pdlo and pdhi and p.bv and p.bhi>=p.blo\n          union all select jsonb_build_object('sessionId',null,'timezone',z.tz,'commercialDate',pdlo,'endCommercialDate',pdhi,'start',private.statistics_v1_series_instant(z.lo),'end',private.statistics_v1_series_instant(z.hi),'endInclusive',pi and z.hi=v_previous_cut) from (\n            select tz,private.statistics_local_cutoff(pdlo,'00:00:00',tz) lo,\n              case when v_partial and pdhi=v_pe then least(v_previous_cut,private.statistics_local_cutoff(pdhi+1,'00:00:00',tz)) else private.statistics_local_cutoff(pdhi+1,'00:00:00',tz) end hi\n              from (select distinct timezone tz from facts where side='previous' and kind='outside_session' and date between pdlo and pdhi\n                union all select v_tz where not exists(select 1 from facts where side='previous' and kind='outside_session' and date between pdlo and pdhi)) zones\n          ) z where private.statistics_v1_series_instant(z.lo) is not null and private.statistics_v1_series_instant(z.hi) is not null and z.hi>=z.lo\n        ) z),'[]'::jsonb)\n        else jsonb_build_array(jsonb_build_object('sessionId',psid,'timezone',coalesce((select s->>'tz' from jsonb_array_elements(v_sessions) s where s->>'id'=psid::text),v_tz),'commercialDate',pdlo,'start',private.statistics_v1_series_instant(plo),'end',private.statistics_v1_series_instant(phi),'endInclusive',pi)) end end pslices\n    from point_metrics m\n  ), points as (\n    select descriptor,jsonb_build_object(\n      'key',md5(jsonb_build_array('statistics.series.v1',v_business,v_start,v_end,basis,descriptor,mapping,cslices->0->>'timezone',pslices->0->>'timezone')::text),\n      'label',coalesce(cdlo,pdlo-v_shift)::text||case when basis='commercial_date' and cdhi<>cdlo then ' / '||cdhi::text else '' end,\n      'basis',basis,'mapping',mapping,\n      'current',case when ca then jsonb_build_object('interval',jsonb_build_object('key',md5(jsonb_build_array('current',v_business,descriptor,cdlo,cdhi,csid,to_char(clo at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'),to_char(chi at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'))::text),\n        'startDate',cdlo,'endDate',cdhi,'slices',cslices,'observation',case when (basis='commercial_date' and v_partial and cdhi=v_end) or (basis<>'commercial_date' and chi=v_now and (csid is null or not coalesce((select (s->>'closed')::boolean from jsonb_array_elements(v_sessions) s where s->>'id'=csid::text),true))) then 'partial' else 'closed' end),'metrics',cm) end,\n      'previous',case when pa then jsonb_build_object('interval',jsonb_build_object('key',md5(jsonb_build_array('previous',v_business,descriptor,pdlo,pdhi,psid,to_char(plo at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'),to_char(phi at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'))::text),\n        'startDate',pdlo,'endDate',pdhi,'slices',pslices,'observation',case when (basis='commercial_date' and v_partial and pdhi=v_pe) or (basis<>'commercial_date' and pi and v_partial and (case when psid is not null then phi<(select (s->>'hi')::timestamptz from jsonb_array_elements(v_sessions) s where s->>'id'=psid::text) else phi<private.statistics_local_cutoff(pdhi+1,'00:00:00',v_tz) end)) then 'partial' else 'closed' end),'metrics',pm) end,\n      'alignment',jsonb_build_object('available',reason is null,'reason',reason),\n      'comparisons',(select jsonb_object_agg(k,private.statistics_v1_series_delta(cm->k,pm->k,reason is null,reason)) from unnest(array['sales','completedOrders','averageTicket','mainUnits']) k)\n    ) point,reason,coalesce(cdlo,pdlo-v_shift) sort_date,coalesce(clo,plo) sort_time\n    from intervals\n  ) select coalesce(jsonb_agg(point order by sort_date,sort_time nulls first,descriptor),'[]'::jsonb),\n      coalesce(bool_and(reason is null),false) and v_compare,\n      (array_agg(reason order by sort_date,sort_time nulls first,descriptor) filter(where reason is not null))[1],\n      (select count(*) from membership where side='current'),(select count(*) from membership where side='previous'),\n      private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons)) from facts where side='current'),'[]'::jsonb),v_historical),\n      case when v_compare then private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons)) from facts where side='previous'),'[]'::jsonb),0) end,\n    (select count(*) from facts f left join (select side,id,count(*) n from membership group by side,id) m using(side,id) where m.n is distinct from 1::bigint)\n                                                                                                    from points",
+      "first": "internal-plans/f4c-100-profile-AB-1.json",
+      "second": "internal-plans/f4c-100-profile-AB-2.json",
+      "differences": []
+    },
+    {
+      "orders": 100,
+      "reader": "AB",
+      "sqlHash": "b80c5ec497e8c82606280b521d07d3220362d723d46bfb945097e1b658a89d89",
+      "queryText": "EXPLAIN(ANALYZE,BUFFERS,SETTINGS,FORMAT JSON) SELECT private.statistics_v1_summary_candidate('today',null,null,'units',5,'{\"asOf\":\"2026-10-14T04:43:29.017895+00:00\",\"offset\":0,\"revision\":\"527\",\"requestKey\":\"92fa487b57264f047c7ca0ce788ef138\"}'::jsonb);",
+      "first": "internal-plans/f4c-100-profile-AB-1.json",
+      "second": "internal-plans/f4c-100-profile-AB-2.json",
+      "differences": []
+    },
+    {
+      "orders": 100,
+      "reader": "D1",
+      "sqlHash": "24f365b7e55e99ad966cf562f562f638a0eecccccb7e450acd69d18ff1cb2017",
+      "queryText": "\n  select coalesce(jsonb_agg(jsonb_build_object(\n    'line_key',i.id,'parent_line_key',i.parent_order_item_id,'item_kind',i.item_kind,\n    'quantity',i.quantity,'unit_price',i.unit_price,'gross',i.quantity*i.unit_price,\n    'product_identity',coalesce(s.product_identity,case when p.business_id=p_business then i.product_id end),\n    'product_name',coalesce(s.product_name,i.product_name),'category_identity',s.category_identity,'category_name',s.category_name,\n    'source_valid',(i.product_id is null or p.business_id=p_business) and\n      (i.parent_order_item_id is null or exists(select 1 from public.order_items parent where parent.id=i.parent_order_item_id and parent.order_id=p_order and parent.item_kind='product'))\n  ) order by i.id),'[]'::jsonb)\n  from public.order_items i join public.orders o on o.id=i.order_id and o.business_id=p_business\n  left join public.order_item_statistics_snapshots s on s.source_item_id=i.id and s.active and s.business_id=p_business\n  left join public.products p on p.id=i.product_id where i.order_id=p_order and (current_user='postgres' or private.statistics_can_read(p_business));\n",
+      "first": "internal-plans/f4c-100-profile-D1-1.json",
+      "second": "internal-plans/f4c-100-profile-D1-2.json",
+      "differences": []
+    },
+    {
+      "orders": 100,
+      "reader": "D1",
+      "sqlHash": "6d40bf13000b83fbd24b5ced5b1d9aed91884569bbd696122e5f4506b1187f2d",
+      "queryText": "with eligible as materialized (\n    select c.*,f.agreed_total current_agreement\n    from public.order_statistics_completions c\n    join public.orders o on o.id=c.order_id and o.business_id=c.business_id and o.status='completed'\n    left join public.order_financials f on f.order_id=c.order_id and f.business_id=c.business_id\n    where c.active and c.business_id=v_business and private.statistics_can_read(c.business_id)\n      and c.commercial_date is not null and c.timezone is not null and not c.date_conflict and c.completed_at<=v_now\n      and (c.commercial_date between v_start and v_end or\n        (v_compare and c.commercial_date between v_ps and v_pe and\n          (not v_partial or case when c.date_kind='outside_session' then c.commercial_date<v_pe or c.completed_at<=v_previous_cutoff\n            else exists(select 1 from jsonb_array_elements(v_segments) seg where (seg->>'previousSessionId')::uuid=c.session_key and c.completed_at<=(seg->>'previousUntil')::timestamptz) end)))\n  ), digests as materialized (\n    select id,case when not composition_conflict then\n      private.statistics_source_digest(private.statistics_source_items(order_id,business_id)) end current_digest\n    from eligible\n  ), effective as materialized (\n    select c.*,\n  c.commercial_date is not null and c.timezone is not null and not c.date_conflict date_reliable,\n  case when not c.composition_conflict and c.composition_digest=d.current_digest then c.main_units end effective_units,\n  case when not c.monetary_conflict and not c.composition_conflict and c.agreed_total is not distinct from c.current_agreement\n    and c.breakdown_source='copy_total_price' and c.composition_digest=d.current_digest then c.agreed_total end effective_sales,\n  array_remove(array[\n    case when c.agreed_total is null then 'missing_agreement' end,\n    case when c.breakdown_source='unresolved' then 'unresolved_breakdown' end,\n    case when c.monetary_conflict or c.agreed_total is distinct from c.current_agreement then 'agreement_changed_after_completion' end,\n    case when c.composition_conflict or c.composition_digest<>d.current_digest then 'source_conflict' end,\n    case when c.main_units is null then 'missing_composition' end\n  ],null) reasons\n    from eligible c join digests d on d.id=c.id\n  ) select coalesce(jsonb_agg(to_jsonb(e)),'[]'::jsonb)                  from effective e",
+      "first": "internal-plans/f4c-100-profile-D1-1.json",
+      "second": "internal-plans/f4c-100-profile-D1-2.json",
+      "differences": []
+    },
+    {
+      "orders": 100,
+      "reader": "D1",
+      "sqlHash": "eef3173f81758df52fa3cdc439d8621cf345545361567758d562b8bdd03ea663",
+      "queryText": "with recursive\n  facts as materialized(select * from jsonb_to_recordset(v_facts) as z(side text,id uuid,date date,at timestamptz,session uuid,kind text,timezone text,sales text,\"mainUnits\" text,reasons jsonb)),\n  pairs as materialized(select * from jsonb_to_recordset(v_pairs) as z(aid uuid,bid uuid,ad date,bd date,alo timestamptz,ahi timestamptz,blo timestamptz,bhi timestamptz,atz text,btz text,av boolean,bv boolean,ac boolean,bc boolean,ordinal bigint)),\n  calendar_size as (\n    select case when v_days<=31 then 1 when v_days<=180 then 7 else greatest(1,ceil(((extract(year from v_end)-extract(year from v_start))*12+extract(month from v_end)-extract(month from v_start)+1)/199)::integer) end factor\n  ), calendar_bins as (\n    select v_start+n lo,least(v_end,v_start+n+factor-1) hi from calendar_size cross join lateral generate_series(0,case when v_mode='calendar' and v_days<=180 then v_days-1 else -1 end,factor) n where v_mode='calendar' and v_days<=180\n    union all\n    select greatest(v_start,t::date),least(v_end,(t+make_interval(months=>factor))::date-1)\n      from calendar_size cross join lateral generate_series(case when v_mode='calendar' and v_days>180 then date_trunc('month',v_start::timestamp) end,date_trunc('month',v_end::timestamp),make_interval(months=>factor)) t\n      where v_mode='calendar' and v_days>180\n  ), calendar_bounds as (\n    select lo,hi,case when v_compare then lo+v_shift end pl,case when v_compare then hi+v_shift end ph,\n      private.statistics_local_cutoff(lo,'00:00:00',v_tz) clo,\n      least(v_now,private.statistics_local_cutoff(hi+1,'00:00:00',v_tz)) chi,\n      case when v_compare then private.statistics_local_cutoff(lo+v_shift,'00:00:00',v_tz) end plo,\n      case when v_compare then case when v_partial and hi=v_end then v_previous_cut\n        else private.statistics_local_cutoff(hi+v_shift+1,'00:00:00',v_tz) end end phi\n    from calendar_bins\n  ), calendar_plan as (\n    select 'date:'||lo::text descriptor,'commercial_date'::text basis,\n      jsonb_build_object('kind','date_offset','days',coalesce(v_shift,0),'sessions',coalesce((select jsonb_agg(jsonb_build_object('currentSessionId',p.aid,'previousSessionId',p.bid,'ordinal',p.ordinal) order by p.ad,p.ordinal) from pairs p where p.ad between lo and hi and p.aid is not null and p.bid is not null),'[]'::jsonb)) mapping,\n      lo cdlo,hi cdhi,pl pdlo,ph pdhi,null::uuid csid,null::uuid psid,\n      clo,chi,plo,phi,(chi=v_now) ci,(v_partial and hi=v_end) pi,\n      true ca,v_compare pa,\n      case when not v_compare then 'root_comparison_unavailable'\n        when clo is null or chi is null or plo is null or phi is null then 'ambiguous_wall_time'\n        when private.statistics_v1_series_instant(clo) is null or private.statistics_v1_series_instant(chi) is null\n          or private.statistics_v1_series_instant(plo) is null or private.statistics_v1_series_instant(phi) is null then 'interval_out_of_range'\n        when chi<clo or phi<plo or chi-clo<>phi-plo or (chi=v_now) is distinct from (v_partial and hi=v_end) then 'duration_mismatch'\n        when exists(select 1 from facts f where (f.date between lo and hi or f.date between pl and ph)\n          and f.kind='outside_session' and f.timezone<>v_tz) then 'timezone_changed'\n        when exists(select 1 from facts f where (f.date between lo and hi or f.date between pl and ph)\n          and f.kind='verified_session' and not exists(select 1 from jsonb_array_elements(v_sessions) s\n            where s->>'id'=f.session::text and coalesce((s->>'valid')::boolean,false)\n              and f.at between (s->>'lo')::timestamptz and (s->>'hi')::timestamptz)) then 'unverified_session'\n        when exists(select 1 from pairs p where (p.ad between lo and hi or p.bd between pl and ph)\n          and (p.aid is null or p.bid is null or not coalesce(p.av and p.bv and p.bc,false))) then 'missing_counterpart'\n        when exists(select 1 from pairs p where p.ad between lo and hi and p.atz is distinct from p.btz) then 'timezone_changed'\n        when exists(select 1 from pairs p where p.ad between lo and hi and (p.ahi-p.alo is distinct from p.bhi-p.blo)) then 'duration_mismatch'\n        else null end reason\n    from calendar_bounds\n  ), session_bins as (\n    select p.*,n::numeric*3600*v_step elapsed_lo,(n+1)::numeric*3600*v_step elapsed_hi\n      from pairs p cross join lateral generate_series(0,case when v_mode='session' then greatest(1,div(greatest(coalesce(extract(epoch from p.ahi-p.alo),0),coalesce(extract(epoch from p.bhi-p.blo),0))*1000000+3600000000::numeric*v_step-1,3600000000::numeric*v_step)::integer)-1 else -1 end) n\n      where v_mode='session'\n  ), session_bounds as (\n    select *,aid is not null and elapsed_lo<extract(epoch from ahi-alo) ca,\n      bid is not null and elapsed_lo<extract(epoch from bhi-blo) pa,\n      alo+elapsed_lo*interval '1 second' clo,least(ahi,alo+elapsed_hi*interval '1 second') chi,\n      blo+elapsed_lo*interval '1 second' plo,least(bhi,blo+elapsed_hi*interval '1 second') phi\n    from session_bins\n  ), session_plan as (\n    select 'session:'||coalesce(ad,bd-v_shift)::text||':'||ordinal::text||':'||elapsed_lo::text descriptor,'session_elapsed'::text basis,\n      jsonb_build_object('kind','session_elapsed','ordinal',ordinal,'startSeconds',elapsed_lo::text,'endSeconds',elapsed_hi::text) mapping,\n      ad cdlo,ad cdhi,bd pdlo,bd pdhi,aid csid,bid psid,clo,chi,plo,phi,chi=ahi ci,phi=bhi pi,ca,pa,\n      case when not v_compare then 'root_comparison_unavailable' when not ca or not pa then 'missing_counterpart'\n        when atz is distinct from btz then 'timezone_changed' when chi-clo<>phi-plo or (chi=ahi) is distinct from (phi=bhi) then 'duration_mismatch' else null end reason\n    from session_bounds\n  ), outside_bins as (\n    select 'current' side,t lo,least(t+interval '1 hour',v_chi) hi,v_chi terminal from generate_series(v_clo,v_chi-interval '1 microsecond',interval '1 hour') t where v_mode='outside'\n    union all\n    select 'previous',t,least(t+interval '1 hour',v_phi),v_phi from generate_series(v_plo,v_phi-interval '1 microsecond',interval '1 hour') t where v_mode='outside' and v_compare\n  ), outside_keys as (\n    select *,to_char(lo at time zone v_tz,'HH24:MI:SS.US')||'/'||to_char(hi at time zone v_tz,'HH24:MI:SS.US') wall_key,\n      private.statistics_local_cutoff((lo at time zone v_tz)::date,(lo at time zone v_tz)::time,v_tz)=lo\n        and private.statistics_local_cutoff((hi at time zone v_tz)::date,(hi at time zone v_tz)::time,v_tz)=hi unique_wall\n    from outside_bins\n  ), outside_pairs as (\n    select a.lo clo,a.hi chi,b.lo plo,b.hi phi,a.terminal ct,b.terminal pt,\n      a.unique_wall au,b.unique_wall bu,coalesce(a.wall_key,b.wall_key) wall_key\n      from (select * from outside_keys where side='current') a full join (select * from outside_keys where side='previous') b\n        on a.wall_key=b.wall_key and a.unique_wall and b.unique_wall\n  ), outside_plan as (\n    select 'outside:'||wall_key||':'||to_char(coalesce(clo,plo) at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US') descriptor,'outside_session_wall'::text basis,\n      jsonb_build_object('kind','wall_clock','wallStart',to_char(coalesce(clo,plo) at time zone v_tz,'HH24:MI:SS.US'),\n        'wallEnd',to_char(coalesce(chi,phi) at time zone v_tz,'HH24:MI:SS.US'),'timezone',v_tz) mapping,\n      v_start cdlo,v_start cdhi,v_ps pdlo,v_ps pdhi,null::uuid csid,null::uuid psid,clo,chi,plo,phi,\n      chi=ct and ct=v_now ci,phi=pt and v_partial pi,clo is not null ca,plo is not null pa,\n      case when not v_compare then 'root_comparison_unavailable' when (clo is not null and not coalesce(au,false)) or (plo is not null and not coalesce(bu,false)) then 'ambiguous_wall_time'\n        when clo is null or plo is null then 'missing_counterpart' when chi-clo<>phi-plo or (chi=ct and ct=v_now) is distinct from (phi=pt and v_partial) then 'duration_mismatch' else null end reason\n    from outside_pairs\n  ), plan as materialized(\n    select * from calendar_plan union all select * from session_plan union all select * from outside_plan\n  ), membership as materialized (\n    select p.descriptor,f.* from plan p join facts f on\n      case when f.side='current' then p.ca and (\n        case when p.basis='commercial_date' then f.date between p.cdlo and p.cdhi\n          else f.date=p.cdlo and (case when p.basis='session_elapsed' then f.session=p.csid and f.kind='verified_session' else f.kind='outside_session' end)\n            and f.at>=p.clo and (f.at<p.chi or (p.ci and f.at=p.chi)) end)\n        else p.pa and (case when p.basis='commercial_date' then f.date between p.pdlo and p.pdhi\n          else f.date=p.pdlo and (case when p.basis='session_elapsed' then f.session=p.psid and f.kind='verified_session' else f.kind='outside_session' end)\n            and f.at>=p.plo and (f.at<p.phi or (p.pi and f.at=p.phi)) end) end\n  ), groups as materialized (\n    select descriptor,side,jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons) order by date,at,id) rows\n      from membership group by descriptor,side\n  ), point_metrics as materialized (\n    select p.*,case when ca then private.statistics_metrics(coalesce(c.rows,'[]'::jsonb),v_historical) end cm,\n      case when pa then private.statistics_metrics(coalesce(b.rows,'[]'::jsonb),0) end pm\n    from plan p left join groups c on c.descriptor=p.descriptor and c.side='current'\n      left join groups b on b.descriptor=p.descriptor and b.side='previous'\n  ), intervals as (\n    select m.*,case when ca then\n      case when basis='commercial_date' then\n        coalesce((select jsonb_agg(slice order by slice->>'start',slice->>'sessionId',slice->>'timezone',slice->>'commercialDate') from (\n          select jsonb_build_object('sessionId',s.id,'timezone',s.tz,'commercialDate',s.d,'start',private.statistics_v1_series_instant(s.lo),'end',private.statistics_v1_series_instant(s.hi),'endInclusive',true) slice\n            from jsonb_to_recordset(v_sessions) s(id uuid,d date,lo timestamptz,hi timestamptz,tz text,valid boolean)\n            where s.d between cdlo and cdhi and s.valid and s.hi>=s.lo\n          union all select jsonb_build_object('sessionId',null,'timezone',z.tz,'commercialDate',cdlo,'endCommercialDate',cdhi,'start',private.statistics_v1_series_instant(z.lo),'end',private.statistics_v1_series_instant(z.hi),'endInclusive',z.hi=v_now) from (\n            select tz,private.statistics_local_cutoff(cdlo,'00:00:00',tz) lo,least(v_now,private.statistics_local_cutoff(cdhi+1,'00:00:00',tz)) hi\n              from (select distinct timezone tz from facts where side='current' and kind='outside_session' and date between cdlo and cdhi\n                union all select v_tz where not exists(select 1 from facts where side='current' and kind='outside_session' and date between cdlo and cdhi)) zones\n          ) z where private.statistics_v1_series_instant(z.lo) is not null and private.statistics_v1_series_instant(z.hi) is not null and z.hi>=z.lo\n        ) z),'[]'::jsonb)\n        else jsonb_build_array(jsonb_build_object('sessionId',csid,'timezone',coalesce((select s->>'tz' from jsonb_array_elements(v_sessions) s where s->>'id'=csid::text),v_tz),'commercialDate',cdlo,'start',private.statistics_v1_series_instant(clo),'end',private.statistics_v1_series_instant(chi),'endInclusive',ci)) end end cslices,\n      case when pa then case when basis='commercial_date' then\n        coalesce((select jsonb_agg(slice order by slice->>'start',slice->>'sessionId',slice->>'timezone',slice->>'commercialDate') from (\n          select jsonb_build_object('sessionId',p.bid,'timezone',p.btz,'commercialDate',p.bd,'start',private.statistics_v1_series_instant(p.blo),'end',private.statistics_v1_series_instant(p.bhi),'endInclusive',true) slice from pairs p\n            where p.bd between pdlo and pdhi and p.bv and p.bhi>=p.blo\n          union all select jsonb_build_object('sessionId',null,'timezone',z.tz,'commercialDate',pdlo,'endCommercialDate',pdhi,'start',private.statistics_v1_series_instant(z.lo),'end',private.statistics_v1_series_instant(z.hi),'endInclusive',pi and z.hi=v_previous_cut) from (\n            select tz,private.statistics_local_cutoff(pdlo,'00:00:00',tz) lo,\n              case when v_partial and pdhi=v_pe then least(v_previous_cut,private.statistics_local_cutoff(pdhi+1,'00:00:00',tz)) else private.statistics_local_cutoff(pdhi+1,'00:00:00',tz) end hi\n              from (select distinct timezone tz from facts where side='previous' and kind='outside_session' and date between pdlo and pdhi\n                union all select v_tz where not exists(select 1 from facts where side='previous' and kind='outside_session' and date between pdlo and pdhi)) zones\n          ) z where private.statistics_v1_series_instant(z.lo) is not null and private.statistics_v1_series_instant(z.hi) is not null and z.hi>=z.lo\n        ) z),'[]'::jsonb)\n        else jsonb_build_array(jsonb_build_object('sessionId',psid,'timezone',coalesce((select s->>'tz' from jsonb_array_elements(v_sessions) s where s->>'id'=psid::text),v_tz),'commercialDate',pdlo,'start',private.statistics_v1_series_instant(plo),'end',private.statistics_v1_series_instant(phi),'endInclusive',pi)) end end pslices\n    from point_metrics m\n  ), points as (\n    select descriptor,jsonb_build_object(\n      'key',md5(jsonb_build_array('statistics.series.v1',v_business,v_start,v_end,basis,descriptor,mapping,cslices->0->>'timezone',pslices->0->>'timezone')::text),\n      'label',coalesce(cdlo,pdlo-v_shift)::text||case when basis='commercial_date' and cdhi<>cdlo then ' / '||cdhi::text else '' end,\n      'basis',basis,'mapping',mapping,\n      'current',case when ca then jsonb_build_object('interval',jsonb_build_object('key',md5(jsonb_build_array('current',v_business,descriptor,cdlo,cdhi,csid,to_char(clo at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'),to_char(chi at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'))::text),\n        'startDate',cdlo,'endDate',cdhi,'slices',cslices,'observation',case when (basis='commercial_date' and v_partial and cdhi=v_end) or (basis<>'commercial_date' and chi=v_now and (csid is null or not coalesce((select (s->>'closed')::boolean from jsonb_array_elements(v_sessions) s where s->>'id'=csid::text),true))) then 'partial' else 'closed' end),'metrics',cm) end,\n      'previous',case when pa then jsonb_build_object('interval',jsonb_build_object('key',md5(jsonb_build_array('previous',v_business,descriptor,pdlo,pdhi,psid,to_char(plo at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'),to_char(phi at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'))::text),\n        'startDate',pdlo,'endDate',pdhi,'slices',pslices,'observation',case when (basis='commercial_date' and v_partial and pdhi=v_pe) or (basis<>'commercial_date' and pi and v_partial and (case when psid is not null then phi<(select (s->>'hi')::timestamptz from jsonb_array_elements(v_sessions) s where s->>'id'=psid::text) else phi<private.statistics_local_cutoff(pdhi+1,'00:00:00',v_tz) end)) then 'partial' else 'closed' end),'metrics',pm) end,\n      'alignment',jsonb_build_object('available',reason is null,'reason',reason),\n      'comparisons',(select jsonb_object_agg(k,private.statistics_v1_series_delta(cm->k,pm->k,reason is null,reason)) from unnest(array['sales','completedOrders','averageTicket','mainUnits']) k)\n    ) point,reason,coalesce(cdlo,pdlo-v_shift) sort_date,coalesce(clo,plo) sort_time\n    from intervals\n  ) select coalesce(jsonb_agg(point order by sort_date,sort_time nulls first,descriptor),'[]'::jsonb),\n      coalesce(bool_and(reason is null),false) and v_compare,\n      (array_agg(reason order by sort_date,sort_time nulls first,descriptor) filter(where reason is not null))[1],\n      (select count(*) from membership where side='current'),(select count(*) from membership where side='previous'),\n      private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons)) from facts where side='current'),'[]'::jsonb),v_historical),\n      case when v_compare then private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons)) from facts where side='previous'),'[]'::jsonb),0) end,\n    (select count(*) from facts f left join (select side,id,count(*) n from membership group by side,id) m using(side,id) where m.n is distinct from 1::bigint)\n                                                                                                    from points",
+      "first": "internal-plans/f4c-100-profile-D1-1.json",
+      "second": "internal-plans/f4c-100-profile-D1-2.json",
+      "differences": []
+    },
+    {
+      "orders": 100,
+      "reader": "D1",
+      "sqlHash": "5bfb609e6c15fe094527db34b3593c8ecb1057002eddeced2c2d1b8723827237",
+      "queryText": "EXPLAIN(ANALYZE,BUFFERS,SETTINGS,FORMAT JSON) SELECT private.statistics_v1_summary_d1_candidate('today',null,null,'units',5,'{\"asOf\":\"2026-10-14T04:43:29.017895+00:00\",\"offset\":0,\"revision\":\"527\",\"requestKey\":\"92fa487b57264f047c7ca0ce788ef138\"}'::jsonb);",
+      "first": "internal-plans/f4c-100-profile-D1-1.json",
+      "second": "internal-plans/f4c-100-profile-D1-2.json",
+      "differences": []
+    }
+  ],
+  "notes": "Original literal predicates become $ parameters with Result gates. This is evidence compatible with custom-to-generic planning under auto, not proof of latency causation; profiles are separate from normal SELECTs."
+}

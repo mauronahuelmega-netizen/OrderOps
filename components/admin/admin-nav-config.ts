@@ -14,6 +14,7 @@ export type AdminNavItem = {
   label: string;
   matchPrefixes: string[];
   requiredPermission?: AdminPermission;
+  releasePending?: boolean;
   requiredFeatureFlag?: AdminNavFeatureFlag;
 };
 
@@ -48,6 +49,13 @@ export const adminNavItems: AdminNavItem[] = [
     requiredPermission: "manageProducts"
   },
   {
+    href: "/admin/statistics",
+    label: "Estadísticas",
+    matchPrefixes: ["/admin/statistics"],
+    requiredPermission: "viewStatistics",
+    releasePending: true
+  },
+  {
     href: "/admin/settings",
     label: "Configuración",
     matchPrefixes: ["/admin/settings", "/admin/team"],
@@ -63,7 +71,7 @@ export function isAdminNavItemActive(pathname: string, item: AdminNavItem) {
 
 export function getAdminNavItemsForRole(role: ProfileRole) {
   return adminNavItems.filter(
-    (item) => !item.requiredPermission || hasAdminPermission(role, item.requiredPermission)
+    (item) => !item.releasePending && (!item.requiredPermission || hasAdminPermission(role, item.requiredPermission))
   );
 }
 
@@ -72,6 +80,10 @@ export function isAdminNavItemFeatureEnabled(
   settings: Database["public"]["Tables"]["business_settings"]["Row"] | null,
   loading: boolean
 ) {
+  if (item.releasePending) {
+    return false;
+  }
+
   if (!item.requiredFeatureFlag) {
     return true;
   }

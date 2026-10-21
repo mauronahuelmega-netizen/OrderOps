@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-16T13:23:39.689Z",
+  "result": "BLOCKED_DRY_RUN",
+  "stage": "layer_kong_/home/kong/custom_nginx.template",
+  "errorClass": "AssertionError",
+  "rawErrorSuppressed": true,
+  "containersChanged": 0
+}

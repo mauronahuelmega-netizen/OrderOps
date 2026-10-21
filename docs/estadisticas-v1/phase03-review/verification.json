@@ -1,0 +1,72 @@
+{
+  "at": "2026-10-13T03:41:29.048Z",
+  "checks": 722,
+  "result": "PASS_OFFLINE_REVIEW_CHECKS",
+  "examples": [
+    "complete",
+    "partial_cut",
+    "unknown_amount",
+    "no_comparison",
+    "configuration_required"
+  ],
+  "branch": "codex/estadisticas-v1",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "shared": {
+    "lib/admin/permissions.ts": {
+      "sha256": "ccb7365f6ecf263dcac8e01ac4d6ac232e0d6cccd586025c2679acd0013f6e8e",
+      "headBlob": "f1ba98dd0a52381ec74d530dd47c5172f4cae524",
+      "cursorLocalBlob": "f1ba98dd0a52381ec74d530dd47c5172f4cae524"
+    },
+    "components/admin/admin-nav-config.ts": {
+      "sha256": "f6af7fe8733c5a56f9daa41136cd8c87ebafe5f200c9067a3037ebca56a2ec6c",
+      "headBlob": "b8b15312965d619a4636cdb415a537a56a317391",
+      "cursorLocalBlob": "b8b15312965d619a4636cdb415a537a56a317391"
+    },
+    "components/admin/layout/admin-nav-list.tsx": {
+      "sha256": "1adf108c6c1dbc12b1f203928238b84b8db97e9078af2c77bbce5a4d5d952f41",
+      "headBlob": "ceb7ed3d486e26bd336a207eef8f895368a778d7",
+      "cursorLocalBlob": "ceb7ed3d486e26bd336a207eef8f895368a778d7"
+    }
+  },
+  "patch": "git apply --check only; evaluated in memory",
+  "sql": "design only; no parsing/compilation/application/runtime tests",
+  "databaseConnections": 0,
+  "limitation": "This is a review-fixture checker, not the future production series decoder or temporal planner.",
+  "migrations": {
+    "candidate": "20261013004000",
+    "localFiles": 122,
+    "knownRefCollision": [
+      {
+        "ref": "HEAD",
+        "paths": []
+      },
+      {
+        "ref": "cursor/commercial-core-v1-integration",
+        "paths": []
+      }
+    ],
+    "note": "Reservation pending current Cursor inventory; no remote fetch or Cursor checkout inspection."
+  },
+  "typecheck": {
+    "command": "tsc --noEmit --incremental false",
+    "exitCode": 0
+  },
+  "scope": {
+    "newFiles": [
+      "20261013004000_statistics_v1_comparative_series.proposed.sql",
+      "README.md",
+      "contract.proposed.ts",
+      "examples.json",
+      "navigation.proposed.patch",
+      "temporal-and-sql.md",
+      "tests-and-execution.md",
+      "verification.json",
+      "verify-review.ts"
+    ],
+    "applicationFilesModified": false,
+    "sharedFilesModified": false,
+    "sqlApplied": false,
+    "uiImplemented": false,
+    "newCommits": 0
+  }
+}

@@ -1,0 +1,378 @@
+{
+  "at": "2026-10-14T15:57:40.832Z",
+  "result": "PASS_STATIC_ONLY",
+  "assertions": 183,
+  "outerStatements": 13,
+  "sqlBodiesParsed": 2,
+  "cteGraph": {
+    "names": [
+      "facts",
+      "lines",
+      "missing_counts",
+      "grouped",
+      "totals",
+      "ranked",
+      "categories"
+    ],
+    "edges": [
+      {
+        "from": "lines",
+        "to": "facts",
+        "valid": true
+      },
+      {
+        "from": "missing_counts",
+        "to": "facts",
+        "valid": true
+      },
+      {
+        "from": "missing_counts",
+        "to": "lines",
+        "valid": true
+      },
+      {
+        "from": "grouped",
+        "to": "lines",
+        "valid": true
+      },
+      {
+        "from": "totals",
+        "to": "missing_counts",
+        "valid": true
+      },
+      {
+        "from": "totals",
+        "to": "missing_counts",
+        "valid": true
+      },
+      {
+        "from": "totals",
+        "to": "missing_counts",
+        "valid": true
+      },
+      {
+        "from": "totals",
+        "to": "lines",
+        "valid": true
+      },
+      {
+        "from": "ranked",
+        "to": "grouped",
+        "valid": true
+      },
+      {
+        "from": "categories",
+        "to": "missing_counts",
+        "valid": true
+      },
+      {
+        "from": "categories",
+        "to": "missing_counts",
+        "valid": true
+      },
+      {
+        "from": "categories",
+        "to": "lines",
+        "valid": true
+      }
+    ]
+  },
+  "negativeControl": [
+    {
+      "from": "totals",
+      "to": "totals",
+      "valid": false
+    },
+    {
+      "from": "totals",
+      "to": "totals",
+      "valid": false
+    }
+  ],
+  "schemaColumns": {
+    "business_statistics_state": [
+      {
+        "name": "business_id",
+        "type": "uuid"
+      },
+      {
+        "name": "instrumented_at",
+        "type": "timestamptz"
+      },
+      {
+        "name": "contract_version",
+        "type": "text"
+      },
+      {
+        "name": "revision",
+        "type": "pg_catalog.int8"
+      }
+    ],
+    "store_session_statistics_snapshots": [
+      {
+        "name": "session_id",
+        "type": "uuid"
+      },
+      {
+        "name": "business_id",
+        "type": "uuid"
+      },
+      {
+        "name": "opened_at",
+        "type": "timestamptz"
+      },
+      {
+        "name": "timezone",
+        "type": "text"
+      },
+      {
+        "name": "commercial_date",
+        "type": "date"
+      },
+      {
+        "name": "observed_closed_at",
+        "type": "timestamptz"
+      },
+      {
+        "name": "source_quality",
+        "type": "text"
+      },
+      {
+        "name": "policy_version",
+        "type": "text"
+      }
+    ],
+    "order_item_statistics_snapshots": [
+      {
+        "name": "id",
+        "type": "uuid"
+      },
+      {
+        "name": "source_item_id",
+        "type": "uuid"
+      },
+      {
+        "name": "order_id",
+        "type": "uuid"
+      },
+      {
+        "name": "business_id",
+        "type": "uuid"
+      },
+      {
+        "name": "generation",
+        "type": "pg_catalog.int8"
+      },
+      {
+        "name": "active",
+        "type": "pg_catalog.bool"
+      },
+      {
+        "name": "product_identity",
+        "type": "uuid"
+      },
+      {
+        "name": "product_name",
+        "type": "text"
+      },
+      {
+        "name": "category_identity",
+        "type": "uuid"
+      },
+      {
+        "name": "category_name",
+        "type": "text"
+      },
+      {
+        "name": "source_kind",
+        "type": "text"
+      },
+      {
+        "name": "captured_at",
+        "type": "timestamptz"
+      }
+    ],
+    "order_statistics_completions": [
+      {
+        "name": "id",
+        "type": "uuid"
+      },
+      {
+        "name": "business_id",
+        "type": "uuid"
+      },
+      {
+        "name": "order_id",
+        "type": "uuid"
+      },
+      {
+        "name": "cycle",
+        "type": "pg_catalog.int8"
+      },
+      {
+        "name": "completed_at",
+        "type": "timestamptz"
+      },
+      {
+        "name": "source_kind",
+        "type": "text"
+      },
+      {
+        "name": "session_id",
+        "type": "uuid"
+      },
+      {
+        "name": "session_key",
+        "type": "uuid"
+      },
+      {
+        "name": "session_opened_at",
+        "type": "timestamptz"
+      },
+      {
+        "name": "timezone",
+        "type": "text"
+      },
+      {
+        "name": "commercial_date",
+        "type": "date"
+      },
+      {
+        "name": "date_kind",
+        "type": "text"
+      },
+      {
+        "name": "active",
+        "type": "pg_catalog.bool"
+      },
+      {
+        "name": "invalidated_at",
+        "type": "timestamptz"
+      },
+      {
+        "name": "invalidation_reason",
+        "type": "text"
+      },
+      {
+        "name": "agreed_total",
+        "type": "pg_catalog.numeric"
+      },
+      {
+        "name": "products_net",
+        "type": "pg_catalog.numeric"
+      },
+      {
+        "name": "delivery",
+        "type": "pg_catalog.numeric"
+      },
+      {
+        "name": "breakdown_source",
+        "type": "text"
+      },
+      {
+        "name": "agreement_evidence_id",
+        "type": "uuid"
+      },
+      {
+        "name": "composition_status",
+        "type": "text"
+      },
+      {
+        "name": "composition_digest",
+        "type": "text"
+      },
+      {
+        "name": "gross_products",
+        "type": "pg_catalog.numeric"
+      },
+      {
+        "name": "main_units",
+        "type": "pg_catalog.int8"
+      },
+      {
+        "name": "monetary_conflict",
+        "type": "pg_catalog.bool"
+      },
+      {
+        "name": "composition_conflict",
+        "type": "pg_catalog.bool"
+      },
+      {
+        "name": "date_conflict",
+        "type": "pg_catalog.bool"
+      },
+      {
+        "name": "contract_version",
+        "type": "text"
+      }
+    ],
+    "order_statistics_completion_items": [
+      {
+        "name": "completion_id",
+        "type": "uuid"
+      },
+      {
+        "name": "business_id",
+        "type": "uuid"
+      },
+      {
+        "name": "line_key",
+        "type": "uuid"
+      },
+      {
+        "name": "parent_line_key",
+        "type": "uuid"
+      },
+      {
+        "name": "product_identity",
+        "type": "uuid"
+      },
+      {
+        "name": "product_name",
+        "type": "text"
+      },
+      {
+        "name": "category_identity",
+        "type": "uuid"
+      },
+      {
+        "name": "category_name",
+        "type": "text"
+      },
+      {
+        "name": "item_kind",
+        "type": "text"
+      },
+      {
+        "name": "quantity",
+        "type": "pg_catalog.int8"
+      },
+      {
+        "name": "unit_price",
+        "type": "pg_catalog.numeric"
+      },
+      {
+        "name": "gross",
+        "type": "pg_catalog.numeric"
+      },
+      {
+        "name": "net_amount",
+        "type": "pg_catalog.numeric"
+      }
+    ]
+  },
+  "decoderRegression": {
+    "at": "2026-10-14T15:57:40.814Z",
+    "result": "PASS",
+    "assertions": 25,
+    "scope": "Offline synthetic shape/null/precision/denominator/category/multi-tenant rejection; no candidate SQL executed"
+  },
+  "additionalFixtures": "main/upsell empty shares; missing orders; unknown null",
+  "notExecuted": [
+    "PL/pgSQL compilation",
+    "catalog binding",
+    "RLS runtime",
+    "SQL fixtures",
+    "database connection"
+  ]
+}

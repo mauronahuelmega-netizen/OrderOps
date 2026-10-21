@@ -1,0 +1,1089 @@
+{
+  "source": "verified synthetic archive",
+  "algorithm": "SHA256 of length-framed, byte-sorted COPY rows; NULL/escapes unchanged",
+  "decompressedReadOnly": true,
+  "restoreExecuted": false,
+  "sqlExecuted": 0,
+  "tables": [
+    {
+      "schema": "auth",
+      "table": "audit_log_entries",
+      "rowCount": 51,
+      "rawBytes": 15535,
+      "rawSha256": "964066ff44e1bf79095f73d63f57afa2701dde04c03dab3f707dec0e53ef4a5c",
+      "rowMultisetSha256": "c59f0a21f3269f2478a9b2439fd15db741ea44df922bb1850cdf97198b381231",
+      "copyDefinitionSha256": "e1a1c713c9ccfea30111a66f9d133a606411f4388db375932b9df3d446ff9f8e",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "flow_state",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "cdc6edd82ee17b79132fe216a18cb0980856ed8d67dc4ffc0218e4f65da7ea9d",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "identities",
+      "rowCount": 15,
+      "rawBytes": 4251,
+      "rawSha256": "75ec4c6c49f09bec7106eb349b82a4f38975040fbce26d058c1774f40deb3b02",
+      "rowMultisetSha256": "2e35afc018100c35322c15ef0225aa05301398b2f272918eb2634b53666260b2",
+      "copyDefinitionSha256": "8fe6aaa06a2680c5933c63d9af818312e812cc2b18bd00445e3d3fd36464e954",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "instances",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "67be3bfb96270a36e07ae7f004ac5cc5f8c282b64d3c04cb3ec5e53bb549b578",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "mfa_amr_claims",
+      "rowCount": 27,
+      "rawBytes": 3419,
+      "rawSha256": "45c847af8e175a268173466f97f6acdf7933cf2384ca87851ba69b01b2a3dfa9",
+      "rowMultisetSha256": "ae68d9149dd497f89952c9ef9f7fe949b9385b55827853fc6e2b0089ce6a9a9f",
+      "copyDefinitionSha256": "cd5bb795a92eb978320219604d19851d745e12a4f19968c9cb2bbd93e8e2197a",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "mfa_challenges",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "e07ddc2ea339234c969b5f88b25aa603f3bdb4fe6117f1092c95c0bf6354729c",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "mfa_factors",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "70513ef681e91d9a7e2f7cd2e6846d3d3cf73b723bb038827d47120fc25ce280",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "oauth_authorizations",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "19a0222a0d24a93a12be6c714e7a0b4bfede6a6b0e133a3a1d52cd8c5617171a",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "oauth_client_states",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "9ca1a1a803b9bd04ab7d27d8555fc39e295117a9c3812bfc98b8af8ad1c92d88",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "oauth_clients",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "bb37d3a53f3c619eb05f6254c72ee45faf5fb3240e5b869d8192bec0b1293111",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "oauth_consents",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "0f3ac040361b37c1dc39711949e6191221c8f1cf58d0508be7424df46e9230ab",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "one_time_tokens",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "1b7f4114c0d2e1e3ec3efb3a5830e4897f4382e8049618c256913b7eb99cf833",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "refresh_tokens",
+      "rowCount": 27,
+      "rawBytes": 4594,
+      "rawSha256": "da32634db1cf5354df84649546e8e61dfa51bc73ff92ad73a06db4eba86c33ba",
+      "rowMultisetSha256": "7334a282ac46fdbfffd4fc49b84492b5fa09eacf22fdffeab60e21acbfc0fb72",
+      "copyDefinitionSha256": "0be45f81955b2f485e8f2bf64cb83df05ad49e703fb9e8126a2f3e1e19244f04",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "saml_providers",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "98b7d5e72c3c3741fa9ad58acca34479218849f6fe7af462b4a8ef1701cc2b47",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "saml_relay_states",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "1b63e88ac6533d9a09c26587ffa6e406dba73a8935462a9f98eced50c42a0442",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "schema_migrations",
+      "rowCount": 75,
+      "rawBytes": 1073,
+      "rawSha256": "dbc10b197885d014e126460c54ffc8062f0fcb69d19640a527033377307bcbaf",
+      "rowMultisetSha256": "0fbca7c0209316fb685358ef27d41ebfc44b408aaa7e5b7f49efc20e917b6900",
+      "copyDefinitionSha256": "d35adfd636c32cfde5fafeee5a45e7822f1701135117ff81c021c4c5a4d20820",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "sessions",
+      "rowCount": 27,
+      "rawBytes": 4297,
+      "rawSha256": "339a42498ae5c071651991f020f9afe91cb0917a967ed6dc77eb84906f1aa54d",
+      "rowMultisetSha256": "c80abed8897aeed9deca24a4a9203b026ad8410fa4762d4fcf5957aef61d69da",
+      "copyDefinitionSha256": "aa303ed20384eb0eef199094da09675518864cf3aba9cb5bb3488c645376388c",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "sso_domains",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "16bb592b03268480093f0e3930cb7e0dfcc10c252941558035a6999895ae2d1c",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "sso_providers",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "c474820b66c95df1ca7f40e2863ff0c4fbf71d961eeeee9d8ce09bc2061ad5c2",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "auth",
+      "table": "users",
+      "rowCount": 15,
+      "rawBytes": 5256,
+      "rawSha256": "70fb347130141e73a0c0f9a93ae5b874319a7936abb4bb212ae0fb69fc8007f6",
+      "rowMultisetSha256": "85b1b309266851a3ea3c4a0f5204f71b58bf3622716f067e7be30f6fc887386c",
+      "copyDefinitionSha256": "369211b2420bae3e6d04e0c89a0af227de0e37a8f4ffacefffabbf4e9d073acc",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "attribution_claims",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "3051e6083016f350231a82c2425f19802d9b8c4d4d3037797c60020fa77b6f6b",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "attribution_disputes",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "3d0041eff6e935d06d158d2e7a4eb54ebbd05e83980cc6f2086c843ade3a73f7",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "audit_events",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "e43d9b154e790e1754c97b5f5b7ee55f64f41a43e8b9a991e6525f68e1f2c88e",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "claim_extensions",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "67cd24af270c89d54304390ddb22e1751b4ae51357e48c70858e022e61d5d725",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "commercial_businesses",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "004fb6fe963508b03f7d61359d4eb5984d3cb24b487702284013cbfd9d13aa8c",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "commercial_contacts",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "a0995231fac8fa6433f643f4d678d0c7ae5ec5737aed0ee5117a6e92de645eec",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "commercial_interactions",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "32c8e4bb49d9e06c2b47d6950282a1f450accada206941b15fa77931c1533ad1",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "commercial_merges",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "b8f226c9c8e38c072a985657afde6581c1b12116f18e3b283cb4b272119df806",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "commercial_opportunities",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "d628c7b713c1a9391880e2af4c3872e7540fbd9d2edc143c56bcc40f00c53f0a",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "commercial_programs",
+      "rowCount": 4,
+      "rawBytes": 100,
+      "rawSha256": "18b6322a15677467ab8bb24de9a7892df3171b5884aa735997fda45ce94b0d71",
+      "rowMultisetSha256": "2b944aac040cd9e6b5ca97684fbcd770eab4fdd919e16a7c4ddc8d290849a873",
+      "copyDefinitionSha256": "11d2239e321260382042c742589bfc2673df940c8dda07aa10c5a2040eb441c8",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "commercial_tasks",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "458dbfbc120206f5a867800ea947d59d21c2e48a307fab0e276a7f1b55388708",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "conversion_terms",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "965996ba1a4b089d3b22b577233c5a1bc702f672cb245fd1c335d96f9685160f",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "demo_rate_buckets",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "4c91aa0bb7d3ca02db4586d42b49ad969b34e397d1f857cd8770cd7ce296c446",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "demo_submissions",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "7a7e5dfe60ae36afd28a323b3734e7f681f872ccd79324d6fac4e3dc1e041b19",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "dispute_events",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "f4984f1144c8710f96f55e32da8a325ea3da3d0c1b67e931295470f7db3a7192",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "dispute_parties",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "5079c29b2811a6080e12d9b130785162ed225482e5630604454974e483116d72",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "internal_role_assignments",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "010526dc61c63fe561b144978ffa0bdb4f99ffb47b9e933ba318ffc4c82a1c86",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "notification_deliveries",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "8c581aff76c505249a1f71a86a2309a0a21274964c7785dda398e1e3adaca910",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "notifications",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "0eb3e747387a26cfd261a6549e4bc468c3a57e22d8611e7ebd0014c71a3dd2fe",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "onboarding_grant_events",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "d5ef7dbd70324fda39e18da4941e9f4de7d85c072d177b29f26c079119c7b81b",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "onboarding_grants",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "306e6c2c6d6c0160522b5db1080aaeaa08fdb9fb8a01efb968d720e7495ebcac",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "opportunity_attributions",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "a7ffffbb8121c1c7f2530150a0a475e2169cb0e878c2c9db9da19de7781dc8cb",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "opportunity_protections",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "d1a447293191a79053ebc5e961a22fc2528dee88caa9ab0d91bc788fee0045ce",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "opportunity_stage_events",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "a29bd59e3f8769a7ff3e7978c883854ba67e8aff207d26219cfc57f353557e3c",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "outbox_events",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "e5dd3ecf4179e7082b619f46e4c9b3ea790822c3ab8a8bb5136d7b8d2f4d83a3",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "platform_accounts",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "3ba340b3d9657ff85ebacfe941cdf53ea026e95b01eb6879ddf986ecccfeb2b2",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "platform_collections",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "1772a698c8b533471f35c2b44c1a649fb3c55969499d68c49d852704941f0fe9",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "platform_obligations",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "4f5a178782cad18d250a610f6e0994ce602c6fe29cd7e11ab61ec5c0e792bdbb",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "privacy_requests",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "9c045e6f13cbdea8060249ad6dfe4e21f49854c9b905ed321063fa458f246d59",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "promoter_bank_accounts",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "6880b7ffbe2f4a1db487e36ce0a323d20cc37011bdaee3660d0b3bc5ca4568a6",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "promoter_contracts",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "ac331832c1e5d14d6945ef7c0e068717978bcace04b66c6eb93932edd692356e",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "promoter_separations",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "4e2a4b8ae40bcb90a8b2230c5dee5dc153d42adc218a8c4b3a8ecfa4d5386a68",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "promoter_verifications",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "a2a6bac80871b54331bf3c142a96c6d0ac01a45256e4932850face41a4ec6d62",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "commercial",
+      "table": "promoters",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "60b321eed3606b6e4897a7f41df1862525026ba7aeaf910c20a953c6eeeaf5af",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "migration_private",
+      "table": "evidence",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "ff198d579a50785c46389da84dee3924d32ca6fc90fd7bce04782e57dc446971",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "migration_private",
+      "table": "runs",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "babd7b492554d3e73eaf3acde7a87b83768965fc9aeced40bb01d663f67f15b3",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "business_finance_settings",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "835ba79619250f3db6a9d0c16fb07a180c49de2b42930103ad3540dbb7222b42",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "business_settings",
+      "rowCount": 5,
+      "rawBytes": 322,
+      "rawSha256": "fa08d08022047810c600cc455d6dc4c34fb56b745cc35aaac2dd3c7ff8c90b97",
+      "rowMultisetSha256": "f4eaecbd5301a522cba88f5f905b0f56d908b4b7a09e9fea66eda256ec2f83cb",
+      "copyDefinitionSha256": "00114c39e3bc9c46b602710ea6498eda4956818d4d843b1cccc7e5b3be308529",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "business_statistics_state",
+      "rowCount": 4,
+      "rawBytes": 90,
+      "rawSha256": "fd6d86f0a45fdd080afb0cadd7de158f22efca3c7d418bf53c1f24b24e98a6bc",
+      "rowMultisetSha256": "c14faefd0b66fad317333218fadbc4112fcc2c440fc6eafb34b313e22fe7f510",
+      "copyDefinitionSha256": "49a24c78d5d8ffe141924193655952a8997ad8678609cc10904f8f610d7e5ca1",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "businesses",
+      "rowCount": 5,
+      "rawBytes": 303,
+      "rawSha256": "c521a37c3f657d4702c6dbca53c0565d77cf07918b6f7c542dcbbb64a2951776",
+      "rowMultisetSha256": "d0df854b1d2f03140f4deb5cbe9feb2088ba053f3bc39077a899c89b9cba05b1",
+      "copyDefinitionSha256": "1b1f1481e4b546d9a344fe7d31a7de19110cd168988b01b08b07046565ec363a",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "categories",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "dda296e4277ea4b5f3d354bb13dfc55cfe99356455b12b1dca0e67a5ddca5f27",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "customization_group_assignments",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "5b8d57ddb4d7456fad03ddb6f17bfb9513a89a1a7213018bcafcc31bd0c36921",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "customization_groups",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "81d13814812e87f0393b6f8c516dd27e121c76190dd8bc4d648e5991d70011be",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "customization_options",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "f6ed0c4af964390a5e62e729fc61904ff685844bc7658223476ba6ca08ba5ae8",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "finance_accounts",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "e6d21431254dbd45ee88f34664d5140e1f381ffc482da707eaa009891e5c61f3",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "finance_audit_events",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "3f934b9a3acf0b3742fed4e7d8770b2b96f57d50410834804f95629b46fa937a",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "finance_categories",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "48648b414057dcafb43f2b9c28198f90c8c16a315a3bab8a366df77679d39188",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "finance_funds",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "566e20780d8eb57d0ba41415a7d1135ca7379f3f2f1b36fbb0a9535939525350",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "finance_operations",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "8dcddacf61110a2bed70e2e934c0806a950e175ead48c883d2a7f5a7dca8f6ec",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "finance_order_outflow_allocations",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "46cf9fb4cd3fbe3e16bee08053f1b4a244a56aa4b33aa9c6ba1abb2bba1b48e7",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "finance_reconciliation_commands",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "7b320d8ab682e12590fb3c3fd3fc4200a7012a05d5a4e9e32b29d98c1fff387c",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "finance_reconciliation_entries",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "8deab62d5773fcd1fd2281f09d6958325fd8a344d46640cb616c08b194e8761e",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "finance_reconciliation_fund_snapshots",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "035cb40f47cc1d6b8c6a8f544d1e2910555b863693d1ebf1e22e521c9127a0c6",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "finance_reconciliations",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "75b6b2f18473534434d6dc979e28e9ea54c27e5a57feeb3671d5ee9340cebd0f",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "finance_transaction_entries",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "2f6f01c5fc500bd63e185abfa791724a01abfa5d20f91a4214c40239540d1746",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "finance_transactions",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "b7555f739abab734c7729aa45aaa9438c19106798535c94b34b1b9b4988699cb",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "order_events",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "32517399a0a49acbe6b29f407782c1b32f06899d01569cc56b154f9004ac85bc",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "order_financials",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "83a6e4d2160548057ba3dfa6b383e86918adb6b36622ea851babfce7e6e32ccd",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "order_item_statistics_snapshots",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "0ed3250e99c35448bd05c639c61553d476cfcf7c1df61a747c1894fb021dece6",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "order_items",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "8c12abf5f486f9d49662b3db3760fc29f772af4789f4111d8bd28a74edf1ca44",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "order_statistics_completion_items",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "7c75c945a290637b061dd6050ddeaf6feeefa7c64ab6cc4411d9118ec32d5347",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "order_statistics_completions",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "c606a9158f71714b3c371d74950ffaf158b80b58271929ea96c0236f5c04801e",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "orders",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "8c4762a4cb352995b2b13ee6e1346b3574a317dd83c1d67c2dd19e3738fbaa78",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "product_customization_overrides",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "c29d112c022996a22072a419012b80bc6f79973815ad54cde054ee2f1c7b6add",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "products",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "e4d347e72b5f7db5351796f8a66b458ceb1cb1c8243b63187ede7721a49d2412",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "profiles",
+      "rowCount": 15,
+      "rawBytes": 1373,
+      "rawSha256": "f04e2608238e5b8a846c562e06e00ac9e58028438b3519e87ddbfe063beb27d5",
+      "rowMultisetSha256": "65a12a61bfb946c485c136eee211400b4b66f39b7b0d4b2c9bebcb003a25fe47",
+      "copyDefinitionSha256": "a52518665c9e5bfcf002f4390904d07d9483ccc1bd3967b533902d3a427709eb",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "push_subscriptions",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "74cf1dccaaa74ed28ae63219b0ee93c25bcfbd01b3bb3b5f2a19e50866296b51",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "stock_movements",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "1463f381303da7a21cf209571038959cb37ead863a7919f9a8053b3b39487e64",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "store_session_statistics_snapshots",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "c2f26f0b4cfed69780e30c5597958182230137f7279516a211fac722acf707b8",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "store_sessions",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "814005e590855db5018bc3f7eb9970ae6236410489e99e9c81e43a1975dd99fd",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "upsell_group_items",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "dba8b76b0dec22002c74a734acc7ef3b837713d6dc54ce6df3b9b80107749669",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "public",
+      "table": "upsell_groups",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "e5b8bb99a4260ab11ee6a8322d24752e29a25d264c2ab9bf0b2516fd0b6c8078",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "statistics_test_environment",
+      "table": "identity",
+      "rowCount": 4,
+      "rawBytes": 72,
+      "rawSha256": "04cf7e6efa2a69c3d8edda1d4561c246b27a8e70f408daea597ee481e855d9f5",
+      "rowMultisetSha256": "af75d53c1bced56423c865391a22157d1a0c9569009f124bcabb6ec87497f7f6",
+      "copyDefinitionSha256": "eb54684be5b2de3ea8bc219bd4259b16e9e979f6f3055f7682386e765649808d",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "storage",
+      "table": "buckets",
+      "rowCount": 6,
+      "rawBytes": 362,
+      "rawSha256": "428fc034879a9d5950abfa2801b68af640eeb38530d8365035b0252af4a58cbd",
+      "rowMultisetSha256": "3866f91d60b263c38aa64c8df33fd71ae196544ceb0e175d9eb1be36fffbb988",
+      "copyDefinitionSha256": "53373f514b31b24c8b1743259fde6020a37228f0296823c87a831424564b43ae",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "storage",
+      "table": "buckets_analytics",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "995779c283e18b7040f4fe119f218d3ec26361b469d6143c25fe1543ad1ab033",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "storage",
+      "table": "buckets_vectors",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "9f4ea959cf24c18d098c3f0cb3472aacee00c67f4c0897b16575adbdd4a7b488",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "storage",
+      "table": "iceberg_namespaces",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "32f7a31bfd86922ef3ae0e080426592fa4f2301c912b45077d73575509d39625",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "storage",
+      "table": "iceberg_tables",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "fdf62563218c45529296b28f7b31ccd142c7442aee2deab87f8f35c98880b2fb",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "storage",
+      "table": "migrations",
+      "rowCount": 53,
+      "rawBytes": 4776,
+      "rawSha256": "1928931ac1cf4a883b23c9716d81719cb16946d215bf03e58492e709f0818b47",
+      "rowMultisetSha256": "bc37c44a6dde3822b601dec3561082afaead25609e7b5a6c95623a0232621866",
+      "copyDefinitionSha256": "53d1b5917d7e6deccd86345ebe11fda8378b32e4b3b5511f62ebc1807efa4dd8",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "storage",
+      "table": "objects",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "a0bf4186cde0790c52d11f5218422a6fbfe11249ca47ba69d7bfc7492178a5eb",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "storage",
+      "table": "prefixes",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "358f2b510266c67641328b0b3d381fa0c062a7472c87cdbf8a6507da5c8d4aea",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "storage",
+      "table": "s3_multipart_uploads",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "d0c9cae4de2c983d37d07fb14f95ac46f963a28eb874efaba58db6fdda850efb",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "storage",
+      "table": "s3_multipart_uploads_parts",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "125afac83f5e99077148d0edb2ad737436dc9a8f545d3a8e5a0ef38aa3a9ab05",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "storage",
+      "table": "vector_indexes",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "72896f9dabdf532ca1b9cc143fe482f4f70f90de8ca80a913f3d6896a0b9522a",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "supabase_functions",
+      "table": "hooks",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "6f5646e011e19274d3f744502efeef289359b94ef727e7651dec93fdbe2d47fc",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "supabase_functions",
+      "table": "migrations",
+      "rowCount": 5,
+      "rawBytes": 102,
+      "rawSha256": "ba1fe2f09637d283d54f5b1e7b1ee8ec0214fb80f089b8969dc830cc04cd6ef1",
+      "rowMultisetSha256": "a25ca47934346bfd5ed8eba7e1520071a2b2e17ae0a8e41f43047ca909cdbcd1",
+      "copyDefinitionSha256": "e3b2d871cb1361f804c97dbe1a106daade48a9e0ec2d1147475fcf6d121374fc",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "supabase_migrations",
+      "table": "schema_migrations",
+      "rowCount": 127,
+      "rawBytes": 877446,
+      "rawSha256": "b812471d1a3c0399c3d79f93571470dd772fff80d0cc84a3980beb55d8f16717",
+      "rowMultisetSha256": "4c2008b3cd72ff5318ea9419472553d0739a8a1ce28126de5d3702fc1ea52ad1",
+      "copyDefinitionSha256": "48f70f091ad8722d5ae0318485a7a3a89829ef48df9a4b39830707eb5033719c",
+      "terminator": "NONE"
+    },
+    {
+      "schema": "vault",
+      "table": "secrets",
+      "rowCount": 3,
+      "rawBytes": 5,
+      "rawSha256": "912db542cbceae6c486480c89555c926655bb7300575c7f46b4e4b3a181e16ba",
+      "rowMultisetSha256": "05425196cc997bde898c786c47872b81385413a4c8ddbca1c699b2396419099d",
+      "copyDefinitionSha256": "64368e6a5e4618a1da5dfb26b51c583e3fcc5e113dc14ed9f02528ba904138e5",
+      "terminator": "NONE"
+    }
+  ]
+}

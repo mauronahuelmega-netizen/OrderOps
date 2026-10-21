@@ -1,0 +1,629 @@
+{
+  "at": "2026-10-14T14:46:23.314Z",
+  "phase": "P04-T01B",
+  "verdict": "NEEDS_FIX",
+  "approvedSourceSha256": "a66ce3ea73bf4a4421c60b77376914f232b4470d41df7d661ee38142c4a29ba8",
+  "currentHarnessSha256": "56af055a7b853f3d39f3093392fb1d213a17c4f120488b136fa9bf6b2d0c9d03",
+  "payloadSha256": "76b0315d9c9cc145a43de0d40315213fb018d5631cd55f27c3d82d34564a2c02",
+  "preflight": "PASS",
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "api": "127.0.0.1:56321",
+  "db": "127.0.0.1:56322",
+  "ledger": 124,
+  "functionsCreatedOnlyInsideRollbackTransactions": 3,
+  "transactions": [
+    {
+      "attempt": "attempt-01/",
+      "harnessSha256": "46a9332db951748493de931a458ce19f299293b81b5fc5e2dab793d34a78d3f1",
+      "payloadSha256": "76b0315d9c9cc145a43de0d40315213fb018d5631cd55f27c3d82d34564a2c02",
+      "explicitRollback": true,
+      "postcheckNewConnection": true,
+      "catalogAndDataIdentical": true
+    },
+    {
+      "attempt": "attempt-02/",
+      "harnessSha256": "163e7afdeb0bfb9e0c57646441ae8144280f6083fdef3da3093ff1f45ae2ab57",
+      "payloadSha256": "76b0315d9c9cc145a43de0d40315213fb018d5631cd55f27c3d82d34564a2c02",
+      "explicitRollback": true,
+      "postcheckNewConnection": true,
+      "catalogAndDataIdentical": true
+    },
+    {
+      "attempt": "attempt-03/",
+      "harnessSha256": "f2350ae2374f971ed1e6921204e86ed7b892ea63da5e06f6f7b394eef506d0b6",
+      "payloadSha256": "76b0315d9c9cc145a43de0d40315213fb018d5631cd55f27c3d82d34564a2c02",
+      "explicitRollback": true,
+      "postcheckNewConnection": true,
+      "catalogAndDataIdentical": true
+    },
+    {
+      "attempt": "attempt-04/",
+      "harnessSha256": "444a2a6dcc4ed7e8cb07d6f94409d078db4b33c2b3c143c44df5ae4cd6630267",
+      "payloadSha256": "76b0315d9c9cc145a43de0d40315213fb018d5631cd55f27c3d82d34564a2c02",
+      "explicitRollback": true,
+      "postcheckNewConnection": true,
+      "catalogAndDataIdentical": true
+    },
+    {
+      "attempt": "attempt-05-final",
+      "harnessSha256": "56af055a7b853f3d39f3093392fb1d213a17c4f120488b136fa9bf6b2d0c9d03",
+      "payloadSha256": "76b0315d9c9cc145a43de0d40315213fb018d5631cd55f27c3d82d34564a2c02",
+      "explicitRollback": true,
+      "postcheckNewConnection": true,
+      "catalogAndDataIdentical": true
+    }
+  ],
+  "confirmedCandidateDefects": [
+    "SQL05: cursor rejected after TimeZone change (22023)",
+    "SQL05: cursor rejected after DateStyle-only change (22023)",
+    "SQL07: nonfinite pending total NaN rejected by unchanged decoder"
+  ],
+  "decoder": {
+    "accepted": 63,
+    "rejected": 1,
+    "unmodified": true,
+    "actualSqlJson": true,
+    "includesRepeatedResponses": true
+  },
+  "summaryDifferential": {
+    "executed": 9,
+    "sharedFieldsAllEqual": true,
+    "fullContractEqualityClaimed": false
+  },
+  "preservation": {
+    "preexistingFiles": 2772,
+    "allHashesUnchanged": true,
+    "previous2752AndAllReviewArtifactsUnchanged": true
+  },
+  "notExecuted": [
+    "Real HTTP authentication refresh/expiry",
+    "Direct dedicated RLS matrix on profiles/effective view for every role",
+    "Full unavailable panel with no known lines",
+    "Operational DST capture and all opening/closing microsecond boundaries",
+    "All discount/adjustment/shipping variants and bigint maxima",
+    "Concurrent modifications",
+    "Advanced benchmarks"
+  ],
+  "noPersistentInstall": true,
+  "noCommit": true,
+  "noSecondCandidate": true,
+  "noT02": true,
+  "noPublication": true,
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/analyze-results.mjs",
+      "sha256": "5db7cdeb49ebb6c273a2a5fd13868bd5895d04f6e2a265ef3689e200df56a553",
+      "bytes": 5739,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-01/catalog-after.json",
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "bytes": 260779,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-01/catalog-before.json",
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "bytes": 260779,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-01/data-after.json",
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "bytes": 1415,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-01/data-before.json",
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "bytes": 1415,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-01/extra-after.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "bytes": 15375,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-01/extra-before.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "bytes": 15375,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-01/harness-manifest.json",
+      "sha256": "ec15945ef211354f24326bd7a1438ecc2aac07a3cececc77778dca70d4d32814",
+      "bytes": 8434,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-01/harness.sql",
+      "sha256": "46a9332db951748493de931a458ce19f299293b81b5fc5e2dab793d34a78d3f1",
+      "bytes": 98318,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-01/preflight.json",
+      "sha256": "6517a68e4456193d70b5f3b6a378abf76d78caca975cb850372a3f9214b192b3",
+      "bytes": 5456,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-01/prepare-harness.mjs",
+      "sha256": "f6e244f77cfa90a294b5222bd1d16abca7d999f40f58f6b14f8362f0c6cb853a",
+      "bytes": 21926,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-01/psql.stderr.log",
+      "sha256": "7b07a1b56747874ee0228a37aab1ac9b5eb77e081d9db3c8ebdf4e4038bbcf41",
+      "bytes": 43908,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-01/psql.stdout.log",
+      "sha256": "4d1a0dd42de37faf206c16f457e500ec02194d37417220b8f00d4d59685ecf13",
+      "bytes": 4888,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-01/rollback-verification.json",
+      "sha256": "e28992ebd93c7ccaed2429a1fdb8e30d09adc4317812d8f3b01cf6e2432c9a23",
+      "bytes": 315,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-01/run-harness.mjs",
+      "sha256": "ce46b09c4f7174a559f3ab997e943cbdff275f3694293acfe96bb3174ae13175",
+      "bytes": 4207,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-01/sql-results.json",
+      "sha256": "4862b805fbd4f064363d13ec2f516e3d412dc9121ff49243cfcbe9d36d3b04b6",
+      "bytes": 49541,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-02/catalog-after.json",
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "bytes": 260779,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-02/catalog-before.json",
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "bytes": 260779,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-02/data-after.json",
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "bytes": 1415,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-02/data-before.json",
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "bytes": 1415,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-02/extra-after.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "bytes": 15375,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-02/extra-before.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "bytes": 15375,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-02/harness-manifest.json",
+      "sha256": "737bf5261f427df4bdbc9877307ac0e304d4bec997cd550f946414837348048f",
+      "bytes": 8434,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-02/harness.sql",
+      "sha256": "163e7afdeb0bfb9e0c57646441ae8144280f6083fdef3da3093ff1f45ae2ab57",
+      "bytes": 99193,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-02/preflight.json",
+      "sha256": "e9660b1a87b8686397480ae4bd6fc750c3b24ea796441d53a6f35b76fcde6ce3",
+      "bytes": 5456,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-02/prepare-harness.mjs",
+      "sha256": "989b44943482ea30b4ee8b2174aba788e89c1ec354eca1ecf73b56d5578320dc",
+      "bytes": 22102,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-02/psql.stderr.log",
+      "sha256": "187347cb3257a3e7d36b158721b1a15ee6bb58c937abc87a40cd83cd68104638",
+      "bytes": 520454,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-02/psql.stdout.log",
+      "sha256": "e316923b42a38ce4a1a7d1fc59de2aa0c413f3706b521201eef2c0afbf3d0210",
+      "bytes": 8008,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-02/rollback-verification.json",
+      "sha256": "960478bfceeabdbefa5a57a4bdf2934496a4c62ab8ff8a0612bd7163e73b0123",
+      "bytes": 315,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-02/run-harness.mjs",
+      "sha256": "ce46b09c4f7174a559f3ab997e943cbdff275f3694293acfe96bb3174ae13175",
+      "bytes": 4207,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-02/sql-results.json",
+      "sha256": "75fe87da316579f7b42d12a50785aaaff61fb72355c5d6b5cf7a64ba0c71ab6e",
+      "bytes": 1017498,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-03/catalog-after.json",
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "bytes": 260779,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-03/catalog-before.json",
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "bytes": 260779,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-03/data-after.json",
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "bytes": 1415,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-03/data-before.json",
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "bytes": 1415,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-03/extra-after.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "bytes": 15375,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-03/extra-before.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "bytes": 15375,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-03/harness-manifest.json",
+      "sha256": "33e65e4fa30d1d8711999e62d0f9ba11062339b5fa36412cea208fbae0d60945",
+      "bytes": 3155,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-03/harness.sql",
+      "sha256": "f2350ae2374f971ed1e6921204e86ed7b892ea63da5e06f6f7b394eef506d0b6",
+      "bytes": 27441,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-03/preflight.json",
+      "sha256": "47d314e61da30325123740500247f29ea9b02b7db3a695dcad745bd07a09fc85",
+      "bytes": 5456,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-03/prepare-harness.mjs",
+      "sha256": "2e94e571d8c9a599a47bfb2de1f3885aa1bfbf5f40b4e6e29daa5ccc7ea77ab2",
+      "bytes": 22568,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-03/psql.stderr.log",
+      "sha256": "02b9095c2abf26f2573ae60fa3527ff602f276155d18bfec5f323bb188a2e5de",
+      "bytes": 10696,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-03/psql.stdout.log",
+      "sha256": "866eb0504cbae1f25e621f9668fd82b3f8411c20a2e3e6b341f5ce88dbd1a28f",
+      "bytes": 1144,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-03/rollback-verification.json",
+      "sha256": "ffe2388fd713a735c7bec19263b67d25b7dee7d661ee4aec4124c7d21186d0d5",
+      "bytes": 315,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-03/run-harness.mjs",
+      "sha256": "ce46b09c4f7174a559f3ab997e943cbdff275f3694293acfe96bb3174ae13175",
+      "bytes": 4207,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-03/sql-results.json",
+      "sha256": "616668761b6db577760548b026f7b71234e84fc6dec3326fb0566ccc48de87ef",
+      "bytes": 17083,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-04/catalog-after.json",
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "bytes": 260779,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-04/catalog-before.json",
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "bytes": 260779,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-04/data-after.json",
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "bytes": 1415,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-04/data-before.json",
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "bytes": 1415,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-04/extra-after.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "bytes": 15375,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-04/extra-before.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "bytes": 15375,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-04/harness-manifest.json",
+      "sha256": "98fa6ba9d96917a3ee55aa5df2f18c0cc45d0b3cdf8c17ab32c280b7bf167e1e",
+      "bytes": 3155,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-04/harness.sql",
+      "sha256": "444a2a6dcc4ed7e8cb07d6f94409d078db4b33c2b3c143c44df5ae4cd6630267",
+      "bytes": 28253,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-04/preflight.json",
+      "sha256": "913e68f2ca7a0e865e02c2495b6a54f44d7037cc6a70714849140651c0048576",
+      "bytes": 5456,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-04/prepare-harness.mjs",
+      "sha256": "bdabe1fe3284f660d60a51a0f5b37bd97f8dff3e5ab12db78a0009ce29a1821b",
+      "bytes": 22570,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-04/psql.stderr.log",
+      "sha256": "15225c1c91434d90906064470a50d070defeefa9af4460aee376bed0d110505f",
+      "bytes": 14507,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-04/psql.stdout.log",
+      "sha256": "44d9b263afe4f33e1fd436aee216f0555d7bf7805f9db5fca0eb9c244d28627b",
+      "bytes": 1768,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-04/rollback-verification.json",
+      "sha256": "5184e0144dde632cc766415ad6e5abe25765c6e8dd58a6c005263a98f032d862",
+      "bytes": 315,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-04/run-harness.mjs",
+      "sha256": "ce46b09c4f7174a559f3ab997e943cbdff275f3694293acfe96bb3174ae13175",
+      "bytes": 4207,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempt-04/sql-results.json",
+      "sha256": "f5390dafc4b76d19b5ecb6ddae66c376812c3ee73e74b2dd1c9a3c338cea1ab8",
+      "bytes": 24010,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/attempts-and-classification.json",
+      "sha256": "fabca69e3c711c3f39192d610f83a7304396d2121c56606ef21ead1e3992f15a",
+      "bytes": 4959,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/catalog-after.json",
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "bytes": 260779,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/catalog-before.json",
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "bytes": 260779,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/catalog-select.sql",
+      "sha256": "b13c2fd8fe442b4cebc94b84b2db464e8476d6e2526b2ca2ba0af6f4fb053ba3",
+      "bytes": 2176,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/data-after.json",
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "bytes": 1415,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/data-before.json",
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "bytes": 1415,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/data-select.sql",
+      "sha256": "146d26738db1be302ad45eb19b9ddd5505993af1ca11d40c1f6ec148b74758e4",
+      "bytes": 2834,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/decoder-results.json",
+      "sha256": "436522e3c4001586ca14dd0e5da731cec2286829a16e50f42e126203c7198c98",
+      "bytes": 12651,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/extra-after.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "bytes": 15375,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/extra-before.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "bytes": 15375,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/extra-select.sql",
+      "sha256": "2d611bf55bbf1fe9deed472b3102ff7515b4df7a9e371fa83399069344006c72",
+      "bytes": 601,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/file-baseline.json",
+      "sha256": "d2011ad25a5785d3ee1b51e43188481170c46bb611a91cee8cb97266b7b310e0",
+      "bytes": 448056,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/finalize-evidence.mjs",
+      "sha256": "cb09cf22fe5a451420723f4f64580d1a560d14e839b260d4290ff8e6d9c4c33b",
+      "bytes": 5664,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/harness-manifest.json",
+      "sha256": "e08c22fc34e62bbddb443e5fb2b1bba21cdb22a10c6f08d10b1fe8c26017f671",
+      "bytes": 3436,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/harness.sql",
+      "sha256": "56af055a7b853f3d39f3093392fb1d213a17c4f120488b136fa9bf6b2d0c9d03",
+      "bytes": 33124,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/informe.md",
+      "sha256": "2dd65dadb26dd2c100dea669438318475aa72a09925c831c89a5bc70ad65e452",
+      "bytes": 11451,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/preflight.json",
+      "sha256": "8bc2ea91631212febf9f1103cf32b688b8dddcbc6e853b9c0909cbf3bafb518f",
+      "bytes": 5456,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/preflight.mjs",
+      "sha256": "b9e7d93e9b86466d196d26884431c55c135a7dbb50e545650f2e3228c5075456",
+      "bytes": 9142,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/prepare-harness.mjs",
+      "sha256": "8b33fd668cd261b8c5cda2d219e37d1d04ba10a2cd9bca90ffddafdcc50fcf03",
+      "bytes": 25463,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/preservation.json",
+      "sha256": "8b2c973dcd7592ce0fccf0096732c24970a2264783bc4166cd568fb8c9f884f7",
+      "bytes": 4197,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/psql.stderr.log",
+      "sha256": "4a14026029247c7e1dafb0e94ec3f71dc36e05801b53e1bf6b842e924b85fac2",
+      "bytes": 83921,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/psql.stdout.log",
+      "sha256": "e5e586ba74391b725703148d51ac3156ada0546c6fa632d34b57ee782dc2e4e2",
+      "bytes": 2704,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/resources.json",
+      "sha256": "17d60bce17528835a4fba5d699e8ca7401ab6dcc4de4d2b3a8d5af273003f67a",
+      "bytes": 3227,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/risks-and-recommendation.md",
+      "sha256": "5afcdbb953cc749d84a0b359ad7c8f7b396e0370b10ecedb953b8e93601a590a",
+      "bytes": 3212,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/rollback-verification.json",
+      "sha256": "2064c66274f18f1dbcf6080d340bdaf85323b27fd49d54a061e52103de4b911f",
+      "bytes": 315,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/run-harness.mjs",
+      "sha256": "ce46b09c4f7174a559f3ab997e943cbdff275f3694293acfe96bb3174ae13175",
+      "bytes": 4207,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/sql-results.json",
+      "sha256": "a66f4f87bee14c8a30117c049c3e3bf61a0fdfd69eb2febe53b02a37bfe32a36",
+      "bytes": 156278,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b/summary-differential.json",
+      "sha256": "3a1b56edb3e1f31da667352e23a522775ece31beef0616187bc8826949083038",
+      "bytes": 4627,
+      "kind": "created"
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

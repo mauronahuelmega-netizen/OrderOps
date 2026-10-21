@@ -1,0 +1,393 @@
+{
+  "at": "2026-10-13T18:18:34.021Z",
+  "result": "PASS",
+  "assertions": 90,
+  "results": [
+    {
+      "label": "Real SSR cookies + initial default period: one query",
+      "result": "PASS"
+    },
+    {
+      "label": "Default week",
+      "result": "PASS"
+    },
+    {
+      "label": "Empty average is unknown, not zero",
+      "result": "PASS"
+    },
+    {
+      "label": "Live period today: one query",
+      "result": "PASS"
+    },
+    {
+      "label": "URL persists today",
+      "result": "PASS"
+    },
+    {
+      "label": "Live period yesterday: one query",
+      "result": "PASS"
+    },
+    {
+      "label": "URL persists yesterday",
+      "result": "PASS"
+    },
+    {
+      "label": "Live period this_week: one query",
+      "result": "PASS"
+    },
+    {
+      "label": "URL persists this_week",
+      "result": "PASS"
+    },
+    {
+      "label": "Live period this_month: one query",
+      "result": "PASS"
+    },
+    {
+      "label": "URL persists this_month",
+      "result": "PASS"
+    },
+    {
+      "label": "Live period previous_month: one query",
+      "result": "PASS"
+    },
+    {
+      "label": "URL persists previous_month",
+      "result": "PASS"
+    },
+    {
+      "label": "Live period last_7_days: one query",
+      "result": "PASS"
+    },
+    {
+      "label": "URL persists last_7_days",
+      "result": "PASS"
+    },
+    {
+      "label": "Live period last_30_days: one query",
+      "result": "PASS"
+    },
+    {
+      "label": "URL persists last_30_days",
+      "result": "PASS"
+    },
+    {
+      "label": "Live custom range one query",
+      "result": "PASS"
+    },
+    {
+      "label": "Custom dates in URL",
+      "result": "PASS"
+    },
+    {
+      "label": "URL cannot choose a foreign business",
+      "result": "PASS"
+    },
+    {
+      "label": "Response never shared cached",
+      "result": "PASS"
+    },
+    {
+      "label": "Real cookies role a/owner",
+      "result": "PASS"
+    },
+    {
+      "label": "Actual tenant a/owner",
+      "result": "PASS"
+    },
+    {
+      "label": "Real cookies role a/manager",
+      "result": "PASS"
+    },
+    {
+      "label": "Actual tenant a/manager",
+      "result": "PASS"
+    },
+    {
+      "label": "Real cookies role a/admin",
+      "result": "PASS"
+    },
+    {
+      "label": "Actual tenant a/admin",
+      "result": "PASS"
+    },
+    {
+      "label": "Real cookies role a/operator",
+      "result": "PASS"
+    },
+    {
+      "label": "Real cookies role a/viewer",
+      "result": "PASS"
+    },
+    {
+      "label": "Real cookies role a/super_admin",
+      "result": "PASS"
+    },
+    {
+      "label": "Real cookies role b/owner",
+      "result": "PASS"
+    },
+    {
+      "label": "Actual tenant b/owner",
+      "result": "PASS"
+    },
+    {
+      "label": "Real cookies role b/manager",
+      "result": "PASS"
+    },
+    {
+      "label": "Actual tenant b/manager",
+      "result": "PASS"
+    },
+    {
+      "label": "Real cookies role b/admin",
+      "result": "PASS"
+    },
+    {
+      "label": "Actual tenant b/admin",
+      "result": "PASS"
+    },
+    {
+      "label": "Real cookies role b/operator",
+      "result": "PASS"
+    },
+    {
+      "label": "Real cookies role b/viewer",
+      "result": "PASS"
+    },
+    {
+      "label": "Real cookies role b/super_admin",
+      "result": "PASS"
+    },
+    {
+      "label": "Anonymous endpoint denied",
+      "result": "PASS"
+    },
+    {
+      "label": "Anonymous page login redirect",
+      "result": "PASS"
+    },
+    {
+      "label": "Denied page exposes no KPI",
+      "result": "PASS"
+    },
+    {
+      "label": "KPI -> chart synchronized",
+      "result": "PASS"
+    },
+    {
+      "label": "Active KPI pressed",
+      "result": "PASS"
+    },
+    {
+      "label": "Chart -> KPI synchronized",
+      "result": "PASS"
+    },
+    {
+      "label": "Persistent point detail",
+      "result": "PASS"
+    },
+    {
+      "label": "KPI/point interactions do not query",
+      "result": "PASS"
+    },
+    {
+      "label": "No horizontal overflow light/desktop",
+      "result": "PASS"
+    },
+    {
+      "label": "Sales surface dominates",
+      "result": "PASS"
+    },
+    {
+      "label": "Desktop chart reading 2:1",
+      "result": "PASS"
+    },
+    {
+      "label": "Keyboard alternative for points",
+      "result": "PASS"
+    },
+    {
+      "label": "KPI -> chart synchronized",
+      "result": "PASS"
+    },
+    {
+      "label": "Active KPI pressed",
+      "result": "PASS"
+    },
+    {
+      "label": "Chart -> KPI synchronized",
+      "result": "PASS"
+    },
+    {
+      "label": "Persistent point detail",
+      "result": "PASS"
+    },
+    {
+      "label": "KPI/point interactions do not query",
+      "result": "PASS"
+    },
+    {
+      "label": "No horizontal overflow light/mobile",
+      "result": "PASS"
+    },
+    {
+      "label": "Mobile secondary two columns where viable",
+      "result": "PASS"
+    },
+    {
+      "label": "Keyboard alternative for points",
+      "result": "PASS"
+    },
+    {
+      "label": "KPI -> chart synchronized",
+      "result": "PASS"
+    },
+    {
+      "label": "Active KPI pressed",
+      "result": "PASS"
+    },
+    {
+      "label": "Chart -> KPI synchronized",
+      "result": "PASS"
+    },
+    {
+      "label": "Persistent point detail",
+      "result": "PASS"
+    },
+    {
+      "label": "KPI/point interactions do not query",
+      "result": "PASS"
+    },
+    {
+      "label": "No horizontal overflow dark/desktop",
+      "result": "PASS"
+    },
+    {
+      "label": "Sales surface dominates",
+      "result": "PASS"
+    },
+    {
+      "label": "Desktop chart reading 2:1",
+      "result": "PASS"
+    },
+    {
+      "label": "Keyboard alternative for points",
+      "result": "PASS"
+    },
+    {
+      "label": "KPI -> chart synchronized",
+      "result": "PASS"
+    },
+    {
+      "label": "Active KPI pressed",
+      "result": "PASS"
+    },
+    {
+      "label": "Chart -> KPI synchronized",
+      "result": "PASS"
+    },
+    {
+      "label": "Persistent point detail",
+      "result": "PASS"
+    },
+    {
+      "label": "KPI/point interactions do not query",
+      "result": "PASS"
+    },
+    {
+      "label": "No horizontal overflow dark/mobile",
+      "result": "PASS"
+    },
+    {
+      "label": "Mobile secondary two columns where viable",
+      "result": "PASS"
+    },
+    {
+      "label": "Keyboard alternative for points",
+      "result": "PASS"
+    },
+    {
+      "label": "Long exact monetary value and 125% text without overflow",
+      "result": "PASS"
+    },
+    {
+      "label": "Landscape without overflow",
+      "result": "PASS"
+    },
+    {
+      "label": "Partial unknown ticket",
+      "result": "PASS"
+    },
+    {
+      "label": "Unknown indicator not plotted as zero",
+      "result": "PASS"
+    },
+    {
+      "label": "No invalid previous line",
+      "result": "PASS"
+    },
+    {
+      "label": "Timezone configuration not fake data",
+      "result": "PASS"
+    },
+    {
+      "label": "Error contains no stale KPI",
+      "result": "PASS"
+    },
+    {
+      "label": "Retry retains period",
+      "result": "PASS"
+    },
+    {
+      "label": "Loading contains no fictional zeros",
+      "result": "PASS"
+    },
+    {
+      "label": "Late reply cannot replace current URL period",
+      "result": "PASS"
+    },
+    {
+      "label": "Old financial data discarded",
+      "result": "PASS"
+    },
+    {
+      "label": "No foreign browser origins",
+      "result": "PASS"
+    },
+    {
+      "label": "No uncaught browser errors",
+      "result": "PASS"
+    },
+    {
+      "label": "Identity unchanged after QA",
+      "result": "PASS"
+    }
+  ],
+  "live": "SSR cookies, real extended RPC, eight periods, two tenants, six roles; existing empty synthetic datasets",
+  "visual": "Complete/partial/error screenshots intercept only the owned endpoint within Playwright using strict synthetic fixtures; never app fallback data",
+  "before": {
+    "verified": true,
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "containers": 5,
+    "volumes": [
+      "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+    ],
+    "baseMigrations": 119,
+    "startedAt": "2026-10-12T19:27:13.000Z"
+  },
+  "after": {
+    "verified": true,
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "containers": 5,
+    "volumes": [
+      "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+    ],
+    "baseMigrations": 119,
+    "startedAt": "2026-10-12T19:27:13.000Z"
+  },
+  "foreignOrigins": [],
+  "browserErrors": []
+}

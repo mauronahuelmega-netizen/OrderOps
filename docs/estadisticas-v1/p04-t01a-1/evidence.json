@@ -1,0 +1,258 @@
+{
+  "at": "2026-10-14T13:16:05.799Z",
+  "phase": "P04-T01A.1",
+  "verdict": "READY_WITH_LIMITATIONS",
+  "branch": "codex/estadisticas-v1",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "originalSha256": "99a5d3e9dd879bb11b92abebc377a5cbdc7ebc08d75b9eed8280f88e4f5e2f23",
+  "reviewedSha256": "a66ce3ea73bf4a4421c60b77376914f232b4470d41df7d661ee38142c4a29ba8",
+  "findings": [
+    {
+      "id": "SQL-01",
+      "status": "CORRECTED",
+      "classification": "COMPILATION_BLOCKER"
+    },
+    {
+      "id": "SQL-02",
+      "status": "CORRECTED",
+      "classification": "DECODER_INCOMPATIBILITY"
+    },
+    {
+      "id": "SQL-03",
+      "status": "PROPOSED_RESTRICTED_VALIDATION",
+      "classification": "PUBLICATION_RISK"
+    },
+    {
+      "id": "SQL-04",
+      "status": "NOT_EXECUTED",
+      "classification": "RUNTIME_VALIDATION_PENDING"
+    },
+    {
+      "id": "SQL-05",
+      "status": "PRESERVED_DOCUMENTED",
+      "classification": "CURSOR_SESSION_SETTINGS"
+    },
+    {
+      "id": "SQL-06",
+      "status": "NOT_MEASURED",
+      "classification": "PERFORMANCE"
+    },
+    {
+      "id": "SQL-07",
+      "status": "DOCUMENTED_TEST_REQUIRED",
+      "classification": "NONFINITE_FINANCIAL_SOURCE"
+    }
+  ],
+  "tests": {
+    "staticAssertions": 183,
+    "decoderAssertions": 25,
+    "result": "PASS_STATIC_ONLY",
+    "originalNegativeControlDetected": true,
+    "sqlBodiesParsed": 2,
+    "plpgsqlCompiled": false,
+    "catalogBinding": false,
+    "liveRls": false
+  },
+  "preservation": {
+    "currentFiles": 2752,
+    "allUnchanged": true,
+    "original2705PreservationChain": true,
+    "ignoredRecordedArtifacts": 10,
+    "originalCopiesIdentical": true
+  },
+  "sources": [
+    {
+      "path": "supabase/migrations/20260426214500_t1_businesses_profiles.sql",
+      "sha256": "f20c23c264da8df82d37625298b37df550ddc978968e7199797215f0bdb556d1"
+    },
+    {
+      "path": "supabase/migrations/20260427021000_super_admin_roles_and_rls.sql",
+      "sha256": "61d49d2efb1ad2c209bee1af4bce246bee11a4ab0fc4fd1fe49d35c43e6c7b3a"
+    },
+    {
+      "path": "supabase/migrations/20260427030000_super_admin_profiles_nullable_business.sql",
+      "sha256": "2056a10630b7fc71d88d4af8b7bb9f6bdffd490420582b27936367969105f137"
+    },
+    {
+      "path": "supabase/migrations/20260516201000_s1_business_roles.sql",
+      "sha256": "218b421ff368ba274880b78b554b0089599ebf534cbde684b2a511d96698fe37"
+    },
+    {
+      "path": "supabase/migrations/20260604143000_v63_store_sessions.sql",
+      "sha256": "6a4d5ca4b45b6205a4e89ee608361884cf2b60ee6ed987d2d37c4eb3e964da10"
+    },
+    {
+      "path": "supabase/migrations/20260607210325_business_settings.sql",
+      "sha256": "0093215fa55158634fe5368783910508bf169ce5acac545101a31b70973041f8"
+    },
+    {
+      "path": "supabase/migrations/20260926010000_shared_core_expand.sql",
+      "sha256": "f54b8c73a37c3937f45fee19de624b5696111d5078a36b6e4f6c8f0aba1fa2f8"
+    },
+    {
+      "path": "supabase/migrations/20260926011000_order_financials.sql",
+      "sha256": "25f5a99a020a9982d04c2b1e4cc36f0fa738fb625f046b386b4c1d27c5c1ccda"
+    },
+    {
+      "path": "supabase/migrations/20261013001000_statistics_v1_structures.sql",
+      "sha256": "5b28bc586ac76f2bcf19df36ecd610d780d26e609d153e8343e5c7b0ecba8828"
+    },
+    {
+      "path": "supabase/migrations/20261013002000_statistics_v1_capture.sql",
+      "sha256": "58c3b995450dd84bcc4299453dc8a80c5c96e62b3b72fe4a46394ae05f9b0d19"
+    },
+    {
+      "path": "supabase/migrations/20261013003000_statistics_v1_reads_security.sql",
+      "sha256": "b42a4c961a5ae1ca6a7884af391b6faa36fe3e9e271ba0c570bb9bd3355a7678"
+    },
+    {
+      "path": "lib/statistics/products-contracts.ts",
+      "sha256": "675f62c50e0c3ac1c696e1bdb8d62b235f5f34227882a3dbdba345ba2d5267f4"
+    },
+    {
+      "path": "lib/statistics/products-read.ts",
+      "sha256": "2dc443a63f66270b55a9ea78d6610117fc103389ee3524d4035562c69a3ec2b2"
+    },
+    {
+      "path": "lib/statistics/statistics-publication-policy.ts",
+      "sha256": "494c4bcd1f5d6a3aa092ae14e2de74946532d0acfb7a03295084aba671daf1ee"
+    },
+    {
+      "path": "lib/statistics/statistics-publication-server.ts",
+      "sha256": "2fe9c0b143020c9c0c34bc332c0fb85e9465c7bc1ba9c7012fbd10c0508b7f47"
+    }
+  ],
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/baseline.json",
+      "sha256": "4c4e1e32770d0d9af641db9893ff0f330ec8924644b01d5d7b16cb43ab3c23fd",
+      "bytes": 444678,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/candidate-products-reviewed.sql",
+      "sha256": "a66ce3ea73bf4a4421c60b77376914f232b4470d41df7d661ee38142c4a29ba8",
+      "bytes": 15143,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/candidate-products.diff",
+      "sha256": "20164dc2d13d5b76b84553ae35ccd4df9a8461ad83083167647ef9698192ea49",
+      "bytes": 10365,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/decoder-tests.json",
+      "sha256": "2e470b724853afb38797e9eaa2021b667611e103a3a406bf5124e94779f887ac",
+      "bytes": 203,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/finalize-evidence.mjs",
+      "sha256": "16eb443fd2fe7ea885eb136a15d5069ba60a70051caba78cd98fb405c94e035a",
+      "bytes": 6371,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/original/candidate-products.sql",
+      "sha256": "99a5d3e9dd879bb11b92abebc377a5cbdc7ebc08d75b9eed8280f88e4f5e2f23",
+      "bytes": 15087,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/original/CONTRACT.md",
+      "sha256": "03e3145153a44fba3feb3b3a87846594579980b0a423bea4f57e08d3b34e8199",
+      "bytes": 8882,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/original/decoder-tests.json",
+      "sha256": "13633a172708c7e32750c64e77d0663ee9a6bda8d8a292d5d200e9d1901dcab1",
+      "bytes": 203,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/original/empty-reference.sql",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/original/evidence.json",
+      "sha256": "40a06fdcd2e46955a5a8c86574760c629436fa7517c7ab0ec9086916863e8680",
+      "bytes": 2050,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/original/functions.diff",
+      "sha256": "f7b87bcfd55a7d748978cde021d71ae2222b2bd3eb6fac1b10f777448a087965",
+      "bytes": 15525,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/original/NEXT_AUTHORIZATION.md",
+      "sha256": "c2d8d394c5c76f919b219ef542df62c1fce9e20770619d4d594b12d0472defab",
+      "bytes": 2050,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/original/SECURITY_MATRIX.md",
+      "sha256": "89efd2280e33c838580bcf21d6ab2dd6639e7670cf62f2cc01bcd63e1c27ae43",
+      "bytes": 3701,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/original/static-audit.json",
+      "sha256": "4770298406c3da6aaba3fe6f4fa69d66c668af1ec22f2413d1b994e795eb6fff",
+      "bytes": 454,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/preservation.json",
+      "sha256": "6077fbabd1b8886ddeb627996330e3ad05c3af35a5247043316f27eeb59cee89",
+      "bytes": 4683,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/security-and-publication-review.md",
+      "sha256": "5e70ea0aa3aeceb9e1dec1c826d33cd639710ffe7dca1a6dbc186b3d68aaf512",
+      "bytes": 8217,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/sql-static-review.md",
+      "sha256": "e943fb099884c06ae7b779042e5782b6c204228032a995d70efc124cef9a9660",
+      "bytes": 15596,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/static-tests.json",
+      "sha256": "2d719ae99b6522026dacbbb4f2cfa9413cc33959010b73675e356785326ba141",
+      "bytes": 7296,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a-1/verify-static.mjs",
+      "sha256": "5e677dc8fc2b0100a9139a2fdc1e6a5797999f55b2e37918c04a9a47bcff9450",
+      "bytes": 10626,
+      "kind": "created"
+    }
+  ],
+  "inventoryExcludesSelf": true,
+  "scope": {
+    "databaseConnections": 0,
+    "cursorWorktreeAccess": false,
+    "installedSql": false,
+    "realGrantsChanged": false,
+    "httpGateChanged": false,
+    "commits": 0,
+    "nextPhasesStarted": false
+  },
+  "limitations": [
+    "Static parser is not PL/pgSQL compilation or catalog binder",
+    "No live identity/catalog revalidation by design",
+    "RPC authenticated grant independent of HTTP gate; restricted future installation authorization required",
+    "Cursor TimeZone/DateStyle continuity and nonfinite pending financial source require runtime cases",
+    "No financial semantics or decoder changes; no optimization adopted"
+  ]
+}

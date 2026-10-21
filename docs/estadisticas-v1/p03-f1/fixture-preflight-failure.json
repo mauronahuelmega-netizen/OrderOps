@@ -1,0 +1,98 @@
+{
+  "orders": 50,
+  "status": "FAILED_TIMEOUT_OR_SQL",
+  "elapsedMs": 191,
+  "isolation": {
+    "at": "2026-10-13T21:10:55.447Z",
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "resources": {
+      "containerIds": [
+        "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+      ],
+      "volumeNames": [
+        "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "networkId": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af"
+    },
+    "containers": [
+      {
+        "name": "/supabase_storage_orderops-statistics-v1-test-74718de66a41",
+        "id": "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_rest_orderops-statistics-v1-test-74718de66a41",
+        "id": "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "health": "no-healthcheck",
+        "running": true
+      },
+      {
+        "name": "/supabase_auth_orderops-statistics-v1-test-74718de66a41",
+        "id": "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_kong_orderops-statistics-v1-test-74718de66a41",
+        "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "health": "healthy",
+        "running": true
+      }
+    ],
+    "api": "127.0.0.1:56321",
+    "db": "127.0.0.1:56322"
+  },
+  "resourceBefore": {
+    "at": "2026-10-13T21:10:55.447Z",
+    "dbStats": {
+      "BlockIO": "113MB / 28.8MB",
+      "CPUPerc": "4.05%",
+      "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "ID": "592f44984962",
+      "MemPerc": "1.57%",
+      "MemUsage": "123.6MiB / 7.702GiB",
+      "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "NetIO": "3.64MB / 10.2MB",
+      "PIDs": "12"
+    },
+    "dockerCapacity": {
+      "cpus": 4,
+      "memoryBytes": 8269664256
+    }
+  },
+  "resourceAfter": {
+    "at": "2026-10-13T21:10:57.281Z",
+    "dbStats": {
+      "BlockIO": "113MB / 28.8MB",
+      "CPUPerc": "0.00%",
+      "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "ID": "592f44984962",
+      "MemPerc": "1.56%",
+      "MemUsage": "122.8MiB / 7.702GiB",
+      "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "NetIO": "3.64MB / 10.2MB",
+      "PIDs": "12"
+    },
+    "dockerCapacity": {
+      "cpus": 4,
+      "memoryBytes": 8269664256
+    }
+  },
+  "measurements": [],
+  "nestedPlans": [],
+  "functionStats": {},
+  "rollback": false,
+  "error": "ERROR:  new row for relation \"orders\" violates check constraint \"orders_order_code_format_chk\"\nDETAIL:  Failing row contains (4af1c5ee-2b5d-c6af-02d9-2a7103c84dd3, 108722c0-a80f-4d5b-98ee-6c99f44cdb23, SYNTHETIC P03-F1 PERFORMANCE, 0000000000, 2026-10-13, null, pickup, null, null, 10.00, pending, 2026-10-13 21:10:57.236174+00, null, null, PF22223, itemized, null).\n"
+}

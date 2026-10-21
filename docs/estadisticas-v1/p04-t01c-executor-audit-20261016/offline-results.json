@@ -1,0 +1,2629 @@
+{
+  "at": "2026-10-16T14:33:34.569Z",
+  "result": "PASS_OFFLINE_ONLY",
+  "tests": 371,
+  "results": [
+    {
+      "name": "success_16_stages",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_1",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_2",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_3",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_4",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_5",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_6",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_7",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_8",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_9",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_10",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_11",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_12",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_13",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_14",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_15",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_16",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_17",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_18",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_19",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_20",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_21",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_22",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_23",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_24",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_25",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_26",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_27",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_28",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_29",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_30",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_31",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_32",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_33",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_34",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_35",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_36",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_37",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_38",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_39",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_40",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_41",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_42",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_43",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_44",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_45",
+      "result": "PASS"
+    },
+    {
+      "name": "request_boundary_halt_46",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_preflight_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_preflight_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_preflight_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_preflight_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_preflight_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_preflight_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_preflight_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_preflight_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_preflight_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_preflight_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_kong_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_kong_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_kong_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_kong_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_kong_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_kong_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_kong_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_kong_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_kong_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_kong_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_db_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_db_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_db_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_db_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_db_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_db_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_db_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_db_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_db_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_stop_db_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_db_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_db_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_db_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_db_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_db_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_db_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_db_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_db_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_db_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_db_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_kong_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_kong_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_kong_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_kong_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_kong_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_kong_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_kong_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_kong_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_kong_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_recapture_kong_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_db_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_db_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_db_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_db_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_db_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_db_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_db_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_db_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_db_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_db_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_db_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_db_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_db_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_db_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_db_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_db_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_db_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_db_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_db_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_db_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_kong_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_kong_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_kong_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_kong_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_kong_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_kong_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_kong_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_kong_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_kong_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_rename_kong_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_kong_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_kong_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_kong_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_kong_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_kong_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_kong_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_kong_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_kong_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_kong_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_detach_kong_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_db_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_db_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_db_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_db_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_db_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_db_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_db_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_db_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_db_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_db_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_kong_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_kong_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_kong_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_kong_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_kong_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_kong_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_kong_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_kong_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_kong_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_create_kong_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_db_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_db_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_db_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_db_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_db_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_db_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_db_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_db_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_db_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_db_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_kong_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_kong_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_kong_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_kong_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_kong_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_kong_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_kong_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_kong_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_kong_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_restore_kong_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_db_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_db_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_db_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_db_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_db_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_db_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_db_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_db_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_db_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_db_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_kong_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_kong_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_kong_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_kong_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_kong_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_kong_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_kong_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_kong_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_kong_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_start_kong_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_postcheck_before_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_postcheck_before_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_postcheck_before_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_postcheck_before_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_postcheck_before_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_postcheck_after_TIMEOUT",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_postcheck_after_ERROR",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_postcheck_after_HTTP_409",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_postcheck_after_HTTP_500",
+      "result": "PASS"
+    },
+    {
+      "name": "fault_postcheck_after_MALFORMED",
+      "result": "PASS"
+    },
+    {
+      "name": "attack_unknown_xattr",
+      "result": "PASS"
+    },
+    {
+      "name": "attack_changed_file",
+      "result": "PASS"
+    },
+    {
+      "name": "attack_collision",
+      "result": "PASS"
+    },
+    {
+      "name": "attack_foreign_resource",
+      "result": "PASS"
+    },
+    {
+      "name": "attack_bad_new_id",
+      "result": "PASS"
+    },
+    {
+      "name": "attack_unhealthy_new",
+      "result": "PASS"
+    },
+    {
+      "name": "attack_writer_race",
+      "result": "PASS"
+    },
+    {
+      "name": "attack_replay_config_changed",
+      "result": "PASS"
+    },
+    {
+      "name": "attack_certificate_regenerated",
+      "result": "PASS"
+    },
+    {
+      "name": "attack_preflight_attributes_unknown",
+      "result": "PASS"
+    },
+    {
+      "name": "attack_resource_pressure",
+      "result": "PASS"
+    },
+    {
+      "name": "no_rollback_even_if_requested_after_failure",
+      "result": "PASS"
+    },
+    {
+      "name": "journal_hash_chain_no_payload_logs",
+      "result": "PASS"
+    },
+    {
+      "name": "unknown_attributes_stop_before_any_stop",
+      "result": "PASS"
+    },
+    {
+      "name": "manual_safe_rollback_stops_only_new",
+      "result": "PASS"
+    },
+    {
+      "name": "rollback_failure_rollback_stop_kong_before",
+      "result": "PASS"
+    },
+    {
+      "name": "rollback_failure_rollback_stop_kong_after",
+      "result": "PASS"
+    },
+    {
+      "name": "rollback_failure_rollback_stop_db_before",
+      "result": "PASS"
+    },
+    {
+      "name": "rollback_failure_rollback_stop_db_after",
+      "result": "PASS"
+    },
+    {
+      "name": "real_adapter_always_denies",
+      "result": "PASS"
+    },
+    {
+      "name": "injected_transport_not_branded",
+      "result": "PASS"
+    },
+    {
+      "name": "real_adapter_not_simulator",
+      "result": "PASS"
+    },
+    {
+      "name": "endpoint_input_forbidden",
+      "result": "PASS"
+    },
+    {
+      "name": "getter_input_forbidden",
+      "result": "PASS"
+    },
+    {
+      "name": "hard_disabled_constant",
+      "result": "PASS"
+    },
+    {
+      "name": "native_send_unconditional_lock",
+      "result": "PASS"
+    },
+    {
+      "name": "native_scanStoppedExport_unconditional_lock",
+      "result": "PASS"
+    },
+    {
+      "name": "compiled_hash_pins_are_deeply_frozen",
+      "result": "PASS"
+    },
+    {
+      "name": "simulation_cannot_be_promoted_to_approved_candidate",
+      "result": "PASS"
+    },
+    {
+      "name": "simulation_request_rejected_by_native_authority_check",
+      "result": "PASS"
+    },
+    {
+      "name": "wrong_resolved_image_even_in_simulation",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_target_ownerops",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_target_Ledger",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_target_Majo",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_target_production",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_target_auth",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_target_rest",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_target_storage",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_operation_delete",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_operation_prune",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_operation_reset",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_operation_start_old",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_operation_reconnect_old",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_operation_exec",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_operation_sql",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_operation_network_create",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_wrong_operation_set_grants",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_arbitrary_input_id",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_arbitrary_input_url",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_arbitrary_input_headers",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_arbitrary_input_body",
+      "result": "PASS"
+    },
+    {
+      "name": "codec_fixed_id_and_api",
+      "result": "PASS"
+    },
+    {
+      "name": "issued_request_tamper_path",
+      "result": "PASS"
+    },
+    {
+      "name": "issued_request_tamper_method",
+      "result": "PASS"
+    },
+    {
+      "name": "issued_request_tamper_body",
+      "result": "PASS"
+    },
+    {
+      "name": "issued_request_tamper_bodyHash",
+      "result": "PASS"
+    },
+    {
+      "name": "issued_request_tamper_extra",
+      "result": "PASS"
+    },
+    {
+      "name": "unissued_request",
+      "result": "PASS"
+    },
+    {
+      "name": "new_start_before_verified_id",
+      "result": "PASS"
+    },
+    {
+      "name": "candidate_cannot_reach_existing_foreign_service",
+      "result": "PASS"
+    },
+    {
+      "name": "candidate_uri_injection",
+      "result": "PASS"
+    },
+    {
+      "name": "new_id_without_provisional_inspect",
+      "result": "PASS"
+    },
+    {
+      "name": "unexpected_create_status_0",
+      "result": "PASS"
+    },
+    {
+      "name": "unexpected_create_status_200",
+      "result": "PASS"
+    },
+    {
+      "name": "unexpected_create_status_202",
+      "result": "PASS"
+    },
+    {
+      "name": "unexpected_create_status_204",
+      "result": "PASS"
+    },
+    {
+      "name": "unexpected_create_status_304",
+      "result": "PASS"
+    },
+    {
+      "name": "unexpected_create_status_400",
+      "result": "PASS"
+    },
+    {
+      "name": "unexpected_create_status_401",
+      "result": "PASS"
+    },
+    {
+      "name": "unexpected_create_status_403",
+      "result": "PASS"
+    },
+    {
+      "name": "unexpected_create_status_404",
+      "result": "PASS"
+    },
+    {
+      "name": "unexpected_create_status_409",
+      "result": "PASS"
+    },
+    {
+      "name": "unexpected_create_status_500",
+      "result": "PASS"
+    },
+    {
+      "name": "unexpected_create_status_503",
+      "result": "PASS"
+    },
+    {
+      "name": "create_timeout",
+      "result": "PASS"
+    },
+    {
+      "name": "create_truncated",
+      "result": "PASS"
+    },
+    {
+      "name": "create_malformed_json",
+      "result": "PASS"
+    },
+    {
+      "name": "create_malicious_id",
+      "result": "PASS"
+    },
+    {
+      "name": "create_warnings_require_review",
+      "result": "PASS"
+    },
+    {
+      "name": "create_response_valid",
+      "result": "PASS"
+    },
+    {
+      "name": "register_new_only_after_full_inspect",
+      "result": "PASS"
+    },
+    {
+      "name": "register_reject_env",
+      "result": "PASS"
+    },
+    {
+      "name": "register_reject_image",
+      "result": "PASS"
+    },
+    {
+      "name": "register_reject_mount",
+      "result": "PASS"
+    },
+    {
+      "name": "register_reject_name",
+      "result": "PASS"
+    },
+    {
+      "name": "register_reject_running",
+      "result": "PASS"
+    },
+    {
+      "name": "register_reject_host",
+      "result": "PASS"
+    },
+    {
+      "name": "stopped_capture_valid",
+      "result": "PASS"
+    },
+    {
+      "name": "capture_reject_running",
+      "result": "PASS"
+    },
+    {
+      "name": "capture_reject_unknown_visibility",
+      "result": "PASS"
+    },
+    {
+      "name": "capture_reject_unexpected_diff",
+      "result": "PASS"
+    },
+    {
+      "name": "capture_reject_volume",
+      "result": "PASS"
+    },
+    {
+      "name": "capture_reject_missing_file",
+      "result": "PASS"
+    },
+    {
+      "name": "capture_reject_new_xattr",
+      "result": "PASS"
+    },
+    {
+      "name": "capture_reject_acl",
+      "result": "PASS"
+    },
+    {
+      "name": "capture_reject_cap",
+      "result": "PASS"
+    },
+    {
+      "name": "capture_reject_owner",
+      "result": "PASS"
+    },
+    {
+      "name": "capture_reject_mtime",
+      "result": "PASS"
+    },
+    {
+      "name": "capture_reject_mode",
+      "result": "PASS"
+    },
+    {
+      "name": "tar_roundtrip",
+      "result": "PASS"
+    },
+    {
+      "name": "tar_tamper",
+      "result": "PASS"
+    },
+    {
+      "name": "tar_extra_hidden_data",
+      "result": "PASS"
+    },
+    {
+      "name": "tar_wrong_basename",
+      "result": "PASS"
+    },
+    {
+      "name": "tar_volume_destination",
+      "result": "PASS"
+    },
+    {
+      "name": "tar_traversal_destination",
+      "result": "PASS"
+    },
+    {
+      "name": "tar_wrong_timestamp",
+      "result": "PASS"
+    },
+    {
+      "name": "tar_missing_terminator",
+      "result": "PASS"
+    },
+    {
+      "name": "unsupported_acl_pax",
+      "result": "PASS"
+    },
+    {
+      "name": "directory_only_tar",
+      "result": "PASS"
+    },
+    {
+      "name": "export_stream_chunk_1",
+      "result": "PASS"
+    },
+    {
+      "name": "export_stream_chunk_13",
+      "result": "PASS"
+    },
+    {
+      "name": "export_stream_chunk_127",
+      "result": "PASS"
+    },
+    {
+      "name": "export_stream_chunk_511",
+      "result": "PASS"
+    },
+    {
+      "name": "export_stream_chunk_512",
+      "result": "PASS"
+    },
+    {
+      "name": "export_stream_chunk_513",
+      "result": "PASS"
+    },
+    {
+      "name": "export_stream_chunk_10000",
+      "result": "PASS"
+    },
+    {
+      "name": "export_byte_budget",
+      "result": "PASS"
+    },
+    {
+      "name": "export_incomplete",
+      "result": "PASS"
+    },
+    {
+      "name": "export_missing_directory",
+      "result": "PASS"
+    },
+    {
+      "name": "export_duplicate_wanted",
+      "result": "PASS"
+    },
+    {
+      "name": "export_volume_requested",
+      "result": "PASS"
+    },
+    {
+      "name": "capture_missing_export_owner_proof",
+      "result": "PASS"
+    },
+    {
+      "name": "capture_export_wrong_container",
+      "result": "PASS"
+    },
+    {
+      "name": "capture_export_includes_volume",
+      "result": "PASS"
+    },
+    {
+      "name": "directory_timestamp_from_stopped_export_not_silently_compared_as_unchanged",
+      "result": "PASS"
+    },
+    {
+      "name": "replay_comment_append_hash_explicit",
+      "result": "PASS"
+    },
+    {
+      "name": "replay_active_guc_not_approved",
+      "result": "PASS"
+    },
+    {
+      "name": "sealed_bundle_decrypts_only_in_memory",
+      "result": "PASS"
+    },
+    {
+      "name": "sealed_bundle_pinned_hash_mismatch",
+      "result": "PASS"
+    },
+    {
+      "name": "sealed_bundle_wrong_key",
+      "result": "PASS"
+    },
+    {
+      "name": "sealed_bundle_tamper_tag",
+      "result": "PASS"
+    },
+    {
+      "name": "sealed_bundle_tamper_ciphertext",
+      "result": "PASS"
+    },
+    {
+      "name": "sealed_bundle_aad_mismatch",
+      "result": "PASS"
+    },
+    {
+      "name": "cli_reject_",
+      "result": "PASS"
+    },
+    {
+      "name": "cli_reject_--apply",
+      "result": "PASS"
+    },
+    {
+      "name": "cli_reject_--execute",
+      "result": "PASS"
+    },
+    {
+      "name": "cli_reject_--simulate_--approval=anything",
+      "result": "PASS"
+    },
+    {
+      "name": "tripwire_simulation_no_io",
+      "result": "PASS"
+    },
+    {
+      "name": "env_cannot_enable_real_engine",
+      "result": "PASS"
+    },
+    {
+      "name": "native_guard_precedes_any_transport_even_with_tripwire",
+      "result": "PASS"
+    },
+    {
+      "name": "journal_valid",
+      "result": "PASS"
+    },
+    {
+      "name": "journal_pending_never_resumes",
+      "result": "PASS"
+    },
+    {
+      "name": "journal_tamper_quarantined",
+      "result": "PASS"
+    },
+    {
+      "name": "journal_truncated_quarantined",
+      "result": "PASS"
+    },
+    {
+      "name": "durable_intent_fsync_then_single_use_ticket",
+      "result": "PASS"
+    },
+    {
+      "name": "native_rejects_simulation_journal_ticket",
+      "result": "PASS"
+    },
+    {
+      "name": "ticket_request_mismatch",
+      "result": "PASS"
+    },
+    {
+      "name": "fake_journal_ticket",
+      "result": "PASS"
+    },
+    {
+      "name": "journal_disk_fault_before_write",
+      "result": "PASS"
+    },
+    {
+      "name": "journal_disk_fault_after_write",
+      "result": "PASS"
+    },
+    {
+      "name": "journal_disk_fault_after_fsync",
+      "result": "PASS"
+    },
+    {
+      "name": "fractional_directory_mtime_preserved",
+      "result": "PASS"
+    },
+    {
+      "name": "lifecycle_only_reviewed_existing_ids",
+      "result": "PASS"
+    },
+    {
+      "name": "lifecycle_forbid_supabase start",
+      "result": "PASS"
+    },
+    {
+      "name": "lifecycle_forbid_supabase stop",
+      "result": "PASS"
+    },
+    {
+      "name": "lifecycle_forbid_supabase db reset",
+      "result": "PASS"
+    },
+    {
+      "name": "lifecycle_forbid_recreate",
+      "result": "PASS"
+    },
+    {
+      "name": "lifecycle_forbid_repair",
+      "result": "PASS"
+    },
+    {
+      "name": "lifecycle_forbid_start-foreign",
+      "result": "PASS"
+    },
+    {
+      "name": "lifecycle_wildcard_denied",
+      "result": "PASS"
+    },
+    {
+      "name": "lifecycle_immutable_checkpoint_required",
+      "result": "PASS"
+    },
+    {
+      "name": "lifecycle_pending_id_denied",
+      "result": "PASS"
+    },
+    {
+      "name": "core_ast_no_transport_eval_or_process",
+      "result": "PASS"
+    },
+    {
+      "name": "native_ast_unconditional_guard_and_only_local_pipe",
+      "result": "PASS"
+    }
+  ],
+  "stageFailureCoverage": [
+    {
+      "stage": "preflight",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "preflight",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "preflight",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "preflight",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "preflight",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "preflight",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "preflight",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "preflight",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "preflight",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "preflight",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "stop_kong",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "stop_kong",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "stop_kong",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "stop_kong",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "stop_kong",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "stop_kong",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "stop_kong",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "stop_kong",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "stop_kong",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "stop_kong",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "stop_db",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "stop_db",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "stop_db",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "stop_db",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "stop_db",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "stop_db",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "stop_db",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "stop_db",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "stop_db",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "stop_db",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "recapture_db",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "recapture_db",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "recapture_db",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "recapture_db",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "recapture_db",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "recapture_db",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "recapture_db",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "recapture_db",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "recapture_db",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "recapture_db",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "recapture_kong",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "recapture_kong",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "recapture_kong",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "recapture_kong",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "recapture_kong",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "recapture_kong",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "recapture_kong",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "recapture_kong",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "recapture_kong",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "recapture_kong",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "rename_db",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "rename_db",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "rename_db",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "rename_db",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "rename_db",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "rename_db",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "rename_db",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "rename_db",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "rename_db",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "rename_db",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "detach_db",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "detach_db",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "detach_db",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "detach_db",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "detach_db",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "detach_db",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "detach_db",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "detach_db",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "detach_db",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "detach_db",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "rename_kong",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "rename_kong",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "rename_kong",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "rename_kong",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "rename_kong",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "rename_kong",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "rename_kong",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "rename_kong",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "rename_kong",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "rename_kong",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "detach_kong",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "detach_kong",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "detach_kong",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "detach_kong",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "detach_kong",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "detach_kong",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "detach_kong",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "detach_kong",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "detach_kong",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "detach_kong",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "create_db",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "create_db",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "create_db",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "create_db",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "create_db",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "create_db",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "create_db",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "create_db",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "create_db",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "create_db",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "create_kong",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "create_kong",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "create_kong",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "create_kong",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "create_kong",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "create_kong",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "create_kong",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "create_kong",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "create_kong",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "create_kong",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "restore_db",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "restore_db",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "restore_db",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "restore_db",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "restore_db",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "restore_db",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "restore_db",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "restore_db",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "restore_db",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "restore_db",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "restore_kong",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "restore_kong",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "restore_kong",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "restore_kong",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "restore_kong",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "restore_kong",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "restore_kong",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "restore_kong",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "restore_kong",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "restore_kong",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "start_db",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "start_db",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "start_db",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "start_db",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "start_db",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "start_db",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "start_db",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "start_db",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "start_db",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "start_db",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "start_kong",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "start_kong",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "start_kong",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "start_kong",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "start_kong",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "start_kong",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "start_kong",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "start_kong",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "start_kong",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "start_kong",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "postcheck",
+      "when": "before",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "postcheck",
+      "when": "before",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "postcheck",
+      "when": "before",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "postcheck",
+      "when": "before",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "postcheck",
+      "when": "before",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": false
+    },
+    {
+      "stage": "postcheck",
+      "when": "after",
+      "type": "TIMEOUT",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "postcheck",
+      "when": "after",
+      "type": "ERROR",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "postcheck",
+      "when": "after",
+      "type": "HTTP_409",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "postcheck",
+      "when": "after",
+      "type": "HTTP_500",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    },
+    {
+      "stage": "postcheck",
+      "when": "after",
+      "type": "MALFORMED",
+      "result": "HALTED_NO_FURTHER_OPERATIONS",
+      "uncertain": true
+    }
+  ],
+  "requestBoundaryCases": 46,
+  "coreImportGraph": [
+    "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/executor.mjs",
+    "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/policy.mjs",
+    "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/filesystem.mjs",
+    "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/request-codec.mjs",
+    "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/approved-constants.mjs",
+    "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/stopped-export.mjs",
+    "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/bundle.mjs",
+    "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal.mjs",
+    "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/lifecycle-policy.mjs"
+  ],
+  "realEngineRequests": 0,
+  "dockerCommands": 0,
+  "sql": 0,
+  "authHttp": 0
+}

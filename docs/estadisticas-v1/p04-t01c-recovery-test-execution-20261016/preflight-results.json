@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-16T17:38:56.565Z",
+  "phaseP04T01C": "BLOCKED",
+  "result": "RECOVERY_INCOMPLETE",
+  "executionStage": "HALTED_BEFORE_RESOURCE_CREATION",
+  "restorationAttempted": false,
+  "approvedManifestSha256": "790960c137c57c70d725cde4a7113165b15c6369662b2e2a52387623093dfd3f",
+  "approvedArtifactHashesVerified": 13,
+  "branch": "codex/estadisticas-v1",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "worktree": "C:\\Users\\Oasis Desktop\\Desktop\\Full Stack Developer\\Projects\\OrderOps-Estadisticas",
+  "backup": {
+    "path": "C:/Docker-Backup-OrderOps/orderops-estadisticas-recovered.dump",
+    "sha256": "b48f1ed8f4f6a6a75f946a2a55b388f88f20c6d05cc48fecf42cd166af1eecdc",
+    "bytes": 1436037,
+    "hashVerified": true
+  },
+  "observations": [
+    {
+      "control": "sandboxAccess",
+      "result": "NOT_AVAILABLE_IN_SANDBOX",
+      "detail": "CIM and Docker named pipe denied; superseded only by authorized read-only elevated preflight, not treated as zero resource use"
+    },
+    {
+      "control": "hostCapacity",
+      "utc": "2026-10-16T17:37:21.4675534Z",
+      "cpuPercent": 26,
+      "maximumCpuPercent": 35,
+      "availableMemoryGiB": 1.036,
+      "totalMemoryGiB": 15.888,
+      "minimumAvailableMemoryGiB": 4,
+      "result": "FAIL_RESOURCE_GATE"
+    },
+    {
+      "control": "newNameCollision",
+      "name": "orderops-statistics-recovery-20261016-a",
+      "command": "docker --host npipe:////./pipe/docker_engine ps -aq --filter name=^/orderops-statistics-recovery-20261016-a$",
+      "exitCode": 0,
+      "matchedIds": [],
+      "result": "PASS_NAME_ABSENT"
+    },
+    {
+      "control": "imageMetadata",
+      "image": "sha256:4255b662ba3d774105cb34f623e410a3d7a860b68408ac6810f7e7e4b9781d5a",
+      "result": "NOT_CONFIRMED",
+      "error": "template parsing error: .Config.Volumes: map has no entry for key Volumes",
+      "automaticRetry": false
+    },
+    {
+      "control": "pressureOomAndFullImageValidation",
+      "result": "NOT_EXECUTED_AFTER_GATE_FAILURE"
+    }
+  ],
+  "newResourceIds": [],
+  "resourcesCreated": 0,
+  "labResourcesActive": [],
+  "sqlExecutions": 0,
+  "restores": 0,
+  "dockerMutations": 0,
+  "cleanupExecuted": false,
+  "comparison": "NOT_EXECUTED",
+  "objectsRolesExtensionsAndDataRestored": "NOT_VERIFIED",
+  "sourceCorruptionOrRestoreFailureDemonstrated": false,
+  "originalSqlConnections": 0,
+  "originalLifecycleOperations": 0,
+  "authorization": "Sequence halted; no automatic retry. New human decision required before resuming.",
+  "pgStopStep": "NOT_EXECUTED; later human prohibition on stopping laboratory takes precedence over proposed post-success pg_ctl step"
+}

@@ -1,0 +1,112 @@
+\set ON_ERROR_STOP off
+\set VERBOSITY sqlstate
+\pset format unaligned
+\pset tuples_only on
+BEGIN TRANSACTION ISOLATION LEVEL REPEATABLE READ READ ONLY;
+
+\if :ERROR
+ROLLBACK;
+\quit 3
+\endif
+SET LOCAL statement_timeout='15s';
+\if :ERROR
+ROLLBACK;
+\quit 3
+\endif
+SET LOCAL lock_timeout='3s';
+\if :ERROR
+ROLLBACK;
+\quit 3
+\endif
+SET LOCAL TIME ZONE 'UTC';
+\if :ERROR
+ROLLBACK;
+\quit 3
+\endif
+SET LOCAL DateStyle='ISO, YMD';
+\if :ERROR
+ROLLBACK;
+\quit 3
+\endif
+SET LOCAL search_path=pg_catalog,public;
+\if :ERROR
+ROLLBACK;
+\quit 3
+\endif
+SELECT ((current_database()='postgres') AND (current_user='postgres') AND count(*)=1 AND coalesce(bool_and(token=:'expected_token'),false)) AS trusted_identity FROM statistics_test_environment.identity WHERE singleton
+\gset
+\if :ERROR
+ROLLBACK;
+\quit 3
+\endif
+\if :trusted_identity
+\else
+ROLLBACK;
+\quit 4
+\endif
+SELECT count(*)=124 AS trusted_ledger FROM supabase_migrations.schema_migrations
+\gset
+\if :ERROR
+ROLLBACK;
+\quit 3
+\endif
+\if :trusted_ledger
+\else
+ROLLBACK;
+\quit 5
+\endif
+\echo RESULT_catalog
+SELECT json_build_object(
+ 'functions',(SELECT json_agg(json_build_object('schema',n.nspname,'name',p.proname,'signature',pg_get_function_identity_arguments(p.oid),'defaults',pg_get_expr(p.proargdefaults,0),'invoker',not p.prosecdef,'volatility',p.provolatile,'config',p.proconfig,'acl',p.proacl::text,'definition',pg_get_functiondef(p.oid)) ORDER BY n.nspname,p.proname) FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE p.proname LIKE 'statistics_%'),
+ 'policies',(SELECT json_agg(row_to_json(t) ORDER BY schemaname,tablename,policyname) FROM pg_policies t WHERE schemaname='public'),
+ 'indexes',(SELECT json_agg(row_to_json(t) ORDER BY schemaname,tablename,indexname) FROM pg_indexes t WHERE schemaname='public'),
+ 'constraints',(SELECT json_agg(json_build_object('table',c.conrelid::regclass::text,'name',c.conname,'definition',pg_get_constraintdef(c.oid)) ORDER BY c.conrelid,c.conname) FROM pg_constraint c WHERE c.conrelid IN ('public.profiles'::regclass,'public.orders'::regclass,'public.order_financials'::regclass,'public.order_statistics_completions'::regclass)),
+ 'counts',json_build_object('orders',(SELECT count(*) FROM public.orders),'items',(SELECT count(*) FROM public.order_items),'financials',(SELECT count(*) FROM public.order_financials),'audit',(SELECT count(*) FROM public.finance_audit_events),'sessions',(SELECT count(*) FROM public.store_sessions),'sessionSnapshots',(SELECT count(*) FROM public.store_session_statistics_snapshots),'completions',(SELECT count(*) FROM public.order_statistics_completions),'completionItems',(SELECT count(*) FROM public.order_statistics_completion_items),'identitySnapshots',(SELECT count(*) FROM public.order_item_statistics_snapshots)),
+ 'profileFingerprint',(SELECT md5(string_agg(id::text||coalesce(business_id::text,'NULL')||role,',' ORDER BY id)) FROM public.profiles),
+ 'ledger',(SELECT json_agg(json_build_object('version',version,'md5',md5(array_to_string(statements,E'\n;\n'))) ORDER BY version) FROM supabase_migrations.schema_migrations),
+ 'checkFunctionBodies',current_setting('check_function_bodies'),'deadlocks',(SELECT deadlocks FROM pg_stat_database WHERE datname=current_database()));
+\if :ERROR
+ROLLBACK;
+\quit 3
+\endif
+
+\echo RESULT_data
+SELECT json_build_object('businesses',(SELECT json_build_object('count',count(*),'hash',md5(coalesce(string_agg(to_jsonb(t)::text,E'\n' ORDER BY to_jsonb(t)::text),''))) FROM public.businesses t),'profiles',(SELECT json_build_object('count',count(*),'hash',md5(coalesce(string_agg(to_jsonb(t)::text,E'\n' ORDER BY to_jsonb(t)::text),''))) FROM public.profiles t),'business_settings',(SELECT json_build_object('count',count(*),'hash',md5(coalesce(string_agg(to_jsonb(t)::text,E'\n' ORDER BY to_jsonb(t)::text),''))) FROM public.business_settings t),'orders',(SELECT json_build_object('count',count(*),'hash',md5(coalesce(string_agg(to_jsonb(t)::text,E'\n' ORDER BY to_jsonb(t)::text),''))) FROM public.orders t),'order_items',(SELECT json_build_object('count',count(*),'hash',md5(coalesce(string_agg(to_jsonb(t)::text,E'\n' ORDER BY to_jsonb(t)::text),''))) FROM public.order_items t),'order_financials',(SELECT json_build_object('count',count(*),'hash',md5(coalesce(string_agg(to_jsonb(t)::text,E'\n' ORDER BY to_jsonb(t)::text),''))) FROM public.order_financials t),'finance_audit_events',(SELECT json_build_object('count',count(*),'hash',md5(coalesce(string_agg(to_jsonb(t)::text,E'\n' ORDER BY to_jsonb(t)::text),''))) FROM public.finance_audit_events t),'store_sessions',(SELECT json_build_object('count',count(*),'hash',md5(coalesce(string_agg(to_jsonb(t)::text,E'\n' ORDER BY to_jsonb(t)::text),''))) FROM public.store_sessions t),'store_session_statistics_snapshots',(SELECT json_build_object('count',count(*),'hash',md5(coalesce(string_agg(to_jsonb(t)::text,E'\n' ORDER BY to_jsonb(t)::text),''))) FROM public.store_session_statistics_snapshots t),'business_statistics_state',(SELECT json_build_object('count',count(*),'hash',md5(coalesce(string_agg(to_jsonb(t)::text,E'\n' ORDER BY to_jsonb(t)::text),''))) FROM public.business_statistics_state t),'order_item_statistics_snapshots',(SELECT json_build_object('count',count(*),'hash',md5(coalesce(string_agg(to_jsonb(t)::text,E'\n' ORDER BY to_jsonb(t)::text),''))) FROM public.order_item_statistics_snapshots t),'order_statistics_completions',(SELECT json_build_object('count',count(*),'hash',md5(coalesce(string_agg(to_jsonb(t)::text,E'\n' ORDER BY to_jsonb(t)::text),''))) FROM public.order_statistics_completions t),'order_statistics_completion_items',(SELECT json_build_object('count',count(*),'hash',md5(coalesce(string_agg(to_jsonb(t)::text,E'\n' ORDER BY to_jsonb(t)::text),''))) FROM public.order_statistics_completion_items t),'products',(SELECT json_build_object('count',count(*),'hash',md5(coalesce(string_agg(to_jsonb(t)::text,E'\n' ORDER BY to_jsonb(t)::text),''))) FROM public.products t),'categories',(SELECT json_build_object('count',count(*),'hash',md5(coalesce(string_agg(to_jsonb(t)::text,E'\n' ORDER BY to_jsonb(t)::text),''))) FROM public.categories t));
+\if :ERROR
+ROLLBACK;
+\quit 3
+\endif
+
+\echo RESULT_extra
+SELECT json_build_object('settings',(SELECT md5(string_agg(to_jsonb(t)::text,',' ORDER BY business_id)) FROM public.business_settings t),'state',(SELECT md5(string_agg(to_jsonb(t)::text,',' ORDER BY business_id)) FROM public.business_statistics_state t),'products',(SELECT count(*) FROM public.products),'categories',(SELECT count(*) FROM public.categories),'stock',(SELECT count(*) FROM public.stock_movements),'triggers',(SELECT json_agg(json_build_object('table',tgrelid::regclass::text,'name',tgname,'def',pg_get_triggerdef(oid)) ORDER BY tgrelid,tgname) FROM pg_trigger WHERE NOT tgisinternal));
+\if :ERROR
+ROLLBACK;
+\quit 3
+\endif
+
+\echo RESULT_privileges
+SELECT json_build_object(
+'functions',(SELECT json_agg(json_build_object('signature',sig,'installed',to_regprocedure(sig) is not null)) FROM unnest(ARRAY['private.statistics_products_metric(numeric,bigint,bigint,bigint,bigint)','private.statistics_v1_products_reader(text,date,date,text,integer,jsonb)','public.statistics_v1_products(text,date,date,text,integer,jsonb)','private.statistics_products_qa_can_query(uuid)'])sig),
+'newConfigAbsent',to_regclass('public.statistics_products_qa_access') is null,
+'schemaUsage',(SELECT json_agg(json_build_object('role',r,'public',has_schema_privilege(r,'public','USAGE'),'private',has_schema_privilege(r,'private','USAGE'))) FROM unnest(ARRAY['anon','authenticated','service_role'])r),
+'originalSummary',(SELECT json_agg(json_build_object('role',r,'execute',has_function_privilege(r,'public.statistics_v1_summary(text,date,date,text,integer,jsonb)','EXECUTE'))) FROM unnest(ARRAY['anon','authenticated','service_role'])r),
+'roleFlags',(SELECT json_agg(json_build_object('role',rolname,'superuser',rolsuper,'bypassRls',rolbypassrls,'canLogin',rolcanlogin)) FROM pg_roles WHERE rolname IN ('anon','authenticated','service_role','authenticator')),
+'sourceRls',(SELECT json_agg(json_build_object('relation',oid::regclass::text,'rls',relrowsecurity,'acl',relacl::text)) FROM pg_class WHERE oid IN ('public.profiles'::regclass,'public.statistics_v1_effective_facts'::regclass,'public.order_statistics_completions'::regclass,'public.order_statistics_completion_items'::regclass)),
+'readOnly',current_setting('transaction_read_only'));
+\if :ERROR
+ROLLBACK;
+\quit 3
+\endif
+
+\echo RESULT_metadata
+SELECT json_build_object('database',current_database(),'user',current_user,'serverVersion',current_setting('server_version'),'serverVersionNum',current_setting('server_version_num'),'serverAddress',inet_server_addr(),'serverPort',inet_server_port(),'readOnly',current_setting('transaction_read_only'),'isolation',current_setting('transaction_isolation'),'timezone',current_setting('TimeZone'),'dateStyle',current_setting('DateStyle'),'control',(SELECT row_to_json(s) FROM pg_catalog.pg_control_system() s),'sourceRls',(SELECT json_agg(json_build_object('schema',n.nspname,'table',c.relname,'rls',c.relrowsecurity,'forceRls',c.relforcerowsecurity,'owner',pg_get_userbyid(c.relowner),'acl',c.relacl::text) ORDER BY n.nspname,c.relname) FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname='public' AND c.relname IN ('profiles','businesses','business_settings','orders','order_items','order_financials','finance_audit_events','store_sessions','store_session_statistics_snapshots','business_statistics_state','order_item_statistics_snapshots','order_statistics_completions','order_statistics_completion_items','products','categories','statistics_v1_effective_facts')));
+\if :ERROR
+ROLLBACK;
+\quit 3
+\endif
+ROLLBACK;
+
+\if :ERROR
+ROLLBACK;
+\quit 3
+\endif

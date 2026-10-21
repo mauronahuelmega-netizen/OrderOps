@@ -1,0 +1,14 @@
+import 'server-only';
+import { createSupabaseServerClient } from '@/lib/supabase/server';
+import { verifyStatisticsPrincipal, type StatisticsPrincipalClient } from './summary-principal';
+import type { SummaryScope } from './summary-transport';
+
+/** Route gate only; no RPC and no role normalization/fallback. Every query authenticates again. */
+export async function statisticsRouteScope(): Promise<
+  { status: 'allowed'; scope: SummaryScope } | { status: 'unauthenticated' | 'forbidden' | 'error' }
+> {
+  try {
+    const client = await createSupabaseServerClient();
+    return verifyStatisticsPrincipal(client as unknown as StatisticsPrincipalClient);
+  } catch { return { status: 'error' }; }
+}

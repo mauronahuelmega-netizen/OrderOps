@@ -1,0 +1,93 @@
+{
+  "at": "2026-10-13T05:14:10.363Z",
+  "verdict": "READY_FOR_ISOLATED_SQL_REVIEW",
+  "branch": "codex/estadisticas-v1",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "newCommits": 0,
+  "files": [
+    {
+      "file": "supabase/migrations/20261013004000_statistics_v1_comparative_series.sql",
+      "sha256": "f5c671dca3c54450d539186df6fdc8cc9199acec88cd50da239b39db85e1af7a"
+    },
+    {
+      "file": "lib/statistics/series-contracts.ts",
+      "sha256": "62944312151175b0c7b8f13f409ed5f306e980c55643e5b80877c183387c3c27"
+    },
+    {
+      "file": "lib/statistics/series-read.ts",
+      "sha256": "8b82d5e7307cdd983f5b1589e399b062f4372b07e6bd5d4438ba505cf8b889d7"
+    },
+    {
+      "file": "lib/statistics/series-temporal.ts",
+      "sha256": "22787d3033d825e58167ccd4d607778a2e07763f992d5a7499d7762c61909332"
+    },
+    {
+      "file": "lib/statistics/series.verify.ts",
+      "sha256": "89fba8da11f4cf7978775a9b2253c3ef1801ddc9d14187abf8d65eabedb61800"
+    },
+    {
+      "file": "lib/statistics/fixtures/series-responses.json",
+      "sha256": "4be03d7ae1f487019951f5cb05c6aa75571b7b6977654b90d2e3f1b8320586b8"
+    },
+    {
+      "file": "scripts/statistics-v1/p03-a-static.verify.mjs",
+      "sha256": "72d32bf5bffd7a8e23619afa25bf5d301792d8d27c02d1a377a20cb9d9e0fd47"
+    },
+    {
+      "file": "supabase/tests/statistics-v1/phase03-series.sql",
+      "sha256": "d12d2ee0902f141417a0fd96d42765e69d069a73dd35c181acfa14c006229709"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-a/informe.md",
+      "sha256": "07771695adec776917346d8e8a2e61299c24a9454ff01f18808ff711926cd74c"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-a/migration.diff",
+      "sha256": "5aff63b1bc644f3550115c6305fb1b86154d4c57273f08e6c16b35a38e7b9a58"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-a/pure-evidence.json",
+      "sha256": "6828fa9f196ec7ac51b9407208368b2964750e3a0db1edd909e26659e5aea2d0"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-a/static-evidence.json",
+      "sha256": "0e1cf88479844156bb5539aad95e921e4150b5094ad1e44abc3a67dc86f9677d"
+    }
+  ],
+  "preexistingTrackedChangesPreserved": [
+    "docs/estadisticas-v1/fase-01-evidencia.json"
+  ],
+  "protectedPathsUnchanged": [
+    "lib/admin/permissions.ts",
+    "components/admin/admin-nav-config.ts",
+    "components/admin/layout/admin-nav-list.tsx",
+    "lib/commercial",
+    "types/database.ts",
+    "lib/statistics/contracts.ts",
+    "lib/statistics/read.ts",
+    "lib/statistics/server.ts"
+  ],
+  "checks": {
+    "newPure": "PASS: 268 assertions",
+    "legacyDomain": "PASS: 1111 monetary conservation cases plus domain checks",
+    "legacyReader": "PASS",
+    "typescript": "PASS: tsc --noEmit --incremental false",
+    "sqlParser": "PASS: new migration and embedded SQL; legacy migrations and prepared tests",
+    "scriptEslint": "PASS",
+    "proposedDiff": "PASS: reverse --check only"
+  },
+  "database": {
+    "connections": 0,
+    "writes": 0,
+    "migrationsApplied": 0,
+    "expectedApi": "127.0.0.1:56321",
+    "expectedDb": "127.0.0.1:56322",
+    "liveIdentityVerifiedThisPhase": false
+  },
+  "limitations": [
+    "No PL/pgSQL/catalog compilation",
+    "No runtime RLS/concurrency/rollback/performance tests",
+    "No current Cursor working-tree inspection or remote update"
+  ],
+  "stop": "Await explicit approval of exact migration hash for isolated P03-B. No other phase authorized."
+}

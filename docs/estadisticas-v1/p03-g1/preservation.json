@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-14T12:13:28.305Z",
+  "unchangedFiles": 2700,
+  "hashesUnchanged": true,
+  "authorizedOwnedChanges": [
+    "lib/statistics/summary-route-server.ts",
+    "lib/statistics/summary-server.ts",
+    "lib/statistics/summary-transport.ts",
+    "app/admin/(protected)/statistics/page.tsx",
+    "app/admin/(protected)/statistics/query/route.ts"
+  ],
+  "originalBytesVerifiedByReverseDiff": true,
+  "sharedAdminFilesUnchanged": true,
+  "dbConnections": 0,
+  "ddl": 0,
+  "commits": 0
+}

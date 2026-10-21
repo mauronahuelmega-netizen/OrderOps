@@ -1,0 +1,279 @@
+{
+  "at": "2026-10-16T15:21:04.278Z",
+  "result": "PASS_RESOURCE_IDENTITY",
+  "server": {
+    "version": "29.1.3",
+    "apiVersion": "1.52",
+    "minApiVersion": "1.44",
+    "os": "linux",
+    "arch": "amd64"
+  },
+  "project": "orderops-statistics-v1-test-74718de66a41",
+  "globalMetadataInspected": 53,
+  "foreignServicesContacted": false,
+  "containers": [
+    {
+      "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "name": "/supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "image": "sha256:4255b662ba3d774105cb34f623e410a3d7a860b68408ac6810f7e7e4b9781d5a",
+      "status": "running",
+      "running": true,
+      "health": "healthy",
+      "restartCount": 0,
+      "hostBindings": {
+        "5432/tcp": [
+          {
+            "HostIp": "",
+            "HostPort": "56322"
+          }
+        ]
+      },
+      "effectiveBindings": {
+        "5432/tcp": [
+          {
+            "HostIp": "0.0.0.0",
+            "HostPort": "56322"
+          },
+          {
+            "HostIp": "::",
+            "HostPort": "56322"
+          }
+        ]
+      },
+      "mounts": [
+        {
+          "type": "volume",
+          "name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "destination": "/var/lib/postgresql/data",
+          "rw": true
+        }
+      ],
+      "networks": [
+        "supabase_network_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "configHash": "725d8325e92cf268d062b14c1fe4d109d8fdec02f05517bc598350a8ee9cdbb5",
+      "hostHash": "430a68d71715d3191e9837d68efe1f9873774a20304f65917e5726462de95bff"
+    },
+    {
+      "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "name": "/supabase_kong_orderops-statistics-v1-test-74718de66a41",
+      "image": "sha256:1b53405d8680a09d6f44494b7990bf7da2ea43f84a258c59717d4539abf09f6d",
+      "status": "running",
+      "running": true,
+      "health": "healthy",
+      "restartCount": 0,
+      "hostBindings": {
+        "8000/tcp": [
+          {
+            "HostIp": "",
+            "HostPort": "56321"
+          }
+        ]
+      },
+      "effectiveBindings": {
+        "8000/tcp": [
+          {
+            "HostIp": "0.0.0.0",
+            "HostPort": "56321"
+          },
+          {
+            "HostIp": "::",
+            "HostPort": "56321"
+          }
+        ]
+      },
+      "mounts": [],
+      "networks": [
+        "supabase_network_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "configHash": "5179614679dee6d4663bbbf9f13674309cf440e216055ae230bbc7582fb269d1",
+      "hostHash": "a49e0db8965b760f09c812533310c1b9b761cabbfea7f9d4a0b2f8090020f375"
+    },
+    {
+      "id": "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+      "name": "/supabase_storage_orderops-statistics-v1-test-74718de66a41",
+      "image": "sha256:b7486fec6ccf1dc2389517e41dd2092c9f602717bd3f9b744aeafb604f05bf8b",
+      "status": "running",
+      "running": true,
+      "health": "healthy",
+      "restartCount": 0,
+      "hostBindings": {},
+      "effectiveBindings": {
+        "5000/tcp": null
+      },
+      "mounts": [
+        {
+          "type": "volume",
+          "name": "supabase_storage_orderops-statistics-v1-test-74718de66a41",
+          "destination": "/mnt",
+          "rw": true
+        }
+      ],
+      "networks": [
+        "supabase_network_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "configHash": "cd87020bcf4723886971dcde8ce974e5bc9d2fe5c5d1606802c70fce95239637",
+      "hostHash": "6f2ce689fb8daac7d2a83b0c0ebae16cc2fbeddbe5608317e65abd5f21821c3f"
+    },
+    {
+      "id": "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+      "name": "/supabase_rest_orderops-statistics-v1-test-74718de66a41",
+      "image": "sha256:7c5840727ad683b0fdbfb9810930665b34f8b44884a4dc740aa8844748a2b85e",
+      "status": "running",
+      "running": true,
+      "health": "NO_HEALTHCHECK",
+      "restartCount": 0,
+      "hostBindings": {},
+      "effectiveBindings": {
+        "3000/tcp": null
+      },
+      "mounts": [],
+      "networks": [
+        "supabase_network_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "configHash": "b9fc76d6152efa9f556d8b8d49852256dfcdc558de1976ce9ee480434f9abb59",
+      "hostHash": "38ce946e1d66a9cc18d84c8f35dc3b4460da9243ceb7972bf709d0934ca597f1"
+    },
+    {
+      "id": "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c",
+      "name": "/supabase_auth_orderops-statistics-v1-test-74718de66a41",
+      "image": "sha256:de22ff0811f3e4f7e6d3ba226f75ed8d82310df577bbd61e16fbfd7a50a8c9ce",
+      "status": "running",
+      "running": true,
+      "health": "healthy",
+      "restartCount": 7,
+      "hostBindings": {},
+      "effectiveBindings": {
+        "9999/tcp": null
+      },
+      "mounts": [],
+      "networks": [
+        "supabase_network_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "configHash": "b0107f8a2d4cb3538880e924e77f4f593d6939e10a19392c8d8de559a54532e4",
+      "hostHash": "38ce946e1d66a9cc18d84c8f35dc3b4460da9243ceb7972bf709d0934ca597f1"
+    }
+  ],
+  "network": {
+    "id": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af",
+    "name": "supabase_network_orderops-statistics-v1-test-74718de66a41",
+    "driver": "bridge",
+    "ipv6": false,
+    "attachedIds": [
+      "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+      "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+      "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+    ],
+    "exclusive": true
+  },
+  "volumes": [
+    {
+      "name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "driver": "local",
+      "mountpoint": "/var/lib/docker/volumes/supabase_db_orderops-statistics-v1-test-74718de66a41/_data",
+      "createdAt": "2026-10-12T19:26:21Z",
+      "projectLabel": "orderops-statistics-v1-test-74718de66a41"
+    },
+    {
+      "name": "supabase_storage_orderops-statistics-v1-test-74718de66a41",
+      "driver": "local",
+      "mountpoint": "/var/lib/docker/volumes/supabase_storage_orderops-statistics-v1-test-74718de66a41/_data",
+      "createdAt": "2026-10-12T19:31:08Z",
+      "projectLabel": "orderops-statistics-v1-test-74718de66a41"
+    }
+  ],
+  "negativeSharingChecks": "PASS_ALL_CONTAINERS_METADATA",
+  "payloads": [
+    {
+      "kind": "db",
+      "payloadSha256": "8ae80d0a2a32ff16da6ae10edc869e9f01b435d6ae336a06c1c04664d77f1a60",
+      "onlyFunctionalChange": "HostIp",
+      "matchesApproved": true
+    },
+    {
+      "kind": "kong",
+      "payloadSha256": "8c1bdda35730b04c3aa01318670754157792a4ac770f8c683d899285d3d930f6",
+      "onlyFunctionalChange": "HostIp",
+      "matchesApproved": true
+    }
+  ],
+  "images": [
+    {
+      "id": "sha256:4255b662ba3d774105cb34f623e410a3d7a860b68408ac6810f7e7e4b9781d5a",
+      "repoDigests": [
+        "public.ecr.aws/supabase/postgres@sha256:4255b662ba3d774105cb34f623e410a3d7a860b68408ac6810f7e7e4b9781d5a"
+      ]
+    },
+    {
+      "id": "sha256:1b53405d8680a09d6f44494b7990bf7da2ea43f84a258c59717d4539abf09f6d",
+      "repoDigests": [
+        "public.ecr.aws/supabase/kong@sha256:1b53405d8680a09d6f44494b7990bf7da2ea43f84a258c59717d4539abf09f6d"
+      ]
+    }
+  ],
+  "layers": [
+    {
+      "kind": "db",
+      "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "entries": [
+        "A /etc/postgresql-custom/pgsodium_root.key",
+        "A /etc/postgresql.schema.sql",
+        "A /run/postgresql/.s.PGSQL.5432",
+        "A /run/postgresql/.s.PGSQL.5432.lock",
+        "A /tmp/orderops-estadisticas-recovered.dump",
+        "A /var/lib/postgresql/data",
+        "C /etc",
+        "C /etc/postgresql",
+        "C /etc/postgresql-custom",
+        "C /etc/postgresql/postgresql.conf",
+        "C /run",
+        "C /run/postgresql",
+        "C /tmp",
+        "C /var",
+        "C /var/lib",
+        "C /var/lib/postgresql"
+      ]
+    },
+    {
+      "kind": "kong",
+      "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "entries": [
+        "A /home/kong/custom_nginx.template",
+        "A /home/kong/kong.yml",
+        "A /home/kong/localhost.crt",
+        "A /home/kong/localhost.key",
+        "A /usr/local/kong/.kong_env",
+        "A /usr/local/kong/client_body_temp",
+        "A /usr/local/kong/fastcgi_temp",
+        "A /usr/local/kong/logs",
+        "A /usr/local/kong/logs/access.log",
+        "A /usr/local/kong/logs/admin_access.log",
+        "A /usr/local/kong/logs/email_templates_access.log",
+        "A /usr/local/kong/logs/error.log",
+        "A /usr/local/kong/nginx-kong-stream.conf",
+        "A /usr/local/kong/nginx-kong.conf",
+        "A /usr/local/kong/nginx.conf",
+        "A /usr/local/kong/pids",
+        "A /usr/local/kong/pids/nginx.pid",
+        "A /usr/local/kong/proxy_temp",
+        "A /usr/local/kong/scgi_temp",
+        "A /usr/local/kong/ssl",
+        "A /usr/local/kong/ssl/admin-kong-default-ecdsa.crt",
+        "A /usr/local/kong/ssl/admin-kong-default-ecdsa.key",
+        "A /usr/local/kong/ssl/admin-kong-default.crt",
+        "A /usr/local/kong/ssl/admin-kong-default.key",
+        "A /usr/local/kong/ssl/ffdhe2048.pem",
+        "A /usr/local/kong/uwsgi_temp",
+        "C /home",
+        "C /home/kong",
+        "C /usr",
+        "C /usr/local",
+        "C /usr/local/kong"
+      ]
+    }
+  ],
+  "sqlConnections": 0,
+  "mutations": 0
+}

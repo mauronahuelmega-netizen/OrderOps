@@ -1,0 +1,193 @@
+{
+  "at": "2026-10-16T13:34:19.301Z",
+  "result": "PASS_OFFLINE_ONLY",
+  "tests": 46,
+  "results": [
+    {
+      "name": "valid_hostip_only_delta",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_env",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_cmd",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_entrypoint",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_image",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_hostname",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_healthcheck",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_restart",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_memory",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_mount",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_new_port",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_wildcard",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_ipv6",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_port_changed",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_network",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_alias",
+      "result": "PASS"
+    },
+    {
+      "name": "payload_reject_grant_label",
+      "result": "PASS"
+    },
+    {
+      "name": "source_reject_privileged",
+      "result": "PASS"
+    },
+    {
+      "name": "source_reject_publish_all",
+      "result": "PASS"
+    },
+    {
+      "name": "source_reject_volumes_from",
+      "result": "PASS"
+    },
+    {
+      "name": "source_reject_static_ip",
+      "result": "PASS"
+    },
+    {
+      "name": "source_reject_unknown_mount",
+      "result": "PASS"
+    },
+    {
+      "name": "source_reject_unhealthy",
+      "result": "PASS"
+    },
+    {
+      "name": "source_reject_wrong_role_target",
+      "result": "PASS"
+    },
+    {
+      "name": "exclusive_fleet",
+      "result": "PASS"
+    },
+    {
+      "name": "reserved_name_collision",
+      "result": "PASS"
+    },
+    {
+      "name": "reserved_names_duplicate",
+      "result": "PASS"
+    },
+    {
+      "name": "reserved_name_free",
+      "result": "PASS"
+    },
+    {
+      "name": "foreign_network_sharing",
+      "result": "PASS"
+    },
+    {
+      "name": "foreign_volume_sharing",
+      "result": "PASS"
+    },
+    {
+      "name": "id_discontinuity_unapproved",
+      "result": "PASS"
+    },
+    {
+      "name": "volume_not_copied",
+      "result": "PASS"
+    },
+    {
+      "name": "key_requires_archive",
+      "result": "PASS"
+    },
+    {
+      "name": "pid_not_restored",
+      "result": "PASS"
+    },
+    {
+      "name": "unknown_special_file",
+      "result": "PASS"
+    },
+    {
+      "name": "resty_scope_narrow",
+      "result": "PASS"
+    },
+    {
+      "name": "valid_tar",
+      "result": "PASS"
+    },
+    {
+      "name": "tar_traversal",
+      "result": "PASS"
+    },
+    {
+      "name": "tar_absolute",
+      "result": "PASS"
+    },
+    {
+      "name": "tar_special",
+      "result": "PASS"
+    },
+    {
+      "name": "tar_bad_checksum",
+      "result": "PASS"
+    },
+    {
+      "name": "explicit_transition_valid",
+      "result": "PASS"
+    },
+    {
+      "name": "transition_lost_env",
+      "result": "PASS"
+    },
+    {
+      "name": "transition_changes_auth",
+      "result": "PASS"
+    },
+    {
+      "name": "transition_second_db_writer",
+      "result": "PASS"
+    },
+    {
+      "name": "transition_old_aliases_attached",
+      "result": "PASS"
+    }
+  ],
+  "sql": 0,
+  "containersChanged": 0
+}

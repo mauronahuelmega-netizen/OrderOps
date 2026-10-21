@@ -1,0 +1,308 @@
+{
+  "at": "2026-10-16T16:30:41.963Z",
+  "status": "PASS_OFFLINE_ONLY",
+  "tests": 74,
+  "items": [
+    {
+      "name": "Synthetic positive A/B/A and exact text system identifier",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject missingRow",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject duplicateRow",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject wrongOriginalIndex",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject wrongTable",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject wrongSchema",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject changedTgfoid",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject changedTableOid",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject numericOid",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject changedEnable",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject changedType",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject changedArgs",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject whenClause",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject transition",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject wrongFunctionSchema",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject securityDefiner",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject changedFunctionHash",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject changedAcl",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject changedOwner",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject changedConfig",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject changedExtension",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject missingExtension",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject ambiguousExtensions",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject wrongVisibility",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject shadowFunction",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject wrongSearchPath",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject normalizedDefinition",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject arrayReorder",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject thirdFrameChange",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject numericSystemId",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject invalidSystemId",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject wrongDatabase",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject wrongUser",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject wrongLedger",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject markerFail",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject notReadOnly",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject wrongIsolation",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject unexpectedKey",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Parse complete labelled output and rollback",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject protocol noRollback",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject protocol trailingNoise",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject protocol duplicateFrame",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject protocol invalidJson",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject protocol unknownFrame",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject protocol unexpectedText",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Pinned files exactly match",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/build-proposal.mjs",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/targets.json",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/validation.mjs",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/trigger-catalog.select.sql",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/trigger-gate.select.sql",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/cluster-identity.select.sql",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/verification.proposed.psql",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/historical-sources.json",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/policy.mjs",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact docs/estadisticas-v1/p04-t01c-executor-audit-20261016/pins.json",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/trigger-differences.json",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact docs/estadisticas-v1/p04-t01c/extra-after.json",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/verification.proposed.psql",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/sql-readonly-observed.json",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact supabase/migrations/20260607210325_business_settings.sql",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact supabase/migrations/20260712090000_product_customization_v1_schema.sql",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact supabase/migrations/20260926011000_order_financials.sql",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact supabase/migrations/20260926012000_finance_foundation.sql",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact supabase/migrations/20260926013000_business_finance_settings.sql",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject altered pinned artifact supabase/migrations/20260926014000_finance_ledger.sql",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "SQL lexical structure trigger-catalog.select.sql",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "SQL lexical structure trigger-gate.select.sql",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "SQL lexical structure cluster-identity.select.sql",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "JSON constructor arity at most100, even key/value count",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Explicit three local paths, statement/lock limits, rollback gates",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Runner review under process/network tripwire",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject invalid CLI --invalid",
+      "result": "PASS_OFFLINE"
+    },
+    {
+      "name": "Reject invalid CLI --execute-readonly --extra",
+      "result": "PASS_OFFLINE"
+    }
+  ],
+  "sqlConnections": 0,
+  "dockerCommands": 0,
+  "realExecutionModeInvoked": false,
+  "fixtures": "In-memory synthetic catalog; not observations or PostgreSQL execution",
+  "postgresParser": "NOT_AVAILABLE; lexical checks are not server compilation"
+}

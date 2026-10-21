@@ -1,0 +1,13 @@
+{
+  "at": "2026-10-14T18:33:51.182Z",
+  "result": "PASS",
+  "readOnlyConnections": true,
+  "rollbackOnly": true,
+  "catalogFunctionsAclPoliciesIndexesConstraintsIdentical": true,
+  "ledger": 124,
+  "dataFingerprintsIdentical": true,
+  "extraIdentical": true,
+  "qaInstallExecuted": false,
+  "qaGrantsApplied": false,
+  "authLoginsExecuted": false
+}

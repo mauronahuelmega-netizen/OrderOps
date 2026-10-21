@@ -1,0 +1,105 @@
+{
+  "at": "2026-10-16T13:06:08.347Z",
+  "phase": "P04-T01C_LOOPBACK_CORRECTION_PLAN",
+  "verdict": "BLOCKED",
+  "executionAuthorized": false,
+  "scope": "Read-only metadata audit and proposal documents",
+  "externalEvidence": {
+    "source": "Human owner report in this conversation",
+    "device": "Phone on same Wi-Fi",
+    "url": "http://192.168.0.108:56321/",
+    "response": "{\"message\":\"no Route matched with those values\"}",
+    "meaning": "API reachable from LAN; not evidence of data access",
+    "postgresql56322": "POTENTIALLY_EXPOSED_NOT_REMOTELY_TESTED",
+    "independentlyRepeated": false
+  },
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "origin": "Supabase CLI 2.72.7 HostPort without HostIp; Docker 29.1.3 expands wildcard",
+  "proposedDelta": {
+    "db": {
+      "5432/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": "56322"
+        }
+      ]
+    },
+    "kong": {
+      "8000/tcp": [
+        {
+          "HostIp": "127.0.0.1",
+          "HostPort": "56321"
+        }
+      ]
+    }
+  },
+  "mandatoryDecision": "Literal binding change cannot preserve both original active DB/Kong container IDs. Selective recreation exception and reviewed harness required; not authorized.",
+  "recommendedIfExceptionApproved": "Keep original DB/Kong stopped and renamed; create two reviewed replacements. Preserve Auth/REST/Storage IDs, network and both volumes; keep history and immutable references.",
+  "writableLayerPreservation": "Required gate; configuration, keys, Kong files and recovery dump paths identified; no secret contents read",
+  "futureHarnessPrepared": false,
+  "commands": "commands-and-tests.md; not executed",
+  "ledgerAndData": "Previous post-recovery evidence only; no new SQL comparison in this task",
+  "qaInstallSha256": "f7940a54a58b93b04d56b10eb1f65bf425299436a2e25a1d3ae79feec919272f",
+  "noTransactionalRehearsal": true,
+  "noT02": true,
+  "noPublication": true,
+  "noCandidateAdoption": true,
+  "oldCheckpointUnchanged": true,
+  "additionalLiveChecks": [
+    "Only project-labelled Docker inspect/network/volume metadata and db/kong docker diff",
+    "Supabase executable version/help and Docker engine version"
+  ],
+  "sources": [
+    "https://raw.githubusercontent.com/supabase/cli/v2.72.7/internal/start/start.go",
+    "https://raw.githubusercontent.com/supabase/cli/v2.72.7/internal/db/start/start.go",
+    "https://raw.githubusercontent.com/supabase/cli/v2.72.7/internal/utils/docker.go",
+    "https://docs.docker.com/engine/network/port-publishing/",
+    "https://docs.docker.com/reference/cli/docker/container/update/"
+  ],
+  "preservation": "preservation.json",
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-plan-20261016/audit-bindings-readonly.mjs",
+      "sha256": "85b8b8e6ab05c13ec94cd96abb87641df146152ba1ea7eba9998969b5f7b87a5",
+      "bytes": 3513,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-plan-20261016/binding-origin.json",
+      "sha256": "fab742159a3eafddc5418d03e307ea009194a3ff27194c7f0178534293442fb3",
+      "bytes": 11686,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-plan-20261016/commands-and-tests.md",
+      "sha256": "4403441671395c9988348d81c337d3ea4e606f93d6aed140bb47a5b4c78df5b2",
+      "bytes": 7416,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-plan-20261016/file-baseline.json",
+      "sha256": "228b8b2b98499aaee4f141ff36ceb52215ec19f91068c3a3eecc164a70425e67",
+      "bytes": 481269,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-plan-20261016/finalize-plan.mjs",
+      "sha256": "847813eacfa54c2baaee0167d504f40c9172bad2f2afed9aaac59e2cdc0bc601",
+      "bytes": 4630,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-plan-20261016/plan.md",
+      "sha256": "52af2c7f8f7d00d05c1a10435f88f9e75dec17ea6c0017a525231bab81413a04",
+      "bytes": 13823,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-plan-20261016/preservation.json",
+      "sha256": "7ff5c89ec3b92fbdc2b42def03aa6318bf75742e1a89e7f3c8ea30d0fe480a04",
+      "bytes": 468,
+      "kind": "created"
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

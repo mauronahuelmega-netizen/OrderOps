@@ -1,0 +1,1423 @@
+{
+  "startUTC": "2026-10-14T14:29:45.706Z",
+  "endUTC": "2026-10-14T14:29:46.468Z",
+  "processExit": 0,
+  "processError": null,
+  "expectedTests": 60,
+  "recordedTests": 33,
+  "pass": 32,
+  "fail": 1,
+  "records": [
+    {
+      "data": [
+        {
+          "acl": "{postgres=X/postgres,authenticated=X/postgres}",
+          "owner": "postgres",
+          "config": [
+            "search_path=pg_catalog, private"
+          ],
+          "invoker": true,
+          "defaults": "NULL::date, NULL::date, 'units'::text, 5, NULL::jsonb",
+          "signature": "statistics_v1_products(text,date,date,text,integer,jsonb)"
+        },
+        {
+          "acl": "{postgres=X/postgres,authenticated=X/postgres}",
+          "owner": "postgres",
+          "config": [
+            "search_path=pg_catalog"
+          ],
+          "invoker": true,
+          "defaults": "0",
+          "signature": "private.statistics_products_metric(numeric,bigint,bigint,bigint,bigint)"
+        },
+        {
+          "acl": "{postgres=X/postgres,authenticated=X/postgres}",
+          "owner": "postgres",
+          "config": [
+            "search_path=pg_catalog, public, private"
+          ],
+          "invoker": true,
+          "defaults": "NULL::date, NULL::date, 'units'::text, 5, NULL::jsonb",
+          "signature": "private.statistics_v1_products_reader(text,date,date,text,integer,jsonb)"
+        }
+      ],
+      "test": "catalog.signatures_invoker_defaults_acl",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T14:29:46.147498+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [],
+          "nextCursor": null,
+          "totalProducts": 0
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 0,
+          "eligibleOrders": 0,
+          "outsideSession": 0,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "127",
+        "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+        "categories": [],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": null,
+          "revenue": null,
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.owner.a.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T14:29:46.208345+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [],
+          "nextCursor": null,
+          "totalProducts": 0
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 0,
+          "eligibleOrders": 0,
+          "outsideSession": 0,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "127",
+        "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+        "categories": [],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": null,
+          "revenue": null,
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.owner.a.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T14:29:46.218436+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [],
+          "nextCursor": null,
+          "totalProducts": 0
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 0,
+          "eligibleOrders": 0,
+          "outsideSession": 0,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "127",
+        "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+        "categories": [],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": null,
+          "revenue": null,
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.manager.a.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T14:29:46.228875+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [],
+          "nextCursor": null,
+          "totalProducts": 0
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 0,
+          "eligibleOrders": 0,
+          "outsideSession": 0,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "127",
+        "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+        "categories": [],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": null,
+          "revenue": null,
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.manager.a.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T14:29:46.237712+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [],
+          "nextCursor": null,
+          "totalProducts": 0
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 0,
+          "eligibleOrders": 0,
+          "outsideSession": 0,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "127",
+        "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+        "categories": [],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": null,
+          "revenue": null,
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.admin.a.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T14:29:46.247097+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [],
+          "nextCursor": null,
+          "totalProducts": 0
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 0,
+          "eligibleOrders": 0,
+          "outsideSession": 0,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "127",
+        "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+        "categories": [],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": null,
+          "revenue": null,
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.admin.a.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "role.operator.a.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.operator.a.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.viewer.a.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.viewer.a.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.super_admin.a.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.super_admin.a.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T14:29:46.268681+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [],
+          "nextCursor": null,
+          "totalProducts": 0
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 0,
+          "eligibleOrders": 0,
+          "outsideSession": 0,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "0",
+        "businessId": "ea72a875-7511-4c1d-9d2c-c3f899b94bea",
+        "categories": [],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": null,
+          "revenue": null,
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.owner.b.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T14:29:46.272678+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [],
+          "nextCursor": null,
+          "totalProducts": 0
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 0,
+          "eligibleOrders": 0,
+          "outsideSession": 0,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "0",
+        "businessId": "ea72a875-7511-4c1d-9d2c-c3f899b94bea",
+        "categories": [],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": null,
+          "revenue": null,
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.owner.b.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T14:29:46.275966+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [],
+          "nextCursor": null,
+          "totalProducts": 0
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 0,
+          "eligibleOrders": 0,
+          "outsideSession": 0,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "0",
+        "businessId": "ea72a875-7511-4c1d-9d2c-c3f899b94bea",
+        "categories": [],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": null,
+          "revenue": null,
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.manager.b.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T14:29:46.278974+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [],
+          "nextCursor": null,
+          "totalProducts": 0
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 0,
+          "eligibleOrders": 0,
+          "outsideSession": 0,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "0",
+        "businessId": "ea72a875-7511-4c1d-9d2c-c3f899b94bea",
+        "categories": [],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": null,
+          "revenue": null,
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.manager.b.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T14:29:46.282029+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [],
+          "nextCursor": null,
+          "totalProducts": 0
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 0,
+          "eligibleOrders": 0,
+          "outsideSession": 0,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "0",
+        "businessId": "ea72a875-7511-4c1d-9d2c-c3f899b94bea",
+        "categories": [],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": null,
+          "revenue": null,
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.admin.b.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T14:29:46.285492+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [],
+          "nextCursor": null,
+          "totalProducts": 0
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 0,
+          "eligibleOrders": 0,
+          "outsideSession": 0,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "0",
+        "businessId": "ea72a875-7511-4c1d-9d2c-c3f899b94bea",
+        "categories": [],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": null,
+          "revenue": null,
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "role.admin.b.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "role.operator.b.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.operator.b.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.viewer.b.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.viewer.b.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.super_admin.b.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "role.super_admin.b.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "deny.no_session.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "deny.no_session.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "deny.missing_profile.public.statistics_v1_products",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "deny.missing_profile.private.statistics_v1_products_reader",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": "42501"
+    },
+    {
+      "data": null,
+      "test": "constraints.null_unknown_roles",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": null,
+      "test": "deny.absent_business",
+      "detail": "",
+      "status": "FAIL",
+      "context": "PL/pgSQL function inline_code_block line 3 at SQL statement",
+      "message": "query has no destination for result data",
+      "summary": null,
+      "sqlstate": "42601"
+    },
+    {
+      "data": {
+        "value": null,
+        "quality": "unavailable",
+        "reasons": [
+          "unverified_lines"
+        ],
+        "knownCount": 0,
+        "unknownCount": 1,
+        "missingCapturedOrders": 0
+      },
+      "test": "pure_helper.no_data",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    },
+    {
+      "data": {
+        "period": {
+          "asOf": "2026-10-14T14:29:46.364972+00:00",
+          "preset": "today",
+          "endDate": "2026-10-14",
+          "partial": true,
+          "timezone": "America/Argentina/Buenos_Aires",
+          "startDate": "2026-10-14",
+          "referenceDate": "2026-10-14"
+        },
+        "status": "ready",
+        "totals": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        },
+        "ranking": {
+          "sort": "units",
+          "items": [],
+          "nextCursor": null,
+          "totalProducts": 0
+        },
+        "version": "statistics.products.v1",
+        "coverage": {
+          "capturedLines": 0,
+          "eligibleOrders": 0,
+          "outsideSession": 0,
+          "historicalScope": "global_unassigned",
+          "unresolvedOrders": 0,
+          "pendingAgreedTotal": null,
+          "unknownProductLines": 0,
+          "unknownCategoryLines": 0,
+          "historicalWithoutDate": 0,
+          "ordersWithoutCapturedLines": 0
+        },
+        "currency": "ARS",
+        "revision": "127",
+        "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+        "categories": [],
+        "denominators": {
+          "scope": "verified_lines_in_period",
+          "units": null,
+          "revenue": null,
+          "unitComplete": true,
+          "revenueComplete": true
+        },
+        "unidentified": {
+          "units": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          },
+          "revenue": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0,
+            "missingCapturedOrders": 0
+          }
+        }
+      },
+      "test": "compile.empty_response",
+      "status": "PASS",
+      "summary": null,
+      "observedSqlstate": null
+    }
+  ],
+  "topLevelErrors": [
+    "ERROR:  42501: CATEGORY_ORDER_APPEND_FORBIDDEN",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block",
+    "ERROR:  25P02: current transaction is aborted, commands ignored until end of transaction block"
+  ],
+  "rollback": {
+    "rollbackReached": true,
+    "productsAbsent": true
+  },
+  "candidateHash": "a66ce3ea73bf4a4421c60b77376914f232b4470d41df7d661ee38142c4a29ba8",
+  "harnessHash": "46a9332db951748493de931a458ce19f299293b81b5fc5e2dab793d34a78d3f1"
+}

@@ -1,0 +1,235 @@
+{
+  "at": "2026-10-16T13:36:28.384Z",
+  "result": "NEEDS_ATTRIBUTE_PRESERVATION_REVIEW",
+  "results": [
+    {
+      "kind": "db",
+      "rows": [
+        {
+          "path": "/etc/postgresql-custom/pgsodium_root.key",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/etc/postgresql.schema.sql",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/tmp/orderops-estadisticas-recovered.dump",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/etc",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/etc/postgresql",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/etc/postgresql-custom",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/etc/postgresql/postgresql.conf",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/run",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/run/postgresql",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/tmp",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/var",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/var/lib",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        },
+        {
+          "path": "/var/lib/postgresql",
+          "count": 0,
+          "posixAclPresent": false,
+          "status": "OK"
+        }
+      ],
+      "allEnumerated": true,
+      "allZero": true,
+      "attributeValuesRead": false,
+      "limitations": "Kernel listxattr visibility for container-root current capabilities; not a forensic proof about hidden unsupported namespaces"
+    },
+    {
+      "kind": "kong",
+      "rows": [
+        {
+          "path": "/home/kong/custom_nginx.template",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/home/kong/kong.yml",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/home/kong/localhost.crt",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/home/kong/localhost.key",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/.kong_env",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/client_body_temp",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/fastcgi_temp",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/logs",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/nginx-kong-stream.conf",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/nginx-kong.conf",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/nginx.conf",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/pids",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/proxy_temp",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/scgi_temp",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/ssl",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/ssl/admin-kong-default-ecdsa.crt",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/ssl/admin-kong-default-ecdsa.key",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/ssl/admin-kong-default.crt",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/ssl/admin-kong-default.key",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/ssl/ffdhe2048.pem",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong/uwsgi_temp",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/home",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/home/kong",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        },
+        {
+          "path": "/usr/local/kong",
+          "count": null,
+          "status": "NOT_AVAILABLE"
+        }
+      ],
+      "allEnumerated": false,
+      "allZero": false,
+      "attributeValuesRead": false,
+      "limitations": "Kernel listxattr visibility for container-root current capabilities; not a forensic proof about hidden unsupported namespaces"
+    }
+  ],
+  "sql": 0,
+  "containerFilesWritten": 0,
+  "packagesInstalled": 0
+}

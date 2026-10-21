@@ -1,0 +1,349 @@
+{
+  "verdict": "PERFORMANCE_IMPROVED_WITH_LIMITATIONS",
+  "method": "Normal PostgreSQL EXPLAIN ANALYZE BUFFERS SETTINGS, JIT default. No function/nested-log instrumentation enabled in measurement connections. One warmup/reader,20 normal samples/reader, three-reader order rotation, concurrency1; p95 nearest rank; every outlier retained. No HTTP measurement.",
+  "cohorts": [
+    {
+      "orders": 50,
+      "status": "PASS",
+      "readers": {
+        "original": {
+          "n": 20,
+          "min": 642.981,
+          "p50": 939.653,
+          "p95": 3547.946,
+          "max": 3671.983,
+          "mean": 1409.8877999999997,
+          "stddev": 907.6392512961083,
+          "rawMs": [
+            2121.66,
+            3547.946,
+            2345.56,
+            3671.983,
+            2166.434,
+            1377.254,
+            1371.578,
+            797.53,
+            939.653,
+            707.778,
+            940.628,
+            1816.268,
+            864.156,
+            772.92,
+            689.415,
+            661.102,
+            662.066,
+            642.981,
+            761.218,
+            1339.626
+          ]
+        },
+        "AB": {
+          "n": 20,
+          "min": 262.569,
+          "p50": 352.183,
+          "p95": 1170.934,
+          "max": 1328.159,
+          "mean": 550.83645,
+          "stddev": 342.3763105542606,
+          "rawMs": [
+            1168.769,
+            1328.159,
+            833.988,
+            1170.934,
+            963.393,
+            743.626,
+            349.65,
+            352.183,
+            330.34,
+            301.051,
+            368.031,
+            535.015,
+            480.974,
+            302.476,
+            287.435,
+            285.899,
+            262.569,
+            263.92,
+            295.744,
+            392.573
+          ]
+        },
+        "D1": {
+          "n": 20,
+          "min": 204.231,
+          "p50": 252.359,
+          "p95": 1038.496,
+          "max": 1226.815,
+          "mean": 419.831,
+          "stddev": 300.07723826641706,
+          "rawMs": [
+            618.632,
+            1038.496,
+            772.156,
+            1226.815,
+            834.023,
+            383.466,
+            324.357,
+            373.962,
+            215.091,
+            226.275,
+            213.787,
+            304.509,
+            252.359,
+            236.832,
+            218.736,
+            211.269,
+            204.231,
+            209.672,
+            248.589,
+            283.363
+          ]
+        }
+      },
+      "warmups": [
+        {
+          "label": "legacy:warmup",
+          "executionMs": 1380.304
+        },
+        {
+          "label": "extended:warmup",
+          "executionMs": 826.171
+        },
+        {
+          "label": "d1:warmup",
+          "executionMs": 757.237
+        }
+      ],
+      "advanceGate": "PASS",
+      "resourcesBefore": {
+        "at": "2026-10-14T00:15:53.558Z",
+        "dbStats": {
+          "BlockIO": "114MB / 55MB",
+          "CPUPerc": "0.00%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.71%",
+          "MemUsage": "134.9MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.78MB / 10.6MB",
+          "PIDs": "13"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourcesAfter": {
+        "at": "2026-10-14T00:16:46.882Z",
+        "dbStats": {
+          "BlockIO": "114MB / 55.4MB",
+          "CPUPerc": "0.05%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.71%",
+          "MemUsage": "134.9MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.78MB / 10.6MB",
+          "PIDs": "13"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "error": null,
+      "rollback": true
+    },
+    {
+      "orders": 100,
+      "status": "PASS",
+      "readers": {
+        "original": {
+          "n": 20,
+          "min": 1013.928,
+          "p50": 1642.095,
+          "p95": 2716.85,
+          "max": 2748.515,
+          "mean": 1748.1878499999998,
+          "stddev": 556.5425520036429,
+          "rawMs": [
+            1665.043,
+            2095.458,
+            2221.265,
+            2681.365,
+            1802.995,
+            2748.515,
+            1628.174,
+            1234.417,
+            1216.946,
+            1705.507,
+            2716.85,
+            1306.993,
+            1080.929,
+            1013.928,
+            2227.895,
+            1642.095,
+            1219.812,
+            1193.342,
+            1302.214,
+            2260.014
+          ]
+        },
+        "AB": {
+          "n": 20,
+          "min": 242.153,
+          "p50": 307.65,
+          "p95": 495.828,
+          "max": 629.3,
+          "mean": 347.1298,
+          "stddev": 97.78889120938021,
+          "rawMs": [
+            281.2,
+            336.881,
+            495.828,
+            399.34,
+            470.891,
+            283.007,
+            280.209,
+            332.929,
+            256.897,
+            261.649,
+            437.72,
+            286.251,
+            242.153,
+            249.911,
+            629.3,
+            299.062,
+            319.421,
+            307.65,
+            349.266,
+            423.031
+          ]
+        },
+        "D1": {
+          "n": 20,
+          "min": 181.198,
+          "p50": 219.13,
+          "p95": 375.94,
+          "max": 519.138,
+          "mean": 253.77444999999997,
+          "stddev": 79.57606759414227,
+          "rawMs": [
+            213.356,
+            319.628,
+            218.087,
+            375.94,
+            295.451,
+            196.205,
+            225.703,
+            230.427,
+            191.651,
+            205.957,
+            519.138,
+            200.09,
+            181.198,
+            208.701,
+            308.103,
+            242.89,
+            219.826,
+            219.13,
+            197.595,
+            306.413
+          ]
+        }
+      },
+      "warmups": [
+        {
+          "label": "legacy:warmup",
+          "executionMs": 1812.923
+        },
+        {
+          "label": "extended:warmup",
+          "executionMs": 297.241
+        },
+        {
+          "label": "d1:warmup",
+          "executionMs": 240.306
+        }
+      ],
+      "advanceGate": "PASS",
+      "resourcesBefore": {
+        "at": "2026-10-14T00:17:04.215Z",
+        "dbStats": {
+          "BlockIO": "114MB / 55.5MB",
+          "CPUPerc": "0.01%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.71%",
+          "MemUsage": "135.2MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.78MB / 10.6MB",
+          "PIDs": "13"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourcesAfter": {
+        "at": "2026-10-14T00:17:56.908Z",
+        "dbStats": {
+          "BlockIO": "114MB / 56.4MB",
+          "CPUPerc": "0.04%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.71%",
+          "MemUsage": "135MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.78MB / 10.6MB",
+          "PIDs": "13"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "error": null,
+      "rollback": true
+    }
+  ],
+  "targets": {
+    "100": {
+      "targetP95Ms": 500,
+      "result": "MET_IN_THIS_ISOLATED_COHORT",
+      "measuredP95Ms": 375.94
+    },
+    "500": {
+      "targetP95Ms": 1000,
+      "result": "NOT_MEASURED_SUFFICIENTLY",
+      "measuredP95Ms": null
+    },
+    "1000": {
+      "targetP95Ms": 1500,
+      "result": "NOT_MEASURED_SUFFICIENTLY",
+      "measuredP95Ms": null
+    },
+    "5000": {
+      "targetP95Ms": 3000,
+      "result": "NOT_MEASURED_SUFFICIENTLY",
+      "measuredP95Ms": null
+    }
+  },
+  "queryTimeoutSeconds": 15,
+  "lockTimeoutSeconds": 3,
+  "resourceGates": {
+    "entryContainerCPUPercent": 35,
+    "entryContainerMemoryPercent": 40,
+    "maximumQueryBeforeEscalationMs": 5000
+  },
+  "omitted": {
+    "orders": [
+      200,
+      500,
+      1000,
+      5000
+    ],
+    "reason": "Deliberately bounded first validation at50/100; higher-cohort peak/host-resource and stability evidence not established. No extrapolation."
+  },
+  "peakMemoryMeasured": false
+}

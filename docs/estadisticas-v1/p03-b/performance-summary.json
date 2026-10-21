@@ -1,0 +1,41 @@
+{
+  "syntheticOrders": 200,
+  "transactionRolledBack": true,
+  "totalFixtureAndTestElapsedMs": 12451,
+  "plans": [
+    {
+      "period": "today",
+      "executionMs": 2012.458,
+      "planningMs": 0.018,
+      "sharedHitBlocks": 71908,
+      "sharedReadBlocks": 0,
+      "tempReadBlocks": 0,
+      "tempWrittenBlocks": 0,
+      "outerNode": "Result"
+    },
+    {
+      "period": "last_7_days",
+      "executionMs": 2346.342,
+      "planningMs": 0.016,
+      "sharedHitBlocks": 71909,
+      "sharedReadBlocks": 0,
+      "tempReadBlocks": 0,
+      "tempWrittenBlocks": 0,
+      "outerNode": "Result"
+    },
+    {
+      "period": "last_30_days",
+      "executionMs": 2634.475,
+      "planningMs": 0.018,
+      "sharedHitBlocks": 71906,
+      "sharedReadBlocks": 0,
+      "tempReadBlocks": 0,
+      "tempWrittenBlocks": 0,
+      "outerNode": "Result"
+    }
+  ],
+  "limitations": [
+    "One bounded sample; not a load test or production SLA",
+    "Outer EXPLAIN does not expose nested PL/pgSQL statement plans"
+  ]
+}

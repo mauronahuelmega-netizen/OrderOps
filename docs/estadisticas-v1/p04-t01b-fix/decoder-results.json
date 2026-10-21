@@ -1,0 +1,334 @@
+{
+  "at": "2026-10-14T16:02:25.047Z",
+  "result": "PASS",
+  "source": "lib/statistics/products-read.ts unchanged",
+  "accepted": 54,
+  "rejected": 0,
+  "completeJsonUnmodified": true,
+  "records": [
+    {
+      "test": "compile.empty_response",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "risk.SQL05.session_settings",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "risk.SQL05.session_settings",
+      "field": "summary",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "risk.SQL07.nonfinite_source",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "risk.SQL05.datestyle_only",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "risk.SQL05.datestyle_only",
+      "field": "summary",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "risk.SQL05.simultaneous",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "risk.SQL05.simultaneous",
+      "field": "summary",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "risk.SQL05.old_cursor_denied",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "risk.SQL07.mixed_pending",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "risk.SQL07.finite_pending",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "role.owner.a.public.statistics_v1_products",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "role.owner.a.private.statistics_v1_products_reader",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "role.manager.a.public.statistics_v1_products",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "role.manager.a.private.statistics_v1_products_reader",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "role.admin.a.public.statistics_v1_products",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "role.admin.a.private.statistics_v1_products_reader",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "role.owner.b.public.statistics_v1_products",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "role.owner.b.private.statistics_v1_products_reader",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "role.manager.b.public.statistics_v1_products",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "role.manager.b.private.statistics_v1_products_reader",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "role.admin.b.public.statistics_v1_products",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "role.admin.b.private.statistics_v1_products_reader",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "period.today",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "period.yesterday",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "period.this_week",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "period.this_month",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "period.previous_month",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "period.last_7_days",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "period.last_30_days",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "period.custom",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "exact.money_units_homonyms",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "tenant.b",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "pagination.cursor_ties",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "pagination.cursor_ties",
+      "field": "summary",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "cursor.foreign",
+      "field": "summary",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "financial.partial_adjustment",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "history.rename_delete",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "history.no_captured_lines",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "history.no_reliable_date",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "history.no_category_vs_unknown",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "upsell.only_category_zero_units",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "time.microseconds_asof",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "time.microseconds_asof",
+      "field": "summary",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "time.dst_stored_commercial_date",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "unavailable.financial",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "unavailable.composition",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "states.reopen",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "states.cancel",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "states.recomplete",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "time.night_session.fresh_statement",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "ranking.amount",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "cursor.revision_invalidation",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    },
+    {
+      "test": "numeric.reader_units_over_int32",
+      "field": "data",
+      "result": "PASS",
+      "error": null
+    }
+  ]
+}

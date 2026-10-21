@@ -1,0 +1,66 @@
+{
+  "at": "2026-10-16T14:35:24.800Z",
+  "result": "PASS",
+  "files": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/approved-constants.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/audit-private-bundle.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/bundle.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/cli.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/executor.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/filesystem.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/finalize-evidence.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-store.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/lifecycle-policy.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/native-adapter.proposed.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/offline-tripwire.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/offline.verify.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/request-codec.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/stopped-export.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    }
+  ]
+}

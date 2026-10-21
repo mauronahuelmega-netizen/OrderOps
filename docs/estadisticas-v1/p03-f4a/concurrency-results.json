@@ -1,0 +1,7 @@
+{
+  "result": "NOT_EXECUTED",
+  "reason": "Serial batch3 N100 stopped at original9570.334ms>=5000ms advance gate; D1 stability gate also fails. Do not increase concurrent read load after incomplete serial safety gate.",
+  "preparedScript": "scripts/statistics-v1/p03-f4a-concurrency.mjs",
+  "financialWriterReopenRecomplete": "NOT_EXECUTED_THIS_PHASE",
+  "MVCCReference": "F3C bounded MVCC remains prior accepted evidence, not a new F4A result."
+}

@@ -1,0 +1,33 @@
+{
+  "at": "2026-10-13T13:18:19.128Z",
+  "results": [
+    {
+      "name": "phase03-series.sql",
+      "hash": "bcf3445ae8a4bb75396f2916e9d115d5929dc1c57a6343be9985e1245c912707",
+      "result": "PASS",
+      "elapsedMs": 13114,
+      "rollback": true
+    },
+    {
+      "name": "capture-metrics.sql",
+      "hash": "919bbb503bc79d6452374f3407ef0360128b2c04f4d3c3385b013f80fd718cc0",
+      "result": "PASS",
+      "elapsedMs": 1141,
+      "rollback": true
+    },
+    {
+      "name": "security-money.sql",
+      "hash": "e64e1831f7eb7bb20e167791af1b9888da998f8c3866896c7aee5196bda95b6d",
+      "result": "PASS",
+      "elapsedMs": 866,
+      "rollback": true
+    },
+    {
+      "name": "regression.sql",
+      "hash": "0e55435b04a5916686835fe0791f44a22c160585b9f4dbf16f9e3860863631c0",
+      "result": "PASS",
+      "elapsedMs": 1835,
+      "rollback": true
+    }
+  ]
+}

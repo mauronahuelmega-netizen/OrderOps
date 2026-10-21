@@ -1,0 +1,57 @@
+{
+  "cohorts": [
+    {
+      "orders": 50,
+      "decodedResponses": 12,
+      "allCompleteJSONEqual": true,
+      "responseSha256": "b5c95af0145751ffb4b64c831a67f2a73772a0b7cd49ccf9d47bf79a4dcc3d49",
+      "asOf": "2026-10-14T04:42:36.372472+00:00",
+      "period": {
+        "asOf": "2026-10-14T04:42:36.372472+00:00",
+        "preset": "today",
+        "endDate": "2026-10-14",
+        "partial": true,
+        "timezone": "America/Argentina/Buenos_Aires",
+        "startDate": "2026-10-14",
+        "comparable": {
+          "endDate": "2026-10-13",
+          "startDate": "2026-10-13"
+        },
+        "granularity": "hour",
+        "referenceDate": "2026-10-14",
+        "comparableReason": null
+      },
+      "seriesPoints": 2,
+      "legacyBuckets": 2,
+      "comparisonAvailable": true,
+      "sourcePrivateLogSha256": "f8a8045a4be6a2497acbd05b041abe96432668f3294acbe3e79836008a23b13f"
+    },
+    {
+      "orders": 100,
+      "decodedResponses": 12,
+      "allCompleteJSONEqual": true,
+      "responseSha256": "3944a922b30d5980342b21c1b79dae01637476237967934d6dc562a15a55749c",
+      "asOf": "2026-10-14T04:43:29.017895+00:00",
+      "period": {
+        "asOf": "2026-10-14T04:43:29.017895+00:00",
+        "preset": "today",
+        "endDate": "2026-10-14",
+        "partial": true,
+        "timezone": "America/Argentina/Buenos_Aires",
+        "startDate": "2026-10-14",
+        "comparable": {
+          "endDate": "2026-10-13",
+          "startDate": "2026-10-13"
+        },
+        "granularity": "hour",
+        "referenceDate": "2026-10-14",
+        "comparableReason": null
+      },
+      "seriesPoints": 2,
+      "legacyBuckets": 2,
+      "comparisonAvailable": true,
+      "sourcePrivateLogSha256": "74e629dabb9c62bf0d0eba78bd64406e6173cc7698443dd16d8377ed98c5ed31"
+    }
+  ],
+  "comparison": "Complete parsed JSON equality, no array reordering, stripping or normalization; raw outputs remain in own private logs."
+}

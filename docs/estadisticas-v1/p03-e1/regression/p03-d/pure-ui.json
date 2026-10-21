@@ -1,0 +1,6 @@
+{
+  "result": "PASS",
+  "assertions": 7,
+  "scope": "Strict long-amount fixture, exact text, bounded finite SVG geometry, explicit point keys, null gaps, known zero",
+  "databaseConnections": 0
+}

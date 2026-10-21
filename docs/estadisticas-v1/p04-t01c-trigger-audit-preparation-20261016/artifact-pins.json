@@ -1,0 +1,93 @@
+{
+  "project": "orderops-statistics-v1-test-74718de66a41",
+  "purpose": "REVIEW_ONLY; explicit future authorization required",
+  "privateManifestSha256": "4b426930d04911dbafc543470fa1b73f566e211a84ad32712d233ddb9b801266",
+  "limits": {
+    "statementMs": 15000,
+    "lockMs": 3000,
+    "sqlProcessMs": 90000,
+    "outputBytes": 2000000
+  },
+  "files": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/build-proposal.mjs",
+      "sha256": "10a4a75758b1bd21572d40a585d76496cca075c28a91ea2475c55a43f30d7e48"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/targets.json",
+      "sha256": "9e9413c03e3ee515ac3e11880b28973c8074842c54b35be58c14c2fdb2704e6c"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/validation.mjs",
+      "sha256": "8cbcebb4c02601aa0d8b046c5ac5d9393f4d0b26ca931425f7c0db232995257c"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/trigger-catalog.select.sql",
+      "sha256": "b1fe48ac21399c6e580fb6ce956333c42100e15de446d568e25c1d0706a3d7c9"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/trigger-gate.select.sql",
+      "sha256": "34c9b84894ab9011916e46e2624d24179903287030fdfff10b04b2b21a1ddee6"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/cluster-identity.select.sql",
+      "sha256": "195cd4500b588fa9b3d8997524bbddc2554c7763ef08e26dd0f3b32a90288e37"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/verification.proposed.psql",
+      "sha256": "61f076a61c4d4d8316afdcdabbca633b24b6bc353db040c2b1d9a6b93412720d"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/historical-sources.json",
+      "sha256": "c955199754a69dfda5a94bc1f0369a956f194278de535d2c9e8e7b8041424bb4"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/policy.mjs",
+      "sha256": "72fe520f9d212aea0e75c5c7c036e24478827f9eaa578f03a32568ac0df5ac41"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/pins.json",
+      "sha256": "4e3f0df8c8c61bf475e24d1e195c5cae7d822f5c3b4ebcc80bbb29b8daf1b441"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/trigger-differences.json",
+      "sha256": "d72124a51c88a23ac9d0997ab4b06614ef9388aaf5ec039d2333a28daf0c0789"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/extra-after.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/verification.proposed.psql",
+      "sha256": "485cf660d8230a868b4051aecce8418da9cc30d799aaec6a001f5eb0e4309a15"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/sql-readonly-observed.json",
+      "sha256": "ac9d460069cbec22480110d1651e0f2ff6bcbd57f55e7f99504d7967ce8bf23b"
+    },
+    {
+      "path": "supabase/migrations/20260607210325_business_settings.sql",
+      "sha256": "0093215fa55158634fe5368783910508bf169ce5acac545101a31b70973041f8"
+    },
+    {
+      "path": "supabase/migrations/20260712090000_product_customization_v1_schema.sql",
+      "sha256": "e0b5e29bde99e3010ff55076e08328c2d1c31d461032a50ce5a7287d61ee1c09"
+    },
+    {
+      "path": "supabase/migrations/20260926011000_order_financials.sql",
+      "sha256": "25f5a99a020a9982d04c2b1e4cc36f0fa738fb625f046b386b4c1d27c5c1ccda"
+    },
+    {
+      "path": "supabase/migrations/20260926012000_finance_foundation.sql",
+      "sha256": "1c2409374eef1f6a9aa3cc1effeb8c008d87154a164ba07a5bbfca23319f5e32"
+    },
+    {
+      "path": "supabase/migrations/20260926013000_business_finance_settings.sql",
+      "sha256": "246c42a5caf306dad7dae4ae2d18a4e21a830951102de8e86585d511e4f231cf"
+    },
+    {
+      "path": "supabase/migrations/20260926014000_finance_ledger.sql",
+      "sha256": "27ab8f8a335491c0099d3d3a2fe1e3c04e10ce8d4fc8664413da8cca3b3d4300"
+    }
+  ]
+}

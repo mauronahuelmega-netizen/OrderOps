@@ -1,0 +1,161 @@
+{
+  "at": "2026-10-14T16:02:25.048Z",
+  "result": "PASS",
+  "executed": 9,
+  "scope": "Eight periods + night; shared period fields and exact finance/units, not complete JSON equality between distinct contracts",
+  "records": [
+    {
+      "test": "period.today",
+      "fields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "different": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "sameStatementSnapshot": true
+    },
+    {
+      "test": "period.yesterday",
+      "fields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "different": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "sameStatementSnapshot": true
+    },
+    {
+      "test": "period.this_week",
+      "fields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "different": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "sameStatementSnapshot": true
+    },
+    {
+      "test": "period.this_month",
+      "fields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "different": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "sameStatementSnapshot": true
+    },
+    {
+      "test": "period.previous_month",
+      "fields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "different": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "sameStatementSnapshot": true
+    },
+    {
+      "test": "period.last_7_days",
+      "fields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "different": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "sameStatementSnapshot": true
+    },
+    {
+      "test": "period.last_30_days",
+      "fields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "different": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "sameStatementSnapshot": true
+    },
+    {
+      "test": "period.custom",
+      "fields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "different": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "sameStatementSnapshot": true
+    },
+    {
+      "test": "time.night_session.fresh_statement",
+      "fields": [
+        "preset",
+        "startDate",
+        "endDate",
+        "referenceDate",
+        "timezone",
+        "asOf",
+        "partial"
+      ],
+      "periodEqual": true,
+      "different": [],
+      "unitsEqual": true,
+      "moneyEqual": true,
+      "sameStatementSnapshot": true
+    }
+  ]
+}

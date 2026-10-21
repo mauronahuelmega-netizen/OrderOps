@@ -1,0 +1,142 @@
+{
+  "batch": 3,
+  "orders": 100,
+  "scaling": false,
+  "status": "INCOMPLETE_LATENCY_GATE",
+  "error": null,
+  "method": "psql real SELECT timing, includes PostgreSQL execution/serialization/local Unix wire; no EXPLAIN/function instrumentation in normal samples",
+  "readers": {
+    "original": {
+      "n": 18,
+      "p50": 1281.774,
+      "p95": 9570.334,
+      "min": 1206.841,
+      "max": 9570.334,
+      "mean": 1892.3830555555553,
+      "stddev": 1945.239161691935,
+      "cv": 1.0279309762266193,
+      "rawMs": [
+        1281.774,
+        1206.841,
+        1293.347,
+        1288.162,
+        1366.648,
+        1261.074,
+        1210.114,
+        1223.444,
+        1301.546,
+        1271.611,
+        1223.643,
+        1264.577,
+        1234.56,
+        1396.238,
+        1322.01,
+        1623.403,
+        3723.569,
+        9570.334
+      ]
+    },
+    "AB": {
+      "n": 17,
+      "p50": 401.551,
+      "p95": 1174.525,
+      "min": 354.444,
+      "max": 1174.525,
+      "mean": 447.34694117647064,
+      "stddev": 185.03034166525566,
+      "cv": 0.41361709365587096,
+      "rawMs": [
+        466.502,
+        423.163,
+        412.488,
+        479.958,
+        401.976,
+        359.8,
+        392.363,
+        374.384,
+        386.7,
+        418.967,
+        354.444,
+        401.551,
+        364.436,
+        376.169,
+        378.787,
+        438.685,
+        1174.525
+      ]
+    },
+    "D1": {
+      "n": 18,
+      "p50": 326.742,
+      "p95": 1836.498,
+      "min": 294.082,
+      "max": 1836.498,
+      "mean": 520.0460555555555,
+      "stddev": 427.647651210728,
+      "cv": 0.8223264971289513,
+      "rawMs": [
+        376.626,
+        325.809,
+        451.303,
+        377.065,
+        305.052,
+        301.11,
+        400.267,
+        319.291,
+        322.182,
+        326.742,
+        355.414,
+        313.246,
+        342.971,
+        294.082,
+        310.519,
+        1451.905,
+        1836.498,
+        950.747
+      ]
+    }
+  },
+  "warmups": {
+    "original": 1410.321,
+    "AB": 453.271,
+    "D1": 355.759
+  },
+  "plans": [],
+  "resourceBefore": {
+    "at": "2026-10-14T01:18:01.565Z",
+    "dbStats": {
+      "BlockIO": "114MB / 61.7MB",
+      "CPUPerc": "0.01%",
+      "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "ID": "592f44984962",
+      "MemPerc": "1.57%",
+      "MemUsage": "123.7MiB / 7.702GiB",
+      "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "NetIO": "3.81MB / 10.6MB",
+      "PIDs": "12"
+    },
+    "dockerCapacity": {
+      "cpus": 4,
+      "memoryBytes": 8269664256
+    }
+  },
+  "resourceAfter": {
+    "at": "2026-10-14T01:19:21.858Z",
+    "dbStats": {
+      "BlockIO": "114MB / 63MB",
+      "CPUPerc": "0.02%",
+      "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "ID": "592f44984962",
+      "MemPerc": "1.57%",
+      "MemUsage": "123.7MiB / 7.702GiB",
+      "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "NetIO": "3.81MB / 10.6MB",
+      "PIDs": "12"
+    },
+    "dockerCapacity": {
+      "cpus": 4,
+      "memoryBytes": 8269664256
+    }
+  },
+  "rollback": true
+}

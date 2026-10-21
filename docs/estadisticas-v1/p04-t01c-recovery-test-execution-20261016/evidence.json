@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-16T17:38:56.570Z",
+  "result": "RECOVERY_INCOMPLETE",
+  "phaseP04T01C": "BLOCKED",
+  "approvalManifestSha256": "790960c137c57c70d725cde4a7113165b15c6369662b2e2a52387623093dfd3f",
+  "sourceDumpSha256": "b48f1ed8f4f6a6a75f946a2a55b388f88f20c6d05cc48fecf42cd166af1eecdc",
+  "resourcesCreated": 0,
+  "sqlExecuted": 0,
+  "restores": 0,
+  "containerMutations": 0,
+  "newFilesOnlyInOwnedExecutionDirectory": true,
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-test-execution-20261016/informe.md",
+      "bytes": 3891,
+      "sha256": "7f0ed58e9ee9a9a7f8c5c2f454d9c6f4404ad917a8a95aa325752f86ec31bbe8"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-test-execution-20261016/preflight-results.json",
+      "bytes": 2646,
+      "sha256": "8fa9650ca402094150767b741081b0a3bc497c331cc966b971a23dbe2622e9be"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-test-execution-20261016/preservation.json",
+      "bytes": 927,
+      "sha256": "b717ef611e90575b3705fc0639c8a2fcb1261bb6c476f2f11df6c33b8eeb97b2"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-test-execution-20261016/record-preflight.mjs",
+      "bytes": 8886,
+      "sha256": "9e48964b2520b96b3959c5589922ef428b1e1ff4bd5571807b2b8aa08697e662"
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

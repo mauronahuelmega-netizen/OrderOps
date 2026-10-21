@@ -1,0 +1,314 @@
+{
+  "at": "2026-10-14T18:36:07.872Z",
+  "phase": "P04-T01C",
+  "verdict": "READY_FOR_QA_INSTALL",
+  "meaning": "Preparation package for closed QA install review, not authorization or runtime validation of new gate",
+  "sourceSha256": "57395a7920d95cf63c1b67fb8191e40272a26aeb445a4abe7bec4d822b99c2c1",
+  "qaInstallSha256": "f7940a54a58b93b04d56b10eb1f65bf425299436a2e25a1d3ae79feec919272f",
+  "qaSqlFiles": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/candidate-products-qa-gated.proposed.sql",
+      "sha256": "97df05b782752b2f34b490a1a029d900cc716fbe2c7091dbef1fef5dfc39dd3d"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-install.proposed.sql",
+      "sha256": "f7940a54a58b93b04d56b10eb1f65bf425299436a2e25a1d3ae79feec919272f"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-enable-synthetic.proposed.sql",
+      "sha256": "758cf316a8707d4bca32c3a8c7ce39765ccbfb37eee3490d8a25f76659df4768"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-disable.proposed.sql",
+      "sha256": "bb81ee84ab4a6c66e865101f274109e61db212e97ffcb66eadd83f318a00ec45"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-uninstall.proposed.sql",
+      "sha256": "46041c9a669f59dc1db00ae6fe9947d00cf0efb16b468c9b25ea01231ada7a95"
+    }
+  ],
+  "livePreflight": "PASS",
+  "effectivePrivileges": "Three Products functions and QA gate/config absent; no effective grants changed",
+  "proposedPolicy": {
+    "emptyDefaultClosed": true,
+    "pinnedSyntheticPairs": 6,
+    "expiresRequired": true,
+    "rawRoles": [
+      "owner",
+      "manager",
+      "admin"
+    ],
+    "scope": "Both public RPC and private reader, independent of G1 HTTP gate",
+    "backendOnlyTransportClaim": false,
+    "newOwnedConfigTable": 1,
+    "newInvokerHelper": 1,
+    "existingObjectsAltered": 0
+  },
+  "staticReview": "PASS_STATIC_ONLY",
+  "mandatoryBeforePersistentWrite": [
+    "New exact hash approval including QA table/RLS/helper/reader guard",
+    "Network exposure review: current Docker bindings 0.0.0.0 and ::, firewall/reachability not verified",
+    "Fresh identity/collision/catalog preflight",
+    "Transient compile/security/regressions with ROLLBACK; stop on failure"
+  ],
+  "activationSeparate": true,
+  "httpPreparedNotExecuted": true,
+  "authExpiryNotExecuted": true,
+  "authTtlSeconds": 3600,
+  "newQaGateRuntimeNotValidated": true,
+  "newQaRlsRuntimeNotValidated": true,
+  "noT02": true,
+  "noPublication": true,
+  "noPersistentInstall": true,
+  "noCommitExecuted": true,
+  "noCandidateAdoption": true,
+  "preservation": {
+    "files": 2908,
+    "allUnchanged": true,
+    "dbCatalogAclLedgerDataUnchanged": true
+  },
+  "scriptsExecuted": [
+    "preflight.mjs READ ONLY",
+    "audit-privileges.mjs READ ONLY",
+    "build-qa-proposal.mjs file-only",
+    "verify-proposal.mjs offline",
+    "audit-privileges-after.mjs READ ONLY",
+    "verify-no-db-change.mjs READ ONLY",
+    "finalize-evidence.mjs file-only"
+  ],
+  "scriptsPreparedNotExecuted": [
+    "http-auth.prepared.mjs",
+    "qa-installed-live.verify.mjs"
+  ],
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/audit-privileges-after.mjs",
+      "sha256": "f8a9d3a35fa7af0b3db1210bb235aa555490fec6306b72b24834354cc0b530d7",
+      "bytes": 3021,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/audit-privileges.mjs",
+      "sha256": "5b2fd16b145e88297d92f06a67b33dab7b24ae18817574302e6c4532d120c200",
+      "bytes": 3014,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/build-qa-proposal.mjs",
+      "sha256": "b5ff79cec70f7b69739da0862afe07492fdae109648a716d85ddb2f5b20f0980",
+      "bytes": 8849,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/candidate-products-qa-gated.proposed.sql",
+      "sha256": "97df05b782752b2f34b490a1a029d900cc716fbe2c7091dbef1fef5dfc39dd3d",
+      "bytes": 15497,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/catalog-after.json",
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "bytes": 260779,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/catalog-before.json",
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "bytes": 260779,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/catalog-select.sql",
+      "sha256": "b13c2fd8fe442b4cebc94b84b2db464e8476d6e2526b2ca2ba0af6f4fb053ba3",
+      "bytes": 2176,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/data-after.json",
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "bytes": 1415,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/data-before.json",
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "bytes": 1415,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/data-select.sql",
+      "sha256": "146d26738db1be302ad45eb19b9ddd5505993af1ca11d40c1f6ec148b74758e4",
+      "bytes": 2834,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/database-preservation.json",
+      "sha256": "fc2c25511b727e6c5faec23502a0d037ff4da453405ab6b64b646d0a3e5f3d04",
+      "bytes": 349,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/extra-after.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "bytes": 15375,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/extra-before.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "bytes": 15375,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/extra-select.sql",
+      "sha256": "2d611bf55bbf1fe9deed472b3102ff7515b4df7a9e371fa83399069344006c72",
+      "bytes": 601,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/file-baseline.json",
+      "sha256": "b38387a443226c2933bf2d06fb8e870930a18ff375455367bd5a5a2206fde936",
+      "bytes": 470770,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/finalize-evidence.mjs",
+      "sha256": "69650cde9a337640bc794bb347c7113b5f31540330b276b606b551f88d1fe946",
+      "bytes": 5310,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/http-auth.prepared.mjs",
+      "sha256": "c0fe303cb717a00b38882759ff7d8586288ee5d7214789ea6f2999cf1b03e92a",
+      "bytes": 5935,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/HTTP_AUTH_AND_TEST_MATRIX.md",
+      "sha256": "7bd630170ca20ed6855860053efe74e94ad8da00ea63b6559c464adee931463c",
+      "bytes": 6009,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/INSTALLATION_PLAN.md",
+      "sha256": "eb0277071441f1dc6184f02bb6ff842d956bfe4cc3962617607e4d634d28ee9f",
+      "bytes": 10109,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/preflight.json",
+      "sha256": "c1d16b7b186ba8401110c537248a0069f68bdb0cdd9e453dc38486e024b9de36",
+      "bytes": 5456,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/preflight.mjs",
+      "sha256": "3e27a3125c5739179198b65851570a581a6fe72a507ec7b8c135e34c6a9de6a1",
+      "bytes": 9301,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/preservation.json",
+      "sha256": "5167e5990f8ded9017cca6b0ee29b4d720ba2bc87d13b114399fe134a0a0e0a4",
+      "bytes": 2590,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/privilege-audit-after.sql",
+      "sha256": "e44a5bcdf3c6c79db7dd20e8741861edf3eb2eb8d32022457309091cf261c9c5",
+      "bytes": 1658,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/privilege-audit.sql",
+      "sha256": "e44a5bcdf3c6c79db7dd20e8741861edf3eb2eb8d32022457309091cf261c9c5",
+      "bytes": 1658,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/privileges-after.json",
+      "sha256": "8f1fca6d861d02195f00296f797bd0747c527c0092e5c90d60a07e5e84ab0618",
+      "bytes": 2442,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/privileges-live.json",
+      "sha256": "b547fb7e6640a053c166f32cee64b779319a99cb811ae2520030c1483d9adb5c",
+      "bytes": 2442,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/PRIVILEGES_AND_ACCESS.md",
+      "sha256": "c9d9b15ea0703dfa31194a8cc7b84c1a2942ab38459fb1d015745ae16e9d5c6b",
+      "bytes": 3277,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-disable.proposed.sql",
+      "sha256": "bb81ee84ab4a6c66e865101f274109e61db212e97ffcb66eadd83f318a00ec45",
+      "bytes": 806,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-enable-synthetic.proposed.sql",
+      "sha256": "758cf316a8707d4bca32c3a8c7ce39765ccbfb37eee3490d8a25f76659df4768",
+      "bytes": 1708,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-install.proposed.sql",
+      "sha256": "f7940a54a58b93b04d56b10eb1f65bf425299436a2e25a1d3ae79feec919272f",
+      "bytes": 19583,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-installed-live.verify.mjs",
+      "sha256": "d7d15b55ae53ee578593bee5812fcf05c35f8af7ac3b0bc2b0d772427e3e085c",
+      "bytes": 8418,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-proposal-manifest.json",
+      "sha256": "1c3d3442bcd59c4fb4ae505bdf5b17c51ca9a1d28944fe14c0f30277e4de1fd6",
+      "bytes": 2705,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-reader-gate.diff",
+      "sha256": "0e41139f9f1f48dc446858955074efa58b0037ce0e7d662b37a85dc7b004fae8",
+      "bytes": 1126,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-uninstall.proposed.sql",
+      "sha256": "46041c9a669f59dc1db00ae6fe9947d00cf0efb16b468c9b25ea01231ada7a95",
+      "bytes": 1529,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/resources.json",
+      "sha256": "17d60bce17528835a4fba5d699e8ca7401ab6dcc4de4d2b3a8d5af273003f67a",
+      "bytes": 3227,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/static-review.json",
+      "sha256": "37f7ea3bfbfffb042fe20fdfce7a846fdf21eb8e4b85646f09f8984aee9feaab",
+      "bytes": 615,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/verify-no-db-change.mjs",
+      "sha256": "15cdeaa59a44f2f604601509a801bdf815f64739f4098c92cc01cb151fbaf7f8",
+      "bytes": 1475,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/verify-proposal.mjs",
+      "sha256": "12c67fecd05171e8da310838f0fa7ba1d65349c1679e62a7c300e6b77a0b0c94",
+      "bytes": 4022,
+      "kind": "created"
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

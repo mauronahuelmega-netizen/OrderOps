@@ -1,0 +1,249 @@
+{
+  "at": "2026-10-16T16:56:54.731Z",
+  "source": "C:/Docker-Backup-OrderOps/orderops-estadisticas-recovered.dump",
+  "sha256": "b48f1ed8f4f6a6a75f946a2a55b388f88f20c6d05cc48fecf42cd166af1eecdc",
+  "bytes": 1436037,
+  "format": "PGDMP1.16.0",
+  "sourceVersion": "17.6",
+  "dumpVersion": "17.6",
+  "tocEntriesIncludingSpecial": 1847,
+  "visibleTocEntries": 1840,
+  "matchedPreviousInventory": true,
+  "metadataNotListedPreviously": [
+    {
+      "id": 5807,
+      "kind": "ENCODING"
+    },
+    {
+      "id": 5808,
+      "kind": "STDSTRINGS"
+    },
+    {
+      "id": 5809,
+      "kind": "SEARCHPATH"
+    },
+    {
+      "id": 5810,
+      "kind": "DATABASE"
+    },
+    {
+      "id": 5811,
+      "kind": "COMMENT"
+    },
+    {
+      "id": 5812,
+      "kind": "ACL"
+    },
+    {
+      "id": 5813,
+      "kind": "DATABASE PROPERTIES"
+    }
+  ],
+  "priorClassificationClarification": "Two PUBLICATION TABLE entries were grouped as PUBLICATION by previous list parser; references unchanged",
+  "roles": [
+    {
+      "name": "anon",
+      "evidence": [
+        "ACL",
+        "DEFAULT ACL",
+        "POLICY"
+      ],
+      "globalAttributesCaptured": false,
+      "labSuperuserForEventTriggerOwnership": false
+    },
+    {
+      "name": "authenticated",
+      "evidence": [
+        "ACL",
+        "DEFAULT ACL",
+        "POLICY"
+      ],
+      "globalAttributesCaptured": false,
+      "labSuperuserForEventTriggerOwnership": false
+    },
+    {
+      "name": "dashboard_user",
+      "evidence": [
+        "ACL",
+        "DEFAULT ACL"
+      ],
+      "globalAttributesCaptured": false,
+      "labSuperuserForEventTriggerOwnership": false
+    },
+    {
+      "name": "pg_database_owner",
+      "evidence": [
+        "TOC_OWNER"
+      ],
+      "globalAttributesCaptured": false,
+      "labSuperuserForEventTriggerOwnership": false
+    },
+    {
+      "name": "pgbouncer",
+      "evidence": [
+        "ACL",
+        "TOC_OWNER"
+      ],
+      "globalAttributesCaptured": false,
+      "labSuperuserForEventTriggerOwnership": false
+    },
+    {
+      "name": "postgres",
+      "evidence": [
+        "ACL",
+        "DEFAULT ACL",
+        "TOC_OWNER"
+      ],
+      "globalAttributesCaptured": false,
+      "labSuperuserForEventTriggerOwnership": false
+    },
+    {
+      "name": "service_role",
+      "evidence": [
+        "ACL",
+        "DEFAULT ACL"
+      ],
+      "globalAttributesCaptured": false,
+      "labSuperuserForEventTriggerOwnership": false
+    },
+    {
+      "name": "supabase_admin",
+      "evidence": [
+        "ACL",
+        "DEFAULT ACL",
+        "TOC_OWNER"
+      ],
+      "globalAttributesCaptured": false,
+      "labSuperuserForEventTriggerOwnership": true
+    },
+    {
+      "name": "supabase_auth_admin",
+      "evidence": [
+        "ACL",
+        "DEFAULT ACL",
+        "TOC_OWNER"
+      ],
+      "globalAttributesCaptured": false,
+      "labSuperuserForEventTriggerOwnership": false
+    },
+    {
+      "name": "supabase_etl_admin",
+      "evidence": [
+        "ACL"
+      ],
+      "globalAttributesCaptured": false,
+      "labSuperuserForEventTriggerOwnership": false
+    },
+    {
+      "name": "supabase_functions_admin",
+      "evidence": [
+        "ACL",
+        "TOC_OWNER"
+      ],
+      "globalAttributesCaptured": false,
+      "labSuperuserForEventTriggerOwnership": false
+    },
+    {
+      "name": "supabase_storage_admin",
+      "evidence": [
+        "ACL",
+        "TOC_OWNER"
+      ],
+      "globalAttributesCaptured": false,
+      "labSuperuserForEventTriggerOwnership": false
+    }
+  ],
+  "extensions": [
+    {
+      "name": "pg_net",
+      "schema": "extensions",
+      "requestedVersion": null,
+      "definitionSha256": "94dd17bbd06c6403a99005ae9fdf9cfaade0ca6221f0c1cee864534df7a3fadc",
+      "versionPinnedByDump": false
+    },
+    {
+      "name": "moddatetime",
+      "schema": "extensions",
+      "requestedVersion": null,
+      "definitionSha256": "017b8b9680f0b6f62e877fd485eef9708978e97d9101287e594f39141e459be5",
+      "versionPinnedByDump": false
+    },
+    {
+      "name": "pg_graphql",
+      "schema": "graphql",
+      "requestedVersion": null,
+      "definitionSha256": "7c3a50b204dba3ce6ea49c0c1500607dda9a669339b477d623ba4a39a843a80e",
+      "versionPinnedByDump": false
+    },
+    {
+      "name": "pg_stat_statements",
+      "schema": "extensions",
+      "requestedVersion": null,
+      "definitionSha256": "d7987134a440c35d8b469af56c01b26b04a1730af20cdb917d40df7668c8ba98",
+      "versionPinnedByDump": false
+    },
+    {
+      "name": "pgcrypto",
+      "schema": "extensions",
+      "requestedVersion": null,
+      "definitionSha256": "23be74a9034df77c8e9520fb7a4347bb41c62299723792a470f1f1880a091da3",
+      "versionPinnedByDump": false
+    },
+    {
+      "name": "supabase_vault",
+      "schema": "vault",
+      "requestedVersion": null,
+      "definitionSha256": "e18efb037aecf54b448e6f9770293872fe7bff1d417b3b2443a646215d6384a7",
+      "versionPinnedByDump": false
+    },
+    {
+      "name": "uuid-ossp",
+      "schema": "extensions",
+      "requestedVersion": null,
+      "definitionSha256": "d0d0a84a2a838603c8a4183f7a0c21a63b7f353f2e98499970548a616d904254",
+      "versionPinnedByDump": false
+    }
+  ],
+  "largeObjectEntries": [],
+  "tablespaces": [],
+  "specialModes": [
+    {
+      "id": 5693,
+      "kind": "PUBLICATION",
+      "name": "supabase_realtime"
+    },
+    {
+      "id": 4138,
+      "kind": "EVENT TRIGGER",
+      "name": "issue_graphql_placeholder"
+    },
+    {
+      "id": 4143,
+      "kind": "EVENT TRIGGER",
+      "name": "issue_pg_cron_access"
+    },
+    {
+      "id": 4137,
+      "kind": "EVENT TRIGGER",
+      "name": "issue_pg_graphql_access"
+    },
+    {
+      "id": 4144,
+      "kind": "EVENT TRIGGER",
+      "name": "issue_pg_net_access"
+    },
+    {
+      "id": 4139,
+      "kind": "EVENT TRIGGER",
+      "name": "pgrst_ddl_watch"
+    },
+    {
+      "id": 4140,
+      "kind": "EVENT TRIGGER",
+      "name": "pgrst_drop_watch"
+    }
+  ],
+  "limits": "TOC only; no row payload read/decompressed; roles derived from owners/ACL/policy references; placeholders never certify original attributes",
+  "sqlExecuted": 0,
+  "restoreExecuted": false
+}

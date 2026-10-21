@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-16T16:35:25.362Z",
+  "syntax": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/build-proposal.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/finalize-evidence.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/offline.verify.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/runner.proposed.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/validation.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    }
+  ],
+  "offlineTests": 74,
+  "status": "PASS_OFFLINE_PREPARATION_ONLY",
+  "artifactPinChecks": "PASS20",
+  "targetMatrixExactHistoricalIndices": "PASS13",
+  "postRecoveryHistoricalText": "PASS13_EXACT",
+  "systemIdentifierHandling": "String/BigInt; unsafe Number rejected in synthetic test",
+  "sqlCompilation": "NOT_EXECUTED; lexical/static checks only; no offline PostgreSQL parser available",
+  "realExecutionModeInvoked": false,
+  "sqlConnections": 0,
+  "dockerCommands": 0
+}

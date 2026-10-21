@@ -1,0 +1,2609 @@
+{
+  "at": "2026-10-14T16:00:37.507Z",
+  "result": "PASS",
+  "independentConnection": true,
+  "writerTransactionOpen": true,
+  "readerRole": "authenticated",
+  "noHttpAuthenticationClaim": true,
+  "observer": {
+    "candidateInvisible": true,
+    "visibleOrders": 0,
+    "originalSummary": {
+      "period": {
+        "asOf": "2026-10-14T16:00:37.349589+00:00",
+        "preset": "today",
+        "endDate": "2026-10-14",
+        "partial": true,
+        "timezone": "America/Argentina/Buenos_Aires",
+        "startDate": "2026-10-14",
+        "comparable": {
+          "endDate": "2026-10-13",
+          "startDate": "2026-10-13"
+        },
+        "granularity": "hour",
+        "referenceDate": "2026-10-14",
+        "comparableReason": null
+      },
+      "series": {
+        "points": [
+          {
+            "key": "8e3bd781b5e800a01701fc3d367c2ebf",
+            "basis": "outside_session_wall",
+            "label": "2026-10-14",
+            "current": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "34df83af52aff3546e767e08a9e90c1d",
+                "slices": [
+                  {
+                    "end": "2026-10-14T04:00:00.000000Z",
+                    "start": "2026-10-14T03:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-14"
+                  }
+                ],
+                "endDate": "2026-10-14",
+                "startDate": "2026-10-14",
+                "observation": "closed"
+              }
+            },
+            "mapping": {
+              "kind": "wall_clock",
+              "wallEnd": "01:00:00.000000",
+              "timezone": "America/Argentina/Buenos_Aires",
+              "wallStart": "00:00:00.000000"
+            },
+            "previous": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "063a643fa080e263e65b55ecd8ba601a",
+                "slices": [
+                  {
+                    "end": "2026-10-13T04:00:00.000000Z",
+                    "start": "2026-10-13T03:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-13"
+                  }
+                ],
+                "endDate": "2026-10-13",
+                "startDate": "2026-10-13",
+                "observation": "closed"
+              }
+            },
+            "alignment": {
+              "reason": null,
+              "available": true
+            },
+            "comparisons": {
+              "sales": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "mainUnits": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "averageTicket": {
+                "reason": "empty_average",
+                "absolute": null,
+                "available": false,
+                "percentage": null,
+                "percentageReason": null
+              },
+              "completedOrders": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              }
+            }
+          },
+          {
+            "key": "aee4a971724f4c01a670f029c4fe9e42",
+            "basis": "outside_session_wall",
+            "label": "2026-10-14",
+            "current": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "c88235eae6bd91e71da0e56b8180caea",
+                "slices": [
+                  {
+                    "end": "2026-10-14T05:00:00.000000Z",
+                    "start": "2026-10-14T04:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-14"
+                  }
+                ],
+                "endDate": "2026-10-14",
+                "startDate": "2026-10-14",
+                "observation": "closed"
+              }
+            },
+            "mapping": {
+              "kind": "wall_clock",
+              "wallEnd": "02:00:00.000000",
+              "timezone": "America/Argentina/Buenos_Aires",
+              "wallStart": "01:00:00.000000"
+            },
+            "previous": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "ba27fbbc4cec4b41e68b1d5efbaeb3fb",
+                "slices": [
+                  {
+                    "end": "2026-10-13T05:00:00.000000Z",
+                    "start": "2026-10-13T04:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-13"
+                  }
+                ],
+                "endDate": "2026-10-13",
+                "startDate": "2026-10-13",
+                "observation": "closed"
+              }
+            },
+            "alignment": {
+              "reason": null,
+              "available": true
+            },
+            "comparisons": {
+              "sales": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "mainUnits": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "averageTicket": {
+                "reason": "empty_average",
+                "absolute": null,
+                "available": false,
+                "percentage": null,
+                "percentageReason": null
+              },
+              "completedOrders": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              }
+            }
+          },
+          {
+            "key": "dea268e9208a4d511f3c12a1f3f59f9f",
+            "basis": "outside_session_wall",
+            "label": "2026-10-14",
+            "current": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "9b613d0ab26ed553a7487202f6be6d3f",
+                "slices": [
+                  {
+                    "end": "2026-10-14T06:00:00.000000Z",
+                    "start": "2026-10-14T05:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-14"
+                  }
+                ],
+                "endDate": "2026-10-14",
+                "startDate": "2026-10-14",
+                "observation": "closed"
+              }
+            },
+            "mapping": {
+              "kind": "wall_clock",
+              "wallEnd": "03:00:00.000000",
+              "timezone": "America/Argentina/Buenos_Aires",
+              "wallStart": "02:00:00.000000"
+            },
+            "previous": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "b8db4034e77e6c444df93f5a5ec71930",
+                "slices": [
+                  {
+                    "end": "2026-10-13T06:00:00.000000Z",
+                    "start": "2026-10-13T05:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-13"
+                  }
+                ],
+                "endDate": "2026-10-13",
+                "startDate": "2026-10-13",
+                "observation": "closed"
+              }
+            },
+            "alignment": {
+              "reason": null,
+              "available": true
+            },
+            "comparisons": {
+              "sales": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "mainUnits": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "averageTicket": {
+                "reason": "empty_average",
+                "absolute": null,
+                "available": false,
+                "percentage": null,
+                "percentageReason": null
+              },
+              "completedOrders": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              }
+            }
+          },
+          {
+            "key": "7dbfd2171f09883afc248218a5d47ffe",
+            "basis": "outside_session_wall",
+            "label": "2026-10-14",
+            "current": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "af41c1b957dc7d2aee4c1d4136d903a1",
+                "slices": [
+                  {
+                    "end": "2026-10-14T07:00:00.000000Z",
+                    "start": "2026-10-14T06:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-14"
+                  }
+                ],
+                "endDate": "2026-10-14",
+                "startDate": "2026-10-14",
+                "observation": "closed"
+              }
+            },
+            "mapping": {
+              "kind": "wall_clock",
+              "wallEnd": "04:00:00.000000",
+              "timezone": "America/Argentina/Buenos_Aires",
+              "wallStart": "03:00:00.000000"
+            },
+            "previous": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "8cd8d5a0bfae4be4dafc3c2ab35de244",
+                "slices": [
+                  {
+                    "end": "2026-10-13T07:00:00.000000Z",
+                    "start": "2026-10-13T06:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-13"
+                  }
+                ],
+                "endDate": "2026-10-13",
+                "startDate": "2026-10-13",
+                "observation": "closed"
+              }
+            },
+            "alignment": {
+              "reason": null,
+              "available": true
+            },
+            "comparisons": {
+              "sales": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "mainUnits": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "averageTicket": {
+                "reason": "empty_average",
+                "absolute": null,
+                "available": false,
+                "percentage": null,
+                "percentageReason": null
+              },
+              "completedOrders": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              }
+            }
+          },
+          {
+            "key": "45f72ad8bd06729208ddefe1551f0112",
+            "basis": "outside_session_wall",
+            "label": "2026-10-14",
+            "current": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "6c44d0d327582ea366050d99cb398716",
+                "slices": [
+                  {
+                    "end": "2026-10-14T08:00:00.000000Z",
+                    "start": "2026-10-14T07:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-14"
+                  }
+                ],
+                "endDate": "2026-10-14",
+                "startDate": "2026-10-14",
+                "observation": "closed"
+              }
+            },
+            "mapping": {
+              "kind": "wall_clock",
+              "wallEnd": "05:00:00.000000",
+              "timezone": "America/Argentina/Buenos_Aires",
+              "wallStart": "04:00:00.000000"
+            },
+            "previous": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "e61733aa2a6dd6145669f9e1a6a56477",
+                "slices": [
+                  {
+                    "end": "2026-10-13T08:00:00.000000Z",
+                    "start": "2026-10-13T07:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-13"
+                  }
+                ],
+                "endDate": "2026-10-13",
+                "startDate": "2026-10-13",
+                "observation": "closed"
+              }
+            },
+            "alignment": {
+              "reason": null,
+              "available": true
+            },
+            "comparisons": {
+              "sales": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "mainUnits": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "averageTicket": {
+                "reason": "empty_average",
+                "absolute": null,
+                "available": false,
+                "percentage": null,
+                "percentageReason": null
+              },
+              "completedOrders": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              }
+            }
+          },
+          {
+            "key": "9a846f6df7e20a2915d7d0bd0eda4f0e",
+            "basis": "outside_session_wall",
+            "label": "2026-10-14",
+            "current": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "5491fd8cff0e6cf1de8155e5149fdc69",
+                "slices": [
+                  {
+                    "end": "2026-10-14T09:00:00.000000Z",
+                    "start": "2026-10-14T08:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-14"
+                  }
+                ],
+                "endDate": "2026-10-14",
+                "startDate": "2026-10-14",
+                "observation": "closed"
+              }
+            },
+            "mapping": {
+              "kind": "wall_clock",
+              "wallEnd": "06:00:00.000000",
+              "timezone": "America/Argentina/Buenos_Aires",
+              "wallStart": "05:00:00.000000"
+            },
+            "previous": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "b303f47cd761469aed153f969a1f69b9",
+                "slices": [
+                  {
+                    "end": "2026-10-13T09:00:00.000000Z",
+                    "start": "2026-10-13T08:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-13"
+                  }
+                ],
+                "endDate": "2026-10-13",
+                "startDate": "2026-10-13",
+                "observation": "closed"
+              }
+            },
+            "alignment": {
+              "reason": null,
+              "available": true
+            },
+            "comparisons": {
+              "sales": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "mainUnits": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "averageTicket": {
+                "reason": "empty_average",
+                "absolute": null,
+                "available": false,
+                "percentage": null,
+                "percentageReason": null
+              },
+              "completedOrders": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              }
+            }
+          },
+          {
+            "key": "de1b1ce7367403276e345aa3e88930e9",
+            "basis": "outside_session_wall",
+            "label": "2026-10-14",
+            "current": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "48bfd86be9bf1e28c69029ba74550739",
+                "slices": [
+                  {
+                    "end": "2026-10-14T10:00:00.000000Z",
+                    "start": "2026-10-14T09:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-14"
+                  }
+                ],
+                "endDate": "2026-10-14",
+                "startDate": "2026-10-14",
+                "observation": "closed"
+              }
+            },
+            "mapping": {
+              "kind": "wall_clock",
+              "wallEnd": "07:00:00.000000",
+              "timezone": "America/Argentina/Buenos_Aires",
+              "wallStart": "06:00:00.000000"
+            },
+            "previous": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "87d373788395bab6bca79285155f4cd5",
+                "slices": [
+                  {
+                    "end": "2026-10-13T10:00:00.000000Z",
+                    "start": "2026-10-13T09:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-13"
+                  }
+                ],
+                "endDate": "2026-10-13",
+                "startDate": "2026-10-13",
+                "observation": "closed"
+              }
+            },
+            "alignment": {
+              "reason": null,
+              "available": true
+            },
+            "comparisons": {
+              "sales": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "mainUnits": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "averageTicket": {
+                "reason": "empty_average",
+                "absolute": null,
+                "available": false,
+                "percentage": null,
+                "percentageReason": null
+              },
+              "completedOrders": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              }
+            }
+          },
+          {
+            "key": "b511e2461d2b9184a01f59cd121e2c6c",
+            "basis": "outside_session_wall",
+            "label": "2026-10-14",
+            "current": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "7d562885c9ca1f514d07de0173b05347",
+                "slices": [
+                  {
+                    "end": "2026-10-14T11:00:00.000000Z",
+                    "start": "2026-10-14T10:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-14"
+                  }
+                ],
+                "endDate": "2026-10-14",
+                "startDate": "2026-10-14",
+                "observation": "closed"
+              }
+            },
+            "mapping": {
+              "kind": "wall_clock",
+              "wallEnd": "08:00:00.000000",
+              "timezone": "America/Argentina/Buenos_Aires",
+              "wallStart": "07:00:00.000000"
+            },
+            "previous": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "698fcef6ed3438ac4761fa6edce1939a",
+                "slices": [
+                  {
+                    "end": "2026-10-13T11:00:00.000000Z",
+                    "start": "2026-10-13T10:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-13"
+                  }
+                ],
+                "endDate": "2026-10-13",
+                "startDate": "2026-10-13",
+                "observation": "closed"
+              }
+            },
+            "alignment": {
+              "reason": null,
+              "available": true
+            },
+            "comparisons": {
+              "sales": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "mainUnits": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "averageTicket": {
+                "reason": "empty_average",
+                "absolute": null,
+                "available": false,
+                "percentage": null,
+                "percentageReason": null
+              },
+              "completedOrders": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              }
+            }
+          },
+          {
+            "key": "ddfeca17b91dd277450aca50f507d2f0",
+            "basis": "outside_session_wall",
+            "label": "2026-10-14",
+            "current": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "668cb153e89df3fd71b51946d2f3f274",
+                "slices": [
+                  {
+                    "end": "2026-10-14T12:00:00.000000Z",
+                    "start": "2026-10-14T11:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-14"
+                  }
+                ],
+                "endDate": "2026-10-14",
+                "startDate": "2026-10-14",
+                "observation": "closed"
+              }
+            },
+            "mapping": {
+              "kind": "wall_clock",
+              "wallEnd": "09:00:00.000000",
+              "timezone": "America/Argentina/Buenos_Aires",
+              "wallStart": "08:00:00.000000"
+            },
+            "previous": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "79893b4fc40768e7bb67767ef4c58456",
+                "slices": [
+                  {
+                    "end": "2026-10-13T12:00:00.000000Z",
+                    "start": "2026-10-13T11:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-13"
+                  }
+                ],
+                "endDate": "2026-10-13",
+                "startDate": "2026-10-13",
+                "observation": "closed"
+              }
+            },
+            "alignment": {
+              "reason": null,
+              "available": true
+            },
+            "comparisons": {
+              "sales": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "mainUnits": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "averageTicket": {
+                "reason": "empty_average",
+                "absolute": null,
+                "available": false,
+                "percentage": null,
+                "percentageReason": null
+              },
+              "completedOrders": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              }
+            }
+          },
+          {
+            "key": "1c511ffbb051f9612f9fed8115d2a0af",
+            "basis": "outside_session_wall",
+            "label": "2026-10-14",
+            "current": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "b251aab54a54301da0bdc655139eb31e",
+                "slices": [
+                  {
+                    "end": "2026-10-14T13:00:00.000000Z",
+                    "start": "2026-10-14T12:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-14"
+                  }
+                ],
+                "endDate": "2026-10-14",
+                "startDate": "2026-10-14",
+                "observation": "closed"
+              }
+            },
+            "mapping": {
+              "kind": "wall_clock",
+              "wallEnd": "10:00:00.000000",
+              "timezone": "America/Argentina/Buenos_Aires",
+              "wallStart": "09:00:00.000000"
+            },
+            "previous": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "f301966d6ff7c0ae7eb5beeab4e8b552",
+                "slices": [
+                  {
+                    "end": "2026-10-13T13:00:00.000000Z",
+                    "start": "2026-10-13T12:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-13"
+                  }
+                ],
+                "endDate": "2026-10-13",
+                "startDate": "2026-10-13",
+                "observation": "closed"
+              }
+            },
+            "alignment": {
+              "reason": null,
+              "available": true
+            },
+            "comparisons": {
+              "sales": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "mainUnits": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "averageTicket": {
+                "reason": "empty_average",
+                "absolute": null,
+                "available": false,
+                "percentage": null,
+                "percentageReason": null
+              },
+              "completedOrders": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              }
+            }
+          },
+          {
+            "key": "302b23accaf48c8ae03d7d92f0e7bc59",
+            "basis": "outside_session_wall",
+            "label": "2026-10-14",
+            "current": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "30d3b6d710d607b397c5c2ccd72e5779",
+                "slices": [
+                  {
+                    "end": "2026-10-14T14:00:00.000000Z",
+                    "start": "2026-10-14T13:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-14"
+                  }
+                ],
+                "endDate": "2026-10-14",
+                "startDate": "2026-10-14",
+                "observation": "closed"
+              }
+            },
+            "mapping": {
+              "kind": "wall_clock",
+              "wallEnd": "11:00:00.000000",
+              "timezone": "America/Argentina/Buenos_Aires",
+              "wallStart": "10:00:00.000000"
+            },
+            "previous": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "2f43a838c92fc0fd5493c35d479ecbcb",
+                "slices": [
+                  {
+                    "end": "2026-10-13T14:00:00.000000Z",
+                    "start": "2026-10-13T13:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-13"
+                  }
+                ],
+                "endDate": "2026-10-13",
+                "startDate": "2026-10-13",
+                "observation": "closed"
+              }
+            },
+            "alignment": {
+              "reason": null,
+              "available": true
+            },
+            "comparisons": {
+              "sales": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "mainUnits": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "averageTicket": {
+                "reason": "empty_average",
+                "absolute": null,
+                "available": false,
+                "percentage": null,
+                "percentageReason": null
+              },
+              "completedOrders": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              }
+            }
+          },
+          {
+            "key": "1bfb6f9194cd2f16b1a921eb3e89f7be",
+            "basis": "outside_session_wall",
+            "label": "2026-10-14",
+            "current": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "d86ba88023918f00ba68628236784f04",
+                "slices": [
+                  {
+                    "end": "2026-10-14T15:00:00.000000Z",
+                    "start": "2026-10-14T14:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-14"
+                  }
+                ],
+                "endDate": "2026-10-14",
+                "startDate": "2026-10-14",
+                "observation": "closed"
+              }
+            },
+            "mapping": {
+              "kind": "wall_clock",
+              "wallEnd": "12:00:00.000000",
+              "timezone": "America/Argentina/Buenos_Aires",
+              "wallStart": "11:00:00.000000"
+            },
+            "previous": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "e059b99901b7848666b827bbe5837935",
+                "slices": [
+                  {
+                    "end": "2026-10-13T15:00:00.000000Z",
+                    "start": "2026-10-13T14:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-13"
+                  }
+                ],
+                "endDate": "2026-10-13",
+                "startDate": "2026-10-13",
+                "observation": "closed"
+              }
+            },
+            "alignment": {
+              "reason": null,
+              "available": true
+            },
+            "comparisons": {
+              "sales": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "mainUnits": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "averageTicket": {
+                "reason": "empty_average",
+                "absolute": null,
+                "available": false,
+                "percentage": null,
+                "percentageReason": null
+              },
+              "completedOrders": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              }
+            }
+          },
+          {
+            "key": "ad7d80dd35004f3067d83c85550f85c8",
+            "basis": "outside_session_wall",
+            "label": "2026-10-14",
+            "current": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "6ba38693e0b23d23387fbbff8c07642d",
+                "slices": [
+                  {
+                    "end": "2026-10-14T16:00:00.000000Z",
+                    "start": "2026-10-14T15:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-14"
+                  }
+                ],
+                "endDate": "2026-10-14",
+                "startDate": "2026-10-14",
+                "observation": "closed"
+              }
+            },
+            "mapping": {
+              "kind": "wall_clock",
+              "wallEnd": "13:00:00.000000",
+              "timezone": "America/Argentina/Buenos_Aires",
+              "wallStart": "12:00:00.000000"
+            },
+            "previous": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "458fe75bcb0b3fa1a2640d0ec1bad30d",
+                "slices": [
+                  {
+                    "end": "2026-10-13T16:00:00.000000Z",
+                    "start": "2026-10-13T15:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": false,
+                    "commercialDate": "2026-10-13"
+                  }
+                ],
+                "endDate": "2026-10-13",
+                "startDate": "2026-10-13",
+                "observation": "closed"
+              }
+            },
+            "alignment": {
+              "reason": null,
+              "available": true
+            },
+            "comparisons": {
+              "sales": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "mainUnits": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "averageTicket": {
+                "reason": "empty_average",
+                "absolute": null,
+                "available": false,
+                "percentage": null,
+                "percentageReason": null
+              },
+              "completedOrders": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              }
+            }
+          },
+          {
+            "key": "fc1c376704495eefda9b3e1c6f1c7896",
+            "basis": "outside_session_wall",
+            "label": "2026-10-14",
+            "current": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "7c4c91c84469cd0c61503a6ae13241e2",
+                "slices": [
+                  {
+                    "end": "2026-10-14T16:00:37.349589Z",
+                    "start": "2026-10-14T16:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": true,
+                    "commercialDate": "2026-10-14"
+                  }
+                ],
+                "endDate": "2026-10-14",
+                "startDate": "2026-10-14",
+                "observation": "partial"
+              }
+            },
+            "mapping": {
+              "kind": "wall_clock",
+              "wallEnd": "13:00:37.349589",
+              "timezone": "America/Argentina/Buenos_Aires",
+              "wallStart": "13:00:00.000000"
+            },
+            "previous": {
+              "metrics": {
+                "sales": {
+                  "value": "0.00",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "mainUnits": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "averageTicket": {
+                  "value": null,
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                },
+                "completedOrders": {
+                  "value": "0",
+                  "quality": "empty",
+                  "reasons": [],
+                  "knownCount": 0,
+                  "unknownCount": 0
+                }
+              },
+              "interval": {
+                "key": "bb7bd3a02cd9113e4897baf36cc47091",
+                "slices": [
+                  {
+                    "end": "2026-10-13T16:00:37.349589Z",
+                    "start": "2026-10-13T16:00:00.000000Z",
+                    "timezone": "America/Argentina/Buenos_Aires",
+                    "sessionId": null,
+                    "endInclusive": true,
+                    "commercialDate": "2026-10-13"
+                  }
+                ],
+                "endDate": "2026-10-13",
+                "startDate": "2026-10-13",
+                "observation": "partial"
+              }
+            },
+            "alignment": {
+              "reason": null,
+              "available": true
+            },
+            "comparisons": {
+              "sales": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "mainUnits": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              },
+              "averageTicket": {
+                "reason": "empty_average",
+                "absolute": null,
+                "available": false,
+                "percentage": null,
+                "percentageReason": null
+              },
+              "completedOrders": {
+                "reason": null,
+                "absolute": "0.00",
+                "available": true,
+                "percentage": null,
+                "percentageReason": "no_base"
+              }
+            }
+          }
+        ],
+        "version": "statistics.series.v1",
+        "coverage": {
+          "scope": "global_unassigned",
+          "historicalWithoutDate": 0
+        },
+        "snapshot": {
+          "asOf": "2026-10-14T16:00:37.349589+00:00",
+          "revision": "127"
+        },
+        "resolution": "hour",
+        "previousRange": {
+          "endDate": "2026-10-13",
+          "startDate": "2026-10-13"
+        },
+        "totalAlignment": {
+          "reason": null,
+          "available": true
+        },
+        "resolutionReason": null,
+        "totalComparisons": {
+          "sales": {
+            "reason": null,
+            "absolute": "0.00",
+            "available": true,
+            "percentage": null,
+            "percentageReason": "no_base"
+          },
+          "mainUnits": {
+            "reason": null,
+            "absolute": "0.00",
+            "available": true,
+            "percentage": null,
+            "percentageReason": "no_base"
+          },
+          "averageTicket": {
+            "reason": "empty_average",
+            "absolute": null,
+            "available": false,
+            "percentage": null,
+            "percentageReason": null
+          },
+          "completedOrders": {
+            "reason": null,
+            "absolute": "0.00",
+            "available": true,
+            "percentage": null,
+            "percentageReason": "no_base"
+          }
+        }
+      },
+      "status": "ready",
+      "buckets": [
+        {
+          "label": "2026-10-14 00:00 · 2026-10-14 03:00:00+00",
+          "metrics": {
+            "sales": {
+              "value": "0.00",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "mainUnits": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "averageTicket": {
+              "value": null,
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "completedOrders": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            }
+          }
+        },
+        {
+          "label": "2026-10-14 01:00 · 2026-10-14 04:00:00+00",
+          "metrics": {
+            "sales": {
+              "value": "0.00",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "mainUnits": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "averageTicket": {
+              "value": null,
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "completedOrders": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            }
+          }
+        },
+        {
+          "label": "2026-10-14 02:00 · 2026-10-14 05:00:00+00",
+          "metrics": {
+            "sales": {
+              "value": "0.00",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "mainUnits": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "averageTicket": {
+              "value": null,
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "completedOrders": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            }
+          }
+        },
+        {
+          "label": "2026-10-14 03:00 · 2026-10-14 06:00:00+00",
+          "metrics": {
+            "sales": {
+              "value": "0.00",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "mainUnits": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "averageTicket": {
+              "value": null,
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "completedOrders": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            }
+          }
+        },
+        {
+          "label": "2026-10-14 04:00 · 2026-10-14 07:00:00+00",
+          "metrics": {
+            "sales": {
+              "value": "0.00",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "mainUnits": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "averageTicket": {
+              "value": null,
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "completedOrders": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            }
+          }
+        },
+        {
+          "label": "2026-10-14 05:00 · 2026-10-14 08:00:00+00",
+          "metrics": {
+            "sales": {
+              "value": "0.00",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "mainUnits": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "averageTicket": {
+              "value": null,
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "completedOrders": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            }
+          }
+        },
+        {
+          "label": "2026-10-14 06:00 · 2026-10-14 09:00:00+00",
+          "metrics": {
+            "sales": {
+              "value": "0.00",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "mainUnits": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "averageTicket": {
+              "value": null,
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "completedOrders": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            }
+          }
+        },
+        {
+          "label": "2026-10-14 07:00 · 2026-10-14 10:00:00+00",
+          "metrics": {
+            "sales": {
+              "value": "0.00",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "mainUnits": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "averageTicket": {
+              "value": null,
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "completedOrders": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            }
+          }
+        },
+        {
+          "label": "2026-10-14 08:00 · 2026-10-14 11:00:00+00",
+          "metrics": {
+            "sales": {
+              "value": "0.00",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "mainUnits": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "averageTicket": {
+              "value": null,
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "completedOrders": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            }
+          }
+        },
+        {
+          "label": "2026-10-14 09:00 · 2026-10-14 12:00:00+00",
+          "metrics": {
+            "sales": {
+              "value": "0.00",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "mainUnits": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "averageTicket": {
+              "value": null,
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "completedOrders": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            }
+          }
+        },
+        {
+          "label": "2026-10-14 10:00 · 2026-10-14 13:00:00+00",
+          "metrics": {
+            "sales": {
+              "value": "0.00",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "mainUnits": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "averageTicket": {
+              "value": null,
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "completedOrders": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            }
+          }
+        },
+        {
+          "label": "2026-10-14 11:00 · 2026-10-14 14:00:00+00",
+          "metrics": {
+            "sales": {
+              "value": "0.00",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "mainUnits": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "averageTicket": {
+              "value": null,
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "completedOrders": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            }
+          }
+        },
+        {
+          "label": "2026-10-14 12:00 · 2026-10-14 15:00:00+00",
+          "metrics": {
+            "sales": {
+              "value": "0.00",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "mainUnits": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "averageTicket": {
+              "value": null,
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "completedOrders": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            }
+          }
+        },
+        {
+          "label": "2026-10-14 13:00 · 2026-10-14 16:00:00+00",
+          "metrics": {
+            "sales": {
+              "value": "0.00",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "mainUnits": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "averageTicket": {
+              "value": null,
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            },
+            "completedOrders": {
+              "value": "0",
+              "quality": "empty",
+              "reasons": [],
+              "knownCount": 0,
+              "unknownCount": 0
+            }
+          }
+        }
+      ],
+      "metrics": {
+        "sales": {
+          "value": "0.00",
+          "quality": "empty",
+          "reasons": [],
+          "knownCount": 0,
+          "unknownCount": 0
+        },
+        "mainUnits": {
+          "value": "0",
+          "quality": "empty",
+          "reasons": [],
+          "knownCount": 0,
+          "unknownCount": 0
+        },
+        "averageTicket": {
+          "value": null,
+          "quality": "empty",
+          "reasons": [],
+          "knownCount": 0,
+          "unknownCount": 0
+        },
+        "completedOrders": {
+          "value": "0",
+          "quality": "empty",
+          "reasons": [],
+          "knownCount": 0,
+          "unknownCount": 0
+        }
+      },
+      "coverage": {
+        "instrumentedAt": "2026-10-12T22:14:16.702582+00:00",
+        "outsideSession": 0,
+        "historicalWithoutDate": 0
+      },
+      "currency": "ARS",
+      "products": {
+        "items": [],
+        "nextCursor": null
+      },
+      "revision": "127",
+      "timezone": "America/Argentina/Buenos_Aires",
+      "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+      "categories": [],
+      "comparison": {
+        "reason": null,
+        "segments": [],
+        "available": true
+      },
+      "ruleEvidence": {
+        "products": []
+      },
+      "unattributed": {
+        "unresolvedOrders": 0,
+        "pendingAgreedTotal": null
+      },
+      "contractVersion": "statistics.v1",
+      "previousMetrics": {
+        "sales": {
+          "value": "0.00",
+          "quality": "empty",
+          "reasons": [],
+          "knownCount": 0,
+          "unknownCount": 0
+        },
+        "mainUnits": {
+          "value": "0",
+          "quality": "empty",
+          "reasons": [],
+          "knownCount": 0,
+          "unknownCount": 0
+        },
+        "averageTicket": {
+          "value": null,
+          "quality": "empty",
+          "reasons": [],
+          "knownCount": 0,
+          "unknownCount": 0
+        },
+        "completedOrders": {
+          "value": "0",
+          "quality": "empty",
+          "reasons": [],
+          "knownCount": 0,
+          "unknownCount": 0
+        }
+      }
+    }
+  },
+  "scope": "Original reader while fixture writes and new function definitions remain uncommitted; not concurrent calls to new candidate"
+}

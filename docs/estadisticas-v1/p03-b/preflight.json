@@ -1,0 +1,101 @@
+{
+  "at": "2026-10-13T12:49:31.962Z",
+  "verdict": "FAIL",
+  "reason": "Mandatory live isolation preflight unavailable: Docker Desktop is unable to start",
+  "worktree": "C:\\Users\\Oasis Desktop\\Desktop\\Full Stack Developer\\Projects\\OrderOps-Estadisticas",
+  "branch": "codex/estadisticas-v1",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "migration": {
+    "path": "supabase/migrations/20261013004000_statistics_v1_comparative_series.sql",
+    "authorizedSha256": "b10c330adff70b803d9d25165f07830e90d4cd092aa4ba2cf3d0120a43f95219",
+    "actualSha256": "b10c330adff70b803d9d25165f07830e90d4cd092aa4ba2cf3d0120a43f95219",
+    "installed": false
+  },
+  "localChecks": {
+    "hash": "PASS",
+    "worktreeBranch": "PASS",
+    "adversarialOffline": "PASS",
+    "manifestProjectId": "PASS_LOCAL_ONLY",
+    "baseline119": "PASS_FILES_ONLY",
+    "phase02": [
+      {
+        "name": "20261013001000_statistics_v1_structures.sql",
+        "sha256": "5b28bc586ac76f2bcf19df36ecd610d780d26e609d153e8343e5c7b0ecba8828",
+        "matchesHistoricalApprovedEvidence": true,
+        "liveLedgerVerified": false
+      },
+      {
+        "name": "20261013002000_statistics_v1_capture.sql",
+        "sha256": "58c3b995450dd84bcc4299453dc8a80c5c96e62b3b72fe4a46394ae05f9b0d19",
+        "matchesHistoricalApprovedEvidence": true,
+        "liveLedgerVerified": false
+      },
+      {
+        "name": "20261013003000_statistics_v1_reads_security.sql",
+        "sha256": "b42a4c961a5ae1ca6a7884af391b6faa36fe3e9e271ba0c570bb9bd3355a7678",
+        "matchesHistoricalApprovedEvidence": true,
+        "liveLedgerVerified": false
+      }
+    ],
+    "versionCollision": "PASS_KNOWN_LOCAL_REFS_ONLY",
+    "knownRefs": [
+      "refs/heads/codex/estadisticas-v1",
+      "refs/heads/cursor-handoff-public-catalog-ui-redesign",
+      "refs/heads/cursor/cloud-agent-1791514230963-191bx",
+      "refs/heads/cursor/cloud-agent-1791515001926-p4cht",
+      "refs/heads/cursor/cloud-agent-1791522067446-hhnd8",
+      "refs/heads/cursor/commercial-core-v1-integration",
+      "refs/heads/main",
+      "refs/heads/public-catalog-residual-roadmap",
+      "refs/remotes/origin/HEAD",
+      "refs/remotes/origin/cursor-handoff-public-catalog-ui-redesign",
+      "refs/remotes/origin/cursor/cloud-agent-1791515001926-p4cht",
+      "refs/remotes/origin/cursor/cloud-agent-1791522067446-hhnd8",
+      "refs/remotes/origin/cursor/commercial-core-v1-integration",
+      "refs/remotes/origin/main"
+    ]
+  },
+  "live": {
+    "status": "FAIL",
+    "projectIdVerified": false,
+    "expectedProjectId": "orderops-statistics-v1-test-74718de66a41",
+    "expectedApi": "127.0.0.1:56321",
+    "expectedDb": "127.0.0.1:56322",
+    "resourcesVerified": false,
+    "ledgerVerified": false,
+    "firstAttempt": "Sandbox denied Docker access",
+    "outsideSandboxAttempt": "Docker Desktop is unable to start",
+    "historicalEvidenceAt": "2026-10-12T22:27:12.833Z",
+    "historicalEvidenceNotSubstitutedForLive": true
+  },
+  "database": {
+    "writes": 0,
+    "migrationsApplied": 0,
+    "sqlTestExecutions": 0,
+    "fixturesCreated": 0,
+    "cleanupNeeded": false,
+    "resetRestartStopOperations": 0
+  },
+  "tests": {
+    "installation": "NOT_RUN",
+    "catalogCompilation": "NOT_RUN",
+    "legacyRuntimeEquality": "NOT_RUN",
+    "rolesAndTenants": "NOT_RUN",
+    "captureLifecycleFinance": "NOT_RUN",
+    "sizingMembershipTemporal": "NOT_RUN",
+    "concurrencyRollback": "NOT_RUN",
+    "performance": "NOT_RUN"
+  },
+  "preexistingTrackedChangesPreserved": [
+    {
+      "file": "docs/estadisticas-v1/fase-01-evidencia.json",
+      "sha256": "6c5327ffdb7511b55b496a8e6afa33bbe795633fc29389279ec676c0588f62a7"
+    },
+    {
+      "file": "next-env.d.ts",
+      "sha256": "083e23c4c5e7761db151134ea1ef7896120c86c5888cdc8a861f534f7e86d6fd"
+    }
+  ],
+  "newCommits": 0,
+  "stop": "Mandatory condition failed; no SQL execution. Repeat all live gates once Docker is operational; exact-hash authorization only."
+}

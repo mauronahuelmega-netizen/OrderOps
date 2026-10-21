@@ -1,0 +1,750 @@
+{
+  "at": "2026-10-13T21:26:24.501Z",
+  "unit": "milliseconds PostgreSQL EXPLAIN execution; planning stored separately in raw plans",
+  "concurrency": 1,
+  "statementTimeoutMs": 15000,
+  "lockTimeoutMs": 3000,
+  "defaultSamples": 5,
+  "warmupsPerRpc": 1,
+  "executed": [
+    {
+      "dataset": "one business, one line, today",
+      "orders": 100,
+      "status": "PASS",
+      "elapsedMs": 16951,
+      "warmups": [
+        {
+          "rpc": "legacy",
+          "executionMs": 864.676
+        },
+        {
+          "rpc": "extended",
+          "executionMs": 1066.263
+        }
+      ],
+      "samples": [
+        {
+          "rpc": "legacy",
+          "mode": "default",
+          "valuesMs": [
+            671.109,
+            626.657,
+            627.648,
+            628.511,
+            697.182
+          ],
+          "repetitions": 5,
+          "p50": 628.511,
+          "p95": 697.182,
+          "min": 626.657,
+          "max": 697.182,
+          "mean": 650.2214,
+          "stdPopulation": 28.90595298273351,
+          "method": "nearest-rank; with five repetitions p95 is the sample maximum, not a robust population estimate",
+          "complete": true,
+          "expectedRepetitions": 5,
+          "percentileCaveat": "exploratory small sample"
+        },
+        {
+          "rpc": "legacy",
+          "mode": "jit_off",
+          "valuesMs": [
+            605.666,
+            837.063,
+            666.941
+          ],
+          "repetitions": 3,
+          "p50": 666.941,
+          "p95": 837.063,
+          "min": 605.666,
+          "max": 837.063,
+          "mean": 703.2233333333334,
+          "stdPopulation": 97.88921863117622,
+          "method": "nearest-rank; with five repetitions p95 is the sample maximum, not a robust population estimate",
+          "complete": true,
+          "expectedRepetitions": 3,
+          "percentileCaveat": "exploratory small sample"
+        },
+        {
+          "rpc": "extended",
+          "mode": "default",
+          "valuesMs": [
+            1251.968,
+            1113.101,
+            989.976,
+            1016.126,
+            1046.503
+          ],
+          "repetitions": 5,
+          "p50": 1046.503,
+          "p95": 1251.968,
+          "min": 989.976,
+          "max": 1251.968,
+          "mean": 1083.5348,
+          "stdPopulation": 93.71494291819212,
+          "method": "nearest-rank; with five repetitions p95 is the sample maximum, not a robust population estimate",
+          "complete": true,
+          "expectedRepetitions": 5,
+          "percentileCaveat": "exploratory small sample"
+        },
+        {
+          "rpc": "extended",
+          "mode": "jit_off",
+          "valuesMs": [
+            1015.243,
+            1147.324,
+            1538.536
+          ],
+          "repetitions": 3,
+          "p50": 1147.324,
+          "p95": 1538.536,
+          "min": 1015.243,
+          "max": 1538.536,
+          "mean": 1233.701,
+          "stdPopulation": 222.19305503548034,
+          "method": "nearest-rank; with five repetitions p95 is the sample maximum, not a robust population estimate",
+          "complete": true,
+          "expectedRepetitions": 3,
+          "percentileCaveat": "exploratory small sample"
+        }
+      ],
+      "resourceBefore": {
+        "at": "2026-10-13T21:12:45.771Z",
+        "dbStats": {
+          "BlockIO": "113MB / 29.3MB",
+          "CPUPerc": "0.02%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.56%",
+          "MemUsage": "122.8MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.64MB / 10.2MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourceAfter": {
+        "at": "2026-10-13T21:13:04.288Z",
+        "dbStats": {
+          "BlockIO": "113MB / 29.8MB",
+          "CPUPerc": "0.19%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.56%",
+          "MemUsage": "123.1MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.64MB / 10.2MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "timeout": null,
+      "cleanup": "Counts equal empty baseline after connection closes; explicit rollback when successful, automatic rollback on error"
+    },
+    {
+      "dataset": "one business, one line, today",
+      "orders": 200,
+      "status": "FAILED_TIMEOUT_OR_SQL",
+      "elapsedMs": 72195,
+      "warmups": [
+        {
+          "rpc": "legacy",
+          "executionMs": 2017.347
+        },
+        {
+          "rpc": "extended",
+          "executionMs": 2396.35
+        }
+      ],
+      "samples": [
+        {
+          "rpc": "legacy",
+          "mode": "default",
+          "valuesMs": [
+            2900.158,
+            3529.349,
+            1584.09,
+            2216.065,
+            10253.823
+          ],
+          "repetitions": 5,
+          "p50": 2900.158,
+          "p95": 10253.823,
+          "min": 1584.09,
+          "max": 10253.823,
+          "mean": 4096.697,
+          "stdPopulation": 3146.8638536604662,
+          "method": "nearest-rank; with five repetitions p95 is the sample maximum, not a robust population estimate",
+          "complete": true,
+          "expectedRepetitions": 5,
+          "percentileCaveat": "exploratory small sample"
+        },
+        {
+          "rpc": "legacy",
+          "mode": "jit_off",
+          "valuesMs": [
+            10969.519
+          ],
+          "repetitions": 1,
+          "p50": 10969.519,
+          "p95": null,
+          "min": 10969.519,
+          "max": 10969.519,
+          "mean": 10969.519,
+          "stdPopulation": 0,
+          "method": "nearest-rank; with five repetitions p95 is the sample maximum, not a robust population estimate",
+          "complete": false,
+          "expectedRepetitions": 3,
+          "percentileCaveat": "Incomplete mode: no target p95 estimated"
+        },
+        {
+          "rpc": "extended",
+          "mode": "default",
+          "valuesMs": [
+            2263.238,
+            2616.412,
+            2467.331,
+            2477.16,
+            10474.009
+          ],
+          "repetitions": 5,
+          "p50": 2477.16,
+          "p95": 10474.009,
+          "min": 2263.238,
+          "max": 10474.009,
+          "mean": 4059.63,
+          "stdPopulation": 3209.1677355703923,
+          "method": "nearest-rank; with five repetitions p95 is the sample maximum, not a robust population estimate",
+          "complete": true,
+          "expectedRepetitions": 5,
+          "percentileCaveat": "exploratory small sample"
+        }
+      ],
+      "resourceBefore": {
+        "at": "2026-10-13T21:13:16.861Z",
+        "dbStats": {
+          "BlockIO": "113MB / 29.8MB",
+          "CPUPerc": "4.38%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "123.5MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.64MB / 10.2MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourceAfter": {
+        "at": "2026-10-13T21:14:30.775Z",
+        "dbStats": {
+          "BlockIO": "113MB / 33.4MB",
+          "CPUPerc": "0.01%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.56%",
+          "MemUsage": "123.1MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.64MB / 10.2MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "timeout": "ERROR:  canceling statement due to statement timeout\nCONTEXT:  SQL function \"statistics_can_read\" statement 1\nSQL function \"statistics_source_items\" statement 1\nSQL statement \"with effective as materialized (\n    select f.* from public.statistics_v1_effective_facts f\n    where f.business_id=v_business and f.date_reliable and f.completed_at<=v_now\n      and (f.commercial_date between v_start and v_end or (v_compare and f.commercial_date between v_ps and v_pe))\n  ), selected as (\n    select 'current' side,f.* from effective f where f.commercial_date between v_start and v_end\n    union all\n    select 'previous' side,f.* from effective f where v_compare and f.commercial_date between v_ps and v_pe\n      and (not v_partial or case when f.date_kind='outside_session' then f.commercial_date<v_pe or f.completed_at<=v_previous_cut\n        else exists(select 1 from jsonb_array_elements(v_base#>'{comparison,segments}') seg\n          where (seg->>'previousSessionId')::uuid=f.session_key and f.completed_at<=(seg->>'previousUntil')::timestamptz) end)\n  )\n  select coalesce(jsonb_agg(jsonb_build_object('side',side,'id',id,'date',commercial_date,\n    'at',completed_at,'session',session_key,'kind',date_kind,'timezone',timezone,\n    'sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons) order by side,commercial_date,completed_at,id),'[]'::jsonb)\n                 from selected\"\nPL/pgSQL function statistics_v1_series_response(text,date,date,text,integer,jsonb) line 33 at SQL statement\nSQL function \"statistics_v1_summary\" statement 1\n",
+      "cleanup": "Counts equal empty baseline after connection closes; explicit rollback when successful, automatic rollback on error"
+    },
+    {
+      "dataset": "one business, one line, today",
+      "orders": 50,
+      "status": "PASS",
+      "elapsedMs": 11763,
+      "warmups": [
+        {
+          "rpc": "legacy",
+          "executionMs": 769.433
+        },
+        {
+          "rpc": "extended",
+          "executionMs": 981.295
+        }
+      ],
+      "samples": [
+        {
+          "rpc": "legacy",
+          "mode": "default",
+          "valuesMs": [
+            543.097,
+            491.552,
+            410.64,
+            422.622,
+            442.414
+          ],
+          "repetitions": 5,
+          "p50": 442.414,
+          "p95": 543.097,
+          "min": 410.64,
+          "max": 543.097,
+          "mean": 462.06499999999994,
+          "stdPopulation": 49.034907704613865,
+          "method": "nearest-rank; with five repetitions p95 is the sample maximum, not a robust population estimate",
+          "complete": true,
+          "expectedRepetitions": 5,
+          "percentileCaveat": "exploratory small sample"
+        },
+        {
+          "rpc": "legacy",
+          "mode": "jit_off",
+          "valuesMs": [
+            529.714,
+            414.149,
+            545.713
+          ],
+          "repetitions": 3,
+          "p50": 529.714,
+          "p95": 545.713,
+          "min": 414.149,
+          "max": 545.713,
+          "mean": 496.5253333333333,
+          "stdPopulation": 58.61391882669356,
+          "method": "nearest-rank; with five repetitions p95 is the sample maximum, not a robust population estimate",
+          "complete": true,
+          "expectedRepetitions": 3,
+          "percentileCaveat": "exploratory small sample"
+        },
+        {
+          "rpc": "extended",
+          "mode": "default",
+          "valuesMs": [
+            677.589,
+            826.951,
+            660.838,
+            674.806,
+            838.576
+          ],
+          "repetitions": 5,
+          "p50": 677.589,
+          "p95": 838.576,
+          "min": 660.838,
+          "max": 838.576,
+          "mean": 735.752,
+          "stdPopulation": 79.49778545091681,
+          "method": "nearest-rank; with five repetitions p95 is the sample maximum, not a robust population estimate",
+          "complete": true,
+          "expectedRepetitions": 5,
+          "percentileCaveat": "exploratory small sample"
+        },
+        {
+          "rpc": "extended",
+          "mode": "jit_off",
+          "valuesMs": [
+            639.851,
+            636.569,
+            766.611
+          ],
+          "repetitions": 3,
+          "p50": 639.851,
+          "p95": 766.611,
+          "min": 636.569,
+          "max": 766.611,
+          "mean": 681.0103333333333,
+          "stdPopulation": 60.54363980542374,
+          "method": "nearest-rank; with five repetitions p95 is the sample maximum, not a robust population estimate",
+          "complete": true,
+          "expectedRepetitions": 3,
+          "percentileCaveat": "exploratory small sample"
+        }
+      ],
+      "resourceBefore": {
+        "at": "2026-10-13T21:12:18.213Z",
+        "dbStats": {
+          "BlockIO": "113MB / 28.8MB",
+          "CPUPerc": "0.00%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.56%",
+          "MemUsage": "122.8MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.64MB / 10.2MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourceAfter": {
+        "at": "2026-10-13T21:12:31.606Z",
+        "dbStats": {
+          "BlockIO": "113MB / 29.2MB",
+          "CPUPerc": "0.02%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.56%",
+          "MemUsage": "122.8MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.64MB / 10.2MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "timeout": null,
+      "cleanup": "Counts equal empty baseline after connection closes; explicit rollback when successful, automatic rollback on error"
+    },
+    {
+      "dataset": "instrumented profiling",
+      "orders": 100,
+      "status": "PASS",
+      "elapsedMs": 5014,
+      "warmups": [
+        {
+          "rpc": "legacy",
+          "executionMs": 812.758
+        },
+        {
+          "rpc": "extended",
+          "executionMs": 1464.396
+        }
+      ],
+      "samples": [],
+      "resourceBefore": {
+        "at": "2026-10-13T21:16:07.484Z",
+        "dbStats": {
+          "BlockIO": "113MB / 33.6MB",
+          "CPUPerc": "0.01%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.56%",
+          "MemUsage": "123.1MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.64MB / 10.2MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourceAfter": {
+        "at": "2026-10-13T21:16:14.146Z",
+        "dbStats": {
+          "BlockIO": "113MB / 34.2MB",
+          "CPUPerc": "0.02%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.56%",
+          "MemUsage": "123.1MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.64MB / 10.2MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "timeout": null,
+      "cleanup": "Counts equal empty baseline after connection closes; explicit rollback when successful, automatic rollback on error",
+      "functions": {
+        "legacy": {
+          "private.statistics_source_digest": {
+            "calls": 600,
+            "totalMs": 40.45965,
+            "selfMs": 40.45965
+          },
+          "private.statistics_can_read": {
+            "calls": 6751,
+            "totalMs": 387.861045,
+            "selfMs": 387.861045
+          },
+          "private.statistics_source_items": {
+            "calls": 600,
+            "totalMs": 602.917833,
+            "selfMs": 354.524898
+          },
+          "private.statistics_metric": {
+            "calls": 84,
+            "totalMs": 5.263278,
+            "selfMs": 5.263278
+          },
+          "private.statistics_metrics": {
+            "calls": 21,
+            "totalMs": 9.015642,
+            "selfMs": 3.752364
+          },
+          "private.statistics_local_cutoff": {
+            "calls": 3,
+            "totalMs": 0.681449,
+            "selfMs": 0.681449
+          },
+          "private.statistics_v1_summary_base": {
+            "calls": 1,
+            "totalMs": 852.616777,
+            "selfMs": 60.074093
+          }
+        },
+        "extended": {
+          "private.statistics_source_digest": {
+            "calls": 900,
+            "totalMs": 61.515077,
+            "selfMs": 61.515077
+          },
+          "private.statistics_can_read": {
+            "calls": 7551,
+            "totalMs": 524.0671120000001,
+            "selfMs": 524.0671120000001
+          },
+          "private.statistics_source_items": {
+            "calls": 900,
+            "totalMs": 923.1957850000001,
+            "selfMs": 540.343738
+          },
+          "private.statistics_metric": {
+            "calls": 852,
+            "totalMs": 54.643972,
+            "selfMs": 54.643972
+          },
+          "private.statistics_metrics": {
+            "calls": 213,
+            "totalMs": 92.164432,
+            "selfMs": 37.52046
+          },
+          "private.statistics_local_cutoff": {
+            "calls": 84,
+            "totalMs": 6.561483,
+            "selfMs": 6.561483
+          },
+          "public.statistics_v1_summary": {
+            "calls": 1,
+            "totalMs": 1322.957081,
+            "selfMs": 0.202615
+          },
+          "private.statistics_v1_summary_base": {
+            "calls": 1,
+            "totalMs": 848.081749,
+            "selfMs": 51.048173999999996
+          },
+          "private.statistics_v1_series_delta": {
+            "calls": 80,
+            "totalMs": 3.08733,
+            "selfMs": 3.08733
+          },
+          "private.statistics_v1_series_instant": {
+            "calls": 156,
+            "totalMs": 3.021824,
+            "selfMs": 3.021824
+          },
+          "private.statistics_v1_series_response": {
+            "calls": 1,
+            "totalMs": 1322.754466,
+            "selfMs": 40.945296
+          }
+        }
+      },
+      "instrumentedCalls": [
+        {
+          "rpc": "legacy:nested",
+          "executionMs": 852.669
+        },
+        {
+          "rpc": "extended:nested",
+          "executionMs": 1322.999
+        }
+      ]
+    },
+    {
+      "dataset": "two businesses, night session, reopened, mixed composition and reconciliation, last_30_days",
+      "orders": 50,
+      "status": "PASS",
+      "elapsedMs": 7889,
+      "warmups": [
+        {
+          "rpc": "legacy",
+          "executionMs": 416.869
+        },
+        {
+          "rpc": "extended",
+          "executionMs": 647.298
+        }
+      ],
+      "samples": [
+        {
+          "rpc": "legacy",
+          "mode": "default",
+          "valuesMs": [
+            280.059,
+            233.756,
+            395.472,
+            273.732,
+            272.202
+          ],
+          "repetitions": 5,
+          "p50": 273.732,
+          "p95": 395.472,
+          "min": 233.756,
+          "max": 395.472,
+          "mean": 291.0442,
+          "stdPopulation": 54.70378169889171,
+          "method": "nearest-rank; with five repetitions p95 is the sample maximum, not a robust population estimate",
+          "complete": true,
+          "expectedRepetitions": 5,
+          "percentileCaveat": "exploratory small sample"
+        },
+        {
+          "rpc": "legacy",
+          "mode": "jit_off",
+          "valuesMs": [
+            230.451,
+            202.143,
+            202.847
+          ],
+          "repetitions": 3,
+          "p50": 202.847,
+          "p95": 230.451,
+          "min": 202.143,
+          "max": 230.451,
+          "mean": 211.81366666666668,
+          "stdPopulation": 13.181718384017897,
+          "method": "nearest-rank; with five repetitions p95 is the sample maximum, not a robust population estimate",
+          "complete": true,
+          "expectedRepetitions": 3,
+          "percentileCaveat": "exploratory small sample"
+        },
+        {
+          "rpc": "extended",
+          "mode": "default",
+          "valuesMs": [
+            474.991,
+            561.969,
+            779.514,
+            619.553,
+            470.096
+          ],
+          "repetitions": 5,
+          "p50": 561.969,
+          "p95": 779.514,
+          "min": 470.096,
+          "max": 779.514,
+          "mean": 581.2246,
+          "stdPopulation": 113.83643883853712,
+          "method": "nearest-rank; with five repetitions p95 is the sample maximum, not a robust population estimate",
+          "complete": true,
+          "expectedRepetitions": 5,
+          "percentileCaveat": "exploratory small sample"
+        },
+        {
+          "rpc": "extended",
+          "mode": "jit_off",
+          "valuesMs": [
+            450.276,
+            436.292,
+            398.299
+          ],
+          "repetitions": 3,
+          "p50": 436.292,
+          "p95": 450.276,
+          "min": 398.299,
+          "max": 450.276,
+          "mean": 428.289,
+          "stdPopulation": 21.96114962078869,
+          "method": "nearest-rank; with five repetitions p95 is the sample maximum, not a robust population estimate",
+          "complete": true,
+          "expectedRepetitions": 3,
+          "percentileCaveat": "exploratory small sample"
+        }
+      ],
+      "resourceBefore": {
+        "at": "2026-10-13T21:17:26.131Z",
+        "dbStats": {
+          "BlockIO": "113MB / 34.6MB",
+          "CPUPerc": "0.01%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.56%",
+          "MemUsage": "123.1MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.64MB / 10.2MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourceAfter": {
+        "at": "2026-10-13T21:17:35.591Z",
+        "dbStats": {
+          "BlockIO": "113MB / 35.3MB",
+          "CPUPerc": "0.04%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.56%",
+          "MemUsage": "123.1MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.64MB / 10.2MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "timeout": null,
+      "cleanup": "Counts equal empty baseline after connection closes; explicit rollback when successful, automatic rollback on error"
+    }
+  ],
+  "notExecuted": [
+    {
+      "orders": 500,
+      "status": "NOT_EXECUTED",
+      "reason": "Progressive safety stop; do not infer timings"
+    },
+    {
+      "orders": 1000,
+      "status": "NOT_EXECUTED",
+      "reason": "Progressive safety stop; do not infer timings"
+    },
+    {
+      "orders": 5000,
+      "status": "NOT_EXECUTED",
+      "reason": "Progressive safety stop; do not infer timings"
+    }
+  ],
+  "http": {
+    "status": "NOT_EXECUTED",
+    "reason": "Fixtures are uncommitted and deliberately invisible to PostgREST. No commit/HTTP of a different cohort is presented as comparable."
+  },
+  "targets": [
+    {
+      "orders": 100,
+      "p95Ms": 500
+    },
+    {
+      "orders": 500,
+      "p95Ms": 1000
+    },
+    {
+      "orders": 1000,
+      "p95Ms": 1500
+    },
+    {
+      "orders": 5000,
+      "p95Ms": 3000
+    }
+  ],
+  "estimates": "No optimized execution or guaranteed speedups measured"
+}

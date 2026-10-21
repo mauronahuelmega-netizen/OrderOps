@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-16T13:33:11.284Z",
+  "results": [
+    {
+      "kind": "db",
+      "exit": 0,
+      "availableTools": [
+        "/usr/sbin/getcap"
+      ],
+      "extendedAttributesAudited": false,
+      "capabilitiesAudited": false,
+      "aclAudited": false
+    },
+    {
+      "kind": "kong",
+      "exit": 0,
+      "availableTools": [
+        "/usr/sbin/getcap"
+      ],
+      "extendedAttributesAudited": false,
+      "capabilitiesAudited": false,
+      "aclAudited": false
+    }
+  ],
+  "noInstallations": true
+}

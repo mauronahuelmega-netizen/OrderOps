@@ -1,0 +1,1221 @@
+{
+  "complete": {
+    "dataState": "complete",
+    "temporalPartial": false,
+    "period": {
+      "preset": "custom",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-13",
+      "referenceDate": "2026-10-14",
+      "asOf": "2026-10-14T12:00:00.000000Z",
+      "timezone": "America/Argentina/Buenos_Aires",
+      "partial": false,
+      "granularity": "day",
+      "comparable": {
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-11"
+      },
+      "comparableReason": null,
+      "label": "Personalizado",
+      "rangeLabel": "12/10/2026 – 13/10/2026"
+    },
+    "selectedMetric": "sales",
+    "selectedPointKey": null,
+    "kpis": [
+      {
+        "key": "sales",
+        "label": "Ventas comerciales",
+        "exactValue": "200.00",
+        "valueText": "$ 200",
+        "quality": "exact",
+        "qualityText": null,
+        "knownCount": 2,
+        "unknownCount": 0,
+        "reasons": [],
+        "isKnownZero": false,
+        "comparison": {
+          "available": true,
+          "direction": "increase",
+          "text": "Aumento",
+          "absoluteText": "+$ 40",
+          "percentageText": "+25%",
+          "reason": null
+        },
+        "selected": true
+      },
+      {
+        "key": "completedOrders",
+        "label": "Pedidos completados",
+        "exactValue": "2",
+        "valueText": "2",
+        "quality": "exact",
+        "qualityText": null,
+        "knownCount": 2,
+        "unknownCount": 0,
+        "reasons": [],
+        "isKnownZero": false,
+        "comparison": {
+          "available": true,
+          "direction": "unchanged",
+          "text": "Sin variación",
+          "absoluteText": "0",
+          "percentageText": "0%",
+          "reason": null
+        },
+        "selected": false
+      },
+      {
+        "key": "averageTicket",
+        "label": "Ticket promedio",
+        "exactValue": "100.00",
+        "valueText": "$ 100",
+        "quality": "exact",
+        "qualityText": null,
+        "knownCount": 2,
+        "unknownCount": 0,
+        "reasons": [],
+        "isKnownZero": false,
+        "comparison": {
+          "available": true,
+          "direction": "increase",
+          "text": "Aumento",
+          "absoluteText": "+$ 20",
+          "percentageText": "+25%",
+          "reason": null
+        },
+        "selected": false
+      },
+      {
+        "key": "mainUnits",
+        "label": "Unidades vendidas",
+        "exactValue": "3",
+        "valueText": "3",
+        "quality": "exact",
+        "qualityText": null,
+        "knownCount": 2,
+        "unknownCount": 0,
+        "reasons": [],
+        "isKnownZero": false,
+        "comparison": {
+          "available": true,
+          "direction": "increase",
+          "text": "Aumento",
+          "absoluteText": "+1",
+          "percentageText": "+50%",
+          "reason": null
+        },
+        "selected": false
+      }
+    ],
+    "series": [
+      {
+        "key": "match-synthetic-0",
+        "mapping": {
+          "kind": "date_offset",
+          "days": -2
+        },
+        "basis": "commercial_date",
+        "label": "12 oct.",
+        "current": {
+          "interval": {
+            "key": "current-synthetic-0",
+            "label": "Jornada comercial: 12/10/2026",
+            "observation": "closed",
+            "slices": [
+              {
+                "sessionId": null,
+                "timezone": "America/Argentina/Buenos_Aires",
+                "commercialDate": "2026-10-12",
+                "start": "2026-10-12T03:00:00.000000Z",
+                "end": "2026-10-13T03:00:00.000000Z",
+                "endInclusive": false
+              }
+            ]
+          },
+          "metric": {
+            "key": "sales",
+            "label": "Ventas comerciales",
+            "exactValue": "0.00",
+            "valueText": "$ 0",
+            "quality": "empty",
+            "qualityText": null,
+            "knownCount": 0,
+            "unknownCount": 0,
+            "reasons": [],
+            "isKnownZero": true
+          }
+        },
+        "previous": {
+          "interval": {
+            "key": "previous-synthetic-0",
+            "label": "Jornada comercial: 10/10/2026",
+            "observation": "closed",
+            "slices": [
+              {
+                "sessionId": null,
+                "timezone": "America/Argentina/Buenos_Aires",
+                "commercialDate": "2026-10-10",
+                "start": "2026-10-10T03:00:00.000000Z",
+                "end": "2026-10-11T03:00:00.000000Z",
+                "endInclusive": false
+              }
+            ]
+          },
+          "metric": {
+            "key": "sales",
+            "label": "Ventas comerciales",
+            "exactValue": "0.00",
+            "valueText": "$ 0",
+            "quality": "empty",
+            "qualityText": null,
+            "knownCount": 0,
+            "unknownCount": 0,
+            "reasons": [],
+            "isKnownZero": true
+          }
+        },
+        "comparison": {
+          "available": true,
+          "direction": "unchanged",
+          "text": "Sin variación",
+          "absoluteText": "$ 0",
+          "percentageText": "Sin variación porcentual calculable",
+          "reason": "no_base"
+        },
+        "alignment": {
+          "available": true,
+          "reason": null
+        },
+        "selected": false
+      },
+      {
+        "key": "match-synthetic-1",
+        "mapping": {
+          "kind": "date_offset",
+          "days": -2
+        },
+        "basis": "commercial_date",
+        "label": "13 oct.",
+        "current": {
+          "interval": {
+            "key": "current-synthetic-1",
+            "label": "Jornada comercial: 13/10/2026",
+            "observation": "closed",
+            "slices": [
+              {
+                "sessionId": null,
+                "timezone": "America/Argentina/Buenos_Aires",
+                "commercialDate": "2026-10-13",
+                "start": "2026-10-13T03:00:00.000000Z",
+                "end": "2026-10-14T03:00:00.000000Z",
+                "endInclusive": false
+              }
+            ]
+          },
+          "metric": {
+            "key": "sales",
+            "label": "Ventas comerciales",
+            "exactValue": "200.00",
+            "valueText": "$ 200",
+            "quality": "exact",
+            "qualityText": null,
+            "knownCount": 2,
+            "unknownCount": 0,
+            "reasons": [],
+            "isKnownZero": false
+          }
+        },
+        "previous": {
+          "interval": {
+            "key": "previous-synthetic-1",
+            "label": "Jornada comercial: 11/10/2026",
+            "observation": "closed",
+            "slices": [
+              {
+                "sessionId": null,
+                "timezone": "America/Argentina/Buenos_Aires",
+                "commercialDate": "2026-10-11",
+                "start": "2026-10-11T03:00:00.000000Z",
+                "end": "2026-10-12T03:00:00.000000Z",
+                "endInclusive": false
+              }
+            ]
+          },
+          "metric": {
+            "key": "sales",
+            "label": "Ventas comerciales",
+            "exactValue": "160.00",
+            "valueText": "$ 160",
+            "quality": "exact",
+            "qualityText": null,
+            "knownCount": 2,
+            "unknownCount": 0,
+            "reasons": [],
+            "isKnownZero": false
+          }
+        },
+        "comparison": {
+          "available": true,
+          "direction": "increase",
+          "text": "Aumento",
+          "absoluteText": "+$ 40",
+          "percentageText": "+25%",
+          "reason": null
+        },
+        "alignment": {
+          "available": true,
+          "reason": null
+        },
+        "selected": false
+      }
+    ],
+    "reading": {
+      "state": "descriptive",
+      "observation": "Ventas comerciales aumentaron (25%) respecto del período equivalente anterior.",
+      "evidence": {
+        "metric": "sales",
+        "label": "Ventas comerciales",
+        "current": {
+          "key": "sales",
+          "label": "Ventas comerciales",
+          "exactValue": "200.00",
+          "valueText": "$ 200",
+          "quality": "exact",
+          "qualityText": null,
+          "knownCount": 2,
+          "unknownCount": 0,
+          "reasons": [],
+          "isKnownZero": false
+        },
+        "previous": {
+          "key": "sales",
+          "label": "Ventas comerciales",
+          "exactValue": "160.00",
+          "valueText": "$ 160",
+          "quality": "exact",
+          "qualityText": null,
+          "knownCount": 2,
+          "unknownCount": 0,
+          "reasons": [],
+          "isKnownZero": false
+        },
+        "rangeLabel": "12/10/2026 – 13/10/2026",
+        "pointKey": null,
+        "asOf": "2026-10-14T12:00:00.000000Z",
+        "timezone": "America/Argentina/Buenos_Aires",
+        "comparison": {
+          "available": true,
+          "direction": "increase",
+          "text": "Aumento",
+          "absoluteText": "+$ 40",
+          "percentageText": "+25%",
+          "reason": null
+        }
+      },
+      "meaning": "El importe comercial informado fue mayor en las observaciones comparables. Esta variación no explica sus causas.",
+      "suggestion": "Revisá qué productos aportaron ingresos en este período."
+    },
+    "notices": [
+      {
+        "kind": "outside_session",
+        "text": "Fuera de sesión verificada: 2 pedidos con fecha de finalización fiable."
+      }
+    ],
+    "emptyMessage": null
+  },
+  "partial": {
+    "dataState": "partial",
+    "temporalPartial": false,
+    "period": {
+      "preset": "custom",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-13",
+      "referenceDate": "2026-10-14",
+      "asOf": "2026-10-14T12:00:00.000000Z",
+      "timezone": "America/Argentina/Buenos_Aires",
+      "partial": false,
+      "granularity": "day",
+      "comparable": {
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-11"
+      },
+      "comparableReason": null,
+      "label": "Personalizado",
+      "rangeLabel": "12/10/2026 – 13/10/2026"
+    },
+    "selectedMetric": "sales",
+    "selectedPointKey": null,
+    "kpis": [
+      {
+        "key": "sales",
+        "label": "Ventas comerciales",
+        "exactValue": "100.00",
+        "valueText": "$ 100",
+        "quality": "partial",
+        "qualityText": "Cobertura parcial",
+        "knownCount": 1,
+        "unknownCount": 1,
+        "reasons": [
+          "unresolved_breakdown"
+        ],
+        "isKnownZero": false,
+        "comparison": {
+          "available": false,
+          "direction": "unavailable",
+          "text": "Sin comparación válida",
+          "absoluteText": null,
+          "percentageText": null,
+          "reason": "metric_quality"
+        },
+        "selected": true
+      },
+      {
+        "key": "completedOrders",
+        "label": "Pedidos completados",
+        "exactValue": "2",
+        "valueText": "2",
+        "quality": "exact",
+        "qualityText": null,
+        "knownCount": 2,
+        "unknownCount": 0,
+        "reasons": [],
+        "isKnownZero": false,
+        "comparison": {
+          "available": true,
+          "direction": "unchanged",
+          "text": "Sin variación",
+          "absoluteText": "0",
+          "percentageText": "0%",
+          "reason": null
+        },
+        "selected": false
+      },
+      {
+        "key": "averageTicket",
+        "label": "Ticket promedio",
+        "exactValue": null,
+        "valueText": "No disponible",
+        "quality": "unavailable",
+        "qualityText": "Datos insuficientes",
+        "knownCount": 1,
+        "unknownCount": 1,
+        "reasons": [
+          "unresolved_breakdown"
+        ],
+        "isKnownZero": false,
+        "comparison": {
+          "available": false,
+          "direction": "unavailable",
+          "text": "Sin comparación válida",
+          "absoluteText": null,
+          "percentageText": null,
+          "reason": "metric_quality"
+        },
+        "selected": false
+      },
+      {
+        "key": "mainUnits",
+        "label": "Unidades vendidas",
+        "exactValue": "3",
+        "valueText": "3",
+        "quality": "exact",
+        "qualityText": null,
+        "knownCount": 2,
+        "unknownCount": 0,
+        "reasons": [],
+        "isKnownZero": false,
+        "comparison": {
+          "available": true,
+          "direction": "increase",
+          "text": "Aumento",
+          "absoluteText": "+1",
+          "percentageText": "+50%",
+          "reason": null
+        },
+        "selected": false
+      }
+    ],
+    "series": [
+      {
+        "key": "match-synthetic-0",
+        "mapping": {
+          "kind": "date_offset",
+          "days": -2
+        },
+        "basis": "commercial_date",
+        "label": "12 oct.",
+        "current": {
+          "interval": {
+            "key": "current-synthetic-0",
+            "label": "Jornada comercial: 12/10/2026",
+            "observation": "closed",
+            "slices": [
+              {
+                "sessionId": null,
+                "timezone": "America/Argentina/Buenos_Aires",
+                "commercialDate": "2026-10-12",
+                "start": "2026-10-12T03:00:00.000000Z",
+                "end": "2026-10-13T03:00:00.000000Z",
+                "endInclusive": false
+              }
+            ]
+          },
+          "metric": {
+            "key": "sales",
+            "label": "Ventas comerciales",
+            "exactValue": "0.00",
+            "valueText": "$ 0",
+            "quality": "empty",
+            "qualityText": null,
+            "knownCount": 0,
+            "unknownCount": 0,
+            "reasons": [],
+            "isKnownZero": true
+          }
+        },
+        "previous": {
+          "interval": {
+            "key": "previous-synthetic-0",
+            "label": "Jornada comercial: 10/10/2026",
+            "observation": "closed",
+            "slices": [
+              {
+                "sessionId": null,
+                "timezone": "America/Argentina/Buenos_Aires",
+                "commercialDate": "2026-10-10",
+                "start": "2026-10-10T03:00:00.000000Z",
+                "end": "2026-10-11T03:00:00.000000Z",
+                "endInclusive": false
+              }
+            ]
+          },
+          "metric": {
+            "key": "sales",
+            "label": "Ventas comerciales",
+            "exactValue": "0.00",
+            "valueText": "$ 0",
+            "quality": "empty",
+            "qualityText": null,
+            "knownCount": 0,
+            "unknownCount": 0,
+            "reasons": [],
+            "isKnownZero": true
+          }
+        },
+        "comparison": {
+          "available": true,
+          "direction": "unchanged",
+          "text": "Sin variación",
+          "absoluteText": "$ 0",
+          "percentageText": "Sin variación porcentual calculable",
+          "reason": "no_base"
+        },
+        "alignment": {
+          "available": true,
+          "reason": null
+        },
+        "selected": false
+      },
+      {
+        "key": "match-synthetic-1",
+        "mapping": {
+          "kind": "date_offset",
+          "days": -2
+        },
+        "basis": "commercial_date",
+        "label": "13 oct.",
+        "current": {
+          "interval": {
+            "key": "current-synthetic-1",
+            "label": "Jornada comercial: 13/10/2026",
+            "observation": "closed",
+            "slices": [
+              {
+                "sessionId": null,
+                "timezone": "America/Argentina/Buenos_Aires",
+                "commercialDate": "2026-10-13",
+                "start": "2026-10-13T03:00:00.000000Z",
+                "end": "2026-10-14T03:00:00.000000Z",
+                "endInclusive": false
+              }
+            ]
+          },
+          "metric": {
+            "key": "sales",
+            "label": "Ventas comerciales",
+            "exactValue": "100.00",
+            "valueText": "$ 100",
+            "quality": "partial",
+            "qualityText": "Cobertura parcial",
+            "knownCount": 1,
+            "unknownCount": 1,
+            "reasons": [
+              "unresolved_breakdown"
+            ],
+            "isKnownZero": false
+          }
+        },
+        "previous": null,
+        "comparison": {
+          "available": false,
+          "direction": "unavailable",
+          "text": "Sin comparación válida",
+          "absoluteText": null,
+          "percentageText": null,
+          "reason": "metric_quality"
+        },
+        "alignment": {
+          "available": true,
+          "reason": null
+        },
+        "selected": false
+      }
+    ],
+    "reading": {
+      "state": "neutral",
+      "observation": "No hay datos suficientes para una comparación válida de este indicador.",
+      "evidence": {
+        "metric": "sales",
+        "label": "Ventas comerciales",
+        "current": {
+          "key": "sales",
+          "label": "Ventas comerciales",
+          "exactValue": "100.00",
+          "valueText": "$ 100",
+          "quality": "partial",
+          "qualityText": "Cobertura parcial",
+          "knownCount": 1,
+          "unknownCount": 1,
+          "reasons": [
+            "unresolved_breakdown"
+          ],
+          "isKnownZero": false
+        },
+        "previous": null,
+        "rangeLabel": "12/10/2026 – 13/10/2026",
+        "pointKey": null,
+        "asOf": "2026-10-14T12:00:00.000000Z",
+        "timezone": "America/Argentina/Buenos_Aires",
+        "comparison": {
+          "available": false,
+          "direction": "unavailable",
+          "text": "Sin comparación válida",
+          "absoluteText": null,
+          "percentageText": null,
+          "reason": "metric_quality"
+        }
+      },
+      "meaning": "La cobertura de los datos limita la lectura; el valor conocido no representa necesariamente el total completo.",
+      "suggestion": "Revisá la cobertura y el período seleccionado antes de sacar conclusiones."
+    },
+    "notices": [
+      {
+        "kind": "quality",
+        "text": "Calidad de datos: algunos indicadores tienen cobertura limitada."
+      },
+      {
+        "kind": "outside_session",
+        "text": "Fuera de sesión verificada: 2 pedidos con fecha de finalización fiable."
+      }
+    ],
+    "emptyMessage": null
+  },
+  "temporalPartial": {
+    "dataState": "complete",
+    "temporalPartial": true,
+    "period": {
+      "preset": "custom",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-13",
+      "referenceDate": "2026-10-13",
+      "asOf": "2026-10-13T15:30:00.000000Z",
+      "timezone": "America/Argentina/Buenos_Aires",
+      "partial": true,
+      "granularity": "day",
+      "comparable": {
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-11"
+      },
+      "comparableReason": null,
+      "label": "Personalizado",
+      "rangeLabel": "12/10/2026 – 13/10/2026"
+    },
+    "selectedMetric": "sales",
+    "selectedPointKey": null,
+    "kpis": [
+      {
+        "key": "sales",
+        "label": "Ventas comerciales",
+        "exactValue": "200.00",
+        "valueText": "$ 200",
+        "quality": "exact",
+        "qualityText": null,
+        "knownCount": 2,
+        "unknownCount": 0,
+        "reasons": [],
+        "isKnownZero": false,
+        "comparison": {
+          "available": true,
+          "direction": "increase",
+          "text": "Aumento",
+          "absoluteText": "+$ 40",
+          "percentageText": "+25%",
+          "reason": null
+        },
+        "selected": true
+      },
+      {
+        "key": "completedOrders",
+        "label": "Pedidos completados",
+        "exactValue": "2",
+        "valueText": "2",
+        "quality": "exact",
+        "qualityText": null,
+        "knownCount": 2,
+        "unknownCount": 0,
+        "reasons": [],
+        "isKnownZero": false,
+        "comparison": {
+          "available": true,
+          "direction": "unchanged",
+          "text": "Sin variación",
+          "absoluteText": "0",
+          "percentageText": "0%",
+          "reason": null
+        },
+        "selected": false
+      },
+      {
+        "key": "averageTicket",
+        "label": "Ticket promedio",
+        "exactValue": "100.00",
+        "valueText": "$ 100",
+        "quality": "exact",
+        "qualityText": null,
+        "knownCount": 2,
+        "unknownCount": 0,
+        "reasons": [],
+        "isKnownZero": false,
+        "comparison": {
+          "available": true,
+          "direction": "increase",
+          "text": "Aumento",
+          "absoluteText": "+$ 20",
+          "percentageText": "+25%",
+          "reason": null
+        },
+        "selected": false
+      },
+      {
+        "key": "mainUnits",
+        "label": "Unidades vendidas",
+        "exactValue": "3",
+        "valueText": "3",
+        "quality": "exact",
+        "qualityText": null,
+        "knownCount": 2,
+        "unknownCount": 0,
+        "reasons": [],
+        "isKnownZero": false,
+        "comparison": {
+          "available": true,
+          "direction": "increase",
+          "text": "Aumento",
+          "absoluteText": "+1",
+          "percentageText": "+50%",
+          "reason": null
+        },
+        "selected": false
+      }
+    ],
+    "series": [
+      {
+        "key": "match-synthetic-0",
+        "mapping": {
+          "kind": "date_offset",
+          "days": -2
+        },
+        "basis": "commercial_date",
+        "label": "12 oct.",
+        "current": {
+          "interval": {
+            "key": "current-synthetic-0",
+            "label": "Jornada comercial: 12/10/2026",
+            "observation": "closed",
+            "slices": [
+              {
+                "sessionId": null,
+                "timezone": "America/Argentina/Buenos_Aires",
+                "commercialDate": "2026-10-12",
+                "start": "2026-10-12T03:00:00.000000Z",
+                "end": "2026-10-13T03:00:00.000000Z",
+                "endInclusive": false
+              }
+            ]
+          },
+          "metric": {
+            "key": "sales",
+            "label": "Ventas comerciales",
+            "exactValue": "0.00",
+            "valueText": "$ 0",
+            "quality": "empty",
+            "qualityText": null,
+            "knownCount": 0,
+            "unknownCount": 0,
+            "reasons": [],
+            "isKnownZero": true
+          }
+        },
+        "previous": {
+          "interval": {
+            "key": "previous-synthetic-0",
+            "label": "Jornada comercial: 10/10/2026",
+            "observation": "closed",
+            "slices": [
+              {
+                "sessionId": null,
+                "timezone": "America/Argentina/Buenos_Aires",
+                "commercialDate": "2026-10-10",
+                "start": "2026-10-10T03:00:00.000000Z",
+                "end": "2026-10-11T03:00:00.000000Z",
+                "endInclusive": false
+              }
+            ]
+          },
+          "metric": {
+            "key": "sales",
+            "label": "Ventas comerciales",
+            "exactValue": "0.00",
+            "valueText": "$ 0",
+            "quality": "empty",
+            "qualityText": null,
+            "knownCount": 0,
+            "unknownCount": 0,
+            "reasons": [],
+            "isKnownZero": true
+          }
+        },
+        "comparison": {
+          "available": true,
+          "direction": "unchanged",
+          "text": "Sin variación",
+          "absoluteText": "$ 0",
+          "percentageText": "Sin variación porcentual calculable",
+          "reason": "no_base"
+        },
+        "alignment": {
+          "available": true,
+          "reason": null
+        },
+        "selected": false
+      },
+      {
+        "key": "match-synthetic-1",
+        "mapping": {
+          "kind": "date_offset",
+          "days": -2
+        },
+        "basis": "commercial_date",
+        "label": "13 oct.",
+        "current": {
+          "interval": {
+            "key": "current-synthetic-1",
+            "label": "Jornada comercial: 13/10/2026",
+            "observation": "partial",
+            "slices": [
+              {
+                "sessionId": null,
+                "timezone": "America/Argentina/Buenos_Aires",
+                "commercialDate": "2026-10-13",
+                "start": "2026-10-13T03:00:00.000000Z",
+                "end": "2026-10-13T15:30:00.000000Z",
+                "endInclusive": true
+              }
+            ]
+          },
+          "metric": {
+            "key": "sales",
+            "label": "Ventas comerciales",
+            "exactValue": "200.00",
+            "valueText": "$ 200",
+            "quality": "exact",
+            "qualityText": null,
+            "knownCount": 2,
+            "unknownCount": 0,
+            "reasons": [],
+            "isKnownZero": false
+          }
+        },
+        "previous": {
+          "interval": {
+            "key": "previous-synthetic-1",
+            "label": "Jornada comercial: 11/10/2026",
+            "observation": "partial",
+            "slices": [
+              {
+                "sessionId": null,
+                "timezone": "America/Argentina/Buenos_Aires",
+                "commercialDate": "2026-10-11",
+                "start": "2026-10-11T03:00:00.000000Z",
+                "end": "2026-10-11T15:30:00.000000Z",
+                "endInclusive": true
+              }
+            ]
+          },
+          "metric": {
+            "key": "sales",
+            "label": "Ventas comerciales",
+            "exactValue": "160.00",
+            "valueText": "$ 160",
+            "quality": "exact",
+            "qualityText": null,
+            "knownCount": 2,
+            "unknownCount": 0,
+            "reasons": [],
+            "isKnownZero": false
+          }
+        },
+        "comparison": {
+          "available": true,
+          "direction": "increase",
+          "text": "Aumento",
+          "absoluteText": "+$ 40",
+          "percentageText": "+25%",
+          "reason": null
+        },
+        "alignment": {
+          "available": true,
+          "reason": null
+        },
+        "selected": false
+      }
+    ],
+    "reading": {
+      "state": "descriptive",
+      "observation": "Ventas comerciales aumentaron (25%) respecto del período equivalente anterior.",
+      "evidence": {
+        "metric": "sales",
+        "label": "Ventas comerciales",
+        "current": {
+          "key": "sales",
+          "label": "Ventas comerciales",
+          "exactValue": "200.00",
+          "valueText": "$ 200",
+          "quality": "exact",
+          "qualityText": null,
+          "knownCount": 2,
+          "unknownCount": 0,
+          "reasons": [],
+          "isKnownZero": false
+        },
+        "previous": {
+          "key": "sales",
+          "label": "Ventas comerciales",
+          "exactValue": "160.00",
+          "valueText": "$ 160",
+          "quality": "exact",
+          "qualityText": null,
+          "knownCount": 2,
+          "unknownCount": 0,
+          "reasons": [],
+          "isKnownZero": false
+        },
+        "rangeLabel": "12/10/2026 – 13/10/2026",
+        "pointKey": null,
+        "asOf": "2026-10-13T15:30:00.000000Z",
+        "timezone": "America/Argentina/Buenos_Aires",
+        "comparison": {
+          "available": true,
+          "direction": "increase",
+          "text": "Aumento",
+          "absoluteText": "+$ 40",
+          "percentageText": "+25%",
+          "reason": null
+        }
+      },
+      "meaning": "El importe comercial informado fue mayor en las observaciones comparables. Esta variación no explica sus causas.",
+      "suggestion": "Revisá qué productos aportaron ingresos en este período."
+    },
+    "notices": [
+      {
+        "kind": "outside_session",
+        "text": "Fuera de sesión verificada: 2 pedidos con fecha de finalización fiable."
+      }
+    ],
+    "emptyMessage": null
+  },
+  "comparisonUnavailable": {
+    "dataState": "complete",
+    "temporalPartial": false,
+    "period": {
+      "preset": "custom",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-13",
+      "referenceDate": "2026-10-14",
+      "asOf": "2026-10-14T12:00:00.000000Z",
+      "timezone": "America/Argentina/Buenos_Aires",
+      "partial": false,
+      "granularity": "day",
+      "comparable": {
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-11"
+      },
+      "comparableReason": "unverified_session",
+      "label": "Personalizado",
+      "rangeLabel": "12/10/2026 – 13/10/2026"
+    },
+    "selectedMetric": "sales",
+    "selectedPointKey": null,
+    "kpis": [
+      {
+        "key": "sales",
+        "label": "Ventas comerciales",
+        "exactValue": "200.00",
+        "valueText": "$ 200",
+        "quality": "exact",
+        "qualityText": null,
+        "knownCount": 2,
+        "unknownCount": 0,
+        "reasons": [],
+        "isKnownZero": false,
+        "comparison": {
+          "available": false,
+          "direction": "unavailable",
+          "text": "Sin comparación válida",
+          "absoluteText": null,
+          "percentageText": null,
+          "reason": "root_comparison_unavailable"
+        },
+        "selected": true
+      },
+      {
+        "key": "completedOrders",
+        "label": "Pedidos completados",
+        "exactValue": "2",
+        "valueText": "2",
+        "quality": "exact",
+        "qualityText": null,
+        "knownCount": 2,
+        "unknownCount": 0,
+        "reasons": [],
+        "isKnownZero": false,
+        "comparison": {
+          "available": false,
+          "direction": "unavailable",
+          "text": "Sin comparación válida",
+          "absoluteText": null,
+          "percentageText": null,
+          "reason": "root_comparison_unavailable"
+        },
+        "selected": false
+      },
+      {
+        "key": "averageTicket",
+        "label": "Ticket promedio",
+        "exactValue": "100.00",
+        "valueText": "$ 100",
+        "quality": "exact",
+        "qualityText": null,
+        "knownCount": 2,
+        "unknownCount": 0,
+        "reasons": [],
+        "isKnownZero": false,
+        "comparison": {
+          "available": false,
+          "direction": "unavailable",
+          "text": "Sin comparación válida",
+          "absoluteText": null,
+          "percentageText": null,
+          "reason": "root_comparison_unavailable"
+        },
+        "selected": false
+      },
+      {
+        "key": "mainUnits",
+        "label": "Unidades vendidas",
+        "exactValue": "3",
+        "valueText": "3",
+        "quality": "exact",
+        "qualityText": null,
+        "knownCount": 2,
+        "unknownCount": 0,
+        "reasons": [],
+        "isKnownZero": false,
+        "comparison": {
+          "available": false,
+          "direction": "unavailable",
+          "text": "Sin comparación válida",
+          "absoluteText": null,
+          "percentageText": null,
+          "reason": "root_comparison_unavailable"
+        },
+        "selected": false
+      }
+    ],
+    "series": [
+      {
+        "key": "match-synthetic-0",
+        "mapping": {
+          "kind": "date_offset",
+          "days": -2
+        },
+        "basis": "commercial_date",
+        "label": "12 oct.",
+        "current": {
+          "interval": {
+            "key": "current-synthetic-0",
+            "label": "Jornada comercial: 12/10/2026",
+            "observation": "closed",
+            "slices": [
+              {
+                "sessionId": null,
+                "timezone": "America/Argentina/Buenos_Aires",
+                "commercialDate": "2026-10-12",
+                "start": "2026-10-12T03:00:00.000000Z",
+                "end": "2026-10-13T03:00:00.000000Z",
+                "endInclusive": false
+              }
+            ]
+          },
+          "metric": {
+            "key": "sales",
+            "label": "Ventas comerciales",
+            "exactValue": "0.00",
+            "valueText": "$ 0",
+            "quality": "empty",
+            "qualityText": null,
+            "knownCount": 0,
+            "unknownCount": 0,
+            "reasons": [],
+            "isKnownZero": true
+          }
+        },
+        "previous": null,
+        "comparison": {
+          "available": false,
+          "direction": "unavailable",
+          "text": "Sin comparación válida",
+          "absoluteText": null,
+          "percentageText": null,
+          "reason": "root_comparison_unavailable"
+        },
+        "alignment": {
+          "available": false,
+          "reason": "root_comparison_unavailable"
+        },
+        "selected": false
+      },
+      {
+        "key": "match-synthetic-1",
+        "mapping": {
+          "kind": "date_offset",
+          "days": -2
+        },
+        "basis": "commercial_date",
+        "label": "13 oct.",
+        "current": {
+          "interval": {
+            "key": "current-synthetic-1",
+            "label": "Jornada comercial: 13/10/2026",
+            "observation": "closed",
+            "slices": [
+              {
+                "sessionId": null,
+                "timezone": "America/Argentina/Buenos_Aires",
+                "commercialDate": "2026-10-13",
+                "start": "2026-10-13T03:00:00.000000Z",
+                "end": "2026-10-14T03:00:00.000000Z",
+                "endInclusive": false
+              }
+            ]
+          },
+          "metric": {
+            "key": "sales",
+            "label": "Ventas comerciales",
+            "exactValue": "200.00",
+            "valueText": "$ 200",
+            "quality": "exact",
+            "qualityText": null,
+            "knownCount": 2,
+            "unknownCount": 0,
+            "reasons": [],
+            "isKnownZero": false
+          }
+        },
+        "previous": null,
+        "comparison": {
+          "available": false,
+          "direction": "unavailable",
+          "text": "Sin comparación válida",
+          "absoluteText": null,
+          "percentageText": null,
+          "reason": "root_comparison_unavailable"
+        },
+        "alignment": {
+          "available": false,
+          "reason": "root_comparison_unavailable"
+        },
+        "selected": false
+      }
+    ],
+    "reading": {
+      "state": "neutral",
+      "observation": "No hay datos suficientes para una comparación válida de este indicador.",
+      "evidence": {
+        "metric": "sales",
+        "label": "Ventas comerciales",
+        "current": {
+          "key": "sales",
+          "label": "Ventas comerciales",
+          "exactValue": "200.00",
+          "valueText": "$ 200",
+          "quality": "exact",
+          "qualityText": null,
+          "knownCount": 2,
+          "unknownCount": 0,
+          "reasons": [],
+          "isKnownZero": false
+        },
+        "previous": null,
+        "rangeLabel": "12/10/2026 – 13/10/2026",
+        "pointKey": null,
+        "asOf": "2026-10-14T12:00:00.000000Z",
+        "timezone": "America/Argentina/Buenos_Aires",
+        "comparison": {
+          "available": false,
+          "direction": "unavailable",
+          "text": "Sin comparación válida",
+          "absoluteText": null,
+          "percentageText": null,
+          "reason": "root_comparison_unavailable"
+        }
+      },
+      "meaning": "El indicador actual y la comparación temporal deben contar con evidencia válida.",
+      "suggestion": "Revisá la cobertura y el período seleccionado antes de sacar conclusiones."
+    },
+    "notices": [
+      {
+        "kind": "outside_session",
+        "text": "Fuera de sesión verificada: 2 pedidos con fecha de finalización fiable."
+      },
+      {
+        "kind": "comparison",
+        "text": "Sin comparación válida para el período."
+      }
+    ],
+    "emptyMessage": null
+  },
+  "timeout": {
+    "status": "error",
+    "error": {
+      "ok": false,
+      "code": "timeout",
+      "message": "La consulta tardó demasiado. Podés volver a intentar.",
+      "retryable": true
+    }
+  },
+  "configuration": {
+    "status": "configuration_required",
+    "message": "Configurá la zona horaria del negocio para consultar Estadísticas."
+  }
+}

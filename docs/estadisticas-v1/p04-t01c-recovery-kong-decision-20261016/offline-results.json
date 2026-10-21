@@ -1,0 +1,214 @@
+{
+  "at": "2026-10-16T17:17:22.372Z",
+  "status": "PASS_OFFLINE_PREPARATION",
+  "tests": 50,
+  "items": [
+    {
+      "name": "Original TOC parsed including seven metadata records",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Source payload COPY blocks readable, not restored",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Self-comparison not a restoration proof",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Changed SQL/owner bytes produce structural difference, no normalization",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Unsupported archive version rejected",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject truncated archive 0",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject truncated archive 4",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject truncated archive 20",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject truncated archive 1000",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Bounded archive input",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Corrupted data stream rejected",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Row order irrelevant; exact multiset preserved",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Duplicate rows not deduplicated",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "No NULL/financial/array normalization \\N",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "No NULL/financial/array normalization 123.450",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "No NULL/financial/array normalization [1,2]",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Synthetic isolated lab accepted",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab wrongId",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab oldName",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab wrongImage",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab originalLabel",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab wrongPlanLabel",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab rootUser",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab bridge",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab foreignEndpoint",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab wildcardPort",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab publishedRuntime",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab publishAll",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab privileged",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab writableRoot",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab hostBind",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab volumesFrom",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab persistentVolume",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab unknownTmpfs",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab unboundedTmpfs",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab capAdd",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab noCapDrop",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab privilegeEscalation",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab moreMemory",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab unlimitedSwap",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab moreCpu",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab unlimitedPids",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab restart",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Reject unsafe lab autoRemove",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Original ID rejected despite forged lab fields",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Role prerequisites are synthetic and exclude predefined roles",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Restore shell uses only fresh socket, hash, quotas and explicit dump restore",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Review cannot touch processes/network assert-new-lab.proposed.mjs",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Review cannot touch processes/network stage-new-lab.proposed.mjs",
+      "result": "PASS_OFFLINE_ONLY"
+    },
+    {
+      "name": "Review cannot touch processes/network compare-new-lab.proposed.mjs",
+      "result": "PASS_OFFLINE_ONLY"
+    }
+  ],
+  "sqlExecuted": 0,
+  "dockerCommands": 0,
+  "restores": 0,
+  "sourceFileReadOnly": true,
+  "comparisonSelfTest": "Not a restore",
+  "shellRuntime": "NOT_EXECUTED",
+  "imageToolsAvailability": "NOT_REQUERIED; future preflight gate"
+}

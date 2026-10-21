@@ -1,0 +1,49 @@
+{
+  "at": "2026-10-13T19:15:26.436Z",
+  "files": [
+    {
+      "path": "docs/estadisticas-v1/p03-e0/audit.mjs",
+      "sha256": "18c05c7b207d8149693e542a014441210d255d9e11a7352117a80ee3e455307d"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e0/base/components/admin/admin-nav-config.ts.txt",
+      "sha256": "493dc714aeba653fa26b9cf0781248d626e08b41ba706157fd66ddd5e9a5b24a"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e0/base/components/admin/layout/admin-nav-list.tsx.txt",
+      "sha256": "6975b263b8ce6ecf3284d35b17ed0b6436e6adf0b19447828c47da544c414e7b"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e0/base/lib/admin/permissions.ts.txt",
+      "sha256": "7fbdad6d2c6ee390536f06aa865e30a918ab308a053f613df1d3adc61dce4405"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e0/evidence.json",
+      "sha256": "44e1dc70ba250f6f88e9e0f674b43d733e0720c8c6ad11cfd8422e6ede502625"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e0/informe.md",
+      "sha256": "ae0ce878a65def2cb9575768a77608e38329d3534063a566de8ba53502f298eb"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e0/navigation-permissions.proposed.patch",
+      "sha256": "e566ce1627b8257d08f73f3954e001ff9944063fadac6588935509174d57f196"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e0/preexisting-hashes.json",
+      "sha256": "04d6784f35429cced41af5f2950a1ae60b0127bc616657aba6da375fb6cdf9d7"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e0/proposed/components/admin/admin-nav-config.ts.txt",
+      "sha256": "c36f9b9f2af872e83cad236f8771a7250b6daf3ec407c5e9a276684fb3902de8"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e0/proposed/components/admin/layout/admin-nav-list.tsx.txt",
+      "sha256": "efcbfa05fcc0fa17a22b0b76493ad9429fbde3a3be2574e3584ade9a49cc34d3"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e0/proposed/lib/admin/permissions.ts.txt",
+      "sha256": "07af68893ca6681e4deb4ab6c452cde2943e7449d9bb7a5839003be3d802870c"
+    }
+  ]
+}

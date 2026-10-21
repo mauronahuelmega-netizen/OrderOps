@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-13T15:13:47.577Z",
+  "nestedAvailable": true,
+  "records": [
+    {
+      "orders": 200,
+      "status": "PASS",
+      "measurementCount": 16
+    }
+  ],
+  "serialOnly": true,
+  "perSelectTimeoutSeconds": 15,
+  "samplesPerMode": 3,
+  "fixtureRollbackVerified": true,
+  "persistentFunctionsAndIndexesUnchanged": true
+}

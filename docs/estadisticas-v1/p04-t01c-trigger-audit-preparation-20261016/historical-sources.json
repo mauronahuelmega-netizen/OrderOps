@@ -1,0 +1,53 @@
+{
+  "at": "2026-10-16T16:27:02.782Z",
+  "files": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/trigger-differences.json",
+      "sha256": "d72124a51c88a23ac9d0997ab4b06614ef9388aaf5ec039d2333a28daf0c0789"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/extra-after.json",
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/verification.proposed.psql",
+      "sha256": "485cf660d8230a868b4051aecce8418da9cc30d799aaec6a001f5eb0e4309a15"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/sql-readonly-observed.json",
+      "sha256": "ac9d460069cbec22480110d1651e0f2ff6bcbd57f55e7f99504d7967ce8bf23b"
+    },
+    {
+      "path": "supabase/migrations/20260607210325_business_settings.sql",
+      "sha256": "0093215fa55158634fe5368783910508bf169ce5acac545101a31b70973041f8"
+    },
+    {
+      "path": "supabase/migrations/20260712090000_product_customization_v1_schema.sql",
+      "sha256": "e0b5e29bde99e3010ff55076e08328c2d1c31d461032a50ce5a7287d61ee1c09"
+    },
+    {
+      "path": "supabase/migrations/20260926011000_order_financials.sql",
+      "sha256": "25f5a99a020a9982d04c2b1e4cc36f0fa738fb625f046b386b4c1d27c5c1ccda"
+    },
+    {
+      "path": "supabase/migrations/20260926012000_finance_foundation.sql",
+      "sha256": "1c2409374eef1f6a9aa3cc1effeb8c008d87154a164ba07a5bbfca23319f5e32"
+    },
+    {
+      "path": "supabase/migrations/20260926013000_business_finance_settings.sql",
+      "sha256": "246c42a5caf306dad7dae4ae2d18a4e21a830951102de8e86585d511e4f231cf"
+    },
+    {
+      "path": "supabase/migrations/20260926014000_finance_ledger.sql",
+      "sha256": "27ab8f8a335491c0099d3d3a2fe1e3c04e10ce8d4fc8664413da8cca3b3d4300"
+    }
+  ],
+  "neverCapturedHistorically": [
+    "trigger oid",
+    "tgfoid",
+    "function oid/implementation/config/ACL for moddatetime",
+    "tgenabled/tgtype catalog fields",
+    "exact original search_path",
+    "lossless system_identifier"
+  ]
+}

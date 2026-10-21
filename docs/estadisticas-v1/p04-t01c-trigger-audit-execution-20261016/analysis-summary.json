@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-16T16:42:19.532Z",
+  "verdict": "PASS_FOCALIZADO",
+  "phaseP04T01C": "BLOCKED",
+  "runnerConclusion": {
+    "status": "CURRENT_REPRESENTATION_CONFIRMED_WITH_HISTORICAL_LIMITATIONS",
+    "triggers": 13,
+    "frames": 3,
+    "sharedFunctionOid": "25370",
+    "exactSystemIdentifier": "7695864922466676780",
+    "oidAndPropertiesStableWithinSnapshot": true,
+    "exactHistoricalTextReproduced": true,
+    "historicalOidContinuityProven": false,
+    "phaseP04T01C": "BLOCKED"
+  },
+  "identity": {
+    "markerVerified": true,
+    "ledger": 124,
+    "database": "postgres",
+    "user": "postgres",
+    "readOnly": "on",
+    "isolation": "repeatable read",
+    "serverVersionNum": "170006",
+    "systemIdentifier": "7695864922466676780"
+  },
+  "triggerCount": 13,
+  "stableFieldsPerTrigger": 54,
+  "allIndividualResults": "PASS",
+  "qualifiedTextEqualsPriorObserved": true,
+  "unqualifiedTextEqualsHistoricalReference": true,
+  "returnToAExact": true,
+  "rollbackObserved": true,
+  "historicalOidContinuityProven": false,
+  "additionalSqlQueries": 0
+}

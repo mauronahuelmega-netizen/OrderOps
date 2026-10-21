@@ -1,0 +1,31 @@
+// Pure validation: no filesystem, processes, transport, evaluation or injected SQL.
+import assert from 'node:assert/strict';import {createHash} from 'node:crypto';
+export const labels=['without_extensions','with_extensions','without_extensions_again'];
+export const stableFields=('originalIndex schema table name triggerOid tableOid tableKind tgfoid tgparentid tgtype tgenabled tgisinternal tgconstrrelid tgconstrindid tgconstraint tgdeferrable tginitdeferred tgnargs tgattr argumentMatches argumentHex argumentBytes argumentMd5 hasWhen whenMd5 hasOldTransition hasNewTransition functionOid functionSchema functionName functionIdentityArguments functionArgumentOids functionNargs functionKind returnTypeOid returnsTrigger language languageOid owner securityDefiner strict leakproof returnsSet volatility parallel configIsNull configMd5 acl sourceMatches binaryMatches sourceMd5 binaryMd5 functionDefinitionMd5 extensionMembership').split(' ');
+const sha=b=>createHash('sha256').update(b).digest('hex');const md5=b=>createHash('md5').update(b).digest('hex');
+const oid=s=>assert.ok(typeof s==='string'&&/^[1-9][0-9]{0,9}$/.test(s)&&BigInt(s)<=4294967295n,'OID not exact text');
+const keys=(v,ks)=>assert.deepEqual(Object.keys(v).sort(),[...ks].sort(),'Unexpected keys');
+export function verifyArtifacts(bytesByPath,pins){for(const p of pins){assert.ok(Object.hasOwn(bytesByPath,p.path),'Missing pinned artifact');assert.equal(sha(bytesByPath[p.path]),p.sha256,'Artifact hash mismatch');}return true;}
+export function parseOutput(stdout){assert.ok(Buffer.byteLength(stdout)<=2e6,'Output budget');const out={};let key=null;let rolled=false;
+ for(const raw of stdout.split(/\r?\n/)){const line=raw.trim();if(!line)continue;if(line==='ROLLBACK_COMPLETED'){assert.equal(key,null);assert.equal(rolled,false);rolled=true;continue;}assert.equal(rolled,false,'Output after rollback marker');
+  if(line.startsWith('RESULT_')){assert.equal(key,null);key=line.slice(7);assert.ok(['identity',...labels].includes(key));assert.ok(!Object.hasOwn(out,key));}
+  else {assert.ok(key,'Unexpected unlabelled output');assert.ok(line.startsWith('{'));out[key]=JSON.parse(line);key=null;}}
+ assert.equal(rolled,true,'Rollback not observed');keys(out,['identity',...labels]);return out;
+}
+export function validateCapture(capture,targets){keys(capture,['identity',...labels]);assert.equal(targets.length,13);assert.equal(new Set(targets.map(t=>t.originalIndex)).size,13);
+ const ident=capture.identity;keys(ident,['markerVerified','ledger','database','user','readOnly','isolation','serverVersionNum','systemIdentifier']);assert.equal(ident.markerVerified,true);assert.equal(ident.ledger,124);assert.equal(ident.database,'postgres');assert.equal(ident.user,'postgres');assert.equal(ident.readOnly,'on');assert.equal(ident.isolation,'repeatable read');assert.equal(ident.serverVersionNum,'170006');assert.ok(typeof ident.systemIdentifier==='string'&&/^[1-9][0-9]{0,19}$/.test(ident.systemIdentifier));assert.ok(BigInt(ident.systemIdentifier)<=18446744073709551615n,'system_identifier range');
+ let commonOid;
+ for(const [frameIndex,label]of labels.entries()){
+  const f=capture[label];keys(f,['label','searchPath','effectiveSchemas','expectedFunctionOid','resolvedUnqualifiedFunctionOid','rows']);assert.equal(f.label,label);assert.equal(f.searchPath,frameIndex===1?'pg_catalog, public, extensions':'pg_catalog, public');assert.deepEqual(f.effectiveSchemas,frameIndex===1?['pg_catalog','public','extensions']:['pg_catalog','public']);oid(f.expectedFunctionOid);commonOid??=f.expectedFunctionOid;assert.equal(f.expectedFunctionOid,commonOid);assert.equal(f.resolvedUnqualifiedFunctionOid,frameIndex===1?commonOid:null);assert.equal(f.rows.length,13);assert.equal(new Set(f.rows.map(r=>r.triggerOid)).size,13);
+  for(let i=0;i<13;i++){
+   const r=f.rows[i],t=targets[i];keys(r,[...stableFields,'functionVisible','definition']);assert.equal(r.originalIndex,t.originalIndex);assert.equal(r.schema,t.schema);assert.equal(r.table,t.table);assert.equal(r.name,t.name);for(const k of ['triggerOid','tableOid','tgfoid','functionOid','languageOid','returnTypeOid'])oid(r[k]);assert.equal(r.functionOid,r.tgfoid);assert.equal(r.tgfoid,commonOid);
+   for(const [k,v]of Object.entries({tableKind:'r',tgparentid:'0',tgtype:19,tgenabled:'O',tgisinternal:false,tgconstrrelid:'0',tgconstrindid:'0',tgconstraint:'0',tgdeferrable:false,tginitdeferred:false,tgnargs:1,tgattr:'',argumentMatches:true,argumentHex:t.expectedArgumentHex,argumentBytes:11,argumentMd5:md5(Buffer.from('updated_at\0')),hasWhen:false,whenMd5:null,hasOldTransition:false,hasNewTransition:false,functionSchema:'extensions',functionName:'moddatetime',functionIdentityArguments:'',functionArgumentOids:'',functionNargs:0,functionKind:'f',returnTypeOid:'2279',returnsTrigger:true,language:'c',securityDefiner:false,strict:false,leakproof:false,returnsSet:false,volatility:'v',parallel:'u',configIsNull:true,configMd5:null,sourceMatches:true,binaryMatches:true,sourceMd5:md5('moddatetime'),binaryMd5:md5('$libdir/moddatetime')}))assert.deepEqual(r[k],v,'Unexpected '+k);
+   assert.match(r.owner,/^[a-zA-Z_][a-zA-Z0-9_]{0,62}$/);assert.ok(r.acl===null||(typeof r.acl==='string'&&r.acl.length<=2048));assert.match(r.functionDefinitionMd5,/^[a-f0-9]{32}$/);
+   assert.equal(r.extensionMembership.length,1);const e=r.extensionMembership[0];keys(e,['oid','name','schema','version','dependencyType']);oid(e.oid);assert.equal(e.name,'moddatetime');assert.equal(e.schema,'extensions');assert.equal(e.dependencyType,'e');assert.match(e.version,/^[0-9]+(?:\.[0-9]+)*$/);
+   assert.equal(r.functionVisible,frameIndex===1);assert.equal(r.definition,frameIndex===1?t.referenceDefinition:t.observedDefinition,'Exact historical text mismatch');
+   if(frameIndex>0)for(const k of stableFields)assert.deepEqual(r[k],capture.without_extensions.rows[i][k],'Catalog identity/config changed: '+k);
+  }
+ }
+ assert.deepEqual(capture.without_extensions_again.rows,capture.without_extensions.rows,'A repeat changed');
+ return {status:'CURRENT_REPRESENTATION_CONFIRMED_WITH_HISTORICAL_LIMITATIONS',triggers:13,frames:3,sharedFunctionOid:commonOid,exactSystemIdentifier:ident.systemIdentifier,oidAndPropertiesStableWithinSnapshot:true,exactHistoricalTextReproduced:true,historicalOidContinuityProven:false,phaseP04T01C:'BLOCKED'};
+}

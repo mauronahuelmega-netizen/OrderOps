@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-14T16:02:25.051Z",
+  "result": "PASS",
+  "tests": [
+    {
+      "id": "risk.SQL05.session_settings",
+      "status": "PASS"
+    },
+    {
+      "id": "risk.SQL07.nonfinite_source",
+      "status": "PASS"
+    },
+    {
+      "id": "risk.SQL05.datestyle_only",
+      "status": "PASS"
+    },
+    {
+      "id": "risk.SQL05.simultaneous",
+      "status": "PASS"
+    },
+    {
+      "id": "risk.SQL05.old_cursor_denied",
+      "status": "PASS"
+    },
+    {
+      "id": "risk.SQL07.mixed_pending",
+      "status": "PASS"
+    },
+    {
+      "id": "risk.SQL07.finite_pending",
+      "status": "PASS"
+    },
+    {
+      "id": "risk.SQL07.nonfinite_projection",
+      "status": "PASS"
+    }
+  ],
+  "candidateSha256": "57395a7920d95cf63c1b67fb8191e40272a26aeb445a4abe7bec4d822b99c2c1",
+  "firstAfterFixtureSetup": true
+}

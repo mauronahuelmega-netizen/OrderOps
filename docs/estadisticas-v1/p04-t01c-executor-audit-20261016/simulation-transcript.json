@@ -1,0 +1,1004 @@
+{
+  "at": "2026-10-16T14:32:28.656Z",
+  "simulationOnly": true,
+  "newIdsAreFictitiousNotOperational": true,
+  "result": "PASS_SIMULATION_ONLY",
+  "failedStage": null,
+  "newIds": {
+    "db": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "kong": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "events": [
+    {
+      "seq": 0,
+      "at": "2026-10-16T14:32:28.666Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "preflight",
+      "status": "INTENT",
+      "previousHash": null,
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "3555a4922eff9f6ed1baa390a4d45d89b06bc24822f2854859e61d57d92070e5"
+    },
+    {
+      "seq": 1,
+      "at": "2026-10-16T14:32:28.669Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "preflight",
+      "status": "VERIFIED",
+      "previousHash": "3555a4922eff9f6ed1baa390a4d45d89b06bc24822f2854859e61d57d92070e5",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "37cbf31c1eff10f5e08d887121f7b333a6c70222a4d0a1671079e380ae39e7cf"
+    },
+    {
+      "seq": 2,
+      "at": "2026-10-16T14:32:28.669Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "stop_kong",
+      "status": "INTENT",
+      "previousHash": "37cbf31c1eff10f5e08d887121f7b333a6c70222a4d0a1671079e380ae39e7cf",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "19cd4ea15216b4dd480833480f384e1a4ca2be87f08fc0ebcd78d5edad8f9895"
+    },
+    {
+      "seq": 3,
+      "at": "2026-10-16T14:32:28.670Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "stop_kong",
+      "status": "VERIFIED",
+      "previousHash": "19cd4ea15216b4dd480833480f384e1a4ca2be87f08fc0ebcd78d5edad8f9895",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "547a0ae6a6870ce5bdb233bb28651b99f5606abaf2c90e90f75d32775a3032e0"
+    },
+    {
+      "seq": 4,
+      "at": "2026-10-16T14:32:28.670Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "stop_db",
+      "status": "INTENT",
+      "previousHash": "547a0ae6a6870ce5bdb233bb28651b99f5606abaf2c90e90f75d32775a3032e0",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "0369008fe4002d613ea48d156285f6869d262b3969828b96bac78eed78c2a9ad"
+    },
+    {
+      "seq": 5,
+      "at": "2026-10-16T14:32:28.672Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "stop_db",
+      "status": "VERIFIED",
+      "previousHash": "0369008fe4002d613ea48d156285f6869d262b3969828b96bac78eed78c2a9ad",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "3276809c45b1824df932be087ef87efd183d16c70b063063bbcf1e6e6540a30c"
+    },
+    {
+      "seq": 6,
+      "at": "2026-10-16T14:32:28.672Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "recapture_db",
+      "status": "INTENT",
+      "previousHash": "3276809c45b1824df932be087ef87efd183d16c70b063063bbcf1e6e6540a30c",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "4e3bbf0fce24f21f3c275bafed7132f7c00d08cb94333407e7a4509f22c72d8f"
+    },
+    {
+      "seq": 7,
+      "at": "2026-10-16T14:32:28.678Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "recapture_db",
+      "status": "VERIFIED",
+      "previousHash": "4e3bbf0fce24f21f3c275bafed7132f7c00d08cb94333407e7a4509f22c72d8f",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "056cc21730ee991169cfd7b1ec5b4a313b5a1af2ed2de52988941f6deb802838"
+    },
+    {
+      "seq": 8,
+      "at": "2026-10-16T14:32:28.678Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "recapture_kong",
+      "status": "INTENT",
+      "previousHash": "056cc21730ee991169cfd7b1ec5b4a313b5a1af2ed2de52988941f6deb802838",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "f1687475e2fd0f9a10c16d4fc35dbfa3c07ba37727ec0115d9d16c747bc9eaf3"
+    },
+    {
+      "seq": 9,
+      "at": "2026-10-16T14:32:28.681Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "recapture_kong",
+      "status": "VERIFIED",
+      "previousHash": "f1687475e2fd0f9a10c16d4fc35dbfa3c07ba37727ec0115d9d16c747bc9eaf3",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "32a63a2d49c4159da6f523e8b2e2a8639a3580ebd8de659d6f7f50f22b07f106"
+    },
+    {
+      "seq": 10,
+      "at": "2026-10-16T14:32:28.681Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "rename_db",
+      "status": "INTENT",
+      "previousHash": "32a63a2d49c4159da6f523e8b2e2a8639a3580ebd8de659d6f7f50f22b07f106",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "73b60833cafbc1ec589c596ebdbf734bf540fac079332c65e829dc61fa0e4f34"
+    },
+    {
+      "seq": 11,
+      "at": "2026-10-16T14:32:28.682Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "rename_db",
+      "status": "VERIFIED",
+      "previousHash": "73b60833cafbc1ec589c596ebdbf734bf540fac079332c65e829dc61fa0e4f34",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "d7778c2068e6c915729b258cb3004550d868cb913f84fb887cdf61cf47a26e0f"
+    },
+    {
+      "seq": 12,
+      "at": "2026-10-16T14:32:28.682Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "detach_db",
+      "status": "INTENT",
+      "previousHash": "d7778c2068e6c915729b258cb3004550d868cb913f84fb887cdf61cf47a26e0f",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "896d7223883f837c313a48348f136c6ad5728a17066af248aa383836c1558e0f"
+    },
+    {
+      "seq": 13,
+      "at": "2026-10-16T14:32:28.683Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "detach_db",
+      "status": "VERIFIED",
+      "previousHash": "896d7223883f837c313a48348f136c6ad5728a17066af248aa383836c1558e0f",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "5f472e36933acb6769d80c9529cd3c22d94e36c13d12a2ba5a194c553b497462"
+    },
+    {
+      "seq": 14,
+      "at": "2026-10-16T14:32:28.683Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "rename_kong",
+      "status": "INTENT",
+      "previousHash": "5f472e36933acb6769d80c9529cd3c22d94e36c13d12a2ba5a194c553b497462",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "9b5fc6e3e3376e27116c098407ae61b239f59b5cdf8e7d87a4f37f219ee4afd8"
+    },
+    {
+      "seq": 15,
+      "at": "2026-10-16T14:32:28.683Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "rename_kong",
+      "status": "VERIFIED",
+      "previousHash": "9b5fc6e3e3376e27116c098407ae61b239f59b5cdf8e7d87a4f37f219ee4afd8",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "1beb4b9e6d8734547e060920493dbecbdbf8ed94c53e13a5f6bf5dadc1241a0e"
+    },
+    {
+      "seq": 16,
+      "at": "2026-10-16T14:32:28.683Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "detach_kong",
+      "status": "INTENT",
+      "previousHash": "1beb4b9e6d8734547e060920493dbecbdbf8ed94c53e13a5f6bf5dadc1241a0e",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "6ee7a781eba54c33839dd32a4d2e724b10c972c5120c4776169628519261b0e2"
+    },
+    {
+      "seq": 17,
+      "at": "2026-10-16T14:32:28.684Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "detach_kong",
+      "status": "VERIFIED",
+      "previousHash": "6ee7a781eba54c33839dd32a4d2e724b10c972c5120c4776169628519261b0e2",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "184551e1912dc8080ff201b9945ca7228d02605f053c05fb06499b656ec28566"
+    },
+    {
+      "seq": 18,
+      "at": "2026-10-16T14:32:28.684Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "create_db",
+      "status": "INTENT",
+      "previousHash": "184551e1912dc8080ff201b9945ca7228d02605f053c05fb06499b656ec28566",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {},
+      "hash": "cded2027982aa99112af98836411877c1df21126745b1bdc91d32bcb980e1bfb"
+    },
+    {
+      "seq": 19,
+      "at": "2026-10-16T14:32:28.687Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "create_db",
+      "status": "VERIFIED",
+      "previousHash": "cded2027982aa99112af98836411877c1df21126745b1bdc91d32bcb980e1bfb",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {
+        "db": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "hash": "2aa33fd2b022da6f5745ed0596747f8f32e4d5daae8983a0c531e6004cdb4b12"
+    },
+    {
+      "seq": 20,
+      "at": "2026-10-16T14:32:28.687Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "create_kong",
+      "status": "INTENT",
+      "previousHash": "2aa33fd2b022da6f5745ed0596747f8f32e4d5daae8983a0c531e6004cdb4b12",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {
+        "db": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "hash": "6e8516815c73d1e671ec5cb9336c2684331389e6c2e441f0be4f5c75c7687818"
+    },
+    {
+      "seq": 21,
+      "at": "2026-10-16T14:32:28.688Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "create_kong",
+      "status": "VERIFIED",
+      "previousHash": "6e8516815c73d1e671ec5cb9336c2684331389e6c2e441f0be4f5c75c7687818",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {
+        "db": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kong": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "hash": "0e1d8ce6e8f3ef4ef136befb7c6b3958398f88aaa9a2521afaf37726f3a8927f"
+    },
+    {
+      "seq": 22,
+      "at": "2026-10-16T14:32:28.688Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "restore_db",
+      "status": "INTENT",
+      "previousHash": "0e1d8ce6e8f3ef4ef136befb7c6b3958398f88aaa9a2521afaf37726f3a8927f",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {
+        "db": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kong": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "hash": "35424b894a8e34bd568f757f3f4832735d3193c53a4ef9537b9983709e84f97e"
+    },
+    {
+      "seq": 23,
+      "at": "2026-10-16T14:32:28.691Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "restore_db",
+      "status": "VERIFIED",
+      "previousHash": "35424b894a8e34bd568f757f3f4832735d3193c53a4ef9537b9983709e84f97e",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {
+        "db": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kong": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "hash": "03a9a47e3525f00e46ceb3498635991b95d2b27a2550f353b996655750ef7a65"
+    },
+    {
+      "seq": 24,
+      "at": "2026-10-16T14:32:28.691Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "restore_kong",
+      "status": "INTENT",
+      "previousHash": "03a9a47e3525f00e46ceb3498635991b95d2b27a2550f353b996655750ef7a65",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {
+        "db": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kong": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "hash": "8d6e0c5decb9e5804ebf20dc280ed563d02ea93f7e184736ff9aa899a1bd91ca"
+    },
+    {
+      "seq": 25,
+      "at": "2026-10-16T14:32:28.693Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "restore_kong",
+      "status": "VERIFIED",
+      "previousHash": "8d6e0c5decb9e5804ebf20dc280ed563d02ea93f7e184736ff9aa899a1bd91ca",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {
+        "db": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kong": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "hash": "562ebc4a3fa0d3366bcdcc42656375e79654ab0b504748c402f062c40eb6223c"
+    },
+    {
+      "seq": 26,
+      "at": "2026-10-16T14:32:28.693Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "start_db",
+      "status": "INTENT",
+      "previousHash": "562ebc4a3fa0d3366bcdcc42656375e79654ab0b504748c402f062c40eb6223c",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {
+        "db": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kong": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "hash": "17d2da83662baae9f392afc83802532d6bd160fba2e7ea6263d99e999f40f57d"
+    },
+    {
+      "seq": 27,
+      "at": "2026-10-16T14:32:28.694Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "start_db",
+      "status": "VERIFIED",
+      "previousHash": "17d2da83662baae9f392afc83802532d6bd160fba2e7ea6263d99e999f40f57d",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {
+        "db": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kong": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "hash": "36c950c93d93197bc3e20d6dd831bc9ab5b1212b53470d189de0923c7bc79823"
+    },
+    {
+      "seq": 28,
+      "at": "2026-10-16T14:32:28.694Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "start_kong",
+      "status": "INTENT",
+      "previousHash": "36c950c93d93197bc3e20d6dd831bc9ab5b1212b53470d189de0923c7bc79823",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {
+        "db": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kong": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "hash": "bb634dde8b6e2366663b2206adf76911af044feadd464be68bbdf933f19d47c1"
+    },
+    {
+      "seq": 29,
+      "at": "2026-10-16T14:32:28.695Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "start_kong",
+      "status": "VERIFIED",
+      "previousHash": "bb634dde8b6e2366663b2206adf76911af044feadd464be68bbdf933f19d47c1",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {
+        "db": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kong": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "hash": "80a25af57806b0214772f36a60603f9f24f2cbbfca539268378559223ff52679"
+    },
+    {
+      "seq": 30,
+      "at": "2026-10-16T14:32:28.695Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "postcheck",
+      "status": "INTENT",
+      "previousHash": "80a25af57806b0214772f36a60603f9f24f2cbbfca539268378559223ff52679",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {
+        "db": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kong": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "hash": "1b118a6f3e883de6333c63511e81c063a877dd6c81ebcbb4c99f821dcabd0283"
+    },
+    {
+      "seq": 31,
+      "at": "2026-10-16T14:32:28.697Z",
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "stage": "postcheck",
+      "status": "VERIFIED",
+      "previousHash": "1b118a6f3e883de6333c63511e81c063a877dd6c81ebcbb4c99f821dcabd0283",
+      "oldIds": {
+        "db": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "kong": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63"
+      },
+      "newIds": {
+        "db": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "kong": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "hash": "3701259466c2e789f86c283966190b7c5c39517ae21a396a01e3cb118a74e819"
+    }
+  ],
+  "calls": [
+    {
+      "stage": "preflight",
+      "op": "snapshot",
+      "id": null,
+      "kind": null
+    },
+    {
+      "stage": "stop_kong",
+      "op": "stop",
+      "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "kind": null
+    },
+    {
+      "stage": "stop_kong",
+      "op": "inspect",
+      "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "kind": null
+    },
+    {
+      "stage": "stop_db",
+      "op": "stop",
+      "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "kind": null
+    },
+    {
+      "stage": "stop_db",
+      "op": "inspect",
+      "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "kind": null
+    },
+    {
+      "stage": "recapture_db",
+      "op": "capture",
+      "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "kind": "db"
+    },
+    {
+      "stage": "recapture_kong",
+      "op": "capture",
+      "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "kind": "kong"
+    },
+    {
+      "stage": "rename_db",
+      "op": "rename",
+      "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "kind": null
+    },
+    {
+      "stage": "rename_db",
+      "op": "inspect",
+      "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "kind": null
+    },
+    {
+      "stage": "detach_db",
+      "op": "detach",
+      "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "kind": null
+    },
+    {
+      "stage": "detach_db",
+      "op": "inspect",
+      "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "kind": null
+    },
+    {
+      "stage": "rename_kong",
+      "op": "rename",
+      "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "kind": null
+    },
+    {
+      "stage": "rename_kong",
+      "op": "inspect",
+      "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "kind": null
+    },
+    {
+      "stage": "detach_kong",
+      "op": "detach",
+      "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "kind": null
+    },
+    {
+      "stage": "detach_kong",
+      "op": "inspect",
+      "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "kind": null
+    },
+    {
+      "stage": "create_db",
+      "op": "create",
+      "id": null,
+      "kind": "db"
+    },
+    {
+      "stage": "create_db",
+      "op": "inspect",
+      "id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "kind": null
+    },
+    {
+      "stage": "create_kong",
+      "op": "create",
+      "id": null,
+      "kind": "kong"
+    },
+    {
+      "stage": "create_kong",
+      "op": "inspect",
+      "id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "kind": null
+    },
+    {
+      "stage": "restore_db",
+      "op": "restore",
+      "id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "kind": "db"
+    },
+    {
+      "stage": "restore_kong",
+      "op": "restore",
+      "id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "kind": "kong"
+    },
+    {
+      "stage": "start_db",
+      "op": "start",
+      "id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "kind": "db"
+    },
+    {
+      "stage": "start_db",
+      "op": "inspect",
+      "id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "kind": null
+    },
+    {
+      "stage": "start_db",
+      "op": "verify_replay",
+      "id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "kind": "db"
+    },
+    {
+      "stage": "start_kong",
+      "op": "start",
+      "id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "kind": "kong"
+    },
+    {
+      "stage": "start_kong",
+      "op": "inspect",
+      "id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "kind": null
+    },
+    {
+      "stage": "start_kong",
+      "op": "verify_replay",
+      "id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "kind": "kong"
+    },
+    {
+      "stage": "postcheck",
+      "op": "snapshot",
+      "id": null,
+      "kind": null
+    }
+  ],
+  "requestTrace": [
+    {
+      "stage": "stop_kong",
+      "method": "POST",
+      "path": "/v1.52/containers/313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63/stop?t=-1",
+      "bodyHash": null,
+      "expectedStatus": 204
+    },
+    {
+      "stage": "stop_kong",
+      "method": "GET",
+      "path": "/v1.52/containers/313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63/json",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "stop_db",
+      "method": "POST",
+      "path": "/v1.52/containers/592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1/stop?t=-1",
+      "bodyHash": null,
+      "expectedStatus": 204
+    },
+    {
+      "stage": "stop_db",
+      "method": "GET",
+      "path": "/v1.52/containers/592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1/json",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "recapture_db",
+      "method": "GET",
+      "path": "/v1.52/containers/592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1/export",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "recapture_db",
+      "method": "GET",
+      "path": "/v1.52/containers/592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1/changes",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "recapture_db",
+      "method": "GET",
+      "path": "/v1.52/containers/592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1/archive?path=%2Fetc%2Fpostgresql%2Fpostgresql.conf",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "recapture_db",
+      "method": "GET",
+      "path": "/v1.52/containers/592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1/archive?path=%2Fetc%2Fpostgresql-custom%2Fpgsodium_root.key",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "recapture_db",
+      "method": "HEAD",
+      "path": "/v1.52/containers/592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1/archive?path=%2Fetc%2Fpostgresql",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "recapture_kong",
+      "method": "GET",
+      "path": "/v1.52/containers/313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63/export",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "recapture_kong",
+      "method": "GET",
+      "path": "/v1.52/containers/313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63/changes",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "recapture_kong",
+      "method": "GET",
+      "path": "/v1.52/containers/313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63/archive?path=%2Fhome%2Fkong%2Flocalhost.crt",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "recapture_kong",
+      "method": "GET",
+      "path": "/v1.52/containers/313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63/archive?path=%2Fhome%2Fkong%2Flocalhost.key",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "recapture_kong",
+      "method": "HEAD",
+      "path": "/v1.52/containers/313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63/archive?path=%2Fhome%2Fkong",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "rename_db",
+      "method": "POST",
+      "path": "/v1.52/containers/592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1/rename?name=supabase_db_orderops-statistics-v1-test-74718de66a41.pre-loopback-SIMULATION",
+      "bodyHash": null,
+      "expectedStatus": 204
+    },
+    {
+      "stage": "rename_db",
+      "method": "GET",
+      "path": "/v1.52/containers/592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1/json",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "detach_db",
+      "method": "POST",
+      "path": "/v1.52/networks/dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af/disconnect",
+      "bodyHash": "d7c1ce5e3fa89ca4ab827abb5c258046c2fee1aecdddc6e71ec9f86782775b53",
+      "expectedStatus": 200
+    },
+    {
+      "stage": "detach_db",
+      "method": "GET",
+      "path": "/v1.52/containers/592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1/json",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "rename_kong",
+      "method": "POST",
+      "path": "/v1.52/containers/313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63/rename?name=supabase_kong_orderops-statistics-v1-test-74718de66a41.pre-loopback-SIMULATION",
+      "bodyHash": null,
+      "expectedStatus": 204
+    },
+    {
+      "stage": "rename_kong",
+      "method": "GET",
+      "path": "/v1.52/containers/313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63/json",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "detach_kong",
+      "method": "POST",
+      "path": "/v1.52/networks/dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af/disconnect",
+      "bodyHash": "4365c7ebe6a2930d4dd0846591377f6dc0c4813d0bddc9286ea3637bad7a3f18",
+      "expectedStatus": 200
+    },
+    {
+      "stage": "detach_kong",
+      "method": "GET",
+      "path": "/v1.52/containers/313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63/json",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "create_db",
+      "method": "POST",
+      "path": "/v1.52/containers/create?name=supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "bodyHash": "6f0c0b5025e8b82675394282fb8e0bb493838d99ac0798d6b07b0bea8f026752",
+      "expectedStatus": 201
+    },
+    {
+      "stage": "create_db",
+      "method": "GET",
+      "path": "/v1.52/containers/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/json",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "create_db",
+      "method": "GET",
+      "path": "/v1.52/containers/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/json",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "create_kong",
+      "method": "POST",
+      "path": "/v1.52/containers/create?name=supabase_kong_orderops-statistics-v1-test-74718de66a41",
+      "bodyHash": "6756da7ea68b99b1f642d35e421eabaca63f7bc5080e7cc3e4dc6e324d40e1a1",
+      "expectedStatus": 201
+    },
+    {
+      "stage": "create_kong",
+      "method": "GET",
+      "path": "/v1.52/containers/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/json",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "create_kong",
+      "method": "GET",
+      "path": "/v1.52/containers/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/json",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "restore_db",
+      "method": "PUT",
+      "path": "/v1.52/containers/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/archive?path=%2F&noOverwriteDirNonDir=true&copyUIDGID=true",
+      "bodyHash": "9f9a7c33be5a8b85a0509980f9f303b05d9ce946f20d90c682b0a6448ffb22bb",
+      "expectedStatus": 200
+    },
+    {
+      "stage": "restore_db",
+      "method": "PUT",
+      "path": "/v1.52/containers/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/archive?path=%2Fetc%2Fpostgresql&noOverwriteDirNonDir=true&copyUIDGID=true",
+      "bodyHash": "147771e5bfa5fcec9820b4db1bb6b9517c5dfddd527359a98736874670927526",
+      "expectedStatus": 200
+    },
+    {
+      "stage": "restore_db",
+      "method": "PUT",
+      "path": "/v1.52/containers/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/archive?path=%2Fetc%2Fpostgresql-custom&noOverwriteDirNonDir=true&copyUIDGID=true",
+      "bodyHash": "0136fe4c4878999b5cce8dfccd6d63c8fc403d53efefd69a5f4383f80da2ac2d",
+      "expectedStatus": 200
+    },
+    {
+      "stage": "restore_db",
+      "method": "GET",
+      "path": "/v1.52/containers/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/archive?path=%2Fetc%2Fpostgresql%2Fpostgresql.conf",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "restore_db",
+      "method": "GET",
+      "path": "/v1.52/containers/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/archive?path=%2Fetc%2Fpostgresql-custom%2Fpgsodium_root.key",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "restore_kong",
+      "method": "PUT",
+      "path": "/v1.52/containers/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/archive?path=%2F&noOverwriteDirNonDir=true&copyUIDGID=true",
+      "bodyHash": "13e48d4963ff8731066ebc6104e8f6c395528ebf6fb0504227cb24cb98d0e75c",
+      "expectedStatus": 200
+    },
+    {
+      "stage": "restore_kong",
+      "method": "PUT",
+      "path": "/v1.52/containers/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/archive?path=%2Fhome%2Fkong&noOverwriteDirNonDir=true&copyUIDGID=true",
+      "bodyHash": "47f179e05beaf381a91be14459f2dd4fedc4ecdc5c1ef02378636f35bf549acb",
+      "expectedStatus": 200
+    },
+    {
+      "stage": "restore_kong",
+      "method": "PUT",
+      "path": "/v1.52/containers/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/archive?path=%2Fhome%2Fkong&noOverwriteDirNonDir=true&copyUIDGID=true",
+      "bodyHash": "caa0d5c9c9f77cea2f1e1824c331af95c88a184013d6550f6df22f8364932b99",
+      "expectedStatus": 200
+    },
+    {
+      "stage": "restore_kong",
+      "method": "GET",
+      "path": "/v1.52/containers/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/archive?path=%2Fhome%2Fkong%2Flocalhost.crt",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "restore_kong",
+      "method": "GET",
+      "path": "/v1.52/containers/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/archive?path=%2Fhome%2Fkong%2Flocalhost.key",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "start_db",
+      "method": "POST",
+      "path": "/v1.52/containers/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/start",
+      "bodyHash": null,
+      "expectedStatus": 204
+    },
+    {
+      "stage": "start_db",
+      "method": "GET",
+      "path": "/v1.52/containers/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/json",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "start_db",
+      "method": "GET",
+      "path": "/v1.52/containers/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/archive?path=%2Fetc%2Fpostgresql%2Fpostgresql.conf",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "start_db",
+      "method": "GET",
+      "path": "/v1.52/containers/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa/archive?path=%2Fetc%2Fpostgresql-custom%2Fpgsodium_root.key",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "start_kong",
+      "method": "POST",
+      "path": "/v1.52/containers/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/start",
+      "bodyHash": null,
+      "expectedStatus": 204
+    },
+    {
+      "stage": "start_kong",
+      "method": "GET",
+      "path": "/v1.52/containers/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/json",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "start_kong",
+      "method": "GET",
+      "path": "/v1.52/containers/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/archive?path=%2Fhome%2Fkong%2Flocalhost.crt",
+      "bodyHash": null,
+      "expectedStatus": 200
+    },
+    {
+      "stage": "start_kong",
+      "method": "GET",
+      "path": "/v1.52/containers/bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb/archive?path=%2Fhome%2Fkong%2Flocalhost.key",
+      "bodyHash": null,
+      "expectedStatus": 200
+    }
+  ],
+  "callsAtHalt": 28,
+  "requestCountAtHalt": 46,
+  "finalWriterCount": 1,
+  "finalRunningIds": [
+    "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c",
+    "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+    "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+    "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  ],
+  "automaticRollback": false,
+  "realEngineRequests": 0
+}

@@ -1,0 +1,138 @@
+{
+  "at": "2026-10-16T15:50:56.034Z",
+  "phase": "P04-T01C",
+  "verdict": "BLOCKED",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "baselineFiles": 3066,
+  "sourceControls": [
+    "User tasks A/B/C; no SQL execution",
+    "Prior scope-preflight/evidence.json retained"
+  ],
+  "results": {
+    "A": "Kernel filtering mechanism supported; hidden metadata enumeration/preservation unresolved",
+    "B": "External file integrity and TOC verified; completeness partial; restore not demonstrated",
+    "C": "Executable READ ONLY proposal prepared and reviewed offline; not executed"
+  },
+  "backupSha256": "b48f1ed8f4f6a6a75f946a2a55b388f88f20c6d05cc48fecf42cd166af1eecdc",
+  "queryTemplateSha256": "485cf660d8230a868b4051aecce8418da9cc30d799aaec6a001f5eb0e4309a15",
+  "queryManifestSha256": "85fefde4aa8256a4f42bfa38b5cd0a8b8819b8919bc77f8643ed3823adcfd294",
+  "proposedRunnerSha256": "76c4653891367e1c55d3d3b51af841f3ae0a5b980490ee5912e4e7ac65588dad",
+  "publicSources": [
+    {
+      "url": "https://raw.githubusercontent.com/torvalds/linux/v6.18/fs/overlayfs/xattrs.c",
+      "use": "Mechanism reference; not proof of exact loaded kernel binary"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/microsoft/WSL2-Linux-Kernel/linux-msft-wsl-6.18.y/fs/overlayfs/xattrs.c",
+      "use": "Microsoft branch corroboration; mutable branch not pinned to loaded build"
+    }
+  ],
+  "safety": {
+    "sqlConnections": 0,
+    "authHttp": 0,
+    "restores": 0,
+    "containerMutations": 0,
+    "newPostgresProcesses": 0,
+    "foreignResourceAccess": false,
+    "newRecreationPrepared": false,
+    "commits": 0
+  },
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/backup-correspondence.json",
+      "sha256": "7902dd92cf227e8c93b2c4bbb5bba0a500b12c7654bc6d5783eb69530fc6276e",
+      "bytes": 5258
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/backup-inventory.json",
+      "sha256": "23d648b8457427c9eb7cdd0a4c9898b90878e1464ae85c2c93536be1299553a9",
+      "bytes": 226968
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/BACKUP_RECOVERABILITY.md",
+      "sha256": "0cdb529c7ef3d54d7aebe2f8562fa6418d7ecd4baad784b4a8e1c6b7ee02cbb9",
+      "bytes": 7666
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/BLOCKERS_AND_RECOMMENDATION.md",
+      "sha256": "a1b6924810f93257b310cfc4f124772203bf6d0a9fcede9c51a93da7d293a9c8",
+      "bytes": 3045
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/build-readonly-proposal.mjs",
+      "sha256": "c645b94d775833768359db1c2209349218c9a6927b9b8516dca80689c6a36510",
+      "bytes": 4817
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/file-baseline.json",
+      "sha256": "9334cbc15cfd7b7ff372f036a0fc3bc9c38455eaa1d5baaa4e739c9bef35c93a",
+      "bytes": 500221
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/finalize-evidence.mjs",
+      "sha256": "6c772979f0ca2e612447a747831380a2a78ea22df769ea69ba376cc482cf503a",
+      "bytes": 7908
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/informe.md",
+      "sha256": "873f6065185e450ede1e7c564894bc1390cbb6093829331392e9f540b6664bd8",
+      "bytes": 2250
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/kong-attributes.json",
+      "sha256": "eaca2203a009e55d4a6a29196787270d686d083d14b1ecfe106dca9752ab97de",
+      "bytes": 11878
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/KONG_ATTRIBUTES_DIAGNOSIS.md",
+      "sha256": "68e6a8b26c75bdd3b559e6d15a6065a0c62c44f3490e639ff2a0c46f7acc67c6",
+      "bytes": 4539
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/observation-tools.json",
+      "sha256": "b94cab3465e89893654b56d9b6b9cb3e430b9ade9054bb0a5cb7c1681f0a9808",
+      "bytes": 280
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/observe-backup-and-tools.mjs",
+      "sha256": "f3833741ff5845f7fcaffa386a1a202728ec9af586047ec4293d7c618bedcd5e",
+      "bytes": 5709
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/observe-kong.mjs",
+      "sha256": "261c31cd49e32b7a6dbac7700a7d7ad0e6f9f303ddf59ef1c9b75b6584b13e8a",
+      "bytes": 4754
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/preservation.json",
+      "sha256": "fbb660a99651998afe160eb46b309366cac0e36752780be370ad55d2bdd4b1cb",
+      "bytes": 864
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/readonly-query-manifest.json",
+      "sha256": "85fefde4aa8256a4f42bfa38b5cd0a8b8819b8919bc77f8643ed3823adcfd294",
+      "bytes": 11437
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/readonly-verification.proposed.mjs",
+      "sha256": "76c4653891367e1c55d3d3b51af841f3ae0a5b980490ee5912e4e7ac65588dad",
+      "bytes": 6129
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/SQL_READONLY_PROPOSAL.md",
+      "sha256": "30517f58fba619de6884f89f5fd666c242895d3c4b4678e5612ab3d1b5c885b3",
+      "bytes": 5834
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/validation-results.json",
+      "sha256": "0956732129e23cd2e9916e6d4db058dad3f794ab9f20ce49e033ff09ab4d92c6",
+      "bytes": 1339
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/verification.proposed.psql",
+      "sha256": "485cf660d8230a868b4051aecce8418da9cc30d799aaec6a001f5eb0e4309a15",
+      "bytes": 9725
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

@@ -1,0 +1,6 @@
+{
+  "at": "2026-10-13T19:34:04.852Z",
+  "result": "PASS",
+  "assertions": 89,
+  "scope": "Offline verified principal, transport, actual server route/endpoint with SSR injection, raw roles, tenant switch, fail-closed, navigation and previous permissions"
+}

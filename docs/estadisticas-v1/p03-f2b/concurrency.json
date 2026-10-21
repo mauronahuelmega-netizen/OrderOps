@@ -1,0 +1,29 @@
+{
+  "result": "PASS",
+  "error": null,
+  "scope": "Two connections: RR reader with own uncommitted captured fixture vs uncommitted timezone writer; same-snapshot JSON equality, no dirty reads. Not an order/finance commit-race stress test.",
+  "before": {
+    "orders": 0,
+    "settings": "d9e81fd519e0c9c84d145cc389794afc",
+    "connections": 0,
+    "deadlocks": 0
+  },
+  "after": {
+    "orders": 0,
+    "settings": "d9e81fd519e0c9c84d145cc389794afc",
+    "connections": 0,
+    "deadlocks": 0
+  },
+  "live": {
+    "verified": true,
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "containers": 5,
+    "volumes": [
+      "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+    ],
+    "baseMigrations": 119,
+    "startedAt": "2026-10-12T19:27:13.000Z"
+  },
+  "cleanup": "Both transactions rolled back; owned application_name connections absent; settings fingerprint identical"
+}

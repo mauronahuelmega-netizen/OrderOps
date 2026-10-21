@@ -1,0 +1,7 @@
+{
+  "result": "PASS",
+  "assertions": 142,
+  "transport": "mock authenticated adapter; one RPC",
+  "databaseConnections": 0,
+  "scope": "URL, exact presenter, deterministic reading, authorization, decoding, races, dedupe, scope invalidation, error states"
+}

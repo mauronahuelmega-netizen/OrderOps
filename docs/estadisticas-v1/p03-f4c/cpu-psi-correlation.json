@@ -1,0 +1,6027 @@
+{
+  "verdict": "MIXED_EVIDENCE",
+  "rows": [
+    {
+      "id": "f4c-50-normal-original-1",
+      "orders": 50,
+      "reader": "original",
+      "startUTC": "2026-10-14T04:42:39.818Z",
+      "endUTC": "2026-10-14T04:42:40.446Z",
+      "wallMs": 627.6438000000053,
+      "psqlMs": 624.562,
+      "observerWindowMs": 896.2173000000039,
+      "containerCPUPercentOfEngine": 19.66043837805845,
+      "cgroupMemoryBytes": [
+        231833600,
+        236548096,
+        232243200
+      ],
+      "cpuPSISomePercent": 4.853621995469158,
+      "memoryPSITimeUs": 0,
+      "ioPSITimeUs": 218,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 6336,
+          "indexRows": 6336
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 1051,
+          "seqRows": 48875,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 450,
+          "indexRows": 450
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 150,
+          "seqRows": 3825,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 450,
+          "indexRows": 450
+        },
+        "order_statistics_completions": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 4,
+          "indexRows": 150
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 50,
+          "seqRows": 2500,
+          "indexScan": 0,
+          "indexRows": 0
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-50-normal-AB-1",
+      "orders": 50,
+      "reader": "AB",
+      "startUTC": "2026-10-14T04:42:41.017Z",
+      "endUTC": "2026-10-14T04:42:41.328Z",
+      "wallMs": 310.6585999999952,
+      "psqlMs": 287.088,
+      "observerWindowMs": 1030.8594000000012,
+      "containerCPUPercentOfEngine": 8.77420819948869,
+      "cgroupMemoryBytes": [
+        232341504,
+        232280064,
+        232239104
+      ],
+      "cpuPSISomePercent": 22.745875916735084,
+      "memoryPSITimeUs": 11134,
+      "ioPSITimeUs": 35389,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 126976,
+          "rios": 0,
+          "wios": 13,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 4132,
+          "indexRows": 4132
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 151,
+          "seqRows": 6325,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_statistics_completions": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 1,
+          "indexRows": 50
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 50,
+          "seqRows": 2500,
+          "indexScan": 0,
+          "indexRows": 0
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-50-normal-D1-1",
+      "orders": 50,
+      "reader": "D1",
+      "startUTC": "2026-10-14T04:42:42.369Z",
+      "endUTC": "2026-10-14T04:42:42.725Z",
+      "wallMs": 356.53929999999673,
+      "psqlMs": 329.886,
+      "observerWindowMs": 615.7574999999997,
+      "containerCPUPercentOfEngine": 15.99111663276534,
+      "cgroupMemoryBytes": [
+        231833600,
+        234516480,
+        232120320
+      ],
+      "cpuPSISomePercent": 58.1962866875353,
+      "memoryPSITimeUs": 0,
+      "ioPSITimeUs": 0,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 4132,
+          "indexRows": 4132
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 151,
+          "seqRows": 6325,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_statistics_completions": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 1,
+          "indexRows": 50
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 50,
+          "seqRows": 2500,
+          "indexScan": 0,
+          "indexRows": 0
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-50-normal-AB-2",
+      "orders": 50,
+      "reader": "AB",
+      "startUTC": "2026-10-14T04:42:43.451Z",
+      "endUTC": "2026-10-14T04:42:43.685Z",
+      "wallMs": 234.32920000000013,
+      "psqlMs": 230.481,
+      "observerWindowMs": 917.8234999999986,
+      "containerCPUPercentOfEngine": 8.509669887511064,
+      "cgroupMemoryBytes": [
+        232329216,
+        232398848,
+        232194048
+      ],
+      "cpuPSISomePercent": 11.199974722808923,
+      "memoryPSITimeUs": 0,
+      "ioPSITimeUs": 422,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 4132,
+          "indexRows": 4132
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 151,
+          "seqRows": 6325,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_statistics_completions": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 1,
+          "indexRows": 50
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 50,
+          "seqRows": 2500,
+          "indexScan": 0,
+          "indexRows": 0
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-50-normal-D1-2",
+      "orders": 50,
+      "reader": "D1",
+      "startUTC": "2026-10-14T04:42:44.594Z",
+      "endUTC": "2026-10-14T04:42:44.926Z",
+      "wallMs": 332.6287999999986,
+      "psqlMs": 306.322,
+      "observerWindowMs": 989.5950999999986,
+      "containerCPUPercentOfEngine": 8.600512472222237,
+      "cgroupMemoryBytes": [
+        231944192,
+        232439808,
+        232177664
+      ],
+      "cpuPSISomePercent": 24.40361719656861,
+      "memoryPSITimeUs": 0,
+      "ioPSITimeUs": 355,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 4132,
+          "indexRows": 4132
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 151,
+          "seqRows": 6325,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_statistics_completions": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 1,
+          "indexRows": 50
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 50,
+          "seqRows": 2500,
+          "indexScan": 0,
+          "indexRows": 0
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-50-normal-original-2",
+      "orders": 50,
+      "reader": "original",
+      "startUTC": "2026-10-14T04:42:45.835Z",
+      "endUTC": "2026-10-14T04:42:46.542Z",
+      "wallMs": 706.6189999999988,
+      "psqlMs": 692.463,
+      "observerWindowMs": 921.1031999999977,
+      "containerCPUPercentOfEngine": 20.932345040164932,
+      "cgroupMemoryBytes": [
+        232259584,
+        237506560,
+        232046592
+      ],
+      "cpuPSISomePercent": 7.258252929747738,
+      "memoryPSITimeUs": 0,
+      "ioPSITimeUs": 3260,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 6336,
+          "indexRows": 6336
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 1051,
+          "seqRows": 48875,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 450,
+          "indexRows": 450
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 150,
+          "seqRows": 3825,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 450,
+          "indexRows": 450
+        },
+        "order_statistics_completions": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 4,
+          "indexRows": 150
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 50,
+          "seqRows": 2500,
+          "indexScan": 0,
+          "indexRows": 0
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-50-normal-D1-3",
+      "orders": 50,
+      "reader": "D1",
+      "startUTC": "2026-10-14T04:42:46.984Z",
+      "endUTC": "2026-10-14T04:42:47.202Z",
+      "wallMs": 218.20819999999367,
+      "psqlMs": 215.571,
+      "observerWindowMs": 888.3947000000044,
+      "containerCPUPercentOfEngine": 8.349751523731472,
+      "cgroupMemoryBytes": [
+        232050688,
+        232026112,
+        232034304
+      ],
+      "cpuPSISomePercent": 2.854136793026779,
+      "memoryPSITimeUs": 0,
+      "ioPSITimeUs": 1250,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 4132,
+          "indexRows": 4132
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 151,
+          "seqRows": 6325,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_statistics_completions": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 1,
+          "indexRows": 50
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 50,
+          "seqRows": 2500,
+          "indexScan": 0,
+          "indexRows": 0
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-50-normal-original-3",
+      "orders": 50,
+      "reader": "original",
+      "startUTC": "2026-10-14T04:42:48.110Z",
+      "endUTC": "2026-10-14T04:42:48.759Z",
+      "wallMs": 648.9444000000003,
+      "psqlMs": 634.995,
+      "observerWindowMs": 920.4319000000032,
+      "containerCPUPercentOfEngine": 19.84299435949573,
+      "cgroupMemoryBytes": [
+        232255488,
+        237178880,
+        233512960
+      ],
+      "cpuPSISomePercent": 10.42445399817191,
+      "memoryPSITimeUs": 0,
+      "ioPSITimeUs": 929,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 6336,
+          "indexRows": 6336
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 1051,
+          "seqRows": 48875,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 450,
+          "indexRows": 450
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 150,
+          "seqRows": 3825,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 450,
+          "indexRows": 450
+        },
+        "order_statistics_completions": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 4,
+          "indexRows": 150
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 50,
+          "seqRows": 2500,
+          "indexScan": 0,
+          "indexRows": 0
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-50-normal-AB-3",
+      "orders": 50,
+      "reader": "AB",
+      "startUTC": "2026-10-14T04:42:49.370Z",
+      "endUTC": "2026-10-14T04:42:49.686Z",
+      "wallMs": 316.2569000000003,
+      "psqlMs": 301.001,
+      "observerWindowMs": 984.3266000000003,
+      "containerCPUPercentOfEngine": 9.092916924118475,
+      "cgroupMemoryBytes": [
+        232194048,
+        231976960,
+        232013824
+      ],
+      "cpuPSISomePercent": 26.52839006890598,
+      "memoryPSITimeUs": 11158,
+      "ioPSITimeUs": 47121,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 4132,
+          "indexRows": 4132
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 151,
+          "seqRows": 6325,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_statistics_completions": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 1,
+          "indexRows": 50
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 50,
+          "seqRows": 2500,
+          "indexScan": 0,
+          "indexRows": 0
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-100-normal-AB-1",
+      "orders": 100,
+      "reader": "AB",
+      "startUTC": "2026-10-14T04:43:33.266Z",
+      "endUTC": "2026-10-14T04:43:33.478Z",
+      "wallMs": 211.96820000000298,
+      "psqlMs": 209.258,
+      "observerWindowMs": 873.5917000000045,
+      "containerCPUPercentOfEngine": 8.55966236858702,
+      "cgroupMemoryBytes": [
+        236449792,
+        231092224,
+        229830656
+      ],
+      "cpuPSISomePercent": 4.508628000929931,
+      "memoryPSITimeUs": 0,
+      "ioPSITimeUs": 2566,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 4096,
+          "rios": 0,
+          "wios": 2,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 907,
+          "indexRows": 907
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 301,
+          "seqRows": 25150,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 100,
+          "seqRows": 5050,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_statistics_completions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 101,
+          "indexRows": 200
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-100-normal-D1-1",
+      "orders": 100,
+      "reader": "D1",
+      "startUTC": "2026-10-14T04:43:34.430Z",
+      "endUTC": "2026-10-14T04:43:34.746Z",
+      "wallMs": 315.8668999999936,
+      "psqlMs": 308.026,
+      "observerWindowMs": 1022.0454000000028,
+      "containerCPUPercentOfEngine": 9.550382986900557,
+      "cgroupMemoryBytes": [
+        229879808,
+        231739392,
+        229699584
+      ],
+      "cpuPSISomePercent": 42.877645161359645,
+      "memoryPSITimeUs": 1594,
+      "ioPSITimeUs": 1804,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 907,
+          "indexRows": 907
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 301,
+          "seqRows": 25150,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 100,
+          "seqRows": 5050,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_statistics_completions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 101,
+          "indexRows": 200
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-100-normal-original-1",
+      "orders": 100,
+      "reader": "original",
+      "startUTC": "2026-10-14T04:43:35.676Z",
+      "endUTC": "2026-10-14T04:43:36.777Z",
+      "wallMs": 1101.2337000000116,
+      "psqlMs": 1096.003,
+      "observerWindowMs": 1624.451700000005,
+      "containerCPUPercentOfEngine": 18.728980984783917,
+      "cgroupMemoryBytes": [
+        229523456,
+        237690880,
+        240541696,
+        234524672
+      ],
+      "cpuPSISomePercent": 7.45494618276429,
+      "memoryPSITimeUs": 0,
+      "ioPSITimeUs": 701,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 262144,
+          "rios": 0,
+          "wios": 27,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 5311,
+          "indexRows": 5311
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 2101,
+          "seqRows": 195250,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 900,
+          "indexRows": 900
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 300,
+          "seqRows": 15150,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 900,
+          "indexRows": 900
+        },
+        "order_statistics_completions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 104,
+          "indexRows": 400
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-100-normal-D1-2",
+      "orders": 100,
+      "reader": "D1",
+      "startUTC": "2026-10-14T04:43:37.501Z",
+      "endUTC": "2026-10-14T04:43:37.700Z",
+      "wallMs": 198.2771999999968,
+      "psqlMs": 195.794,
+      "observerWindowMs": 892.9805999999953,
+      "containerCPUPercentOfEngine": 7.766742077039564,
+      "cgroupMemoryBytes": [
+        234508288,
+        234090496,
+        229265408
+      ],
+      "cpuPSISomePercent": 3.0008490665978793,
+      "memoryPSITimeUs": 0,
+      "ioPSITimeUs": 1067,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 8192,
+          "rios": 0,
+          "wios": 2,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 907,
+          "indexRows": 907
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 301,
+          "seqRows": 25150,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 100,
+          "seqRows": 5050,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_statistics_completions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 101,
+          "indexRows": 200
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-100-normal-original-2",
+      "orders": 100,
+      "reader": "original",
+      "startUTC": "2026-10-14T04:43:38.607Z",
+      "endUTC": "2026-10-14T04:43:39.743Z",
+      "wallMs": 1136.434899999993,
+      "psqlMs": 1120.1,
+      "observerWindowMs": 1666.6582000000053,
+      "containerCPUPercentOfEngine": 19.153612300350424,
+      "cgroupMemoryBytes": [
+        229179392,
+        237826048,
+        241016832,
+        234360832
+      ],
+      "cpuPSISomePercent": 8.9485054584077,
+      "memoryPSITimeUs": 0,
+      "ioPSITimeUs": 1682,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 270336,
+          "rios": 0,
+          "wios": 21,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 5311,
+          "indexRows": 5311
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 2101,
+          "seqRows": 195250,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 900,
+          "indexRows": 900
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 300,
+          "seqRows": 15150,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 900,
+          "indexRows": 900
+        },
+        "order_statistics_completions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 104,
+          "indexRows": 400
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-100-normal-AB-2",
+      "orders": 100,
+      "reader": "AB",
+      "startUTC": "2026-10-14T04:43:40.478Z",
+      "endUTC": "2026-10-14T04:43:40.749Z",
+      "wallMs": 271.1094000000012,
+      "psqlMs": 253.647,
+      "observerWindowMs": 928.3983999999909,
+      "containerCPUPercentOfEngine": 8.65388178178687,
+      "cgroupMemoryBytes": [
+        234037248,
+        234254336,
+        234131456
+      ],
+      "cpuPSISomePercent": 13.35622724037452,
+      "memoryPSITimeUs": 0,
+      "ioPSITimeUs": 4672,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 114688,
+          "rios": 0,
+          "wios": 62,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 907,
+          "indexRows": 907
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 301,
+          "seqRows": 25150,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 100,
+          "seqRows": 5050,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_statistics_completions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 101,
+          "indexRows": 200
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-100-normal-original-3",
+      "orders": 100,
+      "reader": "original",
+      "startUTC": "2026-10-14T04:43:41.663Z",
+      "endUTC": "2026-10-14T04:43:43.495Z",
+      "wallMs": 1832.1898000000074,
+      "psqlMs": 1826.447,
+      "observerWindowMs": 2225.8698000000004,
+      "containerCPUPercentOfEngine": 21.898911158235755,
+      "cgroupMemoryBytes": [
+        234225664,
+        240222208,
+        241233920,
+        234524672,
+        234381312
+      ],
+      "cpuPSISomePercent": 35.67072970755072,
+      "memoryPSITimeUs": 10801,
+      "ioPSITimeUs": 51877,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 4096,
+          "rios": 0,
+          "wios": 1,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 5311,
+          "indexRows": 5311
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 2101,
+          "seqRows": 195250,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 900,
+          "indexRows": 900
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 300,
+          "seqRows": 15150,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 900,
+          "indexRows": 900
+        },
+        "order_statistics_completions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 104,
+          "indexRows": 400
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-100-normal-AB-3",
+      "orders": 100,
+      "reader": "AB",
+      "startUTC": "2026-10-14T04:43:44.109Z",
+      "endUTC": "2026-10-14T04:43:44.331Z",
+      "wallMs": 221.72909999999683,
+      "psqlMs": 205.239,
+      "observerWindowMs": 988.2565000000031,
+      "containerCPUPercentOfEngine": 7.4973956660036905,
+      "cgroupMemoryBytes": [
+        234602496,
+        235978752,
+        234471424
+      ],
+      "cpuPSISomePercent": 22.615586135785527,
+      "memoryPSITimeUs": 0,
+      "ioPSITimeUs": 0,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 907,
+          "indexRows": 907
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 301,
+          "seqRows": 25150,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 100,
+          "seqRows": 5050,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_statistics_completions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 101,
+          "indexRows": 200
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    },
+    {
+      "id": "f4c-100-normal-D1-3",
+      "orders": 100,
+      "reader": "D1",
+      "startUTC": "2026-10-14T04:43:45.385Z",
+      "endUTC": "2026-10-14T04:43:45.656Z",
+      "wallMs": 270.9149999999936,
+      "psqlMs": 261.781,
+      "observerWindowMs": 590.0506000000023,
+      "containerCPUPercentOfEngine": 15.377664220661694,
+      "cgroupMemoryBytes": [
+        234463232,
+        234344448,
+        234373120
+      ],
+      "cpuPSISomePercent": 35.880990545556465,
+      "memoryPSITimeUs": 11326,
+      "ioPSITimeUs": 0,
+      "cgroupIO": {
+        "8:32": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        },
+        "8:64": {
+          "rbytes": 0,
+          "wbytes": 0,
+          "rios": 0,
+          "wios": 0,
+          "dbytes": 0,
+          "dios": 0
+        }
+      },
+      "tableCounterDeltas": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 907,
+          "indexRows": 907
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 301,
+          "seqRows": 25150,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 100,
+          "seqRows": 5050,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_statistics_completions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 101,
+          "indexRows": 200
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        }
+      },
+      "waits": "NOT_AVAILABLE_CACHED_ACTIVITY_SNAPSHOT",
+      "equivalence": true
+    }
+  ],
+  "groups": [
+    {
+      "orders": 50,
+      "reader": "original",
+      "n": 3,
+      "minMs": 624.562,
+      "maxMs": 692.463,
+      "tableCountersIdentical": true,
+      "tableCounters": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 6336,
+          "indexRows": 6336
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 1051,
+          "seqRows": 48875,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 450,
+          "indexRows": 450
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 150,
+          "seqRows": 3825,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 450,
+          "indexRows": 450
+        },
+        "order_statistics_completions": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 4,
+          "indexRows": 150
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 50,
+          "seqRows": 2500,
+          "indexScan": 0,
+          "indexRows": 0
+        }
+      },
+      "rawQueryIds": [
+        "f4c-50-normal-original-1",
+        "f4c-50-normal-original-2",
+        "f4c-50-normal-original-3"
+      ]
+    },
+    {
+      "orders": 50,
+      "reader": "AB",
+      "n": 3,
+      "minMs": 230.481,
+      "maxMs": 301.001,
+      "tableCountersIdentical": true,
+      "tableCounters": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 4132,
+          "indexRows": 4132
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 151,
+          "seqRows": 6325,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_statistics_completions": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 1,
+          "indexRows": 50
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 50,
+          "seqRows": 2500,
+          "indexScan": 0,
+          "indexRows": 0
+        }
+      },
+      "rawQueryIds": [
+        "f4c-50-normal-AB-1",
+        "f4c-50-normal-AB-2",
+        "f4c-50-normal-AB-3"
+      ]
+    },
+    {
+      "orders": 50,
+      "reader": "D1",
+      "n": 3,
+      "minMs": 215.571,
+      "maxMs": 329.886,
+      "tableCountersIdentical": true,
+      "tableCounters": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 4132,
+          "indexRows": 4132
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 151,
+          "seqRows": 6325,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 50,
+          "indexRows": 50
+        },
+        "order_statistics_completions": {
+          "seqScan": 50,
+          "seqRows": 1275,
+          "indexScan": 1,
+          "indexRows": 50
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 50,
+          "seqRows": 2500,
+          "indexScan": 0,
+          "indexRows": 0
+        }
+      },
+      "rawQueryIds": [
+        "f4c-50-normal-D1-1",
+        "f4c-50-normal-D1-2",
+        "f4c-50-normal-D1-3"
+      ]
+    },
+    {
+      "orders": 100,
+      "reader": "original",
+      "n": 3,
+      "minMs": 1096.003,
+      "maxMs": 1826.447,
+      "tableCountersIdentical": true,
+      "tableCounters": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 5311,
+          "indexRows": 5311
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 2101,
+          "seqRows": 195250,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 900,
+          "indexRows": 900
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 300,
+          "seqRows": 15150,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 900,
+          "indexRows": 900
+        },
+        "order_statistics_completions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 104,
+          "indexRows": 400
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        }
+      },
+      "rawQueryIds": [
+        "f4c-100-normal-original-1",
+        "f4c-100-normal-original-2",
+        "f4c-100-normal-original-3"
+      ]
+    },
+    {
+      "orders": 100,
+      "reader": "AB",
+      "n": 3,
+      "minMs": 205.239,
+      "maxMs": 253.647,
+      "tableCountersIdentical": true,
+      "tableCounters": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 907,
+          "indexRows": 907
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 301,
+          "seqRows": 25150,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 100,
+          "seqRows": 5050,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_statistics_completions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 101,
+          "indexRows": 200
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        }
+      },
+      "rawQueryIds": [
+        "f4c-100-normal-AB-1",
+        "f4c-100-normal-AB-2",
+        "f4c-100-normal-AB-3"
+      ]
+    },
+    {
+      "orders": 100,
+      "reader": "D1",
+      "n": 3,
+      "minMs": 195.794,
+      "maxMs": 308.026,
+      "tableCountersIdentical": true,
+      "tableCounters": {
+        "businesses": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "profiles": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 907,
+          "indexRows": 907
+        },
+        "categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "products": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "orders": {
+          "seqScan": 301,
+          "seqRows": 25150,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "push_subscriptions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_sessions": {
+          "seqScan": 2,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 1,
+          "indexRows": 1
+        },
+        "customization_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_options": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "customization_group_assignments": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "product_customization_overrides": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_groups": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "upsell_group_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "stock_movements": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_financials": {
+          "seqScan": 100,
+          "seqRows": 5050,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_accounts": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_categories": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_funds": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_finance_settings": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_operations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transactions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_transaction_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_audit_events": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_fund_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_entries": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_reconciliation_commands": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "finance_order_outflow_allocations": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "business_statistics_state": {
+          "seqScan": 1,
+          "seqRows": 1,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "store_session_statistics_snapshots": {
+          "seqScan": 3,
+          "seqRows": 0,
+          "indexScan": 0,
+          "indexRows": 0
+        },
+        "order_item_statistics_snapshots": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        },
+        "order_statistics_completions": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 101,
+          "indexRows": 200
+        },
+        "order_statistics_completion_items": {
+          "seqScan": 0,
+          "seqRows": 0,
+          "indexScan": 100,
+          "indexRows": 100
+        }
+      },
+      "rawQueryIds": [
+        "f4c-100-normal-D1-1",
+        "f4c-100-normal-D1-2",
+        "f4c-100-normal-D1-3"
+      ]
+    }
+  ],
+  "method": "Paired observer windows bracket SELECT, not pure query-only measurement. PSI some total delta is Linux VM task-stall wall fraction, not CPU utilization. Three points/group, no p95, no regression significance or causal attribution.",
+  "activityLimitation": "Observer held a read-only transaction without pg_stat_clear_snapshot; queryStartedUTC reused per cohort. Raw snapshots retained in synchronized-measurements.json; waits are NOT_AVAILABLE for reliable per-query attribution.",
+  "profilesSeparate": true,
+  "profileCounterComparison": "internal-plans/comparison.json"
+}

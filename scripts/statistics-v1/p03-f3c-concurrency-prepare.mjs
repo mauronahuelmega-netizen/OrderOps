@@ -1,0 +1,7 @@
+import fs from 'node:fs';
+let s=fs.readFileSync('scripts/statistics-v1/p03-f2b-concurrency.mjs','utf8').replaceAll('docs/estadisticas-v1/p03-f2b','docs/estadisticas-v1/p03-f3c').replaceAll('statistics_f2b_mvcc_','statistics_f3c_mvcc_');
+s=s.replace('DECLARE a jsonb;b jsonb;', 'DECLARE a jsonb;b jsonb;z jsonb;').replace("private.statistics_v1_summary_candidate('today') INTO a,b;","private.statistics_v1_summary_candidate('today'),private.statistics_v1_summary_d1_candidate('today') INTO a,b,z;").replace('IF a IS DISTINCT FROM b THEN','IF a IS DISTINCT FROM b OR b IS DISTINCT FROM z THEN');
+s=s.replace("replace('begin;','begin isolation level repeatable read;');","replace('begin;','begin isolation level repeatable read;').replace(\"statement_timeout='30s'\",\"statement_timeout='15s'\");");
+s=s.replace('const live=JSON.parse', "const preflight=spawnSync(process.execPath,['scripts/statistics-v1/p03-f3c-validate.mjs','finish'],{encoding:'utf8',timeout:120000});assert.equal(preflight.status,0,preflight.stderr);\nfor(const file of ['security.json','security-shapes.json','differential.json','differential-products.json','differential-shapes.json','differential-temporal.json'])assert.equal(JSON.parse(fs.readFileSync(`${dir}/${file}`)).result,'PASS',file);\nconst live=JSON.parse");
+s=s.replace('same-snapshot JSON equality','same-snapshot three-reader complete JSON equality');
+fs.writeFileSync('scripts/statistics-v1/p03-f3c-concurrency.mjs',s);

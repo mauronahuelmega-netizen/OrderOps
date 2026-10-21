@@ -1,0 +1,30 @@
+{
+  "at": "2026-10-14T15:58:41.018Z",
+  "result": "PASS",
+  "candidateSha256": "57395a7920d95cf63c1b67fb8191e40272a26aeb445a4abe7bec4d822b99c2c1",
+  "harnessSha256": "7555a8dab26783f079df8a21bd5682a7c45a4353c3f76058e17bf17ff2c77864",
+  "onlyTwoApprovedExpressionsChanged": true,
+  "sourceFunctionsAstEqual": true,
+  "signaturesDefaultsSecurityPathUnchanged": true,
+  "outerStatements": 498,
+  "transactionKinds": [
+    "TRANS_STMT_BEGIN",
+    "TRANS_STMT_SAVEPOINT",
+    "TRANS_STMT_ROLLBACK_TO",
+    "TRANS_STMT_RELEASE",
+    "TRANS_STMT_SAVEPOINT",
+    "TRANS_STMT_ROLLBACK_TO",
+    "TRANS_STMT_RELEASE",
+    "TRANS_STMT_SAVEPOINT",
+    "TRANS_STMT_ROLLBACK_TO",
+    "TRANS_STMT_RELEASE",
+    "TRANS_STMT_ROLLBACK"
+  ],
+  "tests": 91,
+  "regressionsBeforeFunctionalTests": true,
+  "staticAssertions": 183,
+  "decoderAssertions": 25,
+  "typeScriptContractChanged": false,
+  "plpgsqlNotYetCompiled": true,
+  "sqlNotExecuted": true
+}

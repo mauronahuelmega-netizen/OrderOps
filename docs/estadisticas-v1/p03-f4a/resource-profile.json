@@ -1,0 +1,1841 @@
+{
+  "samples": [
+    {
+      "tag": "1_50",
+      "at": "2026-10-14T01:11:11.878Z",
+      "container": {
+        "BlockIO": "114MB / 57.7MB",
+        "CPUPerc": "7.97%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "1.64%",
+        "MemUsage": "129.6MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 258356,
+        "VmHWM": 33112,
+        "VmRSS": 33112
+      },
+      "ownedActivity": [
+        {
+          "pid": 37350,
+          "app": "statistics_f4a_1_50",
+          "state": "idle in transaction",
+          "waitType": "Client",
+          "wait": "ClientRead",
+          "seconds": 0.299091
+        }
+      ]
+    },
+    {
+      "tag": "1_50",
+      "at": "2026-10-14T01:11:18.698Z",
+      "container": {
+        "BlockIO": "114MB / 57.7MB",
+        "CPUPerc": "94.18%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.05%",
+        "MemUsage": "161.6MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 293264,
+        "VmHWM": 67928,
+        "VmRSS": 64048
+      },
+      "ownedActivity": [
+        {
+          "pid": 37350,
+          "app": "statistics_f4a_1_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.704873
+        }
+      ]
+    },
+    {
+      "tag": "1_50",
+      "at": "2026-10-14T01:11:24.185Z",
+      "container": {
+        "BlockIO": "114MB / 57.7MB",
+        "CPUPerc": "96.70%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.12%",
+        "MemUsage": "167.5MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304648,
+        "VmHWM": 74992,
+        "VmRSS": 71420
+      },
+      "ownedActivity": [
+        {
+          "pid": 37350,
+          "app": "statistics_f4a_1_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.456293
+        }
+      ]
+    },
+    {
+      "tag": "1_50",
+      "at": "2026-10-14T01:11:28.037Z",
+      "container": {
+        "BlockIO": "114MB / 57.7MB",
+        "CPUPerc": "99.35%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.13%",
+        "MemUsage": "167.6MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304648,
+        "VmHWM": 74992,
+        "VmRSS": 72416
+      },
+      "ownedActivity": [
+        {
+          "pid": 37350,
+          "app": "statistics_f4a_1_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.540481
+        }
+      ]
+    },
+    {
+      "tag": "1_50",
+      "at": "2026-10-14T01:11:34.080Z",
+      "container": {
+        "BlockIO": "114MB / 57.7MB",
+        "CPUPerc": "95.22%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.13%",
+        "MemUsage": "167.6MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304648,
+        "VmHWM": 74992,
+        "VmRSS": 72496
+      },
+      "ownedActivity": [
+        {
+          "pid": 37350,
+          "app": "statistics_f4a_1_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.656587
+        }
+      ]
+    },
+    {
+      "tag": "1_50",
+      "at": "2026-10-14T01:11:38.081Z",
+      "container": {
+        "BlockIO": "114MB / 57.7MB",
+        "CPUPerc": "101.74%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.13%",
+        "MemUsage": "167.9MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304648,
+        "VmHWM": 74992,
+        "VmRSS": 72564
+      },
+      "ownedActivity": [
+        {
+          "pid": 37350,
+          "app": "statistics_f4a_1_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.353284
+        }
+      ]
+    },
+    {
+      "tag": "1_100",
+      "at": "2026-10-14T01:12:09.857Z",
+      "container": {
+        "BlockIO": "114MB / 58.6MB",
+        "CPUPerc": "8.03%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "1.64%",
+        "MemUsage": "129.7MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 258372,
+        "VmHWM": 33176,
+        "VmRSS": 33176
+      },
+      "ownedActivity": [
+        {
+          "pid": 37568,
+          "app": "statistics_f4a_1_100",
+          "state": "idle in transaction",
+          "waitType": "Client",
+          "wait": "ClientRead",
+          "seconds": 0.320394
+        }
+      ]
+    },
+    {
+      "tag": "1_100",
+      "at": "2026-10-14T01:12:16.693Z",
+      "container": {
+        "BlockIO": "114MB / 58.6MB",
+        "CPUPerc": "92.15%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "1.92%",
+        "MemUsage": "151.4MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 292328,
+        "VmHWM": 67360,
+        "VmRSS": 67360
+      },
+      "ownedActivity": [
+        {
+          "pid": 37568,
+          "app": "statistics_f4a_1_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 1.645115
+        }
+      ]
+    },
+    {
+      "tag": "1_100",
+      "at": "2026-10-14T01:12:21.029Z",
+      "container": {
+        "BlockIO": "114MB / 58.6MB",
+        "CPUPerc": "114.94%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "1.91%",
+        "MemUsage": "150.8MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 294224,
+        "VmHWM": 68572,
+        "VmRSS": 66884
+      },
+      "ownedActivity": [
+        {
+          "pid": 37568,
+          "app": "statistics_f4a_1_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 1.015483
+        }
+      ]
+    },
+    {
+      "tag": "1_100",
+      "at": "2026-10-14T01:12:26.460Z",
+      "container": {
+        "BlockIO": "114MB / 58.6MB",
+        "CPUPerc": "95.79%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.12%",
+        "MemUsage": "167.3MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304996,
+        "VmHWM": 75660,
+        "VmRSS": 66060
+      },
+      "ownedActivity": [
+        {
+          "pid": 37568,
+          "app": "statistics_f4a_1_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.903121
+        }
+      ]
+    },
+    {
+      "tag": "1_100",
+      "at": "2026-10-14T01:12:31.126Z",
+      "container": {
+        "BlockIO": "114MB / 58.9MB",
+        "CPUPerc": "109.99%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.14%",
+        "MemUsage": "168.5MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304996,
+        "VmHWM": 75660,
+        "VmRSS": 73124
+      },
+      "ownedActivity": [
+        {
+          "pid": 37568,
+          "app": "statistics_f4a_1_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.39171
+        }
+      ]
+    },
+    {
+      "tag": "1_100",
+      "at": "2026-10-14T01:12:36.581Z",
+      "container": {
+        "BlockIO": "114MB / 58.9MB",
+        "CPUPerc": "93.09%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.14%",
+        "MemUsage": "168.4MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304996,
+        "VmHWM": 75660,
+        "VmRSS": 73200
+      },
+      "ownedActivity": [
+        {
+          "pid": 37568,
+          "app": "statistics_f4a_1_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.919655
+        }
+      ]
+    },
+    {
+      "tag": "1_100",
+      "at": "2026-10-14T01:12:41.111Z",
+      "container": {
+        "BlockIO": "114MB / 58.9MB",
+        "CPUPerc": "111.34%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.14%",
+        "MemUsage": "168.7MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304996,
+        "VmHWM": 75660,
+        "VmRSS": 73272
+      },
+      "ownedActivity": [
+        {
+          "pid": 37568,
+          "app": "statistics_f4a_1_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 1.389901
+        }
+      ]
+    },
+    {
+      "tag": "1_100",
+      "at": "2026-10-14T01:12:46.592Z",
+      "container": {
+        "BlockIO": "114MB / 58.9MB",
+        "CPUPerc": "93.91%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.14%",
+        "MemUsage": "169MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304996,
+        "VmHWM": 75660,
+        "VmRSS": 73920
+      },
+      "ownedActivity": [
+        {
+          "pid": 37568,
+          "app": "statistics_f4a_1_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.838001
+        }
+      ]
+    },
+    {
+      "tag": "1_100",
+      "at": "2026-10-14T01:12:51.172Z",
+      "container": {
+        "BlockIO": "114MB / 58.9MB",
+        "CPUPerc": "104.18%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.15%",
+        "MemUsage": "169.7MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304996,
+        "VmHWM": 75660,
+        "VmRSS": 73988
+      },
+      "ownedActivity": [
+        {
+          "pid": 37568,
+          "app": "statistics_f4a_1_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.349626
+        }
+      ]
+    },
+    {
+      "tag": "1_100",
+      "at": "2026-10-14T01:12:56.502Z",
+      "container": {
+        "BlockIO": "114MB / 58.9MB",
+        "CPUPerc": "95.89%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.14%",
+        "MemUsage": "169MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304996,
+        "VmHWM": 75660,
+        "VmRSS": 74008
+      },
+      "ownedActivity": [
+        {
+          "pid": 37568,
+          "app": "statistics_f4a_1_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 1.056787
+        }
+      ]
+    },
+    {
+      "tag": "1_100",
+      "at": "2026-10-14T01:13:01.151Z",
+      "container": {
+        "BlockIO": "114MB / 58.9MB",
+        "CPUPerc": "101.59%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.15%",
+        "MemUsage": "169.7MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304996,
+        "VmHWM": 75660,
+        "VmRSS": 74020
+      },
+      "ownedActivity": [
+        {
+          "pid": 37568,
+          "app": "statistics_f4a_1_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 1.332832
+        }
+      ]
+    },
+    {
+      "tag": "2_100",
+      "at": "2026-10-14T01:14:04.748Z",
+      "container": {
+        "BlockIO": "114MB / 60.4MB",
+        "CPUPerc": "0.03%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "1.64%",
+        "MemUsage": "129.7MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 258372,
+        "VmHWM": 33124,
+        "VmRSS": 33124
+      },
+      "ownedActivity": [
+        {
+          "pid": 37906,
+          "app": "statistics_f4a_2_100",
+          "state": "idle in transaction",
+          "waitType": "Client",
+          "wait": "ClientRead",
+          "seconds": 0.234004
+        }
+      ]
+    },
+    {
+      "tag": "2_100",
+      "at": "2026-10-14T01:14:14.834Z",
+      "container": {
+        "BlockIO": "114MB / 60.4MB",
+        "CPUPerc": "35.69%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "1.94%",
+        "MemUsage": "153.1MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 293408,
+        "VmHWM": 66856,
+        "VmRSS": 59872
+      },
+      "ownedActivity": [
+        {
+          "pid": 37906,
+          "app": "statistics_f4a_2_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.426764
+        }
+      ]
+    },
+    {
+      "tag": "2_100",
+      "at": "2026-10-14T01:14:21.617Z",
+      "container": {
+        "BlockIO": "114MB / 60.4MB",
+        "CPUPerc": "126.51%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "1.97%",
+        "MemUsage": "155.5MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 293500,
+        "VmHWM": 66856,
+        "VmRSS": 66024
+      },
+      "ownedActivity": [
+        {
+          "pid": 37906,
+          "app": "statistics_f4a_2_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 3.411239
+        }
+      ]
+    },
+    {
+      "tag": "2_100",
+      "at": "2026-10-14T01:14:26.048Z",
+      "container": {
+        "BlockIO": "114MB / 60.4MB",
+        "CPUPerc": "115.70%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "1.99%",
+        "MemUsage": "157.1MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 294316,
+        "VmHWM": 68360,
+        "VmRSS": 59904
+      },
+      "ownedActivity": [
+        {
+          "pid": 37906,
+          "app": "statistics_f4a_2_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.041878
+        }
+      ]
+    },
+    {
+      "tag": "2_100",
+      "at": "2026-10-14T01:14:31.341Z",
+      "container": {
+        "BlockIO": "114MB / 60.4MB",
+        "CPUPerc": "103.96%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.04%",
+        "MemUsage": "161.2MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 305796,
+        "VmHWM": 76340,
+        "VmRSS": 62996
+      },
+      "ownedActivity": [
+        {
+          "pid": 37906,
+          "app": "statistics_f4a_2_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.447921
+        }
+      ]
+    },
+    {
+      "tag": "2_100",
+      "at": "2026-10-14T01:14:36.004Z",
+      "container": {
+        "BlockIO": "114MB / 60.4MB",
+        "CPUPerc": "106.11%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.13%",
+        "MemUsage": "168.1MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 305796,
+        "VmHWM": 76340,
+        "VmRSS": 73064
+      },
+      "ownedActivity": [
+        {
+          "pid": 37906,
+          "app": "statistics_f4a_2_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.61572
+        }
+      ]
+    },
+    {
+      "tag": "2_100",
+      "at": "2026-10-14T01:14:42.445Z",
+      "container": {
+        "BlockIO": "114MB / 60.4MB",
+        "CPUPerc": "98.78%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.14%",
+        "MemUsage": "168.7MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 305796,
+        "VmHWM": 76340,
+        "VmRSS": 73360
+      },
+      "ownedActivity": [
+        {
+          "pid": 37906,
+          "app": "statistics_f4a_2_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 1.405103
+        }
+      ]
+    },
+    {
+      "tag": "2_100",
+      "at": "2026-10-14T01:14:46.039Z",
+      "container": {
+        "BlockIO": "114MB / 60.6MB",
+        "CPUPerc": "104.77%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.14%",
+        "MemUsage": "168.9MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 305796,
+        "VmHWM": 76340,
+        "VmRSS": 73644
+      },
+      "ownedActivity": [
+        {
+          "pid": 37906,
+          "app": "statistics_f4a_2_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.323251
+        }
+      ]
+    },
+    {
+      "tag": "2_100",
+      "at": "2026-10-14T01:14:51.512Z",
+      "container": {
+        "BlockIO": "114MB / 60.6MB",
+        "CPUPerc": "98.45%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.14%",
+        "MemUsage": "169.2MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 305796,
+        "VmHWM": 76340,
+        "VmRSS": 73972
+      },
+      "ownedActivity": [
+        {
+          "pid": 37906,
+          "app": "statistics_f4a_2_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.713173
+        }
+      ]
+    },
+    {
+      "tag": "2_100",
+      "at": "2026-10-14T01:14:56.051Z",
+      "container": {
+        "BlockIO": "114MB / 60.6MB",
+        "CPUPerc": "100.69%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.14%",
+        "MemUsage": "168.8MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 305796,
+        "VmHWM": 76340,
+        "VmRSS": 74012
+      },
+      "ownedActivity": [
+        {
+          "pid": 37906,
+          "app": "statistics_f4a_2_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.409127
+        }
+      ]
+    },
+    {
+      "tag": "2_100",
+      "at": "2026-10-14T01:15:01.949Z",
+      "container": {
+        "BlockIO": "114MB / 60.6MB",
+        "CPUPerc": "95.06%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.15%",
+        "MemUsage": "169.2MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 305796,
+        "VmHWM": 76340,
+        "VmRSS": 74036
+      },
+      "ownedActivity": [
+        {
+          "pid": 37906,
+          "app": "statistics_f4a_2_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 1.478538
+        }
+      ]
+    },
+    {
+      "tag": "2_100",
+      "at": "2026-10-14T01:15:06.044Z",
+      "container": {
+        "BlockIO": "114MB / 60.6MB",
+        "CPUPerc": "104.79%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.14%",
+        "MemUsage": "169MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.8MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 305796,
+        "VmHWM": 76340,
+        "VmRSS": 74040
+      },
+      "ownedActivity": [
+        {
+          "pid": 37906,
+          "app": "statistics_f4a_2_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.265989
+        }
+      ]
+    },
+    {
+      "tag": "2_50",
+      "at": "2026-10-14T01:15:35.723Z",
+      "container": {
+        "BlockIO": "114MB / 60.9MB",
+        "CPUPerc": "7.66%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "1.64%",
+        "MemUsage": "129.7MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 258356,
+        "VmHWM": 33532,
+        "VmRSS": 33532
+      },
+      "ownedActivity": [
+        {
+          "pid": 38229,
+          "app": "statistics_f4a_2_50",
+          "state": "idle in transaction",
+          "waitType": "Client",
+          "wait": "ClientRead",
+          "seconds": 0.236791
+        }
+      ]
+    },
+    {
+      "tag": "2_50",
+      "at": "2026-10-14T01:15:43.430Z",
+      "container": {
+        "BlockIO": "114MB / 60.9MB",
+        "CPUPerc": "104.62%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.02%",
+        "MemUsage": "159.5MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 293948,
+        "VmHWM": 68068,
+        "VmRSS": 66016
+      },
+      "ownedActivity": [
+        {
+          "pid": 38229,
+          "app": "statistics_f4a_2_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.445757
+        }
+      ]
+    },
+    {
+      "tag": "2_50",
+      "at": "2026-10-14T01:15:46.864Z",
+      "container": {
+        "BlockIO": "114MB / 60.9MB",
+        "CPUPerc": "102.83%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.09%",
+        "MemUsage": "164.6MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 305464,
+        "VmHWM": 75992,
+        "VmRSS": 65244
+      },
+      "ownedActivity": [
+        {
+          "pid": 38229,
+          "app": "statistics_f4a_2_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.191613
+        }
+      ]
+    },
+    {
+      "tag": "2_50",
+      "at": "2026-10-14T01:15:52.322Z",
+      "container": {
+        "BlockIO": "114MB / 60.9MB",
+        "CPUPerc": "94.81%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.10%",
+        "MemUsage": "165.8MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 305464,
+        "VmHWM": 75992,
+        "VmRSS": 70856
+      },
+      "ownedActivity": [
+        {
+          "pid": 38229,
+          "app": "statistics_f4a_2_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.623699
+        }
+      ]
+    },
+    {
+      "tag": "2_50",
+      "at": "2026-10-14T01:15:56.888Z",
+      "container": {
+        "BlockIO": "114MB / 60.9MB",
+        "CPUPerc": "98.31%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.10%",
+        "MemUsage": "165.7MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 305464,
+        "VmHWM": 75992,
+        "VmRSS": 70940
+      },
+      "ownedActivity": [
+        {
+          "pid": 38229,
+          "app": "statistics_f4a_2_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.031113
+        }
+      ]
+    },
+    {
+      "tag": "2_50",
+      "at": "2026-10-14T01:16:02.843Z",
+      "container": {
+        "BlockIO": "114MB / 61.1MB",
+        "CPUPerc": "94.09%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.13%",
+        "MemUsage": "168.1MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 305464,
+        "VmHWM": 75992,
+        "VmRSS": 71040
+      },
+      "ownedActivity": [
+        {
+          "pid": 38229,
+          "app": "statistics_f4a_2_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.078559
+        }
+      ]
+    },
+    {
+      "tag": "2_50",
+      "at": "2026-10-14T01:16:06.884Z",
+      "container": {
+        "BlockIO": "114MB / 61.1MB",
+        "CPUPerc": "106.92%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.13%",
+        "MemUsage": "168.3MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 305464,
+        "VmHWM": 75992,
+        "VmRSS": 73600
+      },
+      "ownedActivity": [
+        {
+          "pid": 38229,
+          "app": "statistics_f4a_2_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.314102
+        }
+      ]
+    },
+    {
+      "tag": "3_50",
+      "at": "2026-10-14T01:16:38.357Z",
+      "container": {
+        "BlockIO": "114MB / 61.5MB",
+        "CPUPerc": "8.32%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "1.64%",
+        "MemUsage": "129.7MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 257744,
+        "VmHWM": 33836,
+        "VmRSS": 33836
+      },
+      "ownedActivity": [
+        {
+          "pid": 38477,
+          "app": "statistics_f4a_3_50",
+          "state": "idle in transaction",
+          "waitType": "Client",
+          "wait": "ClientRead",
+          "seconds": 0.283385
+        }
+      ]
+    },
+    {
+      "tag": "3_50",
+      "at": "2026-10-14T01:16:44.688Z",
+      "container": {
+        "BlockIO": "114MB / 61.5MB",
+        "CPUPerc": "98.05%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.00%",
+        "MemUsage": "158MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 292044,
+        "VmHWM": 66552,
+        "VmRSS": 66524
+      },
+      "ownedActivity": [
+        {
+          "pid": 38477,
+          "app": "statistics_f4a_3_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 1.474287
+        }
+      ]
+    },
+    {
+      "tag": "3_50",
+      "at": "2026-10-14T01:16:50.211Z",
+      "container": {
+        "BlockIO": "114MB / 61.5MB",
+        "CPUPerc": "99.18%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.02%",
+        "MemUsage": "159.4MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 294104,
+        "VmHWM": 67576,
+        "VmRSS": 67036
+      },
+      "ownedActivity": [
+        {
+          "pid": 38477,
+          "app": "statistics_f4a_3_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 1.456959
+        }
+      ]
+    },
+    {
+      "tag": "3_50",
+      "at": "2026-10-14T01:16:54.530Z",
+      "container": {
+        "BlockIO": "114MB / 61.5MB",
+        "CPUPerc": "108.06%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.12%",
+        "MemUsage": "167MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304632,
+        "VmHWM": 76736,
+        "VmRSS": 68452
+      },
+      "ownedActivity": [
+        {
+          "pid": 38477,
+          "app": "statistics_f4a_3_50",
+          "state": "idle in transaction",
+          "waitType": "Client",
+          "wait": "ClientRead",
+          "seconds": 0.008435
+        }
+      ]
+    },
+    {
+      "tag": "3_50",
+      "at": "2026-10-14T01:17:01.414Z",
+      "container": {
+        "BlockIO": "114MB / 61.5MB",
+        "CPUPerc": "99.97%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.15%",
+        "MemUsage": "169.7MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "15"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304632,
+        "VmHWM": 76736,
+        "VmRSS": 73524
+      },
+      "ownedActivity": [
+        {
+          "pid": 38477,
+          "app": "statistics_f4a_3_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 1.559779
+        }
+      ]
+    },
+    {
+      "tag": "3_50",
+      "at": "2026-10-14T01:17:05.813Z",
+      "container": {
+        "BlockIO": "114MB / 61.5MB",
+        "CPUPerc": "107.50%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.13%",
+        "MemUsage": "168.3MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304632,
+        "VmHWM": 76736,
+        "VmRSS": 73552
+      },
+      "ownedActivity": [
+        {
+          "pid": 38477,
+          "app": "statistics_f4a_3_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.236378
+        }
+      ]
+    },
+    {
+      "tag": "3_50",
+      "at": "2026-10-14T01:17:10.098Z",
+      "container": {
+        "BlockIO": "114MB / 61.5MB",
+        "CPUPerc": "96.04%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.13%",
+        "MemUsage": "168.4MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304632,
+        "VmHWM": 76736,
+        "VmRSS": 73872
+      },
+      "ownedActivity": [
+        {
+          "pid": 38477,
+          "app": "statistics_f4a_3_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.839678
+        }
+      ]
+    },
+    {
+      "tag": "3_50",
+      "at": "2026-10-14T01:17:14.705Z",
+      "container": {
+        "BlockIO": "114MB / 61.5MB",
+        "CPUPerc": "95.55%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.13%",
+        "MemUsage": "168.4MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304632,
+        "VmHWM": 76736,
+        "VmRSS": 73972
+      },
+      "ownedActivity": [
+        {
+          "pid": 38477,
+          "app": "statistics_f4a_3_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 1.228197
+        }
+      ]
+    },
+    {
+      "tag": "3_50",
+      "at": "2026-10-14T01:17:20.212Z",
+      "container": {
+        "BlockIO": "114MB / 61.5MB",
+        "CPUPerc": "93.11%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.13%",
+        "MemUsage": "168.3MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304632,
+        "VmHWM": 76736,
+        "VmRSS": 74056
+      },
+      "ownedActivity": [
+        {
+          "pid": 38477,
+          "app": "statistics_f4a_3_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.326954
+        }
+      ]
+    },
+    {
+      "tag": "3_50",
+      "at": "2026-10-14T01:17:24.581Z",
+      "container": {
+        "BlockIO": "114MB / 61.5MB",
+        "CPUPerc": "106.25%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.14%",
+        "MemUsage": "168.4MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304632,
+        "VmHWM": 76736,
+        "VmRSS": 74080
+      },
+      "ownedActivity": [
+        {
+          "pid": 38477,
+          "app": "statistics_f4a_3_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.392756
+        }
+      ]
+    },
+    {
+      "tag": "3_50",
+      "at": "2026-10-14T01:17:30.162Z",
+      "container": {
+        "BlockIO": "114MB / 61.5MB",
+        "CPUPerc": "93.30%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.14%",
+        "MemUsage": "168.5MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304632,
+        "VmHWM": 76736,
+        "VmRSS": 74088
+      },
+      "ownedActivity": [
+        {
+          "pid": 38477,
+          "app": "statistics_f4a_3_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.798272
+        }
+      ]
+    },
+    {
+      "tag": "3_50",
+      "at": "2026-10-14T01:17:34.604Z",
+      "container": {
+        "BlockIO": "114MB / 61.5MB",
+        "CPUPerc": "102.45%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.14%",
+        "MemUsage": "168.9MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304632,
+        "VmHWM": 76736,
+        "VmRSS": 74088
+      },
+      "ownedActivity": [
+        {
+          "pid": 38477,
+          "app": "statistics_f4a_3_50",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.844536
+        }
+      ]
+    },
+    {
+      "tag": "3_100",
+      "at": "2026-10-14T01:18:06.668Z",
+      "container": {
+        "BlockIO": "114MB / 62.2MB",
+        "CPUPerc": "0.03%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "1.65%",
+        "MemUsage": "129.7MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 258372,
+        "VmHWM": 33064,
+        "VmRSS": 33064
+      },
+      "ownedActivity": [
+        {
+          "pid": 38808,
+          "app": "statistics_f4a_3_100",
+          "state": "idle in transaction",
+          "waitType": "Client",
+          "wait": "ClientRead",
+          "seconds": 0.360017
+        }
+      ]
+    },
+    {
+      "tag": "3_100",
+      "at": "2026-10-14T01:18:13.388Z",
+      "container": {
+        "BlockIO": "114MB / 62.2MB",
+        "CPUPerc": "98.20%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.05%",
+        "MemUsage": "161.6MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 293500,
+        "VmHWM": 66960,
+        "VmRSS": 57816
+      },
+      "ownedActivity": [
+        {
+          "pid": 38808,
+          "app": "statistics_f4a_3_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.064056
+        }
+      ]
+    },
+    {
+      "tag": "3_100",
+      "at": "2026-10-14T01:18:18.566Z",
+      "container": {
+        "BlockIO": "114MB / 62.2MB",
+        "CPUPerc": "97.95%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.11%",
+        "MemUsage": "166.1MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 294256,
+        "VmHWM": 68464,
+        "VmRSS": 63720
+      },
+      "ownedActivity": [
+        {
+          "pid": 38808,
+          "app": "statistics_f4a_3_100",
+          "state": "idle in transaction",
+          "waitType": "Client",
+          "wait": "ClientRead",
+          "seconds": 0.018248
+        }
+      ]
+    },
+    {
+      "tag": "3_100",
+      "at": "2026-10-14T01:18:23.031Z",
+      "container": {
+        "BlockIO": "114MB / 62.2MB",
+        "CPUPerc": "98.64%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.11%",
+        "MemUsage": "166.5MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304972,
+        "VmHWM": 75620,
+        "VmRSS": 70296
+      },
+      "ownedActivity": [
+        {
+          "pid": 38808,
+          "app": "statistics_f4a_3_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.315536
+        }
+      ]
+    },
+    {
+      "tag": "3_100",
+      "at": "2026-10-14T01:18:28.391Z",
+      "container": {
+        "BlockIO": "114MB / 62.2MB",
+        "CPUPerc": "93.58%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.11%",
+        "MemUsage": "166.3MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304972,
+        "VmHWM": 75620,
+        "VmRSS": 71120
+      },
+      "ownedActivity": [
+        {
+          "pid": 38808,
+          "app": "statistics_f4a_3_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.260432
+        }
+      ]
+    },
+    {
+      "tag": "3_100",
+      "at": "2026-10-14T01:18:33.672Z",
+      "container": {
+        "BlockIO": "114MB / 62.2MB",
+        "CPUPerc": "96.27%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.12%",
+        "MemUsage": "167MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304972,
+        "VmHWM": 75620,
+        "VmRSS": 71228
+      },
+      "ownedActivity": [
+        {
+          "pid": 38808,
+          "app": "statistics_f4a_3_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.793259
+        }
+      ]
+    },
+    {
+      "tag": "3_100",
+      "at": "2026-10-14T01:18:37.890Z",
+      "container": {
+        "BlockIO": "114MB / 62.7MB",
+        "CPUPerc": "106.45%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.13%",
+        "MemUsage": "167.9MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304972,
+        "VmHWM": 75620,
+        "VmRSS": 72004
+      },
+      "ownedActivity": [
+        {
+          "pid": 38808,
+          "app": "statistics_f4a_3_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.12
+        }
+      ]
+    },
+    {
+      "tag": "3_100",
+      "at": "2026-10-14T01:18:43.253Z",
+      "container": {
+        "BlockIO": "114MB / 62.9MB",
+        "CPUPerc": "98.25%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.13%",
+        "MemUsage": "167.7MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304972,
+        "VmHWM": 75620,
+        "VmRSS": 72252
+      },
+      "ownedActivity": [
+        {
+          "pid": 38808,
+          "app": "statistics_f4a_3_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 0.240916
+        }
+      ]
+    },
+    {
+      "tag": "3_100",
+      "at": "2026-10-14T01:19:02.587Z",
+      "container": {
+        "BlockIO": "114MB / 62.9MB",
+        "CPUPerc": "120.20%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.13%",
+        "MemUsage": "168MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304972,
+        "VmHWM": 75620,
+        "VmRSS": 72340
+      },
+      "ownedActivity": [
+        {
+          "pid": 38808,
+          "app": "statistics_f4a_3_100",
+          "state": "idle in transaction",
+          "waitType": "Client",
+          "wait": "ClientRead",
+          "seconds": 0.154929
+        }
+      ]
+    },
+    {
+      "tag": "3_100",
+      "at": "2026-10-14T01:19:09.126Z",
+      "container": {
+        "BlockIO": "114MB / 62.9MB",
+        "CPUPerc": "149.62%",
+        "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "ID": "592f44984962",
+        "MemPerc": "2.12%",
+        "MemUsage": "167.4MiB / 7.702GiB",
+        "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "NetIO": "3.81MB / 10.6MB",
+        "PIDs": "14"
+      },
+      "backendMemoryKiB": {
+        "VmPeak": 304972,
+        "VmHWM": 75620,
+        "VmRSS": 72340
+      },
+      "ownedActivity": [
+        {
+          "pid": 38808,
+          "app": "statistics_f4a_3_100",
+          "state": "active",
+          "waitType": null,
+          "wait": null,
+          "seconds": 8.324693
+        }
+      ]
+    }
+  ],
+  "scope": "Own container and owned backend RSS/HWM/VM peak plus owned activity/waits; RSS includes shared mappings, not private allocated heap. CPU pressure active normalized to engine CPU capacity, entry gate raw35%; memory40%. Observer no query text/credentials.",
+  "observerIntervalMs": 5000,
+  "summary": {
+    "containerRawCPUPercent": 149.62,
+    "containerMemoryPercent": 2.15,
+    "backendVmHWMKiB": 76736,
+    "cpuNormalizedPercentOf4EngineCPUs": 37.405,
+    "observedSamples": 58,
+    "spillNodesInCollectedPlans": 0,
+    "waitKinds": [
+      "Client:ClientRead",
+      "null:null"
+    ],
+    "limitations": [
+      "Sampled CPU not continuous host attribution; container includes background processes.",
+      "Kernel HWM sampled for owned backend lifetime includes shared mapped memory, not private heap.",
+      "Collected post-benchmark plans show no spills; no plan for9.57s outlier, no absence guarantee between samples.",
+      "No exact per-query start/end timeline in normal sample records; resource correlation at cohort level only."
+    ]
+  },
+  "separateInstrumentedProfile": {
+    "orders": 50,
+    "d1FunctionDeltas": {
+      "private.statistics_source_digest": {
+        "calls": 50,
+        "totalMs": 2.693533,
+        "selfMs": 2.693533
+      },
+      "private.statistics_can_read": {
+        "calls": 3976,
+        "totalMs": 124.867735,
+        "selfMs": 124.867735
+      },
+      "private.statistics_source_items": {
+        "calls": 50,
+        "totalMs": 44.868126,
+        "selfMs": 26.573752
+      },
+      "private.statistics_metric": {
+        "calls": 292,
+        "totalMs": 28.263145,
+        "selfMs": 28.263145
+      },
+      "private.statistics_metrics": {
+        "calls": 73,
+        "totalMs": 41.83909,
+        "selfMs": 13.575945
+      },
+      "private.statistics_local_cutoff": {
+        "calls": 100,
+        "totalMs": 9.379042,
+        "selfMs": 9.379042
+      },
+      "private.statistics_v1_read_core_candidate": {
+        "calls": 1,
+        "totalMs": 210.06087,
+        "selfMs": 40.546118
+      },
+      "public.statistics_v1_summary": {
+        "calls": 0,
+        "totalMs": 0,
+        "selfMs": 0
+      },
+      "private.statistics_v1_summary_base": {
+        "calls": 0,
+        "totalMs": 0,
+        "selfMs": 0
+      },
+      "private.statistics_v1_series_delta": {
+        "calls": 96,
+        "totalMs": 2.843436,
+        "selfMs": 2.843436
+      },
+      "private.statistics_v1_series_instant": {
+        "calls": 188,
+        "totalMs": 2.602327,
+        "selfMs": 2.602327
+      },
+      "private.statistics_v1_series_response": {
+        "calls": 0,
+        "totalMs": 0,
+        "selfMs": 0
+      },
+      "private.statistics_v1_summary_candidate": {
+        "calls": 0,
+        "totalMs": 0,
+        "selfMs": 0
+      },
+      "private.statistics_v1_summary_d1_candidate": {
+        "calls": 1,
+        "totalMs": 279.33896,
+        "selfMs": 27.993927
+      }
+    },
+    "sourceItemsOncePerOrder": true,
+    "inclusiveWarning": "Do not add parent/child times. Source_items includes some statistics_can_read time."
+  }
+}

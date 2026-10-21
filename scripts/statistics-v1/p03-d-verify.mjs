@@ -1,0 +1,28 @@
+/** Preservation and isolated read-only closing inventory. No resets, mutations or migrations. */
+import assert from 'node:assert/strict';
+import { readFileSync,writeFileSync,existsSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { resolve } from 'node:path';
+const hash=file=>createHash('sha256').update(readFileSync(file)).digest('hex');
+const git=(...args)=>{const r=spawnSync('git',args,{encoding:'utf8'});assert.equal(r.status,0);return r.stdout.trim();};
+assert.equal(git('branch','--show-current'),'codex/estadisticas-v1');
+const baseline=JSON.parse(readFileSync('docs/estadisticas-v1/p03-d/baseline.json','utf8'));
+assert.equal(git('rev-parse','HEAD'),baseline.head);
+for(const {file,sha256} of baseline.files)assert.equal(hash(file),sha256,`Preexisting file changed: ${file}`);
+const gate=spawnSync(process.execPath,['scripts/statistics-v1/assert-isolated-target.mjs'],{encoding:'utf8',timeout:180000});assert.equal(gate.status,0);
+const identity=JSON.parse(gate.stdout);assert.equal(identity.projectId,'orderops-statistics-v1-test-74718de66a41');
+const sql="BEGIN READ ONLY; SELECT json_build_object('orders',(SELECT count(*) FROM public.orders),'storeSessions',(SELECT count(*) FROM public.store_sessions),'items',(SELECT count(*) FROM public.order_items),'completions',(SELECT count(*) FROM public.order_statistics_completions),'authSessions',(SELECT count(*) FROM auth.sessions),'ledger',(SELECT count(*) FROM supabase_migrations.schema_migrations)); COMMIT;";
+const db=spawnSync('docker',['exec',`supabase_db_${identity.projectId}`,'psql','-X','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1','-At','-c',sql],{encoding:'utf8',timeout:30000});assert.equal(db.status,0);
+const inventory=JSON.parse(db.stdout.split(/\r?\n/).find(line=>line.startsWith('{')));
+assert.equal(inventory.ledger,123);for(const name of ['orders','storeSessions','items','completions'])assert.equal(inventory[name],0,`Unexpected fixture residue: ${name}`);
+const auth=JSON.parse(readFileSync('docs/estadisticas-v1/p03-d/auth-sessions.json','utf8'));assert.deepEqual(auth.sessionsAfter,auth.sessionsBefore);assert.equal(inventory.authSessions,auth.sessionsBefore.count);assert.equal(auth.sessionsAfter.afterPhaseBaseline,0);
+const qa=JSON.parse(readFileSync('docs/estadisticas-v1/p03-d/qa-server.json','utf8'));
+const shutdown=JSON.parse(readFileSync('docs/estadisticas-v1/p03-d/qa-shutdown.json','utf8'));assert.equal(shutdown.Port3037Closed,true);assert.equal(shutdown.OriginalServer11364Alive,true);assert.equal(shutdown.DockerTouched,false);
+const applicationFiles=[...git('ls-files','--others','--exclude-standard').split(/\r?\n/).filter(f=>f.startsWith('app/admin/(protected)/statistics/')||f.startsWith('components/admin/statistics/')),'lib/statistics/summary-chart.ts','lib/statistics/summary-route-server.ts'];
+for(const file of applicationFiles)assert.equal(hash(file),hash(resolve(qa.sourceMirror,file)),`QA mirror not current: ${file}`);
+const old=new Set(baseline.files.map(f=>f.file));
+const added=git('ls-files','--others','--exclude-standard').split(/\r?\n/).filter(f=>!old.has(f)&&f!=='docs/estadisticas-v1/p03-d/verification.json');
+assert.ok(existsSync('docs/estadisticas-v1/p03-d/informe.md'));
+writeFileSync('docs/estadisticas-v1/p03-d/verification.json',JSON.stringify({at:new Date().toISOString(),verdict:'PASS_WITH_LIMITATIONS',branch:git('branch','--show-current'),head:baseline.head,newCommits:0,preservedFiles:baseline.files.length,allPreexistingFilesUnchanged:true,applicationFiles:applicationFiles.map(file=>({file,sha256:hash(file),qaMirrorIdentical:true})),newFiles:added.map(file=>({file,sha256:hash(file)})),identity,inventory,shutdown,sqlWrites:0,authFixtureWrites:'Bounded synthetic Auth logins followed by local sign-out; no owned sessions retained, preexisting sessions preserved',authSessionPreservation:auth.sessionsAfter,e2e:JSON.parse(readFileSync('docs/estadisticas-v1/p03-d/e2e.json','utf8')).assertions,stop:'P03-D complete. No P03-E/navigation/integration/SQL optimization or deployment.'},null,2)+'\n');
+console.log(`PASS P03-D preservation and inventory: ${baseline.files.length} original files intact; actual app equals QA mirror; ledger 123; zero operational fixture rows; preexisting Auth sessions preserved.`);

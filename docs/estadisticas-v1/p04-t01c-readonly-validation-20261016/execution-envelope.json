@@ -1,0 +1,30 @@
+{
+  "startedUtc": "2026-10-16T15:56:45.640Z",
+  "invocations": 1,
+  "runner": "docs/estadisticas-v1/p04-t01c-focused-preflight-20261016/readonly-verification.proposed.mjs",
+  "approvedHashes": {
+    "readonly-verification.proposed.mjs": "76c4653891367e1c55d3d3b51af841f3ae0a5b980490ee5912e4e7ac65588dad",
+    "verification.proposed.psql": "485cf660d8230a868b4051aecce8418da9cc30d799aaec6a001f5eb0e4309a15",
+    "readonly-query-manifest.json": "85fefde4aa8256a4f42bfa38b5cd0a8b8819b8919bc77f8643ed3823adcfd294"
+  },
+  "mode": "--execute-readonly",
+  "state": "BLOCKED_NO_RETRY",
+  "sqlProcessLimitsUnchanged": {
+    "statementMs": 15000,
+    "lockMs": 3000,
+    "processMs": 90000
+  },
+  "endedUtc": "2026-10-16T15:56:51.802Z",
+  "exitCode": 1,
+  "signal": null,
+  "clientErrorCode": null,
+  "summary": {
+    "status": "BLOCKED_DIFFERENCE_OR_EXECUTION_ERROR",
+    "rollbackObserved": true,
+    "sqlStates": [],
+    "referenceUpdates": 0
+  },
+  "rawChildOutputPersisted": false,
+  "observedFileExists": true,
+  "observedFileSha256": "ac9d460069cbec22480110d1651e0f2ff6bcbd57f55e7f99504d7967ce8bf23b"
+}

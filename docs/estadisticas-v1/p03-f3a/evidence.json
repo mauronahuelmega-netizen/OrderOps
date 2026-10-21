@@ -1,0 +1,527 @@
+{
+  "at": "2026-10-13T23:35:56.337Z",
+  "verdict": "READY_WITH_LIMITATIONS",
+  "branch": "codex/estadisticas-v1",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "candidateSha256": "fd88de8c0ec3f4a87d8a6782650d63cf4779d8170033a4c5b4f37edbd489faf9",
+  "isolationBefore": {
+    "at": "2026-10-13T23:26:27.895Z",
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "resources": {
+      "containerIds": [
+        "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+      ],
+      "volumeNames": [
+        "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "networkId": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af"
+    },
+    "containers": [
+      {
+        "name": "/supabase_storage_orderops-statistics-v1-test-74718de66a41",
+        "id": "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_rest_orderops-statistics-v1-test-74718de66a41",
+        "id": "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "health": "no-healthcheck",
+        "running": true
+      },
+      {
+        "name": "/supabase_auth_orderops-statistics-v1-test-74718de66a41",
+        "id": "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_kong_orderops-statistics-v1-test-74718de66a41",
+        "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "health": "healthy",
+        "running": true
+      }
+    ],
+    "api": "127.0.0.1:56321",
+    "db": "127.0.0.1:56322"
+  },
+  "isolationAfter": {
+    "at": "2026-10-13T23:30:59.995Z",
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "resources": {
+      "containerIds": [
+        "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+      ],
+      "volumeNames": [
+        "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "networkId": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af"
+    },
+    "containers": [
+      {
+        "name": "/supabase_storage_orderops-statistics-v1-test-74718de66a41",
+        "id": "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_rest_orderops-statistics-v1-test-74718de66a41",
+        "id": "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "health": "no-healthcheck",
+        "running": true
+      },
+      {
+        "name": "/supabase_auth_orderops-statistics-v1-test-74718de66a41",
+        "id": "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_kong_orderops-statistics-v1-test-74718de66a41",
+        "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "health": "healthy",
+        "running": true
+      }
+    ],
+    "api": "127.0.0.1:56321",
+    "db": "127.0.0.1:56322"
+  },
+  "ledgerCount": 124,
+  "catalogACLPoliciesPreserved": true,
+  "preexistingFilesPreserved": 2161,
+  "fixtureRollbackVerified": true,
+  "preexistingProfileFingerprintPreserved": true,
+  "publicOriginalActive": true,
+  "noSQLInstallationOrAdoption": true,
+  "noCommits": true,
+  "staticChecks": {
+    "nodeSyntax": 8,
+    "offlineAdversarial": "PASS: identity/config/signing/endpoints and adversarial rejection scenarios; no Docker/DB writes."
+  },
+  "measurementScope": {
+    "orders": [
+      50,
+      100
+    ],
+    "normalSamplesPerRPCPerCohort": 5,
+    "warmupsPerRPCPerCohort": 1,
+    "instrumentedSamplesPerRPCPerCohort": 1,
+    "componentProbes100": 3,
+    "componentSamplesPerProbe": 5,
+    "componentWarmupsPerProbe": 1,
+    "queryTimeoutSeconds": 15,
+    "lockTimeoutSeconds": 3,
+    "fixtureSetupTimeoutSeconds": 30,
+    "concurrency": 1
+  },
+  "scripts": [
+    "scripts/statistics-v1/p03-f3a-evidence.mjs",
+    "scripts/statistics-v1/p03-f3a-final-prepare.mjs",
+    "scripts/statistics-v1/p03-f3a-final.mjs",
+    "scripts/statistics-v1/p03-f3a-prepare.mjs",
+    "scripts/statistics-v1/p03-f3a-probes-prepare.mjs",
+    "scripts/statistics-v1/p03-f3a-probes.mjs",
+    "scripts/statistics-v1/p03-f3a-profile.mjs",
+    "scripts/statistics-v1/p03-f3a-report.mjs"
+  ],
+  "existingUnmodifiedDependencies": [
+    "scripts/statistics-v1/p03-f1-fixture.sql",
+    "scripts/statistics-v1/isolation-policy.verify.mjs",
+    "scripts/statistics-v1/assert-isolated-target.mjs",
+    "scripts/statistics-v1/isolated-environment.mjs"
+  ],
+  "knownHarnessIssue": "Probe generator initially failed offline due template interpolation; fixed in own generator before any live probe. No SQL failure, installation or silent candidate repair.",
+  "limitations": [
+    "Only five normal samples: no p95 SLA certification",
+    "No attribution of historical F2B outlier",
+    "No 200+, HTTP, peak backend memory or concurrent performance",
+    "Nested statements below 10ms omitted; builtin JSON operator times not independently exposed",
+    "Simple synthetic composition, previous side empty; rich product/ruleEvidence/DST performance not measured",
+    "Logical fixture rollback and row counts/profile fingerprint verified, not bitwise database image. Sequences, WAL and PostgreSQL statistics can advance during rolled-back fixture operations; no reset attempted."
+  ],
+  "inventory": {
+    "docs/estadisticas-v1/p03-f3a/after.json": {
+      "sha256": "29c48c1f68733d42d87a92b829ee460d3ba0338702ac65508c650e9eedbcc62c",
+      "bytes": 135437
+    },
+    "docs/estadisticas-v1/p03-f3a/alternatives.md": {
+      "sha256": "3926c184bd70ac733b7d5fe558cfeccb3695562402ea79d769f5f9278f036eaf",
+      "bytes": 7483
+    },
+    "docs/estadisticas-v1/p03-f3a/baseline.json": {
+      "sha256": "9af0b03c96ed674936303971705e7e2b76ce32c87e7844b066a9fda93a9a21d4",
+      "bytes": 640899
+    },
+    "docs/estadisticas-v1/p03-f3a/before.json": {
+      "sha256": "f31003f2c00ffd22d34bb640c306eec2c883c0a7c7815f9151964a534e3f8228",
+      "bytes": 135429
+    },
+    "docs/estadisticas-v1/p03-f3a/component-probes.json": {
+      "sha256": "608234a96b1e45bae27b1d7666520b84ad6bf7919790c0a711ff92c5f90ddac0",
+      "bytes": 103380
+    },
+    "docs/estadisticas-v1/p03-f3a/final-preservation.json": {
+      "sha256": "818ec75005c53827f0632b7d0cf7a5055255199c741cea564ad4a2005799263c",
+      "bytes": 3100
+    },
+    "docs/estadisticas-v1/p03-f3a/function-profile.json": {
+      "sha256": "16f31c82e9ca879b476b3195f14821124e9e534e8a0501009b1dd47c324896fb",
+      "bytes": 867670
+    },
+    "docs/estadisticas-v1/p03-f3a/informe.md": {
+      "sha256": "5dc37d2d796da8f4a6e8b59b23cd41941e19f946b31536c8a9d8cc91f95fd925",
+      "bytes": 3830
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-candidate-6.json": {
+      "sha256": "1696209f7a48ec793d230a4d4402f97136eddf671631c9d4c3cce91593f1431b",
+      "bytes": 20221
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-candidate-7.json": {
+      "sha256": "9c62af814e7477800c16b785aa35734a3af4f81c9ed654a33af6d8a5ac5a66b7",
+      "bytes": 21024
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-candidate-8.json": {
+      "sha256": "1d334aac10cb9c4b5cd8caecee00230cda65ced78bdea85d69c200192e6694d1",
+      "bytes": 134822
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-candidate-9.json": {
+      "sha256": "6e4a233841956edaac81f0ec07f89b4cb2a65cbe321b1a9038d3ed4ec7658ea3",
+      "bytes": 734
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-original-0.json": {
+      "sha256": "58e84cfd3723838d847a818608ec4a44b0d3d916734ea167ad4ca698cf96bb64",
+      "bytes": 87156
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-original-1.json": {
+      "sha256": "18f1fd9bdab8333eaeebc590b966fdda9fc8885a86c91dcc78e7120519f40c22",
+      "bytes": 31252
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-original-2.json": {
+      "sha256": "891950cf051778e159d936b45b944b686ddf91db3bcd1467c191bb4dca093770",
+      "bytes": 22486
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-original-3.json": {
+      "sha256": "23ae6a3c866e8d985d9bbe9dc2aa8e83898d18fcccbf781c45ac7353651bd7d7",
+      "bytes": 134822
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-original-4.json": {
+      "sha256": "f332527a246decb0276930fb7e69cbbe01df6c49fa2a1c0bc803758514c4f6aa",
+      "bytes": 856
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-original-5.json": {
+      "sha256": "40dcb6d56b3ddc97660e0abc1da83aa8ef5996b7e1ed80c67d3775009a305dcb",
+      "bytes": 725
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-outer-0.json": {
+      "sha256": "62bbab2c153dafe08b4472c5e45df763a5b3f89d23f34f8199b0e8df67489bcb",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-outer-1.json": {
+      "sha256": "9314f23a194fb41f17817b942e9092ad9a7ed6b99ab27a3afaac2813e79bead4",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-outer-10.json": {
+      "sha256": "9d60df1077a1f751419896703039b5113019117eaf5a156552d59420802b9a87",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-outer-11.json": {
+      "sha256": "8eef52380e5eb10be3ce60f54844978604b5d80096f10359efde2c2889ae633b",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-outer-12.json": {
+      "sha256": "9d5816ab5b2ab18af8cb5330bd5a4b00b70d7d68aeab884cf20396e53bd348d3",
+      "bytes": 997
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-outer-13.json": {
+      "sha256": "31c625f61e609348eda41171dc486792a999915498182ac387fe72b2694965f2",
+      "bytes": 992
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-outer-2.json": {
+      "sha256": "93f4a40c85516e1e14afd51a4eb31f62a83dcbcc57ea697acbc8bb06529d7f86",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-outer-3.json": {
+      "sha256": "98f90e934ef27d241433f929d60c94cdea2d8e52877f6d47a3fc7b064959e98e",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-outer-4.json": {
+      "sha256": "fa8379d70e483111903074806232d8240d90f3702db864ff47a9b86fab0f9fd9",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-outer-5.json": {
+      "sha256": "a224a32998338e4c7f6ee6303e9841d9064a567ec30175a47c7b29423f5c7a08",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-outer-6.json": {
+      "sha256": "905fde0d1e480de454ab34170034d51471a94e2e9a7da52a289e24e39afb41c6",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-outer-7.json": {
+      "sha256": "26dd701908ded44bd000d6b0ea334a816ba6de58d42104573dac0c2597594df1",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-outer-8.json": {
+      "sha256": "835a94db41d99ed354db8fc09bdc5a10026bb5070f562aef71abdff5ecf666a3",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/100-outer-9.json": {
+      "sha256": "6df09bf017186362c41e144cd9db5977dc4663be8f34d02ec734964353e5b324",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-candidate-10.json": {
+      "sha256": "64705c774e63d7681881e69a4a6c8646ce0ba45e0639cfe0577b9f7f367a86d5",
+      "bytes": 134807
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-candidate-11.json": {
+      "sha256": "b2cf0561cfb74b878a24962a6e8efbd85316a53c7d1de8851e101a323a77a5c8",
+      "bytes": 734
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-candidate-7.json": {
+      "sha256": "c7b71e493ee4556d6ef0191f4611ac02c1b91e089fa1309bcd70ef2a461930e2",
+      "bytes": 6928
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-candidate-8.json": {
+      "sha256": "c7813d44192166035be96c9f944ee65d200a0fb74962c6ab06126f24109639d3",
+      "bytes": 20206
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-candidate-9.json": {
+      "sha256": "3951f9d7a7134be3e9d8d7721251b29337e3d8ac9a2745ae133381867cf05abc",
+      "bytes": 21022
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-original-0.json": {
+      "sha256": "d66ceda2109c8fe3571b61b98ddd021034211dd60ad8c2beede3ee5a6dadd8b5",
+      "bytes": 6928
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-original-1.json": {
+      "sha256": "f5eaa867d714521e392f2b28486c953f899ab26bbc87272b901b82dcaa1775f8",
+      "bytes": 87129
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-original-2.json": {
+      "sha256": "127a6485e09a6a3848e3331d2c592697d7059fd00567a2dcf65f52f1c461c8b9",
+      "bytes": 31244
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-original-3.json": {
+      "sha256": "abc58976455f8537c8ab8aa6c4e1b3c019db52b091389685bcaee540ccc781e9",
+      "bytes": 22473
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-original-4.json": {
+      "sha256": "a95d612ee9f7c9ccd0c64ace0bd9892b68cd5f9d75239c93fb974ebdcaad22fc",
+      "bytes": 134807
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-original-5.json": {
+      "sha256": "14d1658636594e39f0b3845bd2a517d704f7e9ddf3768b9729c60d6ad20c1538",
+      "bytes": 855
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-original-6.json": {
+      "sha256": "af50622806c71abf442dbba3d8b5c5da1c7acb6ebdb50f3c88fffdc3bba3097a",
+      "bytes": 724
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-outer-0.json": {
+      "sha256": "7e26f8e747e729da37cbe54c43d2a3864a94e7d2946e5a3ed0240590dc02c0ba",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-outer-1.json": {
+      "sha256": "88bf35bb8d35993b4f6f6acef67b13bdbf32c8a6ef07d8a0efd7e365a64f1a35",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-outer-10.json": {
+      "sha256": "b84051245afcd91b19e2ea187323139968cb1719b5faa393d386b2226810caa6",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-outer-11.json": {
+      "sha256": "43dd3ce90a39d187a40b09b46ac04c5666fbd1a91642d7c3159dd3c73d9e9bea",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-outer-12.json": {
+      "sha256": "9c7c22763fa9b26c0f81c450aa23acdd4cc65223b9cd7b3cff35d290b9a7a25d",
+      "bytes": 994
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-outer-13.json": {
+      "sha256": "2d9399057a71fe0a5de0a76353907c119e0bf6d86c4beb20b63d006ee8e92a52",
+      "bytes": 993
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-outer-2.json": {
+      "sha256": "300d9f933e92dfbfb176929dd08bf5d19910dfa7fcd7f4e65a598521355eb41b",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-outer-3.json": {
+      "sha256": "530ecdd915d8a20081b6064ba84c8012541ac8693d5ebf67740ccd9cdca555a3",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-outer-4.json": {
+      "sha256": "d31c9c5de4cfe75fa57a2585d321253f979c9067abeb98b6c76a96e01eebfefa",
+      "bytes": 1105
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-outer-5.json": {
+      "sha256": "32f8fded109c1dd391cb7ee95938329fc422f740723c038f233fad4ec03983ef",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-outer-6.json": {
+      "sha256": "fcfd1fbb056d836ca0d8613d53f87a0b3594608f3b86c9fbc322b13b2a3d610b",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-outer-7.json": {
+      "sha256": "081227e74e5729ea016d6db22b5361202a1207f7879fd9b4611e768625a25c55",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-outer-8.json": {
+      "sha256": "0836aa035b5e6ba6a8353b6ba449705eaa41f5c2319d17a8482fb3216b5a24a9",
+      "bytes": 1105
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/50-outer-9.json": {
+      "sha256": "31405e3b2609b095fc74d90acc70a0512fc7921788b98045088f7da59f2d07c8",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-0.json": {
+      "sha256": "8b0429041fa00d70234f9449bb1e4b7778cb5c36a588d47c548085e3717c9755",
+      "bytes": 9864
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-1.json": {
+      "sha256": "9e4c6a6e338a680f20d9f2ca6d0e2df63958513fb6e0e093fa91e2473cbd1f73",
+      "bytes": 1985
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-10.json": {
+      "sha256": "dfe980689241198d7e3253fce5fb867436e35124dd326de915e4913d7db48bba",
+      "bytes": 1985
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-11.json": {
+      "sha256": "9acf8c85b14812b39f0fab6ef0d7fd19842ccf64ec9cf8b3036792b4348929ff",
+      "bytes": 1985
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-12.json": {
+      "sha256": "0626a956967949ea9b03e7d4dc3c39bf0a5ee1577939651145ce74200c7134c9",
+      "bytes": 9865
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-13.json": {
+      "sha256": "762b8768d74049877f28f38063e06aba93f69f64e79f086ed7eeeb0150e6e11c",
+      "bytes": 1984
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-14.json": {
+      "sha256": "59315a6580a7bf51ea67d8ab599ac81ea4d6f331db2e1dc11e7269910884aac9",
+      "bytes": 1985
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-15.json": {
+      "sha256": "b53de01c45d2a2c08ceecfeaf3447d94ef10d66971a03fed5057656896943ca8",
+      "bytes": 9863
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-16.json": {
+      "sha256": "7b5673296dc5081c660e7b40b4c4569e52829c6ec534e0958c7b4ae3071ed830",
+      "bytes": 1985
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-17.json": {
+      "sha256": "efdaa50e019c853ab114ad73ea9cb2a84a1e8899293e674998f83993360449d4",
+      "bytes": 1983
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-2.json": {
+      "sha256": "702e4c19ddb014d99417f052c4f6c105abcbf79f0e6fce83d7d0ca7e88ee077f",
+      "bytes": 1985
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-3.json": {
+      "sha256": "98d63c65da85e48e3d89d5ac05c6f12fc2c1e83b8c68253721aa934e0ae894f8",
+      "bytes": 9864
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-4.json": {
+      "sha256": "4752c269a84d6f6c0fc0959c5204210be8184466473508a7e096a43f404c88a4",
+      "bytes": 1985
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-5.json": {
+      "sha256": "65a5fe9c6b43412cf1b5c9a2b001276a7f2bc2083b91d9045c7de82f6908133e",
+      "bytes": 1985
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-6.json": {
+      "sha256": "19a12fe25ebf3c89fe306fe1e08b23f6b14cd016cbba6e1207fb631f8b46c7a5",
+      "bytes": 9865
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-7.json": {
+      "sha256": "3398f9761c278a3588a8f0601a72f0166d2576922b1a3721484cb602c222b29b",
+      "bytes": 1983
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-8.json": {
+      "sha256": "2eccc18d29001b14d3f9821072d46184d7ca7e707b02ee91a204771bd2a579d6",
+      "bytes": 1985
+    },
+    "docs/estadisticas-v1/p03-f3a/plans/probe-9.json": {
+      "sha256": "a0dde2e93d68a0af392637eb26c022b89e2c40f9f7247a9815424c5c5567f514",
+      "bytes": 9864
+    },
+    "docs/estadisticas-v1/p03-f3a/preservation.json": {
+      "sha256": "acb4ea8df604afdda8358cb26a04a6e9935905949e9825858fd4c4d3b0178abf",
+      "bytes": 184
+    },
+    "docs/estadisticas-v1/p03-f3a/recommendation.md": {
+      "sha256": "5711f196d0c3ae9e6c47dfc693ad123d59cf8c2768a1ea96ce1574ac86d18817",
+      "bytes": 3221
+    },
+    "docs/estadisticas-v1/p03-f3a/residual-cost-analysis.md": {
+      "sha256": "3b211632dd84d51aca1b9fac093053af04c8617132a0c406bf7da0a60f99425b",
+      "bytes": 5511
+    },
+    "docs/estadisticas-v1/p03-f3a/results.json": {
+      "sha256": "7cdff7b00179be1b9a4c8aac53660fb9daf7c5ccec1006b362853b81ec6a40b7",
+      "bytes": 421
+    },
+    "docs/estadisticas-v1/p03-f3a/volume-100.json": {
+      "sha256": "6e070c72cef4254dbcaf50cd468d15ef04bd831bf2d6d7b8c317c87b723338d3",
+      "bytes": 518163
+    },
+    "docs/estadisticas-v1/p03-f3a/volume-50.json": {
+      "sha256": "509f8f64b2bf4b8923983ee26c4b4b6ceea1cb978faf4517e22436e1b9f661d8",
+      "bytes": 533302
+    },
+    "scripts/statistics-v1/p03-f3a-evidence.mjs": {
+      "sha256": "8bd02dca19fbd50ee9d57ee160572c05c132a1f2d6a57af1d603516bcb446358",
+      "bytes": 3799
+    },
+    "scripts/statistics-v1/p03-f3a-final-prepare.mjs": {
+      "sha256": "e5921652f23f516244eb23ff51e12733f335ef2fbc72f5152a90cfbbd4ee1688",
+      "bytes": 1225
+    },
+    "scripts/statistics-v1/p03-f3a-final.mjs": {
+      "sha256": "3525ef58be0cb34735637c9c4f68d83779fac2746fe904165f7419f58140aaea",
+      "bytes": 8628
+    },
+    "scripts/statistics-v1/p03-f3a-prepare.mjs": {
+      "sha256": "7d733e191efacbfab02d195916c7d68caac88faa0515060c6055a4c6f91fa0de",
+      "bytes": 3764
+    },
+    "scripts/statistics-v1/p03-f3a-probes-prepare.mjs": {
+      "sha256": "3b4f0d2215f21eda9fb2e0a6e5be998d28b03bb64e304e177a662c7fb1f54868",
+      "bytes": 2941
+    },
+    "scripts/statistics-v1/p03-f3a-probes.mjs": {
+      "sha256": "2244098f9757f134b5eb39b750228f0885d84ba0586eaafaf2ec75ea26a76e9a",
+      "bytes": 8657
+    },
+    "scripts/statistics-v1/p03-f3a-profile.mjs": {
+      "sha256": "1fc4985e49f82c92be6bb6152e045be45979bc6bb6bbaaf3daec6096497b7ab5",
+      "bytes": 15953
+    },
+    "scripts/statistics-v1/p03-f3a-report.mjs": {
+      "sha256": "1cc8b4c8b102c812bdfde5db10c59b142dc651bb4290365bef8008dbc2923254",
+      "bytes": 24856
+    }
+  },
+  "inventoryExcludesSelf": true
+}

@@ -1,0 +1,221 @@
+{
+  "at": "2026-10-16T17:47:41.312Z",
+  "result": "PASS_OFFLINE_ONLY",
+  "count": 52,
+  "tests": [
+    {
+      "name": "capacity exact 4 GiB and 35% accepted",
+      "result": "PASS"
+    },
+    {
+      "name": "CPU same arithmetic mean per processor as approved observation",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity rejects below 4 GiB",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity rejects above 35%",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity rejects null CPU",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity rejects unknown CPU",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity rejects no CPUs",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity rejects NaN CPU",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity rejects negative CPU",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity rejects null RAM",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity rejects string RAM",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity rejects RAM exceeds total",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity rejects unknown total RAM",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity rejects invalid UTC",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity rejects capture over 30s",
+      "result": "PASS"
+    },
+    {
+      "name": "capacity rejects reverse clock",
+      "result": "PASS"
+    },
+    {
+      "name": "explicit null Volumes recorded",
+      "result": "PASS"
+    },
+    {
+      "name": "explicit empty Volumes accepted",
+      "result": "PASS"
+    },
+    {
+      "name": "only approved PGDATA volume accepted",
+      "result": "PASS"
+    },
+    {
+      "name": "empty RepoDigests not misreported as repository proof",
+      "result": "PASS"
+    },
+    {
+      "name": "environment values not exported",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects missing Volumes",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects unexpected volume",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects malformed volume metadata",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects Volumes array",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects wrong digest",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects unknown digest",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects unknown config",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects unknown Env",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects unknown Cmd",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects unknown Entrypoint",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects unknown User",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects unknown WorkingDir",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects unknown RepoDigests",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects malformed RepoDigest",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects unknown RootFS",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects empty layers",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects wrong OS",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects wrong architecture",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects unknown size",
+      "result": "PASS"
+    },
+    {
+      "name": "image rejects two images",
+      "result": "PASS"
+    },
+    {
+      "name": "no collision",
+      "result": "PASS"
+    },
+    {
+      "name": "name collision",
+      "result": "PASS"
+    },
+    {
+      "name": "label collision under another name",
+      "result": "PASS"
+    },
+    {
+      "name": "malformed collision response",
+      "result": "PASS"
+    },
+    {
+      "name": "missing collision response",
+      "result": "PASS"
+    },
+    {
+      "name": "raw JSON inspect replaces failing Go template",
+      "result": "PASS"
+    },
+    {
+      "name": "one capture with fail-before-Docker sequence",
+      "result": "PASS"
+    },
+    {
+      "name": "exclusive attempt lock and fixed named pipe",
+      "result": "PASS"
+    },
+    {
+      "name": "no Docker mutation verbs in allowlist",
+      "result": "PASS"
+    },
+    {
+      "name": "default review performs no external reads",
+      "result": "PASS"
+    },
+    {
+      "name": "invalid mode fails before live access",
+      "result": "PASS"
+    }
+  ],
+  "cimCalls": 0,
+  "dockerCalls": 0,
+  "sqlExecutions": 0,
+  "restores": 0,
+  "livePreflightExecuted": false,
+  "syntheticFixtures": true
+}

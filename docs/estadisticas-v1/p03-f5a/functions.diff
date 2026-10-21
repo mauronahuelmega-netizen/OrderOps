@@ -1,0 +1,66 @@
+diff --git a/docs/estadisticas-v1/p03-f5a/reference-functions.sql b/docs/estadisticas-v1/p03-f5a/proposed-functions.sql
+index f64de63..ad8770c 100644
+--- a/docs/estadisticas-v1/p03-f5a/reference-functions.sql
++++ b/docs/estadisticas-v1/p03-f5a/proposed-functions.sql
+@@ -1,4 +1,4 @@
+-create function private.statistics_v1_read_core_candidate(
++create function private.statistics_v1_read_core_c_candidate(
+   p_period text,p_start_date date default null,p_end_date date default null,
+   p_product_sort text default 'units',p_limit integer default 5,p_cursor jsonb default null
+ ) returns jsonb language plpgsql stable security invoker
+@@ -132,7 +132,16 @@ begin
+     select f.* from jsonb_populate_recordset(null::public.statistics_v1_effective_facts,v_effective) f where v_compare and f.business_id=v_business and f.commercial_date between v_ps and v_pe and f.date_reliable and f.completed_at<=v_now
+       and (not v_partial or case when f.date_kind='outside_session' then f.commercial_date<v_pe or f.completed_at<=v_previous_cutoff
+         else exists(select 1 from jsonb_array_elements(v_segments) seg where (seg->>'previousSessionId')::uuid=f.session_key and f.completed_at<=(seg->>'previousUntil')::timestamptz) end)),
+-  product_lines as (select i.*,f.effective_sales,f.effective_units,f.completed_at from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id),
++  -- Window-scoped historical lines; invoker SELECT retains the base-table RLS barrier.
++  authorized_completion_items as materialized (
++    select i.* from public.order_statistics_completion_items i
++    where i.business_id=v_business and exists (
++      select 1 from current_facts f where f.id=i.completion_id
++      union all
++      select 1 from previous_facts f where f.id=i.completion_id
++    )
++  ),
++  product_lines as (select i.*,f.effective_sales,f.effective_units,f.completed_at from current_facts f join authorized_completion_items i on i.completion_id=f.id),
+   products as (
+     select coalesce(product_identity::text,'line:'||line_key::text) group_key,product_identity,
+       (array_agg(product_name order by completed_at desc,completion_id,line_key))[1] label,
+@@ -145,7 +154,7 @@ begin
+     select category_identity,coalesce((array_agg(category_name order by completed_at desc,completion_id))[1],'Sin categoría histórica') label,sum(net_amount) amount
+     from product_lines where effective_sales is not null group by category_identity),
+   all_products as(select product_identity from products where product_identity is not null union
+-    select i.product_identity from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity is not null)
++    select i.product_identity from previous_facts f join authorized_completion_items i on i.completion_id=f.id where i.product_identity is not null)
+   select
+     coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from current_facts),'[]'::jsonb),
+     coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from previous_facts),'[]'::jsonb),
+@@ -155,8 +164,8 @@ begin
+     (select count(*) from current_facts where date_kind='outside_session'),
+     (select count(*) from current_facts where effective_sales is null),
+     (select sum(current_agreement) from current_facts where effective_sales is null),
+-    coalesce((select jsonb_agg(jsonb_build_object('identity',p.product_identity,'currentMainUnits',case when v_historical>0 or exists(select 1 from current_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end,'previousMainUnits',
+-      case when not v_compare or exists(select 1 from previous_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end)) from all_products p),'[]'::jsonb)
++    coalesce((select jsonb_agg(jsonb_build_object('identity',p.product_identity,'currentMainUnits',case when v_historical>0 or exists(select 1 from current_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from current_facts f join authorized_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end,'previousMainUnits',
++      case when not v_compare or exists(select 1 from previous_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from previous_facts f join authorized_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end)) from all_products p),'[]'::jsonb)
+     into v_current,v_previous,v_products,v_product_count,v_categories,v_outside,v_unresolved,v_pending,v_rules;
+   v_current_metrics:=private.statistics_metrics(v_current,v_historical);
+   v_previous_metrics:=case when v_compare then private.statistics_metrics(v_previous,0) end;
+@@ -194,7 +203,7 @@ begin
+ end;
+ $$;
+ 
+-create function private.statistics_v1_summary_d1_candidate(
++create function private.statistics_v1_summary_c_candidate(
+   p_period text,p_start_date date default null,p_end_date date default null,
+   p_product_sort text default 'units',p_limit integer default 5,p_cursor jsonb default null
+ ) returns jsonb language plpgsql stable security invoker
+@@ -215,7 +224,7 @@ begin
+   if auth.uid() is null or v_business is null or v_role is null or v_role not in ('owner','manager','admin') then
+     raise exception 'STATISTICS_ACCESS_DENIED' using errcode='42501';
+   end if;
+-  v_bundle:=private.statistics_v1_read_core_candidate(p_period,p_start_date,p_end_date,p_product_sort,p_limit,p_cursor);
++  v_bundle:=private.statistics_v1_read_core_c_candidate(p_period,p_start_date,p_end_date,p_product_sort,p_limit,p_cursor);
+   v_base:=v_bundle->'legacy';
+   if v_base->>'status'<>'ready' then return v_base; end if;
+   if (v_base->>'businessId')::uuid<>v_business then raise exception 'STATISTICS_TENANT_MISMATCH' using errcode='42501'; end if;

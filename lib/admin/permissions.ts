@@ -1,6 +1,7 @@
 import type { ProfileRole } from "@/types/database";
 
 export type AdminPermission =
+  | "viewStatistics"
   | "viewOrders"
   | "updateOrders"
   | "manageNotifications"
@@ -41,6 +42,10 @@ export function isViewer(role: ProfileRole) {
   return normalizeBusinessAdminRole(role) === "viewer";
 }
 
+export function canViewStatistics(role: ProfileRole) {
+  return role === "owner" || role === "manager" || role === "admin";
+}
+
 export function canViewOrders(role: ProfileRole) {
   void role;
   return true;
@@ -68,6 +73,8 @@ export function canManagePublicSettings(role: ProfileRole) {
 
 export function hasAdminPermission(role: ProfileRole, permission: AdminPermission) {
   switch (permission) {
+    case "viewStatistics":
+      return canViewStatistics(role);
     case "viewOrders":
       return canViewOrders(role);
     case "updateOrders":

@@ -1,0 +1,26 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';import {spawnSync,execFileSync} from 'node:child_process';
+const dir='docs/estadisticas-v1/p03-f2a';const sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const baseline=JSON.parse(fs.readFileSync(`${dir}/baseline.json`));for(const [p,h]of Object.entries(baseline.files))assert.equal(sha(p),h,`Preexisting changed ${p}`);
+const migration='supabase/migrations/20261013005000_statistics_v1_read_core_candidate.sql';const sql=fs.readFileSync(migration,'utf8');
+assert.equal(sql,fs.readFileSync(`${dir}/candidate.sql`,'utf8'));
+assert.equal((sql.match(/\$\$/g)??[]).length,6,'Three paired function delimiters');
+assert.equal((sql.match(/create function private\.statistics_v1_\w+_candidate\(/g)??[]).length,3);
+assert.equal((sql.match(/stable security invoker/g)??[]).length,3);
+assert.ok(!/security definer|create or replace|create (?:table|view|index)|\b(?:insert into|update public|delete from|alter table|drop|truncate)\b/i.test(sql));
+assert.equal((sql.match(/private\.statistics_source_items\(/g)??[]).length,1);
+assert.ok(sql.includes('case when not composition_conflict then'));
+assert.ok(!/from public\.statistics_v1_effective_facts/.test(sql));
+assert.ok(!sql.includes('private.statistics_v1_summary_base('));
+assert.equal((sql.match(/v_role is null/g)??[]).length,2);
+assert.equal((sql.match(/grant execute/g)??[]).length,3);
+assert.ok(!/grant.*public\.statistics_v1_summary|revoke.*public\.statistics_v1_summary/.test(sql));
+// Lexical parentheses outside string/comment literals, including function bodies.
+const cleaned=sql.replace(/--[^\n]*/g,'').replace(/'(?:''|[^'])*'/g,"''");let depth=0;for(const c of cleaned){if(c==='(')depth++;if(c===')')depth--;assert.ok(depth>=0,'Unbalanced closing parenthesis');}assert.equal(depth,0);
+const original=fs.readFileSync(`${dir}/original-functions.sql`,'utf8');const proposed=fs.readFileSync(`${dir}/proposed-functions.sql`,'utf8');
+const marker="  select count(*) filter(where x->>'side'='current')";
+assert.equal(proposed.slice(proposed.indexOf(marker)),original.slice(original.indexOf(marker)),'Temporal series tail exact');
+const diff=spawnSync('git',['diff','--no-index','--',`${dir}/original-functions.sql`,`${dir}/proposed-functions.sql`],{encoding:'utf8'});assert.equal(diff.status,1);fs.writeFileSync(`${dir}/functions.diff`,diff.stdout);
+const head=execFileSync('git',['--no-optional-locks','rev-parse','HEAD'],{encoding:'utf8'}).trim();assert.equal(head,baseline.head);
+const own=execFileSync('git',['--no-optional-locks','ls-files','--cached','--others','--exclude-standard','-z'],{encoding:'utf8'}).split('\0').filter(p=>p&&(p.startsWith(dir+'/')||p.startsWith('scripts/statistics-v1/p03-f2a-')||p===migration)&&fs.existsSync(p)&&p!==`${dir}/evidence.json`);
+fs.writeFileSync(`${dir}/evidence.json`,JSON.stringify({at:new Date().toISOString(),head,verdict:'READY_WITH_LIMITATIONS',preservedFiles:Object.keys(baseline.files).length,static:'PASS lexical/scope/structural checks only; no SQL parser, PLpgSQL compilation or runtime equivalence claimed',temporalSeriesTailExact:true,sourceItemsCallSiteCount:1,originalPublicRpcAndGrantsUnchanged:true,installedOriginalFilesPreserved:true,candidateSha256:sha(migration),inventory:own.map(p=>({path:p,sha256:sha(p)})),databaseConnections:0,sqlExecuted:false,commits:0,limitations:['Unordered legacy arrays require differential proof','NULL-role guard explicitly hardened; NOT NULL baseline makes role NULL unreachable, review delta','JSON/composite roundtrip and planner costs pending isolated execution']},null,2));
+console.log(`PASS offline static audit; ${Object.keys(baseline.files).length} preexisting hashes preserved; no SQL execution`);

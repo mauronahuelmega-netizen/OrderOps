@@ -1,0 +1,466 @@
+{
+  "at": "2026-10-14T15:57:39.588Z",
+  "source": "docs/estadisticas-v1/p04-t01b-fix/candidate-products-fixed.sql",
+  "sourceSha256": "57395a7920d95cf63c1b67fb8191e40272a26aeb445a4abe7bec4d822b99c2c1",
+  "harnessSha256": "7555a8dab26783f079df8a21bd5682a7c45a4353c3f76058e17bf17ff2c77864",
+  "payloadSha256": "d4cc433c57be38bcf7ad239bda4b80f53062070479debf0ac3f5a4691b8c09fb",
+  "removedOnlySourceDelimiters": [
+    {
+      "offset": 116,
+      "text": "begin;"
+    },
+    {
+      "offset": 15335,
+      "text": "commit;"
+    }
+  ],
+  "exactFunctionDefinitionsPreserved": true,
+  "transactions": 1,
+  "commitStatements": 0,
+  "rollbackStatements": 1,
+  "priorityTests": [
+    "risk.SQL05.session_settings",
+    "risk.SQL07.nonfinite_source",
+    "risk.SQL05.datestyle_only",
+    "risk.SQL05.simultaneous",
+    "risk.SQL05.old_cursor_denied",
+    "risk.SQL07.mixed_pending",
+    "risk.SQL07.finite_pending",
+    "risk.SQL07.nonfinite_projection"
+  ],
+  "tests": [
+    {
+      "id": "catalog.signatures_invoker_defaults_acl",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "compile.empty_response",
+      "role": "authenticated"
+    },
+    {
+      "id": "risk.SQL05.session_settings",
+      "role": "authenticated"
+    },
+    {
+      "id": "risk.SQL07.nonfinite_source",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "risk.SQL05.datestyle_only",
+      "role": "authenticated"
+    },
+    {
+      "id": "risk.SQL05.simultaneous",
+      "role": "authenticated"
+    },
+    {
+      "id": "risk.SQL05.old_cursor_denied",
+      "role": "authenticated"
+    },
+    {
+      "id": "risk.SQL07.mixed_pending",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "risk.SQL07.finite_pending",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "risk.SQL07.nonfinite_projection",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.owner.a.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.owner.a.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.manager.a.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.manager.a.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.admin.a.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.admin.a.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.operator.a.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.operator.a.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.viewer.a.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.viewer.a.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.super_admin.a.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.super_admin.a.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.owner.b.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.owner.b.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.manager.b.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.manager.b.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.admin.b.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.admin.b.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.operator.b.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.operator.b.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.viewer.b.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.viewer.b.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.super_admin.b.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.super_admin.b.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "deny.no_session.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "deny.no_session.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "deny.missing_profile.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "deny.missing_profile.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "constraints.null_unknown_roles",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "deny.absent_business",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "pure_helper.no_data",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.today",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.yesterday",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.this_week",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.this_month",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.previous_month",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.last_7_days",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.last_30_days",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.custom",
+      "role": "authenticated"
+    },
+    {
+      "id": "exact.money_units_homonyms",
+      "role": "authenticated"
+    },
+    {
+      "id": "tenant.b",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.cross_tenant_sources",
+      "role": "authenticated"
+    },
+    {
+      "id": "pagination.cursor_ties",
+      "role": "authenticated"
+    },
+    {
+      "id": "cursor.foreign",
+      "role": "authenticated"
+    },
+    {
+      "id": "cursor.invalid",
+      "role": "authenticated"
+    },
+    {
+      "id": "financial.partial_adjustment",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "history.rename_delete",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "history.no_captured_lines",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "history.no_reliable_date",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "history.no_category_vs_unknown",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "upsell.only_category_zero_units",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "time.microseconds_asof",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "time.dst_stored_commercial_date",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "unavailable.financial",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "unavailable.composition",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "numeric.pure_bigint_money",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_analytics.owner.a",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_profile.owner.a",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_analytics.manager.a",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_profile.manager.a",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_analytics.admin.a",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_profile.admin.a",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_analytics.operator.a",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_analytics.viewer.a",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_analytics.super_admin.a",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_analytics.owner.b",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_profile.owner.b",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_analytics.manager.b",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_profile.manager.b",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_analytics.admin.b",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_profile.admin.b",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_analytics.operator.b",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_analytics.viewer.b",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.direct_analytics.super_admin.b",
+      "role": "authenticated"
+    },
+    {
+      "id": "states.reopen",
+      "role": "authenticated"
+    },
+    {
+      "id": "states.cancel",
+      "role": "authenticated"
+    },
+    {
+      "id": "states.recomplete",
+      "role": "authenticated"
+    },
+    {
+      "id": "time.night_session.fresh_statement",
+      "role": "authenticated"
+    },
+    {
+      "id": "ranking.amount",
+      "role": "authenticated"
+    },
+    {
+      "id": "cursor.revision_invalidation",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "numeric.reader_units_over_int32",
+      "role": "authenticated"
+    }
+  ],
+  "observerMarker": "\\echo P04_FIX_OBSERVER_WINDOW",
+  "regressionComplete": "\\echo P04_FIX_REGRESSIONS_COMPLETE",
+  "limitations": [
+    "Null/unknown profiles impossible under unchanged constraints",
+    "Claims do not prove real HTTP authentication",
+    "Uncommitted candidate cannot be called from second connection"
+  ],
+  "syntheticActors": [
+    {
+      "id": "a9eea14b-6c1c-4631-9a0e-4c6c62efe501",
+      "role": "owner",
+      "business": "108722c0-a80f-4d5b-98ee-6c99f44cdb23"
+    },
+    {
+      "id": "6d1a696a-d974-4ad6-809d-a5715f90d816",
+      "role": "manager",
+      "business": "108722c0-a80f-4d5b-98ee-6c99f44cdb23"
+    },
+    {
+      "id": "4f81b68b-fc92-4865-88a8-bd59372b45f8",
+      "role": "admin",
+      "business": "108722c0-a80f-4d5b-98ee-6c99f44cdb23"
+    },
+    {
+      "id": "2969d3a4-4fcf-46b9-8724-ef965e364fb4",
+      "role": "operator",
+      "business": "108722c0-a80f-4d5b-98ee-6c99f44cdb23"
+    },
+    {
+      "id": "bc03a29d-699f-48c7-bf53-21624019cdc6",
+      "role": "viewer",
+      "business": "108722c0-a80f-4d5b-98ee-6c99f44cdb23"
+    },
+    {
+      "id": "1235168b-bcab-4053-93d3-0cd44e53ade0",
+      "role": "super_admin",
+      "business": "108722c0-a80f-4d5b-98ee-6c99f44cdb23"
+    },
+    {
+      "id": "bb729a71-be76-4ff7-a7f6-0edd33361097",
+      "role": "owner",
+      "business": "ea72a875-7511-4c1d-9d2c-c3f899b94bea"
+    },
+    {
+      "id": "1ef472c5-3f84-4118-b486-ff2796f1992c",
+      "role": "manager",
+      "business": "ea72a875-7511-4c1d-9d2c-c3f899b94bea"
+    },
+    {
+      "id": "a63714a3-afc5-490c-b114-8abc68d45621",
+      "role": "admin",
+      "business": "ea72a875-7511-4c1d-9d2c-c3f899b94bea"
+    },
+    {
+      "id": "f316cdb5-07a3-4cb1-bf4e-5433d73ec511",
+      "role": "operator",
+      "business": "ea72a875-7511-4c1d-9d2c-c3f899b94bea"
+    },
+    {
+      "id": "ecfc0c1d-069b-43ec-80e7-569bbb78dbaf",
+      "role": "viewer",
+      "business": "ea72a875-7511-4c1d-9d2c-c3f899b94bea"
+    },
+    {
+      "id": "3693c4d3-c66c-4bd6-9faa-0e777c8e0279",
+      "role": "super_admin",
+      "business": "ea72a875-7511-4c1d-9d2c-c3f899b94bea"
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "at": "2026-10-13T12:43:35.476Z",
+  "verdict": "READY_FOR_ISOLATED_SQL_REVIEW",
+  "branch": "codex/estadisticas-v1",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "newCommits": 0,
+  "files": [
+    {
+      "file": "supabase/migrations/20261013004000_statistics_v1_comparative_series.sql",
+      "sha256": "b10c330adff70b803d9d25165f07830e90d4cd092aa4ba2cf3d0120a43f95219"
+    },
+    {
+      "file": "lib/statistics/series-contracts.ts",
+      "sha256": "62944312151175b0c7b8f13f409ed5f306e980c55643e5b80877c183387c3c27"
+    },
+    {
+      "file": "lib/statistics/series-read.ts",
+      "sha256": "8b82d5e7307cdd983f5b1589e399b062f4372b07e6bd5d4438ba505cf8b889d7"
+    },
+    {
+      "file": "lib/statistics/series-temporal.ts",
+      "sha256": "1e0398656e0627914fc00b41468309ddb332c57f1da42c6f1fee1db2246fa9f2"
+    },
+    {
+      "file": "lib/statistics/series.verify.ts",
+      "sha256": "89fba8da11f4cf7978775a9b2253c3ef1801ddc9d14187abf8d65eabedb61800"
+    },
+    {
+      "file": "lib/statistics/fixtures/series-responses.json",
+      "sha256": "4be03d7ae1f487019951f5cb05c6aa75571b7b6977654b90d2e3f1b8320586b8"
+    },
+    {
+      "file": "scripts/statistics-v1/p03-a-static.verify.mjs",
+      "sha256": "43615b47031dfa66a159540981891c42a33bc9e79fd58f8313dd65e4242d5942"
+    },
+    {
+      "file": "supabase/tests/statistics-v1/phase03-series.sql",
+      "sha256": "bcf3445ae8a4bb75396f2916e9d115d5929dc1c57a6343be9985e1245c912707"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-a/informe.md",
+      "sha256": "fdf405ecca37b8faaff09a5351b2e915bed969e7dd643739ea0506d05e55ff49"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-a/migration.diff",
+      "sha256": "b73d2d5744714f4aab96248dbaea69e78d0def137f03ba5fef7c195cae1e387d"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-a/pure-evidence.json",
+      "sha256": "cdc270223e9840e2cc228898a55fcdba9b24964a39b8b139930edf8fa35cca09"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-a/static-evidence.json",
+      "sha256": "725686d1333d6c5f0ca0681450bae021244cdf7a4206904e6a8a82db032f4b2f"
+    },
+    {
+      "file": "lib/statistics/series-sizing.verify.ts",
+      "sha256": "d9e768fcc71945572742175f923a1979d22d25d0c47a0dbbabd335cffb6b62ea"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-a-corrective/informe.md",
+      "sha256": "cf580c45736d76faa188fb802bbd082431ea8dcc89a5d714ca550f1862ef43b6"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-a-corrective/corrective.diff",
+      "sha256": "7aced290d93661cd29d28bf2aa53eaff2fe635f976ad6a431d3d817058171dad"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-a-corrective/pure-evidence.json",
+      "sha256": "cbe7453e05860c0bef7d2e46a854a3bbb5c5ce6cb75da0c7febb4b000310a18d"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-a/verification.json",
+      "sha256": "c95d38a9db7edadcc95cf8ee69a47fd6f263d02093f11bc9d00ca866d550da75"
+    }
+  ],
+  "preexistingTrackedChangesPreserved": [
+    "docs/estadisticas-v1/fase-01-evidencia.json",
+    "next-env.d.ts"
+  ],
+  "protectedPathsUnchanged": [
+    "lib/admin/permissions.ts",
+    "components/admin/admin-nav-config.ts",
+    "components/admin/layout/admin-nav-list.tsx",
+    "lib/commercial",
+    "types/database.ts",
+    "lib/statistics/contracts.ts",
+    "lib/statistics/read.ts",
+    "lib/statistics/server.ts"
+  ],
+  "checks": {
+    "newPure": "PASS: 268 assertions",
+    "legacyDomain": "PASS: 1111 monetary conservation cases plus domain checks",
+    "legacyReader": "PASS",
+    "typescript": "PASS: tsc --noEmit --incremental false",
+    "sqlParser": "PASS: new migration and embedded SQL; legacy migrations and prepared tests",
+    "scriptEslint": "PASS",
+    "proposedDiff": "PASS: reverse --check only",
+    "correctivePure": "PASS: 1118 sets, 1895743 assertions, 1197144 boundary probes; maximum 199",
+    "runtimeJsonEquality": "PREPARED_NOT_EXECUTED; single SELECT verified statically",
+    "preparedSql": "PASS_GRAMMAR_ONLY; not executed"
+  },
+  "database": {
+    "connections": 0,
+    "writes": 0,
+    "migrationsApplied": 0,
+    "expectedApi": "127.0.0.1:56321",
+    "expectedDb": "127.0.0.1:56322",
+    "liveIdentityVerifiedThisPhase": false
+  },
+  "limitations": [
+    "No PL/pgSQL/catalog compilation",
+    "No runtime RLS/concurrency/rollback/performance tests",
+    "No current Cursor working-tree inspection or remote update"
+  ],
+  "stop": "Await explicit approval of exact migration hash for isolated P03-B. No other phase authorized.",
+  "correctiveChanges": [
+    {
+      "file": "supabase/migrations/20261013004000_statistics_v1_comparative_series.sql",
+      "beforeSha256": "f5c671dca3c54450d539186df6fdc8cc9199acec88cd50da239b39db85e1af7a",
+      "afterSha256": "b10c330adff70b803d9d25165f07830e90d4cd092aa4ba2cf3d0120a43f95219"
+    },
+    {
+      "file": "lib/statistics/series-temporal.ts",
+      "beforeSha256": "22787d3033d825e58167ccd4d607778a2e07763f992d5a7499d7762c61909332",
+      "afterSha256": "1e0398656e0627914fc00b41468309ddb332c57f1da42c6f1fee1db2246fa9f2"
+    },
+    {
+      "file": "scripts/statistics-v1/p03-a-static.verify.mjs",
+      "beforeSha256": "72d32bf5bffd7a8e23619afa25bf5d301792d8d27c02d1a377a20cb9d9e0fd47",
+      "afterSha256": "43615b47031dfa66a159540981891c42a33bc9e79fd58f8313dd65e4242d5942"
+    },
+    {
+      "file": "supabase/tests/statistics-v1/phase03-series.sql",
+      "beforeSha256": "d12d2ee0902f141417a0fd96d42765e69d069a73dd35c181acfa14c006229709",
+      "afterSha256": "bcf3445ae8a4bb75396f2916e9d115d5929dc1c57a6343be9985e1245c912707"
+    }
+  ],
+  "runtimeEqualityExecuted": false
+}

@@ -1,0 +1,131 @@
+{
+  "at": "2026-10-16T15:25:01.431Z",
+  "verdict": "BLOCKED",
+  "phaseP04T01C": "BLOCKED",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "baselineFiles": 3051,
+  "sourceAttachment": {
+    "path": "C:/Users/Oasis Desktop/.codex/attachments/7e18f8e4-c760-48a2-b755-f94be9bc85d6/Texto pegado.txt",
+    "sha256": "ef44811e7fbb6574e418d95ec42bdf15b07fa51d80355f03f58cd4030babb7e2"
+  },
+  "checkpointReference": {
+    "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/checkpoint-review.json",
+    "sha256": "17d5e17e97d648c078dfc9567d0308ff2772537fb3d5b3e7ab9184da4fb2b1c3",
+    "historicalStatus": "READY_FOR_LOOPBACK_INTERVENTION_REVIEW",
+    "notPromoted": true
+  },
+  "blockers": [
+    "Five Kong directories have incomplete xattr visibility",
+    "Independent backup recoverability not demonstrated",
+    "Fresh logical SQL integrity not authorized",
+    "Native build still locked; runtime replay/wire compatibility unproven"
+  ],
+  "engine": {
+    "version": "29.1.3",
+    "apiVersion": "1.52",
+    "minApiVersion": "1.44",
+    "os": "linux",
+    "arch": "amd64"
+  },
+  "layerComparison": [
+    {
+      "kind": "db",
+      "entries": 16,
+      "samePathAndChangeSet": true,
+      "contentEqualityNotImplied": true
+    },
+    {
+      "kind": "kong",
+      "entries": 31,
+      "samePathAndChangeSet": true,
+      "contentEqualityNotImplied": true
+    }
+  ],
+  "privateBundle": {
+    "path": "supabase/statistics-v1-test/.runtime/loopback-bundles/2026-10-16T13-30-25-733Z-ae781e38/sealed.json",
+    "sha256": "f988c43bbc968bc95c0194b511afef28efe0154611ec827a9b93072bd1539508",
+    "decryptedInMemory": true,
+    "plaintextWritten": false
+  },
+  "liveCalls": "docker version, ps, inspect(container/network/volume/image), diff; exec readonly xattr listing only",
+  "foreignMetadataUse": "Negative sharing/port collision checks only; no foreign service/DB access",
+  "sqlConnections": 0,
+  "authHttp": 0,
+  "lifecycleMutations": 0,
+  "networkChanges": 0,
+  "firewallChanges": 0,
+  "oldIdsReplaced": false,
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/audit-private-bundle-readonly.mjs",
+      "sha256": "325364d7f70b614531e2ea0a20d052cd6de2425f9381f7ec73ac8c14b3b59f88",
+      "bytes": 3592
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/file-baseline.json",
+      "sha256": "fdae8d31a0f8ae01189cf5de02351bd29f088cfa6cf896adcff3448c5288d71e",
+      "bytes": 497423
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/finalize-evidence.mjs",
+      "sha256": "216386d9d712b40de3fa4764327c4d5b453e579e974d8a916ef04b8a94a6e6ab",
+      "bytes": 6421
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/INTERVENTION_DECISION.md",
+      "sha256": "11afdff00498dfb0883a851aed006ce0c67f4d5027d8cb68e6ddf7a98d7c48a0",
+      "bytes": 4319
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/live-readonly.mjs",
+      "sha256": "b435d4ff6958e70af9f85e4184b3a905d30d06104719f08f7201627e33df4ade",
+      "bytes": 4367
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/live-resources.json",
+      "sha256": "1a3bc8193ff73bdb0996ba06bdabac85658dc2c4eb60e09ba1f5fe8b896d7c6e",
+      "bytes": 9497
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/LOOPBACK_PREFLIGHT_REPORT.md",
+      "sha256": "1808a98dc31a0879e8fac37005ab1ada5cd854a4ef2ee8179436c713417c03cb",
+      "bytes": 6559
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/preservation.json",
+      "sha256": "de7d9a1a4eb564858b11a34b556b6dfb11843da2dd0a1772679c03944875eeb1",
+      "bytes": 2625
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/private-bundle-audit.json",
+      "sha256": "9a09435a10347eec3719a634337784b350d657fefbc642e9b610446d583473b4",
+      "bytes": 1741
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/sql-readonly-proposal.md",
+      "sha256": "e21e1ef16c6e2af9fa9fbdd4b6ba5369277d43a24b235b9f5295148f4fc197b8",
+      "bytes": 1973
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/V1_SCOPE_ADDENDUM.md",
+      "sha256": "f33317ce2fb213663944131cf2d537bc29a55af9897a999e75ad15bb3d78e0e8",
+      "bytes": 5960
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/validation-results.json",
+      "sha256": "e9d4a7851bd002139cbcc8eb24317243ba2d921b8110951bf6d494bd52f685c9",
+      "bytes": 1144
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/xattr-audit.json",
+      "sha256": "9bf36543dc6e0f2bec263abe2981fb9ac6097d3ea3ad28c2e1d8fba458735a02",
+      "bytes": 9034
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/xattrs-readonly.mjs",
+      "sha256": "a06fef3da50254cd7a886375b77552e570ce8b519ce40071bb38d549ef2f3e4a",
+      "bytes": 3362
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

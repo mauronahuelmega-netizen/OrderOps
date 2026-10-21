@@ -1,0 +1,12 @@
+{
+  "result": "PASS_OFFLINE_MODEL",
+  "cases": 1118,
+  "assertions": 1895743,
+  "maximumPoints": 199,
+  "eventProbes": 1197144,
+  "databaseConnections": 0,
+  "limitations": [
+    "SQL planner and interval operators not executed",
+    "RPC JSON runtime equality pending"
+  ]
+}

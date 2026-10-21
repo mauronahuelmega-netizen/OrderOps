@@ -1,0 +1,102 @@
+{
+  "at": "2026-10-14T14:46:23.016Z",
+  "result": "PASS",
+  "preexistingFiles": 2772,
+  "allHashesUnchanged": true,
+  "previous2752BaselinePreserved": true,
+  "previousReviewArtifactsPreserved": true,
+  "ignoredRecordedArtifacts": [
+    {
+      "path": "supabase/statistics-v1-test/.runtime/p03-f4a-1_100.local.log",
+      "sha256": "b919715619ddcab05eedc30a36015ac024ba6990f64ec10df7c23fa0879c698b"
+    },
+    {
+      "path": "supabase/statistics-v1-test/.runtime/p03-f4a-1_50.local.log",
+      "sha256": "4676a98cb18a5fd83c2bdbd843f1c675cbe020a1099343ce7e21fc8d0876004c"
+    },
+    {
+      "path": "supabase/statistics-v1-test/.runtime/p03-f4a-2_100.local.log",
+      "sha256": "7557a3ceb5bc8e0f8a7b09678f1e6b72b5a907496c4af64184807fc36a09abf8"
+    },
+    {
+      "path": "supabase/statistics-v1-test/.runtime/p03-f4a-2_50.local.log",
+      "sha256": "715acf9cbbc38f9b84af8655f0744b1d3cee4e240d66b9ad2c2221f8f496b641"
+    },
+    {
+      "path": "supabase/statistics-v1-test/.runtime/p03-f4a-3_100.local.log",
+      "sha256": "e0edc73b745c416a689a1904fcb5c7b225d3b8959c01a547afd014ef1f34b6fe"
+    },
+    {
+      "path": "supabase/statistics-v1-test/.runtime/p03-f4a-3_50.local.log",
+      "sha256": "4499ddf64d79b7e161d4dc4a39fc858b07284a7ac3c6fcd8a2b0137e561b0b67"
+    },
+    {
+      "path": "supabase/statistics-v1-test/.runtime/p03-f4a-profile-50-prepared.local.sql",
+      "sha256": "59996c16183d7a636379eed43f8a30c262d3ae98cdad576c5e7dc6dbbba6a34f"
+    },
+    {
+      "path": "supabase/statistics-v1-test/.runtime/p03-f4a-profile-50.local.log",
+      "sha256": "7afcd264870d154cafb66dd3456102017f5d4e76dbd077ffc6bcb5cd92e23545"
+    },
+    {
+      "path": "C:\\Users\\Oasis Desktop\\Desktop\\Full Stack Developer\\Projects\\OrderOps-Estadisticas\\supabase\\statistics-v1-test\\.runtime/p03-f4c-50.local.log",
+      "sha256": "f8a8045a4be6a2497acbd05b041abe96432668f3294acbe3e79836008a23b13f"
+    },
+    {
+      "path": "C:\\Users\\Oasis Desktop\\Desktop\\Full Stack Developer\\Projects\\OrderOps-Estadisticas\\supabase\\statistics-v1-test\\.runtime/p03-f4c-100.local.log",
+      "sha256": "74e629dabb9c62bf0d0eba78bd64406e6173cc7698443dd16d8377ed98c5ed31"
+    }
+  ],
+  "branch": "codex/estadisticas-v1",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "transactions": [
+    {
+      "attempt": "attempt-01/",
+      "harnessSha256": "46a9332db951748493de931a458ce19f299293b81b5fc5e2dab793d34a78d3f1",
+      "payloadSha256": "76b0315d9c9cc145a43de0d40315213fb018d5631cd55f27c3d82d34564a2c02",
+      "explicitRollback": true,
+      "postcheckNewConnection": true,
+      "catalogAndDataIdentical": true
+    },
+    {
+      "attempt": "attempt-02/",
+      "harnessSha256": "163e7afdeb0bfb9e0c57646441ae8144280f6083fdef3da3093ff1f45ae2ab57",
+      "payloadSha256": "76b0315d9c9cc145a43de0d40315213fb018d5631cd55f27c3d82d34564a2c02",
+      "explicitRollback": true,
+      "postcheckNewConnection": true,
+      "catalogAndDataIdentical": true
+    },
+    {
+      "attempt": "attempt-03/",
+      "harnessSha256": "f2350ae2374f971ed1e6921204e86ed7b892ea63da5e06f6f7b394eef506d0b6",
+      "payloadSha256": "76b0315d9c9cc145a43de0d40315213fb018d5631cd55f27c3d82d34564a2c02",
+      "explicitRollback": true,
+      "postcheckNewConnection": true,
+      "catalogAndDataIdentical": true
+    },
+    {
+      "attempt": "attempt-04/",
+      "harnessSha256": "444a2a6dcc4ed7e8cb07d6f94409d078db4b33c2b3c143c44df5ae4cd6630267",
+      "payloadSha256": "76b0315d9c9cc145a43de0d40315213fb018d5631cd55f27c3d82d34564a2c02",
+      "explicitRollback": true,
+      "postcheckNewConnection": true,
+      "catalogAndDataIdentical": true
+    },
+    {
+      "attempt": "attempt-05-final",
+      "harnessSha256": "56af055a7b853f3d39f3093392fb1d213a17c4f120488b136fa9bf6b2d0c9d03",
+      "payloadSha256": "76b0315d9c9cc145a43de0d40315213fb018d5631cd55f27c3d82d34564a2c02",
+      "explicitRollback": true,
+      "postcheckNewConnection": true,
+      "catalogAndDataIdentical": true
+    }
+  ],
+  "functionsGrantsFixturesAbsentAfterRollback": true,
+  "ledger": 124,
+  "publicOriginalUnchanged": true,
+  "abD1Unchanged": true,
+  "cAbsent": true,
+  "gateSourceUnchanged": true,
+  "commits": 0,
+  "sqlCandidateChanged": false
+}

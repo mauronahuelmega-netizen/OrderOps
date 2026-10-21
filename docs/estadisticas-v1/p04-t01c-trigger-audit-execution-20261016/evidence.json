@@ -1,0 +1,116 @@
+{
+  "at": "2026-10-16T16:42:23.787Z",
+  "verdict": "PASS_FOCALIZADO",
+  "phaseP04T01C": "BLOCKED",
+  "project": "orderops-statistics-v1-test-74718de66a41",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "baselineFiles": 3123,
+  "approvedHashes": {
+    "runner.proposed.mjs": "aebf2d902ac2abf4a841d4d472cafa2f4a6ad6e2e998019c1851ee31d6b25674",
+    "verification.proposed.psql": "61f076a61c4d4d8316afdcdabbca633b24b6bc353db040c2b1d9a6b93412720d",
+    "artifact-pins.json": "db9310b204b3dbe41284c778abe66d01685982d20c5246ff7035c392fd6b36fa"
+  },
+  "associatedComponentsVerified": 20,
+  "invocations": 1,
+  "authorizationConsumed": true,
+  "startedUtc": "2026-10-16T16:40:07.472Z",
+  "endedUtc": "2026-10-16T16:40:07.733Z",
+  "targetContainer": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+  "markerVerified": true,
+  "ledger": 124,
+  "readOnly": "on",
+  "isolation": "repeatable read",
+  "systemIdentifier": "7695864922466676780",
+  "systemIdentifierExactText": true,
+  "sharedTgfoid": "25370",
+  "all13Passed": true,
+  "rollbackObserved": true,
+  "historicalOidContinuityProven": false,
+  "previousGeneralVerdictRewritten": false,
+  "remainingBlockers": [
+    "Kong hidden metadata preservation",
+    "Independent restoration demonstration",
+    "Wildcard/LAN isolation",
+    "Intervention build/replay and separate human authorization",
+    "Products QA and T02 not authorized"
+  ],
+  "additionalSqlQueries": 0,
+  "containerMutations": 0,
+  "networkChanges": 0,
+  "authHttp": 0,
+  "qaInstallations": 0,
+  "commits": 0,
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/analysis-summary.json",
+      "sha256": "1cc623493c413918e90bba8b4f5f78e71a55f4b166befd67920ed78643bfcd37",
+      "bytes": 1064
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/analyze-capture.mjs",
+      "sha256": "58833c07e5b4a13161100fb3eb863dcc90c3daadbbd8eca9a879214ae745ec2c",
+      "bytes": 3478
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/authorization-pins.json",
+      "sha256": "a6f992c5aa90c7538a6a2c445fa9607bce8f6cefb0baa0e87f97c503252a8581",
+      "bytes": 4276
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/execution-envelope.json",
+      "sha256": "d1b49ea7d4fbf19cd166f39e5d62913cae8c471ecfc01ebc97e3519e6e136f2c",
+      "bytes": 1307
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/file-baseline.json",
+      "sha256": "fd850659c18edca7e2ca7be5a64322bfb1bb371d6e2c566b83b25cae35d69f71",
+      "bytes": 511382
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/finalize-evidence.mjs",
+      "sha256": "19ca34606f06f81465eaaa075e41362e4dd32316990578a069e9fbc489480092",
+      "bytes": 6220
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/informe.md",
+      "sha256": "d832ce9e4aa0fa4793e5f088319977c78ef3e4ca1b9b67b5681a5827d8aca7a6",
+      "bytes": 7748
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/per-trigger-results.json",
+      "sha256": "619053d63bad07a4caea6a93f5423b42671729b1a427b41e5a485e73c0fdce8f",
+      "bytes": 18102
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/preservation.json",
+      "sha256": "14869512dcd2a05c35c75e90097a36aee1b845ebabb1baab8c7034c815c09fa5",
+      "bytes": 1415
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/run-once-envelope.mjs",
+      "sha256": "16ff1ef400db7ce3b8789c4c0ecc09309c42a03857943177c060e99a4c808895",
+      "bytes": 2280
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/TRIGGER_RESULTS.md",
+      "sha256": "30922934ac34878c143333735c3f0b438359550b0dacebbd20a6aaf80ce89af7",
+      "bytes": 2353
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/validation-results.json",
+      "sha256": "4d036256d538fd16c74be0b21e1c6c29635485f1a9889ce7a775da4bf36f8d38",
+      "bytes": 1067
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/execution-intent.json",
+      "sha256": "b77b080bbf959861011425ab11209f10dc20e854f6757479f1aae0795485ba34",
+      "bytes": 158
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/execution-observed.json",
+      "sha256": "a8d7f8ee663b1224eb7dabe807b9afaa27a3c71d39e8801555f96ce77f7811be",
+      "bytes": 96596
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

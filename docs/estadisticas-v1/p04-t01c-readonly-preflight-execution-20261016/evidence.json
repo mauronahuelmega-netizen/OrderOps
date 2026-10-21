@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-16T17:52:59.822Z",
+  "phaseP04T01C": "BLOCKED",
+  "result": "BLOCKED_INDEPENDENT_MEMORY_PRECONDITION",
+  "helperInvocations": 0,
+  "dockerCalls": 0,
+  "sqlExecutions": 0,
+  "restores": 0,
+  "mutations": 0,
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-preflight-execution-20261016/before.json",
+      "sha256": "e51c6eb175cc3b3e4bf90747bd696bfe7ea22a1d7f77419874533efd6f46062f",
+      "bytes": 523609
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-preflight-execution-20261016/independent-memory.json",
+      "sha256": "7f9f886f4045b2b98bc5e8e0012dc6c7a9a359ed645f922a48aff5384dea5256",
+      "bytes": 301
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-preflight-execution-20261016/informe.md",
+      "sha256": "893f6e1e06984d65e122d46585704cd071ef4443ad8395af5601ffed315570fc",
+      "bytes": 2384
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-preflight-execution-20261016/preservation.json",
+      "sha256": "d2cd1b036304142364e64f11b5745ff82070eb2741e242406b52b751e8d0266c",
+      "bytes": 464
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-preflight-execution-20261016/results.json",
+      "sha256": "f0b784fb9e2ed57a78c9d6f2c93880791dd2bf3cf2f01b86097367ba64af3dfa",
+      "bytes": 5138
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

@@ -1,0 +1,12 @@
+{
+  "approved": {
+    "readonly-verification.proposed.mjs": "76c4653891367e1c55d3d3b51af841f3ae0a5b980490ee5912e4e7ac65588dad",
+    "verification.proposed.psql": "485cf660d8230a868b4051aecce8418da9cc30d799aaec6a001f5eb0e4309a15",
+    "readonly-query-manifest.json": "85fefde4aa8256a4f42bfa38b5cd0a8b8819b8919bc77f8643ed3823adcfd294"
+  },
+  "mode": "--execute-readonly",
+  "maximumInvocations": 1,
+  "project": "orderops-statistics-v1-test-74718de66a41",
+  "historicalInventory": "PASS",
+  "observedResultAbsentBefore": true
+}

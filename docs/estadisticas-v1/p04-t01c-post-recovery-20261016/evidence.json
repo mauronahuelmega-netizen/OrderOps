@@ -1,0 +1,176 @@
+{
+  "at": "2026-10-16T05:15:23.926Z",
+  "phase": "P04-T01C_POST_RECOVERY",
+  "verdict": "BLOCKED",
+  "targetCheckpointNotReached": "READY_FOR_TRANSACTIONAL_QA_REHEARSAL",
+  "blocker": "Wildcard published bindings and OS access denied to effective firewall rules; external restriction not demonstrated",
+  "preflight": "PASS",
+  "staticReview": "PASS_STATIC_ONLY",
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "api": "127.0.0.1:56321",
+  "postgresql": "127.0.0.1:56322",
+  "ledger": 124,
+  "qaInstallerSha256": "f7940a54a58b93b04d56b10eb1f65bf425299436a2e25a1d3ae79feec919272f",
+  "productsSourceSha256": "57395a7920d95cf63c1b67fb8191e40272a26aeb445a4abe7bec4d822b99c2c1",
+  "functionsOriginalActive": true,
+  "productsAndQaAbsent": true,
+  "network": {
+    "result": "BLOCKED",
+    "wildcardBindingsUnchangedFromPrior": true,
+    "windowsListenersObserved": true,
+    "effectiveRuleReadError": "Acceso denegado. ",
+    "ruleCount": "NOT_AVAILABLE",
+    "externalReachability": "NOT_TESTED",
+    "remoteProbes": 0,
+    "changes": 0
+  },
+  "recoveryBackup": "USER_REPORTED_NOT_INDEPENDENTLY_AUDITED",
+  "scriptsExecuted": [
+    "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/preflight-readonly.mjs",
+    "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/proposal-static-readonly.mjs",
+    "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/finalize-readonly.mjs",
+    "scripts/statistics-v1/isolation-policy.verify.mjs"
+  ],
+  "additionalOperations": [
+    "Inline Node baseline capture before creating audit artifacts",
+    "PowerShell read-only ActiveStore/listeners/portproxy observation; effective rule query denied"
+  ],
+  "scriptAdaptations": "New copies only; original invariant checks retained, new output paths and P04-T01C reference/hash comparisons. Original verifiers preserved.",
+  "noLiveOperationsAfterNetworkBlock": true,
+  "noTransactionalRehearsal": true,
+  "noPersistentInstall": true,
+  "noAuthHttp": true,
+  "noSyntheticPairsEnabled": true,
+  "noT02": true,
+  "noCandidateAdoption": true,
+  "preservation": "preservation.json",
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/catalog-before.json",
+      "bytes": 260779,
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/catalog-observed.json",
+      "bytes": 260779,
+      "sha256": "3c5997326d1292a1491c5ab95302cd4f2732b282b1b1702263bc7766868c9839",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/catalog-select.sql",
+      "bytes": 2176,
+      "sha256": "b13c2fd8fe442b4cebc94b84b2db464e8476d6e2526b2ca2ba0af6f4fb053ba3",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/data-before.json",
+      "bytes": 1415,
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/data-observed.json",
+      "bytes": 1415,
+      "sha256": "82148bcf91fbc7ee1ff3573f2a99d8a6a5ab39dc4497d1b7f214f651dec73cb3",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/data-select.sql",
+      "bytes": 2834,
+      "sha256": "146d26738db1be302ad45eb19b9ddd5505993af1ca11d40c1f6ec148b74758e4",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/extra-before.json",
+      "bytes": 15375,
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/extra-observed.json",
+      "bytes": 15375,
+      "sha256": "9216be6169cad32108e107ac6b3ff5154323510f032477645dba57c3454aecfa",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/extra-select.sql",
+      "bytes": 601,
+      "sha256": "2d611bf55bbf1fe9deed472b3102ff7515b4df7a9e371fa83399069344006c72",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/file-baseline.json",
+      "bytes": 541083,
+      "sha256": "9def66bf9c7a1d08d0837f35419693f59ceae5c1395bb0478ee64fe4380621e1",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/finalize-readonly.mjs",
+      "bytes": 4810,
+      "sha256": "e28c1c3fe858d86783938c8dc982ee026bf44badf714beda80e3a61987b4a500",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/informe.md",
+      "bytes": 7535,
+      "sha256": "2680fa35debfe80d8819ce49456e32eba8db037e2e3d0773e51de202be517ed0",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/network-observations.json",
+      "bytes": 1797,
+      "sha256": "2f8b3ef44664e061b5a8c743ba183afa3a5f8356a3252bc6e7fb5f4ca3e4235e",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/preflight-readonly.mjs",
+      "bytes": 10271,
+      "sha256": "49c5e0763b9837a646871818534e01fa10b03e2a60de52755c63303032aaec73",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/preflight.json",
+      "bytes": 5621,
+      "sha256": "f96398eecbd2038d476e08fdf85e93b1ac09f0271fe195d9396d63f61105fb94",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/preservation.json",
+      "bytes": 2766,
+      "sha256": "11f0703b496b1e797437a94fecde41d3259981ecdccc55c897e43857d42a7cf0",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/privileges-observed.json",
+      "bytes": 2225,
+      "sha256": "d803911a622a2674f08801cf2c97e7a3d066c1cd94e78cd210ba98ace99c1ef7",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/proposal-static-readonly.mjs",
+      "bytes": 4071,
+      "sha256": "97896b609b67fc1c646769f230e2278ae854936e88b375076b3f3ee040151167",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/rehearsal-review.md",
+      "bytes": 4383,
+      "sha256": "4c374e61a302065f243ddb0a71cb33f36ecb9159e85435ab6daf808faf0d9993",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/resources.json",
+      "bytes": 3227,
+      "sha256": "17d60bce17528835a4fba5d699e8ca7401ab6dcc4de4d2b3a8d5af273003f67a",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-post-recovery-20261016/static-review.json",
+      "bytes": 615,
+      "sha256": "60ba4dc5f80a9288e79f1fa4071193115ccff3bb64f66afa2df236cb349c8de8",
+      "kind": "created"
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

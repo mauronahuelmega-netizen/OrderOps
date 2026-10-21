@@ -1,0 +1,1838 @@
+{
+  "at": "2026-10-13T15:18:32.814Z",
+  "latency": [
+    {
+      "orders": 50,
+      "status": "PASS",
+      "legacy": {
+        "samples": 3,
+        "medianMs": 338.213,
+        "minMs": 329.3,
+        "maxMs": 342.031,
+        "meanMs": 336.5146666666667,
+        "stddevPopulationMs": 5.3343442166982635
+      },
+      "extended": {
+        "samples": 3,
+        "medianMs": 569.014,
+        "minMs": 552.344,
+        "maxMs": 578.626,
+        "meanMs": 566.6613333333333,
+        "stddevPopulationMs": 10.857782503296344
+      },
+      "jitOffLegacy": {
+        "samples": 3,
+        "medianMs": 344.781,
+        "minMs": 329.002,
+        "maxMs": 447.768,
+        "meanMs": 373.8503333333333,
+        "stddevPopulationMs": 52.66314520505671
+      },
+      "jitOffExtended": {
+        "samples": 3,
+        "medianMs": 598.774,
+        "minMs": 572.664,
+        "maxMs": 700.264,
+        "meanMs": 623.9006666666668,
+        "stddevPopulationMs": 55.039089341626614
+      },
+      "warmups": [
+        {
+          "rpc": "legacy",
+          "ms": 453.101
+        },
+        {
+          "rpc": "extended",
+          "ms": 603.844
+        }
+      ],
+      "elapsedMs": 7135,
+      "resourceBefore": {
+        "at": "2026-10-13T15:06:08.873Z",
+        "dbStats": {
+          "BlockIO": "110MB / 11.3MB",
+          "CPUPerc": "0.00%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.50%",
+          "MemUsage": "118.4MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "220kB / 1MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourceAfter": {
+        "at": "2026-10-13T15:06:18.804Z",
+        "dbStats": {
+          "BlockIO": "110MB / 11.8MB",
+          "CPUPerc": "0.02%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.50%",
+          "MemUsage": "118.5MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "220kB / 1MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      }
+    },
+    {
+      "orders": 200,
+      "status": "PASS",
+      "legacy": {
+        "samples": 3,
+        "medianMs": 1527.236,
+        "minMs": 1280.183,
+        "maxMs": 1995.354,
+        "meanMs": 1600.9243333333334,
+        "stddevPopulationMs": 296.58036309723695
+      },
+      "extended": {
+        "samples": 3,
+        "medianMs": 2267.348,
+        "minMs": 2108.534,
+        "maxMs": 2345.865,
+        "meanMs": 2240.5823333333333,
+        "stddevPopulationMs": 98.72116144080861
+      },
+      "jitOffLegacy": {
+        "samples": 3,
+        "medianMs": 1329.688,
+        "minMs": 1280.004,
+        "maxMs": 1713.464,
+        "meanMs": 1441.052,
+        "stddevPopulationMs": 193.68935312677013
+      },
+      "jitOffExtended": {
+        "samples": 3,
+        "medianMs": 2315.54,
+        "minMs": 1961.193,
+        "maxMs": 2548.885,
+        "meanMs": 2275.206,
+        "stddevPopulationMs": 241.61345903874377
+      },
+      "warmups": [
+        {
+          "rpc": "legacy",
+          "ms": 2980.811
+        },
+        {
+          "rpc": "extended",
+          "ms": 2668.548
+        }
+      ],
+      "elapsedMs": 29383,
+      "resourceBefore": {
+        "at": "2026-10-13T15:06:34.065Z",
+        "dbStats": {
+          "BlockIO": "110MB / 12.1MB",
+          "CPUPerc": "4.82%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.51%",
+          "MemUsage": "119MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "220kB / 1MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourceAfter": {
+        "at": "2026-10-13T15:07:06.138Z",
+        "dbStats": {
+          "BlockIO": "110MB / 13.9MB",
+          "CPUPerc": "0.04%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.51%",
+          "MemUsage": "119.1MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "220kB / 1MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      }
+    },
+    {
+      "orders": 500,
+      "status": "FAILED_TIMEOUT_OR_SQL",
+      "legacy": {
+        "samples": 0,
+        "medianMs": null,
+        "minMs": null,
+        "maxMs": null,
+        "meanMs": null,
+        "stddevPopulationMs": null
+      },
+      "extended": {
+        "samples": 0,
+        "medianMs": null,
+        "minMs": null,
+        "maxMs": null,
+        "meanMs": null,
+        "stddevPopulationMs": null
+      },
+      "jitOffLegacy": {
+        "samples": 0,
+        "medianMs": null,
+        "minMs": null,
+        "maxMs": null,
+        "meanMs": null,
+        "stddevPopulationMs": null
+      },
+      "jitOffExtended": {
+        "samples": 0,
+        "medianMs": null,
+        "minMs": null,
+        "maxMs": null,
+        "meanMs": null,
+        "stddevPopulationMs": null
+      },
+      "warmups": [
+        {
+          "rpc": "legacy",
+          "ms": 4440.928
+        }
+      ],
+      "elapsedMs": 21702,
+      "resourceBefore": {
+        "at": "2026-10-13T15:07:19.045Z",
+        "dbStats": {
+          "BlockIO": "110MB / 13.9MB",
+          "CPUPerc": "0.00%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.51%",
+          "MemUsage": "119.1MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "220kB / 1MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourceAfter": {
+        "at": "2026-10-13T15:07:43.320Z",
+        "dbStats": {
+          "BlockIO": "110MB / 18.1MB",
+          "CPUPerc": "0.02%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.53%",
+          "MemUsage": "120.6MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "221kB / 1MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      }
+    }
+  ],
+  "volume1000": {
+    "status": "NOT_EXECUTED",
+    "reason": "Stopped after 500-order extended RPC reached 15-second statement limit"
+  },
+  "profile": {
+    "orders": 200,
+    "legacyRootMs": 1378.514,
+    "extendedRootMs": 2320.656,
+    "legacyFunctions": {
+      "private.statistics_source_digest": {
+        "calls": 1200,
+        "totalMs": 72.681856,
+        "selfMs": 72.681856
+      },
+      "private.statistics_can_read": {
+        "calls": 3601,
+        "totalMs": 495.351495,
+        "selfMs": 495.351495
+      },
+      "private.statistics_source_items": {
+        "calls": 1200,
+        "totalMs": 1212.032273,
+        "selfMs": 752.294659
+      },
+      "private.statistics_metric": {
+        "calls": 60,
+        "totalMs": 3.485826,
+        "selfMs": 3.485826
+      },
+      "private.statistics_metrics": {
+        "calls": 15,
+        "totalMs": 7.228485,
+        "selfMs": 3.742659
+      },
+      "private.statistics_local_cutoff": {
+        "calls": 3,
+        "totalMs": 0.724148,
+        "selfMs": 0.724148
+      },
+      "private.statistics_v1_summary_base": {
+        "calls": 1,
+        "totalMs": 1378.421214,
+        "selfMs": 50.140571
+      }
+    },
+    "extendedFunctionDeltas": {
+      "private.statistics_source_digest": {
+        "calls": 1800,
+        "totalMs": 124.151315,
+        "selfMs": 124.151315
+      },
+      "private.statistics_can_read": {
+        "calls": 5201,
+        "totalMs": 780.837735,
+        "selfMs": 780.837735
+      },
+      "private.statistics_source_items": {
+        "calls": 1800,
+        "totalMs": 1957.175591,
+        "selfMs": 1227.917297
+      },
+      "private.statistics_metric": {
+        "calls": 588,
+        "totalMs": 42.651767,
+        "selfMs": 42.651767
+      },
+      "private.statistics_metrics": {
+        "calls": 147,
+        "totalMs": 76.197401,
+        "selfMs": 33.545634
+      },
+      "private.statistics_local_cutoff": {
+        "calls": 60,
+        "totalMs": 5.5716730000000005,
+        "selfMs": 5.5716730000000005
+      },
+      "public.statistics_v1_summary": {
+        "calls": 1,
+        "totalMs": 2320.611612,
+        "selfMs": 0.172011
+      },
+      "private.statistics_v1_summary_base": {
+        "calls": 1,
+        "totalMs": 1540.486766,
+        "selfMs": 54.533533999999996
+      },
+      "private.statistics_v1_series_delta": {
+        "calls": 56,
+        "totalMs": 2.990404,
+        "selfMs": 2.990404
+      },
+      "private.statistics_v1_series_instant": {
+        "calls": 108,
+        "totalMs": 3.47794,
+        "selfMs": 3.47794
+      },
+      "private.statistics_v1_series_response": {
+        "calls": 1,
+        "totalMs": 2320.439601,
+        "selfMs": 44.762302
+      }
+    },
+    "nested": [
+      {
+        "id": 0,
+        "durationMs": 691.339,
+        "query": "with current_facts as materialized (\n    select * from public.statistics_v1_effective_facts where business_id=v_business and commercial_date between v_start and v_end and date_reliable and completed_at<=v_now),\n  previous_facts as materialized (\n    select f.* from public.statistics_v1_effective_facts f where v_compare and f.business_id=v_business and f.commercial_date between v_ps and v_pe and f.date_reliable and f.completed_at<=v_now\n      and (not v_partial or case when f.date_kind='outside_session' then f.commercial_date<v_pe or f.completed_at<=v_previous_cutoff\n        else exists(select 1 from jsonb_array_elements(v_segments) seg where (seg->>'previousSessionId')::uuid=f.session_key and f.completed_at<=(seg->>'previousUntil')::timestamptz) end)),\n  product_lines as (select i.*,f.effective_sales,f.effective_units,f.completed_at from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id),\n  products as (\n    select coalesce(product_identity::text,'line:'||line_key::text) group_key,product_identity,\n      (array_agg(product_name order by completed_at desc,completion_id,line_key))[1] label,\n      case when bool_or(item_kind='product' and effective_units is null) or v_historical>0 then null else sum(case when item_kind='product' and effective_units is not null then quantity else 0 end)::bigint end main_units,\n      bool_or(item_kind='product' and effective_units is not null) has_main,\n      sum(case when effective_sales is not null then net_amount end) net,\n      bool_or(effective_sales is null) partial from product_lines group by group_key,product_identity),\n  ranked as (select *,row_number() over(order by case when p_product_sort='units' then main_units else net end desc nulls last,group_key collate \"C\") position from products where p_product_sort='amount' or has_main),\n  categories as (\n    select category_identity,coalesce((array_agg(category_name order by completed_at desc,completion_id))[1],'Sin categoría histórica') label,sum(net_amount) amount\n    from product_lines where effective_sales is not null group by category_identity),\n  all_products as(select product_identity from products where product_identity is not null union\n    select i.product_identity from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity is not null)\n  select\n    coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from current_facts),'[]'::jsonb),\n    coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from previous_facts),'[]'::jsonb),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',product_identity,'label',label,'mainUnits',main_units,'netAmount',round(net,2)::text,'quality',case when partial then case when net is null then 'unavailable' else 'partial' end else 'exact' end) order by position) from ranked where position>v_offset and position<=v_offset+p_limit),'[]'::jsonb),\n    (select count(*) from ranked),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',category_identity,'label',label,'amount',round(amount,2)::text,'percentage',case when not exists(select 1 from current_facts where effective_sales is null) and v_historical=0 and (select sum(amount) from categories)>0 then round(amount*100/(select sum(amount) from categories),2)::text end) order by amount desc,label) from categories),'[]'::jsonb),\n    (select count(*) from current_facts where date_kind='outside_session'),\n    (select count(*) from current_facts where effective_sales is null),\n    (select sum(current_agreement) from current_facts where effective_sales is null),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',p.product_identity,'currentMainUnits',case when v_historical>0 or exists(select 1 from current_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end,'previousMainUnits',\n      case when not v_compare or exists(select 1 from previous_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end)) from all_products p),'[]'::jsonb)",
+        "totalCost": 151.46,
+        "jit": null,
+        "sharedHits": 22346,
+        "sharedReads": 0,
+        "tempRead": 0,
+        "tempWritten": 0,
+        "nodes": [
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "orders",
+            "index": "orders_business_id_delivery_date_idx",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (status = 'completed'::text))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_statistics_completions",
+            "index": "statistics_completion_active",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 200,
+            "filter": "((commercial_date IS NOT NULL) AND (timezone IS NOT NULL) AND (NOT date_conflict) AND (commercial_date >= $14) AND (commercial_date <= $15) AND (completed_at <= $11) AND (business_id = $8) AND statistics_can_read(business_id) AND statistics_can_read(business_id))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Seq Scan",
+            "relation": "order_financials",
+            "estimatedRows": 1,
+            "actualRows": 100,
+            "loops": 200,
+            "filter": "(business_id = $8)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "orders",
+            "index": "orders_business_id_delivery_date_idx",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "(((business_id = (InitPlan 6).col1) OR (InitPlan 7).col1) AND (status = 'completed'::text))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_statistics_completions",
+            "index": "statistics_completion_active",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 200,
+            "filter": "((commercial_date IS NOT NULL) AND (timezone IS NOT NULL) AND (NOT date_conflict) AND (commercial_date >= $16) AND (commercial_date <= $17) AND (completed_at <= $11) AND (business_id = $8) AND statistics_can_read(business_id) AND statistics_can_read(business_id))",
+            "rowsRemoved": 1
+          },
+          {
+            "node": "Seq Scan",
+            "relation": "order_financials",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(business_id = $8)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_statistics_completion_items",
+            "index": "order_statistics_completion_items_pkey",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 200,
+            "filter": "statistics_can_read(business_id)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "product_lines",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "products",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "(($4 = 'amount'::text) OR has_main)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "product_lines",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "(effective_sales IS NOT NULL)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "previous_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "ranked",
+            "estimatedRows": 1,
+            "actualRows": 5,
+            "loops": 1,
+            "filter": "((\"position\" > $25) AND (\"position\" <= ($25 + $5)))",
+            "rowsRemoved": 195
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "ranked",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1,
+            "filter": "(effective_sales IS NULL)",
+            "rowsRemoved": 200
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "categories",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "categories",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "categories",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "(date_kind = 'outside_session'::text)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1,
+            "filter": "(effective_sales IS NULL)",
+            "rowsRemoved": 200
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1,
+            "filter": "(effective_sales IS NULL)",
+            "rowsRemoved": 200
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(effective_units IS NULL)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "previous_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(effective_units IS NULL)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "products",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1,
+            "filter": "(product_identity IS NOT NULL)",
+            "rowsRemoved": 200
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "previous_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_statistics_completion_items",
+            "index": "order_statistics_completion_items_pkey",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((product_identity IS NOT NULL) AND statistics_can_read(business_id))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(effective_units IS NOT NULL)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_statistics_completion_items",
+            "index": "order_statistics_completion_items_pkey",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((product_identity = products_1.product_identity) AND (item_kind = 'product'::text) AND statistics_can_read(business_id))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "previous_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(effective_units IS NOT NULL)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_statistics_completion_items",
+            "index": "order_statistics_completion_items_pkey",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((product_identity = products_1.product_identity) AND (item_kind = 'product'::text) AND statistics_can_read(business_id))",
+            "rowsRemoved": 0
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "durationMs": 673.066,
+        "query": "with facts as materialized(select * from public.statistics_v1_effective_facts where business_id=v_business and commercial_date=v_start and date_reliable and completed_at<=v_now),\n    bounds as(select\n      least(private.statistics_local_cutoff(v_start,'00:00:00',v_timezone),coalesce(min(completed_at),v_now)) lo,\n      greatest(least(v_now,private.statistics_local_cutoff(v_start+1,'00:00:00',v_timezone)),coalesce(max(completed_at),'-infinity'::timestamptz),\n        coalesce((select max(coalesce(s.closed_at,v_now)) from public.store_session_statistics_snapshots snap join public.store_sessions s on s.id=snap.session_id where snap.business_id=v_business and snap.commercial_date=v_start and snap.source_quality='exact'),'-infinity'::timestamptz)) hi from facts),\n    sizing as(select date_trunc('hour',lo) lo,date_trunc('hour',hi)+interval '1 hour' hi,greatest(1,ceil((extract(epoch from hi-lo)/3600+1)/199)::integer) step from bounds),\n    bins as(select t lo,t+make_interval(hours=>step) hi from sizing cross join lateral generate_series(lo,hi-interval '1 microsecond',make_interval(hours=>step)) t)\n    select coalesce(jsonb_agg(jsonb_build_object('label',to_char(b.lo at time zone v_timezone,'YYYY-MM-DD HH24:MI')||' · '||b.lo::text,'metrics',private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',f.effective_sales::text,'mainUnits',f.effective_units::text,'reasons',f.reasons)) from facts f where f.completed_at>=b.lo and f.completed_at<b.hi),'[]'::jsonb),v_historical)) order by b.lo),'[]'::jsonb)                from bins b",
+        "totalCost": 484.96,
+        "jit": null,
+        "sharedHits": 20935,
+        "sharedReads": 0,
+        "tempRead": 0,
+        "tempWritten": 0,
+        "nodes": [
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "orders",
+            "index": "orders_business_id_delivery_date_idx",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (status = 'completed'::text))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_statistics_completions",
+            "index": "statistics_completion_active",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 200,
+            "filter": "((commercial_date IS NOT NULL) AND (timezone IS NOT NULL) AND (NOT date_conflict) AND (completed_at <= $11) AND (business_id = $8) AND (commercial_date = $14) AND statistics_can_read(business_id) AND statistics_can_read(business_id))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Seq Scan",
+            "relation": "order_financials",
+            "estimatedRows": 1,
+            "actualRows": 100,
+            "loops": 200,
+            "filter": "(business_id = $8)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Seq Scan",
+            "relation": "store_session_statistics_snapshots",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1,
+            "filter": "((business_id = $8) AND (commercial_date = $14) AND (source_quality = 'exact'::text) AND statistics_can_read(business_id))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Seq Scan",
+            "relation": "store_sessions",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((business_id = (InitPlan 6).col1) OR (InitPlan 7).col1)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 1,
+            "actualRows": 15,
+            "loops": 13,
+            "filter": "((completed_at >= t.t) AND (completed_at < (t.t + make_interval(0, 0, 0, 0, GREATEST(1, (ceil((((EXTRACT(epoch FROM ((GREATEST(LEAST($11, statistics_local_cutoff(($14 + 1), '00:00:00'::time without time zone, $10)), COALESCE(max(facts.completed_at), '-infinity'::timestamp with time zone), COALESCE((InitPlan 8).col1, '-infinity'::timestamp with time zone))) - (LEAST(statistics_local_cutoff($14, '00:00:00'::time without time zone, $10), COALESCE(min(facts.completed_at), $11))))) / '3600'::numeric) + '1'::numeric) / '199'::numeric)))::integer), 0, '0'::double precision))))",
+            "rowsRemoved": 185
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "durationMs": 1378.464,
+        "query": "EXPLAIN (ANALYZE,BUFFERS,FORMAT JSON) SELECT private.statistics_v1_summary_base('today');",
+        "totalCost": 0.26,
+        "jit": null,
+        "sharedHits": 44128,
+        "sharedReads": 0,
+        "tempRead": 0,
+        "tempWritten": 0,
+        "nodes": []
+      },
+      {
+        "id": 3,
+        "durationMs": 11.669,
+        "query": "\n  select coalesce(jsonb_agg(jsonb_build_object(\n    'line_key',i.id,'parent_line_key',i.parent_order_item_id,'item_kind',i.item_kind,\n    'quantity',i.quantity,'unit_price',i.unit_price,'gross',i.quantity*i.unit_price,\n    'product_identity',coalesce(s.product_identity,case when p.business_id=p_business then i.product_id end),\n    'product_name',coalesce(s.product_name,i.product_name),'category_identity',s.category_identity,'category_name',s.category_name,\n    'source_valid',(i.product_id is null or p.business_id=p_business) and\n      (i.parent_order_item_id is null or exists(select 1 from public.order_items parent where parent.id=i.parent_order_item_id and parent.order_id=p_order and parent.item_kind='product'))\n  ) order by i.id),'[]'::jsonb)\n  from public.order_items i join public.orders o on o.id=i.order_id and o.business_id=p_business\n  left join public.order_item_statistics_snapshots s on s.source_item_id=i.id and s.active and s.business_id=p_business\n  left join public.products p on p.id=i.product_id where i.order_id=p_order and (current_user='postgres' or private.statistics_can_read(p_business));\n",
+        "totalCost": 156.58,
+        "jit": null,
+        "sharedHits": 32,
+        "sharedReads": 0,
+        "tempRead": 0,
+        "tempWritten": 0,
+        "nodes": [
+          {
+            "node": "Index Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_items",
+            "index": "order_items_order_id_idx",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "((ANY (order_id = (hashed SubPlan 22).col1)) OR (InitPlan 23).col1)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "orders",
+            "index": "orders_business_id_delivery_date_idx",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "((business_id = (InitPlan 20).col1) OR (InitPlan 21).col1)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "orders",
+            "index": "orders_business_id_delivery_date_idx",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(((business_id = (InitPlan 24).col1) OR (InitPlan 25).col1) AND (id = $1))",
+            "rowsRemoved": 199
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_item_statistics_snapshots",
+            "index": "statistics_item_active",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "((business_id = $2) AND private.statistics_can_read(business_id))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "products",
+            "index": "products_pkey",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1,
+            "filter": "((business_id = (InitPlan 26).col1) OR (InitPlan 27).col1)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_items",
+            "index": "order_items_item_kind_idx",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((id = i.parent_order_item_id) AND (order_id = $1) AND ((ANY (order_id = (hashed SubPlan 6).col1)) OR (InitPlan 7).col1))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "orders",
+            "index": "orders_business_id_delivery_date_idx",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((business_id = (InitPlan 4).col1) OR (InitPlan 5).col1)",
+            "rowsRemoved": 0
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "durationMs": 862.118,
+        "query": "with current_facts as materialized (\n    select * from public.statistics_v1_effective_facts where business_id=v_business and commercial_date between v_start and v_end and date_reliable and completed_at<=v_now),\n  previous_facts as materialized (\n    select f.* from public.statistics_v1_effective_facts f where v_compare and f.business_id=v_business and f.commercial_date between v_ps and v_pe and f.date_reliable and f.completed_at<=v_now\n      and (not v_partial or case when f.date_kind='outside_session' then f.commercial_date<v_pe or f.completed_at<=v_previous_cutoff\n        else exists(select 1 from jsonb_array_elements(v_segments) seg where (seg->>'previousSessionId')::uuid=f.session_key and f.completed_at<=(seg->>'previousUntil')::timestamptz) end)),\n  product_lines as (select i.*,f.effective_sales,f.effective_units,f.completed_at from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id),\n  products as (\n    select coalesce(product_identity::text,'line:'||line_key::text) group_key,product_identity,\n      (array_agg(product_name order by completed_at desc,completion_id,line_key))[1] label,\n      case when bool_or(item_kind='product' and effective_units is null) or v_historical>0 then null else sum(case when item_kind='product' and effective_units is not null then quantity else 0 end)::bigint end main_units,\n      bool_or(item_kind='product' and effective_units is not null) has_main,\n      sum(case when effective_sales is not null then net_amount end) net,\n      bool_or(effective_sales is null) partial from product_lines group by group_key,product_identity),\n  ranked as (select *,row_number() over(order by case when p_product_sort='units' then main_units else net end desc nulls last,group_key collate \"C\") position from products where p_product_sort='amount' or has_main),\n  categories as (\n    select category_identity,coalesce((array_agg(category_name order by completed_at desc,completion_id))[1],'Sin categoría histórica') label,sum(net_amount) amount\n    from product_lines where effective_sales is not null group by category_identity),\n  all_products as(select product_identity from products where product_identity is not null union\n    select i.product_identity from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity is not null)\n  select\n    coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from current_facts),'[]'::jsonb),\n    coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from previous_facts),'[]'::jsonb),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',product_identity,'label',label,'mainUnits',main_units,'netAmount',round(net,2)::text,'quality',case when partial then case when net is null then 'unavailable' else 'partial' end else 'exact' end) order by position) from ranked where position>v_offset and position<=v_offset+p_limit),'[]'::jsonb),\n    (select count(*) from ranked),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',category_identity,'label',label,'amount',round(amount,2)::text,'percentage',case when not exists(select 1 from current_facts where effective_sales is null) and v_historical=0 and (select sum(amount) from categories)>0 then round(amount*100/(select sum(amount) from categories),2)::text end) order by amount desc,label) from categories),'[]'::jsonb),\n    (select count(*) from current_facts where date_kind='outside_session'),\n    (select count(*) from current_facts where effective_sales is null),\n    (select sum(current_agreement) from current_facts where effective_sales is null),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',p.product_identity,'currentMainUnits',case when v_historical>0 or exists(select 1 from current_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end,'previousMainUnits',\n      case when not v_compare or exists(select 1 from previous_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end)) from all_products p),'[]'::jsonb)",
+        "totalCost": 151.46,
+        "jit": null,
+        "sharedHits": 22360,
+        "sharedReads": 0,
+        "tempRead": 0,
+        "tempWritten": 0,
+        "nodes": [
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "orders",
+            "index": "orders_business_id_delivery_date_idx",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (status = 'completed'::text))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_statistics_completions",
+            "index": "statistics_completion_active",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 200,
+            "filter": "((commercial_date IS NOT NULL) AND (timezone IS NOT NULL) AND (NOT date_conflict) AND (commercial_date >= $14) AND (commercial_date <= $15) AND (completed_at <= $11) AND (business_id = $8) AND statistics_can_read(business_id) AND statistics_can_read(business_id))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Seq Scan",
+            "relation": "order_financials",
+            "estimatedRows": 1,
+            "actualRows": 100,
+            "loops": 200,
+            "filter": "(business_id = $8)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "orders",
+            "index": "orders_business_id_delivery_date_idx",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "(((business_id = (InitPlan 6).col1) OR (InitPlan 7).col1) AND (status = 'completed'::text))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_statistics_completions",
+            "index": "statistics_completion_active",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 200,
+            "filter": "((commercial_date IS NOT NULL) AND (timezone IS NOT NULL) AND (NOT date_conflict) AND (commercial_date >= $16) AND (commercial_date <= $17) AND (completed_at <= $11) AND (business_id = $8) AND statistics_can_read(business_id) AND statistics_can_read(business_id))",
+            "rowsRemoved": 1
+          },
+          {
+            "node": "Seq Scan",
+            "relation": "order_financials",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(business_id = $8)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_statistics_completion_items",
+            "index": "order_statistics_completion_items_pkey",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 200,
+            "filter": "statistics_can_read(business_id)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "product_lines",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "products",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "(($4 = 'amount'::text) OR has_main)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "product_lines",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "(effective_sales IS NOT NULL)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "previous_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "ranked",
+            "estimatedRows": 1,
+            "actualRows": 5,
+            "loops": 1,
+            "filter": "((\"position\" > $25) AND (\"position\" <= ($25 + $5)))",
+            "rowsRemoved": 195
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "ranked",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1,
+            "filter": "(effective_sales IS NULL)",
+            "rowsRemoved": 200
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "categories",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "categories",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "categories",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "(date_kind = 'outside_session'::text)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1,
+            "filter": "(effective_sales IS NULL)",
+            "rowsRemoved": 200
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1,
+            "filter": "(effective_sales IS NULL)",
+            "rowsRemoved": 200
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(effective_units IS NULL)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "previous_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(effective_units IS NULL)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "products",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1,
+            "filter": "(product_identity IS NOT NULL)",
+            "rowsRemoved": 200
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "previous_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_statistics_completion_items",
+            "index": "order_statistics_completion_items_pkey",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((product_identity IS NOT NULL) AND statistics_can_read(business_id))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "current_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(effective_units IS NOT NULL)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_statistics_completion_items",
+            "index": "order_statistics_completion_items_pkey",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((product_identity = products_1.product_identity) AND (item_kind = 'product'::text) AND statistics_can_read(business_id))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "previous_facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(effective_units IS NOT NULL)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_statistics_completion_items",
+            "index": "order_statistics_completion_items_pkey",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((product_identity = products_1.product_identity) AND (item_kind = 'product'::text) AND statistics_can_read(business_id))",
+            "rowsRemoved": 0
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "durationMs": 663.595,
+        "query": "with facts as materialized(select * from public.statistics_v1_effective_facts where business_id=v_business and commercial_date=v_start and date_reliable and completed_at<=v_now),\n    bounds as(select\n      least(private.statistics_local_cutoff(v_start,'00:00:00',v_timezone),coalesce(min(completed_at),v_now)) lo,\n      greatest(least(v_now,private.statistics_local_cutoff(v_start+1,'00:00:00',v_timezone)),coalesce(max(completed_at),'-infinity'::timestamptz),\n        coalesce((select max(coalesce(s.closed_at,v_now)) from public.store_session_statistics_snapshots snap join public.store_sessions s on s.id=snap.session_id where snap.business_id=v_business and snap.commercial_date=v_start and snap.source_quality='exact'),'-infinity'::timestamptz)) hi from facts),\n    sizing as(select date_trunc('hour',lo) lo,date_trunc('hour',hi)+interval '1 hour' hi,greatest(1,ceil((extract(epoch from hi-lo)/3600+1)/199)::integer) step from bounds),\n    bins as(select t lo,t+make_interval(hours=>step) hi from sizing cross join lateral generate_series(lo,hi-interval '1 microsecond',make_interval(hours=>step)) t)\n    select coalesce(jsonb_agg(jsonb_build_object('label',to_char(b.lo at time zone v_timezone,'YYYY-MM-DD HH24:MI')||' · '||b.lo::text,'metrics',private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',f.effective_sales::text,'mainUnits',f.effective_units::text,'reasons',f.reasons)) from facts f where f.completed_at>=b.lo and f.completed_at<b.hi),'[]'::jsonb),v_historical)) order by b.lo),'[]'::jsonb)                from bins b",
+        "totalCost": 484.96,
+        "jit": null,
+        "sharedHits": 20935,
+        "sharedReads": 0,
+        "tempRead": 0,
+        "tempWritten": 0,
+        "nodes": [
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "orders",
+            "index": "orders_business_id_delivery_date_idx",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (status = 'completed'::text))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_statistics_completions",
+            "index": "statistics_completion_active",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 200,
+            "filter": "((commercial_date IS NOT NULL) AND (timezone IS NOT NULL) AND (NOT date_conflict) AND (completed_at <= $11) AND (business_id = $8) AND (commercial_date = $14) AND statistics_can_read(business_id) AND statistics_can_read(business_id))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Seq Scan",
+            "relation": "order_financials",
+            "estimatedRows": 1,
+            "actualRows": 100,
+            "loops": 200,
+            "filter": "(business_id = $8)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Seq Scan",
+            "relation": "store_session_statistics_snapshots",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1,
+            "filter": "((business_id = $8) AND (commercial_date = $14) AND (source_quality = 'exact'::text) AND statistics_can_read(business_id))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Seq Scan",
+            "relation": "store_sessions",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((business_id = (InitPlan 6).col1) OR (InitPlan 7).col1)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 1,
+            "actualRows": 15,
+            "loops": 13,
+            "filter": "((completed_at >= t.t) AND (completed_at < (t.t + make_interval(0, 0, 0, 0, GREATEST(1, (ceil((((EXTRACT(epoch FROM ((GREATEST(LEAST($11, statistics_local_cutoff(($14 + 1), '00:00:00'::time without time zone, $10)), COALESCE(max(facts.completed_at), '-infinity'::timestamp with time zone), COALESCE((InitPlan 8).col1, '-infinity'::timestamp with time zone))) - (LEAST(statistics_local_cutoff($14, '00:00:00'::time without time zone, $10), COALESCE(min(facts.completed_at), $11))))) / '3600'::numeric) + '1'::numeric) / '199'::numeric)))::integer), 0, '0'::double precision))))",
+            "rowsRemoved": 185
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "durationMs": 674.883,
+        "query": "with effective as materialized (\n    select f.* from public.statistics_v1_effective_facts f\n    where f.business_id=v_business and f.date_reliable and f.completed_at<=v_now\n      and (f.commercial_date between v_start and v_end or (v_compare and f.commercial_date between v_ps and v_pe))\n  ), selected as (\n    select 'current' side,f.* from effective f where f.commercial_date between v_start and v_end\n    union all\n    select 'previous' side,f.* from effective f where v_compare and f.commercial_date between v_ps and v_pe\n      and (not v_partial or case when f.date_kind='outside_session' then f.commercial_date<v_pe or f.completed_at<=v_previous_cut\n        else exists(select 1 from jsonb_array_elements(v_base#>'{comparison,segments}') seg\n          where (seg->>'previousSessionId')::uuid=f.session_key and f.completed_at<=(seg->>'previousUntil')::timestamptz) end)\n  )\n  select coalesce(jsonb_agg(jsonb_build_object('side',side,'id',id,'date',commercial_date,\n    'at',completed_at,'session',session_key,'kind',date_kind,'timezone',timezone,\n    'sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons) order by side,commercial_date,completed_at,id),'[]'::jsonb)\n                 from selected",
+        "totalCost": 51.23,
+        "jit": null,
+        "sharedHits": 20935,
+        "sharedReads": 0,
+        "tempRead": 0,
+        "tempWritten": 0,
+        "nodes": [
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((role = 'super_admin'::text) AND (id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Only Scan",
+            "relation": "profiles",
+            "index": "profiles_id_business_id_key",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "orders",
+            "index": "orders_business_id_delivery_date_idx",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "(((business_id = (InitPlan 1).col1) OR (InitPlan 2).col1) AND (status = 'completed'::text))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Index Scan",
+            "relation": "order_statistics_completions",
+            "index": "statistics_completion_active",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 200,
+            "filter": "((commercial_date IS NOT NULL) AND (timezone IS NOT NULL) AND (NOT date_conflict) AND (completed_at <= $12) AND (business_id = $9) AND (((commercial_date >= $13) AND (commercial_date <= $14)) OR ($19 AND (commercial_date >= $15) AND (commercial_date <= $16))) AND statistics_can_read(business_id) AND statistics_can_read(business_id))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "Seq Scan",
+            "relation": "order_financials",
+            "estimatedRows": 1,
+            "actualRows": 100,
+            "loops": 200,
+            "filter": "(business_id = $9)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "effective",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "((commercial_date >= $13) AND (commercial_date <= $14))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "effective",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1,
+            "filter": "((commercial_date >= $15) AND (commercial_date <= $16) AND ((NOT $20) OR CASE WHEN (date_kind = 'outside_session'::text) THEN ((commercial_date < $16) OR (completed_at <= $22)) ELSE EXISTS(SubPlan 5) END))",
+            "rowsRemoved": 200
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "durationMs": 89.127,
+        "query": "with recursive\n  facts as materialized(select * from jsonb_to_recordset(v_facts) as z(side text,id uuid,date date,at timestamptz,session uuid,kind text,timezone text,sales text,\"mainUnits\" text,reasons jsonb)),\n  pairs as materialized(select * from jsonb_to_recordset(v_pairs) as z(aid uuid,bid uuid,ad date,bd date,alo timestamptz,ahi timestamptz,blo timestamptz,bhi timestamptz,atz text,btz text,av boolean,bv boolean,ac boolean,bc boolean,ordinal bigint)),\n  calendar_size as (\n    select case when v_days<=31 then 1 when v_days<=180 then 7 else greatest(1,ceil(((extract(year from v_end)-extract(year from v_start))*12+extract(month from v_end)-extract(month from v_start)+1)/199)::integer) end factor\n  ), calendar_bins as (\n    select v_start+n lo,least(v_end,v_start+n+factor-1) hi from calendar_size cross join lateral generate_series(0,case when v_mode='calendar' and v_days<=180 then v_days-1 else -1 end,factor) n where v_mode='calendar' and v_days<=180\n    union all\n    select greatest(v_start,t::date),least(v_end,(t+make_interval(months=>factor))::date-1)\n      from calendar_size cross join lateral generate_series(case when v_mode='calendar' and v_days>180 then date_trunc('month',v_start::timestamp) end,date_trunc('month',v_end::timestamp),make_interval(months=>factor)) t\n      where v_mode='calendar' and v_days>180\n  ), calendar_bounds as (\n    select lo,hi,case when v_compare then lo+v_shift end pl,case when v_compare then hi+v_shift end ph,\n      private.statistics_local_cutoff(lo,'00:00:00',v_tz) clo,\n      least(v_now,private.statistics_local_cutoff(hi+1,'00:00:00',v_tz)) chi,\n      case when v_compare then private.statistics_local_cutoff(lo+v_shift,'00:00:00',v_tz) end plo,\n      case when v_compare then case when v_partial and hi=v_end then v_previous_cut\n        else private.statistics_local_cutoff(hi+v_shift+1,'00:00:00',v_tz) end end phi\n    from calendar_bins\n  ), calendar_plan as (\n    select 'date:'||lo::text descriptor,'commercial_date'::text basis,\n      jsonb_build_object('kind','date_offset','days',coalesce(v_shift,0),'sessions',coalesce((select jsonb_agg(jsonb_build_object('currentSessionId',p.aid,'previousSessionId',p.bid,'ordinal',p.ordinal) order by p.ad,p.ordinal) from pairs p where p.ad between lo and hi and p.aid is not null and p.bid is not null),'[]'::jsonb)) mapping,\n      lo cdlo,hi cdhi,pl pdlo,ph pdhi,null::uuid csid,null::uuid psid,\n      clo,chi,plo,phi,(chi=v_now) ci,(v_partial and hi=v_end) pi,\n      true ca,v_compare pa,\n      case when not v_compare then 'root_comparison_unavailable'\n        when clo is null or chi is null or plo is null or phi is null then 'ambiguous_wall_time'\n        when private.statistics_v1_series_instant(clo) is null or private.statistics_v1_series_instant(chi) is null\n          or private.statistics_v1_series_instant(plo) is null or private.statistics_v1_series_instant(phi) is null then 'interval_out_of_range'\n        when chi<clo or phi<plo or chi-clo<>phi-plo or (chi=v_now) is distinct from (v_partial and hi=v_end) then 'duration_mismatch'\n        when exists(select 1 from facts f where (f.date between lo and hi or f.date between pl and ph)\n          and f.kind='outside_session' and f.timezone<>v_tz) then 'timezone_changed'\n        when exists(select 1 from facts f where (f.date between lo and hi or f.date between pl and ph)\n          and f.kind='verified_session' and not exists(select 1 from jsonb_array_elements(v_sessions) s\n            where s->>'id'=f.session::text and coalesce((s->>'valid')::boolean,false)\n              and f.at between (s->>'lo')::timestamptz and (s->>'hi')::timestamptz)) then 'unverified_session'\n        when exists(select 1 from pairs p where (p.ad between lo and hi or p.bd between pl and ph)\n          and (p.aid is null or p.bid is null or not coalesce(p.av and p.bv and p.bc,false))) then 'missing_counterpart'\n        when exists(select 1 from pairs p where p.ad between lo and hi and p.atz is distinct from p.btz) then 'timezone_changed'\n        when exists(select 1 from pairs p where p.ad between lo and hi and (p.ahi-p.alo is distinct from p.bhi-p.blo)) then 'duration_mismatch'\n        else null end reason\n    from calendar_bounds\n  ), session_bins as (\n    select p.*,n::numeric*3600*v_step elapsed_lo,(n+1)::numeric*3600*v_step elapsed_hi\n      from pairs p cross join lateral generate_series(0,case when v_mode='session' then greatest(1,div(greatest(coalesce(extract(epoch from p.ahi-p.alo),0),coalesce(extract(epoch from p.bhi-p.blo),0))*1000000+3600000000::numeric*v_step-1,3600000000::numeric*v_step)::integer)-1 else -1 end) n\n      where v_mode='session'\n  ), session_bounds as (\n    select *,aid is not null and elapsed_lo<extract(epoch from ahi-alo) ca,\n      bid is not null and elapsed_lo<extract(epoch from bhi-blo) pa,\n      alo+elapsed_lo*interval '1 second' clo,least(ahi,alo+elapsed_hi*interval '1 second') chi,\n      blo+elapsed_lo*interval '1 second' plo,least(bhi,blo+elapsed_hi*interval '1 second') phi\n    from session_bins\n  ), session_plan as (\n    select 'session:'||coalesce(ad,bd-v_shift)::text||':'||ordinal::text||':'||elapsed_lo::text descriptor,'session_elapsed'::text basis,\n      jsonb_build_object('kind','session_elapsed','ordinal',ordinal,'startSeconds',elapsed_lo::text,'endSeconds',elapsed_hi::text) mapping,\n      ad cdlo,ad cdhi,bd pdlo,bd pdhi,aid csid,bid psid,clo,chi,plo,phi,chi=ahi ci,phi=bhi pi,ca,pa,\n      case when not v_compare then 'root_comparison_unavailable' when not ca or not pa then 'missing_counterpart'\n        when atz is distinct from btz then 'timezone_changed' when chi-clo<>phi-plo or (chi=ahi) is distinct from (phi=bhi) then 'duration_mismatch' else null end reason\n    from session_bounds\n  ), outside_bins as (\n    select 'current' side,t lo,least(t+interval '1 hour',v_chi) hi,v_chi terminal from generate_series(v_clo,v_chi-interval '1 microsecond',interval '1 hour') t where v_mode='outside'\n    union all\n    select 'previous',t,least(t+interval '1 hour',v_phi),v_phi from generate_series(v_plo,v_phi-interval '1 microsecond',interval '1 hour') t where v_mode='outside' and v_compare\n  ), outside_keys as (\n    select *,to_char(lo at time zone v_tz,'HH24:MI:SS.US')||'/'||to_char(hi at time zone v_tz,'HH24:MI:SS.US') wall_key,\n      private.statistics_local_cutoff((lo at time zone v_tz)::date,(lo at time zone v_tz)::time,v_tz)=lo\n        and private.statistics_local_cutoff((hi at time zone v_tz)::date,(hi at time zone v_tz)::time,v_tz)=hi unique_wall\n    from outside_bins\n  ), outside_pairs as (\n    select a.lo clo,a.hi chi,b.lo plo,b.hi phi,a.terminal ct,b.terminal pt,\n      a.unique_wall au,b.unique_wall bu,coalesce(a.wall_key,b.wall_key) wall_key\n      from (select * from outside_keys where side='current') a full join (select * from outside_keys where side='previous') b\n        on a.wall_key=b.wall_key and a.unique_wall and b.unique_wall\n  ), outside_plan as (\n    select 'outside:'||wall_key||':'||to_char(coalesce(clo,plo) at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US') descriptor,'outside_session_wall'::text basis,\n      jsonb_build_object('kind','wall_clock','wallStart',to_char(coalesce(clo,plo) at time zone v_tz,'HH24:MI:SS.US'),\n        'wallEnd',to_char(coalesce(chi,phi) at time zone v_tz,'HH24:MI:SS.US'),'timezone',v_tz) mapping,\n      v_start cdlo,v_start cdhi,v_ps pdlo,v_ps pdhi,null::uuid csid,null::uuid psid,clo,chi,plo,phi,\n      chi=ct and ct=v_now ci,phi=pt and v_partial pi,clo is not null ca,plo is not null pa,\n      case when not v_compare then 'root_comparison_unavailable' when (clo is not null and not coalesce(au,false)) or (plo is not null and not coalesce(bu,false)) then 'ambiguous_wall_time'\n        when clo is null or plo is null then 'missing_counterpart' when chi-clo<>phi-plo or (chi=ct and ct=v_now) is distinct from (phi=pt and v_partial) then 'duration_mismatch' else null end reason\n    from outside_pairs\n  ), plan as materialized(\n    select * from calendar_plan union all select * from session_plan union all select * from outside_plan\n  ), membership as materialized (\n    select p.descriptor,f.* from plan p join facts f on\n      case when f.side='current' then p.ca and (\n        case when p.basis='commercial_date' then f.date between p.cdlo and p.cdhi\n          else f.date=p.cdlo and (case when p.basis='session_elapsed' then f.session=p.csid and f.kind='verified_session' else f.kind='outside_session' end)\n            and f.at>=p.clo and (f.at<p.chi or (p.ci and f.at=p.chi)) end)\n        else p.pa and (case when p.basis='commercial_date' then f.date between p.pdlo and p.pdhi\n          else f.date=p.pdlo and (case when p.basis='session_elapsed' then f.session=p.psid and f.kind='verified_session' else f.kind='outside_session' end)\n            and f.at>=p.plo and (f.at<p.phi or (p.pi and f.at=p.phi)) end) end\n  ), groups as materialized (\n    select descriptor,side,jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons) order by date,at,id) rows\n      from membership group by descriptor,side\n  ), point_metrics as (\n    select p.*,case when ca then private.statistics_metrics(coalesce(c.rows,'[]'::jsonb),v_historical) end cm,\n      case when pa then private.statistics_metrics(coalesce(b.rows,'[]'::jsonb),0) end pm\n    from plan p left join groups c on c.descriptor=p.descriptor and c.side='current'\n      left join groups b on b.descriptor=p.descriptor and b.side='previous'\n  ), intervals as (\n    select m.*,case when ca then\n      case when basis='commercial_date' then\n        coalesce((select jsonb_agg(slice order by slice->>'start',slice->>'sessionId',slice->>'timezone',slice->>'commercialDate') from (\n          select jsonb_build_object('sessionId',s.id,'timezone',s.tz,'commercialDate',s.d,'start',private.statistics_v1_series_instant(s.lo),'end',private.statistics_v1_series_instant(s.hi),'endInclusive',true) slice\n            from jsonb_to_recordset(v_sessions) s(id uuid,d date,lo timestamptz,hi timestamptz,tz text,valid boolean)\n            where s.d between cdlo and cdhi and s.valid and s.hi>=s.lo\n          union all select jsonb_build_object('sessionId',null,'timezone',z.tz,'commercialDate',cdlo,'endCommercialDate',cdhi,'start',private.statistics_v1_series_instant(z.lo),'end',private.statistics_v1_series_instant(z.hi),'endInclusive',z.hi=v_now) from (\n            select tz,private.statistics_local_cutoff(cdlo,'00:00:00',tz) lo,least(v_now,private.statistics_local_cutoff(cdhi+1,'00:00:00',tz)) hi\n              from (select distinct timezone tz from facts where side='current' and kind='outside_session' and date between cdlo and cdhi\n                union all select v_tz where not exists(select 1 from facts where side='current' and kind='outside_session' and date between cdlo and cdhi)) zones\n          ) z where private.statistics_v1_series_instant(z.lo) is not null and private.statistics_v1_series_instant(z.hi) is not null and z.hi>=z.lo\n        ) z),'[]'::jsonb)\n        else jsonb_build_array(jsonb_build_object('sessionId',csid,'timezone',coalesce((select s->>'tz' from jsonb_array_elements(v_sessions) s where s->>'id'=csid::text),v_tz),'commercialDate',cdlo,'start',private.statistics_v1_series_instant(clo),'end',private.statistics_v1_series_instant(chi),'endInclusive',ci)) end end cslices,\n      case when pa then case when basis='commercial_date' then\n        coalesce((select jsonb_agg(slice order by slice->>'start',slice->>'sessionId',slice->>'timezone',slice->>'commercialDate') from (\n          select jsonb_build_object('sessionId',p.bid,'timezone',p.btz,'commercialDate',p.bd,'start',private.statistics_v1_series_instant(p.blo),'end',private.statistics_v1_series_instant(p.bhi),'endInclusive',true) slice from pairs p\n            where p.bd between pdlo and pdhi and p.bv and p.bhi>=p.blo\n          union all select jsonb_build_object('sessionId',null,'timezone',z.tz,'commercialDate',pdlo,'endCommercialDate',pdhi,'start',private.statistics_v1_series_instant(z.lo),'end',private.statistics_v1_series_instant(z.hi),'endInclusive',pi and z.hi=v_previous_cut) from (\n            select tz,private.statistics_local_cutoff(pdlo,'00:00:00',tz) lo,\n              case when v_partial and pdhi=v_pe then least(v_previous_cut,private.statistics_local_cutoff(pdhi+1,'00:00:00',tz)) else private.statistics_local_cutoff(pdhi+1,'00:00:00',tz) end hi\n              from (select distinct timezone tz from facts where side='previous' and kind='outside_session' and date between pdlo and pdhi\n                union all select v_tz where not exists(select 1 from facts where side='previous' and kind='outside_session' and date between pdlo and pdhi)) zones\n          ) z where private.statistics_v1_series_instant(z.lo) is not null and private.statistics_v1_series_instant(z.hi) is not null and z.hi>=z.lo\n        ) z),'[]'::jsonb)\n        else jsonb_build_array(jsonb_build_object('sessionId',psid,'timezone',coalesce((select s->>'tz' from jsonb_array_elements(v_sessions) s where s->>'id'=psid::text),v_tz),'commercialDate',pdlo,'start',private.statistics_v1_series_instant(plo),'end',private.statistics_v1_series_instant(phi),'endInclusive',pi)) end end pslices\n    from point_metrics m\n  ), points as (\n    select descriptor,jsonb_build_object(\n      'key',md5(jsonb_build_array('statistics.series.v1',v_business,v_start,v_end,basis,descriptor,mapping,cslices->0->>'timezone',pslices->0->>'timezone')::text),\n      'label',coalesce(cdlo,pdlo-v_shift)::text||case when basis='commercial_date' and cdhi<>cdlo then ' / '||cdhi::text else '' end,\n      'basis',basis,'mapping',mapping,\n      'current',case when ca then jsonb_build_object('interval',jsonb_build_object('key',md5(jsonb_build_array('current',v_business,descriptor,cdlo,cdhi,csid,to_char(clo at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'),to_char(chi at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'))::text),\n        'startDate',cdlo,'endDate',cdhi,'slices',cslices,'observation',case when (basis='commercial_date' and v_partial and cdhi=v_end) or (basis<>'commercial_date' and chi=v_now and (csid is null or not coalesce((select (s->>'closed')::boolean from jsonb_array_elements(v_sessions) s where s->>'id'=csid::text),true))) then 'partial' else 'closed' end),'metrics',cm) end,\n      'previous',case when pa then jsonb_build_object('interval',jsonb_build_object('key',md5(jsonb_build_array('previous',v_business,descriptor,pdlo,pdhi,psid,to_char(plo at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'),to_char(phi at time zone 'UTC','YYYY-MM-DD HH24:MI:SS.US'))::text),\n        'startDate',pdlo,'endDate',pdhi,'slices',pslices,'observation',case when (basis='commercial_date' and v_partial and pdhi=v_pe) or (basis<>'commercial_date' and pi and v_partial and (case when psid is not null then phi<(select (s->>'hi')::timestamptz from jsonb_array_elements(v_sessions) s where s->>'id'=psid::text) else phi<private.statistics_local_cutoff(pdhi+1,'00:00:00',v_tz) end)) then 'partial' else 'closed' end),'metrics',pm) end,\n      'alignment',jsonb_build_object('available',reason is null,'reason',reason),\n      'comparisons',(select jsonb_object_agg(k,private.statistics_v1_series_delta(cm->k,pm->k,reason is null,reason)) from unnest(array['sales','completedOrders','averageTicket','mainUnits']) k)\n    ) point,reason,coalesce(cdlo,pdlo-v_shift) sort_date,coalesce(clo,plo) sort_time\n    from intervals\n  ) select coalesce(jsonb_agg(point order by sort_date,sort_time nulls first,descriptor),'[]'::jsonb),\n      coalesce(bool_and(reason is null),false) and v_compare,\n      (array_agg(reason order by sort_date,sort_time nulls first,descriptor) filter(where reason is not null))[1],\n      (select count(*) from membership where side='current'),(select count(*) from membership where side='previous'),\n      private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons)) from facts where side='current'),'[]'::jsonb),v_historical),\n      case when v_compare then private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',sales,'mainUnits',\"mainUnits\",'reasons',reasons)) from facts where side='previous'),'[]'::jsonb),0) end,\n    (select count(*) from facts f left join (select side,id,count(*) n from membership group by side,id) m using(side,id) where m.n is distinct from 1::bigint)\n                                                                                                    from points",
+        "totalCost": 9211.83,
+        "jit": null,
+        "sharedHits": 0,
+        "sharedReads": 0,
+        "tempRead": 0,
+        "tempWritten": 0,
+        "nodes": [
+          {
+            "node": "CTE Scan",
+            "relation": "outside_keys",
+            "estimatedRows": 10,
+            "actualRows": 13,
+            "loops": 1,
+            "filter": "(side = 'current'::text)",
+            "rowsRemoved": 13
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "outside_keys",
+            "estimatedRows": 10,
+            "actualRows": 13,
+            "loops": 1,
+            "filter": "(side = 'previous'::text)",
+            "rowsRemoved": 13
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "plan",
+            "estimatedRows": 10,
+            "actualRows": 13,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 100,
+            "actualRows": 200,
+            "loops": 13
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "membership",
+            "estimatedRows": 500,
+            "actualRows": 200,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "membership",
+            "estimatedRows": 2,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "(side = 'current'::text)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "membership",
+            "estimatedRows": 2,
+            "actualRows": 0,
+            "loops": 1,
+            "filter": "(side = 'previous'::text)",
+            "rowsRemoved": 200
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 1,
+            "actualRows": 200,
+            "loops": 1,
+            "filter": "(side = 'current'::text)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1,
+            "filter": "(side = 'previous'::text)",
+            "rowsRemoved": 200
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "membership",
+            "estimatedRows": 500,
+            "actualRows": 200,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 100,
+            "actualRows": 200,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "plan",
+            "estimatedRows": 10,
+            "actualRows": 13,
+            "loops": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "groups",
+            "estimatedRows": 1,
+            "actualRows": 1,
+            "loops": 1,
+            "filter": "(side = 'current'::text)",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "groups",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 1,
+            "filter": "(side = 'previous'::text)",
+            "rowsRemoved": 1
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((date >= p.cdlo) AND (date <= p.cdhi) AND (side = 'current'::text) AND (kind = 'outside_session'::text) AND (statistics_v1_series_instant(statistics_local_cutoff(p.cdlo, '00:00:00'::time without time zone, timezone)) IS NOT NULL) AND (statistics_v1_series_instant(LEAST('2026-10-13 15:13:30.320809+00'::timestamp with time zone, statistics_local_cutoff((p.cdhi + 1), '00:00:00'::time without time zone, timezone))) IS NOT NULL) AND (LEAST('2026-10-13 15:13:30.320809+00'::timestamp with time zone, statistics_local_cutoff((p.cdhi + 1), '00:00:00'::time without time zone, timezone)) >= statistics_local_cutoff(p.cdlo, '00:00:00'::time without time zone, timezone)))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((date >= p.cdlo) AND (date <= p.cdhi) AND (side = 'current'::text) AND (kind = 'outside_session'::text))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "pairs",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(bv AND (bd >= p.pdlo) AND (bd <= p.pdhi) AND (bhi >= blo))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((date >= p.pdlo) AND (date <= p.pdhi) AND (side = 'previous'::text) AND (kind = 'outside_session'::text) AND (statistics_v1_series_instant(statistics_local_cutoff(p.pdlo, '00:00:00'::time without time zone, timezone)) IS NOT NULL) AND (statistics_v1_series_instant(CASE WHEN (p.pdhi = '2026-10-12'::date) THEN LEAST('2026-10-12 15:13:30.320809+00'::timestamp with time zone, statistics_local_cutoff((p.pdhi + 1), '00:00:00'::time without time zone, timezone)) ELSE statistics_local_cutoff((p.pdhi + 1), '00:00:00'::time without time zone, timezone) END) IS NOT NULL) AND (CASE WHEN (p.pdhi = '2026-10-12'::date) THEN LEAST('2026-10-12 15:13:30.320809+00'::timestamp with time zone, statistics_local_cutoff((p.pdhi + 1), '00:00:00'::time without time zone, timezone)) ELSE statistics_local_cutoff((p.pdhi + 1), '00:00:00'::time without time zone, timezone) END >= statistics_local_cutoff(p.pdlo, '00:00:00'::time without time zone, timezone)))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((date >= p.pdlo) AND (date <= p.pdhi) AND (side = 'previous'::text) AND (kind = 'outside_session'::text))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((date >= p.cdlo) AND (date <= p.cdhi) AND (side = 'current'::text) AND (kind = 'outside_session'::text) AND (statistics_v1_series_instant(statistics_local_cutoff(p.cdlo, '00:00:00'::time without time zone, timezone)) IS NOT NULL) AND (statistics_v1_series_instant(LEAST('2026-10-13 15:13:30.320809+00'::timestamp with time zone, statistics_local_cutoff((p.cdhi + 1), '00:00:00'::time without time zone, timezone))) IS NOT NULL) AND (LEAST('2026-10-13 15:13:30.320809+00'::timestamp with time zone, statistics_local_cutoff((p.cdhi + 1), '00:00:00'::time without time zone, timezone)) >= statistics_local_cutoff(p.cdlo, '00:00:00'::time without time zone, timezone)))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((date >= p.cdlo) AND (date <= p.cdhi) AND (side = 'current'::text) AND (kind = 'outside_session'::text))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "pairs",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "(bv AND (bd >= p.pdlo) AND (bd <= p.pdhi) AND (bhi >= blo))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((date >= p.pdlo) AND (date <= p.pdhi) AND (side = 'previous'::text) AND (kind = 'outside_session'::text) AND (statistics_v1_series_instant(statistics_local_cutoff(p.pdlo, '00:00:00'::time without time zone, timezone)) IS NOT NULL) AND (statistics_v1_series_instant(CASE WHEN (p.pdhi = '2026-10-12'::date) THEN LEAST('2026-10-12 15:13:30.320809+00'::timestamp with time zone, statistics_local_cutoff((p.pdhi + 1), '00:00:00'::time without time zone, timezone)) ELSE statistics_local_cutoff((p.pdhi + 1), '00:00:00'::time without time zone, timezone) END) IS NOT NULL) AND (CASE WHEN (p.pdhi = '2026-10-12'::date) THEN LEAST('2026-10-12 15:13:30.320809+00'::timestamp with time zone, statistics_local_cutoff((p.pdhi + 1), '00:00:00'::time without time zone, timezone)) ELSE statistics_local_cutoff((p.pdhi + 1), '00:00:00'::time without time zone, timezone) END >= statistics_local_cutoff(p.pdlo, '00:00:00'::time without time zone, timezone)))",
+            "rowsRemoved": 0
+          },
+          {
+            "node": "CTE Scan",
+            "relation": "facts",
+            "estimatedRows": 1,
+            "actualRows": 0,
+            "loops": 0,
+            "filter": "((date >= p.pdlo) AND (date <= p.pdhi) AND (side = 'previous'::text) AND (kind = 'outside_session'::text))",
+            "rowsRemoved": 0
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "durationMs": 2320.47,
+        "query": "\n  select private.statistics_v1_series_response(p_period,p_start_date,p_end_date,p_product_sort,p_limit,p_cursor);\n",
+        "totalCost": 0.26,
+        "jit": null,
+        "sharedHits": 65060,
+        "sharedReads": 0,
+        "tempRead": 0,
+        "tempWritten": 0,
+        "nodes": []
+      },
+      {
+        "id": 9,
+        "durationMs": 2320.628,
+        "query": "EXPLAIN (ANALYZE,BUFFERS,FORMAT JSON) SELECT public.statistics_v1_summary('today');",
+        "totalCost": 0.26,
+        "jit": null,
+        "sharedHits": 65060,
+        "sharedReads": 0,
+        "tempRead": 0,
+        "tempWritten": 0,
+        "nodes": []
+      }
+    ]
+  },
+  "noPersistentOptimizationApplied": true
+}

@@ -1,0 +1,85 @@
+{
+  "at": "2026-10-14T11:35:19.284Z",
+  "verdict": "BLOCKED",
+  "branch": "codex/estadisticas-v1",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "preservation": {
+    "preexistingFileCount": 2705,
+    "hashesUnchanged": true,
+    "memoryHistoricalBytesPreserved": true,
+    "memoryChange": "Append-only authorized decision note"
+  },
+  "appEvidenceMatch": [
+    {
+      "path": "lib/statistics/summary-route-server.ts",
+      "currentMatchesRecorded": true
+    },
+    {
+      "path": "lib/statistics/summary-transport.ts",
+      "currentMatchesRecorded": true
+    },
+    {
+      "path": "lib/statistics/p03-e1.verify.ts",
+      "currentMatchesRecorded": true
+    },
+    {
+      "path": "lib/statistics/summary-principal.ts",
+      "currentMatchesRecorded": true
+    }
+  ],
+  "currentVerification": {
+    "typecheck": "PASS: node node_modules/typescript/bin/tsc --noEmit --incremental false",
+    "lint": "PASS: P03-E1 ESLint config and seven security/nav files; no fix",
+    "newE2E": "NOT_EXECUTED",
+    "productionBuild": "NOT_EXECUTED",
+    "databaseConnections": 0
+  },
+  "noImplementation": true,
+  "noSQL": true,
+  "noCommits": true,
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/PERFORMANCE_DEBT.md",
+      "sha256": "a9bc2156c8f014dc695a31ecb283903b7b240175f88ce213a6e1cb1cba5a3465",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/FUNCTIONAL_READINESS.md",
+      "sha256": "b10c410df0b9d4930a4a3f518cca8dbda3fd8632bf475e1363c65aa8456fc070",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/PHASE04_IMPLEMENTATION_PLAN.md",
+      "sha256": "91dc70f36426565304b6825ebe4331210e013c22a786c6c769ff495179a2ff5e",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/PHASE04_DATA_CONTRACT_AUDIT.md",
+      "sha256": "aabaf5724c4032595bbc105f7135afc1494b59a3d01893ee8865792e0f61e280",
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/PROGRESS.md",
+      "sha256": "ac8bedb2d0386088444d1e40f501325b2f13a408b3621f1edb85b3d5dab959f3",
+      "kind": "created"
+    },
+    {
+      "path": "ORDEROPS_LIVING_MEMORY.md",
+      "sha256": "a606f15510d7b36783e60e931b3eb2ac96c8ac8a079a09ce63066836aad04074",
+      "kind": "modified-append-only"
+    },
+    {
+      "path": "docs/estadisticas-v1/phase04-discovery/audit.mjs",
+      "sha256": "d4a67ee19875ff9037d66e3245fdea192047bd8d76a4a52c674011d672e01b83"
+    },
+    {
+      "path": "docs/estadisticas-v1/phase04-discovery/baseline.json",
+      "sha256": "bc2aaae48728a7ed5371a247d868471c57ab2be46ceb9318bafd4f71204b9c69"
+    },
+    {
+      "path": "docs/estadisticas-v1/phase04-discovery/memory-before.bin",
+      "sha256": "3fc6d724caa5f85133c30a4a9c7b570d165120c8f19ee611a0d736b190d3e679"
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-16T16:42:23.787Z",
+  "syntax": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/analyze-capture.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/finalize-evidence.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/run-once-envelope.mjs",
+      "result": "PASS_NODE_SYNTAX"
+    }
+  ],
+  "verdict": "PASS_FOCALIZADO",
+  "phaseP04T01C": "BLOCKED",
+  "singleInvocation": true,
+  "identityMarker": true,
+  "ledger": 124,
+  "rowsPerFrame": 13,
+  "frames": 3,
+  "individualPass": 13,
+  "stableFieldsPerTrigger": 54,
+  "stableOidsAndProperties": true,
+  "exactTextReproduced": true,
+  "A2EqualsA": true,
+  "systemIdentifier": "7695864922466676780",
+  "systemIdentifierType": "string",
+  "rollbackObserved": true,
+  "sqlErrors": "None accepted; runner requires exit0 and empty stderr",
+  "historicalOidContinuityProven": false,
+  "queriesAfterRunner": 0
+}

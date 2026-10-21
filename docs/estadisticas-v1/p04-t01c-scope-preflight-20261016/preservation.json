@@ -1,0 +1,77 @@
+{
+  "at": "2026-10-16T15:25:01.431Z",
+  "result": "PASS",
+  "baselineFiles": 3051,
+  "allBaselineHashesUnchanged": true,
+  "oldEvidenceInventoryUnchanged": true,
+  "ignoredRecordedArtifactsUnchanged": 10,
+  "privateReferencesUnchanged": [
+    {
+      "path": "supabase/statistics-v1-test/.runtime/manifest.json",
+      "sha256": "4b426930d04911dbafc543470fa1b73f566e211a84ad32712d233ddb9b801266"
+    },
+    {
+      "path": "supabase/statistics-v1-test/.runtime/supabase/config.toml",
+      "sha256": "1db8435f3bf6c7d792ee769ad580f5a1039180d397de60d068e3a0a06e37d254"
+    },
+    {
+      "path": "supabase/statistics-v1-test/.runtime/supabase/signing_keys.json",
+      "sha256": "a1d8df391e9fa84689cbc6e6ab6308c4faeb567b013a47998b1cdbb239eaba5a"
+    },
+    {
+      "path": "supabase/statistics-v1-test/.runtime/loopback-bundles/2026-10-16T13-30-25-733Z-ae781e38/sealed.json",
+      "sha256": "f988c43bbc968bc95c0194b511afef28efe0154611ec827a9b93072bd1539508",
+      "format": "AES-256-GCM+DPAPI-CurrentUser.v1",
+      "plaintextWritten": false,
+      "dpapiRoundtrip": true,
+      "archiveBytes": 1556480
+    },
+    {
+      "path": "supabase/statistics-v1-test/.runtime/loopback-bundles/2026-10-16T13-25-58-910Z-40249ac9/sealed.json",
+      "sha256": "0a88c88e5f2270db11d6a2263c5e84b2b1adb376231d30c7e60066c58ebd1412"
+    }
+  ],
+  "sqlFilesUnchanged": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-install.proposed.sql",
+      "sha256": "f7940a54a58b93b04d56b10eb1f65bf425299436a2e25a1d3ae79feec919272f"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01b-fix/candidate-products-fixed.sql",
+      "sha256": "57395a7920d95cf63c1b67fb8191e40272a26aeb445a4abe7bec4d822b99c2c1"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f5a/candidate-c.sql",
+      "sha256": "7d05e3987695f8bfc0e2477d74a38566269c7b6992682e58dbc4c34032f49bb6"
+    }
+  ],
+  "gitStatus": [
+    "M ORDEROPS_LIVING_MEMORY.md",
+    " M components/admin/admin-nav-config.ts",
+    " M components/admin/layout/admin-nav-list.tsx",
+    " M docs/estadisticas-v1/fase-01-evidencia.json",
+    " M lib/admin/permissions.ts",
+    " M next-env.d.ts"
+  ],
+  "onlyNewOwnedFiles": true,
+  "headUnchanged": true,
+  "applicationEdits": 0,
+  "commits": 0,
+  "sqlConnections": 0,
+  "containerMutations": 0,
+  "catalogAndData": "NOT_QUERIED; cannot claim fresh equality",
+  "layerComparison": [
+    {
+      "kind": "db",
+      "entries": 16,
+      "samePathAndChangeSet": true,
+      "contentEqualityNotImplied": true
+    },
+    {
+      "kind": "kong",
+      "entries": 31,
+      "samePathAndChangeSet": true,
+      "contentEqualityNotImplied": true
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "startedUtc": "2026-10-16T16:40:06.082Z",
+  "invocations": 1,
+  "approved": {
+    "runner.proposed.mjs": "aebf2d902ac2abf4a841d4d472cafa2f4a6ad6e2e998019c1851ee31d6b25674",
+    "verification.proposed.psql": "61f076a61c4d4d8316afdcdabbca633b24b6bc353db040c2b1d9a6b93412720d",
+    "artifact-pins.json": "db9310b204b3dbe41284c778abe66d01685982d20c5246ff7035c392fd6b36fa"
+  },
+  "runner": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/runner.proposed.mjs",
+  "mode": "--execute-readonly",
+  "state": "COMPLETED_SINGLE_APPROVED_RUN",
+  "endedUtc": "2026-10-16T16:40:07.749Z",
+  "exitCode": 0,
+  "signal": null,
+  "clientErrorCode": null,
+  "summary": {
+    "status": "CURRENT_REPRESENTATION_CONFIRMED_WITH_HISTORICAL_LIMITATIONS",
+    "rollbackObserved": true,
+    "phaseP04T01C": "BLOCKED",
+    "invocations": 1
+  },
+  "rawOutputPersisted": false,
+  "execution-intent.json": {
+    "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/execution-intent.json",
+    "sha256": "b77b080bbf959861011425ab11209f10dc20e854f6757479f1aae0795485ba34"
+  },
+  "execution-observed.json": {
+    "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/execution-observed.json",
+    "sha256": "a8d7f8ee663b1224eb7dabe807b9afaa27a3c71d39e8801555f96ce77f7811be"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "result": "NOT_EXECUTED",
+  "cohorts": [],
+  "halt": "original_QUERY_AT_LEAST_5000MS",
+  "omitted": [
+    200,
+    500,
+    1000,
+    5000
+  ],
+  "originalControl": "Full JSON original/AB/D1 with pinned cursor before each cohort; if original control times out, stop, not certified. Higher-cohort normal samples AB/D1 only.",
+  "targetsMs": {
+    "100": 500,
+    "500": 1000,
+    "1000": 1500,
+    "5000": 3000
+  }
+}

@@ -1,0 +1,65 @@
+import { addDays, dayDistance, localInstant, parseDate } from './periods';
+import { delta } from './comparisons';
+import { trustworthy } from './quality';
+import type { Metric } from './contracts';
+import type { AlignmentReason, PointComparison } from './series-contracts';
+
+/** UTC microseconds. JS milliseconds never decide SQL interval membership. */
+export function instantMicros(value: string): bigint {
+  const m = /^(\d{4}-\d{2}-\d{2})T([01]\d|2[0-3]):([0-5]\d):([0-5]\d)(?:\.(\d{1,6}))?(Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)$/.exec(value);
+  if (!m) throw new Error('Invalid timestamp');
+  parseDate(m[1]);
+  const base = Date.parse(`${m[1]}T${m[2]}:${m[3]}:${m[4]}${m[6]}`);
+  if (!Number.isSafeInteger(base)) throw new Error('Invalid timestamp');
+  return BigInt(base) * BigInt(1000) + BigInt((m[5] ?? '').padEnd(6, '0'));
+}
+export function inObservation(at: string, start: string, end: string, endInclusive: boolean): boolean {
+  const instant = instantMicros(at), lo = instantMicros(start), hi = instantMicros(end);
+  return instant >= lo && (instant < hi || (endInclusive && instant === hi));
+}
+export function dateOffset(currentStart: string, currentEnd: string, previousStart: string, previousEnd: string, days: number): boolean {
+  return Number.isSafeInteger(days) && dayDistance(currentStart, previousStart) === days
+    && addDays(currentEnd, days) === previousEnd;
+}
+export function seriesDelta(current: Metric | null, previous: Metric | null, aligned: boolean, reason: AlignmentReason | null): PointComparison {
+  const unavailable = (why: AlignmentReason): PointComparison => ({ available: false, reason: why, absolute: null, percentage: null, percentageReason: null });
+  if (!aligned || !current || !previous) return unavailable(reason ?? 'missing_counterpart');
+  if (!['exact','empty'].includes(current.quality) || !['exact','empty'].includes(previous.quality)) return unavailable('metric_quality');
+  if (!trustworthy(current) || !trustworthy(previous)) return unavailable('empty_average');
+  const result = delta(current, previous);
+  return { available: true, reason: null, absolute: result.absolute, percentage: result.percentage, percentageReason: result.reason === 'no_base' ? 'no_base' : null };
+}
+export function equalExposure(currentStart: string, currentEnd: string, previousStart: string, previousEnd: string): boolean {
+  return instantMicros(currentEnd) - instantMicros(currentStart) === instantMicros(previousEnd) - instantMicros(previousStart);
+}
+export function secondsMicros(value: string): bigint {
+  if (!/^(0|[1-9]\d*)(\.\d{1,6})?$/.test(value)) throw new Error('Invalid elapsed seconds');
+  const [whole,fraction=''] = value.split('.');
+  return BigInt(whole)*BigInt(1000000)+BigInt(fraction.padEnd(6,'0'));
+}
+/** Verifies civil inversion; gap/fold never chooses a PostgreSQL/JS default offset. */
+export function wallInstant(date: string, time: string, timezone: string): { instant: string | null; reason: AlignmentReason | null } {
+  try { return { instant: localInstant(date, time, timezone), reason: null }; }
+  catch (error) {
+    const message = error instanceof Error ? error.message : '';
+    if (message.startsWith('Ambiguous')) return { instant: null, reason: 'ambiguous_wall_time' };
+    if (message.startsWith('Nonexistent')) return { instant: null, reason: 'nonexistent_wall_time' };
+    throw error;
+  }
+}
+/** Physical microseconds; d[i] = max(current, previous) for an explicit session pair.
+ * L < 200. With S = ceil(sum(d)/((200-L)*hour)), sum(ceil(d/(S*hour))) < 200.
+ * Capping S at ceil(max(d)/hour) yields exactly L bins if that cap is smaller.
+ * Integer arithmetic must also be used by the SQL generator, not only sizing.
+ */
+export function elapsedStepHours(durations: bigint[]): number | null {
+  if (durations.length === 0 || durations.length >= 200 || durations.some(d => d <= BigInt(0))) return null;
+  const hour = BigInt(3600000000), budget = BigInt(200 - durations.length) * hour;
+  const total = durations.reduce((a,b) => a+b, BigInt(0));
+  const maximum = durations.reduce((a,b)=>a>b?a:b,BigInt(0));
+  const proposed = (total + budget - BigInt(1)) / budget;
+  const maximumHours = (maximum + hour - BigInt(1)) / hour;
+  const step = proposed < maximumHours ? proposed : maximumHours;
+  if (step > BigInt(Number.MAX_SAFE_INTEGER)) throw new Error('Window overflow');
+  return Math.max(1, Number(step));
+}

@@ -1,0 +1,164 @@
+{
+  "at": "2026-10-13T17:01:39.518Z",
+  "verdict": "PASS_WITH_LIMITATIONS",
+  "branch": "codex/estadisticas-v1",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "newCommits": 0,
+  "files": [
+    {
+      "file": "lib/statistics/summary-period.ts",
+      "sha256": "e247ea437076467077c526a3cdc7d5d5409cf30b36c105e297e45fd108d70d2e"
+    },
+    {
+      "file": "lib/statistics/summary-presenter.ts",
+      "sha256": "b081918def8812615d05a3b9b783aec40f1f01c29aa1eb33b18e947cefefed3c"
+    },
+    {
+      "file": "lib/statistics/summary-query.ts",
+      "sha256": "c3e1a084e3b89b3b75b2fec9cb7ebbb520f74de79bf5022934be09109a662638"
+    },
+    {
+      "file": "lib/statistics/summary-server.ts",
+      "sha256": "936262cc606dca722aa15ed645df0b943fd2e3d1f5fed24e16b077d4be6a9ec1"
+    },
+    {
+      "file": "lib/statistics/summary-transport.ts",
+      "sha256": "a0440265669407cc84ecaff1bd0aef1601a5b99163f2491d06f4d8fb5e7fa8e8"
+    },
+    {
+      "file": "lib/statistics/summary.verify.ts",
+      "sha256": "980ce9aeaeb257d8e87397f6a3ccb747440887a566dcfa673e7ed86b984ed42d"
+    },
+    {
+      "file": "lib/statistics/summary-isolated.verify.ts",
+      "sha256": "fce87ccf8adcb4d8f09c9438a6e61ec2dfb9995023d4ba525904cb6d5b4f3206"
+    },
+    {
+      "file": "scripts/statistics-v1/p03-c-eslint.config.mjs",
+      "sha256": "ffd53bcd8dced5de785e3d14000c18af97950870ae39e48c6040ae06c4baf761"
+    },
+    {
+      "file": "scripts/statistics-v1/p03-c-static.verify.mjs",
+      "sha256": "ac3c8512b4f68bb5c7e3e797a5439d94faf0e8fae20a161239526e13686997ff"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-c/informe.md",
+      "sha256": "6d61e79e5201e02c62d8934a6eb98ef40de6ed61b55d009a1c3248f29d1e0aa2"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-c/examples.json",
+      "sha256": "cf1991796b09ae7f6ee5e8d84bf0bc872973e2275930fc5eb5309d5dec58ff37"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-c/empty-example.json",
+      "sha256": "66edefa79f41fd4402fdc999084986ac82349bcf2e9964b72d5f2ece88de96e0"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-c/pure-evidence.json",
+      "sha256": "afc6d68ed4290bd6f5ed3921555282c938debee2427a3fa4e5ab367f0809e065"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-c/isolated-evidence.json",
+      "sha256": "b9c40fdac4517b39ebe67e3ff2112769198d9c45b49ead42a32cbbc6eebbb082"
+    }
+  ],
+  "preserved": [
+    {
+      "file": "scripts/statistics-v1/p03-b1-diagnose.mjs",
+      "sha256": "6a59c2bc38193c604f934db2090b232a29a94a830453efc6a809628753282173"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b1/after.json",
+      "sha256": "8339542133f43341e6154717649badb60989dd0d05a872ebe84c2819318bd5b3"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b1/analysis.json",
+      "sha256": "b1d4c8326b893bbc7d98466ea0aba442b2a434656b1bf8ff3d867e005911dd68"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b1/before.json",
+      "sha256": "7f405afb3f622551c17206ffa4d45cb3b9c2e6573d4f063707a218dbda89c14b"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b1/informe.md",
+      "sha256": "d0b85acc931ce90fffadc4c296b32a2735a9dd6f55cfd0bedd40df3bae22bc5d"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b1/results.json",
+      "sha256": "4c2bccb47a864f5673027242586b93b9c4bb0cd72db1fbd8cbb035207e2b21d2"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b1/volume-200.json",
+      "sha256": "caeb8fe5723803de2722ff6c317644312a53f65141841bc927754cd2adcdf1c9"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b1/volume-50.json",
+      "sha256": "d881fb10893cc47ddc7d77e7b3668e47eb998179a6fbd4e08b30012b17ac819f"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b1/volume-500.json",
+      "sha256": "5a1b150ca495b2c5a19d6f1a16c0f235a03fb57c1878f8a9eec88235cb9f1e92"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b1/profile/after.json",
+      "sha256": "cbe3f4aca82adc6113a1a0646868002d755239e94fca4c881e6f6bce834d6d37"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b1/profile/attempt-syntax-error.json",
+      "sha256": "9279e24ddd174c8e68e9108a375c9b079c025b913939bb0f207141e540897c4d"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b1/profile/before.json",
+      "sha256": "df0f426821ee7d7b6564c680334bb28b5c59209a9d7e256ff3079efc3f2ff22d"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b1/profile/results.json",
+      "sha256": "2afe52b61002c241dd2c61f555243e86464c1cba33af8dcee08513737a63acf6"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b1/profile/volume-200.json",
+      "sha256": "100d25c859d0dfe0fb4d6d57f51bd8ed17a4e12c1d8181a7a16a2e6eba553e50"
+    },
+    {
+      "file": "docs/estadisticas-v1/fase-01-evidencia.json",
+      "sha256": "6c5327ffdb7511b55b496a8e6afa33bbe795633fc29389279ec676c0588f62a7"
+    },
+    {
+      "file": "next-env.d.ts",
+      "sha256": "083e23c4c5e7761db151134ea1ef7896120c86c5888cdc8a861f534f7e86d6fd"
+    }
+  ],
+  "sharedUnchanged": [
+    {
+      "file": "components/admin/admin-nav-config.ts",
+      "sha256": "f6af7fe8733c5a56f9daa41136cd8c87ebafe5f200c9067a3037ebca56a2ec6c"
+    },
+    {
+      "file": "components/admin/layout/admin-nav-list.tsx",
+      "sha256": "1adf108c6c1dbc12b1f203928238b84b8db97e9078af2c77bbce5a4d5d952f41"
+    },
+    {
+      "file": "lib/admin/permissions.ts",
+      "sha256": "ccb7365f6ecf263dcac8e01ac4d6ac232e0d6cccd586025c2679acd0013f6e8e"
+    },
+    {
+      "file": "lib/commercial/auth/permissions.ts",
+      "sha256": "c5e7ac4c6c55068d026b8a3b772fdd9f658f54d426cbdcc7bf4c4c1da3b6c1fe"
+    }
+  ],
+  "migrationUnchanged": {
+    "file": "supabase/migrations/20261013004000_statistics_v1_comparative_series.sql",
+    "sha256": "b10c330adff70b803d9d25165f07830e90d4cd092aa4ba2cf3d0120a43f95219"
+  },
+  "tests": {
+    "pure": {
+      "result": "PASS",
+      "assertions": 142,
+      "transport": "mock authenticated adapter; one RPC",
+      "databaseConnections": 0,
+      "scope": "URL, exact presenter, deterministic reading, authorization, decoding, races, dedupe, scope invalidation, error states"
+    },
+    "isolated": 81
+  },
+  "stop": "P03-C only; await express P03-D/E authorization"
+}

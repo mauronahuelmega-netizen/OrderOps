@@ -1,0 +1,147 @@
+{
+  "orders": 500,
+  "status": "FAILED_TIMEOUT_OR_SQL",
+  "elapsedMs": 21702,
+  "isolation": {
+    "at": "2026-10-13T15:07:19.045Z",
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "resources": {
+      "containerIds": [
+        "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+      ],
+      "volumeNames": [
+        "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "networkId": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af"
+    },
+    "containers": [
+      {
+        "name": "/supabase_storage_orderops-statistics-v1-test-74718de66a41",
+        "id": "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_rest_orderops-statistics-v1-test-74718de66a41",
+        "id": "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "health": "no-healthcheck",
+        "running": true
+      },
+      {
+        "name": "/supabase_auth_orderops-statistics-v1-test-74718de66a41",
+        "id": "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_kong_orderops-statistics-v1-test-74718de66a41",
+        "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "health": "healthy",
+        "running": true
+      }
+    ],
+    "api": "127.0.0.1:56321",
+    "db": "127.0.0.1:56322"
+  },
+  "resourceBefore": {
+    "at": "2026-10-13T15:07:19.045Z",
+    "dbStats": {
+      "BlockIO": "110MB / 13.9MB",
+      "CPUPerc": "0.00%",
+      "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "ID": "592f44984962",
+      "MemPerc": "1.51%",
+      "MemUsage": "119.1MiB / 7.702GiB",
+      "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "NetIO": "220kB / 1MB",
+      "PIDs": "12"
+    },
+    "dockerCapacity": {
+      "cpus": 4,
+      "memoryBytes": 8269664256
+    }
+  },
+  "resourceAfter": {
+    "at": "2026-10-13T15:07:43.320Z",
+    "dbStats": {
+      "BlockIO": "110MB / 18.1MB",
+      "CPUPerc": "0.02%",
+      "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "ID": "592f44984962",
+      "MemPerc": "1.53%",
+      "MemUsage": "120.6MiB / 7.702GiB",
+      "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "NetIO": "221kB / 1MB",
+      "PIDs": "12"
+    },
+    "dockerCapacity": {
+      "cpus": 4,
+      "memoryBytes": 8269664256
+    }
+  },
+  "measurements": [
+    {
+      "label": "legacy:warmup",
+      "executionMs": 4440.928,
+      "planningMs": 0.019,
+      "plan": {
+        "Plan": {
+          "Node Type": "Result",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Startup Cost": 0,
+          "Total Cost": 0.26,
+          "Plan Rows": 1,
+          "Plan Width": 32,
+          "Actual Startup Time": 4440.913,
+          "Actual Total Time": 4440.914,
+          "Actual Rows": 1,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 172007,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        },
+        "Settings": {
+          "effective_cache_size": "128MB",
+          "search_path": "\"\\$user\", public, extensions"
+        },
+        "Planning": {
+          "Shared Hit Blocks": 0,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        },
+        "Planning Time": 0.019,
+        "Triggers": [],
+        "Execution Time": 4440.928
+      }
+    }
+  ],
+  "nestedPlans": [],
+  "rollback": false,
+  "error": "ERROR:  canceling statement due to statement timeout\nCONTEXT:  SQL function \"statistics_can_read\" statement 1\nSQL function \"statistics_source_items\" statement 1\nSQL statement \"with current_facts as materialized (\n    select * from public.statistics_v1_effective_facts where business_id=v_business and commercial_date between v_start and v_end and date_reliable and completed_at<=v_now),\n  previous_facts as materialized (\n    select f.* from public.statistics_v1_effective_facts f where v_compare and f.business_id=v_business and f.commercial_date between v_ps and v_pe and f.date_reliable and f.completed_at<=v_now\n      and (not v_partial or case when f.date_kind='outside_session' then f.commercial_date<v_pe or f.completed_at<=v_previous_cutoff\n        else exists(select 1 from jsonb_array_elements(v_segments) seg where (seg->>'previousSessionId')::uuid=f.session_key and f.completed_at<=(seg->>'previousUntil')::timestamptz) end)),\n  product_lines as (select i.*,f.effective_sales,f.effective_units,f.completed_at from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id),\n  products as (\n    select coalesce(product_identity::text,'line:'||line_key::text) group_key,product_identity,\n      (array_agg(product_name order by completed_at desc,completion_id,line_key))[1] label,\n      case when bool_or(item_kind='product' and effective_units is null) or v_historical>0 then null else sum(case when item_kind='product' and effective_units is not null then quantity else 0 end)::bigint end main_units,\n      bool_or(item_kind='product' and effective_units is not null) has_main,\n      sum(case when effective_sales is not null then net_amount end) net,\n      bool_or(effective_sales is null) partial from product_lines group by group_key,product_identity),\n  ranked as (select *,row_number() over(order by case when p_product_sort='units' then main_units else net end desc nulls last,group_key collate \"C\") position from products where p_product_sort='amount' or has_main),\n  categories as (\n    select category_identity,coalesce((array_agg(category_name order by completed_at desc,completion_id))[1],'Sin categoría histórica') label,sum(net_amount) amount\n    from product_lines where effective_sales is not null group by category_identity),\n  all_products as(select product_identity from products where product_identity is not null union\n    select i.product_identity from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity is not null)\n  select\n    coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from current_facts),'[]'::jsonb),\n    coalesce((select jsonb_agg(jsonb_build_object('sales',effective_sales::text,'mainUnits',effective_units::text,'reasons',reasons)) from previous_facts),'[]'::jsonb),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',product_identity,'label',label,'mainUnits',main_units,'netAmount',round(net,2)::text,'quality',case when partial then case when net is null then 'unavailable' else 'partial' end else 'exact' end) order by position) from ranked where position>v_offset and position<=v_offset+p_limit),'[]'::jsonb),\n    (select count(*) from ranked),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',category_identity,'label',label,'amount',round(amount,2)::text,'percentage',case when not exists(select 1 from current_facts where effective_sales is null) and v_historical=0 and (select sum(amount) from categories)>0 then round(amount*100/(select sum(amount) from categories),2)::text end) order by amount desc,label) from categories),'[]'::jsonb),\n    (select count(*) from current_facts where date_kind='outside_session'),\n    (select count(*) from current_facts where effective_sales is null),\n    (select sum(current_agreement) from current_facts where effective_sales is null),\n    coalesce((select jsonb_agg(jsonb_build_object('identity',p.product_identity,'currentMainUnits',case when v_historical>0 or exists(select 1 from current_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end,'previousMainUnits',\n      case when not v_compare or exists(select 1 from previous_facts where effective_units is null) then null else coalesce((select sum(i.quantity) from previous_facts f join public.order_statistics_completion_items i on i.completion_id=f.id where i.product_identity=p.product_identity and i.item_kind='product' and f.effective_units is not null),0) end)) from all_products p),'[]'::jsonb)\"\nPL/pgSQL function statistics_v1_summary_base(text,date,date,text,integer,jsonb) line 91 at SQL statement\nPL/pgSQL function statistics_v1_series_response(text,date,date,text,integer,jsonb) line 18 at assignment\nSQL function \"statistics_v1_summary\" statement 1\n"
+}

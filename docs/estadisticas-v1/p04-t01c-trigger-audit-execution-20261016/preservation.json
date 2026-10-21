@@ -1,0 +1,40 @@
+{
+  "at": "2026-10-16T16:42:23.787Z",
+  "result": "PASS_FILE_PRESERVATION",
+  "baselineFiles": 3123,
+  "allBaselineHashesUnchanged": true,
+  "ignoredRecordedArtifactsUnchanged": 10,
+  "approvedHashesUnchanged": true,
+  "associatedComponentHashesUnchanged": 20,
+  "privateHistoricalReferencesUnchanged": true,
+  "onlyAuthorizedNewPaths": true,
+  "newAttemptArtifacts": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/execution-intent.json",
+      "sha256": "b77b080bbf959861011425ab11209f10dc20e854f6757479f1aae0795485ba34",
+      "previouslyAbsent": true
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/execution-observed.json",
+      "sha256": "a8d7f8ee663b1224eb7dabe807b9afaa27a3c71d39e8801555f96ce77f7811be",
+      "previouslyAbsent": true
+    }
+  ],
+  "trackedStatus": [
+    "M ORDEROPS_LIVING_MEMORY.md",
+    " M components/admin/admin-nav-config.ts",
+    " M components/admin/layout/admin-nav-list.tsx",
+    " M docs/estadisticas-v1/fase-01-evidencia.json",
+    " M lib/admin/permissions.ts",
+    " M next-env.d.ts"
+  ],
+  "historicalReferencesUpdated": false,
+  "priorRunnerRepeated": false,
+  "queriesAfterAuthorizedRunner": 0,
+  "sqlInvocations": 1,
+  "ddlDml": 0,
+  "dockerLifecycleOperations": 0,
+  "networkChanges": 0,
+  "commits": 0,
+  "physicalVolumeBytes": "NOT_COMPARED; no task-issued modification operations"
+}

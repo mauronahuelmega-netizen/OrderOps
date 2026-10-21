@@ -1,0 +1,196 @@
+diff --git a/supabase/migrations/20261013004000_statistics_v1_comparative_series.sql b/supabase/migrations/20261013004000_statistics_v1_comparative_series.sql
+index da3f7c7..cfdaf06 100644
+--- a/supabase/migrations/20261013004000_statistics_v1_comparative_series.sql
++++ b/supabase/migrations/20261013004000_statistics_v1_comparative_series.sql
+@@ -288,8 +288,10 @@ begin
+         (p->>'aid' is not null and (not coalesce((p->>'av')::boolean,false) or (p->>'ahi')::timestamptz<=(p->>'alo')::timestamptz))
+         or (p->>'bid' is not null and (not coalesce((p->>'bv')::boolean,false) or (p->>'bhi')::timestamptz<=(p->>'blo')::timestamptz))) then
+       v_mode:='session'; v_resolution:='hour'; v_resolution_reason:=null;
+-      select least(ceil(max(greatest(coalesce(extract(epoch from ahi-alo),0),coalesce(extract(epoch from bhi-blo),0)))/3600),
+-        greatest(1,ceil(v_seconds/(200-v_lanes)/3600)))::integer into v_step
++      -- Integer microseconds: exact ceiling without numeric division rounding.
++      -- The maximum-duration cap gives one bin per lane when it is the lesser term.
++      select least(div(max(greatest(coalesce(extract(epoch from ahi-alo),0),coalesce(extract(epoch from bhi-blo),0)))*1000000+3599999999,3600000000),
++        greatest(1,div(v_seconds*1000000+(200-v_lanes)*3600000000-1,(200-v_lanes)*3600000000)))::integer into v_step
+         from jsonb_to_recordset(v_pairs) as z(alo timestamptz,ahi timestamptz,blo timestamptz,bhi timestamptz);
+       if v_step>1 then v_resolution_reason:='point_limit'; end if;
+     elsif v_lanes=0 and not exists(select 1 from jsonb_array_elements(v_facts) f where f->>'kind'<>'outside_session' or f->>'timezone'<>v_tz) then
+@@ -354,7 +356,7 @@ begin
+     from calendar_bounds
+   ), session_bins as (
+     select p.*,n::numeric*3600*v_step elapsed_lo,(n+1)::numeric*3600*v_step elapsed_hi
+-      from pairs p cross join lateral generate_series(0,greatest(1,ceil(greatest(coalesce(extract(epoch from p.ahi-p.alo),0),coalesce(extract(epoch from p.bhi-p.blo),0))/(3600*v_step))::integer)-1) n
++      from pairs p cross join lateral generate_series(0,case when v_mode='session' then greatest(1,div(greatest(coalesce(extract(epoch from p.ahi-p.alo),0),coalesce(extract(epoch from p.bhi-p.blo),0))*1000000+3600000000::numeric*v_step-1,3600000000::numeric*v_step)::integer)-1 else -1 end) n
+       where v_mode='session'
+   ), session_bounds as (
+     select *,aid is not null and elapsed_lo<extract(epoch from ahi-alo) ca,
+diff --git a/lib/statistics/series-temporal.ts b/lib/statistics/series-temporal.ts
+index 73b970a..8b77475 100644
+--- a/lib/statistics/series-temporal.ts
++++ b/lib/statistics/series-temporal.ts
+@@ -47,7 +47,11 @@ export function wallInstant(date: string, time: string, timezone: string): { ins
+     throw error;
+   }
+ }
+-/** Bounded sizing, before window generation; duration is physical microseconds. */
++/** Physical microseconds; d[i] = max(current, previous) for an explicit session pair.
++ * L < 200. With S = ceil(sum(d)/((200-L)*hour)), sum(ceil(d/(S*hour))) < 200.
++ * Capping S at ceil(max(d)/hour) yields exactly L bins if that cap is smaller.
++ * Integer arithmetic must also be used by the SQL generator, not only sizing.
++ */
+ export function elapsedStepHours(durations: bigint[]): number | null {
+   if (durations.length === 0 || durations.length >= 200 || durations.some(d => d <= BigInt(0))) return null;
+   const hour = BigInt(3600000000), budget = BigInt(200 - durations.length) * hour;
+diff --git a/scripts/statistics-v1/p03-a-static.verify.mjs b/scripts/statistics-v1/p03-a-static.verify.mjs
+index 2da2d85..213837f 100644
+--- a/scripts/statistics-v1/p03-a-static.verify.mjs
++++ b/scripts/statistics-v1/p03-a-static.verify.mjs
+@@ -36,9 +36,12 @@ for(const f of fs) {
+       const query=m[1].replace(/\binto\s+v_\w+(?:\s*,\s*v_\w+)*/gi,'');
+       await parse(query);embeddedStatements++;
+     }
+-    const sizing=/select least\(ceil\(max[\s\S]*?;/.exec(b);
++    const sizing=/select least\(div\(max[\s\S]*?;/.exec(b);
+     assert.ok(sizing);
+     await parse(sizing[0].replace(/\binto\s+v_\w+/gi,'')); embeddedStatements++;
++    assert.ok(b.includes('3600000000::numeric*v_step'));
++    assert.ok(!b.includes('/(3600*v_step)'));
++    assert.ok(b.includes("case when v_mode='session' then greatest(1,div("));
+     assert.ok(b.includes("role not in ('owner','manager','admin')"));
+     assert.equal((b.match(/from public[.]statistics_v1_effective_facts/g)??[]).length,1);
+     assert.ok(b.includes('v_bad<>0') && b.includes('STATISTICS_SERIES_LEGACY_COHORT_MISMATCH'));
+@@ -51,6 +54,14 @@ for(const {stmt} of ast.stmts) {
+   assert.ok(['TransactionStmt','VariableSetStmt','CreateFunctionStmt','GrantStmt'].includes(Object.keys(stmt)[0]),'Unexpected DDL/DML surface');
+ }
+ const raw=source.replace(/--[^\n]*/g,'');
++// Prepared runtime equality remains a single SELECT (same MVCC snapshot/cutoff).
++const runtime=readFileSync('supabase/tests/statistics-v1/phase03-series.sql','utf8');
++const equality=/select private[.]statistics_v1_summary_base\(period,[\s\S]*?into old,new;/.exec(runtime);
++assert.ok(equality && equality[0].includes('public.statistics_v1_summary(period,'));
++const equalityAst=await parse(equality[0].replace(/into old,new;/,';'));
++assert.equal(equalityAst.stmts.length,1);
++assert.equal(equalityAst.stmts[0].stmt.SelectStmt.targetList.length,2);
++assert.ok(runtime.includes("new-'series'=old"));
+ assert.ok(!/\b(?:create\s+table|alter\s+table|create\s+trigger|create\s+policy|security\s+definer|placeholder|todo)\b/i.test(raw));
+ assert.ok(raw.includes('from public,anon,authenticated,service_role'));
+ assert.ok(raw.includes('to authenticated;'));
+diff --git a/supabase/tests/statistics-v1/phase03-series.sql b/supabase/tests/statistics-v1/phase03-series.sql
+index 09c7223..1ecdfe1 100644
+--- a/supabase/tests/statistics-v1/phase03-series.sql
++++ b/supabase/tests/statistics-v1/phase03-series.sql
+@@ -85,6 +85,32 @@ do $$ declare p record;old jsonb;new jsonb;direct jsonb;period text;denied boole
+   end loop;
+ end $$;
+ reset role;
++-- Corrective arithmetic and timestamp predicates: prepared only, never an offline runtime claim.
++do $$ declare lanes integer;variant integer;durations numeric[];d numeric;total numeric;maximum numeric;
++  step numeric;points numeric;h constant numeric:=3600000000;begin
++  for lanes in 1..199 loop
++    for variant in 1..3 loop
++      select array_agg(case variant when 1 then 1::numeric
++        when 2 then i::numeric*h+1 else case when i=1 then 80000000::numeric*h+1 else 1 end end)
++        into durations from generate_series(1,lanes) i;
++      select sum(x),max(x) into total,maximum from unnest(durations) x;
++      step:=least(div(maximum+h-1,h),greatest(1,div(total+(200-lanes)*h-1,(200-lanes)*h)));
++      points:=0;
++      foreach d in array durations loop points:=points+div(d+h*step-1,h*step);end loop;
++      perform pg_temp.assert_true(points between 1 and 199,'exact arithmetic point bound');
++    end loop;
++  end loop;
++  perform pg_temp.assert_true(div(199*h+h-1,h)=199,'199 exact hourly bins');
++  perform pg_temp.assert_true(div(199*h+1+h-1,h)=200,'microsecond tail requires extra bin before resizing');
++end $$;
++with bounds as (select '2026-10-13T22:00:00.000001Z'::timestamptz lo,
++  '2026-10-13T23:00:00.000001Z'::timestamptz mid,'2026-10-14T00:00:00.000002Z'::timestamptz hi),
++bins as (select lo,mid hi,false inclusive from bounds union all select mid,hi,true from bounds),
++events as (select t+o*interval '1 microsecond' as at from bounds
++  cross join lateral unnest(array[lo,mid,hi]) t cross join generate_series(-1,1) o),
++checks as (select e.at,(select count(*) from bins b where e.at>=b.lo and (e.at<b.hi or b.inclusive and e.at=b.hi)) n,
++  case when e.at between bounds.lo and bounds.hi then 1 else 0 end expected from events e cross join bounds)
++select pg_temp.assert_true(bool_and(n=expected),'nocturnal opening/internal/terminal/asOf microseconds') from checks;
+ -- Pure SQL arithmetic tests do not create another monetary source.
+ select pg_temp.assert_true(private.statistics_v1_series_delta('{"value":"99999999999999.99","quality":"exact"}',
+   '{"value":"0.01","quality":"exact"}',true,null)->>'absolute'='99999999999999.98','numeric precision');
+diff --git a/lib/statistics/series-sizing.verify.ts b/lib/statistics/series-sizing.verify.ts
+new file mode 100644
+--- /dev/null
++++ b/lib/statistics/series-sizing.verify.ts
+@@ -0,0 +1,78 @@
++/** Offline arithmetic/predicate model; not PostgreSQL execution or runtime RPC proof. */
++import assert from 'node:assert/strict';
++import { writeFileSync } from 'node:fs';
++import { elapsedStepHours, inObservation, instantMicros } from './series-temporal';
++const H = BigInt(3600000000), one = BigInt(1), zero = BigInt(0);
++const ceil = (n: bigint, d: bigint) => (n+d-one)/d;
++let cases=0, assertions=0, maximumPoints=0, probes=0;
++function check(ok: boolean, label: string) { assertions++; assert.ok(ok,label); }
++type Pair = { current: bigint | null; previous: bigint | null };
++function plan(pairs: Pair[]) {
++  const durations=pairs.map(p=> (p.current??zero)>(p.previous??zero)?p.current!:p.previous!);
++  const step=elapsedStepHours(durations);
++  cases++;
++  if(step===null) { check(pairs.length===0 || pairs.length>=200 || durations.some(d=>d<=zero),'explicit fallback'); return; }
++  const width=BigInt(step)*H;
++  const count=durations.reduce((n,d)=>n+Number(ceil(d,width)),0);
++  maximumPoints=Math.max(maximumPoints,count);
++  check(count<=199,'proved stronger bound');
++  pairs.forEach((pair,i)=>{
++    for(const side of [pair.current,pair.previous]) {
++      if(side===null) continue;
++      const intervals: {lo: bigint; hi: bigint; inclusive: boolean}[]=[];
++      for(let n=zero;n<ceil(durations[i],width);n++) {
++        const lo=n*width;
++        if(lo>=side) continue; // Absent tail is not an invented observation.
++        const hi=(lo+width)<side?lo+width:side;
++        intervals.push({lo,hi,inclusive:hi===side});
++      }
++      check(intervals[0].lo===zero && intervals.at(-1)!.hi===side,'exact observed extent');
++      intervals.forEach((b,j)=>{
++        check(b.hi>b.lo && (j===0 || intervals[j-1].hi===b.lo),'positive contiguous intervals');
++        check(b.inclusive===(j===intervals.length-1),'exclusive internal / inclusive terminal');
++      });
++      const events=new Set<bigint>([-one,zero,one,side-one,side,side+one]);
++      for(const b of intervals) for(const t of [b.lo-one,b.lo,b.lo+one,b.hi-one,b.hi,b.hi+one]) events.add(t);
++      // Synthetic fact IDs at each exact boundary; cardinality, not just sum, detects double assignment.
++      for(const at of events) {
++        const matches=intervals.filter(b=>at>=b.lo && (at<b.hi || b.inclusive && at===b.hi)).length;
++        check(matches===(at>=zero && at<=side?1:0),'every admitted fact belongs exactly once');probes++;
++      }
++    }
++  });
++}
++for(let lanes=1;lanes<=201;lanes++) {
++  plan(Array.from({length:lanes},()=>({current:one,previous:one}))); // numerous short sessions
++  plan(Array.from({length:lanes},(_,i)=>({current:BigInt(i+1)*H+one,previous:BigInt(lanes-i)*H-one})));
++  plan(Array.from({length:lanes},(_,i)=>({current:i===0?BigInt(80000000)*H+one:one,previous:null})));
++}
++for(const d of [H-one,H,H+one,BigInt(199)*H-one,BigInt(199)*H,BigInt(199)*H+one,BigInt(200)*H]) {
++  plan([{current:d,previous:d}]);
++  plan([{current:d,previous:d/BigInt(2)},{current:one,previous:H}]); // unequal partial exposure
++}
++// Deterministic random combinations exercise both cap branches and missing counterparts.
++let seed=731;
++for(let run=0;run<500;run++) {
++  const next=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed;};
++  const lanes=1+next()%199;
++  plan(Array.from({length:lanes},()=>({current:BigInt(1+next()%5000)*H+BigInt(next()%1000000),previous:next()%3?BigInt(1+next()%5000)*H-one:null})));
++}
++check(maximumPoints===199,'199 reached; 200 lanes fall back before generation');
++check(elapsedStepHours([zero])===null,'zero exposure falls back');
++plan([{current:null,previous:H+one},{current:H-one,previous:H+one}]);
++const start='2026-10-13T22:00:00.000001Z', mid='2026-10-13T23:00:00.000001Z', cut='2026-10-14T00:00:00.000002Z';
++function iso(us: bigint) { const seconds=us/BigInt(1000000);return new Date(Number(seconds)*1000).toISOString().replace('.000Z',`.${(us%BigInt(1000000)).toString().padStart(6,'0')}Z`); }
++for(const t of [start,mid,cut]) for(const offset of [-one,zero,one]) {
++  const at=iso(instantMicros(t)+offset);
++  const n=Number(inObservation(at,start,mid,false))+Number(inObservation(at,mid,cut,true));
++  check(n===(instantMicros(at)>=instantMicros(start)&&instantMicros(at)<=instantMicros(cut)?1:0),'production predicate microseconds / nocturnal asOf');
++}
++// Same timestamp at close/open is distinct identity: session key is part of SQL membership.
++for(const session of ['closing','opening']) {
++  const intervals=[{id:'closing',lo:start,hi:mid},{id:'opening',lo:mid,hi:cut}];
++  check(intervals.filter(b=>b.id===session && inObservation(mid,b.lo,b.hi,true)).length===1,'touching sessions are disjoint by frozen session identity');
++}
++check(!inObservation('2026-10-14T00:00:00.000000Z','2026-10-13T00:00:00.000000Z','2026-10-14T00:00:00.000000Z',false),'outside civil midnight excluded');
++check(inObservation(cut,start,cut,true) && !inObservation(iso(instantMicros(cut)+one),start,cut,true),'snapshot cutoff includes equality only');
++writeFileSync('docs/estadisticas-v1/p03-a-corrective/pure-evidence.json',JSON.stringify({result:'PASS_OFFLINE_MODEL',cases,assertions,maximumPoints,eventProbes:probes,databaseConnections:0,limitations:['SQL planner and interval operators not executed','RPC JSON runtime equality pending']},null,2)+'\n');
++console.log(`PASS ${cases} sizing cases, ${assertions} assertions, ${probes} boundary probes; max ${maximumPoints}; zero connections.`);

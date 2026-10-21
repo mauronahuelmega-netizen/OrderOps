@@ -1,0 +1,15 @@
+// Read-only effective privilege audit, after exclusive live preflight. No DDL/grants or Auth login.
+import fs from 'node:fs';import assert from 'node:assert/strict';import {spawnSync} from 'node:child_process';
+const dir='docs/estadisticas-v1/p04-t01c/',p=JSON.parse(fs.readFileSync(dir+'preflight.json'));assert.equal(p.result,'PASS');assert.equal(p.projectId,'orderops-statistics-v1-test-74718de66a41');
+const sql=`BEGIN READ ONLY;SET LOCAL statement_timeout='15s';SET LOCAL lock_timeout='3s';
+SELECT json_build_object(
+'functions',(SELECT json_agg(json_build_object('signature',sig,'installed',to_regprocedure(sig) is not null)) FROM unnest(ARRAY['private.statistics_products_metric(numeric,bigint,bigint,bigint,bigint)','private.statistics_v1_products_reader(text,date,date,text,integer,jsonb)','public.statistics_v1_products(text,date,date,text,integer,jsonb)','private.statistics_products_qa_can_query(uuid)'])sig),
+'newConfigAbsent',to_regclass('public.statistics_products_qa_access') is null,
+'schemaUsage',(SELECT json_agg(json_build_object('role',r,'public',has_schema_privilege(r,'public','USAGE'),'private',has_schema_privilege(r,'private','USAGE'))) FROM unnest(ARRAY['anon','authenticated','service_role'])r),
+'originalSummary',(SELECT json_agg(json_build_object('role',r,'execute',has_function_privilege(r,'public.statistics_v1_summary(text,date,date,text,integer,jsonb)','EXECUTE'))) FROM unnest(ARRAY['anon','authenticated','service_role'])r),
+'roleFlags',(SELECT json_agg(json_build_object('role',rolname,'superuser',rolsuper,'bypassRls',rolbypassrls,'canLogin',rolcanlogin)) FROM pg_roles WHERE rolname IN ('anon','authenticated','service_role','authenticator')),
+'sourceRls',(SELECT json_agg(json_build_object('relation',oid::regclass::text,'rls',relrowsecurity,'acl',relacl::text)) FROM pg_class WHERE oid IN ('public.profiles'::regclass,'public.statistics_v1_effective_facts'::regclass,'public.order_statistics_completions'::regclass,'public.order_statistics_completion_items'::regclass)),
+'readOnly',current_setting('transaction_read_only'));
+ROLLBACK;`;
+const r=spawnSync('docker',['exec','-i','supabase_db_'+p.projectId,'psql','-X','-U','postgres','-d','postgres','-v','ON_ERROR_STOP=1','-qAt'],{input:sql,encoding:'utf8',timeout:30000,maxBuffer:4e6,windowsHide:true});assert.equal(r.status,0,r.stderr);const data=JSON.parse(r.stdout.trim());assert.equal(data.readOnly,'on');assert.ok(data.functions.every(x=>!x.installed));assert.equal(data.newConfigAbsent,true);assert.equal(data.schemaUsage.find(x=>x.role==='authenticated').private,true);
+fs.writeFileSync(dir+'privileges-after.json',JSON.stringify({at:new Date().toISOString(),result:'PASS_PREPARATION',...data,productsEffectivePrivileges:'NO_FUNCTIONS_INSTALLED; candidate transaction ACL recorded separately, not live grants',noGrantChanges:true},null,2)+'\n');fs.writeFileSync(dir+'privilege-audit-after.sql',sql);console.log('PASS live privilege inventory: Products/config/helper absent, existing schema usage sufficient; no writes.');

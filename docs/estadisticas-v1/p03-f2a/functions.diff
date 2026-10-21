@@ -1,0 +1,156 @@
+diff --git a/docs/estadisticas-v1/p03-f2a/original-functions.sql b/docs/estadisticas-v1/p03-f2a/proposed-functions.sql
+index 534232d..df7c6a2 100644
+--- a/docs/estadisticas-v1/p03-f2a/original-functions.sql
++++ b/docs/estadisticas-v1/p03-f2a/proposed-functions.sql
+@@ -1,4 +1,4 @@
+-create function private.statistics_v1_summary_base(
++create function private.statistics_v1_read_core_candidate(
+   p_period text,p_start_date date default null,p_end_date date default null,
+   p_product_sort text default 'units',p_limit integer default 5,p_cursor jsonb default null
+ ) returns jsonb language plpgsql stable security invoker
+@@ -8,10 +8,11 @@ declare v_business uuid; v_role text; v_timezone text; v_now timestamptz:=statem
+   v_historical bigint; v_revision text; v_instrumented timestamptz; v_offset integer:=0; v_previous_cutoff timestamptz;
+   v_compare boolean; v_segments jsonb; v_current jsonb; v_previous jsonb; v_products jsonb; v_categories jsonb; v_buckets jsonb;
+   v_current_metrics jsonb; v_previous_metrics jsonb; v_product_count bigint; v_outside bigint; v_unresolved bigint; v_pending numeric;
++  v_effective jsonb; v_result jsonb;
+   v_rules jsonb; v_bucket_factor integer; v_request_key text; v_statement_cutoff timestamptz:=statement_timestamp();
+ begin
+   select business_id,role into v_business,v_role from public.profiles where id=auth.uid();
+-  if auth.uid() is null or v_business is null or v_role not in ('owner','manager','admin') then
++  if auth.uid() is null or v_business is null or v_role is null or v_role not in ('owner','manager','admin') then
+     raise exception 'STATISTICS_ACCESS_DENIED' using errcode='42501';
+   end if;
+   if p_period is null or p_period not in ('today','yesterday','this_week','this_month','previous_month','last_7_days','last_30_days','custom')
+@@ -24,7 +25,7 @@ begin
+     if not isfinite(v_now) or v_now>v_statement_cutoff then raise exception 'STATISTICS_INVALID_CURSOR' using errcode='22023';end if;
+   end if;
+   select timezone into v_timezone from public.business_settings where business_id=v_business;
+-  if v_timezone is null then return jsonb_build_object('contractVersion','statistics.v1','status','configuration_required','businessId',v_business,'reason','missing_timezone'); end if;
++  if v_timezone is null then return jsonb_build_object('legacy',jsonb_build_object('contractVersion','statistics.v1','status','configuration_required','businessId',v_business,'reason','missing_timezone'),'effectiveFacts','[]'::jsonb); end if;
+   v_civil:=(v_now at time zone v_timezone)::date;
+   select snap.commercial_date into v_reference from public.store_sessions s join public.store_session_statistics_snapshots snap on snap.session_id=s.id and snap.business_id=s.business_id
+     where s.business_id=v_business and s.status='open' and s.closed_at is null and snap.source_quality='exact' and s.opened_at=snap.opened_at and s.opened_at<=v_now;
+@@ -91,11 +92,44 @@ begin
+   if v_historical>0 then v_reason:='missing_completion'; end if;
+   if not v_compare then v_segments:='[]'::jsonb;end if;
+ 
++
++  -- One authorized relational cohort and at most one live digest per eligible non-conflicted completion.
++  with eligible as materialized (
++    select c.*,f.agreed_total current_agreement
++    from public.order_statistics_completions c
++    join public.orders o on o.id=c.order_id and o.business_id=c.business_id and o.status='completed'
++    left join public.order_financials f on f.order_id=c.order_id and f.business_id=c.business_id
++    where c.active and c.business_id=v_business and private.statistics_can_read(c.business_id)
++      and c.commercial_date is not null and c.timezone is not null and not c.date_conflict and c.completed_at<=v_now
++      and (c.commercial_date between v_start and v_end or
++        (v_compare and c.commercial_date between v_ps and v_pe and
++          (not v_partial or case when c.date_kind='outside_session' then c.commercial_date<v_pe or c.completed_at<=v_previous_cutoff
++            else exists(select 1 from jsonb_array_elements(v_segments) seg where (seg->>'previousSessionId')::uuid=c.session_key and c.completed_at<=(seg->>'previousUntil')::timestamptz) end)))
++  ), digests as materialized (
++    select id,case when not composition_conflict then
++      private.statistics_source_digest(private.statistics_source_items(order_id,business_id)) end current_digest
++    from eligible
++  ), effective as materialized (
++    select c.*,
++  c.commercial_date is not null and c.timezone is not null and not c.date_conflict date_reliable,
++  case when not c.composition_conflict and c.composition_digest=d.current_digest then c.main_units end effective_units,
++  case when not c.monetary_conflict and not c.composition_conflict and c.agreed_total is not distinct from c.current_agreement
++    and c.breakdown_source='copy_total_price' and c.composition_digest=d.current_digest then c.agreed_total end effective_sales,
++  array_remove(array[
++    case when c.agreed_total is null then 'missing_agreement' end,
++    case when c.breakdown_source='unresolved' then 'unresolved_breakdown' end,
++    case when c.monetary_conflict or c.agreed_total is distinct from c.current_agreement then 'agreement_changed_after_completion' end,
++    case when c.composition_conflict or c.composition_digest<>d.current_digest then 'source_conflict' end,
++    case when c.main_units is null then 'missing_composition' end
++  ],null) reasons
++    from eligible c join digests d on d.id=c.id
++  ) select coalesce(jsonb_agg(to_jsonb(e)),'[]'::jsonb) into v_effective from effective e;
++
+   -- One top-level RPC statement gives a consistent snapshot. Date predicates precede aggregation.
+   with current_facts as materialized (
+-    select * from public.statistics_v1_effective_facts where business_id=v_business and commercial_date between v_start and v_end and date_reliable and completed_at<=v_now),
++    select * from jsonb_populate_recordset(null::public.statistics_v1_effective_facts,v_effective) where business_id=v_business and commercial_date between v_start and v_end and date_reliable and completed_at<=v_now),
+   previous_facts as materialized (
+-    select f.* from public.statistics_v1_effective_facts f where v_compare and f.business_id=v_business and f.commercial_date between v_ps and v_pe and f.date_reliable and f.completed_at<=v_now
++    select f.* from jsonb_populate_recordset(null::public.statistics_v1_effective_facts,v_effective) f where v_compare and f.business_id=v_business and f.commercial_date between v_ps and v_pe and f.date_reliable and f.completed_at<=v_now
+       and (not v_partial or case when f.date_kind='outside_session' then f.commercial_date<v_pe or f.completed_at<=v_previous_cutoff
+         else exists(select 1 from jsonb_array_elements(v_segments) seg where (seg->>'previousSessionId')::uuid=f.session_key and f.completed_at<=(seg->>'previousUntil')::timestamptz) end)),
+   product_lines as (select i.*,f.effective_sales,f.effective_units,f.completed_at from current_facts f join public.order_statistics_completion_items i on i.completion_id=f.id),
+@@ -129,7 +163,7 @@ begin
+ 
+   -- Gap-filled buckets use null, rather than invented zero, when historical coverage is unknown.
+   if v_days=1 then
+-    with facts as materialized(select * from public.statistics_v1_effective_facts where business_id=v_business and commercial_date=v_start and date_reliable and completed_at<=v_now),
++    with facts as materialized(select * from jsonb_populate_recordset(null::public.statistics_v1_effective_facts,v_effective) where business_id=v_business and commercial_date=v_start and date_reliable and completed_at<=v_now),
+     bounds as(select
+       least(private.statistics_local_cutoff(v_start,'00:00:00',v_timezone),coalesce(min(completed_at),v_now)) lo,
+       greatest(least(v_now,private.statistics_local_cutoff(v_start+1,'00:00:00',v_timezone)),coalesce(max(completed_at),'-infinity'::timestamptz),
+@@ -141,31 +175,39 @@ begin
+     v_bucket_factor:=greatest(1,ceil(((extract(year from v_end)-extract(year from v_start))*12+extract(month from v_end)-extract(month from v_start)+1)/199)::integer);
+     with bins as(select greatest(v_start,t::date) lo,least(v_end,(t+make_interval(months=>v_bucket_factor))::date-1) hi from
+       generate_series(date_trunc('month',v_start::timestamp),date_trunc('month',v_end::timestamp),make_interval(months=>v_bucket_factor)) t),
+-    facts as materialized(select * from public.statistics_v1_effective_facts where business_id=v_business and commercial_date between v_start and v_end and date_reliable and completed_at<=v_now)
++    facts as materialized(select * from jsonb_populate_recordset(null::public.statistics_v1_effective_facts,v_effective) where business_id=v_business and commercial_date between v_start and v_end and date_reliable and completed_at<=v_now)
+     select jsonb_agg(jsonb_build_object('label',b.lo::text||' / '||b.hi::text,'metrics',private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',f.effective_sales::text,'mainUnits',f.effective_units::text,'reasons',f.reasons)) from facts f where f.commercial_date between b.lo and b.hi),'[]'::jsonb),v_historical)) order by b.lo) into v_buckets from bins b;
+   else
+     v_bucket_factor:=case when v_days<=31 then 1 when v_days<=180 then 7 else greatest(1,ceil(v_days::numeric/199)::integer) end;
+     with bins as(select v_start+n lo,least(v_end,v_start+n+v_bucket_factor-1) hi from generate_series(0,v_days-1,v_bucket_factor) n),
+-    facts as materialized(select * from public.statistics_v1_effective_facts where business_id=v_business and commercial_date between v_start and v_end and date_reliable and completed_at<=v_now)
++    facts as materialized(select * from jsonb_populate_recordset(null::public.statistics_v1_effective_facts,v_effective) where business_id=v_business and commercial_date between v_start and v_end and date_reliable and completed_at<=v_now)
+     select jsonb_agg(jsonb_build_object('label',b.lo::text||case when b.hi<>b.lo then ' / '||b.hi::text else '' end,'metrics',private.statistics_metrics(coalesce((select jsonb_agg(jsonb_build_object('sales',f.effective_sales::text,'mainUnits',f.effective_units::text,'reasons',f.reasons)) from facts f where f.commercial_date between b.lo and b.hi),'[]'::jsonb),v_historical)) order by b.lo) into v_buckets from bins b;
+   end if;
+-  return jsonb_build_object('contractVersion','statistics.v1','status','ready','businessId',v_business,'currency','ARS','timezone',v_timezone,'revision',v_revision,
++  v_result:=jsonb_build_object('contractVersion','statistics.v1','status','ready','businessId',v_business,'currency','ARS','timezone',v_timezone,'revision',v_revision,
+     'period',jsonb_build_object('preset',p_period,'startDate',v_start,'endDate',v_end,'referenceDate',v_reference,'asOf',v_now,'timezone',v_timezone,'partial',v_partial,'granularity',v_granularity,'comparable',case when v_ps is not null then jsonb_build_object('startDate',v_ps,'endDate',v_pe) end,'comparableReason',v_reason),
+     'coverage',jsonb_build_object('historicalWithoutDate',v_historical,'outsideSession',v_outside,'instrumentedAt',v_instrumented),
+     'metrics',v_current_metrics,'previousMetrics',v_previous_metrics,'comparison',jsonb_build_object('available',v_compare,'reason',v_reason,'segments',v_segments),
+     'buckets',coalesce(v_buckets,'[]'::jsonb),'products',jsonb_build_object('items',v_products,'nextCursor',case when v_offset+p_limit<v_product_count then jsonb_build_object('offset',v_offset+p_limit,'revision',v_revision,'requestKey',v_request_key,'asOf',v_now) end),
+     'categories',v_categories,'unattributed',jsonb_build_object('pendingAgreedTotal',round(v_pending,2)::text,'unresolvedOrders',v_unresolved),
+     'ruleEvidence',jsonb_build_object('products',v_rules));
++  return jsonb_build_object('legacy',v_result,'effectiveFacts',v_effective);
+ end;
+ $$;
+ 
+-create function private.statistics_v1_series_response(
++create function private.statistics_v1_summary_base_candidate(
++  p_period text,p_start_date date default null,p_end_date date default null,
++  p_product_sort text default 'units',p_limit integer default 5,p_cursor jsonb default null
++) returns jsonb language sql stable security invoker set search_path=pg_catalog,private as $$
++  select private.statistics_v1_read_core_candidate(p_period,p_start_date,p_end_date,p_product_sort,p_limit,p_cursor)->'legacy';
++$$;
++
++create function private.statistics_v1_summary_candidate(
+   p_period text,p_start_date date default null,p_end_date date default null,
+   p_product_sort text default 'units',p_limit integer default 5,p_cursor jsonb default null
+ ) returns jsonb language plpgsql stable security invoker
+ set search_path=pg_catalog,public,private as $$
+ declare
+-  v_base jsonb; v_business uuid; v_role text; v_tz text; v_now timestamptz;
++  v_bundle jsonb; v_base jsonb; v_business uuid; v_role text; v_tz text; v_now timestamptz;
+   v_start date; v_end date; v_ps date; v_pe date; v_shift integer; v_days integer;
+   v_compare boolean; v_partial boolean; v_historical bigint; v_previous_cut timestamptz;
+   v_facts jsonb; v_sessions jsonb; v_pairs jsonb; v_mode text; v_step integer;
+@@ -177,10 +219,11 @@ declare
+ begin
+   -- Effective authorization is repeated here, rather than trusting a response JSON.
+   select business_id,role into v_business,v_role from public.profiles where id=auth.uid();
+-  if auth.uid() is null or v_business is null or v_role not in ('owner','manager','admin') then
++  if auth.uid() is null or v_business is null or v_role is null or v_role not in ('owner','manager','admin') then
+     raise exception 'STATISTICS_ACCESS_DENIED' using errcode='42501';
+   end if;
+-  v_base:=private.statistics_v1_summary_base(p_period,p_start_date,p_end_date,p_product_sort,p_limit,p_cursor);
++  v_bundle:=private.statistics_v1_read_core_candidate(p_period,p_start_date,p_end_date,p_product_sort,p_limit,p_cursor);
++  v_base:=v_bundle->'legacy';
+   if v_base->>'status'<>'ready' then return v_base; end if;
+   if (v_base->>'businessId')::uuid<>v_business then raise exception 'STATISTICS_TENANT_MISMATCH' using errcode='42501'; end if;
+   v_tz:=v_base->>'timezone'; v_now:=(v_base#>>'{period,asOf}')::timestamptz;
+@@ -196,7 +239,7 @@ begin
+ 
+   -- One extra scan of effective facts, independent of the number of points.
+   with effective as materialized (
+-    select f.* from public.statistics_v1_effective_facts f
++    select f.* from jsonb_populate_recordset(null::public.statistics_v1_effective_facts,v_bundle->'effectiveFacts') f
+     where f.business_id=v_business and f.date_reliable and f.completed_at<=v_now
+       and (f.commercial_date between v_start and v_end or (v_compare and f.commercial_date between v_ps and v_pe))
+   ), selected as (

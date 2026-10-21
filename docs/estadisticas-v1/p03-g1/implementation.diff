@@ -1,0 +1,105 @@
+diff --git a/docs/estadisticas-v1/p03-g1/before/lib/statistics/summary-route-server.ts.txt b/docs/estadisticas-v1/p03-g1/after/lib/statistics/summary-route-server.ts.txt
+index dc983ae..2084b9d 100644
+--- a/docs/estadisticas-v1/p03-g1/before/lib/statistics/summary-route-server.ts.txt
++++ b/docs/estadisticas-v1/p03-g1/after/lib/statistics/summary-route-server.ts.txt
+@@ -2,13 +2,16 @@ import 'server-only';
+ import { createSupabaseServerClient } from '@/lib/supabase/server';
+ import { verifyStatisticsPrincipal, type StatisticsPrincipalClient } from './summary-principal';
+ import type { SummaryScope } from './summary-transport';
++import { statisticsPublicationAllowed } from './statistics-publication-server';
+ 
+ /** Route gate only; no RPC and no role normalization/fallback. Every query authenticates again. */
+ export async function statisticsRouteScope(): Promise<
+-  { status: 'allowed'; scope: SummaryScope } | { status: 'unauthenticated' | 'forbidden' | 'error' }
++  { status: 'allowed'; scope: SummaryScope } | { status: 'unauthenticated' | 'forbidden' | 'error' | 'not_published' }
+ > {
+   try {
+     const client = await createSupabaseServerClient();
+-    return verifyStatisticsPrincipal(client as unknown as StatisticsPrincipalClient);
++    const access = await verifyStatisticsPrincipal(client as unknown as StatisticsPrincipalClient);
++    if (access.status !== 'allowed') return access;
++    return statisticsPublicationAllowed(client, access.scope) ? access : { status: 'not_published' };
+   } catch { return { status: 'error' }; }
+ }
+
+diff --git a/docs/estadisticas-v1/p03-g1/before/lib/statistics/summary-server.ts.txt b/docs/estadisticas-v1/p03-g1/after/lib/statistics/summary-server.ts.txt
+index 3dc4bf9..60d4c06 100644
+--- a/docs/estadisticas-v1/p03-g1/before/lib/statistics/summary-server.ts.txt
++++ b/docs/estadisticas-v1/p03-g1/after/lib/statistics/summary-server.ts.txt
+@@ -1,10 +1,11 @@
+ import 'server-only';
+ import { createSupabaseServerClient } from '@/lib/supabase/server';
+ import { readAuthenticatedSummary,summaryFailure,type SummaryAuthenticatedClient,type SummaryResult } from './summary-transport';
++import { statisticsPublicationAllowed } from './statistics-publication-server';
+ /** Server entry for later integration. Not a route/action/UI and never uses service-role credentials. */
+ export async function getStatisticsSummary(search:string):Promise<SummaryResult>{
+   try{
+     const client=await createSupabaseServerClient();
+-    return readAuthenticatedSummary(client as unknown as SummaryAuthenticatedClient,search);
++    return readAuthenticatedSummary(client as unknown as SummaryAuthenticatedClient,search,scope=>statisticsPublicationAllowed(client,scope));
+   }catch{return summaryFailure('query_failed');}
+ }
+
+diff --git a/docs/estadisticas-v1/p03-g1/before/lib/statistics/summary-transport.ts.txt b/docs/estadisticas-v1/p03-g1/after/lib/statistics/summary-transport.ts.txt
+index aa7da91..477d131 100644
+--- a/docs/estadisticas-v1/p03-g1/before/lib/statistics/summary-transport.ts.txt
++++ b/docs/estadisticas-v1/p03-g1/after/lib/statistics/summary-transport.ts.txt
+@@ -4,9 +4,10 @@ import { StatisticsReadError } from './read';
+ import { verifyStatisticsPrincipal } from './summary-principal';
+ import { StatisticsSeriesReadError, readStatisticsSeries } from './series-read';
+ import { SummaryPeriodError,parseSummaryPeriod,summaryPeriodKey,summaryRpcArgs } from './summary-period';
+-export type SummaryErrorCode='unauthenticated'|'forbidden'|'invalid_period'|'timeout'|'query_failed'|'invalid_response'|'series_unavailable';
++export type SummaryErrorCode='unauthenticated'|'forbidden'|'not_published'|'invalid_period'|'timeout'|'query_failed'|'invalid_response'|'series_unavailable';
+ export const SUMMARY_ERRORS: Record<SummaryErrorCode,string>={
+   unauthenticated:'Iniciá sesión para consultar Estadísticas.',forbidden:'No tenés permisos para consultar Estadísticas.',
++  not_published:'Estadísticas todavía no está disponible.',
+   invalid_period:'Revisá el período y las fechas seleccionadas.',timeout:'La consulta tardó demasiado. Podés volver a intentar.',
+   query_failed:'No pudimos consultar las estadísticas. Podés volver a intentar.',invalid_response:'No pudimos validar los datos recibidos.',
+   series_unavailable:'La serie comparativa no está disponible.',
+@@ -25,11 +26,12 @@ export function summaryFailure(code:SummaryErrorCode):Extract<SummaryResult,{ok:
+ class QueryTimeout extends Error {}
+ class InvalidRange extends Error {}
+ /** One authenticated RPC; no legacy query, per-bucket queries, retries, polling or cache. */
+-export async function readAuthenticatedSummary(client:SummaryAuthenticatedClient,search:string):Promise<SummaryResult>{
++export async function readAuthenticatedSummary(client:SummaryAuthenticatedClient,search:string,publication:(scope:SummaryScope)=>boolean=()=>false):Promise<SummaryResult>{
+   try{
+     const period=parseSummaryPeriod(search);
+     const access=await verifyStatisticsPrincipal(client);
+     if(access.status!=='allowed')return summaryFailure(access.status==='error'?'query_failed':access.status);
++    if(!publication(access.scope))return summaryFailure('not_published');
+     const principal={businessId:access.scope.businessId,role:access.role};
+     const rpc:StatisticsReadClient={rpc:async(name,args)=>{
+       const result=await client.rpc(name,args);
+
+diff --git a/docs/estadisticas-v1/p03-g1/before/app/admin/(protected)/statistics/page.tsx.txt b/docs/estadisticas-v1/p03-g1/after/app/admin/(protected)/statistics/page.tsx.txt
+index d4e7131..285b066 100644
+--- a/docs/estadisticas-v1/p03-g1/before/app/admin/(protected)/statistics/page.tsx.txt
++++ b/docs/estadisticas-v1/p03-g1/after/app/admin/(protected)/statistics/page.tsx.txt
+@@ -1,5 +1,5 @@
+ import type { Metadata } from 'next';
+-import { redirect } from 'next/navigation';
++import { redirect, notFound } from 'next/navigation';
+ import AdminPageLayout from '@/components/admin/admin-page-layout';
+ import StatisticsSummary from '@/components/admin/statistics/statistics-summary';
+ import { statisticsRouteScope } from '@/lib/statistics/summary-route-server';
+@@ -9,6 +9,7 @@ export const dynamic = 'force-dynamic';
+ export default async function StatisticsPage() {
+   const access = await statisticsRouteScope();
+   if (access.status === 'unauthenticated') redirect('/admin/login');
++  if (access.status === 'not_published') notFound();
+   if (access.status !== 'allowed') return <AdminPageLayout><section role="alert"><h1>Estadísticas</h1><p>{access.status === 'forbidden' ? 'No tenés permisos para consultar Estadísticas.' : 'No pudimos verificar tu acceso. Volvé a cargar la página.'}</p></section></AdminPageLayout>;
+   return <AdminPageLayout size="wide"><StatisticsSummary key={`${access.scope.userId}:${access.scope.businessId}`} scope={access.scope} /></AdminPageLayout>;
+ }
+
+diff --git a/docs/estadisticas-v1/p03-g1/before/app/admin/(protected)/statistics/query/route.ts.txt b/docs/estadisticas-v1/p03-g1/after/app/admin/(protected)/statistics/query/route.ts.txt
+index cb8b44a..647ecfc 100644
+--- a/docs/estadisticas-v1/p03-g1/before/app/admin/(protected)/statistics/query/route.ts.txt
++++ b/docs/estadisticas-v1/p03-g1/after/app/admin/(protected)/statistics/query/route.ts.txt
+@@ -4,6 +4,6 @@ export const dynamic = 'force-dynamic';
+ /** Same-origin read endpoint; original role/tenant reverified by the P03-C server transport. */
+ export async function GET(request: NextRequest) {
+   const result = await getStatisticsSummary(request.nextUrl.search);
+-  const status = result.ok ? 200 : result.code === 'unauthenticated' ? 401 : result.code === 'forbidden' ? 403 : result.code === 'invalid_period' ? 400 : result.code === 'timeout' ? 504 : 502;
++  const status = result.ok ? 200 : result.code === 'unauthenticated' ? 401 : result.code === 'forbidden' ? 403 : result.code === 'not_published' ? 404 : result.code === 'invalid_period' ? 400 : result.code === 'timeout' ? 504 : 502;
+   return NextResponse.json(result, { status, headers: { 'Cache-Control': 'private, no-store, max-age=0', Vary: 'Cookie' } });
+ }

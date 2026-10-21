@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-16T14:35:24.836Z",
+  "status": "READY_FOR_LOOPBACK_INTERVENTION_REVIEW",
+  "phaseP04T01C": "BLOCKED",
+  "transactionalQaRehearsalReady": false,
+  "authorizationToStopOrReplace": false,
+  "realMutationsEnabled": false,
+  "approvalManifestSha256": "6a93fda6f957e2acdd6eecca4900b2be27a4015273e466b2a86ec4410d2e2a2e",
+  "transition": [
+    {
+      "kind": "db",
+      "oldId": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "newId": null
+    },
+    {
+      "kind": "kong",
+      "oldId": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "newId": null
+    }
+  ],
+  "runtimeValidation": "NOT_EXECUTED",
+  "humanChecklist": "human-checklist.md"
+}

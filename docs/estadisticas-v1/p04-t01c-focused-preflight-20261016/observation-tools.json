@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-16T15:45:45.774Z",
+  "kernel": "6.18.54.1-microsoft-standard-WSL2\n\n#1 SMP PREEMPT_DYNAMIC Tue Oct  6 19:13:07 UTC 2026",
+  "kongTarVersion": "tar (busybox) 1.35.0",
+  "tarExit": 0,
+  "pgRestoreVersion": "pg_restore (PostgreSQL) 17.6",
+  "sqlConnections": 0
+}

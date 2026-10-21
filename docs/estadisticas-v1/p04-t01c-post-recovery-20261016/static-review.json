@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-16T05:12:09.875Z",
+  "result": "PASS_STATIC_ONLY",
+  "grammarParsedFiles": 5,
+  "functions": 4,
+  "ownedConfigTables": 1,
+  "pureSqlBodiesParsed": 3,
+  "financialSourceRestoredByRemovingOnlyGate": true,
+  "roleCheckBeforePublicationCheck": true,
+  "newConfigEmptyClosed": true,
+  "fixedSyntheticPrincipals": 6,
+  "expiryUsesCurrentStatementNotCursorAsOf": true,
+  "existingObjectsAltered": 0,
+  "existingSchemaUsageSufficient": true,
+  "rollbackOwnedObjectsOnly": true,
+  "sqlExecuted": false,
+  "plpgsqlCompiled": false,
+  "newRlsRuntimeValidated": false,
+  "newQaGateRuntimeValidated": false
+}

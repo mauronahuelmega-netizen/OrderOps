@@ -1,0 +1,150 @@
+{
+  "at": "2026-10-13T23:44:56.513Z",
+  "verdict": "READY_FOR_SQL_REVIEW",
+  "branch": "codex/estadisticas-v1",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "candidate": {
+    "path": "docs/estadisticas-v1/p03-f3b/candidate-d1.sql",
+    "sha256": "9e8b793df40de1aeb6ecbb71c1ce4e828c717498e62340341d8784726ee78070",
+    "status": "PROPOSED_ONLY_NOT_INSTALLED",
+    "function": "private.statistics_v1_summary_d1_candidate(text,date,date,text,integer,jsonb)",
+    "referenceSourceSha256": "fd88de8c0ec3f4a87d8a6782650d63cf4779d8170033a4c5b4f37edbd489faf9"
+  },
+  "checks": {
+    "branchHEAD": "PASS",
+    "preexistingFileHashes": "PASS",
+    "preexistingFileCount": 2252,
+    "functionReverseEquality": "PASS",
+    "sqlASTParseFiles": 5,
+    "nodeSyntaxScripts": 3,
+    "offlineAdversarial": "PASS: identity/config/signing/endpoints and adversarial rejection scenarios; no Docker/DB writes.",
+    "PLpgSQLCompilation": "NOT_EXECUTED",
+    "threeReaderRuntime": "NOT_EXECUTED",
+    "RLSAndEffectiveGrants": "NOT_EXECUTED",
+    "D1MetricCounters": "NOT_EXECUTED",
+    "D1Benchmarks": "NOT_EXECUTED"
+  },
+  "environment": {
+    "databaseConnectionsThisPhase": 0,
+    "serviceOperations": 0,
+    "lastLiveEvidence": "docs/estadisticas-v1/p03-f3a/final-preservation.json",
+    "lastVerifiedLedger": 124,
+    "liveIdentityRevalidation": "NOT_EXECUTED_OFFLINE_ONLY"
+  },
+  "preservation": {
+    "originalFourMigrationsAndABHashesUnchanged": true,
+    "publicRoutingUnchanged": true,
+    "preexistingFilesUnchanged": true,
+    "noCommits": true,
+    "noInstalledObjectsChanged": true,
+    "noFrontendOrPermissionsChanges": true
+  },
+  "futureOnly": {
+    "queryTimeoutSeconds": 15,
+    "lockTimeoutSeconds": 3,
+    "minBenchmarkSamplesPerReader": 20,
+    "cohorts": [
+      50,
+      100,
+      200,
+      500,
+      1000,
+      5000
+    ],
+    "p95TargetsMs": {
+      "100": 500,
+      "500": 1000,
+      "1000": 1500,
+      "5000": 3000
+    },
+    "expectedMetrics67": "Design estimate for F3A fixture; not measured and not universal"
+  },
+  "inventory": {
+    "docs/estadisticas-v1/p03-f3b/application-plan.md": {
+      "sha256": "6f180c4c687ebe0696349a9c3e3fb0baaefba1f422172db60f14942352048c80",
+      "bytes": 3739
+    },
+    "docs/estadisticas-v1/p03-f3b/baseline-preexisting.json": {
+      "sha256": "3b97e0d73462dee5ea1c6141e5cc9bbd4095794f7aae33714cdac3816e21cca9",
+      "bytes": 278994
+    },
+    "docs/estadisticas-v1/p03-f3b/candidate-d1.sql": {
+      "sha256": "9e8b793df40de1aeb6ecbb71c1ce4e828c717498e62340341d8784726ee78070",
+      "bytes": 27835
+    },
+    "docs/estadisticas-v1/p03-f3b/differential-plan.md": {
+      "sha256": "cdddf8308e8e8eddfda9f7a6578039c8e8e402f6460784737aedcf53ee4d1881",
+      "bytes": 4850
+    },
+    "docs/estadisticas-v1/p03-f3b/differential-three-readers.sql": {
+      "sha256": "772ebac38d698a10dbbec5b216d1ee983fd65676e1e3a28bebf05c31236dbeb6",
+      "bytes": 4307
+    },
+    "docs/estadisticas-v1/p03-f3b/functions.diff": {
+      "sha256": "10f2de9477aeaf40aafc811689639e8a5e259341a9dad8295d0c3a368da9f318",
+      "bytes": 1228
+    },
+    "docs/estadisticas-v1/p03-f3b/informe.md": {
+      "sha256": "e82e40ba8e50d998260a36e4491117ba3aacabfbe8defd306b505e5199883bc9",
+      "bytes": 2697
+    },
+    "docs/estadisticas-v1/p03-f3b/instrumentation.sql": {
+      "sha256": "8813234e8d20d6d7f7981c8333beecd51be713ced6bd7f9bacd5c08090ce165b",
+      "bytes": 1389
+    },
+    "docs/estadisticas-v1/p03-f3b/performance-risks.md": {
+      "sha256": "f212a79e2035facb96b6ad0b5e8f3f0007d83c1ebc1ec79a1ae60e308908d1ec",
+      "bytes": 1701
+    },
+    "docs/estadisticas-v1/p03-f3b/proposed-d1-function.sql": {
+      "sha256": "e4c72dea8f490a92654e6a971269e2e33e605909a1f933efd9f3c708c374f6b0",
+      "bytes": 27311
+    },
+    "docs/estadisticas-v1/p03-f3b/reference-ab-function.sql": {
+      "sha256": "a27c6487e5532ba5a05a3554fad35a491cf2dc70007e341e02d5a6ed2d1f49b3",
+      "bytes": 27295
+    },
+    "docs/estadisticas-v1/p03-f3b/security-audit.md": {
+      "sha256": "79170b039d2696b0002dd1b9154873e230b12517dbd270fc2573408ccb6c325a",
+      "bytes": 2459
+    },
+    "docs/estadisticas-v1/p03-f3b/semantic-map.md": {
+      "sha256": "bd8b47bd7fddb0f619e20ce16f0de37b3f9596d729f2db24f7399b4b0fc341ef",
+      "bytes": 4721
+    },
+    "docs/estadisticas-v1/p03-f3b/static-audit.json": {
+      "sha256": "31a6ffac833b155ed964806fc4ff8788c985f3c5fe382f06c9702bf3be094d47",
+      "bytes": 708
+    },
+    "scripts/statistics-v1/p03-f3b-build.mjs": {
+      "sha256": "78993fba72ad24374d541bf62a564c7a18a45d5eee04d934ab03d9701615ffce",
+      "bytes": 4676
+    },
+    "scripts/statistics-v1/p03-f3b-docs.mjs": {
+      "sha256": "04fa518f2744b859b6bb8feb75b538d732b6bb1d344e63c7807bf0d43125725f",
+      "bytes": 20558
+    },
+    "scripts/statistics-v1/p03-f3b-evidence.mjs": {
+      "sha256": "9645608ff524c6bfdd1d853f24c627ceb0322d8e9335bfa2fa4ef23caf4eb1ea",
+      "bytes": 4578
+    }
+  },
+  "inventoryExcludesSelf": true,
+  "dependenciesUnmodified": [
+    "supabase/migrations/20261013005000_statistics_v1_read_core_candidate.sql",
+    "supabase/migrations/20261013003000_statistics_v1_reads_security.sql",
+    "scripts/statistics-v1/p03-f1-fixture.sql",
+    "scripts/statistics-v1/p03-f1-shapes-fixture.sql",
+    "scripts/statistics-v1/p03-f2b-temporal-fixture.sql",
+    "scripts/statistics-v1/p03-f2b-dst-tests.sql",
+    "scripts/statistics-v1/p03-f2b-state-tests.sql",
+    "scripts/statistics-v1/p03-f2a-decode.verify.ts"
+  ],
+  "limitations": [
+    "Offline AST parser does not compile PL/pgSQL DO/function bodies",
+    "Materialization evaluation order and error precedence need runtime equality",
+    "Complete rich-fixture/concurrency harness adaptation and execution are pending approval",
+    "No D1 latencies, memory or effective ACL measured",
+    "No migration version or ledger change authorized in this phase"
+  ]
+}

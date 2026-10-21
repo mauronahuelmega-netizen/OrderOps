@@ -1,0 +1,188 @@
+{
+  "at": "2026-10-14T14:37:29.185Z",
+  "result": "PASS",
+  "steps": [
+    {
+      "name": "git_identity",
+      "result": "PASS"
+    },
+    {
+      "name": "approved_products_hash",
+      "result": "PASS"
+    },
+    {
+      "name": "adversarial_offline",
+      "result": "PASS",
+      "detail": "PASS: identity/config/signing/endpoints and adversarial rejection scenarios; no Docker/DB writes."
+    },
+    {
+      "name": "manifest_config_signing_baseline_hashes",
+      "result": "PASS",
+      "detail": {
+        "historicalMigrations": 119,
+        "migrations": [
+          {
+            "path": "supabase/migrations/20261013004000_statistics_v1_comparative_series.sql",
+            "sha256": "b10c330adff70b803d9d25165f07830e90d4cd092aa4ba2cf3d0120a43f95219"
+          },
+          {
+            "path": "supabase/migrations/20261013001000_statistics_v1_structures.sql",
+            "sha256": "5b28bc586ac76f2bcf19df36ecd610d780d26e609d153e8343e5c7b0ecba8828"
+          },
+          {
+            "path": "supabase/migrations/20261013002000_statistics_v1_capture.sql",
+            "sha256": "58c3b995450dd84bcc4299453dc8a80c5c96e62b3b72fe4a46394ae05f9b0d19"
+          },
+          {
+            "path": "supabase/migrations/20261013003000_statistics_v1_reads_security.sql",
+            "sha256": "b42a4c961a5ae1ca6a7884af391b6faa36fe3e9e271ba0c570bb9bd3355a7678"
+          }
+        ]
+      }
+    },
+    {
+      "name": "exclusive_live_resources",
+      "result": "PASS",
+      "detail": [
+        {
+          "name": "/supabase_storage_orderops-statistics-v1-test-74718de66a41",
+          "id": "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+          "health": "healthy",
+          "running": true,
+          "ports": {
+            "5000/tcp": null
+          },
+          "networks": [
+            "supabase_network_orderops-statistics-v1-test-74718de66a41"
+          ],
+          "volumes": [
+            "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+          ]
+        },
+        {
+          "name": "/supabase_rest_orderops-statistics-v1-test-74718de66a41",
+          "id": "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+          "health": "no-healthcheck",
+          "running": true,
+          "ports": {
+            "3000/tcp": null
+          },
+          "networks": [
+            "supabase_network_orderops-statistics-v1-test-74718de66a41"
+          ],
+          "volumes": []
+        },
+        {
+          "name": "/supabase_auth_orderops-statistics-v1-test-74718de66a41",
+          "id": "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c",
+          "health": "healthy",
+          "running": true,
+          "ports": {
+            "9999/tcp": null
+          },
+          "networks": [
+            "supabase_network_orderops-statistics-v1-test-74718de66a41"
+          ],
+          "volumes": []
+        },
+        {
+          "name": "/supabase_kong_orderops-statistics-v1-test-74718de66a41",
+          "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+          "health": "healthy",
+          "running": true,
+          "ports": {
+            "8000/tcp": [
+              {
+                "HostIp": "0.0.0.0",
+                "HostPort": "56321"
+              },
+              {
+                "HostIp": "::",
+                "HostPort": "56321"
+              }
+            ]
+          },
+          "networks": [
+            "supabase_network_orderops-statistics-v1-test-74718de66a41"
+          ],
+          "volumes": []
+        },
+        {
+          "name": "/supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+          "health": "healthy",
+          "running": true,
+          "ports": {
+            "5432/tcp": [
+              {
+                "HostIp": "0.0.0.0",
+                "HostPort": "56322"
+              },
+              {
+                "HostIp": "::",
+                "HostPort": "56322"
+              }
+            ]
+          },
+          "networks": [
+            "supabase_network_orderops-statistics-v1-test-74718de66a41"
+          ],
+          "volumes": [
+            "supabase_db_orderops-statistics-v1-test-74718de66a41"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "api_db_endpoints",
+      "result": "PASS",
+      "detail": {
+        "api": "127.0.0.1:56321",
+        "db": "127.0.0.1:56322"
+      }
+    },
+    {
+      "name": "private_identity_ledger",
+      "result": "PASS",
+      "detail": {
+        "matches": true,
+        "ledger": 124
+      }
+    },
+    {
+      "name": "catalog_ledger_acl_original_readers",
+      "result": "PASS",
+      "detail": {
+        "ledger": 124,
+        "functions": 22,
+        "counts": {
+          "orders": 0,
+          "items": 0,
+          "financials": 0,
+          "audit": 0,
+          "sessions": 0,
+          "sessionSnapshots": 0,
+          "completions": 0,
+          "completionItems": 0,
+          "identitySnapshots": 0
+        },
+        "noProductsCollision": true,
+        "cAbsent": true
+      }
+    },
+    {
+      "name": "resources_budget",
+      "result": "PASS",
+      "detail": {
+        "cpuPercent": "0.02%",
+        "memoryPercent": "1.55%"
+      }
+    }
+  ],
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "api": "127.0.0.1:56321",
+  "db": "127.0.0.1:56322",
+  "ledger": 124,
+  "readOnlyConnections": true,
+  "noCommit": true
+}

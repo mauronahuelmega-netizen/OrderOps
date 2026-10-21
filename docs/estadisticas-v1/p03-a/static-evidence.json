@@ -1,0 +1,96 @@
+{
+  "at": "2026-10-13T12:40:49.191Z",
+  "result": "PASS_STATIC_ONLY",
+  "file": "supabase/migrations/20261013004000_statistics_v1_comparative_series.sql",
+  "sha256": "b10c330adff70b803d9d25165f07830e90d4cd092aa4ba2cf3d0120a43f95219",
+  "statements": 11,
+  "embeddedSqlParsed": 11,
+  "functions": [
+    {
+      "name": "private.statistics_v1_summary_base",
+      "language": "plpgsql",
+      "volatility": "stable",
+      "security": "invoker",
+      "parameters": [
+        "p_period",
+        "p_start_date",
+        "p_end_date",
+        "p_product_sort",
+        "p_limit",
+        "p_cursor"
+      ],
+      "bodySha256": "e09061ad5f75d9e100143271dd590b488c4dfa4fe48c1b273437abad7bfbb5d7"
+    },
+    {
+      "name": "private.statistics_v1_series_instant",
+      "language": "sql",
+      "volatility": "stable",
+      "security": "invoker",
+      "parameters": [
+        "p_at"
+      ],
+      "bodySha256": "70464e60f1f504265174b2786f69f7ddf9e5fc8aff44316a2f148359b557747f"
+    },
+    {
+      "name": "private.statistics_v1_series_delta",
+      "language": "sql",
+      "volatility": "immutable",
+      "security": "invoker",
+      "parameters": [
+        "p_current",
+        "p_previous",
+        "p_aligned",
+        "p_reason"
+      ],
+      "bodySha256": "87ab4a03a8ff1ee83e7082504221fd0c478e11c586aa669a927551db69e1af6b"
+    },
+    {
+      "name": "private.statistics_v1_series_response",
+      "language": "plpgsql",
+      "volatility": "stable",
+      "security": "invoker",
+      "parameters": [
+        "p_period",
+        "p_start_date",
+        "p_end_date",
+        "p_product_sort",
+        "p_limit",
+        "p_cursor"
+      ],
+      "bodySha256": "ec4d39d9c9e48ebceb85e51a999835527e16413e3256166c775a1b6652da4fb7"
+    },
+    {
+      "name": "public.statistics_v1_summary",
+      "language": "sql",
+      "volatility": "stable",
+      "security": "invoker",
+      "parameters": [
+        "p_period",
+        "p_start_date",
+        "p_end_date",
+        "p_product_sort",
+        "p_limit",
+        "p_cursor"
+      ],
+      "bodySha256": "45dc5c38e7bf1ce4d9efcce98384521b958adae1db12fad4c963b1407b82979d"
+    }
+  ],
+  "legacy": {
+    "bodyByteIdentical": true,
+    "signatureAndDefaultsIdentical": true,
+    "returnTypeIdentical": true,
+    "reason": "Static preservation, not proof of runtime result equality"
+  },
+  "isolation": {
+    "connections": 0,
+    "sqlExecuted": false
+  },
+  "limitations": [
+    "PL/pgSQL bodies and types not compiled against PostgreSQL",
+    "Runtime/RLS/concurrency/EXPLAIN pending approval",
+    "Local Cursor reference may be stale"
+  ],
+  "candidateVersion": "20261013004000",
+  "localMigrationCount": 123,
+  "cursorRef": "0e430b08342b638b02392927ed560ea5e0950403"
+}

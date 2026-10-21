@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-16T16:00:57.303Z",
+  "syntax": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/analyze-captured-results.mjs",
+      "result": "PASS"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/finalize-evidence.mjs",
+      "result": "PASS"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-readonly-validation-20261016/run-once-envelope.mjs",
+      "result": "PASS"
+    }
+  ],
+  "approvedHashes": "PASS",
+  "singleInvocation": "PASS_ONE_NO_RETRY",
+  "identityPreflight": "PASS_BY_APPROVED_RUNNER_GATES",
+  "marker": "PASS_BY_APPROVED_PSQL_CONTROL_FLOW_WITHOUT_TOKEN_OUTPUT",
+  "ledger": 124,
+  "sqlProcessExitCode": 0,
+  "sqlStates": [],
+  "rollbackObserved": true,
+  "runnerOverall": "BLOCKED_DIFFERENCE_OR_EXECUTION_ERROR",
+  "offlineComparedFields": 35,
+  "offlineEqualFields": 34,
+  "offlineDifferentFields": 1,
+  "triggerTextDifferences": 13,
+  "sqlAfterRunner": 0,
+  "normalizationToForceEquality": false
+}

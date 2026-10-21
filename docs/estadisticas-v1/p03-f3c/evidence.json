@@ -1,0 +1,1689 @@
+{
+  "at": "2026-10-14T00:32:07.441Z",
+  "verdict": "PERFORMANCE_IMPROVED_WITH_LIMITATIONS",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "branch": "codex/estadisticas-v1",
+  "candidate": {
+    "sha256": "9e8b793df40de1aeb6ecbb71c1ce4e828c717498e62340341d8784726ee78070",
+    "installedFunction": "private.statistics_v1_summary_d1_candidate(text,date,date,text,integer,jsonb)",
+    "publicAdoption": false,
+    "ABSourceSha256": "fd88de8c0ec3f4a87d8a6782650d63cf4779d8170033a4c5b4f37edbd489faf9"
+  },
+  "isolationBefore": {
+    "at": "2026-10-13T23:52:24.996Z",
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "resources": {
+      "containerIds": [
+        "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+      ],
+      "volumeNames": [
+        "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "networkId": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af"
+    },
+    "containers": [
+      {
+        "name": "/supabase_storage_orderops-statistics-v1-test-74718de66a41",
+        "id": "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_rest_orderops-statistics-v1-test-74718de66a41",
+        "id": "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "health": "no-healthcheck",
+        "running": true
+      },
+      {
+        "name": "/supabase_auth_orderops-statistics-v1-test-74718de66a41",
+        "id": "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_kong_orderops-statistics-v1-test-74718de66a41",
+        "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "health": "healthy",
+        "running": true
+      }
+    ],
+    "api": "127.0.0.1:56321",
+    "db": "127.0.0.1:56322"
+  },
+  "isolationAfter": {
+    "at": "2026-10-14T00:19:53.676Z",
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "resources": {
+      "containerIds": [
+        "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+      ],
+      "volumeNames": [
+        "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "networkId": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af"
+    },
+    "containers": [
+      {
+        "name": "/supabase_storage_orderops-statistics-v1-test-74718de66a41",
+        "id": "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_rest_orderops-statistics-v1-test-74718de66a41",
+        "id": "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "health": "no-healthcheck",
+        "running": true
+      },
+      {
+        "name": "/supabase_auth_orderops-statistics-v1-test-74718de66a41",
+        "id": "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_kong_orderops-statistics-v1-test-74718de66a41",
+        "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "health": "healthy",
+        "running": true
+      }
+    ],
+    "api": "127.0.0.1:56321",
+    "db": "127.0.0.1:56322"
+  },
+  "ledgerCount": 124,
+  "installation": {
+    "at": "2026-10-13T23:52:55.548Z",
+    "result": "PASS",
+    "hash": "9e8b793df40de1aeb6ecbb71c1ce4e828c717498e62340341d8784726ee78070",
+    "output": "BEGIN\nSET\nSET\nCREATE FUNCTION\nREVOKE\nGRANT\nCOMMIT",
+    "ledgerChanged": false,
+    "onlyFunctionD1": true
+  },
+  "security": "PASS_SQL_ACTORS_AND_HELPERS",
+  "equivalence": "PASS_IN_EXECUTED_TRIPLE_CASES",
+  "instrumentation": "246_TO_70_METRICS_WITH_22_POINTS_SOURCE_ONCE_PER_ORDER",
+  "benchmarks": {
+    "100": {
+      "targetP95Ms": 500,
+      "result": "MET_IN_THIS_ISOLATED_COHORT",
+      "measuredP95Ms": 375.94
+    },
+    "500": {
+      "targetP95Ms": 1000,
+      "result": "NOT_MEASURED_SUFFICIENTLY",
+      "measuredP95Ms": null
+    },
+    "1000": {
+      "targetP95Ms": 1500,
+      "result": "NOT_MEASURED_SUFFICIENTLY",
+      "measuredP95Ms": null
+    },
+    "5000": {
+      "targetP95Ms": 3000,
+      "result": "NOT_MEASURED_SUFFICIENTLY",
+      "measuredP95Ms": null
+    }
+  },
+  "preservation": {
+    "preexistingFiles": 2270,
+    "hashesUnchanged": true,
+    "counts": {
+      "orders": 0,
+      "items": 0,
+      "financials": 0,
+      "audit": 0,
+      "sessions": 0,
+      "sessionSnapshots": 0,
+      "completions": 0,
+      "completionItems": 0,
+      "identitySnapshots": 0
+    },
+    "extra": {
+      "settings": "d9e81fd519e0c9c84d145cc389794afc",
+      "state": "c1df8c4e5ecaeb6c4241453443327116",
+      "products": 0,
+      "categories": 0,
+      "stock": 0,
+      "triggers": [
+        {
+          "table": "businesses",
+          "name": "on_business_created_create_settings",
+          "def": "CREATE TRIGGER on_business_created_create_settings AFTER INSERT ON public.businesses FOR EACH ROW EXECUTE FUNCTION create_default_business_settings()"
+        },
+        {
+          "table": "categories",
+          "name": "tr_categories_assign_append_position",
+          "def": "CREATE TRIGGER tr_categories_assign_append_position BEFORE INSERT ON public.categories FOR EACH ROW EXECUTE FUNCTION categories_assign_append_position()"
+        },
+        {
+          "table": "products",
+          "name": "tr_auto_suspend_out_of_stock",
+          "def": "CREATE TRIGGER tr_auto_suspend_out_of_stock BEFORE INSERT OR UPDATE OF stock, track_stock, is_available ON public.products FOR EACH ROW EXECUTE FUNCTION auto_suspend_out_of_stock_product()"
+        },
+        {
+          "table": "orders",
+          "name": "guard_m3_order_identity",
+          "def": "CREATE TRIGGER guard_m3_order_identity BEFORE INSERT OR UPDATE ON public.orders FOR EACH ROW EXECUTE FUNCTION private.guard_m3_import_identity()"
+        },
+        {
+          "table": "orders",
+          "name": "statistics_v1_order_capture",
+          "def": "CREATE TRIGGER statistics_v1_order_capture AFTER INSERT OR UPDATE OF status ON public.orders FOR EACH ROW EXECUTE FUNCTION private.statistics_order_changed()"
+        },
+        {
+          "table": "orders",
+          "name": "statistics_v1_order_revision",
+          "def": "CREATE CONSTRAINT TRIGGER statistics_v1_order_revision AFTER INSERT OR DELETE OR UPDATE ON public.orders DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION private.statistics_revision_deferred()"
+        },
+        {
+          "table": "orders",
+          "name": "validate_m3_order_evidence",
+          "def": "CREATE TRIGGER validate_m3_order_evidence BEFORE INSERT OR UPDATE ON public.orders FOR EACH ROW EXECUTE FUNCTION private.validate_m3_import_evidence()"
+        },
+        {
+          "table": "order_items",
+          "name": "statistics_v1_item_capture",
+          "def": "CREATE TRIGGER statistics_v1_item_capture AFTER INSERT OR DELETE OR UPDATE ON public.order_items FOR EACH ROW EXECUTE FUNCTION private.statistics_item_changed()"
+        },
+        {
+          "table": "order_items",
+          "name": "statistics_v1_item_revision",
+          "def": "CREATE CONSTRAINT TRIGGER statistics_v1_item_revision AFTER INSERT OR DELETE OR UPDATE ON public.order_items DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION private.statistics_revision_deferred()"
+        },
+        {
+          "table": "storage.buckets",
+          "name": "enforce_bucket_name_length_trigger",
+          "def": "CREATE TRIGGER enforce_bucket_name_length_trigger BEFORE INSERT OR UPDATE OF name ON storage.buckets FOR EACH ROW EXECUTE FUNCTION storage.enforce_bucket_name_length()"
+        },
+        {
+          "table": "storage.objects",
+          "name": "objects_delete_delete_prefix",
+          "def": "CREATE TRIGGER objects_delete_delete_prefix AFTER DELETE ON storage.objects FOR EACH ROW EXECUTE FUNCTION storage.delete_prefix_hierarchy_trigger()"
+        },
+        {
+          "table": "storage.objects",
+          "name": "objects_insert_create_prefix",
+          "def": "CREATE TRIGGER objects_insert_create_prefix BEFORE INSERT ON storage.objects FOR EACH ROW EXECUTE FUNCTION storage.objects_insert_prefix_trigger()"
+        },
+        {
+          "table": "storage.objects",
+          "name": "objects_update_create_prefix",
+          "def": "CREATE TRIGGER objects_update_create_prefix BEFORE UPDATE ON storage.objects FOR EACH ROW WHEN (((new.name <> old.name) OR (new.bucket_id <> old.bucket_id))) EXECUTE FUNCTION storage.objects_update_prefix_trigger()"
+        },
+        {
+          "table": "storage.objects",
+          "name": "update_objects_updated_at",
+          "def": "CREATE TRIGGER update_objects_updated_at BEFORE UPDATE ON storage.objects FOR EACH ROW EXECUTE FUNCTION storage.update_updated_at_column()"
+        },
+        {
+          "table": "storage.prefixes",
+          "name": "prefixes_create_hierarchy",
+          "def": "CREATE TRIGGER prefixes_create_hierarchy BEFORE INSERT ON storage.prefixes FOR EACH ROW WHEN ((pg_trigger_depth() < 1)) EXECUTE FUNCTION storage.prefixes_insert_trigger()"
+        },
+        {
+          "table": "storage.prefixes",
+          "name": "prefixes_delete_hierarchy",
+          "def": "CREATE TRIGGER prefixes_delete_hierarchy AFTER DELETE ON storage.prefixes FOR EACH ROW EXECUTE FUNCTION storage.delete_prefix_hierarchy_trigger()"
+        },
+        {
+          "table": "store_sessions",
+          "name": "statistics_v1_session_capture",
+          "def": "CREATE TRIGGER statistics_v1_session_capture AFTER INSERT OR UPDATE ON public.store_sessions FOR EACH ROW EXECUTE FUNCTION private.statistics_session_changed()"
+        },
+        {
+          "table": "store_sessions",
+          "name": "statistics_v1_session_revision",
+          "def": "CREATE CONSTRAINT TRIGGER statistics_v1_session_revision AFTER INSERT OR DELETE OR UPDATE ON public.store_sessions DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION private.statistics_revision_deferred()"
+        },
+        {
+          "table": "business_settings",
+          "name": "handle_business_settings_updated_at",
+          "def": "CREATE TRIGGER handle_business_settings_updated_at BEFORE UPDATE ON public.business_settings FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+        },
+        {
+          "table": "customization_groups",
+          "name": "handle_customization_groups_updated_at",
+          "def": "CREATE TRIGGER handle_customization_groups_updated_at BEFORE UPDATE ON public.customization_groups FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+        },
+        {
+          "table": "customization_options",
+          "name": "handle_customization_options_updated_at",
+          "def": "CREATE TRIGGER handle_customization_options_updated_at BEFORE UPDATE ON public.customization_options FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+        },
+        {
+          "table": "customization_group_assignments",
+          "name": "handle_customization_group_assignments_updated_at",
+          "def": "CREATE TRIGGER handle_customization_group_assignments_updated_at BEFORE UPDATE ON public.customization_group_assignments FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+        },
+        {
+          "table": "product_customization_overrides",
+          "name": "handle_product_customization_overrides_updated_at",
+          "def": "CREATE TRIGGER handle_product_customization_overrides_updated_at BEFORE UPDATE ON public.product_customization_overrides FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+        },
+        {
+          "table": "upsell_groups",
+          "name": "handle_upsell_groups_updated_at",
+          "def": "CREATE TRIGGER handle_upsell_groups_updated_at BEFORE UPDATE ON public.upsell_groups FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+        },
+        {
+          "table": "upsell_group_items",
+          "name": "handle_upsell_group_items_updated_at",
+          "def": "CREATE TRIGGER handle_upsell_group_items_updated_at BEFORE UPDATE ON public.upsell_group_items FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+        },
+        {
+          "table": "order_financials",
+          "name": "handle_order_financials_updated_at",
+          "def": "CREATE TRIGGER handle_order_financials_updated_at BEFORE UPDATE ON public.order_financials FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+        },
+        {
+          "table": "order_financials",
+          "name": "statistics_v1_agreement_capture",
+          "def": "CREATE TRIGGER statistics_v1_agreement_capture AFTER INSERT OR DELETE OR UPDATE ON public.order_financials FOR EACH ROW EXECUTE FUNCTION private.statistics_agreement_changed()"
+        },
+        {
+          "table": "order_financials",
+          "name": "statistics_v1_financial_revision",
+          "def": "CREATE CONSTRAINT TRIGGER statistics_v1_financial_revision AFTER INSERT OR DELETE OR UPDATE ON public.order_financials DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION private.statistics_revision_deferred()"
+        },
+        {
+          "table": "finance_accounts",
+          "name": "handle_finance_accounts_updated_at",
+          "def": "CREATE TRIGGER handle_finance_accounts_updated_at BEFORE UPDATE ON public.finance_accounts FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+        },
+        {
+          "table": "finance_categories",
+          "name": "handle_finance_categories_updated_at",
+          "def": "CREATE TRIGGER handle_finance_categories_updated_at BEFORE UPDATE ON public.finance_categories FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+        },
+        {
+          "table": "finance_funds",
+          "name": "finance_funds_validate_committed",
+          "def": "CREATE CONSTRAINT TRIGGER finance_funds_validate_committed AFTER INSERT OR UPDATE OF business_id, account_id, fund_type, order_id, active ON public.finance_funds DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION private.validate_committed_finance_fund()"
+        },
+        {
+          "table": "finance_funds",
+          "name": "handle_finance_funds_updated_at",
+          "def": "CREATE TRIGGER handle_finance_funds_updated_at BEFORE UPDATE ON public.finance_funds FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+        },
+        {
+          "table": "business_finance_settings",
+          "name": "business_finance_settings_validate_default_fund",
+          "def": "CREATE CONSTRAINT TRIGGER business_finance_settings_validate_default_fund AFTER INSERT OR UPDATE OF business_id, protection_account_id, default_operating_fund_id ON public.business_finance_settings DEFERRABLE INITIALLY DEFERRED FOR EACH ROW EXECUTE FUNCTION private.validate_business_finance_settings()"
+        },
+        {
+          "table": "business_finance_settings",
+          "name": "handle_business_finance_settings_updated_at",
+          "def": "CREATE TRIGGER handle_business_finance_settings_updated_at BEFORE UPDATE ON public.business_finance_settings FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+        },
+        {
+          "table": "finance_operations",
+          "name": "guard_m3_operation_identity",
+          "def": "CREATE TRIGGER guard_m3_operation_identity BEFORE INSERT OR UPDATE ON public.finance_operations FOR EACH ROW EXECUTE FUNCTION private.guard_m3_import_identity()"
+        },
+        {
+          "table": "finance_operations",
+          "name": "validate_m3_operation_evidence",
+          "def": "CREATE TRIGGER validate_m3_operation_evidence BEFORE INSERT OR UPDATE ON public.finance_operations FOR EACH ROW EXECUTE FUNCTION private.validate_m3_import_evidence()"
+        },
+        {
+          "table": "finance_transactions",
+          "name": "guard_finance_transaction_mutation",
+          "def": "CREATE TRIGGER guard_finance_transaction_mutation BEFORE UPDATE OF occurred_at, status ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION private.guard_finance_transaction_mutation()"
+        },
+        {
+          "table": "finance_transactions",
+          "name": "guard_m3_transaction_identity",
+          "def": "CREATE TRIGGER guard_m3_transaction_identity BEFORE INSERT OR UPDATE ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION private.guard_m3_import_identity()"
+        },
+        {
+          "table": "finance_transactions",
+          "name": "handle_finance_transactions_updated_at",
+          "def": "CREATE TRIGGER handle_finance_transactions_updated_at BEFORE UPDATE ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+        },
+        {
+          "table": "finance_transactions",
+          "name": "validate_m3_transaction_evidence",
+          "def": "CREATE TRIGGER validate_m3_transaction_evidence BEFORE INSERT OR UPDATE ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION private.validate_m3_import_evidence()"
+        },
+        {
+          "table": "finance_transaction_entries",
+          "name": "guard_finance_entry_closed_period",
+          "def": "CREATE TRIGGER guard_finance_entry_closed_period BEFORE INSERT ON public.finance_transaction_entries FOR EACH ROW EXECUTE FUNCTION private.guard_finance_entry_closed_period()"
+        },
+        {
+          "table": "finance_audit_events",
+          "name": "guard_m3_audit_identity",
+          "def": "CREATE TRIGGER guard_m3_audit_identity BEFORE INSERT OR UPDATE ON public.finance_audit_events FOR EACH ROW EXECUTE FUNCTION private.guard_m3_import_identity()"
+        },
+        {
+          "table": "finance_audit_events",
+          "name": "validate_m3_audit_evidence",
+          "def": "CREATE TRIGGER validate_m3_audit_evidence BEFORE INSERT OR UPDATE ON public.finance_audit_events FOR EACH ROW EXECUTE FUNCTION private.validate_m3_import_evidence()"
+        },
+        {
+          "table": "finance_reconciliations",
+          "name": "enforce_finance_reconciliation_row_mutability",
+          "def": "CREATE TRIGGER enforce_finance_reconciliation_row_mutability BEFORE DELETE OR UPDATE ON public.finance_reconciliations FOR EACH ROW EXECUTE FUNCTION private.enforce_finance_reconciliation_row_mutability()"
+        },
+        {
+          "table": "finance_reconciliation_fund_snapshots",
+          "name": "enforce_finance_reconciliation_snapshot_mutability",
+          "def": "CREATE TRIGGER enforce_finance_reconciliation_snapshot_mutability BEFORE INSERT OR DELETE OR UPDATE ON public.finance_reconciliation_fund_snapshots FOR EACH ROW EXECUTE FUNCTION private.enforce_finance_reconciliation_child_mutability()"
+        },
+        {
+          "table": "finance_reconciliation_entries",
+          "name": "enforce_finance_reconciliation_entry_mutability",
+          "def": "CREATE TRIGGER enforce_finance_reconciliation_entry_mutability BEFORE INSERT OR DELETE OR UPDATE ON public.finance_reconciliation_entries FOR EACH ROW EXECUTE FUNCTION private.enforce_finance_reconciliation_child_mutability()"
+        },
+        {
+          "table": "commercial.platform_accounts",
+          "name": "platform_accounts_reject_promoter_business_member",
+          "def": "CREATE TRIGGER platform_accounts_reject_promoter_business_member BEFORE INSERT OR UPDATE OF user_id, kind ON commercial.platform_accounts FOR EACH ROW EXECUTE FUNCTION commercial.reject_promoter_business_member()"
+        },
+        {
+          "table": "commercial.internal_role_assignments",
+          "name": "internal_role_assignments_require_internal",
+          "def": "CREATE TRIGGER internal_role_assignments_require_internal BEFORE INSERT OR UPDATE OF account_id ON commercial.internal_role_assignments FOR EACH ROW EXECUTE FUNCTION commercial.reject_role_on_non_internal()"
+        },
+        {
+          "table": "commercial.audit_events",
+          "name": "audit_events_append_only",
+          "def": "CREATE TRIGGER audit_events_append_only BEFORE DELETE OR UPDATE ON commercial.audit_events FOR EACH ROW EXECUTE FUNCTION commercial.reject_audit_mutation()"
+        },
+        {
+          "table": "commercial.commercial_programs",
+          "name": "commercial_programs_immutable_economics",
+          "def": "CREATE TRIGGER commercial_programs_immutable_economics BEFORE UPDATE ON commercial.commercial_programs FOR EACH ROW EXECUTE FUNCTION commercial.reject_program_economic_update()"
+        },
+        {
+          "table": "commercial.conversion_terms",
+          "name": "conversion_terms_immutable",
+          "def": "CREATE TRIGGER conversion_terms_immutable BEFORE DELETE OR UPDATE ON commercial.conversion_terms FOR EACH ROW EXECUTE FUNCTION commercial.reject_conversion_terms_mutation()"
+        },
+        {
+          "table": "commercial.onboarding_grants",
+          "name": "onboarding_grants_no_silent_extension",
+          "def": "CREATE TRIGGER onboarding_grants_no_silent_extension BEFORE UPDATE ON commercial.onboarding_grants FOR EACH ROW EXECUTE FUNCTION commercial.reject_onboarding_grant_extension()"
+        }
+      ]
+    },
+    "originalFunctionsAndABUnchanged": true,
+    "policiesACLTriggersIndexesUnchanged": true,
+    "noCommits": true,
+    "noServicesStarted": true,
+    "fixtureRollback": true,
+    "notBitwiseDatabaseImage": true
+  },
+  "checks": {
+    "nodeSyntaxScripts": 8,
+    "sqlAST": "PASS",
+    "PLpgSQLCompilationAndInvocation": "PASS_ON_ISOLATED",
+    "noDecoderModifications": true
+  },
+  "inventory": {
+    "docs/estadisticas-v1/p03-f3c/baseline.json": {
+      "sha256": "e6a3af6a2a8668a0ec6e5e75edd37d3818be1a6eb7958865f1a3deaee0445d29",
+      "bytes": 538258
+    },
+    "docs/estadisticas-v1/p03-f3c/benchmark/after.json": {
+      "sha256": "97e26e1a27e2ae8887a05b6f8bb32b3d00f074254336d07fea308ce908c6b8c4",
+      "bytes": 163189
+    },
+    "docs/estadisticas-v1/p03-f3c/benchmark/baseline.json": {
+      "sha256": "67035464e7d8bc5bee9b488d011f2cefa205e4c96607f2df1a7944a427308063",
+      "bytes": 711369
+    },
+    "docs/estadisticas-v1/p03-f3c/benchmark/before.json": {
+      "sha256": "12d72e4b81b5c472a487935f6507be7b498a78d5d8350c3b2982f6284417ac2e",
+      "bytes": 163187
+    },
+    "docs/estadisticas-v1/p03-f3c/benchmark/preservation.json": {
+      "sha256": "85e759785025c131d4c5c8e4015cf9d515a903ab2e601c240474d4127f2b0d16",
+      "bytes": 184
+    },
+    "docs/estadisticas-v1/p03-f3c/benchmark/results.json": {
+      "sha256": "4a843b00ab46f8d6875875f98c01ac612ac90b09575eb864bbe7d727767d350a",
+      "bytes": 423
+    },
+    "docs/estadisticas-v1/p03-f3c/benchmark/volume-100.json": {
+      "sha256": "759594ff86ffd265a48d78a7cb4c8d1b19e2a20d7f584b6b601b0a004f15a853",
+      "bytes": 96141
+    },
+    "docs/estadisticas-v1/p03-f3c/benchmark/volume-50.json": {
+      "sha256": "9e246579662f8a9c72b40e8eb05795ea38bd1a1b5ddf80992cabe6faba246bdf",
+      "bytes": 96118
+    },
+    "docs/estadisticas-v1/p03-f3c/benchmarks.json": {
+      "sha256": "25834b373504e54d26e0f83f262e9b4fbb53c90fbb284a8edfca04d3ce19ed5c",
+      "bytes": 8716
+    },
+    "docs/estadisticas-v1/p03-f3c/concurrency.json": {
+      "sha256": "37a1e72509053ca86fd05ba508864c94ccf72d336dd2ab232e15c37e12aac1e8",
+      "bytes": 985
+    },
+    "docs/estadisticas-v1/p03-f3c/decode-d1-base.json": {
+      "sha256": "ddea7b78f7449c3e9f4a806e8b36b46a29e254d1b2970fd915bdd13cc27de064",
+      "bytes": 347238
+    },
+    "docs/estadisticas-v1/p03-f3c/decode-d1-edges.json": {
+      "sha256": "cc2ddc971de21c8f1fa7d2aec12793664c9e85144b9d79c807cd4cc2bafa2b5a",
+      "bytes": 347238
+    },
+    "docs/estadisticas-v1/p03-f3c/decode-d1-products.json": {
+      "sha256": "2725bf74b55860b1a6704f9ff33b3821992480c7ac406ab98dd1de8aa097681a",
+      "bytes": 354276
+    },
+    "docs/estadisticas-v1/p03-f3c/decode-d1-shapes.json": {
+      "sha256": "7656511f00055662397e858a9fe8bbda3dac735fb3cd54ea3d7bbf9bc35d505e",
+      "bytes": 286464
+    },
+    "docs/estadisticas-v1/p03-f3c/decode-d1-temporal.json": {
+      "sha256": "9742293a76906a1ffc226a5757c8bf90388c282fa99a63a3952e6c03c12acc08",
+      "bytes": 72278
+    },
+    "docs/estadisticas-v1/p03-f3c/differential-batch-timeout.json": {
+      "sha256": "78250e6cba7d56d4e9f525200ab27e51eb8cefbbcea8fb22d070be807d9956ad",
+      "bytes": 19743
+    },
+    "docs/estadisticas-v1/p03-f3c/differential-client-deadline.json": {
+      "sha256": "073493eec76ca8d5a302860ca56df1d066cbf8594fd7e9c6dcb64652acf8a4b4",
+      "bytes": 13270
+    },
+    "docs/estadisticas-v1/p03-f3c/differential-edges.json": {
+      "sha256": "f728033b4949a4a57ea501e6b89f1ee468735227bc4c5efcf846060d312a8596",
+      "bytes": 299889
+    },
+    "docs/estadisticas-v1/p03-f3c/differential-products.json": {
+      "sha256": "0648f5bfaef1b6ca02a09ef0e4c0a8f2f0a46bd0acc39e09d3a71fd00a8d54a9",
+      "bytes": 324197
+    },
+    "docs/estadisticas-v1/p03-f3c/differential-results.json": {
+      "sha256": "e29c4d3360db0f546a51118f4d2d48dc86e82fe45ed363b11a10bde70c05f68b",
+      "bytes": 3495
+    },
+    "docs/estadisticas-v1/p03-f3c/differential-shapes.json": {
+      "sha256": "db10285b7ddfc215d72963bb327c7b0a23483175196c644b378b889401902fe0",
+      "bytes": 264433
+    },
+    "docs/estadisticas-v1/p03-f3c/differential-temporal.json": {
+      "sha256": "1cc1f9d9ba2302127a991d3f5d389e857f0b81e0a0f4683f6cc4650ec9af755a",
+      "bytes": 84079
+    },
+    "docs/estadisticas-v1/p03-f3c/differential-utc-range-harness.json": {
+      "sha256": "f3bc056c4ae646de93978e22b67de9a743041daceacaa3558fb97f2ff8483c57",
+      "bytes": 6532
+    },
+    "docs/estadisticas-v1/p03-f3c/differential.json": {
+      "sha256": "43ee54b84145980d260f1e856dfdc1b1294ad704434abe52b89ac40e7b8a2401",
+      "bytes": 316149
+    },
+    "docs/estadisticas-v1/p03-f3c/function-profile.json": {
+      "sha256": "265d915be065c648647423e124e427af7a22633ec8e0cf5601d1b59d3e96f898",
+      "bytes": 285000
+    },
+    "docs/estadisticas-v1/p03-f3c/informe.md": {
+      "sha256": "1ff5a2bf4060e3dc30e6bf8a24157291a7d80a3bf527217553fefc2aad665907",
+      "bytes": 5169
+    },
+    "docs/estadisticas-v1/p03-f3c/installation-evidence.json": {
+      "sha256": "b0f7277326752b8907ee3f643b75e8caf6b25cf65c78432dd15fed86329297fb",
+      "bytes": 260
+    },
+    "docs/estadisticas-v1/p03-f3c/installed-catalog.json": {
+      "sha256": "3b00d574ed1d36acff09038f46f165d78f92a808a46129eae530c231363e3973",
+      "bytes": 295157
+    },
+    "docs/estadisticas-v1/p03-f3c/pairs-base.json": {
+      "sha256": "3f545001c4d12767890eb1bc800a382cae190d01455a245752f802a43a47621a",
+      "bytes": 520812
+    },
+    "docs/estadisticas-v1/p03-f3c/pairs-edges.json": {
+      "sha256": "7c0a7fe41d2e10286c64e507d2ffba76ae2a1e7717e48b6f4565b675df232329",
+      "bytes": 520812
+    },
+    "docs/estadisticas-v1/p03-f3c/pairs-products.json": {
+      "sha256": "4adc03e3ffb3d1a236f10bdf0cbf2fa78cd505f27126f9faf530d570bc865114",
+      "bytes": 531369
+    },
+    "docs/estadisticas-v1/p03-f3c/pairs-shapes.json": {
+      "sha256": "c1b6c2b4b28e1daf09a807422f7ee44cbbf0dd14fadbcddd22fa65a6679b6ef3",
+      "bytes": 429651
+    },
+    "docs/estadisticas-v1/p03-f3c/pairs-temporal.json": {
+      "sha256": "9c8d14cb697ccd02e3845d3e3471ed33c6e93311188dde9a47eef3c0c4606d6a",
+      "bytes": 108372
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-0.json": {
+      "sha256": "39889d79e2b28c5bb98bc67533d5df8d6293e830ed1b2435e4496238a72b6837",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-1.json": {
+      "sha256": "05a39d99b03764be379e6b7b975a538f4c8befec0ed40d5ff5ed83b3ee821f97",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-10.json": {
+      "sha256": "aea2ba5d54be6bf45d97999262451c7c8b27546f450d12b55860771fac7c5587",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-11.json": {
+      "sha256": "e39a3dd6e7a4501a13c22dbee2794e47f64653b6290176ebc5a9257fe9f1b96d",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-12.json": {
+      "sha256": "9856aab088a32dbc4b5ebbd617be76dfe1f0929dbbd18ffa91f6f0ff12d560d6",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-13.json": {
+      "sha256": "d2228a54f2f10b0fd61bf5af4548050178ede300b7cb1fa5ddfd31f47b34f316",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-14.json": {
+      "sha256": "f8fbf0dc84a253d2f57d7be5bee320603c94c76cb4097216d332e24e891e21ff",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-15.json": {
+      "sha256": "20a79310085234e0fd693523071537fcfad1c5a4400ec5a2c5fc048c7c241c82",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-16.json": {
+      "sha256": "125a74dea2c638f0519a0fbfe10bbebc3a78aa21362f92bcdfa5cde3c236c14d",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-17.json": {
+      "sha256": "f21766f62b474e699075aa1b55c55299b23aaae79e4786a56806a39f4e562035",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-18.json": {
+      "sha256": "b9976c619cf2c9373b9793abd509be66298b92b623a88e560d10a42d25a2e666",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-19.json": {
+      "sha256": "381dc739185116feeb151b348318cc35c7b261b851faf64b21169763c5bc7a7a",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-2.json": {
+      "sha256": "3b4ccdf26142ee6c0f36f8ac7a13b0f34eb1944fdd039216d579700641be4817",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-20.json": {
+      "sha256": "a741b9a02477a3bc7b3c5adc8afab5d7421980ffbb424fa23c09668751970a88",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-21.json": {
+      "sha256": "f6123a5fdeaa960450fd8549ff29bf05e3e83efd888336901f7070a0b3695dfa",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-22.json": {
+      "sha256": "505d8018d678586b8fd377810e8e31cb920326cc0c04d3102b59f16b48d0bcca",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-23.json": {
+      "sha256": "d5ab454d2889593e3bbc0557b33ae2decc2a7f1323b0be7c5c6f378d04f40b26",
+      "bytes": 1107
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-24.json": {
+      "sha256": "0dfe18959cf3c4aaf750407dc26cea63504faff6aaa94377d4cfff2bf739d698",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-25.json": {
+      "sha256": "99b248e4485a56f6ea2d5bbd6d07d1c51a8115586976ca38cad33653e7d5702c",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-26.json": {
+      "sha256": "80707e6191bd3d5d0ab86d7f3fea7edfa2d4d55436f56041754c21f57841e929",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-27.json": {
+      "sha256": "86e0a9500eee1fcc0761a13d12df50f7133c93df1d601dd9ec889963cfe6e7c7",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-28.json": {
+      "sha256": "fdfd6b226b0a614139c67eecde17a0d4a4f61276ba9249e51de29745c3e7e393",
+      "bytes": 1102
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-29.json": {
+      "sha256": "0da242b42e134629912991742e2d7504c834ed7cdd9db28397c2bc74166b67b2",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-3.json": {
+      "sha256": "a3166bfddac3d9ff792ea690da9ca7ec2d12696fa557ba5d963c422a7f08ae19",
+      "bytes": 1102
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-30.json": {
+      "sha256": "f774ddd94abc447f201b95d69f372e15b8b49a190b2d0fdce6bf8910099bac8b",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-31.json": {
+      "sha256": "06ec2bcdd8ee5fa9b30d2938f304398628dd0d52811a91d827ad64988fa2ffd8",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-32.json": {
+      "sha256": "d5974ca704b28349add18ecb70880fa4e0d8dbf11b1cf65f16374df4673f7341",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-33.json": {
+      "sha256": "14660fd045f03477b249e832c3818f2bb8b4d47faedd8002f367236d5a416565",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-34.json": {
+      "sha256": "3a002041b12ae1cba5710ab2ee3e057e991736597fe6ba76754d200dffafb5a8",
+      "bytes": 1107
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-35.json": {
+      "sha256": "4f599390f27e86b45a6daea495d216fde12a7e032ea18aff2f7f37e93968d5b2",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-36.json": {
+      "sha256": "e26dfe7894ab2925f35f51e187dbcf8ba19b2a5ae9f24c5b7b72492e295de8f8",
+      "bytes": 1107
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-37.json": {
+      "sha256": "3fc65447906a52d3e20e2b3c4a13821196ff6b4382ed626565660530c0bb823a",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-38.json": {
+      "sha256": "eb45e1d511bf981640c1e79eda5b41dcfc32b8828573ec7a6e24cb26baf38d3e",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-39.json": {
+      "sha256": "7721e24e52c0f0b833ce1902e0b3b182f0dfb08322e37a8edb71d07943b9ffb9",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-4.json": {
+      "sha256": "9e5efe21322bf00e0435e7e91c7dbdca128082f7027e4ccc3e6bfb4e0775ba71",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-40.json": {
+      "sha256": "919d765bc22ce2eb02e8f1a13401c315bda4ab82e1e7b69f740c491a3c08086e",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-41.json": {
+      "sha256": "be0fa6c78eb765bec96147b8b3c3475a4c4a31df554c0335937f777586bbe141",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-42.json": {
+      "sha256": "7ebc110192efd2bc6d96165fc265ede89823d6ecfd2f34ec5bcf36bf6feb5d72",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-43.json": {
+      "sha256": "3fc8eb6119b386815bd202ee7c5cf7a6fb4002ea8819e411241a5319869bab6f",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-44.json": {
+      "sha256": "205f935542af06fbf9be98dbf60f2853676b7d8cd14dc448170e3f1e8e8be8c4",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-45.json": {
+      "sha256": "ba5e755caeb62574b03a520eb09c68173e7646af39ad0263cd67e8bdbfcbc01f",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-46.json": {
+      "sha256": "d2717931cd759840b0ca30b9355f53948ea124365427f6bdc2a442a7f4df8036",
+      "bytes": 1102
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-47.json": {
+      "sha256": "ced3149f42f03d4dc9378a8275bce2286749d6c8f48b4a765cf076d15b5781af",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-48.json": {
+      "sha256": "06ee3d683b91df0475a6d639650ca4e0077ca9d84b3faaeee409839580d651d1",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-49.json": {
+      "sha256": "ff1f3906a4821d25a42bc0b78618cd2658e046c9026efc923fa89b924fbc9d04",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-5.json": {
+      "sha256": "8ed1b4a227e73e62cdc58d935b39fdbed3fc1fd138ef49848e4e6d145ae45d3f",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-50.json": {
+      "sha256": "dd031d2def9dfcf3c8644e708a6dcd2d742e6c5ff74e17e7ccb497be20bd710d",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-51.json": {
+      "sha256": "af9825a79223f6f8de9767b279c5debc50c314cc087741ba6fb963093e92542f",
+      "bytes": 1102
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-52.json": {
+      "sha256": "689912990b5e323c529a95987f487f7835de9985a9a06027c46a122b0ec837f9",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-53.json": {
+      "sha256": "3dc9f409271d577bd9793a37e23e0c15b8b975d6a0b72c67a6147682c5fbdf6d",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-54.json": {
+      "sha256": "95165d7c97fc960f3f2275e2d33bbb0b9298a8b764b0cd5767b040f448009bab",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-55.json": {
+      "sha256": "2b3769272ce7bc11755390a63780761e90432da6e49b48cd39754d0443e45222",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-56.json": {
+      "sha256": "b7925f6c69b3aa003ffcd2fb586c432bd3d73018c145c3b809c767f984af82ee",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-57.json": {
+      "sha256": "1c7a5bbc95db99124b3be892ed2a51ee9fc27c0c4942a4da519592990ccb80d8",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-58.json": {
+      "sha256": "a0b6841f75c498b881dcf8550ead42e77de9d1412b85d8454f2248235b715045",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-59.json": {
+      "sha256": "9458c703d964ede15e5ba36924d678b66f6125b00d1388e3fd234819c44e57fb",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-6.json": {
+      "sha256": "08ebf4e7f2170d90803dcdbc26deed288bf52b5422ca23dc1e6ea86f800ce646",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-60.json": {
+      "sha256": "1277be71cd097e92d69a5bbdfae89f9146014f03246776349522961887ebff0b",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-61.json": {
+      "sha256": "c35a19c044398fb045574fa742160042f8820db1aac139443730ee420868a4ba",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-62.json": {
+      "sha256": "146e8a096db08959da721033ccb2f2a68e5b8b6f74ace1cd34fc21feea8b94f8",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-7.json": {
+      "sha256": "9f7ed3c844eb1369199f14f714597bca68f5f77800ac0bc98969b962100b3f79",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-8.json": {
+      "sha256": "a5fccdfcaafdef7249758cc09115b03b60817ed640907b356613b6a0c514e6d6",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-100-9.json": {
+      "sha256": "ad4defaa31e2e35b7c1e1d51b3698d041475b4ba7dd181186ed8cfcb097c045c",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-0.json": {
+      "sha256": "f3a318d839413ac30dcdc79f18beeecc1b6d84d8f9b7121ac2a55126b6f4bab6",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-1.json": {
+      "sha256": "d99f61a6279a2adb8454329bdf27be6283cd7bfea8ec9c97ece299b865d1f37a",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-10.json": {
+      "sha256": "a87c3a2d69f5dd8b018cc71afc6d5a2e96a3ef39b6f3ff3b53a922b3860bf153",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-11.json": {
+      "sha256": "1d04b7e3896603462c39977c9ebe920b65f1e44b146f237d4288c24ece043b80",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-12.json": {
+      "sha256": "998d2903ca089236f855a8855c4cc4764d6d15bcf8e3381682c579722c6313f4",
+      "bytes": 1107
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-13.json": {
+      "sha256": "eeed6b0967e7e2acb4ada72373466610eb5a2b2c16ee22ef56705918a07a9d10",
+      "bytes": 1106
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-14.json": {
+      "sha256": "ff1f39c1791e5c0a33e4c083f8f3667639324685e8f93a11475a834edd107119",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-15.json": {
+      "sha256": "4ca88acc0ec2115299735515d0dd78b93733a27b93c4e0dc705646bae09675b1",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-16.json": {
+      "sha256": "2cf443864a212df6f36180bdd16453c4733d5ec47389059cad20203bbf2cc668",
+      "bytes": 1107
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-17.json": {
+      "sha256": "2f45a102210898bdbd143a3fb8098b1904f0aeb2993f958580247ee5e152dc2b",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-18.json": {
+      "sha256": "a8d881f9e167302c37e15ec53139ad6ee70b6f7c349015b4d9d01e900df59daf",
+      "bytes": 1107
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-19.json": {
+      "sha256": "4f12822bb2c2f16f3e0c9a0c90c2a4c275b0cbaae6b2b72fb357ce11d280df5f",
+      "bytes": 1102
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-2.json": {
+      "sha256": "cb5595c7548e11059ff46470feb6902d4031141b2e106670c9622aaa63d1612b",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-20.json": {
+      "sha256": "9314f2e8517d0827c8460297469a0f7e6dfbc4608163f5c877a9d7c0622210ad",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-21.json": {
+      "sha256": "f7d92920bdbb14a1a2d8430fcfee8911f0386b937024bddb63ac635325625faa",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-22.json": {
+      "sha256": "c0af887dcef2349c2146f3522c05f0cb420ef640ebe6bba4a663952af8e69651",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-23.json": {
+      "sha256": "8bdb79d11465dace2addb1f335d4f18406a7b27aa4833625e59daeb462ea2b8d",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-24.json": {
+      "sha256": "06ca2269f168d8139c1b6d4eb7983873756838da9a85254d5f9682b024a83d86",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-25.json": {
+      "sha256": "16d3ccae6d94d1354b08179e77505bf582ac77b5ef543c4213085bae7a3bb6a7",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-26.json": {
+      "sha256": "ac24bdec650b52f442f85e6f0a9e5f0d3a73b0fb4bf50e7882d8c39b482a2a47",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-27.json": {
+      "sha256": "69011cb730ca8012a91e9befb891b6bfb8b23395f8356c1057171a9c3befc8a0",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-28.json": {
+      "sha256": "504a5d876b6ef275e791a1179f2a9cf1460a4c14ad819606b92750e3d79a4427",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-29.json": {
+      "sha256": "4c807d87dd3e48aed94daee05db2ccdca63baac716763ca9ac0c14c73f7fd265",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-3.json": {
+      "sha256": "162138bebdb7175da2f5f09bcaf053e92917a50f7acd6ebbeabfae3df802481d",
+      "bytes": 1106
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-30.json": {
+      "sha256": "6815cbaf1ebcddb014d317f2d58ef4747531ed273a492f79373ab7e534b09f7d",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-31.json": {
+      "sha256": "6321353da6de32f186ad248a28f8ee02b3e22f0c1b9a516a627b6b6103bff90e",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-32.json": {
+      "sha256": "cdacff8f6bdbb46c6370c7fba393430c11a0d15b358a552dd7987d481be8dbc6",
+      "bytes": 1105
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-33.json": {
+      "sha256": "d57dc64dbcb50bedd7f9f8da4fa911a3e272b24ac4b67df9962cabfd693d7911",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-34.json": {
+      "sha256": "ddf4c0d97a94a198b3bc56dedb1e90cb83cb8d596e4cc8b3486af1443400bb5c",
+      "bytes": 1105
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-35.json": {
+      "sha256": "9191369251af1e4cdd7eb555f417635f75ceb734686bf6f901ff7bca0c6da262",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-36.json": {
+      "sha256": "e39aa1bbbdf82ecbcee475781e6c572dff8c3addb9c00a76fb854246f8cf36d2",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-37.json": {
+      "sha256": "4c1f3356c0e2d10b08107f3107dd2313ff25274e888c631e459719acfb402c72",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-38.json": {
+      "sha256": "d9e46f1d084333f82a8f147cb8490cb159413188336f9fcc50cc6806326d1abc",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-39.json": {
+      "sha256": "f1c8d4ea8cb948d6b88cb1ea5c53d4421bb5fdc7a729135eb000ddac799b7c8c",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-4.json": {
+      "sha256": "d12d51dd3f613a92bc43c3b1fd421efdc294a8d92642099f86a877c61498c893",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-40.json": {
+      "sha256": "5f46e34c2975babe45fe0b2a0feff51275328a64094a527746aae01ea1841336",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-41.json": {
+      "sha256": "d6ee201c388a1dd6ccf2ce8c9b1f5cb62ddacdcd0251cca16584dd7e12a2529e",
+      "bytes": 1105
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-42.json": {
+      "sha256": "58339e0775e3dc2a775fb8763cac088ea76b601a7a1eb959a5317418f1c64829",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-43.json": {
+      "sha256": "7724ba55fd2d58aab7483baf6d5eac8b2016816cb67ce408d5bd3e93f1e458bd",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-44.json": {
+      "sha256": "3655884b98c3a5049c109deae1fd55cd4b90cd4b2c3d32dd60957f13b52fe2da",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-45.json": {
+      "sha256": "95d34bf6a015c7fa41366ae45c7ac3fe331b4fbaa1f07003a14b2ba6daaaa311",
+      "bytes": 1105
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-46.json": {
+      "sha256": "ddfeb3bb4784cf93b1d09b83ac8c9c7783f3a8e1cf938008b5f01e9371eaa887",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-47.json": {
+      "sha256": "5b6dfdbeff5af8b450cd26b122fdaa1e77dc664a2532e179c39040b2cdd3dedb",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-48.json": {
+      "sha256": "e53fc57eabc173715a03336dff657ce1726e7ed990145468d310539935f7eeea",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-49.json": {
+      "sha256": "f133dcb83b45de47e870b590915fb55f37c79abb810aa0a0c3e93650ec617464",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-5.json": {
+      "sha256": "abcc47739bfe653c1df828d8e9014b5c3b92e7253b439aea7b08d2b3c77dd527",
+      "bytes": 1107
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-50.json": {
+      "sha256": "4488383d9b252feaea7acf55443ca1e002d330622f0c51dc61c8f720bcb60a30",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-51.json": {
+      "sha256": "d73f46936c67610f152a0c84e84dd37fd2f4f1c1ec222469578ab7717bc81d8b",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-52.json": {
+      "sha256": "c2cb4f0f197bb3904214026064c6c6c5fcd5e49286a733b3833168749406b0e4",
+      "bytes": 1105
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-53.json": {
+      "sha256": "531c569dbf3b2ab833ebe8fa626261cbb64359aa4eba0c60880f65661618b796",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-54.json": {
+      "sha256": "76b0fd2e6bdaf224847e113fecbf80b92640e90cae1e263bd14a6a67d43585f6",
+      "bytes": 1105
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-55.json": {
+      "sha256": "e37be6f9680464a3d5cde0363eff8f6eb99d33bf8ff200108ba54a51cd75098b",
+      "bytes": 1103
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-56.json": {
+      "sha256": "072a462100710a40c677173fcec9bc1c8f6b15a9be762f2aa5e531ba07a5ef38",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-57.json": {
+      "sha256": "677fb944fecdc133cd1f4c125796c3d11c2988b21fe1ee018931a1fd68d1ec13",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-58.json": {
+      "sha256": "df18f130480eee22bb64db5460809d9c8516c786589816acc3d55d4f39ade231",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-59.json": {
+      "sha256": "d3be7e0f805e69e216542071dc8b1625197f77f935ec215401cb1b27d31899ca",
+      "bytes": 1105
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-6.json": {
+      "sha256": "b806cdeb88007fae904f2c06c2bd664ef08b15d505e215594c1f836e03a16bc0",
+      "bytes": 1107
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-60.json": {
+      "sha256": "32900865ab4f57f5f61da60a39990d345e22e1a9a82664047574e5f99661c381",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-61.json": {
+      "sha256": "055ad2a118f39fccf97a0acf34c1f7bbb19bc1d7a9e7bc55e82f0a158bb2857f",
+      "bytes": 1108
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-62.json": {
+      "sha256": "a64c7d814132a2c447d79eecfe2390489ddd0a28ae8537aeff6b00ce49f64858",
+      "bytes": 1104
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-7.json": {
+      "sha256": "645e9efa3459281ce5a5400a2c760a500dd39fc2e379e9bc4be93b6b2d16d37c",
+      "bytes": 1107
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-8.json": {
+      "sha256": "382ca3aa99c79d7aecbf1857acffc5aede7731fed2350471dcb9352886a647ce",
+      "bytes": 1107
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/benchmark-50-9.json": {
+      "sha256": "aec376fbd96071eac584cab4909375db3c66ced21c5e77e19b39283c88a58964",
+      "bytes": 1106
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-AB-63.json": {
+      "sha256": "e22e25f526daea7192f37cef061137ed7e9fd8fe7b737bc1f4c93cbace4c88d0",
+      "bytes": 4728
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-AB-64.json": {
+      "sha256": "806f8f9adbc858fadb74edcfe9a1665a99a2a586d874b548cb037a2550bfafb5",
+      "bytes": 7073
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-AB-65.json": {
+      "sha256": "29e9aa67edeff285c04cf28afeac7dd0f36e939ba8fc7fb91628f2f748236e71",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-AB-66.json": {
+      "sha256": "c955ae3b4a923d0f750712b26baf01ffed6e04dd2140d4770ce2100d771b16f7",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-AB-67.json": {
+      "sha256": "402cd513bc2c9ac856d340592db8757268bb0d0c70098e8d6ab084515314f97f",
+      "bytes": 40762
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-AB-68.json": {
+      "sha256": "3a03707a3e511fc93d3d1b8e89729001567f95926636f44897c20e84d7e4adee",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-AB-69.json": {
+      "sha256": "e6911e91b4235b20c42fd051a74f0b7121aa45d1a0a9317c2ee0c83c1a43b973",
+      "bytes": 20550
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-AB-70.json": {
+      "sha256": "7025d0a5f5719a3805a965b815a3f4dc144dba213bd6ac333a6561041596e09c",
+      "bytes": 62530
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-AB-71.json": {
+      "sha256": "99fda1b40475b437cbb9efbce2c0fc07a346e7e0a92bb8f8b0ff237249e95603",
+      "bytes": 20140
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-AB-72.json": {
+      "sha256": "395021e027bfd27e1de509381820cd94e242dee41f9d58e9ee4908010caefb99",
+      "bytes": 134822
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-AB-73.json": {
+      "sha256": "456cb30b201fbbcf4bb0dd0fec5315b92e4516b047848310a90e80fedcaac9b9",
+      "bytes": 735
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-D1-74.json": {
+      "sha256": "dba6f6d1a663ea8d7e84e22f91bcdad49f179d5881325b0516d6f9775e241c16",
+      "bytes": 20550
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-D1-75.json": {
+      "sha256": "05eec035589ec55d17fdb3dfb97ee64c1a612977702b7f5ad0fbd30d30f1f60d",
+      "bytes": 62530
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-D1-76.json": {
+      "sha256": "9f2c0ed527874184aed4c80adfe58fb55224711ef36c8c8ee3aac531166b3b16",
+      "bytes": 20140
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-D1-77.json": {
+      "sha256": "97f2c640138bd5a975781ea81d580b45097833f077110c8e84a4f767e00e6e79",
+      "bytes": 134349
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-D1-78.json": {
+      "sha256": "04b2dc6d5f024411010377f61a69c1a25025bf439f041b34d321d50c8d485cb2",
+      "bytes": 738
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-0.json": {
+      "sha256": "2f33ef4f88e471cabdac49d98e3e0b2f15109b7877d277c6546b12956c626bd2",
+      "bytes": 40762
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-1.json": {
+      "sha256": "c078a626c3f93b1f1ea4bf7f455bbf55aebe49a37d64a89c172403bd34fbad30",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-10.json": {
+      "sha256": "f68196452f46ce936abef1994533745e52f47c45afba08c006435417f522cfce",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-11.json": {
+      "sha256": "868e45b7041b98e2316a039c56f7922c9d36beff3a0aa0f06b6448a81d2a8d67",
+      "bytes": 2172
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-12.json": {
+      "sha256": "cff11f2f032e2bd1fb994f81704d5d8c28e614b8e5a3472383dee0677f7777e9",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-13.json": {
+      "sha256": "9dc7e73cc33502450164dafa685c7e589a6225b5ea3783785726f88edb803364",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-14.json": {
+      "sha256": "ec02c56248700e9b83925f4af08fb04a1ab60b3139ce526e95c2ddb9fc1302af",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-15.json": {
+      "sha256": "7a4b7713efd9ce1bebbf5d0bd9a7dc734380bd4916979caf2b67273ca91f5290",
+      "bytes": 40762
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-16.json": {
+      "sha256": "0aeee068c6e47792a1ac840241ba189af803fcf5398d2eb0b05915ac3418aa95",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-17.json": {
+      "sha256": "909c82ac304f815dcd0b86c5a3f7cc995617f5a4c72aaaab8f6e3f38ac6bbdcc",
+      "bytes": 40762
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-18.json": {
+      "sha256": "dddec8a7d0fd057f7b3724d504bd01790c90877588b1e371f7db0c96295f3443",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-19.json": {
+      "sha256": "0d0ed9515abbebb1a9160b121e51d29c5e0d22e05a04d9d87b97a52602d40e4a",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-2.json": {
+      "sha256": "6b181812cd3020b8915907dcdb116dc5a93d76f71439a7d8d4cd5bff1d33ad24",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-20.json": {
+      "sha256": "775dac2b422e5591ab03dfdee88069e2848403e69b8deed2b3ff59c75fe28566",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-21.json": {
+      "sha256": "675d5c5efc7cb66526d657e64a5639bed1d821c196b6b40430b1a9cc42a713cd",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-22.json": {
+      "sha256": "77a6338735f96941ffeed9520331d22f6e8207694861b3c4b5625259c22490f4",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-23.json": {
+      "sha256": "58aea8e61d74301c56defe04eaeed7a80fcab88878b52d5ad9713c7fac09fad1",
+      "bytes": 40762
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-24.json": {
+      "sha256": "69c34f7e95e863b5c8b226aa760cf401b387172751e6966b83a1a46149bb7c87",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-25.json": {
+      "sha256": "66740b064778b262f9aef0a6128c05a217f19ffdbc5e93fa592a80913e2e2b21",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-26.json": {
+      "sha256": "30e3f18ed375bad7958b322a7682613b385017d7be89511e5dfad57858438937",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-27.json": {
+      "sha256": "2c5db8399ac74fb2fcb3484b1f22252a5876c1eacfea3e7c3afb8e817615ad41",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-28.json": {
+      "sha256": "9548f42a14598d457704dd85bff27cffaf16fcef0f82bee2c8f3237059dfc8ac",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-29.json": {
+      "sha256": "4bb56ae2449826f2f8ee8cc9a5e47675c1eb178dd7c4ebfeeb25aaaab1c7bf1f",
+      "bytes": 2172
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-3.json": {
+      "sha256": "0bd743714a1518418e1a70518c157472fd94dabadbfa687bab08e35bdad2dff5",
+      "bytes": 40762
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-30.json": {
+      "sha256": "2ebcc886ffa1ed323fc46bcf076c17190c063c21ce32207b01d4d4fedeb126a8",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-31.json": {
+      "sha256": "b1634b44076dff095011ccaab595ec2a6cbd339ae67606273a69eef8f8f5068f",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-32.json": {
+      "sha256": "d3a963786490efa9cc952687e61e5ddca9c8782f673cb76e6a984ee142aae4ce",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-33.json": {
+      "sha256": "70e209d5535627681be3e95525c411a7a73dbdd823fac23cf5edafc808093cc7",
+      "bytes": 85050
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-34.json": {
+      "sha256": "8e5aa51f08cf47838246046627bece7f3d564a6342abef8ad94e093e26734b01",
+      "bytes": 30497
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-35.json": {
+      "sha256": "94d6a904a12ee294026a325aeff7e840452aeb55fb357f555f9eeff998031caa",
+      "bytes": 2172
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-36.json": {
+      "sha256": "57645b3465c51f68bbd7d41fbc249be0dccbf2361463a2424c30c81ab2cf8805",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-37.json": {
+      "sha256": "f56b1527fd6666e0dd834460002991338c1ba9eb2e192312c990708ed0a51bff",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-38.json": {
+      "sha256": "c400a2753c4b46bbc35d602ca10f1ba2485602fb95b67be8cfaec36726c01073",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-39.json": {
+      "sha256": "c017aeeef2b2242796cb9cdd7c5553b0f770ba36bc997a64ccbe442c827df272",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-4.json": {
+      "sha256": "a1d6839be9e1fc7594c5781afef66719bf78ed28cec0d9cce61e9369169b7815",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-40.json": {
+      "sha256": "5deb77a9bb1d8ddcaa11e631dee03ae18c77aaa8fc16f040d2f654a4551a966f",
+      "bytes": 40761
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-41.json": {
+      "sha256": "ec971b80fe15d82590d8c5fc9343c670190b67b9fa7da9b522ce719057d7f262",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-42.json": {
+      "sha256": "86b05c90c3125e64c0a0a43810f9271b580c23d563337f5238b4dffabd8b182f",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-43.json": {
+      "sha256": "3fe4467e8b78381889ba28324e4181e265dd52254ac7ae8db99bfde3f3b02c06",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-44.json": {
+      "sha256": "cc3d40b9cceb8c6904802febff4e6fcc1eba40650a261bef9064d681d2b75b45",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-45.json": {
+      "sha256": "1f45dbcf2eacbf13437da102a484651e31a5e48d892fa48537cc05e29be40ec2",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-46.json": {
+      "sha256": "0c0896092c1a1d10b8d6771accab71fea66d49092349914cf400884980a6b680",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-47.json": {
+      "sha256": "3c1c844e3258c6db87529bb102b26bfc0d29594e1dd4a8b45a869997f563e314",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-48.json": {
+      "sha256": "91efc1a3cf860acfe3fa3b99583cadddaa63549b90cafb818411c2aa92364c73",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-49.json": {
+      "sha256": "fdebbc8e2267455f8f3120281a11d54e0541025a501e2d022a36722bef39e9f9",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-5.json": {
+      "sha256": "c1c5d3a34c48ecd88148fd4c889c0e5b3a2454d755e306ed248e469e675a0bee",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-50.json": {
+      "sha256": "b3beef67cda4f45c8bab9acfeb34e68515796335fc3ef3558e6886686b245d92",
+      "bytes": 21595
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-51.json": {
+      "sha256": "c9ae057e110469303ac486e7a81b3d0db6b599a85ac6fd22721aee47f7cba3ab",
+      "bytes": 18703
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-52.json": {
+      "sha256": "5fa4417e26fde12feebd91fa3bb24c3dd759ded8c80adfa4ed0f78e19c9d6040",
+      "bytes": 18703
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-53.json": {
+      "sha256": "d1707e2966871bb585e8d1a38893aa9c1c28db8d67728afc1606cc680eecede6",
+      "bytes": 18703
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-54.json": {
+      "sha256": "54598fdd93fcc610977cee4627aca732588a99f8175ba76ee89a4fb9913e1ad7",
+      "bytes": 18703
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-55.json": {
+      "sha256": "6464563f8196ffb9591f97a079752957615481e919c956b9d16f1e96802f0f4e",
+      "bytes": 18703
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-56.json": {
+      "sha256": "db031490659486e0844c75296526d383e0ac7bcda7dd5e69becb495283642de0",
+      "bytes": 18703
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-57.json": {
+      "sha256": "0eb33904ebd6463c87576e352bb3c576458c82894c971608b7e27bcc01989c9e",
+      "bytes": 18702
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-58.json": {
+      "sha256": "ed62ffd20d6930b3338c295bf91d477ea1aa169e6db82b9d85e1284fb1f5c554",
+      "bytes": 979
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-59.json": {
+      "sha256": "9e013d2a1a1ed8d6fdc7fb1a92f95b97ebdb51c7f3d423e20314ece8c20cd82f",
+      "bytes": 18702
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-6.json": {
+      "sha256": "71b8e3056234329f129322e771342a86634fe21fe54862f41b3644dc7bca1abc",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-60.json": {
+      "sha256": "2058a31a46405b81fb9fbd211ca377876827fca40c780dd1c8104b50a039726f",
+      "bytes": 134822
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-61.json": {
+      "sha256": "fa2945d68056a8a99460172207c3540e20f3ffe69aca42f328e69421e4674ffb",
+      "bytes": 856
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-62.json": {
+      "sha256": "bc79fad86ddb33c45274db41743e4d7cc55ee98413ca92cc0388db152637a850",
+      "bytes": 726
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-7.json": {
+      "sha256": "173c3f7ee46baef5bb5ffbb6f7790f62e089b7b99121b754a951819b703e1452",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-8.json": {
+      "sha256": "a74863f793f829833338362f569a98efa55a496aaa5b5d3fc5b00c5b0cb2ffbf",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-100-original-9.json": {
+      "sha256": "7b2bf69c98f5b4aed782124c81b8c458244433aa90ec51fe63f8290688b6f060",
+      "bytes": 40763
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-AB-17.json": {
+      "sha256": "97d53a5bcaf8b72932dfd28370ef90891d017d2e9c6e4c5d14533568a2ac7c00",
+      "bytes": 8125
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-AB-18.json": {
+      "sha256": "5d1c5027e0261fe320ecb58cd53ce877e000d9aada09f02fe9ceb58b2bf63187",
+      "bytes": 20531
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-AB-19.json": {
+      "sha256": "30335e11624ef03f45080846345a1d418d02e19e4b4b9c41fb63140566444d5d",
+      "bytes": 62496
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-AB-20.json": {
+      "sha256": "fd0bb7ca2d46931d25182197d5de1e61ae2072195c2d29c23c9d3bab3539ee53",
+      "bytes": 20138
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-AB-21.json": {
+      "sha256": "cdc6081097e67968e7386cb195006db780b537d100cd856b4f638275afacede3",
+      "bytes": 134808
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-AB-22.json": {
+      "sha256": "65f0894d3bb98e1e9c5ec8abde5bbe4623521871bf9b14952c1c79854149d5f7",
+      "bytes": 735
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-D1-23.json": {
+      "sha256": "57034541fc4098c592af7899cdca29fb5342a36f8ab9b59175ffece04b12c8f6",
+      "bytes": 8125
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-D1-24.json": {
+      "sha256": "55cb4c7a5bcb2882fbe76ac135f2e4e863eda722e31593af1d02564e7e327070",
+      "bytes": 20531
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-D1-25.json": {
+      "sha256": "744bcf579b09915397c6ff49ccc0f8113d0b39ac12becf42850d621f533e5c41",
+      "bytes": 2172
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-D1-26.json": {
+      "sha256": "5f9ccb083c242883c948b42536eb6dbe3dc679f17765bab00fbec3781b787a08",
+      "bytes": 2172
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-D1-27.json": {
+      "sha256": "a6659cea9423bdff74161af68561fa294c39d6f0f4cd2e43d7869f2132727ddd",
+      "bytes": 2172
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-D1-28.json": {
+      "sha256": "b9a426c40cbb4caa74aca5635ad1473dccc881a19a291b7e91ff23fc39def266",
+      "bytes": 62497
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-D1-29.json": {
+      "sha256": "2278bc127e2f1c33bb36bd80538ba5538365e5defa63036e1b4bce52a1107f7c",
+      "bytes": 21858
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-D1-30.json": {
+      "sha256": "4f25570e44eb5eb2e9f3bb939e097e38d2939c76e7531844e31f6a319c8a6047",
+      "bytes": 20137
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-D1-31.json": {
+      "sha256": "78cee6c1f40f1a2089edb65f44c65290b959e493ab7c37e3fa54700ded3d36f2",
+      "bytes": 4374
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-D1-32.json": {
+      "sha256": "a7ff54c34f18d1507dbb888777e472b88e0d9535de3936b8c8c852a5647a82dd",
+      "bytes": 4374
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-D1-33.json": {
+      "sha256": "5a0202458421e66ff1d9c378c1735fd5cee62be12e3fc0be27aeb310de6f13ba",
+      "bytes": 18703
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-D1-34.json": {
+      "sha256": "97385d3e222a0476f796d39e723129eb101c4ab8b7daad6b25b124e0b0da0f1e",
+      "bytes": 18703
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-D1-35.json": {
+      "sha256": "9ddd004c00218d4a94a2a193e926451e8f73e42a1966429fb0e8a2692429b60c",
+      "bytes": 134336
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-D1-36.json": {
+      "sha256": "1718eed1eec42cc7150971f1209ee9dd0b70b56237f06b3b3bbc5fee3d0ea6fd",
+      "bytes": 737
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-0.json": {
+      "sha256": "cb35dd218ba087638ad325ff1582a593fb3bed8761444b882d8113f458fd3096",
+      "bytes": 8125
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-1.json": {
+      "sha256": "39ffc0e119babb49fa63db2caabfae130e7cf4a8e431402c38e7e586c150f914",
+      "bytes": 40759
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-10.json": {
+      "sha256": "00ee26665f36b481cd6730738402fa767480ec3e777258bec515d360cab18d21",
+      "bytes": 3164
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-11.json": {
+      "sha256": "a0d5d5871a1e8e6ab74a989fa80ab87ecec3bc13b004b344deff41d5ce121a0d",
+      "bytes": 40759
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-12.json": {
+      "sha256": "3c41c58f5bc86c164834057d2abcb2e7e0f79e6f535da00e8a319c8b87dbd224",
+      "bytes": 30489
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-13.json": {
+      "sha256": "855fc10b39f201f4549f459ab4ffaf24f8ac7d1fc6746c89df759b9039a4e916",
+      "bytes": 21583
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-14.json": {
+      "sha256": "ab9da6c514515cbfa900781a6f1e5e40740e7522668831bdbfd5017b8d6cf25c",
+      "bytes": 134808
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-15.json": {
+      "sha256": "aa31585361defa1367c0b2b2ea350313f176442f4780ae124de98e82d2008336",
+      "bytes": 856
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-16.json": {
+      "sha256": "0d27327eff659f777afd6fec1c2b52ca035773b7fcba51d38e9d4855b5ff85aa",
+      "bytes": 725
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-2.json": {
+      "sha256": "98cee191b9a5bd6a4b10dd01decb177172bf81f071df5526eb29f4e2b6b2c2cf",
+      "bytes": 40759
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-3.json": {
+      "sha256": "4f26c1381187c960e8af108765a02b5e6527eadf20342a4750de8f8912809301",
+      "bytes": 40759
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-4.json": {
+      "sha256": "5ff76ab8700af0ddbee21546f08bcf495d1bf01b1da765324136b5afa4037f8d",
+      "bytes": 40759
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-5.json": {
+      "sha256": "826b76596e666cbc80f3cb61fecfd447d0b6c8879694d21b3c219f7659fc9668",
+      "bytes": 40759
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-6.json": {
+      "sha256": "f776b74ccb26f4c739d4360ac27d8117c8a0af02ebd41031c51559b9aeac30b1",
+      "bytes": 40759
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-7.json": {
+      "sha256": "2965da5c580b4750c22b10a8368b88cf27482bb1013d85a81dd01c70726b9407",
+      "bytes": 85011
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-8.json": {
+      "sha256": "a55a743e3f3ac450692b5052eb6cf76cfd908842154678090377913026ecd750",
+      "bytes": 40759
+    },
+    "docs/estadisticas-v1/p03-f3c/plans/profile-50-original-9.json": {
+      "sha256": "a9db5c0a83fd4ba37414cff4ab9d77efb1f25cc83ac516170e564879a9d68824",
+      "bytes": 40759
+    },
+    "docs/estadisticas-v1/p03-f3c/preservation.json": {
+      "sha256": "9650cae034d888b5b8d70fc34e6a48f52bbf5d9aaef0275bbfbd697026ab6e14",
+      "bytes": 18513
+    },
+    "docs/estadisticas-v1/p03-f3c/profile/after.json": {
+      "sha256": "d22517a0b99f738d17c9db4f308a49a03fc62b2f195e4bcf3b4ab63cf1693149",
+      "bytes": 163187
+    },
+    "docs/estadisticas-v1/p03-f3c/profile/baseline.json": {
+      "sha256": "8d2ae53b4030b2629fcdbf2f45669ca59217100e60bc57017d42ff3ccbae3b97",
+      "bytes": 711379
+    },
+    "docs/estadisticas-v1/p03-f3c/profile/before.json": {
+      "sha256": "6947c785f75a28a6f3c40efd2abc335a8cd306e92c12c45a637e30598b59f57f",
+      "bytes": 163199
+    },
+    "docs/estadisticas-v1/p03-f3c/profile/preservation.json": {
+      "sha256": "702782e37bfd7e343cc78c18a38d90af838b602271fe78b4c319611677a8aa40",
+      "bytes": 184
+    },
+    "docs/estadisticas-v1/p03-f3c/profile/results.json": {
+      "sha256": "826e76323bbce9990040132717b81733744dff2e698dfe4cd965faa377c17a7f",
+      "bytes": 419
+    },
+    "docs/estadisticas-v1/p03-f3c/profile/volume-100.json": {
+      "sha256": "a7dbce02faf98597109ce425168f5d40e419fedb3e70b139b4ec1a3da57b12b4",
+      "bytes": 3171119
+    },
+    "docs/estadisticas-v1/p03-f3c/profile/volume-50.json": {
+      "sha256": "16d3e168c8a4f189e63942ac016ada0473672eaf04a9ebd3cd4f933ae4638a8f",
+      "bytes": 1337952
+    },
+    "docs/estadisticas-v1/p03-f3c/security-shapes.json": {
+      "sha256": "479a42619c48f154be715381b858cd3e0d232e53793e0f4b959f1762cdbb95ea",
+      "bytes": 2562
+    },
+    "docs/estadisticas-v1/p03-f3c/security.json": {
+      "sha256": "1a4391d4baf4e6d30909b95e19564b04249f0785309c47c8fe390379dbfb54af",
+      "bytes": 2467
+    },
+    "scripts/statistics-v1/p03-f3c-benchmark-prepare.mjs": {
+      "sha256": "a24544990ea6bcd70911bf7052ba7e3feabf68c48fc4cd9f8f0b46515705fff7",
+      "bytes": 3193
+    },
+    "scripts/statistics-v1/p03-f3c-benchmark.mjs": {
+      "sha256": "b9386a978d89fb3638348745648176fcb0fe1354fa9510cc8cbadb90031b1e93",
+      "bytes": 17214
+    },
+    "scripts/statistics-v1/p03-f3c-concurrency-prepare.mjs": {
+      "sha256": "9698ba50aef4206f9d8908c06f0abe6139fabb1ba15a0925fdc235d7596e1621",
+      "bytes": 1455
+    },
+    "scripts/statistics-v1/p03-f3c-concurrency.mjs": {
+      "sha256": "aa98d502c57b49b9c89befa53552c8cfffbe94a01e6f57d913006c17639970e2",
+      "bytes": 5110
+    },
+    "scripts/statistics-v1/p03-f3c-edges.sql": {
+      "sha256": "6240c50c24237cfd3eb5f06ba8c6862664d64bac8a44f5caf86f092efc45ab8b",
+      "bytes": 2705
+    },
+    "scripts/statistics-v1/p03-f3c-evidence.mjs": {
+      "sha256": "56228206a701853ebaa4e3b896350625c9028f2c94843b6b01f9526080b86d53",
+      "bytes": 5179
+    },
+    "scripts/statistics-v1/p03-f3c-prepare.mjs": {
+      "sha256": "e4e79dd57ba299a7fe332ebd550f460b3e795e1d0efc803a41eb8d16085a171f",
+      "bytes": 677
+    },
+    "scripts/statistics-v1/p03-f3c-report.mjs": {
+      "sha256": "d37d3e058fc1a1103d6bd56ee8db370c44b504bbe18ae57ba47fb832cee236cd",
+      "bytes": 12386
+    },
+    "scripts/statistics-v1/p03-f3c-runner.fragment.txt": {
+      "sha256": "5bd7be6da4add0b75d2cfd7823a5559685062120ceb53adb6a046c50dc510301",
+      "bytes": 12400
+    },
+    "scripts/statistics-v1/p03-f3c-validate.mjs": {
+      "sha256": "d2dbd2f58948781dbc3a2b0051e0d25ff80370b7b0ad6d6a9e3db9d27d70b383",
+      "bytes": 20174
+    }
+  },
+  "inventoryExcludesSelf": true,
+  "newScriptFiles": [
+    "scripts/statistics-v1/p03-f3c-benchmark-prepare.mjs",
+    "scripts/statistics-v1/p03-f3c-benchmark.mjs",
+    "scripts/statistics-v1/p03-f3c-concurrency-prepare.mjs",
+    "scripts/statistics-v1/p03-f3c-concurrency.mjs",
+    "scripts/statistics-v1/p03-f3c-edges.sql",
+    "scripts/statistics-v1/p03-f3c-evidence.mjs",
+    "scripts/statistics-v1/p03-f3c-prepare.mjs",
+    "scripts/statistics-v1/p03-f3c-report.mjs",
+    "scripts/statistics-v1/p03-f3c-runner.fragment.txt",
+    "scripts/statistics-v1/p03-f3c-validate.mjs"
+  ],
+  "reusedUnmodifiedDependencies": [
+    "scripts/statistics-v1/p03-f1-fixture.sql",
+    "scripts/statistics-v1/p03-f1-shapes-fixture.sql",
+    "scripts/statistics-v1/p03-f2b-security.sql",
+    "scripts/statistics-v1/p03-f2b-state-tests.sql",
+    "scripts/statistics-v1/p03-f2b-temporal-fixture.sql",
+    "scripts/statistics-v1/p03-f2b-dst-tests.sql",
+    "scripts/statistics-v1/p03-f2a-decode.verify.ts",
+    "docs/estadisticas-v1/p03-f3b/differential-three-readers.sql"
+  ],
+  "limits": [
+    "50/100 only;200/500/1000/5000 not executed; no target extrapolation",
+    "20 normal samples per reader/cohort, single isolated run; higher dispersion at50 than100",
+    "No HTTP or JWT signature/cookie/expiry certification; synthetic SQL claims and effective DB roles tested",
+    "No peak backend/host memory measurement or stress/parallel benchmarks",
+    "Bounded RR MVCC vs uncommitted settings writer, not a committed order/finance race",
+    "No new199/200-point stress suite; unchanged sizing and partition guards plus temporal equivalence",
+    "Synthetic fixture preparation inherited30s budget from F2B; validation and measurement SQL15s,lock3s; installation15s",
+    "Rollbacks preserve logical rows; sequences,WAL,physical pages and statistics can advance; no reset",
+    "D1 remains private experimental, public original still active"
+  ],
+  "ignoredRuntimeInventory": {
+    "supabase/statistics-v1-test/.runtime/p03-f3c-benchmark-100-prepared.local.sql": {
+      "sha256": "96d9252e67af4715765187ae5539459fd8b4ad98e7d460236eb77c9f5d706ccc",
+      "bytes": 10972,
+      "privateLocalOnly": true,
+      "note": "Diagnostic prepared SQL may contain the private isolated identity marker; contents not exported."
+    },
+    "supabase/statistics-v1-test/.runtime/p03-f3c-benchmark-50-prepared.local.sql": {
+      "sha256": "35ac2a3188b5b4d9429d7c3b058f73fcf77faad202147a8e51add218cfc6f62f",
+      "bytes": 10965,
+      "privateLocalOnly": true,
+      "note": "Diagnostic prepared SQL may contain the private isolated identity marker; contents not exported."
+    },
+    "supabase/statistics-v1-test/.runtime/p03-f3c-profile-100-prepared.local.sql": {
+      "sha256": "8c9442939be6ad0b43535ae2f57e1cc164d46c741c3f3aeca044ae17ed25e6e1",
+      "bytes": 4935,
+      "privateLocalOnly": true,
+      "note": "Diagnostic prepared SQL may contain the private isolated identity marker; contents not exported."
+    },
+    "supabase/statistics-v1-test/.runtime/p03-f3c-profile-50-prepared.local.sql": {
+      "sha256": "00b3b2f8fa13b6c9e1fffbf2040e25fe8f1d643ce2673bf2b0ecfedca5b9ee02",
+      "bytes": 4928,
+      "privateLocalOnly": true,
+      "note": "Diagnostic prepared SQL may contain the private isolated identity marker; contents not exported."
+    }
+  },
+  "quantileMethod": "Nearest rank for p50/p95; p95 sample19 of20; all samples and outliers retained."
+}

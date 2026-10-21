@@ -1,0 +1,55 @@
+{
+  "at": "2026-10-14T12:20:40.340Z",
+  "verdict": "READY_FOR_SQL_REVIEW",
+  "candidateSha256": "99a5d3e9dd879bb11b92abebc377a5cbdc7ebc08d75b9eed8280f88e4f5e2f23",
+  "compiledInDb": false,
+  "sqlExecuted": false,
+  "inventory": [
+    {
+      "path": "lib/statistics/products-contracts.ts",
+      "sha256": "675f62c50e0c3ac1c696e1bdb8d62b235f5f34227882a3dbdba345ba2d5267f4"
+    },
+    {
+      "path": "lib/statistics/products-read.ts",
+      "sha256": "2dc443a63f66270b55a9ea78d6610117fc103389ee3524d4035562c69a3ec2b2"
+    },
+    {
+      "path": "lib/statistics/products.verify.ts",
+      "sha256": "276950834c90ad9788857909f68766a9b01b86149ab7116570f730ae2d784796"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/candidate-products.sql",
+      "sha256": "99a5d3e9dd879bb11b92abebc377a5cbdc7ebc08d75b9eed8280f88e4f5e2f23"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/CONTRACT.md",
+      "sha256": "03e3145153a44fba3feb3b3a87846594579980b0a423bea4f57e08d3b34e8199"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/decoder-tests.json",
+      "sha256": "13633a172708c7e32750c64e77d0663ee9a6bda8d8a292d5d200e9d1901dcab1"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/empty-reference.sql",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/functions.diff",
+      "sha256": "f7b87bcfd55a7d748978cde021d71ae2222b2bd3eb6fac1b10f777448a087965"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/NEXT_AUTHORIZATION.md",
+      "sha256": "c2d8d394c5c76f919b219ef542df62c1fce9e20770619d4d594b12d0472defab"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/SECURITY_MATRIX.md",
+      "sha256": "89efd2280e33c838580bcf21d6ab2dd6639e7670cf62f2cc01bcd63e1c27ae43"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01a/static-audit.json",
+      "sha256": "4770298406c3da6aaba3fe6f4fa69d66c668af1ec22f2413d1b994e795eb6fff"
+    }
+  ],
+  "relatedEvidence": "../p03-g1/evidence.json",
+  "inventoryExcludesSelf": true
+}

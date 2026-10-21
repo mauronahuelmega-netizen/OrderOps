@@ -1,0 +1,35 @@
+{
+  "at": "2026-10-16T15:25:01.431Z",
+  "syntax": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/audit-private-bundle-readonly.mjs",
+      "result": "PASS"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/finalize-evidence.mjs",
+      "result": "PASS"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/live-readonly.mjs",
+      "result": "PASS"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-scope-preflight-20261016/xattrs-readonly.mjs",
+      "result": "PASS"
+    }
+  ],
+  "priorTests": {
+    "source": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/offline-results.json",
+    "count": 371,
+    "rerun": false
+  },
+  "liveResourceIdentity": "PASS",
+  "payloadRecomputation": "PASS_2",
+  "bundleDecryption": "PASS_17_ARCHIVES",
+  "nativeBarrier": "PASS_2_REAL_PAYLOAD_DESCRIPTORS_REJECTED",
+  "earlierBundle": "HASH_VERIFIED_NOT_DECRYPTED_IN_THIS_TASK",
+  "xattrs": "BLOCKED_INCOMPLETE_ATTRIBUTE_VISIBILITY",
+  "sql": "NOT_EXECUTED",
+  "mutationOperations": 0,
+  "scopeDocuments": "ONLY_NEW_DOCUMENTS; no UI implementation"
+}

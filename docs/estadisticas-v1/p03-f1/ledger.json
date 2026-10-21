@@ -1,0 +1,38 @@
+{
+  "at": "2026-10-13T21:22:22.499Z",
+  "result": "PASS",
+  "identity": {
+    "verified": true,
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "containers": 5,
+    "volumes": [
+      "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+    ],
+    "baseMigrations": 119,
+    "startedAt": "2026-10-12T19:27:13.000Z"
+  },
+  "entries": [
+    {
+      "name": "20261013001000_statistics_v1_structures.sql",
+      "sha256": "5b28bc586ac76f2bcf19df36ecd610d780d26e609d153e8343e5c7b0ecba8828",
+      "ledgerMd5": "606261017dd0ec9a0250110c5bf88d3b"
+    },
+    {
+      "name": "20261013002000_statistics_v1_capture.sql",
+      "sha256": "58c3b995450dd84bcc4299453dc8a80c5c96e62b3b72fe4a46394ae05f9b0d19",
+      "ledgerMd5": "54f696936af44194984caf4457653668"
+    },
+    {
+      "name": "20261013003000_statistics_v1_reads_security.sql",
+      "sha256": "b42a4c961a5ae1ca6a7884af391b6faa36fe3e9e271ba0c570bb9bd3355a7678",
+      "ledgerMd5": "2e90976cd67d5d2bba0ac5bb4d0b7f12"
+    },
+    {
+      "name": "20261013004000_statistics_v1_comparative_series.sql",
+      "sha256": "b10c330adff70b803d9d25165f07830e90d4cd092aa4ba2cf3d0120a43f95219",
+      "ledgerMd5": "728a95b4e5d1fbe9d7c66dfd20f01264"
+    }
+  ],
+  "readOnly": true
+}

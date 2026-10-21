@@ -1,0 +1,21 @@
+{
+  "simulation": "Source archive compared to itself; NOT restoration",
+  "status": "PASS_DUMP_CONTENT_ONLY",
+  "sourceTocEntries": 1847,
+  "restoredTocEntries": 1847,
+  "sourceDataTables": 108,
+  "restoredDataTables": 108,
+  "sourceRows": 738,
+  "restoredRows": 738,
+  "schemaDifferences": [],
+  "dataDifferences": [],
+  "externalDependencyEdgesNotMapped": {
+    "source": 64,
+    "restored": 64,
+    "scope": "Non-TOC dependency IDs retained in original archives; not equated across clusters or claimed verified"
+  },
+  "globalRoleAttributesRecovered": false,
+  "operationalServiceRecovered": false,
+  "originalOidsCompared": false,
+  "comparison": "Exact logical TOC definitions/owner/dependency identities; row multiset with exact COPY escapes/NULL, no financial normalization"
+}

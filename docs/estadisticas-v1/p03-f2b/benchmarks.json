@@ -1,0 +1,283 @@
+{
+  "at": "2026-10-13T23:15:06.403Z",
+  "result": "PERFORMANCE_IMPROVED_WITH_LIMITATIONS",
+  "unit": "PostgreSQL EXPLAIN execution ms; not HTTP",
+  "concurrency": 1,
+  "perQueryTimeoutMs": 15000,
+  "warmupsExcluded": true,
+  "percentile": "nearest rank; 20 samples are exploratory, no production confidence guarantee",
+  "rows": [
+    {
+      "orders": 50,
+      "status": "PASS",
+      "warmups": [
+        {
+          "name": "original:warmup",
+          "ms": 1563.917
+        },
+        {
+          "name": "candidate:warmup",
+          "ms": 576.573
+        }
+      ],
+      "groups": {
+        "original": {
+          "samples": 20,
+          "p50": 841.428,
+          "p95": 1530.059,
+          "min": 671.908,
+          "max": 2853.457,
+          "stdPopulation": 487.62387519653663,
+          "valuesMs": [
+            1013.609,
+            703.777,
+            1088.785,
+            671.908,
+            789.273,
+            833.317,
+            1530.059,
+            689.786,
+            841.428,
+            1489.22,
+            1120.773,
+            804.783,
+            1106.3,
+            1087.941,
+            1409.533,
+            2853.457,
+            1451.783,
+            807.419,
+            778.068,
+            786.516
+          ]
+        },
+        "candidate": {
+          "samples": 20,
+          "p50": 329.708,
+          "p95": 888.111,
+          "min": 278.828,
+          "max": 1129.9,
+          "stdPopulation": 223.88611282477973,
+          "valuesMs": [
+            644.408,
+            306.453,
+            399.255,
+            325.507,
+            302.573,
+            329.539,
+            496.747,
+            335.546,
+            325.451,
+            459.286,
+            738.46,
+            888.111,
+            411.242,
+            278.828,
+            287.01,
+            1129.9,
+            463.696,
+            329.708,
+            297.088,
+            288.31
+          ]
+        }
+      },
+      "error": null,
+      "resourcesBefore": {
+        "at": "2026-10-13T22:58:38.095Z",
+        "dbStats": {
+          "BlockIO": "114MB / 41.9MB",
+          "CPUPerc": "1.30%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.71%",
+          "MemUsage": "135MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.72MB / 10.4MB",
+          "PIDs": "13"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourcesAfter": {
+        "at": "2026-10-13T22:59:14.790Z",
+        "dbStats": {
+          "BlockIO": "114MB / 42.3MB",
+          "CPUPerc": "0.02%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.71%",
+          "MemUsage": "135MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.72MB / 10.4MB",
+          "PIDs": "13"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "elapsedMs": 33663,
+      "cleanupVerified": true
+    },
+    {
+      "orders": 100,
+      "status": "PASS",
+      "warmups": [
+        {
+          "name": "original:warmup",
+          "ms": 4040.683
+        },
+        {
+          "name": "candidate:warmup",
+          "ms": 1184.827
+        }
+      ],
+      "groups": {
+        "original": {
+          "samples": 20,
+          "p50": 4052.753,
+          "p95": 5430.673,
+          "min": 1614.981,
+          "max": 5690.953,
+          "stdPopulation": 926.8386624314653,
+          "valuesMs": [
+            2331.659,
+            3891.876,
+            1614.981,
+            4387.281,
+            4992.365,
+            5430.673,
+            5323.846,
+            4267.83,
+            4519.991,
+            4060.153,
+            4052.753,
+            5690.953,
+            4815.027,
+            4012.854,
+            3944.687,
+            3793.24,
+            3884.019,
+            3772.568,
+            4480.304,
+            3830.321
+          ]
+        },
+        "candidate": {
+          "samples": 20,
+          "p50": 581.483,
+          "p95": 1251.597,
+          "min": 511.939,
+          "max": 1728.8,
+          "stdPopulation": 314.2292433057234,
+          "valuesMs": [
+            1251.597,
+            1139.053,
+            1007.569,
+            637.009,
+            715.049,
+            511.939,
+            552.412,
+            873.574,
+            668.018,
+            578.13,
+            723.207,
+            1728.8,
+            1085.286,
+            575.348,
+            515.164,
+            548.671,
+            581.483,
+            520.992,
+            579.134,
+            543.82
+          ]
+        }
+      },
+      "error": null,
+      "resourcesBefore": {
+        "at": "2026-10-13T22:59:33.520Z",
+        "dbStats": {
+          "BlockIO": "114MB / 42.3MB",
+          "CPUPerc": "0.00%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.71%",
+          "MemUsage": "134.9MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.72MB / 10.4MB",
+          "PIDs": "13"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "resourcesAfter": {
+        "at": "2026-10-13T23:01:20.657Z",
+        "dbStats": {
+          "BlockIO": "114MB / 43.2MB",
+          "CPUPerc": "0.07%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.71%",
+          "MemUsage": "135.2MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "3.72MB / 10.4MB",
+          "PIDs": "13"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "elapsedMs": 104885,
+      "cleanupVerified": true
+    }
+  ],
+  "notExecuted": [
+    {
+      "orders": 200,
+      "status": "NOT_EXECUTED",
+      "reason": "Progressive safety gate / prior batch stopping condition"
+    },
+    {
+      "orders": 500,
+      "status": "NOT_EXECUTED",
+      "reason": "Progressive safety gate / prior batch stopping condition"
+    },
+    {
+      "orders": 1000,
+      "status": "NOT_EXECUTED",
+      "reason": "Progressive safety gate / prior batch stopping condition"
+    },
+    {
+      "orders": 5000,
+      "status": "NOT_EXECUTED",
+      "reason": "Progressive safety gate / prior batch stopping condition"
+    }
+  ],
+  "targets": [
+    {
+      "orders": 100,
+      "p95Ms": 500
+    },
+    {
+      "orders": 500,
+      "p95Ms": 1000
+    },
+    {
+      "orders": 1000,
+      "p95Ms": 1500
+    },
+    {
+      "orders": 5000,
+      "p95Ms": 3000
+    }
+  ],
+  "publicRpc": "original active; candidate private only",
+  "launchApproval": false
+}

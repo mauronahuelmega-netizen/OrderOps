@@ -1,0 +1,175 @@
+{
+  "at": "2026-10-16T16:00:45.074Z",
+  "comparison": "Exact original array positions; no sorting or normalization",
+  "differences": [
+    {
+      "index": 18,
+      "reference": {
+        "table": "business_settings",
+        "name": "handle_business_settings_updated_at",
+        "def": "CREATE TRIGGER handle_business_settings_updated_at BEFORE UPDATE ON public.business_settings FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+      },
+      "observed": {
+        "table": "business_settings",
+        "name": "handle_business_settings_updated_at",
+        "def": "CREATE TRIGGER handle_business_settings_updated_at BEFORE UPDATE ON public.business_settings FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')"
+      }
+    },
+    {
+      "index": 19,
+      "reference": {
+        "table": "customization_groups",
+        "name": "handle_customization_groups_updated_at",
+        "def": "CREATE TRIGGER handle_customization_groups_updated_at BEFORE UPDATE ON public.customization_groups FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+      },
+      "observed": {
+        "table": "customization_groups",
+        "name": "handle_customization_groups_updated_at",
+        "def": "CREATE TRIGGER handle_customization_groups_updated_at BEFORE UPDATE ON public.customization_groups FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')"
+      }
+    },
+    {
+      "index": 20,
+      "reference": {
+        "table": "customization_options",
+        "name": "handle_customization_options_updated_at",
+        "def": "CREATE TRIGGER handle_customization_options_updated_at BEFORE UPDATE ON public.customization_options FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+      },
+      "observed": {
+        "table": "customization_options",
+        "name": "handle_customization_options_updated_at",
+        "def": "CREATE TRIGGER handle_customization_options_updated_at BEFORE UPDATE ON public.customization_options FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')"
+      }
+    },
+    {
+      "index": 21,
+      "reference": {
+        "table": "customization_group_assignments",
+        "name": "handle_customization_group_assignments_updated_at",
+        "def": "CREATE TRIGGER handle_customization_group_assignments_updated_at BEFORE UPDATE ON public.customization_group_assignments FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+      },
+      "observed": {
+        "table": "customization_group_assignments",
+        "name": "handle_customization_group_assignments_updated_at",
+        "def": "CREATE TRIGGER handle_customization_group_assignments_updated_at BEFORE UPDATE ON public.customization_group_assignments FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')"
+      }
+    },
+    {
+      "index": 22,
+      "reference": {
+        "table": "product_customization_overrides",
+        "name": "handle_product_customization_overrides_updated_at",
+        "def": "CREATE TRIGGER handle_product_customization_overrides_updated_at BEFORE UPDATE ON public.product_customization_overrides FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+      },
+      "observed": {
+        "table": "product_customization_overrides",
+        "name": "handle_product_customization_overrides_updated_at",
+        "def": "CREATE TRIGGER handle_product_customization_overrides_updated_at BEFORE UPDATE ON public.product_customization_overrides FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')"
+      }
+    },
+    {
+      "index": 23,
+      "reference": {
+        "table": "upsell_groups",
+        "name": "handle_upsell_groups_updated_at",
+        "def": "CREATE TRIGGER handle_upsell_groups_updated_at BEFORE UPDATE ON public.upsell_groups FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+      },
+      "observed": {
+        "table": "upsell_groups",
+        "name": "handle_upsell_groups_updated_at",
+        "def": "CREATE TRIGGER handle_upsell_groups_updated_at BEFORE UPDATE ON public.upsell_groups FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')"
+      }
+    },
+    {
+      "index": 24,
+      "reference": {
+        "table": "upsell_group_items",
+        "name": "handle_upsell_group_items_updated_at",
+        "def": "CREATE TRIGGER handle_upsell_group_items_updated_at BEFORE UPDATE ON public.upsell_group_items FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+      },
+      "observed": {
+        "table": "upsell_group_items",
+        "name": "handle_upsell_group_items_updated_at",
+        "def": "CREATE TRIGGER handle_upsell_group_items_updated_at BEFORE UPDATE ON public.upsell_group_items FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')"
+      }
+    },
+    {
+      "index": 25,
+      "reference": {
+        "table": "order_financials",
+        "name": "handle_order_financials_updated_at",
+        "def": "CREATE TRIGGER handle_order_financials_updated_at BEFORE UPDATE ON public.order_financials FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+      },
+      "observed": {
+        "table": "order_financials",
+        "name": "handle_order_financials_updated_at",
+        "def": "CREATE TRIGGER handle_order_financials_updated_at BEFORE UPDATE ON public.order_financials FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')"
+      }
+    },
+    {
+      "index": 28,
+      "reference": {
+        "table": "finance_accounts",
+        "name": "handle_finance_accounts_updated_at",
+        "def": "CREATE TRIGGER handle_finance_accounts_updated_at BEFORE UPDATE ON public.finance_accounts FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+      },
+      "observed": {
+        "table": "finance_accounts",
+        "name": "handle_finance_accounts_updated_at",
+        "def": "CREATE TRIGGER handle_finance_accounts_updated_at BEFORE UPDATE ON public.finance_accounts FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')"
+      }
+    },
+    {
+      "index": 29,
+      "reference": {
+        "table": "finance_categories",
+        "name": "handle_finance_categories_updated_at",
+        "def": "CREATE TRIGGER handle_finance_categories_updated_at BEFORE UPDATE ON public.finance_categories FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+      },
+      "observed": {
+        "table": "finance_categories",
+        "name": "handle_finance_categories_updated_at",
+        "def": "CREATE TRIGGER handle_finance_categories_updated_at BEFORE UPDATE ON public.finance_categories FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')"
+      }
+    },
+    {
+      "index": 31,
+      "reference": {
+        "table": "finance_funds",
+        "name": "handle_finance_funds_updated_at",
+        "def": "CREATE TRIGGER handle_finance_funds_updated_at BEFORE UPDATE ON public.finance_funds FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+      },
+      "observed": {
+        "table": "finance_funds",
+        "name": "handle_finance_funds_updated_at",
+        "def": "CREATE TRIGGER handle_finance_funds_updated_at BEFORE UPDATE ON public.finance_funds FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')"
+      }
+    },
+    {
+      "index": 33,
+      "reference": {
+        "table": "business_finance_settings",
+        "name": "handle_business_finance_settings_updated_at",
+        "def": "CREATE TRIGGER handle_business_finance_settings_updated_at BEFORE UPDATE ON public.business_finance_settings FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+      },
+      "observed": {
+        "table": "business_finance_settings",
+        "name": "handle_business_finance_settings_updated_at",
+        "def": "CREATE TRIGGER handle_business_finance_settings_updated_at BEFORE UPDATE ON public.business_finance_settings FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')"
+      }
+    },
+    {
+      "index": 38,
+      "reference": {
+        "table": "finance_transactions",
+        "name": "handle_finance_transactions_updated_at",
+        "def": "CREATE TRIGGER handle_finance_transactions_updated_at BEFORE UPDATE ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')"
+      },
+      "observed": {
+        "table": "finance_transactions",
+        "name": "handle_finance_transactions_updated_at",
+        "def": "CREATE TRIGGER handle_finance_transactions_updated_at BEFORE UPDATE ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')"
+      }
+    }
+  ]
+}

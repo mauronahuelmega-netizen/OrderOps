@@ -1,0 +1,107 @@
+{
+  "at": "2026-10-16T13:32:43.005Z",
+  "result": "STATIC_REPLAY_ANALYSIS_ONLY",
+  "results": [
+    {
+      "kind": "db",
+      "parsedQuotedHeredocs": [
+        {
+          "path": "/etc/postgresql.schema.sql",
+          "operation": "overwrite_literal",
+          "embeddedContentMatchesCapturedFile": true,
+          "literalSha256": "6a733d0e55a1fefdaf87d782d461d8e697289de21133f6cf22d0a3af44b8fbd9",
+          "capturedSha256": "6a733d0e55a1fefdaf87d782d461d8e697289de21133f6cf22d0a3af44b8fbd9",
+          "appendWhitespaceOnly": null,
+          "appendAudit": null,
+          "expectedAfterReplay": "same_content"
+        },
+        {
+          "path": "/etc/postgresql-custom/pgsodium_root.key",
+          "operation": "overwrite_literal",
+          "embeddedContentMatchesCapturedFile": true,
+          "literalSha256": "0f0a54e1402112b4e6435af6b243389d3e93898760492b904c9e25d1f467946c",
+          "capturedSha256": "0f0a54e1402112b4e6435af6b243389d3e93898760492b904c9e25d1f467946c",
+          "appendWhitespaceOnly": null,
+          "appendAudit": null,
+          "expectedAfterReplay": "same_content"
+        },
+        {
+          "path": "/etc/postgresql/postgresql.conf",
+          "operation": "append_literal",
+          "embeddedContentMatchesCapturedFile": false,
+          "literalSha256": "71dd74284269253b72d549edc7c0df2d309a63222e53577e1060d383782b3b0d",
+          "capturedSha256": "b2b55146de9e4050ea39016b89aaba133a0235b2fb6303096c3bba27d1e5b444",
+          "appendWhitespaceOnly": false,
+          "appendAudit": {
+            "alreadyExactSuffix": true,
+            "onlyAssignmentLines": true,
+            "noActiveLines": true,
+            "assignmentNames": [],
+            "expectedPostStartSha256": "cffcfdad8e6b42a0046160121efea5525f72179841662b2d259bb695d552f751",
+            "runtimeValidated": false
+          },
+          "expectedAfterReplay": "byte_change_expected_append; must compare effective config, not certify unchanged file"
+        }
+      ],
+      "allOverwriteLiteralsMatch": true,
+      "appendTargets": [
+        "/etc/postgresql/postgresql.conf"
+      ],
+      "scriptsExecuted": false,
+      "entrypointAndCmdHashesPreserved": true,
+      "runtimeReplay": "NOT_EXECUTED; post-start verification required"
+    },
+    {
+      "kind": "kong",
+      "parsedQuotedHeredocs": [
+        {
+          "path": "/home/kong/kong.yml",
+          "operation": "overwrite_literal",
+          "embeddedContentMatchesCapturedFile": true,
+          "literalSha256": "04889a9a284f7923062f06ddc3e64509e100d11adfc44aee29adb3d7b65a47f9",
+          "capturedSha256": "04889a9a284f7923062f06ddc3e64509e100d11adfc44aee29adb3d7b65a47f9",
+          "appendWhitespaceOnly": null,
+          "appendAudit": null,
+          "expectedAfterReplay": "same_content"
+        },
+        {
+          "path": "/home/kong/custom_nginx.template",
+          "operation": "overwrite_literal",
+          "embeddedContentMatchesCapturedFile": true,
+          "literalSha256": "9bfdd671361d40816ea8c7a98d27a8ec4ff6d993ffd3f83ed39259e543bff1db",
+          "capturedSha256": "9bfdd671361d40816ea8c7a98d27a8ec4ff6d993ffd3f83ed39259e543bff1db",
+          "appendWhitespaceOnly": null,
+          "appendAudit": null,
+          "expectedAfterReplay": "same_content"
+        },
+        {
+          "path": "/home/kong/localhost.crt",
+          "operation": "overwrite_literal",
+          "embeddedContentMatchesCapturedFile": true,
+          "literalSha256": "9149c59a707da42289d9a0c7cf574194c92efbb449a3b4c840dc0f966acf7152",
+          "capturedSha256": "9149c59a707da42289d9a0c7cf574194c92efbb449a3b4c840dc0f966acf7152",
+          "appendWhitespaceOnly": null,
+          "appendAudit": null,
+          "expectedAfterReplay": "same_content"
+        },
+        {
+          "path": "/home/kong/localhost.key",
+          "operation": "overwrite_literal",
+          "embeddedContentMatchesCapturedFile": true,
+          "literalSha256": "9629d3cc8e377aa58ac8b5cc5192a166d1944448718b9a3847bdb553e4fc3b23",
+          "capturedSha256": "9629d3cc8e377aa58ac8b5cc5192a166d1944448718b9a3847bdb553e4fc3b23",
+          "appendWhitespaceOnly": null,
+          "appendAudit": null,
+          "expectedAfterReplay": "same_content"
+        }
+      ],
+      "allOverwriteLiteralsMatch": true,
+      "appendTargets": [],
+      "scriptsExecuted": false,
+      "entrypointAndCmdHashesPreserved": true,
+      "runtimeReplay": "NOT_EXECUTED; post-start verification required"
+    }
+  ],
+  "plaintextWritten": false,
+  "commandsExecutedFromPayload": 0
+}

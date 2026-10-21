@@ -1,0 +1,161 @@
+{
+  "at": "2026-10-14T02:14:08.995Z",
+  "verdict": "READY_WITH_LIMITATIONS",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "branch": "codex/estadisticas-v1",
+  "sourceHashes": {
+    "supabase/migrations/20261013005000_statistics_v1_read_core_candidate.sql": "fd88de8c0ec3f4a87d8a6782650d63cf4779d8170033a4c5b4f37edbd489faf9",
+    "docs/estadisticas-v1/p03-f3b/candidate-d1.sql": "9e8b793df40de1aeb6ecbb71c1ce4e828c717498e62340341d8784726ee78070",
+    "supabase/migrations/20261013001000_statistics_v1_structures.sql": "5b28bc586ac76f2bcf19df36ecd610d780d26e609d153e8343e5c7b0ecba8828",
+    "supabase/migrations/20261013002000_statistics_v1_capture.sql": "58c3b995450dd84bcc4299453dc8a80c5c96e62b3b72fe4a46394ae05f9b0d19",
+    "supabase/migrations/20261013003000_statistics_v1_reads_security.sql": "b42a4c961a5ae1ca6a7884af391b6faa36fe3e9e271ba0c570bb9bd3355a7678",
+    "supabase/migrations/20261013004000_statistics_v1_comparative_series.sql": "b10c330adff70b803d9d25165f07830e90d4cd092aa4ba2cf3d0120a43f95219"
+  },
+  "candidateSha256": "7d05e3987695f8bfc0e2477d74a38566269c7b6992682e58dbc4c34032f49bb6",
+  "offlineIdentity": {
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "api": "127.0.0.1:56321",
+    "db": "127.0.0.1:56322",
+    "configSha256": "1db8435f3bf6c7d792ee769ad580f5a1039180d397de60d068e3a0a06e37d254",
+    "signingKeysSha256": "a1d8df391e9fa84689cbc6e6ab6308c4faeb567b013a47998b1cdbb239eaba5a",
+    "resources": {
+      "containerIds": [
+        "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+      ],
+      "volumeNames": [
+        "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "networkId": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af"
+    }
+  },
+  "recordedLiveEvidence": {
+    "source": "docs/estadisticas-v1/p03-f4a/preservation.json",
+    "sha256": "8bae001ce570101689de405d4cbcc812eb4b69292deb09d1009b56381567d404",
+    "at": "2026-10-14T01:35:09.714Z",
+    "ledger": 124,
+    "publicOriginalActive": true,
+    "currentLiveStatus": "NOT_VERIFIED_NO_DATABASE_CONNECTION_AUTHORIZED"
+  },
+  "preservation": {
+    "preexistingFiles": 2637,
+    "allHashesUnchanged": true,
+    "baseline": "baseline-files.json",
+    "ignoredRuntimeInventory": {
+      "supabase/statistics-v1-test/.runtime/p03-f4a-1_100.local.log": {
+        "sha256": "b919715619ddcab05eedc30a36015ac024ba6990f64ec10df7c23fa0879c698b",
+        "bytes": 4637010,
+        "privateLocalOnly": true
+      },
+      "supabase/statistics-v1-test/.runtime/p03-f4a-1_50.local.log": {
+        "sha256": "4676a98cb18a5fd83c2bdbd843f1c675cbe020a1099343ce7e21fc8d0876004c",
+        "bytes": 4634698,
+        "privateLocalOnly": true
+      },
+      "supabase/statistics-v1-test/.runtime/p03-f4a-2_100.local.log": {
+        "sha256": "7557a3ceb5bc8e0f8a7b09678f1e6b72b5a907496c4af64184807fc36a09abf8",
+        "bytes": 4637036,
+        "privateLocalOnly": true
+      },
+      "supabase/statistics-v1-test/.runtime/p03-f4a-2_50.local.log": {
+        "sha256": "715acf9cbbc38f9b84af8655f0744b1d3cee4e240d66b9ad2c2221f8f496b641",
+        "bytes": 4634756,
+        "privateLocalOnly": true
+      },
+      "supabase/statistics-v1-test/.runtime/p03-f4a-3_100.local.log": {
+        "sha256": "e0edc73b745c416a689a1904fcb5c7b225d3b8959c01a547afd014ef1f34b6fe",
+        "bytes": 4149245,
+        "privateLocalOnly": true
+      },
+      "supabase/statistics-v1-test/.runtime/p03-f4a-3_50.local.log": {
+        "sha256": "4499ddf64d79b7e161d4dc4a39fc858b07284a7ac3c6fcd8a2b0137e561b0b67",
+        "bytes": 4635016,
+        "privateLocalOnly": true
+      },
+      "supabase/statistics-v1-test/.runtime/p03-f4a-profile-50-prepared.local.sql": {
+        "sha256": "59996c16183d7a636379eed43f8a30c262d3ae98cdad576c5e7dc6dbbba6a34f",
+        "bytes": 4928,
+        "privateLocalOnly": true
+      },
+      "supabase/statistics-v1-test/.runtime/p03-f4a-profile-50.local.log": {
+        "sha256": "7afcd264870d154cafb66dd3456102017f5d4e76dbd077ffc6bcb5cd92e23545",
+        "bytes": 747663,
+        "privateLocalOnly": true
+      }
+    },
+    "ignoredRuntimeHashesUnchanged": true
+  },
+  "executed": {
+    "databaseConnections": 0,
+    "sql": 0,
+    "ddl": 0,
+    "commits": 0
+  },
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p03-f5a/application-reversal-plan.md",
+      "sha256": "33074905c8a59f41b3ae89d262e7dc17d067ad4dc9bb60dd2b760d7bc182bfd4"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f5a/authorization-audit.md",
+      "sha256": "651718acb37acb0b050f8a8266d1267b2e9e6983a00f6e0922151148f4ae7756"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f5a/baseline-files.json",
+      "sha256": "f7b68fee80b2f0ca6ca78a3f7d724a33734a0e6866fde922ffbdbada9dfdc90a"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f5a/candidate-c.sql",
+      "sha256": "7d05e3987695f8bfc0e2477d74a38566269c7b6992682e58dbc4c34032f49bb6"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f5a/differential-test-plan.md",
+      "sha256": "d4db5ff3f76faffcc1e63593ac243d2f99129cc32ef1bb6c2ece9b6e58496935"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f5a/functions.diff",
+      "sha256": "981f5c1014c44af005fd050636f84ee7d543f69fd543607f52e5f0c97f04c516"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f5a/informe.md",
+      "sha256": "7905ec581fb597d844f5dc854d423eb4d761069792906b6ed51894282f0d23bb"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f5a/performance-hypotheses.md",
+      "sha256": "982c8e9d8eb095811483e55b6cd16bfa50c02dd0cb4ec2a51e02623d5d2ecdf1"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f5a/proposed-functions.sql",
+      "sha256": "d2b4ff0b6c5e523be2e33d5504449647d605807f0a87f4657927eafb6b8c23f9"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f5a/recorded-plan-excerpt.json",
+      "sha256": "58f13599135523a00b643428effd794b13b1bf5ec33101cfa172bd17aa7961f4"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f5a/reference-functions.sql",
+      "sha256": "0db4d78cc9c2a4e1c6edf0ca588759ef39e162e1906f73c14d9a95040ff91e18"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f5a/relational-cost-map.md",
+      "sha256": "e8c7bcc3541ce778c0b1cc82ce64b650b149b5499175e8408fe25bf55e310f03"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f5a/semantic-equivalence-map.md",
+      "sha256": "39da309d6d7de7bd71ef1a10f4190e147fdba41ff03e9123be643ea575a25a4b"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f5a/static-audit.json",
+      "sha256": "35bd54a3d3e50fde615938b4ac0a656c8f4b1ecfe0df91f1ce694310b9644f6b"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f5a-build.mjs",
+      "sha256": "ca87adb9849fb0dcbd0be867640a753068884b537d07e88115b5f43c0f9dea62"
+    }
+  ],
+  "inventoryExcludesSelf": "evidence.json is included in the delivered inventory by name; its own hash is not recursively embedded."
+}

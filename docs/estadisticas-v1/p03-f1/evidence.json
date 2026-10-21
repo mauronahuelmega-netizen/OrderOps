@@ -1,0 +1,387 @@
+{
+  "at": "2026-10-13T21:26:29.027Z",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "preservedFiles": 2035,
+  "preexistingPreserved": true,
+  "functionsAndIndexesUnchanged": true,
+  "countsUnchanged": true,
+  "before": {
+    "at": "2026-10-13T21:12:05.021Z",
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "resources": {
+      "containerIds": [
+        "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+      ],
+      "volumeNames": [
+        "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "networkId": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af"
+    },
+    "containers": [
+      {
+        "name": "/supabase_storage_orderops-statistics-v1-test-74718de66a41",
+        "id": "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_rest_orderops-statistics-v1-test-74718de66a41",
+        "id": "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "health": "no-healthcheck",
+        "running": true
+      },
+      {
+        "name": "/supabase_auth_orderops-statistics-v1-test-74718de66a41",
+        "id": "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_kong_orderops-statistics-v1-test-74718de66a41",
+        "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "health": "healthy",
+        "running": true
+      }
+    ],
+    "api": "127.0.0.1:56321",
+    "db": "127.0.0.1:56322"
+  },
+  "after": {
+    "at": "2026-10-13T21:14:46.522Z",
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "resources": {
+      "containerIds": [
+        "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+      ],
+      "volumeNames": [
+        "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "networkId": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af"
+    },
+    "containers": [
+      {
+        "name": "/supabase_storage_orderops-statistics-v1-test-74718de66a41",
+        "id": "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_rest_orderops-statistics-v1-test-74718de66a41",
+        "id": "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "health": "no-healthcheck",
+        "running": true
+      },
+      {
+        "name": "/supabase_auth_orderops-statistics-v1-test-74718de66a41",
+        "id": "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_kong_orderops-statistics-v1-test-74718de66a41",
+        "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "health": "healthy",
+        "running": true
+      },
+      {
+        "name": "/supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "health": "healthy",
+        "running": true
+      }
+    ],
+    "api": "127.0.0.1:56321",
+    "db": "127.0.0.1:56322"
+  },
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p03-f1/after.json",
+      "sha256": "f9dd52c787c9c57c86cf0b60d814a1b6e449e17034c0353cf00097e139914275"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/alternatives.md",
+      "sha256": "14de8824d3975a62c565f8451bf635a361310d9ce66f3676fb9401bb964d94dd"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/baseline.json",
+      "sha256": "168069e2cec4941a219c54d229d79ee3285606340e279c0065151e1e7b55b232"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/before.json",
+      "sha256": "e69522edaaaf0a748f1f49495cba0a1985b309ca98ca4d3a04fb90d9fd65de92"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/benchmarks.json",
+      "sha256": "01dadeb39fff40765e4540a2075d8112426ab82518c9a940f5e7a30517276157"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/equivalence-plan.md",
+      "sha256": "877c3e5968eaa01764de365a79ff60eade0ff3fb240132c5f3d5f23de706af5e"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/fixture-preflight-failure.json",
+      "sha256": "fbc445aace67cb2844e759a572061b0e165f1f1fd068fb846693c01de6c892e9"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/informe.md",
+      "sha256": "7a857691f6b1e11d9e057a8805ef58f412f973932d2c3eadfc1804635d3e175d"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/ledger.json",
+      "sha256": "98f002be970b9ff24681d06bc5f60e77ac8f14ec75c66d662464c64f61e251d4"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/optimization-proposal.md",
+      "sha256": "1823822225485958eb3c00d0f8cfd89231a1e198b1d820545f4c47536b66f75b"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/nested-profile-100-0.json",
+      "sha256": "2b02d69122b8cb708e131d503d2f221acddb03b9980e7a80a4cc1c94b22a9777"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/nested-profile-100-1.json",
+      "sha256": "c26e233d5c63875a8d22805988cc432d3f9b0be5dccdf91fcb8ba318dcfecf68"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/nested-profile-100-10.json",
+      "sha256": "67527903d345287e10ff66d256f86e2bf41fb9f6912ed161114644915bc3be56"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/nested-profile-100-11.json",
+      "sha256": "f369b6dec218510b7ff35f405bdcbc53fb07a0f84153f9475a1bc322fc10602e"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/nested-profile-100-2.json",
+      "sha256": "047e4d99bfc3312c1603ea752efdb3dff7f0b72b585ef30e4f1efd71044e1674"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/nested-profile-100-3.json",
+      "sha256": "493d561772275a50ec567a151ec77b42d7a80d6966c71ff93095122a04cd5b92"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/nested-profile-100-4.json",
+      "sha256": "0c997240573c75ea605fc41a886de621ba27d544ce88a5a49a51cd37b2944c4e"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/nested-profile-100-5.json",
+      "sha256": "d99d525de914932710c54d3c6e81d1ca0aaa91d0660bc3b68920995cc20bc755"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/nested-profile-100-6.json",
+      "sha256": "3340c57e4229701d8fe4e6ac036a256a8f6a2144e85d25a734d879b0eb82eb92"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/nested-profile-100-7.json",
+      "sha256": "53cab76983d10ed234d63cd0c93d5d06d7664acd2558c9fed9123fc240a7fbe6"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/nested-profile-100-8.json",
+      "sha256": "da24407c2ef0bd258b3a050eaf78596c9dfe7129ee52bdadcefef6567ff7f6c8"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/nested-profile-100-9.json",
+      "sha256": "4a68adc3b75351123ae9cec7aae43f2bdcd78455774f4c3f9406a8d6f4d385da"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/p03-f1-100-extended-default.json",
+      "sha256": "19f5d4a29793c1c0387cde44aa4736370aa439cc428dd984551063f086281499"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/p03-f1-100-extended-jit_off.json",
+      "sha256": "7e06e719dd792010f00a68db174c73630a2253446af2fbf977263c06fb061e7e"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/p03-f1-100-legacy-default.json",
+      "sha256": "0c0e96ddb193349327daf32683a12f66743d0770193a3c47955989035d60c90b"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/p03-f1-100-legacy-jit_off.json",
+      "sha256": "47e80166908b082fbbcf36ce6cff4b72fdee0a22fc751eaa25b06578e00f4df0"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/p03-f1-200-extended-default.json",
+      "sha256": "c99e197bef0e8dfdc6f3a7d468a32e5a80a43c33430c178c44c155e6db0b796b"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/p03-f1-200-extended-jit_off.json",
+      "sha256": "7d0b3e8517fd0cbc60dea287e5d59a66ca03f1769a43e203f213c9a3397b810f"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/p03-f1-200-legacy-default.json",
+      "sha256": "7ceb59114a4efe317fe97dc1d7c54ec7cfc4d97558ef3ea8a2ada1b628c55b0b"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/p03-f1-200-legacy-jit_off.json",
+      "sha256": "8f632ebe9da49e41e3bbef5b17ce77ca93cf56d4f0fd9bfc73b10e7454629fb3"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/p03-f1-50-extended-default.json",
+      "sha256": "0ccc8bf3cf5e14029fe2eda9e486297b46c12b613b6b799ee91850456f2ec02f"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/p03-f1-50-extended-jit_off.json",
+      "sha256": "1e52c3776b8f2a3394528150adb8f725bf530c9a3d530fd93aff7b7266800f6a"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/p03-f1-50-legacy-default.json",
+      "sha256": "e66d57fe6f3d9977e53ddacdcb088271fd2b12339032d166e4b2ce5e8c532bdb"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/p03-f1-50-legacy-jit_off.json",
+      "sha256": "3269e34019d2b3b88c4bb1c5d008fc31ed119f958c77c6f205b2a3f31ad9cb8e"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/profile-100-extended-default.json",
+      "sha256": "e6471f238caa39a929e329e8058f61d534b5f5255f4ecdc4725deb4094c12106"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/profile-100-extended-jit_off.json",
+      "sha256": "e6471f238caa39a929e329e8058f61d534b5f5255f4ecdc4725deb4094c12106"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/profile-100-legacy-default.json",
+      "sha256": "6e7c22eb9cd31ebb580ee2259e03900aa9caefecfe2eedfe770a4f2eaff46994"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/profile-100-legacy-jit_off.json",
+      "sha256": "6e7c22eb9cd31ebb580ee2259e03900aa9caefecfe2eedfe770a4f2eaff46994"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/relevant-summary.json",
+      "sha256": "f57e03f07de8870b0cb8005148ec1f5e211d311026d056e1cf14aac6f37bef17"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/shapes-50-extended-default.json",
+      "sha256": "6b67343e7b505dfe4f04c3387d7c6825ad76380f49c030bb3c8d7b4f160f86fc"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/shapes-50-extended-jit_off.json",
+      "sha256": "3f58eafef3a96f01f9412e123760db2ec9f1da0506307f529d6fed19da99291e"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/shapes-50-legacy-default.json",
+      "sha256": "f60321e738959e88793c01fac6e79988dc0ea56c6aea644afb0b2d22ee5505db"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/plans/shapes-50-legacy-jit_off.json",
+      "sha256": "cbf0708778878bd6f2c1b5f8093b26860c802910e51d38f1fe7ba83fa6181ba2"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/profile/after.json",
+      "sha256": "bba2cab25f4a5280fb1eb8533048a06e49c2a0c75288c3a8db5acd58ecf02f4d"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/profile/before.json",
+      "sha256": "a44c0b7caa096b91f54f3b6a6aa8eae2121ce350201e9675535022cf056303c7"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/profile/results.json",
+      "sha256": "0ca5666601316b2351c3ed04257e3cff450142fd0797ef507ae53cd5355ee6d2"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/profile/volume-100.json",
+      "sha256": "76fb57b05a07e73e20ddc2e1d53c3c50a462289f69e92fe1a5b99e2ba972add8"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/results.json",
+      "sha256": "bdef445325cc7c7ef8032cafd16600d8454e7328cd0d1fc3167c973cce396ce2"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/shapes/after.json",
+      "sha256": "817d314489263f6be9d0962b597af97fc0dd9d2d598c3889e569f3f3446ad338"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/shapes/before.json",
+      "sha256": "50f92c8356c8939515cb16cf172bb8a7a1489f31be77206d71f195a0d6dc236b"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/shapes/results.json",
+      "sha256": "9be20a86b3373c5e7240ca2d7e564c7fcc72a464bff6dd844579934faa003197"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/shapes/volume-50.json",
+      "sha256": "cb68e0b14ab790dfab20d22018e0756373913b469d9a2cd676767155ef367df3"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/static-tests.json",
+      "sha256": "ca03a1001ee48fc43b968b7277100ee763d6e0c1b0f8d0abb26ba1817e4a08a1"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/volume-100.json",
+      "sha256": "c692483419a847c323a24062dbd2a981807a79fff9b3fec003fe81897bd875a9"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/volume-200.json",
+      "sha256": "4946adfe958f40df08f3ddec9f5779e9f6e734ca4af445f2b19bdaeef68752fe"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f1/volume-50.json",
+      "sha256": "3a062723a2dfbbd89e01fe29a46e6a4a7a77931cea01a730967f237d8c3f6a7b"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f1-analyze.mjs",
+      "sha256": "faf38f274da7b09d4f9a1c8a75cc297b1e74c9f4c17c789a68d44d1586267af6"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f1-diagnose.mjs",
+      "sha256": "bb5d010e7c2d1e6604b2957dc5788ddf614b9002f8912925ee60a3c710eb925b"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f1-evidence.mjs",
+      "sha256": "bb4630193a759de56b2aa21be93fbd148dc923c518bd3133ef062422df830a99"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f1-fixture.sql",
+      "sha256": "00252b32a46d4a95058e5eb594ecc885226b77990aba2ae0215af9c966edd3d1"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f1-ledger.mjs",
+      "sha256": "7f4a0fd9f4e6fabe0c25fb247508ab3db4dcbf89b996d4e860f339a6f151b3bf"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f1-prepare.mjs",
+      "sha256": "0f1d4fad43aa8c1ada6bb8ac814cb579bfbceeec598dde375b25811e1eac77d5"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f1-profile-diagnose.mjs",
+      "sha256": "a1d39876f58753528192f453547fb60ef0a34feefd2b0c96af7825ccbdc99e44"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f1-profile-prepare.mjs",
+      "sha256": "89e66a0bca6108ffdbc4a2555e004bc4268ce49e6698d0d241751517cee56214"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f1-shapes-diagnose.mjs",
+      "sha256": "0251bd500f71576e0a4e7d97ff8ad503c8da526dad75f784bd756763d850f5cf"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f1-shapes-fixture.sql",
+      "sha256": "2b42eaab247117336bbb3978f51b2ff0e5cac2b6dbfb97036c60749344f7292f"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f1-shapes-prepare.mjs",
+      "sha256": "efde440ffdf03343f8051c12ee188089bf01b5009568dc4419a97ca2981121ac"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f1-static.verify.mjs",
+      "sha256": "7d86c8737c5d76e409ba41b0157fc33c39889b82e168643230b2e853874824b6"
+    }
+  ],
+  "writes": "Synthetic INSERT/UPDATE in isolated transactions followed by rollback; no DDL, grants, migrations, persistent functions or indexes; no commits"
+}

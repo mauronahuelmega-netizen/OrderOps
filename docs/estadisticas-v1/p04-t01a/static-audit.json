@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-14T12:13:28.495Z",
+  "result": "PASS_STATIC_ONLY",
+  "parser": "Outer SQL + modified relational SELECT; not PL/pgSQL compilation",
+  "newFunctions": 3,
+  "invoker": true,
+  "newTables": 0,
+  "originalSummaryUnchanged": true,
+  "candidateSqlExecuted": false,
+  "candidateSha256": "99a5d3e9dd879bb11b92abebc377a5cbdc7ebc08d75b9eed8280f88e4f5e2f23",
+  "limits": {
+    "pageMaximum": 20,
+    "querySeconds": 15,
+    "lockSeconds": 3
+  }
+}

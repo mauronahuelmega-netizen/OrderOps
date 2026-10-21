@@ -1,0 +1,61 @@
+{
+  "durationMs": 10.099,
+  "plan": {
+    "Query Text": "\n  select exists(select 1 from public.profiles p where p.id=auth.uid() and p.business_id=p_business and p.role in ('owner','manager','admin'));\n",
+    "Query Parameters": "$1 = '108722c0-a80f-4d5b-98ee-6c99f44cdb23'",
+    "Plan": {
+      "Node Type": "Result",
+      "Parallel Aware": false,
+      "Async Capable": false,
+      "Startup Cost": 8.2,
+      "Total Cost": 8.21,
+      "Plan Rows": 1,
+      "Plan Width": 1,
+      "Actual Rows": 1,
+      "Actual Loops": 1,
+      "Shared Hit Blocks": 2,
+      "Shared Read Blocks": 0,
+      "Shared Dirtied Blocks": 0,
+      "Shared Written Blocks": 0,
+      "Local Hit Blocks": 0,
+      "Local Read Blocks": 0,
+      "Local Dirtied Blocks": 0,
+      "Local Written Blocks": 0,
+      "Temp Read Blocks": 0,
+      "Temp Written Blocks": 0,
+      "Plans": [
+        {
+          "Node Type": "Index Scan",
+          "Parent Relationship": "InitPlan",
+          "Subplan Name": "InitPlan 1",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Scan Direction": "Forward",
+          "Index Name": "profiles_id_business_id_key",
+          "Relation Name": "profiles",
+          "Alias": "p",
+          "Startup Cost": 0.17,
+          "Total Cost": 8.2,
+          "Plan Rows": 1,
+          "Plan Width": 0,
+          "Actual Rows": 1,
+          "Actual Loops": 1,
+          "Index Cond": "((id = (COALESCE(NULLIF(current_setting('request.jwt.claim.sub'::text, true), ''::text), ((NULLIF(current_setting('request.jwt.claims'::text, true), ''::text))::jsonb ->> 'sub'::text)))::uuid) AND (business_id = $1))",
+          "Rows Removed by Index Recheck": 0,
+          "Filter": "(role = ANY ('{owner,manager,admin}'::text[]))",
+          "Rows Removed by Filter": 0,
+          "Shared Hit Blocks": 2,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0
+        }
+      ]
+    }
+  }
+}

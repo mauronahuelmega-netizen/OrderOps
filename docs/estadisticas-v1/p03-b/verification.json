@@ -1,0 +1,210 @@
+{
+  "at": "2026-10-13T13:39:57.018Z",
+  "verdict": "PASS_WITH_LIMITATIONS",
+  "branch": "codex/estadisticas-v1",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "newCommits": 0,
+  "migration": {
+    "file": "supabase/migrations/20261013004000_statistics_v1_comparative_series.sql",
+    "sha256": "b10c330adff70b803d9d25165f07830e90d4cd092aa4ba2cf3d0120a43f95219",
+    "installed": true,
+    "versionsAdded": 1
+  },
+  "results": {
+    "installation": "PASS",
+    "atomicRollback": "PASS",
+    "runtimeLegacyEquality": "PASS",
+    "roleTenantSqlAndHttp": "PASS",
+    "strictHttpDecoder": "PASS",
+    "captureFinanceLifecycle": "PASS",
+    "pointConservationAndSizing": "PASS",
+    "nocturnalMicrosecondsPartial": "PASS",
+    "dstTimezones": "PASS_TESTED_CASES",
+    "concurrencyFiveSchedules": "PASS",
+    "deadlocksDelta": 0,
+    "fixtureCleanup": "PASS",
+    "eslint": "PASS",
+    "typescriptNoEmit": "PASS",
+    "sqlGrammar": "PASS"
+  },
+  "isolation": {
+    "beforeAfterResourcesIdentical": true,
+    "privateIdentityVerified": true,
+    "api": "127.0.0.1:56321",
+    "db": "127.0.0.1:56322",
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "live5HealthyContainers": true,
+    "exclusiveVolumes": 2,
+    "baselineInstalledSourcesMatch": true,
+    "ledgerCount": 123,
+    "foreignResourcesWritten": false,
+    "containerStartRestartRecreateDelete": false
+  },
+  "fixtureCounts": {
+    "businesses": 2,
+    "profiles": 12,
+    "categories": 0,
+    "stockMovements": 0,
+    "items": 0,
+    "financials": 0,
+    "completionItems": 0,
+    "itemSnapshots": 0,
+    "sessionSnapshots": 0,
+    "auditEvents": 0
+  },
+  "files": [
+    {
+      "file": "scripts/statistics-v1/p03-b-validation.mjs",
+      "sha256": "99343df661fda1abe7775ed60bffddb49048fec45b151a811f4ce771163b1379"
+    },
+    {
+      "file": "scripts/statistics-v1/p03-b-concurrency.mjs",
+      "sha256": "cc101eeb95173df39d7015f899ea018e85900baf998a46641e696f2bc1e416b9"
+    },
+    {
+      "file": "scripts/statistics-v1/p03-b-api.verify.mjs",
+      "sha256": "7744f754679816da90740cf94966d11524decf78e6aba9c2e5d85a0ddd70d00a"
+    },
+    {
+      "file": "supabase/tests/statistics-v1/p03-b-performance.sql",
+      "sha256": "b5566fb0a7dc7abee6733f8aa3a9ec1c253dd3035e77dba5d8536b2e7be0d81c"
+    },
+    {
+      "file": "supabase/tests/statistics-v1/p03-b-paired-series.sql",
+      "sha256": "52a95fd63d45a65a7c242f2fef107a726750ef19fbabc3f95a139b4793a97a66"
+    },
+    {
+      "file": "lib/statistics/p03-b-api.verify.ts",
+      "sha256": "19c47130d192dddf0b1ee8a9d6d71b8a8d2a654b144f7d0e7f12b7b9164f21c9"
+    },
+    {
+      "file": "supabase/migrations/20261013004000_statistics_v1_comparative_series.sql",
+      "sha256": "b10c330adff70b803d9d25165f07830e90d4cd092aa4ba2cf3d0120a43f95219"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b/api-decoder.json",
+      "sha256": "bff17892074e9b67fba4a558858d1eba1372b532d7577f1212e59e0843bdff34"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b/api.json",
+      "sha256": "9090d337c27e3513319a31fe620ef43952f0cbe3800519e80457823e95ee7f85"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b/concurrency.json",
+      "sha256": "d8fd5c410e9d4a1a1dc4e887f908746fe119065acf6de12a4a11682db8e3263d"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b/informe-preflight-bloqueado.md",
+      "sha256": "36a63d926bba7fa64e8f918b527afbac408951e6efdf8d792ff114c0a3834f17"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b/informe-reanudacion.md",
+      "sha256": "8356ff08c17f84a145452d926c70b72ed0633d4e034d30b556b2c3df7341bab5"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b/informe.md",
+      "sha256": "8356ff08c17f84a145452d926c70b72ed0633d4e034d30b556b2c3df7341bab5"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b/installation.json",
+      "sha256": "c4ea23e416cd63ed0b54471da887bc448a8058c227d16a32b92ff382b7f452e5"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b/live-after.json",
+      "sha256": "5435b9d7fc8e65341601b87a44131a33f869b715cdae0c2b79523f341118cf28"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b/live-before.json",
+      "sha256": "fbd91285fd9846fc6451efc323673d51130f1650f1d14c3e40badf8a25a70c59"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b/paired-series.json",
+      "sha256": "582940e0ceb371aee4fa2ffc159fdb09b48da6bb3df17e01d5a0a17c4b5d5a75"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b/performance-summary.json",
+      "sha256": "4e2b87308ff0727451f510645e899d90d2310001e1898411c26c32e61bae1947"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b/performance.json",
+      "sha256": "f868d15c93110efd7793fc597460a82da661ea597f428f66e00a3aa90e91d010"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b/preflight.json",
+      "sha256": "581fc8ebcc548efe5cbc510bf11865d0d070b26bb2a35ad2f8c92bfc111d1daf"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-b/sql-tests.json",
+      "sha256": "303c6236933c430c3c05a1e66b21c1e740a1d27ffbee00f1f9960925421dd088"
+    }
+  ],
+  "preexistingChangesPreserved": [
+    {
+      "file": "docs/estadisticas-v1/fase-01-evidencia.json",
+      "sha256": "6c5327ffdb7511b55b496a8e6afa33bbe795633fc29389279ec676c0588f62a7"
+    },
+    {
+      "file": "next-env.d.ts",
+      "sha256": "083e23c4c5e7761db151134ea1ef7896120c86c5888cdc8a861f534f7e86d6fd"
+    }
+  ],
+  "protectedPathsUnchanged": [
+    "lib/admin/permissions.ts",
+    "components/admin/admin-nav-config.ts",
+    "components/admin/layout/admin-nav-list.tsx",
+    "lib/commercial",
+    "types/database.ts",
+    "lib/statistics/contracts.ts",
+    "lib/statistics/read.ts",
+    "lib/statistics/server.ts"
+  ],
+  "performance": {
+    "syntheticOrders": 200,
+    "transactionRolledBack": true,
+    "totalFixtureAndTestElapsedMs": 12451,
+    "plans": [
+      {
+        "period": "today",
+        "executionMs": 2012.458,
+        "planningMs": 0.018,
+        "sharedHitBlocks": 71908,
+        "sharedReadBlocks": 0,
+        "tempReadBlocks": 0,
+        "tempWrittenBlocks": 0,
+        "outerNode": "Result"
+      },
+      {
+        "period": "last_7_days",
+        "executionMs": 2346.342,
+        "planningMs": 0.016,
+        "sharedHitBlocks": 71909,
+        "sharedReadBlocks": 0,
+        "tempReadBlocks": 0,
+        "tempWrittenBlocks": 0,
+        "outerNode": "Result"
+      },
+      {
+        "period": "last_30_days",
+        "executionMs": 2634.475,
+        "planningMs": 0.018,
+        "sharedHitBlocks": 71906,
+        "sharedReadBlocks": 0,
+        "tempReadBlocks": 0,
+        "tempWrittenBlocks": 0,
+        "outerNode": "Result"
+      }
+    ],
+    "limitations": [
+      "One bounded sample; not a load test or production SLA",
+      "Outer EXPLAIN does not expose nested PL/pgSQL statement plans"
+    ]
+  },
+  "limitations": [
+    "Single bounded performance sample 200 orders; ~2.01–2.63s queries",
+    "Nested PL/pgSQL statement plans not captured",
+    "No broad load/production SLA verification",
+    "No Cursor or Commercial Core integration verification",
+    "No UI or P03-C/D/E"
+  ],
+  "stop": "Await express authorization for any later phase; no integration, merge, rebase, push or deploy"
+}

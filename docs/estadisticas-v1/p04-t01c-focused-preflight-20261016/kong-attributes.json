@@ -1,0 +1,563 @@
+{
+  "at": "2026-10-16T15:39:24.363Z",
+  "containerId": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+  "image": "sha256:1b53405d8680a09d6f44494b7990bf7da2ea43f84a258c59717d4539abf09f6d",
+  "methods": "libc list/llist and direct syscall 195, sized and independent 64KiB buffers; named sizes only",
+  "lists": [
+    {
+      "path": "/home",
+      "method": "libc_llist",
+      "advertised": 46,
+      "advertisedErrno": 0,
+      "returned": 0,
+      "returnedErrno": 0,
+      "fixedBufferReturned": 0,
+      "fixedBufferErrno": 0,
+      "visibleNames": [],
+      "fixedBufferNames": []
+    },
+    {
+      "path": "/home",
+      "method": "libc_list",
+      "advertised": 46,
+      "advertisedErrno": 0,
+      "returned": 0,
+      "returnedErrno": 0,
+      "fixedBufferReturned": 0,
+      "fixedBufferErrno": 0,
+      "visibleNames": [],
+      "fixedBufferNames": []
+    },
+    {
+      "path": "/home",
+      "method": "syscall_llist_195",
+      "advertised": 46,
+      "advertisedErrno": 0,
+      "returned": 0,
+      "returnedErrno": 0,
+      "fixedBufferReturned": 0,
+      "fixedBufferErrno": 0,
+      "visibleNames": [],
+      "fixedBufferNames": []
+    },
+    {
+      "path": "/home/kong",
+      "method": "libc_llist",
+      "advertised": 23,
+      "advertisedErrno": 0,
+      "returned": 0,
+      "returnedErrno": 0,
+      "fixedBufferReturned": 0,
+      "fixedBufferErrno": 0,
+      "visibleNames": [],
+      "fixedBufferNames": []
+    },
+    {
+      "path": "/home/kong",
+      "method": "libc_list",
+      "advertised": 23,
+      "advertisedErrno": 0,
+      "returned": 0,
+      "returnedErrno": 0,
+      "fixedBufferReturned": 0,
+      "fixedBufferErrno": 0,
+      "visibleNames": [],
+      "fixedBufferNames": []
+    },
+    {
+      "path": "/home/kong",
+      "method": "syscall_llist_195",
+      "advertised": 23,
+      "advertisedErrno": 0,
+      "returned": 0,
+      "returnedErrno": 0,
+      "fixedBufferReturned": 0,
+      "fixedBufferErrno": 0,
+      "visibleNames": [],
+      "fixedBufferNames": []
+    },
+    {
+      "path": "/usr",
+      "method": "libc_llist",
+      "advertised": 46,
+      "advertisedErrno": 0,
+      "returned": 0,
+      "returnedErrno": 0,
+      "fixedBufferReturned": 0,
+      "fixedBufferErrno": 0,
+      "visibleNames": [],
+      "fixedBufferNames": []
+    },
+    {
+      "path": "/usr",
+      "method": "libc_list",
+      "advertised": 46,
+      "advertisedErrno": 0,
+      "returned": 0,
+      "returnedErrno": 0,
+      "fixedBufferReturned": 0,
+      "fixedBufferErrno": 0,
+      "visibleNames": [],
+      "fixedBufferNames": []
+    },
+    {
+      "path": "/usr",
+      "method": "syscall_llist_195",
+      "advertised": 46,
+      "advertisedErrno": 0,
+      "returned": 0,
+      "returnedErrno": 0,
+      "fixedBufferReturned": 0,
+      "fixedBufferErrno": 0,
+      "visibleNames": [],
+      "fixedBufferNames": []
+    },
+    {
+      "path": "/usr/local",
+      "method": "libc_llist",
+      "advertised": 46,
+      "advertisedErrno": 0,
+      "returned": 0,
+      "returnedErrno": 0,
+      "fixedBufferReturned": 0,
+      "fixedBufferErrno": 0,
+      "visibleNames": [],
+      "fixedBufferNames": []
+    },
+    {
+      "path": "/usr/local",
+      "method": "libc_list",
+      "advertised": 46,
+      "advertisedErrno": 0,
+      "returned": 0,
+      "returnedErrno": 0,
+      "fixedBufferReturned": 0,
+      "fixedBufferErrno": 0,
+      "visibleNames": [],
+      "fixedBufferNames": []
+    },
+    {
+      "path": "/usr/local",
+      "method": "syscall_llist_195",
+      "advertised": 46,
+      "advertisedErrno": 0,
+      "returned": 0,
+      "returnedErrno": 0,
+      "fixedBufferReturned": 0,
+      "fixedBufferErrno": 0,
+      "visibleNames": [],
+      "fixedBufferNames": []
+    },
+    {
+      "path": "/usr/local/kong",
+      "method": "libc_llist",
+      "advertised": 23,
+      "advertisedErrno": 0,
+      "returned": 0,
+      "returnedErrno": 0,
+      "fixedBufferReturned": 0,
+      "fixedBufferErrno": 0,
+      "visibleNames": [],
+      "fixedBufferNames": []
+    },
+    {
+      "path": "/usr/local/kong",
+      "method": "libc_list",
+      "advertised": 23,
+      "advertisedErrno": 0,
+      "returned": 0,
+      "returnedErrno": 0,
+      "fixedBufferReturned": 0,
+      "fixedBufferErrno": 0,
+      "visibleNames": [],
+      "fixedBufferNames": []
+    },
+    {
+      "path": "/usr/local/kong",
+      "method": "syscall_llist_195",
+      "advertised": 23,
+      "advertisedErrno": 0,
+      "returned": 0,
+      "returnedErrno": 0,
+      "fixedBufferReturned": 0,
+      "fixedBufferErrno": 0,
+      "visibleNames": [],
+      "fixedBufferNames": []
+    }
+  ],
+  "named": [
+    {
+      "path": "/home",
+      "name": "trusted.overlay.origin",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home",
+      "name": "trusted.overlay.impure",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home",
+      "name": "trusted.overlay.opaque",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home",
+      "name": "trusted.overlay.redirect",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home",
+      "name": "trusted.overlay.metacopy",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home",
+      "name": "user.overlay.origin",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home",
+      "name": "user.overlay.impure",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home",
+      "name": "user.overlay.opaque",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home",
+      "name": "security.capability",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home",
+      "name": "security.selinux",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home",
+      "name": "system.posix_acl_access",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home",
+      "name": "system.posix_acl_default",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home/kong",
+      "name": "trusted.overlay.origin",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home/kong",
+      "name": "trusted.overlay.impure",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home/kong",
+      "name": "trusted.overlay.opaque",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home/kong",
+      "name": "trusted.overlay.redirect",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home/kong",
+      "name": "trusted.overlay.metacopy",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home/kong",
+      "name": "user.overlay.origin",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home/kong",
+      "name": "user.overlay.impure",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home/kong",
+      "name": "user.overlay.opaque",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home/kong",
+      "name": "security.capability",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home/kong",
+      "name": "security.selinux",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home/kong",
+      "name": "system.posix_acl_access",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/home/kong",
+      "name": "system.posix_acl_default",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr",
+      "name": "trusted.overlay.origin",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr",
+      "name": "trusted.overlay.impure",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr",
+      "name": "trusted.overlay.opaque",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr",
+      "name": "trusted.overlay.redirect",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr",
+      "name": "trusted.overlay.metacopy",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr",
+      "name": "user.overlay.origin",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr",
+      "name": "user.overlay.impure",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr",
+      "name": "user.overlay.opaque",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr",
+      "name": "security.capability",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr",
+      "name": "security.selinux",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr",
+      "name": "system.posix_acl_access",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr",
+      "name": "system.posix_acl_default",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local",
+      "name": "trusted.overlay.origin",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local",
+      "name": "trusted.overlay.impure",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local",
+      "name": "trusted.overlay.opaque",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local",
+      "name": "trusted.overlay.redirect",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local",
+      "name": "trusted.overlay.metacopy",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local",
+      "name": "user.overlay.origin",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local",
+      "name": "user.overlay.impure",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local",
+      "name": "user.overlay.opaque",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local",
+      "name": "security.capability",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local",
+      "name": "security.selinux",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local",
+      "name": "system.posix_acl_access",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local",
+      "name": "system.posix_acl_default",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local/kong",
+      "name": "trusted.overlay.origin",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local/kong",
+      "name": "trusted.overlay.impure",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local/kong",
+      "name": "trusted.overlay.opaque",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local/kong",
+      "name": "trusted.overlay.redirect",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local/kong",
+      "name": "trusted.overlay.metacopy",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local/kong",
+      "name": "user.overlay.origin",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local/kong",
+      "name": "user.overlay.impure",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local/kong",
+      "name": "user.overlay.opaque",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local/kong",
+      "name": "security.capability",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local/kong",
+      "name": "security.selinux",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local/kong",
+      "name": "system.posix_acl_access",
+      "size": -1,
+      "errno": 61
+    },
+    {
+      "path": "/usr/local/kong",
+      "name": "system.posix_acl_default",
+      "size": -1,
+      "errno": 61
+    }
+  ],
+  "context": [
+    "CapInh:\t0000000000000000",
+    "CapPrm:\t00000000a80425fb",
+    "CapEff:\t00000000a80425fb",
+    "CapBnd:\t00000000a80425fb",
+    "CapAmb:\t0000000000000000",
+    "NoNewPrivs:\t0",
+    "Seccomp:\t2"
+  ],
+  "rootfs": "overlay",
+  "xattrValuesRead": false,
+  "containerFilesWritten": 0,
+  "sqlConnections": 0
+}

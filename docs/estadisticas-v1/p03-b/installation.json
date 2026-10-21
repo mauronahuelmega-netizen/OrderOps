@@ -1,0 +1,6 @@
+{
+  "result": "PASS",
+  "hash": "b10c330adff70b803d9d25165f07830e90d4cd092aa4ba2cf3d0120a43f95219",
+  "atomicErrorProbe": "PASS: forced division-by-zero reverted entire catalog; ledger absent",
+  "at": "2026-10-13T13:17:35.074Z"
+}

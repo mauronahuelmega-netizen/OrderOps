@@ -1,0 +1,285 @@
+{
+  "result": "NO_CAUSAL_PER_QUERY_CORRELATION_AVAILABLE",
+  "historicalSummary": {
+    "containerRawCPUPercent": 149.62,
+    "containerMemoryPercent": 2.15,
+    "backendVmHWMKiB": 76736,
+    "cpuNormalizedPercentOf4EngineCPUs": 37.405,
+    "observedSamples": 58,
+    "spillNodesInCollectedPlans": 0,
+    "waitKinds": [
+      "Client:ClientRead",
+      "null:null"
+    ],
+    "limitations": [
+      "Sampled CPU not continuous host attribution; container includes background processes.",
+      "Kernel HWM sampled for owned backend lifetime includes shared mapped memory, not private heap.",
+      "Collected post-benchmark plans show no spills; no plan for9.57s outlier, no absence guarantee between samples.",
+      "No exact per-query start/end timeline in normal sample records; resource correlation at cohort level only."
+    ]
+  },
+  "historicalCohortObservations": [
+    {
+      "batch": 1,
+      "orders": 50,
+      "samples": 6,
+      "maxContainerRawCPUPercent": 101.74,
+      "maxContainerMemoryPercent": 2.13,
+      "waitKinds": [
+        "Client:ClientRead",
+        "null:null"
+      ],
+      "exactQueryResourceAlignment": false
+    },
+    {
+      "batch": 1,
+      "orders": 100,
+      "samples": 11,
+      "maxContainerRawCPUPercent": 114.94,
+      "maxContainerMemoryPercent": 2.15,
+      "waitKinds": [
+        "Client:ClientRead",
+        "null:null"
+      ],
+      "exactQueryResourceAlignment": false
+    },
+    {
+      "batch": 2,
+      "orders": 100,
+      "samples": 12,
+      "maxContainerRawCPUPercent": 126.51,
+      "maxContainerMemoryPercent": 2.15,
+      "waitKinds": [
+        "Client:ClientRead",
+        "null:null"
+      ],
+      "exactQueryResourceAlignment": false
+    },
+    {
+      "batch": 2,
+      "orders": 50,
+      "samples": 7,
+      "maxContainerRawCPUPercent": 106.92,
+      "maxContainerMemoryPercent": 2.13,
+      "waitKinds": [
+        "Client:ClientRead",
+        "null:null"
+      ],
+      "exactQueryResourceAlignment": false
+    },
+    {
+      "batch": 3,
+      "orders": 50,
+      "samples": 12,
+      "maxContainerRawCPUPercent": 108.06,
+      "maxContainerMemoryPercent": 2.15,
+      "waitKinds": [
+        "Client:ClientRead",
+        "null:null"
+      ],
+      "exactQueryResourceAlignment": false
+    },
+    {
+      "batch": 3,
+      "orders": 100,
+      "samples": 10,
+      "maxContainerRawCPUPercent": 149.62,
+      "maxContainerMemoryPercent": 2.13,
+      "waitKinds": [
+        "Client:ClientRead",
+        "null:null"
+      ],
+      "exactQueryResourceAlignment": false
+    }
+  ],
+  "currentIdleSamples": [
+    {
+      "at": "2026-10-14T02:26:31.796Z",
+      "cpuContainerRawPercent": 0,
+      "containerMemoryPercent": 1.57,
+      "dockerBlockIO": "115MB / 65MB",
+      "linuxGlobalPressure": {
+        "cpu": [
+          {
+            "kind": "some",
+            "avg10": 9.15,
+            "avg60": 10.35,
+            "avg300": 10.01,
+            "totalUs": 4588483646
+          },
+          {
+            "kind": "full",
+            "avg10": 0,
+            "avg60": 0,
+            "avg300": 0,
+            "totalUs": 0
+          }
+        ],
+        "memory": [
+          {
+            "kind": "some",
+            "avg10": 0,
+            "avg60": 0,
+            "avg300": 0,
+            "totalUs": 7943603
+          },
+          {
+            "kind": "full",
+            "avg10": 0,
+            "avg60": 0,
+            "avg300": 0,
+            "totalUs": 6692573
+          }
+        ],
+        "io": [
+          {
+            "kind": "some",
+            "avg10": 1.07,
+            "avg60": 1.59,
+            "avg300": 0.85,
+            "totalUs": 394452014
+          },
+          {
+            "kind": "full",
+            "avg10": 0.34,
+            "avg60": 0.93,
+            "avg300": 0.48,
+            "totalUs": 247224223
+          }
+        ]
+      },
+      "hostCountersAvailable": false,
+      "processCPU": "Cumulative seconds since process start; not current contention measurement"
+    },
+    {
+      "at": "2026-10-14T02:26:52.022Z",
+      "cpuContainerRawPercent": 0.01,
+      "containerMemoryPercent": 1.57,
+      "dockerBlockIO": "115MB / 65MB",
+      "linuxGlobalPressure": {
+        "cpu": [
+          {
+            "kind": "some",
+            "avg10": 9.09,
+            "avg60": 9.96,
+            "avg300": 9.93,
+            "totalUs": 4589482119
+          },
+          {
+            "kind": "full",
+            "avg10": 0,
+            "avg60": 0,
+            "avg300": 0,
+            "totalUs": 0
+          }
+        ],
+        "memory": [
+          {
+            "kind": "some",
+            "avg10": 0,
+            "avg60": 0,
+            "avg300": 0,
+            "totalUs": 7943603
+          },
+          {
+            "kind": "full",
+            "avg10": 0,
+            "avg60": 0,
+            "avg300": 0,
+            "totalUs": 6692573
+          }
+        ],
+        "io": [
+          {
+            "kind": "some",
+            "avg10": 0.97,
+            "avg60": 1.53,
+            "avg300": 0.87,
+            "totalUs": 394644277
+          },
+          {
+            "kind": "full",
+            "avg10": 0.5,
+            "avg60": 0.9,
+            "avg300": 0.49,
+            "totalUs": 247349290
+          }
+        ]
+      },
+      "hostCountersAvailable": false,
+      "processCPU": "Cumulative seconds since process start; not current contention measurement"
+    },
+    {
+      "at": "2026-10-14T02:27:05.142Z",
+      "cpuContainerRawPercent": 0.01,
+      "containerMemoryPercent": 1.57,
+      "dockerBlockIO": "115MB / 65MB",
+      "linuxGlobalPressure": {
+        "cpu": [
+          {
+            "kind": "some",
+            "avg10": 16.51,
+            "avg60": 11.59,
+            "avg300": 10.29,
+            "totalUs": 4592051987
+          },
+          {
+            "kind": "full",
+            "avg10": 0,
+            "avg60": 0,
+            "avg300": 0,
+            "totalUs": 0
+          }
+        ],
+        "memory": [
+          {
+            "kind": "some",
+            "avg10": 0,
+            "avg60": 0,
+            "avg300": 0,
+            "totalUs": 7943603
+          },
+          {
+            "kind": "full",
+            "avg10": 0,
+            "avg60": 0,
+            "avg300": 0,
+            "totalUs": 6692573
+          }
+        ],
+        "io": [
+          {
+            "kind": "some",
+            "avg10": 1.12,
+            "avg60": 1.5,
+            "avg300": 0.89,
+            "totalUs": 394892512
+          },
+          {
+            "kind": "full",
+            "avg10": 0.55,
+            "avg60": 0.86,
+            "avg300": 0.5,
+            "totalUs": 247479621
+          }
+        ]
+      },
+      "hostCountersAvailable": false,
+      "processCPU": "Cumulative seconds since process start; not current contention measurement"
+    }
+  ],
+  "observations": [
+    "CPU scheduling pressure exists in Linux VM while own PostgreSQL is nearly idle",
+    "No OOM or quota throttling recorded for owned container",
+    "50-order original post-benchmark shared hits vary from12268 to111112",
+    "No per-query timestamps matched to host pressure for the9570ms outlier"
+  ],
+  "unknowns": [
+    "Outlier plan",
+    "CPU wait during each query",
+    "Windows host total CPU counters unavailable",
+    "Physical host VHDX path/device",
+    "Nested JIT and planning attribution for outliers"
+  ],
+  "doNotCompute": "No Pearson/coefficient or causal subtraction from cohort-only samples"
+}

@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-16T16:00:45.074Z",
+  "status": "BLOCKED_UNRESOLVED_TRIGGER_TEXT_DIFFERENCE",
+  "fieldsCompared": 35,
+  "equalFields": 34,
+  "unequalFields": 1,
+  "triggerCountReference": 52,
+  "triggerCountObserved": 52,
+  "triggerDifferences": 13,
+  "classification": "13 function names explicitly qualified with extensions in observed deparsed trigger text; no text normalized to PASS",
+  "identityMarker": "Passed by approved psql gate control flow; token not emitted",
+  "ledger": 124,
+  "sqlProcessExit": 0,
+  "sqlStates": [],
+  "rollbackObserved": true,
+  "readOnly": "on",
+  "isolation": "repeatable read",
+  "additionalSqlQueries": 0,
+  "systemIdentifierPrecision": "JSON.parse produced unsafe JS integer; not usable as exact historical cluster identity"
+}

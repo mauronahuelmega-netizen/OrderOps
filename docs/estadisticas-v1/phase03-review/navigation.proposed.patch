@@ -1,0 +1,55 @@
+diff --git a/lib/admin/permissions.ts b/lib/admin/permissions.ts
+--- a/lib/admin/permissions.ts
++++ b/lib/admin/permissions.ts
+@@ -1,6 +1,7 @@
+ import type { ProfileRole } from "@/types/database";
+ 
+ export type AdminPermission =
++  | "viewStatistics"
+   | "viewOrders"
+   | "updateOrders"
+   | "manageNotifications"
+@@ -68,6 +69,8 @@ export function canManagePublicSettings(role: ProfileRole) {
+ 
+ export function hasAdminPermission(role: ProfileRole, permission: AdminPermission) {
+   switch (permission) {
++    case "viewStatistics":
++      return role === "owner" || role === "manager" || role === "admin";
+     case "viewOrders":
+       return canViewOrders(role);
+     case "updateOrders":
+diff --git a/components/admin/admin-nav-config.ts b/components/admin/admin-nav-config.ts
+--- a/components/admin/admin-nav-config.ts
++++ b/components/admin/admin-nav-config.ts
+@@ -47,6 +47,12 @@ export const adminNavItems: AdminNavItem[] = [
+     ],
+     requiredPermission: "manageProducts"
+   },
++  {
++    href: "/admin/statistics",
++    label: "Estadísticas",
++    matchPrefixes: ["/admin/statistics"],
++    requiredPermission: "viewStatistics"
++  },
+   {
+     href: "/admin/settings",
+     label: "Configuración",
+diff --git a/components/admin/layout/admin-nav-list.tsx b/components/admin/layout/admin-nav-list.tsx
+--- a/components/admin/layout/admin-nav-list.tsx
++++ b/components/admin/layout/admin-nav-list.tsx
+@@ -3,6 +3,7 @@
+ import Link from "next/link";
+ import { usePathname } from "next/navigation";
+ import {
++  ChartColumn,
+   ClipboardList,
+   CookingPot,
+   Handshake,
+@@ -24,6 +25,7 @@ const ADMIN_NAV_ICONS: Record<string, LucideIcon> = {
+   "/admin/kitchen": CookingPot,
+   "/admin/onboarding": Handshake,
+   "/admin/products": Package,
++  "/admin/statistics": ChartColumn,
+   "/admin/settings": Settings
+ };
+ 

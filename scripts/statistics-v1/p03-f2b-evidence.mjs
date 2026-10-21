@@ -1,0 +1,8 @@
+import fs from 'node:fs';import crypto from 'node:crypto';import assert from 'node:assert/strict';import {execFileSync} from 'node:child_process';
+const dir='docs/estadisticas-v1/p03-f2b',sha=p=>crypto.createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const baseline=JSON.parse(fs.readFileSync(`${dir}/baseline.json`));for(const [p,h]of Object.entries(baseline.files))assert.equal(sha(p),h,`Preexisting changed ${p}`);
+for(const name of ['security','security-shapes','differential','differential-products','differential-shapes','differential-temporal','concurrency'])assert.equal(JSON.parse(fs.readFileSync(`${dir}/${name}.json`)).result,'PASS');
+const head=execFileSync('git',['--no-optional-locks','rev-parse','HEAD'],{encoding:'utf8'}).trim();assert.equal(head,baseline.head);
+const files=execFileSync('git',['--no-optional-locks','ls-files','--cached','--others','--exclude-standard','-z'],{encoding:'utf8'}).split('\0').filter(p=>p&&fs.existsSync(p)&&(p.startsWith(dir+'/')||p.startsWith('scripts/statistics-v1/p03-f2b-'))&&p!==`${dir}/evidence.json`);
+fs.writeFileSync(`${dir}/evidence.json`,JSON.stringify({at:new Date().toISOString(),head,verdict:'PERFORMANCE_IMPROVED_WITH_LIMITATIONS',preservedFiles:Object.keys(baseline.files).length,preexistingHashesPreserved:true,approvedCandidateHash:sha('supabase/migrations/20261013005000_statistics_v1_read_core_candidate.sql'),inventory:files.map(p=>({path:p,sha256:sha(p)})),publicOriginalActive:true,commits:0,launch:false,benchmarks:JSON.parse(fs.readFileSync(`${dir}/benchmarks.json`)).result,preservation:JSON.parse(fs.readFileSync(`${dir}/preservation.json`))},null,2));
+console.log(`PASS ${Object.keys(baseline.files).length} preexisting hashes; inventory sealed`);

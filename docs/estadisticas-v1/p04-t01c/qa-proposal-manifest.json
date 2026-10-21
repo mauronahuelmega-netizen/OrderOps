@@ -1,0 +1,75 @@
+{
+  "at": "2026-10-14T18:02:37.615Z",
+  "source": "docs/estadisticas-v1/p04-t01b-fix/candidate-products-fixed.sql",
+  "sourceSha256": "57395a7920d95cf63c1b67fb8191e40272a26aeb445a4abe7bec4d822b99c2c1",
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "qaRevision": "P04-T01C-QA1",
+  "principals": [
+    {
+      "userId": "a9eea14b-6c1c-4631-9a0e-4c6c62efe501",
+      "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+      "role": "owner"
+    },
+    {
+      "userId": "6d1a696a-d974-4ad6-809d-a5715f90d816",
+      "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+      "role": "manager"
+    },
+    {
+      "userId": "4f81b68b-fc92-4865-88a8-bd59372b45f8",
+      "businessId": "108722c0-a80f-4d5b-98ee-6c99f44cdb23",
+      "role": "admin"
+    },
+    {
+      "userId": "bb729a71-be76-4ff7-a7f6-0edd33361097",
+      "businessId": "ea72a875-7511-4c1d-9d2c-c3f899b94bea",
+      "role": "owner"
+    },
+    {
+      "userId": "1ef472c5-3f84-4118-b486-ff2796f1992c",
+      "businessId": "ea72a875-7511-4c1d-9d2c-c3f899b94bea",
+      "role": "manager"
+    },
+    {
+      "userId": "a63714a3-afc5-490c-b114-8abc68d45621",
+      "businessId": "ea72a875-7511-4c1d-9d2c-c3f899b94bea",
+      "role": "admin"
+    }
+  ],
+  "policy": "Default empty/closed; fixed six synthetic principal pairs; enabled and expiry required; original role independently required",
+  "sourceChanges": [
+    "One SQL-only publication guard in private reader; no financial expression change"
+  ],
+  "newObjects": [
+    "public.statistics_products_qa_access table",
+    "statistics_products_qa_access_self SELECT RLS policy",
+    "private.statistics_products_qa_can_query(uuid)",
+    "three Products functions"
+  ],
+  "existingObjectsAltered": [],
+  "releaseLedgerChange": false,
+  "requiresNewHashAuthorization": true,
+  "sqlExecuted": false,
+  "files": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/candidate-products-qa-gated.proposed.sql",
+      "sha256": "97df05b782752b2f34b490a1a029d900cc716fbe2c7091dbef1fef5dfc39dd3d"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-install.proposed.sql",
+      "sha256": "f7940a54a58b93b04d56b10eb1f65bf425299436a2e25a1d3ae79feec919272f"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-enable-synthetic.proposed.sql",
+      "sha256": "758cf316a8707d4bca32c3a8c7ce39765ccbfb37eee3490d8a25f76659df4768"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-disable.proposed.sql",
+      "sha256": "bb81ee84ab4a6c66e865101f274109e61db212e97ffcb66eadd83f318a00ec45"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c/qa-uninstall.proposed.sql",
+      "sha256": "46041c9a669f59dc1db00ae6fe9947d00cf0efb16b468c9b25ea01231ada7a95"
+    }
+  ]
+}

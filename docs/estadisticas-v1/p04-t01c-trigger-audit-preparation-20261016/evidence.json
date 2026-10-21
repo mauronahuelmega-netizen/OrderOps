@@ -1,0 +1,227 @@
+{
+  "at": "2026-10-16T16:35:25.362Z",
+  "preparationVerdict": "READY_FOR_SINGLE_READONLY_REVIEW",
+  "phaseP04T01C": "BLOCKED",
+  "project": "orderops-statistics-v1-test-74718de66a41",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "baselineFiles": 3100,
+  "tests": 74,
+  "targets": [
+    {
+      "originalIndex": 18,
+      "schema": "public",
+      "table": "business_settings",
+      "name": "handle_business_settings_updated_at"
+    },
+    {
+      "originalIndex": 19,
+      "schema": "public",
+      "table": "customization_groups",
+      "name": "handle_customization_groups_updated_at"
+    },
+    {
+      "originalIndex": 20,
+      "schema": "public",
+      "table": "customization_options",
+      "name": "handle_customization_options_updated_at"
+    },
+    {
+      "originalIndex": 21,
+      "schema": "public",
+      "table": "customization_group_assignments",
+      "name": "handle_customization_group_assignments_updated_at"
+    },
+    {
+      "originalIndex": 22,
+      "schema": "public",
+      "table": "product_customization_overrides",
+      "name": "handle_product_customization_overrides_updated_at"
+    },
+    {
+      "originalIndex": 23,
+      "schema": "public",
+      "table": "upsell_groups",
+      "name": "handle_upsell_groups_updated_at"
+    },
+    {
+      "originalIndex": 24,
+      "schema": "public",
+      "table": "upsell_group_items",
+      "name": "handle_upsell_group_items_updated_at"
+    },
+    {
+      "originalIndex": 25,
+      "schema": "public",
+      "table": "order_financials",
+      "name": "handle_order_financials_updated_at"
+    },
+    {
+      "originalIndex": 28,
+      "schema": "public",
+      "table": "finance_accounts",
+      "name": "handle_finance_accounts_updated_at"
+    },
+    {
+      "originalIndex": 29,
+      "schema": "public",
+      "table": "finance_categories",
+      "name": "handle_finance_categories_updated_at"
+    },
+    {
+      "originalIndex": 31,
+      "schema": "public",
+      "table": "finance_funds",
+      "name": "handle_finance_funds_updated_at"
+    },
+    {
+      "originalIndex": 33,
+      "schema": "public",
+      "table": "business_finance_settings",
+      "name": "handle_business_finance_settings_updated_at"
+    },
+    {
+      "originalIndex": 38,
+      "schema": "public",
+      "table": "finance_transactions",
+      "name": "handle_finance_transactions_updated_at"
+    }
+  ],
+  "approvalHashes": {
+    "runner.proposed.mjs": "aebf2d902ac2abf4a841d4d472cafa2f4a6ad6e2e998019c1851ee31d6b25674",
+    "verification.proposed.psql": "61f076a61c4d4d8316afdcdabbca633b24b6bc353db040c2b1d9a6b93412720d",
+    "artifact-pins.json": "db9310b204b3dbe41284c778abe66d01685982d20c5246ff7035c392fd6b36fa",
+    "validation.mjs": "8cbcebb4c02601aa0d8b046c5ac5d9393f4d0b26ca931425f7c0db232995257c",
+    "trigger-catalog.select.sql": "b1fe48ac21399c6e580fb6ce956333c42100e15de446d568e25c1d0706a3d7c9",
+    "trigger-gate.select.sql": "34c9b84894ab9011916e46e2624d24179903287030fdfff10b04b2b21a1ddee6",
+    "cluster-identity.select.sql": "195cd4500b588fa9b3d8997524bbddc2554c7763ef08e26dd0f3b32a90288e37",
+    "targets.json": "9e9413c03e3ee515ac3e11880b28973c8074842c54b35be58c14c2fdb2704e6c"
+  },
+  "historicalOidContinuity": "NOT_PROVABLE_FROM_EXISTING_CAPTURES",
+  "intendedConclusion": "CURRENT_REPRESENTATION_CONFIRMED_WITH_HISTORICAL_LIMITATIONS only if future execution passes all gates",
+  "unexecuted": true,
+  "sqlConnections": 0,
+  "dockerCommands": 0,
+  "priorRunnerRepeated": false,
+  "containerMutations": 0,
+  "sourceReferencesRewritten": false,
+  "commits": 0,
+  "nextAuthorization": "Specific single READ ONLY execution of these exact runner/template/artifact-manifest hashes",
+  "publicSources": [
+    "https://www.postgresql.org/docs/17/catalog-pg-trigger.html",
+    "https://www.postgresql.org/docs/17/functions-info.html",
+    "https://raw.githubusercontent.com/postgres/postgres/REL_17_STABLE/src/backend/utils/adt/ruleutils.c"
+  ],
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/ACCEPTANCE_CRITERIA.md",
+      "sha256": "b069ba7bbb000e2f58c0f03052683879209a0c2e16bcd140e43056d80f0af0bb",
+      "bytes": 3820
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/APPROVAL_HASHES.md",
+      "sha256": "1aa163bb90f67a9f130743c666efc73bf30d500a31b2b72099420a1360c59614",
+      "bytes": 1027
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/artifact-pins.json",
+      "sha256": "db9310b204b3dbe41284c778abe66d01685982d20c5246ff7035c392fd6b36fa",
+      "bytes": 4107
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/build-proposal.mjs",
+      "sha256": "10a4a75758b1bd21572d40a585d76496cca075c28a91ea2475c55a43f30d7e48",
+      "bytes": 10352
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/cluster-identity.select.sql",
+      "sha256": "195cd4500b588fa9b3d8997524bbddc2554c7763ef08e26dd0f3b32a90288e37",
+      "bytes": 420
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/EXECUTION_PROPOSAL.md",
+      "sha256": "9287b2241d43783d84528d816cb4623eeab508986ba64b20970e24e695a4b9a0",
+      "bytes": 4709
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/file-baseline.json",
+      "sha256": "3488f3ddd89ed4f87519f2551aba20ba907ad105e2889242b9e03471c435d7ec",
+      "bytes": 506814
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/finalize-evidence.mjs",
+      "sha256": "36bc25cf60cb09b52c3ce905902b204ae5e84aba92bc952b4dc7899cef72bbdb",
+      "bytes": 6127
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/historical-sources.json",
+      "sha256": "c955199754a69dfda5a94bc1f0369a956f194278de535d2c9e8e7b8041424bb4",
+      "bytes": 2085
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/HISTORICAL_COMPARABILITY.md",
+      "sha256": "8bcfdf909f3d34e2cc210d8f656213c9fd54219ad3bb1321115f3f28a1c8612d",
+      "bytes": 4303
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/informe.md",
+      "sha256": "a020d499a10a5d5b4fdbc29615cd0fc2b5bc159422273e0dfd673a1eb2927fd2",
+      "bytes": 4659
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/offline-results.json",
+      "sha256": "30ab8b709df90de1754586ac5b84d18a884fade5d6c9ba03d5d59da2c84cc41f",
+      "bytes": 8460
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/offline.verify.mjs",
+      "sha256": "1331de3c560535888b8a2339a9bbdb98e501b6d84ca87e83588ba4e346269136",
+      "bytes": 9779
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/preservation.json",
+      "sha256": "c9a6d48516a5ee3316fa6bd15b559b68736918558ef23bbc6dbd454ac06c5945",
+      "bytes": 727
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/runner.proposed.mjs",
+      "sha256": "aebf2d902ac2abf4a841d4d472cafa2f4a6ad6e2e998019c1851ee31d6b25674",
+      "bytes": 5612
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/targets.json",
+      "sha256": "9e9413c03e3ee515ac3e11880b28973c8074842c54b35be58c14c2fdb2704e6c",
+      "bytes": 9201
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/trigger-catalog.select.sql",
+      "sha256": "b1fe48ac21399c6e580fb6ce956333c42100e15de446d568e25c1d0706a3d7c9",
+      "bytes": 6425
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/trigger-gate.select.sql",
+      "sha256": "34c9b84894ab9011916e46e2624d24179903287030fdfff10b04b2b21a1ddee6",
+      "bytes": 6130
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/TRIGGER_MATRIX.md",
+      "sha256": "11b3fd2f5c8d0a9fbb1e3b2bd0f9654efb55afaa680d496bcde877b19bd34fab",
+      "bytes": 3409
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/validation-results.json",
+      "sha256": "9fd539d6fac884b43d2b8604318bfc4c4b6c2bf7f82ddb0db7742dbe11135b21",
+      "bytes": 1276
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/validation.mjs",
+      "sha256": "8cbcebb4c02601aa0d8b046c5ac5d9393f4d0b26ca931425f7c0db232995257c",
+      "bytes": 6327
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/verification.proposed.psql",
+      "sha256": "61f076a61c4d4d8316afdcdabbca633b24b6bc353db040c2b1d9a6b93412720d",
+      "bytes": 40098
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

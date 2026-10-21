@@ -1,0 +1,6 @@
+{
+  "result": "PASS",
+  "hash": "fd88de8c0ec3f4a87d8a6782650d63cf4779d8170033a4c5b4f37edbd489faf9",
+  "transactional": true,
+  "output": "BEGIN\nSET\nSET\nCREATE FUNCTION\nCREATE FUNCTION\nCREATE FUNCTION\nREVOKE\nGRANT\nREVOKE\nGRANT\nREVOKE\nGRANT\nINSERT 0 1\nCOMMIT"
+}

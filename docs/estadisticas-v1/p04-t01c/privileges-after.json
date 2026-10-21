@@ -1,0 +1,105 @@
+{
+  "at": "2026-10-14T18:32:48.802Z",
+  "result": "PASS_PREPARATION",
+  "functions": [
+    {
+      "signature": "private.statistics_products_metric(numeric,bigint,bigint,bigint,bigint)",
+      "installed": false
+    },
+    {
+      "signature": "private.statistics_v1_products_reader(text,date,date,text,integer,jsonb)",
+      "installed": false
+    },
+    {
+      "signature": "public.statistics_v1_products(text,date,date,text,integer,jsonb)",
+      "installed": false
+    },
+    {
+      "signature": "private.statistics_products_qa_can_query(uuid)",
+      "installed": false
+    }
+  ],
+  "newConfigAbsent": true,
+  "schemaUsage": [
+    {
+      "role": "anon",
+      "public": true,
+      "private": false
+    },
+    {
+      "role": "authenticated",
+      "public": true,
+      "private": true
+    },
+    {
+      "role": "service_role",
+      "public": true,
+      "private": true
+    }
+  ],
+  "originalSummary": [
+    {
+      "role": "anon",
+      "execute": false
+    },
+    {
+      "role": "authenticated",
+      "execute": true
+    },
+    {
+      "role": "service_role",
+      "execute": false
+    }
+  ],
+  "roleFlags": [
+    {
+      "role": "authenticated",
+      "superuser": false,
+      "bypassRls": false,
+      "canLogin": false
+    },
+    {
+      "role": "anon",
+      "superuser": false,
+      "bypassRls": false,
+      "canLogin": false
+    },
+    {
+      "role": "service_role",
+      "superuser": false,
+      "bypassRls": true,
+      "canLogin": false
+    },
+    {
+      "role": "authenticator",
+      "superuser": false,
+      "bypassRls": false,
+      "canLogin": true
+    }
+  ],
+  "sourceRls": [
+    {
+      "relation": "profiles",
+      "rls": true,
+      "acl": "{postgres=arwdDxtm/postgres,anon=arwdDxtm/postgres,authenticated=arwdDxtm/postgres,service_role=arwdDxtm/postgres}"
+    },
+    {
+      "relation": "order_statistics_completions",
+      "rls": true,
+      "acl": "{postgres=arwdDxtm/postgres,authenticated=r/postgres}"
+    },
+    {
+      "relation": "order_statistics_completion_items",
+      "rls": true,
+      "acl": "{postgres=arwdDxtm/postgres,authenticated=r/postgres}"
+    },
+    {
+      "relation": "statistics_v1_effective_facts",
+      "rls": false,
+      "acl": "{postgres=arwdDxtm/postgres,authenticated=r/postgres}"
+    }
+  ],
+  "readOnly": "on",
+  "productsEffectivePrivileges": "NO_FUNCTIONS_INSTALLED; candidate transaction ACL recorded separately, not live grants",
+  "noGrantChanges": true
+}

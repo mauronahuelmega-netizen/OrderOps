@@ -1,0 +1,98 @@
+{
+  "at": "2026-10-13T21:48:28.448Z",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "verdict": "READY_WITH_LIMITATIONS",
+  "preservedFiles": 2104,
+  "static": "PASS lexical/scope/structural checks only; no SQL parser, PLpgSQL compilation or runtime equivalence claimed",
+  "temporalSeriesTailExact": true,
+  "sourceItemsCallSiteCount": 1,
+  "originalPublicRpcAndGrantsUnchanged": true,
+  "installedOriginalFilesPreserved": true,
+  "candidateSha256": "fd88de8c0ec3f4a87d8a6782650d63cf4779d8170033a4c5b4f37edbd489faf9",
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p03-f2a/application-rollback.md",
+      "sha256": "52de8971ada168486ca881e6feed7cf2d7b6284ba06f57a24d2032df6dc1e0af"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2a/baseline.json",
+      "sha256": "946b54e96f58ff38b3e50977adf8f742b8daa1f38386c2f6a0168e62f0b31cfb"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2a/candidate.sql",
+      "sha256": "fd88de8c0ec3f4a87d8a6782650d63cf4779d8170033a4c5b4f37edbd489faf9"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2a/decoder-tests.json",
+      "sha256": "c7581287c70b8d77a73ee7a45807715317bade4dbcf37aa5a42ecc6700d75d03"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2a/differential-plan.md",
+      "sha256": "7d69e204d63ce47d13805071fdd2f6073186a9de12e69b29e7f3840a938e347f"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2a/differential.sql",
+      "sha256": "b3c98fead7184aa816e92627e9619c07adedcb8c33732afdf5eef0b4b9f38b11"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2a/functions.diff",
+      "sha256": "d62977ced530860d91ec5e05366b1be92c9ba170709d6ae24bcc496718cecab0"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2a/generation.json",
+      "sha256": "dc111010770aa06eb0b12fe21b57b1662071b8d289cd3782ce0687e198c1f8b6"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2a/informe.md",
+      "sha256": "4542d29a31fb7aef355ab3d0fef0bda8ef14d4a8e27ff8c6af692408cfe5ac2c"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2a/original-functions.sql",
+      "sha256": "5756c4732993c117abeade27539279afe82c87908b9594ee60c7d88a4010c71a"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2a/performance-risks.md",
+      "sha256": "512c0c1acca37d555dddc9ca196a1eefdc2e7984869536ee380ed4fb6428e10c"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2a/proposed-functions.sql",
+      "sha256": "80bd83407770cf8ef35c730dc48bcf433ebe0c6438db577f529dec11e213173b"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2a/security-audit.md",
+      "sha256": "914fd76ed6fbe4987c1b50478302297695d96ab0da3a27ced0e11cb0095bb762"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2a/semantic-map.md",
+      "sha256": "526d3c8b8ce19ac2ae586a2d60f5fbcbb5ec0dd51a519ff13095a849d2d63e3f"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2a/typescript-check.txt",
+      "sha256": "2521a022dc8d58e2f75095d9a162db5ec8514a32189be046c3faefc7bf44a5c2"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f2a-build.mjs",
+      "sha256": "b0cb602e4572c7b283b0791fe017df17b0447243e7f3a5fe15e6508855d7eeb9"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f2a-decode.verify.ts",
+      "sha256": "9b9c152f24935c04de7ef8cce34230e2d282e21de107fea1e5a65a6edc09b7e5"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f2a-static.verify.mjs",
+      "sha256": "a4c45d2ebe27b503fb42f601a50b3df9bb62bd9ad5897778faea85145b6aa3fb"
+    },
+    {
+      "path": "supabase/migrations/20261013005000_statistics_v1_read_core_candidate.sql",
+      "sha256": "fd88de8c0ec3f4a87d8a6782650d63cf4779d8170033a4c5b4f37edbd489faf9"
+    }
+  ],
+  "databaseConnections": 0,
+  "sqlExecuted": false,
+  "commits": 0,
+  "limitations": [
+    "Unordered legacy arrays require differential proof",
+    "NULL-role guard explicitly hardened; NOT NULL baseline makes role NULL unreachable, review delta",
+    "JSON/composite roundtrip and planner costs pending isolated execution"
+  ]
+}

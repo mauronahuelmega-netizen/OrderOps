@@ -1,0 +1,313 @@
+{
+  "at": "2026-10-16T14:35:24.836Z",
+  "checkpoint": "READY_FOR_LOOPBACK_INTERVENTION_REVIEW",
+  "operationalPhase": "BLOCKED",
+  "authorizationToStopOrReplace": false,
+  "mutationsEnabled": false,
+  "tests": 371,
+  "stageFaultCases": 160,
+  "requestBoundaryCases": 46,
+  "privateArchivesValidated": 17,
+  "qualifiedCandidateDescriptors": 2,
+  "syntax": "PASS",
+  "proof": [
+    "CLI sim-only",
+    "Unconditional native guard before HTTP import",
+    "Simulation brand plus AST import graph",
+    "Network/process tripwire",
+    "Compiled immutable hash pins",
+    "Qualified request brand and rehash",
+    "Durable one-use intent tickets"
+  ],
+  "sourceValidation": "Historical pins and existing encrypted bundle checked offline; no fresh Engine/catalog/network claims",
+  "keyFindings": [
+    "Stop timeout changed to -1 to avoid automatic SIGKILL; client deadline independent",
+    "Stopped export reader resolves directory ownership gap without mounted-volume export",
+    "Unknown attributes/unsupported metadata halt; no normalization",
+    "Any ambiguity quarantines journal and stops further operations; no auto rollback"
+  ],
+  "remainingRuntimeRisks": [
+    "Fresh live identity/resources/catalog verification",
+    "Fresh metadata visibility including five prior Kong size-change paths",
+    "Engine 1.52 and wire behavior not exercised live",
+    "Bounded stopped rootfs export resource cost",
+    "Exclusive lifecycle window; no guarantee against concurrent Docker administrator",
+    "Localhost/LAN IPv4/IPv6 and read-only logical comparison pending"
+  ],
+  "preservation": "preservation.json",
+  "approvalManifestSha256": "6a93fda6f957e2acdd6eecca4900b2be27a4015273e466b2a86ec4410d2e2a2e",
+  "nativeAdapterSha256": "fdc7323a0664ad621b58a4b45d0319ff5085da837c9c9d39d5e17409621852e5",
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/approval-manifest.json",
+      "sha256": "6a93fda6f957e2acdd6eecca4900b2be27a4015273e466b2a86ec4410d2e2a2e",
+      "bytes": 6270,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/approved-constants.mjs",
+      "sha256": "4599f83d1a65639bf3f28f24fe0bd0b1fad87739480e638d5314cff90943e263",
+      "bytes": 9317,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/audit-private-bundle.mjs",
+      "sha256": "a2838675e69493938c49d2160353be240e0bbcd82c6397c50f8b86266bac88e9",
+      "bytes": 3371,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/bundle.mjs",
+      "sha256": "e0d42cfceb745f24e74f4599a2ea75f71bdd0f6232c23ed9b40b0e7a93ab3ee4",
+      "bytes": 2643,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/checkpoint-review.json",
+      "sha256": "17d5e17e97d648c078dfc9567d0308ff2772537fb3d5b3e7ab9184da4fb2b1c3",
+      "bytes": 711,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/cli.mjs",
+      "sha256": "a1b758ab3964f4d2f1126a3d9a348bc832dd50f963adee4694b31650a8cb98c8",
+      "bytes": 595,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/executor.mjs",
+      "sha256": "48da657e532f0c7ee975a797f054d1669c6170a79fc91fbab9fc13fae99f6087",
+      "bytes": 18242,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/file-baseline.json",
+      "sha256": "061434d0fa3405a73371635dfb594c0ee7b0bf951005b8e14d261f42cf7a0c31",
+      "bytes": 488122,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/filesystem.mjs",
+      "sha256": "ce179900ef34fc40795190bfe43bbfe3faf35fbafa4c893a563b1b6d5f8abded",
+      "bytes": 6591,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/finalize-evidence.mjs",
+      "sha256": "9580e9ee177a86e81ce596ad5771e5e3df8a47630e2f133752f6c0ec9ab5a5fb",
+      "bytes": 7064,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/human-checklist.md",
+      "sha256": "45546ace5e1feecdad35f46e187fa417c107d348ededa662fdada3485080ae54",
+      "bytes": 7504,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/informe-auditoria.md",
+      "sha256": "1ce486290e2ae227bba5be07d3ee7866041b372e7462d3257b1e088a1db7f82d",
+      "bytes": 8897,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792160852188-c3e2c70fed78.jsonl",
+      "sha256": "adb1790896775c293158e5dcfc346da799746068a5cb5b0cf16cbcd1282a67a5",
+      "bytes": 308,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792160852198-6ec07eb4045b.jsonl",
+      "sha256": "faa2451722557887592afe675a70d36a431868b76e0899ddf11e6ec28a159016",
+      "bytes": 308,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792160852207-34c44059e515.jsonl",
+      "sha256": "1b69345206f3fb9cdfc4966f8f9388c0106412fa8c9913f1f2adbac79890ce9d",
+      "bytes": 308,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792160852215-be433e98a856.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792160852218-bc06696590e2.jsonl",
+      "sha256": "2cc82f592a79346d18ca10ae5fafb405eae4b943ac237e983ce56307c8212e7b",
+      "bytes": 308,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792160852221-c1d0075160cd.jsonl",
+      "sha256": "ff47d33bc62082fd7bd73db29be5a812fbcfd83a6247817bcf393621a7e37ad0",
+      "bytes": 308,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792160972785-0100df3396a0.jsonl",
+      "sha256": "4533c1af9e3e0baf5b706d5817ed38c357d6cdc314113c66ab40e1e27427840a",
+      "bytes": 308,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792160972796-2b8be1f2e12b.jsonl",
+      "sha256": "f5535b14d542e07f5011dc0d09c8b551d13453a9566121ee24107cef8c39b8e1",
+      "bytes": 308,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792160972813-cd9d2a9ed688.jsonl",
+      "sha256": "5aeb2cb250bb1b0ecb92b6ede1cac1d6da3e0887e7f01a89c81bba5d8c947bcc",
+      "bytes": 308,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792160972822-17838bc58b41.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792160972825-e4a870a2e9b0.jsonl",
+      "sha256": "60faa9206f9d45cfd37ae8e3228460f9ff81c4a07b6fba5481d038ef734ea1c2",
+      "bytes": 308,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792160972830-0d7882d31aec.jsonl",
+      "sha256": "30666e09bc53b36ea9ae86d6ac40dd005275378a160236b636e4fc4f8017e303",
+      "bytes": 308,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792161213976-7d42f5cfb601.jsonl",
+      "sha256": "e5e1052a4c5d1b72576ee2519e07755b2899418d7887b58690b7fa42dfb7ca55",
+      "bytes": 326,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792161213984-c70052c82a5b.jsonl",
+      "sha256": "683d9c49fa8024a1b70e4291b6f36ea77096225868cea4b39a1d53f4ada6f911",
+      "bytes": 326,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792161213991-b487971bde6a.jsonl",
+      "sha256": "7835d344e7d451b40a0d3632f480c80db728647c7587c9b7a631e374d0a5fcad",
+      "bytes": 326,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792161213999-e1139cce536a.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792161214002-e33f5e4049c7.jsonl",
+      "sha256": "2d4d6d36ff592e6ea0ff310ec29f966e6c2d0ab6062ab822f9489a269178793c",
+      "bytes": 326,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-fixtures/intent-1792161214008-b7107756bcf5.jsonl",
+      "sha256": "afc513e90b74d749596e12888bfdfecbcc8fb42eda9bd4696cc25263d57d2f90",
+      "bytes": 326,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-store.mjs",
+      "sha256": "c3ddb648904ac17f785112c27dab2aa1cc87cee00f586d899c4fc98fe2465fc5",
+      "bytes": 3525,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal.mjs",
+      "sha256": "5415bb94b048d53418df43d502453730c68e3f5aafbf00175ca339232e081460",
+      "bytes": 1226,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/lifecycle-policy.mjs",
+      "sha256": "74589059a1256bca3e83ae3ef56fd6282dfdec90d674d5e80546ae59d2079415",
+      "bytes": 1592,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/native-adapter.proposed.mjs",
+      "sha256": "fdc7323a0664ad621b58a4b45d0319ff5085da837c9c9d39d5e17409621852e5",
+      "bytes": 3519,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/offline-results.json",
+      "sha256": "0ba7e05904aed637f75b09df57b14ac54fd4b61fc9c75b0c03c6f321c13c65b0",
+      "bytes": 57704,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/offline-tripwire.mjs",
+      "sha256": "127b7e52d390adc69358bb2d5d9a632f546ee6ce1f3e5b7783de2b6dff27b1ea",
+      "bytes": 670,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/offline.verify.mjs",
+      "sha256": "55617cc2b4a52ae0b76f465a8246aee9f31de5931bb949a4f56510cef279550b",
+      "bytes": 24906,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/pins.json",
+      "sha256": "4e3f0df8c8c61bf475e24d1e195c5cae7d822f5c3b4ebcc80bbb29b8daf1b441",
+      "bytes": 23144,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/preservacion-y-fallos.md",
+      "sha256": "9fc6281ff1477e472f829de28b21734aa6dd41aea0780d3d2028eecb0ad53fcd",
+      "bytes": 6619,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/preservation.json",
+      "sha256": "53c25a9db7a30734925b59911b964ce6ed8af16c5c99684a424d92799d2d0f7d",
+      "bytes": 765,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/private-bundle-audit.json",
+      "sha256": "05afb67d3f84c3b0dcd1c1743b005ac0211d95326cea52b25f813f7fa2ef0969",
+      "bytes": 1741,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/request-codec.mjs",
+      "sha256": "eb0bd620f472be9bcbdad393b35e335032ee6dd54245a6c13091638eec907668",
+      "bytes": 8026,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/simulation-transcript.json",
+      "sha256": "1634677b564ff7a9d44c303979631f486bb81f305884ab719ef902b6e0a12cef",
+      "bytes": 37599,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/stopped-export.mjs",
+      "sha256": "244773c38def650feaeb0f37e45658865bab9393aae0785d72f536346758ee66",
+      "bytes": 4409,
+      "kind": "created"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/syntax-results.json",
+      "sha256": "0bb332291ba1f7b3edf2aa960f2ef0ccc4cf3c7722215ff818ad315c52ce8c61",
+      "bytes": 2134,
+      "kind": "created"
+    }
+  ],
+  "inventoryExcludesSelf": true
+}

@@ -1,0 +1,11 @@
+// One invocation of approved runner, unchanged. No independent Docker/SQL or retry.
+import fs from 'node:fs';import assert from 'node:assert/strict';import {spawnSync} from 'node:child_process';import {createHash} from 'node:crypto';
+const dir='docs/estadisticas-v1/p04-t01c-trigger-audit-execution-20261016/';const source='docs/estadisticas-v1/p04-t01c-trigger-audit-preparation-20261016/';const sha=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
+const pins=JSON.parse(fs.readFileSync(dir+'authorization-pins.json'));for(const [p,h]of Object.entries(pins.approved))assert.equal(sha(source+p),h);for(const p of pins.associatedComponents)assert.equal(sha(p.path),p.sha256);
+assert.ok(!fs.existsSync(source+'execution-intent.json'));assert.ok(!fs.existsSync(source+'execution-observed.json'));
+const file=dir+'execution-envelope.json';const fd=fs.openSync(file,'wx');const before={startedUtc:new Date().toISOString(),invocations:1,approved:pins.approved,runner:source+'runner.proposed.mjs',mode:'--execute-readonly',state:'INTENT_RECORDED_NO_RETRY'};fs.writeSync(fd,JSON.stringify(before,null,2)+'\n');fs.fsyncSync(fd);fs.closeSync(fd);
+const r=spawnSync(process.execPath,[before.runner,before.mode],{encoding:'utf8',windowsHide:true,maxBuffer:2e6});
+let summary=null;try{const x=JSON.parse(r.stdout.trim());const allowed=['status','rollbackObserved','phaseP04T01C','invocations','at','stage','attemptIntentCreated','sqlProcessInvoked','exitCode','clientErrorCode','sqlStates','stdoutSha256','rawOutputPersisted'];if(Object.keys(x).every(k=>allowed.includes(k)))summary=x;}catch{}
+const result={...before,endedUtc:new Date().toISOString(),exitCode:r.status,signal:r.signal??null,clientErrorCode:r.error?.code??null,summary,rawOutputPersisted:false,state:r.status===0&&summary?.status==='CURRENT_REPRESENTATION_CONFIRMED_WITH_HISTORICAL_LIMITATIONS'?'COMPLETED_SINGLE_APPROVED_RUN':'STOPPED_NO_RETRY'};
+for(const p of ['execution-intent.json','execution-observed.json'])if(fs.existsSync(source+p))result[p]={path:source+p,sha256:sha(source+p)};
+fs.writeFileSync(file,JSON.stringify(result,null,2)+'\n');console.log(JSON.stringify({state:result.state,exitCode:r.status,summary,invocations:1}));if(result.state!=='COMPLETED_SINGLE_APPROVED_RUN')process.exitCode=1;

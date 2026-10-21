@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-14T14:33:26.669Z",
+  "newConnection": true,
+  "threeFunctionsAbsent": true,
+  "catalogIdentical": true,
+  "aclPoliciesFunctionsIdentical": true,
+  "ledgerIdentical": true,
+  "dataFingerprintsIdentical": true,
+  "extraIdentical": true,
+  "explicitRollbackReached": true,
+  "commitStatements": 0
+}

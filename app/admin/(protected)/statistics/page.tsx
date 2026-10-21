@@ -1,0 +1,15 @@
+import type { Metadata } from 'next';
+import { redirect, notFound } from 'next/navigation';
+import AdminPageLayout from '@/components/admin/admin-page-layout';
+import StatisticsSummary from '@/components/admin/statistics/statistics-summary';
+import { statisticsRouteScope } from '@/lib/statistics/summary-route-server';
+
+export const metadata: Metadata = { title: 'Estadísticas' };
+export const dynamic = 'force-dynamic';
+export default async function StatisticsPage() {
+  const access = await statisticsRouteScope();
+  if (access.status === 'unauthenticated') redirect('/admin/login');
+  if (access.status === 'not_published') notFound();
+  if (access.status !== 'allowed') return <AdminPageLayout><section role="alert"><h1>Estadísticas</h1><p>{access.status === 'forbidden' ? 'No tenés permisos para consultar Estadísticas.' : 'No pudimos verificar tu acceso. Volvé a cargar la página.'}</p></section></AdminPageLayout>;
+  return <AdminPageLayout size="wide"><StatisticsSummary key={`${access.scope.userId}:${access.scope.businessId}`} scope={access.scope} /></AdminPageLayout>;
+}

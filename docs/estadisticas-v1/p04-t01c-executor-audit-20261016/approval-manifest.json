@@ -1,0 +1,140 @@
+{
+  "at": "2026-10-16T14:35:24.836Z",
+  "purpose": "REVIEW_ONLY_NOT_EXECUTION",
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "checkpoint": "READY_FOR_LOOPBACK_INTERVENTION_REVIEW",
+  "operationalPhase": "BLOCKED",
+  "humanReplacementApproval": false,
+  "wireHardLocked": true,
+  "enablingRequiresNewReviewedBuildAndHashApproval": true,
+  "artifacts": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/native-adapter.proposed.mjs",
+      "sha256": "fdc7323a0664ad621b58a4b45d0319ff5085da837c9c9d39d5e17409621852e5"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/request-codec.mjs",
+      "sha256": "eb0bd620f472be9bcbdad393b35e335032ee6dd54245a6c13091638eec907668"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/executor.mjs",
+      "sha256": "48da657e532f0c7ee975a797f054d1669c6170a79fc91fbab9fc13fae99f6087"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/approved-constants.mjs",
+      "sha256": "4599f83d1a65639bf3f28f24fe0bd0b1fad87739480e638d5314cff90943e263"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/filesystem.mjs",
+      "sha256": "ce179900ef34fc40795190bfe43bbfe3faf35fbafa4c893a563b1b6d5f8abded"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/stopped-export.mjs",
+      "sha256": "244773c38def650feaeb0f37e45658865bab9393aae0785d72f536346758ee66"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/bundle.mjs",
+      "sha256": "e0d42cfceb745f24e74f4599a2ea75f71bdd0f6232c23ed9b40b0e7a93ab3ee4"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal.mjs",
+      "sha256": "5415bb94b048d53418df43d502453730c68e3f5aafbf00175ca339232e081460"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/journal-store.mjs",
+      "sha256": "c3ddb648904ac17f785112c27dab2aa1cc87cee00f586d899c4fc98fe2465fc5"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/lifecycle-policy.mjs",
+      "sha256": "74589059a1256bca3e83ae3ef56fd6282dfdec90d674d5e80546ae59d2079415"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/cli.mjs",
+      "sha256": "a1b758ab3964f4d2f1126a3d9a348bc832dd50f963adee4694b31650a8cb98c8"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/offline-tripwire.mjs",
+      "sha256": "127b7e52d390adc69358bb2d5d9a632f546ee6ce1f3e5b7783de2b6dff27b1ea"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/offline.verify.mjs",
+      "sha256": "55617cc2b4a52ae0b76f465a8246aee9f31de5931bb949a4f56510cef279550b"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/offline-results.json",
+      "sha256": "0ba7e05904aed637f75b09df57b14ac54fd4b61fc9c75b0c03c6f321c13c65b0"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/audit-private-bundle.mjs",
+      "sha256": "a2838675e69493938c49d2160353be240e0bbcd82c6397c50f8b86266bac88e9"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/private-bundle-audit.json",
+      "sha256": "05afb67d3f84c3b0dcd1c1743b005ac0211d95326cea52b25f813f7fa2ef0969"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/pins.json",
+      "sha256": "4e3f0df8c8c61bf475e24d1e195c5cae7d822f5c3b4ebcc80bbb29b8daf1b441"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/informe-auditoria.md",
+      "sha256": "1ce486290e2ae227bba5be07d3ee7866041b372e7462d3257b1e088a1db7f82d"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/preservacion-y-fallos.md",
+      "sha256": "9fc6281ff1477e472f829de28b21734aa6dd41aea0780d3d2028eecb0ad53fcd"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-executor-audit-20261016/human-checklist.md",
+      "sha256": "45546ace5e1feecdad35f46e187fa417c107d348ededa662fdada3485080ae54"
+    }
+  ],
+  "privateBundle": {
+    "path": "supabase/statistics-v1-test/.runtime/loopback-bundles/2026-10-16T13-30-25-733Z-ae781e38/sealed.json",
+    "sha256": "f988c43bbc968bc95c0194b511afef28efe0154611ec827a9b93072bd1539508"
+  },
+  "candidatePayloads": [
+    {
+      "kind": "db",
+      "oldId": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "payloadSha256": "8ae80d0a2a32ff16da6ae10edc869e9f01b435d6ae336a06c1c04664d77f1a60",
+      "image": "sha256:4255b662ba3d774105cb34f623e410a3d7a860b68408ac6810f7e7e4b9781d5a"
+    },
+    {
+      "kind": "kong",
+      "oldId": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "payloadSha256": "8c1bdda35730b04c3aa01318670754157792a4ac770f8c683d899285d3d930f6",
+      "image": "sha256:1b53405d8680a09d6f44494b7990bf7da2ea43f84a258c59717d4539abf09f6d"
+    }
+  ],
+  "historicalReferences": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/policy.mjs",
+      "sha256": "72fe520f9d212aea0e75c5c7c036e24478827f9eaa578f03a32568ac0df5ac41"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/harness.mjs",
+      "sha256": "1aa9369e78c818950a4b1c89dba392849a1aa905863612872f7aa1a64ecc6eb6"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/dry-run.json",
+      "sha256": "90c55bae9de4e7f869b56a3c8901dfcef748cd3a381ab11fd8beaa24891d1fb8"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/replay-analysis.json",
+      "sha256": "d2e6147a73669079c6e560f28496153548462e0fa74e06de3517265958b78347"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/xattr-audit.json",
+      "sha256": "1e156462dc3b90419c04d59977a7b83c0d7c4408c9796b510110de634a897429"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/capability-audit.json",
+      "sha256": "019bc990dfb01688c35e063948b62c8c8a6accfd671315057fcad4027badc96f"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-loopback-harness-20261016/request-plan.proposed.json",
+      "sha256": "4582cf1a7ec012c5b0f7b49f8da5cda44dcac88491357ec88937ee0620ee16e8"
+    }
+  ]
+}

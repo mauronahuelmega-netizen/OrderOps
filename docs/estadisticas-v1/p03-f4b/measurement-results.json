@@ -1,0 +1,1402 @@
+{
+  "at": "2026-10-14T02:38:00.381Z",
+  "newQueryBenchmarks": {
+    "status": "NOT_EXECUTED",
+    "reason": "Existing evidence answers variability and logical-work questions; avoid another broad synthetic load without synchronized host/nested-plan instrumentation",
+    "fixturesCreated": 0,
+    "sqlWrites": 0
+  },
+  "currentInfraObservation": {
+    "samples": 3,
+    "resourceSamples": [
+      {
+        "at": "2026-10-14T02:26:31.796Z",
+        "cpuContainerRawPercent": 0,
+        "containerMemoryPercent": 1.57,
+        "dockerBlockIO": "115MB / 65MB",
+        "linuxGlobalPressure": {
+          "cpu": [
+            {
+              "kind": "some",
+              "avg10": 9.15,
+              "avg60": 10.35,
+              "avg300": 10.01,
+              "totalUs": 4588483646
+            },
+            {
+              "kind": "full",
+              "avg10": 0,
+              "avg60": 0,
+              "avg300": 0,
+              "totalUs": 0
+            }
+          ],
+          "memory": [
+            {
+              "kind": "some",
+              "avg10": 0,
+              "avg60": 0,
+              "avg300": 0,
+              "totalUs": 7943603
+            },
+            {
+              "kind": "full",
+              "avg10": 0,
+              "avg60": 0,
+              "avg300": 0,
+              "totalUs": 6692573
+            }
+          ],
+          "io": [
+            {
+              "kind": "some",
+              "avg10": 1.07,
+              "avg60": 1.59,
+              "avg300": 0.85,
+              "totalUs": 394452014
+            },
+            {
+              "kind": "full",
+              "avg10": 0.34,
+              "avg60": 0.93,
+              "avg300": 0.48,
+              "totalUs": 247224223
+            }
+          ]
+        },
+        "hostCountersAvailable": false,
+        "processCPU": "Cumulative seconds since process start; not current contention measurement"
+      },
+      {
+        "at": "2026-10-14T02:26:52.022Z",
+        "cpuContainerRawPercent": 0.01,
+        "containerMemoryPercent": 1.57,
+        "dockerBlockIO": "115MB / 65MB",
+        "linuxGlobalPressure": {
+          "cpu": [
+            {
+              "kind": "some",
+              "avg10": 9.09,
+              "avg60": 9.96,
+              "avg300": 9.93,
+              "totalUs": 4589482119
+            },
+            {
+              "kind": "full",
+              "avg10": 0,
+              "avg60": 0,
+              "avg300": 0,
+              "totalUs": 0
+            }
+          ],
+          "memory": [
+            {
+              "kind": "some",
+              "avg10": 0,
+              "avg60": 0,
+              "avg300": 0,
+              "totalUs": 7943603
+            },
+            {
+              "kind": "full",
+              "avg10": 0,
+              "avg60": 0,
+              "avg300": 0,
+              "totalUs": 6692573
+            }
+          ],
+          "io": [
+            {
+              "kind": "some",
+              "avg10": 0.97,
+              "avg60": 1.53,
+              "avg300": 0.87,
+              "totalUs": 394644277
+            },
+            {
+              "kind": "full",
+              "avg10": 0.5,
+              "avg60": 0.9,
+              "avg300": 0.49,
+              "totalUs": 247349290
+            }
+          ]
+        },
+        "hostCountersAvailable": false,
+        "processCPU": "Cumulative seconds since process start; not current contention measurement"
+      },
+      {
+        "at": "2026-10-14T02:27:05.142Z",
+        "cpuContainerRawPercent": 0.01,
+        "containerMemoryPercent": 1.57,
+        "dockerBlockIO": "115MB / 65MB",
+        "linuxGlobalPressure": {
+          "cpu": [
+            {
+              "kind": "some",
+              "avg10": 16.51,
+              "avg60": 11.59,
+              "avg300": 10.29,
+              "totalUs": 4592051987
+            },
+            {
+              "kind": "full",
+              "avg10": 0,
+              "avg60": 0,
+              "avg300": 0,
+              "totalUs": 0
+            }
+          ],
+          "memory": [
+            {
+              "kind": "some",
+              "avg10": 0,
+              "avg60": 0,
+              "avg300": 0,
+              "totalUs": 7943603
+            },
+            {
+              "kind": "full",
+              "avg10": 0,
+              "avg60": 0,
+              "avg300": 0,
+              "totalUs": 6692573
+            }
+          ],
+          "io": [
+            {
+              "kind": "some",
+              "avg10": 1.12,
+              "avg60": 1.5,
+              "avg300": 0.89,
+              "totalUs": 394892512
+            },
+            {
+              "kind": "full",
+              "avg10": 0.55,
+              "avg60": 0.86,
+              "avg300": 0.5,
+              "totalUs": 247479621
+            }
+          ]
+        },
+        "hostCountersAvailable": false,
+        "processCPU": "Cumulative seconds since process start; not current contention measurement"
+      }
+    ],
+    "scope": "Idle snapshots, not benchmark windows"
+  },
+  "historicalNormalSelect": {
+    "phase": "F.4A",
+    "method": "psql SELECT timing includes execution, serialization and local transport; no EXPLAIN instrumentation; pinned asOf/RR",
+    "cohorts": [
+      {
+        "batch": 1,
+        "orders": 50,
+        "status": "PASS",
+        "readers": {
+          "original": {
+            "n": 20,
+            "p50": 698.18,
+            "p95": 838.787,
+            "min": 587.244,
+            "max": 1222.602,
+            "mean": 715.7441499999999,
+            "stddev": 138.8020451024678,
+            "cv": 0.19392690125719897,
+            "rawMs": [
+              1222.602,
+              698.18,
+              778.984,
+              595.273,
+              838.787,
+              779.824,
+              779.304,
+              613.003,
+              735.66,
+              596.946,
+              616.252,
+              626.968,
+              760.327,
+              720.928,
+              730.766,
+              690.722,
+              587.244,
+              729.54,
+              598.101,
+              615.472
+            ],
+            "certifiedBatch": true
+          },
+          "AB": {
+            "n": 20,
+            "p50": 232.171,
+            "p95": 293.766,
+            "min": 207.152,
+            "max": 319.887,
+            "mean": 243.1301,
+            "stddev": 30.198795707610596,
+            "cv": 0.12420837941337003,
+            "rawMs": [
+              269.177,
+              293.766,
+              225.073,
+              319.887,
+              247.419,
+              261.731,
+              265.813,
+              224.713,
+              231.282,
+              234.457,
+              207.152,
+              282.962,
+              207.406,
+              250.522,
+              208.238,
+              220.477,
+              232.171,
+              229.571,
+              240.72,
+              210.065
+            ],
+            "certifiedBatch": true
+          },
+          "D1": {
+            "n": 20,
+            "p50": 158.031,
+            "p95": 229.598,
+            "min": 146.79,
+            "max": 257.943,
+            "mean": 173.08,
+            "stddev": 30.15630312886511,
+            "cv": 0.17423332059663224,
+            "rawMs": [
+              257.943,
+              151.768,
+              148.732,
+              229.598,
+              156.447,
+              211.039,
+              177.151,
+              173.176,
+              205.368,
+              147.359,
+              179.6,
+              156.053,
+              147.313,
+              169.105,
+              160.567,
+              149.929,
+              146.79,
+              185.55,
+              158.031,
+              150.081
+            ],
+            "certifiedBatch": true
+          }
+        },
+        "warmups": {
+          "original": 983.781,
+          "AB": 243.81,
+          "D1": 189.078
+        }
+      },
+      {
+        "batch": 1,
+        "orders": 100,
+        "status": "PASS",
+        "readers": {
+          "original": {
+            "n": 20,
+            "p50": 1333.493,
+            "p95": 1744.053,
+            "min": 1144.506,
+            "max": 2043.088,
+            "mean": 1373.9342000000001,
+            "stddev": 222.03005130670937,
+            "cv": 0.16160166280649346,
+            "rawMs": [
+              1165.973,
+              1348.699,
+              1495.668,
+              1335.369,
+              1370.209,
+              1154.562,
+              1300.486,
+              1333.493,
+              1325.552,
+              1438.339,
+              2043.088,
+              1287.084,
+              1353.155,
+              1144.506,
+              1151.476,
+              1238.124,
+              1744.053,
+              1705.899,
+              1172.471,
+              1370.478
+            ],
+            "certifiedBatch": true
+          },
+          "AB": {
+            "n": 20,
+            "p50": 400.194,
+            "p95": 532.943,
+            "min": 357.431,
+            "max": 538.79,
+            "mean": 419.93514999999996,
+            "stddev": 51.46764033572454,
+            "cv": 0.12256092478975514,
+            "rawMs": [
+              532.943,
+              456.864,
+              441.936,
+              444.819,
+              389.127,
+              410.208,
+              538.79,
+              363.854,
+              394.266,
+              362.101,
+              467.817,
+              463.675,
+              400.194,
+              367.733,
+              357.431,
+              387.382,
+              426.196,
+              376.276,
+              386.985,
+              430.106
+            ],
+            "certifiedBatch": true
+          },
+          "D1": {
+            "n": 20,
+            "p50": 327.388,
+            "p95": 476.775,
+            "min": 293.485,
+            "max": 544.91,
+            "mean": 350.3504,
+            "stddev": 61.74386674836618,
+            "cv": 0.17623461182966021,
+            "rawMs": [
+              381.383,
+              361.818,
+              361.85,
+              327.388,
+              476.775,
+              308.61,
+              335.123,
+              379.767,
+              338.296,
+              293.485,
+              320.611,
+              373.252,
+              298.045,
+              324.238,
+              303.05,
+              544.91,
+              308.963,
+              370.98,
+              301.276,
+              297.188
+            ],
+            "certifiedBatch": true
+          }
+        },
+        "warmups": {
+          "original": 2196.398,
+          "AB": 382.549,
+          "D1": 329.476
+        }
+      },
+      {
+        "batch": 2,
+        "orders": 100,
+        "status": "PASS",
+        "readers": {
+          "original": {
+            "n": 20,
+            "p50": 1220.011,
+            "p95": 2549.766,
+            "min": 1126.141,
+            "max": 3869.315,
+            "mean": 1493.6485,
+            "stddev": 653.0372980981638,
+            "cv": 0.43720948944692395,
+            "rawMs": [
+              3869.315,
+              2549.766,
+              1220.011,
+              1304.97,
+              1511.022,
+              1145.194,
+              1231.176,
+              1126.682,
+              1526.118,
+              1160.725,
+              1209.329,
+              1126.141,
+              1250.457,
+              1229.197,
+              1181.195,
+              1126.17,
+              1530.252,
+              2178.36,
+              1209.104,
+              1187.786
+            ],
+            "certifiedBatch": true
+          },
+          "AB": {
+            "n": 20,
+            "p50": 406.675,
+            "p95": 742.235,
+            "min": 358.271,
+            "max": 872.754,
+            "mean": 467.41370000000006,
+            "stddev": 144.77189220946863,
+            "cv": 0.3097296724710222,
+            "rawMs": [
+              493.038,
+              742.235,
+              423.04,
+              441.93,
+              359.92,
+              420.916,
+              371.157,
+              421.712,
+              380.395,
+              406.675,
+              358.271,
+              375.951,
+              388.742,
+              740.032,
+              380.074,
+              377.143,
+              582.02,
+              872.754,
+              441.727,
+              370.542
+            ],
+            "certifiedBatch": true
+          },
+          "D1": {
+            "n": 20,
+            "p50": 361.615,
+            "p95": 606.202,
+            "min": 295.397,
+            "max": 1384.104,
+            "mean": 428.39624999999995,
+            "stddev": 232.49294181498823,
+            "cv": 0.5427053617182416,
+            "rawMs": [
+              1384.104,
+              403.285,
+              305.712,
+              363.558,
+              302.827,
+              348.933,
+              313.672,
+              370.825,
+              361.615,
+              393.662,
+              313.125,
+              443.87,
+              295.397,
+              451.395,
+              319.67,
+              334.66,
+              522.585,
+              606.202,
+              327.368,
+              405.46
+            ],
+            "certifiedBatch": true
+          }
+        },
+        "warmups": {
+          "original": 1704.511,
+          "AB": 907.2,
+          "D1": 1254.469
+        }
+      },
+      {
+        "batch": 2,
+        "orders": 50,
+        "status": "PASS",
+        "readers": {
+          "original": {
+            "n": 20,
+            "p50": 717.757,
+            "p95": 1442.042,
+            "min": 580.948,
+            "max": 1467.55,
+            "mean": 860.6686,
+            "stddev": 287.06604755359,
+            "cv": 0.33353842298137754,
+            "rawMs": [
+              911.867,
+              1268.951,
+              794.459,
+              761.129,
+              717.338,
+              639.937,
+              626.418,
+              622.946,
+              789.914,
+              612.763,
+              717.757,
+              580.948,
+              589.094,
+              659.734,
+              689.225,
+              1124.276,
+              890.786,
+              1467.55,
+              1306.238,
+              1442.042
+            ],
+            "certifiedBatch": true
+          },
+          "AB": {
+            "n": 20,
+            "p50": 237.05,
+            "p95": 525.033,
+            "min": 178.742,
+            "max": 614.303,
+            "mean": 288.69264999999996,
+            "stddev": 123.62345400176903,
+            "cv": 0.4282182244742603,
+            "rawMs": [
+              469.732,
+              219.045,
+              525.033,
+              237.793,
+              180.378,
+              187.482,
+              208.801,
+              178.742,
+              236.064,
+              244.974,
+              197.786,
+              184.07,
+              181.404,
+              237.05,
+              242.64,
+              346.797,
+              614.303,
+              412.468,
+              333.516,
+              335.775
+            ],
+            "certifiedBatch": true
+          },
+          "D1": {
+            "n": 20,
+            "p50": 144.341,
+            "p95": 335.459,
+            "min": 116.939,
+            "max": 367.267,
+            "mean": 187.44844999999995,
+            "stddev": 76.65719284481725,
+            "cv": 0.40895079604455126,
+            "rawMs": [
+              133.499,
+              150.109,
+              206.405,
+              217.327,
+              128.368,
+              117.646,
+              131.636,
+              116.939,
+              140.44,
+              172.178,
+              122.004,
+              133.247,
+              118.231,
+              208.863,
+              144.341,
+              213.879,
+              367.267,
+              335.459,
+              280.911,
+              310.22
+            ],
+            "certifiedBatch": true
+          }
+        },
+        "warmups": {
+          "original": 987.867,
+          "AB": 404.313,
+          "D1": 184.97
+        }
+      },
+      {
+        "batch": 3,
+        "orders": 50,
+        "status": "PASS",
+        "readers": {
+          "original": {
+            "n": 20,
+            "p50": 1532.799,
+            "p95": 1828.525,
+            "min": 1312.234,
+            "max": 3822.296,
+            "mean": 1612.4524999999999,
+            "stddev": 523.0508343939908,
+            "cv": 0.32438216592054087,
+            "rawMs": [
+              1345.078,
+              1568.793,
+              1533.726,
+              1422.98,
+              1345.111,
+              1312.234,
+              3822.296,
+              1828.525,
+              1542.137,
+              1487.53,
+              1676.779,
+              1425.495,
+              1348.481,
+              1587.188,
+              1398.718,
+              1589.243,
+              1331.303,
+              1532.799,
+              1583.166,
+              1567.468
+            ],
+            "certifiedBatch": true
+          },
+          "AB": {
+            "n": 20,
+            "p50": 364.837,
+            "p95": 808.249,
+            "min": 337.53,
+            "max": 1626.903,
+            "mean": 457.53090000000003,
+            "stddev": 286.29013715510706,
+            "cv": 0.6257285292755245,
+            "rawMs": [
+              364.627,
+              350.255,
+              341.241,
+              378.997,
+              471.518,
+              441.576,
+              1626.903,
+              808.249,
+              346.006,
+              358.781,
+              372.82,
+              364.837,
+              374.519,
+              358.68,
+              382.492,
+              354.328,
+              390.524,
+              340.996,
+              337.53,
+              385.739
+            ],
+            "certifiedBatch": true
+          },
+          "D1": {
+            "n": 20,
+            "p50": 298.803,
+            "p95": 442.549,
+            "min": 270.616,
+            "max": 1123.682,
+            "mean": 356.9032,
+            "stddev": 183.47041065921232,
+            "cv": 0.5140621060814594,
+            "rawMs": [
+              307.534,
+              298.803,
+              360.702,
+              294.028,
+              292.006,
+              272.767,
+              1123.682,
+              442.549,
+              303.273,
+              270.616,
+              302.998,
+              414.591,
+              433.969,
+              272.555,
+              281.118,
+              275.37,
+              279.933,
+              319.549,
+              304.255,
+              287.766
+            ],
+            "certifiedBatch": true
+          }
+        },
+        "warmups": {
+          "original": 1500.148,
+          "AB": 353.994,
+          "D1": 319.931
+        }
+      },
+      {
+        "batch": 3,
+        "orders": 100,
+        "status": "INCOMPLETE_LATENCY_GATE",
+        "readers": {
+          "original": {
+            "n": 18,
+            "p50": 1281.774,
+            "p95": 9570.334,
+            "min": 1206.841,
+            "max": 9570.334,
+            "mean": 1892.3830555555553,
+            "stddev": 1945.239161691935,
+            "cv": 1.0279309762266193,
+            "rawMs": [
+              1281.774,
+              1206.841,
+              1293.347,
+              1288.162,
+              1366.648,
+              1261.074,
+              1210.114,
+              1223.444,
+              1301.546,
+              1271.611,
+              1223.643,
+              1264.577,
+              1234.56,
+              1396.238,
+              1322.01,
+              1623.403,
+              3723.569,
+              9570.334
+            ],
+            "certifiedBatch": false
+          },
+          "AB": {
+            "n": 17,
+            "p50": 401.551,
+            "p95": 1174.525,
+            "min": 354.444,
+            "max": 1174.525,
+            "mean": 447.34694117647064,
+            "stddev": 185.03034166525566,
+            "cv": 0.41361709365587096,
+            "rawMs": [
+              466.502,
+              423.163,
+              412.488,
+              479.958,
+              401.976,
+              359.8,
+              392.363,
+              374.384,
+              386.7,
+              418.967,
+              354.444,
+              401.551,
+              364.436,
+              376.169,
+              378.787,
+              438.685,
+              1174.525
+            ],
+            "certifiedBatch": false
+          },
+          "D1": {
+            "n": 18,
+            "p50": 326.742,
+            "p95": 1836.498,
+            "min": 294.082,
+            "max": 1836.498,
+            "mean": 520.0460555555555,
+            "stddev": 427.647651210728,
+            "cv": 0.8223264971289513,
+            "rawMs": [
+              376.626,
+              325.809,
+              451.303,
+              377.065,
+              305.052,
+              301.11,
+              400.267,
+              319.291,
+              322.182,
+              326.742,
+              355.414,
+              313.246,
+              342.971,
+              294.082,
+              310.519,
+              1451.905,
+              1836.498,
+              950.747
+            ],
+            "certifiedBatch": false
+          }
+        },
+        "warmups": {
+          "original": 1410.321,
+          "AB": 453.271,
+          "D1": 355.759
+        }
+      }
+    ]
+  },
+  "historicalExplain": {
+    "phase": "F.3C",
+    "method": "Normal PostgreSQL EXPLAIN ANALYZE BUFFERS SETTINGS, JIT default. No function/nested-log instrumentation enabled in measurement connections. One warmup/reader,20 normal samples/reader, three-reader order rotation, concurrency1; p95 nearest rank; every outlier retained. No HTTP measurement.",
+    "cohorts": [
+      {
+        "orders": 50,
+        "status": "PASS",
+        "readers": {
+          "original": {
+            "n": 20,
+            "min": 642.981,
+            "p50": 939.653,
+            "p95": 3547.946,
+            "max": 3671.983,
+            "mean": 1409.8877999999997,
+            "stddev": 907.6392512961083,
+            "rawMs": [
+              2121.66,
+              3547.946,
+              2345.56,
+              3671.983,
+              2166.434,
+              1377.254,
+              1371.578,
+              797.53,
+              939.653,
+              707.778,
+              940.628,
+              1816.268,
+              864.156,
+              772.92,
+              689.415,
+              661.102,
+              662.066,
+              642.981,
+              761.218,
+              1339.626
+            ]
+          },
+          "AB": {
+            "n": 20,
+            "min": 262.569,
+            "p50": 352.183,
+            "p95": 1170.934,
+            "max": 1328.159,
+            "mean": 550.83645,
+            "stddev": 342.3763105542606,
+            "rawMs": [
+              1168.769,
+              1328.159,
+              833.988,
+              1170.934,
+              963.393,
+              743.626,
+              349.65,
+              352.183,
+              330.34,
+              301.051,
+              368.031,
+              535.015,
+              480.974,
+              302.476,
+              287.435,
+              285.899,
+              262.569,
+              263.92,
+              295.744,
+              392.573
+            ]
+          },
+          "D1": {
+            "n": 20,
+            "min": 204.231,
+            "p50": 252.359,
+            "p95": 1038.496,
+            "max": 1226.815,
+            "mean": 419.831,
+            "stddev": 300.07723826641706,
+            "rawMs": [
+              618.632,
+              1038.496,
+              772.156,
+              1226.815,
+              834.023,
+              383.466,
+              324.357,
+              373.962,
+              215.091,
+              226.275,
+              213.787,
+              304.509,
+              252.359,
+              236.832,
+              218.736,
+              211.269,
+              204.231,
+              209.672,
+              248.589,
+              283.363
+            ]
+          }
+        }
+      },
+      {
+        "orders": 100,
+        "status": "PASS",
+        "readers": {
+          "original": {
+            "n": 20,
+            "min": 1013.928,
+            "p50": 1642.095,
+            "p95": 2716.85,
+            "max": 2748.515,
+            "mean": 1748.1878499999998,
+            "stddev": 556.5425520036429,
+            "rawMs": [
+              1665.043,
+              2095.458,
+              2221.265,
+              2681.365,
+              1802.995,
+              2748.515,
+              1628.174,
+              1234.417,
+              1216.946,
+              1705.507,
+              2716.85,
+              1306.993,
+              1080.929,
+              1013.928,
+              2227.895,
+              1642.095,
+              1219.812,
+              1193.342,
+              1302.214,
+              2260.014
+            ]
+          },
+          "AB": {
+            "n": 20,
+            "min": 242.153,
+            "p50": 307.65,
+            "p95": 495.828,
+            "max": 629.3,
+            "mean": 347.1298,
+            "stddev": 97.78889120938021,
+            "rawMs": [
+              281.2,
+              336.881,
+              495.828,
+              399.34,
+              470.891,
+              283.007,
+              280.209,
+              332.929,
+              256.897,
+              261.649,
+              437.72,
+              286.251,
+              242.153,
+              249.911,
+              629.3,
+              299.062,
+              319.421,
+              307.65,
+              349.266,
+              423.031
+            ]
+          },
+          "D1": {
+            "n": 20,
+            "min": 181.198,
+            "p50": 219.13,
+            "p95": 375.94,
+            "max": 519.138,
+            "mean": 253.77444999999997,
+            "stddev": 79.57606759414227,
+            "rawMs": [
+              213.356,
+              319.628,
+              218.087,
+              375.94,
+              295.451,
+              196.205,
+              225.703,
+              230.427,
+              191.651,
+              205.957,
+              519.138,
+              200.09,
+              181.198,
+              208.701,
+              308.103,
+              242.89,
+              219.826,
+              219.13,
+              197.595,
+              306.413
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "postBenchmarkExplain": [
+    {
+      "batch": 1,
+      "orders": 50,
+      "reader": "original",
+      "executionMs": 660.74,
+      "planningMs": 0.022,
+      "sharedHits": 12268,
+      "sharedReads": 0,
+      "tempReads": 0,
+      "tempWrites": 0,
+      "jit": null,
+      "visiblePlanHash": "2e6b1a356d5f380eb0e64efdbcc72f0b1b9b733088d482adff415181ad2f65ca",
+      "visibleShape": {
+        "node": "Result",
+        "relation": null,
+        "index": null,
+        "join": null,
+        "children": []
+      },
+      "source": "docs/estadisticas-v1/p03-f4a/batch-1-50.json",
+      "limitation": "Post-benchmark outer function Result; nested plans and outlier query plan unavailable"
+    },
+    {
+      "batch": 1,
+      "orders": 50,
+      "reader": "AB",
+      "executionMs": 245.207,
+      "planningMs": 0.044,
+      "sharedHits": 4243,
+      "sharedReads": 0,
+      "tempReads": 0,
+      "tempWrites": 0,
+      "jit": null,
+      "visiblePlanHash": "2e6b1a356d5f380eb0e64efdbcc72f0b1b9b733088d482adff415181ad2f65ca",
+      "visibleShape": {
+        "node": "Result",
+        "relation": null,
+        "index": null,
+        "join": null,
+        "children": []
+      },
+      "source": "docs/estadisticas-v1/p03-f4a/batch-1-50.json",
+      "limitation": "Post-benchmark outer function Result; nested plans and outlier query plan unavailable"
+    },
+    {
+      "batch": 1,
+      "orders": 50,
+      "reader": "D1",
+      "executionMs": 154.474,
+      "planningMs": 0.023,
+      "sharedHits": 4243,
+      "sharedReads": 0,
+      "tempReads": 0,
+      "tempWrites": 0,
+      "jit": null,
+      "visiblePlanHash": "2e6b1a356d5f380eb0e64efdbcc72f0b1b9b733088d482adff415181ad2f65ca",
+      "visibleShape": {
+        "node": "Result",
+        "relation": null,
+        "index": null,
+        "join": null,
+        "children": []
+      },
+      "source": "docs/estadisticas-v1/p03-f4a/batch-1-50.json",
+      "limitation": "Post-benchmark outer function Result; nested plans and outlier query plan unavailable"
+    },
+    {
+      "batch": 1,
+      "orders": 100,
+      "reader": "original",
+      "executionMs": 1226.53,
+      "planningMs": 0.024,
+      "sharedHits": 33686,
+      "sharedReads": 0,
+      "tempReads": 0,
+      "tempWrites": 0,
+      "jit": null,
+      "visiblePlanHash": "2e6b1a356d5f380eb0e64efdbcc72f0b1b9b733088d482adff415181ad2f65ca",
+      "visibleShape": {
+        "node": "Result",
+        "relation": null,
+        "index": null,
+        "join": null,
+        "children": []
+      },
+      "source": "docs/estadisticas-v1/p03-f4a/batch-1-100.json",
+      "limitation": "Post-benchmark outer function Result; nested plans and outlier query plan unavailable"
+    },
+    {
+      "batch": 1,
+      "orders": 100,
+      "reader": "AB",
+      "executionMs": 434.113,
+      "planningMs": 0.024,
+      "sharedHits": 14067,
+      "sharedReads": 0,
+      "tempReads": 0,
+      "tempWrites": 0,
+      "jit": null,
+      "visiblePlanHash": "2e6b1a356d5f380eb0e64efdbcc72f0b1b9b733088d482adff415181ad2f65ca",
+      "visibleShape": {
+        "node": "Result",
+        "relation": null,
+        "index": null,
+        "join": null,
+        "children": []
+      },
+      "source": "docs/estadisticas-v1/p03-f4a/batch-1-100.json",
+      "limitation": "Post-benchmark outer function Result; nested plans and outlier query plan unavailable"
+    },
+    {
+      "batch": 1,
+      "orders": 100,
+      "reader": "D1",
+      "executionMs": 353.797,
+      "planningMs": 0.024,
+      "sharedHits": 14067,
+      "sharedReads": 0,
+      "tempReads": 0,
+      "tempWrites": 0,
+      "jit": null,
+      "visiblePlanHash": "2e6b1a356d5f380eb0e64efdbcc72f0b1b9b733088d482adff415181ad2f65ca",
+      "visibleShape": {
+        "node": "Result",
+        "relation": null,
+        "index": null,
+        "join": null,
+        "children": []
+      },
+      "source": "docs/estadisticas-v1/p03-f4a/batch-1-100.json",
+      "limitation": "Post-benchmark outer function Result; nested plans and outlier query plan unavailable"
+    },
+    {
+      "batch": 2,
+      "orders": 100,
+      "reader": "original",
+      "executionMs": 1125.911,
+      "planningMs": 0.023,
+      "sharedHits": 33686,
+      "sharedReads": 0,
+      "tempReads": 0,
+      "tempWrites": 0,
+      "jit": null,
+      "visiblePlanHash": "2e6b1a356d5f380eb0e64efdbcc72f0b1b9b733088d482adff415181ad2f65ca",
+      "visibleShape": {
+        "node": "Result",
+        "relation": null,
+        "index": null,
+        "join": null,
+        "children": []
+      },
+      "source": "docs/estadisticas-v1/p03-f4a/batch-2-100.json",
+      "limitation": "Post-benchmark outer function Result; nested plans and outlier query plan unavailable"
+    },
+    {
+      "batch": 2,
+      "orders": 100,
+      "reader": "AB",
+      "executionMs": 356.212,
+      "planningMs": 0.048,
+      "sharedHits": 14067,
+      "sharedReads": 0,
+      "tempReads": 0,
+      "tempWrites": 0,
+      "jit": null,
+      "visiblePlanHash": "2e6b1a356d5f380eb0e64efdbcc72f0b1b9b733088d482adff415181ad2f65ca",
+      "visibleShape": {
+        "node": "Result",
+        "relation": null,
+        "index": null,
+        "join": null,
+        "children": []
+      },
+      "source": "docs/estadisticas-v1/p03-f4a/batch-2-100.json",
+      "limitation": "Post-benchmark outer function Result; nested plans and outlier query plan unavailable"
+    },
+    {
+      "batch": 2,
+      "orders": 100,
+      "reader": "D1",
+      "executionMs": 303.812,
+      "planningMs": 0.021,
+      "sharedHits": 14067,
+      "sharedReads": 0,
+      "tempReads": 0,
+      "tempWrites": 0,
+      "jit": null,
+      "visiblePlanHash": "2e6b1a356d5f380eb0e64efdbcc72f0b1b9b733088d482adff415181ad2f65ca",
+      "visibleShape": {
+        "node": "Result",
+        "relation": null,
+        "index": null,
+        "join": null,
+        "children": []
+      },
+      "source": "docs/estadisticas-v1/p03-f4a/batch-2-100.json",
+      "limitation": "Post-benchmark outer function Result; nested plans and outlier query plan unavailable"
+    },
+    {
+      "batch": 2,
+      "orders": 50,
+      "reader": "original",
+      "executionMs": 1545.237,
+      "planningMs": 0.023,
+      "sharedHits": 111112,
+      "sharedReads": 0,
+      "tempReads": 0,
+      "tempWrites": 0,
+      "jit": null,
+      "visiblePlanHash": "2e6b1a356d5f380eb0e64efdbcc72f0b1b9b733088d482adff415181ad2f65ca",
+      "visibleShape": {
+        "node": "Result",
+        "relation": null,
+        "index": null,
+        "join": null,
+        "children": []
+      },
+      "source": "docs/estadisticas-v1/p03-f4a/batch-2-50.json",
+      "limitation": "Post-benchmark outer function Result; nested plans and outlier query plan unavailable"
+    },
+    {
+      "batch": 2,
+      "orders": 50,
+      "reader": "AB",
+      "executionMs": 333.318,
+      "planningMs": 0.022,
+      "sharedHits": 19878,
+      "sharedReads": 0,
+      "tempReads": 0,
+      "tempWrites": 0,
+      "jit": null,
+      "visiblePlanHash": "2e6b1a356d5f380eb0e64efdbcc72f0b1b9b733088d482adff415181ad2f65ca",
+      "visibleShape": {
+        "node": "Result",
+        "relation": null,
+        "index": null,
+        "join": null,
+        "children": []
+      },
+      "source": "docs/estadisticas-v1/p03-f4a/batch-2-50.json",
+      "limitation": "Post-benchmark outer function Result; nested plans and outlier query plan unavailable"
+    },
+    {
+      "batch": 2,
+      "orders": 50,
+      "reader": "D1",
+      "executionMs": 270.418,
+      "planningMs": 0.023,
+      "sharedHits": 19878,
+      "sharedReads": 0,
+      "tempReads": 0,
+      "tempWrites": 0,
+      "jit": null,
+      "visiblePlanHash": "2e6b1a356d5f380eb0e64efdbcc72f0b1b9b733088d482adff415181ad2f65ca",
+      "visibleShape": {
+        "node": "Result",
+        "relation": null,
+        "index": null,
+        "join": null,
+        "children": []
+      },
+      "source": "docs/estadisticas-v1/p03-f4a/batch-2-50.json",
+      "limitation": "Post-benchmark outer function Result; nested plans and outlier query plan unavailable"
+    },
+    {
+      "batch": 3,
+      "orders": 50,
+      "reader": "original",
+      "executionMs": 1387.663,
+      "planningMs": 0.022,
+      "sharedHits": 110486,
+      "sharedReads": 0,
+      "tempReads": 0,
+      "tempWrites": 0,
+      "jit": null,
+      "visiblePlanHash": "2e6b1a356d5f380eb0e64efdbcc72f0b1b9b733088d482adff415181ad2f65ca",
+      "visibleShape": {
+        "node": "Result",
+        "relation": null,
+        "index": null,
+        "join": null,
+        "children": []
+      },
+      "source": "docs/estadisticas-v1/p03-f4a/batch-3-50.json",
+      "limitation": "Post-benchmark outer function Result; nested plans and outlier query plan unavailable"
+    },
+    {
+      "batch": 3,
+      "orders": 50,
+      "reader": "AB",
+      "executionMs": 336.245,
+      "planningMs": 0.021,
+      "sharedHits": 19556,
+      "sharedReads": 0,
+      "tempReads": 0,
+      "tempWrites": 0,
+      "jit": null,
+      "visiblePlanHash": "2e6b1a356d5f380eb0e64efdbcc72f0b1b9b733088d482adff415181ad2f65ca",
+      "visibleShape": {
+        "node": "Result",
+        "relation": null,
+        "index": null,
+        "join": null,
+        "children": []
+      },
+      "source": "docs/estadisticas-v1/p03-f4a/batch-3-50.json",
+      "limitation": "Post-benchmark outer function Result; nested plans and outlier query plan unavailable"
+    },
+    {
+      "batch": 3,
+      "orders": 50,
+      "reader": "D1",
+      "executionMs": 271.385,
+      "planningMs": 0.023,
+      "sharedHits": 19556,
+      "sharedReads": 0,
+      "tempReads": 0,
+      "tempWrites": 0,
+      "jit": null,
+      "visiblePlanHash": "2e6b1a356d5f380eb0e64efdbcc72f0b1b9b733088d482adff415181ad2f65ca",
+      "visibleShape": {
+        "node": "Result",
+        "relation": null,
+        "index": null,
+        "join": null,
+        "children": []
+      },
+      "source": "docs/estadisticas-v1/p03-f4a/batch-3-50.json",
+      "limitation": "Post-benchmark outer function Result; nested plans and outlier query plan unavailable"
+    }
+  ],
+  "limits": {
+    "queryTimeoutSeconds": 15,
+    "lockTimeoutSeconds": 3,
+    "altered": false
+  },
+  "omitted": [
+    "New50/100 RPC comparisons in separate windows",
+    "Host performance counter reliable total CPU/disk values",
+    "New HTTP latency",
+    "Nested plan/JIT during original9570ms outlier",
+    "Cache-clearing/resource-changing experiments"
+  ]
+}

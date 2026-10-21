@@ -1,0 +1,111 @@
+{
+  "at": "2026-10-16T17:52:59.794Z",
+  "result": "BLOCKED_INDEPENDENT_MEMORY_PRECONDITION",
+  "phaseP04T01C": "BLOCKED",
+  "memory": {
+    "at": "2026-10-16T17:52:08.4028807Z",
+    "method": "Independent CIM Win32_OperatingSystem memory-only observation",
+    "freePhysicalMemoryKiB": 864012,
+    "freeGiB": 0.8239860534667969,
+    "minimumKiB": 4194304,
+    "conditionSatisfied": false,
+    "observations": 1,
+    "helperInvoked": false
+  },
+  "approvedAdditionalManifestSha256": "c516387cfe1e46864788a8885c22c9f9bc5352b5bcbb26b3c50c32510c0b3d70",
+  "approvedOriginalManifestSha256": "790960c137c57c70d725cde4a7113165b15c6369662b2e2a52387623093dfd3f",
+  "verifiedArtifacts": [
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-resumption-preparation-20261016/preflight-readonly.proposed.mjs",
+      "sha256": "5c02e4b142e28c7b9cbdd9e8f99c3afd17f9f8da1d38bc50590e65248813369a",
+      "bytes": 5595
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-resumption-preparation-20261016/preflight-policy.mjs",
+      "sha256": "ed3d3de2cb28ae169917e1d55270d65e1c30376bc5c65e9d6cd4a2908e5ee9e8",
+      "bytes": 4377
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-resumption-preparation-20261016/offline.verify.mjs",
+      "sha256": "f5d34fc03c0e89f73155287a5149f2294d019982aef1a8e62b752f78d7b08bfe",
+      "bytes": 6299
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-resumption-preparation-20261016/informe.md",
+      "sha256": "44f097dde26a7e7569ab036995f003b953b2090a86c33846b5252da1e470a699",
+      "bytes": 6471
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-resumption-preparation-20261016/procedure.md",
+      "sha256": "f4e94bec190a614acb7603f2a85c5a95a6d68bbe9e82380065e673bdb013c2d3",
+      "bytes": 2737
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-kong-decision-20261016/restore.proposed.sh",
+      "sha256": "9f6f6efe7ab0458782e7311c2a1e212aac54588b50183af146bd4b84f0604c33"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-kong-decision-20261016/role-prerequisites.proposed.sql",
+      "sha256": "b3e45dfbc9ac7b0bb12d22ff728b23e572f3775a94cc55cfb4fc04d45fa1f7b1"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-kong-decision-20261016/stage-new-lab.proposed.mjs",
+      "sha256": "921cd69324269db7f067012350bd000c6b5634426ab8b0c5c9b568eea9c8d961"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-kong-decision-20261016/assert-new-lab.proposed.mjs",
+      "sha256": "1f65e96dce61d526594974007b51fb6f678f48301358b83f23059e941d449779"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-kong-decision-20261016/compare-new-lab.proposed.mjs",
+      "sha256": "d9ac8fb710ad75455d94bf0459f7d2d2b50ceb5d9d56a120755672d2a3f5ca67"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-kong-decision-20261016/lab-policy.mjs",
+      "sha256": "26f1c18a05fd785ec020de1458d6c8315d497232baaffe0b4ef7df9b0ce8005b"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-kong-decision-20261016/comparison-model.mjs",
+      "sha256": "357ed94a394243f78b82bd88b557439bdec39c97c39067a326b61dfbc52be606"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-kong-decision-20261016/archive-metadata.mjs",
+      "sha256": "62285a5c79f5fbb8250096a7e75fcff70dafce55ed405074843678ad14246735"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-kong-decision-20261016/recovery-lab-plan.json",
+      "sha256": "37814c9dfe458a8b726b829443c409c23a02531e1ecccca16f0c4343d7cdb84f"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-kong-decision-20261016/COMMANDS_AND_GATES.md",
+      "sha256": "340f8660cd61b229f56607b37752dec8f9bc2a436117163d18062150b7f982ac"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-kong-decision-20261016/RECOVERY_TEST_PROCEDURE.md",
+      "sha256": "39ac49a24aebeaf93259894355fdc4efb2b5c5a8d249b62e3ec26a2b26822870"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-kong-decision-20261016/KONG_PRESERVATION_DECISION.md",
+      "sha256": "e07c97c3325b6e78f76b06d4aad421bfc897dd4352a2f3e3cbc85af5e5b30c2e"
+    },
+    {
+      "path": "docs/estadisticas-v1/p04-t01c-recovery-kong-decision-20261016/CONSOLIDATED_DECISION.md",
+      "sha256": "7c6c4958e66e3b9511e7c214e3e5caada311fbf4664424b748d6c8f6ee686dda"
+    }
+  ],
+  "backupSha256": "b48f1ed8f4f6a6a75f946a2a55b388f88f20c6d05cc48fecf42cd166af1eecdc",
+  "helperInvocations": 0,
+  "exclusiveAttemptRecordCreated": false,
+  "automaticRetries": 0,
+  "cpuMeasurement": "NOT_EXECUTED; helper precondition failed",
+  "imageIdentityAndMetadata": "NOT_VERIFIED_LIVE; Docker not queried",
+  "collisions": "NOT_VERIFIED_LIVE; Docker not queried",
+  "dockerCalls": 0,
+  "resourcesCreated": 0,
+  "sqlExecutions": 0,
+  "restores": 0,
+  "authHttp": 0,
+  "containerMutations": 0,
+  "scope": "Independent memory observation and local evidence only; no resource changes",
+  "nextDecision": "No automatic retry; new human decision required to resume. Restoration and original-container intervention remain unauthorized."
+}

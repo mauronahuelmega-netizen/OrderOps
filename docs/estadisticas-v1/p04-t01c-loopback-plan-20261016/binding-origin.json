@@ -1,0 +1,293 @@
+{
+  "at": "2026-10-16T13:02:45.545Z",
+  "branch": "codex/estadisticas-v1",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "cli": {
+    "path": "C:\\Program Files\\Supabase\\supabase.exe",
+    "version": "2.72.7",
+    "startHelp": "Start containers for Supabase local development\n\nUsage:\n  supabase start [flags]\n\nFlags:\n  -x, --exclude strings       Names of containers to not start. [gotrue,realtime,storage-api,imgproxy,kong,mailpit,postgrest,postgres-meta,studio,edge-runtime,logflare,vector,supavisor]\n  -h, --help                  help for start\n      --ignore-health-check   Ignore unhealthy services and exit 0\n\nGlobal Flags:\n      --create-ticket                                  create a support ticket for any CLI error\n      --debug                                          output debug logs to stderr\n      --dns-resolver [ native | https ]                lookup domain names using the specified resolver (default native)\n      --experimental                                   enable experimental features\n      --network-id string                              use the specified docker network instead of a generated one\n  -o, --output [ env | pretty | json | toml | yaml ]   output format of status variables (default pretty)\n      --profile string                                 use a specific profile for connecting to Supabase API (default \"supabase\")\n      --workdir string                                 path to a Supabase project directory\n      --yes                                            answer yes to all prompts"
+  },
+  "engineVersion": "29.1.3",
+  "resources": [
+    {
+      "id": "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+      "name": "/supabase_storage_orderops-statistics-v1-test-74718de66a41",
+      "running": true,
+      "health": "healthy",
+      "image": "sha256:b7486fec6ccf1dc2389517e41dd2092c9f602717bd3f9b744aeafb604f05bf8b",
+      "labels": {
+        "com.docker.compose.project": "orderops-statistics-v1-test-74718de66a41",
+        "com.supabase.cli.project": "orderops-statistics-v1-test-74718de66a41"
+      },
+      "requestedBindings": {},
+      "effectiveBindings": {
+        "5000/tcp": null
+      },
+      "networkMode": "supabase_network_orderops-statistics-v1-test-74718de66a41",
+      "networks": [
+        "supabase_network_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "mounts": [
+        {
+          "type": "volume",
+          "name": "supabase_storage_orderops-statistics-v1-test-74718de66a41",
+          "destination": "/mnt"
+        }
+      ],
+      "restartPolicy": {
+        "Name": "unless-stopped",
+        "MaximumRetryCount": 0
+      },
+      "configHash": "cd87020bcf4723886971dcde8ce974e5bc9d2fe5c5d1606802c70fce95239637",
+      "hostConfigHash": "6f2ce689fb8daac7d2a83b0c0ebae16cc2fbeddbe5608317e65abd5f21821c3f"
+    },
+    {
+      "id": "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+      "name": "/supabase_rest_orderops-statistics-v1-test-74718de66a41",
+      "running": true,
+      "health": "NO_HEALTHCHECK",
+      "image": "sha256:7c5840727ad683b0fdbfb9810930665b34f8b44884a4dc740aa8844748a2b85e",
+      "labels": {
+        "com.docker.compose.project": "orderops-statistics-v1-test-74718de66a41",
+        "com.supabase.cli.project": "orderops-statistics-v1-test-74718de66a41"
+      },
+      "requestedBindings": {},
+      "effectiveBindings": {
+        "3000/tcp": null
+      },
+      "networkMode": "supabase_network_orderops-statistics-v1-test-74718de66a41",
+      "networks": [
+        "supabase_network_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "mounts": [],
+      "restartPolicy": {
+        "Name": "unless-stopped",
+        "MaximumRetryCount": 0
+      },
+      "configHash": "b9fc76d6152efa9f556d8b8d49852256dfcdc558de1976ce9ee480434f9abb59",
+      "hostConfigHash": "38ce946e1d66a9cc18d84c8f35dc3b4460da9243ceb7972bf709d0934ca597f1"
+    },
+    {
+      "id": "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c",
+      "name": "/supabase_auth_orderops-statistics-v1-test-74718de66a41",
+      "running": true,
+      "health": "healthy",
+      "image": "sha256:de22ff0811f3e4f7e6d3ba226f75ed8d82310df577bbd61e16fbfd7a50a8c9ce",
+      "labels": {
+        "com.docker.compose.project": "orderops-statistics-v1-test-74718de66a41",
+        "com.supabase.cli.project": "orderops-statistics-v1-test-74718de66a41"
+      },
+      "requestedBindings": {},
+      "effectiveBindings": {
+        "9999/tcp": null
+      },
+      "networkMode": "supabase_network_orderops-statistics-v1-test-74718de66a41",
+      "networks": [
+        "supabase_network_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "mounts": [],
+      "restartPolicy": {
+        "Name": "unless-stopped",
+        "MaximumRetryCount": 0
+      },
+      "configHash": "b0107f8a2d4cb3538880e924e77f4f593d6939e10a19392c8d8de559a54532e4",
+      "hostConfigHash": "38ce946e1d66a9cc18d84c8f35dc3b4460da9243ceb7972bf709d0934ca597f1"
+    },
+    {
+      "id": "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+      "name": "/supabase_kong_orderops-statistics-v1-test-74718de66a41",
+      "running": true,
+      "health": "healthy",
+      "image": "sha256:1b53405d8680a09d6f44494b7990bf7da2ea43f84a258c59717d4539abf09f6d",
+      "labels": {
+        "com.docker.compose.project": "orderops-statistics-v1-test-74718de66a41",
+        "com.supabase.cli.project": "orderops-statistics-v1-test-74718de66a41",
+        "maintainer": "Kong <support@konghq.com>"
+      },
+      "requestedBindings": {
+        "8000/tcp": [
+          {
+            "HostIp": "",
+            "HostPort": "56321"
+          }
+        ]
+      },
+      "effectiveBindings": {
+        "8000/tcp": [
+          {
+            "HostIp": "0.0.0.0",
+            "HostPort": "56321"
+          },
+          {
+            "HostIp": "::",
+            "HostPort": "56321"
+          }
+        ]
+      },
+      "networkMode": "supabase_network_orderops-statistics-v1-test-74718de66a41",
+      "networks": [
+        "supabase_network_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "mounts": [],
+      "restartPolicy": {
+        "Name": "unless-stopped",
+        "MaximumRetryCount": 0
+      },
+      "configHash": "5179614679dee6d4663bbbf9f13674309cf440e216055ae230bbc7582fb269d1",
+      "hostConfigHash": "a49e0db8965b760f09c812533310c1b9b761cabbfea7f9d4a0b2f8090020f375"
+    },
+    {
+      "id": "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+      "name": "/supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "running": true,
+      "health": "healthy",
+      "image": "sha256:4255b662ba3d774105cb34f623e410a3d7a860b68408ac6810f7e7e4b9781d5a",
+      "labels": {
+        "com.docker.compose.project": "orderops-statistics-v1-test-74718de66a41",
+        "com.supabase.cli.project": "orderops-statistics-v1-test-74718de66a41",
+        "org.opencontainers.image.ref.name": "ubuntu",
+        "org.opencontainers.image.version": "24.04"
+      },
+      "requestedBindings": {
+        "5432/tcp": [
+          {
+            "HostIp": "",
+            "HostPort": "56322"
+          }
+        ]
+      },
+      "effectiveBindings": {
+        "5432/tcp": [
+          {
+            "HostIp": "0.0.0.0",
+            "HostPort": "56322"
+          },
+          {
+            "HostIp": "::",
+            "HostPort": "56322"
+          }
+        ]
+      },
+      "networkMode": "supabase_network_orderops-statistics-v1-test-74718de66a41",
+      "networks": [
+        "supabase_network_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "mounts": [
+        {
+          "type": "volume",
+          "name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "destination": "/var/lib/postgresql/data"
+        }
+      ],
+      "restartPolicy": {
+        "Name": "unless-stopped",
+        "MaximumRetryCount": 0
+      },
+      "configHash": "725d8325e92cf268d062b14c1fe4d109d8fdec02f05517bc598350a8ee9cdbb5",
+      "hostConfigHash": "430a68d71715d3191e9837d68efe1f9873774a20304f65917e5726462de95bff"
+    }
+  ],
+  "network": {
+    "id": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af",
+    "name": "supabase_network_orderops-statistics-v1-test-74718de66a41",
+    "options": {
+      "com.docker.network.enable_ipv4": "true",
+      "com.docker.network.enable_ipv6": "false"
+    }
+  },
+  "volumes": [
+    {
+      "name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "driver": "local",
+      "labels": {
+        "com.docker.compose.project": "orderops-statistics-v1-test-74718de66a41",
+        "com.supabase.cli.project": "orderops-statistics-v1-test-74718de66a41"
+      }
+    },
+    {
+      "name": "supabase_storage_orderops-statistics-v1-test-74718de66a41",
+      "driver": "local",
+      "labels": {
+        "com.docker.compose.project": "orderops-statistics-v1-test-74718de66a41",
+        "com.supabase.cli.project": "orderops-statistics-v1-test-74718de66a41"
+      }
+    }
+  ],
+  "writableLayerPathsOnly": {
+    "db": [
+      "C /run",
+      "C /run/postgresql",
+      "A /run/postgresql/.s.PGSQL.5432.lock",
+      "A /run/postgresql/.s.PGSQL.5432",
+      "C /var",
+      "C /var/lib",
+      "C /var/lib/postgresql",
+      "A /var/lib/postgresql/data",
+      "C /etc",
+      "C /etc/postgresql",
+      "C /etc/postgresql/postgresql.conf",
+      "C /etc/postgresql-custom",
+      "A /etc/postgresql-custom/pgsodium_root.key",
+      "A /etc/postgresql.schema.sql",
+      "C /tmp",
+      "A /tmp/orderops-estadisticas-recovered.dump"
+    ],
+    "kong": [
+      "C /home",
+      "C /home/kong",
+      "A /home/kong/custom_nginx.template",
+      "A /home/kong/kong.yml",
+      "A /home/kong/localhost.crt",
+      "A /home/kong/localhost.key",
+      "C /usr",
+      "C /usr/local",
+      "C /usr/local/kong",
+      "A /usr/local/kong/fastcgi_temp",
+      "A /usr/local/kong/scgi_temp",
+      "A /usr/local/kong/.kong_env",
+      "A /usr/local/kong/client_body_temp",
+      "A /usr/local/kong/logs",
+      "A /usr/local/kong/logs/access.log",
+      "A /usr/local/kong/logs/admin_access.log",
+      "A /usr/local/kong/logs/email_templates_access.log",
+      "A /usr/local/kong/logs/error.log",
+      "A /usr/local/kong/nginx-kong-stream.conf",
+      "A /usr/local/kong/pids",
+      "A /usr/local/kong/pids/nginx.pid",
+      "A /usr/local/kong/proxy_temp",
+      "A /usr/local/kong/ssl",
+      "A /usr/local/kong/ssl/admin-kong-default-ecdsa.key",
+      "A /usr/local/kong/ssl/admin-kong-default.crt",
+      "A /usr/local/kong/ssl/admin-kong-default.key",
+      "A /usr/local/kong/ssl/ffdhe2048.pem",
+      "A /usr/local/kong/ssl/admin-kong-default-ecdsa.crt",
+      "A /usr/local/kong/nginx-kong.conf",
+      "A /usr/local/kong/nginx.conf",
+      "A /usr/local/kong/uwsgi_temp"
+    ]
+  },
+  "filesAudited": [
+    {
+      "path": "scripts/statistics-v1/isolated-environment.mjs",
+      "sha256": "d0f9bed23407379646574f819d42870a30dab0e213db39a23228e0c5fce86411"
+    },
+    {
+      "path": "scripts/statistics-v1/isolation-policy.mjs",
+      "sha256": "8299a2a5ad234b81d90a68c91126a4cbe58565b43b31cf848cd4d12e8e85f827"
+    },
+    {
+      "path": "supabase/statistics-v1-test/config.template.toml",
+      "sha256": "56e89728ab488ab051b104a7712e59cb98f66a894b9eec6ebfc5775ac22bec3b"
+    },
+    {
+      "path": "supabase/statistics-v1-test/.runtime/supabase/config.toml",
+      "sha256": "1db8435f3bf6c7d792ee769ad580f5a1039180d397de60d068e3a0a06e37d254"
+    }
+  ],
+  "manifestHash": "4b426930d04911dbafc543470fa1b73f566e211a84ad32712d233ddb9b801266",
+  "sqlConnections": 0,
+  "authHttp": 0,
+  "lifecycleChanges": 0,
+  "firewallChanges": 0
+}

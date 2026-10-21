@@ -1,0 +1,75 @@
+diff --git a/docs/estadisticas-v1/p04-t01a/candidate-products.sql b/docs/estadisticas-v1/p04-t01a-1/candidate-products-reviewed.sql
+index e61788a..bcea19a 100644
+--- a/docs/estadisticas-v1/p04-t01a/candidate-products.sql
++++ b/docs/estadisticas-v1/p04-t01a-1/candidate-products-reviewed.sql
+@@ -88,6 +88,8 @@ begin
+    select s.* from public.order_item_statistics_snapshots s where s.source_item_id=i.line_key and s.order_id=f.order_id
+    and s.business_id=v_business and s.captured_at<=f.completed_at order by s.generation desc limit 1
+   ) proof on true
++ ), missing_counts as materialized (
++  select count(*) missing from facts f where not exists(select 1 from lines l where l.completion_id=f.id)
+  ), grouped as materialized (
+   select product_identity,
+    (array_agg(product_name order by completed_at desc,completion_id,line_key))[1] label,
+@@ -97,9 +99,9 @@ begin
+    count(*) filter(where income_value is not null) rk,count(*) filter(where income_value is null) ru
+   from lines where product_identity is not null group by product_identity
+  ), totals as materialized (
+-  select private.statistics_products_metric(sum(units_value),count(*) filter(where item_kind='product' and units_value is not null),count(*) filter(where item_kind='product' and units_value is null),v_historical,(select missing from totals)) units,
+-   private.statistics_products_metric(round(sum(income_value),2),count(*) filter(where income_value is not null),count(*) filter(where income_value is null),v_historical,(select missing from totals)) revenue,
+-   sum(units_value) units_denominator,sum(income_value) revenue_denominator, (select count(*) from facts f where not exists(select 1 from lines l where l.completion_id=f.id)) missing
++  select private.statistics_products_metric(sum(units_value),count(*) filter(where item_kind='product' and units_value is not null),count(*) filter(where item_kind='product' and units_value is null),v_historical,(select missing from missing_counts)) units,
++   private.statistics_products_metric(round(sum(income_value),2),count(*) filter(where income_value is not null),count(*) filter(where income_value is null),v_historical,(select missing from missing_counts)) revenue,
++   sum(units_value) units_denominator,sum(income_value) revenue_denominator, (select missing from missing_counts) missing
+   from lines
+  ), ranked as materialized (
+   select g.*,row_number() over(order by case when p_product_sort='units' then g.units else g.income end desc,g.product_identity::text collate "C") position
+@@ -108,8 +110,8 @@ begin
+   select category_kind,category_key_identity category_identity,
+    case when category_kind='verified' then coalesce((array_agg(category_name order by completed_at desc,completion_id,line_key))[1],'Categoría histórica')
+      when category_kind='uncategorized_verified' then 'Sin categoría' else 'Sin atribución fiable' end label,
+-   private.statistics_products_metric(sum(units_value),count(*) filter(where item_kind='product' and units_value is not null),count(*) filter(where item_kind='product' and units_value is null),v_historical,(select count(*) from facts f where not exists(select 1 from lines l where l.completion_id=f.id))) units,
+-   private.statistics_products_metric(round(sum(income_value),2),count(*) filter(where income_value is not null),count(*) filter(where income_value is null),v_historical,(select count(*) from facts f where not exists(select 1 from lines l where l.completion_id=f.id))) revenue,
++   private.statistics_products_metric(sum(units_value),count(*) filter(where item_kind='product' and units_value is not null),count(*) filter(where item_kind='product' and units_value is null),v_historical,(select missing from missing_counts)) units,
++   private.statistics_products_metric(round(sum(income_value),2),count(*) filter(where income_value is not null),count(*) filter(where income_value is null),v_historical,(select missing from missing_counts)) revenue,
+    sum(units_value) units_value,sum(income_value) income_value
+   from lines group by category_kind,category_key_identity
+  ) select jsonb_build_object(
+@@ -117,27 +119,27 @@ begin
+   'period',jsonb_build_object('preset',p_period,'startDate',v_start,'endDate',v_end,'referenceDate',v_reference,'timezone',v_timezone,'asOf',v_now,'partial',v_end>=v_reference),
+   'totals',jsonb_build_object('units',t.units,'revenue',t.revenue),
+   'denominators',jsonb_build_object('scope','verified_lines_in_period','units',t.units_denominator::text,'revenue',round(t.revenue_denominator,2)::text,
+-   'unitComplete',v_historical=0 and not exists(select 1 from lines where item_kind='product' and units_value is null) and not exists(select 1 from facts f where not exists(select 1 from lines l where l.completion_id=f.id)),
+-   'revenueComplete',v_historical=0 and not exists(select 1 from lines where income_value is null) and not exists(select 1 from facts f where not exists(select 1 from lines l where l.completion_id=f.id))),
++   'unitComplete',v_historical=0 and not exists(select 1 from lines where item_kind='product' and units_value is null) and (select missing from missing_counts)=0,
++   'revenueComplete',v_historical=0 and not exists(select 1 from lines where income_value is null) and (select missing from missing_counts)=0),
+   'coverage',jsonb_build_object('eligibleOrders',(select count(*) from facts),'capturedLines',(select count(*) from lines),
+-   'ordersWithoutCapturedLines',(select count(*) from facts f where not exists(select 1 from lines l where l.completion_id=f.id)),
++   'ordersWithoutCapturedLines',(select missing from missing_counts),
+    'historicalWithoutDate',v_historical,'historicalScope','global_unassigned','outsideSession',(select count(*) from facts where date_kind='outside_session'),
+    'unknownProductLines',(select count(*) from lines where product_identity is null),'unknownCategoryLines',(select count(*) from lines where category_kind='attribution_unknown'),
+    'unresolvedOrders',(select count(*) from facts where effective_sales is null),'pendingAgreedTotal',(select round(sum(current_agreement),2)::text from facts where effective_sales is null)),
+-  'unidentified',jsonb_build_object('units',(select private.statistics_products_metric(sum(units_value),count(*) filter(where item_kind='product' and units_value is not null),count(*) filter(where item_kind='product' and units_value is null),v_historical,(select missing from totals)) from lines where product_identity is null),
+-    'revenue',(select private.statistics_products_metric(round(sum(income_value),2),count(*) filter(where income_value is not null),count(*) filter(where income_value is null),v_historical,(select missing from totals)) from lines where product_identity is null)),
++  'unidentified',jsonb_build_object('units',(select private.statistics_products_metric(sum(units_value),count(*) filter(where item_kind='product' and units_value is not null),count(*) filter(where item_kind='product' and units_value is null),v_historical,(select missing from missing_counts)) from lines where product_identity is null),
++    'revenue',(select private.statistics_products_metric(round(sum(income_value),2),count(*) filter(where income_value is not null),count(*) filter(where income_value is null),v_historical,(select missing from missing_counts)) from lines where product_identity is null)),
+   'ranking',jsonb_build_object('sort',p_product_sort,'totalProducts',(select count(*) from ranked),'items',coalesce((select jsonb_agg(jsonb_build_object(
+    'key','product:'||r.product_identity::text,'identity',r.product_identity,'label',r.label,'position',r.position,'catalogStatus','historical',
+-   'units',private.statistics_products_metric(r.units,r.uk,r.uu,v_historical,(select missing from totals)),'revenue',private.statistics_products_metric(round(r.income,2),r.rk,r.ru,v_historical,(select missing from totals)),
+-   'unitShare',case when t.units_denominator>0 then round(r.units*100/t.units_denominator,2)::text end,
+-   'revenueShare',case when t.revenue_denominator>0 then round(r.income*100/t.revenue_denominator,2)::text end,
++   'units',private.statistics_products_metric(r.units,r.uk,r.uu,v_historical,(select missing from missing_counts)),'revenue',private.statistics_products_metric(round(r.income,2),r.rk,r.ru,v_historical,(select missing from missing_counts)),
++   'unitShare',case when t.units_denominator>0 then round(coalesce(r.units,case when r.uu=0 and v_historical=0 and (select missing from missing_counts)=0 then 0 end)*100/t.units_denominator,2)::text end,
++   'revenueShare',case when t.revenue_denominator>0 then round(coalesce(r.income,case when r.ru=0 and v_historical=0 and (select missing from missing_counts)=0 then 0 end)*100/t.revenue_denominator,2)::text end,
+    'categories',coalesce((select jsonb_agg(jsonb_build_object('kind',x.category_kind,'identity',x.category_identity) order by x.category_kind,x.category_identity) from (select distinct l.category_kind,l.category_key_identity category_identity from lines l where l.product_identity=r.product_identity) x),'[]'::jsonb)
+   ) order by r.position) from ranked r where r.position>v_offset and r.position<=v_offset+p_limit),'[]'::jsonb),
+   'nextCursor',case when v_offset+p_limit<(select count(*) from ranked) then jsonb_build_object('offset',v_offset+p_limit,'revision',v_revision,'requestKey',v_key,'asOf',v_now) end),
+   'categories',coalesce((select jsonb_agg(jsonb_build_object('key',case when c.category_kind='verified' then 'category:'||c.category_identity::text else 'special:'||c.category_kind end,
+    'kind',c.category_kind,'identity',c.category_identity,'label',c.label,'units',c.units,'revenue',c.revenue,
+-   'unitShare',case when t.units_denominator>0 then round(c.units_value*100/t.units_denominator,2)::text end,
+-   'revenueShare',case when t.revenue_denominator>0 then round(c.income_value*100/t.revenue_denominator,2)::text end) order by c.category_kind,c.category_identity) from categories c),'[]'::jsonb)
++   'unitShare',case when t.units_denominator>0 then round((c.units->>'value')::numeric*100/t.units_denominator,2)::text end,
++   'revenueShare',case when t.revenue_denominator>0 then round((c.revenue->>'value')::numeric*100/t.revenue_denominator,2)::text end) order by c.category_kind,c.category_identity) from categories c),'[]'::jsonb)
+  ) into v_result from totals t;
+  return v_result;
+ end;

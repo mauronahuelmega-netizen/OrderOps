@@ -1,0 +1,26 @@
+{
+  "at": "2026-10-13T21:14:48.431Z",
+  "nestedAvailable": false,
+  "records": [
+    {
+      "orders": 50,
+      "status": "PASS",
+      "measurementCount": 18
+    },
+    {
+      "orders": 100,
+      "status": "PASS",
+      "measurementCount": 18
+    },
+    {
+      "orders": 200,
+      "status": "FAILED_TIMEOUT_OR_SQL",
+      "measurementCount": 13
+    }
+  ],
+  "serialOnly": true,
+  "perSelectTimeoutSeconds": 15,
+  "samplesPerMode": 5,
+  "fixtureRollbackVerified": true,
+  "persistentFunctionsAndIndexesUnchanged": true
+}

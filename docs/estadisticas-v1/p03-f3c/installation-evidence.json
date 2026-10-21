@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-13T23:52:55.548Z",
+  "result": "PASS",
+  "hash": "9e8b793df40de1aeb6ecbb71c1ce4e828c717498e62340341d8784726ee78070",
+  "output": "BEGIN\nSET\nSET\nCREATE FUNCTION\nREVOKE\nGRANT\nCOMMIT",
+  "ledgerChanged": false,
+  "onlyFunctionD1": true
+}

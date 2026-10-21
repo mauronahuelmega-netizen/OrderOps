@@ -1,0 +1,329 @@
+{
+  "at": "2026-10-13T23:16:14.651Z",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "verdict": "PERFORMANCE_IMPROVED_WITH_LIMITATIONS",
+  "preservedFiles": 2124,
+  "preexistingHashesPreserved": true,
+  "approvedCandidateHash": "fd88de8c0ec3f4a87d8a6782650d63cf4779d8170033a4c5b4f37edbd489faf9",
+  "inventory": [
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/baseline.json",
+      "sha256": "f54065d72ea9b6dae00f6325212bb77fda8dc78ee2ed3f0f1ccd11b70d856816"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/benchmark/after.json",
+      "sha256": "2d3616688a9eb2e8d05d7c3496609d88f700fa512e005b39a3b5624d61f8cc51"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/benchmark/before.json",
+      "sha256": "e7700e9e940651b728ada2b456f037c78c377e3222ba80256614689e52d833d6"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/benchmark/results.json",
+      "sha256": "7f5f498a434f20a3ac747431e6ce569d57b1740b0346e30a1a5ab6168c5c4d1e"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/benchmark/volume-100.json",
+      "sha256": "9e5e4df682cafea6a6bc00d9f2bbf81470c99a52e47bea5222b50879c2b52466"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/benchmark/volume-50.json",
+      "sha256": "37d992ca0516742c3633e8db3be2faa22af7c9a86abd3864508f9b7831d98f14"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/benchmarks.json",
+      "sha256": "49cb01458efcc82d4c77520dc0a42a7a71ae5e8dce0feac7eacf500bbed17614"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/concurrency.json",
+      "sha256": "f8a824e83da69efe805ea837d5a5df417f9ae077dce584e210e3769f4faa823d"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/differential-products.json",
+      "sha256": "3b8cbb9dcd7907ced87bd60b5f2043f3911a40becf7f06e2cef7e70f77611f5d"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/differential-shapes.json",
+      "sha256": "a05d693218aeb3fbdd559c094ee247f885b5df4dc81f90b44741b54973ded778"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/differential-temporal.json",
+      "sha256": "854847a4140c00c3781fe5569fea48761c32afde87ba48813542f0332ab9169b"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/differential.json",
+      "sha256": "d56f391d5a96dd0ec6c1cf1508fd0429f3ea10a952c96d6c36ba38ad9ec66d27"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/informe.md",
+      "sha256": "cca4d99c25d02d3e5b9405c45dc849ec188a7438fa50d5762b4dc6d37917d9cc"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/installation.json",
+      "sha256": "14b82f5cd06cfb0904e1ef8231ae16df11056f2e0398b881ff80f543d18bedfc"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/installed-catalog.json",
+      "sha256": "7580c6a387c4b560f64e111ec5e7c88c4e0ef7d4decca8b9834696377dd3ad2a"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/pairs-shapes.json",
+      "sha256": "b099c43b640276378f1e2be5203bef0e429b17ad07e0550feb763490b21dab38"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/pairs-temporal.json",
+      "sha256": "e5f729913dac42dcb37d8654bbaae8fd69c377cfe27f3ac1ea7d1ceb2e5a92af"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/plans/100-candidate.json",
+      "sha256": "daa22111cda5805ecbf0e9a6ea92681c5119db5f93afb442559d4bd9746e58f7"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/plans/100-original.json",
+      "sha256": "fa0350673a8262f018e1dbabcf36b04b50a58648df98c93455bf7ce8053b5a38"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/plans/50-candidate.json",
+      "sha256": "2696ddc93e7ab24d7e0c8bcc927d1a10c35a0aaf54f59c4b4644774177436c94"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/plans/50-original.json",
+      "sha256": "c386bc632d7ad99b5bedac4128c5ab2d641a655fd376fa3312536afdc32227b1"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/preservation.json",
+      "sha256": "2779d28ee4f5acd34c631595142257944b10f1b9ccdcac0dcdf4c267fa940fe3"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/security-shapes.json",
+      "sha256": "3b13c72abfac7943054bbed28d6a562a619b168e5e3d613ba1e0e381297a9510"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/security.json",
+      "sha256": "f6d9aa88ef4d87a2ba43ad2f8bea758d9254270de2a462713f4c5e955e4ae4fd"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-f2b/temporal-harness-error.json",
+      "sha256": "e38507688b4f4aae217d5e83a122c0f384864409209869ae2026ede20167963f"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f2b-analyze.mjs",
+      "sha256": "69329aaa5608f76d24e8df9748f5f423ac74741bf2f9860aaef1484f1e1e4c16"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f2b-benchmark-prepare.mjs",
+      "sha256": "abede496dd03d5e078e415e86b2b6462e54d56312abf0121c332e3504a19a427"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f2b-benchmark.mjs",
+      "sha256": "d6d4bbad28d3c4cc7ed10fcf058b28ad43668e2d2f630644f012c462817dbe8f"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f2b-concurrency.mjs",
+      "sha256": "b9e14600724f0d1f82c24cc444cc7c387f2c5707e7d3d8eb776e03b4a3df220d"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f2b-differential.sql",
+      "sha256": "374efc48e82aaca95edf26bcc3578d2cfda2ca17fbcd089763b98e20a950db8f"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f2b-dst-tests.sql",
+      "sha256": "6c841e63412a18cf62fcf07699f0a40db83929dfa65884c94c837292cdbc5cb6"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f2b-evidence.mjs",
+      "sha256": "1d41b9fd135c2b15d38a8bfba9e2a77e84ebb90af6d5b4ee9d82b995174fe3f0"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f2b-security.sql",
+      "sha256": "e1e9df63b7c03668e81fab475e56b1acde6917fbdeb35e85034519dd622e35c0"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f2b-state-tests.sql",
+      "sha256": "d32cdc864fa300c9a82fe0e4bf6194d6064652a5bea78af8c9f6295eb228f230"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f2b-temporal-fixture.sql",
+      "sha256": "e50f517b76335d2272508580173a580ea8431799479513c685009fd1448350cb"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-f2b-validate.mjs",
+      "sha256": "90ec4109d58fd5279bd5b460ffd726756c0ec45c149d437590d984e254389d67"
+    }
+  ],
+  "publicOriginalActive": true,
+  "commits": 0,
+  "launch": false,
+  "benchmarks": "PERFORMANCE_IMPROVED_WITH_LIMITATIONS",
+  "preservation": {
+    "at": "2026-10-13T23:15:21.231Z",
+    "live": {
+      "verified": true,
+      "projectId": "orderops-statistics-v1-test-74718de66a41",
+      "containers": 5,
+      "volumes": [
+        "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "baseMigrations": 119,
+      "startedAt": "2026-10-12T19:27:13.000Z"
+    },
+    "resources": {
+      "containerIds": [
+        "313f159d75515e52b874369ace5b6f540a9bac833d2f5d644a8639e1a5b34e63",
+        "3229777e8e59a5183771b6b01320d3108e142c62e02b98b243d7c4bfc798e663",
+        "592f44984962a26c6552ccb02937d56385a8db008eb8e7a27e8be2d932f77bd1",
+        "d91703176efac3032f8125fb4d42bfcc5cd359c42e4b5d00d79b62d274ba6a28",
+        "fe21c043f6fbdefe5124142137d61231755d36c8058a37354d2a01a635ab5a6c"
+      ],
+      "volumeNames": [
+        "supabase_db_orderops-statistics-v1-test-74718de66a41",
+        "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+      ],
+      "networkId": "dfbf3cf0bf455393fd0c01a0f61438fd19fd18dfe5f4107c2bafc32589c476af"
+    },
+    "hash": "fd88de8c0ec3f4a87d8a6782650d63cf4779d8170033a4c5b4f37edbd489faf9",
+    "preservedFiles": 2124,
+    "originalCatalogUnchanged": true,
+    "candidateDefinitionsUnchanged": true,
+    "originalLedgerSourcesUnchanged": true,
+    "fixturesAbsent": true,
+    "extraFixtureCounts": {
+      "products": 0,
+      "categories": 0,
+      "stockMovements": 0
+    },
+    "publicOriginalActive": true,
+    "functionsInstalled": [
+      "statistics_v1_read_core_candidate",
+      "statistics_v1_summary_base_candidate",
+      "statistics_v1_summary_candidate"
+    ],
+    "ledgerVersions": [
+      "20260426214500",
+      "20260426215500",
+      "20260426221000",
+      "20260426222500",
+      "20260426224000",
+      "20260426230000",
+      "20260426231500",
+      "20260426234000",
+      "20260427012000",
+      "20260427021000",
+      "20260427030000",
+      "20260427103000",
+      "20260505233000",
+      "20260506001500",
+      "20260506013000",
+      "20260512090000",
+      "20260515173000",
+      "20260516183000",
+      "20260516201000",
+      "20260516213000",
+      "20260516233000",
+      "20260518093000",
+      "20260518113000",
+      "20260604143000",
+      "20260604162000",
+      "20260607210325",
+      "20260608143000",
+      "20260608144500",
+      "20260608150000",
+      "20260608153000",
+      "20260608160000",
+      "20260608170000",
+      "20260610103000",
+      "20260610110000",
+      "20260712090000",
+      "20260713030000",
+      "20260716224005",
+      "20260717010500",
+      "20260717120000",
+      "20260717130000",
+      "20260717140000",
+      "20260717170000",
+      "20260813010000",
+      "20260817043000",
+      "20260827234500",
+      "20260909040000",
+      "20260909154400",
+      "20260910010123",
+      "20260910022504",
+      "20260915180000",
+      "20260916180000",
+      "20260917210150",
+      "20260926010000",
+      "20260926011000",
+      "20260926012000",
+      "20260926013000",
+      "20260926014000",
+      "20260926015000",
+      "20260926016000",
+      "20260926017000",
+      "20260926180000",
+      "20260926181000",
+      "20260926182000",
+      "20260926183000",
+      "20260926190000",
+      "20260926191000",
+      "20260926192000",
+      "20260926193000",
+      "20260926200000",
+      "20260926210000",
+      "20260926211000",
+      "20260927100000",
+      "20260927100500",
+      "20260927101000",
+      "20260927102000",
+      "20260927103000",
+      "20261002010000",
+      "20261002011000",
+      "20261002012000",
+      "20261002013000",
+      "20261002100000",
+      "20261002100500",
+      "20261002101000",
+      "20261002102000",
+      "20261002103000",
+      "20261003010000",
+      "20261003011000",
+      "20261003012000",
+      "20261004010000",
+      "20261008215314",
+      "20261008233833",
+      "20261009003119",
+      "20261009004940",
+      "20261009005251",
+      "20261009005428",
+      "20261009005634",
+      "20261009005806",
+      "20261009013318",
+      "20261009015312",
+      "20261009015652",
+      "20261009015854",
+      "20261009020007",
+      "20261009020204",
+      "20261009020422",
+      "20261009020527",
+      "20261009020618",
+      "20261009020811",
+      "20261009021459",
+      "20261009120000",
+      "20261009140600",
+      "20261011020000",
+      "20261011021000",
+      "20261011021100",
+      "20261011021200",
+      "20261011022000",
+      "20261011022100",
+      "20261011023000",
+      "20261011030000",
+      "20261012030000",
+      "20261013001000",
+      "20261013002000",
+      "20261013003000",
+      "20261013004000",
+      "20261013005000"
+    ]
+  }
+}

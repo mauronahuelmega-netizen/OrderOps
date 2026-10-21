@@ -1,0 +1,261 @@
+{
+  "at": "2026-10-13T18:33:08.814Z",
+  "verdict": "PASS_WITH_LIMITATIONS",
+  "branch": "codex/estadisticas-v1",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "newCommits": 0,
+  "preservedFiles": 1941,
+  "allPreexistingFilesUnchanged": true,
+  "applicationFiles": [
+    {
+      "file": "app/admin/(protected)/statistics/error.tsx",
+      "sha256": "1a7fbc9ba2c636fa0fbbce9ede94a3a54dfac151e019bb9c79b3ada180687640",
+      "qaMirrorIdentical": true
+    },
+    {
+      "file": "app/admin/(protected)/statistics/loading.tsx",
+      "sha256": "24e13876c8f7ce281799b1664adcef484982b940b8e6a49c9ab9c32c314f8ced",
+      "qaMirrorIdentical": true
+    },
+    {
+      "file": "app/admin/(protected)/statistics/page.tsx",
+      "sha256": "9ac79f39e52582e5b3cab2df571f3854362a25e440fd11484835c5c9fea3b0d5",
+      "qaMirrorIdentical": true
+    },
+    {
+      "file": "app/admin/(protected)/statistics/query/route.ts",
+      "sha256": "f036b28372ab40a26a921e18c7cf63c272b30465284cafd3b1ce0faedc6e565f",
+      "qaMirrorIdentical": true
+    },
+    {
+      "file": "components/admin/statistics/statistics-summary.tsx",
+      "sha256": "c303ce278a65b9404f847addf1e5efe7c204d1e2738edf797fc8179a0d137e5b",
+      "qaMirrorIdentical": true
+    },
+    {
+      "file": "components/admin/statistics/statistics.module.css",
+      "sha256": "2d7defec573af1700b8bd80b8907fd964cea0ddcf4f3744c6bb66ac11ff85637",
+      "qaMirrorIdentical": true
+    },
+    {
+      "file": "components/admin/statistics/summary-chart.tsx",
+      "sha256": "3305a57aa60224d03cd12cc4f0e990953b2ebecc2a5926f6b689e40ab26425ce",
+      "qaMirrorIdentical": true
+    },
+    {
+      "file": "components/admin/statistics/summary-panels.tsx",
+      "sha256": "95438f66f2ebaeb7828318da39eb535480f924edabe043a0a105a8e0624f727c",
+      "qaMirrorIdentical": true
+    },
+    {
+      "file": "lib/statistics/summary-chart.ts",
+      "sha256": "a40dcd4b1124ed9cf975ba8100fd94b7c21a16096769ceb3ec45a35fd173bb9a",
+      "qaMirrorIdentical": true
+    },
+    {
+      "file": "lib/statistics/summary-route-server.ts",
+      "sha256": "37f7d2cca636444840bc0e377d1e9f7ea27c0fc86b77e7896fe1e8a648ba7c42",
+      "qaMirrorIdentical": true
+    }
+  ],
+  "newFiles": [
+    {
+      "file": "app/admin/(protected)/statistics/error.tsx",
+      "sha256": "1a7fbc9ba2c636fa0fbbce9ede94a3a54dfac151e019bb9c79b3ada180687640"
+    },
+    {
+      "file": "app/admin/(protected)/statistics/loading.tsx",
+      "sha256": "24e13876c8f7ce281799b1664adcef484982b940b8e6a49c9ab9c32c314f8ced"
+    },
+    {
+      "file": "app/admin/(protected)/statistics/page.tsx",
+      "sha256": "9ac79f39e52582e5b3cab2df571f3854362a25e440fd11484835c5c9fea3b0d5"
+    },
+    {
+      "file": "app/admin/(protected)/statistics/query/route.ts",
+      "sha256": "f036b28372ab40a26a921e18c7cf63c272b30465284cafd3b1ce0faedc6e565f"
+    },
+    {
+      "file": "components/admin/statistics/statistics-summary.tsx",
+      "sha256": "c303ce278a65b9404f847addf1e5efe7c204d1e2738edf797fc8179a0d137e5b"
+    },
+    {
+      "file": "components/admin/statistics/statistics.module.css",
+      "sha256": "2d7defec573af1700b8bd80b8907fd964cea0ddcf4f3744c6bb66ac11ff85637"
+    },
+    {
+      "file": "components/admin/statistics/summary-chart.tsx",
+      "sha256": "3305a57aa60224d03cd12cc4f0e990953b2ebecc2a5926f6b689e40ab26425ce"
+    },
+    {
+      "file": "components/admin/statistics/summary-panels.tsx",
+      "sha256": "95438f66f2ebaeb7828318da39eb535480f924edabe043a0a105a8e0624f727c"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/auth-sessions.json",
+      "sha256": "a3486f8907aa62ea3b78ec97a08bcf5274114df44c72b7856bb3d04fe8ac2bc5"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/baseline.json",
+      "sha256": "5606b41b2ae1d1c7bf679e9b4b544353b14ffdb09a3a722157be39f29bf0b7c8"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/e2e.json",
+      "sha256": "b9e5a053999d48d124555201acbadb240337d8357f9355032824acf6a5a9706c"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/informe.md",
+      "sha256": "440459b24331593773d58c25a50aa6d59551d168871996c017c520afcaec87f1"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/pure-ui.json",
+      "sha256": "deacd16a583540fd9bc3f5362458a68f192bfa2b31b73e0de219fe21bd2cd7e9"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/qa-server.json",
+      "sha256": "1af9dff9b32814be1af0cc63b82ab2942b323c470bc409ab0e2377c3f6532d1f"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/qa-shutdown.json",
+      "sha256": "06dbfda1074002e9363e76529b36a0f70cedf42b4bcbf53f66aff49e854cf1f1"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/desktop-dark-complete-fixture.png",
+      "sha256": "dcde152e52f0eaaad58b66004ed188d4067e46cb99baecbc07c1f00d8f8121f2"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/desktop-dark-empty-live.png",
+      "sha256": "8e209be332a56e623c3876f243aed4eaced46f0c78906f541aea45e3eac68fef"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/desktop-light-complete-fixture.png",
+      "sha256": "08639038898ce72d43e51f14ef1ff0035ee4efc74bc91f2cce1700430960cf13"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/desktop-light-empty-live.png",
+      "sha256": "1f7c539d3b8918deb575c782b852876ab6335409c5277c512023c761de326b49"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/desktop-light-error-fixture.png",
+      "sha256": "e2bddf7b3a7ad5299daf1e2b92435d052b2522fa00ba9a0926f80803ed13de31"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/desktop-light-loading-fixture.png",
+      "sha256": "d4f1c0839386cc65e5d1d8d249f348b4fbc1892698ffe986924e8b68e19dde81"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/landscape-dark-long-amount-125text-fixture.png",
+      "sha256": "0f6f2cb529aeec48c64ac70ce974992a9b50d859403240a12f39f32b15982f5c"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/mobile-dark-complete-fixture.png",
+      "sha256": "b13d11f09919bbe255d666792260e4ee6f3d95a989b58e12f8743fda294d1c86"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/mobile-dark-configuration-fixture.png",
+      "sha256": "5960f0e5755d1a37e043adce7c64cf51dbf3e341de93fe7045b0fe45f8afa6bc"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/mobile-dark-empty-live.png",
+      "sha256": "c1b9dcfbb464ebef6ebd128debaa1c7b95622079f845d1a6a18f09a046dd5f64"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/mobile-dark-error-fixture.png",
+      "sha256": "a3ca9a4a982b4d43918ae4cd50f5a272c875d8244b6811ffb037076c3ed5c192"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/mobile-dark-long-amount-125text-fixture.png",
+      "sha256": "15ba90d3c67c7fceb6a76f088e4b027fcdb2e62c6a942b7e67e66db0055d10fd"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/mobile-dark-no-comparison-fixture.png",
+      "sha256": "719080743043fa433b717b723d328e5523c2dbd25942dc39eedea4e9c3d3f84d"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/mobile-dark-partial-fixture.png",
+      "sha256": "c5b96a65bdbfac57a433add06341c1995a9b1f33d2789486201c6aa86618adeb"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/mobile-light-complete-fixture.png",
+      "sha256": "431f7d0786481cb7847cb859eb9eb658410641867f5dd59f21902c9d490dda8c"
+    },
+    {
+      "file": "docs/estadisticas-v1/p03-d/screenshots/mobile-light-empty-live.png",
+      "sha256": "bd4deb5b132cd2519989300d88f19aeefa0d4f197bee1ed7bc8405e8a6098456"
+    },
+    {
+      "file": "lib/statistics/fixtures/p03-d-responses.json",
+      "sha256": "a35e3418371e8308309f030f603209e23a8dce86286f2870aa508dce7c2e50df"
+    },
+    {
+      "file": "lib/statistics/summary-chart.ts",
+      "sha256": "a40dcd4b1124ed9cf975ba8100fd94b7c21a16096769ceb3ec45a35fd173bb9a"
+    },
+    {
+      "file": "lib/statistics/summary-route-server.ts",
+      "sha256": "37f7d2cca636444840bc0e377d1e9f7ea27c0fc86b77e7896fe1e8a648ba7c42"
+    },
+    {
+      "file": "lib/statistics/summary-ui.verify.ts",
+      "sha256": "e94ad9dd00cd368f889b325bf180ba78960364fc9f6f67ac3e36fefddc161084"
+    },
+    {
+      "file": "scripts/statistics-v1/p03-d-auth-session.mjs",
+      "sha256": "790c0b8be9ae0b4362411d75c2408c69158715fd400adab8661bbbbc7755875e"
+    },
+    {
+      "file": "scripts/statistics-v1/p03-d-e2e.mjs",
+      "sha256": "4f54fa459726f7f3ee1e7fda53af3c19fe20e2fb475eab50527af3486eb1dc61"
+    },
+    {
+      "file": "scripts/statistics-v1/p03-d-eslint.config.mjs",
+      "sha256": "095a28a7ab791adca3afd75822085ccd6b329aa5456d99b4e4a75f6d4d025498"
+    },
+    {
+      "file": "scripts/statistics-v1/p03-d-qa-server.mjs",
+      "sha256": "8f47e4342ec07cf286e880b14cc9206c0ee7d9a23e991e22d5461e3f165164ba"
+    },
+    {
+      "file": "scripts/statistics-v1/p03-d-verify.mjs",
+      "sha256": "004fe0b93d1499d60bcbfa8deba10b03a4be2df8c3aa7557acb92284306b1c4d"
+    }
+  ],
+  "identity": {
+    "verified": true,
+    "projectId": "orderops-statistics-v1-test-74718de66a41",
+    "containers": 5,
+    "volumes": [
+      "supabase_db_orderops-statistics-v1-test-74718de66a41",
+      "supabase_storage_orderops-statistics-v1-test-74718de66a41"
+    ],
+    "baseMigrations": 119,
+    "startedAt": "2026-10-12T19:27:13.000Z"
+  },
+  "inventory": {
+    "orders": 0,
+    "storeSessions": 0,
+    "items": 0,
+    "completions": 0,
+    "authSessions": 24,
+    "ledger": 123
+  },
+  "shutdown": {
+    "At": "2026-10-13T18:32:13.7779743Z",
+    "StoppedParent": 7092,
+    "StoppedWorker": 3820,
+    "Port3037Closed": true,
+    "OriginalServer11364Alive": true,
+    "DockerTouched": false
+  },
+  "sqlWrites": 0,
+  "authFixtureWrites": "Bounded synthetic Auth logins followed by local sign-out; no owned sessions retained, preexisting sessions preserved",
+  "authSessionPreservation": {
+    "count": 24,
+    "fingerprint": "895cb57682c6924906450dee054dcdbf",
+    "first": "2026-10-12T19:35:16.683477+00:00",
+    "last": "2026-10-12T21:34:50.495144+00:00",
+    "afterPhaseBaseline": 0
+  },
+  "e2e": 90,
+  "stop": "P03-D complete. No P03-E/navigation/integration/SQL optimization or deployment."
+}

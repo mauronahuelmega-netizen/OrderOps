@@ -1,0 +1,527 @@
+{
+  "long_amount": {
+    "contractVersion": "statistics.v1",
+    "status": "ready",
+    "businessId": "11111111-1111-4111-8111-111111111111",
+    "currency": "ARS",
+    "timezone": "America/Argentina/Buenos_Aires",
+    "period": {
+      "preset": "custom",
+      "startDate": "2026-10-12",
+      "endDate": "2026-10-13",
+      "referenceDate": "2026-10-14",
+      "asOf": "2026-10-14T12:00:00.000000Z",
+      "timezone": "America/Argentina/Buenos_Aires",
+      "partial": false,
+      "granularity": "day",
+      "comparable": {
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-11"
+      },
+      "comparableReason": null
+    },
+    "revision": "42",
+    "coverage": {
+      "historicalWithoutDate": 0,
+      "outsideSession": 2,
+      "instrumentedAt": "2026-10-01T00:00:00Z"
+    },
+    "metrics": {
+      "sales": {
+        "value": "200000000000000000.00",
+        "quality": "exact",
+        "reasons": [],
+        "knownCount": 2,
+        "unknownCount": 0
+      },
+      "completedOrders": {
+        "value": "2",
+        "quality": "exact",
+        "reasons": [],
+        "knownCount": 2,
+        "unknownCount": 0
+      },
+      "averageTicket": {
+        "value": "100000000000000000.00",
+        "quality": "exact",
+        "reasons": [],
+        "knownCount": 2,
+        "unknownCount": 0
+      },
+      "mainUnits": {
+        "value": "3",
+        "quality": "exact",
+        "reasons": [],
+        "knownCount": 2,
+        "unknownCount": 0
+      }
+    },
+    "previousMetrics": {
+      "sales": {
+        "value": "160000000000000000.00",
+        "quality": "exact",
+        "reasons": [],
+        "knownCount": 2,
+        "unknownCount": 0
+      },
+      "completedOrders": {
+        "value": "2",
+        "quality": "exact",
+        "reasons": [],
+        "knownCount": 2,
+        "unknownCount": 0
+      },
+      "averageTicket": {
+        "value": "80000000000000000.00",
+        "quality": "exact",
+        "reasons": [],
+        "knownCount": 2,
+        "unknownCount": 0
+      },
+      "mainUnits": {
+        "value": "2",
+        "quality": "exact",
+        "reasons": [],
+        "knownCount": 2,
+        "unknownCount": 0
+      }
+    },
+    "comparison": {
+      "available": true,
+      "reason": null,
+      "segments": []
+    },
+    "buckets": [
+      {
+        "label": "2026-10-12",
+        "metrics": {
+          "sales": {
+            "value": "0.00",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0
+          },
+          "completedOrders": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0
+          },
+          "averageTicket": {
+            "value": null,
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0
+          },
+          "mainUnits": {
+            "value": "0",
+            "quality": "empty",
+            "reasons": [],
+            "knownCount": 0,
+            "unknownCount": 0
+          }
+        }
+      },
+      {
+        "label": "2026-10-13",
+        "metrics": {
+          "sales": {
+            "value": "200000000000000000.00",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 2,
+            "unknownCount": 0
+          },
+          "completedOrders": {
+            "value": "2",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 2,
+            "unknownCount": 0
+          },
+          "averageTicket": {
+            "value": "100000000000000000.00",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 2,
+            "unknownCount": 0
+          },
+          "mainUnits": {
+            "value": "3",
+            "quality": "exact",
+            "reasons": [],
+            "knownCount": 2,
+            "unknownCount": 0
+          }
+        }
+      }
+    ],
+    "products": {
+      "items": [
+        {
+          "identity": "22222222-2222-4222-8222-222222222222",
+          "label": "Producto sintético",
+          "mainUnits": 3,
+          "netAmount": "200000000000000000.00",
+          "quality": "exact"
+        }
+      ],
+      "nextCursor": null
+    },
+    "categories": [
+      {
+        "identity": "33333333-3333-4333-8333-333333333333",
+        "label": "Categoría sintética",
+        "amount": "200000000000000000.00",
+        "percentage": "100.00"
+      }
+    ],
+    "unattributed": {
+      "pendingAgreedTotal": null,
+      "unresolvedOrders": 0
+    },
+    "ruleEvidence": {
+      "products": [
+        {
+          "identity": "22222222-2222-4222-8222-222222222222",
+          "currentMainUnits": 3,
+          "previousMainUnits": 2
+        }
+      ]
+    },
+    "series": {
+      "version": "statistics.series.v1",
+      "snapshot": {
+        "revision": "42",
+        "asOf": "2026-10-14T12:00:00.000000Z"
+      },
+      "resolution": "day",
+      "resolutionReason": null,
+      "previousRange": {
+        "startDate": "2026-10-10",
+        "endDate": "2026-10-11"
+      },
+      "coverage": {
+        "historicalWithoutDate": 0,
+        "scope": "global_unassigned"
+      },
+      "points": [
+        {
+          "key": "match-synthetic-0",
+          "label": "12 oct.",
+          "basis": "commercial_date",
+          "current": {
+            "interval": {
+              "key": "current-synthetic-0",
+              "startDate": "2026-10-12",
+              "endDate": "2026-10-12",
+              "observation": "closed",
+              "slices": [
+                {
+                  "sessionId": null,
+                  "timezone": "America/Argentina/Buenos_Aires",
+                  "commercialDate": "2026-10-12",
+                  "start": "2026-10-12T03:00:00.000000Z",
+                  "end": "2026-10-13T03:00:00.000000Z",
+                  "endInclusive": false
+                }
+              ]
+            },
+            "metrics": {
+              "sales": {
+                "value": "0.00",
+                "quality": "empty",
+                "reasons": [],
+                "knownCount": 0,
+                "unknownCount": 0
+              },
+              "completedOrders": {
+                "value": "0",
+                "quality": "empty",
+                "reasons": [],
+                "knownCount": 0,
+                "unknownCount": 0
+              },
+              "averageTicket": {
+                "value": null,
+                "quality": "empty",
+                "reasons": [],
+                "knownCount": 0,
+                "unknownCount": 0
+              },
+              "mainUnits": {
+                "value": "0",
+                "quality": "empty",
+                "reasons": [],
+                "knownCount": 0,
+                "unknownCount": 0
+              }
+            }
+          },
+          "previous": {
+            "interval": {
+              "key": "previous-synthetic-0",
+              "startDate": "2026-10-10",
+              "endDate": "2026-10-10",
+              "observation": "closed",
+              "slices": [
+                {
+                  "sessionId": null,
+                  "timezone": "America/Argentina/Buenos_Aires",
+                  "commercialDate": "2026-10-10",
+                  "start": "2026-10-10T03:00:00.000000Z",
+                  "end": "2026-10-11T03:00:00.000000Z",
+                  "endInclusive": false
+                }
+              ]
+            },
+            "metrics": {
+              "sales": {
+                "value": "0.00",
+                "quality": "empty",
+                "reasons": [],
+                "knownCount": 0,
+                "unknownCount": 0
+              },
+              "completedOrders": {
+                "value": "0",
+                "quality": "empty",
+                "reasons": [],
+                "knownCount": 0,
+                "unknownCount": 0
+              },
+              "averageTicket": {
+                "value": null,
+                "quality": "empty",
+                "reasons": [],
+                "knownCount": 0,
+                "unknownCount": 0
+              },
+              "mainUnits": {
+                "value": "0",
+                "quality": "empty",
+                "reasons": [],
+                "knownCount": 0,
+                "unknownCount": 0
+              }
+            }
+          },
+          "alignment": {
+            "available": true,
+            "reason": null
+          },
+          "comparisons": {
+            "sales": {
+              "available": true,
+              "reason": null,
+              "absolute": "0.00",
+              "percentage": null,
+              "percentageReason": "no_base"
+            },
+            "completedOrders": {
+              "available": true,
+              "reason": null,
+              "absolute": "0.00",
+              "percentage": null,
+              "percentageReason": "no_base"
+            },
+            "averageTicket": {
+              "available": false,
+              "reason": "empty_average",
+              "absolute": null,
+              "percentage": null,
+              "percentageReason": null
+            },
+            "mainUnits": {
+              "available": true,
+              "reason": null,
+              "absolute": "0.00",
+              "percentage": null,
+              "percentageReason": "no_base"
+            }
+          },
+          "mapping": {
+            "kind": "date_offset",
+            "days": -2
+          }
+        },
+        {
+          "key": "match-synthetic-1",
+          "label": "13 oct.",
+          "basis": "commercial_date",
+          "current": {
+            "interval": {
+              "key": "current-synthetic-1",
+              "startDate": "2026-10-13",
+              "endDate": "2026-10-13",
+              "observation": "closed",
+              "slices": [
+                {
+                  "sessionId": null,
+                  "timezone": "America/Argentina/Buenos_Aires",
+                  "commercialDate": "2026-10-13",
+                  "start": "2026-10-13T03:00:00.000000Z",
+                  "end": "2026-10-14T03:00:00.000000Z",
+                  "endInclusive": false
+                }
+              ]
+            },
+            "metrics": {
+              "sales": {
+                "value": "200000000000000000.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 2,
+                "unknownCount": 0
+              },
+              "completedOrders": {
+                "value": "2",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 2,
+                "unknownCount": 0
+              },
+              "averageTicket": {
+                "value": "100000000000000000.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 2,
+                "unknownCount": 0
+              },
+              "mainUnits": {
+                "value": "3",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 2,
+                "unknownCount": 0
+              }
+            }
+          },
+          "previous": {
+            "interval": {
+              "key": "previous-synthetic-1",
+              "startDate": "2026-10-11",
+              "endDate": "2026-10-11",
+              "observation": "closed",
+              "slices": [
+                {
+                  "sessionId": null,
+                  "timezone": "America/Argentina/Buenos_Aires",
+                  "commercialDate": "2026-10-11",
+                  "start": "2026-10-11T03:00:00.000000Z",
+                  "end": "2026-10-12T03:00:00.000000Z",
+                  "endInclusive": false
+                }
+              ]
+            },
+            "metrics": {
+              "sales": {
+                "value": "160000000000000000.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 2,
+                "unknownCount": 0
+              },
+              "completedOrders": {
+                "value": "2",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 2,
+                "unknownCount": 0
+              },
+              "averageTicket": {
+                "value": "80000000000000000.00",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 2,
+                "unknownCount": 0
+              },
+              "mainUnits": {
+                "value": "2",
+                "quality": "exact",
+                "reasons": [],
+                "knownCount": 2,
+                "unknownCount": 0
+              }
+            }
+          },
+          "alignment": {
+            "available": true,
+            "reason": null
+          },
+          "comparisons": {
+            "sales": {
+              "available": true,
+              "reason": null,
+              "absolute": "40000000000000000.00",
+              "percentage": "25.00",
+              "percentageReason": null
+            },
+            "completedOrders": {
+              "available": true,
+              "reason": null,
+              "absolute": "0.00",
+              "percentage": "0.00",
+              "percentageReason": null
+            },
+            "averageTicket": {
+              "available": true,
+              "reason": null,
+              "absolute": "20000000000000000.00",
+              "percentage": "25.00",
+              "percentageReason": null
+            },
+            "mainUnits": {
+              "available": true,
+              "reason": null,
+              "absolute": "1.00",
+              "percentage": "50.00",
+              "percentageReason": null
+            }
+          },
+          "mapping": {
+            "kind": "date_offset",
+            "days": -2
+          }
+        }
+      ],
+      "totalAlignment": {
+        "available": true,
+        "reason": null
+      },
+      "totalComparisons": {
+        "sales": {
+          "available": true,
+          "reason": null,
+          "absolute": "40000000000000000.00",
+          "percentage": "25.00",
+          "percentageReason": null
+        },
+        "completedOrders": {
+          "available": true,
+          "reason": null,
+          "absolute": "0.00",
+          "percentage": "0.00",
+          "percentageReason": null
+        },
+        "averageTicket": {
+          "available": true,
+          "reason": null,
+          "absolute": "20000000000000000.00",
+          "percentage": "25.00",
+          "percentageReason": null
+        },
+        "mainUnits": {
+          "available": true,
+          "reason": null,
+          "absolute": "1.00",
+          "percentage": "50.00",
+          "percentageReason": null
+        }
+      }
+    }
+  }
+}

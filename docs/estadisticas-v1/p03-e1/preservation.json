@@ -1,0 +1,245 @@
+{
+  "at": "2026-10-13T19:39:52.970Z",
+  "head": "923300265323d411c5c91b7935472d5423d228d2",
+  "baselineFiles": 1997,
+  "approvedExistingChanges": [
+    "lib/statistics/summary-route-server.ts",
+    "lib/statistics/summary-transport.ts",
+    "scripts/statistics-v1/p03-e1-evidence.mjs",
+    "components/admin/admin-nav-config.ts",
+    "components/admin/layout/admin-nav-list.tsx",
+    "lib/admin/permissions.ts"
+  ],
+  "newFiles": [
+    "docs/estadisticas-v1/p03-e1/auth-sessions.json",
+    "docs/estadisticas-v1/p03-e1/baseline.json",
+    "docs/estadisticas-v1/p03-e1/e2e.json",
+    "docs/estadisticas-v1/p03-e1/informe.md",
+    "docs/estadisticas-v1/p03-e1/preservation.json",
+    "docs/estadisticas-v1/p03-e1/qa-server.json",
+    "docs/estadisticas-v1/p03-e1/qa-shutdown.json",
+    "docs/estadisticas-v1/p03-e1/regression/fixtures/p03-d-responses.json",
+    "docs/estadisticas-v1/p03-e1/regression/p03-a-corrective/pure-evidence.json",
+    "docs/estadisticas-v1/p03-e1/regression/p03-a/pure-evidence.json",
+    "docs/estadisticas-v1/p03-e1/regression/p03-c/examples.json",
+    "docs/estadisticas-v1/p03-e1/regression/p03-c/pure-evidence.json",
+    "docs/estadisticas-v1/p03-e1/regression/p03-d/pure-ui.json",
+    "docs/estadisticas-v1/p03-e1/screenshots/desktop-dark-complete-fixture.png",
+    "docs/estadisticas-v1/p03-e1/screenshots/desktop-dark-empty-live.png",
+    "docs/estadisticas-v1/p03-e1/screenshots/desktop-light-complete-fixture.png",
+    "docs/estadisticas-v1/p03-e1/screenshots/desktop-light-empty-live.png",
+    "docs/estadisticas-v1/p03-e1/screenshots/desktop-light-error-fixture.png",
+    "docs/estadisticas-v1/p03-e1/screenshots/desktop-light-loading-fixture.png",
+    "docs/estadisticas-v1/p03-e1/screenshots/landscape-dark-long-amount-125text-fixture.png",
+    "docs/estadisticas-v1/p03-e1/screenshots/mobile-dark-complete-fixture.png",
+    "docs/estadisticas-v1/p03-e1/screenshots/mobile-dark-configuration-fixture.png",
+    "docs/estadisticas-v1/p03-e1/screenshots/mobile-dark-empty-live.png",
+    "docs/estadisticas-v1/p03-e1/screenshots/mobile-dark-error-fixture.png",
+    "docs/estadisticas-v1/p03-e1/screenshots/mobile-dark-long-amount-125text-fixture.png",
+    "docs/estadisticas-v1/p03-e1/screenshots/mobile-dark-no-comparison-fixture.png",
+    "docs/estadisticas-v1/p03-e1/screenshots/mobile-dark-partial-fixture.png",
+    "docs/estadisticas-v1/p03-e1/screenshots/mobile-light-complete-fixture.png",
+    "docs/estadisticas-v1/p03-e1/screenshots/mobile-light-empty-live.png",
+    "docs/estadisticas-v1/p03-e1/security-tests.json",
+    "lib/statistics/p03-e1.verify.ts",
+    "lib/statistics/summary-principal.ts",
+    "scripts/statistics-v1/p03-e1-auth-session.mjs",
+    "scripts/statistics-v1/p03-e1-e2e.mjs",
+    "scripts/statistics-v1/p03-e1-eslint.config.mjs",
+    "scripts/statistics-v1/p03-e1-prepare-tests.mjs",
+    "scripts/statistics-v1/p03-e1-qa-server.mjs",
+    "scripts/statistics-v1/p03-e1-shutdown.ps1"
+  ],
+  "inventory": [
+    {
+      "path": "lib/statistics/summary-route-server.ts",
+      "sha256": "2a469647e3988932ca11420137cbbf1e0b7dd4a9dd0dce6b7ac382b7da3cfd9f"
+    },
+    {
+      "path": "lib/statistics/summary-transport.ts",
+      "sha256": "e40a462ed4660393f572c468558128509ed8e25bd4fd1ad73de812128953517c"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-e1-evidence.mjs",
+      "sha256": "9d280d5bc6c1a0c1221e3a117d755aea24780f94f60754aa6d678820cc4a16ed"
+    },
+    {
+      "path": "components/admin/admin-nav-config.ts",
+      "sha256": "001a23faab7217ef3b199096f088d68071cfd4808f1c3147bb21fe7366dde2cf"
+    },
+    {
+      "path": "components/admin/layout/admin-nav-list.tsx",
+      "sha256": "6753d3b4c991d8cb401b2d9abdad8132a6f9dc421d02c62a3fd4fbe5ae37075f"
+    },
+    {
+      "path": "lib/admin/permissions.ts",
+      "sha256": "ab66a1211e2fd0ed670d422367779a0991dd791ff32d26cd29914823f327918b"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/auth-sessions.json",
+      "sha256": "135deabe68ad80a6ad0229208ed3c3adb4e1f0596c797c6bbb15ee98f7f843b4"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/baseline.json",
+      "sha256": "145782c03c93b333ed852c50d30c7f29aec06980e605b0b08d56f69a87baa2f9"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/e2e.json",
+      "sha256": "2ae64046bd2e0e3936d38a781ba9d9fd1c17eef9a9dc8b9212d543a52bbe05d2"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/informe.md",
+      "sha256": "3cb3fd695fb7dfcbac60247cbc58b766667c36f17a11cccf8bef923cc9b81454"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/preservation.json",
+      "sha256": null
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/qa-server.json",
+      "sha256": "9ec3ff58e83914ea77a9154f26dda056f9e9ca495c3cefaf4071dc4352e8bf34"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/qa-shutdown.json",
+      "sha256": "70944696b9f90df693fd8d48acf33259b6bc9c4545551ed0e0bc10e4a48a1351"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/regression/fixtures/p03-d-responses.json",
+      "sha256": "a35e3418371e8308309f030f603209e23a8dce86286f2870aa508dce7c2e50df"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/regression/p03-a-corrective/pure-evidence.json",
+      "sha256": "cbe7453e05860c0bef7d2e46a854a3bbb5c5ce6cb75da0c7febb4b000310a18d"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/regression/p03-a/pure-evidence.json",
+      "sha256": "886bac9a4fdba8665e668acc1c1cfbcaf60efb7a9db5ca756114939c556afacb"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/regression/p03-c/examples.json",
+      "sha256": "cf1991796b09ae7f6ee5e8d84bf0bc872973e2275930fc5eb5309d5dec58ff37"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/regression/p03-c/pure-evidence.json",
+      "sha256": "afc6d68ed4290bd6f5ed3921555282c938debee2427a3fa4e5ab367f0809e065"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/regression/p03-d/pure-ui.json",
+      "sha256": "deacd16a583540fd9bc3f5362458a68f192bfa2b31b73e0de219fe21bd2cd7e9"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/desktop-dark-complete-fixture.png",
+      "sha256": "dcde152e52f0eaaad58b66004ed188d4067e46cb99baecbc07c1f00d8f8121f2"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/desktop-dark-empty-live.png",
+      "sha256": "c7e8f54727d3d6e74233ad462858c319f66f9b253f3b9d75152fab55b7faee9c"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/desktop-light-complete-fixture.png",
+      "sha256": "08639038898ce72d43e51f14ef1ff0035ee4efc74bc91f2cce1700430960cf13"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/desktop-light-empty-live.png",
+      "sha256": "1f7c539d3b8918deb575c782b852876ab6335409c5277c512023c761de326b49"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/desktop-light-error-fixture.png",
+      "sha256": "e2bddf7b3a7ad5299daf1e2b92435d052b2522fa00ba9a0926f80803ed13de31"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/desktop-light-loading-fixture.png",
+      "sha256": "d4f1c0839386cc65e5d1d8d249f348b4fbc1892698ffe986924e8b68e19dde81"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/landscape-dark-long-amount-125text-fixture.png",
+      "sha256": "0f6f2cb529aeec48c64ac70ce974992a9b50d859403240a12f39f32b15982f5c"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/mobile-dark-complete-fixture.png",
+      "sha256": "b13d11f09919bbe255d666792260e4ee6f3d95a989b58e12f8743fda294d1c86"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/mobile-dark-configuration-fixture.png",
+      "sha256": "5960f0e5755d1a37e043adce7c64cf51dbf3e341de93fe7045b0fe45f8afa6bc"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/mobile-dark-empty-live.png",
+      "sha256": "eba5da5d6d352ca3ce6c37a19e2a393cf1a54dbf0eeac46b2d6ba5f3e51bf7f9"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/mobile-dark-error-fixture.png",
+      "sha256": "a3ca9a4a982b4d43918ae4cd50f5a272c875d8244b6811ffb037076c3ed5c192"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/mobile-dark-long-amount-125text-fixture.png",
+      "sha256": "15ba90d3c67c7fceb6a76f088e4b027fcdb2e62c6a942b7e67e66db0055d10fd"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/mobile-dark-no-comparison-fixture.png",
+      "sha256": "719080743043fa433b717b723d328e5523c2dbd25942dc39eedea4e9c3d3f84d"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/mobile-dark-partial-fixture.png",
+      "sha256": "c5b96a65bdbfac57a433add06341c1995a9b1f33d2789486201c6aa86618adeb"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/mobile-light-complete-fixture.png",
+      "sha256": "431f7d0786481cb7847cb859eb9eb658410641867f5dd59f21902c9d490dda8c"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/screenshots/mobile-light-empty-live.png",
+      "sha256": "044fac4359d5bdda2c54a0285675d567007a4539a76433bd35ce6469d2ae9390"
+    },
+    {
+      "path": "docs/estadisticas-v1/p03-e1/security-tests.json",
+      "sha256": "937254c71e8f63fd80775984008d99a0c609d18d3e43ac36c5f2aafedad7e045"
+    },
+    {
+      "path": "lib/statistics/p03-e1.verify.ts",
+      "sha256": "0a8130ad0a87f171796b8ee0fe54c2a52bac0bbd77ce188ca407d27ae9554f80"
+    },
+    {
+      "path": "lib/statistics/summary-principal.ts",
+      "sha256": "571c5d16c01f6c888532630e6efb04e262e75080f27b7e58d12a26e56c42ff2d"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-e1-auth-session.mjs",
+      "sha256": "4899b8d7fe8fbe09d0853ec68a79167351b42c0a08fe192261bacd04d8bc9710"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-e1-e2e.mjs",
+      "sha256": "fe32ae34d62f90de9d36e2d6c8f5c1410bca411ebe12ab080dba104c58f6d333"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-e1-eslint.config.mjs",
+      "sha256": "8c0d468595cdc225cf1c720bc14213b86a556098320e517c3020938ffb692288"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-e1-prepare-tests.mjs",
+      "sha256": "09cd639be71367764ae4ab5ea17392d22d611746d8c70d007dd40441acd78b5b"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-e1-qa-server.mjs",
+      "sha256": "a39c50cc74d12303b0e72f42b09ac5d2b4af64acda6ca42a32d470db88c9ab8c"
+    },
+    {
+      "path": "scripts/statistics-v1/p03-e1-shutdown.ps1",
+      "sha256": "e00d3e677e26f597d41b37a9ecdc72bbd9a23a9c342cdfffb129bd4d998c62e2"
+    }
+  ],
+  "cursorObservedDifferences": [],
+  "sharedPatchTextExact": true,
+  "qaSourceMatches": [
+    "lib/admin/permissions.ts",
+    "components/admin/admin-nav-config.ts",
+    "components/admin/layout/admin-nav-list.tsx",
+    "lib/statistics/summary-principal.ts",
+    "lib/statistics/summary-route-server.ts",
+    "lib/statistics/summary-transport.ts",
+    "lib/statistics/summary-server.ts",
+    "app/admin/(protected)/statistics/page.tsx",
+    "app/admin/(protected)/statistics/query/route.ts"
+  ],
+  "commits": 0
+}

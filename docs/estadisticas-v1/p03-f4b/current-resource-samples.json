@@ -1,0 +1,320 @@
+{
+  "scope": "Read-only idle observation; no SQL benchmarks; host process CPU is cumulative, not interval attribution",
+  "samples": [
+    {
+      "at": "2026-10-14T02:26:31.796Z",
+      "index": 0,
+      "resources": {
+        "at": "2026-10-14T02:26:31.796Z",
+        "dbStats": {
+          "BlockIO": "115MB / 65MB",
+          "CPUPerc": "0.00%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "124.1MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "4.39MB / 14.5MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "host": {
+        "ProcessorPercent": null,
+        "ProcessorQueue": null,
+        "AvailableMiB": null,
+        "PagesPerSec": null,
+        "DiskBytesPerSec": null,
+        "DiskQueueLength": null,
+        "TopProcessesCumulativeCPU": [
+          {
+            "Name": "Cursor",
+            "Id": 18104,
+            "CPU": 7484.796875,
+            "WorkingSet64": 627744768
+          },
+          {
+            "Name": "com.docker.backend",
+            "Id": 5412,
+            "CPU": 4039.171875,
+            "WorkingSet64": 166928384
+          },
+          {
+            "Name": "Docker Desktop",
+            "Id": 1440,
+            "CPU": 3267.9375,
+            "WorkingSet64": 165072896
+          },
+          {
+            "Name": "Cursor",
+            "Id": 13320,
+            "CPU": 2616.21875,
+            "WorkingSet64": 214134784
+          },
+          {
+            "Name": "ChatGPT",
+            "Id": 7668,
+            "CPU": 1862.59375,
+            "WorkingSet64": 752779264
+          },
+          {
+            "Name": "ChatGPT",
+            "Id": 20108,
+            "CPU": 1833.3125,
+            "WorkingSet64": 304209920
+          },
+          {
+            "Name": "msedge",
+            "Id": 21484,
+            "CPU": 1758.75,
+            "WorkingSet64": 249290752
+          },
+          {
+            "Name": "Cursor",
+            "Id": 21720,
+            "CPU": 1572.171875,
+            "WorkingSet64": 170754048
+          },
+          {
+            "Name": "Cursor",
+            "Id": 3496,
+            "CPU": 1570.296875,
+            "WorkingSet64": 206196736
+          },
+          {
+            "Name": "Cursor",
+            "Id": 15392,
+            "CPU": 1218.796875,
+            "WorkingSet64": 472440832
+          },
+          {
+            "Name": "codex",
+            "Id": 17176,
+            "CPU": 835.75,
+            "WorkingSet64": 235806720
+          },
+          {
+            "Name": "msedge",
+            "Id": 9648,
+            "CPU": 755.1875,
+            "WorkingSet64": 9887744
+          }
+        ]
+      },
+      "pressure": "usage_usec 1854532798\nuser_usec 1632376658\nsystem_usec 222156140\nnice_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n8:32 rbytes=0 wbytes=8192 rios=0 wios=2 dbytes=0 dios=0\n8:64 rbytes=114741248 wbytes=65032192 rios=4728 wios=8682 dbytes=0 dios=0\nsome avg10=9.15 avg60=10.35 avg300=10.01 total=4588483646\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\nsome avg10=0.00 avg60=0.00 avg300=0.00 total=7943603\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=6692573\nsome avg10=1.07 avg60=1.59 avg300=0.85 total=394452014\nfull avg10=0.34 avg60=0.93 avg300=0.48 total=247224223"
+    },
+    {
+      "at": "2026-10-14T02:26:52.022Z",
+      "index": 1,
+      "resources": {
+        "at": "2026-10-14T02:26:52.022Z",
+        "dbStats": {
+          "BlockIO": "115MB / 65MB",
+          "CPUPerc": "0.01%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "124.1MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "4.39MB / 14.5MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "host": {
+        "ProcessorPercent": null,
+        "ProcessorQueue": null,
+        "AvailableMiB": null,
+        "PagesPerSec": null,
+        "DiskBytesPerSec": null,
+        "DiskQueueLength": null,
+        "TopProcessesCumulativeCPU": [
+          {
+            "Name": "Cursor",
+            "Id": 18104,
+            "CPU": 7484.921875,
+            "WorkingSet64": 624410624
+          },
+          {
+            "Name": "com.docker.backend",
+            "Id": 5412,
+            "CPU": 4041.734375,
+            "WorkingSet64": 172421120
+          },
+          {
+            "Name": "Docker Desktop",
+            "Id": 1440,
+            "CPU": 3269.078125,
+            "WorkingSet64": 173346816
+          },
+          {
+            "Name": "Cursor",
+            "Id": 13320,
+            "CPU": 2616.296875,
+            "WorkingSet64": 214777856
+          },
+          {
+            "Name": "ChatGPT",
+            "Id": 7668,
+            "CPU": 1862.796875,
+            "WorkingSet64": 753401856
+          },
+          {
+            "Name": "ChatGPT",
+            "Id": 20108,
+            "CPU": 1833.375,
+            "WorkingSet64": 304148480
+          },
+          {
+            "Name": "msedge",
+            "Id": 21484,
+            "CPU": 1758.75,
+            "WorkingSet64": 249131008
+          },
+          {
+            "Name": "Cursor",
+            "Id": 21720,
+            "CPU": 1572.25,
+            "WorkingSet64": 171044864
+          },
+          {
+            "Name": "Cursor",
+            "Id": 3496,
+            "CPU": 1570.359375,
+            "WorkingSet64": 206200832
+          },
+          {
+            "Name": "Cursor",
+            "Id": 15392,
+            "CPU": 1218.875,
+            "WorkingSet64": 472440832
+          },
+          {
+            "Name": "codex",
+            "Id": 17176,
+            "CPU": 836,
+            "WorkingSet64": 235896832
+          },
+          {
+            "Name": "msedge",
+            "Id": 9648,
+            "CPU": 755.1875,
+            "WorkingSet64": 9887744
+          }
+        ]
+      },
+      "pressure": "usage_usec 1854618789\nuser_usec 1632427717\nsystem_usec 222191072\nnice_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n8:32 rbytes=0 wbytes=8192 rios=0 wios=2 dbytes=0 dios=0\n8:64 rbytes=114741248 wbytes=65036288 rios=4728 wios=8683 dbytes=0 dios=0\nsome avg10=9.09 avg60=9.96 avg300=9.93 total=4589482119\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\nsome avg10=0.00 avg60=0.00 avg300=0.00 total=7943603\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=6692573\nsome avg10=0.97 avg60=1.53 avg300=0.87 total=394644277\nfull avg10=0.50 avg60=0.90 avg300=0.49 total=247349290"
+    },
+    {
+      "at": "2026-10-14T02:27:05.142Z",
+      "index": 2,
+      "resources": {
+        "at": "2026-10-14T02:27:05.142Z",
+        "dbStats": {
+          "BlockIO": "115MB / 65MB",
+          "CPUPerc": "0.01%",
+          "Container": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "ID": "592f44984962",
+          "MemPerc": "1.57%",
+          "MemUsage": "124.1MiB / 7.702GiB",
+          "Name": "supabase_db_orderops-statistics-v1-test-74718de66a41",
+          "NetIO": "4.39MB / 14.5MB",
+          "PIDs": "12"
+        },
+        "dockerCapacity": {
+          "cpus": 4,
+          "memoryBytes": 8269664256
+        }
+      },
+      "host": {
+        "ProcessorPercent": null,
+        "ProcessorQueue": null,
+        "AvailableMiB": null,
+        "PagesPerSec": null,
+        "DiskBytesPerSec": null,
+        "DiskQueueLength": null,
+        "TopProcessesCumulativeCPU": [
+          {
+            "Name": "Cursor",
+            "Id": 18104,
+            "CPU": 7484.953125,
+            "WorkingSet64": 629121024
+          },
+          {
+            "Name": "com.docker.backend",
+            "Id": 5412,
+            "CPU": 4042.328125,
+            "WorkingSet64": 166322176
+          },
+          {
+            "Name": "Docker Desktop",
+            "Id": 1440,
+            "CPU": 3271.5,
+            "WorkingSet64": 164147200
+          },
+          {
+            "Name": "Cursor",
+            "Id": 13320,
+            "CPU": 2616.46875,
+            "WorkingSet64": 214192128
+          },
+          {
+            "Name": "ChatGPT",
+            "Id": 7668,
+            "CPU": 1863.171875,
+            "WorkingSet64": 754049024
+          },
+          {
+            "Name": "ChatGPT",
+            "Id": 20108,
+            "CPU": 1833.40625,
+            "WorkingSet64": 303812608
+          },
+          {
+            "Name": "msedge",
+            "Id": 21484,
+            "CPU": 1759.140625,
+            "WorkingSet64": 261939200
+          },
+          {
+            "Name": "Cursor",
+            "Id": 21720,
+            "CPU": 1572.265625,
+            "WorkingSet64": 171294720
+          },
+          {
+            "Name": "Cursor",
+            "Id": 3496,
+            "CPU": 1570.5,
+            "WorkingSet64": 205561856
+          },
+          {
+            "Name": "Cursor",
+            "Id": 15392,
+            "CPU": 1218.96875,
+            "WorkingSet64": 472875008
+          },
+          {
+            "Name": "codex",
+            "Id": 17176,
+            "CPU": 836.234375,
+            "WorkingSet64": 235962368
+          },
+          {
+            "Name": "msedge",
+            "Id": 9648,
+            "CPU": 755.1875,
+            "WorkingSet64": 9887744
+          }
+        ]
+      },
+      "pressure": "usage_usec 1854731848\nuser_usec 1632481938\nsystem_usec 222249910\nnice_usec 0\nnr_periods 0\nnr_throttled 0\nthrottled_usec 0\nnr_bursts 0\nburst_usec 0\nlow 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0\n8:32 rbytes=0 wbytes=8192 rios=0 wios=2 dbytes=0 dios=0\n8:64 rbytes=114741248 wbytes=65036288 rios=4728 wios=8683 dbytes=0 dios=0\nsome avg10=16.51 avg60=11.59 avg300=10.29 total=4592051987\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=0\nsome avg10=0.00 avg60=0.00 avg300=0.00 total=7943603\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=6692573\nsome avg10=1.12 avg60=1.50 avg300=0.89 total=394892512\nfull avg10=0.55 avg60=0.86 avg300=0.50 total=247479621"
+    }
+  ]
+}

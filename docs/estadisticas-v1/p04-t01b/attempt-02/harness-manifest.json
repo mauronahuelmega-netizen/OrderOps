@@ -1,0 +1,330 @@
+{
+  "at": "2026-10-14T14:31:03.011Z",
+  "source": "docs/estadisticas-v1/p04-t01a-1/candidate-products-reviewed.sql",
+  "sourceSha256": "a66ce3ea73bf4a4421c60b77376914f232b4470d41df7d661ee38142c4a29ba8",
+  "harnessSha256": "163e7afdeb0bfb9e0c57646441ae8144280f6083fdef3da3093ff1f45ae2ab57",
+  "payloadSha256": "76b0315d9c9cc145a43de0d40315213fb018d5631cd55f27c3d82d34564a2c02",
+  "removedOnlySourceDelimiters": [
+    {
+      "offset": 116,
+      "text": "begin;"
+    },
+    {
+      "offset": 15131,
+      "text": "commit;"
+    }
+  ],
+  "exactFunctionDefinitionsPreserved": true,
+  "transactions": 1,
+  "commitStatements": 0,
+  "rollbackStatements": 1,
+  "tests": [
+    {
+      "id": "catalog.signatures_invoker_defaults_acl",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "role.owner.a.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.owner.a.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.manager.a.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.manager.a.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.admin.a.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.admin.a.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.operator.a.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.operator.a.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.viewer.a.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.viewer.a.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.super_admin.a.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.super_admin.a.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.owner.b.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.owner.b.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.manager.b.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.manager.b.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.admin.b.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.admin.b.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.operator.b.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.operator.b.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.viewer.b.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.viewer.b.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.super_admin.b.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "role.super_admin.b.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "deny.no_session.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "deny.no_session.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "deny.missing_profile.public.statistics_v1_products",
+      "role": "authenticated"
+    },
+    {
+      "id": "deny.missing_profile.private.statistics_v1_products_reader",
+      "role": "authenticated"
+    },
+    {
+      "id": "constraints.null_unknown_roles",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "deny.absent_business",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "pure_helper.no_data",
+      "role": "authenticated"
+    },
+    {
+      "id": "compile.empty_response",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.today",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.yesterday",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.this_week",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.this_month",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.previous_month",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.last_7_days",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.last_30_days",
+      "role": "authenticated"
+    },
+    {
+      "id": "period.custom",
+      "role": "authenticated"
+    },
+    {
+      "id": "exact.money_units_homonyms",
+      "role": "authenticated"
+    },
+    {
+      "id": "tenant.b",
+      "role": "authenticated"
+    },
+    {
+      "id": "rls.cross_tenant_sources",
+      "role": "authenticated"
+    },
+    {
+      "id": "pagination.cursor_ties",
+      "role": "authenticated"
+    },
+    {
+      "id": "cursor.foreign",
+      "role": "authenticated"
+    },
+    {
+      "id": "cursor.invalid",
+      "role": "authenticated"
+    },
+    {
+      "id": "risk.SQL05.session_settings",
+      "role": "authenticated"
+    },
+    {
+      "id": "financial.partial_adjustment",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "risk.SQL07.nonfinite_source",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "states.reopen_cancel_recomplete",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "history.rename_delete",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "history.no_captured_lines",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "history.no_reliable_date",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "history.no_category_vs_unknown",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "upsell.only_category_zero_units",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "time.night_session",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "time.microseconds_asof",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "time.dst_stored_commercial_date",
+      "role": "postgres_fixture_control"
+    },
+    {
+      "id": "cursor.revision_invalidation",
+      "role": "postgres_fixture_control"
+    }
+  ],
+  "limitations": [
+    "Null/unknown profile roles prevented by actual constraints; do not weaken constraints",
+    "No authentication HTTP implied by claims",
+    "No persistent installation"
+  ],
+  "syntheticActors": [
+    {
+      "id": "a9eea14b-6c1c-4631-9a0e-4c6c62efe501",
+      "role": "owner",
+      "business": "108722c0-a80f-4d5b-98ee-6c99f44cdb23"
+    },
+    {
+      "id": "6d1a696a-d974-4ad6-809d-a5715f90d816",
+      "role": "manager",
+      "business": "108722c0-a80f-4d5b-98ee-6c99f44cdb23"
+    },
+    {
+      "id": "4f81b68b-fc92-4865-88a8-bd59372b45f8",
+      "role": "admin",
+      "business": "108722c0-a80f-4d5b-98ee-6c99f44cdb23"
+    },
+    {
+      "id": "2969d3a4-4fcf-46b9-8724-ef965e364fb4",
+      "role": "operator",
+      "business": "108722c0-a80f-4d5b-98ee-6c99f44cdb23"
+    },
+    {
+      "id": "bc03a29d-699f-48c7-bf53-21624019cdc6",
+      "role": "viewer",
+      "business": "108722c0-a80f-4d5b-98ee-6c99f44cdb23"
+    },
+    {
+      "id": "1235168b-bcab-4053-93d3-0cd44e53ade0",
+      "role": "super_admin",
+      "business": "108722c0-a80f-4d5b-98ee-6c99f44cdb23"
+    },
+    {
+      "id": "bb729a71-be76-4ff7-a7f6-0edd33361097",
+      "role": "owner",
+      "business": "ea72a875-7511-4c1d-9d2c-c3f899b94bea"
+    },
+    {
+      "id": "1ef472c5-3f84-4118-b486-ff2796f1992c",
+      "role": "manager",
+      "business": "ea72a875-7511-4c1d-9d2c-c3f899b94bea"
+    },
+    {
+      "id": "a63714a3-afc5-490c-b114-8abc68d45621",
+      "role": "admin",
+      "business": "ea72a875-7511-4c1d-9d2c-c3f899b94bea"
+    },
+    {
+      "id": "f316cdb5-07a3-4cb1-bf4e-5433d73ec511",
+      "role": "operator",
+      "business": "ea72a875-7511-4c1d-9d2c-c3f899b94bea"
+    },
+    {
+      "id": "ecfc0c1d-069b-43ec-80e7-569bbb78dbaf",
+      "role": "viewer",
+      "business": "ea72a875-7511-4c1d-9d2c-c3f899b94bea"
+    },
+    {
+      "id": "3693c4d3-c66c-4bd6-9faa-0e777c8e0279",
+      "role": "super_admin",
+      "business": "ea72a875-7511-4c1d-9d2c-c3f899b94bea"
+    }
+  ]
+}

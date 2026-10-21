@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-16T13:22:49.317Z",
+  "result": "BLOCKED_DRY_RUN",
+  "stage": "payload_db",
+  "errorClass": "AssertionError",
+  "rawErrorSuppressed": true,
+  "containersChanged": 0
+}

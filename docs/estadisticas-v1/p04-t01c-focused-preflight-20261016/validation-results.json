@@ -1,0 +1,55 @@
+{
+  "at": "2026-10-16T15:50:56.034Z",
+  "checks": [
+    {
+      "name": "syntax build-readonly-proposal.mjs",
+      "result": "PASS"
+    },
+    {
+      "name": "syntax finalize-evidence.mjs",
+      "result": "PASS"
+    },
+    {
+      "name": "syntax observe-backup-and-tools.mjs",
+      "result": "PASS"
+    },
+    {
+      "name": "syntax observe-kong.mjs",
+      "result": "PASS"
+    },
+    {
+      "name": "syntax readonly-verification.proposed.mjs",
+      "result": "PASS"
+    },
+    {
+      "name": "Review mode under process/network tripwire",
+      "result": "PASS",
+      "output": {
+        "result": "PASS_OFFLINE_REVIEW",
+        "sqlConnections": 0,
+        "dockerCommands": 0,
+        "queries": 5,
+        "executionAuthorized": false
+      }
+    },
+    {
+      "name": "Invalid mode rejected under tripwire",
+      "result": "PASS"
+    },
+    {
+      "name": "Read-only SQL template allowlist and rollback gates",
+      "result": "PASS_STATIC_ONLY"
+    }
+  ],
+  "sqlExecution": "NOT_EXECUTED",
+  "pgRestoreList": "PASS_OFFLINE_ARCHIVE_READ; no connection string/database",
+  "kongObservations": {
+    "paths": 5,
+    "methods": 3,
+    "listRecords": 15,
+    "namedSizeOnlyRecords": 60
+  },
+  "backupInventoryEntries": 1840,
+  "restore": "NOT_EXECUTED",
+  "sqlstateAndRollbackRuntime": "NOT_TESTED; prepared proposal only"
+}

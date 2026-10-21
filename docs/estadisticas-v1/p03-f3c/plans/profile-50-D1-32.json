@@ -1,0 +1,112 @@
+{
+  "durationMs": 10.934,
+  "plan": {
+    "Query Text": "\n  with wanted as (select p_date+p_time wall), samples as (\n    select wall,t from wanted cross join lateral generate_series((wall at time zone 'UTC')-interval '36 hours',(wall at time zone 'UTC')+interval '36 hours',interval '6 hours') t),\n  candidates as (select distinct (wall at time zone 'UTC')-((t at time zone p_timezone)-(t at time zone 'UTC')) candidate,wall from samples),\n  valid as (select candidate from candidates where candidate at time zone p_timezone=wall)\n  select case when count(*)=1 then min(candidate) end from valid;\n",
+    "Query Parameters": "$1 = '2026-10-12', $2 = '21:00:00', $3 = 'America/Argentina/Buenos_Aires'",
+    "Plan": {
+      "Node Type": "Aggregate",
+      "Strategy": "Plain",
+      "Partial Mode": "Simple",
+      "Parallel Aware": false,
+      "Async Capable": false,
+      "Startup Cost": 32.76,
+      "Total Cost": 32.78,
+      "Plan Rows": 1,
+      "Plan Width": 8,
+      "Actual Rows": 1,
+      "Actual Loops": 1,
+      "Shared Hit Blocks": 0,
+      "Shared Read Blocks": 0,
+      "Shared Dirtied Blocks": 0,
+      "Shared Written Blocks": 0,
+      "Local Hit Blocks": 0,
+      "Local Read Blocks": 0,
+      "Local Dirtied Blocks": 0,
+      "Local Written Blocks": 0,
+      "Temp Read Blocks": 0,
+      "Temp Written Blocks": 0,
+      "Plans": [
+        {
+          "Node Type": "Unique",
+          "Parent Relationship": "Outer",
+          "Parallel Aware": false,
+          "Async Capable": false,
+          "Startup Cost": 32.66,
+          "Total Cost": 32.69,
+          "Plan Rows": 5,
+          "Plan Width": 16,
+          "Actual Rows": 1,
+          "Actual Loops": 1,
+          "Shared Hit Blocks": 0,
+          "Shared Read Blocks": 0,
+          "Shared Dirtied Blocks": 0,
+          "Shared Written Blocks": 0,
+          "Local Hit Blocks": 0,
+          "Local Read Blocks": 0,
+          "Local Dirtied Blocks": 0,
+          "Local Written Blocks": 0,
+          "Temp Read Blocks": 0,
+          "Temp Written Blocks": 0,
+          "Plans": [
+            {
+              "Node Type": "Sort",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Async Capable": false,
+              "Startup Cost": 32.66,
+              "Total Cost": 32.68,
+              "Plan Rows": 5,
+              "Plan Width": 16,
+              "Actual Rows": 13,
+              "Actual Loops": 1,
+              "Sort Key": [
+                "(((($1 + $2) AT TIME ZONE 'UTC'::text) - ((t.t AT TIME ZONE $3) - (t.t AT TIME ZONE 'UTC'::text))))"
+              ],
+              "Sort Method": "quicksort",
+              "Sort Space Used": 25,
+              "Sort Space Type": "Memory",
+              "Shared Hit Blocks": 0,
+              "Shared Read Blocks": 0,
+              "Shared Dirtied Blocks": 0,
+              "Shared Written Blocks": 0,
+              "Local Hit Blocks": 0,
+              "Local Read Blocks": 0,
+              "Local Dirtied Blocks": 0,
+              "Local Written Blocks": 0,
+              "Temp Read Blocks": 0,
+              "Temp Written Blocks": 0,
+              "Plans": [
+                {
+                  "Node Type": "Function Scan",
+                  "Parent Relationship": "Outer",
+                  "Parallel Aware": false,
+                  "Async Capable": false,
+                  "Function Name": "generate_series",
+                  "Alias": "t",
+                  "Startup Cost": 0.02,
+                  "Total Cost": 32.6,
+                  "Plan Rows": 5,
+                  "Plan Width": 16,
+                  "Actual Rows": 13,
+                  "Actual Loops": 1,
+                  "Filter": "((((($1 + $2) AT TIME ZONE 'UTC'::text) - ((t AT TIME ZONE $3) - (t AT TIME ZONE 'UTC'::text))) AT TIME ZONE $3) = ($1 + $2))",
+                  "Rows Removed by Filter": 0,
+                  "Shared Hit Blocks": 0,
+                  "Shared Read Blocks": 0,
+                  "Shared Dirtied Blocks": 0,
+                  "Shared Written Blocks": 0,
+                  "Local Hit Blocks": 0,
+                  "Local Read Blocks": 0,
+                  "Local Dirtied Blocks": 0,
+                  "Local Written Blocks": 0,
+                  "Temp Read Blocks": 0,
+                  "Temp Written Blocks": 0
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

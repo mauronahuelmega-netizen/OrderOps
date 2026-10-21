@@ -1,0 +1,10 @@
+{
+  "parser": "pgsql-parser; outer DDL and modified SELECT parsed, not PL/pgSQL compilation",
+  "functions": 2,
+  "relationalReadSitesReused": 4,
+  "sourceRestorationExact": true,
+  "d1RestorationExact": true,
+  "pointMetricsMaterialized": true,
+  "adversarialOutput": "PASS: identity/config/signing/endpoints and adversarial rejection scenarios; no Docker/DB writes.",
+  "databaseConnections": 0
+}

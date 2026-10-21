@@ -1,0 +1,145 @@
+[
+  {
+    "originalIndex": 18,
+    "schema": "public",
+    "table": "business_settings",
+    "name": "handle_business_settings_updated_at",
+    "referenceDefinition": "CREATE TRIGGER handle_business_settings_updated_at BEFORE UPDATE ON public.business_settings FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')",
+    "observedDefinition": "CREATE TRIGGER handle_business_settings_updated_at BEFORE UPDATE ON public.business_settings FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')",
+    "creationSource": "supabase/migrations/20260607210325_business_settings.sql",
+    "expectedArgument": "updated_at",
+    "expectedArgumentHex": "757064617465645f617400"
+  },
+  {
+    "originalIndex": 19,
+    "schema": "public",
+    "table": "customization_groups",
+    "name": "handle_customization_groups_updated_at",
+    "referenceDefinition": "CREATE TRIGGER handle_customization_groups_updated_at BEFORE UPDATE ON public.customization_groups FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')",
+    "observedDefinition": "CREATE TRIGGER handle_customization_groups_updated_at BEFORE UPDATE ON public.customization_groups FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')",
+    "creationSource": "supabase/migrations/20260712090000_product_customization_v1_schema.sql",
+    "expectedArgument": "updated_at",
+    "expectedArgumentHex": "757064617465645f617400"
+  },
+  {
+    "originalIndex": 20,
+    "schema": "public",
+    "table": "customization_options",
+    "name": "handle_customization_options_updated_at",
+    "referenceDefinition": "CREATE TRIGGER handle_customization_options_updated_at BEFORE UPDATE ON public.customization_options FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')",
+    "observedDefinition": "CREATE TRIGGER handle_customization_options_updated_at BEFORE UPDATE ON public.customization_options FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')",
+    "creationSource": "supabase/migrations/20260712090000_product_customization_v1_schema.sql",
+    "expectedArgument": "updated_at",
+    "expectedArgumentHex": "757064617465645f617400"
+  },
+  {
+    "originalIndex": 21,
+    "schema": "public",
+    "table": "customization_group_assignments",
+    "name": "handle_customization_group_assignments_updated_at",
+    "referenceDefinition": "CREATE TRIGGER handle_customization_group_assignments_updated_at BEFORE UPDATE ON public.customization_group_assignments FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')",
+    "observedDefinition": "CREATE TRIGGER handle_customization_group_assignments_updated_at BEFORE UPDATE ON public.customization_group_assignments FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')",
+    "creationSource": "supabase/migrations/20260712090000_product_customization_v1_schema.sql",
+    "expectedArgument": "updated_at",
+    "expectedArgumentHex": "757064617465645f617400"
+  },
+  {
+    "originalIndex": 22,
+    "schema": "public",
+    "table": "product_customization_overrides",
+    "name": "handle_product_customization_overrides_updated_at",
+    "referenceDefinition": "CREATE TRIGGER handle_product_customization_overrides_updated_at BEFORE UPDATE ON public.product_customization_overrides FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')",
+    "observedDefinition": "CREATE TRIGGER handle_product_customization_overrides_updated_at BEFORE UPDATE ON public.product_customization_overrides FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')",
+    "creationSource": "supabase/migrations/20260712090000_product_customization_v1_schema.sql",
+    "expectedArgument": "updated_at",
+    "expectedArgumentHex": "757064617465645f617400"
+  },
+  {
+    "originalIndex": 23,
+    "schema": "public",
+    "table": "upsell_groups",
+    "name": "handle_upsell_groups_updated_at",
+    "referenceDefinition": "CREATE TRIGGER handle_upsell_groups_updated_at BEFORE UPDATE ON public.upsell_groups FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')",
+    "observedDefinition": "CREATE TRIGGER handle_upsell_groups_updated_at BEFORE UPDATE ON public.upsell_groups FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')",
+    "creationSource": "supabase/migrations/20260712090000_product_customization_v1_schema.sql",
+    "expectedArgument": "updated_at",
+    "expectedArgumentHex": "757064617465645f617400"
+  },
+  {
+    "originalIndex": 24,
+    "schema": "public",
+    "table": "upsell_group_items",
+    "name": "handle_upsell_group_items_updated_at",
+    "referenceDefinition": "CREATE TRIGGER handle_upsell_group_items_updated_at BEFORE UPDATE ON public.upsell_group_items FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')",
+    "observedDefinition": "CREATE TRIGGER handle_upsell_group_items_updated_at BEFORE UPDATE ON public.upsell_group_items FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')",
+    "creationSource": "supabase/migrations/20260712090000_product_customization_v1_schema.sql",
+    "expectedArgument": "updated_at",
+    "expectedArgumentHex": "757064617465645f617400"
+  },
+  {
+    "originalIndex": 25,
+    "schema": "public",
+    "table": "order_financials",
+    "name": "handle_order_financials_updated_at",
+    "referenceDefinition": "CREATE TRIGGER handle_order_financials_updated_at BEFORE UPDATE ON public.order_financials FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')",
+    "observedDefinition": "CREATE TRIGGER handle_order_financials_updated_at BEFORE UPDATE ON public.order_financials FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')",
+    "creationSource": "supabase/migrations/20260926011000_order_financials.sql",
+    "expectedArgument": "updated_at",
+    "expectedArgumentHex": "757064617465645f617400"
+  },
+  {
+    "originalIndex": 28,
+    "schema": "public",
+    "table": "finance_accounts",
+    "name": "handle_finance_accounts_updated_at",
+    "referenceDefinition": "CREATE TRIGGER handle_finance_accounts_updated_at BEFORE UPDATE ON public.finance_accounts FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')",
+    "observedDefinition": "CREATE TRIGGER handle_finance_accounts_updated_at BEFORE UPDATE ON public.finance_accounts FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')",
+    "creationSource": "supabase/migrations/20260926012000_finance_foundation.sql",
+    "expectedArgument": "updated_at",
+    "expectedArgumentHex": "757064617465645f617400"
+  },
+  {
+    "originalIndex": 29,
+    "schema": "public",
+    "table": "finance_categories",
+    "name": "handle_finance_categories_updated_at",
+    "referenceDefinition": "CREATE TRIGGER handle_finance_categories_updated_at BEFORE UPDATE ON public.finance_categories FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')",
+    "observedDefinition": "CREATE TRIGGER handle_finance_categories_updated_at BEFORE UPDATE ON public.finance_categories FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')",
+    "creationSource": "supabase/migrations/20260926012000_finance_foundation.sql",
+    "expectedArgument": "updated_at",
+    "expectedArgumentHex": "757064617465645f617400"
+  },
+  {
+    "originalIndex": 31,
+    "schema": "public",
+    "table": "finance_funds",
+    "name": "handle_finance_funds_updated_at",
+    "referenceDefinition": "CREATE TRIGGER handle_finance_funds_updated_at BEFORE UPDATE ON public.finance_funds FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')",
+    "observedDefinition": "CREATE TRIGGER handle_finance_funds_updated_at BEFORE UPDATE ON public.finance_funds FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')",
+    "creationSource": "supabase/migrations/20260926012000_finance_foundation.sql",
+    "expectedArgument": "updated_at",
+    "expectedArgumentHex": "757064617465645f617400"
+  },
+  {
+    "originalIndex": 33,
+    "schema": "public",
+    "table": "business_finance_settings",
+    "name": "handle_business_finance_settings_updated_at",
+    "referenceDefinition": "CREATE TRIGGER handle_business_finance_settings_updated_at BEFORE UPDATE ON public.business_finance_settings FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')",
+    "observedDefinition": "CREATE TRIGGER handle_business_finance_settings_updated_at BEFORE UPDATE ON public.business_finance_settings FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')",
+    "creationSource": "supabase/migrations/20260926013000_business_finance_settings.sql",
+    "expectedArgument": "updated_at",
+    "expectedArgumentHex": "757064617465645f617400"
+  },
+  {
+    "originalIndex": 38,
+    "schema": "public",
+    "table": "finance_transactions",
+    "name": "handle_finance_transactions_updated_at",
+    "referenceDefinition": "CREATE TRIGGER handle_finance_transactions_updated_at BEFORE UPDATE ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION moddatetime('updated_at')",
+    "observedDefinition": "CREATE TRIGGER handle_finance_transactions_updated_at BEFORE UPDATE ON public.finance_transactions FOR EACH ROW EXECUTE FUNCTION extensions.moddatetime('updated_at')",
+    "creationSource": "supabase/migrations/20260926014000_finance_ledger.sql",
+    "expectedArgument": "updated_at",
+    "expectedArgumentHex": "757064617465645f617400"
+  }
+]

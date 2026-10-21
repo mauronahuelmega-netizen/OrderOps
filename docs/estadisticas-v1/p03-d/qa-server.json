@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-13T17:49:30.864Z",
+  "pid": 7092,
+  "projectId": "orderops-statistics-v1-test-74718de66a41",
+  "app": "http://127.0.0.1:3037",
+  "api": "http://127.0.0.1:56321",
+  "db": "127.0.0.1:56322",
+  "serviceRole": false,
+  "identityVerifiedBeforeStart": true,
+  "sourceMirror": "C:\\Users\\Oasis Desktop\\Desktop\\Full Stack Developer\\Projects\\OrderOps-Estadisticas\\supabase\\statistics-v1-test\\.runtime\\p03-d-app",
+  "originalDevServerUntouched": true
+}
